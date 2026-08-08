@@ -1,0 +1,101 @@
+{
+ "schema": "HGK-KNOWLEDGE-MEMORY-SECURITY-NRTV/1",
+ "captured_at_utc": "2026-08-08T18:31:33.161919+00:00",
+ "supersedes": "not a transport check; dedicated knowledge-domain negative suite",
+ "depth": "L4 (adversarial/failure behavior)",
+ "checks": [
+  {
+   "check": "memory_poisoned_blocked",
+   "ok": true,
+   "detail": "injection pattern blocks persist"
+  },
+  {
+   "check": "memory_cross_scope_recall_blocked",
+   "ok": true,
+   "detail": "0 cross-scope"
+  },
+  {
+   "check": "memory_expired_not_recalled",
+   "ok": true,
+   "detail": "expired excluded"
+  },
+  {
+   "check": "self_promotion_blocked",
+   "ok": true,
+   "detail": "ERR_SELF_APPROVAL"
+  },
+  {
+   "check": "unauthorized_withdrawal_blocked",
+   "ok": true,
+   "detail": "ERR_MEMORY_NOT_ACTIVE"
+  },
+  {
+   "check": "tainted_source_quarantined",
+   "ok": true,
+   "detail": "QUARANTINED"
+  },
+  {
+   "check": "poisoned_document_quarantined",
+   "ok": true,
+   "detail": "QUARANTINED"
+  },
+  {
+   "check": "source_injection_quarantined",
+   "ok": true,
+   "detail": "QUARANTINED"
+  },
+  {
+   "check": "stale_citation_detected",
+   "ok": true,
+   "detail": "ERR_CITATION_INVALID raised (fail-closed)"
+  },
+  {
+   "check": "withdrawn_source_not_retrieved",
+   "ok": true,
+   "detail": "ABSTAIN_NO_GROUNDING"
+  },
+  {
+   "check": "evidence_poor_abstains",
+   "ok": true,
+   "detail": "ABSTAIN_NO_GROUNDING"
+  },
+  {
+   "check": "fabricated_edge_blocked",
+   "ok": true,
+   "detail": "ERR_KG_SOURCE_NOT_ACTIVE"
+  },
+  {
+   "check": "edge_without_provenance_blocked",
+   "ok": true,
+   "detail": "ERR_KG_ASSERTION_FIELD_MISSING"
+  },
+  {
+   "check": "withdrawn_edge_not_in_path",
+   "ok": true,
+   "detail": "edges 0->0"
+  },
+  {
+   "check": "promotion_requires_evidence",
+   "ok": true,
+   "detail": "promotion gated on evidence"
+  },
+  {
+   "check": "source_locator_present",
+   "ok": true,
+   "detail": "docs=1 missing_locator=0"
+  },
+  {
+   "check": "conflict_not_silently_normalized",
+   "ok": true,
+   "detail": "docs=2"
+  },
+  {
+   "check": "duplicate_source_no_double_credit",
+   "ok": true,
+   "detail": "sources=1 (INSERT OR IGNORE)"
+  }
+ ],
+ "passed": 18,
+ "total": 18,
+ "verdict": "PASS"
+}
