@@ -1,0 +1,27 @@
+{
+  "checkpoint_id": "HGK_HERMES_DOMAIN_REAUDIT_004",
+  "task_id": "HGK-HERMES-DOMAIN-REAUDIT-CLOSURE-004",
+  "created_at": "2026-08-08T17:30:00+08:00",
+  "current_head": "eff8efcf984770729e6069f832cc7844a126a2d7",
+  "branch": "codex/hgk-final-closure-002",
+  "git_status": "clean (untracked .hermes/ only)",
+  "prior_decision": {
+    "id": "REL-0cf3901062b56729",
+    "verdict": "HG-KSEOS_LOCAL_DELIVERY_PASS",
+    "status_now": "PRIOR_VALID_EVIDENCE_CANDIDATE / external acceptance REOPENED_FAIL_CLOSED"
+  },
+  "prior_package": {
+    "path": "var/releases/HG-KSEOS_LOCAL_CANDIDATE.zip",
+    "sha256": "9e9ae4fe749d56d7ea0acd0e0f9e668e6ecebac70c24dac026a9c0e5a0c69dc8"
+  },
+  "source_corpus": {
+    "p0_cip": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md",
+    "predev": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+    "packs": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2",
+    "db_root": "資料庫"
+  },
+  "current_gate": "D0",
+  "open_domain_gaps": [],
+  "open_tt": ["TT-A3-HERMES-RUNTIME (TEMP_CLOSED_CORE)", "TT-HLPE-SRU-DRIFT (OPEN_NONBLOCKING)"],
+  "next_atomic_work": "D0: source/denominator/domain reconciliation from actual corpus"
+}
