@@ -1,0 +1,63 @@
+{
+ "schema": "HGK-KG-GRAPHRAG-RUNTIME-ACCEPTANCE/1",
+ "captured_at_utc": "2026-08-08T18:12:56.136712+00:00",
+ "p0_disposition": {
+  "domain_kg": "ACTIVE_REQUIRED",
+  "graphrag": "DEFERRED_SOURCE_BACKED",
+  "graphiti": "DEFERRED_SOURCE_BACKED (P1 PILOT)",
+  "gbrain": "DEFERRED_SOURCE_BACKED (P1 CANDIDATE)",
+  "vector_backends": "DEFERRED_SOURCE_BACKED (Qdrant/pgvector; SQLite FTS is P0 profile)"
+ },
+ "source_locators": {
+  "domain_kg": "HG-KSEOS_多智能體協作系統_本地部屬藍圖_r2.md#L1556",
+  "graphrag": "HG-KSEOS_多智能體協作系統_本地部屬藍圖_r2.md#L1641",
+  "graphiti": "HG-KSEOS_多智能體協作系統_本地部屬藍圖_r2.md#L1677",
+  "gbrain": "HG-KSEOS_多智能體協作系統_本地部屬藍圖_r2.md#L1675"
+ },
+ "depth": "L3 + L4",
+ "checks": [
+  {
+   "check": "edge_with_provenance",
+   "ok": true,
+   "detail": "edge=EDGE-efb1c68fb1b39392f274"
+  },
+  {
+   "check": "duplicate_entity_dedup",
+   "ok": true,
+   "detail": "count=1 idempotent=True"
+  },
+  {
+   "check": "false_relation_rejected",
+   "ok": true,
+   "detail": "ERR_KG_ASSERTION_FIELD_MISSING"
+  },
+  {
+   "check": "orphan_edge_blocked",
+   "ok": true,
+   "detail": "ERR_KG_SOURCE_NOT_ACTIVE"
+  },
+  {
+   "check": "conflicting_edge_not_normalized",
+   "ok": true,
+   "detail": "objects={'Acme', 'BetaCorp'}"
+  },
+  {
+   "check": "rights_scope_rejected",
+   "ok": true,
+   "detail": "ERR_KG_SOURCE_NOT_ACTIVE after withdrawal"
+  },
+  {
+   "check": "withdrawn_edge_removed",
+   "ok": true,
+   "detail": "edges after rebuild=0"
+  },
+  {
+   "check": "graphrag_off",
+   "ok": true,
+   "detail": "graphrag bindings=0 (deferred)"
+  }
+ ],
+ "passed": 8,
+ "total": 8,
+ "verdict": "RUNTIME_PASS"
+}

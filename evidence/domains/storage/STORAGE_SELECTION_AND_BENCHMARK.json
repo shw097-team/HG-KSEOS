@@ -1,0 +1,38 @@
+{
+ "schema": "HGK-STORAGE-SELECTION-AND-BENCHMARK/1",
+ "captured_at_utc": "2026-08-08T18:12:56.137712+00:00",
+ "selected_p0_stores": [
+  {
+   "store": "SQLite (Shared Spine)",
+   "role": "canonical state",
+   "evidence": "spine.db"
+  },
+  {
+   "store": "SQLite FTS5 (KnowledgeFactory)",
+   "role": "lexical retrieval",
+   "evidence": "knowledge_fts"
+  },
+  {
+   "store": "SQLite edge tables (kg_edges/kg_assertions)",
+   "role": "domain KG",
+   "evidence": "kg_edges"
+  },
+  {
+   "store": "memory_records table",
+   "role": "scoped memory",
+   "evidence": "memory_records"
+  }
+ ],
+ "data_volume_assumption": "local-first P0: single-writer SQLite adequate for corpus <= 10^4 docs, <= 10^5 edges",
+ "latency_update_concurrency": "single-writer lease (SharedSpine) serializes mutations; FTS read path read-only",
+ "local_first_rationale": "network-off, non-admin, no external server; SQLite is the only P0 store",
+ "backup_restore": "backup_database/restore_database with sha256 readback (see D4 check 14)",
+ "migration_path": "vector/KG external servers deferred; adapter via providers registry (graphiti P1)",
+ "why_deferred": {
+  "qdrant_pgvector": "source: vector backends conditional/P1; SQLite FTS profile is P0",
+  "neo4j_graphiti": "source: graphiti P1 PILOT; SQLite edge table satisfies P0 contract",
+  "graphrag": "source: deferred_method; keep OFF; ADR+benchmark required before promotion"
+ },
+ "no_second_canonical_truth": "all stores are derived projections of Shared Spine; spine remains authority",
+ "verdict": "ACTIVE_REQUIRED + DEFERRED_SOURCE_BACKED (no false runtime claim)"
+}
