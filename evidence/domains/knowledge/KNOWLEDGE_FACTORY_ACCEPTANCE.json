@@ -1,0 +1,60 @@
+{
+ "schema": "HGK-KNOWLEDGE-FACTORY-ACCEPTANCE/1",
+ "captured_at_utc": "2026-08-08T18:11:10.214098+00:00",
+ "source_denominator": 20,
+ "source_dir": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\資料庫\\【3】SDLC_PRWS\\【1】SDLC_PRW_HLPE_PLUGIN\\SDLC_PRW_HLPE_Plugin_實作PACK_最終交付版_v2026.08.07-r4\\02_PHYSICAL_PACK\\10-surfaces\\knowledge-upload20",
+ "p0_disposition": "ACTIVE_REQUIRED",
+ "depth": "L3 + L4",
+ "ingested": 20,
+ "promoted": 20,
+ "quarantined": 0,
+ "retrieval": {
+  "probed": 20,
+  "passed": 20
+ },
+ "checks": [
+  {
+   "check": "intake_20_sources",
+   "ok": true,
+   "detail": "ingested=20"
+  },
+  {
+   "check": "promote_20_via_verifier",
+   "ok": true,
+   "detail": "promoted=20/20 (quarantined=0)"
+  },
+  {
+   "check": "retrieval_20_over_20",
+   "ok": true,
+   "detail": "retrieved=20/20 fails=[]"
+  },
+  {
+   "check": "citation_source_locator",
+   "ok": true,
+   "detail": "citation=SRC-99c3d496754dad1c9c6c#full"
+  },
+  {
+   "check": "withdrawal_rebuild_abstain",
+   "ok": true,
+   "detail": "'00_KNOW_INDEX' abstains after withdrawal"
+  },
+  {
+   "check": "self_approval_denied",
+   "ok": true,
+   "detail": "ERR_SELF_APPROVAL"
+  },
+  {
+   "check": "poisoned_source_quarantine",
+   "ok": true,
+   "detail": "sanitation=QUARANTINED"
+  },
+  {
+   "check": "rebuild_reproducible",
+   "ok": true,
+   "detail": "rebuild={'fts_documents': 19, 'kg_edges': 0}"
+  }
+ ],
+ "passed": 8,
+ "total": 8,
+ "verdict": "RUNTIME_PASS"
+}
