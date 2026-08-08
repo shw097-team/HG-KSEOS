@@ -1,61 +1,72 @@
 {
-  "checkpoint_id": "HGK_HERMES_FINAL_CLOSURE_003",
-  "task_id": "HGK-HERMES-FINAL-CLOSURE-003",
-  "updated_at": "2026-08-08T11:10:00+08:00",
-  "exact_head": "87f08b49a2976d0a75e657f1a9d015d6b8a4011c",
-  "branch": "codex/hgk-final-closure-002",
-  "git_status": "CLEAN",
-  "resume_from": "C4",
-  "sealed_gates": {
-    "C1_P10_ROUTE_SEAL": {
-      "status": "PASS",
-      "nonce": "HGK_P10_ROUTE_SEAL e41b77cd",
-      "live_requests": "52/52 opencode-go/deepseek-v4-flash HTTP 200",
-      "other_routes": 0,
-      "openai_disabled": true,
-      "combos": "none",
-      "ws_426": "NON_BLOCKING_TRANSPORT_LIMITATION"
-    },
-    "C2_CLOSED_LOOP": {
-      "status": "PASS",
-      "workorder": "WO-HGK-C2-CASERUN-001",
-      "maker": "Codex CLI via OpenCodex/OpenCode Go/deepseek-v4-flash",
-      "focused_tests": "6/6 PASS",
-      "full_suite": "76 PASS",
-      "envelope_sha256": "82875313a7b19ea75d7f7fbb27edcb57051ed18a14e6650205273153898e9673",
-      "rollback": "completed to base 201530f"
-    },
-    "C3_CANONICAL_MATERIALIZATION": {
-      "status": "PASS_CORE",
-      "prior_candidate": "27396f7b306b485ad138ee624c5b7e231f99cb92",
-      "lineage": "250 identical / 8 changed / 97 only-prior(evidence) / 3 only-canonical(tests)",
-      "dirty_hlpe_evidence": "RESOLVED_COMMITTED (470f10e, SHA DC16123B matches G1 harness)",
-      "doctor_blocking": [],
-      "hlpe": "QUALIFIED_SCOPE ee30dc034a3d4fd0e24a6bfdf77ad8aae273b400",
-      "shared_spine": "live (499 requirements, 79 provider bindings)",
-      "agents": "40/40 scoped/versioned",
-      "skills": "18/18 valid",
-      "tst_092": {
-        "status": "INDEPENDENT_CASE_PASS",
-        "head": "fc96af696fae11438929c2a3bcb53fd89d0dacb6",
-        "receipt": "evidence/c3/TST-092_INDEPENDENT_READBACK.json",
-        "package_sha256": "c54d10022abe8af695c0494ee7cab19ffda427bde4dc17063b83b80972c068b5",
-        "payload_files": 267,
-        "exact_set": true,
-        "hash_mismatches": 0,
-        "tt": "TT-FINAL-PACKAGE-READBACK CLOSED"
-      }
-    }
+ "checkpoint_id": "HGK_HERMES_FINAL_CLOSURE_003",
+ "task_id": "HGK-HERMES-FINAL-CLOSURE-003",
+ "updated_at": "2026-08-08T12:05:00+08:00",
+ "exact_head": "87f08b49a2976d0a75e657f1a9d015d6b8a4011c",
+ "branch": "codex/hgk-final-closure-002",
+ "git_status": "CLEAN",
+ "resume_from": "C4",
+ "sealed_gates": {
+  "C1_P10_ROUTE_SEAL": {
+   "status": "PASS",
+   "nonce": "HGK_P10_ROUTE_SEAL e41b77cd",
+   "live_requests": "52/52 opencode-go/deepseek-v4-flash HTTP 200",
+   "other_routes": 0,
+   "openai_disabled": true,
+   "combos": "none",
+   "ws_426": "NON_BLOCKING_TRANSPORT_LIMITATION"
   },
-  "open_tt": [
-    "TT-PROVIDER-RUNTIME (OPEN)",
-    "TT-INDEPENDENT-ACCEPTANCE (OPEN)",
-    "TT-A3-HERMES-RUNTIME (TEMP_CLOSED_CORE)"
-  ],
-  "c4_state": {
-    "c4a_c2_case_run_materialization": "PENDING",
-    "c4b_tst_054": "OPEN",
-    "c4c_provider_lifecycle": "PENDING"
+  "C2_CLOSED_LOOP": {
+   "status": "PASS",
+   "workorder": "WO-HGK-C2-CASERUN-001",
+   "maker": "Codex CLI via OpenCodex/OpenCode Go/deepseek-v4-flash",
+   "focused_tests": "6/6 PASS",
+   "full_suite": "76 PASS",
+   "envelope_sha256": "82875313a7b19ea75d7f7fbb27edcb57051ed18a14e6650205273153898e9673",
+   "rollback": "completed to base 201530f"
   },
-  "next_action": "C4-A: verify case.run materialization need"
+  "C3_CANONICAL_MATERIALIZATION": {
+   "status": "PASS_CORE",
+   "prior_candidate": "27396f7b306b485ad138ee624c5b7e231f99cb92",
+   "lineage": "250 identical / 8 changed / 97 only-prior(evidence) / 3 only-canonical(tests)",
+   "dirty_hlpe_evidence": "RESOLVED_COMMITTED (470f10e, SHA DC16123B matches G1 harness)",
+   "doctor_blocking": [],
+   "hlpe": "QUALIFIED_SCOPE ee30dc034a3d4fd0e24a6bfdf77ad8aae273b400",
+   "shared_spine": "live (499 requirements, 79 provider bindings)",
+   "agents": "40/40 scoped/versioned",
+   "skills": "18/18 valid",
+   "tst_092": {
+    "status": "INDEPENDENT_CASE_PASS",
+    "head": "fc96af696fae11438929c2a3bcb53fd89d0dacb6",
+    "receipt": "evidence/c3/TST-092_INDEPENDENT_READBACK.json",
+    "package_sha256": "c54d10022abe8af695c0494ee7cab19ffda427bde4dc17063b83b80972c068b5",
+    "payload_files": 267,
+    "exact_set": true,
+    "hash_mismatches": 0,
+    "tt": "TT-FINAL-PACKAGE-READBACK CLOSED"
+   }
+  }
+ },
+ "open_tt": [
+  "TT-A3-HERMES-RUNTIME (TEMP_CLOSED_CORE)"
+ ],
+ "c4_state": {
+  "c4a_c2_case_run_materialization": "PENDING",
+  "c4b_tst_054": "OPEN",
+  "c4c_provider_lifecycle": "PENDING"
+ },
+ "next_action": "C7 exact final HEAD seal",
+ "gate": "C6",
+ "gate_status": "PASS",
+ "c5": {
+  "status": "PASS",
+  "verdict": "92/92 INDEPENDENT_CASE_PASS",
+  "evidence": "evidence/c5/INDEPENDENT_ACCEPTANCE_92.json"
+ },
+ "c6": {
+  "status": "PASS",
+  "checks": 15,
+  "blocking_findings": 0,
+  "evidence": "evidence/c6/SECURITY_NRTV_REPORT.json"
+ }
 }
