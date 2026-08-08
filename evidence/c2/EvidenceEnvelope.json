@@ -1,0 +1,55 @@
+{
+  "schema": "HGK-EVIDENCE-ENVELOPE/1",
+  "workorder_id": "WO-HGK-C2-CASERUN-001",
+  "gate": "C2",
+  "captured_at": "2026-08-08T09:35:00+08:00",
+  "orchestrator": "Hermes Agent v0.18.2 / opencode-go / deepseek-v4-flash",
+  "maker": {
+    "executor": "Codex CLI codex-cli 0.147.0-alpha.6.5",
+    "exe_sha256": "fb5c760e14cf8fe86e12e49e8a3e7f237af06082d6b9fe1e411e463b7229c916",
+    "transport": "OpenCodex @bitkyc08/opencodex 2.11.0",
+    "provider": "OpenCode Go https://opencode.ai/zen/go/v1",
+    "model": "deepseek-v4-flash",
+    "worktree": "worktrees/g4-opencodex-pilot",
+    "branch": "codex/hgk-g4-opencodex-pilot",
+    "base_head": "201530fda688766dc8d7b8ebdbf4f90c65b2bff4",
+    "command": "codex exec -m opencode-go/deepseek-v4-flash <WO-HGK-C2-CASERUN-001 prompt>",
+    "exit_code": 0
+  },
+  "changes": {
+    "modified": [
+      "src/hg_kseos/cli.py"
+    ],
+    "added": [
+      "tests/test_c2_case_run.py"
+    ],
+    "diff_stat": "src/hg_kseos/cli.py | 23 ++++++++++++++++++++++- (1 file changed, 22 insertions(+), 1 deletion(-))",
+    "scope_check": "only allowed files changed; eval/ evidence/ config/ plans/ frozen CSV untouched"
+  },
+  "checker": {
+    "identity": "Hermes independent checker (fresh read-only context; not the writer)",
+    "method": "read git diff, re-run focused tests, re-run full suite",
+    "focused_tests": "python -m unittest tests.test_c2_case_run -v -> 6 tests OK (R1 exit 0 TST-037, R2 unknown id exit non-zero, R3 missing id parse error x2, R4 only allowed files)",
+    "focused_exit": 0,
+    "full_suite": "python -m unittest discover -s tests -t . -> 76 tests OK in 6.224s",
+    "full_exit": 0,
+    "verdict": "INDEPENDENT_CHECK_PASS"
+  },
+  "route_readback": {
+    "request_log": "52/52 opencode-go/deepseek-v4-flash HTTP 200; 0 other routes",
+    "default_provider": "opencode-go",
+    "openai_disabled": true,
+    "combos": "none",
+    "openai_model_fallback": false
+  },
+  "hashes": {
+    "cli_py_after": "693496a425374bdf84a40800783ffcc3f157cd6729130834c20464501aea7658",
+    "test_file_sha256": "55e228e34bf1336be2863de0ff4480a54253725851a545301c0633a03ac3551b"
+  },
+  "rollback": {
+    "method": "git clean worktree-local changes, reset branch to base_head",
+    "target": "branch codex/hgk-g4-opencodex-pilot == base_head 201530f, status empty",
+    "status": "PENDING"
+  },
+  "claim_ceiling": "C2 closed-loop qualification evidence; not a release claim."
+}
