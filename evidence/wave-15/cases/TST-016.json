@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-016",
+  "domain": "RAG",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "Abstain with TT-RETRIEVAL",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L940",
+  "fixture": "eval/fixtures/TST-016.yaml",
+  "fixture_sha256": "1ba60a3649043dd510c2cdfc9ae8a2979dfa43fb5bcea6dd23ca0bff1177a991",
+  "details": {
+    "test": "tests.test_knowledge.KnowledgeTests.test_unsupported_query_abstains",
+    "returncode": 0,
+    "output_sha256": "a056005dc5c2a20f7f55b5664e04f05fd35332717ac28c0a11af25c8c211f53a",
+    "output": "test_unsupported_query_abstains (tests.test_knowledge.KnowledgeTests.test_unsupported_query_abstains) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.120s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

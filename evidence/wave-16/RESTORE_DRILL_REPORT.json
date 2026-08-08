@@ -1,0 +1,20 @@
+{
+  "schema": "HGK-RESTORE-DRILL/1",
+  "captured_at_utc": "2026-08-07T16:55:53.450248+00:00",
+  "backup_manifest": "var/backups/hg-kseos-20260807T165435.957523Z.manifest.json",
+  "backup_sha256": "e25f98bcde496e52aadd50ecc8d009af73454f49a102454c4d59b3a70d83e2f0",
+  "restore_result": {
+    "backup": "C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\var\\backups\\hg-kseos-20260807T165435.957523Z.db",
+    "restored": "C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\restore-drill\\restored-1786121753438247300-hg-kseos-20260807T165435.957523Z.db",
+    "sha256": "e25f98bcde496e52aadd50ecc8d009af73454f49a102454c4d59b3a70d83e2f0",
+    "status": "RESTORE_READBACK_PASS"
+  },
+  "destination": "worktrees/restore-drill/restored-1786121753438247300-hg-kseos-20260807T165435.957523Z.db",
+  "rto_observed_ms": 8.945,
+  "integrity": "ok",
+  "schema_version": "2",
+  "requirements": 499,
+  "providers": 79,
+  "status": "RESTORE_DRILL_PASS",
+  "claim_ceiling": "Project-local SQLite restore drill; no production disaster-recovery claim."
+}

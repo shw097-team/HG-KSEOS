@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-040",
+  "domain": "Evidence",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "Release reducer rejects",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L964",
+  "fixture": "eval/fixtures/TST-040.yaml",
+  "fixture_sha256": "fef44c6b876e6fd1fe80a2ca11a01bc4abc2d0696a18f3464f1ff16ed07ed2a7",
+  "details": {
+    "test": "tests.test_recovery_release.RecoveryReleaseTests.test_release_reducer_fails_closed",
+    "returncode": 0,
+    "output_sha256": "b3f05da283e46e3268b403ee8001460df4d756fa89c7f6380d389428b38f7a1e",
+    "output": "test_release_reducer_fails_closed (tests.test_recovery_release.RecoveryReleaseTests.test_release_reducer_fails_closed) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.155s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F17-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

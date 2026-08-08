@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-036",
+  "domain": "Eval",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "Gate remains FAIL",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L960",
+  "fixture": "eval/fixtures/TST-036.yaml",
+  "fixture_sha256": "62d84da083ed010231f281a030835bc6db1ac0279f077cb3c123d7593589eb4f",
+  "details": {
+    "test": "tests.test_assurance.AssuranceTests.test_stale_base_and_deterministic_oracle",
+    "returncode": 0,
+    "output_sha256": "2b2557345e3e5b5d84cfa40884e33aa1769705204fc31138c1a870f4f701d40f",
+    "output": "test_stale_base_and_deterministic_oracle (tests.test_assurance.AssuranceTests.test_stale_base_and_deterministic_oracle) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-01",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

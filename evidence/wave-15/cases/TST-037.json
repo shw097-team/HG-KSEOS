@@ -1,0 +1,35 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-037",
+  "domain": "NRTV",
+  "status": "MAKER_CASE_PASS",
+  "oracle": "Answer from compiled artifacts with correct locator",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L961",
+  "fixture": "eval/fixtures/TST-037.yaml",
+  "fixture_sha256": "8ecec447e3ad8fe0e8df824adeb4255165e7b26814ff0da502c2d4a80d7fbcf9",
+  "details": {
+    "query": "Without reading raw source volumes, report the PREDEV and P0 canonical requirement counts and their combined trace count.",
+    "answer": {
+      "predev_requirements": 240,
+      "p0_requirements": 259,
+      "requirement_trace_rows": 499
+    },
+    "locators": [
+      "requirements/REQUIREMENT_COMPILATION_RECEIPT.json#/predev_requirements",
+      "requirements/REQUIREMENT_COMPILATION_RECEIPT.json#/p0_requirements",
+      "requirements/REQUIREMENT_COMPILATION_RECEIPT.json#/requirement_trace_rows"
+    ],
+    "locators_machine_validated": true,
+    "allowed_artifact_enforced": "requirements/REQUIREMENT_COMPILATION_RECEIPT.json",
+    "forbidden_roots_enforced": [
+      "C:/Projects/Agent_Workspace/HG-KSEOS",
+      "C:/Projects/HG-KSEOS"
+    ],
+    "raw_source_volumes_read": false
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-01",
+  "independent_verdict": "INDEPENDENT_PASS",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

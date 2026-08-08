@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-080",
+  "domain": "Receiver Handoff",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "rework path selected; no silent ACK",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L15254",
+  "fixture": "eval/fixtures/TST-080.yaml",
+  "fixture_sha256": "bf66928a0d69084ea94edd6fbd75ac6b5995acf142847ab0c2c3494ddc8cf199",
+  "details": {
+    "test": "tests.test_assurance.AssuranceTests.test_receiver_packet_capability_and_nack",
+    "returncode": 0,
+    "output_sha256": "35c9cb2419b997288ccd4c2dd16d7267dbfc69f39cefd9e7b901843d80b079b2",
+    "output": "test_receiver_packet_capability_and_nack (tests.test_assurance.AssuranceTests.test_receiver_packet_capability_and_nack) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-06",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

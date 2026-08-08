@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-033",
+  "domain": "Security",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "STOP/QUARANTINE; no external action",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L957",
+  "fixture": "eval/fixtures/TST-033.yaml",
+  "fixture_sha256": "4dce6ae43e38e9748ef1d0263b119a9e9d5d251cca6e35f57ecfe8eafbe7bb25",
+  "details": {
+    "test": "tests.test_knowledge.KnowledgeTests.test_injection_is_quarantined",
+    "returncode": 0,
+    "output_sha256": "91dea51fe2d99b92a70090634ff58904fccbdcdeebc8c793298aad7045023e22",
+    "output": "test_injection_is_quarantined (tests.test_knowledge.KnowledgeTests.test_injection_is_quarantined) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.157s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F16-05",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

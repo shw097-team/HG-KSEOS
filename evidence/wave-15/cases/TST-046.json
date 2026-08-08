@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-046",
+  "domain": "Handoff",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "Receiver rejects packet",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L970",
+  "fixture": "eval/fixtures/TST-046.yaml",
+  "fixture_sha256": "b29d61ea3c321a29b4ae0f86b0ca599c007ac578d55c928e5f48c6a132a82afb",
+  "details": {
+    "test": "tests.test_assurance.AssuranceTests.test_receiver_packet_capability_and_nack",
+    "returncode": 0,
+    "output_sha256": "35c9cb2419b997288ccd4c2dd16d7267dbfc69f39cefd9e7b901843d80b079b2",
+    "output": "test_receiver_packet_capability_and_nack (tests.test_assurance.AssuranceTests.test_receiver_packet_capability_and_nack) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+var/shared-spine/*.db
+var/shared-spine/*.db-*
+var/test-runs/
+var/
+worktrees/
+
+# Frozen authoritative inputs and nested engineering repositories are not
+# owned by the canonical implementation repository.
+/HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md
+/HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md
+/HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2/
+/任務執行指令/
+/施工PROMPT/
+/工程基座/
+/資料庫/

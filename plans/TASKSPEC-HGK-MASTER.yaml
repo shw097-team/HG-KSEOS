@@ -1,0 +1,50 @@
+taskspec_id: TS-HGK-FINAL-CLOSURE-002
+task_id: HGK-CODEX-TASK-2
+version: 2026-08-08.1
+objective: >-
+  Construct, integrate, verify, repair, and locally accept HG-KSEOS from the frozen
+  local corpus without modifying authoritative source artifacts or claiming production acceptance.
+product_root: HG-KSEOS
+source_root: C:\Projects\Agent_Workspace\HG-KSEOS
+source_mode: FROZEN_INPUT_SUBTREES_READ_ONLY
+maker_root: C:\Projects\Agent_Workspace\HG-KSEOS
+authoritative_write_path: CANONICAL_SHARED_SPINE
+authority:
+  - A0: C:\Projects\Agent_Workspace\HG-KSEOS\施工PROMPT\《HG-KSEOS》CODEX 任務執行指令.md
+  - A0B: C:\Projects\Agent_Workspace\HG-KSEOS\任務執行指令\HG-KSEOS_CODEX_任務執行指令-2.md
+  - A1: C:\Projects\Agent_Workspace\HG-KSEOS\HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md
+  - A2: C:\Projects\Agent_Workspace\HG-KSEOS\HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md
+  - A3: C:\Projects\Agent_Workspace\HG-KSEOS\資料庫\【1】HG-KSEOS\【1】藍圖
+  - A4: C:\Projects\Agent_Workspace\HG-KSEOS\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2
+  - A5: C:\Projects\Agent_Workspace\HG-KSEOS\資料庫\【2】Hermes_Agent_OS_專業技術文檔
+  - A6: C:\Projects\Agent_Workspace\HG-KSEOS\工程基座
+permissions:
+  readable_roots:
+    - C:\Projects\Agent_Workspace\HG-KSEOS
+    - C:\Users\user\.cache\codex-runtimes\codex-primary-runtime\dependencies
+  writable_roots:
+    - C:\Projects\Agent_Workspace\HG-KSEOS
+  network: DENY_UNLESS_TASKSPEC_ALLOWLISTS_OFFICIAL_ENDPOINT
+  secrets: REFERENCE_ONLY
+  remote_push_merge: FORBIDDEN
+  deployment: FORBIDDEN
+  production_release: FORBIDDEN
+preconditions:
+  - source inventory readback hash equals c79213f6ae9dcfa6dab7718dff013c9ae33e7a563117bdec39d2518ffc469c5e
+  - no source path is used as an output path
+  - every material side effect has a HarnessRecord and rollback pointer
+completion:
+  required_status: HG-KSEOS_LOCAL_DELIVERY_PASS
+  claim_ceiling: LOCAL_ONLY
+  requires:
+    - all mandatory atomic requirements traced to implementation, test, and evidence
+    - required providers qualified without lifecycle skips
+    - deterministic security, negative, adversarial, recovery, and rollback checks pass
+    - independent checker returns PASS
+    - zero release-blocking TT
+rollback:
+  pointer: RB-HGK-ROOT-001
+  method: Revert only commits owned by the canonical implementation repository; never delete or reset frozen authority subtrees or nested engineering repositories.
+evidence:
+  inventory: evidence/wave-00/SOURCE_INVENTORY.csv
+  inventory_sha256: c79213f6ae9dcfa6dab7718dff013c9ae33e7a563117bdec39d2518ffc469c5e

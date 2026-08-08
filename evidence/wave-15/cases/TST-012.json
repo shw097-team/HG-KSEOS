@@ -1,0 +1,20 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-012",
+  "domain": "Hermes",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "Fallback to Codex-only/manual; canonical state intact",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L936",
+  "fixture": "eval/fixtures/TST-012.yaml",
+  "fixture_sha256": "c6a620e3e282a7f187d8a696a4e77e7c8a8036becab70c52a99d49661dbfec48",
+  "details": {
+    "hermes_status": "TEMP_CLOSED_CORE_PROVIDER_HITL",
+    "canonical_database": "var/shared-spine/hg-kseos.db",
+    "fallback": "Codex/manual + Shared Spine"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

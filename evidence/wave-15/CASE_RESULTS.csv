@@ -1,0 +1,93 @@
+case_id,domain,type,status,evidence,evidence_sha256,independent_verdict
+TST-001,Authority,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-001.json,63404efd3ac3ba37b47f94e6c4344b1fe0005e22e02bfb25080158999e9d2709,NOT_RUN
+TST-002,Intent,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-002.json,d2c90ad8fdab502481af9d13771a9178675cdea47f3dadd05160691d962fa6fd,NOT_RUN
+TST-003,Source,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-003.json,955f35131b9f8a7d072eac56800dc98eb4f2c7d5dafe3e8405cea617498584ca,NOT_RUN
+TST-004,Source,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-004.json,862df49cc1edea7193bf9ea7226c6864b19705365c09a7996aea920d0af80228,NOT_RUN
+TST-005,Architecture,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-005.json,1e8e035126ee2a28c7ab39526b3a8b0ef6e542e020d0a5effd676f5bc4949303,NOT_RUN
+TST-006,Schema,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-006.json,1992e85b09ba5dc79cd5fbd10c7c6f16a267a727bf82446e9316da8b734d1e2f,NOT_RUN
+TST-007,Requirement,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-007.json,7764cdcdf89e5f13cc6ba29bc03a289d1c7abbb5a473f05cd459347512c5d587,NOT_RUN
+TST-008,HLPE,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-008.json,dc52551ba27184d96a791707cec215d7a8df460a120a412e74b599bb500d501e,NOT_RUN
+TST-009,Windows,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-009.json,68e50f9b85ab6fc07846b6cda5ea086cf1baed6e61422749f881227dfef2b3c4,NOT_RUN
+TST-010,Windows,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-010.json,106f994e040f82cb09eed9539c2f66d5ad83de7f866e527e60cadbc377fbedad,NOT_RUN
+TST-011,Windows,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-011.json,0b470cb10aedd11d877ebc54341f641a7b48f7bf8ba5748839c101e83f3916a4,NOT_RUN
+TST-012,Hermes,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-012.json,8061c817163c7394388d49d8c54fe9c990d0798d12838c32f54bf9d94a67f5b6,NOT_RUN
+TST-013,Distillation,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-013.json,e55eb6d6308634c1f1934b3a15fb42cdb6b45aab1490de65815801895c11501a,NOT_RUN
+TST-014,Distillation,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-014.json,f180b696c71982326a7faafc0c645bc92087a1d4e3e108b628ab61dda1866c88,NOT_RUN
+TST-015,RAG,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-015.json,7721357b5f2839db62c4af8b2058654bfad9e5b5cc8c5452fdeacddf31f1bf26,NOT_RUN
+TST-016,RAG,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-016.json,2325e9331d0a8a265f672aed02f861f451ff69743c506168131dcfe4c265a984,NOT_RUN
+TST-017,RAG,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-017.json,90e55a7c3a95506cddcf4244b8b54ca047223ec67256332964e1c66bf6b4234a,NOT_RUN
+TST-018,Memory,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-018.json,95a264d8431472fb505834fd17c4dad60c3c5ea1fd6e51db5dde2ca47e5ce3b8,NOT_RUN
+TST-019,A2A,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-019.json,5042550d310d65e5c58e47da18af5f43d8b0b7be0fdbf825ece5c25d4ff4cce5,NOT_RUN
+TST-020,A2A,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-020.json,1098a9ef36e1a0915f625618406d8621e63b06c3e7bd9833123805d651aad361,NOT_RUN
+TST-021,Harness,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-021.json,e7c86f1accddfa30dca5fa229ea9f10faba9d3cd12d997d93d4a55b0b846eb6d,NOT_RUN
+TST-022,Harness,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-022.json,da5ea27d74e2ec35f95bca26a337e6ce437cea990efbae6c18550cd5a315c98e,NOT_RUN
+TST-023,Loop,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-023.json,a48c45a61900d53f94fc640722be11f62bb32def4050fa408cbd4c4d51e6917a,NOT_RUN
+TST-024,Checkpoint,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-024.json,4510e5c7b2a055646b72f6b8395200ff5b401061fb5faf2a4efea528c5677e7c,NOT_RUN
+TST-025,AGENTS,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-025.json,0176bf98159d88f19a6ca07f1f60669ef554af7b07aea3377ce485832ee9e94d,NOT_RUN
+TST-026,Skills,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-026.json,962d0c3db58265daabdfbeff82d73884f45e39bcec7f4e62fa1f5e29e7d745bb,NOT_RUN
+TST-027,MCP,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-027.json,d9446511f56ce3d39b77572439347faf2ecd44b667772faa74d2128e73d6654a,NOT_RUN
+TST-028,MCP,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-028.json,0000e9ec7119d008c1715dac81e5058a4f37337664271fb645edfc8460f79838,NOT_RUN
+TST-029,Method translation,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-029.json,467ab8a5954ca59cccb279c6f5f69a738b7f659e7b252be03a098b2f7542b669,NOT_RUN
+TST-030,Codex,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-030.json,059f9860a54ae7191226b5630ca899872b710719ca2038f5b9d4d8d1b59424d9,NOT_RUN
+TST-031,Codex,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-031.json,58df822ac47b10de3c25e9d29ad6231e5c3a9300fc704a2ba3c88f6b9279ed8f,NOT_RUN
+TST-032,Repo/CI,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-032.json,05f1bc865a21622d5d225f527e17a955cee41405a5bc9b1ed2bf2e8033fd3c7e,NOT_RUN
+TST-033,Security,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-033.json,a2f1d6920f14be9f6b75faf2e485e762b2303b5bb1228bf862123db5a6f71975,NOT_RUN
+TST-034,Security,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-034.json,9895efc7b838b9205eee7acf925d63add44f4276e398e2f89cf7e45583c00748,NOT_RUN
+TST-035,Security,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-035.json,4b877104ecbe45dca08a60a986d141349d0bea2c8951c4651714361d85dea795,NOT_RUN
+TST-036,Eval,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-036.json,d161e58ed6e32408fe3936f9c6b878153e26b500648a9283edafac471c26bb00,NOT_RUN
+TST-037,NRTV,positive,MAKER_CASE_PASS,evidence/wave-15/cases/TST-037.json,a3f4a0d93f5405ec11e96b8c09d45fe61dae1089f51078034ffd07899f2f4f6c,INDEPENDENT_PASS
+TST-038,Observability,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-038.json,69462a505414f990e7b03468a822a3ac07db09bdcb467900e81a74d3a3c7023a,NOT_RUN
+TST-039,FinOps,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-039.json,aaf45aee31e1809d533ea677f891a1d01d9b7d3e1308aefbc7019d8004a10c3a,NOT_RUN
+TST-040,Evidence,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-040.json,e7a17f9cd28f0753e0a66e0dc4b4eac54a4d0ddfcb47ab68f132618b23812052,NOT_RUN
+TST-041,SBOM,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-041.json,b8c232bab2d273f4193d8b3937ef1a46e413e01a98d453989a44a033ecfb818b,NOT_RUN
+TST-042,Backup,fault,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-042.json,00cc44cd066194dbad64b4fdd7e1acc879d0dc0c166dc0fd1f68037e8fd5b989,NOT_RUN
+TST-043,Release,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-043.json,4d1788ab7c00bc11a7ef51b3b8941198308fdbb9047effb40011f0e01b63ae5b,NOT_RUN
+TST-044,Migration,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-044.json,52eceef01b9265be4f94b393e0fb2e374988cf76af8c85387947ce2841486722,NOT_RUN
+TST-045,Evolution,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-045.json,61c9b5af17e5eec6ecc9fb545b467d1f44a647e9cc05d6723cdbda6b55f7c68f,NOT_RUN
+TST-046,Handoff,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-046.json,05ab8ee1c3b2cef42ea2d43a691080d0383cb3b02e57edad00676bc60656a0bc,NOT_RUN
+TST-047,Handoff,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-047.json,171df7d28bbaaa4d9cb59a51e70f8eedf58f1fa1f21fb8f7c680e13e2f324fad,NOT_RUN
+TST-048,Readback,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-048.json,79b33d91f037f42d3a9de7641b45346b73b587e4c28faf14e7e2bfeff8c4ea00,NOT_RUN
+TST-049,Regression,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-049.json,5afa68dfe8083c77670e6a11bb4e25bc70e47edff2d005534a1abef72b2f10e8,NOT_RUN
+TST-050,Governance,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-050.json,4ada0060c8e8f10e7ee63276132b0aa0f101f05bd44db5603bd8848e13d63bb9,NOT_RUN
+TST-051,Install Source,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-051.json,443fc6b33b0e1eedc87a72620d529586dd8da153947be84586f2c93901186cad,NOT_RUN
+TST-052,Pin,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-052.json,e5d69c5958953e0453a036fd671d87cbd468f8a59077131646b6c9e714a5d910,NOT_RUN
+TST-053,Doctor,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-053.json,9576724049816b6a13cc0461eebd6f378e7e91f341ddaa538a161df9db43ae3e,NOT_RUN
+TST-054,Uninstall,fault,BLOCKED,evidence/wave-15/cases/TST-054.json,05d82ecd1cdb6fb4e9ae168d6ea5a4821a6c24361c66f6d7982eb37e8a072eea,NOT_RUN
+TST-055,Codex Permission,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-055.json,34becc76a55b48ba99e9eb7c8720bd6ee05ebe86c6baad7f2500cc8770cd9bfc,NOT_RUN
+TST-056,Codex Windows,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-056.json,5b0aa692fc8c5b8a363563a7aa61271cfdc34832a90bfd8985d177e520c26858,NOT_RUN
+TST-057,OpenSpec Drift,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-057.json,d30b3a0aba03a91a865aa45c72d04183926bd13022a807084fb77be080dc42ee,NOT_RUN
+TST-058,OpenSpec Archive,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-058.json,ea8176ce6bde354d3f4adacd16cb6aa5e4923a7e323ac28f3a2909489f3d4a7d,NOT_RUN
+TST-059,Hermes Installer,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-059.json,94c6c1f692f0b3e91c71a3075e0752920d7f6610792a53319f5cbfddc27b2bc7,NOT_RUN
+TST-060,Hermes Fallback,fault,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-060.json,20fd8a02b6ea169c4f37ea5b827f1d68d696217f8c20d017bc2faf889ed28fcd,NOT_RUN
+TST-061,MCP Version,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-061.json,75e013df3f70a0d60b70650441bcae8ac544d6d0d0649ad7c1a2dd015b444788,NOT_RUN
+TST-062,MCP Tool Description,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-062.json,92de7a56b16a4236d98accfb9a53ec9ebd2a83f8db8bf27c6df08d640820e9f7,NOT_RUN
+TST-063,Skill Explicit,positive,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-063.json,c65602ddffde13d23ed660f27a783fde3dd15b4eaef772fa785c01235226aa90,NOT_RUN
+TST-064,Skill Implicit,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-064.json,750e2fe363cddbd5facdc5886e7992e79ba5ed1eb396c69a8b924786be82e284,NOT_RUN
+TST-065,Skill Collision,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-065.json,9ee47b8524641d203ac7c61789f41bc4d33ae28453b260655e686d58bb537d94,NOT_RUN
+TST-066,Skill Script,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-066.json,d7a6010a622ceb344007d7406a8fbe3ddf80d8339b92d6cee430637604744274,NOT_RUN
+TST-067,Supply Chain,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-067.json,37733bdede9c8930926198ef5f24c68f63f68d23f6682cae21db51b959c087ef,NOT_RUN
+TST-068,OTel Privacy,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-068.json,f872b7dc3e5fb75a7697d102573da330fa14604f983303780ac98efb7e438ecb,NOT_RUN
+TST-069,Control Plane,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-069.json,2a084f07599cb30a7d2843839e61b372812d006a6f0f0391eb7e48c4f3b2f2f2,NOT_RUN
+TST-070,WP Scheduler,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-070.json,54b69cb4d17f7e8e209045b96af979d385bed850d129374ea9589ac4f1534c16,NOT_RUN
+TST-071,TaskSpec Dispatcher,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-071.json,c656488d89d7087366d2d07928656ea39cce115121973f89ce846eca3a9e7fbb,NOT_RUN
+TST-072,Agent Admission,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-072.json,761bdb25c37296c13891cbfbce75d74d144a91566737539e0fdde9dcb98cba01,NOT_RUN
+TST-073,Harness,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-073.json,6cb420c2e1f3bf25ba69d49ee304b2cc931dcf91720add120a545073502756de,NOT_RUN
+TST-074,Loop,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-074.json,b8485da142b917bf9d8cd156ea8475fd6defed29db0c42b1ecd8417c4b7585d8,NOT_RUN
+TST-075,SoD,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-075.json,91887163ea6348b9737f2008f37de673152a9776e1530065dcd9480597916d28,NOT_RUN
+TST-076,Security Veto,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-076.json,66c23a2f8e2b8ae71b0959051b0db73c97af7da06402014c2e5a14f720767f42,NOT_RUN
+TST-077,Evidence,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-077.json,ee1cc9a49b64e388a17b8b3b22a1b61353635be84138adce0b04b36c2e6d0397,NOT_RUN
+TST-078,Release Reducer,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-078.json,6f89c80929170447b6458a00ac36c7b5ffb38d93712e4562c9ed5027b0bfc89d,NOT_RUN
+TST-079,Rollback,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-079.json,0f1d409ec23d6d69255f83e4a7627afb2e0980f053acdd59034987aaf394c99c,NOT_RUN
+TST-080,Receiver Handoff,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-080.json,fb3badd683173dac5ba3b2d219fa797f664d7c419e9e78042b178c2e95f1ffb3,NOT_RUN
+TST-081,Prompt Contract,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-081.json,c0c17d6043dd3edf93d97f0330353eb1e06aeadb49e1f6a010bbe6defe327f38,NOT_RUN
+TST-082,Prompt Safety,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-082.json,a75273d2ec50db3aaa5321d9ca85513861299d76abc758bd8563d60a7bcbed19,NOT_RUN
+TST-083,Skill Removal,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-083.json,8ab8509e2c71dcec4716b4bd73dcd3433226282c9f80e82cec85a368a9cbe638,NOT_RUN
+TST-084,AGENTS Precedence,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-084.json,64b1bed696cf1aef7e1e421383d3f9ab1b31d60ef2b6a1f4b9106b2a73c622e4,NOT_RUN
+TST-085,State Machine,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-085.json,708d16f4225cfd610246355fa55943fc775e240b47513f271297def4b1317b6f,NOT_RUN
+TST-086,Workflow Graph,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-086.json,cf1a618dfc31fd1c922a517fae06e66cb6d3f65c304f370285b4fdebd05aa3e2,NOT_RUN
+TST-087,Migration,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-087.json,e4bf91115ccabb84ab21da1017930f92e6e934ccfd622a2bce6805f8f65c13b0,NOT_RUN
+TST-088,Provider Hot-swap,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-088.json,478d52999282bff86c687b78da49cfdddb0b24049fae0347c908b0ee1f7b0709,NOT_RUN
+TST-089,Tool Qualification,negative,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-089.json,b58060ef4597f76bfa92e6cc9d55946bfa23dc93f81b963b8bdf8f73cd50a75e,NOT_RUN
+TST-090,Windows P0,edge,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-090.json,00ade89840639771ae45d9620161ce0a044077f0502daf3227290086c3f59fe4,NOT_RUN
+TST-091,Permission Handoff,adversarial,MAKER_PROXY_PASS,evidence/wave-15/cases/TST-091.json,127043b9804da4b13cd1b964428ed8bae619b98ec7cdb2c040d37d45c59d2098,NOT_RUN
+TST-092,Final Package,negative,BLOCKED,evidence/wave-15/cases/TST-092.json,c585580ce89abd4423cc454951a1908803b9fa879cb33804e099aeb946b88497,NOT_RUN

@@ -1,0 +1,17 @@
+{
+  "captured_at": "2026-08-07T12:27:53.271532Z",
+  "counts": {
+    "agents": 10,
+    "prompts": 12,
+    "skills": 18,
+    "state-machines": 6,
+    "workflows": 8
+  },
+  "destination": "C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\control",
+  "manifest": "C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\registries\\CONTROL_MATERIALIZATION_MANIFEST.csv",
+  "manifest_sha256": "6929efb2efd17f8534ef2f2c019a372a371c56023e0932138d84267b4164a52b",
+  "physical_files": 60,
+  "readback": "PASS",
+  "runtime_admission": "NOT_CLAIMED",
+  "source": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\control"
+}

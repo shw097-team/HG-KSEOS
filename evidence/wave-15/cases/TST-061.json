@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-061",
+  "domain": "MCP Version",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "Fail closed or dual-era adapter; record exact versions",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L985",
+  "fixture": "eval/fixtures/TST-061.yaml",
+  "fixture_sha256": "5131cea784931284a216149fbd5cf4724ea23b06a04e0f4faa8eec67d8d41769",
+  "details": {
+    "test": "tests.test_assurance.AssuranceTests.test_mcp_revision_negotiation",
+    "returncode": 0,
+    "output_sha256": "6689068ba65ee7731774dc634be665a86a9480ab9d1918832f90409d485aa122",
+    "output": "test_mcp_revision_negotiation (tests.test_assurance.AssuranceTests.test_mcp_revision_negotiation) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

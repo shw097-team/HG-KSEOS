@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-006",
+  "domain": "Schema",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "No field/semantic loss",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L930",
+  "fixture": "eval/fixtures/TST-006.yaml",
+  "fixture_sha256": "759ff864e4bb12aca5b4f8cd593d2034b9cc5d227ea11f05d84d2c1dd285671a",
+  "details": {
+    "test": "tests.test_e2e_vertical_slice.VerticalSliceTests.test_requirement_to_evidence_to_rollback_slice",
+    "returncode": 0,
+    "output_sha256": "d1e823c65bbf0215b0b3a784dc70c3a5506189262bd2e96aca98cd4f501c0eac",
+    "output": "test_requirement_to_evidence_to_rollback_slice (tests.test_e2e_vertical_slice.VerticalSliceTests.test_requirement_to_evidence_to_rollback_slice) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.281s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

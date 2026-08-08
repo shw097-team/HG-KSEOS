@@ -1,0 +1,19 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-092",
+  "domain": "Final Package",
+  "status": "BLOCKED",
+  "oracle": "LOCAL_FINAL_PACKAGE_READBACK_PASS withheld",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L15266",
+  "fixture": "eval/fixtures/TST-092.yaml",
+  "fixture_sha256": "9dbe4688fa1b69b0d9a80f432be99e72bf5020e91d7c220b0186604d7af04b7b",
+  "details": {
+    "tt_id": "TT-HGK-WRITE-BINDING",
+    "reason": "Canonical target write/readback and final package exact-set are blocked by workspace binding."
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-06",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

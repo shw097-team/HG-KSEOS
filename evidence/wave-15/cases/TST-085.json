@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-085",
+  "domain": "State Machine",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "transition rejected and audit trace emitted",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L15259",
+  "fixture": "eval/fixtures/TST-085.yaml",
+  "fixture_sha256": "4690ba17fb95ce5609de8e86534480e10fb3f45d432a4e695e17fad0ad4eeec0",
+  "details": {
+    "test": "tests.test_spine.SharedSpineTests.test_illegal_transition_is_rejected",
+    "returncode": 0,
+    "output_sha256": "ed8957acad7b4be1aa1cd9c6fca2985f191bc0ab376096fe9228abe1484c033b",
+    "output": "test_illegal_transition_is_rejected (tests.test_spine.SharedSpineTests.test_illegal_transition_is_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.150s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-06",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

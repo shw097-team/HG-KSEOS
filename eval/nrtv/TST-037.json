@@ -1,0 +1,23 @@
+{
+  "schema": "HGK-BLIND-NRTV/1",
+  "case_id": "TST-037",
+  "query": "Without reading raw source volumes, report the PREDEV and P0 canonical requirement counts and their combined trace count.",
+  "allowed_compiled_artifacts": [
+    "requirements/REQUIREMENT_COMPILATION_RECEIPT.json",
+    "source-freeze/DENOMINATOR_RECONCILIATION.json"
+  ],
+  "forbidden_inputs": [
+    "C:/Projects/Agent_Workspace/HG-KSEOS",
+    "C:/Projects/HG-KSEOS"
+  ],
+  "expected_answer": {
+    "predev_requirements": 240,
+    "p0_requirements": 259,
+    "requirement_trace_rows": 499
+  },
+  "required_locators": [
+    "requirements/REQUIREMENT_COMPILATION_RECEIPT.json#/predev_requirements",
+    "requirements/REQUIREMENT_COMPILATION_RECEIPT.json#/p0_requirements",
+    "requirements/REQUIREMENT_COMPILATION_RECEIPT.json#/requirement_trace_rows"
+  ]
+}

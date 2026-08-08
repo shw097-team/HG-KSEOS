@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-042",
+  "domain": "Backup",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "RPO/RTO measured; derived indexes rebuilt",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L966",
+  "fixture": "eval/fixtures/TST-042.yaml",
+  "fixture_sha256": "ba4614f9853528fa589933019e2db4c13a9711a600636372c70460f2f2ccccb7",
+  "details": {
+    "test": "tests.test_recovery_release.RecoveryReleaseTests.test_backup_restore_readback",
+    "returncode": 0,
+    "output_sha256": "5dc402ac6366a0c651cae2be967a568b7c795329303cfca3807778c6778b1a62",
+    "output": "test_backup_restore_readback (tests.test_recovery_release.RecoveryReleaseTests.test_backup_restore_readback) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.153s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F17-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

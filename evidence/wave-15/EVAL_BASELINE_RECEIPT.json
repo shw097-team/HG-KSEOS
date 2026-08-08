@@ -1,0 +1,14 @@
+{
+  "captured_at": "2026-08-07T16:19:30.870750Z",
+  "case_count": 92,
+  "case_ids": {
+    "first": "TST-001",
+    "last": "TST-092",
+    "unique": 92
+  },
+  "frozen_baseline": "C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\eval\\FROZEN_ACCEPTANCE_CASES.csv",
+  "frozen_baseline_sha256": "1564bbf7a8cd4baeabc1704586dc50ebe1e30dd6c1d09c84a7ad629a2b8d8176",
+  "source": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md",
+  "source_sha256": "8a30cb146a3be4ade7d5bee3bf17174d4c1b50452f3e23e5638d7568ac9f16e2",
+  "verdict": "FROZEN_CASE_BASELINE_PASS"
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-075",
+  "domain": "SoD",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "gate fails SoD validation",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L15249",
+  "fixture": "eval/fixtures/TST-075.yaml",
+  "fixture_sha256": "eaa76120b2d49e13cf6e3f40057423e2f101a101c000a019a917e40ee9f394c1",
+  "details": {
+    "test": "tests.test_knowledge.KnowledgeTests.test_self_approval_rejected",
+    "returncode": 0,
+    "output_sha256": "498425d204d2a846532b8ff4440df2729d278121fb0fbb1838c1eb0e3b631801",
+    "output": "test_self_approval_rejected (tests.test_knowledge.KnowledgeTests.test_self_approval_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.120s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F01-02",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-041",
+  "domain": "SBOM",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "No unexplained dependency",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L965",
+  "fixture": "eval/fixtures/TST-041.yaml",
+  "fixture_sha256": "63aa4e4d0da2aee5b2b31c66fca31d0891b83c084db75f33013dd95800b2cc9a",
+  "details": {
+    "status": "PASS",
+    "total_components": 100,
+    "unexplained_dependencies": [],
+    "sbom_sha256": "4a9d45c1f4d3847aa50960225783b000cb25f61014e989b3e4f71c3882995002"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F17-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

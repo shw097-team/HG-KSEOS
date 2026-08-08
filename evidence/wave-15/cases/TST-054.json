@@ -1,0 +1,19 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-054",
+  "domain": "Uninstall",
+  "status": "BLOCKED",
+  "oracle": "IG-08 FAIL；cleanup required",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L978",
+  "fixture": "eval/fixtures/TST-054.yaml",
+  "fixture_sha256": "0bf60b5607b1f9bf29a32ca2291f1586fe17974a1432b5054f97343e0d06fbda",
+  "details": {
+    "tt_id": "TT-HERMES-UNINSTALL",
+    "reason": "Only official full-uninstall dry-run is authorized; destructive uninstall/reinstall proof is pending."
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

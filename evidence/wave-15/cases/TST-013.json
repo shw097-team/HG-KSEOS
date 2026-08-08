@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-013",
+  "domain": "Distillation",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "Exact source hash/anchor returned",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L937",
+  "fixture": "eval/fixtures/TST-013.yaml",
+  "fixture_sha256": "76f2852cee61459c8f2dddccd3803f6379128db34fdc4e3c9578a85c399bd26d",
+  "details": {
+    "test": "tests.test_knowledge.KnowledgeTests.test_clean_candidate_promotes_with_citation",
+    "returncode": 0,
+    "output_sha256": "dfe26ffb1b5d619807c6c619ac676ce55732c69d6ebf3eaaff1667118399e8a6",
+    "output": "test_clean_candidate_promotes_with_citation (tests.test_knowledge.KnowledgeTests.test_clean_candidate_promotes_with_citation) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.151s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

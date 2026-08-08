@@ -1,0 +1,32 @@
+{
+  "receipt_id": "RB-HGK-20260807-001",
+  "captured_at": "2026-08-07T20:02:16.2377164+08:00",
+  "execution_root": "C:\\Projects\\Agent_Workspace\\HG-KSEOS",
+  "execution_root_exists": true,
+  "execution_root_is_git_repository": false,
+  "top_level_entries": [
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2",
+    "工程基座",
+    "施工PROMPT",
+    "資料庫",
+    "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md",
+    "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md"
+  ],
+  "regular_file_count": 5737,
+  "inventory_sha256": "c79213f6ae9dcfa6dab7718dff013c9ae33e7a563117bdec39d2518ffc469c5e",
+  "duplicate_hash_groups": 810,
+  "files_in_duplicate_hash_groups": 2912,
+  "nested_git_roots": [
+    "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\工程基座\\sdlc-prw-formal",
+    "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\工程基座\\sdlc-prw-hlpe-formal",
+    "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\工程基座\\SDLC_PRW_HLPE\\_STAGING\\factory\\H3_CANDIDATE_VALIDATION_20260731\\repo",
+    "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\工程基座\\sru-orochi-formal"
+  ],
+  "source_root_last_write_readback": "2026-08-07T19:53:10.0746347+08:00",
+  "write_binding": {
+    "source_root": "READ_ONLY_FROZEN_INPUT",
+    "maker_root": "CREATE_NEW_COMPANION",
+    "reason": "Workspace policy and immutable-source rule require disjoint maker output."
+  }
+}
+

@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-056",
+  "domain": "Codex Windows",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "Capability probe selects compatible mode; no mixed invalid config",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L980",
+  "fixture": "eval/fixtures/TST-056.yaml",
+  "fixture_sha256": "58f3546e13895cbcd100998af3440b7ecba0549568829deb11da516510d6f877",
+  "details": {
+    "test": "tests.test_assurance.AssuranceTests.test_permission_mode_and_unicode_space_path",
+    "returncode": 0,
+    "output_sha256": "51afae5f1f2c79708a2d1398fc4565d9b2a328c6cf9de0338462faf746e16d20",
+    "output": "test_permission_mode_and_unicode_space_path (tests.test_assurance.AssuranceTests.test_permission_mode_and_unicode_space_path) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.132s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F15-04",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

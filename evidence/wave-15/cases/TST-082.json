@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-CASE-EVIDENCE/1",
+  "captured_at_utc": "2026-08-07T17:11:00.997759+00:00",
+  "case_id": "TST-082",
+  "domain": "Prompt Safety",
+  "status": "MAKER_PROXY_PASS",
+  "oracle": "request rejected; evidence-summary contract retained",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L15256",
+  "fixture": "eval/fixtures/TST-082.yaml",
+  "fixture_sha256": "2714f555757cbd70e9d45ad47c49003728871b16b66cf7c4dba022379aad4ce6",
+  "details": {
+    "test": "tests.test_assurance.AssuranceTests.test_rollback_prompt_veto_provider_and_token",
+    "returncode": 0,
+    "output_sha256": "65d7c2c882dfc100ca58848f0b2ea533fdc99ae4112f08f4834bb3ddc2180c94",
+    "output": "test_rollback_prompt_veto_provider_and_token (tests.test_assurance.AssuranceTests.test_rollback_prompt_veto_provider_and_token) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK"
+  },
+  "maker": "CODEX_MAIN_MAKER",
+  "independent_verifier": "F16-05",
+  "independent_verdict": "NOT_RUN",
+  "claim_ceiling": "Maker execution only; not independent acceptance."
+}

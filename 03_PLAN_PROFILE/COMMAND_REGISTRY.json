@@ -1,0 +1,96 @@
+{
+  "version": "2026-08-07.1",
+  "commands": [
+    {
+      "id": "HGK-BOOTSTRAP",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\bootstrap.ps1",
+      "network": "OFF",
+      "effect": "create project .venv and Shared Spine under the project root",
+      "rollback": "restore baseline Git checkpoint and remove only receipt-listed generated state"
+    },
+    {
+      "id": "HGK-DOCTOR",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\doctor.ps1",
+      "network": "OFF",
+      "effect": "read-only runtime and binding checks",
+      "rollback": "not applicable"
+    },
+    {
+      "id": "HGK-MIGRATE",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\migrate.ps1",
+      "network": "OFF",
+      "effect": "apply additive Shared Spine schema migrations in place",
+      "rollback": "restore the most recent verified project-local SQLite backup"
+    },
+    {
+      "id": "HGK-RECONCILE-TT",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\reconcile-tt.ps1",
+      "network": "OFF",
+      "effect": "synchronize the versioned TT ledger into the Shared Spine",
+      "rollback": "restore the prior verified SQLite backup and TT ledger commit"
+    },
+    {
+      "id": "HGK-TEST",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\test.ps1",
+      "network": "OFF",
+      "effect": "write only test temporary/evidence paths",
+      "rollback": "delete test-owned temporary state"
+    },
+    {
+      "id": "HGK-BACKUP",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\backup.ps1",
+      "network": "OFF",
+      "effect": "create a project-local verified SQLite backup",
+      "rollback": "remove only the selected backup after a later accepted checkpoint"
+    },
+    {
+      "id": "HGK-HERMES-CORE",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\hermes-core.ps1",
+      "network": "OFF",
+      "effect": "read-only verification of the pinned local Hermes core version",
+      "rollback": "not applicable; provider setup and mutation commands are not exposed by this adapter"
+    },
+    {
+      "id": "HGK-QUALIFY-HERMES-CORE",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\qualify-hermes-core.ps1",
+      "network": "OFF",
+      "effect": "verify frozen Hermes evidence and advance only P0-TOOL-001 through DOCTOR_PASS",
+      "rollback": "restore the most recent verified Shared Spine backup; PILOT_PASS and higher states are not reachable"
+    },
+    {
+      "id": "HGK-ACCEPTANCE",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\acceptance.ps1",
+      "network": "OFF",
+      "effect": "execute the frozen 92-case maker suite and write case-level evidence under evidence/wave-15",
+      "rollback": "restore the prior evidence/wave-15 generation; fixtures and evidence never mutate source or canonical target roots"
+    },
+    {
+      "id": "HGK-SBOM",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\sbom.ps1",
+      "network": "OFF",
+      "effect": "generate and reconcile a local CycloneDX 1.6 inventory for project and pinned Hermes environments",
+      "rollback": "restore the prior evidence/wave-13 SBOM generation"
+    },
+    {
+      "id": "HGK-RESTORE-DRILL",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\restore-drill.ps1",
+      "network": "OFF",
+      "effect": "restore the latest verified SQLite backup to a create-new ignored destination and measure readback",
+      "rollback": "remove only the explicitly receipt-listed restore-drill destination after separate path verification"
+    },
+    {
+      "id": "HGK-PACKAGE",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\package.ps1",
+      "network": "OFF",
+      "effect": "create a deterministic local companion ZIP under ignored var/releases and verify exact-set/hash readback",
+      "rollback": "replace only the project-local ignored package after preserving the versioned readback receipt"
+    },
+    {
+      "id": "HGK-VERIFY-LOCAL",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify-local.ps1",
+      "network": "OFF",
+      "effect": "capture complete local unit-test, doctor, and frozen HLPE qualification evidence",
+      "rollback": "restore the prior evidence/wave-17 report generation"
+    }
+  ]
+}
