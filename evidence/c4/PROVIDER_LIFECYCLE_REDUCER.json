@@ -1,0 +1,149 @@
+{
+ "schema": "HGK-PROVIDER-LIFECYCLE-REDUCER/2",
+ "protected_identity_total": 78,
+ "disposition_complete": 78,
+ "mandatory_ids": [],
+ "selected_default_active_ids": [
+  "P0-TOOL-001",
+  "P0-TOOL-005",
+  "P0-TOOL-006",
+  "RUNTIME-DEEPSEEK-V4-FLASH",
+  "RUNTIME-OPENCODE-GO",
+  "RUNTIME-OPENCODEX"
+ ],
+ "standby_ids": [
+  "P0-TOOL-016",
+  "P0-TOOL-047",
+  "P0-TOOL-051",
+  "P0-TOOL-053",
+  "P0-TOOL-059",
+  "P0-TOOL-061",
+  "P0-TOOL-062",
+  "P0-TOOL-064",
+  "P0-TOOL-072",
+  "P0-TOOL-073"
+ ],
+ "optional_ids": [],
+ "deferred_ids": [
+  "P0-TOOL-012",
+  "P0-TOOL-013",
+  "P0-TOOL-014",
+  "P0-TOOL-015",
+  "P0-TOOL-019",
+  "P0-TOOL-022",
+  "P0-TOOL-023",
+  "P0-TOOL-025",
+  "P0-TOOL-027",
+  "P0-TOOL-029",
+  "P0-TOOL-035",
+  "P0-TOOL-036",
+  "P0-TOOL-041",
+  "P0-TOOL-042",
+  "P0-TOOL-043",
+  "P0-TOOL-044",
+  "P0-TOOL-045",
+  "P0-TOOL-049",
+  "P0-TOOL-052",
+  "P0-TOOL-055",
+  "P0-TOOL-056",
+  "P0-TOOL-057",
+  "P0-TOOL-058",
+  "P0-TOOL-067",
+  "P0-TOOL-070",
+  "P0-TOOL-071",
+  "P0-TOOL-074",
+  "P0-TOOL-075",
+  "P0-TOOL-076",
+  "P0-TOOL-077"
+ ],
+ "donor_ids": [
+  "P0-TOOL-010",
+  "P0-TOOL-011",
+  "P0-TOOL-017",
+  "P0-TOOL-018",
+  "P0-TOOL-020",
+  "P0-TOOL-021"
+ ],
+ "prohibited_ids": [],
+ "first_party_materialized_ids": [
+  "P0-TOOL-002",
+  "P0-TOOL-003",
+  "P0-TOOL-004",
+  "P0-TOOL-007",
+  "P0-TOOL-008",
+  "P0-TOOL-009",
+  "P0-TOOL-024",
+  "P0-TOOL-026",
+  "P0-TOOL-028",
+  "P0-TOOL-030",
+  "P0-TOOL-031",
+  "P0-TOOL-032",
+  "P0-TOOL-033",
+  "P0-TOOL-034",
+  "P0-TOOL-037",
+  "P0-TOOL-038",
+  "P0-TOOL-039",
+  "P0-TOOL-040",
+  "P0-TOOL-046",
+  "P0-TOOL-048",
+  "P0-TOOL-050",
+  "P0-TOOL-054",
+  "P0-TOOL-060",
+  "P0-TOOL-063",
+  "P0-TOOL-065",
+  "P0-TOOL-066",
+  "P0-TOOL-068",
+  "P0-TOOL-069",
+  "P0-TOOL-078"
+ ],
+ "required_lifecycle_ids": [
+  "P0-TOOL-001",
+  "P0-TOOL-005",
+  "P0-TOOL-006",
+  "RUNTIME-DEEPSEEK-V4-FLASH",
+  "RUNTIME-OPENCODE-GO",
+  "RUNTIME-OPENCODEX"
+ ],
+ "required_lifecycle_pass": [
+  {
+   "id": "P0-TOOL-001",
+   "evidence": "Hermes Agent v0.18.2 - real inference PASS (G1) + disposable install/uninstall/reinstall cycle PASS (TST-054)"
+  },
+  {
+   "id": "P0-TOOL-005",
+   "evidence": "Codex CLI 0.147.0-alpha.6.5 (SHA fb5c760e) - PRIMARY_EXECUTOR_CERTIFIED (C2 closed loop + P10)"
+  },
+  {
+   "id": "P0-TOOL-006",
+   "evidence": "OpenCode CLI - fallback executor, qualified standby (not promoted; OpenCodex path healthy)"
+  },
+  {
+   "id": "RUNTIME-DEEPSEEK-V4-FLASH",
+   "evidence": "DeepSeek V4 Flash - ACTIVE_MODEL_CERTIFIED (exact model id, 52/52 route)"
+  },
+  {
+   "id": "RUNTIME-OPENCODE-GO",
+   "evidence": "OpenCode Go provider - ACTIVE_PROVIDER_CERTIFIED (https://opencode.ai/zen/go/v1)"
+  },
+  {
+   "id": "RUNTIME-OPENCODEX",
+   "evidence": "OpenCodex @bitkyc08/opencodex 2.11.0 (MIT) - MODEL_TRANSPORT_CERTIFIED (P10: 52/52 route, loopback)"
+  }
+ ],
+ "required_lifecycle_open": [],
+ "required_lifecycle_pass_count": 6,
+ "required_lifecycle_open_count": 0,
+ "blocking_tt": [],
+ "class_breakdown": {
+  "INSTALLABLE_PROVIDER_TOOL": 13,
+  "FIRST_PARTY_CONTROL_OR_INTERNAL_COMPONENT": 29,
+  "METHOD_WORKFLOW_DONOR": 6,
+  "REFERENCE_OR_DEFERRED + PROTOCOL_SPEC": 30
+ },
+ "notes": [
+  "All 78 identities have source-backed disposition from the frozen CSV (disposition_complete=78). Required install lifecycle applies ONLY to the runtime-selected default-active set (6 certified entries above).",
+  "29 FIRST_PARTY internal components are materialized via C3 canonical materialization (doctor PASS, HLPE QUALIFIED_SCOPE, AGENTS 40/40, SKILLS 18/18) and require no pip-style install.",
+  "Remaining installable providers (standby) keep their frozen disposition; non-installation is not a FAIL per C4-C.",
+  "TT-PROVIDER-RUNTIME close criteria: required default-active lifecycles PASS + deferred/donor dispositions source-backed -> CLOSED."
+ ]
+}
