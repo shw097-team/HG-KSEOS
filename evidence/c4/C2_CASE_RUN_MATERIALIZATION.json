@@ -1,0 +1,32 @@
+{
+  "schema": "HGK-C4A-CASE-RUN-MATERIALIZATION/1",
+  "gate": "C4-A",
+  "verdict": "MATERIALIZED",
+  "captured_at": "2026-08-08T11:35:00+08:00",
+  "normative_required": true,
+  "normative_source": {
+    "locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L925",
+    "contract": "eval/FROZEN_ACCEPTANCE_CASES.csv rerun_command = case.run --id TST-XXX (all 92 cases)"
+  },
+  "canonical_probe_before": "hg-kseos case run -> invalid choice 'case' (capability absent)",
+  "taskspec": "TS-HGK-C4A-CASERUN-001 (evidence/c4/TS-HGK-C4A-CASERUN-001.json)",
+  "maker": {
+    "executor": "Codex CLI 0.147.0-alpha.6.5 via OpenCodex 2.11.0 -> OpenCode Go -> deepseek-v4-flash",
+    "worktree": "worktrees/g4-opencodex-pilot",
+    "commit": "c0ae325 (worktree) -> cherry-picked to canonical",
+    "changes": ["src/hg_kseos/cli.py (+35)", "tests/test_c2_case_run.py (new, 152 lines)"]
+  },
+  "checker": {
+    "identity": "INDEPENDENT (fresh read-only context; not the writer)",
+    "focused_tests": "6/6 PASS (R1 exit 0 TST-037 MAKER_CASE_PASS, R1 exit-code propagation, R2 unknown id, R3 missing id x2, R4 only allowed files)",
+    "full_suite": "76/76 PASS",
+    "canonical_probe_after": "hg-kseos case run --id TST-037 -> exit 0, baseline 1564bbf7 verified, MAKER_CASE_PASS"
+  },
+  "route_readback": {
+    "baseline_sha256_verified": "1564bbf7a8cd4baeabc1704586dc50ebe1e30dd6c1d09c84a7ad629a2b8d8176",
+    "openai_fallback": false
+  },
+  "note_crlf_drift": "worktree checkout (autocrlf=true) yields CRLF in FROZEN_ACCEPTANCE_CASES.csv; frozen baseline hash is LF-bytes. Canonical working copy is LF (compile-tool regenerated) so case.run executes correctly against canonical root. Environment artifact, not product defect; documented for C6 residue/readback review.",
+  "rollback": "revert canonical cherry-pick commit (git revert) restores prior HEAD",
+  "claim_ceiling": "C4-A materialization evidence only; not a release claim."
+}
