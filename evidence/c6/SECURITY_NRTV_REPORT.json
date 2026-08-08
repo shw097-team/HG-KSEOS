@@ -1,0 +1,101 @@
+{
+ "schema": "HGK-C6-SECURITY-NRTV/1",
+ "captured_at_utc": "2026-08-08T11:53:41.133092+00:00",
+ "checks": [
+  {
+   "name": "opencodex_loopback_bind",
+   "ok": true,
+   "detail": "✅ Proxy: running (PID 18216)\n   Health: http://127.0.0.1:10100/healthz ok (live)\n   Dashboard: http://localhost:10100/\n   Config: C:\\Users\\user\\.opencodex\\config.json\n   PID file: C:\\Users\\user\\.openc"
+  },
+  {
+   "name": "opencodex_health_ready",
+   "ok": true,
+   "detail": {
+    "health": "{\"ok\":true,\"pid\":18216,\"port\":10100}\n",
+    "ready": "{\"ready\":true,\"status\":\"ready\",\"pid\":18216,\"port\":10100}\n"
+   }
+  },
+  {
+   "name": "no_secrets_in_evidence",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "name": "expected_egress_only",
+   "ok": true,
+   "detail": []
+  },
+  {
+   "name": "no_silent_fallback",
+   "ok": true,
+   "detail": {
+    "openai_disabled": true,
+    "default": "opencode-go"
+   }
+  },
+  {
+   "name": "tool_fidelity_evidence",
+   "ok": true,
+   "detail": {
+    "c2_envelope": true,
+    "c4a": true
+   }
+  },
+  {
+   "name": "replay_idempotent_design",
+   "ok": true,
+   "detail": "evidence/wave-15/cases/*.json deterministic re-derivation (checker re-ran 92/92)"
+  },
+  {
+   "name": "write_scope_bound",
+   "ok": true,
+   "detail": "AGENTS.md worktree scope retained"
+  },
+  {
+   "name": "maker_checker_separation",
+   "ok": true,
+   "detail": {
+    "checker": "INDEPENDENT_CHECKER (fresh subprocess per case; read-only; not the maker)"
+   }
+  },
+  {
+   "name": "injection_negative_guard",
+   "ok": true,
+   "detail": "security.py sanitizer + PII scan present"
+  },
+  {
+   "name": "long_context_tool_continuity",
+   "ok": true,
+   "detail": "P9 (60-line context + write/read/bytes) and P10 (nonce route) PASS in g4 worktree evidence"
+  },
+  {
+   "name": "provider_model_exact",
+   "ok": true,
+   "detail": {
+    "defaultModel": "deepseek-v4-flash"
+   }
+  },
+  {
+   "name": "opencodex_restore_backup",
+   "ok": true,
+   "detail": {
+    "backup_manifest": true
+   }
+  },
+  {
+   "name": "codex_oauth_preserved",
+   "ok": true,
+   "detail": {
+    "auth_json_exists": true
+   }
+  },
+  {
+   "name": "ws426_non_blocking",
+   "ok": true,
+   "detail": "NON_BLOCKING_TRANSPORT_LIMITATION: HTTP/SSE path succeeded with same route"
+  }
+ ],
+ "blocking_findings": [],
+ "verdict": "PASS",
+ "claim_ceiling": "Runtime-sensitive security/NRTV for local closure only."
+}
