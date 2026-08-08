@@ -1,0 +1,649 @@
+{
+ "schema": "HGK-30-DOMAIN-FINAL-STATUS/1",
+ "captured_at_utc": "2026-08-08T18:32:01.369758+00:00",
+ "domains_total": 30,
+ "domains_terminal_acceptable": 30,
+ "terminal_status_counts": {
+  "DEFERRED_SOURCE_BACKED": 2,
+  "RUNTIME_PASS": 28
+ },
+ "blocking_domain_gaps": [],
+ "unknown_count": 0,
+ "missing_evidence_count": 0,
+ "open_blocking_tt_count": 0,
+ "domains": [
+  {
+   "domain": "COV-01",
+   "name": "Product Identity / Authority",
+   "owner": "PRE-01",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-001"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-02",
+   "name": "Intent Preservation",
+   "owner": "PRE-02",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-03",
+   "name": "Roles / Human Authority",
+   "owner": "PRE-03",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-04",
+   "name": "Source Inventory / Coverage",
+   "owner": "PRE-04",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-05",
+   "name": "Architecture",
+   "owner": "PRE-05",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-005"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-06",
+   "name": "Windows Local P0",
+   "owner": "PRE-06",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-07",
+   "name": "Hermes / Provider",
+   "owner": "PRE-07",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-012",
+    "TST-059",
+    "TST-060",
+    "TST-088"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-08",
+   "name": "Knowledge Distillation",
+   "owner": "PRE-08",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [
+    "schema",
+    "captured_at_utc",
+    "source_denominator",
+    "source_dir",
+    "p0_disposition",
+    "depth",
+    "ingested",
+    "promoted",
+    "quarantined",
+    "retrieval",
+    "checks",
+    "passed",
+    "total",
+    "verdict"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-09",
+   "name": "Knowledge Pack / Anchor",
+   "owner": "PRE-09",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [
+    "schema",
+    "captured_at_utc",
+    "source_denominator",
+    "source_dir",
+    "p0_disposition",
+    "depth",
+    "ingested",
+    "promoted",
+    "quarantined",
+    "retrieval",
+    "checks",
+    "passed",
+    "total",
+    "verdict"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-10",
+   "name": "RAG / Retrieval",
+   "owner": "PRE-10",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-015",
+    "TST-016",
+    "TST-017"
+   ],
+   "evidence_artifacts": [
+    "schema",
+    "captured_at_utc",
+    "p0_disposition",
+    "backend",
+    "source",
+    "depth",
+    "checks",
+    "passed",
+    "total",
+    "verdict"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-11",
+   "name": "Knowledge Graph / GraphRAG",
+   "owner": "PRE-11",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [
+    "schema",
+    "captured_at_utc",
+    "p0_disposition",
+    "source_locators",
+    "depth",
+    "checks",
+    "passed",
+    "total",
+    "verdict"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-12",
+   "name": "Memory",
+   "owner": "PRE-12",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-018"
+   ],
+   "evidence_artifacts": [
+    "schema",
+    "captured_at_utc",
+    "p0_disposition",
+    "source",
+    "depth",
+    "checks",
+    "passed",
+    "total",
+    "verdict"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-13",
+   "name": "Agents / A2A",
+   "owner": "PRE-13",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-019",
+    "TST-020"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-14",
+   "name": "Harness / Loop",
+   "owner": "PRE-14",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-021",
+    "TST-022",
+    "TST-023",
+    "TST-073",
+    "TST-074"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-15",
+   "name": "Control Plane / Providers",
+   "owner": "PRE-15",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-069"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-16",
+   "name": "Coding / Codex",
+   "owner": "PRE-16",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-030",
+    "TST-031",
+    "TST-055",
+    "TST-056"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-17",
+   "name": "Security",
+   "owner": "PRE-17",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-033",
+    "TST-034",
+    "TST-035",
+    "TST-076"
+   ],
+   "evidence_artifacts": [
+    "schema",
+    "captured_at_utc",
+    "supersedes",
+    "depth",
+    "checks",
+    "passed",
+    "total",
+    "verdict"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-18",
+   "name": "Verification / Eval / NRTV",
+   "owner": "PRE-18",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L4",
+   "runtime_evidence": false,
+   "negative_evidence": false,
+   "recovery_rollback": false,
+   "tst_coverage": [
+    "TST-036",
+    "TST-037"
+   ],
+   "evidence_artifacts": [
+    "schema",
+    "captured_at_utc",
+    "total_cases",
+    "depth_distribution",
+    "required_distribution",
+    "gap_cases",
+    "gap_count",
+    "calibrated_count",
+    "cases",
+    "status"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-19",
+   "name": "Evidence / Release",
+   "owner": "PRE-19",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-040",
+    "TST-043",
+    "TST-077",
+    "TST-078"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-20",
+   "name": "Backup / Restore / Rollback",
+   "owner": "PRE-20",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-042",
+    "TST-079"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-21",
+   "name": "Package / Handoff",
+   "owner": "PRE-21",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-046",
+    "TST-047",
+    "TST-080",
+    "TST-091",
+    "TST-092"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-22",
+   "name": "Governance / Evolution",
+   "owner": "PRE-22",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [
+    "TST-045",
+    "TST-050"
+   ],
+   "evidence_artifacts": [
+    "verdict",
+    "basis"
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "SQS-Domain Manifest",
+   "name": "Domain Manifest Pack",
+   "owner": "SQS-Domain Manifest",
+   "p0_disposition": "ACTIVE_SELECTED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "SQS-Source",
+   "name": "Source Pack",
+   "owner": "SQS-八個 Domain Packs",
+   "p0_disposition": "ACTIVE_SELECTED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "SQS-Domain Ontology",
+   "name": "Ontology Pack",
+   "owner": "SQS-Domain Ontology",
+   "p0_disposition": "ACTIVE_SELECTED",
+   "required_runtime_depth": "N/A (deferred)",
+   "actual_depth": "N/A",
+   "runtime_evidence": false,
+   "negative_evidence": false,
+   "recovery_rollback": false,
+   "tst_coverage": [],
+   "evidence_artifacts": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "DEFERRED_SOURCE_BACKED"
+  },
+  {
+   "domain": "SQS-Workflow",
+   "name": "Workflow Pack",
+   "owner": "SQS-八個 Domain Packs",
+   "p0_disposition": "ACTIVE_SELECTED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "SQS-Skill/Prompt",
+   "name": "Skill-Prompt Pack",
+   "owner": "SQS-八個 Domain Packs",
+   "p0_disposition": "ACTIVE_SELECTED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "SQS-Artifact Template",
+   "name": "Artifact Template Pack",
+   "owner": "SQS-八個 Domain Packs",
+   "p0_disposition": "ACTIVE_SELECTED",
+   "required_runtime_depth": "N/A (deferred)",
+   "actual_depth": "N/A",
+   "runtime_evidence": false,
+   "negative_evidence": false,
+   "recovery_rollback": false,
+   "tst_coverage": [],
+   "evidence_artifacts": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "DEFERRED_SOURCE_BACKED"
+  },
+  {
+   "domain": "SQS-Eval/Gate",
+   "name": "Eval-Gate Pack",
+   "owner": "SQS-八個 Domain Packs",
+   "p0_disposition": "ACTIVE_SELECTED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "SQS-Security/Compliance",
+   "name": "Security-Compliance Pack",
+   "owner": "SQS-八個 Domain Packs",
+   "p0_disposition": "ACTIVE_SELECTED",
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_artifacts": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  }
+ ],
+ "verdict": "PASS"
+}
