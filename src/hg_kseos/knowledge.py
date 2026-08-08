@@ -62,6 +62,8 @@ class KnowledgeFactory:
         }
 
     def promote(self, candidate_id: str, verifier: str, evidence_ref: str, title: str) -> str:
+        if not evidence_ref.strip():
+            raise InvariantViolation("ERR_PROMOTION_EVIDENCE_REQUIRED")
         if verifier.casefold() in {"maker", "self", "candidate"}:
             raise InvariantViolation("ERR_SELF_APPROVAL")
         with self.spine.transaction() as connection:
