@@ -1,0 +1,83 @@
+{
+ "schema": "HGK-RAG-KB-RUNTIME-ACCEPTANCE/1",
+ "captured_at_utc": "2026-08-08T18:12:21.309377+00:00",
+ "p0_disposition": "ACTIVE_REQUIRED (lexical/FTS-first profile)",
+ "backend": "SQLite FTS5 via KnowledgeFactory (spine-backed)",
+ "source": "PRE-20/DOC-12; lexical/FTS-first local profile (vector backend DEFERRED_SOURCE_BACKED)",
+ "depth": "L3 + L4",
+ "checks": [
+  {
+   "check": "positive_retrieval",
+   "ok": true,
+   "detail": "hits=1"
+  },
+  {
+   "check": "multi_source_retrieval",
+   "ok": true,
+   "detail": "hits=2"
+  },
+  {
+   "check": "exact_source_locator",
+   "ok": true,
+   "detail": "locator=SRC-9e29d76675e310b58472#full"
+  },
+  {
+   "check": "citation_verifiable",
+   "ok": true,
+   "detail": "doc=DOC-be890e6f64e11f660714 citation=SRC-9e29d76675e310b58472#full"
+  },
+  {
+   "check": "abstention_insufficient",
+   "ok": true,
+   "detail": "ABSTAIN_NO_GROUNDING raised"
+  },
+  {
+   "check": "conflicting_evidence_not_normalized",
+   "ok": true,
+   "detail": "both sources surfaced, docs=2"
+  },
+  {
+   "check": "stale_index_detection",
+   "ok": true,
+   "detail": "ERR_SOURCE_DRIFT raised"
+  },
+  {
+   "check": "withdrawal_no_stale",
+   "ok": true,
+   "detail": "abstains after withdrawal"
+  },
+  {
+   "check": "index_rebuild",
+   "ok": true,
+   "detail": "rebuild={'fts_documents': 1, 'kg_edges': 0}"
+  },
+  {
+   "check": "deterministic_readback",
+   "ok": true,
+   "detail": "stable docs=1"
+  },
+  {
+   "check": "tenant_scope_isolation",
+   "ok": true,
+   "detail": "poison quarantined=QUARANTINED"
+  },
+  {
+   "check": "poisoned_retrieval_blocked",
+   "ok": true,
+   "detail": "quarantined candidate cannot promote"
+  },
+  {
+   "check": "permission_rights_negative",
+   "ok": true,
+   "detail": "cross-scope memory recall=0"
+  },
+  {
+   "check": "rollback_restore",
+   "ok": true,
+   "detail": "retrieval intact after restore (1 hits)"
+  }
+ ],
+ "passed": 14,
+ "total": 14,
+ "verdict": "RUNTIME_PASS"
+}
