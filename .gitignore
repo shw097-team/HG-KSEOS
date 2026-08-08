@@ -18,3 +18,11 @@ worktrees/
 /工程基座/
 /資料庫/
 /release/
+
+# Dynamic final evidence sidecars contain HEAD/package/checker identities.
+# Keeping them outside the Git tree avoids a self-referential final seal while
+# preserving the files locally for review and exact hash verification.
+/evidence/wave-15/
+/evidence/wave-18/
+/evidence/final/
+/evidence/review/HG-KSEOS_FINAL_EVIDENCE_FOR_REVIEW.md

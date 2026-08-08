@@ -5,300 +5,441 @@ import csv
 import hashlib
 import json
 import os
-import subprocess
-from datetime import datetime, timezone
-from pathlib import Path
+from dataclasses import dataclass
+from pathlib import Path, PurePosixPath
+from typing import Callable
 
 
 EXPECTED_BASELINE_SHA256 = "1564bbf7a8cd4baeabc1704586dc50ebe1e30dd6c1d09c84a7ad629a2b8d8176"
-
-TEST_BINDINGS = {
-    "TST-010": "tests.test_assurance.AssuranceTests.test_permission_mode_and_unicode_space_path",
-    "TST-004": "tests.test_security_harness.SecurityHarnessTests.test_prompt_injection_in_metadata_rejected",
-    "TST-005": "tests.test_spine.SharedSpineTests.test_dual_writer_is_rejected",
-    "TST-006": "tests.test_e2e_vertical_slice.VerticalSliceTests.test_requirement_to_evidence_to_rollback_slice",
-    "TST-011": "tests.test_security_harness.SecurityHarnessTests.test_privilege_escalation_rejected",
-    "TST-013": "tests.test_knowledge.KnowledgeTests.test_clean_candidate_promotes_with_citation",
-    "TST-014": "tests.test_knowledge.KnowledgeTests.test_injection_is_quarantined",
-    "TST-015": "tests.test_knowledge.KnowledgeTests.test_clean_candidate_promotes_with_citation",
-    "TST-016": "tests.test_knowledge.KnowledgeTests.test_unsupported_query_abstains",
-    "TST-017": "tests.test_knowledge.KnowledgeTests.test_withdrawal_removes_derived_retrieval",
-    "TST-018": "tests.test_knowledge.KnowledgeTests.test_pii_memory_requires_explicit_admission",
-    "TST-019": "tests.test_spine.SharedSpineTests.test_wrong_lease_token_is_rejected",
-    "TST-020": "tests.test_agents_providers.AgentTests.test_join_propagates_nack",
-    "TST-021": "tests.test_security_harness.SecurityHarnessTests.test_path_traversal_rejected",
-    "TST-022": "tests.test_security_harness.SecurityHarnessTests.test_network_not_admitted",
-    "TST-023": "tests.test_controls_observability_repo.ObservabilityTests.test_structured_log_and_no_progress_watchdog",
-    "TST-024": "tests.test_recovery_release.RecoveryReleaseTests.test_tampered_backup_rejected",
-    "TST-025": "tests.test_assurance.AssuranceTests.test_instruction_precedence_and_stale_override",
-    "TST-026": "tests.test_assurance.AssuranceTests.test_skill_collision_implicit_and_clean_removal",
-    "TST-027": "tests.test_assurance.AssuranceTests.test_mcp_revision_negotiation",
-    "TST-028": "tests.test_security_harness.SecurityHarnessTests.test_mcp_tool_description_poisoning_rejected",
-    "TST-029": "tests.test_controls_observability_repo.ControlValidationTests.test_all_materialized_controls_have_effective_contracts",
-    "TST-030": "tests.test_e2e_vertical_slice.VerticalSliceTests.test_requirement_to_evidence_to_rollback_slice",
-    "TST-031": "tests.test_security_harness.SecurityHarnessTests.test_path_traversal_rejected",
-    "TST-032": "tests.test_assurance.AssuranceTests.test_stale_base_and_deterministic_oracle",
-    "TST-033": "tests.test_knowledge.KnowledgeTests.test_injection_is_quarantined",
-    "TST-034": "tests.test_security_harness.SecurityHarnessTests.test_secret_detection_and_redaction",
-    "TST-035": "tests.test_security_harness.SecurityHarnessTests.test_privilege_escalation_rejected",
-    "TST-036": "tests.test_assurance.AssuranceTests.test_stale_base_and_deterministic_oracle",
-    "TST-038": "tests.test_assurance.AssuranceTests.test_telemetry_privacy_and_budget",
-    "TST-039": "tests.test_assurance.AssuranceTests.test_telemetry_privacy_and_budget",
-    "TST-040": "tests.test_recovery_release.RecoveryReleaseTests.test_release_reducer_fails_closed",
-    "TST-042": "tests.test_recovery_release.RecoveryReleaseTests.test_backup_restore_readback",
-    "TST-043": "tests.test_recovery_release.RecoveryReleaseTests.test_release_reducer_fails_closed",
-    "TST-044": "tests.test_assurance.AssuranceTests.test_sbom_and_migration_reconciliation",
-    "TST-045": "tests.test_knowledge.KnowledgeTests.test_self_approval_rejected",
-    "TST-046": "tests.test_assurance.AssuranceTests.test_receiver_packet_capability_and_nack",
-    "TST-047": "tests.test_assurance.AssuranceTests.test_receiver_packet_capability_and_nack",
-    "TST-049": "tests.test_assurance.AssuranceTests.test_regression_release_drift_and_archive_failure",
-    "TST-050": "tests.test_agents_providers.AgentTests.test_checker_write_scope_rejected",
-    "TST-052": "tests.test_security_harness.SecurityHarnessTests.test_supply_chain_pin_mismatch_rejected",
-    "TST-055": "tests.test_security_harness.SecurityHarnessTests.test_privilege_escalation_rejected",
-    "TST-056": "tests.test_assurance.AssuranceTests.test_permission_mode_and_unicode_space_path",
-    "TST-057": "tests.test_assurance.AssuranceTests.test_regression_release_drift_and_archive_failure",
-    "TST-058": "tests.test_assurance.AssuranceTests.test_regression_release_drift_and_archive_failure",
-    "TST-061": "tests.test_assurance.AssuranceTests.test_mcp_revision_negotiation",
-    "TST-062": "tests.test_security_harness.SecurityHarnessTests.test_mcp_tool_description_poisoning_rejected",
-    "TST-063": "tests.test_controls_observability_repo.ControlValidationTests.test_all_materialized_controls_have_effective_contracts",
-    "TST-064": "tests.test_assurance.AssuranceTests.test_skill_collision_implicit_and_clean_removal",
-    "TST-065": "tests.test_assurance.AssuranceTests.test_skill_collision_implicit_and_clean_removal",
-    "TST-066": "tests.test_security_harness.SecurityHarnessTests.test_secret_detection_and_redaction",
-    "TST-067": "tests.test_security_harness.SecurityHarnessTests.test_supply_chain_pin_mismatch_rejected",
-    "TST-068": "tests.test_assurance.AssuranceTests.test_telemetry_privacy_and_budget",
-    "TST-069": "tests.test_security_harness.SecurityHarnessTests.test_prompt_injection_in_metadata_rejected",
-    "TST-070": "tests.test_controls_observability_repo.ObservabilityTests.test_structured_log_and_no_progress_watchdog",
-    "TST-071": "tests.test_spine.SharedSpineTests.test_stale_version_is_rejected",
-    "TST-072": "tests.test_agents_providers.AgentTests.test_checker_write_scope_rejected",
-    "TST-073": "tests.test_assurance.AssuranceTests.test_rollback_prompt_veto_provider_and_token",
-    "TST-074": "tests.test_controls_observability_repo.ObservabilityTests.test_structured_log_and_no_progress_watchdog",
-    "TST-075": "tests.test_knowledge.KnowledgeTests.test_self_approval_rejected",
-    "TST-076": "tests.test_assurance.AssuranceTests.test_rollback_prompt_veto_provider_and_token",
-    "TST-077": "tests.test_recovery_release.RecoveryReleaseTests.test_release_reducer_fails_closed",
-    "TST-078": "tests.test_recovery_release.RecoveryReleaseTests.test_release_reducer_fails_closed",
-    "TST-079": "tests.test_assurance.AssuranceTests.test_rollback_prompt_veto_provider_and_token",
-    "TST-080": "tests.test_assurance.AssuranceTests.test_receiver_packet_capability_and_nack",
-    "TST-081": "tests.test_controls_observability_repo.ControlValidationTests.test_all_materialized_controls_have_effective_contracts",
-    "TST-082": "tests.test_assurance.AssuranceTests.test_rollback_prompt_veto_provider_and_token",
-    "TST-083": "tests.test_assurance.AssuranceTests.test_skill_collision_implicit_and_clean_removal",
-    "TST-084": "tests.test_assurance.AssuranceTests.test_instruction_precedence_and_stale_override",
-    "TST-085": "tests.test_spine.SharedSpineTests.test_illegal_transition_is_rejected",
-    "TST-086": "tests.test_controls_observability_repo.ControlValidationTests.test_all_materialized_controls_have_effective_contracts",
-    "TST-087": "tests.test_assurance.AssuranceTests.test_sbom_and_migration_reconciliation",
-    "TST-088": "tests.test_assurance.AssuranceTests.test_rollback_prompt_veto_provider_and_token",
-    "TST-089": "tests.test_agents_providers.ProviderTests.test_lifecycle_requires_evidence",
-    "TST-090": "tests.test_assurance.AssuranceTests.test_permission_mode_and_unicode_space_path",
-    "TST-091": "tests.test_security_harness.SecurityHarnessTests.test_privilege_escalation_rejected",
+EXPECTED_TST_037_NRTV_SHA256 = "dbdecaf42bb318fef5d79dc1396b2cf96c4fec9fd7eae8d97bc14b50a67c7eaa"
+FIXTURE_FIELDS = {
+    "schema",
+    "case_id",
+    "type",
+    "fixture",
+    "preconditions",
+    "oracle",
+    "expected",
+    "reject_code",
+    "source_locator",
+    "frozen_baseline_sha256",
 }
+BASELINE_BOUND_FIELDS = (
+    "case_id",
+    "type",
+    "fixture",
+    "preconditions",
+    "oracle",
+    "expected",
+    "reject_code",
+    "source_locator",
+)
 
-STATIC_CASES = {
-    "TST-001", "TST-002", "TST-003", "TST-007", "TST-008", "TST-009",
-    "TST-012", "TST-037", "TST-041", "TST-048", "TST-051", "TST-053", "TST-059", "TST-060",
-}
 
-BLOCKED_CASES = {
-    "TST-054": ("TT-HERMES-UNINSTALL", "Only official full-uninstall dry-run is authorized; destructive uninstall/reinstall proof is pending."),
-    "TST-092": ("TT-HGK-WRITE-BINDING", "Canonical target write/readback and final package exact-set are blocked by workspace binding."),
-}
+class CaseFailure(RuntimeError):
+    """The case ran and its deterministic contract failed."""
+
+
+@dataclass(frozen=True)
+class CaseResult:
+    passed: bool
+    details: dict[str, object]
 
 
 def sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
 
 
-def csv_count(path: Path) -> int:
-    with path.open(encoding="utf-8-sig", newline="") as handle:
-        return sum(1 for _ in csv.DictReader(handle))
+def _load_json(path: Path) -> dict[str, object]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise CaseFailure(f"ERR_JSON_OBJECT_REQUIRED:{path.name}")
+    return value
 
 
-def static_probe(case_id: str, root: Path) -> tuple[bool, dict[str, object]]:
-    if case_id == "TST-001":
-        receipt = json.loads((root / "source-freeze" / "SOURCE_FREEZE_RECEIPT.json").read_text(encoding="utf-8"))
-        return True, {"authority_receipt": receipt.get("status"), "conflicts": csv_count(root / "source-freeze" / "CONFLICT_LEDGER.csv")}
-    if case_id == "TST-002":
-        count = csv_count(root / "requirements" / "ATOMIC_CHILD_REQUIREMENTS.csv")
-        return count == 1040, {"atomic_children": count, "expected": 1040}
-    if case_id == "TST-003":
-        controls = csv_count(root / "registries" / "CONTROL_MATERIALIZATION_MANIFEST.csv")
-        denominator = json.loads((root / "source-freeze" / "DENOMINATOR_RECONCILIATION.json").read_text(encoding="utf-8"))
-        return controls == 60, {"materialized_control_files": controls, "predev_slice_denominator": 857, "denominator_status": denominator["status"]}
-    if case_id == "TST-007":
-        trace = csv_count(root / "requirements" / "REQUIREMENT_TRACEABILITY.csv")
-        acceptances = csv_count(root / "requirements" / "ACCEPTANCE_EVIDENCE_PLAN.csv")
-        return trace == acceptances == 499, {"trace_rows": trace, "acceptance_rows": acceptances}
-    if case_id == "TST-008":
-        conflicts = csv_count(root / "source-freeze" / "CONFLICT_LEDGER.csv")
-        tt = (root / "source-freeze" / "TT_LEDGER.csv").read_text(encoding="utf-8")
-        return conflicts > 0 and "TT-HLPE" in tt, {"conflict_rows": conflicts, "tt_conflict_present": "TT-HLPE" in tt}
-    if case_id == "TST-009":
-        from hg_kseos.doctor import doctor
-        report = doctor(root)
-        return report["verdict"] == "PASS", {"doctor_verdict": report["verdict"], "blocking": report["blocking"]}
-    if case_id in {"TST-012", "TST-060"}:
-        hermes = json.loads((root / "config" / "hermes.json").read_text(encoding="utf-8"))
-        project = json.loads((root / "config" / "project.json").read_text(encoding="utf-8"))
-        return hermes["provider_credentials_configured"] is False, {"hermes_status": hermes["status"], "canonical_database": project["canonical_database"], "fallback": "Codex/manual + Shared Spine"}
-    if case_id == "TST-037":
-        fixture = json.loads((root / "eval" / "nrtv" / "TST-037.json").read_text(encoding="utf-8"))
-        compiled_relative = "requirements/REQUIREMENT_COMPILATION_RECEIPT.json"
-        allowed = set(fixture["allowed_compiled_artifacts"])
-        if compiled_relative not in allowed:
-            return False, {"reason": "ERR_NRTV_COMPILED_ARTIFACT_NOT_ALLOWED"}
-        compiled_path = (root / compiled_relative).resolve(strict=True)
-        forbidden = [Path(value).resolve() for value in fixture["forbidden_inputs"]]
-        if any(compiled_path == path or path in compiled_path.parents for path in forbidden):
-            return False, {"reason": "ERR_NRTV_FORBIDDEN_RAW_INPUT"}
-        compiled = json.loads(compiled_path.read_text(encoding="utf-8"))
-        answer = {name: compiled[name] for name in fixture["expected_answer"]}
-        expected_locators = [f"{compiled_relative}#/{name}" for name in fixture["expected_answer"]]
-        locators_valid = fixture["required_locators"] == expected_locators
-        passed = answer == fixture["expected_answer"] and answer["predev_requirements"] + answer["p0_requirements"] == answer["requirement_trace_rows"] and locators_valid
-        return passed, {"query": fixture["query"], "answer": answer, "locators": fixture["required_locators"], "locators_machine_validated": locators_valid, "allowed_artifact_enforced": compiled_relative, "forbidden_roots_enforced": fixture["forbidden_inputs"], "raw_source_volumes_read": False}
-    if case_id == "TST-041":
-        receipt = json.loads((root / "evidence" / "wave-13" / "SBOM_RECONCILIATION.json").read_text(encoding="utf-8"))
-        passed = receipt["status"] == "PASS" and not receipt["unexplained_dependencies"]
-        return passed, {"status": receipt["status"], "total_components": receipt["total_components"], "unexplained_dependencies": receipt["unexplained_dependencies"], "sbom_sha256": receipt["sbom_sha256"]}
-    if case_id == "TST-048":
-        rows = json.loads((root / "source-freeze" / "DENOMINATOR_RECONCILIATION.json").read_text(encoding="utf-8"))["rows"]
-        values = {row["identity"]: row["observed"] for row in rows}
-        passed = values.get("WP") == 24 and values.get("RBWI") == 18 and values.get("CA") == 30
-        return passed, {"WP": values.get("WP"), "RBWI": values.get("RBWI"), "CA": values.get("CA")}
-    if case_id in {"TST-051", "TST-059"}:
-        receipt = json.loads((root / "evidence" / "wave-06" / "HERMES_INSTALL_RECEIPT.json").read_text(encoding="utf-8"))
-        passed = receipt["installer"]["full_installer_executed"] is False and receipt["mutations"]["global_git_config_modified"] is False
-        return passed, {"full_installer_executed": receipt["installer"]["full_installer_executed"], "global_git_config_modified": receipt["mutations"]["global_git_config_modified"], "unlocked_fallback_used": receipt["uv"]["unlocked_fallback_used"]}
-    if case_id == "TST-053":
-        report = json.loads((root / "evidence" / "wave-06" / "HERMES_RUNTIME_VALIDATION.json").read_text(encoding="utf-8"))
-        tests = report["official_security_rollback_tests"]
-        passed = tests["failures"] == 7 and report["overall"].startswith("TEMP_CLOSED")
-        return passed, {"tests": tests["tests"], "passed": tests["passed"], "capability_exceptions": tests["failures"], "overall": report["overall"]}
-    raise AssertionError(case_id)
+def _normal_relative_path(value: str) -> PurePosixPath:
+    if not value or "\\" in value:
+        raise CaseFailure("ERR_NON_CANONICAL_RELATIVE_PATH")
+    path = PurePosixPath(value)
+    if path.is_absolute() or any(part in {"", ".", ".."} for part in path.parts):
+        raise CaseFailure("ERR_UNSAFE_RELATIVE_PATH")
+    if str(path) != value:
+        raise CaseFailure("ERR_NON_CANONICAL_RELATIVE_PATH")
+    return path
 
 
-def run_unittest(root: Path, qualified_name: str) -> tuple[bool, dict[str, object]]:
-    env = os.environ.copy()
-    env["PYTHONPATH"] = str(root / "src")
-    env["PYTHONDONTWRITEBYTECODE"] = "1"
-    completed = subprocess.run(
-        [str(root / ".venv" / "Scripts" / "python.exe"), "-m", "unittest", "-v", qualified_name],
-        cwd=root,
-        env=env,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
+def _resolve_repo_file(root: Path, relative: PurePosixPath) -> Path:
+    candidate = root.joinpath(*relative.parts)
+    if not candidate.is_file():
+        raise CaseFailure(f"ERR_REQUIRED_ARTIFACT_MISSING:{relative}")
+    resolved = candidate.resolve(strict=True)
+    try:
+        resolved.relative_to(root)
+    except ValueError as exc:
+        raise CaseFailure(f"ERR_ARTIFACT_OUTSIDE_ROOT:{relative}") from exc
+    current = candidate
+    while current != root:
+        if current.is_symlink() or (
+            getattr(current.stat(), "st_file_attributes", 0) & 0x400
+        ):
+            raise CaseFailure(f"ERR_REPARSE_ARTIFACT:{relative}")
+        current = current.parent
+    return resolved
+
+
+def validate_frozen_fixture(
+    row: dict[str, str], fixture_path: Path, baseline_hash: str
+) -> tuple[dict[str, object], str]:
+    try:
+        fixture_bytes = fixture_path.read_bytes()
+        fixture = json.loads(fixture_bytes.decode("utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise CaseFailure("ERR_FIXTURE_UNREADABLE") from exc
+    if not isinstance(fixture, dict):
+        raise CaseFailure("ERR_FIXTURE_OBJECT_REQUIRED")
+    if set(fixture) != FIXTURE_FIELDS:
+        raise CaseFailure("ERR_FIXTURE_SCHEMA_EXACT_SET")
+    if fixture["schema"] != "HGK-ACCEPTANCE-FIXTURE/1":
+        raise CaseFailure("ERR_FIXTURE_SCHEMA")
+    if fixture["frozen_baseline_sha256"] != baseline_hash:
+        raise CaseFailure("ERR_FIXTURE_BASELINE_BINDING")
+    mismatches = [field for field in BASELINE_BOUND_FIELDS if fixture[field] != row[field]]
+    if mismatches:
+        raise CaseFailure("ERR_FIXTURE_BASELINE_FIELDS:" + ",".join(mismatches))
+    return fixture, sha256_bytes(fixture_bytes)
+
+
+def verify_common_preconditions(root: Path, fixture: dict[str, object]) -> dict[str, object]:
+    if fixture["preconditions"] != "authority/source/version/permission frozen":
+        raise CaseFailure("ERR_UNSUPPORTED_PRECONDITION_CONTRACT")
+    receipt_path = root / "source-freeze" / "SOURCE_FREEZE_RECEIPT.json"
+    project_path = root / "config" / "project.json"
+    if not receipt_path.is_file() or not project_path.is_file():
+        raise CaseFailure("ERR_PRECONDITION_EVIDENCE_MISSING")
+    receipt = _load_json(receipt_path)
+    project = _load_json(project_path)
+    status = str(receipt.get("status", ""))
+    if not status.startswith("FROZEN_"):
+        raise CaseFailure("ERR_SOURCE_NOT_FROZEN")
+    exact_root = str(root)
+    bound_fields = {
+        "freeze_execution_root": receipt.get("execution_root"),
+        "project_source_root": project.get("source_root"),
+        "project_maker_root": project.get("maker_root"),
+    }
+    if any(str(value).casefold() != exact_root.casefold() for value in bound_fields.values()):
+        raise CaseFailure("ERR_CANONICAL_ROOT_BINDING")
+    return {
+        "contract": fixture["preconditions"],
+        "source_freeze_status": status,
+        "source_freeze_receipt_sha256": sha256_bytes(receipt_path.read_bytes()),
+        "project_binding_sha256": sha256_bytes(project_path.read_bytes()),
+        "canonical_root": exact_root,
+    }
+
+
+def _json_pointer(document: dict[str, object], pointer: str) -> object:
+    if not pointer.startswith("/") or pointer == "/":
+        raise CaseFailure("ERR_NRTV_JSON_POINTER")
+    value: object = document
+    for encoded in pointer[1:].split("/"):
+        token = encoded.replace("~1", "/").replace("~0", "~")
+        if not isinstance(value, dict) or token not in value:
+            raise CaseFailure(f"ERR_NRTV_LOCATOR_UNRESOLVED:{pointer}")
+        value = value[token]
+    return value
+
+
+def execute_tst_037(
+    root: Path,
+    fixture: dict[str, object],
+    *,
+    expected_nrtv_hash: str = EXPECTED_TST_037_NRTV_SHA256,
+) -> CaseResult:
+    nrtv_path = root / "eval" / "nrtv" / "TST-037.json"
+    nrtv_bytes = nrtv_path.read_bytes()
+    nrtv_hash = sha256_bytes(nrtv_bytes)
+    if nrtv_hash != expected_nrtv_hash:
+        raise CaseFailure(f"ERR_NRTV_FIXTURE_DRIFT:{nrtv_hash}")
+    nrtv = json.loads(nrtv_bytes.decode("utf-8"))
+    if not isinstance(nrtv, dict) or nrtv.get("schema") != "HGK-BLIND-NRTV/1":
+        raise CaseFailure("ERR_NRTV_SCHEMA")
+    if nrtv.get("case_id") != "TST-037":
+        raise CaseFailure("ERR_NRTV_CASE_BINDING")
+    if not isinstance(nrtv.get("query"), str) or not nrtv["query"].strip():
+        raise CaseFailure("ERR_NRTV_QUERY")
+    expected = nrtv.get("expected_answer")
+    allowed_values = nrtv.get("allowed_compiled_artifacts")
+    required_locators = nrtv.get("required_locators")
+    forbidden_values = nrtv.get("forbidden_inputs")
+    if not isinstance(expected, dict) or not expected:
+        raise CaseFailure("ERR_NRTV_EXPECTED_ANSWER")
+    if not isinstance(allowed_values, list) or not allowed_values:
+        raise CaseFailure("ERR_NRTV_ALLOWED_ARTIFACTS")
+    if not isinstance(required_locators, list) or not required_locators:
+        raise CaseFailure("ERR_NRTV_REQUIRED_LOCATORS")
+    if not isinstance(forbidden_values, list) or not forbidden_values:
+        raise CaseFailure("ERR_NRTV_FORBIDDEN_INPUTS")
+    declared_paths = allowed_values + required_locators + forbidden_values
+    if not all(isinstance(value, str) for value in declared_paths):
+        raise CaseFailure("ERR_NRTV_STRING_LIST_REQUIRED")
+
+    allowed = {_normal_relative_path(value) for value in allowed_values}
+    if len(allowed) != len(allowed_values):
+        raise CaseFailure("ERR_NRTV_DUPLICATE_ALLOWED_ARTIFACT")
+    if not all(Path(value).is_absolute() for value in forbidden_values):
+        raise CaseFailure("ERR_NRTV_FORBIDDEN_INPUT_NOT_ABSOLUTE")
+    forbidden = [Path(value).resolve(strict=False) for value in forbidden_values]
+    if len({os.path.normcase(str(path)) for path in forbidden}) != len(forbidden):
+        raise CaseFailure("ERR_NRTV_DUPLICATE_FORBIDDEN_INPUT")
+
+    resolved_allowed = {artifact: _resolve_repo_file(root, artifact) for artifact in allowed}
+    locator_map: dict[str, tuple[PurePosixPath, str]] = {}
+    for locator in required_locators:
+        if "#" not in locator:
+            raise CaseFailure("ERR_NRTV_LOCATOR_FORMAT")
+        artifact_text, pointer = locator.split("#", 1)
+        artifact = _normal_relative_path(artifact_text)
+        if artifact not in allowed:
+            raise CaseFailure(f"ERR_NRTV_LOCATOR_ARTIFACT_NOT_ALLOWED:{artifact}")
+        if pointer in locator_map:
+            raise CaseFailure(f"ERR_NRTV_DUPLICATE_LOCATOR:{pointer}")
+        locator_map[pointer] = (artifact, locator)
+    expected_pointers = {f"/{name}" for name in expected}
+    if set(locator_map) != expected_pointers:
+        raise CaseFailure("ERR_NRTV_LOCATOR_EXACT_SET")
+
+    documents: dict[PurePosixPath, dict[str, object]] = {}
+    access_log: list[dict[str, object]] = []
+    answer: dict[str, object] = {}
+    for name in expected:
+        artifact, locator = locator_map[f"/{name}"]
+        if artifact not in documents:
+            artifact_path = resolved_allowed[artifact]
+            # A broad forbidden root may contain an explicitly allowlisted compiled artifact.
+            # The explicit allowlist is the sole exception; no other path is ever opened here.
+            covered_by_forbidden = any(
+                artifact_path == path or path in artifact_path.parents for path in forbidden
+            )
+            artifact_bytes = artifact_path.read_bytes()
+            document = json.loads(artifact_bytes.decode("utf-8"))
+            if not isinstance(document, dict):
+                raise CaseFailure(f"ERR_NRTV_ARTIFACT_OBJECT_REQUIRED:{artifact}")
+            documents[artifact] = document
+            access_log.append(
+                {
+                    "path": str(artifact),
+                    "sha256": sha256_bytes(artifact_bytes),
+                    "explicitly_allowlisted": True,
+                    "inside_declared_forbidden_root": covered_by_forbidden,
+                }
+            )
+        value = _json_pointer(documents[artifact], f"/{name}")
+        if value != expected[name]:
+            raise CaseFailure(f"ERR_NRTV_ORACLE_VALUE:{name}")
+        answer[name] = value
+        if locator != f"{artifact}#/{name}":
+            raise CaseFailure(f"ERR_NRTV_LOCATOR_CANONICAL:{name}")
+
+    required_counts = {"predev_requirements", "p0_requirements", "requirement_trace_rows"}
+    if set(answer) != required_counts:
+        raise CaseFailure("ERR_NRTV_ANSWER_EXACT_SET")
+    compiled_total = answer["predev_requirements"] + answer["p0_requirements"]
+    if compiled_total != answer["requirement_trace_rows"]:
+        raise CaseFailure("ERR_NRTV_TRACE_ARITHMETIC")
+    if fixture["oracle"] != "Answer from compiled artifacts with correct locator":
+        raise CaseFailure("ERR_NRTV_BASELINE_ORACLE")
+
+    return CaseResult(
+        passed=True,
+        details={
+            "query": nrtv["query"],
+            "answer": answer,
+            "required_locators": required_locators,
+            "locator_exact_set_validated": True,
+            "allowed_compiled_artifacts": sorted(str(path) for path in allowed),
+            "forbidden_inputs": forbidden_values,
+            "artifact_access_log": access_log,
+            "raw_source_volumes_read_by_case_executor": False,
+            "nrtv_fixture_sha256": nrtv_hash,
+        },
     )
-    output = "\n".join(part.strip() for part in (completed.stdout, completed.stderr) if part.strip())
-    return completed.returncode == 0, {"test": qualified_name, "returncode": completed.returncode, "output_sha256": sha256_bytes(output.encode("utf-8")), "output": output}
+
+
+CASE_EXECUTORS: dict[str, Callable[[Path, dict[str, object]], CaseResult]] = {
+    "TST-037": execute_tst_037,
+}
+
+
+EXPLICIT_BLOCKERS = {
+    "TST-054": (
+        "TT-HERMES-UNINSTALL",
+        "A case-specific disposable uninstall/rollback execution receipt is required.",
+    ),
+    "TST-092": (
+        "TT-FINAL-PACKAGE-READBACK",
+        "A sealed exact-set package readback for the final tested HEAD is required.",
+    ),
+}
+
+
+def _run_case(
+    row: dict[str, str], root: Path, baseline_hash: str
+) -> tuple[str, dict[str, object], str]:
+    case_id = row["case_id"]
+    fixture_path = root / "eval" / "fixtures" / f"{case_id}.yaml"
+    fixture, fixture_hash = validate_frozen_fixture(row, fixture_path, baseline_hash)
+    preconditions = verify_common_preconditions(root, fixture)
+    executor = CASE_EXECUTORS.get(case_id)
+    if executor is None:
+        tt_id, reason = EXPLICIT_BLOCKERS.get(
+            case_id,
+            (
+                f"TT-ACCEPTANCE-{case_id}",
+                (
+                    "No dedicated case executor currently applies this case fixture "
+                    "and evaluates its oracle."
+                ),
+            ),
+        )
+        return (
+            "BLOCKED",
+            {
+                "tt_id": tt_id,
+                "reason": reason,
+                "preconditions": preconditions,
+                "required_close_criteria": (
+                    "Add a dedicated executor that consumes this fixture, exercises the "
+                    "stated procedure, and evaluates this exact oracle without shared-test "
+                    "substitution."
+                ),
+            },
+            fixture_hash,
+        )
+    result = executor(root, fixture)
+    if not result.passed:
+        raise CaseFailure("ERR_CASE_ORACLE_FALSE")
+    return (
+        "MAKER_CASE_PASS",
+        {"preconditions": preconditions, "oracle_execution": result.details},
+        fixture_hash,
+    )
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, required=True)
+    parser.add_argument("--case-id", action="append", dest="case_ids")
     args = parser.parse_args()
     root = args.root.resolve(strict=True)
     baseline = root / "eval" / "FROZEN_ACCEPTANCE_CASES.csv"
     baseline_bytes = baseline.read_bytes()
     baseline_hash = sha256_bytes(baseline_bytes)
+    runner_hash = sha256_bytes(Path(__file__).read_bytes())
     if baseline_hash != EXPECTED_BASELINE_SHA256:
         raise SystemExit(f"acceptance baseline drift: {baseline_hash}")
     with baseline.open(encoding="utf-8-sig", newline="") as handle:
         cases = list(csv.DictReader(handle))
-    if len(cases) != 92 or {row["case_id"] for row in cases} != {f"TST-{number:03d}" for number in range(1, 93)}:
+    expected_ids = {f"TST-{number:03d}" for number in range(1, 93)}
+    if len(cases) != 92 or {row["case_id"] for row in cases} != expected_ids:
         raise SystemExit("acceptance denominator/exact-set mismatch")
+    selected = set(args.case_ids or expected_ids)
+    if not selected or not selected <= expected_ids:
+        raise SystemExit("unknown or empty --case-id selection")
 
     output_root = root / "evidence" / "wave-15"
     case_root = output_root / "cases"
-    fixture_root = root / "eval" / "fixtures"
     case_root.mkdir(parents=True, exist_ok=True)
-    fixture_root.mkdir(parents=True, exist_ok=True)
-    cache: dict[str, tuple[bool, dict[str, object]]] = {}
     results: list[dict[str, object]] = []
-    captured_at = datetime.now(timezone.utc).isoformat()
     for row in cases:
         case_id = row["case_id"]
-        fixture = {
-            "schema": "HGK-ACCEPTANCE-FIXTURE/1",
+        if case_id not in selected:
+            continue
+        try:
+            status, details, fixture_hash = _run_case(row, root, baseline_hash)
+        except CaseFailure as exc:
+            status = "FAIL"
+            details = {"reason": str(exc)}
+            fixture_path = root / "eval" / "fixtures" / f"{case_id}.yaml"
+            fixture_hash = (
+                sha256_bytes(fixture_path.read_bytes()) if fixture_path.is_file() else "MISSING"
+            )
+        evidence = {
+            "schema": "HGK-CASE-EVIDENCE/2",
             "case_id": case_id,
+            "domain": row["domain"],
             "type": row["type"],
-            "fixture": row["fixture"],
-            "preconditions": row["preconditions"],
+            "status": status,
+            "fixture_text": row["fixture"],
+            "preconditions_contract": row["preconditions"],
             "oracle": row["oracle"],
             "expected": row["expected"],
             "reject_code": row["reject_code"],
             "source_locator": row["source_locator"],
+            "fixture": f"eval/fixtures/{case_id}.yaml",
+            "fixture_sha256": fixture_hash,
             "frozen_baseline_sha256": baseline_hash,
-        }
-        fixture_path = fixture_root / f"{case_id}.yaml"
-        fixture_path.write_text(json.dumps(fixture, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-        if case_id in BLOCKED_CASES:
-            tt_id, reason = BLOCKED_CASES[case_id]
-            status = "BLOCKED"
-            details: dict[str, object] = {"tt_id": tt_id, "reason": reason}
-        elif case_id in STATIC_CASES:
-            passed, details = static_probe(case_id, root)
-            status = "MAKER_CASE_PASS" if passed and case_id == "TST-037" else ("MAKER_PROXY_PASS" if passed else "FAIL")
-        else:
-            binding = TEST_BINDINGS.get(case_id)
-            if not binding:
-                status = "FAIL"
-                details = {"reason": "ERR_CASE_IMPLEMENTATION_MISSING"}
-            else:
-                if binding not in cache:
-                    cache[binding] = run_unittest(root, binding)
-                passed, details = cache[binding]
-                status = "MAKER_PROXY_PASS" if passed else "FAIL"
-        evidence = {
-            "schema": "HGK-CASE-EVIDENCE/1",
-            "captured_at_utc": captured_at,
-            "case_id": case_id,
-            "domain": row["domain"],
-            "status": status,
-            "oracle": row["oracle"],
-            "source_locator": row["source_locator"],
-            "fixture": str(fixture_path.relative_to(root)).replace("\\", "/"),
-            "fixture_sha256": sha256_bytes(fixture_path.read_bytes()),
+            "runner_sha256": runner_hash,
             "details": details,
             "maker": "CODEX_MAIN_MAKER",
             "independent_verifier": row["independent_verifier"],
-            "independent_verdict": "INDEPENDENT_PASS" if case_id == "TST-037" and (root / "evidence" / "wave-19" / "INDEPENDENT_CHECKER_REPORT.json").is_file() else "NOT_RUN",
-            "claim_ceiling": "Maker execution only; not independent acceptance.",
+            "independent_verdict": "NOT_RUN",
+            "claim_ceiling": "Maker case execution only; independent acceptance is not inferred.",
         }
         evidence_path = case_root / f"{case_id}.json"
-        evidence_path.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        evidence_bytes = (json.dumps(evidence, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+        evidence_path.write_bytes(evidence_bytes)
         results.append(
             {
                 "case_id": case_id,
                 "domain": row["domain"],
                 "type": row["type"],
                 "status": status,
-                "evidence": str(evidence_path.relative_to(root)).replace("\\", "/"),
-                "evidence_sha256": sha256_bytes(evidence_path.read_bytes()),
-                "independent_verdict": evidence["independent_verdict"],
+                "evidence": f"evidence/wave-15/cases/{case_id}.json",
+                "evidence_sha256": sha256_bytes(evidence_bytes),
+                "independent_verdict": "NOT_RUN",
             }
         )
 
-    counts = {name: sum(1 for row in results if row["status"] == name) for name in ("MAKER_CASE_PASS", "MAKER_PROXY_PASS", "BLOCKED", "FAIL")}
+    statuses = ("MAKER_CASE_PASS", "BLOCKED", "FAIL")
+    counts = {name: sum(1 for row in results if row["status"] == name) for name in statuses}
+    complete_run = selected == expected_ids
     report = {
-        "schema": "HGK-MAKER-ACCEPTANCE-REPORT/1",
-        "captured_at_utc": captured_at,
+        "schema": "HGK-MAKER-ACCEPTANCE-REPORT/2",
         "baseline_sha256": baseline_hash,
-        "denominator": 92,
+        "runner_sha256": runner_hash,
+        "frozen_denominator": 92,
+        "attempted": len(results),
+        "complete_run": complete_run,
         "counts": counts,
-        "exact_set": True,
-        "independent_acceptance": "PARTIAL_1_OF_92_TST_037_ONLY",
-        "verdict": "TEMP_CLOSED" if counts["BLOCKED"] and not counts["FAIL"] else ("FAIL" if counts["FAIL"] else "MAKER_PASS_ONLY"),
-        "claim_ceiling": "92/92 maker cases attempted; shared unit/static mappings are explicitly proxy checks, case-specific pass is separate, blocked cases remain open, and no independent/remote/deploy/production claim is made.",
+        "exact_selected_set": len(results) == len(selected),
+        "case_specific_executor_ids": sorted(CASE_EXECUTORS),
+        "independent_acceptance": "NOT_RUN",
+        "verdict": (
+            "FAIL"
+            if counts["FAIL"]
+            else ("BLOCKED" if counts["BLOCKED"] else "MAKER_PASS_ONLY")
+        ),
+        "claim_ceiling": (
+            "Only a dedicated fixture-consuming, oracle-evaluating executor may produce "
+            "MAKER_CASE_PASS. Missing dedicated execution is BLOCKED and the process exits "
+            "non-zero."
+        ),
     }
     report_path = output_root / "MAKER_ACCEPTANCE_REPORT.json"
-    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    report_path.write_text(
+        json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
     with (output_root / "CASE_RESULTS.csv").open("w", encoding="utf-8", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(results[0]))
         writer.writeheader()
         writer.writerows(results)
     print(json.dumps(report, ensure_ascii=False))
-    return 1 if counts["FAIL"] else 0
+    if counts["FAIL"]:
+        return 1
+    if counts["BLOCKED"]:
+        return 2
+    return 0
 
 
 if __name__ == "__main__":
