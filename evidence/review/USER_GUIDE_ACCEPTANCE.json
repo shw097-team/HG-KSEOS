@@ -1,0 +1,62 @@
+{
+ "schema": "HGK-USER-GUIDE-ACCEPTANCE/1",
+ "captured_at_utc": "2026-08-08T18:33:22.416177+00:00",
+ "guide_path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\docs\\HG-KSEOS使用說明文檔.md",
+ "guide_bytes": 7312,
+ "guide_sha256": "b41116cce9bc135ec09e0467193c4c56a1ecc9a233b83262a511f6ca5b99b451",
+ "checks": [
+  {
+   "check": "scripts_exist",
+   "ok": true,
+   "detail": "10 referenced, missing=[]"
+  },
+  {
+   "check": "hermes_version_pin",
+   "ok": true,
+   "detail": "v0.18.2 / v2026.7.7.2 / 9de9c25f present"
+  },
+  {
+   "check": "requirement_denominator_499",
+   "ok": true,
+   "detail": "499 = 240 + 259 present"
+  },
+  {
+   "check": "acceptance_92_claim",
+   "ok": true,
+   "detail": "cases=92"
+  },
+  {
+   "check": "provider_model_claim",
+   "ok": true,
+   "detail": "opencode-go/deepseek-v4-flash route present"
+  },
+  {
+   "check": "control_artifacts_claim",
+   "ok": true,
+   "detail": "control/denominators present"
+  },
+  {
+   "check": "memory_capability_claim",
+   "ok": true,
+   "detail": "PII/expiry/revocation/abstain described"
+  },
+  {
+   "check": "deferred_marked",
+   "ok": true,
+   "detail": "GraphRAG/vector deferred; production NOT_CLAIMED"
+  },
+  {
+   "check": "no_production_claim",
+   "ok": true,
+   "detail": "production NOT_CLAIMED explicit"
+  },
+  {
+   "check": "guide_path_bytes_hash",
+   "ok": true,
+   "detail": "bytes=7312 sha256=b41116cce9bc135e…"
+  }
+ ],
+ "passed": 10,
+ "total": 10,
+ "verdict": "PASS"
+}

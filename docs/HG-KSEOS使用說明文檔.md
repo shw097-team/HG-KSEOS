@@ -2,7 +2,7 @@
 
 ## 1. 文件目的
 
-本文件說明 HG-KSEOS 本機 companion 的安裝、操作、驗證、備份、回滾與交付。現階段最高聲明為 `TEMP_CLOSED` 本機候選，不代表遠端 CI、部署、正式環境或外部獨立驗收通過。
+本文件說明 HG-KSEOS 本機 companion 的安裝、操作、驗證、備份、回滾與交付。現階段最高聲明為 local delivery candidate（domain-complete reducer `HG-KSEOS_LOCAL_DELIVERY_PASS`），不代表遠端 CI、部署、正式環境或外部獨立驗收通過；production 一律 `NOT_CLAIMED`。
 
 ## 2. 權威來源
 
@@ -52,13 +52,13 @@ Hermes 固定為 v0.18.2、tag `v2026.7.7.2`、commit `9de9c25f620ff7f1ce0fd5457
 
 執行 `scripts\hermes-core.ps1` 僅驗證固定版本，不會 setup、登入、安裝 gateway、更新或卸載。
 
-## 14. Hermes Provider HITL
+## 14. Hermes Provider
 
-OAuth／API key 仍未設定。由人類選定 provider 並完成秘密輸入後，才能執行正向 pilot；不得把 `DOCTOR_PASS` 越級為 `PILOT_PASS`。
+Hermes v0.18.2 使用 provider `opencode-go`、model `deepseek-v4-flash`（base `https://opencode.ai/zen/go/v1`）。憑證以 `OPENCODE_GO_API_KEY` env-ref 存放於 Hermes auth store（`%LOCALAPPDATA%\hermes\.env`），不寫入任何 evidence。OpenAI OAuth credential 保留未動。Provider 正向 pilot（P1–P10）與 Hermes→Codex closed loop 已 PASS。
 
 ## 15. Hermes 回滾
 
-官方 `uninstall --full --yes --dry-run` 已驗證；真實卸載會刪除目前 checkout，必須另行取得 destructive approval，並先保存 backup/receipt。
+官方 `uninstall --full --yes --dry-run` 已驗證；真實卸載會刪除目前 checkout，必須另行取得 destructive approval，並先保存 backup/receipt。TST-054（uninstall residue）已以 disposable venv 完成 INDEPENDENT_CASE_PASS。
 
 ## 16. Provider Lifecycle
 
@@ -130,15 +130,17 @@ blocking TT、過期／scope mismatch evidence 或 exact-set mismatch 都會把�
 
 ## 33. Local Package
 
-`scripts\package.ps1` 產生 deterministic local ZIP 與 readback receipt。ZIP 只代表 companion payload；canonical target 未寫入時，TST-092 必須維持 BLOCKED。
+`scripts\package.ps1` 產生 deterministic local ZIP 與 readback receipt。ZIP 只代表 companion payload；TST-092 已以獨立 checker 在 same-HEAD/same-package 上完成 INDEPENDENT_CASE_PASS（exact-set、0 hash mismatch）。
 
 ## 34. Independent NRTV
 
 獨立 checker 必須從 frozen inputs 與版本化證據重跑，不可沿用 maker 的內部推理。maker pass 與 independent pass 是不同欄位。
 
-## 35. 已知阻擋
+## 35. 已知限制
 
-目前主要阻擋是 canonical target writable binding、Hermes provider 正向 pilot/真實卸載隔離證據、其餘 protected provider runtime，以及 independent acceptance。
+- `TT-A3-HERMES-RUNTIME`：`TEMP_CLOSED_CORE`（non-blocking；Hermes runtime 核心驗證部分項目以 temp-closed 揭露）。
+- Memory/Knowledge/RAG/KG 均為 local-first SQLite/FTS runtime（RUNTIME_PASS）；GraphRAG、graphiti、vector backend 依 source 為 `DEFERRED_SOURCE_BACKED`，未宣稱 runtime。
+- production 一律 `NOT_CLAIMED`；本文件與所有 evidence 僅代表 local delivery candidate。
 
 ## 36. 問題處理與交接
 
