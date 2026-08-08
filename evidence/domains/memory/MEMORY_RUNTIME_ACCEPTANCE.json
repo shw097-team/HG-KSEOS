@@ -1,0 +1,67 @@
+{
+ "schema": "HGK-MEMORY-RUNTIME-ACCEPTANCE/1",
+ "captured_at_utc": "2026-08-08T18:10:03.910382+00:00",
+ "p0_disposition": "ACTIVE_SELECTED",
+ "source": "PRE-19/PRE-20 (REQ-137/REQ-138), COV-18; runtime: KnowledgeFactory memory APIs",
+ "depth": "L3 + L4",
+ "checks": [
+  {
+   "check": "lifecycle_capture_persist_recall",
+   "ok": true,
+   "detail": "memory_id=MEM-47724317e1899bba recalled=1"
+  },
+  {
+   "check": "scope_isolation",
+   "ok": true,
+   "detail": "cross-scope recall=0 (must be 0)"
+  },
+  {
+   "check": "expiry_excludes_expired",
+   "ok": true,
+   "detail": "expired memory excluded from recall"
+  },
+  {
+   "check": "pii_permission_denied",
+   "ok": true,
+   "detail": "ERR_PII_PERSISTENCE_NOT_ADMITTED raised"
+  },
+  {
+   "check": "withdrawal_revoke",
+   "ok": true,
+   "detail": "revoked memory excluded"
+  },
+  {
+   "check": "rebuild_readback",
+   "ok": true,
+   "detail": "memory persisted and re-readable after reopen"
+  },
+  {
+   "check": "poisoning_quarantine",
+   "ok": true,
+   "detail": "sanitation=QUARANTINED"
+  },
+  {
+   "check": "memory_not_canonical",
+   "ok": true,
+   "detail": "memory writes do not touch requirements table (req_count=0)"
+  },
+  {
+   "check": "self_promotion_denied",
+   "ok": true,
+   "detail": "ERR_SELF_APPROVAL raised"
+  },
+  {
+   "check": "verifier_promotion_ok",
+   "ok": true,
+   "detail": "verifier promotion ok (DOC-83a4404e42a133fe7ca3)"
+  },
+  {
+   "check": "tainted_source_quarantine",
+   "ok": true,
+   "detail": "tainted source sanitation=QUARANTINED"
+  }
+ ],
+ "passed": 11,
+ "total": 11,
+ "verdict": "RUNTIME_PASS"
+}
