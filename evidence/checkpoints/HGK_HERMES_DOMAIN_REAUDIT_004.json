@@ -1,27 +1,34 @@
 {
   "checkpoint_id": "HGK_HERMES_DOMAIN_REAUDIT_004",
   "task_id": "HGK-HERMES-DOMAIN-REAUDIT-CLOSURE-004",
-  "created_at": "2026-08-08T17:30:00+08:00",
-  "current_head": "eff8efcf984770729e6069f832cc7844a126a2d7",
+  "updated_at": "2026-08-09T02:10:00+08:00",
+  "current_head": "9c1b4bb938da9c4de0644195901e27b5d73de7e7",
   "branch": "codex/hgk-final-closure-002",
-  "git_status": "clean (untracked .hermes/ only)",
+  "git_status": "D1 artifacts uncommitted at last update; now committing",
   "prior_decision": {
     "id": "REL-0cf3901062b56729",
     "verdict": "HG-KSEOS_LOCAL_DELIVERY_PASS",
-    "status_now": "PRIOR_VALID_EVIDENCE_CANDIDATE / external acceptance REOPENED_FAIL_CLOSED"
+    "status_now": "HISTORICAL_PRIOR_CANDIDATE (superseded by 004 re-audit; tracked mutations invalidate old seal)"
   },
   "prior_package": {
     "path": "var/releases/HG-KSEOS_LOCAL_CANDIDATE.zip",
-    "sha256": "9e9ae4fe749d56d7ea0acd0e0f9e668e6ecebac70c24dac026a9c0e5a0c69dc8"
+    "sha256": "9e9ae4fe749d56d7ea0acd0e0f9e668e6ecebac70c24dac026a9c0e5a0c69dc8",
+    "status_now": "HISTORICAL_PRIOR_CANDIDATE"
   },
-  "source_corpus": {
-    "p0_cip": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md",
-    "predev": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
-    "packs": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2",
-    "db_root": "資料庫"
+  "gates": {
+    "D0": {"status": "PASS", "domains": 30, "denominator": 499, "orphans": 0,
+            "evidence": "evidence/review/HG-KSEOS_DOMAIN_COVERAGE_RECONCILIATION.json"},
+    "D1": {"status": "PASS", "maker": "92/92", "independent": "92/92",
+            "depth_calibrated": "92/92", "gaps": [],
+            "evidence": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+            "depth_executors": "tools/case_executors_depth.py",
+            "runner_wiring": "tools/run_acceptance.py"}
   },
-  "current_gate": "D0",
-  "open_domain_gaps": [],
-  "open_tt": ["TT-A3-HERMES-RUNTIME (TEMP_CLOSED_CORE)", "TT-HLPE-SRU-DRIFT (OPEN_NONBLOCKING)"],
-  "next_atomic_work": "D0: source/denominator/domain reconciliation from actual corpus"
+  "current_gate": "D2",
+  "open_domain_gaps": ["D2 Memory lifecycle/expiry/permission", "D3 KnowledgeFactory/KP 20/20 retrieval",
+                       "D4 RAG grounding/abstention", "D5 KG/GraphRAG/Storage disposition",
+                       "D6 knowledge security negatives", "D7 30-domain final status",
+                       "D8 User Guide", "D9 reducer v2", "D10 repair", "D11 final evidence MD"],
+  "open_tt": ["TT-A3-HERMES-RUNTIME (TEMP_CLOSED_CORE)"],
+  "next_atomic_work": "D2: Memory domain closure — runtime lifecycle + negatives from PRE-19/DOC-10/11 owner"
 }

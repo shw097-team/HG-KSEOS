@@ -270,19 +270,26 @@ CASE_EXECUTORS: dict[str, Callable[[Path, dict[str, object]], CaseResult]] = {}
 
 
 def _load_case_executors() -> None:
-    """Load deterministic case executors (tools/case_executors.py) exactly once."""
+    """Load deterministic case executors exactly once; depth executors override
+    symbol-presence executors for L4/L5-required cases (D1 calibration)."""
     if CASE_EXECUTORS:
         return
     import importlib.util
 
-    module_path = Path(__file__).resolve().parent / "case_executors.py"
-    spec = importlib.util.spec_from_file_location("case_executors", module_path)
-    assert spec and spec.loader
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    for name, executor in module.CASE_EXECUTORS.items():
-        if isinstance(executor, Callable):
-            CASE_EXECUTORS[name] = executor
+    base_module_path = Path(__file__).resolve().parent / "case_executors.py"
+    for module_path, module_name in (
+        (base_module_path, "case_executors"),
+        (Path(__file__).resolve().parent / "case_executors_depth.py", "case_executors_depth"),
+    ):
+        if not module_path.is_file():
+            continue
+        spec = importlib.util.spec_from_file_location(module_name, module_path)
+        assert spec and spec.loader
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        for name, executor in module.CASE_EXECUTORS.items():
+            if isinstance(executor, Callable):
+                CASE_EXECUTORS[name] = executor
 
 
 _load_case_executors()
