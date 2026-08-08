@@ -5,16 +5,48 @@ import csv
 import hashlib
 import io
 import json
+import subprocess
 import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
 
-EXCLUDED_PARTS = {".git", ".venv", "var", "worktrees", "__pycache__", ".pytest_cache", "release"}
-
-
 def sha256_bytes(value: bytes) -> str:
     return hashlib.sha256(value).hexdigest()
+
+
+def git_text(root: Path, *arguments: str) -> str:
+    result = subprocess.run(
+        ["git", "-C", str(root), *arguments],
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        encoding="utf-8",
+    )
+    return result.stdout.strip()
+
+
+def tracked_payload_files(root: Path) -> list[Path]:
+    status = git_text(root, "status", "--porcelain", "--untracked-files=all")
+    if status:
+        raise RuntimeError("ERR_PACKAGE_REQUIRES_CLEAN_HEAD")
+    result = subprocess.run(
+        ["git", "-C", str(root), "ls-files", "-z"],
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    relative_paths = [Path(value.decode("utf-8")) for value in result.stdout.split(b"\0") if value]
+    files = []
+    for relative in relative_paths:
+        relative_posix = relative.as_posix()
+        if relative_posix.startswith("evidence/wave-18/"):
+            continue
+        path = root / relative
+        if not path.is_file():
+            raise RuntimeError(f"ERR_TRACKED_PAYLOAD_NOT_FILE:{relative_posix}")
+        files.append(path)
+    return sorted(files, key=lambda item: item.relative_to(root).as_posix().casefold())
 
 
 def main() -> int:
@@ -22,14 +54,9 @@ def main() -> int:
     parser.add_argument("--root", type=Path, required=True)
     args = parser.parse_args()
     root = args.root.resolve(strict=True)
-    files = []
-    for path in sorted(root.rglob("*"), key=lambda item: item.as_posix().casefold()):
-        relative = path.relative_to(root)
-        if not path.is_file() or any(part in EXCLUDED_PARTS for part in relative.parts):
-            continue
-        if relative.as_posix().startswith("evidence/wave-18/"):
-            continue
-        files.append(path)
+    head = git_text(root, "rev-parse", "HEAD")
+    branch = git_text(root, "branch", "--show-current")
+    files = tracked_payload_files(root)
     rows = []
     for path in files:
         data = path.read_bytes()
@@ -46,7 +73,7 @@ def main() -> int:
     output_dir = root / "var" / "releases"
     output_dir.mkdir(parents=True, exist_ok=True)
     package = output_dir / "HG-KSEOS_LOCAL_CANDIDATE.zip"
-    timestamp = (2026, 8, 7, 0, 0, 0)
+    timestamp = (2026, 8, 8, 0, 0, 0)
     with zipfile.ZipFile(package, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for path, row in zip(files, rows, strict=True):
             info = zipfile.ZipInfo(row["path"], timestamp)
@@ -67,6 +94,9 @@ def main() -> int:
     receipt = {
         "schema": "HGK-LOCAL-PACKAGE-READBACK/1",
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
+        "canonical_head": head,
+        "canonical_branch": branch,
+        "git_status": "CLEAN",
         "package": str(package.relative_to(root)).replace("\\", "/"),
         "package_bytes": package.stat().st_size,
         "package_sha256": sha256_bytes(package.read_bytes()),
@@ -79,7 +109,7 @@ def main() -> int:
         "manifest_readback": manifest_match,
         "maker_acceptance": acceptance["counts"],
         "verdict": "LOCAL_PACKAGE_READBACK_PASS_WITH_TT" if exact_set and not mismatches and manifest_match else "FAIL",
-        "claim_ceiling": "Local companion package only; canonical target deployment, independent acceptance, remote CI, deploy, and production remain unclaimed.",
+        "claim_ceiling": "Canonical local candidate only; remote CI, deploy, and production remain unclaimed.",
     }
     evidence = root / "evidence" / "wave-18"
     evidence.mkdir(parents=True, exist_ok=True)
