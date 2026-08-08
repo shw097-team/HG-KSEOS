@@ -15,6 +15,25 @@ def clean(value: str) -> str:
     return value
 
 
+def configured_workspace_bindings(project_root: Path, source_root: Path) -> tuple[tuple[str, str, Path, str], ...]:
+    """Return non-conflicting workspace bindings for companion or canonical layouts."""
+    project_root = project_root.resolve(strict=True)
+    source_root = source_root.resolve(strict=True)
+    if project_root == source_root:
+        return (
+            (
+                "WS-CANONICAL",
+                "HGK-P0",
+                project_root,
+                "WRITABLE_CANONICAL_WITH_FROZEN_INPUT_SUBTREES",
+            ),
+        )
+    return (
+        ("WS-SOURCE", "HGK-P0", source_root, "READ_ONLY_SOURCE"),
+        ("WS-MAKER", "HGK-P0", project_root, "WRITABLE_MAKER"),
+    )
+
+
 def bootstrap(project_root: Path) -> dict[str, object]:
     project_root = project_root.resolve(strict=True)
     config = json.loads((project_root / "config" / "project.json").read_text(encoding="utf-8"))
@@ -24,8 +43,10 @@ def bootstrap(project_root: Path) -> dict[str, object]:
     spine = SharedSpine(database)
     spine.initialize()
     spine.create_project()
-    spine.bind_workspace("WS-SOURCE", "HGK-P0", Path(config["source_root"]), "READ_ONLY_SOURCE")
-    spine.bind_workspace("WS-MAKER", "HGK-P0", project_root, "WRITABLE_MAKER")
+    for workspace_id, project_id, path, mode in configured_workspace_bindings(
+        project_root, Path(config["source_root"])
+    ):
+        spine.bind_workspace(workspace_id, project_id, path, mode)
 
     requirement_count = 0
     with (project_root / "requirements" / "PREDEV_REQUIREMENTS.csv").open(

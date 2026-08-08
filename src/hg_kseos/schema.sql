@@ -20,7 +20,12 @@ CREATE TABLE IF NOT EXISTS workspaces (
     workspace_id TEXT PRIMARY KEY,
     project_id TEXT NOT NULL REFERENCES projects(project_id),
     path TEXT NOT NULL UNIQUE,
-    mode TEXT NOT NULL CHECK(mode IN ('READ_ONLY_SOURCE','WRITABLE_MAKER','ISOLATED_WORKTREE')),
+    mode TEXT NOT NULL CHECK(mode IN (
+        'READ_ONLY_SOURCE',
+        'WRITABLE_MAKER',
+        'ISOLATED_WORKTREE',
+        'WRITABLE_CANONICAL_WITH_FROZEN_INPUT_SUBTREES'
+    )),
     identity_digest TEXT NOT NULL,
     created_at TEXT NOT NULL
 );
