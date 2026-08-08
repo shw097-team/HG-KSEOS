@@ -1,7 +1,7 @@
 {
   "binding": "Intent -> Requirement -> Plan IR -> TaskSpec -> WorkOrder -> Evidence requirement",
-  "canonical_frozen_input_mount": "C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\evidence\\A05-A11",
-  "captured_at": "2026-08-07T12:38:51.884150Z",
+  "canonical_frozen_input_mount": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\worktrees\\evidence\\A05-A11",
+  "captured_at": "2026-08-08T03:19:15.649759Z",
   "expected_head": "ee30dc034a3d4fd0e24a6bfdf77ad8aae273b400",
   "fresh_upstream_tests": {
     "exit_code": 0,
@@ -26,7 +26,7 @@
   },
   "initial_failed_attempt": "missing canonical A05-A11 frozen-input mount in isolated test topology",
   "integrated_target": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\工程基座\\sdlc-prw-hlpe-formal",
-  "isolated_clone": "C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hlpe-qualification",
+  "isolated_clone": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\worktrees\\hlpe-qualification",
   "negative_and_fallback": "PASS",
   "qualification_sequence": [
     "DISCOVER",
