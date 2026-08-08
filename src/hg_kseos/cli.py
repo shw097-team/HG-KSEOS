@@ -29,6 +29,31 @@ def emit(value: Any) -> None:
     print(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True))
 
 
+def case_run(root: Path, case_id: str) -> int:
+    """Run one frozen acceptance case via tools/run_acceptance.py.
+
+    tools/ is not an importable package, so the runner is loaded from the
+    repository tools directory and invoked with --root and --case-id. Its exit
+    code is propagated verbatim; a runner SystemExit is mapped to its process
+    exit code.
+    """
+    tools_dir = Path(__file__).resolve().parents[2] / "tools"
+    if str(tools_dir) not in sys.path:
+        sys.path.insert(0, str(tools_dir))
+    import run_acceptance
+
+    original_argv = sys.argv
+    sys.argv = ["run_acceptance", "--root", str(root), "--case-id", case_id]
+    try:
+        return int(run_acceptance.main())
+    except SystemExit as exc:
+        if isinstance(exc.code, str):
+            print(exc.code, file=sys.stderr)
+        return 1 if not isinstance(exc.code, int) else exc.code
+    finally:
+        sys.argv = original_argv
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="hg-kseos")
     parser.add_argument("--root", type=Path, default=Path.cwd())
@@ -67,6 +92,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     release = commands.add_parser("release-reduce")
     release.add_argument("envelope", type=Path)
+
+    case = commands.add_parser("case")
+    case_commands = case.add_subparsers(dest="case_command", required=True)
+    case_run_parser = case_commands.add_parser("run")
+    case_run_parser.add_argument("--id", required=True)
+    case_run_parser.add_argument("--root", type=Path, default=Path.cwd())
     return parser
 
 
@@ -76,6 +107,8 @@ def run(args: argparse.Namespace) -> Any:
         return bootstrap(root)
     if args.command == "doctor":
         return doctor(root)
+    if args.command == "case":
+        return case_run(args.root, args.id)
     if args.command == "reconcile-tt":
         return reconcile_tt(root)
     if args.command == "qualify-hermes-core":
@@ -115,6 +148,8 @@ def run(args: argparse.Namespace) -> Any:
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    if args.command == "case":
+        return case_run(args.root, args.id)
     try:
         result = run(args)
         emit(result)
