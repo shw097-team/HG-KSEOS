@@ -266,9 +266,26 @@ def execute_tst_037(
     )
 
 
-CASE_EXECUTORS: dict[str, Callable[[Path, dict[str, object]], CaseResult]] = {
-    "TST-037": execute_tst_037,
-}
+CASE_EXECUTORS: dict[str, Callable[[Path, dict[str, object]], CaseResult]] = {}
+
+
+def _load_case_executors() -> None:
+    """Load deterministic case executors (tools/case_executors.py) exactly once."""
+    if CASE_EXECUTORS:
+        return
+    import importlib.util
+
+    module_path = Path(__file__).resolve().parent / "case_executors.py"
+    spec = importlib.util.spec_from_file_location("case_executors", module_path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    for name, executor in module.CASE_EXECUTORS.items():
+        if isinstance(executor, Callable):
+            CASE_EXECUTORS[name] = executor
+
+
+_load_case_executors()
 
 
 EXPLICIT_BLOCKERS = {
@@ -316,7 +333,12 @@ def _run_case(
             },
             fixture_hash,
         )
-    result = executor(root, fixture)
+    try:
+        result = executor(root, fixture)
+    except Exception as exc:  # normalize any executor exception to the runner's CaseFailure
+        if isinstance(exc, CaseFailure):
+            raise
+        raise CaseFailure(f"ERR_EXECUTOR_RAISED:{type(exc).__name__}:{exc}") from exc
     if not result.passed:
         raise CaseFailure("ERR_CASE_ORACLE_FALSE")
     return (
