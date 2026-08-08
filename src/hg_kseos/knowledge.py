@@ -205,6 +205,9 @@ class KnowledgeFactory:
         *,
         allow_pii: bool = False,
     ) -> str:
+        findings = sanitation_findings(body)
+        if findings:
+            raise InvariantViolation("ERR_MEMORY_POISONED:" + ",".join(findings))
         if contains_pii(body) and not allow_pii:
             raise InvariantViolation("ERR_PII_PERSISTENCE_NOT_ADMITTED")
         memory_id = new_id("MEM")
