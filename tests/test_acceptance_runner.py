@@ -105,8 +105,9 @@ class AcceptanceRunnerContractTests(unittest.TestCase):
         with self.assertRaisesRegex(run_acceptance.CaseFailure, "NRTV_FIXTURE_DRIFT"):
             run_acceptance.execute_tst_037(root, self._fixture())
 
-    def test_only_dedicated_executor_can_pass(self) -> None:
-        self.assertEqual({"TST-037"}, set(run_acceptance.CASE_EXECUTORS))
+    def test_all_cases_have_dedicated_executor(self) -> None:
+        expected = {f"TST-{number:03d}" for number in range(1, 93)}
+        self.assertEqual(expected, set(run_acceptance.CASE_EXECUTORS))
         self.assertNotIn("MAKER_PROXY_PASS", inspect.getsource(run_acceptance))
 
 
