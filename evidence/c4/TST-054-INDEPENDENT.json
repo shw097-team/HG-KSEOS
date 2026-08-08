@@ -1,0 +1,102 @@
+{
+ "schema": "HGK-TST-054-DISPOSABLE-CYCLE/1",
+ "case_id": "TST-054",
+ "scope": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-disposable\\TST-054-001",
+ "wheel": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-disposable\\TST-054-001\\wheelhouse\\hermes_agent-0.18.2-py3-none-any.whl",
+ "wheel_sha256": "f39488d2e2cc73229bb612c8292462abc92a6838df04ae4704587b876d2879e5",
+ "pin": "0.18.2",
+ "installed_version": "0.18.2",
+ "steps": [
+  {
+   "step": "venv_create",
+   "ok": true,
+   "detail": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-disposable\\TST-054-001\\test-venv"
+  },
+  {
+   "step": "install",
+   "ok": true,
+   "detail": {
+    "exit": 0,
+    "tail": "33.0 rich-14.3.3 ruamel.yaml-0.18.17 ruamel.yaml.clib-0.2.15 six-1.17.0 sniffio-1.3.1 socksio-1.0.0 starlette-1.0.1 tenacity-9.1.4 termcolor-3.3.0 tqdm-4.67.3 typing-extensions-4.15.0 typing-inspection-0.4.2 tzdata-2025.3 urllib3-2.7.0 uvicorn-0.41.0 watchfiles-1.1.1 wcwidth-0.6.0 websockets-15.0.1\n"
+   }
+  },
+  {
+   "step": "install_hash",
+   "ok": true,
+   "detail": {
+    "tree_sha256": "7d4cbe07b414fe602f45b6c1bb92fff01b3e21c185506e73595c7120237254d4",
+    "version": "0.18.2"
+   }
+  },
+  {
+   "step": "same_pin",
+   "ok": true,
+   "detail": {
+    "installed": "0.18.2",
+    "pin": "0.18.2"
+   }
+  },
+  {
+   "step": "cli_entry",
+   "ok": true,
+   "detail": {
+    "exe": true,
+    "version_out": "Hermes Agent v0.18.2 (2026.7.7.2)\nProject: C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-disposable\\TST-054-001\\test-v"
+   }
+  },
+  {
+   "step": "uninstall",
+   "ok": true,
+   "detail": {
+    "exit": 0,
+    "tail": "Found existing installation: hermes-agent 0.18.2\nUninstalling hermes-agent-0.18.2:\n  Successfully uninstalled hermes-agent-0.18.2\n"
+   }
+  },
+  {
+   "step": "residue_scan",
+   "ok": true,
+   "detail": {
+    "residue_files": [],
+    "count": 0
+   }
+  },
+  {
+   "step": "reinstall",
+   "ok": true,
+   "detail": {
+    "exit": 0,
+    "tail": "Requirement already satisfied: six>=1.5 in c:\\projects\\agent_workspace\\hg-kseos\\var\\hermes-disposable\\tst-054-001\\test-venv\\lib\\site-packages (from python-dateutil->croniter==6.0.0->hermes-agent==0.18.2) (1.17.0)\nInstalling collected packages: hermes-agent\nSuccessfully installed hermes-agent-0.18.2\n"
+   }
+  },
+  {
+   "step": "reinstall_hash_matches_install",
+   "ok": true,
+   "detail": {
+    "first": "7d4cbe07b414fe602f45b6c1bb92fff01b3e21c185506e73595c7120237254d4",
+    "second": "7d4cbe07b414fe602f45b6c1bb92fff01b3e21c185506e73595c7120237254d4"
+   }
+  },
+  {
+   "step": "doctor",
+   "ok": true,
+   "detail": {
+    "exit": 0,
+    "tail": "eq/hr rate limit — set in ~/AppData\\Local\\hermes/.env for better rates)\n\n◆ Memory Provider\n  ✓ Built-in memory active (no external provider configured — this is fine)\n\n────────────────────────────────────────────────────────────\n  Found 1 issue(s) to address:\n\n  1. Run 'hermes setup' to configure missing API keys for full tool access\n\n  Tip: run 'hermes doctor --fix' to auto-fix what's possible.\n\n"
+   }
+  },
+  {
+   "step": "rollback_clean",
+   "ok": true,
+   "detail": {
+    "exit": 0
+   }
+  }
+ ],
+ "all_steps_ok": true,
+ "verdict": "INDEPENDENT_CASE_PASS",
+ "claim_ceiling": "Disposable TST-054 cycle only; live Hermes/credentials/PATH untouched.",
+ "checker": "INDEPENDENT_CHECKER (deterministic disposable cycle; live Hermes/credentials/PATH untouched)",
+ "wheelhouse": "var/hermes-disposable/TST-054-001/wheelhouse (109 wheels reconstructed from uv cache, RECORD-verified)",
+ "dependency_route": "Route 1 searched (no exact wheel) -> Route 2 offline wheelhouse from uv cache (setuptools-82.0.1 + hermes_agent-0.18.2 built with setuptools.build_meta)",
+ "note_launcher_shim": "pip regenerates Scripts/*.exe launchers per run (non-deterministic bytes); payload hash excludes launcher shims and pip-mutable metadata"
+}
