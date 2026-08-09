@@ -1,0 +1,58 @@
+{
+ "schema": "HGK-FINAL-EVIDENCE-MD-READBACK/1",
+ "captured_at_utc": "2026-08-09T01:08:21.448243+00:00",
+ "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\evidence\\review\\HG-KSEOS_FINAL_EVIDENCE_FOR_REVIEW.md",
+ "bytes": 9895,
+ "sha256": "956a9c4d64bb4752f02ceb3e90bbfdb936bd3c6b751867f002ad490dff15e280",
+ "required_sections": [
+  "A. Final identity",
+  "B. Source / Denominator Reconciliation",
+  "C. 30-domain table",
+  "D. 92-case acceptance",
+  "E. Memory",
+  "F. Knowledge / DocETL",
+  "G. RAG / KB",
+  "H. KG / GraphRAG / Storage",
+  "I. Knowledge-domain security",
+  "J. Runtime / provider",
+  "K. User Guide",
+  "L. CoverageReducer",
+  "M. Repair history",
+  "N. Security"
+ ],
+ "checks": [
+  {
+   "check": "exists",
+   "ok": true,
+   "detail": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\evidence\\review\\HG-KSEOS_FINAL_EVIDENCE_FOR_REVIEW.md"
+  },
+  {
+   "check": "bytes_gt_0",
+   "ok": true,
+   "detail": "bytes=9895"
+  },
+  {
+   "check": "sha256",
+   "ok": true,
+   "detail": "956a9c4d64bb4752"
+  },
+  {
+   "check": "required_sections",
+   "ok": true,
+   "detail": "missing=[]"
+  },
+  {
+   "check": "referenced_paths_exist",
+   "ok": true,
+   "detail": "13 refs, absent=[]"
+  },
+  {
+   "check": "secret_scan",
+   "ok": true,
+   "detail": "secrets=[]"
+  }
+ ],
+ "passed": 6,
+ "total": 6,
+ "verdict": "PASS"
+}
