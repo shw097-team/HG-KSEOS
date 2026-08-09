@@ -1,0 +1,33 @@
+{
+  "checkpoint_id": "HGK_FINAL_EXTERNAL_HANDOFF_EVIDENCE_005",
+  "task_id": "HGK-FINAL-EXTERNAL-HANDOFF-EVIDENCE-005",
+  "updated_at": "2026-08-09T02:30:00+08:00",
+  "current_head": "b427316ced2bff76b43f6b4e7f6f1c3ad88baf00",
+  "branch": "codex/hgk-final-closure-002",
+  "git_status": "CLEAN (evidence MD + readback are gitignored sidecars)",
+  "package": {
+    "path": "var/releases/HG-KSEOS_LOCAL_CANDIDATE.zip",
+    "bytes": 26534149,
+    "sha256": "3e0eb262859447d6b05a4e3801c5019dd9c66369f80696557d9a2ee734e5a625",
+    "files": 294,
+    "exact_set": true,
+    "tst092": "INDEPENDENT_CASE_PASS (same HEAD + same package)"
+  },
+  "evidence_issues": {
+    "A_owner_terminology": "RESOLVED - requirement_ledger_owner vs domain_publication_owner distinct; owner_semantic_collision=0",
+    "B_control_corpus_manifest": "RESOLVED - section P with Manifest/Group-01..07/AGENTS(40)/SKILLS(18)/HLPE hashes + drift PASS",
+    "C_runtime_qualification_digest": "RESOLVED - section Q with 12 rows (Hermes/Codex/OpenCodex/OpenCodeGo/DeepSeek/P10/loop/provider/TST-054/092/C6/D6)",
+    "D_semantic_closure_retained": "RESOLVED - D0 499 invariants, D1 92 rows, D7 30+2 preserved",
+    "E_decision_identity": "RESOLVED - sealed=REL-f04c6e1d104fc86d (digest ccfb8c7c), ad_hoc=REL-69d435e4b5e149f7 classified supplementary, old-schema digest documented",
+    "F_readback_schema_v3": "RESOLVED - HGK-FINAL-EVIDENCE-MD-READBACK/3 with unambiguous fields"
+  },
+  "final_evidence_md": {
+    "path": "evidence/review/HG-KSEOS_FINAL_EVIDENCE_FOR_REVIEW.md",
+    "bytes": 38025,
+    "sha256": "232e41e7c0120f1b",
+    "handoff_validator": "PASS (44/44)",
+    "readback": "HGK-FINAL-EVIDENCE-MD-READBACK/3 verdict PASS semantic PASS"
+  },
+  "status": "FINAL_EXTERNAL_HANDOFF_EVIDENCE_PASS",
+  "next_atomic_work": "none - terminal; report final response"
+}
