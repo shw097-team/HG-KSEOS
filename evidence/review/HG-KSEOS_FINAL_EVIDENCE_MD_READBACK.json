@@ -1,9 +1,9 @@
 {
  "schema": "HGK-FINAL-EVIDENCE-MD-READBACK/1",
- "captured_at_utc": "2026-08-09T01:12:08.672028+00:00",
+ "captured_at_utc": "2026-08-09T01:12:46.348019+00:00",
  "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\evidence\\review\\HG-KSEOS_FINAL_EVIDENCE_FOR_REVIEW.md",
- "bytes": 10209,
- "sha256": "654435aa3be8e7cc0a4837b3c9584e3a228c217e5cbf6e4910ae7571cff57b97",
+ "bytes": 10238,
+ "sha256": "6bf3eebc341e162c4324d9b1171c5dcbf987a38be6c3c10fe142b30b50e97dac",
  "required_sections": [
   "A. Final identity",
   "B. Source / Denominator Reconciliation",
@@ -29,12 +29,12 @@
   {
    "check": "bytes_gt_0",
    "ok": true,
-   "detail": "bytes=10209"
+   "detail": "bytes=10238"
   },
   {
    "check": "sha256",
    "ok": true,
-   "detail": "654435aa3be8e7cc"
+   "detail": "6bf3eebc341e162c"
   },
   {
    "check": "required_sections",
