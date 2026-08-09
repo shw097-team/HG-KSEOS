@@ -1,6 +1,6 @@
 {
  "schema": "HGK-30-DOMAIN-FINAL-STATUS/3",
- "captured_at_utc": "2026-08-09T01:56:53.985745+00:00",
+ "captured_at_utc": "2026-08-09T02:04:10.760087+00:00",
  "canonical_domains_total": 30,
  "canonical_domains_terminal": 30,
  "subcapabilities_total": 2,
@@ -32,7 +32,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -55,7 +55,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -78,7 +78,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -101,7 +101,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -124,7 +124,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -147,7 +147,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -170,7 +170,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -318,7 +318,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -341,7 +341,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [
@@ -374,7 +374,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -397,7 +397,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -420,11 +420,11 @@
    "evidence_refs": [
     {
      "path": "evidence/domains/security/KNOWLEDGE_MEMORY_SECURITY_NRTV.json",
-     "sha256": "1f688013212a7ac387ad48e995ea80e25196cbf7ee93107199c3d24d985a6738"
+     "sha256": "61426f1a502d3326ca2fdc2ec70846b5df9bc51c18fee16ac6291e9fc36f0e90"
     },
     {
      "path": "evidence/c6/SECURITY_NRTV_REPORT.json",
-     "sha256": "e06a88c3ff4d982976c1482bd8090606436c202426d135856fd1ac921d56fcbf"
+     "sha256": "c5ec3eb3e20b79b9d9e9e982aa5fe2e25043faff47bd219be6e6c00c3416d695"
     }
    ],
    "active_subcapabilities": [],
@@ -447,15 +447,15 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     },
     {
      "path": "evidence/c6/SECURITY_NRTV_REPORT.json",
-     "sha256": "e06a88c3ff4d982976c1482bd8090606436c202426d135856fd1ac921d56fcbf"
+     "sha256": "c5ec3eb3e20b79b9d9e9e982aa5fe2e25043faff47bd219be6e6c00c3416d695"
     },
     {
      "path": "evidence/domains/security/KNOWLEDGE_MEMORY_SECURITY_NRTV.json",
-     "sha256": "1f688013212a7ac387ad48e995ea80e25196cbf7ee93107199c3d24d985a6738"
+     "sha256": "61426f1a502d3326ca2fdc2ec70846b5df9bc51c18fee16ac6291e9fc36f0e90"
     }
    ],
    "active_subcapabilities": [
@@ -488,7 +488,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -511,7 +511,7 @@
    "evidence_refs": [
     {
      "path": "evidence/wave-16/RESTORE_DRILL_REPORT.json",
-     "sha256": "6a220f6313d0b314b20e3e997ebb19b382fcd7c118f4b0c4ebc4526c22e49424"
+     "sha256": "4bdaaa0f43e17efc506e45ca27a4f3edbc92dd506b51ea4b3bc7c41e5de3694c"
     }
    ],
    "active_subcapabilities": [
@@ -544,7 +544,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -567,7 +567,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -590,7 +590,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -613,7 +613,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -636,7 +636,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -659,7 +659,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -682,7 +682,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -705,7 +705,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -728,7 +728,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
@@ -751,7 +751,7 @@
    "evidence_refs": [
     {
      "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
-     "sha256": "9bf164517926a7e26998ef0ac26f8bbdfd71b2b47b896726cb90d1b3941c136a"
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
     }
    ],
    "active_subcapabilities": [],
