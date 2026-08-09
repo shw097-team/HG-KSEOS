@@ -1,0 +1,1135 @@
+{
+ "schema": "HGK-USER-EXPECTED-CAPABILITY-EXPERIENCE-MATRIX/1",
+ "captured_at_utc": "2026-08-09T04:57:43.994128+00:00",
+ "source_expectations_total": 16,
+ "rows_total": 15,
+ "p0_required_rows": 13,
+ "deferred_optional_rows": 2,
+ "rows": [
+  {
+   "uex_id": "UEX-001",
+   "user_goal": "自然語言任務自動路由",
+   "user_input": "「請把 X 完成」",
+   "preconditions": [
+    "user task text"
+   ],
+   "expected_user_visible_result": "task accepted, routed, executed, evidence shown",
+   "expected_automatic_behavior": [
+    "intent parse",
+    "task class",
+    "owner/WP route",
+    "AGENT/SKILL select",
+    "provider/tool select"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [
+    "credential",
+    "destructive",
+    "governance"
+   ],
+   "agent_behavior": "single-agent default; bounded multi-agent only when independent",
+   "skill_behavior": "auto-select existing skill",
+   "memory_behavior": "recall only if relevant",
+   "rag_behavior": "retrieve only if source-backed",
+   "kg_behavior": "use only if relationship needed",
+   "knowledge_behavior": "grounded answer with citation",
+   "provider_tool_behavior": "admitted selection",
+   "security_privacy_behavior": "no secret leak",
+   "failure_degrade_behavior": "self-repair/resume",
+   "recovery_behavior": "checkpoint/resume",
+   "source_locators": [
+    "P0-CIP L2233 COV-01-07",
+    "PREDEV REQ-034"
+   ],
+   "requirement_ids": [
+    "COV-01-07",
+    "REQ-034"
+   ],
+   "domain_ids": [
+    "COV-01",
+    "COV-02",
+    "COV-22"
+   ],
+   "owner_wps": [
+    "PRE-01",
+    "PRE-22"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/cli.py case.run",
+    "src/hg_kseos/assurance.py"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L4",
+   "e2e_fixture": "var/uecx/vs01",
+   "negative_fixture": "var/uecx/neg01",
+   "recovery_fixture": "var/uecx/rec01",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "PARTIALLY_PROVEN",
+   "slice_id": "VS-01",
+   "e2e_receipt": {
+    "slice_id": "VS-01",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "natural task auto-routed to known skill (implicit allowed; user did not name it)",
+    "decisions": {
+     "skill_selected": "report-gen"
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-002",
+   "user_goal": "自然語言 coding 任務 → Hermes→WorkOrder→Codex",
+   "user_input": "「實作 X」",
+   "preconditions": [
+    "coding task"
+   ],
+   "expected_user_visible_result": "code written by Codex in isolated worktree with tests/evidence",
+   "expected_automatic_behavior": [
+    "Hermes orchestrates",
+    "admitted WorkOrder",
+    "Codex CLI executes",
+    "tests/evidence",
+    "independent checker"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [
+    "UAC",
+    "credential"
+   ],
+   "agent_behavior": "Codex = writer, Hermes = orchestrator",
+   "skill_behavior": "coding skill if exists",
+   "memory_behavior": "relevant recall",
+   "rag_behavior": "source grounding",
+   "kg_behavior": "not needed",
+   "knowledge_behavior": "evidence envelope",
+   "provider_tool_behavior": "Codex via OpenCodex→OpenCode Go→deepseek-v4-flash",
+   "security_privacy_behavior": "no secrets in evidence",
+   "failure_degrade_behavior": "worktree rollback",
+   "recovery_behavior": "cherry-pick/rollback",
+   "source_locators": [
+    "PREDEV PRE-12",
+    "P0-CIP COV-16"
+   ],
+   "requirement_ids": [
+    "REQ-097",
+    "REQ-098"
+   ],
+   "domain_ids": [
+    "COV-16"
+   ],
+   "owner_wps": [
+    "PRE-12"
+   ],
+   "implementation_bindings": [
+    "worktrees/",
+    "plans/TASKSPEC-*",
+    "tools/run_acceptance.py"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L4",
+   "e2e_fixture": "var/uecx/vs02",
+   "negative_fixture": "var/uecx/neg02",
+   "recovery_fixture": "var/uecx/rec02",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "COMPONENT_PROVEN_E2E_OPEN",
+   "slice_id": "VS-02",
+   "e2e_receipt": {
+    "slice_id": "VS-02",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "coding task admitted via WorkOrder contract (rollback declared); Codex as admitted writer; maker!=checker",
+    "decisions": {
+     "workorder_admission": "ACK"
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-003",
+   "user_goal": "簡單任務單一 agent 預設",
+   "user_input": "「查一下 X」",
+   "preconditions": [
+    "simple task"
+   ],
+   "expected_user_visible_result": "done by single agent, no fan-out",
+   "expected_automatic_behavior": [
+    "single-agent default",
+    "no delegation/voting"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [],
+   "agent_behavior": "one agent",
+   "skill_behavior": "auto",
+   "memory_behavior": "relevant only",
+   "rag_behavior": "if needed",
+   "kg_behavior": "no",
+   "knowledge_behavior": "answer",
+   "provider_tool_behavior": "admitted",
+   "security_privacy_behavior": "safe",
+   "failure_degrade_behavior": "self-repair",
+   "recovery_behavior": "resume",
+   "source_locators": [
+    "PREDEV PRE-16 REQ-101"
+   ],
+   "requirement_ids": [
+    "REQ-101"
+   ],
+   "domain_ids": [
+    "COV-13",
+    "COV-14"
+   ],
+   "owner_wps": [
+    "PRE-16"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/assurance.py agent selection"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L3",
+   "e2e_fixture": "var/uecx/vs03",
+   "negative_fixture": "var/uecx/neg03",
+   "recovery_fixture": "var/uecx/rec03",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "PARTIALLY_PROVEN",
+   "slice_id": "VS-03",
+   "e2e_receipt": {
+    "slice_id": "VS-03",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "simple task stays single-agent (no fan-out/voting)",
+    "decisions": {},
+    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-004",
+   "user_goal": "複雜獨立任務 bounded multi-agent",
+   "user_input": "「同時分析 A 與 B 兩個獨立件」",
+   "preconditions": [
+    "independent subtasks"
+   ],
+   "expected_user_visible_result": "parallel completion, SoD, merged result",
+   "expected_automatic_behavior": [
+    "admission check",
+    "bounded topology",
+    "SoD",
+    "merge/adjudication"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [
+    "merge conflict governance"
+   ],
+   "agent_behavior": "bounded multi-agent, one writer/worktree",
+   "skill_behavior": "auto",
+   "memory_behavior": "relevant",
+   "rag_behavior": "if needed",
+   "kg_behavior": "if needed",
+   "knowledge_behavior": "evidence per subtask",
+   "provider_tool_behavior": "admitted",
+   "security_privacy_behavior": "SoD",
+   "failure_degrade_behavior": "per-subtask repair",
+   "recovery_behavior": "per-subtask resume",
+   "source_locators": [
+    "PREDEV PRE-16 REQ-102"
+   ],
+   "requirement_ids": [
+    "REQ-102"
+   ],
+   "domain_ids": [
+    "COV-13",
+    "COV-14"
+   ],
+   "owner_wps": [
+    "PRE-16"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/assurance.py multi-agent admission"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L4",
+   "e2e_fixture": "var/uecx/vs04",
+   "negative_fixture": "var/uecx/neg04",
+   "recovery_fixture": "var/uecx/rec04",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "PARTIALLY_PROVEN",
+   "slice_id": "VS-04",
+   "e2e_receipt": {
+    "slice_id": "VS-04",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "complex independent task → bounded topology with SoD + one writer/worktree (admission gate)",
+    "decisions": {
+     "admission": "BOUNDED_MULTI_AGENT",
+     "soD": true,
+     "one_writer_per_worktree": true
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-005",
+   "user_goal": "歷史相關任務自動 Memory recall",
+   "user_input": "「照上次的做法處理 X」",
+   "preconditions": [
+    "historical precedent"
+   ],
+   "expected_user_visible_result": "relevant memory auto-recalled",
+   "expected_automatic_behavior": [
+    "relevance match",
+    "scope/TTL/permission filter",
+    "provenance"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [],
+   "agent_behavior": "recall",
+   "skill_behavior": "n/a",
+   "memory_behavior": "auto recall when relevant",
+   "rag_behavior": "n/a",
+   "kg_behavior": "n/a",
+   "knowledge_behavior": "n/a",
+   "provider_tool_behavior": "n/a",
+   "security_privacy_behavior": "permission-filtered",
+   "failure_degrade_behavior": "no stale/poisoned recall",
+   "recovery_behavior": "n/a",
+   "source_locators": [
+    "PREDEV PRE-19 REQ-137"
+   ],
+   "requirement_ids": [
+    "REQ-137"
+   ],
+   "domain_ids": [
+    "COV-12"
+   ],
+   "owner_wps": [
+    "PRE-19"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/knowsledge.py remember/active_memory"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L4",
+   "e2e_fixture": "var/uecx/vs05",
+   "negative_fixture": "var/uecx/neg05",
+   "recovery_fixture": "var/uecx/rec05",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "COMPONENT_PROVEN_E2E_OPEN",
+   "slice_id": "VS-05",
+   "e2e_receipt": {
+    "slice_id": "VS-05",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "relevant memory auto-recalled (user did not say 'use memory')",
+    "decisions": {
+     "recalled": 1
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.290651+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-006",
+   "user_goal": "無關任務不注入 Memory",
+   "user_input": "「寫一封感謝信」",
+   "preconditions": [
+    "unrelated task"
+   ],
+   "expected_user_visible_result": "no irrelevant memory injected",
+   "expected_automatic_behavior": [
+    "relevance reject"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [],
+   "agent_behavior": "no recall",
+   "skill_behavior": "n/a",
+   "memory_behavior": "no injection when irrelevant",
+   "rag_behavior": "n/a",
+   "kg_behavior": "n/a",
+   "knowledge_behavior": "n/a",
+   "provider_tool_behavior": "n/a",
+   "security_privacy_behavior": "scope enforced",
+   "failure_degrade_behavior": "n/a",
+   "recovery_behavior": "n/a",
+   "source_locators": [
+    "PREDEV PRE-19 REQ-138"
+   ],
+   "requirement_ids": [
+    "REQ-138"
+   ],
+   "domain_ids": [
+    "COV-12"
+   ],
+   "owner_wps": [
+    "PRE-19"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/knowsledge.py scope filter"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L4",
+   "e2e_fixture": "var/uecx/vs06",
+   "negative_fixture": "var/uecx/neg06",
+   "recovery_fixture": "var/uecx/rec06",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "COMPONENT_PROVEN_E2E_OPEN",
+   "slice_id": "VS-06",
+   "e2e_receipt": {
+    "slice_id": "VS-06",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "unrelated scope: no memory injected",
+    "decisions": {
+     "irrelevant_memory_injected": 0
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.454542+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-007",
+   "user_goal": "source 問題自動 RAG + citation",
+   "user_input": "「X 的定義是什麼？」",
+   "preconditions": [
+    "source-backed question"
+   ],
+   "expected_user_visible_result": "grounded answer with citation",
+   "expected_automatic_behavior": [
+    "retrieval",
+    "KnowledgePack anchor",
+    "locator/citation/grounding"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [],
+   "agent_behavior": "retrieve",
+   "skill_behavior": "n/a",
+   "memory_behavior": "n/a",
+   "rag_behavior": "auto route when needed",
+   "kg_behavior": "no",
+   "knowledge_behavior": "cited answer",
+   "provider_tool_behavior": "n/a",
+   "security_privacy_behavior": "safe",
+   "failure_degrade_behavior": "abstain",
+   "recovery_behavior": "n/a",
+   "source_locators": [
+    "PREDEV PRE-20 REQ-145"
+   ],
+   "requirement_ids": [
+    "REQ-145"
+   ],
+   "domain_ids": [
+    "COV-10"
+   ],
+   "owner_wps": [
+    "PRE-20"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/knowsledge.py search",
+    "src/hg_kseos/retrieval.py"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L4",
+   "e2e_fixture": "var/uecx/vs07",
+   "negative_fixture": "var/uecx/neg07",
+   "recovery_fixture": "var/uecx/rec07",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "COMPONENT_PROVEN_E2E_OPEN",
+   "slice_id": "VS-07",
+   "e2e_receipt": {
+    "slice_id": "VS-07",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "source question auto-retrieved with citation (user did not say RAG)",
+    "decisions": {
+     "hits": 1
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.620045+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-008",
+   "user_goal": "關係/依賴問題才用 KG",
+   "user_input": "「A 依賴哪些元件？」",
+   "preconditions": [
+    "relationship task"
+   ],
+   "expected_user_visible_result": "KG path answer when useful; factual lookup otherwise",
+   "expected_automatic_behavior": [
+    "KG route when relationship useful",
+    "no KG for simple lookup"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [],
+   "agent_behavior": "route",
+   "skill_behavior": "n/a",
+   "memory_behavior": "n/a",
+   "rag_behavior": "n/a",
+   "kg_behavior": "use when relationship needed; no overuse",
+   "knowledge_behavior": "grounded",
+   "provider_tool_behavior": "n/a",
+   "security_privacy_behavior": "safe",
+   "failure_degrade_behavior": "fallback to lookup",
+   "recovery_behavior": "n/a",
+   "source_locators": [
+    "PREDEV PRE-20 KG scope"
+   ],
+   "requirement_ids": [
+    "REQ-146"
+   ],
+   "domain_ids": [
+    "COV-11"
+   ],
+   "owner_wps": [
+    "PRE-20"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/knowsledge.py kg query"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L4",
+   "e2e_fixture": "var/uecx/vs08",
+   "negative_fixture": "var/uecx/neg08",
+   "recovery_fixture": "var/uecx/rec08",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "PARTIALLY_PROVEN",
+   "slice_id": "VS-08",
+   "e2e_receipt": {
+    "slice_id": "VS-08",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "relationship question bound to KG edge; plain lookup does not traverse KG",
+    "decisions": {
+     "edge": "EDGE-e6e0c16c230c27c0a642"
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.809602+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-009",
+   "user_goal": "證據不足/已 withdrawn → abstain",
+   "user_input": "「X 的 spec 是什麼？」(source withdrawn)",
+   "preconditions": [
+    "insufficient/withdrawn evidence"
+   ],
+   "expected_user_visible_result": "abstain with reason",
+   "expected_automatic_behavior": [
+    "stale/withdrawn invalidation",
+    "abstention"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [],
+   "agent_behavior": "abstain",
+   "skill_behavior": "n/a",
+   "memory_behavior": "n/a",
+   "rag_behavior": "no hallucinated citation",
+   "kg_behavior": "no stale edge",
+   "knowledge_behavior": "honest abstain",
+   "provider_tool_behavior": "n/a",
+   "security_privacy_behavior": "safe",
+   "failure_degrade_behavior": "abstain",
+   "recovery_behavior": "rebuild",
+   "source_locators": [
+    "PREDEV PRE-20 withdrawn"
+   ],
+   "requirement_ids": [
+    "REQ-145"
+   ],
+   "domain_ids": [
+    "COV-10",
+    "COV-11"
+   ],
+   "owner_wps": [
+    "PRE-20"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/knowsledge.py withdraw/rebuild"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L4",
+   "e2e_fixture": "var/uecx/vs09",
+   "negative_fixture": "var/uecx/neg09",
+   "recovery_fixture": "var/uecx/rec09",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "COMPONENT_PROVEN_E2E_OPEN",
+   "slice_id": "VS-09",
+   "e2e_receipt": {
+    "slice_id": "VS-09",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "withdrawn evidence abstained (no hallucinated citation)",
+    "decisions": {
+     "error": "ABSTAIN_NO_GROUNDING:withdrawn statement"
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-010",
+   "user_goal": "既有 Skill 自動選擇",
+   "user_input": "「用既有流程產生 X」",
+   "preconditions": [
+    "existing skill"
+   ],
+   "expected_user_visible_result": "matching skill auto-selected",
+   "expected_automatic_behavior": [
+    "skill auto-match",
+    "contraindication check"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [],
+   "agent_behavior": "select skill",
+   "skill_behavior": "auto-select existing skill; no unrelated skill",
+   "memory_behavior": "n/a",
+   "rag_behavior": "n/a",
+   "kg_behavior": "n/a",
+   "knowledge_behavior": "skill output",
+   "provider_tool_behavior": "admitted",
+   "security_privacy_behavior": "safe",
+   "failure_degrade_behavior": "fallback",
+   "recovery_behavior": "n/a",
+   "source_locators": [
+    "PREDEV PRE-22 REQ-169"
+   ],
+   "requirement_ids": [
+    "REQ-169"
+   ],
+   "domain_ids": [
+    "COV-22",
+    "COV-29"
+   ],
+   "owner_wps": [
+    "PRE-22"
+   ],
+   "implementation_bindings": [
+    "control/skills/*/SKILL.md registry"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L3",
+   "e2e_fixture": "var/uecx/vs10",
+   "negative_fixture": "var/uecx/neg10",
+   "recovery_fixture": "var/uecx/rec10",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "PARTIALLY_PROVEN",
+   "slice_id": "VS-10",
+   "e2e_receipt": {
+    "slice_id": "VS-10",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "existing skill auto-selected; implicit-forbidden unrelated skill not auto-chosen",
+    "decisions": {
+     "selected": "codex-bounded-execute",
+     "unrelated_auto_select_blocked": true
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-011",
+   "user_goal": "缺 Skill → FIT-GAP → Candidate",
+   "user_input": "「做一件沒有 skill 的新事」",
+   "preconditions": [
+    "no matching skill"
+   ],
+   "expected_user_visible_result": "FIT-GAP documented; SkillCandidate if source-backed",
+   "expected_automatic_behavior": [
+    "no-fit detection",
+    "reuse search",
+    "FIT-GAP record",
+    "candidate if allowed"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [
+    "skill promotion governance"
+   ],
+   "agent_behavior": "fit-gap",
+   "skill_behavior": "no self-promotion; qualification before promotion",
+   "memory_behavior": "n/a",
+   "rag_behavior": "n/a",
+   "kg_behavior": "n/a",
+   "knowledge_behavior": "gap record",
+   "provider_tool_behavior": "n/a",
+   "security_privacy_behavior": "safe",
+   "failure_degrade_behavior": "n/a",
+   "recovery_behavior": "n/a",
+   "source_locators": [
+    "PREDEV PRE-22 REQ-170"
+   ],
+   "requirement_ids": [
+    "REQ-170"
+   ],
+   "domain_ids": [
+    "COV-29"
+   ],
+   "owner_wps": [
+    "PRE-22"
+   ],
+   "implementation_bindings": [
+    "evidence/review/FIT-GAP tool disposition"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L3",
+   "e2e_fixture": "var/uecx/vs11",
+   "negative_fixture": "var/uecx/neg11",
+   "recovery_fixture": "var/uecx/rec11",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "PARTIALLY_PROVEN",
+   "slice_id": "VS-11",
+   "e2e_receipt": {
+    "slice_id": "VS-11",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "no-fit → FIT-GAP/reuse search; no direct promotion",
+    "decisions": {
+     "fit_gap": "FIT-GAP",
+     "promotion": "NOT_PERFORMED"
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-012",
+   "user_goal": "受治理 Skill 學習迴圈",
+   "user_input": "「重複的工作模式能否被系統學起來」",
+   "preconditions": [
+    "source-backed active learning"
+   ],
+   "expected_user_visible_result": "governed pattern capture → qualification → promotion → reuse",
+   "expected_automatic_behavior": [
+    "learning signal",
+    "tests+negative+holdout+security",
+    "independent checker",
+    "promotion",
+    "later reuse"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [
+    "promotion governance"
+   ],
+   "agent_behavior": "learn",
+   "skill_behavior": "no self-promotion; rollback on bad learning",
+   "memory_behavior": "MemoryCandidate governed",
+   "rag_behavior": "n/a",
+   "kg_behavior": "n/a",
+   "knowledge_behavior": "n/a",
+   "provider_tool_behavior": "n/a",
+   "security_privacy_behavior": "safe",
+   "failure_degrade_behavior": "rollback",
+   "recovery_behavior": "rollback bad learning",
+   "source_locators": [
+    "PREDEV PRE-19/PRE-22 learning boundary"
+   ],
+   "requirement_ids": [
+    "REQ-137",
+    "REQ-169"
+   ],
+   "domain_ids": [
+    "COV-12",
+    "COV-22",
+    "COV-29"
+   ],
+   "owner_wps": [
+    "PRE-19",
+    "PRE-22"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/knowsledge.py memory candidates"
+   ],
+   "p0_disposition": "DEFERRED_SOURCE_BACKED",
+   "runtime_required_now": false,
+   "required_depth": "L3",
+   "e2e_fixture": "var/uecx/vs12",
+   "negative_fixture": "var/uecx/neg12",
+   "recovery_fixture": "var/uecx/rec12",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "DEFERRED_SOURCE_BACKED",
+   "classification": "SOURCE_DEFERRED",
+   "slice_id": "VS-12",
+   "e2e_receipt": {
+    "slice_id": "VS-12",
+    "verdict": "DEFERRED_SOURCE_BACKED",
+    "detail": "controlled skill learning loop deferred (no source-backed autonomous skill promotion framework in P0 scope); governed memory candidates exist; full skill promotion loop not active",
+    "decisions": {
+     "learning_loop": "DEFERRED_SOURCE_BACKED",
+     "authority_mutation": 0
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-013",
+   "user_goal": "新 source → Knowledge refresh → withdraw 失效",
+   "user_input": "「新增來源文件 D 並發布」",
+   "preconditions": [
+    "new source"
+   ],
+   "expected_user_visible_result": "source admitted, unitized, published, retrievable; withdrawal invalidates",
+   "expected_automatic_behavior": [
+    "sanitize/hash/unitize",
+    "candidate/admission",
+    "KnowledgePack",
+    "publish/wiki",
+    "RAG refresh",
+    "KG projection",
+    "withdraw→invalidate→rebuild"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [
+    "publish governance"
+   ],
+   "agent_behavior": "refresh",
+   "skill_behavior": "n/a",
+   "memory_behavior": "n/a",
+   "rag_behavior": "refreshed index",
+   "kg_behavior": "projection if applicable",
+   "knowledge_behavior": "published",
+   "provider_tool_behavior": "n/a",
+   "security_privacy_behavior": "sanitize",
+   "failure_degrade_behavior": "rebuild",
+   "recovery_behavior": "withdraw→rebuild",
+   "source_locators": [
+    "PREDEV PRE-10/PRE-20"
+   ],
+   "requirement_ids": [
+    "REQ-073",
+    "REQ-074"
+   ],
+   "domain_ids": [
+    "COV-08",
+    "COV-09",
+    "COV-10"
+   ],
+   "owner_wps": [
+    "PRE-10",
+    "PRE-20"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/knowsledge.py ingest/promote/withdraw"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L4",
+   "e2e_fixture": "var/uecx/vs13",
+   "negative_fixture": "var/uecx/neg13",
+   "recovery_fixture": "var/uecx/rec13",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "COMPONENT_PROVEN_E2E_OPEN",
+   "slice_id": "VS-13",
+   "e2e_receipt": {
+    "slice_id": "VS-13",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "new source published+retrievable; withdrawal invalidated",
+    "decisions": {
+     "published": true,
+     "withdrawn_invalidated": true
+    },
+    "captured_at_utc": "2026-08-09T05:00:38.175170+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-014",
+   "user_goal": "知識工作台 / Obsidian disposition",
+   "user_input": "「在知識工作台瀏覽/編輯」",
+   "preconditions": [
+    "workbench"
+   ],
+   "expected_user_visible_result": "Git Markdown/Wiki readable; Obsidian per source disposition",
+   "expected_automatic_behavior": [
+    "Git Markdown publication",
+    "Wiki compile",
+    "Obsidian OPTIONAL only"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [],
+   "agent_behavior": "n/a",
+   "skill_behavior": "n/a",
+   "memory_behavior": "n/a",
+   "rag_behavior": "readback",
+   "kg_behavior": "n/a",
+   "knowledge_behavior": "published markdown",
+   "provider_tool_behavior": "n/a",
+   "security_privacy_behavior": "safe",
+   "failure_degrade_behavior": "core works without Obsidian",
+   "recovery_behavior": "n/a",
+   "source_locators": [
+    "P0-CIP L13595 obsidian OPTIONAL"
+   ],
+   "requirement_ids": [
+    "SQS-REQ-001"
+   ],
+   "domain_ids": [
+    "COV-21",
+    "COV-28"
+   ],
+   "owner_wps": [
+    "PRE-21"
+   ],
+   "implementation_bindings": [
+    "docs/",
+    "evidence/review/",
+    "control/skills/"
+   ],
+   "p0_disposition": "OPTIONAL",
+   "runtime_required_now": false,
+   "required_depth": "L2",
+   "e2e_fixture": "var/uecx/vs14",
+   "negative_fixture": "var/uecx/neg14",
+   "recovery_fixture": "var/uecx/rec14",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "OPTIONAL_NOT_ACTIVE_SOURCE_BACKED",
+   "classification": "SOURCE_OPTIONAL",
+   "slice_id": "VS-14",
+   "e2e_receipt": {
+    "slice_id": "VS-14",
+    "verdict": "OPTIONAL_NOT_ACTIVE_SOURCE_BACKED",
+    "detail": "Obsidian OPTIONAL/TIER-2/PLANNED per P0-CIP L13595; Git Markdown/Wiki is the active workbench; no false ACTIVE claim; core operation does not depend on Obsidian",
+    "decisions": {
+     "obsidian_disposition": "OPTIONAL",
+     "active_workbench": "Git Markdown / LLM Wiki"
+    },
+    "captured_at_utc": "2026-08-09T05:00:38.176171+00:00"
+   }
+  },
+  {
+   "uex_id": "UEX-015",
+   "user_goal": "失敗→checkpoint→self-repair→resume→完成",
+   "user_input": "「完成 X」(觸發可修復失敗)",
+   "preconditions": [
+    "recoverable failure"
+   ],
+   "expected_user_visible_result": "user-visible completion after repair",
+   "expected_automatic_behavior": [
+    "failure classify",
+    "checkpoint",
+    "smallest repair",
+    "affected recheck",
+    "independent verify",
+    "resume"
+   ],
+   "expected_manual_behavior": [],
+   "allowed_hitl": [],
+   "agent_behavior": "repair",
+   "skill_behavior": "n/a",
+   "memory_behavior": "n/a",
+   "rag_behavior": "n/a",
+   "kg_behavior": "n/a",
+   "knowledge_behavior": "n/a",
+   "provider_tool_behavior": "safe degrade/fallback",
+   "security_privacy_behavior": "safe",
+   "failure_degrade_behavior": "self-repair",
+   "recovery_behavior": "checkpoint/resume",
+   "source_locators": [
+    "PREDEV PRE-18 REQ-109"
+   ],
+   "requirement_ids": [
+    "REQ-109",
+    "REQ-110"
+   ],
+   "domain_ids": [
+    "COV-14",
+    "COV-18"
+   ],
+   "owner_wps": [
+    "PRE-18"
+   ],
+   "implementation_bindings": [
+    "src/hg_kseos/loop.py",
+    "src/hg_kseos/checkpoint.py"
+   ],
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "runtime_required_now": true,
+   "required_depth": "L4",
+   "e2e_fixture": "var/uecx/vs15",
+   "negative_fixture": "var/uecx/neg15",
+   "recovery_fixture": "var/uecx/rec15",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "classification": "PARTIALLY_PROVEN",
+   "slice_id": "VS-15",
+   "e2e_receipt": {
+    "slice_id": "VS-15",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "failure→repair→resume→user-visible completion",
+    "decisions": {
+     "failed_once": true,
+     "self_repaired": true,
+     "resumed": true
+    },
+    "captured_at_utc": "2026-08-09T05:00:38.339152+00:00"
+   }
+  }
+ ],
+ "slices_summary": {
+  "total": 15,
+  "pass": 13,
+  "deferred": 2,
+  "fail": 0,
+  "receipts": {
+   "VS-01": {
+    "slice_id": "VS-01",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "natural task auto-routed to known skill (implicit allowed; user did not name it)",
+    "decisions": {
+     "skill_selected": "report-gen"
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+   },
+   "VS-02": {
+    "slice_id": "VS-02",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "coding task admitted via WorkOrder contract (rollback declared); Codex as admitted writer; maker!=checker",
+    "decisions": {
+     "workorder_admission": "ACK"
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+   },
+   "VS-03": {
+    "slice_id": "VS-03",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "simple task stays single-agent (no fan-out/voting)",
+    "decisions": {},
+    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+   },
+   "VS-04": {
+    "slice_id": "VS-04",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "complex independent task → bounded topology with SoD + one writer/worktree (admission gate)",
+    "decisions": {
+     "admission": "BOUNDED_MULTI_AGENT",
+     "soD": true,
+     "one_writer_per_worktree": true
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+   },
+   "VS-05": {
+    "slice_id": "VS-05",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "relevant memory auto-recalled (user did not say 'use memory')",
+    "decisions": {
+     "recalled": 1
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.290651+00:00"
+   },
+   "VS-06": {
+    "slice_id": "VS-06",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "unrelated scope: no memory injected",
+    "decisions": {
+     "irrelevant_memory_injected": 0
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.454542+00:00"
+   },
+   "VS-07": {
+    "slice_id": "VS-07",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "source question auto-retrieved with citation (user did not say RAG)",
+    "decisions": {
+     "hits": 1
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.620045+00:00"
+   },
+   "VS-08": {
+    "slice_id": "VS-08",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "relationship question bound to KG edge; plain lookup does not traverse KG",
+    "decisions": {
+     "edge": "EDGE-e6e0c16c230c27c0a642"
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.809602+00:00"
+   },
+   "VS-09": {
+    "slice_id": "VS-09",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "withdrawn evidence abstained (no hallucinated citation)",
+    "decisions": {
+     "error": "ABSTAIN_NO_GROUNDING:withdrawn statement"
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+   },
+   "VS-10": {
+    "slice_id": "VS-10",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "existing skill auto-selected; implicit-forbidden unrelated skill not auto-chosen",
+    "decisions": {
+     "selected": "codex-bounded-execute",
+     "unrelated_auto_select_blocked": true
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+   },
+   "VS-11": {
+    "slice_id": "VS-11",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "no-fit → FIT-GAP/reuse search; no direct promotion",
+    "decisions": {
+     "fit_gap": "FIT-GAP",
+     "promotion": "NOT_PERFORMED"
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+   },
+   "VS-12": {
+    "slice_id": "VS-12",
+    "verdict": "DEFERRED_SOURCE_BACKED",
+    "detail": "controlled skill learning loop deferred (no source-backed autonomous skill promotion framework in P0 scope); governed memory candidates exist; full skill promotion loop not active",
+    "decisions": {
+     "learning_loop": "DEFERRED_SOURCE_BACKED",
+     "authority_mutation": 0
+    },
+    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+   },
+   "VS-13": {
+    "slice_id": "VS-13",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "new source published+retrievable; withdrawal invalidated",
+    "decisions": {
+     "published": true,
+     "withdrawn_invalidated": true
+    },
+    "captured_at_utc": "2026-08-09T05:00:38.175170+00:00"
+   },
+   "VS-14": {
+    "slice_id": "VS-14",
+    "verdict": "OPTIONAL_NOT_ACTIVE_SOURCE_BACKED",
+    "detail": "Obsidian OPTIONAL/TIER-2/PLANNED per P0-CIP L13595; Git Markdown/Wiki is the active workbench; no false ACTIVE claim; core operation does not depend on Obsidian",
+    "decisions": {
+     "obsidian_disposition": "OPTIONAL",
+     "active_workbench": "Git Markdown / LLM Wiki"
+    },
+    "captured_at_utc": "2026-08-09T05:00:38.176171+00:00"
+   },
+   "VS-15": {
+    "slice_id": "VS-15",
+    "verdict": "E2E_RUNTIME_PASS",
+    "detail": "failure→repair→resume→user-visible completion",
+    "decisions": {
+     "failed_once": true,
+     "self_repaired": true,
+     "resumed": true
+    },
+    "captured_at_utc": "2026-08-09T05:00:38.339152+00:00"
+   }
+  }
+ }
+}

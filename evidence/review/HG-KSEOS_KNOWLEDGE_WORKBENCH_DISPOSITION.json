@@ -1,0 +1,83 @@
+{
+ "schema": "HGK-KNOWLEDGE-WORKBENCH-DISPOSITION/1",
+ "captured_at_utc": "2026-08-09T05:01:30.748013+00:00",
+ "rows": [
+  {
+   "item": "Git Markdown Wiki",
+   "disposition": "ACTIVE",
+   "p0_required_now": true,
+   "installed": true,
+   "bound": true,
+   "runtime_qualified": true,
+   "reason": "canonical human-readable knowledge surface; docs/ + evidence/"
+  },
+  {
+   "item": "LLM Wiki compiler",
+   "disposition": "ACTIVE",
+   "p0_required_now": true,
+   "installed": true,
+   "bound": true,
+   "runtime_qualified": true,
+   "reason": "KnowledgePack publication pipeline"
+  },
+  {
+   "item": "Obsidian",
+   "disposition": "OPTIONAL",
+   "p0_required_now": false,
+   "installed": false,
+   "bound": false,
+   "runtime_qualified": false,
+   "reason": "P0-CIP L13595: OPTIONAL/TIER-2/PLANNED/NOT_EXECUTED; OPTIONAL_NOT_ACTIVE_SOURCE_BACKED",
+   "source_locators": [
+    "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md L13595"
+   ],
+   "enable_migration_path": "EXACT_IDENTITY_REVIEW → PIN → INSTALL → CONFIGURE → DOCTOR → PILOT → CERTIFY → ENABLE (rollback ready)"
+  },
+  {
+   "item": "KnowledgePack publication",
+   "disposition": "ACTIVE",
+   "p0_required_now": true,
+   "installed": true,
+   "bound": true,
+   "runtime_qualified": true,
+   "reason": "knowledge-upload20 corpus, 20/20 retrieval"
+  },
+  {
+   "item": "RAG index",
+   "disposition": "ACTIVE",
+   "p0_required_now": true,
+   "installed": true,
+   "bound": true,
+   "runtime_qualified": true,
+   "reason": "SQLite FTS5 lexical profile; 14/14"
+  },
+  {
+   "item": "KG projection",
+   "disposition": "ACTIVE",
+   "p0_required_now": true,
+   "installed": true,
+   "bound": true,
+   "runtime_qualified": true,
+   "reason": "SQLite kg_edges; 8/8"
+  },
+  {
+   "item": "GraphRAG",
+   "disposition": "DEFERRED_SOURCE_BACKED",
+   "p0_required_now": false,
+   "installed": false,
+   "bound": false,
+   "runtime_qualified": false,
+   "reason": "deferred_method keep OFF; ADR+benchmark required before promotion"
+  },
+  {
+   "item": "Vector backend",
+   "disposition": "DEFERRED_SOURCE_BACKED",
+   "p0_required_now": false,
+   "installed": false,
+   "bound": false,
+   "runtime_qualified": false,
+   "reason": "Qdrant/pgvector/graphiti P1 CANDIDATE/PILOT; SQLite FTS5 is P0 profile"
+  }
+ ],
+ "verdict": "PASS"
+}

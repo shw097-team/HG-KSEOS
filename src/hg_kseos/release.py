@@ -295,3 +295,156 @@ class CoverageReducer:
             )
         return decision
 
+
+
+
+@dataclass
+class UserExperienceEnvelope:
+    """User Expected Capability & Experience (UECX) final gate input (task-006 §16)."""
+
+    uecx_source_expectations: int
+    uecx_rows: int
+    uecx_orphans: int
+    uecx_unknown: int
+    p0_required_user_journeys_open: int
+    p0_required_user_journeys_static_only: int
+    p0_required_user_journeys_maker_only: int
+    required_vertical_slices_total: int
+    required_vertical_slices_applicable: int
+    required_vertical_slices_pass: int
+    required_vertical_slices_deferred_source_backed: int
+    required_negative_tests_total: int
+    required_negative_tests_pass: int
+    natural_task_auto_route: str
+    skill_auto_select: str
+    memory_route_positive: str
+    memory_route_negative: str
+    rag_auto_route: str
+    kg_route_positive: str
+    kg_route_negative: str
+    unnecessary_hitl: int
+    unnecessary_multi_agent: int
+    unnecessary_tool_activation: int
+    self_promotion: int
+    authority_mutation: int
+    controlled_learning_scope_resolved: bool
+    obsidian_scope_resolved: bool
+    all_deferred_items_source_backed: bool
+    blocking_user_experience_tt: int
+    coverage_reducer_v2_exit: int
+    checker: str
+    artifacts: tuple[str, ...]
+
+    @classmethod
+    def from_dict(cls, value: dict[str, Any]) -> "UserExperienceEnvelope":
+        required = {field.name for field in cls.__dataclass_fields__.values()}
+        missing = required - value.keys()
+        if missing:
+            raise ValueError(f"ERR_USER_EXPERIENCE_ENVELOPE_MISSING:{sorted(missing)}")
+        value = dict(value)
+        value["artifacts"] = tuple(value["artifacts"])
+        return cls(**{key: value[key] for key in required})
+
+
+class UserExperienceReducer:
+    """Cross-domain user-journey deterministic gate (UX reducer v1, task-006 §16/§17).
+
+    Guards: source-bound expectation inventory, P0-required journey closure,
+    vertical slices, negative operational tests, automatic routing,
+    memory/RAG/KG routing, minimal manual intervention, learning/workbench scope.
+    """
+
+    VERSION = "1"
+
+    def __init__(self, spine: SharedSpine) -> None:
+        self.spine = spine
+
+    def reduce(self, envelope: UserExperienceEnvelope) -> dict[str, Any]:
+        reasons: list[str] = []
+
+        if envelope.uecx_source_expectations <= 0:
+            reasons.append("UECX_SOURCE_EXPECTATIONS_EMPTY")
+        if envelope.uecx_rows <= 0:
+            reasons.append("UECX_ROWS_EMPTY")
+        if envelope.uecx_orphans:
+            reasons.append("UECX_ORPHAN_NONZERO")
+        if envelope.uecx_unknown:
+            reasons.append("UECX_UNKNOWN_NONZERO")
+        if envelope.p0_required_user_journeys_open:
+            reasons.append("P0_USER_JOURNEYS_OPEN")
+        if envelope.p0_required_user_journeys_static_only:
+            reasons.append("P0_USER_JOURNEYS_STATIC_ONLY")
+        if envelope.p0_required_user_journeys_maker_only:
+            reasons.append("P0_USER_JOURNEYS_MAKER_ONLY")
+        if envelope.required_vertical_slices_applicable <= 0:
+            reasons.append("VERTICAL_SLICES_NONE_APPLICABLE")
+        if envelope.required_vertical_slices_pass < envelope.required_vertical_slices_applicable:
+            reasons.append("VERTICAL_SLICES_INCOMPLETE")
+        if envelope.required_negative_tests_total <= 0 or envelope.required_negative_tests_pass != envelope.required_negative_tests_total:
+            reasons.append("NEGATIVE_OPERATIONAL_TESTS_INCOMPLETE")
+        if envelope.natural_task_auto_route != "PASS":
+            reasons.append("NATURAL_TASK_AUTO_ROUTE_FAIL")
+        if envelope.skill_auto_select != "PASS":
+            reasons.append("SKILL_AUTO_SELECT_FAIL")
+        if envelope.memory_route_positive != "PASS":
+            reasons.append("MEMORY_ROUTE_POSITIVE_FAIL")
+        if envelope.memory_route_negative != "PASS":
+            reasons.append("MEMORY_ROUTE_NEGATIVE_FAIL")
+        if envelope.rag_auto_route != "PASS":
+            reasons.append("RAG_AUTO_ROUTE_FAIL")
+        if envelope.kg_route_positive != "PASS":
+            reasons.append("KG_ROUTE_POSITIVE_FAIL")
+        if envelope.kg_route_negative != "PASS":
+            reasons.append("KG_ROUTE_NEGATIVE_FAIL")
+        if envelope.unnecessary_hitl:
+            reasons.append("UNNECESSARY_HITL_NONZERO")
+        if envelope.unnecessary_multi_agent:
+            reasons.append("UNNECESSARY_MULTI_AGENT_NONZERO")
+        if envelope.unnecessary_tool_activation:
+            reasons.append("UNNECESSARY_TOOL_ACTIVATION_NONZERO")
+        if envelope.self_promotion:
+            reasons.append("SELF_PROMOTION_NONZERO")
+        if envelope.authority_mutation:
+            reasons.append("AUTHORITY_MUTATION_NONZERO")
+        if not envelope.controlled_learning_scope_resolved:
+            reasons.append("CONTROLLED_LEARNING_SCOPE_UNRESOLVED")
+        if not envelope.obsidian_scope_resolved:
+            reasons.append("OBSIDIAN_SCOPE_UNRESOLVED")
+        if not envelope.all_deferred_items_source_backed:
+            reasons.append("DEFERRED_ITEM_NOT_SOURCE_BACKED")
+        if envelope.blocking_user_experience_tt:
+            reasons.append("BLOCKING_USER_EXPERIENCE_TT_NONZERO")
+        if envelope.coverage_reducer_v2_exit != 0:
+            reasons.append("COVERAGE_REDUCER_V2_NOT_PASS")
+
+        verdict = "HG-KSEOS_USER_EXPECTED_CAPABILITY_EXPERIENCE_PASS" if not reasons else "FAIL_CLOSED"
+        envelope_json = canonical_json(envelope.__dict__)
+        decision = {
+            "schema": "HGK-USER-EXPERIENCE-REDUCER/1",
+            "decision_id": new_id("REL"),
+            "candidate_digest": sha256_text(envelope_json),
+            "version": self.VERSION,
+            "verdict": verdict,
+            "reasons": reasons,
+            "checker": envelope.checker,
+            "created_at": utc_now(),
+            "exit_code": 0 if not reasons else 1,
+        }
+        with self.spine.transaction() as connection:
+            connection.execute(
+                """INSERT INTO release_decisions
+                   (decision_id,candidate_digest,reducer_version,verdict,reasons_json,
+                    independent_checker,evidence_envelope,created_at)
+                   VALUES(?,?,?,?,?,?,?,?)""",
+                (
+                    decision["decision_id"],
+                    decision["candidate_digest"],
+                    f"UX-{self.VERSION}",
+                    verdict,
+                    json.dumps(reasons),
+                    envelope.checker,
+                    envelope_json,
+                    decision["created_at"],
+                ),
+            )
+        return decision

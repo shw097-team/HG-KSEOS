@@ -1,0 +1,11 @@
+{
+ "schema": "HGK-USER-EXPERIENCE-REDUCER/1",
+ "decision_id": "REL-4fe010775e631c07",
+ "candidate_digest": "ae59e7c35ab39f245823f4142068ef6cd4da2e742b23b366e32019c9ce04e49d",
+ "version": "1",
+ "verdict": "HG-KSEOS_USER_EXPECTED_CAPABILITY_EXPERIENCE_PASS",
+ "reasons": [],
+ "checker": "INDEPENDENT_CHECKER",
+ "created_at": "2026-08-09T05:04:17.546169Z",
+ "exit_code": 0
+}

@@ -1,0 +1,26 @@
+{
+ "schema": "HGK-USER-EXPERIENCE-E2E/1",
+ "captured_at_utc": "2026-08-09T05:01:30.748013+00:00",
+ "normal_task_manual_steps": 2,
+ "normal_task_manual_steps_detail": "describe goal + provide task inputs/files",
+ "high_risk_task_manual_steps": 3,
+ "high_risk_task_manual_steps_detail": "describe goal + provide inputs + HITL approval for high-risk gate",
+ "unnecessary_hitl_count": 0,
+ "user_visible_error_quality": "PASS",
+ "user_visible_recovery_quality": "PASS",
+ "user_does_not_need": [
+  "name WP/RBWI",
+  "name AGENT/SKILL",
+  "name Memory/RAG/KG/provider/model",
+  "paste internal PowerShell chain"
+ ],
+ "allowed_hitl": [
+  "credential/login",
+  "UAC/admin",
+  "destructive/irreversible",
+  "external publish/deploy",
+  "high-risk governance/product decision",
+  "truly ambiguous un-inferable"
+ ],
+ "verdict": "PASS"
+}

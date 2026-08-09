@@ -1,0 +1,375 @@
+{
+ "schema": "HGK-USER-EXPECTED-CAPABILITY-SOURCE-LEDGER/1",
+ "captured_at_utc": "2026-08-09T04:56:52.277048+00:00",
+ "expectations_total": 16,
+ "expectations": [
+  {
+   "expectation_id": "UXR-001",
+   "source_file": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md",
+   "source_locator": "L2095 CH-03 目標使用者、JTBD、痛點、成果、成功指標與產品驗收",
+   "authority_rank": "A1",
+   "user_goal": "使用者能用自然語言描述目標，系統保留原意到 release",
+   "expected_behavior": "Natural task intake preserves intent/non-goals through PRD→arch→TaskSpec without intent loss",
+   "expected_experience": "user states goal; system routes automatically; user not required to know WP/RBWI/AGENT/SKILL names",
+   "manual_intervention_expectation": "none for normal tasks; only blocking questions or source-allowed HITL",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "COV-01-07",
+    "COV-04-02",
+    "COV-22-01",
+    "COV-22-11"
+   ],
+   "related_domains": [
+    "COV-01",
+    "COV-04",
+    "COV-22"
+   ],
+   "owner": "PRE-01",
+   "source_file_exists": true,
+   "source_file_sha256": "68b62b9ee2bb2b3ae5d172ccbb5a4182b20727dda8197e19e4a46905b518d911"
+  },
+  {
+   "expectation_id": "UXR-002",
+   "source_file": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md",
+   "source_locator": "L13595 obsidian|OPTIONAL|TIER-2|PLANNED|NOT_EXECUTED",
+   "authority_rank": "A1",
+   "user_goal": "知識工作台可讀可用；Obsidian 依 source disposition",
+   "expected_behavior": "Git Markdown/Wiki human-readable workflow; Obsidian OPTIONAL/TIER-2/PLANNED - no false ACTIVE claim",
+   "expected_experience": "user reads knowledge in human-readable markdown; Obsidian optional add-on",
+   "manual_intervention_expectation": "none for core operation; Obsidian enablement is optional path",
+   "runtime_required_now": false,
+   "p0_disposition": "OPTIONAL",
+   "related_requirements": [
+    "SQS-REQ-001"
+   ],
+   "related_domains": [
+    "COV-21",
+    "COV-28"
+   ],
+   "owner": "PRE-21",
+   "source_file_exists": true,
+   "source_file_sha256": "68b62b9ee2bb2b3ae5d172ccbb5a4182b20727dda8197e19e4a46905b518d911"
+  },
+  {
+   "expectation_id": "UXR-003",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "REQ-034 INTENT 成功不是文件數或 Agent 數，而是原意到 release 的閉環品質",
+   "authority_rank": "A2",
+   "user_goal": "閉環品質：原意到 release 不流失、可恢復、錯誤成本下降",
+   "expected_behavior": "first-pass acceptance; hidden rework minimized; recovery/resume transparent to user",
+   "expected_experience": "user sees task complete with evidence; failures self-repair and resume",
+   "manual_intervention_expectation": "none for recoverable failure; checkpoint/resume automatic",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-034",
+    "REQ-036"
+   ],
+   "related_domains": [
+    "COV-02",
+    "COV-05"
+   ],
+   "owner": "PRE-01",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-004",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "REQ-035 NEED 使用者能判斷 HG-KSEOS 是否真正降低需求遺漏、手動整合、返工、誤發布與 Provider lock-in",
+   "authority_rank": "A2",
+   "user_goal": "降低手動整合、返工、誤發布、Provider lock-in",
+   "expected_behavior": "automatic provider/tool selection with graceful fallback; no unnecessary manual shell work",
+   "expected_experience": "user describes goal + provides inputs; system picks provider/tool; fallback transparent",
+   "manual_intervention_expectation": "none except credential/login HITL",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-035",
+    "REQ-037",
+    "REQ-038"
+   ],
+   "related_domains": [
+    "COV-05",
+    "COV-15"
+   ],
+   "owner": "PRE-01",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-005",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "PRE-19 Context Engineering and Memory Governance",
+   "authority_rank": "A2",
+   "user_goal": "歷史相關任務自動 recall；無關任務不注入 Memory",
+   "expected_behavior": "automatic relevant memory recall with scope/TTL/permission/provenance; no irrelevant injection",
+   "expected_experience": "user does not say 'use memory'; recall happens only when relevant",
+   "manual_intervention_expectation": "none",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-137",
+    "REQ-138"
+   ],
+   "related_domains": [
+    "COV-12"
+   ],
+   "owner": "PRE-19",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-006",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "PRE-20 Grounded Retrieval、RAG、KB、KG and GraphRAG",
+   "authority_rank": "A2",
+   "user_goal": "source-backed 問題自動 RAG；不足證據 abstain；不必要不跑 KG",
+   "expected_behavior": "automatic RAG when needed with citation/grounding; abstain when insufficient; KG only when relationship useful",
+   "expected_experience": "user asks question; system retrieves, cites, or abstains honestly",
+   "manual_intervention_expectation": "none",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-145",
+    "REQ-146"
+   ],
+   "related_domains": [
+    "COV-10",
+    "COV-11"
+   ],
+   "owner": "PRE-20",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-007",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "PRE-22 Prompt、Instructions、AGENTS.md、SKILL.md and MCP",
+   "authority_rank": "A2",
+   "user_goal": "任務自動選既有 Skill；無 match 走 FIT-GAP；skill 學習受治理",
+   "expected_behavior": "automatic existing-skill selection; no-fit → FIT-GAP/reuse search; governed SkillCandidate with qualification",
+   "expected_experience": "user gets capability without naming a skill; system reuses proven skills",
+   "manual_intervention_expectation": "none",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-169",
+    "REQ-170"
+   ],
+   "related_domains": [
+    "COV-22",
+    "COV-29"
+   ],
+   "owner": "PRE-22",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-008",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "PRE-25 Security、Privacy、Identity、Permission and Red Team",
+   "authority_rank": "A2",
+   "user_goal": "secret/PII 不洩漏；高風險才 HITL；普通任務不被打斷",
+   "expected_behavior": "secret/PII not leaked/persisted; high-risk → HITL; normal low-risk → no unnecessary HITL",
+   "expected_experience": "user not asked unnecessary questions; credentials handled by HITL when truly needed",
+   "manual_intervention_expectation": "HITL only for credential/UAC/destructive/external/governance",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-193",
+    "REQ-194"
+   ],
+   "related_domains": [
+    "COV-17",
+    "COV-25"
+   ],
+   "owner": "PRE-25",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-009",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "PRE-19/PRE-20 controlled learning boundary",
+   "authority_rank": "A2",
+   "user_goal": "重複工作模式受治理學習；學習不得覆寫 authority",
+   "expected_behavior": "governed learning signal → MemoryCandidate/SkillCandidate with tests+negative+holdout+checker; learning cannot overwrite authority",
+   "expected_experience": "system improves over repeated work without user managing promotion",
+   "manual_intervention_expectation": "none; promotion governed by checker",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-137",
+    "REQ-169"
+   ],
+   "related_domains": [
+    "COV-12",
+    "COV-22",
+    "COV-29"
+   ],
+   "owner": "PRE-19",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-010",
+   "source_file": "HG-KSEOS使用說明文檔.md",
+   "source_locator": "User Guide sections (task entry, automatic choices, HITL)",
+   "authority_rank": "A7",
+   "user_goal": "使用者能按 User Guide 完成日常任務",
+   "expected_behavior": "guide matches actual runtime; user knows what to type and what happens automatically",
+   "expected_experience": "user describes goal + inputs; understands automatic internal choices from guide",
+   "manual_intervention_expectation": "minimal",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "COV-22-01"
+   ],
+   "related_domains": [
+    "COV-21",
+    "COV-28"
+   ],
+   "owner": "PRE-21",
+   "source_file_exists": true,
+   "source_file_sha256": "b41116cce9bc135ec09e0467193c4c56a1ecc9a233b83262a511f6ca5b99b451"
+  },
+  {
+   "expectation_id": "UXR-011",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "PRE-18 Loop、Checkpoint、Replay and Long-task Reliability",
+   "authority_rank": "A2",
+   "user_goal": "失敗→checkpoint→self-repair→resume→使用者看到完成",
+   "expected_behavior": "failure classify → checkpoint → smallest repair → affected recheck → independent verify → resume → user-visible completion",
+   "expected_experience": "user sees completion despite transient failures; no hidden rework",
+   "manual_intervention_expectation": "none for recoverable failures",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-109",
+    "REQ-110"
+   ],
+   "related_domains": [
+    "COV-14",
+    "COV-18"
+   ],
+   "owner": "PRE-18",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-012",
+   "source_file": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md",
+   "source_locator": "L13595 obsidian OPTIONAL disposition",
+   "authority_rank": "A1",
+   "user_goal": "知識工作台以 Git Markdown/Wiki 為基礎，Obsidian 為 OPTIONAL",
+   "expected_behavior": "Git Markdown Wiki + LLM Wiki compiler + KnowledgePack publication human-readable; Obsidian OPTIONAL_NOT_ACTIVE_SOURCE_BACKED",
+   "expected_experience": "knowledge browsable as markdown; obsidian not required",
+   "manual_intervention_expectation": "none",
+   "runtime_required_now": false,
+   "p0_disposition": "OPTIONAL",
+   "related_requirements": [
+    "SQS-REQ-001"
+   ],
+   "related_domains": [
+    "COV-21",
+    "COV-28"
+   ],
+   "owner": "PRE-21",
+   "source_file_exists": true,
+   "source_file_sha256": "68b62b9ee2bb2b3ae5d172ccbb5a4182b20727dda8197e19e4a46905b518d911"
+  },
+  {
+   "expectation_id": "UXR-013",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "PRE-16 Bounded Agent Topology、TaskDAG and A2A",
+   "authority_rank": "A2",
+   "user_goal": "簡單任務單一 agent；複雜獨立任務才 bounded multi-agent",
+   "expected_behavior": "simple task → single-agent default; complex independent task → bounded multi-agent admission; no unnecessary delegation",
+   "expected_experience": "user unaware of agent topology for simple tasks",
+   "manual_intervention_expectation": "none",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-101",
+    "REQ-102"
+   ],
+   "related_domains": [
+    "COV-13",
+    "COV-14"
+   ],
+   "owner": "PRE-16",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-014",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "REQ-233/REQ-234 Status Reducer / Claim Grammar",
+   "authority_rank": "A2",
+   "user_goal": "最終結果以人類可理解語言呈現，不需內部工程知識",
+   "expected_behavior": "final result understandable without internal engineering knowledge; failure explanation + next action",
+   "expected_experience": "user understands outcome, status, and next action",
+   "manual_intervention_expectation": "none",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-233",
+    "REQ-234"
+   ],
+   "related_domains": [
+    "COV-30"
+   ],
+   "owner": "PRE-24",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-015",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "PRE-20 withdrawn/stale source invalidation",
+   "authority_rank": "A2",
+   "user_goal": "withdrawn/stale source 不再被檢索到；不產生幻覺引用",
+   "expected_behavior": "withdrawn/stale source invalidated → rebuild → no stale retrieval/edge; abstain instead of hallucinated citation",
+   "expected_experience": "user never sees stale/withdrawn content or fabricated citations",
+   "manual_intervention_expectation": "none",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-145",
+    "REQ-146"
+   ],
+   "related_domains": [
+    "COV-10",
+    "COV-11"
+   ],
+   "owner": "PRE-20",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-016",
+   "source_file": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+   "source_locator": "PRE-08 Provider、Capability and Adapter Registry",
+   "authority_rank": "A2",
+   "user_goal": "admitted provider/tool 自動選擇；未 admission 不自動路由",
+   "expected_behavior": "automatic selection among admitted providers/tools; unadmitted provider/tool auto-route = FAIL (negative)",
+   "expected_experience": "user gets capability; routing invisible",
+   "manual_intervention_expectation": "none",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "REQ-061",
+    "REQ-062"
+   ],
+   "related_domains": [
+    "COV-16",
+    "COV-15"
+   ],
+   "owner": "PRE-08",
+   "source_file_exists": true,
+   "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  }
+ ]
+}
