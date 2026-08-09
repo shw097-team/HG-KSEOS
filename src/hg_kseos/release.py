@@ -114,10 +114,15 @@ class CoverageEnvelope:
 
     coverage_domains_total: int
     coverage_domains_terminal: int
+    subcapabilities_total: int
+    subcapabilities_terminal: int
     canonical_requirements_total: int
     requirements_reconciled: bool
     requirements_domain_mapped: int
     requirements_source_bound: int
+    requirement_owner_matches_domain_owner: int
+    requirement_owner_source_validated: int
+    unsupported_disposition_count: int
     orphan_requirements: int
     unowned_mandatory_assets: int
     runtime_pass_missing_evidence: int
@@ -189,6 +194,8 @@ class CoverageReducer:
         # authority / denominator
         if envelope.coverage_domains_total < 1 or envelope.coverage_domains_terminal != envelope.coverage_domains_total:
             reasons.append("DOMAIN_COVERAGE_INCOMPLETE")
+        if envelope.subcapabilities_total < 0 or envelope.subcapabilities_terminal != envelope.subcapabilities_total:
+            reasons.append("SUBCAPABILITY_COVERAGE_INCOMPLETE")
         if not envelope.requirements_reconciled or envelope.orphan_requirements or envelope.unowned_mandatory_assets:
             reasons.append("REQUIREMENT_RECONCILIATION_INCOMPLETE")
         if envelope.canonical_requirements_total < 1:
@@ -197,6 +204,12 @@ class CoverageReducer:
             reasons.append("REQUIREMENT_DOMAIN_MAPPING_INCOMPLETE")
         if envelope.requirements_source_bound != envelope.canonical_requirements_total:
             reasons.append("REQUIREMENT_SOURCE_BINDING_INCOMPLETE")
+        if envelope.requirement_owner_matches_domain_owner != envelope.canonical_requirements_total:
+            reasons.append("REQUIREMENT_OWNER_MISMATCH")
+        if envelope.requirement_owner_source_validated != envelope.canonical_requirements_total:
+            reasons.append("REQUIREMENT_OWNER_NOT_SOURCE_VALIDATED")
+        if envelope.unsupported_disposition_count:
+            reasons.append("UNSUPPORTED_DISPOSITION_NONZERO")
         if envelope.runtime_pass_missing_evidence:
             reasons.append("RUNTIME_PASS_MISSING_EVIDENCE")
         if envelope.active_deferred_contradiction:

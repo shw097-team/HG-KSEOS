@@ -13,10 +13,15 @@ def make_envelope(**overrides: object) -> CoverageEnvelope:
     base: dict[str, object] = {
         "coverage_domains_total": 30,
         "coverage_domains_terminal": 30,
+        "subcapabilities_total": 2,
+        "subcapabilities_terminal": 2,
         "canonical_requirements_total": 499,
         "requirements_reconciled": True,
         "requirements_domain_mapped": 499,
         "requirements_source_bound": 499,
+        "requirement_owner_matches_domain_owner": 499,
+        "requirement_owner_source_validated": 499,
+        "unsupported_disposition_count": 0,
         "orphan_requirements": 0,
         "unowned_mandatory_assets": 0,
         "runtime_pass_missing_evidence": 0,
@@ -145,6 +150,30 @@ class CoverageReducerTests(unittest.TestCase):
         decision = self.reducer.reduce(env)
         self.assertEqual("FAIL_CLOSED", decision["verdict"])
         self.assertIn("ACCEPTANCE_TRACE_BINDING_INCOMPLETE", decision["reasons"])
+
+    def test_owner_mismatch_fails(self) -> None:
+        env = make_envelope(requirement_owner_matches_domain_owner=450)
+        decision = self.reducer.reduce(env)
+        self.assertEqual("FAIL_CLOSED", decision["verdict"])
+        self.assertIn("REQUIREMENT_OWNER_MISMATCH", decision["reasons"])
+
+    def test_owner_not_source_validated_fails(self) -> None:
+        env = make_envelope(requirement_owner_source_validated=450)
+        decision = self.reducer.reduce(env)
+        self.assertEqual("FAIL_CLOSED", decision["verdict"])
+        self.assertIn("REQUIREMENT_OWNER_NOT_SOURCE_VALIDATED", decision["reasons"])
+
+    def test_unsupported_disposition_fails(self) -> None:
+        env = make_envelope(unsupported_disposition_count=1)
+        decision = self.reducer.reduce(env)
+        self.assertEqual("FAIL_CLOSED", decision["verdict"])
+        self.assertIn("UNSUPPORTED_DISPOSITION_NONZERO", decision["reasons"])
+
+    def test_subcapability_incomplete_fails(self) -> None:
+        env = make_envelope(subcapabilities_terminal=1)
+        decision = self.reducer.reduce(env)
+        self.assertEqual("FAIL_CLOSED", decision["verdict"])
+        self.assertIn("SUBCAPABILITY_COVERAGE_INCOMPLETE", decision["reasons"])
 
 
 if __name__ == "__main__":
