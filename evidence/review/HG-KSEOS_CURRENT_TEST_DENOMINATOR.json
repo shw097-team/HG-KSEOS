@@ -1,0 +1,49 @@
+{
+ "schema": "HGK-CURRENT-TEST-DENOMINATOR/1",
+ "head": "a71a7542de2042941bd495d19b34e00a89c105de",
+ "captured_at_utc": "HEAD-commit-date",
+ "files": {
+  "core_product_test_files": 16,
+  "ux_reducer_test_files": 1,
+  "workbench_test_files": 1,
+  "tool_adapter_test_files": 0,
+  "other_test_files": 0,
+  "total_test_files": 18
+ },
+ "cases": {
+  "core_product_test_cases": 100,
+  "ux_reducer_test_cases": 18,
+  "workbench_test_cases": 1,
+  "tool_adapter_test_cases": 0,
+  "other_test_cases": 0,
+  "total_test_cases": 119
+ },
+ "execution": {
+  "cases_run": 119,
+  "cases_passed": 119,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "exit_code": 0,
+  "command": "python -m unittest discover -s tests -t . -v"
+ },
+ "historical_case_denominators": [
+  {
+   "count": 101,
+   "era": "pre-UECX",
+   "status": "historical"
+  },
+  {
+   "count": 110,
+   "era": "UECX reducer closure",
+   "status": "historical"
+  },
+  {
+   "count": 119,
+   "era": "task-007/task-008",
+   "status": "current_if_rediscovered"
+  }
+ ],
+ "sum_files_matches": true,
+ "sum_cases_matches": true
+}
