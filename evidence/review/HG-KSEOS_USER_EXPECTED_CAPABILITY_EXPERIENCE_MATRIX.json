@@ -1,6 +1,6 @@
 {
  "schema": "HGK-USER-EXPECTED-CAPABILITY-EXPERIENCE-MATRIX/1",
- "captured_at_utc": "2026-08-09T04:57:43.994128+00:00",
+ "captured_at_utc": "2026-08-09T05:13:19.351676+00:00",
  "source_expectations_total": 16,
  "rows_total": 15,
  "p0_required_rows": 13,
@@ -76,7 +76,7 @@
     "decisions": {
      "skill_selected": "report-gen"
     },
-    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.451342+00:00"
    }
   },
   {
@@ -146,7 +146,7 @@
     "decisions": {
      "workorder_admission": "ACK"
     },
-    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.451342+00:00"
    }
   },
   {
@@ -205,7 +205,7 @@
     "verdict": "E2E_RUNTIME_PASS",
     "detail": "simple task stays single-agent (no fan-out/voting)",
     "decisions": {},
-    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.451342+00:00"
    }
   },
   {
@@ -272,7 +272,7 @@
      "soD": true,
      "one_writer_per_worktree": true
     },
-    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.451342+00:00"
    }
   },
   {
@@ -333,7 +333,7 @@
     "decisions": {
      "recalled": 1
     },
-    "captured_at_utc": "2026-08-09T05:00:37.290651+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.588045+00:00"
    }
   },
   {
@@ -392,7 +392,7 @@
     "decisions": {
      "irrelevant_memory_injected": 0
     },
-    "captured_at_utc": "2026-08-09T05:00:37.454542+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.717755+00:00"
    }
   },
   {
@@ -454,7 +454,7 @@
     "decisions": {
      "hits": 1
     },
-    "captured_at_utc": "2026-08-09T05:00:37.620045+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.867989+00:00"
    }
   },
   {
@@ -512,9 +512,9 @@
     "verdict": "E2E_RUNTIME_PASS",
     "detail": "relationship question bound to KG edge; plain lookup does not traverse KG",
     "decisions": {
-     "edge": "EDGE-e6e0c16c230c27c0a642"
+     "edge": "EDGE-1b1d81ef25bcd0dff0db"
     },
-    "captured_at_utc": "2026-08-09T05:00:37.809602+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.052811+00:00"
    }
   },
   {
@@ -575,7 +575,7 @@
     "decisions": {
      "error": "ABSTAIN_NO_GROUNDING:withdrawn statement"
     },
-    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.232636+00:00"
    }
   },
   {
@@ -637,7 +637,7 @@
      "selected": "codex-bounded-execute",
      "unrelated_auto_select_blocked": true
     },
-    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.232636+00:00"
    }
   },
   {
@@ -702,7 +702,7 @@
      "fit_gap": "FIT-GAP",
      "promotion": "NOT_PERFORMED"
     },
-    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.232636+00:00"
    }
   },
   {
@@ -772,7 +772,7 @@
      "learning_loop": "DEFERRED_SOURCE_BACKED",
      "authority_mutation": 0
     },
-    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.232636+00:00"
    }
   },
   {
@@ -844,7 +844,7 @@
      "published": true,
      "withdrawn_invalidated": true
     },
-    "captured_at_utc": "2026-08-09T05:00:38.175170+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.415966+00:00"
    }
   },
   {
@@ -909,7 +909,7 @@
      "obsidian_disposition": "OPTIONAL",
      "active_workbench": "Git Markdown / LLM Wiki"
     },
-    "captured_at_utc": "2026-08-09T05:00:38.176171+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.415966+00:00"
    }
   },
   {
@@ -978,7 +978,7 @@
      "self_repaired": true,
      "resumed": true
     },
-    "captured_at_utc": "2026-08-09T05:00:38.339152+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.573773+00:00"
    }
   }
  ],
@@ -995,7 +995,7 @@
     "decisions": {
      "skill_selected": "report-gen"
     },
-    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.451342+00:00"
    },
    "VS-02": {
     "slice_id": "VS-02",
@@ -1004,14 +1004,14 @@
     "decisions": {
      "workorder_admission": "ACK"
     },
-    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.451342+00:00"
    },
    "VS-03": {
     "slice_id": "VS-03",
     "verdict": "E2E_RUNTIME_PASS",
     "detail": "simple task stays single-agent (no fan-out/voting)",
     "decisions": {},
-    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.451342+00:00"
    },
    "VS-04": {
     "slice_id": "VS-04",
@@ -1022,7 +1022,7 @@
      "soD": true,
      "one_writer_per_worktree": true
     },
-    "captured_at_utc": "2026-08-09T05:00:37.135451+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.451342+00:00"
    },
    "VS-05": {
     "slice_id": "VS-05",
@@ -1031,7 +1031,7 @@
     "decisions": {
      "recalled": 1
     },
-    "captured_at_utc": "2026-08-09T05:00:37.290651+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.588045+00:00"
    },
    "VS-06": {
     "slice_id": "VS-06",
@@ -1040,7 +1040,7 @@
     "decisions": {
      "irrelevant_memory_injected": 0
     },
-    "captured_at_utc": "2026-08-09T05:00:37.454542+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.717755+00:00"
    },
    "VS-07": {
     "slice_id": "VS-07",
@@ -1049,16 +1049,16 @@
     "decisions": {
      "hits": 1
     },
-    "captured_at_utc": "2026-08-09T05:00:37.620045+00:00"
+    "captured_at_utc": "2026-08-09T05:13:19.867989+00:00"
    },
    "VS-08": {
     "slice_id": "VS-08",
     "verdict": "E2E_RUNTIME_PASS",
     "detail": "relationship question bound to KG edge; plain lookup does not traverse KG",
     "decisions": {
-     "edge": "EDGE-e6e0c16c230c27c0a642"
+     "edge": "EDGE-1b1d81ef25bcd0dff0db"
     },
-    "captured_at_utc": "2026-08-09T05:00:37.809602+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.052811+00:00"
    },
    "VS-09": {
     "slice_id": "VS-09",
@@ -1067,7 +1067,7 @@
     "decisions": {
      "error": "ABSTAIN_NO_GROUNDING:withdrawn statement"
     },
-    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.232636+00:00"
    },
    "VS-10": {
     "slice_id": "VS-10",
@@ -1077,7 +1077,7 @@
      "selected": "codex-bounded-execute",
      "unrelated_auto_select_blocked": true
     },
-    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.232636+00:00"
    },
    "VS-11": {
     "slice_id": "VS-11",
@@ -1087,7 +1087,7 @@
      "fit_gap": "FIT-GAP",
      "promotion": "NOT_PERFORMED"
     },
-    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.232636+00:00"
    },
    "VS-12": {
     "slice_id": "VS-12",
@@ -1097,7 +1097,7 @@
      "learning_loop": "DEFERRED_SOURCE_BACKED",
      "authority_mutation": 0
     },
-    "captured_at_utc": "2026-08-09T05:00:37.997680+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.232636+00:00"
    },
    "VS-13": {
     "slice_id": "VS-13",
@@ -1107,7 +1107,7 @@
      "published": true,
      "withdrawn_invalidated": true
     },
-    "captured_at_utc": "2026-08-09T05:00:38.175170+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.415966+00:00"
    },
    "VS-14": {
     "slice_id": "VS-14",
@@ -1117,7 +1117,7 @@
      "obsidian_disposition": "OPTIONAL",
      "active_workbench": "Git Markdown / LLM Wiki"
     },
-    "captured_at_utc": "2026-08-09T05:00:38.176171+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.415966+00:00"
    },
    "VS-15": {
     "slice_id": "VS-15",
@@ -1128,7 +1128,7 @@
      "self_repaired": true,
      "resumed": true
     },
-    "captured_at_utc": "2026-08-09T05:00:38.339152+00:00"
+    "captured_at_utc": "2026-08-09T05:13:20.573773+00:00"
    }
   }
  }

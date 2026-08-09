@@ -1,6 +1,6 @@
 {
  "schema": "HGK-OPERATIONAL-INTELLIGENCE-NEGATIVES/1",
- "captured_at_utc": "2026-08-09T05:01:04.795754+00:00",
+ "captured_at_utc": "2026-08-09T05:13:21.071146+00:00",
  "tests_total": 12,
  "tests_pass": 12,
  "tests_fail": 0,
@@ -9,73 +9,73 @@
    "test": "neg_01_low_risk_no_hitl",
    "verdict": "PASS",
    "detail": "low-risk task: no HITL",
-   "captured_at_utc": "2026-08-09T05:01:04.369040+00:00"
+   "captured_at_utc": "2026-08-09T05:13:20.677463+00:00"
   },
   "neg_02_simple_no_multi_agent": {
    "test": "neg_02_simple_no_multi_agent",
    "verdict": "PASS",
    "detail": "simple task stays single-agent (complexity gate)",
-   "captured_at_utc": "2026-08-09T05:01:04.369040+00:00"
+   "captured_at_utc": "2026-08-09T05:13:20.677463+00:00"
   },
   "neg_03_deterministic_no_rag": {
    "test": "neg_03_deterministic_no_rag",
    "verdict": "PASS",
    "detail": "deterministic task: no RAG activation",
-   "captured_at_utc": "2026-08-09T05:01:04.369040+00:00"
+   "captured_at_utc": "2026-08-09T05:13:20.677463+00:00"
   },
   "neg_04_simple_lookup_no_kg": {
    "test": "neg_04_simple_lookup_no_kg",
    "verdict": "PASS",
    "detail": "simple lookup: no KG traversal",
-   "captured_at_utc": "2026-08-09T05:01:04.369040+00:00"
+   "captured_at_utc": "2026-08-09T05:13:20.677463+00:00"
   },
   "neg_05_memory_scope_isolation": {
    "test": "neg_05_memory_scope_isolation",
    "verdict": "PASS",
    "detail": "cross-scope leak=0",
-   "captured_at_utc": "2026-08-09T05:01:04.513284+00:00"
+   "captured_at_utc": "2026-08-09T05:13:20.813705+00:00"
   },
   "neg_06_poisoned_memory_blocked": {
    "test": "neg_06_poisoned_memory_blocked",
    "verdict": "PASS",
    "detail": "poisoned memory rejected",
-   "captured_at_utc": "2026-08-09T05:01:04.655059+00:00"
+   "captured_at_utc": "2026-08-09T05:13:20.934415+00:00"
   },
   "neg_07_injection_blocked": {
    "test": "neg_07_injection_blocked",
    "verdict": "PASS",
    "detail": "injection quarantined: ['PROMPT_INJECTION:ignore\\\\s+(?:all\\\\s+)?(?:previous|prior)\\\\s+instructions']",
-   "captured_at_utc": "2026-08-09T05:01:04.794751+00:00"
+   "captured_at_utc": "2026-08-09T05:13:21.071146+00:00"
   },
   "neg_08_skill_no_self_promotion": {
    "test": "neg_08_skill_no_self_promotion",
    "verdict": "PASS",
    "detail": "self-promotion (collision) blocked",
-   "captured_at_utc": "2026-08-09T05:01:04.795754+00:00"
+   "captured_at_utc": "2026-08-09T05:13:21.071146+00:00"
   },
   "neg_09_no_over_generalization": {
    "test": "neg_09_no_over_generalization",
    "verdict": "PASS",
    "detail": "over-generalization blocked (trigger collision)",
-   "captured_at_utc": "2026-08-09T05:01:04.795754+00:00"
+   "captured_at_utc": "2026-08-09T05:13:21.071146+00:00"
   },
   "neg_10_unadmitted_provider_blocked": {
    "test": "neg_10_unadmitted_provider_blocked",
    "verdict": "PASS",
    "detail": "unadmitted tool rejected",
-   "captured_at_utc": "2026-08-09T05:01:04.795754+00:00"
+   "captured_at_utc": "2026-08-09T05:13:21.071146+00:00"
   },
   "neg_11_no_second_truth": {
    "test": "neg_11_no_second_truth",
    "verdict": "PASS",
    "detail": "single canonical spine; Obsidian/Wiki/RAG/KG are capability surfaces, never canonical truth",
-   "captured_at_utc": "2026-08-09T05:01:04.795754+00:00"
+   "captured_at_utc": "2026-08-09T05:13:21.071146+00:00"
   },
   "neg_12_no_authority_mutation": {
    "test": "neg_12_no_authority_mutation",
    "verdict": "PASS",
    "detail": "autonomous evolution cannot modify constitution/frozen requirements/security/production claim (hard gate)",
-   "captured_at_utc": "2026-08-09T05:01:04.795754+00:00"
+   "captured_at_utc": "2026-08-09T05:13:21.071146+00:00"
   }
  },
  "verdict": "PASS"

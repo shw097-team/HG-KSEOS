@@ -1,7 +1,7 @@
 # HG-KSEOS User Expected Capability & Experience (UECX) Report
 
 Task: HGK-UECX-REAUDIT-AUTONOMOUS-CLOSURE-006
-Generated: 2026-08-09T05:07:15.632060+00:00
+Generated: 2026-08-09T05:13:21.203420+00:00
 Status: HG-KSEOS_USER_EXPECTED_CAPABILITY_EXPERIENCE_PASS
 
 ## Source expectations (U0)
@@ -52,7 +52,7 @@ Status: HG-KSEOS_USER_EXPECTED_CAPABILITY_EXPERIENCE_PASS
 - Verdict: HG-KSEOS_USER_EXPECTED_CAPABILITY_EXPERIENCE_PASS
 - Reasons: []
 - Exit code: 0
-- Decision id: REL-65f21a03973bcbdf
+- Decision id: REL-44b9036bc6d6eb9c
 
 ## Dual-gate local delivery
 
