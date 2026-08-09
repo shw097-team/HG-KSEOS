@@ -1,18 +1,18 @@
 {
  "schema": "HGK-C6-SECURITY-NRTV/1",
- "captured_at_utc": "2026-08-08T11:53:41.133092+00:00",
+ "captured_at_utc": "2026-08-09T02:00:25.583686+00:00",
  "checks": [
   {
    "name": "opencodex_loopback_bind",
    "ok": true,
-   "detail": "✅ Proxy: running (PID 18216)\n   Health: http://127.0.0.1:10100/healthz ok (live)\n   Dashboard: http://localhost:10100/\n   Config: C:\\Users\\user\\.opencodex\\config.json\n   PID file: C:\\Users\\user\\.openc"
+   "detail": "✅ Proxy: running (PID 12916)\n   Health: http://127.0.0.1:10100/healthz ok (live)\n   Dashboard: http://localhost:10100/\n   Config: C:\\Users\\user\\.opencodex\\config.json\n   PID file: C:\\Users\\user\\.openc"
   },
   {
    "name": "opencodex_health_ready",
    "ok": true,
    "detail": {
-    "health": "{\"ok\":true,\"pid\":18216,\"port\":10100}\n",
-    "ready": "{\"ready\":true,\"status\":\"ready\",\"pid\":18216,\"port\":10100}\n"
+    "health": "{\"ok\":true,\"pid\":12916,\"port\":10100}\n",
+    "ready": "{\"ready\":true,\"status\":\"ready\",\"pid\":12916,\"port\":10100}\n"
    }
   },
   {

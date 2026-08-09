@@ -2,7 +2,7 @@
   "schema": "HGK-SBOM-RECONCILIATION/1",
   "status": "PASS",
   "sbom": "evidence/wave-13/sbom.cdx.json",
-  "sbom_sha256": "c0ebe096cb80dd7e6c4614fa437ad3e1ec4d3ca668f4a60ab683c9e0b26e6ab2",
+  "sbom_sha256": "855d739fa53424285835b2ead4b88c9e1dcf4ad69f2946e64a6b946626815c27",
   "project_components": 1,
   "hermes_components": 99,
   "total_components": 100,
