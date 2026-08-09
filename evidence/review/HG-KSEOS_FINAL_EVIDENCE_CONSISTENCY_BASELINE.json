@@ -1,0 +1,17 @@
+{
+ "schema": "HGK-FINAL-EVIDENCE-CONSISTENCY-BASELINE/1",
+ "head": "8e64c41bbfeb641abe423a4beb9368932811ffd1",
+ "tree_clean": true,
+ "package_sha256": "2ae75b4f3f6a12fcdd806c4ea3b3bb01c5a5ba971ebf1825ee21ffd8676ec026",
+ "package_bytes": 26611020,
+ "payload_files": 359,
+ "tst092_head": "a71a7542de2042941bd495d19b34e00a89c105de",
+ "tst092_package_sha256": "2ae75b4f3f6a12fcdd806c4ea3b3bb01c5a5ba971ebf1825ee21ffd8676ec026",
+ "coverage_reducer_exit": 0,
+ "ux_reducer_exit": 0,
+ "final_md_bytes": 46278,
+ "final_md_sha256": "27470213878cd28a8dcf93db11160b76d97fda71f394f40b77ad9d82882b67b5",
+ "external_acceptance_status": "EXTERNAL_FINAL_ACCEPTANCE_PENDING",
+ "drift_detected": false,
+ "candidate_identity_self_consistent": false
+}
