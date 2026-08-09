@@ -1,0 +1,79 @@
+{
+ "schema": "HGK-AUTONOMY-EVOLUTION-FITGAP/1",
+ "task_id": "HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011",
+ "existing_capabilities": {
+  "shared_spine": "requirements/taskspecs/workorders/TT/evidence/leases/checkpoints/rollback",
+  "harness": "preflight/run/evidence append",
+  "observability": "StructuredEvent EventLog + no_progress",
+  "knowledge": "ingest/promote/search/rebuild (RAG) + KG assertions",
+  "memory": "remember/active_memory",
+  "release": "CoverageReducer v2 / UserExperienceReducer v1",
+  "cli": "bootstrap/doctor/ingest/promote/search/backup/restore/release-reduce/case",
+  "security": "NRTV harness + quarantine"
+ },
+ "gaps": [
+  {
+   "gap_id": "GAP-APL-01",
+   "capability": "product-level project lifecycle state machine",
+   "evidence": "no project_lifecycle state table; spine has projects(static) but no state transition surface",
+   "decision": "ADD minimal state table + transition method in spine; controller module",
+   "reuse": "canonical_events table for transitions; checkpoints for resume"
+  },
+  {
+   "gap_id": "GAP-APL-02",
+   "capability": "product entrypoint (project start/status/resume/stop)",
+   "evidence": "CLI lacks project/evolution commands",
+   "decision": "EXTEND existing cli.py with project + evolution subcommands",
+   "reuse": "existing argparse structure"
+  },
+  {
+   "gap_id": "GAP-APL-03",
+   "capability": "intake/authority auto-read + intent roundtrip",
+   "evidence": "no intake surface",
+   "decision": "ADD thin intake in lifecycle controller; uses spine sources table",
+   "reuse": "existing sources/source_units tables"
+  },
+  {
+   "gap_id": "GAP-APL-04",
+   "capability": "plan/TaskSpec/WorkOrder auto-generation",
+   "evidence": "spine has create_taskspec/create_workorder but no auto-planner",
+   "decision": "ADD deterministic planner deriving TaskSpecs from intent + source inventory",
+   "reuse": "create_taskspec/create_workorder"
+  },
+  {
+   "gap_id": "GAP-EVO-01",
+   "capability": "evolution signal capture + gap classification",
+   "evidence": "no signal surface",
+   "decision": "ADD evolution_signals table + collector",
+   "reuse": "EventLog"
+  },
+  {
+   "gap_id": "GAP-EVO-02",
+   "capability": "improvement candidate lifecycle (sandbox/eval/checker/policy/rollback)",
+   "evidence": "candidates table is knowledge-only",
+   "decision": "ADD improvement_candidates table + governed evolution controller",
+   "reuse": "candidates registry pattern; harness for sandbox"
+  },
+  {
+   "gap_id": "GAP-EVO-03",
+   "capability": "promotion policy machine-readable",
+   "evidence": "P0-CIP PUB-10 COV-11-05/06 (frozen eval/holdout/independent+human for promotion)",
+   "decision": "ADD machine policy record; enforce in controller; high-risk human gate",
+   "reuse": "existing TT + rollback_records"
+  }
+ ],
+ "rejected_alternatives": [
+  "LangGraph/Temporal/Airflow (new orchestrator — forbidden by task-011 §6)",
+  "second Shared Spine / new DB (forbidden §4)",
+  "new vector/graph DB (forbidden §4/§55)"
+ ],
+ "mutation_plan": [
+  "schema.sql: +project_lifecycles, +evolution_signals, +improvement_candidates (idempotent, forward-only)",
+  "spine.py: lifecycle/evolution methods",
+  "cli.py: project/evolution subcommands",
+  "new src/hg_kseos/lifecycle.py, src/hg_kseos/evolution.py (thin controllers)",
+  "tests: L1-L4 + negatives",
+  "User Guide restructure"
+ ],
+ "verdict": "FIT_GAP_RESOLVED"
+}

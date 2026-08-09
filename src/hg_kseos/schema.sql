@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS schema_meta (
     key TEXT PRIMARY KEY,
     value TEXT NOT NULL
 );
-INSERT OR REPLACE INTO schema_meta(key, value) VALUES ('schema_version', '2');
+INSERT OR REPLACE INTO schema_meta(key, value) VALUES ('schema_version', '3');
 
 CREATE TABLE IF NOT EXISTS projects (
     project_id TEXT PRIMARY KEY,
@@ -269,4 +269,81 @@ CREATE TABLE IF NOT EXISTS release_decisions (
     independent_checker TEXT,
     evidence_envelope TEXT NOT NULL,
     created_at TEXT NOT NULL
+);
+
+-- task-011: Autonomous Project Lifecycle (v3 forward-only)
+CREATE TABLE IF NOT EXISTS project_lifecycles (
+    project_id TEXT PRIMARY KEY,
+    run_id TEXT NOT NULL,
+    state TEXT NOT NULL,
+    goal_hash TEXT NOT NULL,
+    source_count INTEGER NOT NULL DEFAULT 0,
+    authority_order_json TEXT NOT NULL DEFAULT '[]',
+    conflicts_json TEXT NOT NULL DEFAULT '[]',
+    blocking_missing_json TEXT NOT NULL DEFAULT '[]',
+    non_blocking_missing_json TEXT NOT NULL DEFAULT '[]',
+    intent_json TEXT NOT NULL DEFAULT '{}',
+    non_goals_json TEXT NOT NULL DEFAULT '[]',
+    current_workorder TEXT,
+    last_checkpoint_id TEXT,
+    attempt_budget INTEGER NOT NULL DEFAULT 3,
+    attempts_used INTEGER NOT NULL DEFAULT 0,
+    repair_count INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS project_transitions (
+    transition_id TEXT PRIMARY KEY,
+    project_id TEXT NOT NULL REFERENCES project_lifecycles(project_id),
+    run_id TEXT NOT NULL,
+    from_state TEXT NOT NULL,
+    to_state TEXT NOT NULL,
+    trigger TEXT NOT NULL,
+    authority_refs_json TEXT NOT NULL DEFAULT '[]',
+    workorder_refs_json TEXT NOT NULL DEFAULT '[]',
+    evidence_refs_json TEXT NOT NULL DEFAULT '[]',
+    checkpoint_id TEXT,
+    rollback_pointer TEXT NOT NULL,
+    attempt INTEGER NOT NULL DEFAULT 0,
+    budget_remaining INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS evolution_signals (
+    signal_id TEXT PRIMARY KEY,
+    project_id TEXT NOT NULL,
+    run_id TEXT NOT NULL,
+    signal_type TEXT NOT NULL,
+    severity TEXT NOT NULL,
+    source_evidence_json TEXT NOT NULL DEFAULT '[]',
+    recurrence_key TEXT NOT NULL,
+    occurrence_count INTEGER NOT NULL DEFAULT 1,
+    candidate_worthy INTEGER NOT NULL DEFAULT 0,
+    authority_impact TEXT NOT NULL DEFAULT 'NONE',
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS improvement_candidates (
+    candidate_id TEXT PRIMARY KEY,
+    gap_id TEXT NOT NULL,
+    candidate_type TEXT NOT NULL,
+    source_signals_json TEXT NOT NULL DEFAULT '[]',
+    problem_statement TEXT NOT NULL,
+    proposed_change TEXT NOT NULL,
+    expected_gain TEXT NOT NULL,
+    risk_class TEXT NOT NULL,
+    allowed_write_set_json TEXT NOT NULL DEFAULT '[]',
+    forbidden_write_set_json TEXT NOT NULL DEFAULT '[]',
+    state TEXT NOT NULL DEFAULT 'CANDIDATE',
+    sandbox_path TEXT,
+    baseline_metrics_json TEXT NOT NULL DEFAULT '{}',
+    evaluation_plan_json TEXT NOT NULL DEFAULT '{}',
+    rollback TEXT NOT NULL,
+    authority_gate TEXT NOT NULL,
+    independent_verdict TEXT,
+    promotion_state TEXT NOT NULL DEFAULT 'NOT_PROMOTED',
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
 );

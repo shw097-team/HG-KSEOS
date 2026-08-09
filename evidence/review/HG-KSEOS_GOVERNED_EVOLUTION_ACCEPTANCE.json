@@ -1,0 +1,94 @@
+{
+ "schema": "HGK-GOVERNED-EVOLUTION-ACCEPTANCE/1",
+ "captured_at_utc": "2026-08-09T13:31:04.892387+00:00",
+ "checks_total": 14,
+ "checks_pass": 14,
+ "results": {
+  "GE-01_signal_capture": {
+   "check": "GE-01_signal_capture",
+   "verdict": "PASS",
+   "detail": "signal=EVO-SIG-F661644A",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-02_gap_classification": {
+   "check": "GE-02_gap_classification",
+   "verdict": "PASS",
+   "detail": "gap=SKILL_GAP",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-03_fit_gap_reuse": {
+   "check": "GE-03_fit_gap_reuse",
+   "verdict": "PASS",
+   "detail": "reuse=SkillRegistry route (existing skills)",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-04_candidate_creation": {
+   "check": "GE-04_candidate_creation",
+   "verdict": "PASS",
+   "detail": "candidate=IC-8921A10B",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-05_sandbox_qualify": {
+   "check": "GE-05_sandbox_qualify",
+   "verdict": "PASS",
+   "detail": "sandbox qualified",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-06_negative_security": {
+   "check": "GE-06_negative_security",
+   "verdict": "PASS",
+   "detail": "high-severity signal worthy",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-07_holdout_nrtv": {
+   "check": "GE-07_holdout_nrtv",
+   "verdict": "PASS",
+   "detail": "holdout+NRTV part of qualification gate (verified in qualify)",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-08_independent_checker": {
+   "check": "GE-08_independent_checker",
+   "verdict": "PASS",
+   "detail": "verdict=PASS",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-09_failed_candidate_rollback": {
+   "check": "GE-09_failed_candidate_rollback",
+   "verdict": "PASS",
+   "detail": "state=REJECTED",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-10_promotion_gate": {
+   "check": "GE-10_promotion_gate",
+   "verdict": "PASS",
+   "detail": "gate=AUTO_PROMOTE",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-11_later_reuse": {
+   "check": "GE-11_later_reuse",
+   "verdict": "PASS",
+   "detail": "promoted capability available for later reuse (canary OK)",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-12_authority_mutation_defense": {
+   "check": "GE-12_authority_mutation_defense",
+   "verdict": "PASS",
+   "detail": "blocked",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-13_evaluator_tamper_defense": {
+   "check": "GE-13_evaluator_tamper_defense",
+   "verdict": "PASS",
+   "detail": "blocked",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  },
+  "GE-14_budget_stop": {
+   "check": "GE-14_budget_stop",
+   "verdict": "PASS",
+   "detail": "attempt_budget enforced by lifecycle (3); no infinite loop",
+   "captured_at_utc": "2026-08-09T13:31:04.892387+00:00"
+  }
+ },
+ "promotion_policy": "LOW=auto+checker+rollback; MEDIUM=checker+human-if-required; HIGH/CONSTITUTIONAL=human-mandatory",
+ "verdict": "PASS"
+}

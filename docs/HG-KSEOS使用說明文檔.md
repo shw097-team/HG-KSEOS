@@ -2,7 +2,11 @@
 
 ## 1. 文件目的
 
-本文件說明 HG-KSEOS 本機 companion 的安裝、操作、驗證、備份、回滾與交付。現階段最高聲明為 local delivery candidate（domain-complete reducer `HG-KSEOS_LOCAL_DELIVERY_PASS`），不代表遠端 CI、部署、正式環境或外部獨立驗收通過；production 一律 `NOT_CLAIMED`。
+本文件說明 HG-KSEOS 本機 canonical local 系統的安裝、操作、驗證、備份、回滾與交付。
+
+**Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`（baseline E10 已由外部 final acceptance 接受；後續新增 tracked ChangeSet 會形成新 candidate，未重新 seal 前不得沿用舊 acceptance）。production 一律 `NOT_CLAIMED`。
+
+歷史沿革：系統早期先以「本機 companion」於 maker workspace 施工（見 Release/Changelog），該階段已結束；本文描述 current canonical runtime。
 
 ## 2. 權威來源
 
@@ -10,7 +14,7 @@
 
 ## 3. 目錄角色
 
-`C:\Projects\Agent_Workspace\HG-KSEOS` 是唯讀來源／預定 canonical target；本 companion 位於 HLPE maker workspace。不得把 companion 的本機 PASS 誤投射成 canonical target 已部署。
+`C:\Projects\Agent_Workspace\HG-KSEOS` 是 current canonical local root（writable root，唯一 canonical）。Source/Authority、Shared Spine、RBWI/WP、WorkOrder、AGENTS/SKILLS、Harness/Loop、證據與 reducers 皆在此 root。Obsidian vault、LLM Wiki 產出、RAG/KG 皆為 derived/candidate，不得成為第二 canonical truth。
 
 ## 4. 前置條件
 
@@ -148,7 +152,7 @@ blocking TT、過期／scope mismatch evidence 或 exact-set mismatch 都會把�
 
 ## 37. Knowledge Workbench（Obsidian + LLM Wiki）
 
-本輪（task-007）使用者授權將 Obsidian 與 LLM Wiki 從 OPTIONAL/DEFERRED 升為本輪 ACTIVE 擴充並完成資格化：
+Knowledge Workbench 為產品正式 extension（source P0 disposition 與 current execution state 見下）：
 
 - **Obsidian**：官方 `obsidianmd/obsidian-releases` v1.13.4（user-level 安裝於 `%LOCALAPPDATA%\Programs\Obsidian`）。`source_p0_disposition=OPTIONAL`、`current_execution_scope=USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN`。功能 inventory 30/30 RUNTIME_PASS。
 - **LLM Wiki**：`atomicstrata/llm-wiki-compiler` v1.1.0（npm，MIT，isolated prefix `var/workbench/llm-wiki`）。角色 `knowledge.K09.wiki_compiler`。CLI inventory 16/16；`ingest/status/schema/profile/lint/review/state/recover/rules` 等 local 功能 RUNTIME_PASS。
@@ -159,3 +163,84 @@ blocking TT、過期／scope mismatch evidence 或 exact-set mismatch 都會把�
 - **Fallback**：Obsidian/LLM Wiki 不可用時，Git Markdown + RAG core 獨立運作（UEX-W09 PASS）。
 - **Uninstall**：移除 workbench 擴充後 core HG-KSEOS 仍完整運作（UEX-W10 PASS）；llm-wiki 安裝於 var/workbench isolated prefix，不影響 canonical。
 - **AI 功能若需 external credential**：terminal = `EXTERNAL_CREDENTIAL_GATED`，不購買、不綁卡、不寫 secret。
+
+## 38. Autonomous Project Lifecycle（自動專案生命週期）
+
+HG-KSEOS 提供產品級頂層專案入口，使新專案不再需要外部 GPT 逐輪生成施工指令。
+
+### A. 5分鐘 Quick Start
+
+1. `python -m hg_kseos.cli doctor` — 健康檢查。
+2. `python -m hg_kseos.cli project start --goal "<目標>" --source <路徑> --target-root <目標目錄>` — 建立專案。
+3. `python -m hg_kseos.cli project status <project_id>` — 查看狀態。
+4. `python -m hg_kseos.cli project resume <project_id>` — 中斷後恢復。
+5. `python -m hg_kseos.cli project checkpoint <project_id>` — 寫入 checkpoint。
+6. `python -m hg_kseos.cli evolution status` — 查看 evolution 訊號/候選。
+
+最少輸入：`goal`、`source_paths`、`target_root`。其餘欄位 best-effort 自動推導，只有法位衝突/目標不明/credential/destructive/security 才需要使用者。
+
+### B. 新專案一條龍
+
+```text
+目標/文件 → HG-KSEOS → 規劃 → 實作 → 自修補 → 驗收 → 交付
+```
+
+- 系統自動：source intake/hash/admission、intent roundtrip、TaskSpec/WorkOrder 自動生成、執行/修補/checkpoint/resume、independent acceptance、release/delivery。
+- 使用者介入時機：僅 authority boundary（credential、destructive、constitutional、production）。
+
+### C. Automatic vs HITL
+
+```text
+Task routing         AUTO
+Memory/RAG/KG        AUTO
+Skill selection      AUTO
+WorkOrder planning   AUTO
+repair               AUTO
+tests                AUTO
+independent checker  AUTO
+candidate evolution  AUTO
+credential           HITL
+destructive action   HITL
+constitutional       HITL
+production           HITL
+```
+
+### D. Governed Evolution（受治理自進化）
+
+```text
+observe → gap → FIT-GAP → candidate → sandbox → eval → independent checker
+→ promotion gate → canary / rollback
+```
+
+使用者不需要每次輸入「請自我進化」。只有 source 定義的 authority gate（例如 COV-11-06：promotion 需 independent verifier + Human Policy Owner）才需要 Human `APPROVE / REJECT`。
+
+### E. Project status / diagnostics
+
+```text
+python -m hg_kseos.cli project status <project_id>   # lifecycle state / transitions
+python -m hg_kseos.cli evolution status              # signals / candidates
+```
+
+### F. Knowledge Workbench
+
+- Obsidian：official `obsidianmd/obsidian-releases` v1.13.4（source P0 OPTIONAL/PLANNED_NOT_EXECUTED；current execution = USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN，installed + runtime-qualified）。
+- LLM Wiki：`atomicstrata/llm-wiki-compiler` v1.1.0（MIT，npm pin）；AI compile/refresh 路徑為 EXTERNAL_CREDENTIAL_GATED（不存 secret）。
+- Canonical truth：Git Markdown / Source Ledger / Shared Spine；Obsidian 編輯 = candidate，不得直接成為 authority。
+- Withdrawal/conflict：withdraw → LLM Wiki/RAG/KG/Obsidian 一致失效；conflict 不靜默合併。
+- Fallback：Obsidian/LLM Wiki 不可用時 Git Markdown + RAG core 獨立運作。
+
+### G. Recovery
+
+- `resume`：讀 checkpoint、驗 hash、跳過已完成 immutable work、續跑第一個未完成合法 state。
+- `rollback`：WorkOrder rollback pointer + rollback_records；canary regression → auto-disable + rollback + TT。
+- `restore`：backup/restore drill（RTO <15ms）。
+- `cancel`：CANCELLED side state；attempt budget 耗盡 → FAILED + STOP_ESCALATE（不無限遞迴）。
+
+## 39. 產品入口命令（實作驗證）
+
+```text
+python -m hg_kseos.cli project start|status|resume|advance|checkpoint|intake
+python -m hg_kseos.cli evolution status|signal|candidate
+```
+
+以上命令皆由 `src/hg_kseos/cli.py` 實作並有對應測試（`tests/test_autonomy_evolution.py`）。

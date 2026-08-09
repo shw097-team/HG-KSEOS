@@ -79,6 +79,30 @@ def make_envelope(**overrides: object) -> UserExperienceEnvelope:
         "fallback_to_git_markdown_pass": True,
         "external_gated_features_all_accounted_for": True,
         "blocking_workbench_tt": 0,
+        "autonomous_project_entrypoint": True,
+        "external_gpt_not_required": True,
+        "project_source_auto_admission": True,
+        "intent_roundtrip": True,
+        "workorder_auto_admission": True,
+        "real_hermes_codex_execution": True,
+        "automatic_repair": True,
+        "checkpoint_resume": True,
+        "independent_project_acceptance": True,
+        "minimal_hitl": True,
+        "evolution_signal_capture": True,
+        "gap_classification": True,
+        "fit_gap_reuse_first": True,
+        "candidate_sandbox": True,
+        "holdout_nrtv": True,
+        "independent_candidate_check": True,
+        "failed_candidate_rollback": True,
+        "promotion_policy_enforced": True,
+        "authority_mutation": 0,
+        "evaluator_self_mutation": 0,
+        "infinite_evolution_loop": 0,
+        "user_guide_current_runtime": True,
+        "user_guide_no_stale_companion_claim": True,
+        "user_guide_no_task007_current_wording": True,
         "checker": "INDEPENDENT_CHECKER",
         "artifacts": ("UECX", "U7", "U8", "U9", "OBS", "WIKI"),
     }
@@ -183,6 +207,31 @@ class UserExperienceReducerTests(unittest.TestCase):
         decision = self.reducer.reduce(make_envelope(obsidian_llmwiki_integration_pass=False))
         self.assertEqual(decision["verdict"], "FAIL_CLOSED")
         self.assertIn("OBSIDIAN_LLMWIKI_INTEGRATION_FAIL", decision["reasons"])
+
+    def test_autonomy_entrypoint_missing_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(autonomous_project_entrypoint=False))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("AUTONOMOUS_PROJECT_ENTRYPOINT_MISSING", decision["reasons"])
+
+    def test_external_gpt_required_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(external_gpt_not_required=False))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("EXTERNAL_GPT_REQUIRED_FOR_NORMAL_LIFECYCLE", decision["reasons"])
+
+    def test_authority_mutation_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(authority_mutation=1))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("AUTHORITY_MUTATION_ATTEMPT_SUCCEEDED", decision["reasons"])
+
+    def test_evolution_loop_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(infinite_evolution_loop=1))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("INFINITE_EVOLUTION_LOOP", decision["reasons"])
+
+    def test_user_guide_stale_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(user_guide_current_runtime=False))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("USER_GUIDE_STALE", decision["reasons"])
 
     def test_missing_field_rejected(self) -> None:
         data = make_envelope().__dict__

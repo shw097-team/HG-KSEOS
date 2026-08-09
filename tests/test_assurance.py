@@ -72,7 +72,7 @@ class AssuranceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="HGK Unicode 空 格 ") as directory:
             database = Path(directory) / "spine test.db"
             spine = SharedSpine(database); spine.initialize()
-            self.assertEqual(spine.snapshot()["schema_version"], "2")
+            self.assertEqual(spine.snapshot()["schema_version"], "3")
 
 
 if __name__ == "__main__":

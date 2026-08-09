@@ -1,0 +1,24 @@
+{
+ "schema": "HGK-USER-GUIDE-CURRENT-RUNTIME-READBACK/1",
+ "checks": {
+  "no_stale_companion_as_current": true,
+  "canonical_root_current": true,
+  "current_lifecycle_described": true,
+  "quick_start_present": true,
+  "automatic_vs_hitl_present": true,
+  "governed_evolution_present": true,
+  "external_gpt_not_required": true,
+  "production_not_claimed": true,
+  "obsidian_dual_state": true,
+  "llmwiki_exact_identity": true,
+  "graphrag_vector_deferred": true,
+  "no_task007_current_wording": true,
+  "external_acceptance_current": true,
+  "commands_exist": true,
+  "no_secret_value": true,
+  "all_guide_commands_exist": true
+ },
+ "pass_count": 16,
+ "total": 16,
+ "verdict": "PASS"
+}

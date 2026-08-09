@@ -98,6 +98,52 @@ def build_parser() -> argparse.ArgumentParser:
     case_run_parser = case_commands.add_parser("run")
     case_run_parser.add_argument("--id", required=True)
     case_run_parser.add_argument("--root", type=Path, default=Path.cwd())
+
+    # task-011: autonomous project lifecycle entrypoint
+    project = commands.add_parser("project", help="Autonomous project lifecycle")
+    project_commands = project.add_subparsers(dest="project_command", required=True)
+    p_start = project_commands.add_parser("start", help="Start a new autonomous project")
+    p_start.add_argument("--goal", required=True)
+    p_start.add_argument("--source", action="append", default=[])
+    p_start.add_argument("--constraint", action="append", default=[])
+    p_start.add_argument("--non-goal", action="append", default=[])
+    p_start.add_argument("--target-root", type=Path)
+    p_start.add_argument("--project-id")
+    p_status = project_commands.add_parser("status", help="Project lifecycle status")
+    p_status.add_argument("project_id")
+    p_resume = project_commands.add_parser("resume", help="Resume from checkpoint")
+    p_resume.add_argument("project_id")
+    p_advance = project_commands.add_parser("advance", help="Advance lifecycle state")
+    p_advance.add_argument("project_id")
+    p_advance.add_argument("to_state")
+    p_advance.add_argument("--trigger", default="MANUAL_ADVANCE")
+    p_ckpt = project_commands.add_parser("checkpoint", help="Write lifecycle checkpoint")
+    p_ckpt.add_argument("project_id")
+    p_intake = project_commands.add_parser("intake", help="Source intake + authority envelope")
+    p_intake.add_argument("project_id")
+    p_intake.add_argument("--goal", required=True)
+    p_intake.add_argument("--source", action="append", default=[])
+    p_intake.add_argument("--constraint", action="append", default=[])
+    p_intake.add_argument("--non-goal", action="append", default=[])
+    p_intake.add_argument("--target-root", type=Path)
+
+    # task-011: governed evolution entrypoint
+    evolution = commands.add_parser("evolution", help="Governed evolution controller")
+    evolution_commands = evolution.add_subparsers(dest="evolution_command", required=True)
+    e_status = evolution_commands.add_parser("status", help="Evolution signal/candidate status")
+    e_signal = evolution_commands.add_parser("signal", help="Capture an evolution signal")
+    e_signal.add_argument("--project-id", required=True)
+    e_signal.add_argument("--signal-type", required=True)
+    e_signal.add_argument("--severity", default="LOW", choices=["LOW", "MEDIUM", "HIGH"])
+    e_signal.add_argument("--evidence", action="append", default=[])
+    e_candidate = evolution_commands.add_parser("candidate", help="Create an improvement candidate")
+    e_candidate.add_argument("--project-id", required=True)
+    e_candidate.add_argument("--gap-id", required=True)
+    e_candidate.add_argument("--type", required=True)
+    e_candidate.add_argument("--problem", required=True)
+    e_candidate.add_argument("--change", required=True)
+    e_candidate.add_argument("--gain", required=True)
+    e_candidate.add_argument("--risk", default="LOW", choices=["LOW", "MEDIUM", "HIGH", "CONSTITUTIONAL"])
     return parser
 
 
@@ -142,6 +188,47 @@ def run(args: argparse.Namespace) -> Any:
     if args.command == "release-reduce":
         envelope = EvidenceEnvelope.from_dict(json.loads(args.envelope.read_text(encoding="utf-8")))
         return ReleaseReducer(spine).reduce(envelope)
+    if args.command == "project":
+        from .lifecycle import ProjectLifecycleController, ProjectRequest
+        from .spine import SharedSpine as _SS
+        lc = ProjectLifecycleController(spine)
+        if args.project_command == "start":
+            req = ProjectRequest(goal=args.goal, source_paths=args.source,
+                                 constraints=args.constraint, non_goals=args.non_goal,
+                                 target_root=str(args.target_root) if args.target_root else "")
+            return lc.start(req, project_id=args.project_id)
+        if args.project_command == "intake":
+            req = ProjectRequest(goal=args.goal, source_paths=args.source,
+                                 constraints=args.constraint, non_goals=args.non_goal,
+                                 target_root=str(args.target_root) if args.target_root else "")
+            return lc.intake(args.project_id, req)
+        if args.project_command == "status":
+            return lc.status(args.project_id)
+        if args.project_command == "resume":
+            return lc.resume(args.project_id)
+        if args.project_command == "checkpoint":
+            return lc.checkpoint(args.project_id)
+        if args.project_command == "advance":
+            return lc.transition(args.project_id, args.to_state, trigger=args.trigger)
+        raise AssertionError(args.project_command)
+    if args.command == "evolution":
+        from .evolution import GovernedEvolutionController, EvolutionSignal
+        from .observability import EventLog
+        config = project_config(root)
+        log = EventLog(root / config.get("event_log", "var/events.jsonl"))
+        ec = GovernedEvolutionController(spine, log)
+        if args.evolution_command == "status":
+            return ec.status(args.project_id if hasattr(args, "project_id") else None)
+        if args.evolution_command == "signal":
+            return ec.capture_signal(EvolutionSignal(
+                project_id=args.project_id, run_id="CLI", signal_type=args.signal_type,
+                severity=args.severity, source_evidence=args.evidence))
+        if args.evolution_command == "candidate":
+            return ec.create_candidate(project_id=args.project_id, gap_id=args.gap_id,
+                                       candidate_type=args.type, problem_statement=args.problem,
+                                       proposed_change=args.change, expected_gain=args.gain,
+                                       risk_class=args.risk)
+        raise AssertionError(args.evolution_command)
     raise AssertionError(args.command)
 
 

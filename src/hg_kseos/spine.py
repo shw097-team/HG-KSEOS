@@ -416,6 +416,10 @@ class SharedSpine:
             "kg_assertions",
             "memory_records",
             "provider_bindings",
+            "project_lifecycles",
+            "project_transitions",
+            "evolution_signals",
+            "improvement_candidates",
         )
         with self.connect() as connection:
             counts = {table: connection.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0] for table in tables}

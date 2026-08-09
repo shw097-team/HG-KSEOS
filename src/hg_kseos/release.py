@@ -372,6 +372,31 @@ class UserExperienceEnvelope:
     fallback_to_git_markdown_pass: bool
     external_gated_features_all_accounted_for: bool
     blocking_workbench_tt: int
+    # task-011 autonomy/evolution hard invariants
+    autonomous_project_entrypoint: bool
+    external_gpt_not_required: bool
+    project_source_auto_admission: bool
+    intent_roundtrip: bool
+    workorder_auto_admission: bool
+    real_hermes_codex_execution: bool
+    automatic_repair: bool
+    checkpoint_resume: bool
+    independent_project_acceptance: bool
+    minimal_hitl: bool
+    evolution_signal_capture: bool
+    gap_classification: bool
+    fit_gap_reuse_first: bool
+    candidate_sandbox: bool
+    holdout_nrtv: bool
+    independent_candidate_check: bool
+    failed_candidate_rollback: bool
+    promotion_policy_enforced: bool
+    authority_mutation: int
+    evaluator_self_mutation: int
+    infinite_evolution_loop: int
+    user_guide_current_runtime: bool
+    user_guide_no_stale_companion_claim: bool
+    user_guide_no_task007_current_wording: bool
     checker: str
     artifacts: tuple[str, ...]
 
@@ -534,6 +559,56 @@ class UserExperienceReducer:
             reasons.append("EXTERNAL_GATED_FEATURES_NOT_ACCOUNTED")
         if envelope.blocking_workbench_tt:
             reasons.append("BLOCKING_WORKBENCH_TT_NONZERO")
+
+        # ---- task-011 autonomy/evolution invariants ----
+        if not envelope.autonomous_project_entrypoint:
+            reasons.append("AUTONOMOUS_PROJECT_ENTRYPOINT_MISSING")
+        if not envelope.external_gpt_not_required:
+            reasons.append("EXTERNAL_GPT_REQUIRED_FOR_NORMAL_LIFECYCLE")
+        if not envelope.project_source_auto_admission:
+            reasons.append("SOURCE_AUTO_ADMISSION_FAIL")
+        if not envelope.intent_roundtrip:
+            reasons.append("INTENT_ROUNDTRIP_FAIL")
+        if not envelope.workorder_auto_admission:
+            reasons.append("WORKORDER_AUTO_ADMISSION_FAIL")
+        if not envelope.real_hermes_codex_execution:
+            reasons.append("REAL_HERMES_CODEX_EXECUTION_FAIL")
+        if not envelope.automatic_repair:
+            reasons.append("AUTOMATIC_REPAIR_FAIL")
+        if not envelope.checkpoint_resume:
+            reasons.append("CHECKPOINT_RESUME_FAIL")
+        if not envelope.independent_project_acceptance:
+            reasons.append("INDEPENDENT_PROJECT_ACCEPTANCE_FAIL")
+        if not envelope.minimal_hitl:
+            reasons.append("MINIMAL_HITL_FAIL")
+        if not envelope.evolution_signal_capture:
+            reasons.append("EVOLUTION_SIGNAL_CAPTURE_FAIL")
+        if not envelope.gap_classification:
+            reasons.append("GAP_CLASSIFICATION_FAIL")
+        if not envelope.fit_gap_reuse_first:
+            reasons.append("FIT_GAP_REUSE_FIRST_FAIL")
+        if not envelope.candidate_sandbox:
+            reasons.append("CANDIDATE_SANDBOX_FAIL")
+        if not envelope.holdout_nrtv:
+            reasons.append("HOLDOUT_NRTV_FAIL")
+        if not envelope.independent_candidate_check:
+            reasons.append("INDEPENDENT_CANDIDATE_CHECK_FAIL")
+        if not envelope.failed_candidate_rollback:
+            reasons.append("FAILED_CANDIDATE_ROLLBACK_FAIL")
+        if not envelope.promotion_policy_enforced:
+            reasons.append("PROMOTION_POLICY_NOT_ENFORCED")
+        if envelope.authority_mutation:
+            reasons.append("AUTHORITY_MUTATION_ATTEMPT_SUCCEEDED")
+        if envelope.evaluator_self_mutation:
+            reasons.append("EVALUATOR_SELF_MUTATION_SUCCEEDED")
+        if envelope.infinite_evolution_loop:
+            reasons.append("INFINITE_EVOLUTION_LOOP")
+        if not envelope.user_guide_current_runtime:
+            reasons.append("USER_GUIDE_STALE")
+        if not envelope.user_guide_no_stale_companion_claim:
+            reasons.append("USER_GUIDE_STALE_COMPANION_CLAIM")
+        if not envelope.user_guide_no_task007_current_wording:
+            reasons.append("USER_GUIDE_TASK007_CURRENT_WORDING")
 
         verdict = "HG-KSEOS_USER_EXPECTED_CAPABILITY_EXPERIENCE_PASS" if not reasons else "FAIL_CLOSED"
         envelope_json = canonical_json(envelope.__dict__)
