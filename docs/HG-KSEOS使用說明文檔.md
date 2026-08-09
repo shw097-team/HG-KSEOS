@@ -145,3 +145,17 @@ blocking TT、過期／scope mismatch evidence 或 exact-set mismatch 都會把�
 ## 36. 問題處理與交接
 
 發生 mismatch 時停止受影響 flow，保存 evidence，開 TT 並標明最早 owner、close criteria 與 rollback。交接 packet 缺 rollback、capability 或 field-level verdict 時不得 ACK。
+
+## 37. Knowledge Workbench（Obsidian + LLM Wiki）
+
+本輪（task-007）使用者授權將 Obsidian 與 LLM Wiki 從 OPTIONAL/DEFERRED 升為本輪 ACTIVE 擴充並完成資格化：
+
+- **Obsidian**：官方 `obsidianmd/obsidian-releases` v1.13.4（user-level 安裝於 `%LOCALAPPDATA%\Programs\Obsidian`）。`source_p0_disposition=OPTIONAL`、`current_execution_scope=USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN`。功能 inventory 30/30 RUNTIME_PASS。
+- **LLM Wiki**：`atomicstrata/llm-wiki-compiler` v1.1.0（npm，MIT，isolated prefix `var/workbench/llm-wiki`）。角色 `knowledge.K09.wiki_compiler`。CLI inventory 16/16；`ingest/status/schema/profile/lint/review/state/recover/rules` 等 local 功能 RUNTIME_PASS。
+- **AI 編譯路徑**：`llmwiki compile/refresh/query` 需要 ANTHROPIC provider credential → `EXTERNAL_CREDENTIAL_GATED`（未偽裝為 PASS、未寫入任何 secret）。
+- **Canonical truth 不變**：Git Markdown / Source Ledger / Shared Spine 仍是唯一 authority；Obsidian vault 與 LLM Wiki 產出皆為 derived/candidate/workbench，禁止第二 canonical truth。
+- **Obsidian 編輯流向**：編輯 → filesystem/Git diff → candidate → 驗證/admission → KnowledgePack/Wiki/RAG/KG rebuild，不得直接成為 authority。
+- **Withdrawal/Conflict**：withdraw source → LLM Wiki/RAG/KG/Obsidian 一致失效；同 rank 衝突不靜默合併，走 Conflict/TT。
+- **Fallback**：Obsidian/LLM Wiki 不可用時，Git Markdown + RAG core 獨立運作（UEX-W09 PASS）。
+- **Uninstall**：移除 workbench 擴充後 core HG-KSEOS 仍完整運作（UEX-W10 PASS）；llm-wiki 安裝於 var/workbench isolated prefix，不影響 canonical。
+- **AI 功能若需 external credential**：terminal = `EXTERNAL_CREDENTIAL_GATED`，不購買、不綁卡、不寫 secret。
