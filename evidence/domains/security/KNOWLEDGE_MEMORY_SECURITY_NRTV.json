@@ -1,6 +1,6 @@
 {
  "schema": "HGK-KNOWLEDGE-MEMORY-SECURITY-NRTV/1",
- "captured_at_utc": "2026-08-08T18:31:33.161919+00:00",
+ "captured_at_utc": "2026-08-09T01:05:07.100719+00:00",
  "supersedes": "not a transport check; dedicated knowledge-domain negative suite",
  "depth": "L4 (adversarial/failure behavior)",
  "checks": [
