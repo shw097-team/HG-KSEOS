@@ -4,7 +4,7 @@
 
 本文件說明 HG-KSEOS 本機 canonical local 系統的安裝、操作、驗證、備份、回滾與交付。
 
-**Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`（baseline E10 已由外部 final acceptance 接受；後續新增 tracked ChangeSet 會形成新 candidate，未重新 seal 前不得沿用舊 acceptance）。production 一律 `NOT_CLAIMED`。
+**Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`。Current changeset = **Task-011**（Autonomous Project Lifecycle + Governed Evolution，`HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011`）；external acceptance semantic closure = **Task-012**（`HGK-TASK011-AUTONOMY-EVOLUTION-EXTERNAL-ACCEPTANCE-SEMANTIC-CLOSURE-012`）。Historical baseline：E10（task-009/010）為 lineage，已 superseded。後續新增 tracked ChangeSet 會形成新 candidate，未重新 seal 前不得沿用舊 acceptance。production 一律 `NOT_CLAIMED`。
 
 歷史沿革：系統早期先以「本機 companion」於 maker workspace 施工（見 Release/Changelog），該階段已結束；本文描述 current canonical runtime。
 
@@ -30,7 +30,7 @@
 
 ## 7. 初始建置
 
-全新 companion 才可執行 `scripts\bootstrap.ps1`。若資料庫已存在，bootstrap 會 fail closed；既有環境改用 migrate/doctor。
+全新 HG-KSEOS canonical local installation / bootstrap environment 才可執行 `scripts\bootstrap.ps1`。若資料庫已存在，bootstrap 會 fail closed；既有環境改用 migrate/doctor。
 
 ## 8. Shared Spine
 
@@ -134,7 +134,7 @@ blocking TT、過期／scope mismatch evidence 或 exact-set mismatch 都會把�
 
 ## 33. Local Package
 
-`scripts\package.ps1` 產生 deterministic local ZIP 與 readback receipt。ZIP 只代表 companion payload；TST-092 已以獨立 checker 在 same-HEAD/same-package 上完成 INDEPENDENT_CASE_PASS（exact-set、0 hash mismatch）。
+`scripts\package.ps1` 產生 deterministic local ZIP 與 readback receipt。ZIP 代表 current local-delivery payload（不包含 production deployment）；TST-092 已以獨立 checker 在 same-HEAD/same-package 上完成 INDEPENDENT_CASE_PASS（exact-set、0 hash mismatch）。
 
 ## 34. Independent NRTV
 

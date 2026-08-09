@@ -193,7 +193,13 @@ class EvolutionTests(unittest.TestCase):
             ic = ec.independent_check(c["candidate_id"], raw_evidence_refs=["EV-1"])
             self.assertEqual(ic["verdict"], "PASS")
             pg = ec.promotion_gate(c["candidate_id"])
-            self.assertEqual(pg["state"], "PROMOTED")  # low risk auto (delegated)
+            # source COV-11-06: promotion requires Human Policy Owner -> no auto-promote
+            self.assertEqual(pg["state"], "PROMOTION_READY_HITL_SOURCE_REQUIRED")
+            self.assertEqual(pg["source_locator"], "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md#COV-11-06")
+            # with human approval -> promoted
+            pg2 = ec.promotion_gate(c["candidate_id"], human_approval=True)
+            self.assertEqual(pg2["state"], "PROMOTED")
+            self.assertEqual(pg2["gate"], "HUMAN_APPROVED")
             cn = ec.canary(c["candidate_id"])
             self.assertEqual(cn["state"], "CANARY_OK")
         finally:
@@ -253,7 +259,7 @@ class EvolutionTests(unittest.TestCase):
                        holdout_pass=True, nrtv_pass=True, baseline_verified=True, rollback_verified=True)
             ec.independent_check(c["candidate_id"], raw_evidence_refs=["EV-1"])
             pg = ec.promotion_gate(c["candidate_id"])
-            self.assertEqual(pg["state"], "PROMOTION_READY_HITL")
+            self.assertEqual(pg["state"], "PROMOTION_READY_HITL_SOURCE_REQUIRED")
             self.assertEqual(pg["human_role"], "AUTHORITY_GATE_ONLY")
         finally:
             shutil.rmtree(tmp, ignore_errors=True)

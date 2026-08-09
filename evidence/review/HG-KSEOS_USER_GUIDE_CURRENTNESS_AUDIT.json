@@ -1,0 +1,11 @@
+{
+ "schema": "HGK-USER-GUIDE-CURRENTNESS-AUDIT/1",
+ "companion_occurrences_total": 1,
+ "historical_ok": 1,
+ "current_stale": 0,
+ "maker_root_current_stale": 0,
+ "old_task_current_stale": 0,
+ "current_candidate_identity_present": true,
+ "task012_closure_present": true,
+ "verdict": "PASS"
+}

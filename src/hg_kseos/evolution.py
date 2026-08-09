@@ -45,23 +45,31 @@ PROMOTION_POLICY = {
         "examples": ["documentation", "non-authoritative routing hint", "test fixture",
                      "candidate knowledge", "reversible local optimization"],
         "automatic_pipeline": True, "independent_checker": True, "rollback": True,
-        "human_gate": "source_policy_dependent",
+        "human_gate": "required",  # COV-11-06: promotion requires independent verifier + Human Policy Owner
+        "source_locator": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md#COV-11-06",
+        "policy_version": "P0-CIP r2 (2026-08-05)",
     },
     "medium_risk": {
         "examples": ["new active Skill", "provider/tool capability", "workflow behavior",
                      "persistent routing policy"],
         "automatic_pipeline": True, "independent_checker": True,
-        "human_gate": "required_if_current_authority_requires",
+        "human_gate": "required",  # COV-11-06
+        "source_locator": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md#COV-11-06",
+        "policy_version": "P0-CIP r2 (2026-08-05)",
     },
     "high_risk": {
         "examples": ["permission expansion", "external egress", "destructive action",
                      "release policy", "security policy"],
         "human_gate": "required", "auto_promotion": False,
+        "source_locator": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md#COV-11-06 + security constitution",
+        "policy_version": "P0-CIP r2 (2026-08-05)",
     },
     "constitutional": {
         "examples": ["authority stack", "product constitution", "frozen evaluator governance",
                      "production admission policy"],
         "human_gate": "mandatory", "auto_promotion": False,
+        "source_locator": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md#COV-11-06 + PUB-10 H2-07/H2-08",
+        "policy_version": "P0-CIP r2 (2026-08-05)",
     },
 }
 RISK_LEVELS = {"LOW": "low_risk", "MEDIUM": "medium_risk", "HIGH": "high_risk",
@@ -318,18 +326,19 @@ class GovernedEvolutionController:
                     "blocked": "INDEPENDENT_CHECK_NOT_PASS"}
         if policy.get("auto_promotion") is False or policy["human_gate"] in ("required", "mandatory"):
             if human_approval is None:
-                return {"candidate_id": candidate_id, "state": "PROMOTION_READY_HITL",
+                return {"candidate_id": candidate_id, "state": "PROMOTION_READY_HITL_SOURCE_REQUIRED",
                         "human_role": "AUTHORITY_GATE_ONLY",
+                        "source_locator": policy.get("source_locator", ""),
                         "question": f"Candidate {candidate_id} completed automatic qualification. Risk={risk}. Rollback={rollback}. Approve/Reject?"}
             if human_approval is False:
                 self._reject(candidate_id, "HUMAN_REJECTED")
                 return {"candidate_id": candidate_id, "state": "REJECTED", "reason": "human rejected"}
-        # auto-promote (low risk with delegated authority) or human-approved
+        # human-approved promotion (source COV-11-06: Human Policy Owner approval)
         with self.spine.transaction() as conn:
             conn.execute("UPDATE improvement_candidates SET promotion_state='PROMOTED', state='PROMOTED', "
                          "updated_at=? WHERE candidate_id=?", (utc_now(), candidate_id))
         return {"candidate_id": candidate_id, "state": "PROMOTED", "promotion_state": "PROMOTED",
-                "gate": "AUTO_PROMOTE" if human_approval is None else "HUMAN_APPROVED"}
+                "gate": "HUMAN_APPROVED"}
 
     # ---------- canary / rollback ----------
     def canary(self, candidate_id: str, *, observed_regression: bool = False) -> dict[str, Any]:
