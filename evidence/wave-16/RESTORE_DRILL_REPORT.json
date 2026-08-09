@@ -1,16 +1,16 @@
 {
   "schema": "HGK-RESTORE-DRILL/1",
-  "captured_at_utc": "2026-08-09T01:59:27.959660+00:00",
+  "captured_at_utc": "2026-08-09T05:06:35.087900+00:00",
   "backup_manifest": "var/backups/hg-kseos-20260808T115720.920805Z.manifest.json",
   "backup_sha256": "c9f18599a7af351d1b7492aaca8524d5369c279285ba4006d4006b1f08fbc23d",
   "restore_result": {
     "backup": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\backups\\hg-kseos-20260808T115720.920805Z.db",
-    "restored": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\worktrees\\restore-drill\\restored-1786240767944659800-hg-kseos-20260808T115720.920805Z.db",
+    "restored": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\worktrees\\restore-drill\\restored-1786251995076390600-hg-kseos-20260808T115720.920805Z.db",
     "sha256": "c9f18599a7af351d1b7492aaca8524d5369c279285ba4006d4006b1f08fbc23d",
     "status": "RESTORE_READBACK_PASS"
   },
-  "destination": "worktrees/restore-drill/restored-1786240767944659800-hg-kseos-20260808T115720.920805Z.db",
-  "rto_observed_ms": 9.876,
+  "destination": "worktrees/restore-drill/restored-1786251995076390600-hg-kseos-20260808T115720.920805Z.db",
+  "rto_observed_ms": 9.271,
   "integrity": "ok",
   "schema_version": "2",
   "requirements": 499,
