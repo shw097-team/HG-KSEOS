@@ -2,17 +2,17 @@
 
 - **Status**: EXTERNAL_FINAL_ACCEPTANCE_PENDING
 - **Production**: NOT_CLAIMED
-- **Checked at**: 2026-08-09T07:46:43.980757+00:00
+- **Checked at**: 2026-08-09T07:47:41.366149+00:00
 
 ## Candidate identity
 
 | Field | Value |
 |---|---|
-| Final HEAD | `bab07098e8cdf070f7ec9b49020560f52e1ebcb1` |
+| Final HEAD | `908501df14b25e11e3191237cd508e79ff73c4aa` |
 | Package | `var/releases/HG-KSEOS_LOCAL_CANDIDATE.zip` |
-| Package SHA-256 | `f6aea2f51b3fa153385bac2e3a8f8b4120cf1d4d1b3cd009dd9a3c4dcea80b7b` |
-| Package bytes | 26599416 |
-| Payload files | 349 |
+| Package SHA-256 | `8b30df8fccad0716a523012398ddf7705a472b38219ab98bebf9c3a20682c59b` |
+| Package bytes | 26613945 |
+| Payload files | 361 |
 | TST-092 | INDEPENDENT_CASE_PASS (same HEAD + same package) |
 
 ## Test denominator reconciliation (§23)
