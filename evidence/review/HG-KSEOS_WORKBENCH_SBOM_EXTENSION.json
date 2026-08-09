@@ -1,0 +1,859 @@
+{
+ "schema": "HGK-WORKBENCH-SBOM-EXTENSION/1",
+ "captured_at_utc": "2026-08-09T06:06:27.859350+00:00",
+ "components": [
+  {
+   "component": "Obsidian (desktop)",
+   "exact_version": "1.13.4",
+   "source": "obsidianmd/obsidian-releases (official GitHub release)",
+   "license": "Proprietary freeware (Obsidian EULA)",
+   "checksum": "8c761aaa40310d339b6936092e91e99a9886daf1fd655f4c8d59e9f7fa46e7a0",
+   "checksum_algorithm": "SHA-256",
+   "install_root": "C:\\Users\\user\\AppData\\Local\\Programs\\Obsidian",
+   "runtime_role": "human knowledge workbench (derived; never canonical)",
+   "network_capability": "optional sync/plugins (disabled by policy)",
+   "credential_capability": "none used",
+   "update_channel": "manual pin (1.13.4 frozen this run)",
+   "rollback": "previous 1.12.7 recorded; installer re-run downgrade path"
+  },
+  {
+   "component": "llm-wiki-compiler (npm)",
+   "exact_version": "1.1.0",
+   "source": "atomicstrata/llm-wiki-compiler (official repo) via npm registry",
+   "license": "MIT",
+   "integrity": "sha512-LJslVmSt8tng8n3t0tw1QEqZJKKD0ualJ/WupdZMCtCzmCNarkP99",
+   "install_root": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\workbench\\llm-wiki\\node_modules\\llm-wiki-compiler",
+   "runtime_role": "knowledge.K09.wiki_compiler (derived wiki compiler)",
+   "network_capability": "LLM provider API calls (ANTHROPIC key) — EXTERNAL_CREDENTIAL_GATED",
+   "credential_capability": "ANTHROPIC_API_KEY env ref only (not stored in repo)",
+   "update_channel": "npm pin 1.1.0 (package-lock immutable)",
+   "rollback": "isolated prefix under var/workbench; removable without canonical impact",
+   "npm_dependencies": [
+    {
+     "component": "@anthropic-ai/claude-agent-sdk",
+     "version": "0.3.226"
+    },
+    {
+     "component": "@anthropic-ai/claude-agent-sdk-darwin-arm64",
+     "version": "0.3.226"
+    },
+    {
+     "component": "@anthropic-ai/claude-agent-sdk-darwin-x64",
+     "version": "0.3.226"
+    },
+    {
+     "component": "@anthropic-ai/claude-agent-sdk-linux-arm64",
+     "version": "0.3.226"
+    },
+    {
+     "component": "@anthropic-ai/claude-agent-sdk-linux-arm64-musl",
+     "version": "0.3.226"
+    },
+    {
+     "component": "@anthropic-ai/claude-agent-sdk-linux-x64",
+     "version": "0.3.226"
+    },
+    {
+     "component": "@anthropic-ai/claude-agent-sdk-linux-x64-musl",
+     "version": "0.3.226"
+    },
+    {
+     "component": "@anthropic-ai/claude-agent-sdk-win32-arm64",
+     "version": "0.3.226"
+    },
+    {
+     "component": "@anthropic-ai/claude-agent-sdk-win32-x64",
+     "version": "0.3.226"
+    },
+    {
+     "component": "@anthropic-ai/sdk",
+     "version": "0.101.0"
+    },
+    {
+     "component": "@asamuzakjp/css-color",
+     "version": "3.2.0"
+    },
+    {
+     "component": "@babel/runtime",
+     "version": "7.29.7"
+    },
+    {
+     "component": "@csstools/color-helpers",
+     "version": "5.1.0"
+    },
+    {
+     "component": "@csstools/css-calc",
+     "version": "2.1.4"
+    },
+    {
+     "component": "@csstools/css-color-parser",
+     "version": "3.1.0"
+    },
+    {
+     "component": "@csstools/css-parser-algorithms",
+     "version": "3.0.5"
+    },
+    {
+     "component": "@csstools/css-tokenizer",
+     "version": "3.0.4"
+    },
+    {
+     "component": "@hono/node-server",
+     "version": "2.1.0"
+    },
+    {
+     "component": "@mixmark-io/domino",
+     "version": "2.2.0"
+    },
+    {
+     "component": "@modelcontextprotocol/sdk",
+     "version": "1.30.0"
+    },
+    {
+     "component": "@mozilla/readability",
+     "version": "0.6.0"
+    },
+    {
+     "component": "@napi-rs/canvas",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@napi-rs/canvas-android-arm64",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@napi-rs/canvas-darwin-arm64",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@napi-rs/canvas-darwin-x64",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@napi-rs/canvas-linux-arm-gnueabihf",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@napi-rs/canvas-linux-arm64-gnu",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@napi-rs/canvas-linux-arm64-musl",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@napi-rs/canvas-linux-riscv64-gnu",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@napi-rs/canvas-linux-x64-gnu",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@napi-rs/canvas-linux-x64-musl",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@napi-rs/canvas-win32-x64-msvc",
+     "version": "0.1.80"
+    },
+    {
+     "component": "@stablelib/base64",
+     "version": "1.0.1"
+    },
+    {
+     "component": "accepts",
+     "version": "2.0.0"
+    },
+    {
+     "component": "agent-base",
+     "version": "7.1.4"
+    },
+    {
+     "component": "ajv",
+     "version": "8.20.0"
+    },
+    {
+     "component": "ajv-formats",
+     "version": "3.0.1"
+    },
+    {
+     "component": "argparse",
+     "version": "2.0.1"
+    },
+    {
+     "component": "asynckit",
+     "version": "0.4.0"
+    },
+    {
+     "component": "body-parser",
+     "version": "2.3.0"
+    },
+    {
+     "component": "body-parser/node_modules/content-type",
+     "version": "2.0.0"
+    },
+    {
+     "component": "bytes",
+     "version": "3.1.2"
+    },
+    {
+     "component": "call-bind-apply-helpers",
+     "version": "1.0.2"
+    },
+    {
+     "component": "call-bound",
+     "version": "1.0.4"
+    },
+    {
+     "component": "canonicalize",
+     "version": "3.0.0"
+    },
+    {
+     "component": "chokidar",
+     "version": "4.0.3"
+    },
+    {
+     "component": "combined-stream",
+     "version": "1.0.8"
+    },
+    {
+     "component": "commander",
+     "version": "13.1.0"
+    },
+    {
+     "component": "content-disposition",
+     "version": "1.1.0"
+    },
+    {
+     "component": "content-type",
+     "version": "1.0.5"
+    },
+    {
+     "component": "cookie",
+     "version": "0.7.2"
+    },
+    {
+     "component": "cookie-signature",
+     "version": "1.2.2"
+    },
+    {
+     "component": "cors",
+     "version": "2.8.6"
+    },
+    {
+     "component": "cross-spawn",
+     "version": "7.0.6"
+    },
+    {
+     "component": "cssstyle",
+     "version": "4.6.0"
+    },
+    {
+     "component": "cssstyle/node_modules/rrweb-cssom",
+     "version": "0.8.0"
+    },
+    {
+     "component": "ata-urls",
+     "version": "5.0.0"
+    },
+    {
+     "component": "ayjs",
+     "version": "1.11.21"
+    },
+    {
+     "component": "bug",
+     "version": "4.4.3"
+    },
+    {
+     "component": "cimal.js",
+     "version": "10.6.0"
+    },
+    {
+     "component": "pmerge",
+     "version": "4.3.1"
+    },
+    {
+     "component": "ayed-stream",
+     "version": "1.0.0"
+    },
+    {
+     "component": "pd",
+     "version": "2.0.0"
+    },
+    {
+     "component": "-serializer",
+     "version": "3.1.1"
+    },
+    {
+     "component": "-serializer/node_modules/entities",
+     "version": "8.0.0"
+    },
+    {
+     "component": "ttype",
+     "version": "3.0.0"
+    },
+    {
+     "component": "handler",
+     "version": "6.0.1"
+    },
+    {
+     "component": "tils",
+     "version": "4.0.2"
+    },
+    {
+     "component": "tenv",
+     "version": "17.4.2"
+    },
+    {
+     "component": "r-proto",
+     "version": "1.0.1"
+    },
+    {
+     "component": "-first",
+     "version": "1.1.1"
+    },
+    {
+     "component": "codeurl",
+     "version": "2.0.0"
+    },
+    {
+     "component": "tities",
+     "version": "4.5.0"
+    },
+    {
+     "component": "-define-property",
+     "version": "1.0.1"
+    },
+    {
+     "component": "-errors",
+     "version": "1.3.0"
+    },
+    {
+     "component": "-object-atoms",
+     "version": "1.1.2"
+    },
+    {
+     "component": "-set-tostringtag",
+     "version": "2.1.0"
+    },
+    {
+     "component": "cape-html",
+     "version": "1.0.3"
+    },
+    {
+     "component": "cape-string-regexp",
+     "version": "4.0.0"
+    },
+    {
+     "component": "tag",
+     "version": "1.8.1"
+    },
+    {
+     "component": "ventsource",
+     "version": "3.0.7"
+    },
+    {
+     "component": "ventsource-parser",
+     "version": "3.1.0"
+    },
+    {
+     "component": "xpress",
+     "version": "5.2.1"
+    },
+    {
+     "component": "xpress-rate-limit",
+     "version": "8.6.2"
+    },
+    {
+     "component": "fast-deep-equal",
+     "version": "3.1.3"
+    },
+    {
+     "component": "fast-sha256",
+     "version": "1.3.0"
+    },
+    {
+     "component": "fast-uri",
+     "version": "3.1.5"
+    },
+    {
+     "component": "finalhandler",
+     "version": "2.1.1"
+    },
+    {
+     "component": "form-data",
+     "version": "4.0.6"
+    },
+    {
+     "component": "form-data/node_modules/mime-db",
+     "version": "1.52.0"
+    },
+    {
+     "component": "form-data/node_modules/mime-types",
+     "version": "2.1.35"
+    },
+    {
+     "component": "forwarded",
+     "version": "0.2.0"
+    },
+    {
+     "component": "fresh",
+     "version": "2.0.0"
+    },
+    {
+     "component": "function-bind",
+     "version": "1.1.2"
+    },
+    {
+     "component": "get-intrinsic",
+     "version": "1.3.0"
+    },
+    {
+     "component": "get-proto",
+     "version": "1.0.1"
+    },
+    {
+     "component": "gopd",
+     "version": "1.2.0"
+    },
+    {
+     "component": "has-symbols",
+     "version": "1.1.0"
+    },
+    {
+     "component": "has-tostringtag",
+     "version": "1.0.2"
+    },
+    {
+     "component": "hasown",
+     "version": "2.0.4"
+    },
+    {
+     "component": "hono",
+     "version": "4.13.1"
+    },
+    {
+     "component": "html-encoding-sniffer",
+     "version": "4.0.0"
+    },
+    {
+     "component": "htmlparser2",
+     "version": "12.0.0"
+    },
+    {
+     "component": "htmlparser2/node_modules/entities",
+     "version": "8.0.0"
+    },
+    {
+     "component": "http-errors",
+     "version": "2.0.1"
+    },
+    {
+     "component": "http-proxy-agent",
+     "version": "7.0.2"
+    },
+    {
+     "component": "https-proxy-agent",
+     "version": "7.0.6"
+    },
+    {
+     "component": "iconv-lite",
+     "version": "0.7.3"
+    },
+    {
+     "component": "inherits",
+     "version": "2.0.4"
+    },
+    {
+     "component": "ip-address",
+     "version": "10.4.0"
+    },
+    {
+     "component": "ipaddr.js",
+     "version": "1.9.1"
+    },
+    {
+     "component": "is-plain-object",
+     "version": "5.0.0"
+    },
+    {
+     "component": "is-potential-custom-element-name",
+     "version": "1.0.1"
+    },
+    {
+     "component": "is-promise",
+     "version": "4.0.0"
+    },
+    {
+     "component": "isexe",
+     "version": "2.0.0"
+    },
+    {
+     "component": "jose",
+     "version": "6.2.8"
+    },
+    {
+     "component": "js-yaml",
+     "version": "4.3.1"
+    },
+    {
+     "component": "jsdom",
+     "version": "25.0.1"
+    },
+    {
+     "component": "json-schema-to-ts",
+     "version": "3.1.1"
+    },
+    {
+     "component": "json-schema-traverse",
+     "version": "1.0.0"
+    },
+    {
+     "component": "json-schema-typed",
+     "version": "8.0.2"
+    },
+    {
+     "component": "aunder",
+     "version": "1.7.1"
+    },
+    {
+     "component": "inkify-it",
+     "version": "5.0.2"
+    },
+    {
+     "component": "ru-cache",
+     "version": "10.4.3"
+    },
+    {
+     "component": "arkdown-it",
+     "version": "14.3.0"
+    },
+    {
+     "component": "ath-intrinsics",
+     "version": "1.1.0"
+    },
+    {
+     "component": "rl",
+     "version": "2.1.0"
+    },
+    {
+     "component": "ia-typer",
+     "version": "1.1.1"
+    },
+    {
+     "component": "rge-descriptors",
+     "version": "2.0.0"
+    },
+    {
+     "component": "ime-db",
+     "version": "1.54.0"
+    },
+    {
+     "component": "ime-types",
+     "version": "3.0.2"
+    },
+    {
+     "component": "",
+     "version": "2.1.3"
+    },
+    {
+     "component": "anoid",
+     "version": "3.3.18"
+    },
+    {
+     "component": "gotiator",
+     "version": "1.0.0"
+    },
+    {
+     "component": "wsapi",
+     "version": "2.2.24"
+    },
+    {
+     "component": "bject-assign",
+     "version": "4.1.1"
+    },
+    {
+     "component": "bject-inspect",
+     "version": "1.13.4"
+    },
+    {
+     "component": "-finished",
+     "version": "2.4.1"
+    },
+    {
+     "component": "ce",
+     "version": "1.4.0"
+    },
+    {
+     "component": "penai",
+     "version": "6.49.0"
+    },
+    {
+     "component": "p-limit",
+     "version": "6.2.0"
+    },
+    {
+     "component": "parse-srcset",
+     "version": "1.0.2"
+    },
+    {
+     "component": "parse5",
+     "version": "7.3.0"
+    },
+    {
+     "component": "parse5/node_modules/entities",
+     "version": "6.0.1"
+    },
+    {
+     "component": "parseurl",
+     "version": "1.3.3"
+    },
+    {
+     "component": "path-key",
+     "version": "3.1.1"
+    },
+    {
+     "component": "path-to-regexp",
+     "version": "8.4.2"
+    },
+    {
+     "component": "pdf-parse",
+     "version": "2.4.5"
+    },
+    {
+     "component": "pdfjs-dist",
+     "version": "5.4.296"
+    },
+    {
+     "component": "picocolors",
+     "version": "1.1.1"
+    },
+    {
+     "component": "pkce-challenge",
+     "version": "5.0.1"
+    },
+    {
+     "component": "postcss",
+     "version": "8.5.26"
+    },
+    {
+     "component": "proxy-addr",
+     "version": "2.0.7"
+    },
+    {
+     "component": "punycode",
+     "version": "2.3.1"
+    },
+    {
+     "component": "punycode.js",
+     "version": "2.3.1"
+    },
+    {
+     "component": "qs",
+     "version": "6.15.3"
+    },
+    {
+     "component": "range-parser",
+     "version": "1.3.0"
+    },
+    {
+     "component": "raw-body",
+     "version": "3.0.2"
+    },
+    {
+     "component": "readdirp",
+     "version": "4.1.2"
+    },
+    {
+     "component": "require-from-string",
+     "version": "2.0.2"
+    },
+    {
+     "component": "router",
+     "version": "2.2.0"
+    },
+    {
+     "component": "rrweb-cssom",
+     "version": "0.7.1"
+    },
+    {
+     "component": "afer-buffer",
+     "version": "2.1.2"
+    },
+    {
+     "component": "anitize-html",
+     "version": "2.17.6"
+    },
+    {
+     "component": "axes",
+     "version": "6.0.0"
+    },
+    {
+     "component": "",
+     "version": "1.2.1"
+    },
+    {
+     "component": "rve-static",
+     "version": "2.2.1"
+    },
+    {
+     "component": "tprototypeof",
+     "version": "1.2.0"
+    },
+    {
+     "component": "hebang-command",
+     "version": "2.0.0"
+    },
+    {
+     "component": "hebang-regex",
+     "version": "3.0.0"
+    },
+    {
+     "component": "ide-channel",
+     "version": "1.1.1"
+    },
+    {
+     "component": "ide-channel-list",
+     "version": "1.0.1"
+    },
+    {
+     "component": "ide-channel-map",
+     "version": "1.0.1"
+    },
+    {
+     "component": "ide-channel-weakmap",
+     "version": "1.0.2"
+    },
+    {
+     "component": "rce-map-js",
+     "version": "1.2.1"
+    },
+    {
+     "component": "tandardwebhooks",
+     "version": "1.0.0"
+    },
+    {
+     "component": "tatuses",
+     "version": "2.0.2"
+    },
+    {
+     "component": "ymbol-tree",
+     "version": "3.2.4"
+    },
+    {
+     "component": "tldts",
+     "version": "6.1.86"
+    },
+    {
+     "component": "tldts-core",
+     "version": "6.1.86"
+    },
+    {
+     "component": "toidentifier",
+     "version": "1.0.1"
+    },
+    {
+     "component": "tough-cookie",
+     "version": "5.1.2"
+    },
+    {
+     "component": "tr46",
+     "version": "5.1.1"
+    },
+    {
+     "component": "ts-algebra",
+     "version": "2.0.0"
+    },
+    {
+     "component": "turndown",
+     "version": "7.2.4"
+    },
+    {
+     "component": "type-is",
+     "version": "2.1.0"
+    },
+    {
+     "component": "type-is/node_modules/content-type",
+     "version": "2.0.0"
+    },
+    {
+     "component": "c.micro",
+     "version": "2.1.0"
+    },
+    {
+     "component": "pipe",
+     "version": "1.0.0"
+    },
+    {
+     "component": "vary",
+     "version": "1.1.2"
+    },
+    {
+     "component": "w3c-xmlserializer",
+     "version": "5.0.0"
+    },
+    {
+     "component": "webidl-conversions",
+     "version": "7.0.0"
+    },
+    {
+     "component": "whatwg-encoding",
+     "version": "3.1.1"
+    },
+    {
+     "component": "whatwg-encoding/node_modules/iconv-lite",
+     "version": "0.6.3"
+    },
+    {
+     "component": "whatwg-mimetype",
+     "version": "4.0.0"
+    },
+    {
+     "component": "whatwg-url",
+     "version": "14.2.0"
+    },
+    {
+     "component": "which",
+     "version": "2.0.2"
+    },
+    {
+     "component": "wrappy",
+     "version": "1.0.2"
+    },
+    {
+     "component": "ws",
+     "version": "8.21.3"
+    },
+    {
+     "component": "xml-name-validator",
+     "version": "5.0.0"
+    },
+    {
+     "component": "xmlchars",
+     "version": "2.2.0"
+    },
+    {
+     "component": "yocto-queue",
+     "version": "1.2.2"
+    },
+    {
+     "component": "youtube-transcript",
+     "version": "1.3.1"
+    },
+    {
+     "component": "zod",
+     "version": "4.4.3"
+    },
+    {
+     "component": "zod-to-json-schema",
+     "version": "3.25.2"
+    }
+   ]
+  }
+ ],
+ "llm_wiki_dependency_count": 205,
+ "canonical_sbom_unchanged": "evidence/wave-13/sbom.cdx.json (100 components) untouched; extension is additive",
+ "license_unknown_enabled": 0,
+ "verdict": "PASS"
+}

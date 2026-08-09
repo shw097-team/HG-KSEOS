@@ -1,6 +1,6 @@
 {
  "schema": "HGK-C6-SECURITY-NRTV/1",
- "captured_at_utc": "2026-08-09T05:06:15.287716+00:00",
+ "captured_at_utc": "2026-08-09T06:05:52.848283+00:00",
  "checks": [
   {
    "name": "opencodex_loopback_bind",
