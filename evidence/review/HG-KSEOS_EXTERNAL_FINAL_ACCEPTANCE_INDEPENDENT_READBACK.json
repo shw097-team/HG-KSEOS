@@ -1,0 +1,22 @@
+{
+ "schema": "HGK-EXTERNAL-FINAL-ACCEPTANCE-INDEPENDENT-READBACK/1",
+ "checker": "INDEPENDENT_CHECKER",
+ "captured_at_utc": "HEAD-commit-date",
+ "same_head": true,
+ "same_package": true,
+ "tree_clean": true,
+ "tst092_independent": true,
+ "test_files_verified": true,
+ "test_cases_verified": true,
+ "cases_run_fresh": 119,
+ "cases_fail_fresh": 0,
+ "uecx_count_verified": true,
+ "obsidian_state_verified": true,
+ "llmwiki_identity_verified": true,
+ "reducers_verified": true,
+ "final_md_verified": true,
+ "md_current_candidate": true,
+ "all_hard_checks_recomputed": true,
+ "hard_check_total": 35,
+ "verdict": "INDEPENDENT_EXTERNAL_FINAL_ACCEPTANCE_PASS"
+}
