@@ -74,10 +74,11 @@ def main() -> int:
             [
                 PYTHON, "-c",
                 "import sys, json; sys.path.insert(0, 'tools'); "
-                "import run_acceptance, case_executors; "
+                "import run_acceptance; "
+                "run_acceptance._load_case_executors(); "
                 "f = json.load(open(sys.argv[1], encoding='utf-8')); "
                 "root = __import__('pathlib').Path(sys.argv[2]); "
-                "r = case_executors.CASE_EXECUTORS[sys.argv[3]](root, f); "
+                "r = run_acceptance.CASE_EXECUTORS[sys.argv[3]](root, f); "
                 "print(json.dumps({'passed': r.passed, 'details': r.details}))",
                 str(fixture_path), str(ROOT), cid,
             ],
@@ -129,6 +130,14 @@ def main() -> int:
         "failures": failures[:10],
         "verdict": "92/92" if all(r["verdict"] == "INDEPENDENT_CASE_PASS" for r in rows) else "FAIL",
     }
+    # persist per-case independent receipts as sidecar evidence (does not alter verdict)
+    indep_dir = ROOT / "evidence" / "wave-15" / "independent"
+    indep_dir.mkdir(parents=True, exist_ok=True)
+    for r in rows:
+        (indep_dir / f"{r['case_id']}.json").write_text(
+            json.dumps(r, ensure_ascii=False, indent=1), encoding="utf-8")
+    (indep_dir / "INDEPENDENT_ACCEPTANCE_REPORT.json").write_text(
+        json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps(report, ensure_ascii=False, indent=1))
     return 0 if report["verdict"] == "92/92" else 1
 

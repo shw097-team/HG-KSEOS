@@ -116,12 +116,19 @@ class CoverageEnvelope:
     coverage_domains_terminal: int
     canonical_requirements_total: int
     requirements_reconciled: bool
+    requirements_domain_mapped: int
+    requirements_source_bound: int
     orphan_requirements: int
     unowned_mandatory_assets: int
+    runtime_pass_missing_evidence: int
+    active_deferred_contradiction: int
+    missing_evidence_refs: int
     tst_total: int
     tst_independent_pass: int
     semantic_depth_calibrated: bool
     runtime_required_static_only_count: int
+    current_executor_missing: int
+    raw_receipt_missing: int
     domains: dict[str, str]
     knowledge_security_negative: str
     domain_blocking_gaps: int
@@ -184,11 +191,25 @@ class CoverageReducer:
             reasons.append("DOMAIN_COVERAGE_INCOMPLETE")
         if not envelope.requirements_reconciled or envelope.orphan_requirements or envelope.unowned_mandatory_assets:
             reasons.append("REQUIREMENT_RECONCILIATION_INCOMPLETE")
+        if envelope.canonical_requirements_total < 1:
+            reasons.append("REQUIREMENT_DENOMINATOR_EMPTY")
+        if envelope.requirements_domain_mapped != envelope.canonical_requirements_total:
+            reasons.append("REQUIREMENT_DOMAIN_MAPPING_INCOMPLETE")
+        if envelope.requirements_source_bound != envelope.canonical_requirements_total:
+            reasons.append("REQUIREMENT_SOURCE_BINDING_INCOMPLETE")
+        if envelope.runtime_pass_missing_evidence:
+            reasons.append("RUNTIME_PASS_MISSING_EVIDENCE")
+        if envelope.active_deferred_contradiction:
+            reasons.append("ACTIVE_DEFERRED_CONTRADICTION")
+        if envelope.missing_evidence_refs:
+            reasons.append("MISSING_EVIDENCE_REFS")
         # acceptance depth
         if envelope.tst_total < 1 or envelope.tst_independent_pass != envelope.tst_total:
             reasons.append("ACCEPTANCE_NOT_INDEPENDENT_FULL")
         if not envelope.semantic_depth_calibrated or envelope.runtime_required_static_only_count:
             reasons.append("SEMANTIC_DEPTH_NOT_CALIBRATED")
+        if envelope.current_executor_missing or envelope.raw_receipt_missing:
+            reasons.append("ACCEPTANCE_TRACE_BINDING_INCOMPLETE")
         # domains: every status terminal source-backed
         for domain, status in envelope.domains.items():
             if status in FORBIDDEN_DOMAIN_STATUSES:

@@ -15,12 +15,19 @@ def make_envelope(**overrides: object) -> CoverageEnvelope:
         "coverage_domains_terminal": 30,
         "canonical_requirements_total": 499,
         "requirements_reconciled": True,
+        "requirements_domain_mapped": 499,
+        "requirements_source_bound": 499,
         "orphan_requirements": 0,
         "unowned_mandatory_assets": 0,
+        "runtime_pass_missing_evidence": 0,
+        "active_deferred_contradiction": 0,
+        "missing_evidence_refs": 0,
         "tst_total": 92,
         "tst_independent_pass": 92,
         "semantic_depth_calibrated": True,
         "runtime_required_static_only_count": 0,
+        "current_executor_missing": 0,
+        "raw_receipt_missing": 0,
         "domains": {"memory": "RUNTIME_PASS", "knowledge_factory": "RUNTIME_PASS",
                     "retrieval_rag_kb": "RUNTIME_PASS", "knowledge_graph": "RUNTIME_PASS",
                     "graphrag": "DEFERRED_SOURCE_BACKED", "storage": "RUNTIME_PASS"},
@@ -114,6 +121,30 @@ class CoverageReducerTests(unittest.TestCase):
         del data["checker"]
         with self.assertRaises(ValueError):
             CoverageEnvelope.from_dict(data)
+
+    def test_requirement_domain_mapping_incomplete_fails(self) -> None:
+        env = make_envelope(requirements_domain_mapped=450)
+        decision = self.reducer.reduce(env)
+        self.assertEqual("FAIL_CLOSED", decision["verdict"])
+        self.assertIn("REQUIREMENT_DOMAIN_MAPPING_INCOMPLETE", decision["reasons"])
+
+    def test_runtime_pass_missing_evidence_fails(self) -> None:
+        env = make_envelope(runtime_pass_missing_evidence=1)
+        decision = self.reducer.reduce(env)
+        self.assertEqual("FAIL_CLOSED", decision["verdict"])
+        self.assertIn("RUNTIME_PASS_MISSING_EVIDENCE", decision["reasons"])
+
+    def test_active_deferred_contradiction_fails(self) -> None:
+        env = make_envelope(active_deferred_contradiction=1)
+        decision = self.reducer.reduce(env)
+        self.assertEqual("FAIL_CLOSED", decision["verdict"])
+        self.assertIn("ACTIVE_DEFERRED_CONTRADICTION", decision["reasons"])
+
+    def test_trace_binding_incomplete_fails(self) -> None:
+        env = make_envelope(current_executor_missing=1)
+        decision = self.reducer.reduce(env)
+        self.assertEqual("FAIL_CLOSED", decision["verdict"])
+        self.assertIn("ACCEPTANCE_TRACE_BINDING_INCOMPLETE", decision["reasons"])
 
 
 if __name__ == "__main__":
