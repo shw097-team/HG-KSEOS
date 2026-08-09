@@ -41,8 +41,46 @@ def make_envelope(**overrides: object) -> UserExperienceEnvelope:
         "all_deferred_items_source_backed": True,
         "blocking_user_experience_tt": 0,
         "coverage_reducer_v2_exit": 0,
+        "source_families_required": 23,
+        "source_families_reviewed": 23,
+        "source_expectations_unmapped": 0,
+        "requirement_id_not_in_canonical_ledger": 0,
+        "requirement_domain_mismatch": 0,
+        "requirement_disposition_mismatch": 0,
+        "u0_u1_disposition_conflict": 0,
+        "p0_runtime_pass_raw_evidence_missing": 0,
+        "p0_runtime_pass_independent_evidence_missing": 0,
+        "p0_runtime_pass_fixture_missing": 0,
+        "p0_runtime_pass_command_missing": 0,
+        "p0_runtime_pass_trace_missing": 0,
+        "p0_runtime_pass_hash_missing": 0,
+        "classification_terminal_contradiction": 0,
+        "named_tool_claim_without_lifecycle_evidence": 0,
+        "knowledge_workbench_scope_resolved": True,
+        "obsidian_identity_resolved": True,
+        "obsidian_installed": True,
+        "obsidian_runtime_qualified": True,
+        "obsidian_feature_inventory_complete": True,
+        "obsidian_unknown_features": 0,
+        "llm_wiki_identity_resolved": True,
+        "llm_wiki_single_selected_identity": True,
+        "llm_wiki_installed": True,
+        "llm_wiki_runtime_qualified": True,
+        "llm_wiki_feature_inventory_complete": True,
+        "llm_wiki_unknown_features": 0,
+        "workbench_canonical_authority_violation": 0,
+        "tool_claim_without_identity": 0,
+        "tool_claim_without_version": 0,
+        "tool_claim_without_raw_evidence": 0,
+        "tool_claim_without_independent_evidence": 0,
+        "obsidian_llmwiki_integration_pass": True,
+        "withdrawal_consistency_pass": True,
+        "conflict_fail_closed_pass": True,
+        "fallback_to_git_markdown_pass": True,
+        "external_gated_features_all_accounted_for": True,
+        "blocking_workbench_tt": 0,
         "checker": "INDEPENDENT_CHECKER",
-        "artifacts": ("UECX", "U7", "U8", "U9"),
+        "artifacts": ("UECX", "U7", "U8", "U9", "OBS", "WIKI"),
     }
     base.update(overrides)
     return UserExperienceEnvelope.from_dict(base)
@@ -100,6 +138,51 @@ class UserExperienceReducerTests(unittest.TestCase):
         decision = self.reducer.reduce(make_envelope(coverage_reducer_v2_exit=1))
         self.assertEqual(decision["verdict"], "FAIL_CLOSED")
         self.assertIn("COVERAGE_REDUCER_V2_NOT_PASS", decision["reasons"])
+
+    def test_source_family_scan_incomplete_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(source_families_reviewed=22))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("SOURCE_FAMILY_SCAN_INCOMPLETE", decision["reasons"])
+
+    def test_raw_evidence_missing_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(p0_runtime_pass_raw_evidence_missing=1))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("P0_RUNTIME_PASS_RAW_EVIDENCE_MISSING", decision["reasons"])
+
+    def test_independent_evidence_missing_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(p0_runtime_pass_independent_evidence_missing=2))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("P0_RUNTIME_PASS_INDEPENDENT_EVIDENCE_MISSING", decision["reasons"])
+
+    def test_crosswalk_mismatch_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(requirement_domain_mismatch=1))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("REQUIREMENT_DOMAIN_MISMATCH", decision["reasons"])
+
+    def test_disposition_conflict_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(u0_u1_disposition_conflict=1))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("U0_U1_DISPOSITION_CONFLICT", decision["reasons"])
+
+    def test_classification_contradiction_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(classification_terminal_contradiction=1))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("CLASSIFICATION_TERMINAL_CONTRADICTION", decision["reasons"])
+
+    def test_obsidian_not_installed_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(obsidian_installed=False))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("OBSIDIAN_NOT_INSTALLED", decision["reasons"])
+
+    def test_llmwiki_unknown_features_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(llm_wiki_unknown_features=1))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("LLM_WIKI_UNKNOWN_FEATURES_NONZERO", decision["reasons"])
+
+    def test_integration_fail_fails(self) -> None:
+        decision = self.reducer.reduce(make_envelope(obsidian_llmwiki_integration_pass=False))
+        self.assertEqual(decision["verdict"], "FAIL_CLOSED")
+        self.assertIn("OBSIDIAN_LLMWIKI_INTEGRATION_FAIL", decision["reasons"])
 
     def test_missing_field_rejected(self) -> None:
         data = make_envelope().__dict__

@@ -1,0 +1,12 @@
+{
+ "uex_id": "UEX-005",
+ "kind": "raw",
+ "fixture": "var/uecx/vs05",
+ "command": "python var/u4_vertical_slices.py::VS-05",
+ "router_trace": {
+  "recalled": 1
+ },
+ "raw_output": "relevant memory auto-recalled (user did not say 'use memory')",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:33.650199+00:00"
+}

@@ -1,0 +1,12 @@
+{
+ "uex_id": "UEX-009",
+ "kind": "raw",
+ "fixture": "var/uecx/vs09",
+ "command": "python var/u4_vertical_slices.py::VS-09",
+ "router_trace": {
+  "error": "ABSTAIN_NO_GROUNDING:withdrawn statement"
+ },
+ "raw_output": "withdrawn evidence abstained (no hallucinated citation)",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:34.329760+00:00"
+}

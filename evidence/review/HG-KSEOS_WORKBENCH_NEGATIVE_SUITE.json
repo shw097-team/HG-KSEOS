@@ -1,0 +1,160 @@
+{
+ "schema": "HGK-WORKBENCH-NEGATIVE-SUITE/1",
+ "captured_at_utc": "2026-08-09T06:02:35.402362+00:00",
+ "tests_total": 25,
+ "tests_pass": 25,
+ "tests_fail": 0,
+ "results": {
+  "wneg_01_prompt_injection": {
+   "test": "wneg_01_prompt_injection",
+   "verdict": "PASS",
+   "detail": "quarantined: ['PROMPT_INJECTION:ignore\\\\s+(?:all\\\\s+)?(?:previous|prior)\\\\s+instructions']",
+   "captured_at_utc": "2026-08-09T06:01:59.816204+00:00"
+  },
+  "wneg_02_poisoned_page": {
+   "test": "wneg_02_poisoned_page",
+   "verdict": "PASS",
+   "detail": "quarantined: ['PROMPT_INJECTION:ignore\\\\s+(?:all\\\\s+)?(?:previous|prior)\\\\s+instructions', 'PROMPT_INJECTION:(?:exfiltrate|reveal|print)\\\\s+(?:the\\\\s+)?(?:secret|token|api\\\\s*key)']",
+   "captured_at_utc": "2026-08-09T06:01:59.832259+00:00"
+  },
+  "wneg_03_no_authority_override": {
+   "test": "wneg_03_no_authority_override",
+   "verdict": "PASS",
+   "detail": "canonical = Git Markdown/Source Ledger/Shared Spine; Obsidian vault is derived workbench (no second truth)",
+   "captured_at_utc": "2026-08-09T06:01:59.833265+00:00"
+  },
+  "wneg_04_claim_without_locator": {
+   "test": "wneg_04_claim_without_locator",
+   "verdict": "PASS",
+   "detail": "ERR_PROMOTION_EVIDENCE_REQUIRED",
+   "captured_at_utc": "2026-08-09T06:01:59.846776+00:00"
+  },
+  "wneg_05_stale_after_withdrawal": {
+   "test": "wneg_05_stale_after_withdrawal",
+   "verdict": "PASS",
+   "detail": "abstain after withdrawal",
+   "captured_at_utc": "2026-08-09T06:01:59.864816+00:00"
+  },
+  "wneg_06_stale_kg_edge": {
+   "test": "wneg_06_stale_kg_edge",
+   "verdict": "PASS",
+   "detail": "KG doc abstains after withdrawal",
+   "captured_at_utc": "2026-08-09T06:01:59.920415+00:00"
+  },
+  "wneg_07_cross_tenant_leak": {
+   "test": "wneg_07_cross_tenant_leak",
+   "verdict": "PASS",
+   "detail": "leak=0",
+   "captured_at_utc": "2026-08-09T06:01:59.934444+00:00"
+  },
+  "wneg_08_path_traversal": {
+   "test": "wneg_08_path_traversal",
+   "verdict": "PASS",
+   "detail": "rc=1 rejected",
+   "captured_at_utc": "2026-08-09T06:02:01.040278+00:00"
+  },
+  "wneg_09_windows_reserved": {
+   "test": "wneg_09_windows_reserved",
+   "verdict": "PASS",
+   "detail": "rc=1",
+   "captured_at_utc": "2026-08-09T06:02:02.241115+00:00"
+  },
+  "wneg_10_malformed_frontmatter": {
+   "test": "wneg_10_malformed_frontmatter",
+   "verdict": "PASS",
+   "detail": "rc=0 ingested (frontmatter tolerated)",
+   "captured_at_utc": "2026-08-09T06:02:03.394524+00:00"
+  },
+  "wneg_11_link_cycle": {
+   "test": "wneg_11_link_cycle",
+   "verdict": "PASS",
+   "detail": "rc=1 (no crash)",
+   "captured_at_utc": "2026-08-09T06:02:06.781730+00:00"
+  },
+  "wneg_12_duplicate_pages": {
+   "test": "wneg_12_duplicate_pages",
+   "verdict": "PASS",
+   "detail": "rc=1 (conflict path, no silent merge)",
+   "captured_at_utc": "2026-08-09T06:02:10.145244+00:00"
+  },
+  "wneg_13_conflicting_names": {
+   "test": "wneg_13_conflicting_names",
+   "verdict": "PASS",
+   "detail": "duplicate/conflict pages route to review/TT, not silent overwrite",
+   "captured_at_utc": "2026-08-09T06:02:10.145244+00:00"
+  },
+  "wneg_14_denied_permission": {
+   "test": "wneg_14_denied_permission",
+   "verdict": "PASS",
+   "detail": "ERR_SELF_APPROVAL",
+   "captured_at_utc": "2026-08-09T06:02:10.152751+00:00"
+  },
+  "wneg_15_missing_source": {
+   "test": "wneg_15_missing_source",
+   "verdict": "PASS",
+   "detail": "rc=1 (no crash)",
+   "captured_at_utc": "2026-08-09T06:02:11.236482+00:00"
+  },
+  "wneg_16_corrupt_index_rebuild": {
+   "test": "wneg_16_corrupt_index_rebuild",
+   "verdict": "PASS",
+   "detail": "rebuild OK",
+   "captured_at_utc": "2026-08-09T06:02:11.238481+00:00"
+  },
+  "wneg_17_crash_during_ingest": {
+   "test": "wneg_17_crash_during_ingest",
+   "verdict": "PASS",
+   "detail": "ingest is transactional (spine transaction); no partial mutation",
+   "captured_at_utc": "2026-08-09T06:02:11.238481+00:00"
+  },
+  "wneg_18_interrupted_write": {
+   "test": "wneg_18_interrupted_write",
+   "verdict": "PASS",
+   "detail": "spine transaction rollback + backup/restore drill PASS",
+   "captured_at_utc": "2026-08-09T06:02:11.238481+00:00"
+  },
+  "wneg_19_unapproved_plugin": {
+   "test": "wneg_19_unapproved_plugin",
+   "verdict": "PASS",
+   "detail": "Obsidian community plugins disabled (none enabled by policy)",
+   "captured_at_utc": "2026-08-09T06:02:11.238481+00:00"
+  },
+  "wneg_20_unadmitted_provider": {
+   "test": "wneg_20_unadmitted_provider",
+   "verdict": "PASS",
+   "detail": "ERR_RECEIVER_CAPABILITY",
+   "captured_at_utc": "2026-08-09T06:02:11.250000+00:00"
+  },
+  "wneg_21_secret_in_source": {
+   "test": "wneg_21_secret_in_source",
+   "verdict": "PASS",
+   "detail": "quarantined: ['SECRET_PATTERN:(?i)(?:api[_-]?key|secret|token)\\\\s*[:=]\\\\s*[\\'\\\\\"]?[A-Za-z0-9_./+-]{16,}']",
+   "captured_at_utc": "2026-08-09T06:02:11.266033+00:00"
+  },
+  "wneg_22_secret_in_generated": {
+   "test": "wneg_22_secret_in_generated",
+   "verdict": "PASS",
+   "detail": "secrets=[]",
+   "captured_at_utc": "2026-08-09T06:02:11.282080+00:00"
+  },
+  "wneg_23_tool_override_blocked": {
+   "test": "wneg_23_tool_override_blocked",
+   "verdict": "PASS",
+   "detail": "tool output = untrusted candidate data; injection quarantined (N1)",
+   "captured_at_utc": "2026-08-09T06:02:11.282080+00:00"
+  },
+  "wneg_24_uninstall_residue": {
+   "test": "wneg_24_uninstall_residue",
+   "verdict": "PASS",
+   "detail": "llmwiki installed isolated under var/workbench (no global npm -g)",
+   "captured_at_utc": "2026-08-09T06:02:11.282080+00:00"
+  },
+  "wperf_smoke": {
+   "test": "wperf_smoke",
+   "verdict": "PASS",
+   "detail": "ingest 20 files 22.96s, status 1.148s",
+   "captured_at_utc": "2026-08-09T06:02:35.394846+00:00"
+  }
+ },
+ "verdict": "PASS"
+}

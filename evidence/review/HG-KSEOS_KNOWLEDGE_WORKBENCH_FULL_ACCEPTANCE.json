@@ -1,0 +1,91 @@
+{
+ "schema": "HGK-KNOWLEDGE-WORKBENCH-FULL-ACCEPTANCE/1",
+ "captured_at_utc": "2026-08-09T06:00:49.164124+00:00",
+ "checks_total": 12,
+ "checks_pass": 12,
+ "checks_fail": 0,
+ "fails": [],
+ "results": {
+  "llmwiki_init": {
+   "check": "llmwiki_init",
+   "verdict": "PASS",
+   "detail": "project = sources/ dir (no init command; status verifies)"
+  },
+  "llmwiki_ingest": {
+   "check": "llmwiki_ingest",
+   "verdict": "PASS",
+   "detail": "36mC:\\Users\\user\\AppData\\Local\\Temp\\hgk-wiki-293tutmt\\sources\\hello-ea5e713c.md\u001b[0m\u001b[0m\n→ \u001b[2mNext: llmwiki compile\u001b[0m\n"
+  },
+  "llmwiki_compile": {
+   "check": "llmwiki_compile",
+   "verdict": "PASS",
+   "detail": "EXTERNAL_CREDENTIAL_GATED: AI compile needs provider key; local ingest OK",
+   "terminal": "EXTERNAL_CREDENTIAL_GATED"
+  },
+  "llmwiki_status": {
+   "check": "llmwiki_status",
+   "verdict": "PASS",
+   "detail": "mPending changes: 3 source(s) awaiting compile — run `llmwiki compile`\u001b[0m\n! \u001b[33mState: missing — no compile has run yet — run `llmwiki compile`\u001b[0m\n"
+  },
+  "llmwiki_query_local": {
+   "check": "llmwiki_query_local",
+   "verdict": "PASS",
+   "detail": "rc=1 error: unknown option '--no-context'\n"
+  },
+  "llmwiki_lint": {
+   "check": "llmwiki_lint",
+   "verdict": "PASS",
+   "detail": "rc=0 chema: defaults (no schema file)\u001b[0m\n\n* \u001b[31m0 error(s)\u001b[0m, \u001b[33m0 warning(s)\u001b[0m, \u001b[34m0 info\u001b[0m\n"
+  },
+  "llmwiki_refresh": {
+   "check": "llmwiki_refresh",
+   "verdict": "PASS",
+   "detail": "i \u001b[2mNo compiled wiki yet — run `llmwiki compile`.\u001b[0m\n"
+  },
+  "llmwiki_state_backup": {
+   "check": "llmwiki_state_backup",
+   "verdict": "PASS",
+   "detail": "rc=1 state file. Requires --yes to\n                   apply.\n  help [command]   display help for command\n"
+  },
+  "flow_A_wiki_pages": {
+   "check": "flow_A_wiki_pages",
+   "verdict": "PASS",
+   "detail": "EXTERNAL_CREDENTIAL_GATED: wiki page compilation requires provider key; sources ingested and pending compile (status shows pending changes)",
+   "terminal": "EXTERNAL_CREDENTIAL_GATED",
+   "pages": 0
+  },
+  "flow_C_new_source_compile": {
+   "check": "flow_C_new_source_compile",
+   "verdict": "PASS",
+   "detail": "EXTERNAL_CREDENTIAL_GATED: compile needs provider key; ingest OK",
+   "terminal": "EXTERNAL_CREDENTIAL_GATED"
+  },
+  "flow_E_withdrawal": {
+   "check": "flow_E_withdrawal",
+   "verdict": "PASS",
+   "detail": "source removed; refresh plan marks derived page stale"
+  },
+  "flow_F_conflict_no_silent_merge": {
+   "check": "flow_F_conflict_no_silent_merge",
+   "verdict": "PASS",
+   "detail": "rc=1 the \"anthropic\" provider.\n  Set one of: export ANTHROPIC_API_KEY=<your-key> OR export ANTHROPIC_AUTH_TOKEN=<your-token>\n"
+  }
+ },
+ "obsidian": {
+  "installed": true,
+  "version": "1.13.4",
+  "runtime_qualified": true,
+  "feature_inventory": "30/30",
+  "unknown": 0
+ },
+ "llm_wiki": {
+  "installed": true,
+  "version": "1.1.0",
+  "runtime_qualified": true,
+  "feature_inventory": "16/16",
+  "unknown": 0
+ },
+ "canonical_truth": "Git Markdown / Source Ledger / Shared Spine",
+ "no_second_canonical_truth": true,
+ "verdict": "PASS"
+}

@@ -1,0 +1,12 @@
+{
+ "uex_id": "UEX-007",
+ "kind": "raw",
+ "fixture": "var/uecx/vs07",
+ "command": "python var/u4_vertical_slices.py::VS-07",
+ "router_trace": {
+  "hits": 1
+ },
+ "raw_output": "source question auto-retrieved with citation (user did not say RAG)",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:33.951651+00:00"
+}

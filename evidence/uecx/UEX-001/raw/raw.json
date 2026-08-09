@@ -1,0 +1,12 @@
+{
+ "uex_id": "UEX-001",
+ "kind": "raw",
+ "fixture": "var/uecx/vs01",
+ "command": "python var/u4_vertical_slices.py::VS-01",
+ "router_trace": {
+  "skill_selected": "report-gen"
+ },
+ "raw_output": "natural task auto-routed to known skill (implicit allowed; user did not name it)",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:33.508488+00:00"
+}

@@ -1,0 +1,440 @@
+{
+ "schema": "HGK-UECX-SOURCE-REQUIREMENT-CROSSWALK/1",
+ "captured_at_utc": "2026-08-09T06:03:33.393815+00:00",
+ "rows_total": 15,
+ "rows_validated": 15,
+ "errors": {
+  "source_expectations_unmapped": 0,
+  "requirement_id_not_in_D0": 0,
+  "requirement_domain_mismatch": 0,
+  "requirement_disposition_mismatch": 0,
+  "owner_mismatch": 0,
+  "u0_u1_disposition_conflict": 0,
+  "unexplained_many_to_one": 0
+ },
+ "error_detail": {},
+ "crosswalk": [
+  {
+   "uex_id": "UEX-001",
+   "source_expectation_ids": [
+    "UXR-001",
+    "UXR-003"
+   ],
+   "source_locators": [
+    "P0-CIP L2233 COV-01-07",
+    "PREDEV REQ-034"
+   ],
+   "canonical_requirement_ids": [
+    "COV-01-01",
+    "COV-01-07",
+    "COV-22-01"
+   ],
+   "canonical_domain_ids": [
+    "COV-01",
+    "COV-22"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-01",
+    "PRE-07"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-01-01",
+    "D0 row COV-01-07",
+    "D0 row COV-22-01"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-002",
+   "source_expectation_ids": [
+    "UXR-001",
+    "UXR-004"
+   ],
+   "source_locators": [
+    "PREDEV PRE-12",
+    "P0-CIP COV-16"
+   ],
+   "canonical_requirement_ids": [
+    "COV-16-01",
+    "COV-16-02"
+   ],
+   "canonical_domain_ids": [
+    "COV-16"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-08"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-16-01",
+    "D0 row COV-16-02"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-003",
+   "source_expectation_ids": [
+    "UXR-013"
+   ],
+   "source_locators": [
+    "PREDEV PRE-16 REQ-101"
+   ],
+   "canonical_requirement_ids": [
+    "COV-13-01",
+    "COV-13-02"
+   ],
+   "canonical_domain_ids": [
+    "COV-13"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-12"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-13-01",
+    "D0 row COV-13-02"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-004",
+   "source_expectation_ids": [
+    "UXR-013"
+   ],
+   "source_locators": [
+    "PREDEV PRE-16 REQ-102"
+   ],
+   "canonical_requirement_ids": [
+    "COV-13-03",
+    "COV-13-04"
+   ],
+   "canonical_domain_ids": [
+    "COV-13"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-12"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-13-03",
+    "D0 row COV-13-04"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-005",
+   "source_expectation_ids": [
+    "UXR-005",
+    "UXR-005b"
+   ],
+   "source_locators": [
+    "PREDEV PRE-19 REQ-137"
+   ],
+   "canonical_requirement_ids": [
+    "COV-12-01",
+    "COV-12-02"
+   ],
+   "canonical_domain_ids": [
+    "COV-12"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-01"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-12-01",
+    "D0 row COV-12-02"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-006",
+   "source_expectation_ids": [
+    "UXR-005",
+    "UXR-005b"
+   ],
+   "source_locators": [
+    "PREDEV PRE-19 REQ-138"
+   ],
+   "canonical_requirement_ids": [
+    "COV-12-03",
+    "COV-12-04"
+   ],
+   "canonical_domain_ids": [
+    "COV-12"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-01"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-12-03",
+    "D0 row COV-12-04"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-007",
+   "source_expectation_ids": [
+    "UXR-006",
+    "UXR-015"
+   ],
+   "source_locators": [
+    "PREDEV PRE-20 REQ-145"
+   ],
+   "canonical_requirement_ids": [
+    "COV-10-01",
+    "COV-10-02"
+   ],
+   "canonical_domain_ids": [
+    "COV-10"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-03"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-10-01",
+    "D0 row COV-10-02"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-008",
+   "source_expectation_ids": [
+    "UXR-006"
+   ],
+   "source_locators": [
+    "PREDEV PRE-20 KG scope"
+   ],
+   "canonical_requirement_ids": [
+    "COV-11-01",
+    "COV-11-02"
+   ],
+   "canonical_domain_ids": [
+    "COV-11"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-09"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-11-01",
+    "D0 row COV-11-02"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-009",
+   "source_expectation_ids": [
+    "UXR-015"
+   ],
+   "source_locators": [
+    "PREDEV PRE-20 withdrawn"
+   ],
+   "canonical_requirement_ids": [
+    "COV-10-03",
+    "COV-11-03"
+   ],
+   "canonical_domain_ids": [
+    "COV-10",
+    "COV-11"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-03",
+    "PRE-09"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-10-03",
+    "D0 row COV-11-03"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-010",
+   "source_expectation_ids": [
+    "UXR-007"
+   ],
+   "source_locators": [
+    "PREDEV PRE-22 REQ-169"
+   ],
+   "canonical_requirement_ids": [
+    "REQ-169"
+   ],
+   "canonical_domain_ids": [
+    "COV-22"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-07"
+   ],
+   "crosswalk_evidence": [
+    "D0 row REQ-169"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-011",
+   "source_expectation_ids": [
+    "UXR-007"
+   ],
+   "source_locators": [
+    "PREDEV PRE-22 REQ-170"
+   ],
+   "canonical_requirement_ids": [
+    "REQ-170"
+   ],
+   "canonical_domain_ids": [
+    "COV-22"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-07"
+   ],
+   "crosswalk_evidence": [
+    "D0 row REQ-170"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-012",
+   "source_expectation_ids": [
+    "UXR-009"
+   ],
+   "source_locators": [
+    "PREDEV PRE-19/PRE-22 learning boundary"
+   ],
+   "canonical_requirement_ids": [
+    "REQ-169",
+    "REQ-170"
+   ],
+   "canonical_domain_ids": [
+    "COV-22"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-07"
+   ],
+   "crosswalk_evidence": [
+    "D0 row REQ-169",
+    "D0 row REQ-170"
+   ],
+   "merge_reason": "REQ-169/170 cover active auto-select+FIT-GAP; full candidate→promotion→reuse loop is DEFERRED_SOURCE_BACKED",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-013",
+   "source_expectation_ids": [
+    "UXR-006"
+   ],
+   "source_locators": [
+    "PREDEV PRE-10/PRE-20"
+   ],
+   "canonical_requirement_ids": [
+    "COV-08-01",
+    "COV-10-04"
+   ],
+   "canonical_domain_ids": [
+    "COV-08",
+    "COV-10"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-03",
+    "PRE-05"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-08-01",
+    "D0 row COV-10-04"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  },
+  {
+   "uex_id": "UEX-014",
+   "source_expectation_ids": [
+    "UXR-002",
+    "UXR-012"
+   ],
+   "source_locators": [
+    "P0-CIP L13595 obsidian OPTIONAL"
+   ],
+   "canonical_requirement_ids": [],
+   "canonical_domain_ids": [],
+   "canonical_dispositions": [],
+   "owner_wps": [],
+   "crosswalk_evidence": [],
+   "merge_reason": "Obsidian is a tool-registry row (P0-CIP L13595), not a canonical requirement; disposition OPTIONAL + USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN",
+   "validated": "Obsidian is a tool-registry row (P0-CIP L13595), not a canonical requirement; disposition OPTIONAL + USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN"
+  },
+  {
+   "uex_id": "UEX-015",
+   "source_expectation_ids": [
+    "UXR-003",
+    "UXR-011"
+   ],
+   "source_locators": [
+    "PREDEV PRE-18 REQ-109"
+   ],
+   "canonical_requirement_ids": [
+    "COV-14-01",
+    "COV-14-02"
+   ],
+   "canonical_domain_ids": [
+    "COV-14"
+   ],
+   "canonical_dispositions": [
+    "ACTIVE_REQUIRED"
+   ],
+   "owner_wps": [
+    "PRE-13"
+   ],
+   "crosswalk_evidence": [
+    "D0 row COV-14-01",
+    "D0 row COV-14-02"
+   ],
+   "merge_reason": "source locator/related-domain binding to canonical D0 rows",
+   "validated": true
+  }
+ ],
+ "verdict": "PASS"
+}

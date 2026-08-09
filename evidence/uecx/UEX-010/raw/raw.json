@@ -1,0 +1,13 @@
+{
+ "uex_id": "UEX-010",
+ "kind": "raw",
+ "fixture": "var/uecx/vs10",
+ "command": "python var/u4_vertical_slices.py::VS-10",
+ "router_trace": {
+  "selected": "codex-bounded-execute",
+  "unrelated_auto_select_blocked": true
+ },
+ "raw_output": "existing skill auto-selected; implicit-forbidden unrelated skill not auto-chosen",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:34.329760+00:00"
+}

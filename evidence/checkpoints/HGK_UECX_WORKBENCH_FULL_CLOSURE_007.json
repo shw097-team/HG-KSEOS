@@ -1,0 +1,47 @@
+{
+  "checkpoint_id": "HGK_UECX_WORKBENCH_FULL_CLOSURE_007",
+  "task_id": "HGK-UECX-WORKBENCH-FULL-CLOSURE-007",
+  "updated_at": "2026-08-09T06:00:00+08:00",
+  "phase": "STARTED - baseline verified",
+  "current_head": "042afbd80dab2fff1106252080c229976774c73d",
+  "branch": "codex/hgk-final-closure-002",
+  "git_status": "CLEAN",
+  "package": {
+    "path": "var/releases/HG-KSEOS_LOCAL_CANDIDATE.zip",
+    "bytes": 26557593,
+    "sha256": "0da8401a1ba79fca9ec8369886b2b8cf3db43ff9e9c3ac8f5aa16f50a820ea2b",
+    "payload_files": 308,
+    "tst092": "INDEPENDENT_CASE_PASS (same HEAD + same package)"
+  },
+  "baseline": {
+    "status": "PRIOR_CORE_PASS_BASELINE_REUSE_CANDIDATE",
+    "coverage_reducer_v2": "PASS exit 0",
+    "user_experience_reducer_v1": "PASS exit 0",
+    "product_suite": "110/110 PASS",
+    "hlpe": "51/51 PASS"
+  },
+  "reopen_scope": [
+    "UECX_SOURCE_BINDING", "UECX_RAW_INDEPENDENT_EVIDENCE",
+    "USER_EXPERIENCE_REDUCER_FAIL_CLOSED", "CONTROLLED_SKILL_LEARNING_SCOPE_RESOLUTION",
+    "KNOWLEDGE_WORKBENCH_FULL_INSTALLATION", "OBSIDIAN_FULL_QUALIFICATION",
+    "LLM_WIKI_EXACT_IDENTITY_INSTALLATION", "LLM_WIKI_FULL_QUALIFICATION",
+    "OBSIDIAN_LLM_WIKI_HGK_INTEGRATION"
+  ],
+  "user_authorized_scope_expansion": {
+    "obsidian": "USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN",
+    "llm_wiki": "USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN"
+  },
+  "plan": [
+    "F1 source-family scan", "F2 crosswalk rebind", "F3 UECX schema repair",
+    "F4 raw+independent evidence closure", "F5 reducer fail-closed patch",
+    "F6 skill-learning scope", "W0 identity resolution (Obsidian + LLM Wiki)",
+    "W1 pre-install snapshot", "W2-W3 Obsidian install + feature inventory",
+    "W4 canonicality contract", "W5-W7 LLM Wiki install + feature inventory + provider binding",
+    "W8-W9 architecture binding + integration flows A-F",
+    "W10 negative suite", "W11 performance smoke",
+    "UEX-W01..W10 workbench journeys", "reducer workbench invariants",
+    "User Guide patch", "SBOM update", "full reseal", "Final Evidence MD S/T",
+    "final readback"
+  ],
+  "next_atomic_action": "F1: authority source-family scan coverage"
+}

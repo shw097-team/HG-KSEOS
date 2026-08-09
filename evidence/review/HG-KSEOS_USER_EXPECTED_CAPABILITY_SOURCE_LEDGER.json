@@ -1,7 +1,7 @@
 {
  "schema": "HGK-USER-EXPECTED-CAPABILITY-SOURCE-LEDGER/1",
- "captured_at_utc": "2026-08-09T05:13:19.279027+00:00",
- "expectations_total": 16,
+ "captured_at_utc": "2026-08-09T06:03:33.228553+00:00",
+ "expectations_total": 17,
  "expectations": [
   {
    "expectation_id": "UXR-001",
@@ -110,8 +110,8 @@
    "runtime_required_now": true,
    "p0_disposition": "ACTIVE_REQUIRED",
    "related_requirements": [
-    "REQ-137",
-    "REQ-138"
+    "COV-12-01",
+    "COV-12-02"
    ],
    "related_domains": [
     "COV-12"
@@ -119,6 +119,27 @@
    "owner": "PRE-19",
    "source_file_exists": true,
    "source_file_sha256": "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+  },
+  {
+   "expectation_id": "UXR-005b",
+   "source_file": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md",
+   "source_locator": "P0 COV-12 family (ACTIVE_REQUIRED) — canonical memory runtime binding",
+   "authority_rank": "A1",
+   "user_goal": "memory runtime auto-recall is ACTIVE_REQUIRED via P0 COV-12",
+   "expected_behavior": "P0 COV-12-01..08 ACTIVE_REQUIRED; PREDEV REQ-137/138 are LATER planning rows (DEFERRED_SOURCE_BACKED)",
+   "expected_experience": "memory runtime qualified under P0 COV-12",
+   "manual_intervention_expectation": "none",
+   "runtime_required_now": true,
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "related_requirements": [
+    "COV-12-01"
+   ],
+   "related_domains": [
+    "COV-12"
+   ],
+   "owner": "PRE-19",
+   "source_file_exists": true,
+   "source_file_sha256": "68b62b9ee2bb2b3ae5d172ccbb5a4182b20727dda8197e19e4a46905b518d911"
   },
   {
    "expectation_id": "UXR-006",

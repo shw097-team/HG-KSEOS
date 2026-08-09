@@ -1,0 +1,50 @@
+{
+ "schema": "HGK-KNOWLEDGE-WORKBENCH-IDENTITY/1",
+ "captured_at_utc": "2026-08-09T06:00:49.164124+00:00",
+ "obsidian": {
+  "identity": "Obsidian (official)",
+  "repo": "obsidianmd/obsidian-releases",
+  "selected_version": "1.13.4",
+  "prior_version": "1.12.7",
+  "installer": "Obsidian-1.13.4.exe",
+  "installer_bytes": 326879800,
+  "installer_sha256": "8c761aaa40310d339b6936092e91e99a9886daf1fd655f4c8d59e9f7fa46e7a0",
+  "license": "Proprietary freeware (Obsidian.md EULA)",
+  "install_root": "C:\\Users\\user\\AppData\\Local\\Programs\\Obsidian",
+  "install_mode": "user-level (no admin)",
+  "source_p0_disposition": "OPTIONAL",
+  "current_execution_scope": "USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN"
+ },
+ "llm_wiki": {
+  "identity": "llm-wiki-compiler",
+  "repo": "atomicstrata/llm-wiki-compiler",
+  "selected_version": "1.1.0",
+  "selected_release_tag": "v1.1.0",
+  "package": "llm-wiki-compiler@1.1.0 (npm)",
+  "npm_integrity": "sha512-LJslVmSt8tng8n3t0tw1QEqZJKKD0ualJ/WupdZMCtCzmCNarkP99",
+  "license": "MIT",
+  "role": "knowledge.K09.wiki_compiler",
+  "source_p0_disposition": "PRIMARY_ADAPTER / TARGET_CONTRACT_DEFINED / OBSERVED_NOT_INSTALLED",
+  "current_execution_scope": "USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN",
+  "rejected_candidates": [
+   {
+    "identity": "ussumant/llm-wiki-compiler",
+    "reason": "Claude Code plugin fork (307 stars); narrower agent-only surface vs primary"
+   },
+   {
+    "identity": "bybit-exchange/kaas",
+    "reason": "Python; lower stars (88); not the canonical Karpathy-pattern original"
+   },
+   {
+    "identity": "Emmimal/wiki-compiler",
+    "reason": "pure-Python, lower stars (86)"
+   },
+   {
+    "identity": "6eanut/llm-wiki",
+    "reason": "Claude Code skill shell script, 41 stars"
+   }
+  ],
+  "selection_rationale": "primary official original (1894 stars) matching knowledge.K09.wiki_compiler role: raw sources in, interlinked wiki out; MIT; local-first; Git Markdown; npm pinned with sha512 integrity; Node>=24 satisfied",
+  "independent_checker": "INDEPENDENT_CHECKER"
+ }
+}

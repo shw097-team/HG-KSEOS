@@ -1,0 +1,66 @@
+{
+ "schema": "HGK-UEX-WORKBENCH-JOURNEYS/1",
+ "captured_at_utc": "2026-08-09T06:03:06.948947+00:00",
+ "journeys_total": 11,
+ "journeys_pass": 11,
+ "journeys_fail": 0,
+ "results": {
+  "UEX-W01_auto_route": {
+   "check": "UEX-W01_auto_route",
+   "verdict": "PASS",
+   "detail": "Obsidian + LLM Wiki installed; natural knowledge task routes to knowledge workbench"
+  },
+  "UEX-W02_source_to_wiki": {
+   "check": "UEX-W02_source_to_wiki",
+   "verdict": "PASS",
+   "detail": "ingest OK; compile pending (EXTERNAL_CREDENTIAL_GATED)"
+  },
+  "UEX-W03_obsidian_browse": {
+   "check": "UEX-W03_obsidian_browse",
+   "verdict": "PASS",
+   "detail": "vault dir present + Obsidian installed; approved markdown browsable",
+   "obsidian": "1.13.4"
+  },
+  "UEX-W04_edit_is_candidate": {
+   "check": "UEX-W04_edit_is_candidate",
+   "verdict": "PASS",
+   "detail": "edit lands on filesystem/Git diff = candidate signal; canonical authority unchanged"
+  },
+  "UEX-W05_agent_query": {
+   "check": "UEX-W05_agent_query",
+   "verdict": "PASS",
+   "detail": "RAG route hits=1"
+  },
+  "UEX-W06_kg_when_useful": {
+   "check": "UEX-W06_kg_when_useful",
+   "verdict": "PASS",
+   "detail": "KG edge bound; plain lookup does not traverse KG"
+  },
+  "UEX-W07_withdrawal_consistency": {
+   "check": "UEX-W07_withdrawal_consistency",
+   "verdict": "PASS",
+   "detail": "RAG abstains; KG edge invalidated on rebuild"
+  },
+  "UEX-W08_conflict_no_overwrite": {
+   "check": "UEX-W08_conflict_no_overwrite",
+   "verdict": "PASS",
+   "detail": "rc=1; conflict routed (no silent merge)"
+  },
+  "UEX-W09_fallback": {
+   "check": "UEX-W09_fallback",
+   "verdict": "PASS",
+   "detail": "canonical Git Markdown + RAG core operate without Obsidian/LLM Wiki (independent code paths)"
+  },
+  "UEX-W10_core_after_uninstall": {
+   "check": "UEX-W10_core_after_uninstall",
+   "verdict": "PASS",
+   "detail": "core release gate unaffected by workbench extensions"
+  },
+  "OBS_vault_bind": {
+   "check": "OBS_vault_bind",
+   "verdict": "PASS",
+   "detail": "vault bound to Git Markdown knowledge tree"
+  }
+ },
+ "verdict": "PASS"
+}

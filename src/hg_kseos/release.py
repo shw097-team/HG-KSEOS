@@ -332,6 +332,46 @@ class UserExperienceEnvelope:
     all_deferred_items_source_backed: bool
     blocking_user_experience_tt: int
     coverage_reducer_v2_exit: int
+    # --- task-007 F5 fail-closed invariants ---
+    source_families_required: int
+    source_families_reviewed: int
+    source_expectations_unmapped: int
+    requirement_id_not_in_canonical_ledger: int
+    requirement_domain_mismatch: int
+    requirement_disposition_mismatch: int
+    u0_u1_disposition_conflict: int
+    p0_runtime_pass_raw_evidence_missing: int
+    p0_runtime_pass_independent_evidence_missing: int
+    p0_runtime_pass_fixture_missing: int
+    p0_runtime_pass_command_missing: int
+    p0_runtime_pass_trace_missing: int
+    p0_runtime_pass_hash_missing: int
+    classification_terminal_contradiction: int
+    named_tool_claim_without_lifecycle_evidence: int
+    knowledge_workbench_scope_resolved: bool
+    # --- task-007 §26 workbench extension invariants ---
+    obsidian_identity_resolved: bool
+    obsidian_installed: bool
+    obsidian_runtime_qualified: bool
+    obsidian_feature_inventory_complete: bool
+    obsidian_unknown_features: int
+    llm_wiki_identity_resolved: bool
+    llm_wiki_single_selected_identity: bool
+    llm_wiki_installed: bool
+    llm_wiki_runtime_qualified: bool
+    llm_wiki_feature_inventory_complete: bool
+    llm_wiki_unknown_features: int
+    workbench_canonical_authority_violation: int
+    tool_claim_without_identity: int
+    tool_claim_without_version: int
+    tool_claim_without_raw_evidence: int
+    tool_claim_without_independent_evidence: int
+    obsidian_llmwiki_integration_pass: bool
+    withdrawal_consistency_pass: bool
+    conflict_fail_closed_pass: bool
+    fallback_to_git_markdown_pass: bool
+    external_gated_features_all_accounted_for: bool
+    blocking_workbench_tt: int
     checker: str
     artifacts: tuple[str, ...]
 
@@ -416,6 +456,84 @@ class UserExperienceReducer:
             reasons.append("BLOCKING_USER_EXPERIENCE_TT_NONZERO")
         if envelope.coverage_reducer_v2_exit != 0:
             reasons.append("COVERAGE_REDUCER_V2_NOT_PASS")
+
+        # ---- task-007 F5 fail-closed invariants ----
+        if envelope.source_families_required <= 0 or envelope.source_families_reviewed != envelope.source_families_required:
+            reasons.append("SOURCE_FAMILY_SCAN_INCOMPLETE")
+        if envelope.source_expectations_unmapped:
+            reasons.append("SOURCE_EXPECTATIONS_UNMAPPED")
+        if envelope.requirement_id_not_in_canonical_ledger:
+            reasons.append("REQUIREMENT_ID_NOT_IN_CANONICAL_LEDGER")
+        if envelope.requirement_domain_mismatch:
+            reasons.append("REQUIREMENT_DOMAIN_MISMATCH")
+        if envelope.requirement_disposition_mismatch:
+            reasons.append("REQUIREMENT_DISPOSITION_MISMATCH")
+        if envelope.u0_u1_disposition_conflict:
+            reasons.append("U0_U1_DISPOSITION_CONFLICT")
+        if envelope.p0_runtime_pass_raw_evidence_missing:
+            reasons.append("P0_RUNTIME_PASS_RAW_EVIDENCE_MISSING")
+        if envelope.p0_runtime_pass_independent_evidence_missing:
+            reasons.append("P0_RUNTIME_PASS_INDEPENDENT_EVIDENCE_MISSING")
+        if envelope.p0_runtime_pass_fixture_missing:
+            reasons.append("P0_RUNTIME_PASS_FIXTURE_MISSING")
+        if envelope.p0_runtime_pass_command_missing:
+            reasons.append("P0_RUNTIME_PASS_COMMAND_MISSING")
+        if envelope.p0_runtime_pass_trace_missing:
+            reasons.append("P0_RUNTIME_PASS_TRACE_MISSING")
+        if envelope.p0_runtime_pass_hash_missing:
+            reasons.append("P0_RUNTIME_PASS_HASH_MISSING")
+        if envelope.classification_terminal_contradiction:
+            reasons.append("CLASSIFICATION_TERMINAL_CONTRADICTION")
+        if envelope.named_tool_claim_without_lifecycle_evidence:
+            reasons.append("NAMED_TOOL_CLAIM_WITHOUT_LIFECYCLE_EVIDENCE")
+        if not envelope.knowledge_workbench_scope_resolved:
+            reasons.append("KNOWLEDGE_WORKBENCH_SCOPE_UNRESOLVED")
+
+        # ---- task-007 §26 workbench extension invariants ----
+        if not envelope.obsidian_identity_resolved:
+            reasons.append("OBSIDIAN_IDENTITY_UNRESOLVED")
+        if not envelope.obsidian_installed:
+            reasons.append("OBSIDIAN_NOT_INSTALLED")
+        if not envelope.obsidian_runtime_qualified:
+            reasons.append("OBSIDIAN_NOT_RUNTIME_QUALIFIED")
+        if not envelope.obsidian_feature_inventory_complete:
+            reasons.append("OBSIDIAN_FEATURE_INVENTORY_INCOMPLETE")
+        if envelope.obsidian_unknown_features:
+            reasons.append("OBSIDIAN_UNKNOWN_FEATURES_NONZERO")
+        if not envelope.llm_wiki_identity_resolved:
+            reasons.append("LLM_WIKI_IDENTITY_UNRESOLVED")
+        if not envelope.llm_wiki_single_selected_identity:
+            reasons.append("LLM_WIKI_SINGLE_IDENTITY_VIOLATION")
+        if not envelope.llm_wiki_installed:
+            reasons.append("LLM_WIKI_NOT_INSTALLED")
+        if not envelope.llm_wiki_runtime_qualified:
+            reasons.append("LLM_WIKI_NOT_RUNTIME_QUALIFIED")
+        if not envelope.llm_wiki_feature_inventory_complete:
+            reasons.append("LLM_WIKI_FEATURE_INVENTORY_INCOMPLETE")
+        if envelope.llm_wiki_unknown_features:
+            reasons.append("LLM_WIKI_UNKNOWN_FEATURES_NONZERO")
+        if envelope.workbench_canonical_authority_violation:
+            reasons.append("WORKBENCH_CANONICAL_AUTHORITY_VIOLATION")
+        if envelope.tool_claim_without_identity:
+            reasons.append("TOOL_CLAIM_WITHOUT_IDENTITY")
+        if envelope.tool_claim_without_version:
+            reasons.append("TOOL_CLAIM_WITHOUT_VERSION")
+        if envelope.tool_claim_without_raw_evidence:
+            reasons.append("TOOL_CLAIM_WITHOUT_RAW_EVIDENCE")
+        if envelope.tool_claim_without_independent_evidence:
+            reasons.append("TOOL_CLAIM_WITHOUT_INDEPENDENT_EVIDENCE")
+        if not envelope.obsidian_llmwiki_integration_pass:
+            reasons.append("OBSIDIAN_LLMWIKI_INTEGRATION_FAIL")
+        if not envelope.withdrawal_consistency_pass:
+            reasons.append("WITHDRAWAL_CONSISTENCY_FAIL")
+        if not envelope.conflict_fail_closed_pass:
+            reasons.append("CONFLICT_FAIL_CLOSED_FAIL")
+        if not envelope.fallback_to_git_markdown_pass:
+            reasons.append("FALLBACK_TO_GIT_MARKDOWN_FAIL")
+        if not envelope.external_gated_features_all_accounted_for:
+            reasons.append("EXTERNAL_GATED_FEATURES_NOT_ACCOUNTED")
+        if envelope.blocking_workbench_tt:
+            reasons.append("BLOCKING_WORKBENCH_TT_NONZERO")
 
         verdict = "HG-KSEOS_USER_EXPECTED_CAPABILITY_EXPERIENCE_PASS" if not reasons else "FAIL_CLOSED"
         envelope_json = canonical_json(envelope.__dict__)

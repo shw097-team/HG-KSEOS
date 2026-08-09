@@ -1,0 +1,13 @@
+{
+ "uex_id": "UEX-013",
+ "kind": "raw",
+ "fixture": "var/uecx/vs13",
+ "command": "python var/u4_vertical_slices.py::VS-13",
+ "router_trace": {
+  "published": true,
+  "withdrawn_invalidated": true
+ },
+ "raw_output": "new source published+retrievable; withdrawal invalidated",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:34.490554+00:00"
+}
