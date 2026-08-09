@@ -1,0 +1,81 @@
+{
+ "schema": "HGK-TECH-DRIFT-RESEARCH/1",
+ "window": "published_or_updated >= 2026-07-15",
+ "checked_at": "2026-08-09T07:44:23.148320+00:00",
+ "note": "primary sources only (official changelog/repo/registry); 2026-07-15 prior data is baseline, not current",
+ "findings": [
+  {
+   "source": "obsidian.md/changelog/2026-07-27-desktop-v1.13.4/",
+   "source_type": "official changelog",
+   "published": "2026-07-27",
+   "topic": "Obsidian Desktop 1.13.4 (Early access/catalyst)",
+   "finding": "fixes rare file-save race condition, workspace load failure when a view throws, embed/image/editor fixes",
+   "impact_on_hgk": "installed version carries the save/workspace regression fixes; must include rapid-save/reopen regression tests",
+   "action": "retain 1.13.4 (sealed working candidate); run §18 regression tests"
+  },
+  {
+   "source": "obsidian.md/changelog/2026-07-21-desktop-v1.13.3/",
+   "source_type": "official changelog",
+   "published": "2026-07-21",
+   "topic": "Obsidian Desktop 1.13.3 (Early access/catalyst)",
+   "finding": "intermediate catalyst release between 1.12.7 public and 1.13.4",
+   "impact_on_hgk": "superseded by 1.13.4; not selected",
+   "action": "none"
+  },
+  {
+   "source": "obsidian.md/changelog/2026-03-23-desktop-v1.12.7/",
+   "source_type": "official changelog",
+   "published": "2026-03-23",
+   "topic": "Obsidian Desktop 1.12.7 (Public) — bundled official CLI binary",
+   "finding": "installer now bundles new CLI binary (Obsidian.com terminal redirector); faster terminal interactions; replaces old Electron-binary CLI method",
+   "impact_on_hgk": "official CLI surface (Obsidian.com) present in install; enablement is Settings > General > Advanced toggle (user GUI step)",
+   "action": "record CLI binary presence + functional probe; toggle documented as user setup step"
+  },
+  {
+   "source": "github.com/obsidianmd/obsidian-releases/releases",
+   "source_type": "official GitHub releases",
+   "published": "2026-07-30 (v1.13.4 asset publish)",
+   "topic": "installer asset identity",
+   "finding": "Obsidian-1.13.4.exe 326,879,800 bytes; SHA-256 8c761aaa40310d339b6936092e91e99a9886daf1fd655f4c8d59e9f7fa46e7a0",
+   "impact_on_hgk": "installer pin + hash recorded in workbench identity resolution",
+   "action": "verified on disk"
+  },
+  {
+   "source": "github.com/nvk/llm-wiki/releases",
+   "source_type": "official repo releases",
+   "published": "2026-08-08 (v0.17.0)",
+   "topic": "LLM-Wiki landscape candidate A",
+   "finding": "active (v0.17.0 2026-08-08; v0.16.0 2026-07-10); Codex/OpenCode plugin packaging, Obsidian-compatible, MIT",
+   "impact_on_hgk": "candidate for FIT-GAP comparison; NOT the installed identity (installed = atomicstrata/llm-wiki-compiler)",
+   "action": "record in selection comparison; retain working tool per §11"
+  },
+  {
+   "source": "github.com/jackwener/llm-wiki/releases",
+   "source_type": "official repo releases",
+   "published": "2026-08-08 (repo updated)",
+   "topic": "LLM-Wiki landscape candidate B",
+   "finding": "Apache-2.0, npm @jackwener/llm-wiki, BM25 local search, CJK bigram; no tagged releases in window (tags absent)",
+   "impact_on_hgk": "candidate; NOT installed",
+   "action": "record; retain working tool"
+  },
+  {
+   "source": "github.com/Pratiyush/llm-wiki/releases",
+   "source_type": "official repo releases",
+   "published": "2026-04-30 (v1.3.82)",
+   "topic": "LLM-Wiki landscape candidate C",
+   "finding": "latest release v1.3.82 (2026-04-30) — before window; repo updated 2026-08-07",
+   "impact_on_hgk": "candidate; NOT installed",
+   "action": "record; retain working tool"
+  },
+  {
+   "source": "github.com/nashsu/llm_wiki",
+   "source_type": "official repo",
+   "published": "2026-08-09 (repo updated)",
+   "topic": "LLM-Wiki landscape candidate D",
+   "finding": "popular desktop app (16k stars) with integrated LLM/KG/vector/UI",
+   "impact_on_hgk": "NOT_PREFERRED per §10: duplicates Obsidian UI/RAG/KG/vector/provider stack",
+   "action": "rejected by policy; no migration"
+  }
+ ],
+ "verdict": "PASS"
+}

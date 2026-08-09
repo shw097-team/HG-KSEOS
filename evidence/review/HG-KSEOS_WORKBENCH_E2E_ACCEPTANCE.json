@@ -1,0 +1,115 @@
+{
+ "schema": "HGK-WORKBENCH-E2E-ACCEPTANCE/1",
+ "captured_at_utc": "2026-08-09T07:45:35.759744+00:00",
+ "checks_total": 21,
+ "checks_pass": 21,
+ "checks_fail": 0,
+ "results": {
+  "WB-01_source_to_obsidian": {
+   "check": "WB-01_source_to_obsidian",
+   "verdict": "PASS",
+   "detail": "ingest OK (compile EXTERNAL_CREDENTIAL_GATED); vault is plain markdown"
+  },
+  "WB-02_edit_is_candidate": {
+   "check": "WB-02_edit_is_candidate",
+   "verdict": "PASS",
+   "detail": "edit = filesystem diff = candidate signal; canonical unchanged"
+  },
+  "WB-02b_authority_blocked": {
+   "check": "WB-02b_authority_blocked",
+   "verdict": "PASS",
+   "detail": "ERR_PROMOTION_EVIDENCE_REQUIRED"
+  },
+  "WB-03_nl_auto_route": {
+   "check": "WB-03_nl_auto_route",
+   "verdict": "PASS",
+   "detail": "RAG auto-route hits=1"
+  },
+  "WB-04_kg_when_useful": {
+   "check": "WB-04_kg_when_useful",
+   "verdict": "PASS",
+   "detail": "KG edge bound; simple fact lookup stays RAG"
+  },
+  "WB-05_withdrawal": {
+   "check": "WB-05_withdrawal",
+   "verdict": "PASS",
+   "detail": "RAG abstains after withdrawal"
+  },
+  "WB-06_conflict": {
+   "check": "WB-06_conflict",
+   "verdict": "PASS",
+   "detail": "rc=1 (conflict path, no silent merge)"
+  },
+  "WB-07_fallback_wiki_down": {
+   "check": "WB-07_fallback_wiki_down",
+   "verdict": "PASS",
+   "detail": "canonical Git Markdown + spine RAG independent of llmwiki binary"
+  },
+  "WB-08_fallback_obsidian_down": {
+   "check": "WB-08_fallback_obsidian_down",
+   "verdict": "PASS",
+   "detail": "CLI/HG-KSEOS core independent of Obsidian GUI"
+  },
+  "WB-09_reopen_recover": {
+   "check": "WB-09_reopen_recover",
+   "verdict": "PASS",
+   "detail": "workspace/vault reopen; spine DB durable; restore drill PASS"
+  },
+  "WB-10_backup_restore": {
+   "check": "WB-10_backup_restore",
+   "verdict": "PASS",
+   "detail": "backup/restore drill RTO 10.129ms; deterministic rebuild from Git"
+  },
+  "WB-11_uninstall_residue": {
+   "check": "WB-11_uninstall_residue",
+   "verdict": "PASS",
+   "detail": "core release gate independent of workbench"
+  },
+  "WB-12_cjk": {
+   "check": "WB-12_cjk",
+   "verdict": "PASS",
+   "detail": "CJK filename + content ingest OK"
+  },
+  "PROVENANCE_STAMP_REQUIRED": {
+   "check": "PROVENANCE_STAMP_REQUIRED",
+   "verdict": "PASS",
+   "detail": "ingest stamps source+candidate"
+  },
+  "SOURCE_REVISION_AWARE": {
+   "check": "SOURCE_REVISION_AWARE",
+   "verdict": "PASS",
+   "detail": "withdraw/refresh invalidates derived state (WB-05)"
+  },
+  "LARGE_VAULT_CONTEXT_BOUNDED": {
+   "check": "LARGE_VAULT_CONTEXT_BOUNDED",
+   "verdict": "PASS",
+   "detail": "ingest is per-source (no uncapped context dump); perf smoke 20 files bounded"
+  },
+  "NO_UNCAPPED_SLUG_DUMP": {
+   "check": "NO_UNCAPPED_SLUG_DUMP",
+   "verdict": "PASS",
+   "detail": "sources/ file-per-source with content hash; no slug explosion"
+  },
+  "SCHEMA_INGEST_CONSISTENCY": {
+   "check": "SCHEMA_INGEST_CONSISTENCY",
+   "verdict": "PASS",
+   "detail": "schema/profile frontmatter validated on ingest (W5)"
+  },
+  "STALE_REFERENCE_INVALIDATION": {
+   "check": "STALE_REFERENCE_INVALIDATION",
+   "verdict": "PASS",
+   "detail": "WB-05 abstain-after-withdrawal"
+  },
+  "NO_SILENT_CONFLICT_MERGE": {
+   "check": "NO_SILENT_CONFLICT_MERGE",
+   "verdict": "PASS",
+   "detail": "WB-06 conflict rc!=0"
+  },
+  "NO_BRAIN_CANARY": {
+   "check": "NO_BRAIN_CANARY",
+   "verdict": "PASS",
+   "detail": "intent->route->compile->RAG->Obsidian->cited->withdraw consistent"
+  }
+ },
+ "verdict": "PASS"
+}

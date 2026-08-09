@@ -1,0 +1,92 @@
+{
+ "schema": "HGK-LLMWIKI-NATIVE-FEATURE-ACCOUNTING/1",
+ "captured_at_utc": "2026-08-09T07:44:51.231752+00:00",
+ "identity": "atomicstrata/llm-wiki-compiler@1.1.0",
+ "native_features_discovered": 16,
+ "native_features_accounted": 16,
+ "native_unknown": 0,
+ "native_runtime_pass": 16,
+ "features": [
+  {
+   "feature_id": "LW-N-ingest",
+   "command": "llmwiki ingest",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-ingest-session",
+   "command": "llmwiki ingest-session",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-view",
+   "command": "llmwiki view",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-compile",
+   "command": "llmwiki compile",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-refresh",
+   "command": "llmwiki refresh",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-review",
+   "command": "llmwiki review",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-state",
+   "command": "llmwiki state",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-recover",
+   "command": "llmwiki recover",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-rules",
+   "command": "llmwiki rules",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-query",
+   "command": "llmwiki query",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-watch",
+   "command": "llmwiki watch",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-lint",
+   "command": "llmwiki lint",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-status",
+   "command": "llmwiki status",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-eval",
+   "command": "llmwiki eval",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-schema",
+   "command": "llmwiki schema",
+   "terminal": "RUNTIME_PASS"
+  },
+  {
+   "feature_id": "LW-N-profile",
+   "command": "llmwiki profile",
+   "terminal": "RUNTIME_PASS"
+  }
+ ],
+ "verdict": "PASS"
+}

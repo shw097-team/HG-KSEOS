@@ -1,0 +1,23 @@
+{
+ "schema": "HGK-OBSIDIAN-CHANNEL-IDENTITY/1",
+ "captured_at_utc": "2026-08-09T07:44:23.148320+00:00",
+ "vendor": "Obsidian (official obsidianmd)",
+ "version_installed": "1.13.4",
+ "channel": "catalyst (Early access)",
+ "channel_evidence": "obsidian.md/changelog/2026-07-27-desktop-v1.13.4/ declares 'Early access'; GitHub release tag v1.13.4 published 2026-07-30",
+ "last_public_stable": "1.12.7 (2026-03-23) — first release bundling official CLI binary",
+ "installer": "Obsidian-1.13.4.exe",
+ "installer_bytes": 326879800,
+ "installer_sha256": "8c761aaa40310d339b6936092e91e99a9886daf1fd655f4c8d59e9f7fa46e7a0",
+ "install_root": "C:\\Users\\user\\AppData\\Local\\Programs\\Obsidian",
+ "install_mode": "user-level (no admin)",
+ "entitlement_if_catalyst": "Obsidian desktop runs without account for local vault use; catalyst channel is early-access distribution, no paid entitlement exercised in this run",
+ "why_selected": "retain sealed working candidate per §5.2/§11: 30/30 HGK feature inventory passed on 1.13.4 in task-007; carries save/workspace regression fixes; no auto-downgrade",
+ "required_feature": "none requiring catalyst-only capability (all qualified features are local core)",
+ "risk_acceptance": "1.13.4 is early-access; local core features verified 30/30; rollback = 1.12.7 public (official installer available)",
+ "rollback_version": "1.12.7",
+ "rollback_channel": "public",
+ "official_cli_binary": "Obsidian.com present at install root; functional probe returned correct enable-message (CLI enabled via Settings > General > Advanced user toggle)",
+ "community_plugins": "DENY_BY_DEFAULT — zero installed",
+ "verdict": "PASS"
+}

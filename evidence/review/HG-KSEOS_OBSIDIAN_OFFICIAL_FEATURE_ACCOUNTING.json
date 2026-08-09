@@ -1,0 +1,206 @@
+{
+ "schema": "HGK-OBSIDIAN-OFFICIAL-FEATURE-ACCOUNTING/1",
+ "captured_at_utc": "2026-08-09T07:44:51.231752+00:00",
+ "official_features_discovered": 32,
+ "official_features_accounted": 32,
+ "unknown": 0,
+ "required_and_pass": 19,
+ "available_not_required": 9,
+ "disabled_by_policy": 2,
+ "external_not_used": 2,
+ "features": [
+  {
+   "feature_id": "OBS-O-00",
+   "official_name": "markdown_editor",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-01",
+   "official_name": "live_preview",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-02",
+   "official_name": "reading_view",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-03",
+   "official_name": "internal_wikilinks",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-04",
+   "official_name": "backlinks_panel",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-05",
+   "official_name": "graph_view",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-06",
+   "official_name": "full_text_search",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-07",
+   "official_name": "tags",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-08",
+   "official_name": "properties_frontmatter",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-09",
+   "official_name": "aliases",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-10",
+   "official_name": "embeds",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-11",
+   "official_name": "attachments",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-12",
+   "official_name": "command_palette",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-13",
+   "official_name": "file_recovery",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-14",
+   "official_name": "workspace_reopen",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-15",
+   "official_name": "file_rename_move",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-16",
+   "official_name": "outline",
+   "terminal": "AVAILABLE_NOT_REQUIRED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-17",
+   "official_name": "bookmarks",
+   "terminal": "AVAILABLE_NOT_REQUIRED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-18",
+   "official_name": "canvas",
+   "terminal": "AVAILABLE_NOT_REQUIRED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-19",
+   "official_name": "daily_notes",
+   "terminal": "AVAILABLE_NOT_REQUIRED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-20",
+   "official_name": "templates",
+   "terminal": "AVAILABLE_NOT_REQUIRED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-21",
+   "official_name": "slides",
+   "terminal": "AVAILABLE_NOT_REQUIRED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-22",
+   "official_name": "audio_recorder",
+   "terminal": "AVAILABLE_NOT_REQUIRED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-23",
+   "official_name": "whiteboard",
+   "terminal": "AVAILABLE_NOT_REQUIRED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-24",
+   "official_name": "properties_view",
+   "terminal": "AVAILABLE_NOT_REQUIRED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-25",
+   "official_name": "starred",
+   "terminal": "DISABLED_BY_POLICY",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-26",
+   "official_name": "sync",
+   "terminal": "EXTERNAL_SERVICE_NOT_USED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-27",
+   "official_name": "publish",
+   "terminal": "EXTERNAL_SERVICE_NOT_USED",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-28",
+   "official_name": "community_plugins",
+   "terminal": "DISABLED_BY_POLICY",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-29",
+   "official_name": "official_cli",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-30",
+   "official_name": "obsidian_uri",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  },
+  {
+   "feature_id": "OBS-O-31",
+   "official_name": "git_markdown_vault_bind",
+   "terminal": "REQUIRED_AND_PASS",
+   "source": "pinned official feature map + CLI inventory"
+  }
+ ],
+ "verdict": "PASS"
+}
