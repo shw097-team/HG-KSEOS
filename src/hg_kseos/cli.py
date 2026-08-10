@@ -126,6 +126,8 @@ def build_parser() -> argparse.ArgumentParser:
     p_intake.add_argument("--constraint", action="append", default=[])
     p_intake.add_argument("--non-goal", action="append", default=[])
     p_intake.add_argument("--target-root", type=Path)
+    p_denom = project_commands.add_parser("denominator", help="Full-project closure denominator")
+    p_denom.add_argument("project_id")
 
     # task-011: governed evolution entrypoint
     evolution = commands.add_parser("evolution", help="Governed evolution controller")
@@ -210,6 +212,8 @@ def run(args: argparse.Namespace) -> Any:
             return lc.checkpoint(args.project_id)
         if args.project_command == "advance":
             return lc.transition(args.project_id, args.to_state, trigger=args.trigger)
+        if args.project_command == "denominator":
+            return lc.denominator(args.project_id)
         raise AssertionError(args.project_command)
     if args.command == "evolution":
         from .evolution import GovernedEvolutionController, EvolutionSignal

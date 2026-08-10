@@ -481,3 +481,63 @@ class ProjectLifecycleController:
             "updated_at": row[10],
             "recent_transitions": [{"from": t[0], "to": t[1], "trigger": t[2], "at": t[3]} for t in trans],
         }
+
+    # ---------- full-project denominator (CS-A) ----------
+    def denominator(self, project_id: str) -> dict[str, Any]:
+        """Materialize the full-project closure denominator from the spine.
+
+        Machine-reconciles (never assumes a fixed workorder count):
+          requirements (project-owned, FROZEN) -> taskspecs -> workorders,
+          required-active capabilities (named-method registry) vs provider
+          bindings, and acceptance/user-journey rows. Every open item is
+          listed explicitly so a scope guard can fail closed.
+        """
+        from .named_methods import NAMED_METHODS  # local import (no cycle)
+        state = self._project_state(project_id)
+        with self.spine.connect() as conn:
+            req_rows = conn.execute(
+                "SELECT requirement_id, state FROM requirements WHERE project_id=?",
+                (project_id,)).fetchall()
+            ts_rows = conn.execute(
+                "SELECT t.taskspec_id, t.state FROM taskspecs t "
+                "JOIN requirements r ON r.requirement_id=t.requirement_id "
+                "WHERE r.project_id=?", (project_id,)).fetchall()
+            wo_rows = conn.execute(
+                "SELECT w.workorder_id, w.state FROM workorders w "
+                "JOIN taskspecs t ON t.taskspec_id=w.taskspec_id "
+                "JOIN requirements r ON r.requirement_id=t.requirement_id "
+                "WHERE r.project_id=?", (project_id,)).fetchall()
+            acc_rows = conn.execute(
+                "SELECT a.acceptance_id, a.verdict FROM acceptances a "
+                "JOIN requirements r ON r.requirement_id=a.requirement_id "
+                "WHERE r.project_id=?", (project_id,)).fetchall()
+            bind_rows = conn.execute(
+                "SELECT provider_id, state FROM provider_bindings").fetchall()
+        req_ids = [r[0] for r in req_rows]
+        open_workorders = [w[0] for w in wo_rows
+                           if w[1] not in ("VERIFIED", "ROLLED_BACK", "CANCELLED")]
+        open_acceptances = [a[0] for a in acc_rows if a[1] != "PASS"]
+        # required-active capabilities from the named-method registry
+        active_methods = [tid for tid, m in NAMED_METHODS.items()
+                          if m.runtime_required_now and m.current_execution_scope != "STANDBY"]
+        bound = {b[0] for b in bind_rows if b[1] == "ENABLED"}
+        open_capabilities = [tid for tid in active_methods
+                             if not any(tid.startswith(b) for b in bound)]
+        return {
+            "project_id": project_id,
+            "state": state,
+            "requirements_total": len(req_ids),
+            "requirements_frozen": sum(1 for r in req_rows if r[1] == "FROZEN"),
+            "taskspecs_total": len(ts_rows),
+            "workorders_total": len(wo_rows),
+            "workorders_open": open_workorders,
+            "workorders_open_count": len(open_workorders),
+            "acceptances_total": len(acc_rows),
+            "acceptances_open": open_acceptances,
+            "acceptances_open_count": len(open_acceptances),
+            "required_active_capabilities": active_methods,
+            "required_active_capabilities_total": len(active_methods),
+            "required_active_capabilities_open": open_capabilities,
+            "required_active_capabilities_open_count": len(open_capabilities),
+            "denominator_available": True,
+        }

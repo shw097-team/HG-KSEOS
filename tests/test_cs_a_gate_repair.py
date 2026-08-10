@@ -196,5 +196,39 @@ class D5OrdinaryUserFlowTests(unittest.TestCase):
         self.assertIn("project", src)
 
 
+class D6DenominatorTests(unittest.TestCase):
+    def test_denominator_materializes_full_project(self):
+        """FULL_PROJECT_DENOMINATOR: requirements/taskspecs/workorders/acceptances/capabilities."""
+        tmp, spine = fresh_spine()
+        try:
+            lc, pid = boot_to_plan(spine, project_id="HGK-PRJ-DEN")
+            lc.admit_workorders(pid)
+            d = lc.denominator(pid)
+            self.assertTrue(d["denominator_available"])
+            self.assertGreaterEqual(d["requirements_total"], 1)
+            self.assertEqual(d["requirements_frozen"], d["requirements_total"])
+            self.assertGreaterEqual(d["workorders_total"], 3)
+            self.assertGreaterEqual(d["workorders_open_count"], 3)  # all open
+            self.assertGreaterEqual(d["acceptances_total"], 1)
+            self.assertIn("workorders_open", d)
+            self.assertIn("required_active_capabilities", d)
+            # after completing workorders, open count drops
+            with spine.transaction() as c:
+                c.execute("UPDATE workorders SET state='VERIFIED'")
+            d2 = lc.denominator(pid)
+            self.assertEqual(d2["workorders_open_count"], 0)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def test_denominator_cli(self):
+        """CLI project denominator entrypoint exists (help surface)."""
+        r = subprocess.run(
+            [str(ROOT / ".venv" / "Scripts" / "python.exe"), "-m", "hg_kseos",
+             "--root", str(Path(__file__).resolve().parents[1]), "project", "--help"],
+            capture_output=True, text=True, timeout=120,
+            env={"PYTHONPATH": str(Path(__file__).resolve().parents[1] / "src")})
+        self.assertIn("denominator", r.stdout + r.stderr)
+
+
 if __name__ == "__main__":
     unittest.main()
