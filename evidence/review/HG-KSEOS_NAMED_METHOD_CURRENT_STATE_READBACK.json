@@ -1,0 +1,36 @@
+{
+ "schema": "HGK-NAMED-METHOD-CURRENT-STATE/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T05:04:03.842775+00:00",
+ "openspec": {
+  "state": "CERTIFIED_ACTIVE_BROWNFIELD",
+  "runtime": "installed+bound+invoked"
+ },
+ "gstack": {
+  "state": "CERTIFIED_ACTIVE_SELECTED_SLICES",
+  "selected_slices": [
+   "office-hours",
+   "plan-eng-review",
+   "review",
+   "qa",
+   "cso",
+   "ship",
+   "retro"
+  ]
+ },
+ "spec_kit": {
+  "state": "STANDBY / GREENFIELD PROFILE",
+  "xor_with": "openspec"
+ },
+ "routes": {
+  "brownfield": "openspec",
+  "greenfield": "XOR_GREENFIELD",
+  "plan": "gstack.plan-eng-review",
+  "review": "gstack.review",
+  "qa": "gstack.qa",
+  "security": "gstack.cso",
+  "release": "gstack.ship (advisory)",
+  "ambiguity": "gstack.office-hours"
+ },
+ "verdict": "PASS"
+}

@@ -1,0 +1,34 @@
+{
+ "schema": "HGK-OPENSPEC-HERMES-BINDING/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T05:04:03.842775+00:00",
+ "external_dirs_bound": true,
+ "hermes_runtime": "0.20.0 / v2026.8.3 / 3c27eb62",
+ "effective_load": {
+  "skill": "openspec-propose",
+  "discovered": true,
+  "named_correctly": true,
+  "invocation": "REAL (agent named purpose)"
+ },
+ "generated_skills": 6,
+ "hosts": [
+  "hermes",
+  "codex",
+  "opencode"
+ ],
+ "codex_surface": {
+  "skills": 6,
+  "path": ".agents/skills/openspec-*/SKILL.md"
+ },
+ "opencode_surface": {
+  "commands": 6,
+  "path": ".opencode/commands/opsx-*.md"
+ },
+ "skill_sha256": {
+  "openspec-propose": "a556a8e5eff6ee29687f61050ae7ba16e0007b81ea493d092675cefbae02a7b4",
+  "openspec-apply-change": "f1f1a448d646a092b1257b2455d0495c8d49c0ccf4567b3311bbc924059ddcf3"
+ },
+ "no_unwanted_integrations": true,
+ "no_github_workflow": true,
+ "verdict": "PASS"
+}

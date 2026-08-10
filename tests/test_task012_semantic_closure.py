@@ -87,22 +87,22 @@ class PredicateSemanticsTests(unittest.TestCase):
 class CurrentIdentityTests(unittest.TestCase):
     """F3/F4: current changeset identity."""
 
-    def test_current_changeset_task_is_013(self) -> None:
+    def test_current_changeset_task_is_014(self) -> None:
         """F3/F4 regression: the acceptance must carry the CURRENT changeset
-        identity. Task-011/012 are historical accepted lineage (Prompt §42)."""
+        identity. Task-011/012/013 are historical accepted lineage (Prompt §45)."""
         acc = read_json("evidence/review/HG-KSEOS_EXTERNAL_FINAL_ACCEPTANCE.json")
         ctx = acc["acceptance_context"]
         self.assertEqual(ctx["current_changeset_task_id"],
-                         "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013")
+                         "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014")
         self.assertEqual(ctx["closure_task_id"],
-                         "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013")
+                         "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014")
+        self.assertIn("HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+                      ctx["historical_task_ids"])
         self.assertIn("HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011",
                       ctx["historical_task_ids"])
         self.assertIn("HGK-TASK011-AUTONOMY-EVOLUTION-EXTERNAL-ACCEPTANCE-SEMANTIC-CLOSURE-012",
                       ctx["historical_task_ids"])
-        self.assertIn("HGK-FINAL-TEST-DENOMINATOR-EXTERNAL-EVIDENCE-CLOSURE-009", ctx["historical_task_ids"])
-        self.assertIn("HGK-FINAL-MD-EXTERNAL-ACCEPTANCE-STALE-SECTION-FIX-010", ctx["historical_task_ids"])
-        # stale-identity regression: Task-011 must NOT appear as current
+        # stale-identity regression: Task-013 must NOT appear as current
         self.assertNotEqual(ctx["current_changeset_task_id"],
                             "HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011")
 

@@ -1,0 +1,53 @@
+{
+ "schema": "HGK-GSTACK-SELECTED-SLICE-INVENTORY/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T04:38:49.876710+00:00",
+ "selected_slices": [
+  "office-hours",
+  "plan-eng-review",
+  "review",
+  "qa",
+  "cso",
+  "ship",
+  "retro"
+ ],
+ "skill_count": 54,
+ "results": {
+  "flat_naming_convention": {
+   "check": "flat_naming_convention",
+   "verdict": "PASS",
+   "detail": "54 skills; nested=[]"
+  },
+  "selected_slices_present": {
+   "check": "selected_slices_present",
+   "verdict": "PASS",
+   "detail": "selected slices all present; missing=[]"
+  },
+  "references_resolve": {
+   "check": "references_resolve",
+   "verdict": "PASS",
+   "detail": "54 skills scanned; unresolved=[]; runtime_scoped=0; example_scoped=46"
+  },
+  "hermes_host_sidecar_gap_recorded": {
+   "check": "hermes_host_sidecar_gap_recorded",
+   "verdict": "PASS",
+   "detail": "gstack-review requires .hermes/skills/review/* — generator omits it; thin adapter materialized=True"
+  },
+  "adapter_resolution": {
+   "check": "adapter_resolution",
+   "verdict": "PASS",
+   "detail": "repo review/ copied to fixture .hermes/skills/review/ (checklist.md + TODOS-format.md present)"
+  },
+  "llms_txt_index": {
+   "check": "llms_txt_index",
+   "verdict": "PASS",
+   "detail": "llms.txt bytes=12443"
+  },
+  "runtime_sidecars": {
+   "check": "runtime_sidecars",
+   "verdict": "PASS",
+   "detail": "browse/design CLI + playwright/puppeteer deps installed via bun.lock (294 packages)"
+  }
+ },
+ "verdict": "PASS"
+}

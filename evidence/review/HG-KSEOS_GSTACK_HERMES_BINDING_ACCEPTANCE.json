@@ -1,0 +1,27 @@
+{
+ "schema": "HGK-GSTACK-HERMES-BINDING/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T05:04:03.842775+00:00",
+ "setup_exit_zero_not_certified": true,
+ "gen_skill_docs": {
+  "command": "bun run gen:skill-docs --host hermes",
+  "skills": 54,
+  "llms_txt": true,
+  "flat_convention": true
+ },
+ "effective_load": {
+  "skill": "gstack-retro",
+  "discovered": true,
+  "invocation": "REAL"
+ },
+ "invoked_slices": [
+  "gstack-review (real advisory, NOT_READY findings)",
+  "gstack-ship (advisory-only, final_authority=false)"
+ ],
+ "sidecar_gap": {
+  "finding": "gstack-review requires .hermes/skills/review/* (generator omits)",
+  "adapter": "thin copy of repo review/ into project .hermes/skills/review/",
+  "resolved": true
+ },
+ "verdict": "PASS"
+}

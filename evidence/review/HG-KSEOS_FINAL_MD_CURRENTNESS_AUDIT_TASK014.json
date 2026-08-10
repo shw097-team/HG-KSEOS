@@ -1,0 +1,91 @@
+{
+ "stale_violations": [],
+ "historical_only_occurrences": [
+  {
+   "pattern": "E12_head_db8115d3",
+   "line": "- **Historical E12 baseline HEAD (superseded)**: `db8115d32a710046aabf0d11a71ae9ace859c8ca`"
+  },
+  {
+   "pattern": "E12_head_db8115d3",
+   "line": "- HEAD `db8115d32a710046aabf0d11a71ae9ace859c8ca`"
+  },
+  {
+   "pattern": "E12_head_db8115d3",
+   "line": "- **Historical E12 baseline HEAD/package**: `db8115d32a710046aabf0d11a71ae9ace859c8ca` / `12be004ecb"
+  },
+  {
+   "pattern": "E12_head_db8115d3",
+   "line": "- **Final HEAD/package**: `db8115d32a710046aabf0d11a71ae9ace859c8ca` / `12be004ecb4f4acc846b22954f58"
+  },
+  {
+   "pattern": "E12_head_db8115d3",
+   "line": "- **Old baseline (E12 rollback baseline, preserved)**: HEAD `db8115d32a710046aabf0d11a71ae9ace859c8c"
+  },
+  {
+   "pattern": "E12_package_12be004e",
+   "line": "- **Historical E12 baseline package SHA-256**: `12be004ecb4f4acc846b22954f585e4e1ad4d72078dd9e407701"
+  },
+  {
+   "pattern": "E12_package_12be004e",
+   "line": "- PACKAGE `12be004ecb4f4acc846b22954f585e4e1ad4d72078dd9e4077017195e3812cfc`"
+  },
+  {
+   "pattern": "E12_package_12be004e",
+   "line": "- **Historical E12 baseline HEAD/package**: `db8115d32a710046aabf0d11a71ae9ace859c8ca` / `12be004ecb"
+  },
+  {
+   "pattern": "E12_package_12be004e",
+   "line": "- **Final HEAD/package**: `db8115d32a710046aabf0d11a71ae9ace859c8ca` / `12be004ecb4f4acc846b22954f58"
+  },
+  {
+   "pattern": "E12_package_12be004e",
+   "line": "- **Old baseline (E12 rollback baseline, preserved)**: HEAD `db8115d32a710046aabf0d11a71ae9ace859c8c"
+  },
+  {
+   "pattern": "task013_head_deab9ea5",
+   "line": "- **Historical Task-013 seal (superseded by Task-014)**: HEAD `deab9ea507ec1042df533b1aa7be0123ae13c"
+  },
+  {
+   "pattern": "task013_package_17cbe722",
+   "line": "- **Historical Task-013 seal (superseded by Task-014)**: HEAD `deab9ea507ec1042df533b1aa7be0123ae13c"
+  },
+  {
+   "pattern": "task012_hermes_v0182_current",
+   "line": "Hermes v0.18.2/opencode-go/deepseek-v4-flash; Codex CLI PRIMARY_EXECUTOR_CERTIFIED; OpenCodex MODEL_"
+  },
+  {
+   "pattern": "task012_hermes_v0182_current",
+   "line": "| Hermes | v0.18.2 (tag v2026.7.7.2, pin 9de9c25f) | `evidence/checkpoints/HGK_HERMES_FINAL_CLOSURE_"
+  },
+  {
+   "pattern": "task012_hermes_v0182_current",
+   "line": "- **Old baseline (E12 rollback baseline, preserved)**: HEAD `db8115d32a710046aabf0d11a71ae9ace859c8c"
+  },
+  {
+   "pattern": "task012_hermes_v0182_current",
+   "line": "- **Side-by-side qualification**: disposable root `%TEMP%\\hgk-hermes-v020-qual`（exact-tag checkout →"
+  },
+  {
+   "pattern": "task012_hermes_v0182_current",
+   "line": "- **Q01-Q20**: identity / doctor(blocking=[]) / Windows native / provider real inference / WorkOrder"
+  },
+  {
+   "pattern": "task012_hermes_v0182_current",
+   "line": "- **Rollback**: v0.18.2 rollback drill PASS（executable runnable + real inference `V0182_ROLLBACK_OK`"
+  },
+  {
+   "pattern": "task012_hermes_v0182_current",
+   "line": "- **Hermes pin**: config/hermes.json → `ACTIVE_SELECTED_CERTIFIED`（0.20.0 / v2026.8.3 / 3c27eb62）；ro"
+  },
+  {
+   "pattern": "task012_hermes_v0182_current",
+   "line": "- v0.18.2（9de9c25f / v2026.7.7.2）= rollback baseline（保留）"
+  }
+ ],
+ "digest": {
+  "bytes": 61688,
+  "raw_sha256": "285b80efaf6cfe841ee2a95eaad1db2289ccbff86a7daed26644f78eccc79399"
+ },
+ "verdict": "PASS",
+ "captured_at_utc": "2026-08-10T05:12:36.998564+00:00"
+}

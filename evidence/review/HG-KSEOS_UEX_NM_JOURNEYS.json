@@ -1,0 +1,19 @@
+{
+ "schema": "HGK-UEX-NM/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T05:04:03.842775+00:00",
+ "UEX-NM-01": {
+  "journey": "ordinary brownfield request -> automatic OpenSpec route -> real invocation -> Codex implementation -> delivery",
+  "manual_named_method_selection": 0,
+  "result": "PASS"
+ },
+ "UEX-NM-02": {
+  "journey": "implementation -> selected gstack review/QA/security routes -> real effective-load -> EvidenceCandidates -> HGK final acceptance",
+  "result": "PASS"
+ },
+ "UEX-NM-03": {
+  "journey": "named method unavailable -> explicit DEGRADED -> certified native fallback -> no fake invocation -> safe completion/block",
+  "result": "PASS"
+ },
+ "verdict": "PASS"
+}

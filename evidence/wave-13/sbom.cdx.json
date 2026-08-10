@@ -1237,6 +1237,58 @@
           "value": "hermes-pinned-runtime"
         }
       ]
+    },
+    {
+      "type": "application",
+      "name": "@fission-ai/openspec",
+      "version": "1.8.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "scope",
+          "value": "named-method-qualified-external"
+        },
+        {
+          "name": "pin",
+          "value": "v1.8.0 / d57889664cab4f2f061d236ec3ff82a5578701bb"
+        },
+        {
+          "name": "role",
+          "value": "brownfield-spec-projection-adapter"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "name": "gstack",
+      "version": "1.61.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "scope",
+          "value": "named-method-qualified-external"
+        },
+        {
+          "name": "pin",
+          "value": "94993f74012782fd94416dd44b8314f6363a13a4 (EXACT_COMMIT_PLUS_VERSION)"
+        },
+        {
+          "name": "role",
+          "value": "advisory-review-qa-security-method-adapter"
+        }
+      ]
     }
   ]
 }

@@ -4,7 +4,7 @@
 
 本文件說明 HG-KSEOS 本機 canonical local 系統的安裝、操作、驗證、備份、回滾與交付。
 
-**Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`。Current changeset = **Task-013**（Hermes v0.20 Native Runtime Reuse Convergence + Qualification，`HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013`）。Task-011（`HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011`）與 Task-012（`HGK-TASK011-AUTONOMY-EVOLUTION-EXTERNAL-ACCEPTANCE-SEMANTIC-CLOSURE-012`）為 historical accepted lineage，不再作為 current changeset。Historical baseline：E10（task-009/010）為 lineage，已 superseded。後續新增 tracked ChangeSet 會形成新 candidate，未重新 seal 前不得沿用舊 acceptance。production 一律 `NOT_CLAIMED`。
+**Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`。Current changeset = **Task-014**（Self-Bootstrap Named Method Runtime Readiness + Task-013 Final Closure，`HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014`）。Task-011/012/013 為 historical accepted lineage，不再作為 current changeset。Historical baseline：E10（task-009/010）為 lineage，已 superseded。後續新增 tracked ChangeSet 會形成新 candidate，未重新 seal 前不得沿用舊 acceptance。production 一律 `NOT_CLAIMED`。
 
 歷史沿革：系統早期先以「本機 companion」於 maker workspace 施工（見 Release/Changelog），該階段已結束；本文描述 current canonical runtime。
 
@@ -312,3 +312,39 @@ python -m hg_kseos.cli evolution status|signal|candidate
 3. 將 config/hermes.json `executable` 指向 v0.20 venv，`scripts\hermes-core.ps1` 通過。
 4. Rollback：刪除 disposable root，還原 config/hermes.json rollback baseline（v0.18.2），`hermes-core.ps1` 恢復 PASS。
 5. 全程 production `NOT_CLAIMED`。
+
+## 41. Named Method Runtime Readiness（Task-014）
+
+Task-014 將 OpenSpec 與 gstack 兩個 named-method 工具以真實 runtime 身份接進 HG-KSEOS（self-bootstrap：HG-KSEOS 自己完成 detect→FIT-GAP→install→route→pilot→negative→rollback→independent certify）。
+
+**OpenSpec（brownfield spec projection）**
+
+- Exact pin：`@fission-ai/openspec@1.8.0`（tag `v1.8.0`、release commit `d57889664…`、MIT、Node >=20.19）。
+- 角色：`BROWNFIELD_ENGINEERING_DEFINITION_ADAPTER`；`engineering_definition.brownfield → openspec`，fallback `hgk_native_prw`。
+- 使用上游官方 Hermes skills-only 整合（`.hermes/skills/openspec-*/SKILL.md`），透過 `skills.external_dirs` 載入；HG-KSEOS 不重寫 translator。
+- XOR：brownfield（OpenSpec active）與 greenfield（Spec Kit STANDBY / native）互斥；OpenSpec 不是 Root SSOT、不是 release owner、不是 primary writer（Codex CLI 仍為 bounded writer）。
+- 流程：brownfield 需求 → 自動 route OpenSpec → explore/propose → spec delta → Codex 實作 → tests → OpenSpec validate/archive → HGK independent checker + reducer 收尾。
+
+**gstack（selected advisory slices）**
+
+- Exact pin：`garrytan/gstack@1.61.0.0`（commit `94993f74012782fd94416dd44b8314f6363a13a4`、MIT、bun runtime）。
+- 選定 slices（advisory only）：`office-hours`（ambiguity 諮詢）、`plan-eng-review`、`review`、`qa`、`cso`（security 諮詢）、`ship`（release-readiness advisory，`final_authority=false`）、`retro`。
+- 生成：`bun run gen:skill-docs --host hermes`（54 skills，flat `gstack-*` 命名）；`setup --host hermes` 只印指示並 exit 0，不等於 certified（必須 effective-load + real invocation）。
+- 已知 pinned host-generation gap（已記錄 + thin adapter 解決）：`gstack-review` 要求 `.hermes/skills/review/*`（checklist.md 等 sibling assets），generator 未生成——adapter 把 repo `review/` 拷入 project `.hermes/skills/review/`。
+- 邊界：gstack ship ≠ release authority；gstack review ≠ independent checker；gstack cso ≠ HGK security authority；gstack office-hours ≠ product authority。輸出皆為 EvidenceCandidate / advisory，最終由 HGK checker/reducer 決定。
+
+**Router（deterministic，不靠 LLM 猜）**
+
+- `brownfield/migration → openspec`；`greenfield → XOR_GREENFIELD`；`high-impact ambiguity → gstack.office-hours`；`plan → gstack.plan-eng-review`；`implementation complete → gstack.review`；`QA → gstack.qa`；`security-sensitive → gstack.cso`；`release readiness → gstack.ship（advisory）`；`retro → gstack.retro`；其餘 → native。
+- Provider 不可用：route state 顯式 `DEGRADED` + certified native fallback（EvidenceEnvelope 記錄 fallback）；禁止「tool 沒跑卻宣稱 tool PASS」。
+
+**Activation invariant（fail-closed）**
+
+- 任何 active canonical flow 引用的 named method 必須 runtime-ready（identity/pin/install/binding/doctor/pilot/independent-cert）或存在 certified native substitution，否則 `FAIL_CLOSED`（CoverageReducer 檢查 `*_missing_*`、`dual_spec_owner`、`second_orchestrator`、`release_authority_escape` 等一律為 0）。
+
+**診斷 / 停用 / 回滾**
+
+- 診斷：`openspec doctor`（於 fixture root）、`bun run gen:skill-docs --host hermes` 後檢查 `.hermes/skills/`、Hermes `skills list` 看 `gstack-*`/`openspec-*` 是否 discover。
+- 停用：移除 `skills.external_dirs` 中的 fixture/gstack 路徑即停用 named-method skills；router 仍 fallback 到 native。
+- 回滾：刪除 fixture `.hermes/skills`（candidate projection），native PRW/review/QA/security 全數保留；canonical Requirement/ADR/WorkOrder 不刪。
+- Promotion 依 COV-11-06：independent verifier + Human Policy Owner 批准（本輪 A0 Prompt 提供 conditional authorization，source locator 記錄於 evidence）。

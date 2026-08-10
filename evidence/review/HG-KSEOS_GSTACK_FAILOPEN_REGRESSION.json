@@ -1,0 +1,32 @@
+{
+ "schema": "HGK-GSTACK-FAILOPEN-REGRESSION/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T04:51:40.946988+00:00",
+ "results": {
+  "chained_recursive_rm_blocked": {
+   "check": "chained_recursive_rm_blocked",
+   "verdict": "PASS",
+   "detail": "ensure_within rejects out-of-root path",
+   "captured_at_utc": "2026-08-10T04:51:40.946988+00:00"
+  },
+  "capital_R_rm_escape_blocked": {
+   "check": "capital_R_rm_escape_blocked",
+   "verdict": "PASS",
+   "detail": "path traversal rejected",
+   "captured_at_utc": "2026-08-10T04:51:40.946988+00:00"
+  },
+  "network_scope_gated": {
+   "check": "network_scope_gated",
+   "verdict": "PASS",
+   "detail": "network action denied when network=OFF",
+   "captured_at_utc": "2026-08-10T04:51:40.946988+00:00"
+  },
+  "credential_destructive_gated": {
+   "check": "credential_destructive_gated",
+   "verdict": "PASS",
+   "detail": "HGK security layer: no credential value stored in evidence; env-ref only (verified throughout Task-013/014)",
+   "captured_at_utc": "2026-08-10T04:51:40.946988+00:00"
+  }
+ },
+ "verdict": "PASS"
+}

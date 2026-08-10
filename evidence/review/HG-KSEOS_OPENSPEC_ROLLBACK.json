@@ -1,0 +1,8 @@
+{
+ "schema": "HGK-OPENSPEC-ROLLBACK/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T04:29:21.722290+00:00",
+ "drill": "disable route -> remove generated skill projection -> canonical git/content preserved -> native smoke",
+ "native_fallback": "PASS",
+ "verdict": "PASS"
+}

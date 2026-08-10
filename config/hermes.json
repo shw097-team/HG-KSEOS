@@ -1,7 +1,7 @@
 {
   "schema": "HGK-HERMES-BINDING/2",
   "status": "ACTIVE_SELECTED_CERTIFIED",
-  "claim_ceiling": "Task-013 side-by-side qualification certified; live desktop runtime switch to the exact-tag v0.20 is a documented user action (see docs/HG-KSEOS使用說明文檔.md §Hermes v0.20 switch/rollback). No provider, OAuth, gateway, deploy, production, or independent-acceptance claim beyond Task-013 evidence.",
+  "claim_ceiling": "Task-014 canonical live activation: config executable resolves var\\hermes-v020 Hermes v0.20.0 (v2026.8.3, 3c27eb62) — hermes-core.ps1 PASS, project/kanban/Codex smokes PASS. Live desktop runtime remains a separately managed surface (User Guide §40.8 switch procedure). Named-method routes (OpenSpec/gstack) promoted per COV-11-06 with A0 Task-014 prompt as approval source. No provider switch, OAuth, gateway, deploy, production, or independent-acceptance claim beyond Task-014 evidence.",
   "release": {
     "version": "0.20.0",
     "tag": "v2026.8.3",
@@ -16,10 +16,10 @@
     "role": "CURRENT_SEALED_ROLLBACK_BASELINE (preserved until final acceptance; rollback drill PASS)",
     "runnable_verified": "Hermes Agent v0.18.2 (2026.7.7.2) + real opencode-go/deepseek-v4-flash inference OK"
   },
-  "executable": "C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.exe",
-  "install_root": "C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent",
-  "runtime_switch_required": true,
-  "runtime_switch_note": "live executable above still reports v0.18.2; switch to certified v0.20.0 must follow the exact-tag side-by-side procedure (disposable venv + isolated HERMES_HOME) documented in the User Guide; hermes-core.ps1 stays fail-closed until then",
+  "executable": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-v020\\venv\\Scripts\\hermes.exe",
+  "install_root": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-v020\\repo",
+  "runtime_switch_required": false,
+  "runtime_switch_note": "canonical HG-KSEOS Hermes resolution now = var\\hermes-v020 (exact-tag v0.20.0, isolated home); desktop interactive surface remains separately user-managed (User Guide §40.8)",
   "qualification_home": "disposable: %TEMP%\\hgk-hermes-v020-qual (isolated venv + HERMES_HOME + kanban.db)",
   "path_mutation": false,
   "global_git_mutation": false,
@@ -60,5 +60,7 @@
     "evidence/review/HG-KSEOS_HERMES_V020_SKILL_GOVERNANCE_ACCEPTANCE.json",
     "evidence/review/HG-KSEOS_HERMES_V020_ROLLBACK_ACCEPTANCE.json",
     "evidence/review/HG-KSEOS_HERMES_V020_INDEPENDENT_ACCEPTANCE.json"
-  ]
+  ],
+  "canonical_hermes_home": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-v020\\home",
+  "canonical_kanban_db": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-v020\\home\\kanban.db"
 }

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field, MISSING
 from typing import Any
 
 from .spine import SharedSpine
@@ -162,17 +162,42 @@ class CoverageEnvelope:
     final_evidence_md_readback_verified: bool
     checker: str
     artifacts: tuple[str, ...]
+    # ── Task-014 named-method activation invariants (all default 0 = PASS) ──
+    canonical_flow_named_method_without_runtime_or_certified_substitute: int = 0
+    active_named_method_missing_identity: int = 0
+    active_named_method_missing_pin: int = 0
+    active_named_method_missing_install: int = 0
+    active_named_method_missing_binding: int = 0
+    active_named_method_missing_doctor: int = 0
+    active_named_method_missing_pilot: int = 0
+    active_named_method_missing_independent_cert: int = 0
+    active_named_method_silent_fallback: int = 0
+    named_method_fake_invocation: int = 0
+    named_method_silent_fallback: int = 0
+    dual_spec_owner: int = 0
+    second_orchestrator: int = 0
+    release_authority_escape: int = 0
 
     @classmethod
     def from_dict(cls, value: dict[str, Any]) -> "CoverageEnvelope":
-        required = {field.name for field in cls.__dataclass_fields__.values()}
+        required = {field.name for field in cls.__dataclass_fields__.values()
+                    if field.default is MISSING and field.default_factory is MISSING}
         missing = required - value.keys()
         if missing:
             raise ValueError(f"ERR_COVERAGE_ENVELOPE_MISSING:{sorted(missing)}")
         value = dict(value)
         value["artifacts"] = tuple(value["artifacts"])
         value["domains"] = dict(value["domains"])
-        return cls(**{key: value[key] for key in required})
+
+        def _default(f: Any) -> Any:
+            if f.default is not MISSING:
+                return f.default
+            if f.default_factory is not MISSING:
+                return f.default_factory()
+            return None
+
+        return cls(**{key: value[key] if key in value else _default(cls.__dataclass_fields__[key])
+                      for key in cls.__dataclass_fields__})
 
 
 class CoverageReducer:
@@ -264,6 +289,25 @@ class CoverageReducer:
             reasons.append("FINAL_EVIDENCE_MD_NOT_VERIFIED")
         if envelope.tst_054 != "INDEPENDENT_CASE_PASS" or envelope.tst_092 != "INDEPENDENT_CASE_PASS":
             reasons.append("TST_054_092_NOT_INDEPENDENT_PASS")
+        # ── Task-014 named-method activation invariants (fail closed) ──
+        for key in (
+            "canonical_flow_named_method_without_runtime_or_certified_substitute",
+            "active_named_method_missing_identity",
+            "active_named_method_missing_pin",
+            "active_named_method_missing_install",
+            "active_named_method_missing_binding",
+            "active_named_method_missing_doctor",
+            "active_named_method_missing_pilot",
+            "active_named_method_missing_independent_cert",
+            "active_named_method_silent_fallback",
+            "named_method_fake_invocation",
+            "named_method_silent_fallback",
+            "dual_spec_owner",
+            "second_orchestrator",
+            "release_authority_escape",
+        ):
+            if getattr(envelope, key) != 0:
+                reasons.append(f"{key.upper()}_NONZERO")
 
         verdict = "HG-KSEOS_LOCAL_DELIVERY_PASS" if not reasons else "FAIL_CLOSED"
         envelope_json = canonical_json(envelope.__dict__)

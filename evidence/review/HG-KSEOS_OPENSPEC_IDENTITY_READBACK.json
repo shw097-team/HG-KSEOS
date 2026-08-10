@@ -1,0 +1,21 @@
+{
+ "schema": "HGK-OPENSPEC-IDENTITY/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T05:04:03.842775+00:00",
+ "repo": "Fission-AI/OpenSpec",
+ "package": "@fission-ai/openspec",
+ "expected_version": "1.8.0",
+ "expected_tag": "v1.8.0",
+ "expected_release_commit": "d57889664cab4f2f061d236ec3ff82a5578701bb",
+ "expected_license": "MIT",
+ "expected_node_engine": ">=20.19.0",
+ "readback_version": "1.8.0",
+ "readback_license": "MIT License",
+ "node_version": "v24.19.0",
+ "integrity": {
+  "package_json_sha256": "3c8dbdcde52bc84e1dc7048919f76e8893be1ee71780e49a9c2db93462befed1",
+  "install_dir": "C:\\Users\\user\\AppData\\Local\\Temp\\hgk-nm-qual\\openspec\\node_modules\\@fission-ai\\openspec"
+ },
+ "identity_exact": true,
+ "verdict": "PASS"
+}
