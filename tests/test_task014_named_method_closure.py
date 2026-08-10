@@ -107,7 +107,7 @@ class SingleCurrentTests(unittest.TestCase):
     def test_external_acceptance_current_identity(self) -> None:
         d = read_json("HG-KSEOS_EXTERNAL_FINAL_ACCEPTANCE.json")
         self.assertEqual(d["acceptance_context"]["current_changeset_task_id"],
-                         "HGK-TASK014-FINAL-EXTERNAL-EVIDENCE-COHERENCE-UNIQUE-DENOMINATOR-RECEIPT-LINEAGE-015")
+                         "HGK-CS-A-APL-FULL-PROJECT-GATE-REPAIR-001")
         self.assertIn("HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
                       d["acceptance_context"]["historical_task_ids"])
         self.assertIn("HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",

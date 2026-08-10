@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(r"C:\Projects\Agent_Workspace\HG-KSEOS")
 REVIEW = ROOT / "evidence" / "review"
 WAVE = ROOT / "evidence" / "wave-18"
-TASK = "HGK-TASK014-FINAL-EXTERNAL-EVIDENCE-COHERENCE-UNIQUE-DENOMINATOR-RECEIPT-LINEAGE-015"
+TASK = "HGK-CS-A-APL-FULL-PROJECT-GATE-REPAIR-001"
 
 
 def read_json(path: Path) -> dict:
