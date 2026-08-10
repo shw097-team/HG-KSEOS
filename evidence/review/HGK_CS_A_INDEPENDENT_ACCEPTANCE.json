@@ -6,7 +6,7 @@
   "exit_code": 1,
   "ran": 238,
   "ok": false,
-  "tail": "TASK014-FINAL-EXTERNAL-EVIDENCE-COHERENCE-UNIQUE-DENOMINATOR-RECEIPT-LINEAGE-015\n\n\n----------------------------------------------------------------------\nRan 238 tests in 23.639s\n\nFAILED (failures=6)\n"
+  "tail": "TASK014-FINAL-EXTERNAL-EVIDENCE-COHERENCE-UNIQUE-DENOMINATOR-RECEIPT-LINEAGE-015\n\n\n----------------------------------------------------------------------\nRan 238 tests in 22.882s\n\nFAILED (failures=6)\n"
  },
  "apl_canary": {
   "goal": "依 SQS-THC / TW-ICT_FSDT-Stack authoritative corpus 完成真實本機施工、驗收與交付",
