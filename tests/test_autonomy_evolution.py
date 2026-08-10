@@ -69,6 +69,13 @@ class LifecycleStateMachineTests(unittest.TestCase):
             lc.transition(pid, "EVOLUTION_REVIEW", trigger="EVO_REVIEW")
             lc.transition(pid, "RELEASE_REDUCING", trigger="REDUCE")
             lc.transition(pid, "DELIVERY_READY", trigger="READY")
+            # CS-A D4: pending required workorders block DELIVERED
+            with self.assertRaises(Exception):
+                lc.transition(pid, "DELIVERED", trigger="DELIVER")
+            self.assertEqual(lc.status(pid)["state"], "DELIVERY_READY")
+            # complete all workorders -> DELIVERED legal
+            with spine.transaction() as c:
+                c.execute("UPDATE workorders SET state='VERIFIED'")
             lc.transition(pid, "DELIVERED", trigger="DELIVER")
             self.assertEqual(lc.status(pid)["state"], "DELIVERED")
             snap = spine.snapshot()["counts"]

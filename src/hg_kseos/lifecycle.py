@@ -109,6 +109,12 @@ class ProjectLifecycleController:
         pid = project_id or f"HGK-PRJ-{uuid.uuid4().hex[:8].upper()}"
         rid = run_id or f"RUN-{uuid.uuid4().hex[:8].upper()}"
         goal_hash = sha256_text(canonical_json({"goal": request.goal}))
+        # CS-A D3: lifecycle projects must own a `projects` row (FK precondition
+        # for register_requirement / create_taskspec). Idempotent create.
+        try:
+            self.spine.create_project(project_id=pid, name=f"Project {pid}")
+        except Exception:  # noqa: BLE001  (already exists -> no-op)
+            pass
         with self.spine.transaction() as conn:
             conn.execute(
                 "INSERT OR REPLACE INTO project_lifecycles("
@@ -160,6 +166,20 @@ class ProjectLifecycleController:
         state = self._project_state(project_id)
         if to_state not in VALID_TRANSITIONS.get(state, set()):
             raise LifecycleError(f"ERR_ILLEGAL_TRANSITION {state}->{to_state}")
+        # CS-A D4: project-level DELIVERED must fail while required workorders
+        # are still open (created/admitted/executing). Wave/subset closure is
+        # recorded via checkpoints, not by claiming project delivery.
+        if to_state == "DELIVERED":
+            with self.spine.connect() as conn:
+                open_rows = conn.execute(
+                    "SELECT COUNT(*) FROM workorders w JOIN taskspecs t ON t.taskspec_id=w.taskspec_id "
+                    "JOIN requirements r ON r.requirement_id=t.requirement_id "
+                    "WHERE r.project_id=? AND w.state NOT IN ('VERIFIED','ROLLED_BACK','CANCELLED')",
+                    (project_id,),
+                ).fetchone()[0]
+            if open_rows:
+                raise LifecycleError(
+                    f"ERR_PENDING_WORK_CANNOT_DELIVER {project_id}: {open_rows} required workorders open")
         with self.spine.transaction() as conn:
             row = conn.execute("SELECT run_id, attempt_budget, attempts_used FROM project_lifecycles WHERE project_id=?",
                                (project_id,)).fetchone()
@@ -273,21 +293,29 @@ class ProjectLifecycleController:
 
     @staticmethod
     def _derive_tasks(goal: str, source_count: int) -> list[tuple[str, str, list[str]]]:
-        """Deterministic plan from goal keywords; no external LLM needed for the skeleton."""
+        """Deterministic plan from goal keywords; no external LLM needed for the skeleton.
+
+        CS-A D1: match CJK goal keywords alongside English so a Traditional-Chinese
+        user goal (e.g. 依 authoritative corpus 完成施工、驗收與交付) still derives the
+        required task families instead of degrading to a bare delivery skeleton.
+        """
         g = goal.lower()
         tasks: list[tuple[str, str, list[str]]] = []
-        if any(k in g for k in ("knowledge", "wiki", "research", "document")):
+        if any(k in g for k in ("knowledge", "wiki", "research", "document",
+                                "知識", "文檔", "研究", "檢索")):
             tasks.append(("Authority source admission",
                           "Hash, classify and admit project sources into the canonical source ledger.",
                           ["WP-RBWI-01", "WP-RBWI-02"]))
             tasks.append(("Knowledge pipeline",
                           "Build RAG/KG ingestion from admitted sources with provenance.",
                           ["WP-RBWI-04"]))
-        if any(k in g for k in ("system", "tool", "service", "app", "platform", "pipeline")):
+        if any(k in g for k in ("system", "tool", "service", "app", "platform", "pipeline",
+                                "系統", "工具", "施工", "實作", "建置")):
             tasks.append(("Core implementation",
                           "Implement the core product surface from requirements with tests.",
                           ["WP-RBWI-03", "WP-RBWI-05"]))
-        if any(k in g for k in ("test", "acceptance", "verify", "qualif")):
+        if any(k in g for k in ("test", "acceptance", "verify", "qualif",
+                                "測試", "驗收", "驗證", "測試驗收")):
             tasks.append(("Acceptance and evidence",
                           "Run deterministic acceptance, raw evidence and independent checks.",
                           ["WP-RBWI-06", "WP-RBWI-07"]))
@@ -307,8 +335,9 @@ class ProjectLifecycleController:
             raise LifecycleError(f"ERR_ADMIT_STATE {state}")
         plan = self.plan(project_id)  # idempotent re-derive
         admitted: list[str] = []
-        # project-scoped requirement to satisfy the taskspecs FK (frozen requirement contract)
-        req_id = f"REQ-{project_id.split('-')[-1]}"
+        # CS-A D2: project-scoped requirement id (embed the FULL project id so a
+        # project whose tail is "001" cannot collide with the legacy REQ-001).
+        req_id = f"REQ-{project_id}-PLAN"
         try:
             self.spine.register_requirement(
                 requirement_id=req_id,
@@ -330,7 +359,12 @@ class ProjectLifecycleController:
         except InvariantViolation:
             pass  # already registered (idempotent resume)
         except Exception as exc:  # noqa: BLE001
-            raise LifecycleError(f"ERR_REQUIREMENT_REGISTRATION {type(exc).__name__}: {exc}") from exc
+            # CS-A D2: treat UNIQUE/IntegrityError on the requirement id as an
+            # idempotent-resume condition, not a fatal registration error.
+            if "UNIQUE" in str(exc) or "IntegrityError" in type(exc).__name__:
+                pass
+            else:
+                raise LifecycleError(f"ERR_REQUIREMENT_REGISTRATION {type(exc).__name__}: {exc}") from exc
         for spec in plan["plan"]:
             self.spine.create_taskspec(
                 taskspec_id=spec["taskspec_id"],
