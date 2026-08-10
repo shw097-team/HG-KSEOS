@@ -1,0 +1,35 @@
+{
+ "session": "20260810_goalqual_0001",
+ "q12_set": {
+  "status": "active",
+  "max_turns": 5,
+  "contract": true
+ },
+ "q13_contract_fields": {
+  "outcome": "",
+  "verification": "python -m unittest discover -s tests passes with Ran N tests OK",
+  "constraints": "do not modify the add function; no new dependencies",
+  "boundaries": "only calc.py and tests/test_calc.py may change",
+  "stop_when": "unittest reports Ran N tests OK"
+ },
+ "q13_subgoals": [
+  "multiply must handle negative numbers"
+ ],
+ "q13_judge": {
+  "verdict": "continue",
+  "parse_failed": false,
+  "transport_failed": false,
+  "reason_excerpt": "only claims tests passed without showing actual unittest command output ... concrete evidence of the Verification criterion is missing"
+ },
+ "q14_resume": {
+  "fresh_process_reload": true,
+  "is_active": true,
+  "status_line": "Goal (active, 0/5 turns, 1 subgoal, contract)"
+ },
+ "persistence": "SessionDB state_meta key goal:<session_id>",
+ "goal_self_attestation_not_final": true,
+ "verdict": "PASS",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:55:39.741780+00:00"
+}

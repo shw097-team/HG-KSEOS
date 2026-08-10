@@ -16,6 +16,7 @@ worktrees/
 /HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2/
 /任務執行指令/
 /施工PROMPT/
+/實作執行/
 /工程基座/
 /資料庫/
 /release/
@@ -36,3 +37,5 @@ worktrees/
 /evidence/review/HG-KSEOS_FINAL_EVIDENCE_CONSISTENCY_BASELINE.json
 /evidence/review/HG-KSEOS_FINAL_MD_EXTERNAL_ACCEPTANCE_INDEPENDENT_READBACK.json
 /evidence/review/HG-KSEOS_CURRENT_TEST_DENOMINATOR.json
+/evidence/review/HG-KSEOS_COVERAGE_REDUCER_TASK013_DECISION.json
+/evidence/review/HG-KSEOS_USER_EXPERIENCE_REDUCER_TASK013_DECISION.json

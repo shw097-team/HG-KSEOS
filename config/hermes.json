@@ -1,19 +1,36 @@
 {
-  "schema": "HGK-HERMES-BINDING/1",
-  "status": "TEMP_CLOSED_CORE_PROVIDER_HITL",
-  "claim_ceiling": "Pinned local core only; no provider, OAuth, gateway, deploy, production, or independent-acceptance claim.",
+  "schema": "HGK-HERMES-BINDING/2",
+  "status": "ACTIVE_SELECTED_CERTIFIED",
+  "claim_ceiling": "Task-013 side-by-side qualification certified; live desktop runtime switch to the exact-tag v0.20 is a documented user action (see docs/HG-KSEOS使用說明文檔.md §Hermes v0.20 switch/rollback). No provider, OAuth, gateway, deploy, production, or independent-acceptance claim beyond Task-013 evidence.",
   "release": {
+    "version": "0.20.0",
+    "tag": "v2026.8.3",
+    "commit": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb",
+    "repository": "https://github.com/NousResearch/hermes-agent.git",
+    "identity_verified": "git rev-parse HEAD = git tag --points-at HEAD = v2026.8.3; pyproject version 0.20.0; runtime hermes --version = Hermes Agent v0.20.0 (2026.8.3)"
+  },
+  "rollback_baseline": {
     "version": "0.18.2",
     "tag": "v2026.7.7.2",
     "commit": "9de9c25f620ff7f1ce0fd5457d596052d5159596",
-    "repository": "https://github.com/NousResearch/hermes-agent.git"
+    "role": "CURRENT_SEALED_ROLLBACK_BASELINE (preserved until final acceptance; rollback drill PASS)",
+    "runnable_verified": "Hermes Agent v0.18.2 (2026.7.7.2) + real opencode-go/deepseek-v4-flash inference OK"
   },
   "executable": "C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.exe",
   "install_root": "C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent",
-  "project_qualification_home": "var/hermes-qualification",
+  "runtime_switch_required": true,
+  "runtime_switch_note": "live executable above still reports v0.18.2; switch to certified v0.20.0 must follow the exact-tag side-by-side procedure (disposable venv + isolated HERMES_HOME) documented in the User Guide; hermes-core.ps1 stays fail-closed until then",
+  "qualification_home": "disposable: %TEMP%\\hgk-hermes-v020-qual (isolated venv + HERMES_HOME + kanban.db)",
   "path_mutation": false,
   "global_git_mutation": false,
   "provider_credentials_configured": false,
+  "provider_route": {
+    "provider": "opencode-go",
+    "model": "deepseek-v4-flash",
+    "base_url": "https://opencode.ai/zen/go/v1",
+    "openai_fallback": false,
+    "codex_route": "Codex CLI -> OpenCodex -> OpenCode Go -> deepseek-v4-flash (PASS, real execution)"
+  },
   "formal_adapter": {
     "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\hermes-core.ps1",
     "allowed_operation": "version verification only",
@@ -30,9 +47,18 @@
     ]
   },
   "evidence": [
-    "evidence/wave-06/HERMES_INSTALL_RECEIPT.json",
-    "evidence/wave-06/HERMES_RUNTIME_VALIDATION.json",
-    "evidence/wave-06/HERMES_SECURITY_ROLLBACK_JUNIT.xml",
-    "evidence/wave-06/TOOL_LOCK.json"
+    "evidence/review/HG-KSEOS_HERMES_V020_IDENTITY_READBACK.json",
+    "evidence/review/HG-KSEOS_HERMES_V0182_TO_V020_CAPABILITY_DELTA.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_REUSE_BINDING_MATRIX.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_WINDOWS_QUALIFICATION.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_PROVIDER_ROUTE_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_KANBAN_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_GOAL_CONTRACT_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_TOOL_RECOVERY_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_APPROVALS_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_COMPRESSION_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_SKILL_GOVERNANCE_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_ROLLBACK_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_INDEPENDENT_ACCEPTANCE.json"
   ]
 }

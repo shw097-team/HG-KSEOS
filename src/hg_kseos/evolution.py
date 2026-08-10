@@ -38,8 +38,9 @@ CANDIDATE_TYPES = (
 )
 
 # source-defined promotion policy (P0-CIP PUB-10 COV-11-05/06 + DOC-16/20):
-# low risk may auto-promote with independent checker + rollback; medium requires
-# human gate if current authority requires; high/constitutional always human.
+# COV-11-06: promotion requires independent verifier + Human Policy Owner for
+# every risk class; no implementation-invented auto-promotion (Task-012
+# source-resolved semantics; GE-11 = PROMOTION_READY_HITL_SOURCE_REQUIRED).
 PROMOTION_POLICY = {
     "low_risk": {
         "examples": ["documentation", "non-authoritative routing hint", "test fixture",

@@ -373,12 +373,28 @@
     {
       "type": "library",
       "name": "hermes-agent",
-      "version": "0.18.2",
-      "bom-ref": "pkg:pypi/hermes-agent@0.18.2?scope=hermes-pinned-runtime",
+      "version": "0.20.0",
+      "bom-ref": "pkg:pypi/hermes-agent@0.20.0?scope=hermes-pinned-runtime",
       "properties": [
         {
           "name": "hgk:scope",
           "value": "hermes-pinned-runtime"
+        },
+        {
+          "name": "hgk:release.tag",
+          "value": "v2026.8.3"
+        },
+        {
+          "name": "hgk:release.commit",
+          "value": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb"
+        },
+        {
+          "name": "hgk:rollback_baseline",
+          "value": "0.18.2/v2026.7.7.2/9de9c25f620ff7f1ce0fd5457d596052d5159596"
+        },
+        {
+          "name": "hgk:certification",
+          "value": "ACTIVE_SELECTED_CERTIFIED (Task-013 side-by-side qualification)"
         }
       ]
     },

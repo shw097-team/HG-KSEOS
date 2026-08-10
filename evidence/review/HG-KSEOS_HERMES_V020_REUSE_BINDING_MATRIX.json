@@ -1,0 +1,333 @@
+{
+ "method": "call-graph/owner read of src/, tools/, scripts/ + hermes v0.20 modules (both exact checkouts)",
+ "entries": [
+  {
+   "capability": "task_queue_ready_polling",
+   "hgk_binding": [
+    "src/hg_kseos/lifecycle.py (WorkOrder admission; normative, no polling)"
+   ],
+   "hermes_v020_binding": [
+    "hermes_cli/kanban.py (ready promotion)",
+    "gateway/kanban_watchers.py"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_KANBAN_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "dependency_scheduler",
+   "hgk_binding": [
+    "src/hg_kseos/agents.py TaskDAG (in-memory invariant validator, tests only)",
+    "src/hg_kseos/spine.py (normative state)"
+   ],
+   "hermes_v020_binding": [
+    "hermes_cli/kanban.py (parent/child deps, todo gating)"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "TaskDAG retained as normative verification utility (no persistence/workers/retry => not a runtime duplicate)",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_KANBAN_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "worker_dispatcher",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "hermes_cli/kanban.py dispatch",
+    "gateway/kanban_watchers.py"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_KANBAN_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "worker_process_spawn",
+   "hgk_binding": [
+    "tools/ (Codex CLI invocation inside acceptance runners; execution route, not a worker pool)"
+   ],
+   "hermes_v020_binding": [
+    "tools/delegate_tool.py",
+    "hermes_cli/kanban.py"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_PROVIDER_ROUTE_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "heartbeat",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "hermes_cli/kanban.py heartbeat verb"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_KANBAN_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "stale_worker_reclaim",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "hermes_cli/kanban.py reclaim"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_KANBAN_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "retry_timer",
+   "hgk_binding": [
+    "src/hg_kseos/evolution.py (attempt-budget classification, normative)"
+   ],
+   "hermes_v020_binding": [
+    "hermes_cli/kanban.py (max-retries, run ledger)"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "HGK attempt budget stays normative; runtime retry by Hermes",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_KANBAN_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "worktree_allocation",
+   "hgk_binding": [
+    "src/hg_kseos/lifecycle.py (worktree write_scope admission, normative)",
+    "worktrees/ (verification worktrees, historical)"
+   ],
+   "hermes_v020_binding": [
+    "hermes_cli/kanban.py (worktree:<path> workspace)"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "ADAPTER",
+   "duplicate_runtime_found": false,
+   "action": "thin adapter: HGK WorkOrder worktree scope -> Hermes workspace kind",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_KANBAN_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "goal_continuation",
+   "hgk_binding": [
+    "src/hg_kseos/lifecycle.py checkpoint/resume (normative project state)"
+   ],
+   "hermes_v020_binding": [
+    "hermes_cli/goals.py GoalManager"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_GOAL_ENGINE",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_GOAL_CONTRACT_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "session_persistence",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "hermes_state.py SessionDB"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_GOAL_CONTRACT_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "runtime_checkpoint",
+   "hgk_binding": [
+    "src/hg_kseos/recovery.py (product DB backup/restore, COV-20)"
+   ],
+   "hermes_v020_binding": [
+    "tools/checkpoint_manager.py",
+    "hermes_cli/checkpoints.py"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "no HGK runtime checkpoint store exists; HGK DB backup retained (different responsibility)",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_WINDOWS_QUALIFICATION.json"
+   ]
+  },
+  {
+   "capability": "filesystem_checkpoint",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "tools/checkpoint_manager.py"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": []
+  },
+  {
+   "capability": "tool_retry_wrapper",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "tools/terminal_tool.py (retry loop, truncation notice)"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "no HGK wrapper exists in src/",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_TOOL_RECOVERY_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "patch_retry_wrapper",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "tools/file_operations.py (PatchResult)"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_TOOL_RECOVERY_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "write_verification_wrapper",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "tools/file_operations.py (WriteResult verify)"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_TOOL_RECOVERY_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "search_retry",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "tools/file_operations.py (near-miss densify)"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": []
+  },
+  {
+   "capability": "terminal_truncation_workaround",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "tools/terminal_tool.py (truncation notice + tail readback)"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "NO_NEW_HGK_IMPLEMENTATION",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_TOOL_RECOVERY_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "mcp_startup_loader_router",
+   "hgk_binding": [],
+   "hermes_v020_binding": [
+    "mcp_serve.py + mcp client"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "DEFERRED_NOT_REQUIRED",
+   "duplicate_runtime_found": false,
+   "action": "no active MCP requirement in HGK route; nothing added",
+   "evidence_refs": []
+  },
+  {
+   "capability": "approval_risk_shell_classifier",
+   "hgk_binding": [
+    "src/hg_kseos/harness.py HarnessAction (product-level admission, COV-14)",
+    "src/hg_kseos/security.py"
+   ],
+   "hermes_v020_binding": [
+    "tools/approval.py (dangerous patterns, hardline, deny rules)"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "ADAPTER",
+   "duplicate_runtime_found": false,
+   "action": "two layers compose: Hermes gates agent shell commands; HGK harness gates product tool actions; both retained",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_APPROVALS_ACCEPTANCE.json"
+   ]
+  },
+  {
+   "capability": "skill_storage_crud_loader",
+   "hgk_binding": [
+    "control/skills/ (18 normative skill fixtures, materialized)"
+   ],
+   "hermes_v020_binding": [
+    "skills/ loading + agent/curator.py"
+   ],
+   "runtime_owner": "HERMES",
+   "normative_owner": "HG-KSEOS",
+   "decision": "REUSE_HERMES",
+   "duplicate_runtime_found": false,
+   "action": "HGK skills are normative fixtures loaded by Hermes mechanism; no HGK skill store",
+   "evidence_refs": [
+    "HG-KSEOS_HERMES_V020_SKILL_GOVERNANCE_ACCEPTANCE.json"
+   ]
+  }
+ ],
+ "duplicate_scheduler_remaining": 0,
+ "duplicate_worker_dispatcher_remaining": 0,
+ "duplicate_runtime_checkpoint_store_remaining": 0,
+ "duplicate_provider_proxy_remaining": 0,
+ "duplicate_skill_store_remaining": 0,
+ "verdict": "COMPLETE — no proven duplicate runtime; zero deletions performed (nothing proven duplicate)",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:54:54.698224+00:00"
+}

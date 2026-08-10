@@ -87,15 +87,24 @@ class PredicateSemanticsTests(unittest.TestCase):
 class CurrentIdentityTests(unittest.TestCase):
     """F3/F4: current changeset identity."""
 
-    def test_current_changeset_task_is_011(self) -> None:
+    def test_current_changeset_task_is_013(self) -> None:
+        """F3/F4 regression: the acceptance must carry the CURRENT changeset
+        identity. Task-011/012 are historical accepted lineage (Prompt §42)."""
         acc = read_json("evidence/review/HG-KSEOS_EXTERNAL_FINAL_ACCEPTANCE.json")
         ctx = acc["acceptance_context"]
         self.assertEqual(ctx["current_changeset_task_id"],
-                         "HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011")
+                         "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013")
         self.assertEqual(ctx["closure_task_id"],
-                         "HGK-TASK011-AUTONOMY-EVOLUTION-EXTERNAL-ACCEPTANCE-SEMANTIC-CLOSURE-012")
+                         "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013")
+        self.assertIn("HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011",
+                      ctx["historical_task_ids"])
+        self.assertIn("HGK-TASK011-AUTONOMY-EVOLUTION-EXTERNAL-ACCEPTANCE-SEMANTIC-CLOSURE-012",
+                      ctx["historical_task_ids"])
         self.assertIn("HGK-FINAL-TEST-DENOMINATOR-EXTERNAL-EVIDENCE-CLOSURE-009", ctx["historical_task_ids"])
         self.assertIn("HGK-FINAL-MD-EXTERNAL-ACCEPTANCE-STALE-SECTION-FIX-010", ctx["historical_task_ids"])
+        # stale-identity regression: Task-011 must NOT appear as current
+        self.assertNotEqual(ctx["current_changeset_task_id"],
+                            "HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011")
 
     def test_required_task011_invariants_complete(self) -> None:
         acc = read_json("evidence/review/HG-KSEOS_EXTERNAL_FINAL_ACCEPTANCE.json")
@@ -143,7 +152,12 @@ class CurrentIdentityTests(unittest.TestCase):
 
     def test_promotion_policy_requires_source_locator(self) -> None:
         ge = read_json("evidence/review/HG-KSEOS_GOVERNED_EVOLUTION_ACCEPTANCE.json")
-        self.assertTrue(ge["promotion_policy"].startswith("LOW"))
+        # Task-012 source-resolved semantics: COV-11-06 (independent verifier +
+        # Human Policy Owner), no implementation-invented auto-promotion.
+        self.assertIn("COV-11-06", ge["promotion_policy"])
+        self.assertIn("Human Policy Owner", ge["promotion_policy"])
+        self.assertIn("no implementation-invented auto-promotion", ge["promotion_policy"])
+        self.assertNotIn("LOW=auto", ge["promotion_policy"])
         self.assertIn("COV-11-06", ge["results"]["GE-10_promotion_gate"]["source_locator"])
 
     def test_user_guide_currentness_scan(self) -> None:

@@ -1,0 +1,219 @@
+{
+ "baseline": {
+  "version": "0.18.2",
+  "tag": "v2026.7.7.2",
+  "commit": "9de9c25f620ff7f1ce0fd5457d596052d5159596"
+ },
+ "candidate": {
+  "version": "0.20.0",
+  "tag": "v2026.8.3",
+  "commit": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb"
+ },
+ "method": "module-level presence + line-count scan of both exact checkouts; runtime probes where applicable",
+ "features": {
+  "kanban_runtime_task_plane": {
+   "v0182_state": "present (kanban.py 2845L, kanban_db.py 8723L)",
+   "v020_state": "present, deepened (kanban.py 3236L, kanban_db.py 10275L)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "HGK keeps normative WorkOrder state in Shared Spine; no HGK task board exists",
+   "proposed_disposition": "REUSE_HERMES (runtime task plane); HGK retains normative state + refs",
+   "source_locator": "hermes_cli/kanban.py, hermes_cli/kanban_db.py"
+  },
+  "kanban_dispatch_daemon": {
+   "v0182_state": "present (gateway/kanban_watchers.py)",
+   "v020_state": "present; embedded dispatcher in gateway (kanban.dispatch_in_gateway)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "none (HGK has no dispatcher daemon)",
+   "proposed_disposition": "REUSE_HERMES",
+   "source_locator": "gateway/kanban_watchers.py, hermes_cli/kanban.py"
+  },
+  "goal_continuation": {
+   "v0182_state": "present (hermes_cli/goals.py 1765L)",
+   "v020_state": "present (1807L; GoalManager, judge loop, wait barriers)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "none (HGK project resume is normative checkpoint, not a goal loop)",
+   "proposed_disposition": "REUSE_HERMES",
+   "source_locator": "hermes_cli/goals.py"
+  },
+  "goal_completion_contracts": {
+   "v0182_state": "present (GoalContract base)",
+   "v020_state": "present (outcome/verification/constraints/boundaries/stop_when; woven into judge+continuation)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "HGK WorkOrder acceptance contract remains normative; no HGK goal-judge exists",
+   "proposed_disposition": "REUSE_HERMES via thin projection (WorkOrder->goal contract); HGK acceptance still authoritative",
+   "source_locator": "hermes_cli/goals.py GoalContract/parse_contract"
+  },
+  "sessiondb": {
+   "v0182_state": "present (hermes_state.py)",
+   "v020_state": "present + hermes_state_schema.py split",
+   "hgk_relevance": "MEDIUM",
+   "current_hgk_overlap": "none (Shared Spine is the normative store; no HGK session store)",
+   "proposed_disposition": "REUSE_HERMES",
+   "source_locator": "hermes_state.py, hermes_state_schema.py"
+  },
+  "checkpoint_rollback": {
+   "v0182_state": "present (tools/checkpoint_manager.py, hermes_cli/checkpoints.py)",
+   "v020_state": "present",
+   "hgk_relevance": "MEDIUM",
+   "current_hgk_overlap": "HGK recovery.py backup/restore is product DB-level (COV-20) — distinct responsibility; no HGK runtime checkpoint store",
+   "proposed_disposition": "REUSE_HERMES for runtime; HGK backup/restore retained (normative)",
+   "source_locator": "tools/checkpoint_manager.py"
+  },
+  "worker_dispatch": {
+   "v0182_state": "present (kanban dispatch + delegate_tool)",
+   "v020_state": "present",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "none (HGK WorkOrder admission is normative; execution goes to Codex CLI)",
+   "proposed_disposition": "REUSE_HERMES",
+   "source_locator": "hermes_cli/kanban.py, tools/delegate_tool.py"
+  },
+  "retry_reclaim": {
+   "v0182_state": "present (kanban reclaim)",
+   "v020_state": "present (claim/reclaim/run ledger)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "HGK attempt budget lives in WorkOrder normative state — complementary",
+   "proposed_disposition": "REUSE_HERMES",
+   "source_locator": "hermes_cli/kanban.py"
+  },
+  "heartbeat": {
+   "v0182_state": "present",
+   "v020_state": "present (kanban heartbeat verb)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "none",
+   "proposed_disposition": "REUSE_HERMES",
+   "source_locator": "hermes_cli/kanban.py"
+  },
+  "worktrees": {
+   "v0182_state": "present",
+   "v020_state": "present (worktree:<path> workspace kind)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "HGK lifecycle admits WorkOrders with worktree write_scope (normative); Hermes materializes worktrees (runtime)",
+   "proposed_disposition": "ADAPTER (HGK WorkOrder worktree scope -> Hermes workspace)",
+   "source_locator": "hermes_cli/kanban.py"
+  },
+  "tool_self_recovery": {
+   "v0182_state": "present",
+   "v020_state": "present, deepened (terminal retry/truncation, file verify, patch result)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "none (no HGK tool wrappers in src/)",
+   "proposed_disposition": "REUSE_HERMES",
+   "source_locator": "tools/terminal_tool.py, tools/file_operations.py"
+  },
+  "context_compression": {
+   "v0182_state": "present (1367L)",
+   "v020_state": "present, majorly deepened (3979L; progress-aware, admission lock, timeout wrap)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "none (no HGK compactor)",
+   "proposed_disposition": "REUSE_HERMES",
+   "source_locator": "agent/conversation_compression.py"
+  },
+  "smart_approvals": {
+   "v0182_state": "present (tools/approval.py)",
+   "v020_state": "present + approval_mode.py + approvals_suggest.py (smart mode, subagent policy)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "HGK HarnessAction admission is product-level normative gate (COV-14); Hermes approvals govern the agent runtime shell",
+   "proposed_disposition": "ADAPTER (explicit approvals.mode=manual; HGK harness retained)",
+   "source_locator": "tools/approval.py, hermes_cli/approval_mode.py"
+  },
+  "deny_rules": {
+   "v0182_state": "present",
+   "v020_state": "present (user deny rules + hardline)",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "none",
+   "proposed_disposition": "REUSE_HERMES with HGK explicit policy",
+   "source_locator": "tools/approval.py"
+  },
+  "denial_circuit_breaker": {
+   "v0182_state": "present (tools/approval.py)",
+   "v020_state": "present + config_defaults (consecutive-denial breaker)",
+   "hgk_relevance": "MEDIUM",
+   "current_hgk_overlap": "none",
+   "proposed_disposition": "REUSE_HERMES",
+   "source_locator": "hermes_cli/config_defaults.py"
+  },
+  "runaway_loop_caps": {
+   "v0182_state": "present (agent/conversation_loop.py)",
+   "v020_state": "present + config_defaults (max_turns caps)",
+   "hgk_relevance": "MEDIUM",
+   "current_hgk_overlap": "HGK agent.max_turns=300 explicit",
+   "proposed_disposition": "REUSE_HERMES (config explicit)",
+   "source_locator": "hermes_cli/config_defaults.py"
+  },
+  "mcp_discovery_startup": {
+   "v0182_state": "present (mcp_serve.py + client)",
+   "v020_state": "present",
+   "hgk_relevance": "LOW",
+   "current_hgk_overlap": "none (no active MCP requirement in HGK route)",
+   "proposed_disposition": "DEFERRED_NOT_REQUIRED (no MCP added this changeset)",
+   "source_locator": "mcp_serve.py"
+  },
+  "deepseek_opencode_caching": {
+   "v0182_state": "present (chat_completion_helpers)",
+   "v020_state": "present + agent/backend_identity.py",
+   "hgk_relevance": "HIGH",
+   "current_hgk_overlap": "none",
+   "proposed_disposition": "REUSE_HERMES (runtime-verified: prompt_cache_hit_tokens exposed; 9088/9092 hit on repeated prefix)",
+   "source_locator": "agent/backend_identity.py, agent/chat_completion_helpers.py"
+  },
+  "skills_curator": {
+   "v0182_state": "present (curator.py)",
+   "v020_state": "present (archive-only, never promotes, created_by=agent scope)",
+   "hgk_relevance": "MEDIUM",
+   "current_hgk_overlap": "HGK skill candidate admission + COV-11-06 Human Policy Owner gate is normative; no HGK skill storage",
+   "proposed_disposition": "REUSE_HERMES (mechanism); HGK admission/promotion gate retained",
+   "source_locator": "agent/curator.py, hermes_cli/curator.py"
+  },
+  "grounded_citations": {
+   "v0182_state": "present",
+   "v020_state": "present",
+   "hgk_relevance": "LOW",
+   "current_hgk_overlap": "HGK source locator/hash/rank remains canonical",
+   "proposed_disposition": "RESEARCH_HELPER only; not canonical evidence authority",
+   "source_locator": "agent/context_references.py"
+  },
+  "a2a": {
+   "v0182_state": "no dedicated module",
+   "v020_state": "no dedicated module",
+   "hgk_relevance": "NONE",
+   "current_hgk_overlap": "none",
+   "proposed_disposition": "STANDBY (no production integration)",
+   "source_locator": "-"
+  },
+  "signed_webhooks": {
+   "v0182_state": "present (webhook.py)",
+   "v020_state": "present",
+   "hgk_relevance": "NONE",
+   "current_hgk_overlap": "none",
+   "proposed_disposition": "STANDBY (no production integration)",
+   "source_locator": "hermes_cli/webhook.py"
+  },
+  "voice": {
+   "v0182_state": "present (tts/stt)",
+   "v020_state": "present",
+   "hgk_relevance": "NONE",
+   "current_hgk_overlap": "none",
+   "proposed_disposition": "NOT_REQUIRED_THIS_CHANGESET",
+   "source_locator": "tools/tts_tool.py"
+  },
+  "desktop_plugin_sdk": {
+   "v0182_state": "present (apps/desktop)",
+   "v020_state": "present",
+   "hgk_relevance": "NONE",
+   "current_hgk_overlap": "none",
+   "proposed_disposition": "NOT_REQUIRED_THIS_CHANGESET",
+   "source_locator": "apps/desktop"
+  },
+  "codex_app_server_runtime": {
+   "v0182_state": "present (codex_runtime_switch.py)",
+   "v020_state": "present",
+   "hgk_relevance": "LOW",
+   "current_hgk_overlap": "HGK certified route = Codex CLI -> OpenCodex -> OpenCode Go -> deepseek-v4-flash",
+   "proposed_disposition": "NOT_PRIMARY (route unchanged; source-backed inventory only)",
+   "source_locator": "hermes_cli/codex_runtime_switch.py"
+  }
+ },
+ "verdict": "COMPLETE",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:54:54.698224+00:00"
+}

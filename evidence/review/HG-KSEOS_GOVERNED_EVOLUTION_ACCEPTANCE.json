@@ -1,97 +1,97 @@
 {
- "schema": "HGK-GOVERNED-EVOLUTION-ACCEPTANCE/1",
- "captured_at_utc": "2026-08-09T15:38:43.507957+00:00",
- "checks_total": 14,
- "checks_pass": 14,
- "results": {
-  "GE-01_signal_capture": {
-   "check": "GE-01_signal_capture",
-   "verdict": "PASS",
-   "detail": "signal=EVO-SIG-AC6A84CC",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  "schema": "HGK-GOVERNED-EVOLUTION-ACCEPTANCE/1",
+  "captured_at_utc": "2026-08-09T15:38:43.507957+00:00",
+  "checks_total": 14,
+  "checks_pass": 14,
+  "results": {
+    "GE-01_signal_capture": {
+      "check": "GE-01_signal_capture",
+      "verdict": "PASS",
+      "detail": "signal=EVO-SIG-AC6A84CC",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-02_gap_classification": {
+      "check": "GE-02_gap_classification",
+      "verdict": "PASS",
+      "detail": "gap=SKILL_GAP",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-03_fit_gap_reuse": {
+      "check": "GE-03_fit_gap_reuse",
+      "verdict": "PASS",
+      "detail": "reuse=SkillRegistry route (existing skills)",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-04_candidate_creation": {
+      "check": "GE-04_candidate_creation",
+      "verdict": "PASS",
+      "detail": "candidate=IC-CB8A76EF",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-05_sandbox_qualify": {
+      "check": "GE-05_sandbox_qualify",
+      "verdict": "PASS",
+      "detail": "sandbox qualified",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-06_negative_security": {
+      "check": "GE-06_negative_security",
+      "verdict": "PASS",
+      "detail": "high-severity signal worthy",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-07_holdout_nrtv": {
+      "check": "GE-07_holdout_nrtv",
+      "verdict": "PASS",
+      "detail": "holdout+NRTV part of qualification gate (verified in qualify)",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-08_independent_checker": {
+      "check": "GE-08_independent_checker",
+      "verdict": "PASS",
+      "detail": "verdict=PASS",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-09_failed_candidate_rollback": {
+      "check": "GE-09_failed_candidate_rollback",
+      "verdict": "PASS",
+      "detail": "state=REJECTED",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-10_promotion_gate": {
+      "check": "GE-10_promotion_gate",
+      "verdict": "PASS",
+      "detail": "gate=PROMOTION_READY_HITL_SOURCE_REQUIRED src=HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md#C",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00",
+      "source_locator": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md#COV-11-06"
+    },
+    "GE-11_later_reuse": {
+      "check": "GE-11_later_reuse",
+      "verdict": "PASS",
+      "detail": "PROMOTION_READY_HITL_SOURCE_REQUIRED — later reuse NOT_APPLICABLE_UNTIL_APPROVED",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00",
+      "terminal": "PROMOTION_READY_HITL_SOURCE_REQUIRED",
+      "later_reuse": "NOT_APPLICABLE_UNTIL_APPROVED"
+    },
+    "GE-12_authority_mutation_defense": {
+      "check": "GE-12_authority_mutation_defense",
+      "verdict": "PASS",
+      "detail": "blocked",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-13_evaluator_tamper_defense": {
+      "check": "GE-13_evaluator_tamper_defense",
+      "verdict": "PASS",
+      "detail": "blocked",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    },
+    "GE-14_budget_stop": {
+      "check": "GE-14_budget_stop",
+      "verdict": "PASS",
+      "detail": "attempt_budget enforced by lifecycle (3); no infinite loop",
+      "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+    }
   },
-  "GE-02_gap_classification": {
-   "check": "GE-02_gap_classification",
-   "verdict": "PASS",
-   "detail": "gap=SKILL_GAP",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  },
-  "GE-03_fit_gap_reuse": {
-   "check": "GE-03_fit_gap_reuse",
-   "verdict": "PASS",
-   "detail": "reuse=SkillRegistry route (existing skills)",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  },
-  "GE-04_candidate_creation": {
-   "check": "GE-04_candidate_creation",
-   "verdict": "PASS",
-   "detail": "candidate=IC-CB8A76EF",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  },
-  "GE-05_sandbox_qualify": {
-   "check": "GE-05_sandbox_qualify",
-   "verdict": "PASS",
-   "detail": "sandbox qualified",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  },
-  "GE-06_negative_security": {
-   "check": "GE-06_negative_security",
-   "verdict": "PASS",
-   "detail": "high-severity signal worthy",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  },
-  "GE-07_holdout_nrtv": {
-   "check": "GE-07_holdout_nrtv",
-   "verdict": "PASS",
-   "detail": "holdout+NRTV part of qualification gate (verified in qualify)",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  },
-  "GE-08_independent_checker": {
-   "check": "GE-08_independent_checker",
-   "verdict": "PASS",
-   "detail": "verdict=PASS",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  },
-  "GE-09_failed_candidate_rollback": {
-   "check": "GE-09_failed_candidate_rollback",
-   "verdict": "PASS",
-   "detail": "state=REJECTED",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  },
-  "GE-10_promotion_gate": {
-   "check": "GE-10_promotion_gate",
-   "verdict": "PASS",
-   "detail": "gate=PROMOTION_READY_HITL_SOURCE_REQUIRED src=HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md#C",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00",
-   "source_locator": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md#COV-11-06"
-  },
-  "GE-11_later_reuse": {
-   "check": "GE-11_later_reuse",
-   "verdict": "PASS",
-   "detail": "PROMOTION_READY_HITL_SOURCE_REQUIRED — later reuse NOT_APPLICABLE_UNTIL_APPROVED",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00",
-   "terminal": "PROMOTION_READY_HITL_SOURCE_REQUIRED",
-   "later_reuse": "NOT_APPLICABLE_UNTIL_APPROVED"
-  },
-  "GE-12_authority_mutation_defense": {
-   "check": "GE-12_authority_mutation_defense",
-   "verdict": "PASS",
-   "detail": "blocked",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  },
-  "GE-13_evaluator_tamper_defense": {
-   "check": "GE-13_evaluator_tamper_defense",
-   "verdict": "PASS",
-   "detail": "blocked",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  },
-  "GE-14_budget_stop": {
-   "check": "GE-14_budget_stop",
-   "verdict": "PASS",
-   "detail": "attempt_budget enforced by lifecycle (3); no infinite loop",
-   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
-  }
- },
- "promotion_policy": "LOW=auto+checker+rollback; MEDIUM=checker+human-if-required; HIGH/CONSTITUTIONAL=human-mandatory",
- "verdict": "PASS"
+  "promotion_policy": "source-resolved per P0-CIP COV-11-06: promotion requires independent verifier + Human Policy Owner for every risk class; no implementation-invented auto-promotion (Task-012 semantic closure; GE-11 = PROMOTION_READY_HITL_SOURCE_REQUIRED; later reuse = NOT_APPLICABLE_UNTIL_APPROVED)",
+  "verdict": "PASS"
 }

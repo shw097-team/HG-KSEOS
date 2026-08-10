@@ -1,0 +1,66 @@
+{
+ "provider": "opencode-go",
+ "base_url": "https://opencode.ai/zen/go/v1",
+ "model": "deepseek-v4-flash",
+ "preserved_from_v0182": true,
+ "openai_fallback": false,
+ "unadmitted_provider": 0,
+ "model_silently_switched": false,
+ "q04_hermes_inference": {
+  "prompt": "HGK_V020_PROVIDER_PING_OK",
+  "result": "exact reply",
+  "seconds": 13
+ },
+ "q05_codex_route": {
+  "executor": "Codex CLI 0.147.0-alpha.6.5 (SHA fb5c760e14cf8fe86e12e49e8a3e7f237af06082d6b9fe1e411e463b7229c916)",
+  "transport": "OpenCodex 2.11.0 (loopback 127.0.0.1:10100, health 200)",
+  "provider": "OpenCode Go",
+  "model": "deepseek-v4-flash",
+  "direct_run": {
+   "workorder": "wq-001",
+   "diff": "calculator.py +8, tests +12/-1",
+   "tests": "3/3 PASS",
+   "independent_recheck": "PASS"
+  },
+  "v020_orchestrated_run": {
+   "workorder": "wq-002",
+   "session": "20260810_100152_a8f027",
+   "tool_calls": 6,
+   "diff": "greeter.py +4, tests +5/-1",
+   "tests": "2/2 PASS (unittest + pytest)",
+   "independent_recheck": "PASS"
+  }
+ },
+ "deepseek_prompt_cache": {
+  "gateway_metadata_exposed": [
+   "prompt_cache_hit_tokens",
+   "prompt_cache_miss_tokens",
+   "prompt_tokens_details.cached_tokens"
+  ],
+  "probe1_92_tokens": {
+   "first": {
+    "hit": 0,
+    "miss": 92
+   },
+   "repeat": {
+    "hit": 0,
+    "miss": 92
+   }
+  },
+  "probe2_9092_tokens": {
+   "first": {
+    "hit": 0,
+    "miss": 9092
+   },
+   "repeat": {
+    "hit": 9088,
+    "miss": 4
+   }
+  },
+  "verdict": "PASS — cache present and observable; savings measured from provider metadata, none invented"
+ },
+ "verdict": "PASS",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:55:39.741780+00:00"
+}

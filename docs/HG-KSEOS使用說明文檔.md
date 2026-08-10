@@ -4,7 +4,7 @@
 
 本文件說明 HG-KSEOS 本機 canonical local 系統的安裝、操作、驗證、備份、回滾與交付。
 
-**Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`。Current changeset = **Task-011**（Autonomous Project Lifecycle + Governed Evolution，`HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011`）；external acceptance semantic closure = **Task-012**（`HGK-TASK011-AUTONOMY-EVOLUTION-EXTERNAL-ACCEPTANCE-SEMANTIC-CLOSURE-012`）。Historical baseline：E10（task-009/010）為 lineage，已 superseded。後續新增 tracked ChangeSet 會形成新 candidate，未重新 seal 前不得沿用舊 acceptance。production 一律 `NOT_CLAIMED`。
+**Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`。Current changeset = **Task-013**（Hermes v0.20 Native Runtime Reuse Convergence + Qualification，`HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013`）。Task-011（`HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011`）與 Task-012（`HGK-TASK011-AUTONOMY-EVOLUTION-EXTERNAL-ACCEPTANCE-SEMANTIC-CLOSURE-012`）為 historical accepted lineage，不再作為 current changeset。Historical baseline：E10（task-009/010）為 lineage，已 superseded。後續新增 tracked ChangeSet 會形成新 candidate，未重新 seal 前不得沿用舊 acceptance。production 一律 `NOT_CLAIMED`。
 
 歷史沿革：系統早期先以「本機 companion」於 maker workspace 施工（見 Release/Changelog），該階段已結束；本文描述 current canonical runtime。
 
@@ -50,7 +50,24 @@ PREDEV 240 與 P0 259 共 499 條 requirement；`ATOMIC_CHILD_REQUIREMENTS.csv` 
 
 ## 12. Hermes 版本
 
-Hermes 固定為 v0.18.2、tag `v2026.7.7.2`、commit `9de9c25f620ff7f1ce0fd5457d596052d5159596`。不得使用 floating latest。
+Hermes 經 Task-013 side-by-side qualification 後認證為 v0.20.0、tag `v2026.8.3`、commit `3c27eb6234bf91b8ceee9e9071591b31e9b148cb`（exact-tag/commit 三者對齊；不使用 floating latest；不使用 `hermes update` 作為升級方式）。
+
+- **Certified**: `ACTIVE_SELECTED_CERTIFIED`（Task-013 全部 gate PASS 後）。
+- **Rollback baseline**: v0.18.2、tag `v2026.7.7.2`、commit `9de9c25f620ff7f1ce0fd5457d596052d5159596` 保留為 sealed rollback baseline，直到 final acceptance 完成不得刪除（rollback drill 已 PASS）。
+- **Live runtime switch（HITL）**: 本機 desktop runtime 目前仍為 v0.18.2；切換到 certified v0.20 必須依 §40 的 exact-tag side-by-side 程序（disposable venv + 隔離 HERMES_HOME），不得直接覆寫 v0.18.2 安裝。`scripts\hermes-core.ps1` 在切換前會 fail-closed 回報版本 mismatch。
+
+## 12a. Runtime / Governance 雙層所有權
+
+```text
+HG-KSEOS Governance / Normative Control Plane
+   → thin runtime binding
+      → Hermes v0.20 Runtime / Orchestration Plane
+         → admitted WorkOrder → Codex CLI → OpenCodex → OpenCode Go → deepseek-v4-flash
+```
+
+- HG-KSEOS 擁有：authority、source admission、intent、requirements、RBWI/WP、TaskSpec、WorkOrder admission、normative lifecycle、risk/HITL policy、evidence contract、independent checker、reducers、evolution qualification/promotion authority、release/package/handoff、Canonical Shared Spine。
+- Hermes v0.20 擁有：durable Kanban runtime task plane、worker dispatch/dependency/retry/heartbeat/reclaim、worktree 物化、`/goal` continuation 與 completion contract、SessionDB、runtime checkpoint、tool self-recovery、context compression、approvals 執行機制、Skills/Curator 機制、MCP startup。
+- Shared Spine 只存 pointer / normative state / evidence refs / rollback pointer，不鏡像 Hermes runtime 狀態。
 
 ## 13. Hermes 核心驗證
 
@@ -58,7 +75,7 @@ Hermes 固定為 v0.18.2、tag `v2026.7.7.2`、commit `9de9c25f620ff7f1ce0fd5457
 
 ## 14. Hermes Provider
 
-Hermes v0.18.2 使用 provider `opencode-go`、model `deepseek-v4-flash`（base `https://opencode.ai/zen/go/v1`）。憑證以 `OPENCODE_GO_API_KEY` env-ref 存放於 Hermes auth store（`%LOCALAPPDATA%\hermes\.env`），不寫入任何 evidence。OpenAI OAuth credential 保留未動。Provider 正向 pilot（P1–P10）與 Hermes→Codex closed loop 已 PASS。
+Hermes 使用 provider `opencode-go`、model `deepseek-v4-flash`（base `https://opencode.ai/zen/go/v1`），v0.18.2 與 certified v0.20.0 相同，未變更。憑證以 `OPENCODE_GO_API_KEY` env-ref 存放於 Hermes auth store（`%LOCALAPPDATA%\hermes\.env`），不寫入任何 evidence。OpenAI OAuth credential 保留未動；OpenAI fallback = false；unadmitted provider = 0。Provider 正向 pilot（P1–P10）、Hermes→Codex closed loop 與 Task-013 real Codex route（Codex CLI → OpenCodex → OpenCode Go → deepseek-v4-flash）均 PASS。DeepSeek prompt caching 在 OpenCode Go gateway 上實測：重複 9092-token prefix 的第二次呼叫 `prompt_cache_hit_tokens=9088`（hit 由 provider metadata 量測，未編造節省百分比）。
 
 ## 15. Hermes 回滾
 
@@ -244,3 +261,54 @@ python -m hg_kseos.cli evolution status|signal|candidate
 ```
 
 以上命令皆由 `src/hg_kseos/cli.py` 實作並有對應測試（`tests/test_autonomy_evolution.py`）。
+
+## 40. Hermes v0.20 Native Runtime Reuse Convergence（Task-013）
+
+### 40.1 認證身份
+
+- 版本 `0.20.0`／tag `v2026.8.3`／commit `3c27eb6234bf91b8ceee9e9071591b31e9b148cb`（三者對齊，source + runtime readback 皆 PASS）。
+- 安裝方式：exact-tag git checkout → 隔離 venv（系統 Python 3.11.9）→ editable install；`HERMES_HOME`、config、kanban.db 全部隔離在 disposable qualification root（`%TEMP%\hgk-hermes-v020-qual`），未污染 production v0.18.2 安裝。
+- 禁止：`hermes update`、floating main、覆寫 v0.18.2、系統 PATH 變更。
+
+### 40.2 Kanban 使用規則
+
+- 用途：cross-role／durable／restart-surviving／parallel-dependent tasks → Hermes Kanban card（create→ready→claim→running→complete；dependency 以 parent/child gating；HITL 以 block + typed reason；retry 以 max-retries + run ledger；heartbeat/reclaim 單一 writer 由原子 claim 保證）。
+- 不用：small atomic task 不強迫 Kanban（直接 Hermes turn / 既有 bounded lane）；簡單任務禁止每個步驟都開 card。
+- HG-KSEOS WorkOrder → Hermes Kanban 為 thin adapter：Shared Spine 只存 workorder_id/pointer/normative state；Kanban board/task id/runtime state 由 Hermes 持有。
+
+### 40.3 `/goal` 使用規則
+
+- 用途：long-running WorkOrder → 把 WorkOrder contract 投影成 goal completion contract（outcome/verification/constraints/boundaries/stop_when）。
+- `/goal done` 不等於 HG-KSEOS PASS：goal judge 只是 runtime stop helper；final acceptance 仍須 raw evidence → HG-KSEOS independent checker → reducers → release。
+- Resume：goal state 存於 SessionDB `state_meta`（key `goal:<session_id>`），process restart 後可恢復。
+
+### 40.4 Runtime checkpoint vs Normative checkpoint
+
+- Hermes v0.20 負責：session state、goal state、worker runtime state、Kanban state、Hermes checkpoint runtime。
+- HG-KSEOS 負責：project normative checkpoint、source hashes、WorkOrder IDs、Hermes session/Kanban refs、evidence refs、release state、rollback pointer。
+- 不鏡像 Hermes runtime；Shared Spine 只存 pointer/ref。
+
+### 40.5 Tool recovery / Compression / Approvals
+
+- Tool self-recovery（terminal retry/truncation readback、write_file on-disk verify、patch already-applied、search near-miss）由 Hermes v0.20 提供；HG-KSEOS 未發現重複 wrapper（reuse binding matrix 20 項、duplicates=0）。
+- Context compression 使用 Hermes v0.20（enabled、threshold 0.5、target_ratio 0.2 顯式設定）；HG-KSEOS Memory/RAG/SourceUnit 不因 compression 刪除。
+- Approvals 顯式 policy：`approvals.mode: manual`（fail-closed；timeout 60s；不得以 `off` 作正常 profile）。實測：`rm -rf` 觸發 `pending_approval`，agent 拒絕繞過；POSIX 危險 pattern 由 Hermes 攔截，Windows-native path guard 由 HGK security 層保留。
+
+### 40.6 Skill governance
+
+- Hermes 負責 skill file 機制／loading／invocation／curator（archive-only，永不 promote，只作用於 `created_by=agent`）。
+- HG-KSEOS 負責 candidate admission、FIT-GAP、sandbox、negative/security、holdout、NRTV、independent checker、promotion policy、COV-11-06 Human Policy Owner gate、rollback acceptance。
+
+### 40.7 v0.20 未啟用／deferred
+
+- MCP：本輪無 active requirement → `DEFERRED_NOT_REQUIRED`（不新增 MCP server）。
+- A2A、signed webhooks、voice、wake words、desktop plugin SDK、新 GUI：`STANDBY`／`NOT_REQUIRED`（不裝服務、不開 port）。
+- Codex App-Server runtime：`NOT_PRIMARY`（current certified route 不變）。
+
+### 40.8 v0.20 Switch / Rollback 程序（HITL）
+
+1. 依 §12 的 exact-tag 程序建 disposable venv + 隔離 HERMES_HOME（不覆寫 v0.18.2）。
+2. 驗證 `hermes --version` = v0.20.0、`hermes doctor` blocking=[]、一次 real inference、一次 real Codex route。
+3. 將 config/hermes.json `executable` 指向 v0.20 venv，`scripts\hermes-core.ps1` 通過。
+4. Rollback：刪除 disposable root，還原 config/hermes.json rollback baseline（v0.18.2），`hermes-core.ps1` 恢復 PASS。
+5. 全程 production `NOT_CLAIMED`。

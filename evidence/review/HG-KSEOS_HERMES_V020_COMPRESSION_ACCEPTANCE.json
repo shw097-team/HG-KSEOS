@@ -1,0 +1,24 @@
+{
+ "config": {
+  "enabled": true,
+  "threshold": 0.5,
+  "target_ratio": 0.2
+ },
+ "source_mechanism": "agent/conversation_compression.py (3979L in v0.20 vs 1367L in v0.18.2; progress-aware, admission lock, timeout wrap)",
+ "upstream_tests": {
+  "files": [
+   "tests/test_cli_manual_compress.py",
+   "tests/test_trajectory_compressor.py",
+   "tests/test_hermes_state_compression_busy_retry.py",
+   "tests/test_hermes_state_compression_locks.py"
+  ],
+  "result": "green (in 66-test upstream run)"
+ },
+ "recent_user_messages_preserved": "source-backed (compressor keeps recent turns; see upstream tests)",
+ "hgk_memory_rag_source_units_never_deleted": true,
+ "no_hgk_compactor": true,
+ "verdict": "PASS",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:55:39.741780+00:00"
+}
