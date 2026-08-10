@@ -511,18 +511,20 @@ class ProjectLifecycleController:
                 "SELECT a.acceptance_id, a.verdict FROM acceptances a "
                 "JOIN requirements r ON r.requirement_id=a.requirement_id "
                 "WHERE r.project_id=?", (project_id,)).fetchall()
-            bind_rows = conn.execute(
-                "SELECT provider_id, state FROM provider_bindings").fetchall()
         req_ids = [r[0] for r in req_rows]
         open_workorders = [w[0] for w in wo_rows
                            if w[1] not in ("VERIFIED", "ROLLED_BACK", "CANCELLED")]
         open_acceptances = [a[0] for a in acc_rows if a[1] != "PASS"]
-        # required-active capabilities from the named-method registry
+        # required-active capabilities from the named-method registry.
+        # Bound = registry scope is ACTIVE (USER_AUTHORIZED_ACTIVE_* /
+        # CERTIFIED_ACTIVE_* / runtime-now); provider_bindings is the P0-TOOL
+        # discovery layer and is not the binding source for named-method tools.
         active_methods = [tid for tid, m in NAMED_METHODS.items()
                           if m.runtime_required_now and m.current_execution_scope != "STANDBY"]
-        bound = {b[0] for b in bind_rows if b[1] == "ENABLED"}
-        open_capabilities = [tid for tid in active_methods
-                             if not any(tid.startswith(b) for b in bound)]
+        _ACTIVE_SCOPES = ("USER_AUTHORIZED_ACTIVE", "CERTIFIED_ACTIVE")
+        open_capabilities = [tid for tid, m in NAMED_METHODS.items()
+                             if tid in active_methods
+                             and not str(getattr(m, "current_execution_scope", "")).startswith(_ACTIVE_SCOPES)]
         return {
             "project_id": project_id,
             "state": state,
