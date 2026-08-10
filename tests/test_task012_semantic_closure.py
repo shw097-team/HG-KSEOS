@@ -87,22 +87,22 @@ class PredicateSemanticsTests(unittest.TestCase):
 class CurrentIdentityTests(unittest.TestCase):
     """F3/F4: current changeset identity."""
 
-    def test_current_changeset_task_is_014(self) -> None:
+    def test_current_changeset_task_is_015(self) -> None:
         """F3/F4 regression: the acceptance must carry the CURRENT changeset
-        identity. Task-011/012/013 are historical accepted lineage (Prompt §45)."""
+        identity. Task-011/012/013/014 are historical accepted lineage."""
         acc = read_json("evidence/review/HG-KSEOS_EXTERNAL_FINAL_ACCEPTANCE.json")
         ctx = acc["acceptance_context"]
         self.assertEqual(ctx["current_changeset_task_id"],
-                         "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014")
+                         "HGK-TASK014-FINAL-EXTERNAL-EVIDENCE-COHERENCE-UNIQUE-DENOMINATOR-RECEIPT-LINEAGE-015")
         self.assertEqual(ctx["closure_task_id"],
-                         "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014")
+                         "HGK-TASK014-FINAL-EXTERNAL-EVIDENCE-COHERENCE-UNIQUE-DENOMINATOR-RECEIPT-LINEAGE-015")
+        self.assertIn("HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+                      ctx["historical_task_ids"])
         self.assertIn("HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
                       ctx["historical_task_ids"])
         self.assertIn("HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011",
                       ctx["historical_task_ids"])
-        self.assertIn("HGK-TASK011-AUTONOMY-EVOLUTION-EXTERNAL-ACCEPTANCE-SEMANTIC-CLOSURE-012",
-                      ctx["historical_task_ids"])
-        # stale-identity regression: Task-013 must NOT appear as current
+        # stale-identity regression: Task-014 must NOT appear as current
         self.assertNotEqual(ctx["current_changeset_task_id"],
                             "HGK-AUTONOMOUS-PROJECT-LIFECYCLE-GOVERNED-EVOLUTION-CLOSURE-011")
 

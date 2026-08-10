@@ -1,350 +1,318 @@
 # HG-KSEOS 使用說明文檔
 
-## 1. 文件目的
+> 本文是 **projection / operational manual**，不是 authority / policy source / requirement source。
+> 權威來源依 §Authority（P0-CIP r2、實作前開發文檔包、三份藍圖、FINAL_r2 控制包、Hermes DOC-01..20，均 hash 綁定）。
+> **Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`。Current changeset = **Task-015**（Final External Evidence Coherence + Unique Denominator + Receipt Lineage，`HGK-TASK014-FINAL-EXTERNAL-EVIDENCE-COHERENCE-UNIQUE-DENOMINATOR-RECEIPT-LINEAGE-015`）。Task-011/012/013/014 為 historical accepted lineage。Production 一律 `NOT_CLAIMED`。歷史施工細節見 §Changelog / Historical Baselines。
 
-本文件說明 HG-KSEOS 本機 canonical local 系統的安裝、操作、驗證、備份、回滾與交付。
+---
 
-**Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`。Current changeset = **Task-014**（Self-Bootstrap Named Method Runtime Readiness + Task-013 Final Closure，`HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014`）。Task-011/012/013 為 historical accepted lineage，不再作為 current changeset。Historical baseline：E10（task-009/010）為 lineage，已 superseded。後續新增 tracked ChangeSet 會形成新 candidate，未重新 seal 前不得沿用舊 acceptance。production 一律 `NOT_CLAIMED`。
+# Part I — 5 分鐘開始
 
-歷史沿革：系統早期先以「本機 companion」於 maker workspace 施工（見 Release/Changelog），該階段已結束；本文描述 current canonical runtime。
+## 1. HG-KSEOS 是什麼
 
-## 2. 權威來源
+HG-KSEOS 是受治理的多閘門本機交付系統：把「使用者目標 → 來源 → 需求 → 設計 → 計畫 → WorkOrder → 實作 → 測試 → 修補 → 獨立驗收 → reducers → local delivery」整條鏈路自動化，並以 immutable evidence、independent checker 與 fail-closed 閘門維持可稽核性。
 
-權威順序依 source-freeze 工件執行；P0-CIP r2、實作前開發文檔包 r2、三份藍圖、FINAL_r2 控制包與 Hermes DOC-01..20 均以 hash 綁定。低權威來源不得覆寫高權威規則。
+## 2. 目前狀態
 
-## 3. 目錄角色
+- **Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`（以 current External Acceptance 為準；hard-check denominator 按 **unique predicate ID** 計數，duplicate ID 本身是 fail-closed defect）。
+- **Hermes**: v0.20.0（tag `v2026.8.3`、commit `3c27eb6234bf91b8ceee9e9071591b31e9b148cb`）`ACTIVE_SELECTED_CERTIFIED`；provider `opencode-go`、model `deepseek-v4-flash`。
+- **Named methods**: OpenSpec `CERTIFIED_ACTIVE_BROWNFIELD`；gstack `CERTIFIED_ACTIVE_SELECTED_SLICES`。
+- **Production**: `NOT_CLAIMED`（Local Delivery PASS ≠ Production Authorized）。
 
-`C:\Projects\Agent_Workspace\HG-KSEOS` 是 current canonical local root（writable root，唯一 canonical）。Source/Authority、Shared Spine、RBWI/WP、WorkOrder、AGENTS/SKILLS、Harness/Loop、證據與 reducers 皆在此 root。Obsidian vault、LLM Wiki 產出、RAG/KG 皆為 derived/candidate，不得成為第二 canonical truth。
+## 3. Canonical Root
 
-## 4. 前置條件
+`C:\Projects\Agent_Workspace\HG-KSEOS` 是唯一 canonical local root（writable root）。Source/Authority、Shared Spine、RBWI/WP、WorkOrder、AGENTS/SKILLS、Harness/Loop、證據與 reducers 皆在此 root。Obsidian vault、LLM Wiki 產出、RAG/KG 皆為 derived/candidate。
 
-需要 Windows、PowerShell 5.1+、Python 3.12 專案環境、Git 及 SQLite FTS5。Hermes core 使用獨立 Python 3.11 venv。
-
-## 5. 安全邊界
-
-禁止寫入來源、越出 maker root、路徑穿越、reparse point、未授權網路、秘密讀取、遠端發佈、部署與 production mutation。所有高風險擴權維持 HITL。
-
-## 6. 快速健康檢查
-
-執行 `powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1`。只有 `blocking` 為空且 `verdict=PASS` 才是本機核心健康。
-
-## 7. 初始建置
-
-全新 HG-KSEOS canonical local installation / bootstrap environment 才可執行 `scripts\bootstrap.ps1`。若資料庫已存在，bootstrap 會 fail closed；既有環境改用 migrate/doctor。
-
-## 8. Shared Spine
-
-canonical database 為 `var/shared-spine/hg-kseos.db`。所有 requirements、provider lifecycle、TT 與 release decision 都由單一 writer 契約管理。
-
-## 9. Requirements
-
-PREDEV 240 與 P0 259 共 499 條 requirement；`ATOMIC_CHILD_REQUIREMENTS.csv` 另保存 1040 個拆分子項。不得用子項取代 499 個 canonical parent identity。
-
-## 10. Acceptance
-
-`eval/FROZEN_ACCEPTANCE_CASES.csv` 精確包含 TST-001..092。執行 `scripts\acceptance.ps1` 產生逐案 fixture、evidence、hash 與 maker verdict。
-
-## 11. 控制工件
-
-`control/` 物化 FINAL_r2 的 18 skills、10 agents、12 prompts、8 workflows、6 state machines，以及 6 個 wrapper/control 文件；manifest 共 60 列。
-
-## 12. Hermes 版本
-
-Hermes 經 Task-013 side-by-side qualification 後認證為 v0.20.0、tag `v2026.8.3`、commit `3c27eb6234bf91b8ceee9e9071591b31e9b148cb`（exact-tag/commit 三者對齊；不使用 floating latest；不使用 `hermes update` 作為升級方式）。
-
-- **Certified**: `ACTIVE_SELECTED_CERTIFIED`（Task-013 全部 gate PASS 後）。
-- **Rollback baseline**: v0.18.2、tag `v2026.7.7.2`、commit `9de9c25f620ff7f1ce0fd5457d596052d5159596` 保留為 sealed rollback baseline，直到 final acceptance 完成不得刪除（rollback drill 已 PASS）。
-- **Live runtime switch（HITL）**: 本機 desktop runtime 目前仍為 v0.18.2；切換到 certified v0.20 必須依 §40 的 exact-tag side-by-side 程序（disposable venv + 隔離 HERMES_HOME），不得直接覆寫 v0.18.2 安裝。`scripts\hermes-core.ps1` 在切換前會 fail-closed 回報版本 mismatch。
-
-## 12a. Runtime / Governance 雙層所有權
+## 4. 啟動與健康檢查
 
 ```text
-HG-KSEOS Governance / Normative Control Plane
-   → thin runtime binding
-      → Hermes v0.20 Runtime / Orchestration Plane
-         → admitted WorkOrder → Codex CLI → OpenCodex → OpenCode Go → deepseek-v4-flash
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\doctor.ps1     # blocking 為空且 verdict=PASS 才是健康
+python -m hg_kseos.cli doctor
 ```
 
-- HG-KSEOS 擁有：authority、source admission、intent、requirements、RBWI/WP、TaskSpec、WorkOrder admission、normative lifecycle、risk/HITL policy、evidence contract、independent checker、reducers、evolution qualification/promotion authority、release/package/handoff、Canonical Shared Spine。
-- Hermes v0.20 擁有：durable Kanban runtime task plane、worker dispatch/dependency/retry/heartbeat/reclaim、worktree 物化、`/goal` continuation 與 completion contract、SessionDB、runtime checkpoint、tool self-recovery、context compression、approvals 執行機制、Skills/Curator 機制、MCP startup。
-- Shared Spine 只存 pointer / normative state / evidence refs / rollback pointer，不鏡像 Hermes runtime 狀態。
-
-## 13. Hermes 核心驗證
-
-執行 `scripts\hermes-core.ps1` 僅驗證固定版本，不會 setup、登入、安裝 gateway、更新或卸載。
-
-## 14. Hermes Provider
-
-Hermes 使用 provider `opencode-go`、model `deepseek-v4-flash`（base `https://opencode.ai/zen/go/v1`），v0.18.2 與 certified v0.20.0 相同，未變更。憑證以 `OPENCODE_GO_API_KEY` env-ref 存放於 Hermes auth store（`%LOCALAPPDATA%\hermes\.env`），不寫入任何 evidence。OpenAI OAuth credential 保留未動；OpenAI fallback = false；unadmitted provider = 0。Provider 正向 pilot（P1–P10）、Hermes→Codex closed loop 與 Task-013 real Codex route（Codex CLI → OpenCodex → OpenCode Go → deepseek-v4-flash）均 PASS。DeepSeek prompt caching 在 OpenCode Go gateway 上實測：重複 9092-token prefix 的第二次呼叫 `prompt_cache_hit_tokens=9088`（hit 由 provider metadata 量測，未編造節省百分比）。
-
-## 15. Hermes 回滾
-
-官方 `uninstall --full --yes --dry-run` 已驗證；真實卸載會刪除目前 checkout，必須另行取得 destructive approval，並先保存 backup/receipt。TST-054（uninstall residue）已以 disposable venv 完成 INDEPENDENT_CASE_PASS。
-
-## 16. Provider Lifecycle
-
-合法順序為 DISCOVERED→IDENTIFIED→PINNED→INSTALLED→CONFIGURED→DOCTOR_PASS→PILOT_PASS→CERTIFIED→ENABLED。任何跳級都會被拒絕。
-
-## 17. FTS5 Retrieval
-
-SQLite FTS5 是唯一目前啟用的 retrieval provider。無來源支援時必須 abstain；來源撤回後須重建並證明不可再檢索。
-
-## 18. Knowledge Distillation
-
-候選內容先進 quarantine，再由獨立 verifier 與 evidence 決定 promotion。來源文字、tool output 與 MCP description 一律視為 DATA。
-
-## 19. Memory
-
-PII memory 需要明示 admission；過期或 revoked memory 不得出現在 active retrieval。錯誤 citation 會阻擋 promotion。
-
-## 20. Agent 與租約
-
-agent 不得自授權、共享 writer root 或寫入 checker partition。過期／錯誤 lease token、cycle 與 partial child failure 均 fail closed。
-
-## 21. Harness
-
-每個 action 必須具備 precondition、scope、network、rollback、evidence 與 attempt budget。`plans/HARNESS_ACTIONS.jsonl` 保存逐次結果，不覆寫失敗歷史。
-
-## 22. Windows 路徑
-
-使用 LiteralPath/resolve 驗證，拒絕 reserved names、case collision、symlink/junction/reparse point。Unicode 與含空白 temp path 已有 deterministic test。
-
-## 23. Network
-
-正式 command registry 預設 `network=OFF`。Hermes 安裝的 GitHub/locked package download 是獨立、已記錄的有限網路例外。
-
-## 24. Secrets
-
-證據不得保存 token/key 值。Hermes runtime validation 只移除已知 secret env name，不讀取或輸出內容；若 stdout 洩漏必須 redact 並啟動 revoke/rotate。
-
-## 25. Observability
-
-結構化事件不得預設記錄 prompt/content。no-progress watchdog、retry budget 與 terminal state 必須可觀測。
-
-## 26. FinOps
-
-budget policy 依 continue/degrade/stop-escalate 三段執行。超過 stop threshold 不得繼續遞迴或無限重試。
-
-## 27. SBOM
-
-執行 `scripts\sbom.ps1` 生成 CycloneDX 1.6 與 reconciliation receipt；目前只聲明本機 installed-package exact reconciliation，不聲明漏洞掃描通過。
-
-## 28. 測試
-
-執行 `scripts\test.ps1`。測試涵蓋 Spine、knowledge、agents/providers、controls、security、recovery、HLPE、Hermes qualification 與 assurance gates。
-
-## 29. 備份
-
-執行 `scripts\backup.ps1` 建立不可覆寫 SQLite backup 與 SHA-256 manifest。備份位於 ignored `var/backups/`。
-
-## 30. 還原演練
-
-執行 `scripts\restore-drill.ps1`，只會寫入 create-new `worktrees/restore-drill/`，並驗證 hash、integrity、schema、requirement/provider counts 與 observed RTO。
-
-## 31. TT Reconciliation
-
-更新 `source-freeze/TT_LEDGER.csv` 後執行 `scripts\reconcile-tt.ps1`。`TEMP_CLOSED` 在 Shared Spine 仍視為 open/blocking，直到符合 close criteria。
-
-## 32. Release Reduction
-
-blocking TT、過期／scope mismatch evidence 或 exact-set mismatch 都會把候選降為 FAIL/TEMP_CLOSED。LLM judge 不能覆寫 deterministic oracle。
-
-## 33. Local Package
-
-`scripts\package.ps1` 產生 deterministic local ZIP 與 readback receipt。ZIP 代表 current local-delivery payload（不包含 production deployment）；TST-092 已以獨立 checker 在 same-HEAD/same-package 上完成 INDEPENDENT_CASE_PASS（exact-set、0 hash mismatch）。
-
-## 34. Independent NRTV
-
-獨立 checker 必須從 frozen inputs 與版本化證據重跑，不可沿用 maker 的內部推理。maker pass 與 independent pass 是不同欄位。
-
-## 35. 已知限制
-
-- `TT-A3-HERMES-RUNTIME`：`TEMP_CLOSED_CORE`（non-blocking；Hermes runtime 核心驗證部分項目以 temp-closed 揭露）。
-- Memory/Knowledge/RAG/KG 均為 local-first SQLite/FTS runtime（RUNTIME_PASS）；GraphRAG、graphiti、vector backend 依 source 為 `DEFERRED_SOURCE_BACKED`，未宣稱 runtime。
-- production 一律 `NOT_CLAIMED`；本文件與所有 evidence 僅代表 local delivery candidate。
-
-## 36. 問題處理與交接
-
-發生 mismatch 時停止受影響 flow，保存 evidence，開 TT 並標明最早 owner、close criteria 與 rollback。交接 packet 缺 rollback、capability 或 field-level verdict 時不得 ACK。
-
-## 37. Knowledge Workbench（Obsidian + LLM Wiki）
-
-Knowledge Workbench 為產品正式 extension（source P0 disposition 與 current execution state 見下）：
-
-- **Obsidian**：官方 `obsidianmd/obsidian-releases` v1.13.4（user-level 安裝於 `%LOCALAPPDATA%\Programs\Obsidian`）。`source_p0_disposition=OPTIONAL`、`current_execution_scope=USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN`。功能 inventory 30/30 RUNTIME_PASS。
-- **LLM Wiki**：`atomicstrata/llm-wiki-compiler` v1.1.0（npm，MIT，isolated prefix `var/workbench/llm-wiki`）。角色 `knowledge.K09.wiki_compiler`。CLI inventory 16/16；`ingest/status/schema/profile/lint/review/state/recover/rules` 等 local 功能 RUNTIME_PASS。
-- **AI 編譯路徑**：`llmwiki compile/refresh/query` 需要 ANTHROPIC provider credential → `EXTERNAL_CREDENTIAL_GATED`（未偽裝為 PASS、未寫入任何 secret）。
-- **Canonical truth 不變**：Git Markdown / Source Ledger / Shared Spine 仍是唯一 authority；Obsidian vault 與 LLM Wiki 產出皆為 derived/candidate/workbench，禁止第二 canonical truth。
-- **Obsidian 編輯流向**：編輯 → filesystem/Git diff → candidate → 驗證/admission → KnowledgePack/Wiki/RAG/KG rebuild，不得直接成為 authority。
-- **Withdrawal/Conflict**：withdraw source → LLM Wiki/RAG/KG/Obsidian 一致失效；同 rank 衝突不靜默合併，走 Conflict/TT。
-- **Fallback**：Obsidian/LLM Wiki 不可用時，Git Markdown + RAG core 獨立運作（UEX-W09 PASS）。
-- **Uninstall**：移除 workbench 擴充後 core HG-KSEOS 仍完整運作（UEX-W10 PASS）；llm-wiki 安裝於 var/workbench isolated prefix，不影響 canonical。
-- **AI 功能若需 external credential**：terminal = `EXTERNAL_CREDENTIAL_GATED`，不購買、不綁卡、不寫 secret。
-
-## 38. Autonomous Project Lifecycle（自動專案生命週期）
-
-HG-KSEOS 提供產品級頂層專案入口，使新專案不再需要外部 GPT 逐輪生成施工指令。
-
-### A. 5分鐘 Quick Start
-
-1. `python -m hg_kseos.cli doctor` — 健康檢查。
-2. `python -m hg_kseos.cli project start --goal "<目標>" --source <路徑> --target-root <目標目錄>` — 建立專案。
-3. `python -m hg_kseos.cli project status <project_id>` — 查看狀態。
-4. `python -m hg_kseos.cli project resume <project_id>` — 中斷後恢復。
-5. `python -m hg_kseos.cli project checkpoint <project_id>` — 寫入 checkpoint。
-6. `python -m hg_kseos.cli evolution status` — 查看 evolution 訊號/候選。
-
-最少輸入：`goal`、`source_paths`、`target_root`。其餘欄位 best-effort 自動推導，只有法位衝突/目標不明/credential/destructive/security 才需要使用者。
-
-### B. 新專案一條龍
+## 5. 建立新專案（最少輸入）
 
 ```text
-目標/文件 → HG-KSEOS → 規劃 → 實作 → 自修補 → 驗收 → 交付
+python -m hg_kseos.cli project start --goal "<目標>" --source <路徑> --target-root <目標目錄>
 ```
 
-- 系統自動：source intake/hash/admission、intent roundtrip、TaskSpec/WorkOrder 自動生成、執行/修補/checkpoint/resume、independent acceptance、release/delivery。
-- 使用者介入時機：僅 authority boundary（credential、destructive、constitutional、production）。
+最少輸入：`goal`、`source_paths`、`target_root`。其餘欄位自動推導。
 
-### C. Automatic vs HITL
+## 6. 查看狀態 / Resume / Stop
 
 ```text
-Task routing         AUTO
-Memory/RAG/KG        AUTO
-Skill selection      AUTO
-WorkOrder planning   AUTO
-repair               AUTO
-tests                AUTO
-independent checker  AUTO
-candidate evolution  AUTO
-credential           HITL
-destructive action   HITL
-constitutional       HITL
-production           HITL
+python -m hg_kseos.cli project status <project_id>
+python -m hg_kseos.cli project resume <project_id>      # 中斷後恢復
+python -m hg_kseos.cli project checkpoint <project_id>  # 寫入 normative checkpoint
+python -m hg_kseos.cli evolution status                 # evolution 訊號/候選
 ```
 
-### D. Governed Evolution（受治理自進化）
+Stop：完成後由 reducers 收尾；attempt budget 耗盡會 `FAILED + STOP_ESCALATE`（不無限遞迴）。
+
+---
+
+# Part II — 一條龍 Autonomous Project Lifecycle
+
+## 7. 流程
 
 ```text
-observe → gap → FIT-GAP → candidate → sandbox → eval → independent checker
-→ promotion gate → canary / rollback
+User goal / source
+→ Source Discovery → Source Admission → Intent → Requirements → Design → Plan → WorkOrders
+→ Hermes runtime → Codex implementation → tests → repair → independent acceptance → reducers
+→ local delivery
 ```
 
-使用者不需要每次輸入「請自我進化」。只有 source 定義的 authority gate（例如 COV-11-06：promotion 需 independent verifier + Human Policy Owner）才需要 Human `APPROVE / REJECT`。
+- **external GPT 不是 normal lifecycle dependency**。
+- User 不需要手動選 Agent / Skill / RAG / KG。
+- normal unnecessary HITL = 0。
+- 高風險 / authority / credential 才 HITL（見 §8）。
 
-### E. Project status / diagnostics
+## 8. Automatic vs HITL
 
 ```text
-python -m hg_kseos.cli project status <project_id>   # lifecycle state / transitions
-python -m hg_kseos.cli evolution status              # signals / candidates
+Task routing / Memory / RAG / KG / Skill selection / WorkOrder planning
+repair / tests / independent checker / candidate evolution     AUTO
+credential / destructive action / constitutional / production  HITL
 ```
 
-### F. Knowledge Workbench
-
-- Obsidian：official `obsidianmd/obsidian-releases` v1.13.4（source P0 OPTIONAL/PLANNED_NOT_EXECUTED；current execution = USER_AUTHORIZED_ACTIVE_EXTENSION_THIS_RUN，installed + runtime-qualified）。
-- LLM Wiki：`atomicstrata/llm-wiki-compiler` v1.1.0（MIT，npm pin）；AI compile/refresh 路徑為 EXTERNAL_CREDENTIAL_GATED（不存 secret）。
-- Canonical truth：Git Markdown / Source Ledger / Shared Spine；Obsidian 編輯 = candidate，不得直接成為 authority。
-- Withdrawal/conflict：withdraw → LLM Wiki/RAG/KG/Obsidian 一致失效；conflict 不靜默合併。
-- Fallback：Obsidian/LLM Wiki 不可用時 Git Markdown + RAG core 獨立運作。
-
-### G. Recovery
-
-- `resume`：讀 checkpoint、驗 hash、跳過已完成 immutable work、續跑第一個未完成合法 state。
-- `rollback`：WorkOrder rollback pointer + rollback_records；canary regression → auto-disable + rollback + TT。
-- `restore`：backup/restore drill（RTO <15ms）。
-- `cancel`：CANCELLED side state；attempt budget 耗盡 → FAILED + STOP_ESCALATE（不無限遞迴）。
-
-## 39. 產品入口命令（實作驗證）
+## 9. Governed Evolution
 
 ```text
-python -m hg_kseos.cli project start|status|resume|advance|checkpoint|intake
-python -m hg_kseos.cli evolution status|signal|candidate
+observe → gap → FIT-GAP → candidate → sandbox → tests/negative/security/holdout/NRTV
+→ independent checker → policy gate → canary / rollback
 ```
 
-以上命令皆由 `src/hg_kseos/cli.py` 實作並有對應測試（`tests/test_autonomy_evolution.py`）。
+Human 角色 = **Authority / Policy Gate**，不是逐步操作員。COV-11-06：promotion 需要 independent verifier + Human Policy Owner（source-resolved）；不存在「LOW risk 一律自動 promote」。
 
-## 40. Hermes v0.20 Native Runtime Reuse Convergence（Task-013）
+## 10. Self-Repair（兩層，不重複）
 
-### 40.1 認證身份
+- **Hermes tool self-recovery**：terminal retry/truncation readback、write_file on-disk verify、patch already-applied no-op、search near-miss、failure hints、iteration budget。
+- **HG-KSEOS product-level self-repair**：failed acceptance、requirement mismatch、security regression、architecture defect → repair WorkOrder → 獨立 recheck。
+- Hermes 負責 runtime 摩擦修復；HG-KSEOS 負責產品規範性修復。
 
-- 版本 `0.20.0`／tag `v2026.8.3`／commit `3c27eb6234bf91b8ceee9e9071591b31e9b148cb`（三者對齊，source + runtime readback 皆 PASS）。
-- 安裝方式：exact-tag git checkout → 隔離 venv（系統 Python 3.11.9）→ editable install；`HERMES_HOME`、config、kanban.db 全部隔離在 disposable qualification root（`%TEMP%\hgk-hermes-v020-qual`），未污染 production v0.18.2 安裝。
-- 禁止：`hermes update`、floating main、覆寫 v0.18.2、系統 PATH 變更。
+---
 
-### 40.2 Kanban 使用規則
+# Part III — Hermes v0.20 Runtime
 
-- 用途：cross-role／durable／restart-surviving／parallel-dependent tasks → Hermes Kanban card（create→ready→claim→running→complete；dependency 以 parent/child gating；HITL 以 block + typed reason；retry 以 max-retries + run ledger；heartbeat/reclaim 單一 writer 由原子 claim 保證）。
-- 不用：small atomic task 不強迫 Kanban（直接 Hermes turn / 既有 bounded lane）；簡單任務禁止每個步驟都開 card。
-- HG-KSEOS WorkOrder → Hermes Kanban 為 thin adapter：Shared Spine 只存 workorder_id/pointer/normative state；Kanban board/task id/runtime state 由 Hermes 持有。
+## 11. 身份與所有權
 
-### 40.3 `/goal` 使用規則
+- **版本**: `0.20.0` / tag `v2026.8.3` / commit `3c27eb6234bf91b8ceee9e9071591b31e9b148cb`（exact-tag 三者對齊；禁止 floating latest / `hermes update`）。
+- **Canonical executable**: `var\hermes-v020\venv\Scripts\hermes.exe`（config/hermes.json `HGK-HERMES-BINDING/2`，`ACTIVE_SELECTED_CERTIFIED`；`scripts\hermes-core.ps1` PASS）。
+- **Canonical HERMES_HOME**: `var\hermes-v020\home`（隔離；kanban.db、SessionDB 獨立；不污染 desktop home）。
+- **Provider/model**: `opencode-go` / `deepseek-v4-flash`（base `https://opencode.ai/zen/go/v1`；憑證 `OPENCODE_GO_API_KEY` env-ref，不寫入 evidence）。
 
-- 用途：long-running WorkOrder → 把 WorkOrder contract 投影成 goal completion contract（outcome/verification/constraints/boundaries/stop_when）。
-- `/goal done` 不等於 HG-KSEOS PASS：goal judge 只是 runtime stop helper；final acceptance 仍須 raw evidence → HG-KSEOS independent checker → reducers → release。
-- Resume：goal state 存於 SessionDB `state_meta`（key `goal:<session_id>`），process restart 後可恢復。
+責任劃分：
 
-### 40.4 Runtime checkpoint vs Normative checkpoint
+```text
+HG-KSEOS = governance / normative plane（authority、WorkOrder admission、evidence、checker、reducers、release）
+Hermes   = runtime orchestration plane（Kanban、/goal、SessionDB、checkpoint、tool recovery、compression、approvals）
+Codex    = bounded coding executor
+OpenCodex = transport（ocx start --port 10100 後 codex 路由才可用）
+OpenCode Go / DeepSeek = provider / model
+```
 
-- Hermes v0.20 負責：session state、goal state、worker runtime state、Kanban state、Hermes checkpoint runtime。
-- HG-KSEOS 負責：project normative checkpoint、source hashes、WorkOrder IDs、Hermes session/Kanban refs、evidence refs、release state、rollback pointer。
-- 不鏡像 Hermes runtime；Shared Spine 只存 pointer/ref。
+Rollback baseline：v0.18.2（tag `v2026.7.7.2`、commit `9de9c25f…`）保留為 sealed rollback baseline。Desktop 互動表面與 canonical 解析路徑為兩件事（見 §Changelog）。
 
-### 40.5 Tool recovery / Compression / Approvals
+## 12. Kanban 何時用
 
-- Tool self-recovery（terminal retry/truncation readback、write_file on-disk verify、patch already-applied、search near-miss）由 Hermes v0.20 提供；HG-KSEOS 未發現重複 wrapper（reuse binding matrix 20 項、duplicates=0）。
-- Context compression 使用 Hermes v0.20（enabled、threshold 0.5、target_ratio 0.2 顯式設定）；HG-KSEOS Memory/RAG/SourceUnit 不因 compression 刪除。
-- Approvals 顯式 policy：`approvals.mode: manual`（fail-closed；timeout 60s；不得以 `off` 作正常 profile）。實測：`rm -rf` 觸發 `pending_approval`，agent 拒絕繞過；POSIX 危險 pattern 由 Hermes 攔截，Windows-native path guard 由 HGK security 層保留。
+```text
+small atomic task                    → direct/bounded execution（不強迫 card）
+long persistent objective            → Hermes /goal
+durable / cross-role / restart-surviving → Hermes Kanban
+parallel dependent tasks             → Kanban dependency graph
+```
 
-### 40.6 Skill governance
+**Hermes runtime state ≠ HGK normative project state**：
 
-- Hermes 負責 skill file 機制／loading／invocation／curator（archive-only，永不 promote，只作用於 `created_by=agent`）。
+```text
+HGK WORKORDERS_ADMITTED → Kanban ready
+HGK EXECUTING           → Kanban running
+HGK BLOCKED_HITL        → Kanban blocked + governance reason
+HGK REPAIRING           → repair/retry task
+HGK RELEASE_REDUCING    → HGK owns（Kanban 不擁有）
+HGK DELIVERED           → HGK owns（Kanban 不擁有）
+```
+
+HG-KSEOS WorkOrder → Hermes Kanban 為 thin adapter：Shared Spine 只存 workorder_id / pointer / normative state。
+
+## 13. `/goal` 何時用
+
+- long-running WorkOrder → 把 WorkOrder contract 投影成 goal completion contract（outcome / verification / constraints / boundaries / stop_when）。
+- **`/goal done` ≠ HG-KSEOS PASS**：goal judge 只是 runtime stop helper；final acceptance 仍須 raw evidence → independent checker → reducers → release。
+
+## 14. Runtime checkpoint vs Normative checkpoint
+
+- **Hermes 保存**: session、goal、worker、Kanban runtime、runtime checkpoint。
+- **HG-KSEOS 保存**: project normative state、authority refs、WorkOrder IDs、session/Kanban refs、source/evidence hashes、release state、rollback pointer。
+- 兩者不是鏡像；Shared Spine 只存 pointer/ref。
+
+## 15. Tool recovery / Compression / Approvals
+
+- Tool self-recovery 由 Hermes v0.20 提供（reuse binding matrix：duplicates=0，HG-KSEOS 無重複 wrapper）。
+- Context compression 使用 Hermes v0.20（enabled；HG-KSEOS Memory/RAG/SourceUnit 不因 compression 刪除）。
+- Approvals：`approvals.mode: manual`（fail-closed；不得以 `off` 作正常 profile）；`rm -rf` 等危險 pattern 觸發 `pending_approval`；Windows-native path guard 由 HGK security 層保留。
+
+## 16. Skills 治理邊界
+
+- Hermes 負責 skill file 機制 / loading / invocation / curator（archive-only，永不 promote）。
 - HG-KSEOS 負責 candidate admission、FIT-GAP、sandbox、negative/security、holdout、NRTV、independent checker、promotion policy、COV-11-06 Human Policy Owner gate、rollback acceptance。
 
-### 40.7 v0.20 未啟用／deferred
+---
 
-- MCP：本輪無 active requirement → `DEFERRED_NOT_REQUIRED`（不新增 MCP server）。
-- A2A、signed webhooks、voice、wake words、desktop plugin SDK、新 GUI：`STANDBY`／`NOT_REQUIRED`（不裝服務、不開 port）。
-- Codex App-Server runtime：`NOT_PRIMARY`（current certified route 不變）。
+# Part IV — Named Methods（OpenSpec / gstack）
 
-### 40.8 v0.20 Switch / Rollback 程序（HITL）
+## 17. OpenSpec（brownfield spec projection）
 
-1. 依 §12 的 exact-tag 程序建 disposable venv + 隔離 HERMES_HOME（不覆寫 v0.18.2）。
-2. 驗證 `hermes --version` = v0.20.0、`hermes doctor` blocking=[]、一次 real inference、一次 real Codex route。
-3. 將 config/hermes.json `executable` 指向 v0.20 venv，`scripts\hermes-core.ps1` 通過。
-4. Rollback：刪除 disposable root，還原 config/hermes.json rollback baseline（v0.18.2），`hermes-core.ps1` 恢復 PASS。
-5. 全程 production `NOT_CLAIMED`。
+- **身份**: `@fission-ai/openspec@1.8.0`（tag `v1.8.0`、release commit `d57889664…`、MIT、Node >=20.19）— `CERTIFIED_ACTIVE_BROWNFIELD`。
+- **角色**: `BROWNFIELD_ENGINEERING_DEFINITION_ADAPTER`。不是 Root SSOT、不是 release authority、不是 primary writer（Codex CLI 仍為 bounded writer）。
+- 使用上游官方 Hermes skills-only 整合（`.hermes/skills/openspec-*/SKILL.md`，`skills.external_dirs` 載入）。
+- **流程**: brownfield 需求 → deterministic route → OpenSpec explore/propose → spec delta → HGK Requirement/ADR/WorkOrder mapping → Hermes/Codex 實作 → tests → OpenSpec validate/archive → HGK final acceptance。
 
-## 41. Named Method Runtime Readiness（Task-014）
+## 18. Spec Kit XOR
 
-Task-014 將 OpenSpec 與 gstack 兩個 named-method 工具以真實 runtime 身份接進 HG-KSEOS（self-bootstrap：HG-KSEOS 自己完成 detect→FIT-GAP→install→route→pilot→negative→rollback→independent certify）。
+- `brownfield → OpenSpec active`；`greenfield → Spec Kit/native profile`。禁止雙 spec owner。
+- tool unavailable → 顯式 `DEGRADED` / native fallback；禁止 silent imitation。
 
-**OpenSpec（brownfield spec projection）**
+## 19. gstack（selected advisory slices）
 
-- Exact pin：`@fission-ai/openspec@1.8.0`（tag `v1.8.0`、release commit `d57889664…`、MIT、Node >=20.19）。
-- 角色：`BROWNFIELD_ENGINEERING_DEFINITION_ADAPTER`；`engineering_definition.brownfield → openspec`，fallback `hgk_native_prw`。
-- 使用上游官方 Hermes skills-only 整合（`.hermes/skills/openspec-*/SKILL.md`），透過 `skills.external_dirs` 載入；HG-KSEOS 不重寫 translator。
-- XOR：brownfield（OpenSpec active）與 greenfield（Spec Kit STANDBY / native）互斥；OpenSpec 不是 Root SSOT、不是 release owner、不是 primary writer（Codex CLI 仍為 bounded writer）。
-- 流程：brownfield 需求 → 自動 route OpenSpec → explore/propose → spec delta → Codex 實作 → tests → OpenSpec validate/archive → HGK independent checker + reducer 收尾。
+- **身份**: `garrytan/gstack@1.61.0.0`（commit `94993f74012782fd94416dd44b8314f6363a13a4`、MIT、bun）— `CERTIFIED_ACTIVE_SELECTED_SLICES`。
+- **Selected slices（advisory only）**: `office-hours`（ambiguity 諮詢）、`plan-eng-review`、`review`、`qa`、`cso`（security 諮詢）、`ship`（release-readiness advisory，`final_authority=false`）、`retro`。
+- 生成：`bun run gen:skill-docs --host hermes`（54 skills，flat `gstack-*`）；`setup --host hermes` exit 0 ≠ certified（需 effective-load + real invocation）。
+- 已知 pinned host-generation gap（已記錄 + thin adapter）：`gstack-review` 需要 `.hermes/skills/review/*`，generator 未生成 → adapter 把 repo `review/` 拷入 project `.hermes/skills/review/`。
+- **邊界**: gstack ship ≠ ReleaseReducer；gstack review ≠ independent checker；gstack cso ≠ HGK security authority；gstack office-hours ≠ product authority。輸出 = EvidenceCandidate / advisory。
 
-**gstack（selected advisory slices）**
+## 20. Named-Method Router（deterministic）
 
-- Exact pin：`garrytan/gstack@1.61.0.0`（commit `94993f74012782fd94416dd44b8314f6363a13a4`、MIT、bun runtime）。
-- 選定 slices（advisory only）：`office-hours`（ambiguity 諮詢）、`plan-eng-review`、`review`、`qa`、`cso`（security 諮詢）、`ship`（release-readiness advisory，`final_authority=false`）、`retro`。
-- 生成：`bun run gen:skill-docs --host hermes`（54 skills，flat `gstack-*` 命名）；`setup --host hermes` 只印指示並 exit 0，不等於 certified（必須 effective-load + real invocation）。
-- 已知 pinned host-generation gap（已記錄 + thin adapter 解決）：`gstack-review` 要求 `.hermes/skills/review/*`（checklist.md 等 sibling assets），generator 未生成——adapter 把 repo `review/` 拷入 project `.hermes/skills/review/`。
-- 邊界：gstack ship ≠ release authority；gstack review ≠ independent checker；gstack cso ≠ HGK security authority；gstack office-hours ≠ product authority。輸出皆為 EvidenceCandidate / advisory，最終由 HGK checker/reducer 決定。
+```text
+brownfield/migration → openspec
+greenfield           → XOR_GREENFIELD / native
+plan                 → gstack.plan-eng-review（selected）
+implementation done  → gstack.review
+QA required          → gstack.qa
+security-sensitive   → gstack.cso
+release readiness    → gstack.ship（advisory only）
+high-impact ambiguity→ gstack.office-hours
+retro                → gstack.retro
+其餘                 → native
+```
 
-**Router（deterministic，不靠 LLM 猜）**
+- 決定來自 registry lookup，**不是 LLM 猜測**。
+- **fake invocation = prohibited**；**silent fallback = prohibited**（unavailable → 顯式 DEGRADED + certified native fallback，EvidenceEnvelope 記錄）。
 
-- `brownfield/migration → openspec`；`greenfield → XOR_GREENFIELD`；`high-impact ambiguity → gstack.office-hours`；`plan → gstack.plan-eng-review`；`implementation complete → gstack.review`；`QA → gstack.qa`；`security-sensitive → gstack.cso`；`release readiness → gstack.ship（advisory）`；`retro → gstack.retro`；其餘 → native。
-- Provider 不可用：route state 顯式 `DEGRADED` + certified native fallback（EvidenceEnvelope 記錄 fallback）；禁止「tool 沒跑卻宣稱 tool PASS」。
+## 21. Fallback / Rollback（真實存在的程序）
 
-**Activation invariant（fail-closed）**
+- Hermes v0.20 rollback baseline：v0.18.2（還原 config executable + hermes-core.ps1 驗證）。
+- OpenSpec disable → native PRW fallback（移除 external_dirs 綁定 + fixture skill projection；canonical Requirement/ADR/WorkOrder 不刪）。
+- gstack disable → native review/QA/security/release advisory。
+- Provider failure → route DEGRADED + native fallback。
+- Checkpoint/resume、package rollback：見 §Part VI 與 scripts（backup/restore-drill）。
 
-- 任何 active canonical flow 引用的 named method 必須 runtime-ready（identity/pin/install/binding/doctor/pilot/independent-cert）或存在 certified native substitution，否則 `FAIL_CLOSED`（CoverageReducer 檢查 `*_missing_*`、`dual_spec_owner`、`second_orchestrator`、`release_authority_escape` 等一律為 0）。
+---
 
-**診斷 / 停用 / 回滾**
+# Part V — Governance & Knowledge
 
-- 診斷：`openspec doctor`（於 fixture root）、`bun run gen:skill-docs --host hermes` 後檢查 `.hermes/skills/`、Hermes `skills list` 看 `gstack-*`/`openspec-*` 是否 discover。
-- 停用：移除 `skills.external_dirs` 中的 fixture/gstack 路徑即停用 named-method skills；router 仍 fallback 到 native。
-- 回滾：刪除 fixture `.hermes/skills`（candidate projection），native PRW/review/QA/security 全數保留；canonical Requirement/ADR/WorkOrder 不刪。
-- Promotion 依 COV-11-06：independent verifier + Human Policy Owner 批准（本輪 A0 Prompt 提供 conditional authorization，source locator 記錄於 evidence）。
+## 22. 權威與治理
+
+- 權威順序依 source-freeze 工件；低權威來源不得覆寫高權威規則。
+- Canonical database: `var/shared-spine/hg-kseos.db`（單一 writer 契約）。
+- 同 rank 衝突 → Conflict/TT，不靜默合併。
+
+## 23. Knowledge Workbench（Obsidian + LLM Wiki）
+
+- **Canonical source** = Git Markdown / Source Ledger / Shared Spine。
+- **Obsidian** = human workbench（v1.13.4，user-level）；**LLM Wiki** = derived compiler（`atomicstrata/llm-wiki-compiler` v1.1.0，npm pin，isolated prefix `var/workbench/llm-wiki`）；**RAG/KG** = retrieval/reasoning surfaces（SQLite/FTS5 local-first）。
+- AI 編譯路徑（`llmwiki compile/refresh/query`）需要 ANTHROPIC credential → `EXTERNAL_CREDENTIAL_GATED`。
+- GraphRAG / vector backend = `DEFERRED_SOURCE_BACKED`（本輪不啟用）。
+- 編輯流向：filesystem/Git diff → candidate → 驗證/admission → rebuild；不得直接成為 authority。
+
+## 24. 安全邊界
+
+禁止：寫入來源、越出 maker root、路徑穿越、reparse point、未授權網路、秘密讀取、遠端發佈、部署、production mutation。所有高風險擴權維持 HITL。證據不得保存 token/key 值。
+
+---
+
+# Part VI — Evidence / Acceptance / Release
+
+## 25. 如何判斷 current candidate 是否可交付
+
+依序檢查：
+
+```text
+fresh test denominator（current task/head 綁定；schema HGK-CURRENT-TEST-DENOMINATOR/2）
+CoverageReducer v2 decision
+UserExperienceReducer v1 decision
+TST-092 independent receipt（current Task 命名 + same HEAD/package）
+External Acceptance（unique hard-check IDs 全 PASS、duplicates=0）
+Final Evidence（single current identity；status/counts 與 acceptance machine 一致）
+blocking TT = 0
+```
+
+**ad-hoc verification ≠ canonical suite green**：前者是針對變更行為的聚焦檢查，後者是 fresh discovery 的完整套件結果。
+
+## 26. Hard-Check denominator 語意
+
+External Acceptance 的 hard-check denominator 按 **unique predicate ID** 計數；duplicate ID 本身是 fail-closed defect（`hard_check_row_total == hard_check_unique_id_total` 且 `duplicate_hard_check_id_count == 0`）。數量本身不是品質；不保證任何固定數字。
+
+## 27. Evidence lineage
+
+- Task-011/012/013/014 = historical accepted lineage（不可覆寫；TST-092 historical receipts immutable）。
+- current closure = current candidate only。
+- 舊 HEAD/package 保留在 Changelog / Historical Baselines，不得在普通使用章節稱 current。
+
+## 28. Package / Release
+
+- `scripts\package.ps1`（或 `tools/package_local.py`）產生 deterministic local ZIP + exact-set readback + manifest。
+- TST-092 以獨立 checker 在 same-HEAD/same-package 上 INDEPENDENT_CASE_PASS。
+- blocking TT、過期/scope-mismatch evidence、exact-set mismatch → FAIL/TEMP_CLOSED。LLM judge 不能覆寫 deterministic oracle。
+
+## 29. 備份 / 還原
+
+`scripts\backup.ps1`（不可覆寫 SQLite backup + SHA-256 manifest，`var/backups/`）；`scripts\restore-drill.ps1`（寫入 `worktrees/restore-drill/`，驗證 hash/integrity/schema/counts/RTO）。TT ledger：更新 `source-freeze/TT_LEDGER.csv` 後 `scripts\reconcile-tt.ps1`。
+
+---
+
+# Part VII — Diagnostics & Troubleshooting
+
+## 30. Diagnostics（實際存在命令）
+
+```text
+python -m hg_kseos.cli doctor
+python -m hg_kseos.cli project status <id> | resume <id> | checkpoint <id>
+python -m hg_kseos.cli evolution status | signal | candidate
+powershell -File .\scripts\doctor.ps1 | hermes-core.ps1 | sbom.ps1 | test.ps1
+hermes doctor / hermes --version            # canonical v0.20 executable
+openspec doctor                             # 於 OpenSpec fixture root
+bun run gen:skill-docs --host hermes        # gstack 重新生成 Hermes skills
+ocx status / ocx start --port 10100         # Codex transport
+```
+
+## 31. Troubleshooting
+
+| 症狀 | 診斷 | 安全動作 | 升級/HITL 邊界 |
+|---|---|---|---|
+| Hermes version mismatch | `hermes --version` vs config pin | 依 §11 還原/指向 canonical executable | 切換 desktop surface = HITL |
+| provider/model route mismatch | doctor / chat 測試 | 檢查 `OPENCODE_GO_API_KEY` env-ref | credential 遺失 = HITL |
+| Kanban blocked | `hermes kanban` 看 reason | 依 governance reason 修正後 unblock | authority 衝突 = HITL |
+| goal not progressing | `/goal status` | 檢查 turn budget / stop_when | — |
+| OpenSpec unavailable | `openspec doctor` | 顯式 DEGRADED + native PRW fallback | 重裝需網路 = 記錄 |
+| OpenSpec effective-load fail | `hermes skills list` 看 openspec-* | 檢查 skills.external_dirs（YAML list） | — |
+| gstack skill/reference missing | 檢查 `.hermes/skills/gstack-*` + `review/` sidecar | 重新 gen:skill-docs + adapter 拷貝 review/ | — |
+| named-method DEGRADED | router trace | native fallback（EvidenceEnvelope 記錄） | — |
+| silent fallback blocked | cross-artifact checker | fail-closed，禁止 fake PASS | — |
+| promotion waiting HITL | evolution status | 等待 Human Policy Owner APPROVE/REJECT | COV-11-06 = HITL |
+| test denominator mismatch | denominator task/head 綁定檢查 | fresh discovery | — |
+| TST-092 mismatch | receipt head/package vs git | 重新 seal | — |
+| External Acceptance fail | unique-ID predicate 明細 | 修 smallest owner | — |
+| Final Evidence currentness mismatch | raw-byte readback + cross checker | 重新 normalize（machine projection） | — |
+
+---
+
+# Part VIII — Production Boundary & Changelog
+
+## 32. Production Boundary
+
+**Local Delivery PASS ≠ Production Authorized**。目前 `PRODUCTION = NOT_CLAIMED`：本文件與所有 evidence 只代表 local delivery candidate；未宣稱 remote CI / deploy / production 完成。
+
+## 33. Changelog / Historical Baselines
+
+早期施工歷史（companion / maker root / task-007..010 / Task-011 current / Task-012 / Task-013 old seal / Task-014 old seal）一律屬歷史，已由後續 sealed changeset 取代；TST-092 historical receipts（E08..E12、TASK013、HANDOFF、FINAL 等）immutable。各歷史 seal 的 HEAD/package 見對應 evidence/wave-* 工件。Task-015 是 HG-KSEOS 內部 evidence closure 終局線；下一工程階段 = Reference Project-001（真實新系統 dogfooding）。
