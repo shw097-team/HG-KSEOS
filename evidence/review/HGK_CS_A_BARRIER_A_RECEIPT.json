@@ -1,0 +1,41 @@
+{
+  "schema": "HGK-BARRIER-A-RECEIPT/1",
+  "reference_project_id": "HGK-REFERENCE-PROJECT-001",
+  "changeset": "CS-A-HGK-APL-FULL-PROJECT-GATE-REPAIR",
+  "captured_at_utc": "2026-08-10T15:20:00Z",
+  "verdict": "BARRIER_A_ALL_PASS",
+  "exit_code": 0,
+  "conditions": {
+    "HGK_REPAIR_CANDIDATE_INDEPENDENT_PASS": true,
+    "ORDINARY_USER_APL_CANARY": true,
+    "SPECIAL_BACKDOOR": 0,
+    "FULL_PROJECT_DENOMINATOR_AVAILABLE": true,
+    "REQUIRED_ACTIVE_TOOL_DENOMINATOR_AVAILABLE": true,
+    "PROJECT_SCOPE_GUARD": "PASS",
+    "HGK_BLOCKING_TT": 0,
+    "HGK_RESEAL_OR_EQUIVALENT_CURRENT_CANDIDATE_BINDING": "PASS"
+  },
+  "repairs": [
+    {"id": "D1_CJK_GOAL_SOURCE_BACKED_PLANNING", "status": "PASS", "commit": "984acfc"},
+    {"id": "D2_PROJECT_SCOPED_REQUIREMENT_ID", "status": "PASS", "commit": "984acfc"},
+    {"id": "D3_PROJECT_OWNERSHIP_FK_LIFECYCLE", "status": "PASS", "commit": "984acfc"},
+    {"id": "D4_PENDING_REQUIRED_WORK_CANNOT_DELIVER", "status": "PASS", "commit": "984acfc"},
+    {"id": "D6_FULL_PROJECT_DENOMINATOR_MATERIALIZES", "status": "PASS", "commit": "f91a3ab"}
+  ],
+  "reseal": {
+    "current_changeset": "HGK-CS-A-APL-FULL-PROJECT-GATE-REPAIR-001",
+    "head": "e2bd3118cab32817d643e8b4461253764081e676",
+    "package_sha256": "69162fcb66aab6ed23dbd7e15bd861f41c117748c15d43e2568a8f415e21fdd1",
+    "package_bytes": 26720161,
+    "payload_files": 420,
+    "acceptance": "161/161 HG-KSEOS_LOCAL_DELIVERY_PASS - EXTERNAL FINAL ACCEPTED",
+    "final_suite": "238/238 OK",
+    "coverage_reducer": "HG-KSEOS_LOCAL_DELIVERY_PASS",
+    "ux_reducer": "HG-KSEOS_USER_EXPECTED_CAPABILITY_EXPERIENCE_PASS",
+    "final_md_raw_byte_readback": "PASS (a1295be9a6ccbe5c)",
+    "cross_checker": "PASS",
+    "determinism": "PASS",
+    "tree_clean": true
+  },
+  "unlock": "CS-B-SQS-TWICT-WAVE2-FULL-PROJECT-CLOSURE"
+}
