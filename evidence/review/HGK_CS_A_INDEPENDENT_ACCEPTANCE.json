@@ -1,0 +1,30 @@
+{
+ "schema": "HGK-CS-A-INDEPENDENT/1",
+ "changeset": "CS-A-HGK-APL-FULL-PROJECT-GATE-REPAIR",
+ "checker": "INDEPENDENT_CHECKER (fresh subprocess)",
+ "full_suite": {
+  "exit_code": 0,
+  "ran": 238,
+  "ok": true,
+  "tail": "...................................................................................................\n----------------------------------------------------------------------\nRan 238 tests in 23.252s\n\nOK\n"
+ },
+ "apl_canary": {
+  "goal": "依 SQS-THC / TW-ICT_FSDT-Stack authoritative corpus 完成真實本機施工、驗收與交付",
+  "plan_titles": [
+   "Core implementation",
+   "Acceptance and evidence",
+   "Package and delivery"
+  ],
+  "has_core_impl": true,
+  "has_acceptance": true,
+  "workorders_admitted": 3,
+  "requirement_project_scoped": true,
+  "projects_row_created": true,
+  "open_workorders": 3,
+  "delivered_rejected_with_open_work": true,
+  "denominator_available": true,
+  "denominator_requirements": 1,
+  "denominator_workorders_open": 3
+ },
+ "verdict": "INDEPENDENT_ACCEPTANCE_PASS"
+}
