@@ -3,10 +3,10 @@
  "changeset": "CS-A-HGK-APL-FULL-PROJECT-GATE-REPAIR",
  "checker": "INDEPENDENT_CHECKER (fresh subprocess)",
  "full_suite": {
-  "exit_code": 0,
+  "exit_code": 1,
   "ran": 238,
-  "ok": true,
-  "tail": "...................................................................................................\n----------------------------------------------------------------------\nRan 238 tests in 23.252s\n\nOK\n"
+  "ok": false,
+  "tail": "TASK014-FINAL-EXTERNAL-EVIDENCE-COHERENCE-UNIQUE-DENOMINATOR-RECEIPT-LINEAGE-015\n\n\n----------------------------------------------------------------------\nRan 238 tests in 23.639s\n\nFAILED (failures=6)\n"
  },
  "apl_canary": {
   "goal": "依 SQS-THC / TW-ICT_FSDT-Stack authoritative corpus 完成真實本機施工、驗收與交付",
@@ -26,5 +26,5 @@
   "denominator_requirements": 1,
   "denominator_workorders_open": 3
  },
- "verdict": "INDEPENDENT_ACCEPTANCE_PASS"
+ "verdict": "INDEPENDENT_ACCEPTANCE_FAIL"
 }
