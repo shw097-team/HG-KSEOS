@@ -110,7 +110,8 @@ class CurrentIdentityTests(unittest.TestCase):
         acc = read_json("evidence/review/HG-KSEOS_EXTERNAL_FINAL_ACCEPTANCE.json")
         ids = {e["id"] for e in acc["hard_check_evaluations"]}
         required = {
-            "baseline_lineage_preserved", "tree_clean", "final_head_matches", "final_package_matches",
+            "baseline_lineage_preserved", "tree_clean", "final_md_current_head_matches",
+            "final_md_current_package_matches",
             "tst092_independent_pass", "blocking_tt_zero",
             "autonomous_project_entrypoint", "external_gpt_not_required_for_normal_project",
             "source_auto_discovery", "source_admission", "intent_roundtrip", "plan_auto_generation",
@@ -127,7 +128,7 @@ class CurrentIdentityTests(unittest.TestCase):
             "user_guide_no_current_stale_companion", "user_guide_no_current_stale_maker_root",
             "user_guide_no_old_task_as_current",
             "coverage_reducer_exit_zero", "user_experience_reducer_exit_zero", "product_test_cases_green",
-            "hlpe_green", "final_md_current_candidate", "final_md_readback_exact",
+            "hlpe_green", "final_md_current_changeset_matches", "final_md_readback_exact",
         }
         self.assertTrue(required.issubset(ids), f"missing: {required - ids}")
 

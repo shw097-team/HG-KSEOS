@@ -134,7 +134,14 @@ class G6CrossArtifactTests(unittest.TestCase):
                     "tst092_receipt_package_matches_candidate",
                     "acceptance_input_manifest_complete",
                     "acceptance_input_hashes_match",
-                    "historical_receipts_immutable"):
+                    "historical_receipts_immutable",
+                    # F3: the six Final-MD cross-artifact predicates
+                    "final_md_external_acceptance_status_matches",
+                    "final_md_external_acceptance_counts_match",
+                    "final_md_test_denominator_matches",
+                    "final_md_current_changeset_matches",
+                    "final_md_current_head_matches",
+                    "final_md_current_package_matches"):
             self.assertTrue(preds.get(cid), cid)
 
 
@@ -144,6 +151,21 @@ class GuideAndDeterminismTests(unittest.TestCase):
         self.assertEqual(gv["verdict"], "PASS")
         for k, v in gv["checks"].items():
             self.assertEqual(v["verdict"], "PASS", k)
+
+    def test_guide_maker_root_zero_and_stale_zero(self) -> None:
+        gv = read_json(REVIEW / "HG-KSEOS_USER_GUIDE_CURRENT_RUNTIME_READBACK.json")
+        self.assertEqual(gv["checks"]["current_operational_maker_root_occurrences"]["actual"], 0)
+        self.assertEqual(gv["checks"]["user_guide_stale_current_claim_count"]["actual"], 0)
+        self.assertTrue(gv["checks"]["maker_root_current_zero"]["verdict"] == "PASS")
+        self.assertTrue(gv["checks"]["user_guide_no_stale_current_claims"]["verdict"] == "PASS")
+
+    def test_final_md_guide_projection_matches_actual_guide(self) -> None:
+        md = (REVIEW / "HG-KSEOS_FINAL_EVIDENCE_FOR_REVIEW.md").read_text(encoding="utf-8")
+        ab = md.split("## AB. Task-014 Final External Evidence Coherence Closure")[-1]
+        import hashlib
+        guide = (ROOT / "docs" / "HG-KSEOS使用說明文檔.md").read_bytes()
+        self.assertIn(hashlib.sha256(guide).hexdigest(), ab)
+        self.assertIn("stale_current_claim_count=0", ab)
 
     def test_guide_current_claim_is_task015(self) -> None:
         guide = (ROOT / "docs" / "HG-KSEOS使用說明文檔.md").read_text(encoding="utf-8")

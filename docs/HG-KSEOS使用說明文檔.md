@@ -227,7 +227,7 @@ retro                → gstack.retro
 
 ## 24. 安全邊界
 
-禁止：寫入來源、越出 maker root、路徑穿越、reparse point、未授權網路、秘密讀取、遠端發佈、部署、production mutation。所有高風險擴權維持 HITL。證據不得保存 token/key 值。
+禁止：寫入來源、越出 WorkOrder admitted write-set / target-root / isolated worktree boundary、路徑穿越、reparse point、未授權網路、秘密讀取、遠端發佈、部署、production mutation。所有高風險擴權維持 HITL。證據不得保存 token/key 值。
 
 ---
 
