@@ -662,7 +662,9 @@ def rbwi_composite(parts: dict[str, str]) -> dict[str, Any]:
         v = parts.get(k, "NOT_RUN")
         if v == "TEMP_CLOSED":
             temp_edges.append(f"{k}={v}")
-        elif v not in ("PASS", "NOT_REQUIRED_FOR_LOCAL_DELIVERY"):
+        elif v not in ("PASS", "NOT_REQUIRED_FOR_LOCAL_DELIVERY",
+                       "SOURCE_VALID_NOT_REQUIRED_FOR_LOCAL_DELIVERY",
+                       "SOURCE_VALID_NOT_APPLICABLE"):
             open_edges.append(f"{k}={v}")
     if temp_edges:
         verdict = "TEMP_CLOSED"
