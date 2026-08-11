@@ -309,6 +309,31 @@ ocx status / ocx start --port 10100         # Codex transport
 
 # Part VIII — Production Boundary & Changelog
 
+## 31b. Reference Project-001 Milestone（RP-001 operational delta）
+
+RP-001（`HGK-REFERENCE-PROJECT-001`，SQS-THC / TW-ICT FSDT-Stack dogfooding）已
+**MILESTONE_CLOSED**——從施工/驗收專案轉為完成的 dogfooding milestone。對日常操作的影響：
+
+1. **普通使用者入口**：只需 `goal` + `source` + `target_root` 最少輸入（§5）；
+   不用手選 WP / RBWI / Agent / Skill / provider / test runner。
+2. **責任邊界**：HG-KSEOS = governance/normative；Hermes = runtime orchestration；
+   Codex = bounded coding executor（§11）。
+3. **normal repair loop**：`failure → smallest owner repair → affected regression → continue`；
+   不做整輪 reseal（除非 platform-level invariant 變更）。
+4. **Governed Evolution 升級條件**：只有真實平台級缺陷才形成 candidate；
+   低價值 evidence cosmetics / readback-ordering debt 記 non-blocking debt，自然 reseal 時處理。
+5. **Canonical Evidence Graph / Frozen Oracle / Subject**：是 milestone/qualification controls，
+   不是每次日常修改都要 final seal。
+6. **Release applicability**：`WORKSPACE_LOCAL`（日常）不需大型 package；
+   `AUDIT_HANDOFF` 只需必要 review/attestation bundle；
+   `DISTRIBUTABLE_RELEASE` 才啟完整 package/readback/rollback。
+7. **self-closure trap guard**：product gates 已綠且只剩 non-blocking evidence debt →
+   轉入真實任務，不再「驗收驗收」。
+8. RP-001 retained regressions（EVO-003/004/005 gates）繼續在 canonical suite 保護；
+   RP-001 closure record：`C:\Projects\Agent_Workspace\SQS-THC\evidence
+eview\SQS_RP001_MILESTONE_CLOSURE_RECORD.md`。
+9. User Guide 與 current authority 衝突時，authority / actual readback 優先，Guide 進修補。
+
 ## 32. Production Boundary
 
 **Local Delivery PASS ≠ Production Authorized**。目前 `PRODUCTION = NOT_CLAIMED`：本文件與所有 evidence 只代表 local delivery candidate；未宣稱 remote CI / deploy / production 完成。
@@ -316,3 +341,9 @@ ocx status / ocx start --port 10100         # Codex transport
 ## 33. Changelog / Historical Baselines
 
 早期施工歷史（companion / maker root / task-007..010 / Task-011 current / Task-012 / Task-013 old seal / Task-014 old seal）一律屬歷史，已由後續 sealed changeset 取代；TST-092 historical receipts（E08..E12、TASK013、HANDOFF、FINAL 等）immutable。各歷史 seal 的 HEAD/package 見對應 evidence/wave-* 工件。Task-015 是 HG-KSEOS 內部 evidence closure 終局線；下一工程階段 = Reference Project-001（真實新系統 dogfooding）。
+
+**2026-08-11 RP-001 milestone**：`HGK-REFERENCE-PROJECT-001` 已 **MILESTONE_CLOSED**（見 §31b）。
+RP-001 完成 WAVE1-WAVE5 + EVO-003/004/005：15/15 WO、211/211 SQS tests、274/274 HGK suite、
+161/161 acceptance、EVO-005F frozen graph（root `6535d9cd…`）單一 truth。
+此後 SQS 任務走 normal operational loop（`execute → test → repair → continue`）；
+平台級 invariant defect 才升 HGK evolution candidate。
