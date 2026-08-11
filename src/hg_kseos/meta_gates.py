@@ -125,3 +125,47 @@ def evidence_reducer(*, capsules: list[dict[str, Any]],
         "raw_path_only_claims": raw_path_only,
         "verdict": "PASS" if not missing and raw_path_only == 0 else "FAIL",
     }
+
+
+# ---- EVO004 FINAL-IDENTITY dogfood gates ----
+def single_md_embedding_gate(*, required_claim_ids: list[str],
+                             embedded_capsule_ids: list[str],
+                             md_has_capsules: bool) -> dict[str, Any]:
+    """NEG-13: capsules external but not physically embedded in the Final MD
+    must FAIL the gate. `see foo.json` / capsule-count-only is not enough."""
+    missing = sorted(set(required_claim_ids) - set(embedded_capsule_ids))
+    if not md_has_capsules or missing:
+        return {
+            "verdict": "FAIL",
+            "missing_embedded": missing,
+            "md_has_capsules": md_has_capsules,
+            "reasons": ["NEG-13"] + ([] if missing else ["no capsules embedded"]),
+        }
+    return {"verdict": "PASS", "missing_embedded": [], "reasons": []}
+
+
+def corpus_completeness_gate(required_families: set[str], present_families: set[str],
+                             fixture_only: bool = False) -> dict[str, Any]:
+    """NEG-14: mechanism passing on a tiny fixture never substitutes required
+    corpus materialization. Any required family absent -> FAIL."""
+    missing = sorted(required_families - present_families)
+    reasons: list[str] = []
+    if fixture_only:
+        reasons.append("fixture_neq_corpus")
+    if missing:
+        reasons.append("NEG-14")
+    if reasons:
+        return {"verdict": "FAIL", "missing_families": missing, "reasons": reasons}
+    return {"verdict": "PASS", "missing_families": [], "reasons": []}
+
+
+def atomic_candidate_binding(*, capsule_candidate: str,
+                             current_candidate: str) -> dict[str, Any]:
+    """Old-candidate capsule on a new candidate is STALE (must rebind)."""
+    if capsule_candidate != current_candidate:
+        return {"verdict": "STALE",
+                "capsule_candidate": capsule_candidate,
+                "current_candidate": current_candidate}
+    return {"verdict": "BOUND",
+            "capsule_candidate": capsule_candidate,
+            "current_candidate": current_candidate}
