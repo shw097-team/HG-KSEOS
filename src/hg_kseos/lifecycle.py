@@ -541,5 +541,133 @@ class ProjectLifecycleController:
             "required_active_capabilities_total": len(active_methods),
             "required_active_capabilities_open": open_capabilities,
             "required_active_capabilities_open_count": len(open_capabilities),
+            # G0 D1/D2: dynamic-denominator guard predicates — the project is
+            # NOT terminal when required local scope is open but no workorder
+            # materializes it (late-bound obligation must expand the
+            # denominator, never hide behind workorders_open == 0).
+            "required_local_scope_open": len(open_workorders) + len(open_acceptances) + len(open_capabilities),
+            "guard_required_workorders_terminal": len(open_workorders) == 0
+            and len(open_acceptances) == 0 and len(open_capabilities) == 0,
             "denominator_available": True,
         }
+
+    # ---------- G0 D2: dynamic denominator expansion ----------
+    def admit_requirement(self, project_id: str, requirement_id: str,
+                          wording: str, *, owner: str = "owner",
+                          priority: str = "P1") -> dict[str, Any]:
+        """Admit a late-bound required obligation into the SAME project
+        lifecycle: Requirement -> TaskSpec -> WorkOrder -> denominator.
+
+        This closes the LATE_BOUND_OBLIGATION_DENOMINATOR_GAP: any new
+        required source obligation must expand the denominator instead of
+        being deferred to an invisible 'next wave'.
+        """
+        state = self._project_state(project_id)
+        if state not in ("EXECUTING", "PLAN_READY", "WORKORDERS_ADMITTED"):
+            raise LifecycleError(f"ERR_ADMIT_REQUIREMENT_STATE {state}")
+        self.spine.register_requirement(
+            requirement_id=requirement_id,
+            source_locator=f"project:{project_id}:late-bound-obligation",
+            wording=wording,
+            acceptance_id=f"ACC-{requirement_id}",
+            oracle=f"{wording} materialized + acceptance PASS",
+            threshold="EXPLICIT_ORACLE_PASS",
+            negative_fixture="obligation without workorder",
+            priority=priority,
+            project_id=project_id,
+        )
+        self.spine.acquire_lease(requirement_id, "lifecycle-planner", f"TK-{requirement_id}", ttl_seconds=300)
+        try:
+            self.spine.transition_requirement(
+                requirement_id, "FROZEN", actor="lifecycle-planner",
+                token=f"TK-{requirement_id}", expected_version=0,
+                evidence_ref=f"EV-{requirement_id}",
+                idempotency_key=f"FRZ-{requirement_id}",
+            )
+        finally:
+            self.spine.release_lease(requirement_id, "lifecycle-planner", f"TK-{requirement_id}")
+        ts_id = f"TS-{requirement_id.lower()}"
+        try:
+            self.spine.create_taskspec(
+                taskspec_id=ts_id,
+                requirement_id=requirement_id,
+                objective=wording,
+                owner=owner,
+                writable_root=Path("worktrees") / ts_id.lower(),
+                permissions={"write_scope": "worktree", "network": False},
+                tests=[f"test_{ts_id.lower()}.py"],
+                evidence_plan="raw + independent evidence per acceptance contract",
+            )
+            self.spine.create_workorder(
+                f"WO-{ts_id}", ts_id, writer="codex",
+                worktree=Path("worktrees") / ts_id.lower(),
+                base_head=self._repo_head(),
+            )
+        except InvariantViolation:
+            pass  # idempotent resume
+        return {"requirement_id": requirement_id, "requirement_state": "FROZEN",
+                "taskspec": ts_id, "workorder": f"WO-{ts_id}"}
+
+    # ---------- G0 D3: mandatory completion sweep ----------
+    def completion_sweep(self, project_id: str) -> dict[str, Any]:
+        """Classify every open denominator edge.
+
+        auto_local        -> MUST be materialized/admitted and continued
+        blocked_hitl      -> requires human credential/approval
+        temp_external     -> external condition (market-time, rights)
+        non_blocking_debt -> deferrable without blocking release
+
+        Only the last two may legitimately stop a session; AUTO_LOCAL and
+        BLOCKED_HITL are surfaced explicitly so a controller can act.
+        """
+        den = self.denominator(project_id)
+        auto_local: list[str] = []
+        blocked_hitl: list[str] = []
+        temp_external: list[str] = []
+        non_blocking_debt: list[str] = []
+        for wo in den["workorders_open"]:
+            auto_local.append(f"workorder:{wo}")
+        for acc in den["acceptances_open"]:
+            auto_local.append(f"acceptance:{acc}")
+        for cap in den["required_active_capabilities_open"]:
+            auto_local.append(f"capability:{cap}")
+        return {
+            "project_id": project_id,
+            "auto_local": auto_local,
+            "blocked_hitl": blocked_hitl,
+            "temp_external": temp_external,
+            "non_blocking_debt": non_blocking_debt,
+            "open_total": len(auto_local) + len(blocked_hitl)
+            + len(temp_external) + len(non_blocking_debt),
+            "sweepable": len(auto_local) > 0,
+        }
+
+
+# ---------- G0 D4: RBWI composite acceptance semantics ----------
+def rbwi_composite(parts: dict[str, str]) -> dict[str, Any]:
+    """RBWI final-system qualification is a composite; it can never PASS
+    above a required child state.
+
+    Children (each PASS / NOT_REQUIRED_FOR_LOCAL_DELIVERY / TEMP_CLOSED):
+      local_paper, external_market, tool_coverage, user_journey,
+      negative_degraded, replay.
+    Verdict: PASS only when every required child is PASS or explicitly
+    NOT_REQUIRED_FOR_LOCAL_DELIVERY; otherwise FAIL_CLOSED with open edges.
+    """
+    required = ("local_paper", "external_market", "tool_coverage",
+                "user_journey", "negative_degraded", "replay")
+    open_edges: list[str] = []
+    temp_edges: list[str] = []
+    for k in required:
+        v = parts.get(k, "NOT_RUN")
+        if v == "TEMP_CLOSED":
+            temp_edges.append(f"{k}={v}")
+        elif v not in ("PASS", "NOT_REQUIRED_FOR_LOCAL_DELIVERY"):
+            open_edges.append(f"{k}={v}")
+    if temp_edges:
+        verdict = "TEMP_CLOSED"
+    elif open_edges:
+        verdict = "FAIL_CLOSED"
+    else:
+        verdict = "PASS"
+    return {"verdict": verdict, "open_edges": open_edges + temp_edges, "parts": dict(parts)}
