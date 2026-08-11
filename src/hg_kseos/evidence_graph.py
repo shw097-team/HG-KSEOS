@@ -55,12 +55,120 @@ def new_id(prefix: str, seed: str = "") -> str:
 
 
 class EvidenceGraph:
+    """Canonical Evidence Graph with finalization lifecycle.
+
+    Lifecycle: OPEN -> FINALIZING -> FROZEN.
+    - registration allowed only in OPEN (or authorized FINALIZING)
+    - freeze() validates + locks root; append-after-freeze rejected
+    - one final root per generation
+    """
+
     def __init__(self, db_path: Path) -> None:
         self.db = db_path
         self.conn = sqlite3.connect(str(db_path))
         self.conn.row_factory = sqlite3.Row
         self.conn.executescript(SCHEMA)
+        # lifecycle + generation metadata
+        self.conn.execute(
+            "CREATE TABLE IF NOT EXISTS graph_meta("
+            "key TEXT PRIMARY KEY, value TEXT NOT NULL)")
+        self.conn.execute(
+            "CREATE TABLE IF NOT EXISTS artifact_versions("
+            "artifact_id TEXT PRIMARY KEY, path TEXT NOT NULL, sha256 TEXT NOT NULL,"
+            "supersedes TEXT, created_at TEXT NOT NULL)")
         self.conn.commit()
+        if not self._meta("generation_id"):
+            self._set_meta("generation_id",
+                           f"GEN-{hashlib.sha256(str(db_path).encode()).hexdigest()[:12]}")
+        if not self._meta("lifecycle"):
+            self._set_meta("lifecycle", "OPEN")
+
+    # ---- lifecycle ----
+    def _meta(self, key: str) -> str | None:
+        row = self.conn.execute("SELECT value FROM graph_meta WHERE key=?", (key,)).fetchone()
+        return row["value"] if row else None
+
+    def _set_meta(self, key: str, value: str) -> None:
+        with self.conn:
+            self.conn.execute(
+                "INSERT OR REPLACE INTO graph_meta(key,value) VALUES(?,?)", (key, value))
+
+    def lifecycle_state(self) -> str:
+        return self._meta("lifecycle") or "OPEN"
+
+    def generation_id(self) -> str:
+        return self._meta("generation_id") or "GEN-?"
+
+    def begin_finalizing(self) -> None:
+        if self.lifecycle_state() == "FROZEN":
+            raise RuntimeError("GRAPH_FROZEN: cannot begin finalizing a frozen graph")
+        self._set_meta("lifecycle", "FINALIZING")
+
+    def _check_writable(self) -> None:
+        state = self.lifecycle_state()
+        if state == "FROZEN":
+            raise RuntimeError("GRAPH_FROZEN: append/mutation rejected after freeze")
+        if state == "FINALIZING":
+            # authorized finalizing registrations allowed (pre-freeze completion)
+            pass
+
+    def freeze(self) -> str:
+        if self.lifecycle_state() == "FROZEN":
+            return self.graph_root_digest()
+        self.begin_finalizing()
+        root = self.graph_root_digest()
+        self._set_meta("lifecycle", "FROZEN")
+        self._set_meta("final_root", root)
+        self._set_meta("finalized_at_utc", utc_now())
+        return root
+
+    def final_roots(self) -> list[str]:
+        root = self._meta("final_root")
+        return [root] if root else []
+
+    # ---- artifact identity (uniqueness: same path+digest -> same id) ----
+    def register_artifact(self, path: str, producer: str,
+                          media_type: str | None = None,
+                          subject_digest: str | None = None) -> dict[str, Any]:
+        self._check_writable()
+        p = Path(path)
+        b = p.read_bytes()
+        sha = hashlib.sha256(b).hexdigest()
+        # canonical identity: same normalized path + same digest -> same id
+        norm_path = str(p.resolve()) if p.exists() else str(p)
+        row = self.conn.execute(
+            "SELECT artifact_id FROM artifacts WHERE path=? AND sha256=?",
+            (norm_path, sha)).fetchone()
+        if row:
+            return self.artifact_record(row["artifact_id"])
+        # changed digest for same path -> new version, supersedes recorded
+        prev = self.conn.execute(
+            "SELECT artifact_id FROM artifacts WHERE path=? ORDER BY rowid DESC LIMIT 1",
+            (norm_path,)).fetchone()
+        artifact_id = new_id("ART", seed=f"{norm_path}:{sha}")
+        with self.conn:
+            self.conn.execute(
+                "INSERT INTO artifacts(artifact_id,path,bytes,sha256,media_type,producer,subject_digest,created_at) VALUES(?,?,?,?,?,?,?,?)",
+                (artifact_id, norm_path, len(b), sha, media_type, producer, subject_digest, utc_now()))
+            self.conn.execute(
+                "INSERT INTO artifact_versions(artifact_id,path,sha256,supersedes,created_at) VALUES(?,?,?,?,?)",
+                (artifact_id, norm_path, sha, prev["artifact_id"] if prev else None, utc_now()))
+        return {"artifact_id": artifact_id, "path": norm_path, "bytes": len(b),
+                "sha256": sha, "media_type": media_type, "producer": producer}
+
+    def artifact_version_relation(self, old_id: str, new_id: str) -> str:
+        row = self.conn.execute(
+            "SELECT supersedes FROM artifact_versions WHERE artifact_id=?", (new_id,)).fetchone()
+        if row and row["supersedes"] == old_id:
+            return "SUPERSEDED"
+        return "UNRELATED"
+
+    def identity_conflicts(self) -> int:
+        """Two different artifact IDs claiming the same path+sha256 pair = conflict."""
+        rows = self.conn.execute(
+            "SELECT path, sha256, COUNT(DISTINCT artifact_id) c FROM artifacts "
+            "GROUP BY path, sha256 HAVING c > 1").fetchall()
+        return len(rows)
 
     # ---- nodes ----
     def register_subject(self, subject_id: str, digest: str) -> None:
@@ -81,21 +189,6 @@ class EvidenceGraph:
             self.conn.execute(
                 "INSERT OR REPLACE INTO executions(execution_id,requirement_id,runner,status,created_at) VALUES(?,?,?,?,?)",
                 (execution_id, requirement_id, runner, status, utc_now()))
-
-    def register_artifact(self, path: str, producer: str,
-                          media_type: str | None = None,
-                          subject_digest: str | None = None) -> dict[str, Any]:
-        p = Path(path)
-        b = p.read_bytes()
-        sha = hashlib.sha256(b).hexdigest()
-        # deterministic artifact id: seed = path + sha (reproducible graph)
-        artifact_id = new_id("ART", seed=f"{p}:{sha}")
-        with self.conn:
-            self.conn.execute(
-                "INSERT INTO artifacts(artifact_id,path,bytes,sha256,media_type,producer,subject_digest,created_at) VALUES(?,?,?,?,?,?,?,?)",
-                (artifact_id, str(p), len(b), sha, media_type, producer, subject_digest, utc_now()))
-        return {"artifact_id": artifact_id, "path": str(p), "bytes": len(b),
-                "sha256": sha, "media_type": media_type, "producer": producer}
 
     def register_verification(self, verification_id: str, requirement_id: str,
                               checker: str, verdict: str) -> None:
