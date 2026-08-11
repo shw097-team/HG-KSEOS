@@ -69,6 +69,21 @@ class EvidenceGraphTests(unittest.TestCase):
         rows = g.verification_records()
         self.assertEqual(len(rows), 0)
 
+    def test_graph_root_digest_deterministic(self):
+        from hg_kseos.evidence_graph import EvidenceGraph
+        import tempfile as _tf
+        p = Path(_tf.mkdtemp()) / "raw.json"
+        p.write_text('{"v": 1}', encoding="utf-8")
+        d1 = EvidenceGraph(fresh_db())
+        d2 = EvidenceGraph(fresh_db())
+        for g in (d1, d2):
+            g.register_subject("S1", "digest-x")
+            g.register_requirement("R1", scope="PRODUCT")
+            a = g.register_artifact(path=str(p), producer="RUNNER", subject_digest="digest-x")
+            g.register_verification("V1", "R1", checker="INDEP", verdict="PASS")
+            g.link_verification_checks("V1", a["artifact_id"])
+        self.assertEqual(d1.graph_root_digest(), d2.graph_root_digest())
+
 
 if __name__ == "__main__":
     unittest.main()

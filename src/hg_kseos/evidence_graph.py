@@ -46,7 +46,11 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def new_id(prefix: str) -> str:
+def new_id(prefix: str, seed: str = "") -> str:
+    """Deterministic id: seed-based when provided (reproducible graph),
+    otherwise time-based."""
+    if seed:
+        return f"{prefix}-{hashlib.sha256(f'{prefix}:{seed}'.encode()).hexdigest()[:16]}"
     return f"{prefix}-{hashlib.sha256(f'{prefix}:{utc_now()}'.encode()).hexdigest()[:16]}"
 
 
@@ -84,7 +88,8 @@ class EvidenceGraph:
         p = Path(path)
         b = p.read_bytes()
         sha = hashlib.sha256(b).hexdigest()
-        artifact_id = new_id("ART")
+        # deterministic artifact id: seed = path + sha (reproducible graph)
+        artifact_id = new_id("ART", seed=f"{p}:{sha}")
         with self.conn:
             self.conn.execute(
                 "INSERT INTO artifacts(artifact_id,path,bytes,sha256,media_type,producer,subject_digest,created_at) VALUES(?,?,?,?,?,?,?,?)",
@@ -104,7 +109,7 @@ class EvidenceGraph:
         with self.conn:
             self.conn.execute(
                 "INSERT INTO edges(edge_id,kind,src,dst,created_at) VALUES(?,?,?,?,?)",
-                (new_id("EDGE"), kind, src, dst, utc_now()))
+                (new_id("EDGE", seed=f"{kind}:{src}:{dst}"), kind, src, dst, utc_now()))
 
     def link_execution_produced(self, execution_id: str, artifact_id: str) -> None:
         self._edge("execution_produced", execution_id, artifact_id)
@@ -136,11 +141,23 @@ class EvidenceGraph:
         return dict(row) if row else None
 
     def graph_root_digest(self) -> str:
-        """Deterministic digest of the whole canonical graph (nodes+edges)."""
+        """Deterministic digest of the whole canonical graph (nodes+edges).
+        Timestamps excluded so the digest is reproducible across re-builds
+        of the same registered artifacts."""
         parts = []
-        for table in ("subjects", "requirements", "executions", "artifacts",
-                      "verifications", "edges", "runner_summaries"):
-            rows = self.conn.execute(f"SELECT * FROM {table} ORDER BY rowid").fetchall()
+        tables = {
+            "subjects": ["subject_id", "digest"],
+            "requirements": ["requirement_id", "claim_scope"],
+            "executions": ["execution_id", "requirement_id", "runner", "status"],
+            "artifacts": ["artifact_id", "path", "bytes", "sha256", "media_type",
+                          "producer", "subject_digest"],
+            "verifications": ["verification_id", "requirement_id", "checker", "verdict"],
+            "edges": ["edge_id", "kind", "src", "dst"],
+            "runner_summaries": ["summary_id", "runner", "note"],
+        }
+        for table, cols in tables.items():
+            rows = self.conn.execute(
+                f"SELECT {','.join(cols)} FROM {table} ORDER BY rowid").fetchall()
             parts.append(table + ":" + repr([tuple(r) for r in rows]))
         return hashlib.sha256("\n".join(parts).encode("utf-8")).hexdigest()
 
