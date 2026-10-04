@@ -396,7 +396,7 @@ class ProjectLifecycleController:
                                (project_id,)).fetchone()
             run_id, budget, used = row
             wo = conn.execute("SELECT workorder_id FROM workorders w WHERE w.state='ADMITTED' OR w.state='EXECUTING' "
-                              "ORDER BY created_at LIMIT 1").fetchone()
+                              "ORDER BY rowid LIMIT 1").fetchone()  # Ordering oracle is the implicit rowid (monotonic INSERTION order), not wall-clock created_at: # created_at has second granularity, so two rows sharing a timestamp make the choice arbitrary. # Same convention as evidence_graph.py (ORDER BY rowid).
             current_wo = wo[0] if wo else None
         payload = {
             "project_id": project_id, "run_id": run_id, "state": state,
@@ -473,7 +473,7 @@ class ProjectLifecycleController:
                 raise LifecycleError(f"ERR_PROJECT_UNKNOWN {project_id}")
             trans = conn.execute(
                 "SELECT from_state, to_state, trigger, created_at FROM project_transitions "
-                "WHERE project_id=? ORDER BY created_at DESC LIMIT 5", (project_id,)).fetchall()
+                "WHERE project_id=? ORDER BY rowid DESC LIMIT 5", (project_id,)).fetchall()  # insertion order
         return {
             "project_id": row[0], "run_id": row[1], "state": row[2], "goal_hash": row[3],
             "source_count": row[4], "current_workorder": row[5], "last_checkpoint": row[6],

@@ -219,9 +219,10 @@ class EvidenceGraph:
     # ---- queries ----
     def requirement_supported_by(self, requirement_id: str) -> list[dict[str, Any]]:
         rows = self.conn.execute(
+            # Ordering oracle is v.rowid (monotonic insertion order), not wall-clock created_at (C7).
             """SELECT v.verification_id, v.checker, v.verdict, v.requirement_id
                FROM verifications v
-               WHERE v.requirement_id = ? ORDER BY v.created_at""",
+               WHERE v.requirement_id = ? ORDER BY v.rowid""",
             (requirement_id,)).fetchall()
         return [dict(r) for r in rows]
 

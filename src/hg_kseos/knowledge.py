@@ -226,7 +226,7 @@ class KnowledgeFactory:
         with self.spine.connect() as connection:
             rows = connection.execute(
                 """SELECT * FROM memory_records WHERE scope=? AND revoked_at IS NULL
-                   AND (expires_at IS NULL OR expires_at>?) ORDER BY created_at""",
+                   AND (expires_at IS NULL OR expires_at>?) ORDER BY rowid""",
                 (scope, now),
             ).fetchall()
         return [dict(row) for row in rows]
