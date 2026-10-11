@@ -34,12 +34,38 @@ def rec(cid: str, ok: bool, detail: str) -> None:
     results.append({"id": cid, "ok": ok, "detail": detail})
 
 
-# T1 -- fail closed on an absent credential file
+# T1 -- fail closed when NO source is usable.
+#
+# REALIGNED FIXTURE, same reason as verify_offline.py.  The old form asserted "absent file =>
+# abort", which encoded the superseded PAT-only contract (a dead PAT blocked a healthy App).
+# The gate now requires the EFFECTIVE source, so this is split and made hermetic: the App
+# configuration is CONTROLLED here instead of inherited from the ambient shell.
+_amb = {k: os.environ.pop(k, None) for k in ("HGK_APP_ID", "HGK_APP_KEY", "HGK_APP_INSTALLATION_ID")}
+_p_orig = {k: getattr(pf, k) for k in ("APP_ID", "APP_KEY", "APP_INSTALLATION_ID")}
+
 os.environ["HGK_CRED_FILE"] = str(HERE / "_absent_cred_file")
 pf.PAT_FILE = Path(os.environ["HGK_CRED_FILE"])
+pf.APP_ID = pf.APP_KEY = pf.APP_INSTALLATION_ID = None
 pre = pf.run_preflight(probe=False)
-rec("T1_fail_closed", pre["abort"] and pre["verdict"] == "FAIL_CLOSED",
-    f"verdict={pre['verdict']} failed={pre['failed_required']}")
+rec("T1a_fail_closed_no_source", pre["abort"] and pre["verdict"] == "FAIL_CLOSED"
+    and pre["effective_source"] == "pat",
+    f"verdict={pre['verdict']} source={pre['effective_source']} failed={pre['failed_required']}")
+
+pf.APP_ID, pf.APP_KEY = "1", str(Path(__file__))   # any EXISTING file; key bytes are never read
+pf.APP_INSTALLATION_ID = "1"
+pre2 = pf.run_preflight(probe=False)
+pat_gated = any(c["id"] in pre2["required"] for c in pre2["checks"] if c["id"].startswith("cred_"))
+rec("T1b_absent_pat_is_not_the_effective_source",
+    (not pre2["abort"]) and pre2["effective_source"] == "app" and not pat_gated,
+    f"verdict={pre2['verdict']} source={pre2['effective_source']} pat_checks_required={pat_gated}")
+
+pre3 = pf.run_preflight(probe=True, app_token_getter=None)
+rec("T1c_unprobed_app_refuses", pre3["abort"],
+    f"verdict={pre3['verdict']} failed={pre3['failed_required']}")
+
+for k, v_ in _p_orig.items():
+    setattr(pf, k, v_)
+os.environ.pop("HGK_CRED_FILE", None)
 
 # T2 -- metadata-only reports existence+length without reading
 with tempfile.TemporaryDirectory() as td:

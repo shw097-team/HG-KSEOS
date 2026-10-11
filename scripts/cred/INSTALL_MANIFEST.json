@@ -20,22 +20,22 @@
   "files": [
     {
       "target": "scripts/cred/cred_broker.py",
-      "sha256": "012035724258a30f9e8d91b4cb20ca727aacacedfe30ac5398bd6f3af2ddb1d7",
+      "sha256": "38baca046f26ff7fbb197dff0d771619a0512858000b3529a35eea1c189e1f62",
       "bytes": 8011
     },
     {
       "target": "scripts/cred/cred_preflight.py",
-      "sha256": "63fa632ffd29645358b9821d1cb30b9e3dbf8b39322ddb9b2be319676c34e5b1",
+      "sha256": "0e8adf04b05687f6aedfad1e2c4d8919bd41128d24e892757a3fef2ca85221c0",
       "bytes": 7909
     },
     {
       "target": "scripts/cred/selftest.py",
-      "sha256": "f78be993bbd4e137e8330a6c2f4e032925471323f20f1e38262aae8361eb7196",
+      "sha256": "26c47a492f56c63ab6e3384f9694d532fc5f93ad896ac8e7a73f4a999a4b398e",
       "bytes": 3838
     },
     {
       "target": "scripts/cred/verify_offline.py",
-      "sha256": "c15432473ec946c40e8255145561b19a65bfea84bef90564a964237d5b6612ca",
+      "sha256": "30bc35ea0a56ed110241d2f432a0f570f7738e9a5a49c3d293ee67f2ff73f7e9",
       "bytes": 3964
     },
     {

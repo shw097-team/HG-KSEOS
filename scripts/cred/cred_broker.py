@@ -150,12 +150,12 @@ def main() -> int:
     args = ap.parse_args()
 
     if args.cmd == "preflight":
-        out = pf.run_preflight(probe=True)
+        out = pf.run_preflight(probe=True, app_token_getter=mint_app_installation_token)
         print(json.dumps(out, indent=1, ensure_ascii=False))
         return 2 if out["abort"] else 0
 
     if args.cmd == "dry-run":
-        pre = pf.run_preflight(probe=True)
+        pre = pf.run_preflight(probe=True, app_token_getter=mint_app_installation_token)
         if pre["abort"]:
             print(json.dumps({"verdict": "ABORTED_BY_PREFLIGHT", "preflight": pre},
                              indent=1, ensure_ascii=False))
@@ -181,7 +181,7 @@ def main() -> int:
 
     # run
     git_args = [a for a in args.git_args if a != "--"]
-    pre = pf.run_preflight(probe=True)
+    pre = pf.run_preflight(probe=True, app_token_getter=mint_app_installation_token)
     if pre["abort"]:
         print(json.dumps({"verdict": "ABORTED_BY_PREFLIGHT", "failed": pre["failed_required"]}))
         return 2

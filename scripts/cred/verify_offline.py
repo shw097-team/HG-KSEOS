@@ -41,11 +41,47 @@ def rec(cid: str, status: str, detail: str) -> None:
     results.append({"id": cid, "status": status, "detail": detail})
 
 
-# T1 -- fail closed on an absent credential file (no read, no network)
+# T1 -- fail closed when NO source is usable (no read, no network).
+#
+# REALIGNED FIXTURE.  The earlier form asserted "no PAT file => abort", which encoded the
+# superseded PAT-only contract: the gate used to require the PAT unconditionally, so a dead
+# or absent PAT blocked a fully configured App.  That was the defect fixed in this round.
+# The contract is now "the gate requires the EFFECTIVE source", so this fixture is split and
+# made deterministic -- the App configuration is CONTROLLED here rather than inherited from
+# whatever HGK_APP_* the ambient shell happens to export, which made the old result depend on
+# the environment rather than on the code.
+_amb = {k: os.environ.pop(k, None) for k in ("HGK_APP_ID", "HGK_APP_KEY", "HGK_APP_INSTALLATION_ID")}
+p_orig = {k: getattr(pf, k) for k in ("APP_ID", "APP_KEY", "APP_INSTALLATION_ID")}
+
 pf.PAT_FILE = Path(HERE / "_verify_nonexistent")
+pf.APP_ID = pf.APP_KEY = pf.APP_INSTALLATION_ID = None          # no source at all
 pre = pf.run_preflight(probe=False)
-rec("T1_fail_closed", "PASS" if (pre["abort"] and pre["verdict"] == "FAIL_CLOSED") else "FAIL",
-    f"verdict={pre['verdict']} failed={pre['failed_required']}")
+rec("T1a_fail_closed_no_source",
+    "PASS" if (pre["abort"] and pre["verdict"] == "FAIL_CLOSED"
+               and pre["effective_source"] == "pat") else "FAIL",
+    f"verdict={pre['verdict']} source={pre['effective_source']} failed={pre['failed_required']}")
+
+pf.PAT_FILE = Path(HERE / "_verify_nonexistent")
+# Any EXISTING file stands in for the key: the gate checks Path.is_file(), never the key bytes.
+pf.APP_ID, pf.APP_KEY = "1", str(Path(__file__))
+pf.APP_INSTALLATION_ID = "1"
+pre2 = pf.run_preflight(probe=False)
+pat_gated = any(c["id"] in pre2["required"] for c in pre2["checks"] if c["id"].startswith("cred_"))
+rec("T1b_absent_pat_is_not_the_effective_source",
+    "PASS" if (not pre2["abort"] and pre2["effective_source"] == "app" and not pat_gated) else "FAIL",
+    f"verdict={pre2['verdict']} source={pre2['effective_source']} pat_checks_required={pat_gated}")
+
+# a configured-but-UNPROBED App must never pass (presence is not validity)
+pre3 = pf.run_preflight(probe=True, app_token_getter=None)
+rec("T1c_unprobed_app_refuses",
+    "PASS" if pre3["abort"] else "FAIL",
+    f"verdict={pre3['verdict']} failed={pre3['failed_required']}")
+
+for k, val in p_orig.items():
+    setattr(pf, k, val)
+for k, val in _amb.items():
+    if val is not None:
+        os.environ[k] = val
 
 # T2 -- metadata-only reports existence+length without reading content
 with tempfile.TemporaryDirectory() as td:

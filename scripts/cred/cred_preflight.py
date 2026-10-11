@@ -48,7 +48,12 @@ EXPIRY_FILE = Path(os.environ.get(
 API = "https://api.github.com"
 TOKEN_RE = re.compile(rb"github_pat_[A-Za-z0-9_]{20,}|gh[pousr]_[A-Za-z0-9]{20,}")
 
-REQUIRED = ("cred_source_present", "cred_syntax", "cred_api_valid")
+# The gate must require the validity of the source the broker will ACTUALLY use.
+# acquire() selects the App when it is configured and does NOT fall back to the PAT,
+# so a dead PAT must not fail a healthy App, and a healthy PAT must not mask a dead App.
+REQUIRED_PAT = ("cred_source_present", "cred_syntax", "cred_api_valid")
+REQUIRED_APP = ("app_cred_valid",)
+REQUIRED = REQUIRED_PAT  # kept for backwards compatibility with external readers
 
 
 def _result(cid: str, status: str, detail: str) -> dict:
@@ -102,32 +107,58 @@ def check_metadata_only() -> list[dict]:
     return checks
 
 
-def run_preflight(probe: bool) -> dict:
+def run_preflight(probe: bool, app_token_getter=None) -> dict:
+    """Fail-closed preflight over the source the broker will actually use.
+
+    ``app_token_getter`` is injected by the broker (which owns the minting code) so
+    this module needs no import of it.  When it is absent the App source can only be
+    reported as configured-but-unproven, and the gate stays on the PAT -- never a
+    silent PASS on an unprobed credential.
+    """
     checks: list[dict] = []
+    app_configured = bool(APP_ID and APP_KEY and APP_INSTALLATION_ID and Path(APP_KEY).is_file())
+
+    # 0. What will the broker actually use?  Mirror acquire() exactly.
+    effective = "app" if app_configured else "pat"
 
     # 1. source presence (metadata)
     st = PAT_FILE.stat() if PAT_FILE.is_file() else None
     checks.append(_result("cred_source_present",
-                          "PASS" if st else "FAIL",
-                          f"file present, {st.st_size} bytes" if st else "credential file absent"))
-    if not st:
+                          "PASS" if st else ("SKIP" if effective == "app" else "FAIL"),
+                          f"file present, {st.st_size} bytes" if st
+                          else "credential file absent"
+                               + (f" (not required: effective source is the App)" if effective == "app" else "")))
+    if not st and effective == "pat":
         checks.append(_result("cred_syntax", "FAIL", "no source"))
         checks.append(_result("cred_api_valid", "FAIL", "no source"))
         checks.append(_result("app_config_present", "SKIP", "PAT path failed first"))
         checks.append(_result("expiry_known", "FAIL", "no source"))
-        return _verdict(checks)
+        return _verdict(checks, REQUIRED_PAT, "pat")
 
-    # 2. syntax (reads the file)
-    token = load_pat()
-    checks.append(_result("cred_syntax",
-                          "PASS" if token else "FAIL",
-                          f"token-shaped & non-empty, length={len(token)}" if token
-                          else "file holds no github token-shaped string"))
-    if not token:
+    if not st and effective == "app":
+        # The PAT bridge is absent, but it is not the source in force.  Probe the App.
+        checks.append(_result("cred_syntax", "SKIP", "no PAT to read; effective source is the App"))
+        checks.append(_result("cred_api_valid", "SKIP", "PAT not in force; effective source is the App"))
+        checks.append(_result("app_config_present", "PASS", "app id/key/installation configured"))
+        checks.extend(_app_probe(probe, app_token_getter))
+        checks.append(_expiry_check())
+        return _verdict(checks, REQUIRED_APP, "app")
+
+    # 2. syntax (reads the file).  When the App is the effective source the PAT is a
+    #    bridge that is NOT in force, so its bytes are still reported but its validity
+    #    cannot gate the run.
+    token = None if effective == "app" else load_pat()
+    _syn = ("cred_syntax",
+            "PASS" if token else ("SKIP" if effective == "app" else "FAIL"),
+            f"token-shaped & non-empty, length={len(token)}" if token
+            else ("PAT bridge not read: the App is the effective source" if effective == "app"
+                  else "file holds no github token-shaped string"))
+    checks.append(_result(*_syn))
+    if effective == "pat" and not token:
         checks.append(_result("cred_api_valid", "FAIL", "unusable source"))
         checks.append(_result("app_config_present", "SKIP", "PAT path failed first"))
         checks.append(_result("expiry_known", "SKIP", "PAT path failed first"))
-        return _verdict(checks)
+        return _verdict(checks, REQUIRED_PAT, "pat")
 
     # 3. App source availability (optional; needs no secret read here)
     app_ok = bool(APP_ID and APP_KEY and APP_INSTALLATION_ID and Path(APP_KEY).is_file())
@@ -136,33 +167,69 @@ def run_preflight(probe: bool) -> dict:
                           "app id/key/installation configured" if app_ok
                           else "not configured (PAT bridge in force)"))
 
-    # 4. validity probe (network; uses the token but prints only a status code)
-    if probe:
+    # 4. validity probe of the EFFECTIVE source only
+    if effective == "app":
+        checks.append(_result("cred_api_valid",
+                              "SKIP",
+                              "PAT is NOT the effective source; probing the App instead"))
+        checks.extend(_app_probe(probe, app_token_getter))
+        required = REQUIRED_APP
+    elif probe:
         s, me = _api("/user", token)
         valid = s == 200
         checks.append(_result("cred_api_valid",
                               "PASS" if valid else "FAIL",
                               f"GET /user -> {s}" + (f", login={me.get('login')}" if valid else "")))
+        required = REQUIRED_PAT
     else:
         checks.append(_result("cred_api_valid", "SKIP", "--no-probe"))
+        required = REQUIRED_PAT
 
     # 5. expiry knowledge.  GitHub exposes no API to read a PAT's own expiry, so
     #    the only signal is owner-recorded metadata (a date file).
+    checks.append(_expiry_check())
+    return _verdict(checks, required, effective)
+
+
+def _expiry_check() -> dict:
     if EXPIRY_FILE.is_file():
         raw = EXPIRY_FILE.read_text(encoding="utf-8", errors="replace").strip()
-        checks.append(_result("expiry_known", "PASS", f"owner-recorded expiry: {_redact(raw)[:32]}"))
-    else:
-        checks.append(_result("expiry_known", "WARN",
-                              "no owner-recorded expiry; GitHub has no API to read a PAT's own expiry"))
-    return _verdict(checks)
+        return _result("expiry_known", "PASS", f"owner-recorded expiry: {_redact(raw)[:32]}")
+    return _result("expiry_known", "WARN",
+                   "no owner-recorded expiry; GitHub has no API to read a PAT's own expiry")
 
 
-def _verdict(checks: list[dict]) -> dict:
+def _app_probe(probe: bool, app_token_getter) -> list[dict]:
+    """Probe the App source by its OWN installation token - presence is not validity."""
+    if not probe:
+        return [_result("app_cred_valid", "SKIP", "--no-probe")]
+    if app_token_getter is None:
+        return [_result("app_cred_valid", "FAIL",
+                        "App configured but no probe available (unproven credential); "
+                        "the gate refuses to pass on presence alone")]
+    try:
+        token = app_token_getter()
+    except Exception as exc:  # noqa: BLE001 - report, never hide
+        return [_result("app_cred_valid", "FAIL", f"installation token mint failed: {type(exc).__name__}")]
+    slug = os.environ.get("HGK_REPO_SLUG")
+    path = f"/repos/{slug}" if slug else "/installation/repositories"
+    status, body = _api(path, token)
+    ok = status == 200
+    detail = f"GET {path} -> {status}"
+    if ok and slug:
+        detail += f", repo={body.get('full_name')}, push={bool((body.get('permissions') or {}).get('push'))}"
+    return [_result("app_cred_valid", "PASS" if ok else "FAIL", detail)]
+
+
+def _verdict(checks: list[dict], required=REQUIRED_PAT, effective: str = "pat") -> dict:
     failed = [c["id"] for c in checks
-              if c["status"] == "FAIL" and c["id"] in REQUIRED]
+              if c["status"] == "FAIL" and c["id"] in required]
     return {"schema": "PIPD-CRED-PREFLIGHT/1",
+            # Which source the broker will actually use.  Reported so this gate can be
+            # tested deterministically instead of being inferred from ambient env.
+            "effective_source": effective,
             "checks": checks,
-            "required": list(REQUIRED),
+            "required": list(required),
             "failed_required": failed,
             "verdict": "FAIL_CLOSED" if failed else "OK",
             "abort": bool(failed)}
@@ -177,7 +244,16 @@ def main() -> int:
     if args.metadata_only:
         out = _verdict(check_metadata_only())
     else:
-        out = run_preflight(probe=not args.no_probe)
+        # Bound lazily: cred_broker imports THIS module at module scope, so importing it
+        # at module scope here would be a cycle.  Without the getter the App source can
+        # only be reported as configured-but-unproven and the gate fails closed on it.
+        getter = None
+        try:
+            import cred_broker  # noqa: PLC0415 - deliberate lazy import
+            getter = cred_broker.mint_app_installation_token
+        except Exception:  # noqa: BLE001 - the getter is optional; absence is fail-closed
+            getter = None
+        out = run_preflight(probe=not args.no_probe, app_token_getter=getter)
     print(json.dumps(out, indent=1, ensure_ascii=False))
     return 2 if out["abort"] else 0
 
