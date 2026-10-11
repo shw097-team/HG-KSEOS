@@ -35,6 +35,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -84,7 +85,6 @@ def mint_app_installation_token() -> str:
                  "User-Agent": "PIPD-LS-SP-cred-broker",
                  "X-GitHub-Api-Version": "2022-11-28",
                  "Content-Type": "application/json"})
-    import urllib.error
     try:
         with urllib.request.urlopen(req, timeout=30) as r:
             return json.loads(r.read().decode("utf-8", "replace"))["token"]

@@ -95,6 +95,10 @@ App 設定頁 → **Private keys** → **Generate a private key**。
 ### 步驟 3 — 安裝 App 到 repo
 
 App 頁面 → **Install App** → 選 `shw097-team` → **Only select repositories** → 勾 `PIPD-LS-SP` → **Install**。
+實測可用直接入口：`https://github.com/apps/<app-slug>/installations/new` —— 會直接帶到
+「Install on your organization shw097 team」。選 `Only select repositories` 後，repo 選單是個 `<details>`
+擴展式小工具（summary：`Select repositories`），展開後點 `shw097-team/PIPD-LS-SP`；選中後會出現隱藏欄位
+`repository_ids[]`（本輪為 `1410587331`）——**這才是「真的選中了」的證據**，不是看 UI 有沒有變色。
 
 安裝後看 URL：`https://github.com/settings/installations/<數字>`。**那個數字就是 Installation ID**。也不是機密。
 
@@ -113,7 +117,7 @@ chmod 600 /c/Users/user/.hgk-creds/hgk-app.private-key.pem
 
 # 3) 設為「使用者層級」環境變數（Windows，透過 setx 永久生效）
 #    注意：setx 只影響「之後新開」的行程，本 shell 需重開
-setx HGK_APP_ID "<你的 App ID>"
+setx HGK_APP_ID "<你的 App ID>"   # 本輪實測值：5270497
 setx HGK_APP_KEY "C:/Users/user/.hgk-creds/hgk-app.private-key.pem"
 setx HGK_APP_INSTALLATION_ID "<你的 Installation ID>"
 setx HGK_REPO_SLUG "shw097-team/PIPD-LS-SP"
@@ -248,6 +252,8 @@ setx HGK_CRED_EXPIRY_FILE "C:/Users/user/.hgk-creds/pat-expiry.txt"
 | `Invalid username or token` | 用 `$(cat)` 讀了 **4 行筆記檔** | 改用形狀比對取單行（§6 第 1 條） |
 | `ERR` 但 `exit 0`、遠端沒動 | 推送送出**空認證**（靜默未認證） | 檢查是否用 CLI `-c extraheader` 覆蓋了環境值（契約第 4 條）；改用 `cred_broker.py run` |
 | mint 回 `404` | **App 未安裝到該 repo**（跳過步驟 3） | 完成 Install App |
+| App 安裝頁**只列出個人帳號**，或組織 URL 回 `Page not found` | 組織第三方存取政策 = `Access restricted`，個人 App 無法取得組織資料 | **改用組織擁有的 App**（`/organizations/<org>/settings/apps/new`） |
+| `UnboundLocalError: ... 'urllib'` | **已修的缺陷**：`mint_app_installation_token()` 內部有 `import urllib.error`，使 `urllib` 變成該函式的區域變數 | 已將 import 提到模組層並重算 pin |
 | mint 回 `401` | App ID 或私鑰不符 | 核對 `HGK_APP_ID` 與 `.pem` 是否同一組 |
 | `dry-run` 顯示 `credential_kind="pat"` | `HGK_APP_KEY` 未生效 | **setx 後要重開 shell**；或路徑用了 MSYS `/c/...`（原生程式不轉譯） |
 | `header_would_be_supplied=false` 但推送其實正常 | **已修的缺陷**：舊版把自我檢查比對一個寫死的遮蔽佔位字串，該欄位**永遠報 false** | 已修為語意檢查（比對 key 尾綴與 value 前綴）。若你看到 false，先確認工具版本 |
@@ -279,6 +285,18 @@ setx HGK_CRED_EXPIRY_FILE "C:/Users/user/.hgk-creds/pat-expiry.txt"
 - **broker 仍未「啟用」**：它躺在 `HG-KSEOS/scripts/cred/`，`config/` 對它的引用數為 **0**。把它接進 push 流程是**另一個獨立的控制平面輪次**，需自己的 admission。
 - **App installation token 也不是萬能**：1 小時 TTL 意味著長任務中**每次**推送前都要重新 mint（這正是設計，不是缺點）。
 - **本指引不證明**推送流程已被端到端啟用；它只描述**可執行且已驗證到 dry-run 層級**的操作。
+
+### 本輪實測結果（已完成）
+
+| 項目 | 值 |
+|---|---|
+| App | `HGK-SWOF-ACCEPTANCE-BRIDGE-ORG`（**組織擁有** @shw097-team） |
+| App ID | **5270497** |
+| Installation ID | **170160551**（安裝在 @shw097-team，僅授權 1 個 repo） |
+| 私鑰 | `C:/Users/user/.hgk-creds/hgk-app.private-key.pem`（`openssl rsa -check` → `RSA key ok`） |
+| 端到端證據 | `cred_broker.py dry-run` → `credential_kind="app"`；`run -- ls-remote` → 成功讀回 `refs/heads/main`，`secret_leaked: false` |
+
+**意義**：長時間無人守值現在不需長效憑証、也不需人工續期。PAT 可退休。
 
 ### 已知耦合（照實揭露，本輪**未**改動）
 
