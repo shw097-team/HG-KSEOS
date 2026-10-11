@@ -114,9 +114,13 @@ def run_preflight(probe: bool, app_token_getter=None) -> dict:
     this module needs no import of it.  When it is absent the App source can only be
     reported as configured-but-unproven, and the gate FAILS CLOSED on it: it does NOT
     quietly fall back to the PAT, because the PAT is not the source the broker would
-    use.  Never a silent PASS on an unprobed credential.  (An earlier revision of this
-    docstring said "the gate stays on the PAT", which contradicted the code -- measured
-    by the R11 independent checker, and corrected here.)
+    use.  Never a silent PASS on an unprobed credential *on the default path*.
+    (Two corrections from the R11 independent checker, both measured against the committed
+    source: an earlier revision of this docstring said "the gate stays on the PAT", which
+    contradicted the code; and this sentence claimed an unconditional guarantee while the
+    explicit --no-probe / --metadata-only opt-outs can still yield verdict:"OK" over an
+    unproven credential -- those runs are marked "probe_skipped_by_request": true so the two
+    kinds of OK are distinguishable rather than silently identical.)
     """
     checks: list[dict] = []
     app_configured = bool(APP_ID and APP_KEY and APP_INSTALLATION_ID and Path(APP_KEY).is_file())
@@ -230,10 +234,16 @@ def _verdict(checks: list[dict], required=REQUIRED_PAT, effective: str = "pat",
               if c["status"] == "FAIL" and c["id"] in required]
     return {"schema": "PIPD-CRED-PREFLIGHT/1",
             # ADDITIVE (R11).  "verdict": "OK" alone cannot distinguish "the effective source was
-            # PROBED and is valid" from "--no-probe/--metadata-only skipped the probe", and a reader
-            # taking OK for proof is the presence-is-not-validity class this gate exists to stop.
-            # No existing key changes value; this one says which of the two an OK is.
-            "provenance": "UNPROVEN_BY_REQUEST" if unproven_by_request else "PROBED",
+            # validity-checked" from "--no-probe/--metadata-only skipped the check", and a reader taking
+            # OK for proof is the presence-is-not-validity class this gate exists to stop.
+            #
+            # MEASURED AND CORRECTED (R11, independent checker): the first version emitted a two-valued
+            # label -- "PROBED" / "UNPROVEN_BY_REQUEST" -- and the checker showed "PROBED" claimed more
+            # than it knew: the no-source, invalid-PAT, missing-getter and mint-exception paths all
+            # returned "PROBED" having made ZERO HTTP calls.  A label must not assert what was not
+            # measured, so it is now a BOOLEAN that answers exactly the one question that is known.
+            # No existing key changes value.
+            "probe_skipped_by_request": unproven_by_request,
             # Which source the broker will actually use.  Reported so this gate can be
             # tested deterministically instead of being inferred from ambient env.
             "effective_source": effective,
