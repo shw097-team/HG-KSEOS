@@ -112,8 +112,11 @@ def run_preflight(probe: bool, app_token_getter=None) -> dict:
 
     ``app_token_getter`` is injected by the broker (which owns the minting code) so
     this module needs no import of it.  When it is absent the App source can only be
-    reported as configured-but-unproven, and the gate stays on the PAT -- never a
-    silent PASS on an unprobed credential.
+    reported as configured-but-unproven, and the gate FAILS CLOSED on it: it does NOT
+    quietly fall back to the PAT, because the PAT is not the source the broker would
+    use.  Never a silent PASS on an unprobed credential.  (An earlier revision of this
+    docstring said "the gate stays on the PAT", which contradicted the code -- measured
+    by the R11 independent checker, and corrected here.)
     """
     checks: list[dict] = []
     app_configured = bool(APP_ID and APP_KEY and APP_INSTALLATION_ID and Path(APP_KEY).is_file())
@@ -188,7 +191,7 @@ def run_preflight(probe: bool, app_token_getter=None) -> dict:
     # 5. expiry knowledge.  GitHub exposes no API to read a PAT's own expiry, so
     #    the only signal is owner-recorded metadata (a date file).
     checks.append(_expiry_check())
-    return _verdict(checks, required, effective)
+    return _verdict(checks, required, effective, unproven_by_request=not probe)
 
 
 def _expiry_check() -> dict:
@@ -221,10 +224,16 @@ def _app_probe(probe: bool, app_token_getter) -> list[dict]:
     return [_result("app_cred_valid", "PASS" if ok else "FAIL", detail)]
 
 
-def _verdict(checks: list[dict], required=REQUIRED_PAT, effective: str = "pat") -> dict:
+def _verdict(checks: list[dict], required=REQUIRED_PAT, effective: str = "pat",
+             unproven_by_request: bool = False) -> dict:
     failed = [c["id"] for c in checks
               if c["status"] == "FAIL" and c["id"] in required]
     return {"schema": "PIPD-CRED-PREFLIGHT/1",
+            # ADDITIVE (R11).  "verdict": "OK" alone cannot distinguish "the effective source was
+            # PROBED and is valid" from "--no-probe/--metadata-only skipped the probe", and a reader
+            # taking OK for proof is the presence-is-not-validity class this gate exists to stop.
+            # No existing key changes value; this one says which of the two an OK is.
+            "provenance": "UNPROVEN_BY_REQUEST" if unproven_by_request else "PROBED",
             # Which source the broker will actually use.  Reported so this gate can be
             # tested deterministically instead of being inferred from ambient env.
             "effective_source": effective,
@@ -242,7 +251,7 @@ def main() -> int:
     ap.add_argument("--no-probe", action="store_true", help="skip the network validity probe")
     args = ap.parse_args()
     if args.metadata_only:
-        out = _verdict(check_metadata_only())
+        out = _verdict(check_metadata_only(), unproven_by_request=True)
     else:
         # Bound lazily: cred_broker imports THIS module at module scope, so importing it
         # at module scope here would be a cycle.  Without the getter the App source can
