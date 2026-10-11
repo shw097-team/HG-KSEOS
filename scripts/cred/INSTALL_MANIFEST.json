@@ -55,8 +55,10 @@
   }
  ],
  "control_plane_admission_file": {
-  "target": ".hgk/rounds/HGK-CREDBROKER-20261011/admission/hgk_cred_admission.py",
-  "sha256": "e521ae869fc48d56b52a0a94d09d7418dbb078d7b02b533f4788be0cccdbd7ea"
+  "target": "scripts/cred/admission/hgk_cred_admission.py",
+  "sha256": "e521ae869fc48d56b52a0a94d09d7418dbb078d7b02b533f4788be0cccdbd7ea",
+  "note": "REPOINTED. This target previously named a Route-B round directory that was never created, so it dangled. The script that actually performed the admission is installed at the path above and is what this field now pins.",
+  "route_actually_taken": "Route A - admitted into existing control-plane project HGK-CHU-20261009"
  },
  "verification": [
   {
