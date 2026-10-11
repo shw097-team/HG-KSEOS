@@ -1,0 +1,38 @@
+{
+  "schema": "HGK-CRED-BROKER-INSTALL/1",
+  "artefact": "GitHub credential broker (R9-designed) standing install",
+  "origin": "ephemeral scratch: <scratch>/r9/cred/ (pruned when idle; cannot serve an unattended run)",
+  "install_repo": "HG-KSEOS",
+  "install_mode": "COPY_BYTES_PRESERVING",
+  "activation": false,
+  "activation_note": "STANDING, NON-ACTIVATED. No config/ lane-routing / model-lane / dispatcher / Hermes-binding file references these paths. Installing does not wire the broker into any lane; activation is a separate, later, separately-admitted change.",
+  "governance": {
+    "control_plane": "HG-KSEOS",
+    "route": "separate HG-KSEOS control-plane admission (typed ProjectLifecycleController.admit_requirement); NOT rideable inside a PIPD product round",
+    "precedent": "FAR-PIPD-R8-DISPATCH-004 sec.4 option B",
+    "candidate_requirement": "REQ-HGK-CREDBROKER-001",
+    "candidate_admission_script": ".hgk/rounds/HGK-CREDBROKER-20261011/admission/hgk_cred_admission.py",
+    "minimal_target_project": "HGK-CHU-20261009 (EXECUTING; already carries REQ-CHU-R2-04-CREDENTIAL-SCRUB / REQ-CHU-R2-05-BRIDGE-CONFIG)"
+  },
+  "self_hash_policy": "This manifest does NOT list its own digest (self-reference prohibited, AGENTS.md rule 5).",
+  "files": [
+    {"target": "scripts/cred/cred_broker.py",        "sha256": "23264973b8612639bfe4e8a76116ff0dc1fa5cee3ee69ed9cfb783e3806b3843", "bytes": 8011},
+    {"target": "scripts/cred/cred_preflight.py",     "sha256": "63fa632ffd29645358b9821d1cb30b9e3dbf8b39322ddb9b2be319676c34e5b1", "bytes": 7909},
+    {"target": "scripts/cred/selftest.py",           "sha256": "f78be993bbd4e137e8330a6c2f4e032925471323f20f1e38262aae8361eb7196", "bytes": 3838},
+    {"target": "scripts/cred/verify_offline.py",     "sha256": "c15432473ec946c40e8255145561b19a65bfea84bef90564a964237d5b6612ca", "bytes": 3964},
+    {"target": "scripts/cred/README.md",             "sha256": "d235b0dddfa48b4898d270ed864dfa5a14398052160e9d35be124d77b5cebef0", "bytes": 2862},
+    {"target": "scripts/cred/INSTALL.md",            "sha256": "6f0054e8b80cc72a759e4ef562e70bb49a0e6626b9c1b74c41870eb851337b06", "bytes": 4668}
+  ],
+  "control_plane_admission_file": {
+    "target": ".hgk/rounds/HGK-CREDBROKER-20261011/admission/hgk_cred_admission.py",
+    "sha256": "e521ae869fc48d56b52a0a94d09d7418dbb078d7b02b533f4788be0cccdbd7ea"
+  },
+  "verification": [
+    {"id": "V1_integrity", "cmd": "python -c \"import json,hashlib,pathlib as p;m=json.load(open('scripts/cred/INSTALL_MANIFEST.json'));[print(f['target'], hashlib.sha256((p.Path('.')/f['target']).read_bytes()).hexdigest()==f['sha256']) for f in m['files']]\"", "expect": "all True"},
+    {"id": "V2_offline_contract", "cmd": "python scripts/cred/verify_offline.py", "expect": "verdict=PASS_OFFLINE_T5_UNPROVEN, exit 0"},
+    {"id": "V3_full_contract_dummy", "cmd": "python scripts/cred/selftest.py", "expect": "5/5 PASS, exit 0 (needs network for T5; DUMMY creds only)"},
+    {"id": "V4_failclosed", "cmd": "env HGK_CRED_FILE=/nonexistent python scripts/cred/cred_preflight.py --metadata-only", "expect": "verdict=FAIL_CLOSED, exit 2"},
+    {"id": "V5_non_activation", "cmd": "git grep -n \"scripts/cred\" -- config/ scripts/ src/ | grep -v '^scripts/cred/' || echo NON_ACTIVATED_OK", "expect": "NON_ACTIVATED_OK"}
+  ],
+  "secret_policy": "No secret value is read, printed, hashed, or copied. verify_offline.py and selftest.py use DUMMY tokens only; cred_preflight --metadata-only never reads the credential file's content."
+}
