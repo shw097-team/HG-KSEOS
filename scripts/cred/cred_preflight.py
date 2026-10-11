@@ -136,7 +136,7 @@ def run_preflight(probe: bool, app_token_getter=None) -> dict:
         checks.append(_result("cred_api_valid", "FAIL", "no source"))
         checks.append(_result("app_config_present", "SKIP", "PAT path failed first"))
         checks.append(_result("expiry_known", "FAIL", "no source"))
-        return _verdict(checks, REQUIRED_PAT, "pat")
+        return _verdict(checks, REQUIRED_PAT, "pat", unproven_by_request=not probe)
 
     if not st and effective == "app":
         # The PAT bridge is absent, but it is not the source in force.  Probe the App.
@@ -145,7 +145,7 @@ def run_preflight(probe: bool, app_token_getter=None) -> dict:
         checks.append(_result("app_config_present", "PASS", "app id/key/installation configured"))
         checks.extend(_app_probe(probe, app_token_getter))
         checks.append(_expiry_check())
-        return _verdict(checks, REQUIRED_APP, "app")
+        return _verdict(checks, REQUIRED_APP, "app", unproven_by_request=not probe)
 
     # 2. syntax (reads the file).  When the App is the effective source the PAT is a
     #    bridge that is NOT in force, so its bytes are still reported but its validity
@@ -161,7 +161,7 @@ def run_preflight(probe: bool, app_token_getter=None) -> dict:
         checks.append(_result("cred_api_valid", "FAIL", "unusable source"))
         checks.append(_result("app_config_present", "SKIP", "PAT path failed first"))
         checks.append(_result("expiry_known", "SKIP", "PAT path failed first"))
-        return _verdict(checks, REQUIRED_PAT, "pat")
+        return _verdict(checks, REQUIRED_PAT, "pat", unproven_by_request=not probe)
 
     # 3. App source availability (optional; needs no secret read here)
     app_ok = bool(APP_ID and APP_KEY and APP_INSTALLATION_ID and Path(APP_KEY).is_file())
