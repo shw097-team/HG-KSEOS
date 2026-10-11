@@ -74,7 +74,7 @@
     {
       "id": "V3_full_contract_dummy",
       "cmd": "python scripts/cred/selftest.py",
-      "expect": "5/5 PASS, exit 0 (needs network for T5; DUMMY creds only)"
+      "expect": "7/7 PASS, exit 0 (V3 counts the recorded checks: T1 was split into T1a/T1b/T1c when the gate began requiring the EFFECTIVE source rather than unconditionally the PAT; needs network for T5; DUMMY creds only)"
     },
     {
       "id": "V4_failclosed",
