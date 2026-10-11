@@ -162,7 +162,11 @@ def main() -> int:
             return 2
         kind, token = acquire()
         env = _child_env(token)
-        supplied = env["GIT_CONFIG_KEY_0"] in env and env["GIT_CONFIG_VALUE_0"].startswith("Authorization: Basic ")
+        # Semantic check on construction, never on a literal that can drift from the built
+        # value. A prior version compared against a redaction placeholder, so this field
+        # reported False unconditionally while the header was built correctly.
+        supplied = (env["GIT_CONFIG_KEY_0"].endswith("/.extraheader")
+                    and env["GIT_CONFIG_VALUE_0"].startswith("Authorization: Basic "))
         print(json.dumps({
             "verdict": "OK",
             "preflight": pre["verdict"],
