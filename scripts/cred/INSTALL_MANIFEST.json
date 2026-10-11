@@ -49,7 +49,7 @@
    "bytes": 4668
   },
   {
-   "target": "admission/hgk_cred_admission.py",
+   "target": "scripts/cred/admission/hgk_cred_admission.py",
    "sha256": "e521ae869fc48d56b52a0a94d09d7418dbb078d7b02b533f4788be0cccdbd7ea",
    "bytes": 5598
   }
