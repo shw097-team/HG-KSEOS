@@ -51,7 +51,13 @@ python scripts/cred/cred_preflight.py --metadata-only   # 期望狀態、不讀�
 ```
 
 **期望**：7/7 pin `True`；`PASS_OFFLINE_T5_UNPROVEN`（T5 需網路，**永遠不會**被離線驗證報成 PASS）。
-若 `--metadata-only` 回 `FAIL_CLOSED`（exit 2），代表**根本沒設 `HGK_CRED_FILE`**——這是設計行為，不是壞掉。
+
+> **實測更正（重要）**：本機跑 `--metadata-only` 實際回 **`OK` / `abort=false` / exit 0**，**不是** fail-closed。
+> 原因是 `cred_preflight.py:34-35` **硬編了一個預設路徑**指向 owner 的筆記檔：
+> `C:\Projects\Agent_Workspace\API KEY\Fine-grained personal access tokens.txt`。
+> 所以**在任何環境變數都没設的情況下，工具仍會去讀那個檔**。見 §10「已知耦合」。
+> 要驗證 fail-closed 行為，必須明確指向不存在路徑：
+> `HGK_CRED_FILE=/nonexistent python scripts/cred/cred_preflight.py --metadata-only` → 期望 `FAIL_CLOSED` (exit 2)。
 
 ---
 
@@ -128,10 +134,12 @@ cd C:/Projects/Agent_Workspace/HG-KSEOS
 python scripts/cred/cred_broker.py preflight
 #     期望：abort=false；app_config_present=PASS；credential_kind=app
 
-# (b) dry-run：真的去 mint 一個 installation token，但只印 kind 與長度
+# (b) dry-run：真的去 acquire 一個憑證，但只印 kind 與長度
 python scripts/cred/cred_broker.py dry-run
-#     期望：verdict=OK、credential_kind="app"、credential_length≈40、
-#           header_would_be_supplied=true、secret_printed=false
+#     目標狀態（App 已設）：credential_kind="app"、credential_length≈40
+#     ── 本機【今天實測】──：credential_kind="pat"、credential_length=93、
+#           header_would_be_supplied=true、secret_printed=false、verdict=OK
+#     credential_kind 仍是 pat 是【預期】的：App 三個變數尚未設定。
 ```
 
 `dry-run` 是**這套工具最重要的設計**：它證明「mint 得出來、header 放得進去」，而**不**把 secret 印出來，也**不**真的推送。
@@ -242,6 +250,7 @@ setx HGK_CRED_EXPIRY_FILE "C:/Users/user/.hgk-creds/pat-expiry.txt"
 | mint 回 `404` | **App 未安裝到該 repo**（跳過步驟 3） | 完成 Install App |
 | mint 回 `401` | App ID 或私鑰不符 | 核對 `HGK_APP_ID` 與 `.pem` 是否同一組 |
 | `dry-run` 顯示 `credential_kind="pat"` | `HGK_APP_KEY` 未生效 | **setx 後要重開 shell**；或路徑用了 MSYS `/c/...`（原生程式不轉譯） |
+| `header_would_be_supplied=false` 但推送其實正常 | **已修的缺陷**：舊版把自我檢查比對一個寫死的遮蔽佔位字串，該欄位**永遠報 false** | 已修為語意檢查（比對 key 尾綴與 value 前綴）。若你看到 false，先確認工具版本 |
 | preflight `exit 2` | fail-closed 正確觸發 | 讀它印出的逐項 `checks`，找出是哪一項 FAIL |
 | 私鑰在 repo 內被看到 | 放錯位置 | 移到 `.git` 之外；`git status` 應看不到它 |
 
@@ -270,3 +279,12 @@ setx HGK_CRED_EXPIRY_FILE "C:/Users/user/.hgk-creds/pat-expiry.txt"
 - **broker 仍未「啟用」**：它躺在 `HG-KSEOS/scripts/cred/`，`config/` 對它的引用數為 **0**。把它接進 push 流程是**另一個獨立的控制平面輪次**，需自己的 admission。
 - **App installation token 也不是萬能**：1 小時 TTL 意味著長任務中**每次**推送前都要重新 mint（這正是設計，不是缺點）。
 - **本指引不證明**推送流程已被端到端啟用；它只描述**可執行且已驗證到 dry-run 層級**的操作。
+
+### 已知耦合（照實揭露，本輪**未**改動）
+
+`cred_preflight.py` 內建一個**指向本機絕對路徑**的預設憑證來源（見 §2 更正）。後果與處置：
+
+- **好處**：本機免設定即可運作（`dry-run` 實測已能取得 93 字元的 PAT）。
+- **風險**：這個默認值**默默把控制平面工具綁在一台主機的檔案佈局**上；換主機就會 fail-closed（安全，但看起來像壞掉）。
+- **本輪裁決**：**揭露而不改動**。改動預設解析屬控制平面行為變更，需自己的 admission；且 `HGK_CRED_FILE` 仍是唯一正式機制（§6 第 3 條）。
+  **因此：請一律顯式設定 `HGK_CRED_FILE`，不要依賴內建預設值。**
