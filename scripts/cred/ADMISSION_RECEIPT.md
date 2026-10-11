@@ -47,3 +47,15 @@ networked host, and is cited as such.
 - The GitHub App setup remains human: registering the App, downloading its private key, and installing
   it are **UI-only** — GitHub exposes no API for any of the three. Until then the PAT bridge is used.
 - Nothing here rotates a credential. GitHub exposes no API to read a PAT's own expiry or to renew it.
+
+## Verification status of the table above (added after independent check)
+
+An independent checker re-derived the pinned hashes and the non-activation search, and returned FAIL on exactly one item: `INSTALL_MANIFEST.json` pinned a target that did not exist (a Route-B admission-script path for a round that was never created, because Route A was taken). That was a real defect in the artefact, not a checker artefact, and it is now fixed: the script that actually performed the admission is installed at `admission/hgk_cred_admission.py`, the field is repointed to it, and it is added to the pinned file list so the pin is verifiable rather than merely named.
+
+Which rows above are INDEPENDENTLY established and which are self-reported:
+
+- Criterion 1 (pins) - independently established: the checker recomputed the file hashes itself.
+- Criterion 3 (non-activation) - independently established: the checker ran the same search.
+- Criterion 4 (no secret value) - **self-reported, NOT independently established.** The checker explicitly recorded that it performed no credential-value search. It should be read as "no secret was read or written by the process that produced these artefacts", not as a repo-wide proof.
+- Criterion 2 (offline verify / selftest 5-of-5) - **partly historical.** The 5-of-5 run happened in R9 on a networked host and was not reproduced by the checker; the offline verifier returns T5 as UNPROVEN by design. Do not read this row as a fresh full 5-of-5.
+- The typed admission into HGK-CHU-20261009 - **recorded but not independently queried** by the checker; the receipt and `admission/control-plane/hgk_cred_admission.json` are the evidence.
