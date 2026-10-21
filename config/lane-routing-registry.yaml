@@ -271,8 +271,12 @@ routes:
   auth: openai_oauth
   oauth: true
   selection_authority: owner-order-20261021-gpt-61-sol-plan-verify-execute-deepseek
-  selected_arm: A
-  selected_arm_identity: minimax-m3.1-flash-free
+  # `selected_arm` names the arm slot; the value domain is the `arms[].arm` vocabulary
+  # (primary / fallback1..N). It was written as "A" back when the dual-arm route still used
+  # A/B names; the arm records were later renamed to primary/fallbackN and the field was not
+  # updated with them. `selected_arm_identity` must name the identity of the arm in that slot.
+  selected_arm: primary
+  selected_arm_identity: gpt-6.1-sol
   arms:
   - arm: primary
     provider: openai-codex
