@@ -339,9 +339,12 @@
     }
   ],
   "identity_overlaps_recorded_not_enforced": [
-    "deepseek-v4.1-flash is rank 1 (EXECUTE/VERIFY) and ranks 1-2 (PLAN) - the same identity can occupy all three lanes",
-    "glm-5.3-flash appears at PLAN rank 4/5 and VERIFY rank 3",
-    "gpt-6.1-sol appears at PLAN rank 3 and VERIFY rank 4"
+    "nvidia/deepseek-ai/deepseek-v4.1-flash appears at EXECUTE rank 4, PLAN rank 7, VERIFY_SECURITY rank 5 - the same identity can occupy all three lanes",
+    "openai-codex/gpt-6.1-sol appears at PLAN rank 1, VERIFY_SECURITY rank 1 - the same identity can occupy all three lanes",
+    "openai-codex/gpt-6.1-sol: BY OWNER ORDER (2026-10-21, GPT quota restored): the PLAN lane and the Independent Acceptance Officer / VERIFY / SECURITY checker lane are BOTH openai-codex/gpt-6.1-sol. The collision is REAL and is declared SOD006-C4 (OPEN_OWNER_ORDERED); independence for this pair is PROCESS, LANE and EVIDENCE-PATH separation only, and model independence is NOT claimed. The EXECUTE writer is on a DIFFERENT model (opencode-go/deepseek-v4.1-flash), so the maker/checker separation holds on the model axis.",
+    "opencode-go/deepseek-v4.1-flash appears at EXECUTE rank 1, PLAN rank 4, VERIFY_SECURITY rank 4 - the same identity can occupy all three lanes",
+    "opencode-go/glm-5.3-flash appears at PLAN rank 3, VERIFY_SECURITY rank 3 - the same identity can occupy all three lanes",
+    "opencode-go/minimax-m3.1-flash-free appears at EXECUTE rank 2, PLAN rank 2, VERIFY_SECURITY rank 2 - the same identity can occupy all three lanes"
   ],
   "transport_evidence": {
     "relay_namespace_observed": [
