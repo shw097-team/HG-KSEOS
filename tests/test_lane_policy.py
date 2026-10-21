@@ -102,7 +102,7 @@ class TestLanePolicyConformance(unittest.TestCase):
         #
         # Under this order PLAN and VERIFY/SECURITY rank-1 on
         # openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth) and EXECUTE
-        # ranks-1 on opencode-go/deepseek-v4.1-flash -- so the WRITER and the
+        # ranks-1 on opencode-go/minimax-m3.1-flash-free -- so the WRITER and the
         # CHECKER are on DIFFERENT models AND different providers, and only the
         # PLAN-vs-VERIFY pair shares a model, BY OWNER ORDER (declared as
         # SOD006-C4, OPEN_OWNER_ORDERED).
@@ -114,7 +114,7 @@ class TestLanePolicyConformance(unittest.TestCase):
         owner_chain = {
             "PLAN": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "glm-5.3-flash")],
             "VERIFY_SECURITY": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "glm-5.3-flash")],
-            "EXECUTE": [("opencode-go", "deepseek-v4.1-flash"), ("opencode-go", "minimax-m3.1-flash-free"), ("openai-codex", "gpt-6-luna")],
+            "EXECUTE": [("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6-luna")],
         }
         for route in registry["routes"]:
             lane = route["lane"]

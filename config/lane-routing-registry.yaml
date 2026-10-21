@@ -1,6 +1,6 @@
 schema: HGK-LANE-ROUTING-REGISTRY/1
 status: CANDIDATE
-epoch: 26
+epoch: 28
 authorization_basis: 'REQ-FAR-LANE-SOD-003 / WO-LANE-ROUTE-001-EXECUTE (writer=codex). The route values
   are adopted from the `sod` block of config/model-lane-assignment.json, dispatchable at revision 24.
   This registry does not itself confer authority; activation requires an HGK-authorized generation binding.
@@ -8,11 +8,14 @@ authorization_basis: 'REQ-FAR-LANE-SOD-003 / WO-LANE-ROUTE-001-EXECUTE (writer=c
   (owner adjudication; events=947). | Owner order 2026-10-21 (GPT quota restored): PLAN and VERIFY/SECURITY
   are openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth); EXECUTE remains opencode-go/deepseek-v4.1-flash.
   Owner final route change is still a CANDIDATE declaration: activation requires an HGK-authorized generation
-  binding.'
+  binding. | Owner mandate 2026-10-21 (this round): PLAN and VERIFY/SECURITY are openai-codex/gpt-6.1-sol
+  (GPT 6.1 SOL-MEDIUM, OpenAI OAuth); EXECUTE is opencode-go/minimax-m3.1-flash-free (MiniMax M3.1 Flash,
+  OPENCODE GO). Owner final route change is still a CANDIDATE declaration: activation requires an HGK-authorized
+  generation binding.'
 source_of_routes:
   path: config/model-lane-assignment.json
-  revision: 26
-  sha256: 7afbd4b7a3967ce0b3121279f896fef16da613aece290e413c963ec7d1b1e363
+  revision: 28
+  sha256: 44405796ef33f9b9a90308293f6c7ca7baf87db232075436ba2856528dec6167
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
@@ -71,7 +74,7 @@ routes:
   auth: openai_oauth
   oauth: true
   reasoning_effort: medium
-  selection_authority: owner-order-20261021-gpt-61-sol-plan-verify-execute-deepseek
+  selection_authority: owner-order-20261021-execute-minimax-m31-flash
   arms:
   - arm: primary
     provider: openai-codex
@@ -193,30 +196,30 @@ routes:
   - BULK TRANSFORM
   engine: codex-cli
   provider: opencode-go
-  model: deepseek-v4.1-flash
-  canonical_identity: deepseek-v4.1-flash
+  model: minimax-m3.1-flash-free
+  canonical_identity: minimax-m3.1-flash-free
   auth: env_ref:OPENCODE_GO_API_KEY
   oauth: false
-  selection_authority: owner-order-20261021-gpt-61-sol-plan-verify-execute-deepseek
+  selection_authority: owner-order-20261021-execute-minimax-m31-flash
   arms:
   - arm: primary
-    provider: opencode-go
-    model: deepseek-v4.1-flash
-    canonical_identity: deepseek-v4.1-flash
-    auth: env_ref:OPENCODE_GO_API_KEY
-    oauth: false
-    default: true
-    automatic_selection: true
-    transport_model: opencode-go/deepseek-v4.1-flash
-  - arm: fallback1
     provider: opencode-go
     model: minimax-m3.1-flash-free
     canonical_identity: minimax-m3.1-flash-free
     auth: env_ref:OPENCODE_GO_API_KEY
     oauth: false
+    default: true
+    automatic_selection: true
+    transport_model: opencode-go/minimax-m3.1-flash-free
+  - arm: fallback1
+    provider: opencode-go
+    model: deepseek-v4.1-flash
+    canonical_identity: deepseek-v4.1-flash
+    auth: env_ref:OPENCODE_GO_API_KEY
+    oauth: false
     default: false
     automatic_selection: false
-    transport_model: opencode-go/minimax-m3.1-flash-free
+    transport_model: opencode-go/deepseek-v4.1-flash
   - arm: fallback2
     provider: openai-codex
     model: gpt-6-luna
@@ -237,8 +240,8 @@ routes:
     transport_model: nvidia/deepseek-ai/deepseek-v4.1-flash
   fallbacks:
   - provider: opencode-go
-    model: minimax-m3.1-flash-free
-    canonical_identity: minimax-m3.1-flash-free
+    model: deepseek-v4.1-flash
+    canonical_identity: deepseek-v4.1-flash
     auth: env_ref:OPENCODE_GO_API_KEY
     oauth: false
   - provider: openai-codex
@@ -270,11 +273,7 @@ routes:
   canonical_identity: gpt-6.1-sol
   auth: openai_oauth
   oauth: true
-  selection_authority: owner-order-20261021-gpt-61-sol-plan-verify-execute-deepseek
-  # `selected_arm` names the arm slot; the value domain is the `arms[].arm` vocabulary
-  # (primary / fallback1..N). It was written as "A" back when the dual-arm route still used
-  # A/B names; the arm records were later renamed to primary/fallbackN and the field was not
-  # updated with them. `selected_arm_identity` must name the identity of the arm in that slot.
+  selection_authority: owner-order-20261021-execute-minimax-m31-flash
   selected_arm: primary
   selected_arm_identity: gpt-6.1-sol
   arms:
@@ -512,9 +511,9 @@ projections:
     declared as SOD006-C4 (OPEN_OWNER_ORDERED, process separation only) rather than hedged.
   bindings:
   - pointer: /registry_epoch
-    expected: 26
+    expected: 28
   - pointer: /revision
-    expected: 26
+    expected: 28
   - pointer: /assignment/1/additional_routes/0/provider
     expected: openai-codex
   - pointer: /assignment/1/additional_routes/0/model
@@ -547,9 +546,9 @@ projections:
     expected: openai-codex / gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OPEN AI OAuth) — owner order 2026-10-21
       (GPT quota restored); supersedes the 2026-10-21 minimax-m3.1-flash-free order.
   - pointer: /sod/execute_lane
-    expected: opencode-go / deepseek-v4.1-flash (DeepSeek V4.1 Flash, OPENCODE GO) — Codex CLI bounded
-      writer; owner order 2026-10-21 keeps it UNCHANGED; supersedes the 2026-10-21 minimax-m3.1-flash-free
-      order.
+    expected: opencode-go / minimax-m3.1-flash-free (MiniMax M3.1 Flash, OPENCODE GO) — Codex CLI bounded
+      writer; owner mandate 2026-10-21 (this round) sets EXECUTE to MiniMax M3.1 Flash; supersedes the
+      2026-10-21 order that kept EXECUTE on deepseek-v4.1-flash.
   - pointer: /sod/verify_security_lane
     expected: openai-codex / gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OPEN AI OAuth) — owner order 2026-10-21
       (GPT quota restored); supersedes the 2026-10-21 minimax-m3.1-flash-free order.
@@ -566,7 +565,7 @@ projections:
   - pointer: /assignment/0/assigned_provider
     expected: openai-codex
   - pointer: /assignment/1/assigned_model
-    expected: deepseek-v4.1-flash
+    expected: minimax-m3.1-flash-free
   - pointer: /assignment/1/assigned_provider
     expected: opencode-go
   - pointer: /assignment/2/assigned_model
@@ -602,7 +601,7 @@ projections:
   - pointer: /lane_chains/PLAN/0/provider
     expected: openai-codex
   - pointer: /lane_chains/EXECUTE/0/model
-    expected: deepseek-v4.1-flash
+    expected: minimax-m3.1-flash-free
   - pointer: /lane_chains/EXECUTE/0/provider
     expected: opencode-go
   - pointer: /lane_chains/VERIFY_SECURITY/0/model
@@ -655,7 +654,9 @@ projections:
 - id: hermes-codex-lane
   path: config/hermes-codex-lane.json
   format: json
-  note: sealed EXECUTE lane binding; sealed-lane and isolation fields must remain exact preimages.
+  note: sealed EXECUTE lane binding. Round R8-EXECUTE-MINIMAX-20261021 moved /model, /model_fallbacks/0
+    and /execute_lane_child_models/0 to minimax-m3.1-flash-free under the owner mandate. /model_routing_change/new_model
+    keeps its pin because that field is a HISTORICAL record of the 2026-10-02 change and was NOT rewritten.
   bindings:
   - pointer: /execute_additional_routes/0/provider
     expected: openai-codex
@@ -672,11 +673,11 @@ projections:
   - pointer: /provider
     expected: opencode-go
   - pointer: /model
-    expected: deepseek-v4.1-flash
+    expected: minimax-m3.1-flash-free
   - pointer: /model_fallbacks/0
-    expected: deepseek-v4.1-flash
+    expected: minimax-m3.1-flash-free
   - pointer: /execute_lane_child_models/0
-    expected: deepseek-v4.1-flash
+    expected: minimax-m3.1-flash-free
   - pointer: /default_execute_route
     expected: CODEX_CLI_SEALED_LANE
   - pointer: /opencodex_port
@@ -704,9 +705,11 @@ projections:
 - id: hermes-binding
   path: config/hermes.json
   format: json
-  note: HGK-HERMES-BINDING/2. The binding/release identity is checked for presence only here; the runtime
-    path fields still name the pre-MSIX AppData install and an older model slug, which are recorded as
-    DEBT, not required to match.
+  note: 'HGK-HERMES-BINDING/2. The binding/release identity is checked for presence only here. The /provider_route/model
+    DEBT entry was RESOLVED and removed by round R8-EXECUTE-MINIMAX-20261021: the file now declares the
+    owner-mandated opencode-go/minimax-m3.1-flash-free, so there is no stale model slug left to record
+    as debt. The install_root / canonical_hermes_home debt entries are UNCHANGED -- they are pre-MSIX
+    path drift and are outside this round''s scope.'
   bindings:
   - pointer: /schema
     expected: HGK-HERMES-BINDING/2
@@ -715,8 +718,6 @@ projections:
     expected: C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes\hermes-agent
   - pointer: /canonical_hermes_home
     expected: C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes
-  - pointer: /provider_route/model
-    expected: deepseek-v4.1-flash
 observations:
 - id: hermes-live-config-yaml
   path: C:/Users/user/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/hermes/config.yaml
@@ -796,14 +797,31 @@ history:
     transport_model gpt-6.1-sol = BARE id). EXECUTE restored to opencode-go/deepseek-v4.1-flash at rank
     1 (concurrent commit a1bd583 had moved it to minimax and left the declaration self-contradicting).
     The minimax arm is retained as a reachable fallback on all three lanes, not removed.
+- round: OWNER-ORDER-20261021-GPT-QUOTA-RESTORED
+  at_utc: '2026-10-21T12:57:26.954627+00:00'
+  epoch: 26
+  change: EXECUTE rank-1 arm moved to opencode-go/minimax-m3.1-flash-free (MiniMax M3.1 Flash, OPENCODE
+    GO); deepseek-v4.1-flash demoted to fallback 1 and retained. PLAN and VERIFY/SECURITY remain openai-codex/gpt-6.1-sol
+    (medium, OpenAI OAuth, transport_model gpt-6.1-sol = BARE id), unchanged by this mandate.
+- round: R8-EXECUTE-MINIMAX-20261021
+  at_utc: '2026-10-21T12:58:59.099248+00:00'
+  epoch: 28
+  change: 'the two RUNTIME declarations were brought into agreement with the policy surfaces: config/hermes-codex-lane.json
+    and config/hermes.json now declare opencode-go/minimax-m3.1-flash-free for EXECUTE, and this projection''s
+    three pins moved with the file they pin. Found because the drift gate reads 0 findings while each
+    pin matches a file that contradicts the pool -- a clean gate is not coherence.'
+- round: R8-EXECUTE-MINIMAX-20261021
+  at_utc: '2026-10-21T12:59:10.942163+00:00'
+  epoch: 28
+  change: 'resolved and removed the hermes-binding /provider_route/model DEBT entry: the runtime declaration
+    now names the owner-mandated EXECUTE model, so the recorded stale-slug debt no longer exists. The
+    two pre-MSIX path debt entries are left in place.'
+- round: R8-EXECUTE-MINIMAX-20261021
+  at_utc: '2026-10-21T13:06:23.651604+00:00'
+  epoch: 28
+  change: aligned model-lane-assignment registry_epoch/revision to the registry's epoch 28 and re-pinned
+    /registry_epoch, /revision and source_of_routes. The mismatch was introduced when the hermes-binding
+    DEBT entry was resolved (registry epoch 27 -> 28) while the assignment still declared 27; the drift
+    gate did NOT catch it because its /registry_epoch pin still matched the assignment, but the dispatcher's
+    ERR_LANE_STALE_EPOCH did.
 claim_ceiling: CANDIDATE_ONLY
-
-# --- R7-RESUME-20261021 pin refresh ---
-# The Codex CLI was upgraded in place (0.163.0-alpha.10.2 -> 0.163.0-alpha.11). The declared
-# binary no longer existed, and every lane dispatch failed BEFORE SPAWNING with
-# ERR_LANE_PIN_IDENTITY_INVALID / ERR_LANE_TOOLCHAIN_BINARY_MISSING, stopping the
-# SBL EXECUTE and VERIFY lanes. The live declaration was refreshed FROM THE
-# INSTALLED BINARY (path discovered, version from `codex.exe --version`, digest
-# computed over the file) and these two expected values were advanced to match.
-# The pointer positions are unchanged -- only the expected values moved.
-# Refreshed 2026-10-21.

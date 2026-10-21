@@ -1,9 +1,9 @@
 {
   "artifact": "MODEL_LANE_ASSIGNMENT",
   "schema": "HGK-MODEL-LANE-ASSIGNMENT/1",
-  "revision": 26,
+  "revision": 28,
   "declared_at_utc": "2026-10-15T11:25:47.689574Z",
-  "declared_by": "Owner order 2026-10-21 (owner messages, GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH GPT 6.1 SOL-MEDIUM (OpenAI OAuth) = openai-codex/gpt-6.1-sol (transport_model: gpt-6.1-sol, the BARE id). This SUPERSEDES the 2026-10-21 order that put minimax-m3.1-flash-free (opencode-go) on PLAN and VERIFY_SECURITY. The EXECUTE lane is NOT named by this order and stays deepseek-v4.1-flash (opencode-go) at rank 1, per the owner's standing clarification 「維持 DeepSeek V4.1 Flash（依您原話：只改 PLAN 與 VERIFY/CHECKER）」. The minimax arm is retained at a lower rank as a reachable fallback, not removed.",
+  "declared_by": "Owner mandate 2026-10-21 (this round, verbatim): PLAN model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth); Codex bounded writer / EXECUTE, handed to the CODEX CLI, provider/model = MiniMax M3.1 Flash (OPENCODE GO); Independent Acceptance Officer / VERIFY / SECURITY, handed to the CODEX CLI, checker model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth). This SUPERSEDES the earlier 2026-10-21 order that kept EXECUTE on deepseek-v4.1-flash: EXECUTE is now opencode-go/minimax-m3.1-flash-free at rank 1. deepseek-v4.1-flash is demoted to a reachable fallback and NOT removed. PLAN and VERIFY_SECURITY are unchanged.",
   "authority_note": "Operator-declared routing policy. Not an authority source; the runtime wiring named in `effective_wiring` is the machine truth. The current revision is the top-level \"revision\" field; earlier revisions are recorded in the revision_*_reason fields and in this file's history sections.",
   "authorization_basis": "Owner user order 2026-10-15 (verbatim: PLAN & Orchestrator 模型改成使用 GLM-5.3-Flash(OPENCODE GO), 因為GPT配合耗盡). Recorded as a canonical control-plane advance; candidate-lifecycle only, no self-acceptance, no independent verification claimed.",
   "lane_registry_status": "NO_PRIOR_REGISTRY at first encoding (revision 1/2). This file remains the formal encoding.",
@@ -54,7 +54,7 @@
         "EVAL CODE",
         "BULK TRANSFORM"
       ],
-      "assigned_model": "deepseek-v4.1-flash",
+      "assigned_model": "minimax-m3.1-flash-free",
       "assigned_provider": "opencode-go",
       "supply": "OpenCode Go",
       "executor": "CODEX CLI (sealed HGK lane) — NOT the Hermes main loop",
@@ -75,7 +75,7 @@
       "rationale": "Primary sealed lane remains deepseek-v4.1-flash/opencode-go. Owner authorizes an explicit gpt-6-luna/openai-codex native OAuth additional route under WO-PIPD-R5-EXECUTE-LUNA-ROUTE-20261009; not an automatic fallback, not backend-availability proof, bounded-writer admission remains required.",
       "auth": "env_ref:OPENCODE_GO_API_KEY",
       "oauth": false,
-      "canonical_identity": "deepseek-v4.1-flash"
+      "canonical_identity": "minimax-m3.1-flash-free"
     },
     {
       "lane_group": "VERIFY_SECURITY",
@@ -221,12 +221,12 @@
   },
   "sod": {
     "plan_lane": "openai-codex / gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OPEN AI OAuth) — owner order 2026-10-21 (GPT quota restored); supersedes the 2026-10-21 minimax-m3.1-flash-free order.",
-    "execute_lane": "opencode-go / deepseek-v4.1-flash (DeepSeek V4.1 Flash, OPENCODE GO) — Codex CLI bounded writer; owner order 2026-10-21 keeps it UNCHANGED; supersedes the 2026-10-21 minimax-m3.1-flash-free order.",
+    "execute_lane": "opencode-go / minimax-m3.1-flash-free (MiniMax M3.1 Flash, OPENCODE GO) — Codex CLI bounded writer; owner mandate 2026-10-21 (this round) sets EXECUTE to MiniMax M3.1 Flash; supersedes the 2026-10-21 order that kept EXECUTE on deepseek-v4.1-flash.",
     "verify_security_lane": "openai-codex / gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OPEN AI OAuth) — owner order 2026-10-21 (GPT quota restored); supersedes the 2026-10-21 minimax-m3.1-flash-free order.",
     "verify_security_arm_A": "openai-codex / gpt-6.1-sol (primary Codex CLI checker; owner order 2026-10-21)",
     "verify_security_default_arm": "gpt-6.1-sol",
     "verify_security_selection": "owner order 2026-10-21 (GPT quota restored): the automatic, default arm is openai-codex/gpt-6.1-sol. The other provider arms stay reachable as operator-selectable fallbacks, including opencode-go/minimax-m3.1-flash-free.",
-    "verify_vs_execute_model_separation": "RESTORED on the model axis: EXECUTE is opencode-go/deepseek-v4.1-flash and VERIFY_SECURITY is openai-codex/gpt-6.1-sol, so the maker and the checker are on DIFFERENT models AND different providers. Provider separation is not required by the invariants, but the axes happen to be distinct under this owner order.",
+    "verify_vs_execute_model_separation": "PRESENT on the model axis: EXECUTE is opencode-go/minimax-m3.1-flash-free and VERIFY_SECURITY is openai-codex/gpt-6.1-sol, so the maker and the checker are on DIFFERENT models AND different providers. Provider separation is not required by the invariants, but both axes happen to be distinct under this owner mandate.",
     "verify_vs_plan_model_separation": "NONE on the model axis, BY OWNER ORDER: PLAN and VERIFY_SECURITY are both openai-codex/gpt-6.1-sol. SOD006-C4 (PLAN vs VERIFY) is OPEN_OWNER_ORDERED; independence is process separation only. EXECUTE is a DIFFERENT model.",
     "provider_separation": "PRESENT between EXECUTE (opencode-go) and VERIFY_SECURITY (openai-codex). PLAN and VERIFY_SECURITY share openai-codex BY OWNER ORDER; model-axis separation between them is absent and is NOT claimed.",
     "maker_self_acceptance": "PREVENTED at dispatch on every arm: no single call ever verifies its own output. Model-identity separation between writer and checker is deliberately NOT present under the 2026-10-21 owner order (EXECUTE and VERIFY_SECURITY are both opencode-go/minimax-m3.1-flash-free, SOD006-C5 OWNER_ORDERED_IN_FORCE); the separation this round actually has is process, lane and evidence-path independence. PLAN is on the same model as both.",
@@ -334,21 +334,21 @@
     "EXECUTE": [
       {
         "provider": "opencode-go",
-        "model": "deepseek-v4.1-flash",
-        "transport_model": "opencode-go/deepseek-v4.1-flash",
-        "role": "fallback1",
-        "default": true,
-        "automatic_selection": false,
-        "reasoning_effort": null
-      },
-      {
-        "provider": "opencode-go",
         "model": "minimax-m3.1-flash-free",
         "transport_model": "opencode-go/minimax-m3.1-flash-free",
         "arm": "A",
         "role": "primary",
-        "default": false,
+        "default": true,
         "automatic_selection": true,
+        "reasoning_effort": null
+      },
+      {
+        "provider": "opencode-go",
+        "model": "deepseek-v4.1-flash",
+        "transport_model": "opencode-go/deepseek-v4.1-flash",
+        "role": "fallback1",
+        "default": false,
+        "automatic_selection": false,
         "reasoning_effort": null
       },
       {
@@ -641,7 +641,7 @@
   "revision_12_reason": "Revision 12 applies the arm-B exhaustive-declaration repair for revision 11: it corrects the stale provider-separation shape (E1/E2/E3), marks the historical lane-deviation object superseded (E4), rebuilds the across-arms identity aggregate for the current arms (E5/E6/E7), retags the FAR-LANE-SOD-005 flash probe as historical (E8), corrects the fallback-surface and delegation.applies_to claims (E9/E10), declares the EXECUTE lane's measured live effort without inventing an operator value (E11), and records the projection-drops-dual-arms gap as DECLARED_GAP_NOT_FIXED because src/** is out of scope (E12). sod_conflicts stays exactly SOD006-C1 and SOD006-C2, both OPEN. It also labelled the retired OpenAI Codex fallback token and the retired z-ai NVIDIA flash token at every remaining site as RETIRED history, so the stale-prose grep is clean without deleting the historical records.",
   "revision_13_reason": "Revision 13 repairs the round-2 over-correction: it restores the exact machine-readable retired identifiers at the three identifier sites from the rev11 byte-copy (recovering them from the backup rather than inventing them) and carries the retired semantics in additive retired/retired_note fields. It also closes the residual prose defects - the authority note's false self-revision clause, the operator-decision option and the revision_12_reason wording that spelled the retired tokens, and the registry header and digest - while this file's own revision is now the top-level revision field.",
   "revision_14_reason": "WO-FAR-D1D2-FINAL-ROUTE-20261008 / REQ-FAR-D1D2-FINAL-20261008 (owner adjudication; events=947); PLAN medium; VERIFY primary/default arm A and arm B fallback; affected projections synchronized; historical records preserved.",
-  "registry_epoch": 26,
+  "registry_epoch": 28,
   "revision_16_reason": "WO-PIPD-R5-EXECUTE-LUNA-ROUTE-20261009: owner-requested additional explicit EXECUTE gpt-6-luna/openai-codex OAuth route. Preserve primary and historical retired entries; zero automatic fallbacks; local route resolution only, backend unsupported and bounded-writer admission not claimed.",
   "revision_15_reason": "Second canonical edit under WO-FAR-D1D2-FINAL-ROUTE-20261008 / REQ-FAR-D1D2-FINAL-20261008 (owner adjudication; events=947): preserve VERIFY primary/default arm A and PLAN medium; demote arm B to a non-default operator-selectable alternate, never auto-selected; restore every registry fallbacks list to []; advance registry epoch 12 -> 13 and declaration revision 14 -> 15; synchronize source digest and projection bindings without modifying candidate tests.",
   "round_authorization": {
@@ -727,7 +727,7 @@
   },
   "revision_23_reason": "Round FAR-REMEDIATION-20261021 (owner order 2026-10-21): PLAN rank-1 = openai-codex/gpt-6.1-sol (medium, OAuth); VERIFY_SECURITY rank-1 = openai-codex/gpt-6.1-sol (medium, OAuth, Codex CLI); EXECUTE unchanged; SOD006-C3 superseded, SOD006-C4 declared OPEN_OWNER_ORDERED; toolchain pin unified to the live 0.163.0-alpha.10.2 build. Cross-surface alignment (registry / pool / profile / AGENTS.md / owner-chain test) lands in the SAME change set.",
   "revision_24_reason": "Round FAR-CLOSURE-20261021: close the cross-field declaration gaps that check_drift() cannot see. sod.verify_security_arm_A now restates lane_chains.VERIFY_SECURITY[0] instead of the superseded deepseek arm; registry authorization_basis / selected_arm_identity / projection note stopped describing revision 17/22; the EXECUTE pool's PROBE arm is labelled as a PROBE and the declared default is stated; the change checklist is reconciled against receipts. Epoch 24.",
-  "owner_order": "Owner order 2026-10-21 (owner messages, GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH GPT 6.1 SOL-MEDIUM (OpenAI OAuth) = openai-codex/gpt-6.1-sol (transport_model: gpt-6.1-sol, the BARE id). This SUPERSEDES the 2026-10-21 order that put minimax-m3.1-flash-free (opencode-go) on PLAN and VERIFY_SECURITY. The EXECUTE lane is NOT named by this order and stays deepseek-v4.1-flash (opencode-go) at rank 1, per the owner's standing clarification 「維持 DeepSeek V4.1 Flash（依您原話：只改 PLAN 與 VERIFY/CHECKER）」. The minimax arm is retained at a lower rank as a reachable fallback, not removed.",
+  "owner_order": "Owner mandate 2026-10-21 (this round, verbatim): PLAN model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth); Codex bounded writer / EXECUTE, handed to the CODEX CLI, provider/model = MiniMax M3.1 Flash (OPENCODE GO); Independent Acceptance Officer / VERIFY / SECURITY, handed to the CODEX CLI, checker model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth). This SUPERSEDES the earlier 2026-10-21 order that kept EXECUTE on deepseek-v4.1-flash: EXECUTE is now opencode-go/minimax-m3.1-flash-free at rank 1. deepseek-v4.1-flash is demoted to a reachable fallback and NOT removed. PLAN and VERIFY_SECURITY are unchanged.",
   "revision_25_reason": "Revision 25 (owner order 2026-10-21, round FAR-MINIMAX-MANDATE-20261021): all three lanes bound to opencode-go/minimax-m3.1-flash-free. The chain, the assignment rows, the supply selector and the SoD declarations are DERIVED from the pool, not hand-written, so the pool remains the single selection authority. The model axis is identical across all three lanes and is declared as SOD006-C4/C5 rather than hedged.",
   "revision_26_reason": "Owner order 2026-10-21 (GPT quota restored): PLAN and VERIFY/SECURITY bound to openai-codex/gpt-6.1-sol (medium, OpenAI OAuth, transport_model gpt-6.1-sol = BARE id, measured usage 200 on the relay); EXECUTE kept on opencode-go/deepseek-v4.1-flash. The concurrent minimax commit a1bd583 is superseded and its self-contradicting EXECUTE binding is corrected."
 }

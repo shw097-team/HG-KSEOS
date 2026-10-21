@@ -2,10 +2,10 @@
   "schema": "HGK-LANE-ROUTE-SLOTS/1",
   "status": "CANDIDATE",
   "artifact": "LANE_ROUTE_SLOTS_CANDIDATE",
-  "revision": 13,
-  "supersedes_revision": "11",
+  "revision": 15,
+  "supersedes_revision": "13",
   "round": "ROUND3-LANE-REBIND-AND-CLOSURE-20261016",
-  "declared_by": "Owner order 2026-10-21 (owner messages, GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH GPT 6.1 SOL-MEDIUM (OpenAI OAuth) = openai-codex/gpt-6.1-sol (transport_model: gpt-6.1-sol, the BARE id). This SUPERSEDES the 2026-10-21 order that put minimax-m3.1-flash-free (opencode-go) on PLAN and VERIFY_SECURITY. The EXECUTE lane is NOT named by this order and stays deepseek-v4.1-flash (opencode-go) at rank 1, per the owner's standing clarification 「維持 DeepSeek V4.1 Flash（依您原話：只改 PLAN 與 VERIFY/CHECKER）」. The minimax arm is retained at a lower rank as a reachable fallback, not removed.",
+  "declared_by": "Owner mandate 2026-10-21 (this round, verbatim): PLAN model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth); Codex bounded writer / EXECUTE, handed to the CODEX CLI, provider/model = MiniMax M3.1 Flash (OPENCODE GO); Independent Acceptance Officer / VERIFY / SECURITY, handed to the CODEX CLI, checker model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth). This SUPERSEDES the earlier 2026-10-21 order that kept EXECUTE on deepseek-v4.1-flash: EXECUTE is now opencode-go/minimax-m3.1-flash-free at rank 1. deepseek-v4.1-flash is demoted to a reachable fallback and NOT removed. PLAN and VERIFY_SECURITY are unchanged.",
   "authority_basis": "D4 (the list IS an ordered preference pool) + D5=B (relay namespace extension authorised; single-model restriction control declared substantively weakened) + D1 (no maker==checker REFUSE rule) + D2 (low friction, no over-engineering) + D3 (per-session: default unless instructed; fall back on failure) + D6 (ruled by FAR in evidence/FAR_GOVERNANCE_UNLOCK.md)",
   "claim_ceiling": "CANDIDATE_ONLY. Not promoted, not active. Selection is declarative; only entries marked DISPATCHABLE can be dispatched today.",
   "change_log": [
@@ -105,6 +105,26 @@
         {
           "lane": "VERIFY_SECURITY",
           "rank1": "openai-codex/gpt-6.1-sol"
+        }
+      ]
+    },
+    {
+      "rev": "13 -> 14",
+      "round": "OWNER-ORDER-20261021-GPT-QUOTA-RESTORED",
+      "date": "2026-10-21",
+      "what": "Owner mandate applied to the dispatch-time pool ranks: EXECUTE is promoted to opencode-go/minimax-m3.1-flash-free at rank 1 (MiniMax M3.1 Flash, OPENCODE GO, Codex-CLI bounded writer); the previous EXECUTE rank-1 (opencode-go/deepseek-v4.1-flash) is demoted to fallback 1 and NOT removed. PLAN and VERIFY_SECURITY stay openai-codex/gpt-6.1-sol at rank 1 (GPT 6.1 SOL-MEDIUM, OpenAI OAuth, transport_model gpt-6.1-sol = BARE id), unchanged by this mandate.",
+      "measured": "VERIFY_SECURITY lane probe 2026-10-21 after the owner's quota notice (var/R7-LANES/probe_gpt_61sol_VERIFY3.json): ok=true, required_arm and served_arm both openai-codex/gpt-6.1-sol, used_transport_model=gpt-6.1-sol, usage_status=200, usage_receipt_ok=true, 3.11 s. The openai arm requires the BARE model id; a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable'.",
+      "claim_ceiling": "a measured arm availability on the lane, not an acceptance of any subject; the pool is CANDIDATE_ONLY and selection is declarative"
+    },
+    {
+      "rev": "note-repair -> 15",
+      "utc": "20261021T125731Z",
+      "round": "OWNER-ORDER-20261021-GPT-QUOTA-RESTORED",
+      "what": "Repaired each lane's selection_note so it states THAT lane's actual rank-1 arm. The notes still read 'minimax-m3.1-flash-free ... is rank 1' on all three lanes, contradicting the same file's declared_by, change_log and ordered_pool[0]. A reviewer reading the note would have concluded MiniMax was the PLAN binding -- exactly the lane-vs-session confusion the order was meant to end. The note is now generated from ordered_pool[0] so it cannot drift again.",
+      "lanes_changed": [
+        {
+          "lane": "EXECUTE",
+          "rank1": "opencode-go/minimax-m3.1-flash-free"
         }
       ]
     }
@@ -233,27 +253,27 @@
         {
           "rank": 1,
           "provider": "opencode-go",
-          "model": "deepseek-v4.1-flash",
-          "role": "DEFAULT/首選",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "oauth": false,
-          "transport_model": "opencode-go/deepseek-v4.1-flash",
-          "probe_note": "declared policy default for this lane (owner order 2026-10-21)",
-          "default": true,
-          "automatic_selection": true
-        },
-        {
-          "rank": 2,
-          "provider": "opencode-go",
           "model": "minimax-m3.1-flash-free",
-          "role": "FALLBACK/備援",
+          "role": "DEFAULT/首選",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
           "transport_model": "opencode-go/minimax-m3.1-flash-free",
           "probe_note": "measured lane arm (round FAR-CLOSURE-20261021): the Codex-CLI lane served this arm at required_arm == served_arm. A PROBE arm is NOT a policy default and must not be selected by an unpinned dispatch; it is an explicitly pinnable measured capability.",
-          "default": false,
-          "automatic_selection": false,
+          "default": true,
+          "automatic_selection": true,
           "reasoning_effort": null
+        },
+        {
+          "rank": 2,
+          "provider": "opencode-go",
+          "model": "deepseek-v4.1-flash",
+          "role": "FALLBACK/備援",
+          "auth": "env_ref:OPENCODE_GO_API_KEY",
+          "oauth": false,
+          "transport_model": "opencode-go/deepseek-v4.1-flash",
+          "probe_note": "declared policy default for this lane (owner order 2026-10-21)",
+          "default": false,
+          "automatic_selection": false
         },
         {
           "rank": 3,
@@ -279,7 +299,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (EXECUTE) the rank-1 arm is opencode-go/deepseek-v4.1-flash, and it is the lane's automatic selection. The transport id is the provider-qualified slug 'opencode-go/deepseek-v4.1-flash'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted."
+      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (EXECUTE) the rank-1 arm is opencode-go/minimax-m3.1-flash-free, and it is the lane's automatic selection. The transport id is the provider-qualified slug 'opencode-go/minimax-m3.1-flash-free'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted."
     },
     {
       "lane": "VERIFY_SECURITY",
@@ -362,9 +382,9 @@
     "nvidia/deepseek-ai/deepseek-v4.1-flash appears at EXECUTE rank 4, PLAN rank 7, VERIFY_SECURITY rank 5 - the same identity can occupy all three lanes",
     "openai-codex/gpt-6.1-sol appears at PLAN rank 1, VERIFY_SECURITY rank 1 - the same identity can occupy all three lanes",
     "openai-codex/gpt-6.1-sol: BY OWNER ORDER (2026-10-21, GPT quota restored): the PLAN lane and the Independent Acceptance Officer / VERIFY / SECURITY checker lane are BOTH openai-codex/gpt-6.1-sol. The collision is REAL and is declared SOD006-C4 (OPEN_OWNER_ORDERED); independence for this pair is PROCESS, LANE and EVIDENCE-PATH separation only, and model independence is NOT claimed. The EXECUTE writer is on a DIFFERENT model (opencode-go/deepseek-v4.1-flash), so the maker/checker separation holds on the model axis.",
-    "opencode-go/deepseek-v4.1-flash appears at EXECUTE rank 1, PLAN rank 4, VERIFY_SECURITY rank 4 - the same identity can occupy all three lanes",
+    "opencode-go/deepseek-v4.1-flash appears at EXECUTE rank 2, PLAN rank 4, VERIFY_SECURITY rank 4 - the same identity can occupy all three lanes",
     "opencode-go/glm-5.3-flash appears at PLAN rank 3, VERIFY_SECURITY rank 3 - the same identity can occupy all three lanes",
-    "opencode-go/minimax-m3.1-flash-free appears at EXECUTE rank 2, PLAN rank 2, VERIFY_SECURITY rank 2 - the same identity can occupy all three lanes"
+    "opencode-go/minimax-m3.1-flash-free appears at EXECUTE rank 1, PLAN rank 2, VERIFY_SECURITY rank 2 - the same identity can occupy all three lanes"
   ],
   "transport_evidence": {
     "relay_namespace_observed": [
