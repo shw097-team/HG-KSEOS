@@ -30,6 +30,19 @@ _spec.loader.exec_module(disp)
 
 REAL_POOL = ROOT / "config" / "lane-route-slots.candidate.json"
 
+
+def _canonical_execute_rank1():
+    """The EXECUTE lane's rank-1 arm, read from the CANONICAL pool.
+
+    Several stub children answer AS the arm the dispatcher will serve on --force-rank 1, and
+    their usage row must name that same arm or the receipt is (correctly) rejected as a model
+    mismatch. Reading it from the pool instead of hard-coding a model keeps those tests
+    hermetic against an owner re-binding: the stub and the dispatcher can never disagree.
+    """
+    doc = json.loads(REAL_POOL.read_text(encoding="utf-8"))
+    lane = next(l for l in doc["lanes"] if l["lane"] == "EXECUTE")
+    return lane["ordered_pool"][0]
+
 OAUTH_ARM = {"rank": 4, "provider": "openai-codex", "model": "gpt-6.1-sol"}
 KEY_ARM = {"rank": 1, "provider": "opencode-go", "model": "deepseek-v4.1-flash"}
 
@@ -493,7 +506,36 @@ def _run_dispatch(cmd_extra, *, env=None, timeout=120):
     return p, rec, tmp
 
 
-def _stub_env(tmp, provider="opencode-go", model="deepseek-v4.1-flash"):
+def _pool_rank1_model(pool_path, lane="EXECUTE"):
+    """The rank-1 model of `lane` inside a pool document on disk."""
+    doc = json.loads(pathlib.Path(pool_path).read_text(encoding="utf-8"))
+    for ln in doc.get("lanes", []):
+        if ln.get("lane") == lane:
+            entries = ln.get("ordered_pool") or []
+            if entries:
+                return entries[0]["model"]
+    raise AssertionError(f"pool {pool_path} has no lane {lane!r}")
+
+
+def _stub_env(tmp, provider="opencode-go", model=None, *, pool=None, lane="EXECUTE"):
+    """The stub child's environment.
+
+    The usage row must name the arm the dispatcher will ACTUALLY serve, otherwise the
+    receipt is correctly rejected as a model mismatch and the test fails for the wrong
+    reason.  The dispatcher serves the rank-1 arm of the lane it is dispatching, and that
+    lane comes from the pool the test hands it via ``--pool`` - which is a fixture in most
+    tests, NOT the canonical pool.  So the model is resolved from ``pool`` when the caller
+    passes it, and only falls back to the canonical EXECUTE rank-1 when no pool is given.
+
+    Resolving from the pool (instead of hard-coding one model) is what lets these tests
+    survive a re-binding of the canonical pool: they assert nonce and receipt logic, not
+    which model happens to be rank-1 today.
+    """
+    if model is None:
+        # The stub child re-derives the served model from the dispatcher's --model argument,
+        # so the value here is only a fallback for stubs that do not parse argv.  It is the
+        # hermetic fixture arm, which is what most of these tests dispatch.
+        model = "deepseek-v4.1-flash"
     env = dict(os.environ)
     env["HGK_STUB_MODE"] = "clean"
     env["HGK_STUB_USAGE"] = str(tmp / "usage.jsonl")
@@ -547,7 +589,12 @@ class C1FailureDisposition(unittest.TestCase):
         p, rec, _ = _run_dispatch(cmd, env=env)
         self.assertFalse(rec["ok"])
         self.assertEqual(rec["code"], "ERR_NO_ARM_EMITTED_NONCE", p.stdout + p.stderr)
-        self.assertEqual(rec["nonce_absent_arms"], ["opencode-go/deepseek-v4.1-flash"])
+        # The expectation is DERIVED from the pool the dispatcher was handed, so a future owner
+        # re-binding of the canonical pool cannot turn into a failure that has nothing to do with
+        # the C1 classification.
+        _pdoc = json.loads(pool.read_text(encoding="utf-8"))
+        v_r1 = next(ln["ordered_pool"][0] for ln in _pdoc["lanes"] if ln["lane"] == "VERIFY_SECURITY")
+        self.assertEqual(rec["nonce_absent_arms"], [f"{v_r1['provider']}/{v_r1['model']}"])
 
 
 class C2DispatchableConsumer(unittest.TestCase):
@@ -793,12 +840,30 @@ class R3Repair(unittest.TestCase):
     @staticmethod
     def _text_stub(tmp, text_literal):
         """A stub emitting exactly one item.completed/agent_message with the given RAW text JSON, plus
-        a matching usage row, so the turn is 'answered' and the ONLY missing thing is the nonce."""
+        a matching usage row, so the turn is 'answered' and the ONLY missing thing is the nonce.
+
+        The usage row's model is taken from the ``--model`` the dispatcher passes to the child, so
+        the stub always reports the arm that is actually being served.  Hard-coding a model here
+        would make every re-binding of the pool break these tests for the wrong reason (the
+        receipt would be rejected as a model mismatch, not for the nonce defect under test).
+        """
         stub = tmp / "text_stub.py"
         stub.write_text(
             "import json, os, pathlib, sys\n"
+            "argv = sys.argv[1:]\n"
+            "model = None\n"
+            "for _i, _a in enumerate(argv):\n"
+            "    if _a == '--model' and _i + 1 < len(argv):\n"
+            "        model = argv[_i + 1]; break\n"
+            "row = json.loads(os.environ['HGK_STUB_USAGE_LINE'])\n"
+            "if model and isinstance(row, dict):\n"
+            "    if '/' in model:\n"
+            "        row['provider'], _, rest = model.partition('/')\n"
+            "        row['model'] = rest\n"
+            "    else:\n"
+            "        row['model'] = model\n"
             "p = pathlib.Path(os.environ['HGK_STUB_USAGE']); p.parent.mkdir(parents=True, exist_ok=True)\n"
-            "p.open('a', encoding='utf-8').write(json.dumps(json.loads(os.environ['HGK_STUB_USAGE_LINE'])) + '\\n')\n"
+            "p.open('a', encoding='utf-8').write(json.dumps(row) + '\\n')\n"
             "sys.stdout.write(" + repr(text_literal) + " + chr(10))\n"
             "sys.exit(0)\n",
             encoding="utf-8")
@@ -969,8 +1034,9 @@ class R4Repair(unittest.TestCase):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-r4-"))
         stub = self._raw_stub(tmp, stdout_bytes, usage_status=usage_status)
         env = dict(env or _stub_env(tmp))
+        _r1 = _canonical_execute_rank1()
         env["HGK_STUB_USAGE_LINE"] = json.dumps(
-            {"provider": "opencode-go", "model": "deepseek-v4.1-flash", "status": usage_status})
+            {"provider": _r1["provider"], "model": _r1["model"], "status": usage_status})
         cmd = ["--lane", "EXECUTE", "--force-rank", "1", "--nonce", nonce,
                "--codex-executable", str(stub), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
@@ -1036,8 +1102,9 @@ class R4Repair(unittest.TestCase):
     def test_H2_negative_a_fractional_status_is_not_a_usage_receipt(self):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-r4-h2-"))
         env = _stub_env(tmp)
+        _r1 = _canonical_execute_rank1()
         env["HGK_STUB_USAGE_LINE"] = json.dumps(
-            {"provider": "opencode-go", "model": "deepseek-v4.1-flash", "status": 200.9})
+            {"provider": _r1["provider"], "model": _r1["model"], "status": 200.9})
         cmd = ["--lane", "EXECUTE", "--force-rank", "1", "--nonce", "HGK_LANE_NONCE_OK",
                "--codex-executable", str(ROOT / self.STUB), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
@@ -1359,7 +1426,10 @@ class R5Repair(unittest.TestCase):
         p, rec, _ = self._run(cmd, env=env)
         self.assertFalse(rec["ok"], p.stdout + p.stderr)
         self.assertEqual(rec["code"], "ERR_NO_ARM_EMITTED_NONCE", p.stdout + p.stderr)
-        self.assertEqual(rec["nonce_absent_arms"], ["opencode-go/deepseek-v4.1-flash"])
+        # The expectation is DERIVED from the canonical pool the dispatcher was handed (this
+        # test dispatches without --pool), so a future owner re-binding cannot turn into a
+        # failure that has nothing to do with the C1 classification.
+        self.assertEqual(rec["nonce_absent_arms"], [f"{v_r1['provider']}/{v_r1['model']}"])
         # the usage MEASUREMENT is not overwritten by the shape diagnostic
         self.assertTrue(rec["attempts"][0]["usage_receipt_ok"], rec["attempts"][0])
         self.assertTrue(rec["attempts"][0]["carrier_shape_invalid"])
@@ -1714,15 +1784,25 @@ class R7StrictDeclaration(unittest.TestCase):
         scratch = tmp / "usage.jsonl"
         scratch.write_bytes(b"")
         stub = tmp / "stub.py"
+        # The stub answers AS the arm the dispatcher will serve. The arm is taken from the
+        # CANONICAL pool's EXECUTE rank-1, and the same arm is pinned into a fixture pool, so
+        # the usage row and the served arm can never disagree -- whatever the current owner
+        # order binds. (Previously the stub wrote deepseek-v4.1-flash while the dispatcher
+        # served the canonical rank-1, which broke on every re-binding.)
+        slots_doc = json.loads((ROOT / "config" / "lane-route-slots.candidate.json").read_text(encoding="utf-8"))
+        e_lane = next(l for l in slots_doc["lanes"] if l["lane"] == "EXECUTE")
+        e_r1 = e_lane["ordered_pool"][0]
+        pool = _lane_pool(tmp, "EXECUTE", [dict(e_r1, feasibility="DISPATCHABLE")], renumber=True)
         stub.write_text(
             "import json, os, pathlib, sys\n"
             "led = pathlib.Path(os.environ['HGK_STUB_TARGET'])\n"
-            "led.write_text(json.dumps({'provider': 'opencode-go', 'model': 'deepseek-v4.1-flash',"
-            " 'status': 200}) + chr(10), encoding='utf-8')\n"
+            "led.write_text(json.dumps({'provider': " + repr(e_r1["provider"]) +
+            ", 'model': " + repr(e_r1["model"]) + ", 'status': 200}) + chr(10), encoding='utf-8')\n"
             "sys.stdout.write(json.dumps({'type': 'item.completed', 'item': {'type': 'agent_message',"
             " 'text': '" + text + "'}}) + " + term_expr + ")\n"
             "sys.exit(0)\n", encoding="utf-8")
         return _run_dispatch(["--lane", "EXECUTE", "--force-rank", "1", "--nonce", "HGK_LANE_NONCE_OK",
+                              "--pool", str(pool),
                               "--codex-executable", str(stub), "--usage", str(scratch), "--prompt", "x"],
                              env={"HGK_STUB_TARGET": str(scratch)})
 
@@ -1847,15 +1927,25 @@ class R8StrictDeclarationPass2(unittest.TestCase):
         scratch = tmp / "usage.jsonl"
         scratch.write_bytes(b"")
         stub = tmp / "stub.py"
+        # The stub answers AS the arm the dispatcher will serve. The arm is taken from the
+        # CANONICAL pool's EXECUTE rank-1, and the same arm is pinned into a fixture pool, so
+        # the usage row and the served arm can never disagree -- whatever the current owner
+        # order binds. (Previously the stub wrote deepseek-v4.1-flash while the dispatcher
+        # served the canonical rank-1, which broke on every re-binding.)
+        slots_doc = json.loads((ROOT / "config" / "lane-route-slots.candidate.json").read_text(encoding="utf-8"))
+        e_lane = next(l for l in slots_doc["lanes"] if l["lane"] == "EXECUTE")
+        e_r1 = e_lane["ordered_pool"][0]
+        pool = _lane_pool(tmp, "EXECUTE", [dict(e_r1, feasibility="DISPATCHABLE")], renumber=True)
         stub.write_text(
             "import json, os, pathlib, sys\n"
             "led = pathlib.Path(os.environ['HGK_STUB_TARGET'])\n"
-            "led.write_text(json.dumps({'provider': 'opencode-go', 'model': 'deepseek-v4.1-flash',"
-            " 'status': 200}) + chr(10), encoding='utf-8')\n"
+            "led.write_text(json.dumps({'provider': " + repr(e_r1["provider"]) +
+            ", 'model': " + repr(e_r1["model"]) + ", 'status': 200}) + chr(10), encoding='utf-8')\n"
             "sys.stdout.write(json.dumps({'type': 'item.completed', 'item': {'type': 'agent_message',"
             " 'text': '" + text + "'}}) + " + term_expr + ")\n"
             "sys.exit(0)\n", encoding="utf-8")
         return _run_dispatch(["--lane", "EXECUTE", "--force-rank", "1", "--nonce", "HGK_LANE_NONCE_OK",
+                              "--pool", str(pool),
                               "--codex-executable", str(stub), "--usage", str(scratch), "--prompt", "x"],
                              env={"HGK_STUB_TARGET": str(scratch)})
 

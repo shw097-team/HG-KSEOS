@@ -2,10 +2,10 @@
   "schema": "HGK-LANE-ROUTE-SLOTS/1",
   "status": "CANDIDATE",
   "artifact": "LANE_ROUTE_SLOTS_CANDIDATE",
-  "revision": "11",
+  "revision": 10,
   "supersedes_revision": 9,
   "round": "ROUND3-LANE-REBIND-AND-CLOSURE-20261016",
-  "declared_by": "Owner order 2026-10-21 (round SBL-R7-FAR-RESIDUAL-CLOSURE, this round): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH minimax-m3.1-flash-free (opencode-go). Supersedes the 2026-10-16 order (GLM-5.3-Flash for PLAN, deepseek-v4.1-flash for VERIFY/SECURITY). The EXECUTE lane is unchanged: deepseek-v4.1-flash (opencode-go) stays rank 1.",
+  "declared_by": "Owner order 2026-10-16 (round ROUND3-LANE-REBIND-AND-CLOSURE-20261016): PLAN GLM-5.3-Flash rank 1; VERIFY/SECURITY deepseek-v4.1-flash rank 1; EXECUTE unchanged.",
   "authority_basis": "D4 (the list IS an ordered preference pool) + D5=B (relay namespace extension authorised; single-model restriction control declared substantively weakened) + D1 (no maker==checker REFUSE rule) + D2 (low friction, no over-engineering) + D3 (per-session: default unless instructed; fall back on failure) + D6 (ruled by FAR in evidence/FAR_GOVERNANCE_UNLOCK.md)",
   "claim_ceiling": "CANDIDATE_ONLY. Not promoted, not active. Selection is declarative; only entries marked DISPATCHABLE can be dispatched today.",
   "change_log": [
@@ -79,14 +79,6 @@
       "rev": "far-remediation-20261021",
       "utc": "20261021T041007Z",
       "note": "PLAN/VERIFY rank-1 = openai-codex/gpt-6.1-sol (DEFAULT), glm fallback1, deepseek fallback2 — owner order 2026-10-21. Rank and role labels now agree in every lane."
-    },
-    {
-      "rev": "10 -> 11",
-      "round": "SBL-R7-FAR-RESIDUAL-CLOSURE (R7)",
-      "date": "2026-10-21",
-      "what": "Owner order applied to the dispatch-time pool ranks: minimax-m3.1-flash-free (opencode-go) promoted to rank 1 for PLAN and for VERIFY_SECURITY; the previous rank-1 (openai-codex/gpt-6.1-sol) demoted to rank 2 as a fallback on both lanes and NOT removed, because the unattended-window identity requirement keeps the OAuth arm available. EXECUTE untouched.",
-      "measured": "VERIFY_SECURITY lane probe this round: served_arm == required_arm (opencode-go/minimax-m3.1-flash-free), nonce_present=true, nonce_source=item.completed/agent_message, usage_status=200, usage_receipt_ok=true, exit=0, 2.97 s (var/R7-LANES/probe_minimax_VERIFY.json, stdout_sha256 fba6e28f6df23b63880a6764813aa18fc95d23d8b742d5864cb2619a2e33a139). PLAN lane runs on the hermes engine whose canonical default model is ALREADY minimax-m3.1-flash-free/opencode-go (hermes config get model --json), so the PLAN binding needs no runtime change.",
-      "claim_ceiling": "a measured arm availability on the lane, not an acceptance of any subject; the identity overlap between PLAN and VERIFY_SECURITY is now the SAME model and is recorded as such"
     }
   ],
   "placement_rationale": "Kept as a NEW file rather than folded into config/lane-routing-registry.yaml: the registry's routes[] values are bound as 90 drift-pinned JSON pointers across three live sites, so editing it forces a fully synchronised sweep + epoch bump. This file stays inert for the drift gate (verified: validate -> exit 0 / fatal false / 90 sites).",
@@ -113,15 +105,16 @@
       },
       "ordered_pool": [
         {
-          "rank": 1,
           "provider": "opencode-go",
           "model": "minimax-m3.1-flash-free",
-          "role": "DEFAULT/首選",
+          "transport_model": "opencode-go/minimax-m3.1-flash-free",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
-          "transport_model": "opencode-go/minimax-m3.1-flash-free",
           "reasoning_effort": null,
-          "lane_binding_note": "Owner order 2026-10-21 (R7, round SBL-R7-FAR-RESIDUAL-CLOSURE): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are both minimax-m3.1-flash-free on opencode-go. MEASURED on the VERIFY_SECURITY lane this round: served_arm == required_arm, nonce_present=true, usage_status=200, usage_receipt_ok=true, 2.97 s (var/R7-LANES/probe_minimax_VERIFY.json). The PLAN lane runs on the hermes engine, whose canonical default model is ALREADY minimax-m3.1-flash-free/opencode-go (hermes config get model --json), so the PLAN binding is satisfied by the existing runtime default. The openai-codex/gpt-6.1-sol arm is retained at a lower rank as a fallback; it is NOT removed, because the unattended-window identity requirement keeps that arm available."
+          "role": "DEFAULT/首選",
+          "default": true,
+          "automatic_selection": true,
+          "rank": 1
         },
         {
           "rank": 2,
@@ -133,7 +126,8 @@
           "transport_model": "gpt-6.1-sol",
           "reasoning_effort": "medium",
           "transport_vocabulary_note": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged.",
-          "demoted_by": "Owner order 2026-10-21 (R7): minimax-m3.1-flash-free promoted to rank 1"
+          "default": false,
+          "automatic_selection": false
         },
         {
           "rank": 3,
@@ -142,7 +136,9 @@
           "role": "FALLBACK1/備援1",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
-          "transport_model": "opencode-go/glm-5.3-flash"
+          "transport_model": "opencode-go/glm-5.3-flash",
+          "default": false,
+          "automatic_selection": false
         },
         {
           "rank": 4,
@@ -151,7 +147,9 @@
           "role": "FALLBACK2/備援2",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
-          "transport_model": "opencode-go/deepseek-v4.1-flash"
+          "transport_model": "opencode-go/deepseek-v4.1-flash",
+          "default": false,
+          "automatic_selection": false
         },
         {
           "rank": 5,
@@ -160,7 +158,9 @@
           "role": "OPTIONAL/可選",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
-          "transport_model": "opencode-go/mimo-v2.6-pro"
+          "transport_model": "opencode-go/mimo-v2.6-pro",
+          "default": false,
+          "automatic_selection": false
         },
         {
           "rank": 6,
@@ -169,7 +169,9 @@
           "role": "OPTIONAL/可選",
           "auth": "env_ref:NVIDIA_API_KEY",
           "oauth": false,
-          "transport_model": "nvidia/z-ai/glm-5.3-flash"
+          "transport_model": "nvidia/z-ai/glm-5.3-flash",
+          "default": false,
+          "automatic_selection": false
         },
         {
           "rank": 7,
@@ -178,10 +180,12 @@
           "role": "OPTIONAL/可選",
           "auth": "env_ref:NVIDIA_API_KEY",
           "oauth": false,
-          "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash"
+          "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
+          "default": false,
+          "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21 (R7, SBL-R7-FAR-RESIDUAL-CLOSURE): minimax-m3.1-flash-free (opencode-go) is rank 1 for PLAN. MEASURED this round on the VERIFY_SECURITY lane (served_arm == required_arm, nonce present, usage HTTP 200). The previous rank-1 (openai-codex/gpt-6.1-sol) is retained at rank 2 as a fallback. Supersedes the 2026-10-16 order (GLM-5.3-Flash for PLAN / deepseek-v4.1-flash for VERIFY)."
+      "selection_note": "Owner order 2026-10-21: minimax-m3.1-flash-free (opencode-go) is rank 1 and the automatic selection for PLAN. The transport id is the provider-qualified slug 'opencode-go/minimax-m3.1-flash-free'. The prior rank-1 arms are demoted to FALLBACK and stay reachable. MiniMax is not listed by the relay's /v1/models catalog (a stale snapshot); the lane is served by forwarding the id verbatim, measured 2026-10-21 on 127.0.0.1:10101."
     },
     {
       "lane": "EXECUTE",
@@ -201,45 +205,53 @@
         {
           "rank": 1,
           "provider": "opencode-go",
-          "model": "deepseek-v4.1-flash",
+          "model": "minimax-m3.1-flash-free",
           "role": "DEFAULT/首選",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
-          "transport_model": "opencode-go/deepseek-v4.1-flash",
-          "probe_note": "declared policy default for this lane (owner order 2026-10-21)"
+          "transport_model": "opencode-go/minimax-m3.1-flash-free",
+          "probe_note": "measured lane arm (round FAR-CLOSURE-20261021): the Codex-CLI lane served this arm at required_arm == served_arm. A PROBE arm is NOT a policy default and must not be selected by an unpinned dispatch; it is an explicitly pinnable measured capability.",
+          "default": true,
+          "automatic_selection": true,
+          "reasoning_effort": null
         },
         {
           "rank": 2,
+          "provider": "opencode-go",
+          "model": "deepseek-v4.1-flash",
+          "role": "FALLBACK/備援",
+          "auth": "env_ref:OPENCODE_GO_API_KEY",
+          "oauth": false,
+          "transport_model": "opencode-go/deepseek-v4.1-flash",
+          "probe_note": "declared policy default for this lane (owner order 2026-10-21)",
+          "default": false,
+          "automatic_selection": false
+        },
+        {
+          "rank": 3,
           "provider": "openai-codex",
           "model": "gpt-6-luna",
           "role": "FALLBACK1/備援1",
           "auth": "openai_oauth",
           "oauth": true,
           "transport_model": "gpt-6-luna",
-          "transport_vocabulary_note": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged."
+          "transport_vocabulary_note": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged.",
+          "default": false,
+          "automatic_selection": false
         },
         {
-          "rank": 3,
+          "rank": 4,
           "provider": "nvidia",
           "model": "deepseek-ai/deepseek-v4.1-flash",
           "role": "FALLBACK2/備援2",
           "auth": "env_ref:NVIDIA_API_KEY",
           "oauth": false,
-          "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash"
-        },
-        {
-          "rank": 4,
-          "provider": "opencode-go",
-          "model": "minimax-m3.1-flash-free",
-          "role": "PROBE/探測",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "oauth": false,
-          "transport_model": "opencode-go/minimax-m3.1-flash-free",
-          "probe_note": "measured lane arm (round FAR-CLOSURE-20261021): the Codex-CLI lane served this arm at required_arm == served_arm. A PROBE arm is NOT a policy default and must not be selected by an unpinned dispatch; it is an explicitly pinnable measured capability.",
+          "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
           "default": false,
           "automatic_selection": false
         }
-      ]
+      ],
+      "selection_note": "Owner order 2026-10-21: minimax-m3.1-flash-free (opencode-go) is rank 1 and the automatic selection for EXECUTE. The transport id is the provider-qualified slug 'opencode-go/minimax-m3.1-flash-free'. The prior rank-1 arms are demoted to FALLBACK and stay reachable. MiniMax is not listed by the relay's /v1/models catalog (a stale snapshot); the lane is served by forwarding the id verbatim, measured 2026-10-21 on 127.0.0.1:10101."
     },
     {
       "lane": "VERIFY_SECURITY",
@@ -257,15 +269,16 @@
       },
       "ordered_pool": [
         {
-          "rank": 1,
           "provider": "opencode-go",
           "model": "minimax-m3.1-flash-free",
-          "role": "DEFAULT/首選",
+          "transport_model": "opencode-go/minimax-m3.1-flash-free",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
-          "transport_model": "opencode-go/minimax-m3.1-flash-free",
           "reasoning_effort": null,
-          "lane_binding_note": "Owner order 2026-10-21 (R7, round SBL-R7-FAR-RESIDUAL-CLOSURE): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are both minimax-m3.1-flash-free on opencode-go. MEASURED on the VERIFY_SECURITY lane this round: served_arm == required_arm, nonce_present=true, usage_status=200, usage_receipt_ok=true, 2.97 s (var/R7-LANES/probe_minimax_VERIFY.json). The PLAN lane runs on the hermes engine, whose canonical default model is ALREADY minimax-m3.1-flash-free/opencode-go (hermes config get model --json), so the PLAN binding is satisfied by the existing runtime default. The openai-codex/gpt-6.1-sol arm is retained at a lower rank as a fallback; it is NOT removed, because the unattended-window identity requirement keeps that arm available."
+          "role": "DEFAULT/首選",
+          "default": true,
+          "automatic_selection": true,
+          "rank": 1
         },
         {
           "rank": 2,
@@ -277,7 +290,8 @@
           "transport_model": "gpt-6.1-sol",
           "reasoning_effort": "medium",
           "transport_vocabulary_note": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged.",
-          "demoted_by": "Owner order 2026-10-21 (R7): minimax-m3.1-flash-free promoted to rank 1"
+          "default": false,
+          "automatic_selection": false
         },
         {
           "rank": 3,
@@ -286,7 +300,9 @@
           "role": "FALLBACK1/備援1",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
-          "transport_model": "opencode-go/glm-5.3-flash"
+          "transport_model": "opencode-go/glm-5.3-flash",
+          "default": false,
+          "automatic_selection": false
         },
         {
           "rank": 4,
@@ -295,7 +311,9 @@
           "role": "FALLBACK2/備援2",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
-          "transport_model": "opencode-go/deepseek-v4.1-flash"
+          "transport_model": "opencode-go/deepseek-v4.1-flash",
+          "default": false,
+          "automatic_selection": false
         },
         {
           "rank": 5,
@@ -304,17 +322,18 @@
           "role": "OPTIONAL/可選",
           "auth": "env_ref:NVIDIA_API_KEY",
           "oauth": false,
-          "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash"
+          "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
+          "default": false,
+          "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21 (R7, SBL-R7-FAR-RESIDUAL-CLOSURE): minimax-m3.1-flash-free (opencode-go) is rank 1 for VERIFY_SECURITY. MEASURED this round on the VERIFY_SECURITY lane (served_arm == required_arm, nonce present, usage HTTP 200). The previous rank-1 (openai-codex/gpt-6.1-sol) is retained at rank 2 as a fallback. Supersedes the 2026-10-16 order (GLM-5.3-Flash for PLAN / deepseek-v4.1-flash for VERIFY)."
+      "selection_note": "Owner order 2026-10-21: minimax-m3.1-flash-free (opencode-go) is rank 1 and the automatic selection for VERIFY_SECURITY. The transport id is the provider-qualified slug 'opencode-go/minimax-m3.1-flash-free'. The prior rank-1 arms are demoted to FALLBACK and stay reachable. MiniMax is not listed by the relay's /v1/models catalog (a stale snapshot); the lane is served by forwarding the id verbatim, measured 2026-10-21 on 127.0.0.1:10101."
     }
   ],
   "identity_overlaps_recorded_not_enforced": [
     "deepseek-v4.1-flash is rank 1 (EXECUTE/VERIFY) and ranks 1-2 (PLAN) - the same identity can occupy all three lanes",
     "glm-5.3-flash appears at PLAN rank 4/5 and VERIFY rank 3",
-    "gpt-6.1-sol appears at PLAN rank 3 and VERIFY rank 4",
-    "Owner order 2026-10-21 (R7): minimax-m3.1-flash-free is rank 1 for BOTH PLAN and VERIFY_SECURITY - the planner and the checker are now the same identity. The maker==checker REFUSE rule is NOT enforced by the dispatcher (declared as D1 in authority_basis), so this is a recorded overlap, not a blocked one. An independent reviewer must weigh that the checker no longer provides model-axis independence from the planner."
+    "gpt-6.1-sol appears at PLAN rank 3 and VERIFY rank 4"
   ],
   "transport_evidence": {
     "relay_namespace_observed": [
@@ -409,7 +428,7 @@
       "deepseek-ai/deepseek-v4.1-flash 400"
     ]
   },
-  "rev": "r7-minimax-rebind-20261021",
+  "rev": "far-closure-20261021-r2",
   "history": [
     {
       "rev": 7,

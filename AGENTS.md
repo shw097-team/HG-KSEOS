@@ -46,15 +46,32 @@ checker result.
 8. **不得以「重新登入同一帳號」主張身分分離**：單一帳號環境下，重複的互動登入對身分分離毫無作用；此類目標應記為 **NOT APPLICABLE**，而非 blocked/deferred。
 9. **成本與副作用必須實測後如實更正**：預估與實測不符時，以實測值更正紀錄（例：relay 帳本列數），不得沿用較好看的預估。
 
-## Lane-chain contract (current, epoch 23)
+## Lane-chain contract (current, epoch 25)
 
-The single source of lane model routing is `config/lane-routing-registry.yaml` (source pin → `config/model-lane-assignment.json`, revision 24). Current owner chains:
+The single source of lane model routing is `config/lane-routing-registry.yaml` (source pin → `config/model-lane-assignment.json`, revision 25). Current owner chains:
 
-- **PLAN** (Hermes-internal): default `openai-codex/gpt-6.1-sol` (medium, OAuth) → fallback1 `opencode-go/glm-5.3-flash` → fallback2 `opencode-go/deepseek-v4.1-flash`. (owner order 2026-10-21, epoch 23 — restored; the 2026-10-16 GLM order is superseded history)
+- **PLAN** (Hermes-internal): default `opencode-go/minimax-m3.1-flash-free` (MiniMax M3.1 Flash, OPENCODE GO) → fallback `openai-codex/gpt-6.1-sol` → fallback `opencode-go/glm-5.3-flash` → (further arms retained). (owner order 2026-10-21, epoch 25 — the MiniMax mandate; the epoch-23 GPT order is superseded history)
 - **EXECUTE** (Codex CLI bounded writer): default `opencode-go/deepseek-v4.1-flash` → fallback1 `openai-codex/gpt-6-luna` → fallback2 `nvidia/deepseek-ai/deepseek-v4.1-flash` (fallback2 untested live: needs one owner-approved relay restart; fallback1 UNPROVEN until a real backend reach test).
-- **VERIFY_SECURITY** (Codex CLI checker): default `openai-codex/gpt-6.1-sol` (medium) → fallback1 `opencode-go/glm-5.3-flash` → fallback2 `opencode-go/deepseek-v4.1-flash`. (owner order 2026-10-21, epoch 23; PLAN/VERIFY share this model — declared SOD006-C4 OPEN_OWNER_ORDERED, process separation only)
+- **VERIFY_SECURITY** (Codex CLI checker): default `opencode-go/minimax-m3.1-flash-free` (MiniMax M3.1 Flash, OPENCODE GO) → fallback `openai-codex/gpt-6.1-sol` → fallback `opencode-go/glm-5.3-flash` → (further arms retained). (owner order 2026-10-21, epoch 25; PLAN, EXECUTE and VERIFY_SECURITY ALL share this one model — declared SOD006-C4 and SOD006-C5, both OPEN_OWNER_ORDERED, process/lane/evidence-path separation only)
 
 Per-turn adjustability is enforced, not advisory: a round mandate may name a per-lane `chain[]`; `scripts/runtime_role_binding_assert.py` fails closed (exit 6, `ERR_MANDATE_ARM_UNRESOLVED`) if any chain arm is absent from the pool, and the dispatcher binds every receipt with `require_arm == served_arm`. The canonical binary pin (`config/hermes-codex-lane.json`) now names the INSTALLED build (0.163.0-alpha.10.2, sha256 verified) — repaired in round FAR-REMEDIATION-20261021, epoch 23. SOD006-C4 (PLAN and VERIFY share the default arm by owner order) is recorded `OPEN_OWNER_ORDERED` in the registry; SOD006-C2 and SOD006-C3 are retained as SUPERSEDED history — recorded, not hidden.
+
+**Model-axis separation is currently ABSENT on every pair** (all three lanes run
+`opencode-go/minimax-m3.1-flash-free` by owner order 2026-10-21). The registry declares this as
+SOD006-C5 (`OPEN_OWNER_ORDERED`) and sets the `EXECUTE → VERIFY_SECURITY` pair's
+`distinct_required` to `false` **with the reason recorded**. What remains is PROCESS separation (a
+separate Codex-CLI process with a fresh context), LANE separation, EVIDENCE-PATH separation (the
+checker re-derives every decisive claim from the artifacts and must not read the writer's summary),
+and the no-self-acceptance rule. Correlated blind spots inside the shared model family are **not**
+claimed to be absent. Every previously declared arm is retained as a reachable fallback, so a later
+owner order can restore model separation without re-deriving the pool.
+
+**Transport vocabulary is per-provider and is not optional**: `openai-codex` requires the BARE id
+(`gpt-6.1-sol`); `opencode-go` and `nvidia` require the provider-qualified id
+(`opencode-go/minimax-m3.1-flash-free`). A qualified id sent to the `openai-codex` arm is routed to
+the default provider and answers HTTP 400 "Model is unavailable". The relay's `/v1/models` catalog
+is a **stale snapshot** and is not the source of truth for either arm — what matters is the id that
+is actually forwarded.
 
 ## Files-first bootstrap (reading order)
 

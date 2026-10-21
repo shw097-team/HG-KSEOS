@@ -95,15 +95,22 @@ class TestLanePolicyConformance(unittest.TestCase):
         self.assertEqual(registry["schema"], "HGK-LANE-ROUTING-REGISTRY/1")
         lanes = [r["lane"] for r in registry["routes"]]
         self.assertEqual(lanes, list(lp.LANE_ORDER), "exactly the three mandated lanes, in order")
-        # Owner chain (2026-10-21 rebind, round FAR-REMEDIATION-20261021, epoch 23 — owner-authorized oracle update): the sequence is first-class
-        # policy, not a fixture-era empty list, and it moves WITH the owner order in the SAME change --
-        # PLAN's rank-1 default is GLM-5.3-Flash and the VERIFY/SECURITY checker's rank-1 default is
-        # deepseek-v4.1-flash, which is the same model as the EXECUTE writer BY OWNER ORDER (declared as
-        # SOD006-C3 in sod_invariants.declared_conflicts). Conformance = exact owner order per lane.
+        # Owner chain (2026-10-21 MiniMax mandate, round FAR-MINIMAX-MANDATE-20261021, epoch 25 --
+        # owner-authorized oracle update). The sequence is first-class policy, not a fixture-era empty
+        # list, and it moves WITH the owner order in the SAME change. Under this order ALL THREE lanes
+        # rank-1 on opencode-go/minimax-m3.1-flash-free, which is the SAME model on the maker and the
+        # checker BY OWNER ORDER -- declared as SOD006-C5 (OPEN_OWNER_ORDERED) in
+        # sod_invariants.declared_conflicts, and reflected by the EXECUTE->VERIFY_SECURITY pair's
+        # distinct_required: false. Conformance = exact owner order per lane.
+        #
+        # NOTE: the fallback lists below name the FIRST THREE fallback arms of each lane. The pools
+        # keep every previously declared arm (nothing is deleted by a re-binding), so the oracle
+        # asserts the head of the chain, not the whole chain -- the full chain is checked against
+        # the pool by test_pool_arms_are_contiguous_and_rank_one_is_the_default.
         owner_chain = {
-            "PLAN": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "glm-5.3-flash"), ("opencode-go", "deepseek-v4.1-flash")],
-            "VERIFY_SECURITY": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "glm-5.3-flash"), ("opencode-go", "deepseek-v4.1-flash")],
-            "EXECUTE": [("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6-luna"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
+            "PLAN": [("opencode-go", "minimax-m3.1-flash-free"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "glm-5.3-flash")],
+            "VERIFY_SECURITY": [("opencode-go", "minimax-m3.1-flash-free"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "glm-5.3-flash")],
+            "EXECUTE": [("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6-luna")],
         }
         for route in registry["routes"]:
             lane = route["lane"]
@@ -112,7 +119,8 @@ class TestLanePolicyConformance(unittest.TestCase):
             self.assertEqual((route["provider"], route["model"]), owner_chain[lane][0],
                              f"{lane} rank-1 default must be owner-declared")
             got = [(b["provider"], b["model"]) for b in route["fallbacks"]]
-            self.assertEqual(got, owner_chain[lane][1:], f"{lane} fallback order must match owner order")
+            self.assertEqual(got[:len(owner_chain[lane]) - 1], owner_chain[lane][1:],
+                             f"{lane} fallback order must match owner order (head of the chain)")
             self.assertIn(route["admission_status"], {"ADMITTED", "REFUSED", "UNPROVEN"})
         self.assertGreaterEqual(len(registry["projections"]), 3)
         self.assertTrue(registry["sod_invariants"]["pairs"], "sod_invariants.pairs must be non-empty")
