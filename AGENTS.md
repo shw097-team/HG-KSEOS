@@ -48,13 +48,13 @@ checker result.
 
 ## Lane-chain contract (current, epoch 23)
 
-The single source of lane model routing is `config/lane-routing-registry.yaml` (source pin → `config/model-lane-assignment.json`, revision 18). Current owner chains:
+The single source of lane model routing is `config/lane-routing-registry.yaml` (source pin → `config/model-lane-assignment.json`, revision 24). Current owner chains:
 
 - **PLAN** (Hermes-internal): default `openai-codex/gpt-6.1-sol` (medium, OAuth) → fallback1 `opencode-go/glm-5.3-flash` → fallback2 `opencode-go/deepseek-v4.1-flash`. (owner order 2026-10-21, epoch 23 — restored; the 2026-10-16 GLM order is superseded history)
 - **EXECUTE** (Codex CLI bounded writer): default `opencode-go/deepseek-v4.1-flash` → fallback1 `openai-codex/gpt-6-luna` → fallback2 `nvidia/deepseek-ai/deepseek-v4.1-flash` (fallback2 untested live: needs one owner-approved relay restart; fallback1 UNPROVEN until a real backend reach test).
 - **VERIFY_SECURITY** (Codex CLI checker): default `openai-codex/gpt-6.1-sol` (medium) → fallback1 `opencode-go/glm-5.3-flash` → fallback2 `opencode-go/deepseek-v4.1-flash`. (owner order 2026-10-21, epoch 23; PLAN/VERIFY share this model — declared SOD006-C4 OPEN_OWNER_ORDERED, process separation only)
 
-Per-turn adjustability is enforced, not advisory: a round mandate may name a per-lane `chain[]`; `scripts/runtime_role_binding_assert.py` fails closed (exit 6, `ERR_MANDATE_ARM_UNRESOLVED`) if any chain arm is absent from the pool, and the dispatcher binds every receipt with `require_arm == served_arm`. The canonical binary pin (`config/hermes-codex-lane.json`) now names the INSTALLED build (0.163.0-alpha.10.2, sha256 verified) — repaired in round FAR-REMEDIATION-20261021, epoch 23. SOD006-C2 (PLAN and VERIFY share the default arm by owner order) is recorded `OPEN_OWNER_ORDERED` in the registry — recorded, not hidden.
+Per-turn adjustability is enforced, not advisory: a round mandate may name a per-lane `chain[]`; `scripts/runtime_role_binding_assert.py` fails closed (exit 6, `ERR_MANDATE_ARM_UNRESOLVED`) if any chain arm is absent from the pool, and the dispatcher binds every receipt with `require_arm == served_arm`. The canonical binary pin (`config/hermes-codex-lane.json`) now names the INSTALLED build (0.163.0-alpha.10.2, sha256 verified) — repaired in round FAR-REMEDIATION-20261021, epoch 23. SOD006-C4 (PLAN and VERIFY share the default arm by owner order) is recorded `OPEN_OWNER_ORDERED` in the registry; SOD006-C2 and SOD006-C3 are retained as SUPERSEDED history — recorded, not hidden.
 
 ## Files-first bootstrap (reading order)
 

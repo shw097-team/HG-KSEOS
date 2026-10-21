@@ -304,3 +304,32 @@ if __name__ == "__main__":
     if "--self-test" in sys.argv:
         raise SystemExit(_self_test())
     unittest.main(verbosity=2)
+
+
+class TestOpenaiTransportVocabulary(unittest.TestCase):
+    """G8 (round FAR-CLOSURE-20261021-R2): the openai arm REQUIRES the BARE transport id.
+
+    A qualified 'openai-codex/<model>' is routed by the relay to the default provider, which
+    does not serve it and answers HTTP 400 'Model is unavailable'. The governance identity is
+    unchanged; only the transport vocabulary is corrected. Measured 2026-10-21 on the live
+    relay: bare id -> 200, qualified id -> 400.
+    """
+
+    POOL = Path(__file__).resolve().parents[1] / "config" / "lane-route-slots.candidate.json"
+
+    def test_openai_codex_transport_models_are_bare(self):
+        pool = json.loads(self.POOL.read_text(encoding="utf-8"))
+        offenders = []
+        for lane in pool["lanes"]:
+            for c in lane["ordered_pool"]:
+                if c.get("provider") == "openai-codex":
+                    tm = str(c.get("transport_model", ""))
+                    if "/" in tm:
+                        offenders.append(f"{lane['lane']}#{c.get('rank')}:{tm}")
+        self.assertEqual([], offenders, f"openai-codex entries must use a bare transport_model: {offenders}")
+
+    def test_transport_vocabulary_is_recorded(self):
+        pool = json.loads(self.POOL.read_text(encoding="utf-8"))
+        tv = pool.get("transport_vocabulary") or {}
+        self.assertTrue(tv.get("openai_codex_bare_only"), "transport_vocabulary must record the bare-only rule")
+        self.assertIn("gpt-6.1-sol", (tv.get("evidence") or {}), "the measured evidence must name gpt-6.1-sol")

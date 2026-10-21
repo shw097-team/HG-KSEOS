@@ -38,3 +38,10 @@ no surface may report model-axis independence for that pair.
 
 `config/lane-route-slots.candidate.json::lanes[].ordered_pool` SHALL label the rank-1 entry `DEFAULT/首選`
 and subsequent entries as fallbacks in the same order as the lane's declared fallback chain.
+
+#### Scenario: Rank order and role labels agree in every lane
+
+- **WHEN** each lane's `ordered_pool` is read
+- **THEN** entry at `rank: 1` carries a role label starting with `DEFAULT`
+- **AND** the `rank` values are exactly `1..N` with no gap or duplicate
+- **AND** the entries at ranks 2..N carry fallback role labels in the same order as the registry's `fallbacks[]`
