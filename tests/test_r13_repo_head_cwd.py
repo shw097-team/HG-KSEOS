@@ -74,3 +74,24 @@ def test_admission_fails_closed_when_target_is_not_a_repo(tmp_path, monkeypatch)
     with pytest.raises(InvariantViolation) as excinfo:
         controller.admit_workorders(pid)
     assert "ERR_REPO_HEAD" in str(excinfo.value), f"expected a typed repo-head refusal, got {excinfo.value!r}"
+
+
+def test_target_inside_another_repo_is_refused(tmp_path, monkeypatch):
+    """A target that is a SUBDIRECTORY of a repository must not inherit that repository's HEAD.
+
+    git happily answers `rev-parse HEAD` for any path inside a worktree, which is exactly how a
+    project can silently take a HEAD it does not own. The target must be the repository root.
+    """
+    outer = tmp_path / "outer_repo"
+    _mkrepo(outer, "outer")
+    inner = outer / "nested_project"
+    inner.mkdir()
+    elsewhere = tmp_path / "cwd_repo"
+    _mkrepo(elsewhere, "cwd")
+
+    controller, pid, _ = _admit(tmp_path, inner)
+    monkeypatch.chdir(elsewhere)
+
+    with pytest.raises(InvariantViolation) as excinfo:
+        controller.admit_workorders(pid)
+    assert "ERR_REPO_HEAD_TARGET_NOT_A_REPO" in str(excinfo.value), f"got {excinfo.value!r}"
