@@ -6,9 +6,9 @@
   "human_codex_config": "C:\\Users\\user\\.codex\\config.toml",
   "hermes_codex_home": "%LOCALAPPDATA%\\HG-KSEOS\\codex-hermes",
   "hermes_opencodex_home": "%LOCALAPPDATA%\\HG-KSEOS\\opencodex-hermes",
-  "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\896a0166b774037a\\codex.exe",
-  "codex_version": "0.163.0-alpha.10.2",
-  "codex_sha256": "f6dbf48cb70f62649c645f26c87dc9bf84cc36986202dfad8e12fb5b8ca70312",
+  "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\6257d9e8f63c0f2b\\codex.exe",
+  "codex_version": "0.163.0-alpha.11",
+  "codex_sha256": "00c0f1e4099246fddcd67ec620ca8ed50827c7d70e113b7224f7a2933cf2d67c",
   "opencodex_root": "%LOCALAPPDATA%\\HG-KSEOS\\runtime\\opencodex-2.11.0",
   "opencodex_version": "2.11.0",
   "opencodex_port": 10101,
@@ -155,5 +155,23 @@
   "lane_dispatch_script": "scripts/hgk-lane-dispatch.py",
   "lane_dispatch_note": "Codex-CLI dispatch for EXECUTE and VERIFY_SECURITY is lane-parameterised and pool-driven. The single-model 10100 front door is retired from the pool path (it 403s every model except one -> incompatible with an ordered pool). PLAN stays on the harness engine (hermes_provider_client).",
   "round_rebinding_note": "Round HGK-SOLUTION-APPLY-20261012 (owner adjudication 1): the PLAN lane is rebound from openai-codex/gpt-6.1-sol to opencode-go/deepseek-v4.1-flash. This sealed EXECUTE-lane binding is otherwise unchanged: provider/model, additional route, codex_version and codex_sha256 are preserved exactly. Producing this candidate mutated no live file.",
-  "toolchain_pin_note": "Round FAR-REMEDIATION-20261021 (epoch 23): the pin now names the INSTALLED build and its measured sha256 (f6dbf48cb70f6264…), replacing the dead e78bad9887fa50cf path that had been recorded as a KNOWN STALE POINTER since 2026-10-15. Version verified with `codex --version`."
+  "toolchain_pin_note": "Pin refreshed 2026-10-21 to the INSTALLED build. The Codex CLI was upgraded in place: the previously declared binary (C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\896a0166b774037a\\codex.exe, 0.163.0-alpha.10.2) no longer exists, and every lane dispatch was failing BEFORE SPAWNING with ERR_LANE_PIN_IDENTITY_INVALID / ERR_LANE_TOOLCHAIN_BINARY_MISSING, which stopped the SBL EXECUTE and VERIFY lanes entirely. The new path was DISCOVERED under C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin, the version comes from `codex.exe --version`, and the digest is computed over the installed file. The prior value was C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\896a0166b774037a\\codex.exe / 0.163.0-alpha.10.2 / sha256 f6dbf48cb70f62649c645f26c87dc9bf84cc36986202dfad8e12fb5b8ca70312. Probe receipts under evidence/ are NOT rewritten: they record what the lane actually served on 2026-10-21 with the OLD build and remain true as history.",
+  "pin_refresh_history": [
+    {
+      "at_utc": "2026-10-21T10:45:44.133227+00:00",
+      "round": "R7-RESUME-20261021",
+      "reason": "codex CLI upgraded in place; the declared binary no longer existed",
+      "from": {
+        "path": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\896a0166b774037a\\codex.exe",
+        "version": "0.163.0-alpha.10.2",
+        "sha256": "f6dbf48cb70f62649c645f26c87dc9bf84cc36986202dfad8e12fb5b8ca70312"
+      },
+      "to": {
+        "path": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\6257d9e8f63c0f2b\\codex.exe",
+        "version": "0.163.0-alpha.11",
+        "sha256": "00c0f1e4099246fddcd67ec620ca8ed50827c7d70e113b7224f7a2933cf2d67c"
+      },
+      "failure_it_fixed": "ERR_LANE_PIN_IDENTITY_INVALID / ERR_LANE_TOOLCHAIN_BINARY_MISSING"
+    }
+  ]
 }

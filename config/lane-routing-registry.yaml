@@ -684,9 +684,9 @@ projections:
   - pointer: /opencodex_version
     expected: 2.11.0
   - pointer: /codex_version
-    expected: 0.163.0-alpha.10.2
+    expected: 0.163.0-alpha.11
   - pointer: /codex_sha256
-    expected: f6dbf48cb70f62649c645f26c87dc9bf84cc36986202dfad8e12fb5b8ca70312
+    expected: 00c0f1e4099246fddcd67ec620ca8ed50827c7d70e113b7224f7a2933cf2d67c
   - pointer: /credential_env
     expected: OPENCODE_GO_API_KEY
   - pointer: /openai_fallback
@@ -797,3 +797,13 @@ history:
     1 (concurrent commit a1bd583 had moved it to minimax and left the declaration self-contradicting).
     The minimax arm is retained as a reachable fallback on all three lanes, not removed.
 claim_ceiling: CANDIDATE_ONLY
+
+# --- R7-RESUME-20261021 pin refresh ---
+# The Codex CLI was upgraded in place (0.163.0-alpha.10.2 -> 0.163.0-alpha.11). The declared
+# binary no longer existed, and every lane dispatch failed BEFORE SPAWNING with
+# ERR_LANE_PIN_IDENTITY_INVALID / ERR_LANE_TOOLCHAIN_BINARY_MISSING, stopping the
+# SBL EXECUTE and VERIFY lanes. The live declaration was refreshed FROM THE
+# INSTALLED BINARY (path discovered, version from `codex.exe --version`, digest
+# computed over the file) and these two expected values were advanced to match.
+# The pointer positions are unchanged -- only the expected values moved.
+# Refreshed 2026-10-21.

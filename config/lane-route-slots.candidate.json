@@ -2,7 +2,7 @@
   "schema": "HGK-LANE-ROUTE-SLOTS/1",
   "status": "CANDIDATE",
   "artifact": "LANE_ROUTE_SLOTS_CANDIDATE",
-  "revision": "12",
+  "revision": 13,
   "supersedes_revision": "11",
   "round": "ROUND3-LANE-REBIND-AND-CLOSURE-20261016",
   "declared_by": "Owner order 2026-10-21 (owner messages, GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH GPT 6.1 SOL-MEDIUM (OpenAI OAuth) = openai-codex/gpt-6.1-sol (transport_model: gpt-6.1-sol, the BARE id). This SUPERSEDES the 2026-10-21 order that put minimax-m3.1-flash-free (opencode-go) on PLAN and VERIFY_SECURITY. The EXECUTE lane is NOT named by this order and stays deepseek-v4.1-flash (opencode-go) at rank 1, per the owner's standing clarification 「維持 DeepSeek V4.1 Flash（依您原話：只改 PLAN 與 VERIFY/CHECKER）」. The minimax arm is retained at a lower rank as a reachable fallback, not removed.",
@@ -87,6 +87,26 @@
       "what": "Owner order applied to the dispatch-time pool ranks: openai-codex/gpt-6.1-sol promoted to rank 1 for PLAN and for VERIFY_SECURITY (GPT 6.1 SOL-MEDIUM, OpenAI OAuth, transport_model gpt-6.1-sol = BARE id); the previous rank-1 (opencode-go/minimax-m3.1-flash-free) demoted to a reachable fallback on both lanes and NOT removed. EXECUTE is not named by the order: it is restored to opencode-go/deepseek-v4.1-flash at rank 1, because concurrent commit a1bd583 had moved it to minimax while simultaneously reverting declared_by to a text saying 'EXECUTE unchanged' -- the artifact contradicted itself.",
       "measured": "VERIFY_SECURITY lane probe 2026-10-21 after the owner's quota notice (var/R7-LANES/probe_gpt_61sol_VERIFY3.json): ok=true, required_arm and served_arm both openai-codex/gpt-6.1-sol, used_transport_model=gpt-6.1-sol, usage_status=200, usage_receipt_ok=true, 3.11 s. The openai arm requires the BARE model id; a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable'.",
       "claim_ceiling": "a measured arm availability on the lane, not an acceptance of any subject; the pool is CANDIDATE_ONLY and selection is declarative"
+    },
+    {
+      "rev": "note-repair -> 13",
+      "utc": "20261021T103955Z",
+      "round": "OWNER-ORDER-20261021-GPT-QUOTA-RESTORED",
+      "what": "Repaired each lane's selection_note so it states THAT lane's actual rank-1 arm. The notes still read 'minimax-m3.1-flash-free ... is rank 1' on all three lanes, contradicting the same file's declared_by, change_log and ordered_pool[0]. A reviewer reading the note would have concluded MiniMax was the PLAN binding -- exactly the lane-vs-session confusion the order was meant to end. The note is now generated from ordered_pool[0] so it cannot drift again.",
+      "lanes_changed": [
+        {
+          "lane": "PLAN",
+          "rank1": "openai-codex/gpt-6.1-sol"
+        },
+        {
+          "lane": "EXECUTE",
+          "rank1": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "lane": "VERIFY_SECURITY",
+          "rank1": "openai-codex/gpt-6.1-sol"
+        }
+      ]
     }
   ],
   "placement_rationale": "Kept as a NEW file rather than folded into config/lane-routing-registry.yaml: the registry's routes[] values are bound as 90 drift-pinned JSON pointers across three live sites, so editing it forces a fully synchronised sweep + epoch bump. This file stays inert for the drift gate (verified: validate -> exit 0 / fatal false / 90 sites).",
@@ -193,7 +213,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21: minimax-m3.1-flash-free (opencode-go) is rank 1 and the automatic selection for PLAN. The transport id is the provider-qualified slug 'opencode-go/minimax-m3.1-flash-free'. The prior rank-1 arms are demoted to FALLBACK and stay reachable. MiniMax is not listed by the relay's /v1/models catalog (a stale snapshot); the lane is served by forwarding the id verbatim, measured 2026-10-21 on 127.0.0.1:10101."
+      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (PLAN) the rank-1 arm is openai-codex/gpt-6.1-sol with reasoning effort medium, and it is the lane's automatic selection. The transport id is the BARE 'gpt-6.1-sol': the OpenAI transport rejects the provider-qualified form 'openai-codex/gpt-6.1-sol' with HTTP 400 'Model is unavailable'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted."
     },
     {
       "lane": "EXECUTE",
@@ -259,7 +279,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21: minimax-m3.1-flash-free (opencode-go) is rank 1 and the automatic selection for EXECUTE. The transport id is the provider-qualified slug 'opencode-go/minimax-m3.1-flash-free'. The prior rank-1 arms are demoted to FALLBACK and stay reachable. MiniMax is not listed by the relay's /v1/models catalog (a stale snapshot); the lane is served by forwarding the id verbatim, measured 2026-10-21 on 127.0.0.1:10101."
+      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (EXECUTE) the rank-1 arm is opencode-go/deepseek-v4.1-flash, and it is the lane's automatic selection. The transport id is the provider-qualified slug 'opencode-go/deepseek-v4.1-flash'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted."
     },
     {
       "lane": "VERIFY_SECURITY",
@@ -335,7 +355,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21: minimax-m3.1-flash-free (opencode-go) is rank 1 and the automatic selection for VERIFY_SECURITY. The transport id is the provider-qualified slug 'opencode-go/minimax-m3.1-flash-free'. The prior rank-1 arms are demoted to FALLBACK and stay reachable. MiniMax is not listed by the relay's /v1/models catalog (a stale snapshot); the lane is served by forwarding the id verbatim, measured 2026-10-21 on 127.0.0.1:10101."
+      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (VERIFY_SECURITY) the rank-1 arm is openai-codex/gpt-6.1-sol with reasoning effort medium, and it is the lane's automatic selection. The transport id is the BARE 'gpt-6.1-sol': the OpenAI transport rejects the provider-qualified form 'openai-codex/gpt-6.1-sol' with HTTP 400 'Model is unavailable'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted."
     }
   ],
   "identity_overlaps_recorded_not_enforced": [
