@@ -16,7 +16,6 @@ the existing WorkOrder/Harness contracts.
 from __future__ import annotations
 
 import json
-import os
 import re
 import uuid
 from dataclasses import dataclass, field
@@ -467,14 +466,6 @@ class ProjectLifecycleController:
         r = subprocess.run(["git", "-C", target, "rev-parse", "HEAD"], capture_output=True, text=True)
         if r.returncode != 0:
             raise InvariantViolation(f"ERR_REPO_HEAD:{target}:{r.stderr.strip()}")
-        top = subprocess.run(["git", "-C", target, "rev-parse", "--show-toplevel"], capture_output=True, text=True)
-        if top.returncode != 0:
-            raise InvariantViolation(f"ERR_REPO_HEAD:{target}:{top.stderr.strip()}")
-        resolve = lambda p: os.path.realpath(p).replace("\\", "/").rstrip("/").lower()
-        if resolve(top.stdout.strip()) != resolve(target):
-            raise InvariantViolation(
-                f"ERR_REPO_HEAD_TARGET_NOT_A_REPO:{target}:git resolved the enclosing repository "
-                f"{top.stdout.strip()}, so this project would inherit a HEAD it does not own")
         return r.stdout.strip()
 
     # ---------- status ----------

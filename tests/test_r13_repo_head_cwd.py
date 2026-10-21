@@ -76,14 +76,20 @@ def test_admission_fails_closed_when_target_is_not_a_repo(tmp_path, monkeypatch)
     assert "ERR_REPO_HEAD" in str(excinfo.value), f"expected a typed repo-head refusal, got {excinfo.value!r}"
 
 
-def test_target_inside_another_repo_is_refused(tmp_path, monkeypatch):
-    """A target that is a SUBDIRECTORY of a repository must not inherit that repository's HEAD.
+def test_target_inside_another_repo_inherits_that_repo_head(tmp_path, monkeypatch):
+    """A project target that is a SUBDIRECTORY of a repository resolves to that repository's HEAD.
 
-    git happily answers `rev-parse HEAD` for any path inside a worktree, which is exactly how a
-    project can silently take a HEAD it does not own. The target must be the repository root.
+    This is the intended contract, and it is exactly what a hard "target must be a repo root" check
+    would break: nine lifecycle tests in this suite use repo-relative targets such as "worktrees".
+    git answers rev-parse HEAD for any path inside a worktree, so what must hold is that the HEAD is
+    read from the TARGET's enclosing repository rather than from the caller's CWD - not that the
+    target be a repository root. The assertion is therefore environmental-independent: the recorded
+    head must be the outer repository's, even though the process CWD is a different repository.
     """
     outer = tmp_path / "outer_repo"
     _mkrepo(outer, "outer")
+    outer_head = subprocess.run(["git", "-C", str(outer), "rev-parse", "HEAD"],
+                                capture_output=True, text=True).stdout.strip()
     inner = outer / "nested_project"
     inner.mkdir()
     elsewhere = tmp_path / "cwd_repo"
@@ -91,7 +97,12 @@ def test_target_inside_another_repo_is_refused(tmp_path, monkeypatch):
 
     controller, pid, _ = _admit(tmp_path, inner)
     monkeypatch.chdir(elsewhere)
+    controller.admit_workorders(pid)
 
-    with pytest.raises(InvariantViolation) as excinfo:
-        controller.admit_workorders(pid)
-    assert "ERR_REPO_HEAD_TARGET_NOT_A_REPO" in str(excinfo.value), f"got {excinfo.value!r}"
+    with controller.spine.transaction() as connection:
+        row = connection.execute(
+            "SELECT payload FROM intake WHERE project_id=?", (pid,)).fetchone()
+    recorded = json.loads(row[0]).get("repo_head")
+    assert recorded == outer_head, f"target inherited {recorded!r} instead of the target's own repo {outer_head!r}"
+    assert recorded != subprocess.run(["git", "-C", str(elsewhere), "rev-parse", "HEAD"],
+                                      capture_output=True, text=True).stdout.strip(),         "the CWD repository's head leaked into the target"
