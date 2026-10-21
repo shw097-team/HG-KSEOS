@@ -108,10 +108,18 @@ them turned out to be a real governance defect, not a test problem.
   `stub_lane_child.py` while the whole directory was untracked, so a clean checkout could not
   rebuild the test suite. This is the same defect class as the runtime closure fixed earlier this
   round.
-- [x] 5.4 **Self-acceptance** — the targeted lane suite is green (`141 passed / 90 subtests`) and
+- [x] 5.4 **A second layer of the same defect, found by the independent AO** — the route row
+  carries a TOP-LEVEL copy of the arm's auth posture (`auth` / `oauth` / `reasoning_effort`)
+  that is not part of `arms[]`, so the first sync did not cover it. PLAN and VERIFY_SECURITY
+  still advertised `auth: openai_oauth, oauth: true, reasoning_effort: medium` while the pool's
+  rank-1 arm is `env_ref:OPENCODE_GO_API_KEY / oauth: false / no effort` — an external reader
+  would conclude the MiniMax arm is an OAuth arm. The AO found this by re-deriving from the
+  COMMITTED tree; the round's own drift gate could not see it. Fixed; `drift = 0`; the re-run
+  reports 0 changes (idempotent); the targeted suite is `141 passed / 90 subtests`.
+- [x] 5.5 **Self-acceptance** — the targeted lane suite is green (`141 passed / 90 subtests`) and
   the isolated full-suite comparison shows no new failure attributable to this round
   (`var/FAR-MINIMAX-MANDATE-20261021/pytest_diff.json`)
-- [x] 5.5 **The publish branch is clean** — this round publishes on
+- [x] 5.6 **The publish branch is clean** — this round publishes on
   `pub/far-minimax-mandate-20261021` (based on `origin/main`), because the earlier branch
   `pub/far-lane-remediation-20261021` was contaminated by another session's commits
   (`8fdb9f3`, SBL r7 artifacts) and by 177 stray `fabric-autonomous-research/runs/**` files added by
