@@ -42,9 +42,9 @@
   "hermes_source": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent",
   "hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes",
   "provider": "opencode-go",
-  "model": "deepseek-v4.1-flash",
+  "model": "minimax-m3.1-flash-free",
   "model_fallbacks": [
-    "minimax-m3.1-flash-free"
+    "deepseek-v4.1-flash"
   ],
   "credential_env": "OPENCODE_GO_API_KEY",
   "credential_source_file": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\.env",
@@ -54,7 +54,7 @@
   "model_routing_change": {
     "changed_by": "user instruction (2026-10-02)",
     "previous_model": "deepseek-v4-flash",
-    "new_model": "deepseek-v4.1-flash",
+    "new_model": "minimax-m3.1-flash-free",
     "provider": "opencode-go",
     "permanence": "PERMANENT",
     "note": "Primary Codex-lane route is now opencode-go/deepseek-v4.1-flash. Fallbacks are retained as fail-closed safety only; they never override the primary."
@@ -71,7 +71,7 @@
   "relay_service_note": "The isolated opencodex relay must be running for the Codex lane to work: `ocx start --port 10101` (or install it as a service with `ocx service install`). Relay state lives in %LOCALAPPDATA%\\HG-KSEOS\\opencodex-hermes; the human C:\\Users\\user\\.codex home is not used by this lane.",
   "default_execute_route": "CODEX_CLI_SEALED_LANE",
   "execute_lane_child_models": [
-    "deepseek-v4.1-flash"
+    "minimax-m3.1-flash-free"
   ],
   "execute_route_contract": {
     "declared_by": "user instruction (canonical Hermes session 2026-10-07), REQ-LANE-ROUTE-001",
