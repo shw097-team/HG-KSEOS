@@ -1,6 +1,6 @@
 # AGENTS.md — HG-KSEOS local P0
 
-Version: 2026-10-04.1  (adds: canonical transition API for acceptance; ordering oracle)
+Version: 2026-10-15.1  (adds: lane-chain contract line — epoch 18 owner chains + per-turn mandate chain[] gate; supersedes 2026-10-10.1 which remains valid for unchanged sections)
 Scope: this repository and all descendants unless a nearer AGENTS.md narrows execution details.
 
 HG-KSEOS is the sole system governance / normative control plane. Within this repository, HG-KSEOS is the canonical HGK product root. Hermes, Codex, HLPE, DocETL, providers, tools, skills, memory, retrieval, and graph components are bounded capabilities and never become a second Product Root, canonical truth, Human Authority, or release authority. External admitted product/domain roots such as SQS-THC remain governed stacks, not second system control planes. `..\Fabric` is the governance / assurance / interop / knowledge contract surface consumed by HGK (policy consumption trace required); it is not a second control plane.
@@ -31,6 +31,30 @@ Lane ≠ execution method. Registry state that contradicts live evidence (e.g.
 `kanban_state` stale) is a smallest-repair candidate, not a reason to skip the
 surfaces. Each execution surface must carry raw evidence and an independent
 checker result.
+
+## AO lane 獨立性與 false-green 陷阱（2026-10-10，預設適用）
+
+獨立查核 lane 的價值來自「**能被證明**」，不是「看起來獨立」。以下規則為本 repo 通則：
+
+1. **閘門在 spawn 前 fail-closed**：受點名的 arm 不健康即拒絕（具名錯誤碼、非零 exit、**不 spawn**）；**永不**靜默改跑其他 arm 來讓回合「成功」。
+2. **required ＝ served**：`--require-arm` 意指該 arm 必須**實際服務**本回合；只通過閘門不算。要確保用到特定模型，**同時釘 rank**。
+3. **升權 lane 必須帶守衛主體**：`--guard-subject` 為條件必備；守衛根**無法解析**時必須拒絕（0 attempts），**不得**回報「乾淨」。受檢主體的 `removed`/`changed` 使該回合 verdict **自我作廢**。
+4. **空泛通過（vacuous pass）禁令**：任何比較器／守衛若在**輸入缺失**時回報成功，即為缺陷。以三值判定（`PASS` / `FAIL` / **`INCONCLUSIVE`**）實作，`INCONCLUSIVE` 一律視為**未驗收**；比較前先斷言輸入非空。
+5. **自我指涉禁令**：工件**不得**記錄自身的 digest／大小，也**不得**由「正在寫入它的那條指令」同時被 digest。排除要**由構造達成**，不可事後手改 manifest。
+6. **負測必須是「本應通過」的回合**：若該回合因其他條件（缺 nonce、缺用量收據、缺 arm）先被拒，則它證明不了受測條件。優先使用**確定性（無模型）**接縫驅動負測。
+7. **promotion ≠ acceptance**：promotion 是狀態轉移；acceptance 必須由**獨立** checker lane 產生 verdict，且 oracle 要在檢查**之前**登記。maker 只**機械化轉錄** verdict（fail-closed 映射），**不得**自判；`actor` 欄位必須區分「判決作者」與「動列者」。
+8. **不得以「重新登入同一帳號」主張身分分離**：單一帳號環境下，重複的互動登入對身分分離毫無作用；此類目標應記為 **NOT APPLICABLE**，而非 blocked/deferred。
+9. **成本與副作用必須實測後如實更正**：預估與實測不符時，以實測值更正紀錄（例：relay 帳本列數），不得沿用較好看的預估。
+
+## Lane-chain contract (current, epoch 23)
+
+The single source of lane model routing is `config/lane-routing-registry.yaml` (source pin → `config/model-lane-assignment.json`, revision 18). Current owner chains:
+
+- **PLAN** (Hermes-internal): default `openai-codex/gpt-6.1-sol` (medium, OAuth) → fallback1 `opencode-go/glm-5.3-flash` → fallback2 `opencode-go/deepseek-v4.1-flash`. (owner order 2026-10-21, epoch 23 — restored; the 2026-10-16 GLM order is superseded history)
+- **EXECUTE** (Codex CLI bounded writer): default `opencode-go/deepseek-v4.1-flash` → fallback1 `openai-codex/gpt-6-luna` → fallback2 `nvidia/deepseek-ai/deepseek-v4.1-flash` (fallback2 untested live: needs one owner-approved relay restart; fallback1 UNPROVEN until a real backend reach test).
+- **VERIFY_SECURITY** (Codex CLI checker): default `openai-codex/gpt-6.1-sol` (medium) → fallback1 `opencode-go/glm-5.3-flash` → fallback2 `opencode-go/deepseek-v4.1-flash`. (owner order 2026-10-21, epoch 23; PLAN/VERIFY share this model — declared SOD006-C4 OPEN_OWNER_ORDERED, process separation only)
+
+Per-turn adjustability is enforced, not advisory: a round mandate may name a per-lane `chain[]`; `scripts/runtime_role_binding_assert.py` fails closed (exit 6, `ERR_MANDATE_ARM_UNRESOLVED`) if any chain arm is absent from the pool, and the dispatcher binds every receipt with `require_arm == served_arm`. The canonical binary pin (`config/hermes-codex-lane.json`) now names the INSTALLED build (0.163.0-alpha.10.2, sha256 verified) — repaired in round FAR-REMEDIATION-20261021, epoch 23. SOD006-C2 (PLAN and VERIFY share the default arm by owner order) is recorded `OPEN_OWNER_ORDERED` in the registry — recorded, not hidden.
 
 ## Files-first bootstrap (reading order)
 
@@ -109,6 +133,20 @@ goal / source → source admission → Requirement (freeze) → TaskSpec → Wor
   promotion / release / deploy (fresh session, read-only candidate, 8 acceptance packs).
 - Officer cannot repair the candidate it checks; defects are reported to the maker, then rechecked
   independently.
+- **Independent checker lane (advisory binding, candidate)**: `REQ-CHU-04-CHECKER-ADAPTER` +
+  `REQ-CHU-04-WIRING`. A dispatched checker (Codex CLI -> loopback bridge -> a model distinct from the
+  maker) produces an **advisory verdict only**. It is never an OracleReceipt and never a canonical
+  acceptance status; the runtime consumes it through one named method that carries an explicit advisory
+  ceiling, and no canonical token may be derived from it. The adapter fails closed on a binding that
+  claims a canonical token, a non-candidate binding, a verdict outside the advisory enum, and a verdict
+  whose digests disagree with the intake. Watchdog pauses are advisory requests
+  (`WATCHDOG_ADVISORY_ONLY`); resuming canonical state always requires an operator decision.
+  Landed at `src/hg_kseos/checker_bridge/` with its suite under `tests/checker_bridge/`
+  (113 tests, OK, skipped=1). Round summary and ceilings:
+  `evidence/checker-upgrade-20261009/IMPLEMENTATION_SUMMARY.md`. Honest status: the cutover gate is
+  `TEMP_CLOSED/UNVERIFIED`, NOT accepted/released; `hgk_canonical_acceptance: NOT_PERFORMED`.
+  Deferred by the specification's section 9.3 and NOT claimed here: the two User Guide currentness
+  edits, which happen only after cutover is formally accepted.
 
 ## Knowledge
 
