@@ -95,22 +95,26 @@ class TestLanePolicyConformance(unittest.TestCase):
         self.assertEqual(registry["schema"], "HGK-LANE-ROUTING-REGISTRY/1")
         lanes = [r["lane"] for r in registry["routes"]]
         self.assertEqual(lanes, list(lp.LANE_ORDER), "exactly the three mandated lanes, in order")
-        # Owner chain (2026-10-21 MiniMax mandate, round FAR-MINIMAX-MANDATE-20261021, epoch 25 --
-        # owner-authorized oracle update). The sequence is first-class policy, not a fixture-era empty
-        # list, and it moves WITH the owner order in the SAME change. Under this order ALL THREE lanes
-        # rank-1 on opencode-go/minimax-m3.1-flash-free, which is the SAME model on the maker and the
-        # checker BY OWNER ORDER -- declared as SOD006-C5 (OPEN_OWNER_ORDERED) in
-        # sod_invariants.declared_conflicts, and reflected by the EXECUTE->VERIFY_SECURITY pair's
-        # distinct_required: false. Conformance = exact owner order per lane.
+        # Owner chain (2026-10-21 GPT-quota-restored order, round
+        # OWNER-ORDER-20261021-GPT-QUOTA-RESTORED, epoch 26 -- owner-authorized
+        # oracle update). The sequence is first-class policy, not a fixture-era
+        # empty list, and it moves WITH the owner order in the SAME change.
+        #
+        # Under this order PLAN and VERIFY/SECURITY rank-1 on
+        # openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth) and EXECUTE
+        # ranks-1 on opencode-go/deepseek-v4.1-flash -- so the WRITER and the
+        # CHECKER are on DIFFERENT models AND different providers, and only the
+        # PLAN-vs-VERIFY pair shares a model, BY OWNER ORDER (declared as
+        # SOD006-C4, OPEN_OWNER_ORDERED).
         #
         # NOTE: the fallback lists below name the FIRST THREE fallback arms of each lane. The pools
         # keep every previously declared arm (nothing is deleted by a re-binding), so the oracle
         # asserts the head of the chain, not the whole chain -- the full chain is checked against
         # the pool by test_pool_arms_are_contiguous_and_rank_one_is_the_default.
         owner_chain = {
-            "PLAN": [("opencode-go", "minimax-m3.1-flash-free"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "glm-5.3-flash")],
-            "VERIFY_SECURITY": [("opencode-go", "minimax-m3.1-flash-free"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "glm-5.3-flash")],
-            "EXECUTE": [("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6-luna")],
+            "PLAN": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "glm-5.3-flash")],
+            "VERIFY_SECURITY": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "glm-5.3-flash")],
+            "EXECUTE": [("opencode-go", "deepseek-v4.1-flash"), ("opencode-go", "minimax-m3.1-flash-free"), ("openai-codex", "gpt-6-luna")],
         }
         for route in registry["routes"]:
             lane = route["lane"]
