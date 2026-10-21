@@ -9,6 +9,7 @@ from typing import Any, Iterator
 
 from .errors import InvariantViolation, LeaseConflict, StaleState
 from .util import canonical_json, new_id, sha256_text, utc_now
+from . import role_binding
 
 
 TRANSITIONS: dict[str, dict[str | None, set[str]]] = {
@@ -129,7 +130,13 @@ class SharedSpine:
                 (resource_id, holder, token_hash, expires.isoformat().replace("+00:00", "Z"), utc_now()),
             )
 
-    def release_lease(self, resource_id: str, holder: str, token: str) -> None:
+    def release_lease(self, resource_id: str, holder: str, token: str) -> dict[str, Any]:
+        """Release a lease and return a typed receipt.
+
+        Revocation is FORWARD-ONLY: releasing a lease ends the exclusive-write window, it does not
+        and cannot un-record a verdict that was already accepted. A revoked permit is therefore
+        never usable as evidence for a NEW acceptance; it is not a retroactive eraser.
+        """
         with self.transaction() as connection:
             row = connection.execute(
                 "SELECT holder,token_hash FROM leases WHERE resource_id=?", (resource_id,)
@@ -137,6 +144,8 @@ class SharedSpine:
             if not row or row["holder"] != holder or row["token_hash"] != sha256_text(token):
                 raise LeaseConflict(f"ERR_LEASE_RELEASE_AUTH:{resource_id}")
             connection.execute("DELETE FROM leases WHERE resource_id=?", (resource_id,))
+        return {"schema": "HGK-LEASE-RELEASE/1", "released": True, "resource_id": resource_id,
+                "holder": holder, "released_at": utc_now(), "revocation_scope": "FORWARD_ONLY"}
 
     def _assert_lease(self, connection: sqlite3.Connection, resource_id: str, holder: str, token: str) -> None:
         row = connection.execute(
@@ -328,22 +337,64 @@ class SharedSpine:
         checker: str,
         verdict: str,
         evidence_refs: list[str],
-    ) -> None:
+        *,
+        role_evidence: dict[str, Any] | None = None,
+        evidence_subject: str | None = None,
+        verification_role: str = "VERIFY_SECURITY",
+    ) -> dict[str, Any]:
         if writer == checker:
             raise InvariantViolation("ERR_WORKORDER_SELF_REVIEW")
         if verdict not in {"PASS", "FAIL"} or not evidence_refs:
             raise InvariantViolation("ERR_WORKORDER_RESULT_INCOMPLETE")
+        # Tranche B: a BOUND workorder (its TaskSpec permissions_json carries an explicit
+        # role_binding) may only reach VERIFIED through a typed role-evidence bundle that is exactly
+        # bound to that persisted binding. Legacy, non-governed rows (no binding) are unchanged.
+        bound_binding: dict[str, Any] | None = None
+        bound_arm: dict[str, Any] | None = None
         with self.transaction() as connection:
             row = connection.execute(
-                "SELECT writer,state FROM workorders WHERE workorder_id=?", (workorder_id,)
+                """SELECT w.writer,w.state,w.base_head,w.worktree,t.permissions_json,t.taskspec_id
+                   FROM workorders w JOIN taskspecs t ON t.taskspec_id=w.taskspec_id
+                   WHERE w.workorder_id=?""",
+                (workorder_id,),
             ).fetchone()
             if not row or row["writer"] != writer or row["state"] != "CREATED":
                 raise InvariantViolation("ERR_WORKORDER_RESULT_STATE")
+            try:
+                permissions = json.loads(row["permissions_json"])
+            except (json.JSONDecodeError, TypeError):
+                permissions = None
+            bound_binding = role_binding.extract_binding(permissions)
+            if bound_binding is not None and verdict == "PASS":
+                # The exact persisted binding is read back and the bundle must match it, not merely
+                # the caller's input names.
+                scope = bound_binding.get("scope") or []
+                measured_subject = evidence_subject if evidence_subject is not None else bound_binding.get("subject")
+                if scope and measured_subject is not None and measured_subject not in scope:
+                    raise role_binding.BindingError(
+                        "ERR_ROLE_BINDING_SUBJECT_OUT_OF_SCOPE",
+                        f"subject {measured_subject!r} is not inside the granted scope {scope!r}")
+                role_binding.validate_binding(
+                    bound_binding, workorder_id=workorder_id, subject=evidence_subject,
+                    base_head=row["base_head"],
+                )
+                bundle = role_evidence
+                if bundle is None:
+                    raise role_binding.BindingError(
+                        "ERR_ROLE_EVIDENCE_MISSING",
+                        f"workorder {workorder_id} is bound; a typed role_evidence bundle is required")
+                bound_arm = role_binding.validate_role_evidence(
+                    bound_binding, bundle, role=verification_role, writer=writer)
             result = {"verdict": verdict, "checker": checker, "evidence_refs": evidence_refs}
+            if bound_binding is not None:
+                result["role_binding_digest"] = role_binding.binding_digest(bound_binding)
+            if bound_arm is not None:
+                result["role_evidence"] = bound_arm
             connection.execute(
                 "UPDATE workorders SET state=?,result_json=?,updated_at=? WHERE workorder_id=?",
                 ("VERIFIED" if verdict == "PASS" else "FAILED", canonical_json(result), utc_now(), workorder_id),
             )
+        return result
 
     def rollback_workorder(self, workorder_id: str, evidence_ref: str) -> None:
         with self.transaction() as connection:
