@@ -27,11 +27,12 @@
   "provider_credentials_configured": true,
   "provider_route": {
     "provider": "opencode-go",
-    "model": "minimax-m3.1-flash-free",
+    "model": "deepseek-v4.1-flash",
     "base_url": "https://opencode.ai/zen/go/v1",
     "openai_fallback": false,
-    "codex_route": "Codex CLI -> OpenCodex -> OpenCode Go -> minimax-m3.1-flash-free (owner mandate 2026-10-21; the arm is measured live on the EXECUTE lane)",
-    "owner_mandate_20261021": "Owner mandate 2026-10-21 (verbatim): PLAN = GPT 6.1 SOL-MEDIUM (Open AI OAuth); Codex bounded writer / EXECUTE handed to the CODEX CLI, provider/model = MiniMax M3.1 Flash (OPENCODE GO); Independent Acceptance Officer / VERIFY / SECURITY handed to the CODEX CLI, checker = GPT 6.1 SOL-MEDIUM (Open AI OAuth). EXECUTE moves from deepseek-v4.1-flash to minimax-m3.1-flash-free; PLAN and VERIFY_SECURITY are unchanged."
+    "codex_route": "Codex CLI -> OpenCodex -> OpenCode Go -> deepseek-v4.1-flash (owner mandate 2026-10-21, handover round; the arm is measured live on the EXECUTE lane)",
+    "owner_mandate_20261021": "Owner mandate 2026-10-21 (verbatim): PLAN = GPT 6.1 SOL-MEDIUM (Open AI OAuth); Codex bounded writer / EXECUTE handed to the CODEX CLI, provider/model = MiniMax M3.1 Flash (OPENCODE GO); Independent Acceptance Officer / VERIFY / SECURITY handed to the CODEX CLI, checker = GPT 6.1 SOL-MEDIUM (Open AI OAuth). EXECUTE moves from deepseek-v4.1-flash to minimax-m3.1-flash-free; PLAN and VERIFY_SECURITY are unchanged.",
+    "owner_mandate_20261021b": "Owner mandate 2026-10-21 (handover round, verbatim): PLAN = MiniMax M3.1 Flash (OPENCODE GO); Codex bounded writer / EXECUTE handed to the CODEX CLI, provider/model = DeepSeek V4.1 Flash (OPENCODE GO); Independent Acceptance Officer / VERIFY / SECURITY handed to the CODEX CLI, checker = GPT 6.1 SOL-MEDIUM (Open AI OAuth). This SUPERSEDES the earlier 2026-10-21 order (PLAN gpt-6.1-sol, EXECUTE minimax): PLAN and EXECUTE swap. No arm removed."
   },
   "formal_adapter": {
     "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\hermes-core.ps1",

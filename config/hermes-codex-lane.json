@@ -42,7 +42,7 @@
   "hermes_source": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent",
   "hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes",
   "provider": "opencode-go",
-  "model": "minimax-m3.1-flash-free",
+  "model": "deepseek-v4.1-flash",
   "model_fallbacks": [
     "minimax-m3.1-flash-free"
   ],
@@ -71,12 +71,12 @@
   "relay_service_note": "The isolated opencodex relay must be running for the Codex lane to work: `ocx start --port 10101` (or install it as a service with `ocx service install`). Relay state lives in %LOCALAPPDATA%\\HG-KSEOS\\opencodex-hermes; the human C:\\Users\\user\\.codex home is not used by this lane.",
   "default_execute_route": "CODEX_CLI_SEALED_LANE",
   "execute_lane_child_models": [
-    "minimax-m3.1-flash-free"
+    "deepseek-v4.1-flash"
   ],
   "execute_route_contract": {
     "declared_by": "user instruction (canonical Hermes session 2026-10-07), REQ-LANE-ROUTE-001",
     "dispatch_path": "scripts/start-hgk-hermes.ps1 -Action Write (sealed lane) - the ONLY sanctioned Codex dispatch",
-    "chain_must_be_pinned": "invoke with -ModelChain minimax-m3.1-flash-free so the chain cannot advance to another model; assert write_model_used in the receipt",
+    "chain_must_be_pinned": "invoke with -ModelChain deepseek-v4.1-flash so the chain cannot advance to another model; assert write_model_used in the receipt",
     "hermes_side": "model.codex_bin is set in the canonical Hermes config so every codex spawn uses this pinned, hash-verified binary. model.openai_runtime is deliberately NOT set: it is a no-op for provider=opencode-go and would break SoD if the provider were switched to openai-codex (finding F8).",
     "precondition": "CODEX_HOME must be the isolated lane home at launch; only this launcher may set it (user/machine-level CODEX_HOME is refused).",
     "relay_dependency": "http://127.0.0.1:10101/v1 must be healthy; start it with -Action StartOpenCodex (a -Action Probe stops its own relay in finally).",
@@ -91,7 +91,7 @@
       "var/lane-route-001/receipts/step5b_isolated_codex_runtime_smoke.json"
     ]
   },
-  "sod_note": "EXECUTE runs on minimax-m3.1-flash-free via this sealed lane (owner mandate 2026-10-21). PLAN and the Independent Acceptance Officer / VERIFY / SECURITY both run openai-codex/gpt-6.1-sol by that same mandate, so maker and checker sit on DIFFERENT models AND different providers. PLAN vs VERIFY model independence is explicitly NOT claimed: SOD006-C4 is OPEN_OWNER_ORDERED, process separation only.",
+  "sod_note": "EXECUTE runs on deepseek-v4.1-flash via this sealed lane (owner mandate 2026-10-21, handover round). PLAN runs opencode-go/minimax-m3.1-flash-free and the Independent Acceptance Officer / VERIFY / SECURITY runs openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth) under that same mandate. So maker and checker sit on DIFFERENT models AND different providers, and PLAN vs VERIFY/SECURITY also sit on different models and providers -- measured at the MODEL level only: model-level separation of duties is NOT principal-level separation of duties, and no principal-independence claim is made here. PLAN and EXECUTE now SHARE the opencode-go provider (different models).",
   "model_fallbacks_previous": [
     "gpt-5.6-luna",
     "glm-5.2"
@@ -174,5 +174,6 @@
       "failure_it_fixed": "ERR_LANE_PIN_IDENTITY_INVALID / ERR_LANE_TOOLCHAIN_BINARY_MISSING"
     }
   ],
-  "round_rebinding_note_20261021": "Round R8-EXECUTE-MINIMAX-20261021: the sealed EXECUTE lane binding moved from deepseek-v4.1-flash to minimax-m3.1-flash-free under the owner mandate quoted in config/lane-routing-registry.yaml. /model_routing_change is a HISTORICAL record of the 2026-10-02 change and was deliberately NOT rewritten (previous_model deepseek-v4-flash -> new_model deepseek-v4.1-flash at that time). The codex toolchain pin (codex_executable / codex_version / codex_sha256) is a separate concern and was not touched by a lane-model mandate."
+  "round_rebinding_note_20261021": "Round R8-EXECUTE-MINIMAX-20261021: the sealed EXECUTE lane binding moved from deepseek-v4.1-flash to minimax-m3.1-flash-free under the owner mandate quoted in config/lane-routing-registry.yaml. /model_routing_change is a HISTORICAL record of the 2026-10-02 change and was deliberately NOT rewritten (previous_model deepseek-v4-flash -> new_model deepseek-v4.1-flash at that time). The codex toolchain pin (codex_executable / codex_version / codex_sha256) is a separate concern and was not touched by a lane-model mandate.",
+  "round_rebinding_note_20261021b": "Round R10-HANDOVER-20261021: the sealed EXECUTE lane binding moved from minimax-m3.1-flash-free to deepseek-v4.1-flash under the owner mandate quoted in config/lane-routing-registry.yaml, in the same order that moved PLAN to minimax-m3.1-flash-free. Prior round_rebinding_note / round_rebinding_note_20261021 and model_routing_change are HISTORICAL records and were deliberately NOT rewritten. The codex toolchain pin (codex_executable / codex_version / codex_sha256) is a separate concern and was not touched by the lane-model mandate."
 }
