@@ -63,10 +63,23 @@ def test_admission_uses_target_head_not_process_cwd(tmp_path, monkeypatch):
 
 
 def test_admission_fails_closed_when_target_is_not_a_repo(tmp_path, monkeypatch):
-    not_a_repo = tmp_path / "plain_dir"
+    """A target that is not in any worktree is refused with ERR_REPO_HEAD.
+
+    Guarded on purpose: `git -C <dir> rev-parse HEAD` succeeds for ANY directory inside a worktree,
+    and under the lane sandbox TMPDIR points inside the workspace, so tmp_path is itself inside a
+    repository there. The control only means something when the target is genuinely outside every
+    repository; otherwise the inheritance case below is the applicable contract.
+    """
+    if subprocess.run(["git", "-C", str(tmp_path), "rev-parse", "--show-toplevel"],
+                      capture_output=True, text=True).returncode == 0:
+        pytest.skip(f"fixture path {tmp_path} is inside the repository "
+                    f"{subprocess.run(['git','-C',str(tmp_path),'rev-parse','--show-toplevel'],capture_output=True,text=True).stdout.strip()}"
+                    " - the inheritance contract applies instead")
+
+    not_a_repo = tmp_path / "plain_directory"
     not_a_repo.mkdir()
     elsewhere = tmp_path / "cwd_repo"
-    _mkrepo(elsewhere)
+    _mkrepo(elsewhere, "cwd")
 
     controller, pid, _ = _admit(tmp_path, not_a_repo)
     monkeypatch.chdir(elsewhere)          # a valid repo in the CWD must NOT be used as a fallback
