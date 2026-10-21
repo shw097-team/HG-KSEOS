@@ -94,15 +94,17 @@ def test_target_inside_another_repo_inherits_that_repo_head(tmp_path, monkeypatc
     inner.mkdir()
     elsewhere = tmp_path / "cwd_repo"
     _mkrepo(elsewhere, "cwd")
+    cwd_head = subprocess.run(["git", "-C", str(elsewhere), "rev-parse", "HEAD"],
+                              capture_output=True, text=True).stdout.strip()
 
     controller, pid, _ = _admit(tmp_path, inner)
     monkeypatch.chdir(elsewhere)
     controller.admit_workorders(pid)
 
     with controller.spine.transaction() as connection:
-        row = connection.execute(
-            "SELECT payload FROM intake WHERE project_id=?", (pid,)).fetchone()
-    recorded = json.loads(row[0]).get("repo_head")
-    assert recorded == outer_head, f"target inherited {recorded!r} instead of the target's own repo {outer_head!r}"
-    assert recorded != subprocess.run(["git", "-C", str(elsewhere), "rev-parse", "HEAD"],
-                                      capture_output=True, text=True).stdout.strip(),         "the CWD repository's head leaked into the target"
+        cols = [r[1] for r in connection.execute("PRAGMA table_info(workorders)").fetchall()]
+        assert "base_head" in cols, cols
+        heads = [r[0] for r in connection.execute("SELECT base_head FROM workorders").fetchall()]
+    assert heads, "no workorder was recorded"
+    assert outer_head in heads, f"workorder base_head {heads!r} did not come from the target repo {outer_head!r}"
+    assert cwd_head not in heads, "the CWD repository's head leaked into the workorder"
