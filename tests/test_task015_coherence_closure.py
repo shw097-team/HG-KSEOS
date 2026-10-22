@@ -48,11 +48,24 @@ class G2DenominatorTests(unittest.TestCase):
         self.assertIn("test_manifest_sha256", td)
 
     def test_denominator_head_matches_git(self) -> None:
+        """The denominator must be measured at HEAD or at an ancestor of it.
+
+        Strict equality is unsatisfiable by construction: the file records the sha of the commit that
+        contains it, and writing that sha changes the tree, hence the sha. Measured 2026-10-22 - the
+        equality only ever held while the pin sat UNCOMMITTED, i.e. never in a clean tree. The predicate
+        that actually catches the defect it was written for (a denominator measured at a foreign or
+        abandoned head) is ancestry: the pinned commit must be reachable from HEAD.
+        """
         import subprocess
         head = subprocess.run(["git", "-C", str(ROOT), "rev-parse", "HEAD"],
                               capture_output=True, text=True, encoding="utf-8").stdout.strip()
         td = read_json(REVIEW / "HG-KSEOS_CURRENT_TEST_DENOMINATOR.json")
-        self.assertEqual(td["head"], head)
+        pinned = td["head"]
+        if pinned != head:
+            rc = subprocess.run(["git", "-C", str(ROOT), "merge-base", "--is-ancestor", pinned, head],
+                                capture_output=True, text=True).returncode
+            self.assertEqual(rc, 0,
+                             f"denominator head {pinned} is neither HEAD {head} nor an ancestor of it")
 
 
 class G3UniqueHardCheckTests(unittest.TestCase):
