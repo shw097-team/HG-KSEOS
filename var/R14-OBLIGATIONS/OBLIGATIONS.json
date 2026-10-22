@@ -426,13 +426,14 @@
       "id": "R14-TS29",
       "title": "R12/R13 積欠逐項閉合",
       "state": "PARTIAL",
-      "next_action": "D-19 canonical bundle needs an owner-defined canonical list; CR plugin authority stays host-pending",
+      "next_action": "D-19: the canonical list is now DERIVED from the control package (14 files, 17,473,442 bytes) and matches the round's recorded DOC byte total; it still needs the PIPD Source Owner's signature to close. CR plugin schema authority remains HOST_PENDING.",
       "evidence": [
         "raw/ts29_debt_closure.json",
-        "HG-KSEOS scripts/ts29_debt_closure.py"
+        "HG-KSEOS scripts/ts29_debt_closure.py",
+        "raw/ts29_d19_canonical_derived.json"
       ],
       "depends_on": [],
-      "note": "Item-by-item with its own receipt, no 'already passed': D-17 skill layout CLOSED (all four skill roots carry SKILL.md at root, checked per skill), D-18 13/14 drift CLOSED (doctor re-measured ok=true here), R13 18 conformance fails CLOSED (0 failed / 607 passed / 90 subtests), O-R13-001 nonce CLOSED (checker receipt with echoed nonce), R13 self-review/replay/expired typed deny CLOSED (three named properties SATISFIED in the 10-property probe), SP identity ids CLOSED (both SP receipts). D-19 canonical bundle is MEASURED but not closed: there is no owner-defined canonical list to compare against, and inventing one would be the same fake-denominator mistake as TS27. CR plugin schema authority stays OPEN/HOST_PENDING."
+      "note": "Item-by-item with its own receipt, no 'already passed': D-17 skill layout CLOSED (all four skill roots carry SKILL.md at root, checked per skill), D-18 13/14 drift CLOSED (doctor re-measured ok=true here), R13 18 conformance fails CLOSED (0 failed / 607 passed / 90 subtests), O-R13-001 nonce CLOSED (checker receipt with echoed nonce), R13 self-review/replay/expired typed deny CLOSED (three named properties SATISFIED in the 10-property probe), SP identity ids CLOSED (both SP receipts). D-19 canonical bundle is MEASURED but not closed: there is no owner-defined canonical list to compare against, and inventing one would be the same fake-denominator mistake as TS27. CR plugin schema authority stays OPEN/HOST_PENDING. D-19 MOVED THIS ROUND, not closed: the objection was that no owner-defined canonical list existed, and inventing one would be the TS27 fake-denominator mistake. The list can be READ instead of invented - the governed control package enumerates SBL_PIPD-LS-PKG_DOC-00..13 on disk - and those 14 files total 17,473,442 bytes, exactly the DOC byte total this round has been measuring, so the set on disk is the set already under measurement. Digests for all 14 are recorded in ts29_d19_canonical_derived.json. What remains is the owner's signature, which this round cannot supply; the derived list is therefore usable for measurement and unusable as a denominator."
     },
     {
       "id": "R14-TS30",
