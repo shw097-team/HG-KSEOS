@@ -76,8 +76,8 @@ def _registry_without_declaration(tmp):
 
 PLAN_ARM = ["--lane", "PLAN", "--maker-engine", "opencode-go", "--maker-model", "deepseek-v4.1-flash",
             "--target-engine", "openai-codex", "--target-model", "gpt-6.1-sol", "--target-provider", "openai-codex"]
-VERIFY_ARM = ["--lane", "VERIFY_SECURITY", "--maker-engine", "opencode-go", "--maker-model", "deepseek-v4.1-flash",
-              "--target-engine", "hermes", "--target-model", "glm-5.3-flash", "--target-provider", "opencode-go"]
+VERIFY_ARM = ["--lane", "VERIFY_SECURITY", "--maker-engine", "opencode-go", "--maker-model", "minimax-m3.1-flash-free",
+              "--target-engine", "hermes", "--target-model", "deepseek-v4.1-flash", "--target-provider", "opencode-go"]
 
 
 class TestLaneGuard(unittest.TestCase):
@@ -85,7 +85,7 @@ class TestLaneGuard(unittest.TestCase):
         self.tmp = pathlib.Path(tempfile.mkdtemp())
         self.addCleanup(shutil.rmtree, self.tmp, ignore_errors=True)
         self.plan_fix = _fixture(self.tmp / "plan.json", "gpt-6.1-sol", "openai-codex", "openai-codex")
-        self.verify_fix = _fixture(self.tmp / "verify.json", "glm-5.3-flash", "opencode-go", "hermes")
+        self.verify_fix = _fixture(self.tmp / "verify.json", "deepseek-v4.1-flash", "opencode-go", "hermes")
         self.deepseek_fix = _fixture(self.tmp / "deepseek.json", "deepseek-v4.1-flash", "opencode-go", "hermes")
 
     def test_sod_same_model_is_refused(self):
@@ -176,8 +176,8 @@ class TestLaneGuard(unittest.TestCase):
 
     def test_v4_omitted_provider_is_not_a_wildcard(self):
         arm = ["--lane", "VERIFY_SECURITY", "--maker-engine", "opencode-go",
-               "--maker-model", "deepseek-v4.1-flash", "--target-engine", "hermes",
-               "--target-model", "glm-5.3-flash"]
+               "--maker-model", "minimax-m3.1-flash-free", "--target-engine", "hermes",
+               "--target-model", "deepseek-v4.1-flash"]
         v = evaluate(arm + ["--admission", self.verify_fix])
         self.assertEqual(v["exit_code"], 3)
         self.assertIn("ERR_LANE_NOT_ADMITTED", v["errors"])

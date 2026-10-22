@@ -1,0 +1,1093 @@
+{
+  "schema": "HGK-VERIFY-REBIND-RECEIPT/2",
+  "base_commit": "5db0a8b17c67931ea6176eba611692edb55cfcaf",
+  "green": true,
+  "reverted": false,
+  "registry_epoch": {
+    "before": 30,
+    "after": 31,
+    "attempted_after": 31
+  },
+  "changes": [
+    {
+      "file": "config/lane-routing-registry.yaml",
+      "before_sha256": "5ada795547957961eea5142c6477e78f4ed6381c007edc4fa7cfd001d2935fe6",
+      "after_sha256": "36b6722c560369529c6c971fdc7d61032953c56eef4b15fb1c463509aeda93eb",
+      "fields": [
+        {
+          "field": "/authorization_basis",
+          "before": "Order SBL-R14-FULL-DOC-POST-R13-20261022 (2026-10-22), verbatim: PLAN model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth); Codex bounded writer / EXECUTE, provider/model = MiniMax M3.1 Flash (OPENCODE GO); VERIFY / SECURITY checker model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth).",
+          "after": "Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied."
+        },
+        {
+          "field": "/epoch",
+          "before": 30,
+          "after": 31
+        },
+        {
+          "field": "/projections/0/bindings/0/expected",
+          "before": 29,
+          "after": 31
+        },
+        {
+          "field": "/projections/0/bindings/1/expected",
+          "before": 30,
+          "after": 31
+        },
+        {
+          "field": "/projections/0/bindings/12/expected",
+          "before": true,
+          "after": false
+        },
+        {
+          "field": "/projections/0/bindings/13/expected",
+          "before": "primary",
+          "after": "fallback1"
+        },
+        {
+          "field": "/projections/0/bindings/15/expected",
+          "before": true,
+          "after": false
+        },
+        {
+          "field": "/projections/0/bindings/18/expected",
+          "before": "openai-codex / gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OPEN AI OAuth) - owner mandate 2026-10-21 (handover round); unchanged by this order.",
+          "after": "opencode-go/deepseek-v4.1-flash - owner mandate 2026-10-22; ACCEPTANCE, SECURITY REVIEW and VERIFY use this one checker."
+        },
+        {
+          "field": "/projections/0/bindings/19/expected",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/projections/0/bindings/20/expected",
+          "before": "PREVENTED at dispatch on every arm (no call verifies its own output) and, under the R14 mandate, the writer (opencode-go/minimax) and the checker (openai-codex/gpt-6.1-sol) are on different providers as well as different models. The remaining independence is process/lane/evidence-path, not OS-level principal isolation.",
+          "after": "PREVENTED at dispatch on every arm (no call verifies its own output). EXECUTE MiniMax and VERIFY_SECURITY DeepSeek have distinct models, not distinct providers. Remaining isolation is process/lane/evidence-path, not OS-level principal isolation."
+        },
+        {
+          "field": "/projections/0/bindings/25/expected",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/projections/0/bindings/26/expected",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/projections/0/bindings/28/expected",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/projections/0/bindings/29/expected",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/projections/0/bindings/31/expected",
+          "before": "ABSENT for the PLAN-vs-VERIFY pair by owner order (both are openai-codex/gpt-6.1-sol); PRESENT for writer-vs-checker across providers.",
+          "after": "PRESENT: PLAN openai-codex/gpt-6.1-sol differs from VERIFY_SECURITY opencode-go/deepseek-v4.1-flash."
+        },
+        {
+          "field": "/projections/0/bindings/42/expected",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/projections/0/bindings/43/expected",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/projections/0/bindings/45/expected",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/projections/0/bindings/49/expected",
+          "before": null,
+          "after": "medium"
+        },
+        {
+          "field": "/projections/0/bindings/58/expected",
+          "before": "PRESENT under the 2026-10-22 R14 mandate: PLAN and VERIFY_SECURITY sit on openai-codex/gpt-6.1-sol and EXECUTE sits on opencode-go/minimax-m3.1-flash-free, so writer and checker differ on both the model and the provider axis. Model-level separation is still not principal-level separation of duties.",
+          "after": "ABSENT between EXECUTE and VERIFY_SECURITY (both opencode-go); PRESENT between PLAN and VERIFY_SECURITY. All three default models differ. Model separation is not principal-level separation of duties."
+        },
+        {
+          "field": "/projections/0/bindings/59/expected",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/projections/0/bindings/60/expected",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/projections/0/note",
+          "before": "canonical policy revision 24 (owner order 2026-10-21, round FAR-CLOSURE-20261021, superseding revision 22 / the 2026-10-16 order). PLAN rank-1 is openai-codex/gpt-6.1-sol (medium, OpenAI OAuth) with the owner-chain fallbacks GLM-5.3-Flash (OpenCode Go) then DeepSeek V4.1 Flash; VERIFY_SECURITY arm A is openai-codex/gpt-6.1-sol (Codex CLI) and arm B is opencode-go/glm-5.3-flash; the additional EXECUTE route is operator-selectable only. PLAN and VERIFY/SECURITY share one model BY OWNER ORDER, declared as SOD006-C4 (OPEN_OWNER_ORDERED, process separation only) rather than hedged.",
+          "after": "Epoch 31 checker rebind: Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied. Existing PLAN and EXECUTE projection values and registered lane-scope residue are intentionally unchanged."
+        },
+        {
+          "field": "/projections/0/registry_epoch",
+          "before": 30,
+          "after": 31
+        },
+        {
+          "field": "/projections/1/registry_epoch",
+          "before": 30,
+          "after": 31
+        },
+        {
+          "field": "/projections/2/registry_epoch",
+          "before": 30,
+          "after": 31
+        },
+        {
+          "field": "/routes/2/admission_evidence",
+          "before": "MEASURED 2026-10-21 (HGK-LANE-ADMISSION/1, probe probe-f18fa10552da8290): served identity opencode-go/minimax-m3.1-flash-free; lane-shaped exercise completed (model calls=1, tools=1); dispatcher evidence: dispatcher ok=True required_arm=opencode-go/minimax-m3.1-flash-free served_arm=opencode-go/minimax-m3.1-flash-free used_rank=5 exit=0 nonce_ok=True tool_echo_ok=True receipt=var/FAR-MINIMAX-MANDATE-20261021/probes/VERIFY_admit.json",
+          "after": "UNPROVEN for opencode-go/deepseek-v4.1-flash under epoch 31. Configuration and local fixture tests are not a measured model/tool lane admission. Previous MiniMax measurement is preserved in the v2 receipt before-values."
+        },
+        {
+          "field": "/routes/2/admission_status",
+          "before": "ADMITTED",
+          "after": "UNPROVEN"
+        },
+        {
+          "field": "/routes/2/arms/0/auth",
+          "before": "openai_oauth",
+          "after": "env_ref:OPENCODE_GO_API_KEY"
+        },
+        {
+          "field": "/routes/2/arms/0/canonical_identity",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/0/model",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/0/oauth",
+          "before": true,
+          "after": false
+        },
+        {
+          "field": "/routes/2/arms/0/provider",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/routes/2/arms/0/transport_model",
+          "before": "gpt-6.1-sol",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/1/canonical_identity",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/1/model",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/1/transport_model",
+          "before": "opencode-go/minimax-m3.1-flash-free",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/2/canonical_identity",
+          "before": "glm-5.3-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/2/model",
+          "before": "glm-5.3-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/2/transport_model",
+          "before": "opencode-go/glm-5.3-flash",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/4/auth",
+          "before": "env_ref:NVIDIA_API_KEY",
+          "after": "env_ref:OPENCODE_GO_API_KEY"
+        },
+        {
+          "field": "/routes/2/arms/4/canonical_identity",
+          "before": "deepseek-ai/deepseek-v4.1-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/4/model",
+          "before": "deepseek-ai/deepseek-v4.1-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/arms/4/provider",
+          "before": "nvidia",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/routes/2/arms/4/transport_model",
+          "before": "nvidia/deepseek-ai/deepseek-v4.1-flash",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/auth",
+          "before": "openai_oauth",
+          "after": "env_ref:OPENCODE_GO_API_KEY"
+        },
+        {
+          "field": "/routes/2/canonical_identity",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/fallbacks/0/canonical_identity",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/fallbacks/0/model",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/fallbacks/1/canonical_identity",
+          "before": "glm-5.3-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/fallbacks/1/model",
+          "before": "glm-5.3-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/fallbacks/3/auth",
+          "before": "env_ref:NVIDIA_API_KEY",
+          "after": "env_ref:OPENCODE_GO_API_KEY"
+        },
+        {
+          "field": "/routes/2/fallbacks/3/canonical_identity",
+          "before": "deepseek-ai/deepseek-v4.1-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/fallbacks/3/model",
+          "before": "deepseek-ai/deepseek-v4.1-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/fallbacks/3/provider",
+          "before": "nvidia",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/routes/2/model",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/oauth",
+          "before": true,
+          "after": false
+        },
+        {
+          "field": "/routes/2/provider",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/routes/2/selected_arm_identity",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/routes/2/selection_authority",
+          "before": "owner-order-20261021-handover-plan-minimax-execute-deepseek",
+          "after": "owner-order-20261022-r14-verify-deepseek"
+        },
+        {
+          "field": "/routes/2/transport_model",
+          "before": null,
+          "before_present": false,
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/sod_invariants/declared_conflicts/4/status",
+          "before": "OPEN_OWNER_ORDERED",
+          "after": "SUPERSEDED"
+        },
+        {
+          "field": "/sod_invariants/declared_conflicts/4/superseded_by",
+          "before": null,
+          "before_present": false,
+          "after": "Owner order 2026-10-22 / registry epoch 31: VERIFY_SECURITY opencode-go/deepseek-v4.1-flash; PLAN GPT and EXECUTE MiniMax are distinct from the checker. Prior statements below are historical, not current bindings."
+        },
+        {
+          "field": "/sod_invariants/declared_conflicts/5/status",
+          "before": "OPEN_OWNER_ORDERED",
+          "after": "SUPERSEDED"
+        },
+        {
+          "field": "/sod_invariants/declared_conflicts/5/superseded_by",
+          "before": null,
+          "before_present": false,
+          "after": "Owner order 2026-10-22 / registry epoch 31: VERIFY_SECURITY opencode-go/deepseek-v4.1-flash; PLAN GPT and EXECUTE MiniMax are distinct from the checker. Prior statements below are historical, not current bindings."
+        },
+        {
+          "field": "/sod_invariants/pairs/0/note",
+          "before": "Owner order 2026-10-21 (GPT quota restored): EXECUTE is opencode-go/deepseek-v4.1-flash and VERIFY_SECURITY is openai-codex/gpt-6.1-sol. The models DIFFER and so do the providers, so the maker/checker separation HOLDS on the model axis and is asserted here.",
+          "after": "Owner order 2026-10-22: EXECUTE and VERIFY_SECURITY have distinct canonical models; model separation is required. Provider separation is not required."
+        },
+        {
+          "field": "/sod_invariants/pairs/1/distinct_required",
+          "before": false,
+          "after": true
+        },
+        {
+          "field": "/sod_invariants/pairs/1/note",
+          "before": "Owner order 2026-10-21 (GPT quota restored): PLAN is openai-codex/gpt-6.1-sol and VERIFY_SECURITY is openai-codex/gpt-6.1-sol. The models are the SAME, so the collision is REAL and is declared OPEN_OWNER_ORDERED; independence for this pair is PROCESS separation only and model independence is NOT claimed.",
+          "after": "Owner order 2026-10-22: PLAN and VERIFY_SECURITY have distinct canonical models; model separation is required. Provider separation is not required."
+        },
+        {
+          "field": "/source_of_routes/revision",
+          "before": 30,
+          "after": 31
+        },
+        {
+          "field": "/source_of_routes/sha256",
+          "before": "004cc2722885858be26b94d8db174db4cd6b356c9e6d44e63545bb24e017b241",
+          "after": "40284a32639c9bc2a45740a793eaf191abeeac091e03fa5f1807c4d4485ddd20"
+        }
+      ]
+    },
+    {
+      "file": "config/model-lane-assignment.json",
+      "before_sha256": "004cc2722885858be26b94d8db174db4cd6b356c9e6d44e63545bb24e017b241",
+      "after_sha256": "40284a32639c9bc2a45740a793eaf191abeeac091e03fa5f1807c4d4485ddd20",
+      "fields": [
+        {
+          "field": "/assignment/2/assigned_model",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/assignment/2/assigned_provider",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/assignment/2/auth",
+          "before": "openai_oauth",
+          "after": "env_ref:OPENCODE_GO_API_KEY"
+        },
+        {
+          "field": "/assignment/2/canonical_identity",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/assignment/2/oauth",
+          "before": true,
+          "after": false
+        },
+        {
+          "field": "/assignment/2/observed_state",
+          "before": "Arm A (opencode-go/glm-5.3-flash) completed a Hermes subagent turn in 158.9 s (FAR-LANE-VERIFY-002). Arm B (openai-codex/gpt-6.1-sol) is the model this round's PLAN lanes and every prior acceptance-officer lane ran on (e.g. deleg_dc8bcd60). Re-verified in this round by the two SWARM lanes.",
+          "after": "HISTORICAL PRE-EPOCH-31 observation, not serving or admission evidence for the rebound checker: Arm A (opencode-go/glm-5.3-flash) completed a Hermes subagent turn in 158.9 s (FAR-LANE-VERIFY-002). Arm B (openai-codex/gpt-6.1-sol) is the model this round's PLAN lanes and every prior acceptance-officer lane ran on (e.g. deleg_dc8bcd60). Re-verified in this round by the two SWARM lanes."
+        },
+        {
+          "field": "/assignment/2/rationale",
+          "before": "Owner adjudication resolves default PLAN/VERIFY model collision: primary VERIFY arm A is glm-5.3-flash; arm B gpt-6.1-sol is fallback only and may not check a PLAN-made artifact. Provider separation is not required.",
+          "after": "Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied."
+        },
+        {
+          "field": "/assignment/2/selection_authority",
+          "before": "owner adjudication; unspecified dispatch selects primary arm A; arm B is a non-default operator-selectable alternate, never auto-selected and remains forbidden for PLAN-made artifacts",
+          "after": "Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied."
+        },
+        {
+          "field": "/assignment/2/supply",
+          "before": "DEFAULT primary arm A = OpenCode Go / glm-5.3-flash; arm B = OpenAI OAuth / gpt-6.1-sol is fallback only. Both arms are medium.",
+          "after": "OpenCode Go"
+        },
+        {
+          "field": "/assignment/2/supply_selector/alternate_relationship",
+          "before": "Arm A is primary; B/C are ordered fallbacks, auto-reached only on typed refusal of earlier arms; never silently substituted before checking A.",
+          "after": "Every retained slot binds the same checker opencode-go/deepseek-v4.1-flash; repeated slots do not imply model/provider diversity."
+        },
+        {
+          "field": "/assignment/2/supply_selector/arms/0/automatic_selection",
+          "before": false,
+          "after": true
+        },
+        {
+          "field": "/assignment/2/supply_selector/arms/0/model",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/assignment/2/supply_selector/arms/0/provider",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/assignment/2/supply_selector/arms/1/automatic_selection",
+          "before": true,
+          "after": false
+        },
+        {
+          "field": "/assignment/2/supply_selector/arms/1/model",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/assignment/2/supply_selector/arms/2/model",
+          "before": "glm-5.3-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/assignment/2/supply_selector/arms/4/model",
+          "before": "deepseek-ai/deepseek-v4.1-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/assignment/2/supply_selector/arms/4/provider",
+          "before": "nvidia",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/assignment/2/supply_selector/declared_only_vs_enforced",
+          "before": "Canonical route_for_lane resolves primary arm A (gpt-6.1-sol OAuth). Governed dispatch must pin the canonical lane route and check_sod; fallbacks allowed in ARM order; SOD rules still apply.",
+          "after": "Canonical VERIFY_SECURITY checker is opencode-go/deepseek-v4.1-flash in every retained slot. Governed dispatch must pin the canonical checker and check_sod; no alternate checker is declared."
+        },
+        {
+          "field": "/assignment/2/supply_selector/unspecified_default/auth",
+          "before": "openai_oauth",
+          "after": "env_ref:OPENCODE_GO_API_KEY"
+        },
+        {
+          "field": "/assignment/2/supply_selector/unspecified_default/canonical_identity",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/assignment/2/supply_selector/unspecified_default/model",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/assignment/2/supply_selector/unspecified_default/oauth",
+          "before": true,
+          "after": false
+        },
+        {
+          "field": "/assignment/2/supply_selector/unspecified_default/provider",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/declared_by",
+          "before": "Order SBL-R14-FULL-DOC-POST-R13-20261022 (2026-10-22), verbatim: PLAN model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth); Codex bounded writer / EXECUTE, provider/model = MiniMax M3.1 Flash (OPENCODE GO); VERIFY / SECURITY checker model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth). This SUPERSEDES revision 29 (PLAN minimax / EXECUTE deepseek). No arm is removed - each demoted arm stays reachable as a fallback. VERIFY_SECURITY is unchanged at openai-codex/gpt-6.1-sol, medium.",
+          "after": "Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied."
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/0/automatic_selection",
+          "before": false,
+          "after": true
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/0/model",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/0/provider",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/0/role",
+          "before": "fallback1",
+          "after": "primary"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/0/transport_model",
+          "before": "gpt-6.1-sol",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/1/automatic_selection",
+          "before": true,
+          "after": false
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/1/model",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/1/role",
+          "before": "primary",
+          "after": "fallback1"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/1/transport_model",
+          "before": "opencode-go/minimax-m3.1-flash-free",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/2/model",
+          "before": "glm-5.3-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/2/transport_model",
+          "before": "opencode-go/glm-5.3-flash",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/4/model",
+          "before": "deepseek-ai/deepseek-v4.1-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/4/provider",
+          "before": "nvidia",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/lane_chains/VERIFY_SECURITY/4/transport_model",
+          "before": "nvidia/deepseek-ai/deepseek-v4.1-flash",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/owner_order",
+          "before": "Owner mandate 2026-10-21 (handover round, verbatim): PLAN model = MiniMax M3.1 Flash (OPENCODE GO); Codex bounded writer / EXECUTE, handed to the CODEX CLI, provider/model = DeepSeek V4.1 Flash (OPENCODE GO); Independent Acceptance Officer / VERIFY / SECURITY, handed to the CODEX CLI, checker model = GPT 6.1 SOL-MEDIUM (OPEN AI OAuth). This SUPERSEDES the earlier 2026-10-21 order (PLAN gpt-6.1-sol, EXECUTE minimax-m3.1-flash-free): PLAN and EXECUTE swap. No arm is removed - each demoted arm stays reachable as a fallback. VERIFY_SECURITY is unchanged at openai-codex/gpt-6.1-sol, medium.",
+          "after": "Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied."
+        },
+        {
+          "field": "/registry_epoch",
+          "before": 29,
+          "after": 31
+        },
+        {
+          "field": "/revision",
+          "before": 30,
+          "after": 31
+        },
+        {
+          "field": "/sod/lane_deviation_recorded",
+          "before": "Owner order 2026-10-21: all three lanes on one model. Recorded as SOD006-C4 (PLAN vs VERIFY) and SOD006-C5 (EXECUTE vs VERIFY), both OPEN_OWNER_ORDERED.",
+          "after": "Prior same-model checker deviations SOD006-C4 and SOD006-C5 are SUPERSEDED by the owner order 2026-10-22; both declared maker/checker pairs now require distinct models."
+        },
+        {
+          "field": "/sod/maker_self_acceptance",
+          "before": "PREVENTED at dispatch on every arm (no call verifies its own output) and, under the R14 mandate, the writer (opencode-go/minimax) and the checker (openai-codex/gpt-6.1-sol) are on different providers as well as different models. The remaining independence is process/lane/evidence-path, not OS-level principal isolation.",
+          "after": "PREVENTED at dispatch on every arm (no call verifies its own output). EXECUTE MiniMax and VERIFY_SECURITY DeepSeek have distinct models, not distinct providers. Remaining isolation is process/lane/evidence-path, not OS-level principal isolation."
+        },
+        {
+          "field": "/sod/provider_separation",
+          "before": "PLAN and EXECUTE now SHARE the opencode-go provider (different models: minimax-m3.1-flash-free vs deepseek-v4.1-flash); VERIFY_SECURITY is on openai-codex. Provider separation therefore survives between the maker planes and the checker, but NOT between PLAN and EXECUTE - recorded, not claimed otherwise.",
+          "after": "PLAN uses openai-codex; EXECUTE and VERIFY_SECURITY share opencode-go but have distinct models. Provider separation is not required."
+        },
+        {
+          "field": "/sod/provider_separation_status",
+          "before": "PRESENT under the 2026-10-22 R14 mandate: PLAN and VERIFY_SECURITY sit on openai-codex/gpt-6.1-sol and EXECUTE sits on opencode-go/minimax-m3.1-flash-free, so writer and checker differ on both the model and the provider axis. Model-level separation is still not principal-level separation of duties.",
+          "after": "ABSENT between EXECUTE and VERIFY_SECURITY (both opencode-go); PRESENT between PLAN and VERIFY_SECURITY. All three default models differ. Model separation is not principal-level separation of duties."
+        },
+        {
+          "field": "/sod/verify_security_arm_A",
+          "before": "openai-codex / gpt-6.1-sol (primary Codex CLI checker; owner order 2026-10-21)",
+          "after": "opencode-go/deepseek-v4.1-flash (primary Codex CLI checker; owner order 2026-10-22)"
+        },
+        {
+          "field": "/sod/verify_security_arm_A_note",
+          "before": "Aligned to lane_chains.VERIFY_SECURITY[0] in round FAR-CLOSURE-20261021. This field is a PROSE restatement of the chain, so it is not covered by check_drift(); the cross-field check is now a named gate (see tests/test_lane_declaration_agreement.py).",
+          "after": "Aligned to registry, dispatch pool and lane_chains.VERIFY_SECURITY for the owner order 2026-10-22."
+        },
+        {
+          "field": "/sod/verify_security_default_arm",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/sod/verify_security_lane",
+          "before": "openai-codex / gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OPEN AI OAuth) - owner mandate 2026-10-21 (handover round); unchanged by this order.",
+          "after": "opencode-go/deepseek-v4.1-flash - owner mandate 2026-10-22; ACCEPTANCE, SECURITY REVIEW and VERIFY use this one checker."
+        },
+        {
+          "field": "/sod/verify_security_reasoning_effort",
+          "before": null,
+          "after": "medium"
+        },
+        {
+          "field": "/sod/verify_security_selection",
+          "before": "owner order 2026-10-21 (GPT quota restored): the automatic, default arm is openai-codex/gpt-6.1-sol. The other provider arms stay reachable as operator-selectable fallbacks, including opencode-go/minimax-m3.1-flash-free.",
+          "after": "All retained checker slots use opencode-go/deepseek-v4.1-flash; rank 1 is the sole default/automatic selection."
+        },
+        {
+          "field": "/sod/verify_vs_execute_model_separation",
+          "before": "PRESENT on the model axis: EXECUTE is opencode-go/deepseek-v4.1-flash and VERIFY_SECURITY is openai-codex/gpt-6.1-sol, so the maker and the checker are on DIFFERENT models AND different providers.",
+          "after": "PRESENT: EXECUTE opencode-go/minimax-m3.1-flash-free differs from VERIFY_SECURITY opencode-go/deepseek-v4.1-flash. Providers are shared."
+        },
+        {
+          "field": "/sod/verify_vs_plan_model_separation",
+          "before": "ABSENT for the PLAN-vs-VERIFY pair by owner order (both are openai-codex/gpt-6.1-sol); PRESENT for writer-vs-checker across providers.",
+          "after": "PRESENT: PLAN openai-codex/gpt-6.1-sol differs from VERIFY_SECURITY opencode-go/deepseek-v4.1-flash."
+        },
+        {
+          "field": "/sod_across_all_arms/maker_checker_model_separation",
+          "before": "Under the 2026-10-21 owner order every lane's rank-1 arm is minimax-m3.1-flash-free, so EVERY maker->checker pair is IDENTICAL on the model axis. Model diversity is NOT claimed anywhere in this round's artifacts. The separation that remains is PROCESS, LANE and EVIDENCE-PATH independence plus the no-self-acceptance rule.",
+          "after": "Default maker/checker models are distinct: PLAN GPT, EXECUTE MiniMax, VERIFY_SECURITY DeepSeek. Across all maker fallbacks, DeepSeek overlaps the checker; same-model maker/checker calls must still be refused. Default model separation is not separation across every possible maker arm."
+        },
+        {
+          "field": "/sod_across_all_arms/new_cross_lane_coupling",
+          "before": "One model family across all three lanes. Declared as SOD006-C4/C5; not a violation, because the owner ordered it and the alternative controls are the process/lane/artifact separation and the no-self-acceptance rule.",
+          "after": "The sole checker identity is opencode-go/deepseek-v4.1-flash. Existing PLAN/EXECUTE fallback arms can share its model; process/lane/evidence-path separation and the no-self-acceptance rule remain required."
+        },
+        {
+          "field": "/sod_across_all_arms/provider_separation_across_arms",
+          "before": "ABSENT - all three lanes sit on opencode-go. Provider separation is NOT required (invariants.provider_separation_required=false).",
+          "after": "ABSENT across all arms: EXECUTE and VERIFY_SECURITY share opencode-go. Provider separation is not required."
+        },
+        {
+          "field": "/sod_across_all_arms/retired_note",
+          "before": "NOT retired: the current VERIFY default arm is MiniMax M3.1 Flash (owner order 2026-10-21).",
+          "after": "NOT retired: current VERIFY_SECURITY checker is opencode-go/deepseek-v4.1-flash by owner order 2026-10-22."
+        },
+        {
+          "field": "/sod_across_all_arms/verifier_models/0",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/sod_across_all_arms/verifier_models/1",
+          "before": "deepseek-ai/deepseek-v4.1-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/sod_across_all_arms/verifier_models/3",
+          "before": "glm-5.3-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/sod_across_all_arms/verifier_models/4",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/sod_across_all_arms/verify_flash_vs_plan_glm",
+          "before": "PLAN fallback_1 is plain z-ai/glm-5.3 while VERIFY is glm-5.3-flash, so the planner fallback and the verifier are now different models too.",
+          "after": "VERIFY_SECURITY uses DeepSeek, not GLM; PLAN fallback declarations are unchanged."
+        },
+        {
+          "field": "/sod_conflicts/4/status",
+          "before": "OPEN_OWNER_ORDERED",
+          "after": "SUPERSEDED"
+        },
+        {
+          "field": "/sod_conflicts/4/superseded_by",
+          "before": null,
+          "before_present": false,
+          "after": "Owner order 2026-10-22 / epoch 31: PLAN GPT and VERIFY_SECURITY DeepSeek are distinct. The prior collision statement is historical."
+        }
+      ]
+    },
+    {
+      "file": "config/lane-route-slots.candidate.json",
+      "before_sha256": "0033b616bdf21433b048463b2ee38513773ba4ab2395cc4d1a34a1e4f6526e3e",
+      "after_sha256": "f40ea5a095950c017015a7056393237a41b050ed0efcc482de1b6693480844f5",
+      "fields": [
+        {
+          "field": "/declared_by",
+          "before": "owner order SBL-R14-FULL-DOC-POST-R13-20261022 (PLAN gpt-6.1-sol / EXECUTE minimax-m3.1-flash-free / VERIFY_SECURITY gpt-6.1-sol)",
+          "after": "Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied."
+        },
+        {
+          "field": "/identity_overlaps_recorded_not_enforced/0",
+          "before": "nvidia/deepseek-ai/deepseek-v4.1-flash appears at EXECUTE rank 4, PLAN rank 7, VERIFY_SECURITY rank 5 - the same identity can occupy all three lanes",
+          "after": "Checker slots 1 through 5 all bind opencode-go/deepseek-v4.1-flash; these are retained slot positions, not five distinct checkers."
+        },
+        {
+          "field": "/identity_overlaps_recorded_not_enforced/1",
+          "before": "openai-codex/gpt-6.1-sol appears at PLAN rank 1, VERIFY_SECURITY rank 1 - the same identity can occupy all three lanes",
+          "after": "PLAN and EXECUTE pools remain unchanged. Their fallback overlap with DeepSeek is not a collision of the default maker/checker pair."
+        },
+        {
+          "field": "/identity_overlaps_recorded_not_enforced/2",
+          "before": "openai-codex/gpt-6.1-sol: BY OWNER ORDER (2026-10-21, GPT quota restored): the PLAN lane and the Independent Acceptance Officer / VERIFY / SECURITY checker lane are BOTH openai-codex/gpt-6.1-sol. The collision is REAL and is declared SOD006-C4 (OPEN_OWNER_ORDERED); independence for this pair is PROCESS, LANE and EVIDENCE-PATH separation only, and model independence is NOT claimed. The EXECUTE writer is on a DIFFERENT model (opencode-go/deepseek-v4.1-flash), so the maker/checker separation holds on the model axis.",
+          "after": "PLAN default openai-codex/gpt-6.1-sol, EXECUTE default opencode-go/minimax-m3.1-flash-free and VERIFY_SECURITY default opencode-go/deepseek-v4.1-flash are three distinct models; EXECUTE and VERIFY_SECURITY share a provider."
+        },
+        {
+          "field": "/identity_overlaps_recorded_not_enforced/3",
+          "before": "opencode-go/deepseek-v4.1-flash appears at EXECUTE rank 2, PLAN rank 4, VERIFY_SECURITY rank 4 - the same identity can occupy all three lanes",
+          "after": null,
+          "after_present": false
+        },
+        {
+          "field": "/identity_overlaps_recorded_not_enforced/4",
+          "before": "opencode-go/glm-5.3-flash appears at PLAN rank 3, VERIFY_SECURITY rank 3 - the same identity can occupy all three lanes",
+          "after": null,
+          "after_present": false
+        },
+        {
+          "field": "/identity_overlaps_recorded_not_enforced/5",
+          "before": "opencode-go/minimax-m3.1-flash-free appears at EXECUTE rank 1, PLAN rank 2, VERIFY_SECURITY rank 2 - the same identity can occupy all three lanes",
+          "after": null,
+          "after_present": false
+        },
+        {
+          "field": "/lanes/2/ordered_pool/0/auth",
+          "before": "openai_oauth",
+          "after": "env_ref:OPENCODE_GO_API_KEY"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/0/model",
+          "before": "gpt-6.1-sol",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/0/oauth",
+          "before": true,
+          "after": false
+        },
+        {
+          "field": "/lanes/2/ordered_pool/0/provider",
+          "before": "openai-codex",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/0/transport_model",
+          "before": "gpt-6.1-sol",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/0/transport_vocabulary_note",
+          "before": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged.",
+          "after": "OpenCode Go checker transport uses the provider-qualified slug opencode-go/deepseek-v4.1-flash."
+        },
+        {
+          "field": "/lanes/2/ordered_pool/1/model",
+          "before": "minimax-m3.1-flash-free",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/1/transport_model",
+          "before": "opencode-go/minimax-m3.1-flash-free",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/2/model",
+          "before": "glm-5.3-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/2/transport_model",
+          "before": "opencode-go/glm-5.3-flash",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/4/auth",
+          "before": "env_ref:NVIDIA_API_KEY",
+          "after": "env_ref:OPENCODE_GO_API_KEY"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/4/model",
+          "before": "deepseek-ai/deepseek-v4.1-flash",
+          "after": "deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/4/provider",
+          "before": "nvidia",
+          "after": "opencode-go"
+        },
+        {
+          "field": "/lanes/2/ordered_pool/4/transport_model",
+          "before": "nvidia/deepseek-ai/deepseek-v4.1-flash",
+          "after": "opencode-go/deepseek-v4.1-flash"
+        },
+        {
+          "field": "/lanes/2/selection_note",
+          "before": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (VERIFY_SECURITY) the rank-1 arm is openai-codex/gpt-6.1-sol with reasoning effort medium, and it is the lane's automatic selection. The transport id is the BARE 'gpt-6.1-sol': the OpenAI transport rejects the provider-qualified form 'openai-codex/gpt-6.1-sol' with HTTP 400 'Model is unavailable'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted.",
+          "after": "Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied. Rank 1 is the sole default/automatic selection, using transport opencode-go/deepseek-v4.1-flash. Configuration selection is not admission, acceptance, or provider-liveness evidence."
+        },
+        {
+          "field": "/revision",
+          "before": 18,
+          "after": 19
+        }
+      ]
+    },
+    {
+      "file": "config/lane_scope_exceptions.json",
+      "before_sha256": "c503df7fda7be5ea45c3f9890354b066d8224db172d7079c055200a40714593b",
+      "after_sha256": "1f25d481274be4ea7745c47cfe02386d6b4fc519f3088b93cab2204d9b6ce48f",
+      "fields": [
+        {
+          "field": "/epoch_skew",
+          "before": {
+            "registry": 30,
+            "assignment": 29,
+            "registered_on": "2026-10-22",
+            "reason": "The registry advanced to epoch 30 (R14 rebind) while the assignment still names epoch 29, so the assignment is a projection of the previous epoch. This single skew explains all ten value divergences; it is registered so the guard fails on further movement rather than staying red. Re-projecting means bumping the assignment revision and its lane_chains from the registry in one change."
+          },
+          "after": null,
+          "after_present": false
+        },
+        {
+          "field": "/exceptions/8",
+          "before": {
+            "role": "VERIFY_SECURITY",
+            "index": 0,
+            "field": "automatic_selection",
+            "lane_scope_value": true,
+            "assignment_value": false,
+            "classification": "CURRENT_ROUND_NOT_DERIVED",
+            "origin_commit": null,
+            "origin_subject": null,
+            "origin_date": null
+          },
+          "after": null,
+          "after_present": false
+        },
+        {
+          "field": "/exceptions/9",
+          "before": {
+            "role": "VERIFY_SECURITY",
+            "index": 1,
+            "field": "automatic_selection",
+            "lane_scope_value": false,
+            "assignment_value": true,
+            "classification": "CURRENT_ROUND_NOT_DERIVED",
+            "origin_commit": null,
+            "origin_subject": null,
+            "origin_date": null
+          },
+          "after": null,
+          "after_present": false
+        },
+        {
+          "field": "/registry_epoch",
+          "before": 29,
+          "after": 31
+        }
+      ]
+    },
+    {
+      "file": "tests/test_lane_policy.py",
+      "before_sha256": "42b2df78525848abf2b22ae5433d74f3c2d607d7ccb68edab4125cc7fc6a8367",
+      "after_sha256": "a7b462fc41f2ae8f855d2ee5823c43d7136bedff4e29b3b9577fe512bf73375a",
+      "fields": [
+        {
+          "field": "lines before 98:113, after 98:101",
+          "before": [
+            "        # Owner chain (2026-10-21 GPT-quota-restored order, round",
+            "        # OWNER-ORDER-20261021-GPT-QUOTA-RESTORED, epoch 26 -- owner-authorized",
+            "        # oracle update). The sequence is first-class policy, not a fixture-era",
+            "        # empty list, and it moves WITH the owner order in the SAME change.",
+            "        #",
+            "        # Under this order PLAN and VERIFY/SECURITY rank-1 on",
+            "        # openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth) and EXECUTE",
+            "        # ranks-1 on opencode-go/minimax-m3.1-flash-free -- so the WRITER and the",
+            "        # CHECKER are on DIFFERENT models AND different providers, and only the",
+            "        # PLAN-vs-VERIFY pair shares a model, BY OWNER ORDER (declared as",
+            "        # SOD006-C4, OPEN_OWNER_ORDERED).",
+            "        #",
+            "        # NOTE: the fallback lists below name the FIRST THREE fallback arms of each lane. The pools",
+            "        # keep every previously declared arm (nothing is deleted by a re-binding), so the oracle",
+            "        # asserts the head of the chain, not the whole chain -- the full chain is checked against",
+            "        # the pool by test_pool_arms_are_contiguous_and_rank_one_is_the_default."
+          ],
+          "after": [
+            "        # Owner chain 2026-10-22: PLAN and EXECUTE are unchanged; every",
+            "        # VERIFY_SECURITY slot names opencode-go/deepseek-v4.1-flash.",
+            "        # The same chain-head equality checks remain: no weakening of the",
+            "        # default, fallback-order, admission, drift, or SoD assertions."
+          ]
+        },
+        {
+          "field": "lines before 116:116, after 104:104",
+          "before": [
+            "            \"VERIFY_SECURITY\": [(\"openai-codex\", \"gpt-6.1-sol\"), (\"opencode-go\", \"minimax-m3.1-flash-free\"), (\"opencode-go\", \"glm-5.3-flash\")],"
+          ],
+          "after": [
+            "            \"VERIFY_SECURITY\": [(\"opencode-go\", \"deepseek-v4.1-flash\"), (\"opencode-go\", \"deepseek-v4.1-flash\"), (\"opencode-go\", \"deepseek-v4.1-flash\")],"
+          ]
+        },
+        {
+          "field": "lines before 360:360, after 348:348",
+          "before": [
+            "        \"VERIFY_SECURITY\": (\"openai-codex\", \"gpt-6.1-sol\"),"
+          ],
+          "after": [
+            "        \"VERIFY_SECURITY\": (\"opencode-go\", \"deepseek-v4.1-flash\"),"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "tests/test_lane_guard.py",
+      "before_sha256": "3b5c3c83862c2e1bbe4aa5d65c6086b28d7de2eb4d1c3aca06db46ba78284d45",
+      "after_sha256": "d50ad8c94edfb3837de422712275065f0332b5e6b5450f8a22f8a93dbf78d3cc",
+      "fields": [
+        {
+          "field": "lines before 79:80, after 79:80",
+          "before": [
+            "VERIFY_ARM = [\"--lane\", \"VERIFY_SECURITY\", \"--maker-engine\", \"opencode-go\", \"--maker-model\", \"deepseek-v4.1-flash\",",
+            "              \"--target-engine\", \"hermes\", \"--target-model\", \"glm-5.3-flash\", \"--target-provider\", \"opencode-go\"]"
+          ],
+          "after": [
+            "VERIFY_ARM = [\"--lane\", \"VERIFY_SECURITY\", \"--maker-engine\", \"opencode-go\", \"--maker-model\", \"minimax-m3.1-flash-free\",",
+            "              \"--target-engine\", \"hermes\", \"--target-model\", \"deepseek-v4.1-flash\", \"--target-provider\", \"opencode-go\"]"
+          ]
+        },
+        {
+          "field": "lines before 88:88, after 88:88",
+          "before": [
+            "        self.verify_fix = _fixture(self.tmp / \"verify.json\", \"glm-5.3-flash\", \"opencode-go\", \"hermes\")"
+          ],
+          "after": [
+            "        self.verify_fix = _fixture(self.tmp / \"verify.json\", \"deepseek-v4.1-flash\", \"opencode-go\", \"hermes\")"
+          ]
+        },
+        {
+          "field": "lines before 179:180, after 179:180",
+          "before": [
+            "               \"--maker-model\", \"deepseek-v4.1-flash\", \"--target-engine\", \"hermes\",",
+            "               \"--target-model\", \"glm-5.3-flash\"]"
+          ],
+          "after": [
+            "               \"--maker-model\", \"minimax-m3.1-flash-free\", \"--target-engine\", \"hermes\",",
+            "               \"--target-model\", \"deepseek-v4.1-flash\"]"
+          ]
+        }
+      ]
+    }
+  ],
+  "test_fixtures_updated": [
+    {
+      "file": "tests/test_lane_policy.py",
+      "fixture": "TestLanePolicyConformance.test_registry_and_projection_shape.owner_chain[VERIFY_SECURITY]",
+      "why_not_weakening": "Changes only the three exact provider/model oracle tuples to the owner-mandated checker. Exact default and fallback-head equality assertions, their length, all drift injections and their failure semantics are unchanged."
+    },
+    {
+      "file": "tests/test_lane_policy.py",
+      "fixture": "PoolSelectionTests.MANDATE[VERIFY_SECURITY]",
+      "why_not_weakening": "Exact expected rank-1 provider/model follows the new owner order; contiguous ranks, exactly one default and automatic selection, object shape and transport assertions are unchanged."
+    },
+    {
+      "file": "tests/test_lane_guard.py",
+      "fixture": "VERIFY_ARM",
+      "why_not_weakening": "Uses the unchanged EXECUTE identity minimax as the distinct maker and the mandated DeepSeek checker as target. All positive and negative guard exit-code/error assertions are byte-for-byte unchanged."
+    },
+    {
+      "file": "tests/test_lane_guard.py",
+      "fixture": "TestLaneGuard.setUp.verify_fix",
+      "why_not_weakening": "Receipt arm/served fixture now matches dispatched DeepSeek; schema/status/engine are unchanged. No real admission is fabricated; CONTROL-FIXTURE-NOT-A-REAL-ADMISSION remains."
+    },
+    {
+      "file": "tests/test_lane_guard.py",
+      "fixture": "TestLaneGuard.test_v4_omitted_provider_is_not_a_wildcard.arm",
+      "why_not_weakening": "Maker/target match the distinct new lane pair while provider remains omitted. Still requires exit 3 and ERR_LANE_NOT_ADMITTED, preserving provider-fail-closed coverage."
+    }
+  ],
+  "assertion_integrity": {
+    "tests/test_lane_policy.py": {
+      "test_count": 6,
+      "assertion_count": 49,
+      "before_after_test_names_and_assertion_AST_identical": true
+    },
+    "tests/test_lane_guard.py": {
+      "test_count": 13,
+      "assertion_count": 37,
+      "before_after_test_names_and_assertion_AST_identical": true
+    }
+  },
+  "lane_scope_test_fixtures_updated": [],
+  "lane_scope_exception_resolution": {
+    "removed_only_VERIFY_SECURITY_entries": [
+      {
+        "role": "VERIFY_SECURITY",
+        "index": 0,
+        "field": "automatic_selection",
+        "lane_scope_value": true,
+        "assignment_value": false,
+        "classification": "CURRENT_ROUND_NOT_DERIVED",
+        "origin_commit": null,
+        "origin_subject": null,
+        "origin_date": null
+      },
+      {
+        "role": "VERIFY_SECURITY",
+        "index": 1,
+        "field": "automatic_selection",
+        "lane_scope_value": false,
+        "assignment_value": true,
+        "classification": "CURRENT_ROUND_NOT_DERIVED",
+        "origin_commit": null,
+        "origin_subject": null,
+        "origin_date": null
+      }
+    ],
+    "removed_epoch_skew": {
+      "registry": 30,
+      "assignment": 29,
+      "registered_on": "2026-10-22",
+      "reason": "The registry advanced to epoch 30 (R14 rebind) while the assignment still names epoch 29, so the assignment is a projection of the previous epoch. This single skew explains all ten value divergences; it is registered so the guard fails on further movement rather than staying red. Re-projecting means bumping the assignment revision and its lane_chains from the registry in one change."
+    },
+    "why": "Checker automatic_selection now matches registry arms at indices 0 and 1. Registry and assignment epochs now both 31. PLAN/EXECUTE residue and provenance remain untouched; no new exceptions were added."
+  },
+  "preserved_PLAN_EXECUTE_subtrees": true,
+  "pytest_command": [
+    "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "tests/test_lane_policy.py",
+    "tests/test_lane_guard.py",
+    "tests/test_lane_scope_isolation.py",
+    "-q",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "pytest_exit_code": 0,
+  "pytest_summary": "23 passed, 90 subtests passed in 12.64s",
+  "pytest_stdout": ".......................                                [100%]\n23 passed, 90 subtests passed in 12.64s\n",
+  "pytest_stderr": "",
+  "fixture_first_red": {
+    "exit_code": 1,
+    "stdout": ".F...F.................                                [100%]\n================================== FAILURES ===================================\n________ TestLanePolicyConformance.test_registry_and_projection_shape _________\n\nself = <tests.test_lane_policy.TestLanePolicyConformance testMethod=test_registry_and_projection_shape>\n\n    def test_registry_and_projection_shape(self):\n        root = _source_root()\n        registry = lp.load_registry(_registry_path(root))\n    \n        self.assertEqual(registry[\"schema\"], \"HGK-LANE-ROUTING-REGISTRY/1\")\n        lanes = [r[\"lane\"] for r in registry[\"routes\"]]\n        self.assertEqual(lanes, list(lp.LANE_ORDER), \"exactly the three mandated lanes, in order\")\n        # Owner chain 2026-10-22: PLAN and EXECUTE are unchanged; every\n        # VERIFY_SECURITY slot names opencode-go/deepseek-v4.1-flash.\n        # The same chain-head equality checks remain: no weakening of the\n        # default, fallback-order, admission, drift, or SoD assertions.\n        owner_chain = {\n            \"PLAN\": [(\"openai-codex\", \"gpt-6.1-sol\"), (\"opencode-go\", \"minimax-m3.1-flash-free\"), (\"opencode-go\", \"glm-5.3-flash\")],\n            \"VERIFY_SECURITY\": [(\"opencode-go\", \"deepseek-v4.1-flash\"), (\"opencode-go\", \"deepseek-v4.1-flash\"), (\"opencode-go\", \"deepseek-v4.1-flash\")],\n            \"EXECUTE\": [(\"opencode-go\", \"minimax-m3.1-flash-free\"), (\"opencode-go\", \"deepseek-v4.1-flash\"), (\"openai-codex\", \"gpt-6-luna\")],\n        }\n        for route in registry[\"routes\"]:\n            lane = route[\"lane\"]\n            self.assertIn(lane, owner_chain, f\"{lane} must be one of the three mandated lanes\")\n            # rank-1 default must be the owner-declared default\n>           self.assertEqual((route[\"provider\"], route[\"model\"]), owner_chain[lane][0],\n                             f\"{lane} rank-1 default must be owner-declared\")\nE           AssertionError: Tuples differ: ('openai-codex', 'gpt-6.1-sol') != ('opencode-go', 'deepseek-v4.1-flash')\nE           \nE           First differing element 0:\nE           'openai-codex'\nE           'opencode-go'\nE           \nE           - ('openai-codex', 'gpt-6.1-sol')\nE           + ('opencode-go', 'deepseek-v4.1-flash') : VERIFY_SECURITY rank-1 default must be owner-declared\n\ntests\\test_lane_policy.py:111: AssertionError\n_ PoolSelectionTests.test_pool_arms_are_contiguous_and_rank_one_is_the_default _\n\nself = <tests.test_lane_policy.PoolSelectionTests testMethod=test_pool_arms_are_contiguous_and_rank_one_is_the_default>\n\n    def test_pool_arms_are_contiguous_and_rank_one_is_the_default(self) -> None:\n        doc = self.pool()\n        self.assertGreaterEqual(len(doc[\"lanes\"]), 3)\n        for lane in doc[\"lanes\"]:\n            name, arms = lane[\"lane\"], lane[\"ordered_pool\"]\n            self.assertTrue(arms, f\"{name} pool must not be empty\")\n            for i, arm in enumerate(arms):\n                self.assertIsInstance(arm, dict,\n                    f\"{name} rank {i + 1} must be a JSON object, not a repr string (the dispatcher reads keys)\")\n                self.assertEqual(arm.get(\"rank\"), i + 1, f\"{name} rank must equal list position\")\n                self.assertIn(\"provider\", arm); self.assertIn(\"model\", arm)\n            defaults = [a for a in arms if a.get(\"default\")]\n            autos = [a for a in arms if a.get(\"automatic_selection\")]\n            self.assertEqual(len(defaults), 1, f\"{name} must declare exactly one default, got {len(defaults)}\")\n            self.assertEqual(len(autos), 1, f\"{name} must declare exactly one automatic selection\")\n            self.assertIs(defaults[0], arms[0], f\"{name} default must be rank 1\")\n            self.assertIs(autos[0], arms[0], f\"{name} automatic_selection must be rank 1\")\n>           self.assertEqual((arms[0][\"provider\"], arms[0][\"model\"]), self.MANDATE[name],\n                             f\"{name} rank 1 must be the owner-mandated arm\")\nE           AssertionError: Tuples differ: ('openai-codex', 'gpt-6.1-sol') != ('opencode-go', 'deepseek-v4.1-flash')\nE           \nE           First differing element 0:\nE           'openai-codex'\nE           'opencode-go'\nE           \nE           - ('openai-codex', 'gpt-6.1-sol')\nE           + ('opencode-go', 'deepseek-v4.1-flash') : VERIFY_SECURITY rank 1 must be the owner-mandated arm\n\ntests\\test_lane_policy.py:372: AssertionError\n=========================== short test summary info ===========================\nFAILED tests/test_lane_policy.py::TestLanePolicyConformance::test_registry_and_projection_shape\nFAILED tests/test_lane_policy.py::PoolSelectionTests::test_pool_arms_are_contiguous_and_rank_one_is_the_default\n2 failed, 21 passed, 90 subtests passed in 11.74s\n",
+    "stderr": ""
+  },
+  "claim_ceiling": "Local configuration/fixture verification only; NOT model liveness, measured lane admission, independent acceptance, promotion, release or production.",
+  "receipt_path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\R14-OBLIGATIONS\\rebind_verify_deepseek_v2.json",
+  "prior_green_pytest_summary": "23 passed, 90 subtests passed in 11.80s",
+  "measured_head": "a6c4f7be6b5fd3ae5a2adfeb567ec1b2592c89d6",
+  "scope_notes": [
+    "Six tracked files changed; tests/test_lane_scope_isolation.py and all production code are unchanged.",
+    "Existing PLAN and EXECUTE registry route rows, assignment groups, lane chains, and dispatch pool lane objects are semantically identical to commit 5db0a8b17c67931ea6176eba611692edb55cfcaf. This preserves inherited PLAN/EXECUTE residue rather than silently expanding the checker-only scope.",
+    "Historical measurements and explicitly historical/revision-keyed records are retained, not rewritten as new admission evidence.",
+    "Retained five checker slots all name the same DeepSeek identity; they do not imply distinct fallbacks or provider diversity."
+  ],
+  "final_verification": {
+    "checker_identity_rows_verified": 27,
+    "registry_epoch": 31,
+    "PLAN_EXECUTE_routing_subtrees_preserved": true,
+    "remaining_PLAN_EXECUTE_exceptions": 8,
+    "checker_exceptions_remaining": 0,
+    "epoch_skew_exception_removed": true,
+    "receipt_hashes_match": true,
+    "lane_scope_tests_unchanged": true,
+    "unrelated_concurrent_tracked_changes_not_touched": [
+      "tools/run_acceptance.py"
+    ]
+  }
+}

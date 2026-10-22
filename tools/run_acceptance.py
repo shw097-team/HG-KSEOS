@@ -355,6 +355,36 @@ def _run_case(
     )
 
 
+def _semantic_gate(row: dict[str, str], root: Path, details: object) -> dict[str, object]:  # noqa: C901
+    """Emit-time oracle. A VIOLATED predicate refuses the case instead of passing it.
+
+    TS13's residual was that the two oracles existed as a module and a test but nothing called them on the path that
+    emits acceptance evidence. The gate runs after the executor has produced its result and before the evidence file is
+    written, so a case whose input aliases maker as checker can no longer be emitted as MAKER_CASE_PASS.
+    """
+    from hg_kseos.semantic_oracle import check_claim_gate, check_distinct
+
+    fixture_path = root / "eval" / "fixtures" / f"{row['case_id']}.yaml"
+    payload: object = {}
+    if fixture_path.is_file():
+        try:
+            import yaml
+
+            payload = yaml.safe_load(fixture_path.read_text(encoding="utf-8")) or {}
+        except Exception:  # noqa: BLE001 - an unreadable fixture is the runner's problem, not the oracle's
+            payload = {}
+    case_input = payload.get("input") if isinstance(payload, dict) else None
+    if not isinstance(case_input, dict):
+        return {"predicate": "semantic.distinct", "verdict": "NOT_APPLICABLE",
+                "reasons": ["no case input to judge"], "evidence": {}}
+    emitted = details.get("oracle_execution") if isinstance(details, dict) else None
+    first = dict(check_distinct(case_input, emitted if isinstance(emitted, dict) else None))
+    if first["verdict"] == "VIOLATED":
+        return first
+    second = dict(check_claim_gate(case_input, emitted if isinstance(emitted, dict) else None))
+    return second if second["verdict"] == "VIOLATED" else first
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, required=True)
@@ -393,6 +423,10 @@ def main() -> int:
             fixture_hash = (
                 sha256_bytes(fixture_path.read_bytes()) if fixture_path.is_file() else "MISSING"
             )
+        semantic = _semantic_gate(row, root, details)
+        if semantic.get("verdict") == "VIOLATED":
+            status = "BLOCKED"
+            details = {**(details if isinstance(details, dict) else {}), "semantic_refusal": semantic}
         evidence = {
             "schema": "HGK-CASE-EVIDENCE/2",
             "case_id": case_id,
@@ -410,6 +444,7 @@ def main() -> int:
             "frozen_baseline_sha256": baseline_hash,
             "runner_sha256": runner_hash,
             "details": details,
+            "semantic_gate": semantic,
             "maker": "CODEX_MAIN_MAKER",
             "independent_verifier": row["independent_verifier"],
             "independent_verdict": "NOT_RUN",
