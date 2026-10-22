@@ -1,0 +1,120 @@
+{
+  "ok": false,
+  "changes": [
+    {
+      "where": "registry.routes[VERIFY_SECURITY]",
+      "from": [
+        "openai-codex",
+        "gpt-6.1-sol"
+      ],
+      "to": [
+        "opencode-go",
+        "deepseek-v4.1-flash"
+      ]
+    },
+    {
+      "where": "registry.epoch",
+      "from": 30,
+      "to": 31
+    },
+    {
+      "where": "assignment.VERIFY_SECURITY",
+      "from": [
+        "openai-codex",
+        "gpt-6.1-sol"
+      ],
+      "to": [
+        "opencode-go",
+        "deepseek-v4.1-flash"
+      ]
+    },
+    {
+      "where": "assignment.lane_chains.VERIFY_SECURITY[fallback1]",
+      "from": [
+        "openai-codex",
+        "gpt-6.1-sol"
+      ],
+      "to": [
+        "opencode-go",
+        "deepseek-v4.1-flash"
+      ]
+    },
+    {
+      "where": "assignment.lane_chains.VERIFY_SECURITY[primary]",
+      "from": [
+        "opencode-go",
+        "minimax-m3.1-flash-free"
+      ],
+      "to": [
+        "opencode-go",
+        "deepseek-v4.1-flash"
+      ]
+    },
+    {
+      "where": "assignment.lane_chains.VERIFY_SECURITY[fallback2]",
+      "from": [
+        "opencode-go",
+        "glm-5.3-flash"
+      ],
+      "to": [
+        "opencode-go",
+        "deepseek-v4.1-flash"
+      ]
+    },
+    {
+      "where": "assignment.lane_chains.VERIFY_SECURITY[fallback3]",
+      "from": [
+        "opencode-go",
+        "deepseek-v4.1-flash"
+      ],
+      "to": [
+        "opencode-go",
+        "deepseek-v4.1-flash"
+      ]
+    },
+    {
+      "where": "assignment.lane_chains.VERIFY_SECURITY[fallback4]",
+      "from": [
+        "nvidia",
+        "deepseek-ai/deepseek-v4.1-flash"
+      ],
+      "to": [
+        "opencode-go",
+        "deepseek-v4.1-flash"
+      ]
+    },
+    {
+      "where": "assignment.registry_epoch",
+      "from": 30,
+      "to": 31
+    },
+    {
+      "where": "binding /assignment/2/assigned_model",
+      "from": "gpt-6.1-sol",
+      "to": "deepseek-v4.1-flash"
+    },
+    {
+      "where": "binding /assignment/2/assigned_provider",
+      "from": "openai-codex",
+      "to": "opencode-go"
+    },
+    {
+      "where": "binding /lane_chains/VERIFY_SECURITY/0/model",
+      "from": "gpt-6.1-sol",
+      "to": "deepseek-v4.1-flash"
+    },
+    {
+      "where": "binding /lane_chains/VERIFY_SECURITY/0/provider",
+      "from": "openai-codex",
+      "to": "opencode-go"
+    },
+    {
+      "where": "binding /lane_chains/VERIFY_SECURITY/1/model",
+      "from": "minimax-m3.1-flash-free",
+      "to": "deepseek-v4.1-flash"
+    }
+  ],
+  "pytest_exit": 1,
+  "pytest_tail": "URITY\",\nE         \"index\": 4,\nE         \"field\": \"model\",\nE         \"lane_scope_value\": \"deepseek-ai/deepseek-v4.1-flash\",\nE         \"assignment_value\": \"deepseek-v4.1-flash\"\nE        },\nE        {\nE         \"role\": \"VERIFY_SECURITY\",\nE         \"index\": 4,\nE         \"field\": \"transport_model\",\nE         \"lane_scope_value\": \"nvidia/deepseek-ai/deepseek-v4.1-flash\",\nE         \"assignment_value\": \"opencode-go/deepseek-v4.1-flash\"\nE        }\nE       ]\n\ntests\\test_lane_scope_isolation.py:52: AssertionError\n=========================== short test summary info ===========================\nFAILED tests/test_lane_policy.py::TestLanePolicyConformance::test_drift_injection_subcases\nFAILED tests/test_lane_policy.py::TestLanePolicyConformance::test_registry_and_projection_shape\nFAILED tests/test_lane_guard.py::TestLaneGuard::test_admit_with_receipt_evidence\nFAILED tests/test_lane_guard.py::TestLaneGuard::test_distinct_pair_admits_without_declared_conflict\nFAILED tests/test_lane_guard.py::TestLaneGuard::test_v3_bare_admitted_string_is_not_admissible\nFAILED tests/test_lane_guard.py::TestLaneGuard::test_v4_omitted_provider_is_not_a_wildcard\nFAILED tests/test_lane_guard.py::TestLaneGuard::test_v4_provider_mismatch_is_refused\nFAILED tests/test_lane_scope_isolation.py::LaneScopeIsolationTests::test_epoch_matches_between_assignment_and_registry\nFAILED tests/test_lane_scope_isolation.py::LaneScopeIsolationTests::test_new_divergence_fails_and_known_residue_is_registered\n9 failed, 14 passed in 1.55s\n",
+  "reverted": true
+}
