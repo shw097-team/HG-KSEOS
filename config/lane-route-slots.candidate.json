@@ -2,7 +2,7 @@
   "schema": "HGK-LANE-ROUTE-SLOTS/1",
   "status": "CANDIDATE",
   "artifact": "LANE_ROUTE_SLOTS_CANDIDATE",
-  "revision": 20,
+  "revision": 21,
   "supersedes_revision": 19,
   "round": "ROUND-R14-LANE-REBIND-20261022",
   "declared_by": "Owner instruction 2026-10-22 (GPT quota exhausted): PLAN opencode-go/deepseek-v4.1-flash; EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY opencode-go/deepseek-v4.1-flash. PLAN's DEFAULT moves; the former default openai-codex/gpt-6.1-sol stays in the pool as fallback1 and no arm is deleted.",
@@ -147,6 +147,48 @@
     {
       "revision": 17,
       "change": "rank 1 of PLAN and EXECUTE moved to the mandated arm; the demoted arm keeps its place in the chain (shift, never drop)"
+    },
+    {
+      "rev": 21,
+      "what": "Owner order 2026-10-23: EXECUTE rank 1 moved to opencode-go/deepseek-v4.1-flash because the former rank-1 arm opencode-go/minimax-m3.1-flash-free is DEPRECATED at the provider (relay returned HTTP 410 Gone on a live dispatch). minimax retained as rank-2 fallback, explicitly marked not dispatchable.",
+      "measured": "EXECUTE dispatch through run_lane --role EXECUTE returned ok=false in 9.21s with code=ERR_LANE_ALL_ROUTES_EXHAUSTED and provider error '410 Gone: Model minimax-m3.1-flash-free has been deprecated'; relay /v1/models no longer lists any minimax id (92 models, 0 minimax). opencode-go/deepseek-v4.1-flash is present in the relay model list.",
+      "declared_by": "Owner instruction 2026-10-23 (in-session): replace the deprecated EXECUTE arm with DeepSeek V4.1 Flash",
+      "before": [
+        [
+          1,
+          "opencode-go/minimax-m3.1-flash-free"
+        ],
+        [
+          2,
+          "opencode-go/deepseek-v4.1-flash"
+        ],
+        [
+          3,
+          "openai-codex/gpt-6-luna"
+        ],
+        [
+          4,
+          "nvidia/deepseek-ai/deepseek-v4.1-flash"
+        ]
+      ],
+      "after": [
+        [
+          1,
+          "opencode-go/deepseek-v4.1-flash"
+        ],
+        [
+          2,
+          "opencode-go/minimax-m3.1-flash-free"
+        ],
+        [
+          4,
+          "openai-codex/gpt-6-luna"
+        ],
+        [
+          5,
+          "nvidia/deepseek-ai/deepseek-v4.1-flash"
+        ]
+      ]
     }
   ],
   "placement_rationale": "Kept as a NEW file rather than folded into config/lane-routing-registry.yaml: the registry's routes[] values are bound as 90 drift-pinned JSON pointers across three live sites, so editing it forces a fully synchronised sweep + epoch bump. This file stays inert for the drift gate (verified: validate -> exit 0 / fatal false / 90 sites).",
@@ -273,27 +315,27 @@
         {
           "rank": 1,
           "provider": "opencode-go",
-          "model": "minimax-m3.1-flash-free",
+          "model": "deepseek-v4.1-flash",
           "role": "DEFAULT/首選",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
-          "transport_model": "opencode-go/minimax-m3.1-flash-free",
-          "probe_note": "measured lane arm (round FAR-CLOSURE-20261021): the Codex-CLI lane served this arm at required_arm == served_arm. A PROBE arm is NOT a policy default and must not be selected by an unpinned dispatch; it is an explicitly pinnable measured capability.",
+          "transport_model": "opencode-go/deepseek-v4.1-flash",
+          "probe_note": "Owner order 2026-10-23: substituted for minimax-m3.1-flash-free after the relay returned '410 Gone: Model minimax-m3.1-flash-free has been deprecated' (measured, EXECUTE dispatch 9.21s, receipt EXECUTE__BRIEF4.json).",
           "default": true,
-          "automatic_selection": true,
-          "reasoning_effort": null
+          "automatic_selection": false
         },
         {
           "rank": 2,
           "provider": "opencode-go",
-          "model": "deepseek-v4.1-flash",
-          "role": "FALLBACK1/備援1",
+          "model": "minimax-m3.1-flash-free",
+          "role": "fallback1 (DEPRECATED at provider)",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
-          "transport_model": "opencode-go/deepseek-v4.1-flash",
-          "probe_note": "declared policy default for this lane (owner order 2026-10-21)",
+          "transport_model": "opencode-go/minimax-m3.1-flash-free",
+          "probe_note": "410 Gone measured 2026-10-23 on the relay: 'Model minimax-m3.1-flash-free has been deprecated'. Retained as a historical arm, not dispatchable until the provider restores it.",
           "default": false,
-          "automatic_selection": false
+          "automatic_selection": true,
+          "reasoning_effort": null
         },
         {
           "rank": 3,
@@ -319,7 +361,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (EXECUTE) the rank-1 arm is opencode-go/minimax-m3.1-flash-free, and it is the lane's automatic selection. The transport id is the provider-qualified slug 'opencode-go/minimax-m3.1-flash-free'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted."
+      "selection_note": "EXECUTE rank-1 arm is now opencode-go/deepseek-v4.1-flash by owner order dated 2026-10-23, because minimax-m3.1-flash-free returns 410 Gone at the provider. Generated from ordered_pool[0] so it cannot drift."
     },
     {
       "lane": "VERIFY_SECURITY",
