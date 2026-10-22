@@ -10,9 +10,9 @@
   "source_root": "C:\\Projects\\Agent_Workspace\\HG-KSEOS",
   "maker_root": "C:\\Projects\\Agent_Workspace\\HG-KSEOS",
   "hlpe": {
-    "integrated_target": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\工程基座\\sdlc-prw-hlpe-formal",
+    "integrated_target": "C:\\Projects\\Agent_Workspace\\知識庫\\工程基座\\sdlc-prw-hlpe-formal",
     "expected_head": "ee30dc034a3d4fd0e24a6bfdf77ad8aae273b400",
-    "r3_control_base": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\工程基座\\SDLC_PRW_HLPE\\_HLPE_BASE\\HLPE_MAIN_PLATFORM_3DOMAINS_v2026.07.22-r3"
+    "r3_control_base": "C:\\Projects\\Agent_Workspace\\知識庫\\工程基座\\SDLC_PRW_HLPE\\_HLPE_BASE\\HLPE_MAIN_PLATFORM_3DOMAINS_v2026.07.22-r3"
   },
   "hermes": {
     "role": "BOUNDED_PROVIDER_ORCHESTRATOR",

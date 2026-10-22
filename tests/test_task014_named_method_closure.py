@@ -64,13 +64,21 @@ class NamedMethodEvidenceTests(unittest.TestCase):
 
 
 class CanonicalRuntimeTests(unittest.TestCase):
-    def test_config_resolves_v020(self) -> None:
+    def test_config_resolves_scheme_b_appdata_runtime(self) -> None:
         cfg = json.loads((ROOT / "config" / "hermes.json").read_text(encoding="utf-8"))
         self.assertEqual(cfg["release"]["version"], "0.20.0")
         self.assertEqual(cfg["release"]["tag"], "v2026.8.3")
         self.assertEqual(cfg["release"]["commit"], "3c27eb6234bf91b8ceee9e9071591b31e9b148cb")
-        self.assertEqual(cfg["status"], "ACTIVE_SELECTED_CERTIFIED")
-        self.assertIn("hermes-v020", cfg["executable"])
+        self.assertEqual(cfg["status"], "ACTIVE_SELECTED_REINSTALL_BASELINE")
+        self.assertEqual(
+            cfg["executable"],
+            r"C:\Users\user\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes.exe",
+        )
+        self.assertEqual(
+            cfg["python_executable"],
+            r"C:\Users\user\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe",
+        )
+        self.assertEqual(cfg["canonical_hermes_home"], r"C:\Users\user\AppData\Local\hermes")
 
     def test_canonical_live_readback(self) -> None:
         d = read_json("HG-KSEOS_HERMES_V020_CANONICAL_LIVE_READBACK.json")

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import sqlite3
 from pathlib import Path
 from typing import Any
@@ -7,7 +8,7 @@ from typing import Any
 from .errors import GroundingFailure, InvariantViolation
 from .security import contains_pii, sanitation_findings
 from .spine import SharedSpine
-from .util import new_id, sha256_text, utc_now
+from .util import canonical_json, new_id, sha256_file, sha256_text, utc_now
 
 
 class KnowledgeFactory:
@@ -197,6 +198,101 @@ class KnowledgeFactory:
                 "UPDATE sources SET status='WITHDRAWN',withdrawn_at=? WHERE source_id=?",
                 (utc_now(), source_id),
             )
+
+    def repoint_source(
+        self,
+        source_id: str,
+        new_canonical_path: str,
+        *,
+        actor: str,
+        evidence_ref: str,
+    ) -> dict[str, Any]:
+        """Move a source's `canonical_path` pointer to where the SAME content now lives.
+
+        WHY this exists: `ingest_text()` keys a source by `SRC-<sha256[:20]>` and inserts with
+        `INSERT OR IGNORE`, so it structurally can never re-point an existing row. When the corpus
+        is relocated on disk the recorded path goes dead and `ERR_SOURCE_DRIFT` becomes unpassable,
+        while re-ingesting is a no-op and a direct SQL UPDATE is forbidden to consumers. This is the
+        missing canonical transition, NOT a bypass.
+
+        Discipline (same shape as `transition_requirement`):
+          * content must be UNCHANGED -- the file at the new path must hash to the recorded
+            `sources.sha256`; a re-point is a pointer move, never a content swap (no silent drift)
+          * the source must still be ACTIVE; a WITHDRAWN source is never resurrected by a re-point
+          * the evidence ref must already exist in `evidence_refs` (no orphan re-points)
+          * the pointer change and its canonical event are written in ONE transaction
+          * an identical replay returns the original event instead of appending a second one
+          * the rollback pointer is the previous path
+        """
+        if not actor.strip():
+            raise InvariantViolation("ERR_REPOINT_ACTOR_MISSING")
+        if not evidence_ref.strip():
+            raise InvariantViolation("ERR_REPOINT_EVIDENCE_REQUIRED")
+        target = os.path.normpath(new_canonical_path)
+        if not os.path.isfile(target):
+            raise InvariantViolation(f"ERR_REPOINT_PATH_MISSING:{target}")
+        live_sha = sha256_file(Path(target))
+        idempotency_key = f"repoint:{source_id}:{target}"
+        now = utc_now()
+        with self.spine.transaction() as connection:
+            if not connection.execute(
+                "SELECT 1 FROM evidence_refs WHERE evidence_id=?", (evidence_ref,)
+            ).fetchone():
+                raise InvariantViolation(f"ERR_REPOINT_EVIDENCE_UNREGISTERED:{evidence_ref}")
+            row = connection.execute(
+                "SELECT canonical_path,sha256,status FROM sources WHERE source_id=?", (source_id,)
+            ).fetchone()
+            if not row:
+                raise InvariantViolation(f"ERR_REPOINT_UNKNOWN_SOURCE:{source_id}")
+            if row["status"] != "ACTIVE":
+                raise InvariantViolation(f"ERR_REPOINT_SOURCE_STATE:{source_id}:{row['status']}")
+            from_path = row["canonical_path"]
+            if live_sha != row["sha256"]:
+                raise InvariantViolation(f"ERR_REPOINT_SHA_DRIFT:{source_id}")
+            if os.path.normpath(from_path) == target:
+                spent = connection.execute(
+                    "SELECT event_id FROM canonical_events WHERE idempotency_key=?",
+                    (idempotency_key,),
+                ).fetchone()
+                return {
+                    "source_id": source_id,
+                    "from_path": from_path,
+                    "to_path": target,
+                    "event_id": spent["event_id"] if spent else None,
+                    "idempotent_replay": True,
+                }
+            event_id = new_id("EVT")
+            connection.execute(
+                "UPDATE sources SET canonical_path=? WHERE source_id=?", (target, source_id)
+            )
+            connection.execute(
+                """INSERT INTO canonical_events
+                   (event_id,idempotency_key,entity_type,entity_id,from_state,to_state,actor,
+                    expected_version,resulting_version,payload_json,evidence_ref,rollback_pointer,created_at)
+                   VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                (
+                    event_id,
+                    idempotency_key,
+                    "source",
+                    source_id,
+                    from_path,
+                    target,
+                    actor,
+                    0,
+                    1,
+                    canonical_json({"from_path": from_path, "to_path": target, "sha256": live_sha}),
+                    evidence_ref,
+                    from_path,
+                    now,
+                ),
+            )
+        return {
+            "source_id": source_id,
+            "from_path": from_path,
+            "to_path": target,
+            "event_id": event_id,
+            "idempotent_replay": False,
+        }
 
     def remember(
         self,
