@@ -112,6 +112,34 @@ class KnowledgeFactory:
             raise GroundingFailure(f"ABSTAIN_NO_GROUNDING:{query}")
         return [dict(row) for row in rows]
 
+    def detect_conflicts(self) -> list[dict[str, Any]]:
+        """Flag the same (subject, predicate) asserted with different objects by different active sources.
+
+        R14-TS18 found that contradictory claims across sources were never surfaced: each assertion was individually
+        admissible, so the graph held both and nothing said so. This does not decide which one is right - it reports the
+        pair with both source doc ids, which is what a reviewer needs to adjudicate.
+        """
+        with self.spine.connect() as connection:
+            rows = connection.execute(
+                """SELECT a.subject,a.predicate,a.object,a.source_doc_id
+                   FROM kg_assertions a
+                   JOIN knowledge_docs k ON k.doc_id=a.source_doc_id
+                   JOIN source_units u ON u.unit_id=k.source_unit_id
+                   JOIN sources s ON s.source_id=u.source_id
+                   WHERE s.status='ACTIVE'
+                   ORDER BY a.subject,a.predicate,a.object"""
+            ).fetchall()
+        grouped: dict[tuple[str, str], dict[str, set[str]]] = {}
+        for row in rows:
+            grouped.setdefault((row["subject"], row["predicate"]), {}).setdefault(row["object"], set()).add(
+                row["source_doc_id"])
+        conflicts = []
+        for (subject, predicate), objects in grouped.items():
+            if len(objects) > 1:
+                conflicts.append({"subject": subject, "predicate": predicate,
+                                  "objects": {obj: sorted(docs) for obj, docs in objects.items()}})
+        return conflicts
+
     def rebuild(self) -> dict[str, int]:
         with self.spine.transaction() as connection:
             connection.execute("DELETE FROM knowledge_fts")
@@ -142,7 +170,8 @@ class KnowledgeFactory:
                        VALUES(?,?,?,?,?,?)""",
                     tuple(row),
                 )
-        return {"fts_documents": len(docs), "kg_edges": len(assertions)}
+        return {"fts_documents": len(docs), "kg_edges": len(assertions),
+                "conflicts": len(self.detect_conflicts())}
 
     def add_kg_assertion(self, doc_id: str, subject: str, predicate: str, object_: str) -> str:
         if not all((subject.strip(), predicate.strip(), object_.strip())):
@@ -172,16 +201,46 @@ class KnowledgeFactory:
             )
         return edge_id
 
-    def verify_citation(self, doc_id: str, citation: str) -> bool:
+    def citation_integrity(self, doc_id: str) -> dict[str, Any]:
+        """Compare the digest recorded at ingest with the bytes on disk right now.
+
+        R14-TS18 found that verify_citation() only compared the stored citation STRING, so a source file could be
+        edited after ingestion and the citation still verified. This reports MATCH / DRIFT / UNREADABLE without deciding
+        for the caller, because "the file is not on this host" is a different fact from "the file changed".
+        """
         with self.spine.connect() as connection:
             row = connection.execute(
-                """SELECT k.citation,s.status FROM knowledge_docs k
+                """SELECT s.canonical_path,s.sha256 FROM knowledge_docs k
+                   JOIN source_units u ON u.unit_id=k.source_unit_id
+                   JOIN sources s ON s.source_id=u.source_id WHERE k.doc_id=?""",
+                (doc_id,),
+            ).fetchone()
+        if not row:
+            raise GroundingFailure(f"ERR_CITATION_INVALID:{doc_id}")
+        path = Path(row["canonical_path"])
+        if not path.is_file():
+            return {"doc_id": doc_id, "path": str(path), "status": "UNREADABLE",
+                    "stored_sha256": row["sha256"], "live_sha256": None}
+        live = sha256_text(path.read_text(encoding="utf-8", errors="replace"))
+        return {"doc_id": doc_id, "path": str(path),
+                "status": "MATCH" if live == row["sha256"] else "DRIFT",
+                "stored_sha256": row["sha256"], "live_sha256": live}
+
+    def verify_citation(self, doc_id: str, citation: str, *, require_source_bytes: bool = False) -> bool:
+        with self.spine.connect() as connection:
+            row = connection.execute(
+                """SELECT k.citation,s.status,s.canonical_path FROM knowledge_docs k
                    JOIN source_units u ON u.unit_id=k.source_unit_id
                    JOIN sources s ON s.source_id=u.source_id WHERE k.doc_id=?""",
                 (doc_id,),
             ).fetchone()
         if not row or row["status"] != "ACTIVE" or row["citation"] != citation:
             raise GroundingFailure(f"ERR_CITATION_INVALID:{doc_id}")
+        integrity = self.citation_integrity(doc_id)
+        if integrity["status"] == "DRIFT":
+            raise GroundingFailure(f"ERR_CITATION_SOURCE_DRIFT:{doc_id}")
+        if require_source_bytes and integrity["status"] == "UNREADABLE":
+            raise GroundingFailure(f"ERR_CITATION_SOURCE_UNREADABLE:{doc_id}")
         return True
 
     def withdraw_source(self, source_id: str) -> None:

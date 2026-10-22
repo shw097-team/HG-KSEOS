@@ -21,6 +21,14 @@ INJECTION_PATTERNS = (
     re.compile(r"developer\s+message\s*:", re.I),
     re.compile(r"(?:exfiltrate|reveal|print)\s+(?:the\s+)?(?:secret|token|api\s*key)", re.I),
     re.compile(r"disable\s+(?:the\s+)?(?:sandbox|security|validation)", re.I),
+    # R14-TS18: the English-only list let CJK authority-escalation text through to promotion. These are the CJK
+    # equivalents of the five patterns above, not a general Chinese filter: they match ACTS (override authority,
+    # claim a system role, demand secrets, demand disabling a gate), which is what an injection does.
+    re.compile(r"(?:忽略|無視|略過)(?:上述|以上|先前|前面|之前)?(?:的)?(?:所有)?(?:指令|指示|規則|限制)"),
+    re.compile(r"(?:最高|最高級|絕對|系統級|開發者級)(?:授權|權限|指令|權威)"),
+    re.compile(r"(?:覆寫|覆蓋|改寫|繞過|跳過)(?:所有)?(?:授權|權限|審查|檢查|閘門|驗證)"),
+    re.compile(r"(?:洩漏|洩露|輸出|列出|印出)(?:所有)?(?:密鑰|金鑰|憑證|權杖|api\s*key|token)", re.I),
+    re.compile(r"(?:停用|關閉|解除)(?:所有)?(?:沙箱|安全|驗證|審查)"),
 )
 SECRET_PATTERNS = (
     re.compile(r"sk-[A-Za-z0-9_-]{20,}"),
