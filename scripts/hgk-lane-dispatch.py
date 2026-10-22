@@ -79,6 +79,9 @@ except Exception:  # noqa: BLE001
     _sp_identity = None
 ERR_SP_IDENTITY_MODULE_UNAVAILABLE = "ERR_SP_IDENTITY_MODULE_UNAVAILABLE"
 ERR_SP_IDENTITY_FLAG_WITHOUT_IDENTITY = "ERR_SP_IDENTITY_FLAG_WITHOUT_IDENTITY"
+# F2 belt (independent Challenge-SP, 2026-10-23): the resolver must return a typed result; if
+# anything escapes it anyway, this is the code the pre-spawn refusal carries instead of a traceback.
+ERR_SP_IDENTITY_INTERNAL = "ERR_SP_IDENTITY_INTERNAL"
 
 # Tranche B: the per-round role-binding refusals, raised PRE-SPAWN immediately before run_candidate.
 ERR_ROLE_BINDING_FILE_UNREADABLE = "ERR_ROLE_BINDING_FILE_UNREADABLE"
@@ -1798,18 +1801,31 @@ def main() -> int:
                 sp_identity={"sp": args.sp_identity, "ok": False},
                 say="refusing before any spawn: an identity the dispatcher cannot resolve must not be "
                     "dispatched as if it were present"))
-        resolved = _sp_identity.resolve_identity(
-            args.sp_identity, skills_root=args.sp_skills_root, lane=args.lane, nonce=args.nonce,
-            invocation_id=args.sp_invocation_id, spine=args.sp_spine or SPINE_DB,
-            workorder=args.sp_workorder)
-        ident = dict(resolved.get("identity") or {})
-        ident["ok"] = bool(resolved["ok"])
+        # F2 belt (independent Challenge-SP, 2026-10-23): resolve_identity is contracted never to
+        # raise, but this gate sits on the zero-spawn boundary — anything that escapes anyway must
+        # still produce a typed pre-spawn refusal with a receipt, not a traceback in main().
+        try:
+            resolved = _sp_identity.resolve_identity(
+                args.sp_identity, skills_root=args.sp_skills_root, lane=args.lane, nonce=args.nonce,
+                invocation_id=args.sp_invocation_id, spine=args.sp_spine or SPINE_DB,
+                workorder=args.sp_workorder)
+            ident = dict(resolved.get("identity") or {})
+            ident["ok"] = bool(resolved["ok"])
+            block = _sp_identity.build_block(ident) if resolved["ok"] else None
+        except Exception as exc:  # noqa: BLE001 - a raising gate is a traceback where a receipt is due
+            return emit_refusal(args, refusal_body(args.lane, ERR_SP_IDENTITY_INTERNAL,
+                f"{type(exc).__name__}: {exc}",
+                sp_identity={"sp": args.sp_identity, "ok": False,
+                             "code": ERR_SP_IDENTITY_INTERNAL},
+                say="refusing before any spawn: the identity resolver raised instead of returning a "
+                    "typed result, so this run ends with a refusal receipt rather than a traceback "
+                    "crossing the zero-spawn boundary"))
         args.sp_identity_receipt = ident
         if not resolved["ok"]:
             return emit_refusal(args, refusal_body(args.lane, resolved["code"], resolved["detail"],
                 sp_identity=ident,
                 say="refusing before any spawn: the SP identity did not resolve"))
-        block = _sp_identity.build_block(ident)
+        assert block is not None  # narrowing only: ok=False returned just above, so block was built
         ident["block_sha256"] = hashlib.sha256(block.encode("utf-8")).hexdigest()
         ident["prompt_sha256_before"] = hashlib.sha256(args.prompt.encode("utf-8")).hexdigest()
         # The injection point. Everything between here and run_candidate is a gate that can only

@@ -79,9 +79,15 @@ def _pool(tmp, lane: str) -> pathlib.Path:
     return p
 
 
-def _spine(tmp, *, with_wo: bool = True) -> pathlib.Path:
+def _spine(tmp, *, with_wo: bool = True, perms: str | None = None,
+           with_binding: bool = True) -> pathlib.Path:
     """A spine-shaped fixture: the columns read_chain() selects, and one WorkOrder with prose in the
-    taskspec objective so a leak of that prose into the prompt is detectable."""
+    taskspec objective so a leak of that prose into the prompt is detectable.
+
+    ``perms`` injects raw taskspec permissions_json (a damage case); ``with_binding=False`` writes a
+    well-formed permissions document that simply carries no role_binding (the claim cda8cd0's
+    commit message made but never implemented).
+    """
     p = pathlib.Path(tmp) / "spine.db"
     con = sqlite3.connect(p)
     con.executescript(
@@ -90,10 +96,11 @@ def _spine(tmp, *, with_wo: bool = True) -> pathlib.Path:
         "CREATE TABLE taskspecs (taskspec_id TEXT PRIMARY KEY, requirement_id TEXT, state TEXT,"
         " objective TEXT, permissions_json TEXT);")
     if with_wo:
+        if perms is None:
+            perms = json.dumps({"role_binding": {"schema": "HGK-ROLE-BINDING/1",
+                                                 "workorder": "WO-TEST-01"}}) if with_binding else "{}"
         con.execute("INSERT INTO taskspecs VALUES (?,?,?,?,?)",
-                    ("TS-TEST-01", "REQ-TEST-PLAN", "ADMITTED", SPINE_PROSE,
-                     json.dumps({"role_binding": {"schema": "HGK-ROLE-BINDING/1",
-                                                  "workorder": "WO-TEST-01"}})))
+                    ("TS-TEST-01", "REQ-TEST-PLAN", "ADMITTED", SPINE_PROSE, perms))
         con.execute("INSERT INTO workorders VALUES (?,?,?,?,?,?)",
                     ("WO-TEST-01", "TS-TEST-01", "CREATED", "b" * 40, "codex", "RB-WO-TEST-01"))
     con.commit()
@@ -361,6 +368,92 @@ class PreSpawnGateEndToEnd(unittest.TestCase):
         self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
         self.assertTrue(rec["ok"], rec.get("code"))
         self.assertNotIn("sp_identity", rec)
+
+
+class ChainDigestAndTypedRefusals(unittest.TestCase):
+    """The independent Challenge-SP review of cda8cd0 (2026-10-23, verdict PARTIAL) -> the three
+    things it proved wrong, each locked so they cannot come back:
+
+      F1  one binding had TWO digests: read_chain() published sha256(json.dumps(sort_keys=True)),
+          while role_binding.binding_digest() (what the dispatch receipt and every HGK validator
+          compute) produced a different hex for the same document - so the value the injected block
+          told an SP to echo could not be reconciled with any validator.
+      F2  json.loads(permissions_json) was unguarded: a malformed spine row raised JSONDecodeError
+          straight out of resolve_identity into main(), with no code and no receipt, breaching the
+          "every identity failure refuses typed before the spawn" claim.
+      F4  (self-caught while fixing F2): cda8cd0's commit message promised that --sp-workorder on a
+          row with no role_binding refuses - the code for that refusal did not exist at all.
+    """
+
+    FIXTURE_BINDING = {"schema": "HGK-ROLE-BINDING/1", "workorder": "WO-TEST-01"}
+
+    def _authority_digest(self) -> str:
+        from hg_kseos.role_binding import binding_digest
+        return "sha256:" + binding_digest(dict(self.FIXTURE_BINDING))
+
+    def test_F1_chain_digest_is_the_authority_digest_not_a_local_serialization(self):
+        tmp = tempfile.mkdtemp(prefix="hgk-sp-f1-")
+        chain = spid.read_chain(_spine(tmp), "WO-TEST-01")
+        local = "sha256:" + hashlib.sha256(
+            json.dumps(self.FIXTURE_BINDING, sort_keys=True).encode()).hexdigest()
+        self.assertEqual(chain["spine_binding_digest"], self._authority_digest(),
+                         "the block must publish the digest the receipt already uses")
+        self.assertNotEqual(chain["spine_binding_digest"], local,
+                            "the private re-serialization is exactly what F1 ruled out")
+
+    def test_F1_receipt_chain_digest_cross_checks_against_the_authority(self):
+        """The cross-check F1 said the fixture could not perform, done end to end through the gate."""
+        case = PreSpawnGateEndToEnd("test_unknown_identity_refuses")
+        (_p, rec, _t), _inv, _skills, _spine_path, _tmp = case._positive()
+        assert rec is not None, "the positive run must write its receipt"
+        self.assertTrue(rec["ok"], rec.get("code"))
+        chain = rec["sp_identity"]["chain"]
+        self.assertEqual(chain["spine_binding_digest"], self._authority_digest(),
+                         "the digest the child is told to echo must be the validator's digest")
+
+    def test_F2_malformed_permissions_json_refuses_typed_before_the_spawn(self):
+        tmp = tempfile.mkdtemp(prefix="hgk-sp-f2-")
+        bad_spine = _spine(tmp, perms="this-is-not-json")
+        self._expect_refusal(code=spid.ERR_SP_IDENTITY_BINDING_MALFORMED, spine=bad_spine)
+
+    def test_F2_permissions_json_that_is_not_an_object_refuses_typed(self):
+        tmp = tempfile.mkdtemp(prefix="hgk-sp-f2b-")
+        self._expect_refusal(code=spid.ERR_SP_IDENTITY_BINDING_MALFORMED,
+                             spine=_spine(tmp, perms=json.dumps(["not", "an", "object"])))
+
+    def test_F2_resolver_never_raises_out_of_the_gate(self):
+        """The belt itself: an exception the classifier never anticipated still returns a typed
+        result, because a traceback at pre-spawn carries no code and no receipt."""
+        tmp = tempfile.mkdtemp(prefix="hgk-sp-f2c-")
+        inv = spid.new_invocation_id("challenge")
+        original = getattr(spid, "read_chain")
+        setattr(spid, "read_chain",
+                lambda *a, **k: (_ for _ in ()).throw(RuntimeError("synthetic blow-up")))
+        try:
+            resolved = spid.resolve_identity(
+                "challenge", skills_root=_skills_root(tmp), lane="VERIFY_SECURITY", nonce=inv,
+                invocation_id=inv, spine=str(_spine(tmp)), workorder="WO-TEST-01")
+        finally:
+            setattr(spid, "read_chain", original)
+        self.assertFalse(resolved["ok"])
+        self.assertEqual(resolved["code"], spid.ERR_SP_IDENTITY_INTERNAL)
+        self.assertIn("RuntimeError", resolved["detail"])
+        self.assertIn("synthetic blow-up", resolved["detail"])
+
+    def test_F4_chain_join_on_a_row_without_a_binding_refuses(self):
+        tmp = tempfile.mkdtemp(prefix="hgk-sp-f4-")
+        self._expect_refusal(code=spid.ERR_SP_IDENTITY_BINDING_ABSENT,
+                             spine=_spine(tmp, with_binding=False))
+
+    def _expect_refusal(self, *, code, spine):
+        """Positive command, one broken input, and every pre-spawn promise still kept.
+        _refusal already asserts exit 4, a refusal receipt, this exact code, zero attempts and an
+        untouched attempt-log directory."""
+        case = PreSpawnGateEndToEnd("test_unknown_identity_refuses")
+        rec, _tmp = case._refusal(expect_code=code, spine=spine)
+        assert rec is not None
+        self.assertFalse(rec["ok"])
+        return rec
 
 
 if __name__ == "__main__":

@@ -51,6 +51,11 @@ ERR_SP_IDENTITY_INVOCATION_ID_MALFORMED = "ERR_SP_IDENTITY_INVOCATION_ID_MALFORM
 ERR_SP_IDENTITY_NONCE_MISMATCH = "ERR_SP_IDENTITY_NONCE_MISMATCH"
 ERR_SP_IDENTITY_CHAIN_UNAVAILABLE = "ERR_SP_IDENTITY_CHAIN_UNAVAILABLE"
 ERR_SP_IDENTITY_WORKORDER_UNKNOWN = "ERR_SP_IDENTITY_WORKORDER_UNKNOWN"
+# Independent Challenge-SP findings on cda8cd0 (2026-10-23) -> typed refusals, not tracebacks:
+ERR_SP_IDENTITY_BINDING_MALFORMED = "ERR_SP_IDENTITY_BINDING_MALFORMED"  # F2: permissions_json not JSON
+ERR_SP_IDENTITY_BINDING_ABSENT = "ERR_SP_IDENTITY_BINDING_ABSENT"        # chain join with no binding
+ERR_SP_IDENTITY_DIGEST_AUTHORITY_UNAVAILABLE = "ERR_SP_IDENTITY_DIGEST_AUTHORITY_UNAVAILABLE"  # F1
+ERR_SP_IDENTITY_INTERNAL = "ERR_SP_IDENTITY_INTERNAL"                    # F2 belt: nothing escapes untyped
 
 # The registry is the AUTHORITY for lane binding and procedure location; a caller may pick an entry,
 # never redefine one. `commander` is declared here so the registry is complete for both D-06 halves;
@@ -130,8 +135,25 @@ def read_chain(spine, workorder: str) -> dict:
         raise LookupError(f"{ERR_SP_IDENTITY_CHAIN_UNAVAILABLE}: {type(exc).__name__}: {exc}") from exc
     if row is None:
         raise LookupError(f"{ERR_SP_IDENTITY_WORKORDER_UNKNOWN}: {workorder}")
-    perms = json.loads(row["permissions_json"] or "{}")
-    binding = perms.get("role_binding") if isinstance(perms, dict) else None
+    # A damaged permissions document is a TYPED refusal: json.loads raises JSONDecodeError (a
+    # ValueError), which is neither sqlite3.Error nor row-is-None, so unguarded it walked straight
+    # out of resolve_identity into main() with no code and no receipt (F2, 2026-10-23).
+    try:
+        perms = json.loads(row["permissions_json"] or "{}")
+    except ValueError as exc:
+        raise LookupError(f"{ERR_SP_IDENTITY_BINDING_MALFORMED}: permissions_json is not JSON "
+                          f"({type(exc).__name__}: {exc})") from exc
+    if not isinstance(perms, dict):
+        raise LookupError(f"{ERR_SP_IDENTITY_BINDING_MALFORMED}: permissions_json decoded to "
+                          f"{type(perms).__name__}, expected a JSON object")
+    binding = perms.get("role_binding")
+    if not isinstance(binding, dict) or not binding:
+        # cda8cd0's own message promised this refusal and the code behind it did not exist: a chain
+        # join with no binding would print an echo contract no authority can cross-check.
+        raise LookupError(
+            f"{ERR_SP_IDENTITY_BINDING_ABSENT}: {workorder} carries no role_binding document in its "
+            f"taskspec permissions_json; refusing the join rather than publishing a chain whose "
+            f"binding_digest nothing can verify")
     return {
         "workorder_id": row["workorder_id"],
         "taskspec_id": row["taskspec_id"],
@@ -141,14 +163,53 @@ def read_chain(spine, workorder: str) -> dict:
         "writer": row["writer"],
         "rollback_pointer": row["rollback_pointer"],
         "requirement_id": row["requirement_id"],
-        "spine_binding_present": bool(binding),
-        "spine_binding_digest": ("sha256:" + hashlib.sha256(
-            json.dumps(binding, sort_keys=True).encode()).hexdigest()) if binding else None,
+        "spine_binding_present": True,
+        # ONE binding, ONE digest (F1): this is role_binding.binding_digest, the same authority the
+        # dispatch receipt uses, not a second local json.dumps re-serialization of the same document.
+        "spine_binding_digest": "sha256:" + _binding_digest(binding),
     }
+
+
+def _binding_digest(binding: dict) -> str:
+    """Canonical digest of a role binding = the authority's own, so one binding has one digest.
+
+    Independent Challenge-SP, 2026-10-23: ``sha256(json.dumps(binding, sort_keys=True))`` put a
+    second, different hex in the same receipt next to ``role_binding_digest``, so the value the
+    injected block told an SP to echo could not be reconciled with any HGK validator. If the
+    authority helper cannot be loaded or refuses the document, the join fails typed — there is no
+    private-digest fallback, because a fallback is exactly what created the mismatch.
+    """
+    try:
+        from hg_kseos.role_binding import binding_digest as _authority_digest  # noqa: PLC0415
+        return _authority_digest(binding)
+    except Exception as exc:  # noqa: BLE001 - fail closed, never fall back to a local digest
+        raise LookupError(f"{ERR_SP_IDENTITY_DIGEST_AUTHORITY_UNAVAILABLE}: "
+                          f"{type(exc).__name__}: {exc}") from exc
 
 
 def resolve_identity(name, *, skills_root=None, lane=None, nonce=None, invocation_id=None,
                      spine=None, workorder=None) -> dict:
+    """Resolve one SP identity for a pre-spawn gate — NEVER RAISES.
+
+    F2 (independent Challenge-SP, 2026-10-23): a resolver that raises escapes the typed-refusal
+    contract — the traceback lands in main() with no code and no receipt, and past the zero-spawn
+    boundary. Anything the inner resolver cannot classify comes back as ERR_SP_IDENTITY_INTERNAL so
+    the dispatcher refuses with it like any other pre-spawn result. The inner resolver's own
+    contract is unchanged; see _resolve_identity_inner.
+    """
+    try:
+        return _resolve_identity_inner(name, skills_root=skills_root, lane=lane, nonce=nonce,
+                                       invocation_id=invocation_id, spine=spine, workorder=workorder)
+    except Exception as exc:  # noqa: BLE001 - the gate refuses typed instead of tracebacking
+        return {"ok": False, "code": ERR_SP_IDENTITY_INTERNAL,
+                "detail": f"{type(exc).__name__}: {exc}",
+                "identity": {"schema": SCHEMA, "ok": False, "sp": str(name),
+                             "code": ERR_SP_IDENTITY_INTERNAL, "claim_ceiling": CLAIM_CEILING,
+                             "issued_permit": False, "signed_acceptance": False}}
+
+
+def _resolve_identity_inner(name, *, skills_root=None, lane=None, nonce=None, invocation_id=None,
+                            spine=None, workorder=None) -> dict:
     """Resolve one SP identity for a pre-spawn gate.
 
     Returns {"ok": bool, "code": str|None, "detail": str|None, "identity": {...}}. On failure the
