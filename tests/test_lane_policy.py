@@ -51,6 +51,30 @@ def _registry_path(root: Path) -> Path:
     return Path(root) / "config" / "lane-routing-registry.yaml"
 
 
+def _open_declared_conflict(registry: dict, maker: str, checker: str) -> bool:
+    """Is this demoted pair covered by a STILL-OPEN declared conflict?
+
+    This is the predicate behind "a demoted pair must have an OPEN declared conflict", and it is
+    exact on both axes: the conflict must NAME this pair (one of its ``pairs`` entries, either
+    order) AND its status must still be open (``OPEN...``, e.g. ``OPEN_OWNER_ORDERED``).
+
+    It used to be written inline and its filter ended in ``... or True``, so every entry passed the
+    filter: the assertion could then only fail when ``declared_conflicts`` was EMPTY, and it never
+    checked either the pair or the status. That is the vacuity defect the independent checker filed
+    under matrix row M01 (measured 2026-10-23: ``grep -n "or True" tests/test_lane_policy.py``).
+    ``test_registry_and_projection_shape`` now drives BOTH this predicate and its two negative
+    halves, so removing either half of the condition turns that test RED.
+    """
+    conflicts = ((registry.get("sod_invariants") or {}).get("declared_conflicts")) or []
+    for conflict in conflicts:
+        if not str(conflict.get("status") or "").startswith("OPEN"):
+            continue
+        for named in (conflict.get("pairs") or []):
+            if maker in named and checker in named:
+                return True
+    return False
+
+
 # --------------------------------------------------------------------------------------------------
 # pointer mutation helper (for crafting injected drift)
 # --------------------------------------------------------------------------------------------------
@@ -142,10 +166,27 @@ class TestLanePolicyConformance(unittest.TestCase):
             else:
                 self.assertFalse(ok,
                     f"{pair['maker']}~{pair['checker']} is declared OPEN: collision must be real")
-                self.assertTrue(any(c.get("status", "").startswith("OPEN") for c in registry["sod_invariants"].get("declared_conflicts", [])
-                                    if pair["maker"] in (c.get("pairs") or [[]])[0]
-                                    and pair["checker"] in (c.get("pairs") or [[], []])[0 if len((c.get("pairs") or [[]])[0]) else 0] or True),
-                    "demoted pair must have an OPEN declared conflict")
+                self.assertTrue(
+                    _open_declared_conflict(registry, pair["maker"], pair["checker"]),
+                    "demoted pair must have an OPEN declared conflict naming both lanes")
+                # NON-VACUITY of the predicate above: on the SAME registry, each half of its
+                # condition must be able to make it say NO. Without these two the predicate
+                # degrades to "declared_conflicts is non-empty" -- which is exactly what the
+                # `or True` it replaced did, and why the defect was invisible while green.
+                closed = copy.deepcopy(registry)
+                for conflict in closed["sod_invariants"]["declared_conflicts"]:
+                    if str(conflict.get("status") or "").startswith("OPEN"):
+                        conflict["status"] = "SUPERSEDED"
+                self.assertFalse(
+                    _open_declared_conflict(closed, pair["maker"], pair["checker"]),
+                    "a conflict that is no longer OPEN must not satisfy the predicate")
+                unlisted = copy.deepcopy(registry)
+                for conflict in unlisted["sod_invariants"]["declared_conflicts"]:
+                    conflict["pairs"] = [named for named in (conflict.get("pairs") or [])
+                                         if not (pair["maker"] in named and pair["checker"] in named)]
+                self.assertFalse(
+                    _open_declared_conflict(unlisted, pair["maker"], pair["checker"]),
+                    "a conflict that does not name this pair must not satisfy the predicate")
                 # identity must be resolvable even when collision is declared (fail-closed on missing ids)
                 self.assertTrue(maker and checker, "collision-declared pair must still resolve identities")
 

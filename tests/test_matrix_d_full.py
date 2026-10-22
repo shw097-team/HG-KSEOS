@@ -21,9 +21,13 @@ import unittest
 from tests.test_role_binding_enforcement import (  # noqa: E402
     BASE,
     HGK_PY,
+    MANDATED_EXECUTE_ARM,
+    POOL_EXECUTE_DEFAULT_ARM,
     ROOT,
     WO,
     _binding,
+    _execute_arms,
+    _non_default_arm,
     disp,
 )
 
@@ -66,10 +70,14 @@ class M06(unittest.TestCase):
         return tmpdir / "spine.db"
 
     def test_argv_require_arm_conflicting_with_mandate_refused_no_spawn(self):
-        # The mandated EXECUTE arm is (opencode-go, minimax-m3.1-flash-free). We assert a DIFFERENT arm.
+        # The mandated EXECUTE arm is the pool's NON-default arm (read from
+        # config/lane-route-slots.candidate.json as INPUT -- today opencode-go/minimax-m3.1-flash-free
+        # at rank 2; rank 1 / the unpinned default is opencode-go/deepseek-v4.1-flash).
+        # We assert a DIFFERENT arm, so `mismatch` is the tested condition, not a fixture coincidence.
         mandate_arm = _binding()["roles"]["EXECUTE"]
-        self.assertEqual((mandate_arm["provider"], mandate_arm["model"]),
-                         ("opencode-go", "minimax-m3.1-flash-free"))
+        self.assertEqual((mandate_arm["provider"], mandate_arm["model"], mandate_arm["rank"]),
+                         (MANDATED_EXECUTE_ARM["provider"], MANDATED_EXECUTE_ARM["model"],
+                          MANDATED_EXECUTE_ARM["rank"]))
         conflicting = "openai-codex/gpt-6.1-sol"
         self.assertNotEqual(conflicting, f'{mandate_arm["provider"]}/{mandate_arm["model"]}')
 
@@ -126,13 +134,21 @@ class M07(unittest.TestCase):
         return tmpdir / "spine.db"
 
     def test_omitted_require_arm_cannot_escape_mandate(self):
-        # The persisted mandate binds EXECUTE to (opencode-go, minimax-m3.1-flash-free) at rank 1.
+        # The persisted mandate binds EXECUTE to the pool's NON-default arm. The arm and its rank
+        # are read from config/lane-route-slots.candidate.json as INPUT (today opencode-go/
+        # minimax-m3.1-flash-free at rank 2; the unpinned default is opencode-go/deepseek-v4.1-flash
+        # at rank 1), so the next re-bind moves this fixture instead of breaking it -- pool rev21
+        # (9c36a77), which moved EXECUTE off minimax, is what broke it as a literal pin.
+        pool_mandate = _non_default_arm(_execute_arms())
         mandate_arm = _binding()["roles"]["EXECUTE"]
         mandated = f'{mandate_arm["provider"]}/{mandate_arm["model"]}'
-        self.assertEqual(mandated, "opencode-go/minimax-m3.1-flash-free")
-        # An argv DEFAULT would be some OTHER arm; the binding must overrule it, not vice-versa.
-        self.assertNotEqual(mandated, f'{_binding()["roles"]["PLAN"]["provider"]}/'
-                                      f'{_binding()["roles"]["PLAN"]["model"]}')
+        self.assertEqual(mandated, pool_mandate["arm"])
+        self.assertEqual(mandate_arm["rank"], pool_mandate["rank"])
+        # An UNPINNED dispatch takes the pool's rank-1 default; the binding must overrule it, not
+        # vice-versa. (The original assertion compared against the PLAN arm as a stand-in for
+        # "some other arm"; the pool's own default is the exact comparison, and it is the arm the
+        # receipt below proves was NOT taken: candidates [rank] instead of every dispatchable rank.)
+        self.assertNotEqual(mandated, POOL_EXECUTE_DEFAULT_ARM["arm"])
 
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-m07a-",
                                             dir=str(ROOT.parent / "TEST_RESULTS")))
@@ -204,10 +220,12 @@ class M08(unittest.TestCase):
     the argv ``--nonce``. That isolates the SURFACE as the only intended defect, and the turn must
     still be REFUSED rather than completed.
 
-    Rationale (recorded): the mandated EXECUTE arm is (opencode-go, minimax-m3.1-flash-free); a usage
-    receipt naming a different provider/model is not this turn's receipt, so it is never counted as
-    an ``answered`` arm. If this run instead COMPLETES (``ok`` true) that is a REAL finding: STOP and
-    report it as NOT_RUN with the exact receipt -- the code change would be a SEPARATE successor.
+    Rationale (recorded): the mandated EXECUTE arm is the pool's non-default arm -- read from
+    config/lane-route-slots.candidate.json as INPUT (today opencode-go/minimax-m3.1-flash-free at
+    rank 2; rank 1 is opencode-go/deepseek-v4.1-flash). A usage receipt naming a different
+    provider/model is not this turn's receipt, so it is never counted as an ``answered`` arm. If
+    this run instead COMPLETES (``ok`` true) that is a REAL finding: STOP and report it as
+    NOT_RUN with the exact receipt -- the code change would be a SEPARATE successor.
     """
 
     def _run(self, extra, tmpdir, spine_db):
@@ -239,10 +257,11 @@ class M08(unittest.TestCase):
         return tmpdir / "spine.db"
 
     def test_foreign_surface_usage_receipt_cannot_complete(self):
-        # The mandated EXECUTE arm is (opencode-go, minimax-m3.1-flash-free) at rank 1.
+        # The mandated EXECUTE arm is the pool's non-default arm (pool as INPUT; today rank 2).
         mandate_arm = _binding()["roles"]["EXECUTE"]
         mandated = f'{mandate_arm["provider"]}/{mandate_arm["model"]}'
-        self.assertEqual(mandated, "opencode-go/minimax-m3.1-flash-free")
+        self.assertEqual(mandated, MANDATED_EXECUTE_ARM["arm"])
+        self.assertEqual(mandate_arm["rank"], MANDATED_EXECUTE_ARM["rank"])
         foreign = "openrouter/anthropic/claude-opus-4.8"
         self.assertNotEqual(mandated, foreign)
 
@@ -305,7 +324,8 @@ class M08(unittest.TestCase):
         """
         mandate_arm = _binding()["roles"]["EXECUTE"]
         mandated = f'{mandate_arm["provider"]}/{mandate_arm["model"]}'
-        self.assertEqual(mandated, "opencode-go/minimax-m3.1-flash-free")
+        self.assertEqual(mandated, MANDATED_EXECUTE_ARM["arm"])
+        self.assertEqual(mandate_arm["rank"], MANDATED_EXECUTE_ARM["rank"])
         nonce = "M08-CONTROL"
 
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-m08ctl-",

@@ -43,7 +43,73 @@ def _mandate_digest() -> str:
     return "sha256:" + hashlib.sha256(b"mandate").hexdigest()
 
 
+def _lane_arms(lane: str) -> list[dict]:
+    """That lane's deployment plane, read from the pool artifact as a test INPUT.
+
+    Same shape as ``tests/test_matrix_m02_resume.py::_execute_arms()``: the fixture follows the
+    pool instead of pinning a model name, so a re-bind changes this fixture rather than breaking
+    it. Pool rev21 (``9c36a77``, 2026-10-23) moved EXECUTE off
+    ``opencode-go/minimax-m3.1-flash-free`` and every literal pin in these two test modules had to
+    be chased by hand -- that is the defect this helper exists to prevent.
+    """
+    doc = json.loads(REAL_POOL.read_text(encoding="utf-8"))
+    lane_doc = next((entry for entry in doc["lanes"] if entry.get("lane") == lane), None)
+    if lane_doc is None:
+        raise AssertionError(f"{lane} is not declared in {REAL_POOL}")
+    arms: list[dict] = []
+    for entry in lane_doc["ordered_pool"]:
+        if not isinstance(entry, dict):
+            continue
+        arms.append({"rank": int(entry["rank"]), "provider": str(entry["provider"]),
+                     "model": str(entry["model"]), "default": bool(entry.get("default")),
+                     "reasoning_effort": entry.get("reasoning_effort"),
+                     "arm": f"{entry['provider']}/{entry['model']}"})
+    if not arms:
+        raise AssertionError(f"{lane} ordered_pool is empty in {REAL_POOL}")
+    return arms
+
+
+def _execute_arms() -> list[dict]:
+    """The EXECUTE plane. Two arms are required: with one, no fixture can move OFF the default."""
+    arms = _lane_arms("EXECUTE")
+    if len(arms) < 2:
+        raise AssertionError(f"the EXECUTE pool must carry at least two arms, got {arms!r}")
+    return arms
+
+
+def _non_default_arm(arms: list[dict]) -> dict:
+    """An arm that is NOT the pool's own default (rationale copied from the reference impl).
+
+    Binding the pool's rank-1 default would let a dispatcher that NEVER read the persisted binding
+    produce the same arm, so "the binding drove the selection" would prove nothing. Binding a
+    non-default arm makes those assertions carry weight: the run has to be moved OFF the default.
+    MEASURED 2026-10-23 with the M07a harness (receipt fields):
+
+      unbound (no binding)          -> mode ``pinned_primary``, candidates [1, 2, 4],
+                                        required_arm / binding_forced_rank / role_binding_arm all null
+      bound to the non-default arm  -> mode ``forced_rank``,   candidates [2],
+                                        required_arm = role_binding_arm = the bound arm
+
+    Either binding is non-vacuous on the null fields; only the NON-DEFAULT binding additionally
+    proves the assertion the test's own prose makes -- that the binding overrules the arm an
+    unpinned dispatch would have taken.
+    """
+    for arm in arms:
+        if not arm["default"]:
+            return arm
+    raise AssertionError(f"the EXECUTE pool declares no non-default arm: {arms!r}")
+
+
+# The mandate every fixture in this module binds on the EXECUTE lane, and the arm an unpinned
+# dispatch would take instead (the comparison the M07a prose is about).
+MANDATED_EXECUTE_ARM = _non_default_arm(_execute_arms())
+POOL_EXECUTE_DEFAULT_ARM = _execute_arms()[0]
+
+
 def _binding(**over) -> dict:
+    execute = MANDATED_EXECUTE_ARM
+    plan = _lane_arms("PLAN")[0]
+    verify = _lane_arms("VERIFY_SECURITY")[0]
     doc = {
         "schema": role_binding.ROLE_BINDING_SCHEMA,
         "round": ROUND,
@@ -54,13 +120,19 @@ def _binding(**over) -> dict:
         "scope": ["hgk/src/hg_kseos/role_binding.py", "hgk/scripts/hgk-lane-dispatch.py"],
         "expiry": EXPIRY,
         "mandate_digest": _mandate_digest(),
+        # Every arm (provider / model / rank / reasoning_effort) comes from the pool artifact, so
+        # the binding is INTERNALLY consistent with the ranks the dispatcher derives from it -- a
+        # binding that named a pool arm at the wrong rank is exactly what made rev21 refuse with
+        # ERR_LANE_REQUIRED_ARM_ABSENT. Only `surface` is a role property, not pool state.
         "roles": {
-            "EXECUTE": {"provider": "opencode-go", "model": "minimax-m3.1-flash-free",
-                        "surface": "codex-cli", "rank": 1, "reasoning_effort": "medium"},
-            "VERIFY_SECURITY": {"provider": "opencode-go", "model": "glm-5.3-flash",
-                                "surface": "codex-cli", "rank": 2},
-            "PLAN": {"provider": "openai-codex", "model": "gpt-6.1-sol",
-                     "surface": "Hermes-internal", "rank": 1, "reasoning_effort": "medium"},
+            "EXECUTE": {"provider": execute["provider"], "model": execute["model"],
+                        "surface": "codex-cli", "rank": execute["rank"],
+                        "reasoning_effort": execute["reasoning_effort"]},
+            "VERIFY_SECURITY": {"provider": verify["provider"], "model": verify["model"],
+                                "surface": "codex-cli", "rank": verify["rank"]},
+            "PLAN": {"provider": plan["provider"], "model": plan["model"],
+                     "surface": "Hermes-internal", "rank": plan["rank"],
+                     "reasoning_effort": plan["reasoning_effort"]},
         },
     }
     doc.update(over)
@@ -68,12 +140,16 @@ def _binding(**over) -> dict:
 
 
 def _evidence(**over) -> dict:
+    # served_arm names the SAME arm the binding declares for the VERIFY role, so the two can never
+    # drift apart: validate_role_evidence refuses on ERR_ROLE_EVIDENCE_SERVED_ARM_MISMATCH.
+    verify = _binding()["roles"]["VERIFY_SECURITY"]
     doc = {
         "workorder": WO, "session": SESSION, "round": ROUND, "subject": SUBJECT,
         "mandate_digest": _mandate_digest(), "role": "VERIFY_SECURITY", "surface": "codex-cli",
         "artifact_digest": "sha256:" + hashlib.sha256(b"artifact").hexdigest(),
-        "checker_identity": "codex-cli-independent-glm", "guard": "CLEAN",
-        "lane_receipt": {"ok": True, "code": None, "served_arm": "opencode-go/glm-5.3-flash",
+        "checker_identity": "codex-cli-independent-checker", "guard": "CLEAN",
+        "lane_receipt": {"ok": True, "code": None,
+                         "served_arm": f'{verify["provider"]}/{verify["model"]}',
                          "receipt_path": "TEST_RESULTS/verify.receipt.json",
                          "receipt_digest": "sha256:" + hashlib.sha256(b"receipt").hexdigest()},
         "log_refs": [{"path": "TEST_RESULTS/verify.stdout.txt",
@@ -123,7 +199,15 @@ class PureValidator(unittest.TestCase):
     def test_positive_resolves_arm_and_rank_from_same_binding(self):
         out = role_binding.validate_binding(_binding(), lane="EXECUTE", session=SESSION, round=ROUND)
         arm = role_binding.resolve_arm(out["binding"], "EXECUTE")
-        self.assertEqual((arm["provider"], arm["model"], arm["rank"]), ("opencode-go", "minimax-m3.1-flash-free", 1))
+        # The resolved arm IS the pool's arm (INPUT), not a literal this test could restate.
+        expected = MANDATED_EXECUTE_ARM
+        self.assertEqual((arm["provider"], arm["model"], arm["rank"]),
+                         (expected["provider"], expected["model"], expected["rank"]))
+        self.assertIn(f'{arm["provider"]}/{arm["model"]}', [a["arm"] for a in _execute_arms()])
+        # Non-vacuity: the fixture deliberately binds a NON-default arm, so this equality can only
+        # pass if resolve_arm really read provider/model/rank out of the binding document.
+        self.assertNotEqual(f'{arm["provider"]}/{arm["model"]}', POOL_EXECUTE_DEFAULT_ARM["arm"],
+                            "the fixture must not bind the pool default (see _non_default_arm)")
 
     def test_negative_evidence_bad_guards(self):
         binding = _binding()
@@ -178,7 +262,8 @@ class SpineConsumer(unittest.TestCase):
         spine = self._seed({role_binding.ROLE_BINDING_KEY: _binding()})
         result = spine.record_workorder_result(WO, "writer-a", "glm-checker", "PASS", ["E1"],
                                                role_evidence=_evidence())
-        self.assertEqual(result["role_evidence"]["arm"], "opencode-go/glm-5.3-flash")
+        # The arm on the recorded evidence is the pool's VERIFY arm, carried through _evidence().
+        self.assertEqual(result["role_evidence"]["arm"], _lane_arms("VERIFY_SECURITY")[0]["arm"])
         with spine.connect() as c:
             state = c.execute("SELECT state FROM workorders WHERE workorder_id=?", (WO,)).fetchone()
         self.assertEqual(state["state"], "VERIFIED")
@@ -263,12 +348,14 @@ class DispatcherPreSpawn(unittest.TestCase):
         db = self._persist_spine(tmp, deliverable={
             "path": "deliverable.py", "sha256": hashlib.sha256(deliverable).hexdigest()})
         scratch = tmp / "usage.jsonl"
+        mandate = MANDATED_EXECUTE_ARM
         env = dict(os.environ)
         env["HGK_SPINE_DB"] = str(db)
         env["HGK_STUB_MODE"] = "clean"
         env["HGK_STUB_USAGE"] = str(scratch)
+        # The stub answers AS the arm the binding mandates (pool-derived INPUT, not a pinned model).
         env["HGK_STUB_USAGE_LINE"] = json.dumps(
-            {"provider": "opencode-go", "model": "minimax-m3.1-flash-free", "status": 200})
+            {"provider": mandate["provider"], "model": mandate["model"], "status": 200})
         cmd = [str(HGK_PY), str(ROOT / "scripts" / "hgk-lane-dispatch.py"),
                "--lane", "EXECUTE", "--prompt", "deterministic binding omission case",
                "--role-binding-file", str(bf),
@@ -281,9 +368,17 @@ class DispatcherPreSpawn(unittest.TestCase):
                            errors="replace", stdin=subprocess.DEVNULL, timeout=180, cwd=str(ROOT), env=env)
         self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
         r = json.loads((tmp / "receipt.json").read_text(encoding="utf-8"))
-        self.assertEqual(r["required_arm"], "opencode-go/minimax-m3.1-flash-free")
-        self.assertEqual(r["binding_forced_rank"], 1)
-        self.assertEqual(r["role_binding_served_arm"], "opencode-go/minimax-m3.1-flash-free")
+        self.assertEqual(r["required_arm"], mandate["arm"])
+        self.assertEqual(r["binding_forced_rank"], mandate["rank"])
+        self.assertEqual(r["role_binding_served_arm"], mandate["arm"])
+        # NON-VACUITY of "the binding forced it": the mandate is NOT the arm an unpinned dispatch
+        # takes, and only the bound rank was ever considered. MEASURED 2026-10-23, the same
+        # harness without the binding reports mode=pinned_primary, candidates [1, 2, 4] and a null
+        # required_arm, so none of these three equalities can hold by accident.
+        self.assertEqual(r["mode"], "forced_rank")
+        self.assertEqual(r["candidates_considered"], [mandate["rank"]])
+        self.assertNotEqual(mandate["arm"], POOL_EXECUTE_DEFAULT_ARM["arm"],
+                            "the fixture must not bind the pool default (see _non_default_arm)")
         self.assertEqual(r["session"], SESSION)
         self.assertEqual(r["round"], ROUND)
         self.assertEqual(r["subject"], SUBJECT)
