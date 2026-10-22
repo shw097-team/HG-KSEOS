@@ -400,16 +400,18 @@
     {
       "id": "R14-TS28",
       "title": "發行、供應鏈與 GitHub 每輪證據 E06/E07",
-      "state": "PARTIAL",
-      "next_action": "publish the new evidence files, then re-run the blob readback so identical>6",
+      "state": "DONE",
+      "next_action": "",
       "evidence": [
         "raw/ts28_release.json",
         "raw/ts28_remote_readback.json",
         "SBL_R14_RELEASE_NOTE.md",
-        "raw/ts28_readback_denominator.json"
+        "raw/ts28_readback_denominator.json",
+        "raw/ts28_remote_readback_v2.json",
+        "raw/ts28_readback_v2.py"
       ],
       "depends_on": [],
-      "note": "Packet built and locally verified: 331/331 digest entries rechecked, 0 token-shaped hits (with 28 disclosed literal-grep hits that are the scanner rules themselves), credential file excluded from the delivered set, licence inventory from package metadata only (194 HGK + 3 SBL distributions), CycloneDX-shaped SBOM with 522 components labelled SELF_AUTHORED_NO_THIRD_PARTY_SCANNER. Remote readback at the time: 6 identical / 51 different / 259 absent - the absent ones are this batch's own new files, so the honest state is 'not yet published', and complete_order_pass is false. The candidate branch has no remote on the SBL origin either, so no candidate SHA was confirmed remotely. Re-published after the batch and re-measured: of the 54 DIFFERENT entries, 53 are CRLF-only and 1 was real - the published ts03 matrix still showed scope_path_enforcement as GAP after the local re-run had closed it (TT-R14-033, re-published). The two denominators are now recorded separately: published set vs full local manifest, because 295 'absent' are repo-local artifacts never meant for the evidence branch. Candidate branch still has no remote on the SBL origin, so remote_candidate_verified stays false."
+      "note": "Packet built and locally verified: 331/331 digest entries rechecked, 0 token-shaped hits (with 28 disclosed literal-grep hits that are the scanner rules themselves), credential file excluded from the delivered set, licence inventory from package metadata only (194 HGK + 3 SBL distributions), CycloneDX-shaped SBOM with 522 components labelled SELF_AUTHORED_NO_THIRD_PARTY_SCANNER. Remote readback at the time: 6 identical / 51 different / 259 absent - the absent ones are this batch's own new files, so the honest state is 'not yet published', and complete_order_pass is false. The candidate branch has no remote on the SBL origin either, so no candidate SHA was confirmed remotely. Re-published after the batch and re-measured: of the 54 DIFFERENT entries, 53 are CRLF-only and 1 was real - the published ts03 matrix still showed scope_path_enforcement as GAP after the local re-run had closed it (TT-R14-033, re-published). The two denominators are now recorded separately: published set vs full local manifest, because 295 'absent' are repo-local artifacts never meant for the evidence branch. Candidate branch still has no remote on the SBL origin, so remote_candidate_verified stays false. CLOSED THIS ROUND: the three SBL surfaces this round publishes are now on the remote and read back equal - evidence/r14-20261022-native 9d42442 (432 files, 0 differing), candidate/r14-ts15-kinds 10d510f (456, 0), candidate/r14-openspec-20261022 1189147 (228, 0); 1116 identical blobs, far past the >6 the row asks for. The prior NOT_ADVERTISED verdict was a SCRIPT DEFECT, not a discovered failure: it compared a branch of HG-KSEOS against the SBL remote although HG-KSEOS has no git remote at all, so the comparison could never pass. That is now recorded as a local-only surface rather than a red row. Ceiling: the ORCHESTRATOR repository is still unpublished and this round makes no claim that it is remotely verifiable."
     },
     {
       "id": "R14-TS29",
