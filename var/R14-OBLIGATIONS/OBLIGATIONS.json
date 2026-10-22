@@ -245,10 +245,13 @@
       "state": "DONE",
       "next_action": "",
       "evidence": [
-        "raw/ts18_gknow.md",
-        "raw/final_r14_full14.log",
-        "HG-KSEOS src/hg_kseos/knowledge.py citation_integrity/detect_conflicts",
-        "HG-KSEOS src/hg_kseos/security.py INJECTION_PATTERNS (CJK set)"
+        "raw/ts18_gknow_negatives.json",
+        "raw/ts18_gknow_negatives.md",
+        "raw/ts18_verification.json",
+        "raw/ts18_run_result.json",
+        "raw/ts18_sources_and_anchors.json",
+        "HG-KSEOS/src/hg_kseos/knowledge.py",
+        "HG-KSEOS/src/hg_kseos/security.py"
       ],
       "depends_on": [],
       "note": "All three named unenforced cases are now enforced with their own regressions: (1) live citation - citation_integrity() re-hashes the source bytes and verify_citation raises ERR_CITATION_SOURCE_DRIFT on change (require_source_bytes=True also refuses an unreadable source instead of passing silently); (2) CJK authority escalation - five CJK patterns matching the five English acts, tested positive on three escalation strings and NEGATIVE on ordinary Chinese prose so the filter is not a blanket block; (3) cross-source contradiction - detect_conflicts() reports the same (subject,predicate) with different objects plus both doc ids, and rebuild() now returns a conflicts count. What is deliberately NOT automated: adjudicating which claim wins - that stays a reviewer act, and the report says so."
@@ -412,12 +415,12 @@
       "state": "DONE",
       "next_action": "",
       "evidence": [
-        "raw/ts28_release.json",
-        "raw/ts28_remote_readback.json",
-        "SBL_R14_RELEASE_NOTE.md",
-        "raw/ts28_readback_denominator.json",
+        "raw/ts28_SBL_R14_RELEASE_NOTE.md",
         "raw/ts28_remote_readback_v2.json",
-        "raw/ts28_readback_v2.py"
+        "raw/ts28_digest_manifest.json",
+        "raw/ts28_sbom.json",
+        "raw/ts28_secret_scan.json",
+        "raw/ts28_licence_inventory.json"
       ],
       "depends_on": [],
       "note": "Packet built and locally verified: 331/331 digest entries rechecked, 0 token-shaped hits (with 28 disclosed literal-grep hits that are the scanner rules themselves), credential file excluded from the delivered set, licence inventory from package metadata only (194 HGK + 3 SBL distributions), CycloneDX-shaped SBOM with 522 components labelled SELF_AUTHORED_NO_THIRD_PARTY_SCANNER. Remote readback at the time: 6 identical / 51 different / 259 absent - the absent ones are this batch's own new files, so the honest state is 'not yet published', and complete_order_pass is false. The candidate branch has no remote on the SBL origin either, so no candidate SHA was confirmed remotely. Re-published after the batch and re-measured: of the 54 DIFFERENT entries, 53 are CRLF-only and 1 was real - the published ts03 matrix still showed scope_path_enforcement as GAP after the local re-run had closed it (TT-R14-033, re-published). The two denominators are now recorded separately: published set vs full local manifest, because 295 'absent' are repo-local artifacts never meant for the evidence branch. Candidate branch still has no remote on the SBL origin, so remote_candidate_verified stays false. CLOSED THIS ROUND: the three SBL surfaces this round publishes are now on the remote and read back equal - evidence/r14-20261022-native 9d42442 (432 files, 0 differing), candidate/r14-ts15-kinds 10d510f (456, 0), candidate/r14-openspec-20261022 1189147 (228, 0); 1116 identical blobs, far past the >6 the row asks for. The prior NOT_ADVERTISED verdict was a SCRIPT DEFECT, not a discovered failure: it compared a branch of HG-KSEOS against the SBL remote although HG-KSEOS has no git remote at all, so the comparison could never pass. That is now recorded as a local-only surface rather than a red row. Ceiling: the ORCHESTRATOR repository is still unpublished and this round makes no claim that it is remotely verifiable."
