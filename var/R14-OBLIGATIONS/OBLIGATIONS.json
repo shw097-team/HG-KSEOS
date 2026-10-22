@@ -234,10 +234,11 @@
         "raw/ts17_matrix_v2.md",
         "raw/ts17_matrix_v2_verification.json",
         "raw/ts17_matrix_v2_measure.py",
-        "raw/ts17_v2_execution_*.json"
+        "raw/ts17_v2_execution_*.json",
+        "raw/ts17_reexec_v3.json"
       ],
       "depends_on": [],
-      "note": "32/32 case-bearing rows were executed, each with its own command, exit code, timestamp and output tail; 30/96 RUNTIME_QUALIFIED strictly at schema-oracle scope; 66 DECLARED_ONLY (64 with no row-specific executable case, 2 real enforcement failures - tqaep NEG-001 semantic.distinct and package-project NEG-001 semantic.claim_gate are both ACCEPTED by their schemas); 0 NO_ORACLE. Dimension, stated precisely this time: the supplied matrix ARTEFACT is 12 TestClass x 8 skills while DOC-08's normative matrix is TestClass x OracleTypes - no equivalence was invented (TT-R14-037 corrects my earlier note). Qualification = executed once on this host at commit d09dda0, not functional or native qualification. MEASURED THIS ROUND on the DOC-08 axis: 768 cells = 8 skills x 12 TestClasses x 8 OracleTypes, of which **32 RUNTIME_QUALIFIED** (DETERMINISTIC only, 4 TestClasses x 8 skills) and **736 DECLARED_ONLY**. The previous artefact was TestClass x 8 skills (wrong axis, TT-R14-037); this one is TestClass x OracleTypes as DOC-08 requires and states its own ceiling: SCHEMA_AND_PURE_SEMANTIC_CONTRACT_ONLY, full_doc08_functional_native_qualification false on every cell, i.e. 0 functional-native cells. Independently checked here: all 32 cells record exit_code 0, their evidence files exist, and the recorded sha256 equals the live file for 32/32. Two cells are the measured proof the oracle adds value: pipd-assurance-tqaep/NEG-001 and pipd-package-project/NEG-001 are ACCEPTED by their own schema and VIOLATED by the runtime oracle."
+      "note": "32/32 case-bearing rows were executed, each with its own command, exit code, timestamp and output tail; 30/96 RUNTIME_QUALIFIED strictly at schema-oracle scope; 66 DECLARED_ONLY (64 with no row-specific executable case, 2 real enforcement failures - tqaep NEG-001 semantic.distinct and package-project NEG-001 semantic.claim_gate are both ACCEPTED by their schemas); 0 NO_ORACLE. Dimension, stated precisely this time: the supplied matrix ARTEFACT is 12 TestClass x 8 skills while DOC-08's normative matrix is TestClass x OracleTypes - no equivalence was invented (TT-R14-037 corrects my earlier note). Qualification = executed once on this host at commit d09dda0, not functional or native qualification. MEASURED THIS ROUND on the DOC-08 axis: 768 cells = 8 skills x 12 TestClasses x 8 OracleTypes, of which **32 RUNTIME_QUALIFIED** (DETERMINISTIC only, 4 TestClasses x 8 skills) and **736 DECLARED_ONLY**. The previous artefact was TestClass x 8 skills (wrong axis, TT-R14-037); this one is TestClass x OracleTypes as DOC-08 requires and states its own ceiling: SCHEMA_AND_PURE_SEMANTIC_CONTRACT_ONLY, full_doc08_functional_native_qualification false on every cell, i.e. 0 functional-native cells. Independently checked here: all 32 cells record exit_code 0, their evidence files exist, and the recorded sha256 equals the live file for 32/32. Two cells are the measured proof the oracle adds value: pipd-assurance-tqaep/NEG-001 and pipd-package-project/NEG-001 are ACCEPTED by their own schema and VIOLATED by the runtime oracle. RE-EXECUTION CLOSED THE EARLIER STATIC LIMIT: the 32 RUNTIME_QUALIFIED cells were re-run this round without a shell (the recorded command split into env assignments plus argv, PYTHONPATH cleared, executable anchored to the recorded cwd): 32/32 REPRODUCED - recorded exit codes matched and every evidence file's sha256 is unchanged. The claim ceiling is unchanged: 736 cells remain DECLARED_ONLY, functional-native DOC-08 qualification is still 0, and 7 OracleTypes still have no executor in the repository."
     },
     {
       "id": "R14-TS18",
@@ -260,38 +261,47 @@
       "id": "R14-TS19",
       "title": "50 Parent／149 Child 全程追溯 M4",
       "state": "PARTIAL",
-      "next_action": "upstream historical pointers cite files absent on this host; nothing can make them verifiable here",
+      "next_action": "locators are settled and proven; what remains is that no row carries an execution receipt, and TS19's upstream exists only as a preserved deleted copy - an owner decision on whether a recycle-bin copy may serve as the upstream of record.",
       "evidence": [
         "raw/ts1921_evidence_anchors.csv",
         "raw/ts1921_evidence_SUMMARY.json",
-        "raw/ts1921_evidence_SUMMARY.md"
+        "raw/ts1921_evidence_SUMMARY.md",
+        "raw/ts1921_locator_repair_v2.json",
+        "raw/ts1921_absence_proof.json",
+        "raw/ts20_sources_repaired.csv"
       ],
       "depends_on": [],
-      "note": "629 rows measured one locator at a time. Primary anchors: TS19 149/149, TS20 435/441, TS21 38/38 VERIFIED. Fully-verified (every locator in the row): TS19 0/149, TS20 24/441, TS21 38/38 - the shortfall is entirely the recorded upstream_locator pointing at SBL_PIPD-LS-PKG_全DOC藍圖(8).md, which is absent at the cited path. I checked whether the similarly-named canonical 全DOC藍圖.md is the same document: its file sha256 is 3ddb214e... and the cited line 3676 carries unrelated NOBJ24 content, while the row records @8e8327db..., so it is a DIFFERENT document and may not be substituted. 0/628 rows carry an execution receipt."
+      "note": "629 rows measured one locator at a time. Primary anchors: TS19 149/149, TS20 435/441, TS21 38/38 VERIFIED. Fully-verified (every locator in the row): TS19 0/149, TS20 24/441, TS21 38/38 - the shortfall is entirely the recorded upstream_locator pointing at SBL_PIPD-LS-PKG_全DOC藍圖(8).md, which is absent at the cited path. I checked whether the similarly-named canonical 全DOC藍圖.md is the same document: its file sha256 is 3ddb214e... and the cited line 3676 carries unrelated NOBJ24 content, while the row records @8e8327db..., so it is a DIFFERENT document and may not be substituted. 0/628 rows carry an execution receipt. LOCATOR SETTLEMENT (verified independently, not taken from the delegate's word): 1202 cited-path rows are settled - 642 resolve at the cited path and 560 resolve to a byte-identical instance, 0 unrepairable, 0 found with different bytes. 441 TS20 rows now carry 441 DISTINCT row_digests (the old file-level digest repeated on every row is gone), and the legacy value is explained: it is the sha256 of the 90621-byte identity ledger itself. I rehashed 200 rows against the recorded digests: 200 match, 0 mismatch. LIMIT THAT KEEPS THIS PARTIAL: none of the 628 rows has an execution receipt, and TS19's upstream blueprint resolves only to a DELETED copy inside $Recycle.Bin (2619602 B, 8e8327dbc53be8a1722d1cd5...) - it is absent from every live location, so the governing upstream is preserved but not in place. The bytes are now also stored in the evidence branch under upstream/ with the same digest."
     },
     {
       "id": "R14-TS20",
       "title": "441 source identities／OSS 導入 M4",
       "state": "PARTIAL",
-      "next_action": "411 rows cite SpecBuild_整合工程總藍圖_v2.0r1(1).md which is absent; and the inventory's digest column is not per-row",
+      "next_action": "locators are settled and proven; what remains is that no row carries an execution receipt, and TS19's upstream exists only as a preserved deleted copy - an owner decision on whether a recycle-bin copy may serve as the upstream of record.",
       "evidence": [
         "raw/ts1921_evidence_anchors.csv",
-        "raw/ts1921_evidence_SUMMARY.json"
+        "raw/ts1921_evidence_SUMMARY.json",
+        "raw/ts1921_locator_repair_v2.json",
+        "raw/ts1921_absence_proof.json",
+        "raw/ts20_sources_repaired.csv"
       ],
       "depends_on": [],
-      "note": "435/441 primary anchors VERIFIED, 6 CONTENT_MISMATCH (canonical lines name the donor but not its id). The 411 missing upstream pointers cite _v2.0r1(1).md; the two canonical _v2.0r1.md copies both hash 83ea1bef... but there is no per-row digest to prove aliasing - see TT-R14-031."
+      "note": "435/441 primary anchors VERIFIED, 6 CONTENT_MISMATCH (canonical lines name the donor but not its id). The 411 missing upstream pointers cite _v2.0r1(1).md; the two canonical _v2.0r1.md copies both hash 83ea1bef... but there is no per-row digest to prove aliasing - see TT-R14-031. LOCATOR SETTLEMENT (verified independently, not taken from the delegate's word): 1202 cited-path rows are settled - 642 resolve at the cited path and 560 resolve to a byte-identical instance, 0 unrepairable, 0 found with different bytes. 441 TS20 rows now carry 441 DISTINCT row_digests (the old file-level digest repeated on every row is gone), and the legacy value is explained: it is the sha256 of the 90621-byte identity ledger itself. I rehashed 200 rows against the recorded digests: 200 match, 0 mismatch. LIMIT THAT KEEPS THIS PARTIAL: none of the 628 rows has an execution receipt, and TS19's upstream blueprint resolves only to a DELETED copy inside $Recycle.Bin (2619602 B, 8e8327dbc53be8a1722d1cd5...) - it is absent from every live location, so the governing upstream is preserved but not in place. The bytes are now also stored in the evidence branch under upstream/ with the same digest."
     },
     {
       "id": "R14-TS21",
       "title": "38 surfaces／五工具分發 M4",
       "state": "DONE",
-      "next_action": "",
+      "next_action": "locators are settled and proven; what remains is that no row carries an execution receipt, and TS19's upstream exists only as a preserved deleted copy - an owner decision on whether a recycle-bin copy may serve as the upstream of record.",
       "evidence": [
         "raw/ts1921_evidence_anchors.csv",
-        "raw/ts1921_evidence_SUMMARY.json"
+        "raw/ts1921_evidence_SUMMARY.json",
+        "raw/ts1921_locator_repair_v2.json",
+        "raw/ts1921_absence_proof.json",
+        "raw/ts20_sources_repaired.csv"
       ],
       "depends_on": [],
-      "note": "38/38 surfaces fully anchor-verified, 0 unverified, no UTF-8/CJK decode errors. Execution receipts: 0/38, which is a separate obligation (TS12 HOST_PENDING), not a defect of the anchor check."
+      "note": "38/38 surfaces fully anchor-verified, 0 unverified, no UTF-8/CJK decode errors. Execution receipts: 0/38, which is a separate obligation (TS12 HOST_PENDING), not a defect of the anchor check. LOCATOR SETTLEMENT (verified independently, not taken from the delegate's word): 1202 cited-path rows are settled - 642 resolve at the cited path and 560 resolve to a byte-identical instance, 0 unrepairable, 0 found with different bytes. 441 TS20 rows now carry 441 DISTINCT row_digests (the old file-level digest repeated on every row is gone), and the legacy value is explained: it is the sha256 of the 90621-byte identity ledger itself. I rehashed 200 rows against the recorded digests: 200 match, 0 mismatch. LIMIT THAT KEEPS THIS PARTIAL: none of the 628 rows has an execution receipt, and TS19's upstream blueprint resolves only to a DELETED copy inside $Recycle.Bin (2619602 B, 8e8327dbc53be8a1722d1cd5...) - it is absent from every live location, so the governing upstream is preserved but not in place. The bytes are now also stored in the evidence branch under upstream/ with the same digest."
     },
     {
       "id": "R14-TS22",
