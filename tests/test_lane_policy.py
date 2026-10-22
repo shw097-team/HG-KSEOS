@@ -345,3 +345,47 @@ class TestOpenaiTransportVocabulary(unittest.TestCase):
         tv = pool.get("transport_vocabulary") or {}
         self.assertTrue(tv.get("openai_codex_bare_only"), "transport_vocabulary must record the bare-only rule")
         self.assertIn("gpt-6.1-sol", (tv.get("evidence") or {}), "the measured evidence must name gpt-6.1-sol")
+
+class PoolSelectionTests(unittest.TestCase):
+    """The pool is what the dispatcher actually reads, and nothing asserted its selection flags.
+
+    Measured 2026-10-22: after the round re-bound the chain, PLAN and EXECUTE rank 1 carried the mandated arm
+    while `default`/`automatic_selection` were still true on the OLD rank-2 arm, so an unpinned dispatch would
+    have served a different model than the registry declared. The comment in this file already pointed at a
+    test of this name; the test did not exist. This is that test.
+    """
+
+    MANDATE = {
+        "PLAN": ("openai-codex", "gpt-6.1-sol"),
+        "VERIFY_SECURITY": ("openai-codex", "gpt-6.1-sol"),
+        "EXECUTE": ("opencode-go", "minimax-m3.1-flash-free"),
+    }
+
+    def pool(self) -> dict:
+        return json.loads((_REPO_ROOT / "config" / "lane-route-slots.candidate.json").read_text(encoding="utf-8"))
+
+    def test_pool_arms_are_contiguous_and_rank_one_is_the_default(self) -> None:
+        doc = self.pool()
+        self.assertGreaterEqual(len(doc["lanes"]), 3)
+        for lane in doc["lanes"]:
+            name, arms = lane["lane"], lane["ordered_pool"]
+            self.assertTrue(arms, f"{name} pool must not be empty")
+            for i, arm in enumerate(arms):
+                self.assertIsInstance(arm, dict,
+                    f"{name} rank {i + 1} must be a JSON object, not a repr string (the dispatcher reads keys)")
+                self.assertEqual(arm.get("rank"), i + 1, f"{name} rank must equal list position")
+                self.assertIn("provider", arm); self.assertIn("model", arm)
+            defaults = [a for a in arms if a.get("default")]
+            autos = [a for a in arms if a.get("automatic_selection")]
+            self.assertEqual(len(defaults), 1, f"{name} must declare exactly one default, got {len(defaults)}")
+            self.assertEqual(len(autos), 1, f"{name} must declare exactly one automatic selection")
+            self.assertIs(defaults[0], arms[0], f"{name} default must be rank 1")
+            self.assertIs(autos[0], arms[0], f"{name} automatic_selection must be rank 1")
+            self.assertEqual((arms[0]["provider"], arms[0]["model"]), self.MANDATE[name],
+                             f"{name} rank 1 must be the owner-mandated arm")
+            # every arm must name a transport model; the openai transport requires the BARE id
+            for arm in arms:
+                self.assertIn("transport_model", arm, f"{name} arm {arm.get('model')} must declare transport_model")
+                if arm["provider"] == "openai-codex":
+                    self.assertNotIn("/", arm["transport_model"],
+                                     "the openai transport rejects provider-qualified ids with HTTP 400")
