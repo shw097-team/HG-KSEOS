@@ -137,16 +137,19 @@
     {
       "id": "R14-TS11",
       "title": "三 SP ZIP 正式可分發 E06/M1/M4",
-      "state": "PARTIAL",
-      "next_action": "no third-party scanner on this host: SBOM/licence/secret results are self-authored",
+      "state": "DONE",
+      "next_action": "",
       "evidence": [
         "raw/ts11_receipts.json",
         "raw/ts11_SUMMARY.md",
         "raw/ts11_build_output/",
-        "raw/ts11_thirdparty_scans.json"
+        "raw/ts11_thirdparty_scans.json",
+        "raw/ts11_thirdparty_scans_v2.json",
+        "raw/ts11_zip_dependency_intersection.json",
+        "_governance/round-20261022-r14/FAR_R14_5.md"
       ],
       "depends_on": [],
-      "note": "Three SP ZIPs built twice each with fixed metadata and byte-identical sha256 (tpm 7 members/4,268 B, commander 7/4,307, external-challenge 8/5,917), CRC + extraction + member digests re-verified, zero secret hits. SBOM, licence inventory and secret scan are SELF-AUTHORED: syft/pip-licenses/detect-secrets/trivy/grype all absent from PATH (recorded per tool). Positive/negative regex controls passed on synthetic input. Not a release qualification and not host installation. BASIS CHANGED: two of the five named scanners are pip-installable and were installed and run - detect-secrets 1.5.0 over the six SP ZIPs and their unpacked members: 0 findings (a first run over the whole build output reported 37 high-entropy hits, all inside our own SBOM/licence JSON sha256 values, which is scanning our own report and was excluded); pip-licenses over 144 installed distributions with a licence classification (MIT 32 / BSD-3-Clause 23 / MIT License 23 / Apache 18+15 ...). Still absent: syft (SBOM), trivy and grype (vulnerabilities) - so NO dependency vulnerability claim of any kind is made for this round."
+      "note": "Three SP ZIPs built twice each with fixed metadata and byte-identical sha256 (tpm 7 members/4,268 B, commander 7/4,307, external-challenge 8/5,917), CRC + extraction + member digests re-verified, zero secret hits. SBOM, licence inventory and secret scan are SELF-AUTHORED: syft/pip-licenses/detect-secrets/trivy/grype all absent from PATH (recorded per tool). Positive/negative regex controls passed on synthetic input. Not a release qualification and not host installation. BASIS CHANGED: two of the five named scanners are pip-installable and were installed and run - detect-secrets 1.5.0 over the six SP ZIPs and their unpacked members: 0 findings (a first run over the whole build output reported 37 high-entropy hits, all inside our own SBOM/licence JSON sha256 values, which is scanning our own report and was excluded); pip-licenses over 144 installed distributions with a licence classification (MIT 32 / BSD-3-Clause 23 / MIT License 23 / Apache 18+15 ...). Still absent: syft (SBOM), trivy and grype (vulnerabilities) - so NO dependency vulnerability claim of any kind is made for this round. CLOSED THIS ROUND: the two missing third-party sources were installed and run - cyclonedx-bom 7.5.0 generated a CycloneDX 1.6 SBOM (171 components) and pip-audit 2.10.1 consulted the PyPI advisory database (68 advisories across 9 packages, all with published fixes). The deliverable question is answered separately and decisively: all three SP packages declare ZERO runtime dependencies and are MIT, so the advisories lie outside their dependency closure. detect-secrets 1.5.0: 0 hits in the unpacked deliverable. The host-runtime advisories are NOT remediated and are registered as debt in FAR_R14_5; no claim is made that the host is clean."
     },
     {
       "id": "R14-TS12",
