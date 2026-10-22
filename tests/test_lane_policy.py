@@ -346,7 +346,12 @@ class PoolSelectionTests(unittest.TestCase):
     MANDATE = {
         "PLAN": ("opencode-go", "deepseek-v4.1-flash"),
         "VERIFY_SECURITY": ("opencode-go", "deepseek-v4.1-flash"),
-        "EXECUTE": ("opencode-go", "minimax-m3.1-flash-free"),
+        # Owner order 2026-10-23 (pool rev 21): EXECUTE rank 1 moved off
+        # opencode-go/minimax-m3.1-flash-free, which is DEPRECATED at the provider
+        # (relay returned HTTP 410 Gone on a live dispatch), to deepseek-v4.1-flash.
+        # This map pinned the pre-rebind arm; it moves with the pool so the suite
+        # does not enforce a mandate the provider no longer serves.
+        "EXECUTE": ("opencode-go", "deepseek-v4.1-flash"),
     }
 
     def pool(self) -> dict:

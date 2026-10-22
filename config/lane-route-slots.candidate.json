@@ -189,6 +189,15 @@
           "nvidia/deepseek-ai/deepseek-v4.1-flash"
         ]
       ]
+    },
+    {
+      "rev": "note-repair -> 21",
+      "utc": "20261022T183418Z",
+      "round": "FAR-R12-RESIDUAL-REPAIR",
+      "what": "Repair the rev-21 rebind's leftover selection flag: EXECUTE automatic_selection moved off the deprecated rank-2 arm (opencode-go/minimax-m3.1-flash-free, 410 Gone at the provider) onto the rank-1 arm (opencode-go/deepseek-v4.1-flash), so automatic_selection and default agree on rank 1 as tests/test_lane_policy.py::PoolSelectionTests requires. The arm ORDER is unchanged (deepseek stays rank 1); only the misplaced flag moved. A numeric revision bump is deliberately NOT taken: no arm was added, removed or re-ranked, mirroring the note-repair precedent (rev 13/15) for in-place declaration-face repairs.",
+      "measured": "Before: tests/test_lane_policy.py + test_lane_scope_isolation.py -> 1 failed (PoolSelectionTests EXECUTE automatic_selection must be rank 1), 9 passed, 90 subtests, at HEAD 1dcc59d. After this repair: both suites green (see the commit that carries it).",
+      "claim_ceiling": "CANDIDATE_ONLY. A declaration-face consistency repair, not an acceptance of any subject; the pool is not promoted and not active.",
+      "scope": "This file is inert to the drift gate (check_drift reads the registry projections vs live sites, not this pool), so this edit cannot turn the drift gate red and no registry epoch / model-lane-assignment revision bump is taken here."
     }
   ],
   "placement_rationale": "Kept as a NEW file rather than folded into config/lane-routing-registry.yaml: the registry's routes[] values are bound as 90 drift-pinned JSON pointers across three live sites, so editing it forces a fully synchronised sweep + epoch bump. This file stays inert for the drift gate (verified: validate -> exit 0 / fatal false / 90 sites).",
@@ -322,7 +331,7 @@
           "transport_model": "opencode-go/deepseek-v4.1-flash",
           "probe_note": "Owner order 2026-10-23: substituted for minimax-m3.1-flash-free after the relay returned '410 Gone: Model minimax-m3.1-flash-free has been deprecated' (measured, EXECUTE dispatch 9.21s, receipt EXECUTE__BRIEF4.json).",
           "default": true,
-          "automatic_selection": false
+          "automatic_selection": true
         },
         {
           "rank": 2,
@@ -334,7 +343,7 @@
           "transport_model": "opencode-go/minimax-m3.1-flash-free",
           "probe_note": "410 Gone measured 2026-10-23 on the relay: 'Model minimax-m3.1-flash-free has been deprecated'. Retained as a historical arm, not dispatchable until the provider restores it.",
           "default": false,
-          "automatic_selection": true,
+          "automatic_selection": false,
           "reasoning_effort": null
         },
         {
