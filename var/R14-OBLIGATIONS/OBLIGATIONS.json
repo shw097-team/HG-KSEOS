@@ -474,10 +474,11 @@
     "written_at": "2026-10-22",
     "first_action": "Read section 4: the tenth TS23 review was interrupted but had already found a SURVIVED mutation in ts23_review with mutant_ran_and_answered=true. Settle that before claiming any M2 progress.",
     "heads_at_handover": {
-      "HG-KSEOS": "c94da94",
-      "_r14_ev": "9c161c6",
+      "HG-KSEOS": "9b2214b",
+      "_r14_ev": "e6623ba",
       "SBL": "10d510f",
       "PIPD": "39079c0"
-    }
+    },
+    "suite_at_handover": "646 passed, 90 subtests, exit 0 (var/R14-OBLIGATIONS/full_suite_at_handover.log, clean tree)"
   }
 }
