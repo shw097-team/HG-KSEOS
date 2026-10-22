@@ -217,7 +217,15 @@
       ],
       "not_covered": "Auxiliary and MoA consumers are not PLAN lane effort declarations; shared delegation still needs governed per-dispatch pins."
     },
-    "delegation._changed_utc": "2026-10-15 (PLAN rebind: in-Hermes orchestration plane = GLM-5.3-Flash; live config.yaml read back)"
+    "delegation._changed_utc": "2026-10-15 (PLAN rebind: in-Hermes orchestration plane = GLM-5.3-Flash; live config.yaml read back)",
+    "delegation": {
+      "provider": "opencode-go",
+      "model": "deepseek-v4.1-flash",
+      "applied_at": "2026-10-22",
+      "reason": "owner order: GPT quota exhausted. Sub-agents run under the PLAN lane, so the delegation binding must not stay pinned to openai-codex/gpt-6.1-sol; a TS19/TS20 sub-agent died at HTTP 429 after 49 minutes under the old pin.",
+      "config_path": "config.yaml delegation.provider/model",
+      "measured_from": "config.yaml after `main.py config set`"
+    }
   },
   "sod": {
     "plan_lane": "openai-codex / gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OPEN AI OAuth) - owner mandate 2026-10-22 (R14); supersedes revision 29 which had PLAN on minimax.",

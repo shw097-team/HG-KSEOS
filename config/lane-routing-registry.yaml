@@ -9,7 +9,7 @@ authorization_basis: 'Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-so
 source_of_routes:
   path: config/model-lane-assignment.json
   revision: 31
-  sha256: 04e1efbd0e547cbf66ff9f28253a2569d9298dfa395e6e863e4ca208f78841de
+  sha256: 16fc842a8d3feec1bbe314bb57a95d966f1ebff763ba5c5d83bbe90e54cd512c
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence
     under evidence/review/
