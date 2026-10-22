@@ -466,5 +466,18 @@
       ],
       "note": "Verdict ISSUED, gate NOT passed: BLOCKED, computed from the ledger rather than argued. M1 SIGNED (4/4 under owner authorization), M2 NOT_PASSED (dogfood works, no independent acceptance), M3 BLOCKED (no W3), M4 therefore BLOCKED. 14 residual rows, each named with the principal who can close it. No semantic percentage is quoted because the TS27 denominator is unsigned."
     }
-  ]
+  ],
+  "handover": {
+    "path": "C:/Projects/Agent_Workspace/_handover/R14-SESSION-HANDOVER-20261022/SESSION_HANDOVER.md",
+    "machine_readable": "C:/Projects/Agent_Workspace/_handover/R14-SESSION-HANDOVER-20261022/state_at_handover.json",
+    "copy_in_evidence": "_r14_ev/_governance/round-20261022-r14/handover/SESSION_HANDOVER.md",
+    "written_at": "2026-10-22",
+    "first_action": "Read section 4: the tenth TS23 review was interrupted but had already found a SURVIVED mutation in ts23_review with mutant_ran_and_answered=true. Settle that before claiming any M2 progress.",
+    "heads_at_handover": {
+      "HG-KSEOS": "c94da94",
+      "_r14_ev": "9c161c6",
+      "SBL": "10d510f",
+      "PIPD": "39079c0"
+    }
+  }
 }
