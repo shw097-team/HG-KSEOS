@@ -87,6 +87,13 @@ def emit_usage(argv=()) -> str:
         return "no-usage-row"
     row = json.loads(line)
     model = served_model(argv)
+    # VERBATIM mode: M08 needs a usage row whose provider/model really is FOREIGN, i.e. a surface
+    # that was NOT served. Without this the stub rewrites the row to the served arm (its normal job),
+    # which silently turns the negative control into a positive one.
+    if (os.environ.get("HGK_STUB_USAGE_VERBATIM") or "").strip().lower() in ("1", "true", "yes"):
+        with open(path, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(row) + "\n")
+        return "verbatim-usage-row"
     # Only a well-formed row can carry a model.  A deliberately malformed row (a list, a bool,
     # a string, an int) must be emitted AS IS so the dispatcher's shape guard can count it.
     if model and isinstance(row, dict):
