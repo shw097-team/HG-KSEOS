@@ -64,6 +64,21 @@ try:
     from hg_kseos import role_binding as _role_binding  # noqa: E402
 except Exception:  # noqa: BLE001 - a missing helper must never crash the dispatcher at import
     _role_binding = None
+# D-06 (R13 follow-through): SP identity for the PRE-SPAWN gate. Loaded by path so the helper can
+# sit beside this file without putting scripts/ on sys.path (it would outrank src/ for any name the
+# two trees share). A missing helper is never a crash: the gate refuses typed instead.
+try:
+    import importlib.util as _ilu  # noqa: E402
+    _sp_spec = _ilu.spec_from_file_location("hgk_sp_identity", ROOT / "scripts" / "hgk_sp_identity.py")
+    _sp_loader = getattr(_sp_spec, "loader", None)
+    if _sp_spec is None or _sp_loader is None:
+        raise ImportError("scripts/hgk_sp_identity.py has no loader")
+    _sp_identity = _ilu.module_from_spec(_sp_spec)
+    _sp_loader.exec_module(_sp_identity)
+except Exception:  # noqa: BLE001
+    _sp_identity = None
+ERR_SP_IDENTITY_MODULE_UNAVAILABLE = "ERR_SP_IDENTITY_MODULE_UNAVAILABLE"
+ERR_SP_IDENTITY_FLAG_WITHOUT_IDENTITY = "ERR_SP_IDENTITY_FLAG_WITHOUT_IDENTITY"
 
 # Tranche B: the per-round role-binding refusals, raised PRE-SPAWN immediately before run_candidate.
 ERR_ROLE_BINDING_FILE_UNREADABLE = "ERR_ROLE_BINDING_FILE_UNREADABLE"
@@ -1495,6 +1510,29 @@ def main() -> int:
     ap.add_argument("--workorder", default=None,
                     help="the canonical WorkOrder whose persisted role_binding is the authority for a "
                          "bound (role-binding) dispatch. Required whenever a role binding is in play.")
+    # ---- D-06: SP identity at PRE-SPAWN (R13 follow-through) ------------------------------------
+    # Deliberately NOT --workorder: --workorder is the ROLE-BINDING authority and it derives the arm
+    # and rank for the turn. The SP identity only JOINs the chain (it reads ids back from the spine to
+    # bind the invocation), so it must not be able to move the arm selection, and the two authorities
+    # must never be half-supplied.
+    ap.add_argument("--sp-identity", default=None,
+                    help="SP identity to bind PRE-SPAWN: challenge (VERIFY_SECURITY) | commander (PLAN). "
+                         "The registry holds the lane binding and the procedure path; a mismatch, an "
+                         "unusable procedure or a nonce that is not the invocation id refuses with zero "
+                         "attempts instead of dispatching an identityless turn.")
+    ap.add_argument("--sp-invocation-id", default=None,
+                    help="this invocation's id (SPINV-<TAG>-<12 hex>); REQUIRED with --sp-identity and "
+                         "must equal --nonce, so the existing nonce oracle is what proves the child "
+                         "received the identity block. Mint one with hgk_sp_identity.new_invocation_id().")
+    ap.add_argument("--sp-workorder", default=None,
+                    help="optional chain join: the WorkOrder whose spine ids are read back and carried "
+                         "in the identity block. Unknown id / unreadable spine is a typed refusal.")
+    ap.add_argument("--sp-skills-root", default=None,
+                    help="root holding the SP skill packages (default: resolved from HERMES_SKILLS_ROOT "
+                         "or HERMES_HOME/skills/sbl). Operator/test seam.")
+    ap.add_argument("--sp-spine", default=None,
+                    help="Shared Spine path used for the --sp-workorder join (default: "
+                         "var/shared-spine/hg-kseos.db). Operator/test seam.")
     args = ap.parse_args()
 
     # ---- Tranche A/B: resolve the persisted per-round role binding (pre-spawn, fail-closed) ------
@@ -1735,6 +1773,51 @@ def main() -> int:
             "the supplied --nonce is blank or whitespace-only; the nonce substring test would be "
             "vacuously true and certify a turn that emitted nothing",
             say="refusing before any spawn; the oracle requires a real nonce (no empty-string bypass)"))
+
+    # ---- fail-closed SP identity gate (pre-spawn) ----------------------------------------------
+    # D-06 (R13 follow-through): R13 honestly recorded its writer/checker as LANE_ONLY, because
+    # nothing in the dispatch carried an SP identity — the lane and the SP were one thing under two
+    # names. This is the adapter that separates them. The identity is resolved, digest-pinned and
+    # INJECTED into the prompt here, before any candidate is considered, and --nonce is required to be
+    # the invocation id, so the pre-existing nonce oracle (assistant-message read on the preserved
+    # bytes) is what proves the child actually received it — no second, weaker echo check.
+    args.sp_identity_receipt = None
+    sp_dangling = [k for k, v in (("--sp-invocation-id", args.sp_invocation_id),
+                                  ("--sp-workorder", args.sp_workorder),
+                                  ("--sp-skills-root", args.sp_skills_root),
+                                  ("--sp-spine", args.sp_spine)) if v]
+    if sp_dangling and not args.sp_identity:
+        return emit_refusal(args, refusal_body(args.lane, ERR_SP_IDENTITY_FLAG_WITHOUT_IDENTITY,
+            f"{sp_dangling} given without --sp-identity: ignoring them would let a receipt read as "
+            f"carrying an identity this run never resolved",
+            say="refusing before any spawn rather than silently dropping an identity-shaped argument"))
+    if args.sp_identity:
+        if _sp_identity is None:
+            return emit_refusal(args, refusal_body(args.lane, ERR_SP_IDENTITY_MODULE_UNAVAILABLE,
+                "scripts/hgk_sp_identity.py could not be loaded",
+                sp_identity={"sp": args.sp_identity, "ok": False},
+                say="refusing before any spawn: an identity the dispatcher cannot resolve must not be "
+                    "dispatched as if it were present"))
+        resolved = _sp_identity.resolve_identity(
+            args.sp_identity, skills_root=args.sp_skills_root, lane=args.lane, nonce=args.nonce,
+            invocation_id=args.sp_invocation_id, spine=args.sp_spine or SPINE_DB,
+            workorder=args.sp_workorder)
+        ident = dict(resolved.get("identity") or {})
+        ident["ok"] = bool(resolved["ok"])
+        args.sp_identity_receipt = ident
+        if not resolved["ok"]:
+            return emit_refusal(args, refusal_body(args.lane, resolved["code"], resolved["detail"],
+                sp_identity=ident,
+                say="refusing before any spawn: the SP identity did not resolve"))
+        block = _sp_identity.build_block(ident)
+        ident["block_sha256"] = hashlib.sha256(block.encode("utf-8")).hexdigest()
+        ident["prompt_sha256_before"] = hashlib.sha256(args.prompt.encode("utf-8")).hexdigest()
+        # The injection point. Everything between here and run_candidate is a gate that can only
+        # refuse; no path re-derives the prompt, so what the child gets is exactly this.
+        args.prompt = block + "\n\n" + args.prompt
+        ident["prompt_sha256_after"] = hashlib.sha256(args.prompt.encode("utf-8")).hexdigest()
+        ident["identity_block_injected_pre_spawn"] = True
+        args.sp_identity_receipt = ident
 
     # ---- fail-closed lane-home isolation gate (pre-spawn) --------------------------------------
     # C3: the pool declares transports PER ARM, but --codex-home is a PER-RUN flag. Pointing it at a
@@ -2299,6 +2382,23 @@ def main() -> int:
         receipt["code"] = ERR_CHECKER_MUTATED_SUBJECT
         receipt["verdict_void_reason"] = (f"the guarded subject changed during the turn: "
                                           f"changed={len(mutation['changed'])} removed={len(mutation['removed'])}")
+    if args.sp_identity_receipt:
+        # D-06: the SP identity block the pre-spawn gate injected, carried on the invocation receipt,
+        # with the join proven by the run's own nonce (the gate requires --nonce == invocation id).
+        # The ERR_SP_IDENTITY_NOT_ECHOED arm is a belt over an invariant the nonce already enforces: if
+        # a future change ever let ok:true stand without the child echoing the id, the receipt voids
+        # itself instead of implying a join that was never observed.
+        sp_rec = dict(args.sp_identity_receipt)
+        real_attempts = [a for a in attempts if not a.get("injected")]
+        sp_rec["attempts"] = len(real_attempts)
+        sp_rec["invocation_id_echoed"] = any(bool(a.get("nonce_present")) for a in real_attempts)
+        if receipt["ok"] and not sp_rec["invocation_id_echoed"]:
+            receipt["ok"] = False
+            receipt["code"] = "ERR_SP_IDENTITY_NOT_ECHOED"
+            receipt["verdict_void_reason"] = (
+                "the run reported ok but no attempt echoed the SP invocation id; the identity join is "
+                "not observed and is not claimed")
+        receipt["sp_identity"] = sp_rec
     if args.json_out:
         out = Path(args.json_out)
         out.parent.mkdir(parents=True, exist_ok=True)
