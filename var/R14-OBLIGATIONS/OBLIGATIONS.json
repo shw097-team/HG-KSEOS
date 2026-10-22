@@ -165,16 +165,20 @@
     {
       "id": "R14-TS13",
       "title": "八 PIPD Skills＋Native Writer E02/M2",
-      "state": "PARTIAL",
-      "next_action": "wire the oracle into the emission path; PIPD keeps authority over its own schemas",
+      "state": "DONE",
+      "next_action": "",
       "evidence": [
         "raw/ts13_semantic_results.json",
         "raw/ts13_semantic_oracle.md",
         "HG-KSEOS src/hg_kseos/semantic_oracle.py",
-        "HG-KSEOS tests/test_semantic_oracle.py"
+        "HG-KSEOS tests/test_semantic_oracle.py",
+        "src/hg_kseos/semantic_oracle.py",
+        "tests/test_semantic_oracle.py",
+        "tests/test_acceptance_gate.py",
+        "tools/run_acceptance.py"
       ],
       "depends_on": [],
-      "note": "The two REFUSE cases the schemas accept are now refused by a runtime oracle in HG-KSEOS: check_distinct (maker/checker separation - the case text governs, and it says separation of duties, not output novelty) and check_claim_gate (a LOCAL_QUALIFIED-or-higher claim needs non-blank checker_identity and approval_receipt). Re-measured here on the real fixtures with the correct argument shape: schema ACCEPT vs oracle VIOLATED for both. My first run of the oracle returned NOT_APPLICABLE because I passed the whole case dict instead of its input - the API takes the payload, not the case envelope. PIPD is untouched, the oracle is opt-in and NOT wired into the emission path, so the gap is expressible and correct but not yet enforced automatically."
+      "note": "The two REFUSE cases the schemas accept are now refused by a runtime oracle in HG-KSEOS: check_distinct (maker/checker separation - the case text governs, and it says separation of duties, not output novelty) and check_claim_gate (a LOCAL_QUALIFIED-or-higher claim needs non-blank checker_identity and approval_receipt). Re-measured here on the real fixtures with the correct argument shape: schema ACCEPT vs oracle VIOLATED for both. My first run of the oracle returned NOT_APPLICABLE because I passed the whole case dict instead of its input - the API takes the payload, not the case envelope. PIPD is untouched, the oracle is opt-in and NOT wired into the emission path, so the gap is expressible and correct but not yet enforced automatically. CLOSED THIS ROUND: the two oracles are no longer an orphan module. tools/run_acceptance.py now calls _semantic_gate on every selected case AFTER its executor returns and BEFORE the evidence document is assembled; a VIOLATED verdict rewrites the status to BLOCKED and records the refusal inside the evidence file. tests/test_acceptance_gate.py (5 tests) drives the gate through real fixture files - aliased maker/checker refused, distinct pair satisfied, gated claim without a receipt refused, missing input NOT_APPLICABLE, and an ordering guard that fails if the gate ever moves after the evidence write. PIPD remains authoritative over its own schemas; this is an HG-KSEOS-side gate on the emission path only."
     },
     {
       "id": "R14-TS14",
