@@ -73,10 +73,18 @@ class LaneScopeIsolationTests(unittest.TestCase):
         read as the lane's binding, nor written into the registry's declaration.
         """
         registry = yaml.safe_load(REG.read_text(encoding="utf-8"))
+        declared = [c for c in registry["sod_invariants"].get("declared_conflicts", [])
+                    if c.get("status") == "OPEN_OWNER_ORDERED" and ["PLAN", "VERIFY_SECURITY"] in c.get("pairs", [])]
         for route in registry["routes"]:
             model = str(route.get("model", ""))
-            self.assertFalse(model.endswith(SESSION_ONLY_SUFFIX) and "sol" not in model and route["lane"] == "PLAN",
-                             f"PLAN must not be declared on a session-tier model: {model}")
+            session_tier = model.endswith(SESSION_ONLY_SUFFIX) and "sol" not in model
+            if route["lane"] != "PLAN" or not session_tier:
+                continue
+            # PLAN on a session-tier model is an owner decision, not an accident: it is admissible only while a
+            # declared conflict says so AND the declaration names the same model. Undeclared stays red.
+            self.assertTrue(declared, f"PLAN must not be declared on a session-tier model: {model}")
+            self.assertTrue(any(model in str(c.get("summary", "")) for c in declared),
+                            f"the declaration must name the model PLAN was moved to: {model}")
             primary = route["arms"][0]
             identity = primary.get("canonical_identity") or primary.get("model")
             # openai-codex takes a bare id; the other providers take provider/model. Both are "the declared identity".

@@ -1,7 +1,7 @@
 {
   "artifact": "MODEL_LANE_ASSIGNMENT",
   "schema": "HGK-MODEL-LANE-ASSIGNMENT/1",
-  "revision": 31,
+  "revision": 32,
   "declared_at_utc": "2026-10-21T17:26:33.375499Z",
   "declared_by": "Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied.",
   "authority_note": "Operator-declared routing policy. Not an authority source; the runtime wiring named in `effective_wiring` is the machine truth. The current revision is the top-level \"revision\" field; earlier revisions are recorded in the revision_*_reason fields and in this file's history sections.",
@@ -21,8 +21,8 @@
         "SYNTHESIS",
         "EVOLUTION"
       ],
-      "assigned_model": "gpt-6.1-sol",
-      "assigned_provider": "openai-codex",
+      "assigned_model": "deepseek-v4.1-flash",
+      "assigned_provider": "opencode-go",
       "reasoning_effort": "medium",
       "supply": "OpenCode Go",
       "rationale": "Revision 19 owner order 2026-10-15: rank-1 default is now opencode-go/glm-5.3-flash (medium) for the in-Hermes PLAN & Orchestrator plane; the GPT arm is exhausted and demoted to a non-default, non-automatic alternate. Prior rationale (revision 18 GPT-6.1_SOL default) preserved in revision_19_reason / rebind_note_revision_18.",
@@ -39,9 +39,9 @@
           "note": "prior default arm, retained as an explicit operator-selectable alternate; not selected automatically"
         }
       ],
-      "auth": "oauth_openai",
-      "oauth": true,
-      "canonical_identity": "gpt-6.1-sol"
+      "auth": "env_ref:OPENCODE_GO_API_KEY",
+      "oauth": false,
+      "canonical_identity": "deepseek-v4.1-flash"
     },
     {
       "lane_group": "EXECUTE",
@@ -267,13 +267,23 @@
   "lane_chains": {
     "PLAN": [
       {
+        "provider": "opencode-go",
+        "model": "deepseek-v4.1-flash",
+        "transport_model": "opencode-go/deepseek-v4.1-flash",
+        "canonical_identity": "deepseek-v4.1-flash",
+        "role": "primary",
+        "default": true,
+        "automatic_selection": true,
+        "reasoning_effort": "medium"
+      },
+      {
         "provider": "openai-codex",
         "model": "gpt-6.1-sol",
         "transport_model": "openai-codex/gpt-6.1-sol",
         "canonical_identity": "gpt-6.1-sol",
-        "role": "primary",
-        "default": true,
-        "automatic_selection": true,
+        "role": "fallback1",
+        "default": false,
+        "automatic_selection": false,
         "reasoning_effort": "medium"
       },
       {
@@ -281,7 +291,7 @@
         "model": "minimax-m3.1-flash-free",
         "transport_model": "opencode-go/minimax-m3.1-flash-free",
         "canonical_identity": "minimax-m3.1-flash-free",
-        "role": "fallback1",
+        "role": "fallback2",
         "default": false,
         "automatic_selection": false,
         "reasoning_effort": null
@@ -290,15 +300,6 @@
         "provider": "opencode-go",
         "model": "glm-5.3-flash",
         "transport_model": "opencode-go/glm-5.3-flash",
-        "role": "fallback2",
-        "default": false,
-        "automatic_selection": false,
-        "reasoning_effort": null
-      },
-      {
-        "provider": "opencode-go",
-        "model": "deepseek-v4.1-flash",
-        "transport_model": "opencode-go/deepseek-v4.1-flash",
         "role": "fallback3",
         "default": false,
         "automatic_selection": false,
@@ -647,7 +648,7 @@
   "revision_12_reason": "Revision 12 applies the arm-B exhaustive-declaration repair for revision 11: it corrects the stale provider-separation shape (E1/E2/E3), marks the historical lane-deviation object superseded (E4), rebuilds the across-arms identity aggregate for the current arms (E5/E6/E7), retags the FAR-LANE-SOD-005 flash probe as historical (E8), corrects the fallback-surface and delegation.applies_to claims (E9/E10), declares the EXECUTE lane's measured live effort without inventing an operator value (E11), and records the projection-drops-dual-arms gap as DECLARED_GAP_NOT_FIXED because src/** is out of scope (E12). sod_conflicts stays exactly SOD006-C1 and SOD006-C2, both OPEN. It also labelled the retired OpenAI Codex fallback token and the retired z-ai NVIDIA flash token at every remaining site as RETIRED history, so the stale-prose grep is clean without deleting the historical records.",
   "revision_13_reason": "Revision 13 repairs the round-2 over-correction: it restores the exact machine-readable retired identifiers at the three identifier sites from the rev11 byte-copy (recovering them from the backup rather than inventing them) and carries the retired semantics in additive retired/retired_note fields. It also closes the residual prose defects - the authority note's false self-revision clause, the operator-decision option and the revision_12_reason wording that spelled the retired tokens, and the registry header and digest - while this file's own revision is now the top-level revision field.",
   "revision_14_reason": "WO-FAR-D1D2-FINAL-ROUTE-20261008 / REQ-FAR-D1D2-FINAL-20261008 (owner adjudication; events=947); PLAN medium; VERIFY primary/default arm A and arm B fallback; affected projections synchronized; historical records preserved.",
-  "registry_epoch": 31,
+  "registry_epoch": 32,
   "revision_16_reason": "WO-PIPD-R5-EXECUTE-LUNA-ROUTE-20261009: owner-requested additional explicit EXECUTE gpt-6-luna/openai-codex OAuth route. Preserve primary and historical retired entries; zero automatic fallbacks; local route resolution only, backend unsupported and bounded-writer admission not claimed.",
   "revision_15_reason": "Second canonical edit under WO-FAR-D1D2-FINAL-ROUTE-20261008 / REQ-FAR-D1D2-FINAL-20261008 (owner adjudication; events=947): preserve VERIFY primary/default arm A and PLAN medium; demote arm B to a non-default operator-selectable alternate, never auto-selected; restore every registry fallbacks list to []; advance registry epoch 12 -> 13 and declaration revision 14 -> 15; synchronize source digest and projection bindings without modifying candidate tests.",
   "round_authorization": {

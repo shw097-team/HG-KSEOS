@@ -100,7 +100,7 @@ class TestLanePolicyConformance(unittest.TestCase):
         # The same chain-head equality checks remain: no weakening of the
         # default, fallback-order, admission, drift, or SoD assertions.
         owner_chain = {
-            "PLAN": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "glm-5.3-flash")],
+            "PLAN": [("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "glm-5.3-flash")],
             "VERIFY_SECURITY": [("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "glm-5.3-flash")],
             "EXECUTE": [("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6-luna")],
         }
@@ -344,7 +344,7 @@ class PoolSelectionTests(unittest.TestCase):
     """
 
     MANDATE = {
-        "PLAN": ("openai-codex", "gpt-6.1-sol"),
+        "PLAN": ("opencode-go", "deepseek-v4.1-flash"),
         "VERIFY_SECURITY": ("opencode-go", "deepseek-v4.1-flash"),
         "EXECUTE": ("opencode-go", "minimax-m3.1-flash-free"),
     }
