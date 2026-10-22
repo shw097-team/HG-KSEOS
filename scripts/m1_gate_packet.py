@@ -43,16 +43,23 @@ def load(p: Path) -> dict | None:
 
 
 def h0() -> dict:
-    # A PI-PKG for a real subject: the PIPD pi-compile output schema plus a produced instance.
+    """H0 needs a PI-PKG that VALIDATES against PIPD's own output schema, not a file whose name looks like a PI.
+
+    First measurement of this level returned met=True from the mere existence of a ts14* file; the compile receipt
+    says ok=false, so that was a false green and the check now reads the receipt itself.
+    """
     schema = WS / "PIPD/skills/pipd-pi-compile/schemas/output.schema.json"
-    instances = [p for p in (WS / "_r14_packet/raw").glob("*pi*.json") if "pi_compile" in p.name.lower()
-                 or p.name.startswith("ts14")]
-    compiled = [p for p in instances if load(p)]
+    receipt = load(RAW / "ts14_pi_pkg.json") or {}
+    ok = bool(receipt.get("ok")) and receipt.get("negative_control") == "REJECTED"
     return {"level": "H0", "name": "PIPD source/PI", "schema_present": schema.is_file(),
-            "schema_sha256": sha(schema), "pi_instances_found": [p.name for p in compiled],
-            "met": bool(compiled),
-            "gap": None if compiled else ("no compiled PI-PKG for a real subject exists; the eight skills' "
-                                          "existence is not H0, and no PI has been compiled against a frozen source")}
+            "schema_sha256": sha(schema),
+            "pi_receipt": "ts14_pi_pkg.json",
+            "pi_subject_id": (receipt.get("pi_pkg") or {}).get("subject_id"),
+            "pi_schema_valid": bool(receipt.get("ok")),
+            "negative_control": receipt.get("negative_control"),
+            "met": ok,
+            "gap": None if ok else ("no PI-PKG validates against PIPD's output schema; eight skills existing is not "
+                                    "H0 and an input-valid atom set is not a compiled PI")}
 
 
 def h1() -> dict:

@@ -449,6 +449,15 @@ class ProjectLifecycleController:
         state = self._project_state(project_id)
         if state not in ("VERIFYING", "EVOLUTION_REVIEW", "EXECUTING"):
             raise LifecycleError(f"ERR_REPAIR_STATE {state}")
+        # The attempt budget is enforced everywhere else (attempt(), checkpoint()) but was NOT enforced here, so a
+        # repair loop could outlive its budget: measured 2 repairs against attempt_budget=1. A budget that one path
+        # ignores is not a budget.
+        with self.spine.connect() as conn:
+            row = conn.execute(
+                "SELECT attempt_budget, attempts_used FROM project_lifecycles WHERE project_id=?", (project_id,)
+            ).fetchone()
+        if row is not None and row[1] >= row[0]:
+            raise LifecycleError(f"ERR_REPAIR_BUDGET_EXHAUSTED {row[1]}/{row[0]}")
         with self.spine.transaction() as conn:
             conn.execute("UPDATE project_lifecycles SET repair_count=repair_count+1, "
                          "attempts_used=attempts_used+1, updated_at=? WHERE project_id=?",

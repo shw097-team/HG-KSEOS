@@ -99,12 +99,18 @@ def measure(name: str) -> dict:
         expect = case.get("expect")
         ok_in, why_in = validate(case.get("input"), in_schema) if in_schema else (None, "no input schema")
         out_ok = None
-        if expect == "ACCEPT" and case.get("output") and out_schema:
-            out_ok, _ = validate(case["output"], out_schema)
+        if case.get("output") and out_schema:
+            out_ok, why_out = validate(case["output"], out_schema)
         if expect == "ACCEPT":
             state = "PASS" if ok_in and (out_ok in (True, None)) else "FAIL"
         else:
-            state = "SCHEMA_ENFORCED" if ok_in is False else "UNENFORCED"
+            # a refusal is schema-enforced if EITHER side of the contract rejects it. Measuring only the input
+            # schema under-counted by 12 cases: pipd-execution-contract's four negatives are all output-side
+            # (first_fail=output.required/const/minItems/not), so "0/4 enforced" was a wrong verdict, corrected here.
+            if ok_in is False or out_ok is False:
+                state = "SCHEMA_ENFORCED"
+            else:
+                state = "UNENFORCED"
         results.append({"id": case.get("id"), "kind": case.get("kind"), "expect": expect,
                         "state": state, "why": why_in[:120] if ok_in is False else ""})
     counts: dict[str, int] = {}

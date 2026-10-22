@@ -299,3 +299,26 @@ class CliEntrypointTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RepairBudgetTests(unittest.TestCase):
+    """The attempt budget must bind the repair path too (measured: 2 repairs with attempt_budget=1)."""
+
+    def test_repair_cannot_outlive_the_attempt_budget(self) -> None:
+        tmp, spine = fresh_spine()
+        try:
+            lc, pid = boot_lifecycle(spine)
+            lc.admit_workorders(pid)
+            lc.transition(pid, "EXECUTING", trigger="WO_EXECUTE")
+            lc.transition(pid, "VERIFYING", trigger="VERIFY")
+            with lc.spine.transaction() as conn:
+                conn.execute("UPDATE project_lifecycles SET attempt_budget=1 WHERE project_id=?", (pid,))
+            lc.begin_repair(pid)
+            lc.transition(pid, "EXECUTING", trigger="REPAIR_RETRY")
+            lc.transition(pid, "VERIFYING", trigger="VERIFY")
+            with self.assertRaises(Exception) as ctx:
+                lc.begin_repair(pid)
+            self.assertIn("ERR_REPAIR_BUDGET_EXHAUSTED", str(ctx.exception))
+            self.assertEqual(lc.status(pid)["repair_count"], 1)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
