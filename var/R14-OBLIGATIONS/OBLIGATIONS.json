@@ -225,14 +225,19 @@
       "id": "R14-TS17",
       "title": "TQAEP／Independent Challenge E07/M2",
       "state": "PARTIAL",
-      "next_action": "66 rows stay DECLARED_ONLY; 2 negatives are accepted by their own schemas (PIPD bundle owner)",
+      "next_action": "7 of 8 OracleTypes have no executable semantics in this repo (STATE_READBACK, PROPERTY, REFERENCE_OUTPUT, STATISTICAL, SEMANTIC_JUDGE, HUMAN, COMPOSITE); qualifying them needs executors, not measurement",
       "evidence": [
         "raw/ts17_tqaep_matrix_runtime.csv",
         "raw/ts17_runtime_SUMMARY.md",
-        "raw/ts17_runtime_executions.jsonl"
+        "raw/ts17_runtime_executions.jsonl",
+        "raw/ts17_matrix_v2.json",
+        "raw/ts17_matrix_v2.md",
+        "raw/ts17_matrix_v2_verification.json",
+        "raw/ts17_matrix_v2_measure.py",
+        "raw/ts17_v2_execution_*.json"
       ],
       "depends_on": [],
-      "note": "32/32 case-bearing rows were executed, each with its own command, exit code, timestamp and output tail; 30/96 RUNTIME_QUALIFIED strictly at schema-oracle scope; 66 DECLARED_ONLY (64 with no row-specific executable case, 2 real enforcement failures - tqaep NEG-001 semantic.distinct and package-project NEG-001 semantic.claim_gate are both ACCEPTED by their schemas); 0 NO_ORACLE. Dimension, stated precisely this time: the supplied matrix ARTEFACT is 12 TestClass x 8 skills while DOC-08's normative matrix is TestClass x OracleTypes - no equivalence was invented (TT-R14-037 corrects my earlier note). Qualification = executed once on this host at commit d09dda0, not functional or native qualification."
+      "note": "32/32 case-bearing rows were executed, each with its own command, exit code, timestamp and output tail; 30/96 RUNTIME_QUALIFIED strictly at schema-oracle scope; 66 DECLARED_ONLY (64 with no row-specific executable case, 2 real enforcement failures - tqaep NEG-001 semantic.distinct and package-project NEG-001 semantic.claim_gate are both ACCEPTED by their schemas); 0 NO_ORACLE. Dimension, stated precisely this time: the supplied matrix ARTEFACT is 12 TestClass x 8 skills while DOC-08's normative matrix is TestClass x OracleTypes - no equivalence was invented (TT-R14-037 corrects my earlier note). Qualification = executed once on this host at commit d09dda0, not functional or native qualification. MEASURED THIS ROUND on the DOC-08 axis: 768 cells = 8 skills x 12 TestClasses x 8 OracleTypes, of which **32 RUNTIME_QUALIFIED** (DETERMINISTIC only, 4 TestClasses x 8 skills) and **736 DECLARED_ONLY**. The previous artefact was TestClass x 8 skills (wrong axis, TT-R14-037); this one is TestClass x OracleTypes as DOC-08 requires and states its own ceiling: SCHEMA_AND_PURE_SEMANTIC_CONTRACT_ONLY, full_doc08_functional_native_qualification false on every cell, i.e. 0 functional-native cells. Independently checked here: all 32 cells record exit_code 0, their evidence files exist, and the recorded sha256 equals the live file for 32/32. Two cells are the measured proof the oracle adds value: pipd-assurance-tqaep/NEG-001 and pipd-package-project/NEG-001 are ACCEPTED by their own schema and VIOLATED by the runtime oracle."
     },
     {
       "id": "R14-TS18",
