@@ -65,6 +65,10 @@ class NamedMethodEvidenceTests(unittest.TestCase):
 
 class CanonicalRuntimeTests(unittest.TestCase):
     def test_config_resolves_scheme_b_appdata_runtime(self) -> None:
+        # Re-pinned 2026-10-22 (R14): the Hermes runtime moved into the MSIX package LocalCache tree.
+        # The two legacy AppData\Local\hermes\...env\Scripts paths no longer exist on this host, so the
+        # golden values now name the measured installation; the claim under test is unchanged.
+
         cfg = json.loads((ROOT / "config" / "hermes.json").read_text(encoding="utf-8"))
         self.assertEqual(cfg["release"]["version"], "0.20.0")
         self.assertEqual(cfg["release"]["tag"], "v2026.8.3")
@@ -72,13 +76,13 @@ class CanonicalRuntimeTests(unittest.TestCase):
         self.assertEqual(cfg["status"], "ACTIVE_SELECTED_REINSTALL_BASELINE")
         self.assertEqual(
             cfg["executable"],
-            r"C:\Users\user\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes.exe",
+            r"C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes\hermes-agent\venv\Scripts\hermes.exe",
         )
         self.assertEqual(
             cfg["python_executable"],
-            r"C:\Users\user\AppData\Local\hermes\hermes-agent\venv\Scripts\python.exe",
+            r"C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes\hermes-agent\venv\Scripts\python.exe",
         )
-        self.assertEqual(cfg["canonical_hermes_home"], r"C:\Users\user\AppData\Local\hermes")
+        self.assertEqual(cfg["canonical_hermes_home"], r"C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes")
 
     def test_canonical_live_readback(self) -> None:
         d = read_json("HG-KSEOS_HERMES_V020_CANONICAL_LIVE_READBACK.json")

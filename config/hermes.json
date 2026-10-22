@@ -16,8 +16,8 @@
     "role": "RECOVERY_ONLY_BASELINE (not active after Scheme B cutover)",
     "runnable_verified": "Hermes Agent v0.18.2 (2026.7.7.2) + real opencode-go/deepseek-v4-flash inference OK"
   },
-  "executable": "C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.exe",
-  "python_executable": "C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+  "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.exe",
+  "python_executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
   "install_root": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent",
   "runtime_switch_required": false,
   "runtime_switch_note": "Scheme B single-runtime cutover: HG-KSEOS now resolves the canonical AppData Hermes v0.20.0 / v2026.8.3 / 3c27eb6234bf91b8ceee9e9071591b31e9b148cb. RP-002 requires fresh G1 and affected-runtime-gate revalidation before promotion.",

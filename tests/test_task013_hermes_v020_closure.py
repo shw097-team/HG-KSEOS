@@ -67,7 +67,17 @@ class Gate0PolicySemanticsTests(unittest.TestCase):
         self.assertGreaterEqual(final_md.count("no implementation-invented auto-promotion"), 2)
 
     def test_cov_11_06_source_text_unchanged(self) -> None:
-        corpus = ROOT / "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2"
+        # Locator repaired 2026-10-22 (R14): the frozen corpus was never inside the repository - it lives in
+        # the knowledge-base SSOT. Resolution is ordered (repo copy first if one is ever added back) and fails
+        # loudly; the assertion below is unchanged, only the search path is.
+        candidates = [
+            ROOT / "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2",
+            Path(r"C:\Projects\Agent_Workspace\知識庫\SWOF-F\HG-KSEOS\HG-KSEOS_SSOT"
+                 r"\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2"),
+        ]
+        corpus = next((c for c in candidates if c.is_dir()), None)
+        if corpus is None:
+            raise AssertionError(f"frozen corpus not found in any known location: {[str(c) for c in candidates]}")
         group01 = next(corpus.glob("*Group-01_Authority_Source_Requirements.md"))
         text = group01.read_text(encoding="utf-8")
         row = [line for line in text.splitlines() if "COV-11-06" in line and "Promotion" in line]
