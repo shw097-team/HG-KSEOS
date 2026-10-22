@@ -1,0 +1,23 @@
+{
+  "profile_id": "hgk-coding-factory",
+  "engine": "hermes",
+  "toolset": [
+    "codex",
+    "worktree"
+  ],
+  "permissions": {
+    "read": [
+      "hgk.workorder",
+      "admitted-source"
+    ],
+    "write": [
+      "bounded-worktree"
+    ],
+    "denied": [
+      "release/promotion",
+      "cross-worktree-write"
+    ],
+    "secrets_policy": "REFERENCE_ONLY"
+  },
+  "model_provider_route": "opencode-go/deepseek-v4-flash"
+}

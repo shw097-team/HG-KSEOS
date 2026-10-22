@@ -1,0 +1,150 @@
+{
+  "schema": "RP002-GSTACK-ROLE-MAP/1",
+  "architecture": {
+    "ADOPT_FULL_GSTACK_ROLE_ARCHITECTURE": true,
+    "ADOPT_FULL_GSTACK_CONTROL_PLANE": false
+  },
+  "hard_deny": [
+    "gstack Conductor as canonical scheduler",
+    "gstack /spec as canonical spec owner",
+    "gstack /ship as promote/release",
+    "gstack /land-and-deploy or setup-deploy as production"
+  ],
+  "roles": {
+    "office-hours": {
+      "category": "support",
+      "disposition": "ADOPT",
+      "host": "hgk-orchestrator",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_support"
+    },
+    "plan-ceo-review": {
+      "category": "plan",
+      "disposition": "MAP_TO_EXISTING_OWNER",
+      "host": "hgk-engineering-reviewer",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_plan"
+    },
+    "plan-eng-review": {
+      "category": "plan",
+      "disposition": "ADOPT",
+      "host": "hgk-engineering-reviewer",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_plan"
+    },
+    "autoplan": {
+      "category": "plan",
+      "disposition": "ADOPT",
+      "host": "hgk-orchestrator",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_plan"
+    },
+    "plan-design-review": {
+      "category": "plan",
+      "disposition": "MAP_TO_EXISTING_OWNER",
+      "host": "hgk-design-worker",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_plan"
+    },
+    "plan-devex-review": {
+      "category": "plan",
+      "disposition": "MAP_TO_EXISTING_OWNER",
+      "host": "hgk-devex-worker",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_plan"
+    },
+    "design-consultation": {
+      "category": "design",
+      "disposition": "MAP_TO_EXISTING_OWNER",
+      "host": "hgk-design-worker",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_design"
+    },
+    "devex-review": {
+      "category": "devex",
+      "disposition": "MAP_TO_EXISTING_OWNER",
+      "host": "hgk-devex-worker",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_devex"
+    },
+    "investigate": {
+      "category": "research",
+      "disposition": "ADOPT",
+      "host": "specialist-research-worker",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_research"
+    },
+    "review": {
+      "category": "review",
+      "disposition": "ADOPT",
+      "host": "hgk-engineering-reviewer",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_review"
+    },
+    "qa": {
+      "category": "qa",
+      "disposition": "ADOPT",
+      "host": "hgk-qa",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_qa"
+    },
+    "qa-only": {
+      "category": "qa",
+      "disposition": "ADOPT",
+      "host": "hgk-qa",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_qa"
+    },
+    "cso": {
+      "category": "security",
+      "disposition": "ADOPT",
+      "host": "hgk-security",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_security"
+    },
+    "benchmark": {
+      "category": "perf",
+      "disposition": "MAP_TO_EXISTING_OWNER",
+      "host": "hgk-performance-worker",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_bench"
+    },
+    "document-*": {
+      "category": "docs",
+      "disposition": "MAP_TO_EXISTING_OWNER",
+      "host": "hgk-documentation-worker",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_docs"
+    },
+    "ship": {
+      "category": "release",
+      "disposition": "SUPPORT_ONLY",
+      "host": "hgk-orchestrator",
+      "worker_mode": "advisory",
+      "fallback": "hgk_native_release"
+    },
+    "canary": {
+      "category": "canary",
+      "disposition": "MAP_TO_EXISTING_OWNER",
+      "host": "hgk-qa",
+      "worker_mode": "local-paper",
+      "fallback": "hgk_native_canary"
+    },
+    "retro": {
+      "category": "retro",
+      "disposition": "ADOPT",
+      "host": "hgk-orchestrator",
+      "worker_mode": "on-demand",
+      "fallback": "hgk_native_retro"
+    },
+    "codex": {
+      "category": "coding",
+      "disposition": "MAP_TO_EXISTING_OWNER",
+      "host": "hgk-coding-factory",
+      "worker_mode": "tracked-writer",
+      "fallback": "sealed-codex-lane"
+    }
+  },
+  "snapshot_ref": "HGK/HGK_GSTACK_UPSTREAM_CAPABILITY_SNAPSHOT.tsv",
+  "missing_disposition_count": 0
+}

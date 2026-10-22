@@ -1,0 +1,65 @@
+{
+  "profile_id": "hgk-security",
+  "distribution": {
+    "repo_or_source": "HGK",
+    "version_or_tag": "v2.0-stage2-r2",
+    "full_commit": "22e21f0340501caf4ff0dbd67663faf49f521b03",
+    "package_digest": "f572a7522d0c84c4237cf56a5cf50bb6f152b0e64238486aa103f23479903e24"
+  },
+  "artifacts": {
+    "soul": "SOUL.md",
+    "config": "config.yaml",
+    "skills": [
+      "skills/"
+    ],
+    "preloads": [],
+    "mcp": null,
+    "fixtures_dir": "fixtures/",
+    "runtime_contract": "README.runtime-contract.md"
+  },
+  "runtime": {
+    "engine": "hermes",
+    "toolset": [
+      "security",
+      "gstack.cso"
+    ],
+    "model_provider_route": "opencode-go/deepseek-v4-flash",
+    "mcp_bindings": null,
+    "a2a_binding": null,
+    "terminal_cwd_policy": "admitted-worktree",
+    "process_identity_readback": "pid-check"
+  },
+  "permissions": {
+    "read": [
+      "candidate",
+      "permissions"
+    ],
+    "write": [
+      "security-findings"
+    ],
+    "denied": [
+      "fabric-authority",
+      "promotion"
+    ],
+    "secrets_policy": "REFERENCE_ONLY"
+  },
+  "inputs": [
+    "WorkOrder",
+    "ExecutionBinding"
+  ],
+  "outputs": [
+    "evidence",
+    "receipt"
+  ],
+  "acceptance": {
+    "fresh_session": true,
+    "effective_load": true,
+    "positive_fixtures": [
+      "fixtures/positive.json"
+    ],
+    "negative_fixtures": [
+      "fixtures/negative.json"
+    ],
+    "rollback_target": "pre-profile-binding"
+  }
+}

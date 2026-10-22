@@ -1,0 +1,5 @@
+- [x] Map Fabric hard_rules to code (result: 0/6 implemented)
+- [x] Candidate S1*: lifecycle + spine invariants + subject binding migration (authored, not run)
+- [x] Align canonical acceptance fixtures (candidate v2)
+- [ ] Apply to canonical tree (owner gate - NOT executed)
+- [ ] Execute the subject_digest migration (owner gate - NOT executed)

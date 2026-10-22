@@ -1,0 +1,41 @@
+{
+  "schema": "SBL-HGK-ADAPTER/1",
+  "abi": {
+    "name": "hgk-harness-abi/1",
+    "provides": [
+      "plan",
+      "execute",
+      "verify"
+    ],
+    "requires_native": [
+      "WorkOrder",
+      "ExecutionBinding",
+      "Permit"
+    ],
+    "not_provided": [
+      "native_effect",
+      "permit_signing",
+      "workorder_admission"
+    ]
+  },
+  "hgk_pin": {
+    "package": "hg_kseos",
+    "version": "0.1.0",
+    "version_range": ">=0.1.0,<0.2.0",
+    "root_env": "HGK_ROOT",
+    "default_root": "C:/Projects/Agent_Workspace/HG-KSEOS",
+    "source_subdir": "src/hg_kseos",
+    "spine_relpath": "var/shared-spine/hg-kseos.db",
+    "lane_registry_relpath": "config/lane-route-slots.candidate.json",
+    "dispatcher_relpath": "scripts/hgk-lane-dispatch.py"
+  },
+  "hgk_root": "C:\\Projects\\Agent_Workspace\\HG-KSEOS",
+  "observed_version": "0.1.0",
+  "host": {
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.17",
+    "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe"
+  },
+  "claim_ceiling": "HOST_PENDING",
+  "native_effect": "NOT_GRANTED"
+}

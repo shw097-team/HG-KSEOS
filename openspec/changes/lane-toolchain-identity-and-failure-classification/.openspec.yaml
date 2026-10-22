@@ -1,0 +1,3 @@
+name: lane-toolchain-identity-and-failure-classification
+title: "Lane toolchain identity: one declared lane binary, a bounded pre-lane identity preflight, and typed failure classification"
+status: proposed

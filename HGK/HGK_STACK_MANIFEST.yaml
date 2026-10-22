@@ -1,0 +1,49 @@
+{
+  "schema": "RP002-STACK-MANIFEST/2",
+  "stack_id": "HGK_ENGINEERING",
+  "persistent_profiles_p0": [
+    "hgk-orchestrator",
+    "hgk-coding-factory",
+    "hgk-engineering-reviewer",
+    "hgk-qa",
+    "hgk-security"
+  ],
+  "on_demand_role_workers": [
+    "hgk-knowledge-distiller",
+    "hgk-documentation-worker",
+    "hgk-performance-worker",
+    "hgk-design-worker",
+    "hgk-devex-worker",
+    "specialist-research-worker"
+  ],
+  "services": {
+    "required": [
+      "source_ledger",
+      "evidence_store",
+      "shared_knowledge_substrate"
+    ]
+  },
+  "knowledge_namespace": {
+    "read": [
+      "hgk.*",
+      "shared.approved.*"
+    ],
+    "candidate_write": [
+      "hgk.candidate.*"
+    ],
+    "canonical_promote": [
+      "hgk.approved.*:HGK_AUTHORIZED_ROUTE_ONLY"
+    ]
+  },
+  "runtime": {
+    "engine": "hermes",
+    "coordination": "kanban",
+    "board_policy": "project_scoped",
+    "topology_policy_ref": "HGK/HGK_TASK_TOPOLOGY_POLICY.yaml"
+  },
+  "acceptance": {
+    "formal_checker_after_O1": "acceptance-officer",
+    "formal_checker_before_O1": "STAGE1_FROZEN_BOOTSTRAP_META_CHECKER"
+  },
+  "materialized_at": "2026-08-12T22:45:00+08:00"
+}

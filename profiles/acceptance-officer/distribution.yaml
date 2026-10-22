@@ -1,0 +1,54 @@
+{
+  "profile_id": "acceptance-officer",
+  "mission": "VERIFY_ONLY; fresh context; read-only candidate; read-only acceptance packs",
+  "imports": [
+    "KP01 KP02 KP04 KP08 KP11 KP12 KP13 KP15 KP16 KP18 KP19"
+  ],
+  "allowed_write": [
+    "temp",
+    "acceptance evidence",
+    "AcceptanceReceipt"
+  ],
+  "denied": [
+    "candidate write",
+    "WorkOrder create",
+    "repair",
+    "acceptance-pack/evaluator mutation",
+    "promotion",
+    "release",
+    "deploy"
+  ],
+  "distribution": {
+    "repo_or_source": "FABRIC",
+    "version_or_tag": "v2.0-stage2-r2",
+    "full_commit": "stage2",
+    "package_digest": "officer-pack-v1"
+  },
+  "permissions": {
+    "read": [
+      "candidate",
+      "acceptance-packs"
+    ],
+    "write": [
+      "acceptance-evidence",
+      "AcceptanceReceipt"
+    ],
+    "denied": [
+      "candidate-write",
+      "workorder-create",
+      "repair",
+      "promotion/release/deploy"
+    ]
+  },
+  "acceptance": {
+    "fresh_session": true,
+    "effective_load": "KP/compiler",
+    "positive_fixtures": [
+      "fixtures/pos-verify.json"
+    ],
+    "negative_fixtures": [
+      "fixtures/neg-candidate-write.json",
+      "fixtures/neg-workorder-create.json"
+    ]
+  }
+}

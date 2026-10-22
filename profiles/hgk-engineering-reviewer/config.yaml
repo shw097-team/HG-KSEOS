@@ -1,0 +1,22 @@
+{
+  "profile_id": "hgk-engineering-reviewer",
+  "engine": "hermes",
+  "toolset": [
+    "review",
+    "gstack.review"
+  ],
+  "permissions": {
+    "read": [
+      "candidate",
+      "evidence"
+    ],
+    "write": [
+      "review-findings"
+    ],
+    "denied": [
+      "fabric-L2-acceptance"
+    ],
+    "secrets_policy": "REFERENCE_ONLY"
+  },
+  "model_provider_route": "opencode-go/deepseek-v4-flash"
+}

@@ -1,0 +1,26 @@
+{
+  "profile_id": "hgk-orchestrator",
+  "engine": "hermes",
+  "toolset": [
+    "kanban",
+    "shared-spine",
+    "router"
+  ],
+  "permissions": {
+    "read": [
+      "hgk.*",
+      "fabric.control.*"
+    ],
+    "write": [
+      "hgk.kanban",
+      "hgk.workorder-admission"
+    ],
+    "denied": [
+      "final-acceptance",
+      "broad-candidate-coding",
+      "fabric-authority"
+    ],
+    "secrets_policy": "REFERENCE_ONLY"
+  },
+  "model_provider_route": "opencode-go/deepseek-v4-flash"
+}

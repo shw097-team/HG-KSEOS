@@ -1,0 +1,22 @@
+{
+  "profile_id": "hgk-qa",
+  "engine": "hermes",
+  "toolset": [
+    "qa",
+    "gstack.qa"
+  ],
+  "permissions": {
+    "read": [
+      "candidate",
+      "tests"
+    ],
+    "write": [
+      "test-evidence"
+    ],
+    "denied": [
+      "fabric-L2-acceptance"
+    ],
+    "secrets_policy": "REFERENCE_ONLY"
+  },
+  "model_provider_route": "opencode-go/deepseek-v4-flash"
+}

@@ -1,0 +1,21 @@
+{
+  "profile_id": "construction-commander",
+  "imports": [
+    "KP00 KP01 KP03 KP05 KP07 KP10 KP14 KP18 KP19",
+    "compiler C0-C9"
+  ],
+  "permissions": {
+    "read": [
+      "fabric.control.*",
+      "hgk.workorder-admission"
+    ],
+    "write": [
+      "hgk.workorder-admission"
+    ],
+    "denied": [
+      "candidate-write",
+      "acceptance-receipt",
+      "promotion/release"
+    ]
+  }
+}

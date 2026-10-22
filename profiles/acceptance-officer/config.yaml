@@ -1,0 +1,20 @@
+{
+  "profile_id": "acceptance-officer",
+  "mission": "VERIFY_ONLY",
+  "permissions": {
+    "read": [
+      "candidate",
+      "acceptance-packs"
+    ],
+    "write": [
+      "acceptance-evidence",
+      "AcceptanceReceipt"
+    ],
+    "denied": [
+      "candidate-write",
+      "workorder-create",
+      "repair",
+      "promotion/release/deploy"
+    ]
+  }
+}

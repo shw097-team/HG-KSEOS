@@ -1,0 +1,53 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "sbl-hgk-harness",
+  "version": "0.1.1rc1",
+  "description": "Adapter for the pinned HG-KSEOS native control plane: declares the dependency, the harness ABI and the boundaries of its authority",
+  "license": "MIT",
+  "keywords": [
+    "sbl",
+    "hgk",
+    "governance",
+    "harness-adapter"
+  ],
+  "extensions": {
+    "org.sbl.harness": {
+      "abi": {
+        "name": "hgk-harness-abi/1",
+        "provides": [
+          "plan",
+          "execute",
+          "verify"
+        ],
+        "requires_native": [
+          "WorkOrder",
+          "ExecutionBinding",
+          "Permit"
+        ],
+        "not_provided": [
+          "native_effect",
+          "permit_signing",
+          "workorder_admission"
+        ]
+      },
+      "hgk_pin": {
+        "package": "hg_kseos",
+        "version": "0.1.0",
+        "version_range": ">=0.1.0,<0.2.0",
+        "root_env": "HGK_ROOT",
+        "default_root": "C:/Projects/Agent_Workspace/HG-KSEOS",
+        "source_subdir": "src/hg_kseos",
+        "spine_relpath": "var/shared-spine/hg-kseos.db",
+        "lane_registry_relpath": "config/lane-route-slots.candidate.json",
+        "dispatcher_relpath": "scripts/hgk-lane-dispatch.py"
+      },
+      "observed": {
+        "status": "ROOT_READY",
+        "version": "0.1.0",
+        "root": "C:\\Projects\\Agent_Workspace\\HG-KSEOS"
+      },
+      "claim_ceiling": "HOST_PENDING",
+      "native_effect": "NOT_GRANTED"
+    }
+  }
+}

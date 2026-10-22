@@ -1,0 +1,23 @@
+{
+  "profile_id": "hgk-security",
+  "engine": "hermes",
+  "toolset": [
+    "security",
+    "gstack.cso"
+  ],
+  "permissions": {
+    "read": [
+      "candidate",
+      "permissions"
+    ],
+    "write": [
+      "security-findings"
+    ],
+    "denied": [
+      "fabric-authority",
+      "promotion"
+    ],
+    "secrets_policy": "REFERENCE_ONLY"
+  },
+  "model_provider_route": "opencode-go/deepseek-v4-flash"
+}

@@ -1,0 +1,48 @@
+{
+  "profile_id": "construction-commander",
+  "mission": "classify/compile bounded engineering request; issue admitted HGK WorkOrder; request smallest bounded repair",
+  "imports": [
+    "KP00 KP01 KP03 KP05 KP07 KP10 KP14 KP18 KP19",
+    "compiler C0-C9"
+  ],
+  "allowed": [
+    "classify/compile bounded engineering request",
+    "create/issue admitted HGK WorkOrder",
+    "request smallest bounded repair"
+  ],
+  "denied": [
+    "candidate code write",
+    "final AcceptanceReceipt",
+    "promotion/release"
+  ],
+  "distribution": {
+    "repo_or_source": "FABRIC",
+    "version_or_tag": "v2.0-stage2-r2",
+    "full_commit": "stage2",
+    "package_digest": "commander-pack-v1"
+  },
+  "permissions": {
+    "read": [
+      "fabric.control.*",
+      "hgk.workorder-admission"
+    ],
+    "write": [
+      "hgk.workorder-admission"
+    ],
+    "denied": [
+      "candidate-write",
+      "acceptance-receipt",
+      "promotion/release"
+    ]
+  },
+  "acceptance": {
+    "fresh_session": true,
+    "effective_load": "compiler lint/activation/acceptance",
+    "positive_fixtures": [
+      "fixtures/pos-compile.json"
+    ],
+    "negative_fixtures": [
+      "fixtures/neg-acceptance-receipt.json"
+    ]
+  }
+}
