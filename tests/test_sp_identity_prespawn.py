@@ -440,6 +440,31 @@ class ChainDigestAndTypedRefusals(unittest.TestCase):
         self.assertIn("RuntimeError", resolved["detail"])
         self.assertIn("synthetic blow-up", resolved["detail"])
 
+    def test_F6_digest_authority_failure_surfaces_its_own_code_not_INTERNAL(self):
+        """F6 (round-4 observation, 2026-10-23): _binding_digest raises LookupError from INSIDE
+        read_chain, so the receipt must show ERR_SP_IDENTITY_DIGEST_AUTHORITY_UNAVAILABLE rather than
+        the belt's blanket ERR_SP_IDENTITY_INTERNAL — an observation the round-4 reviewer could only
+        reason about, because its delta did not include the inner LookupError handler."""
+        import hg_kseos.role_binding as rb
+
+        tmp = tempfile.mkdtemp(prefix="hgk-sp-f6-")
+        inv = spid.new_invocation_id("challenge")
+        original = getattr(rb, "binding_digest")
+
+        def _authority_down(_binding):
+            raise RuntimeError("authority helper down (synthetic)")
+
+        setattr(rb, "binding_digest", _authority_down)
+        try:
+            resolved = spid.resolve_identity(
+                "challenge", skills_root=_skills_root(tmp), lane="VERIFY_SECURITY", nonce=inv,
+                invocation_id=inv, spine=str(_spine(tmp)), workorder="WO-TEST-01")
+        finally:
+            setattr(rb, "binding_digest", original)
+        self.assertFalse(resolved["ok"])
+        self.assertEqual(resolved["code"], spid.ERR_SP_IDENTITY_DIGEST_AUTHORITY_UNAVAILABLE)
+        self.assertIn("authority helper down", resolved["detail"])
+
     def test_F4_chain_join_on_a_row_without_a_binding_refuses(self):
         tmp = tempfile.mkdtemp(prefix="hgk-sp-f4-")
         self._expect_refusal(code=spid.ERR_SP_IDENTITY_BINDING_ABSENT,
