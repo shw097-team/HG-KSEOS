@@ -738,7 +738,8 @@
         "the shared canonical config.yaml model.default (NON_AUTHORITATIVE for governed HGK calls, per the registry's hermes-live-config-yaml observation)"
       ],
       "measured": "VERIFY_SECURITY lane probe var/R7-LANES/probe_gpt_61sol_VERIFY3.json: ok=true, served_arm=openai-codex/gpt-6.1-sol, usage_status=200, 3.11 s.",
-      "claim_ceiling": "a declaration of the lane's binding surface and one measured arm availability; the governed profile's own serving rows are the serving evidence, and this is NOT canonical acceptance."
+      "claim_ceiling": "a declaration of the lane's binding surface and one measured arm availability; the governed profile's own serving rows are the serving evidence, and this is NOT canonical acceptance.",
+      "correction_20261023": "FALSE WHEN WRITTEN, NOW MOOT: measured 2026-10-23 (SWARM W2 blast-radius audit), <HERMES_HOME>/profiles/hgk-governed/config.yaml carried model.default=minimax-m3.1-flash-free, NOT gpt-6.1-sol -- so this paragraph must not be cited as evidence that the governed profile was clean. R15-MODEL-FALLBACK-20261023 set it to opencode-go/deepseek-v4.1-flash and postcondition P6 now checks it on every run. History is preserved verbatim; this note stands beside it."
     }
   },
   "revision_23_reason": "Round FAR-REMEDIATION-20261021 (owner order 2026-10-21): PLAN rank-1 = openai-codex/gpt-6.1-sol (medium, OAuth); VERIFY_SECURITY rank-1 = openai-codex/gpt-6.1-sol (medium, OAuth, Codex CLI); EXECUTE unchanged; SOD006-C3 superseded, SOD006-C4 declared OPEN_OWNER_ORDERED; toolchain pin unified to the live 0.163.0-alpha.10.2 build. Cross-surface alignment (registry / pool / profile / AGENTS.md / owner-chain test) lands in the SAME change set.",
