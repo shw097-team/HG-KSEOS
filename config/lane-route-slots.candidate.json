@@ -205,6 +205,14 @@
       "by": "owner order 2026-10-23",
       "what": "deleted the deprecated minimax-m3.1-flash-free entry from all three ordered pools; ranks renumbered; no other arm removed",
       "why": "provider answers HTTP 410 ModelDeprecated (probe var/R15-MODEL-FALLBACK-20261023/probes/probe_opencode_go_20261023.json)"
+    },
+    {
+      "round": "R15-MODEL-FALLBACK-20261023",
+      "revision": 23,
+      "by": "self-repair J (SWARM W2 finding)",
+      "what": "regenerated every lane's selection_note from ordered_pool[0] and voided the identity-overlap entries that named the deleted arm",
+      "why": "the note contradicted the same object's ordered_pool[0] (it still named gpt-6.1-sol for PLAN and VERIFY_SECURITY), and the overlap list still reported ranks for a deleted arm",
+      "no_numeric_bump": "in-place declaration-face repair, following the rev 13/15 note-repair precedent"
     }
   ],
   "placement_rationale": "Kept as a NEW file rather than folded into config/lane-routing-registry.yaml: the registry's routes[] values are bound as 90 drift-pinned JSON pointers across three live sites, so editing it forces a fully synchronised sweep + epoch bump. This file stays inert for the drift gate (verified: validate -> exit 0 / fatal false / 90 sites).",
@@ -299,7 +307,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (PLAN) the rank-1 arm is openai-codex/gpt-6.1-sol with reasoning effort medium, and it is the lane's automatic selection. The transport id is the BARE 'gpt-6.1-sol': the OpenAI transport rejects the provider-qualified form 'openai-codex/gpt-6.1-sol' with HTTP 400 'Model is unavailable'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted. R15-MODEL-FALLBACK-20261023 (2026-10-23): the deprecated arm opencode-go/minimax-m3.1-flash-free was DELETED from this pool by owner order because the provider answers HTTP 410 ModelDeprecated."
+      "selection_note": "R15-MODEL-FALLBACK-20261023 (owner order 2026-10-23): the PLAN rank-1 arm is opencode-go/deepseek-v4.1-flash; the deprecated arm minimax-m3.1-flash-free is deleted (HTTP 410 at the provider) and MiMo-V2.6-Flash takes the fallback-1 slot it vacated. Generated from ordered_pool[0] so it cannot drift again."
     },
     {
       "lane": "EXECUTE",
@@ -363,7 +371,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "EXECUTE rank-1 arm is now opencode-go/deepseek-v4.1-flash by owner order dated 2026-10-23, because minimax-m3.1-flash-free returns 410 Gone at the provider. Generated from ordered_pool[0] so it cannot drift. R15-MODEL-FALLBACK-20261023 (2026-10-23): the deprecated arm opencode-go/minimax-m3.1-flash-free was DELETED from this pool by owner order because the provider answers HTTP 410 ModelDeprecated."
+      "selection_note": "R15-MODEL-FALLBACK-20261023 (owner order 2026-10-23): the EXECUTE rank-1 arm is opencode-go/deepseek-v4.1-flash; the deprecated arm minimax-m3.1-flash-free is deleted (HTTP 410 at the provider) and MiMo-V2.6-Flash takes the fallback-1 slot it vacated. Generated from ordered_pool[0] so it cannot drift again."
     },
     {
       "lane": "VERIFY_SECURITY",
@@ -427,7 +435,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (VERIFY_SECURITY) the rank-1 arm is openai-codex/gpt-6.1-sol with reasoning effort medium, and it is the lane's automatic selection. The transport id is the BARE 'gpt-6.1-sol': the OpenAI transport rejects the provider-qualified form 'openai-codex/gpt-6.1-sol' with HTTP 400 'Model is unavailable'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted. R15-MODEL-FALLBACK-20261023 (2026-10-23): the deprecated arm opencode-go/minimax-m3.1-flash-free was DELETED from this pool by owner order because the provider answers HTTP 410 ModelDeprecated."
+      "selection_note": "R15-MODEL-FALLBACK-20261023 (owner order 2026-10-23): the VERIFY_SECURITY rank-1 arm is opencode-go/deepseek-v4.1-flash; the deprecated arm minimax-m3.1-flash-free is deleted (HTTP 410 at the provider) and MiMo-V2.6-Flash takes the fallback-1 slot it vacated. Generated from ordered_pool[0] so it cannot drift again."
     }
   ],
   "identity_overlaps_recorded_not_enforced": [
@@ -436,8 +444,8 @@
     "openai-codex/gpt-6.1-sol: BY OWNER ORDER (2026-10-21, GPT quota restored): the PLAN lane and the Independent Acceptance Officer / VERIFY / SECURITY checker lane are BOTH openai-codex/gpt-6.1-sol. The collision is REAL and is declared SOD006-C4 (OPEN_OWNER_ORDERED); independence for this pair is PROCESS, LANE and EVIDENCE-PATH separation only, and model independence is NOT claimed. The EXECUTE writer is on a DIFFERENT model (opencode-go/deepseek-v4.1-flash), so the maker/checker separation holds on the model axis.",
     "opencode-go/deepseek-v4.1-flash appears at EXECUTE rank 2, PLAN rank 4, VERIFY_SECURITY rank 4 - the same identity can occupy all three lanes",
     "opencode-go/glm-5.3-flash appears at PLAN rank 3, VERIFY_SECURITY rank 3 - the same identity can occupy all three lanes",
-    "opencode-go/minimax-m3.1-flash-free appears at EXECUTE rank 1, PLAN rank 2, VERIFY_SECURITY rank 2 - the same identity can occupy all three lanes",
-    "opencode-go/deepseek-v4.1-flash now occupies PLAN rank 1 and VERIFY_SECURITY rank 1 - the planner and the checker are the SAME canonical identity by owner order 2026-10-22 (SOD006-C6). Recorded, not hidden; process separation only."
+    "opencode-go/deepseek-v4.1-flash now occupies PLAN rank 1 and VERIFY_SECURITY rank 1 - the planner and the checker are the SAME canonical identity by owner order 2026-10-22 (SOD006-C6). Recorded, not hidden; process separation only.",
+    "VOIDED by R15-MODEL-FALLBACK-20261023: minimax-m3.1-flash-free was deleted from every pool, so the overlap entries that named it no longer describe any live identity (kept as this note, not as a live claim)."
   ],
   "transport_evidence": {
     "relay_namespace_observed": [
