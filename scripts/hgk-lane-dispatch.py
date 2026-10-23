@@ -1048,6 +1048,26 @@ def nonce_is_blank(nonce) -> bool:
     return not isinstance(nonce, str) or nonce.strip() == ""
 
 
+def served_arm_of(provider, model):
+    """Compose the served arm identity from what actually answered.
+
+    REC07 G1: the relay providers report the model as a provider-qualified slug
+    (``opencode-go/deepseek-v4.1-flash``) while the OAuth arm reports a bare name
+    (``gpt-6.1-sol``).  Prefixing unconditionally doubled the slug, so a run that really served the
+    required arm was recorded as ERR_REQUIRED_ARM_NOT_SERVED.
+
+    Prefix only when the model does not already carry its own provider, and never strip: a model
+    qualified by a DIFFERENT provider still composes to an arm that cannot equal the requirement.
+    """
+    provider = str(provider or "").strip()
+    model = str(model or "").strip()
+    if not provider or not model:
+        return model
+    if model == provider or model.startswith(provider + "/"):
+        return model
+    return f"{provider}/{model}"
+
+
 def failure_disposition(attempts: list) -> dict:
     """C1: the failure code for a run that produced no usable turn, without conflating conditions.
 
@@ -2464,8 +2484,8 @@ def main() -> int:
     if used is not None and args.require_arm:
         # Always record the pair positively, so a passing receipt also states WHICH arm served.
         receipt["required_arm"] = str(args.require_arm)
-        receipt["served_arm"] = f"{used['provider']}/{used['model']}"
-        if f"{used['provider']}/{used['model']}" != str(args.require_arm):
+        receipt["served_arm"] = served_arm_of(used["provider"], used["model"])
+        if receipt["served_arm"] != str(args.require_arm):
             # Surviving the gate is not the guarantee; BEING SERVED is. Without this, a run could pass
             # the required arm's gate and then serve a different arm after a runtime failure, reporting
             # ok:true (hostile-review F11).
@@ -2481,7 +2501,7 @@ def main() -> int:
         receipt["session"] = binding_fields.get("role_binding_session")
         receipt["round"] = binding_fields.get("role_binding_round")
         receipt["subject"] = binding_fields.get("role_binding_subject")
-        served = f"{used['provider']}/{used['model']}" if used is not None else None
+        served = served_arm_of(used["provider"], used["model"]) if used is not None else None
         receipt["role_binding_served_arm"] = served
         if used is not None and served != binding_fields.get("role_binding_arm"):
             receipt["ok"] = False
