@@ -123,10 +123,13 @@ class TestLanePolicyConformance(unittest.TestCase):
         # VERIFY_SECURITY slot names opencode-go/deepseek-v4.1-flash.
         # The same chain-head equality checks remain: no weakening of the
         # default, fallback-order, admission, drift, or SoD assertions.
+        # R15-MODEL-FALLBACK-20261023: the deleted arm is gone from every position; the promoted
+        # arm (MiMo-V2.6-Flash) takes the fallback-1 slot it vacated, and every lane's rank 1 is
+        # the owner-declared primary opencode-go/deepseek-v4.1-flash.
         owner_chain = {
-            "PLAN": [("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "glm-5.3-flash")],
-            "VERIFY_SECURITY": [("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "glm-5.3-flash")],
-            "EXECUTE": [("opencode-go", "minimax-m3.1-flash-free"), ("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6-luna")],
+            "PLAN": [("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "glm-5.3-flash"), ("opencode-go", "mimo-v2.6-pro"), ("nvidia", "z-ai/glm-5.3-flash"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
+            "VERIFY_SECURITY": [("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "glm-5.3-flash"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
+            "EXECUTE": [("opencode-go", "deepseek-v4.1-flash"), ("opencode-go", "mimo-v2.6-flash"), ("openai-codex", "gpt-6-luna"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
         }
         for route in registry["routes"]:
             lane = route["lane"]

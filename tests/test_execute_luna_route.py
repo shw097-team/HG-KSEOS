@@ -30,7 +30,7 @@ class ExecuteLunaRoute(unittest.TestCase):
         p = resolve()
         self.assertEqual(p.returncode, 0, p.stderr)
         route = json.loads(p.stdout)
-        self.assertEqual((route['provider'], route['model']), ('opencode-go', 'minimax-m3.1-flash-free'))
+        self.assertEqual((route['provider'], route['model']), ('opencode-go', 'deepseek-v4.1-flash'))
 
     def test_provider_qualified_oauth_route(self):
         p = resolve('-ModelChain', 'openai-codex/gpt-6-luna')
@@ -38,7 +38,7 @@ class ExecuteLunaRoute(unittest.TestCase):
         self.assertEqual(json.loads(p.stdout)['model'], 'gpt-6-luna')
 
     def test_primary_can_still_be_selected(self):
-        p = resolve('-ModelChain', 'opencode-go/minimax-m3.1-flash-free')
+        p = resolve('-ModelChain', 'opencode-go/deepseek-v4.1-flash')
         self.assertEqual(p.returncode, 0, p.stderr)
         self.assertEqual(json.loads(p.stdout)['transport'], 'sealed-opencodex-frontdoor')
 
@@ -48,7 +48,7 @@ class ExecuteLunaRoute(unittest.TestCase):
         self.assertIn('ERR_CODEX_WRITE_MODEL_NOT_SANCTIONED', p.stderr)
 
     def test_mixed_chain_is_refused(self):
-        p = resolve('-ModelChain', 'minimax-m3.1-flash-free,gpt-6-luna')
+        p = resolve('-ModelChain', 'deepseek-v4.1-flash,gpt-6-luna')
         self.assertNotEqual(p.returncode, 0)
         self.assertIn('ERR_CODEX_WRITE_CHAIN_NOT_SINGLE', p.stderr)
 

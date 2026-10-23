@@ -42,10 +42,8 @@
   "hermes_source": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent",
   "hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes",
   "provider": "opencode-go",
-  "model": "minimax-m3.1-flash-free",
-  "model_fallbacks": [
-    "deepseek-v4.1-flash"
-  ],
+  "model": "deepseek-v4.1-flash",
+  "model_fallbacks": [],
   "credential_env": "OPENCODE_GO_API_KEY",
   "credential_source_file": "%LOCALAPPDATA%\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\.env",
   "credential_resolution": "existing-process-env-then-canonical-hermes-root-env",
@@ -71,7 +69,7 @@
   "relay_service_note": "The isolated opencodex relay must be running for the Codex lane to work: `ocx start --port 10101` (or install it as a service with `ocx service install`). Relay state lives in %LOCALAPPDATA%\\HG-KSEOS\\opencodex-hermes; the human C:\\Users\\user\\.codex home is not used by this lane.",
   "default_execute_route": "CODEX_CLI_SEALED_LANE",
   "execute_lane_child_models": [
-    "minimax-m3.1-flash-free"
+    "deepseek-v4.1-flash"
   ],
   "execute_route_contract": {
     "declared_by": "user instruction (canonical Hermes session 2026-10-07), REQ-LANE-ROUTE-001",
@@ -91,7 +89,7 @@
       "var/lane-route-001/receipts/step5b_isolated_codex_runtime_smoke.json"
     ]
   },
-  "sod_note": "EXECUTE runs on deepseek-v4.1-flash via this sealed lane (owner mandate 2026-10-21, handover round). PLAN runs opencode-go/minimax-m3.1-flash-free and the Independent Acceptance Officer / VERIFY / SECURITY runs openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth) under that same mandate. So maker and checker sit on DIFFERENT models AND different providers, and PLAN vs VERIFY/SECURITY also sit on different models and providers -- measured at the MODEL level only: model-level separation of duties is NOT principal-level separation of duties, and no principal-independence claim is made here. PLAN and EXECUTE now SHARE the opencode-go provider (different models).",
+  "sod_note": "R15 (2026-10-23): all three lanes run opencode-go/deepseek-v4.1-flash by owner order. Model-axis separation is ABSENT and recorded as OPEN_OWNER_ORDERED, not hidden. What remains is PROCESS separation (a separate Codex-CLI process with a fresh context), LANE separation, EVIDENCE-PATH separation and the no-self-acceptance rule. No principal-independence and no cross-family-independence claim is made.",
   "model_fallbacks_previous": [
     "gpt-5.6-luna",
     "glm-5.2"
@@ -175,5 +173,6 @@
     }
   ],
   "round_rebinding_note_20261021": "Round R8-EXECUTE-MINIMAX-20261021: the sealed EXECUTE lane binding moved from deepseek-v4.1-flash to minimax-m3.1-flash-free under the owner mandate quoted in config/lane-routing-registry.yaml. /model_routing_change is a HISTORICAL record of the 2026-10-02 change and was deliberately NOT rewritten (previous_model deepseek-v4-flash -> new_model deepseek-v4.1-flash at that time). The codex toolchain pin (codex_executable / codex_version / codex_sha256) is a separate concern and was not touched by a lane-model mandate.",
-  "round_rebinding_note_20261021b": "Round R10-HANDOVER-20261021: the sealed EXECUTE lane binding moved from minimax-m3.1-flash-free to deepseek-v4.1-flash under the owner mandate quoted in config/lane-routing-registry.yaml, in the same order that moved PLAN to minimax-m3.1-flash-free. Prior round_rebinding_note / round_rebinding_note_20261021 and model_routing_change are HISTORICAL records and were deliberately NOT rewritten. The codex toolchain pin (codex_executable / codex_version / codex_sha256) is a separate concern and was not touched by the lane-model mandate."
+  "round_rebinding_note_20261021b": "Round R10-HANDOVER-20261021: the sealed EXECUTE lane binding moved from minimax-m3.1-flash-free to deepseek-v4.1-flash under the owner mandate quoted in config/lane-routing-registry.yaml, in the same order that moved PLAN to minimax-m3.1-flash-free. Prior round_rebinding_note / round_rebinding_note_20261021 and model_routing_change are HISTORICAL records and were deliberately NOT rewritten. The codex toolchain pin (codex_executable / codex_version / codex_sha256) is a separate concern and was not touched by the lane-model mandate.",
+  "round_rebinding_note_20261023": "Round R15-MODEL-FALLBACK-20261023: /model and /execute_lane_child_models move from the deprecated minimax-m3.1-flash-free to deepseek-v4.1-flash; /model_fallbacks is emptied deliberately because the relay catalog exposes only opencode-go/deepseek-v4.1-flash, opencode-go/glm-5.3-flash and opencode-go/mimo-v2.6-pro (NOT mimo-v2.6-flash), and an automatic alternate list is a live escape hatch - the chain is pinned by the dispatcher against the pool instead. Prior round notes, model_routing_change and the toolchain pin are HISTORICAL/HISTORICAL-ADJACENT and were not rewritten."
 }

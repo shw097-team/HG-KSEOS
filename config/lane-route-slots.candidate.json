@@ -2,10 +2,10 @@
   "schema": "HGK-LANE-ROUTE-SLOTS/1",
   "status": "CANDIDATE",
   "artifact": "LANE_ROUTE_SLOTS_CANDIDATE",
-  "revision": 21,
-  "supersedes_revision": 19,
+  "revision": 23,
+  "supersedes_revision": 22,
   "round": "ROUND-R14-LANE-REBIND-20261022",
-  "declared_by": "Owner instruction 2026-10-22 (GPT quota exhausted): PLAN opencode-go/deepseek-v4.1-flash; EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY opencode-go/deepseek-v4.1-flash. PLAN's DEFAULT moves; the former default openai-codex/gpt-6.1-sol stays in the pool as fallback1 and no arm is deleted.",
+  "declared_by": "Owner order 2026-10-23: main model DEEPSEEK V4.1 FLASH (OPENCODE GO); the deprecated fallback-first arm MiniMax M3.1 Flash is DELETED and MiMo-V2.6-Flash takes fallback 1. The arm opencode-go/minimax-m3.1-flash-free answers HTTP 410 ModelDeprecated, so deletion is a repair, not a preference. All three lanes stay opencode-go/deepseek-v4.1-flash at rank 1.",
   "authority_basis": "the same owner order that rebind the registry routes, the assignment and the 87 projection bindings in HG-KSEOS 924af95; the pool is the deployment plane and must not disagree with the declared plane",
   "claim_ceiling": "CANDIDATE_ONLY. Not promoted, not active. Selection is declarative; only entries marked DISPATCHABLE can be dispatched today.",
   "change_log": [
@@ -198,6 +198,13 @@
       "measured": "Before: tests/test_lane_policy.py + test_lane_scope_isolation.py -> 1 failed (PoolSelectionTests EXECUTE automatic_selection must be rank 1), 9 passed, 90 subtests, at HEAD 1dcc59d. After this repair: both suites green (see the commit that carries it).",
       "claim_ceiling": "CANDIDATE_ONLY. A declaration-face consistency repair, not an acceptance of any subject; the pool is not promoted and not active.",
       "scope": "This file is inert to the drift gate (check_drift reads the registry projections vs live sites, not this pool), so this edit cannot turn the drift gate red and no registry epoch / model-lane-assignment revision bump is taken here."
+    },
+    {
+      "round": "R15-MODEL-FALLBACK-20261023",
+      "revision": 22,
+      "by": "owner order 2026-10-23",
+      "what": "deleted the deprecated minimax-m3.1-flash-free entry from all three ordered pools; ranks renumbered; no other arm removed",
+      "why": "provider answers HTTP 410 ModelDeprecated (probe var/R15-MODEL-FALLBACK-20261023/probes/probe_opencode_go_20261023.json)"
     }
   ],
   "placement_rationale": "Kept as a NEW file rather than folded into config/lane-routing-registry.yaml: the registry's routes[] values are bound as 90 drift-pinned JSON pointers across three live sites, so editing it forces a fully synchronised sweep + epoch bump. This file stays inert for the drift gate (verified: validate -> exit 0 / fatal false / 90 sites).",
@@ -248,19 +255,7 @@
           "automatic_selection": false
         },
         {
-          "provider": "opencode-go",
-          "model": "minimax-m3.1-flash-free",
-          "transport_model": "opencode-go/minimax-m3.1-flash-free",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "oauth": false,
-          "reasoning_effort": null,
-          "role": "FALLBACK2/備援2",
-          "default": false,
-          "automatic_selection": false,
-          "rank": 3
-        },
-        {
-          "rank": 4,
+          "rank": 3,
           "provider": "opencode-go",
           "model": "glm-5.3-flash",
           "role": "FALLBACK3/備援3",
@@ -271,7 +266,7 @@
           "automatic_selection": false
         },
         {
-          "rank": 5,
+          "rank": 4,
           "provider": "opencode-go",
           "model": "mimo-v2.6-pro",
           "role": "FALLBACK4/備援4",
@@ -282,7 +277,7 @@
           "automatic_selection": false
         },
         {
-          "rank": 6,
+          "rank": 5,
           "provider": "nvidia",
           "model": "z-ai/glm-5.3-flash",
           "role": "FALLBACK5/備援5",
@@ -293,7 +288,7 @@
           "automatic_selection": false
         },
         {
-          "rank": 7,
+          "rank": 6,
           "provider": "nvidia",
           "model": "deepseek-ai/deepseek-v4.1-flash",
           "role": "FALLBACK6/備援6",
@@ -304,7 +299,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (PLAN) the rank-1 arm is openai-codex/gpt-6.1-sol with reasoning effort medium, and it is the lane's automatic selection. The transport id is the BARE 'gpt-6.1-sol': the OpenAI transport rejects the provider-qualified form 'openai-codex/gpt-6.1-sol' with HTTP 400 'Model is unavailable'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted."
+      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (PLAN) the rank-1 arm is openai-codex/gpt-6.1-sol with reasoning effort medium, and it is the lane's automatic selection. The transport id is the BARE 'gpt-6.1-sol': the OpenAI transport rejects the provider-qualified form 'openai-codex/gpt-6.1-sol' with HTTP 400 'Model is unavailable'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted. R15-MODEL-FALLBACK-20261023 (2026-10-23): the deprecated arm opencode-go/minimax-m3.1-flash-free was DELETED from this pool by owner order because the provider answers HTTP 410 ModelDeprecated."
     },
     {
       "lane": "EXECUTE",
@@ -334,17 +329,15 @@
           "automatic_selection": true
         },
         {
-          "rank": 2,
+          "model": "mimo-v2.6-flash",
           "provider": "opencode-go",
-          "model": "minimax-m3.1-flash-free",
-          "role": "fallback1 (DEPRECATED at provider)",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "oauth": false,
-          "transport_model": "opencode-go/minimax-m3.1-flash-free",
-          "probe_note": "410 Gone measured 2026-10-23 on the relay: 'Model minimax-m3.1-flash-free has been deprecated'. Retained as a historical arm, not dispatchable until the provider restores it.",
+          "transport_model": "opencode-go/mimo-v2.6-flash",
+          "canonical_identity": "mimo-v2.6-flash",
+          "role": "fallback1_operator_selectable",
           "default": false,
           "automatic_selection": false,
-          "reasoning_effort": null
+          "provenance": "R15-MODEL-FALLBACK-20261023: owner order 2026-10-23 promotes MiMo-V2.6-Flash into the slot the deleted arm held",
+          "rank": 2
         },
         {
           "rank": 3,
@@ -370,7 +363,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "EXECUTE rank-1 arm is now opencode-go/deepseek-v4.1-flash by owner order dated 2026-10-23, because minimax-m3.1-flash-free returns 410 Gone at the provider. Generated from ordered_pool[0] so it cannot drift."
+      "selection_note": "EXECUTE rank-1 arm is now opencode-go/deepseek-v4.1-flash by owner order dated 2026-10-23, because minimax-m3.1-flash-free returns 410 Gone at the provider. Generated from ordered_pool[0] so it cannot drift. R15-MODEL-FALLBACK-20261023 (2026-10-23): the deprecated arm opencode-go/minimax-m3.1-flash-free was DELETED from this pool by owner order because the provider answers HTTP 410 ModelDeprecated."
     },
     {
       "lane": "VERIFY_SECURITY",
@@ -412,19 +405,7 @@
           "automatic_selection": false
         },
         {
-          "provider": "opencode-go",
-          "model": "minimax-m3.1-flash-free",
-          "transport_model": "opencode-go/minimax-m3.1-flash-free",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "oauth": false,
-          "reasoning_effort": null,
-          "role": "FALLBACK2/備援2",
-          "default": false,
-          "automatic_selection": false,
-          "rank": 3
-        },
-        {
-          "rank": 4,
+          "rank": 3,
           "provider": "opencode-go",
           "model": "glm-5.3-flash",
           "role": "FALLBACK3/備援3",
@@ -435,7 +416,7 @@
           "automatic_selection": false
         },
         {
-          "rank": 5,
+          "rank": 4,
           "provider": "nvidia",
           "model": "deepseek-ai/deepseek-v4.1-flash",
           "role": "FALLBACK4/備援4",
@@ -446,7 +427,7 @@
           "automatic_selection": false
         }
       ],
-      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (VERIFY_SECURITY) the rank-1 arm is openai-codex/gpt-6.1-sol with reasoning effort medium, and it is the lane's automatic selection. The transport id is the BARE 'gpt-6.1-sol': the OpenAI transport rejects the provider-qualified form 'openai-codex/gpt-6.1-sol' with HTTP 400 'Model is unavailable'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted."
+      "selection_note": "Owner order 2026-10-21 (GPT quota restored): the PLAN execution model and the Independent Acceptance Officer / VERIFY / SECURITY checker model are BOTH openai-codex/gpt-6.1-sol (GPT 6.1 SOL-MEDIUM, OpenAI OAuth). This SUPERSEDES the earlier 2026-10-21 order that put minimax-m3.1-flash-free on PLAN and VERIFY_SECURITY. The EXECUTE lane is not named by the order and stays on opencode-go/deepseek-v4.1-flash, per the owner's standing clarification. For THIS lane (VERIFY_SECURITY) the rank-1 arm is openai-codex/gpt-6.1-sol with reasoning effort medium, and it is the lane's automatic selection. The transport id is the BARE 'gpt-6.1-sol': the OpenAI transport rejects the provider-qualified form 'openai-codex/gpt-6.1-sol' with HTTP 400 'Model is unavailable'. The arms below it stay reachable as fallbacks. A rank-1 arm is a SELECTION, not an acceptance: it says which model the lane dispatches to, not that anything has been accepted. R15-MODEL-FALLBACK-20261023 (2026-10-23): the deprecated arm opencode-go/minimax-m3.1-flash-free was DELETED from this pool by owner order because the provider answers HTTP 410 ModelDeprecated."
     }
   ],
   "identity_overlaps_recorded_not_enforced": [
@@ -569,6 +550,14 @@
       "revision": 18,
       "at": "2026-10-22",
       "change": "normalised ordered_pool: entries that were str(dict) reprs are real objects again; rank is the list order; default/automatic_selection are true for rank 1 only. Measured cause: the rev-17 re-binding moved the chain but left default=true on the OLD arm, so the deployed dispatcher would still auto-select deepseek on EXECUTE while the registry declared minimax first - a declared-vs-actual gap that no test covered (the test named in test_lane_policy.py:113 did not exist)."
+    },
+    {
+      "round": "R15-MODEL-FALLBACK-20261023",
+      "revision": 23,
+      "by": "owner order 2026-10-23",
+      "what": "inserted opencode-go/mimo-v2.6-flash into the EXECUTE ordered pool at rank 2 -- the slot the deleted arm held -- and renumbered ranks 1..4",
+      "why": "the owner order promotes MiMo-V2.6-Flash to fallback 1; deleting the deprecated arm without filling its slot would have shifted every fallback up one rank (a silent re-ranking), which the artifact's own convention forbids",
+      "ceiling": "CANDIDATE_ONLY; selection is declarative"
     }
   ],
   "identity_requirements_declared": {
