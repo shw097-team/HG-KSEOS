@@ -21,6 +21,16 @@ file was written:
   copy, and a copy that fails ``PRAGMA integrity_check`` is unlinked before
   ``ERR_RESTORE_INTEGRITY`` is raised -- so a failed restore cannot leave a half-written target
   standing in for a committed checkpoint.
+* An interrupted restore is modelled the way a killed copy really leaves the world: the target path
+  is *occupied* by what the dead attempt produced -- a truncated file, or a directory wearing the
+  target's name -- and the module reports it as ``ERR_RESTORE_TARGET_EXISTS`` instead of writing
+  through it. That is a different situation from an absent target, and the resume test pins it.
+* The module has no ``operation_id``, no readback after a timeout, and no UNKNOWN/PARTIAL
+  reconciliation (KB ``SBL_HGK_FABRIC_PIPD_LS_PKG_R15_1...#1418``).
+  ``test_resume_requires_operation_identity`` states that contract and is marked
+  ``xfail(strict=True)``: it fails today, so the gap stays visible, and it turns XPASS -- and
+  therefore a failing build -- the moment ``recovery`` grows the identity, so the rule cannot be
+  quietly satisfied by a weaker reading later.
 
 Each test builds its own SQLite database under pytest's ``tmp_path``; there is no network, no repo
 fixture, and no write outside the pytest temp root.
@@ -29,7 +39,9 @@ fixture, and no write outside the pytest temp root.
 from __future__ import annotations
 
 import hashlib
+import inspect
 import json
+import shutil
 import sqlite3
 import sys
 from pathlib import Path
@@ -206,34 +218,61 @@ def test_resume_with_mismatched_digest_is_refused_and_target_untouched(tmp_path)
 def test_resume_after_interrupted_restore_reproduces_the_backup_exactly(tmp_path):
     """After an interrupted restore, resuming from the intact backup reproduces its bytes exactly.
 
-    The interruption is modelled the way the module's own failure path leaves the world: the target
-    is gone (a crashed copy, or an integrity failure that unlinked the bad copy) while the backup is
-    untouched. Resuming writes the bytes the backup holds -- equality is asserted on the raw bytes,
-    not just on the digest -- and the reproduced checkpoint carries each row once, so the resume
-    reconciles to the backup's state instead of layering a second application on top of it.
+    The interruption is not "the target never existed". A copy that dies part-way leaves the target
+    path *occupied* by its own debris, and this test produces both shapes of that debris: a file
+    holding a strict prefix of the backup (a killed ``copy2``), and a directory sitting on the
+    target name with a partial payload inside (a crashed extraction). In each case the module
+    reports the occupied destination -- ``ERR_RESTORE_TARGET_EXISTS`` -- and leaves the debris
+    byte-identical, so the resume cannot merge into it, append to it, or silently treat a
+    half-written file as a checkpoint. Once the failed attempt's debris is cleared, the resume has
+    to reproduce the backup: the load-bearing assertions are byte equality with the backup file,
+    its digest, ``PRAGMA integrity_check``, and each row present exactly once -- not any message.
     """
     database = _seeded_database(tmp_path)
     receipt = recovery.backup_database(database, tmp_path / "backups")
     backup = Path(receipt["backup"])
     backup_digest = _sha256(backup)
     backup_bytes = backup.read_bytes()
+    assert backup_digest == receipt["sha256"]
+
+    # --- interruption 1: a copy killed mid-file leaves a truncated target behind ------------------
     target = tmp_path / "restore" / "spine.db"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    interrupted_bytes = backup_bytes[: len(backup_bytes) // 2]
+    assert 0 < len(interrupted_bytes) < len(backup_bytes), (
+        "the interruption is not a truncated copy"
+    )
+    assert backup_bytes.startswith(interrupted_bytes), (
+        "the interruption is not a prefix of the backup"
+    )
+    target.write_bytes(interrupted_bytes)
 
-    completed = recovery.restore_database(backup, receipt["sha256"], target)
-    assert completed["status"] == "RESTORE_READBACK_PASS"
-    assert _sha256(target) == backup_digest
+    with pytest.raises(InvariantViolation) as caught:
+        recovery.restore_database(backup, backup_digest, target)
+    assert str(caught.value).startswith("ERR_RESTORE_TARGET_EXISTS"), (
+        "the product did not report the interrupted attempt's leftover; a resume that writes "
+        "through it would be the repeated world effect this test exists to catch"
+    )
+    assert target.read_bytes() == interrupted_bytes, (
+        "the refused resume wrote through the interrupted copy"
+    )
+    assert _sha256(target) != backup_digest, (
+        "the interrupted target already looks like a finished restore"
+    )
 
-    # Interruption: the target does not survive, the backup does.
+    # The dead attempt's artifact is cleared; the resume now has to reproduce the checkpoint.
     target.unlink()
     assert not target.exists()
     assert backup.is_file(), "the interrupted restore damaged the backup"
-    assert _sha256(backup) == backup_digest == receipt["sha256"]
+    assert _sha256(backup) == backup_digest
 
     resumed = recovery.restore_database(backup, backup_digest, target)
 
     assert resumed["status"] == "RESTORE_READBACK_PASS"
     assert resumed["sha256"] == backup_digest
-    assert target.read_bytes() == backup_bytes, "the resumed restore is not byte-identical to the backup"
+    assert target.read_bytes() == backup_bytes, (
+        "the resumed restore is not byte-identical to the backup"
+    )
     assert _sha256(target) == backup_digest
 
     connection = sqlite3.connect(target)
@@ -242,9 +281,102 @@ def test_resume_after_interrupted_restore_reproduces_the_backup_exactly(tmp_path
     finally:
         connection.close()
     assert integrity == "ok"
-    assert _rows(target) == PAYLOADS, "the resumed checkpoint re-applied rows instead of reproducing them"
+    assert _rows(target) == PAYLOADS, (
+        "the resumed checkpoint re-applied rows instead of reproducing them"
+    )
     assert len(_rows(target)) == len(PAYLOADS)
+
+    # --- interruption 2: the crashed attempt left a directory on the target name ------------------
+    blocked = tmp_path / "restore-dir" / "spine.db"
+    blocked.mkdir(parents=True)
+    leftover = blocked / "partial.tmp"
+    leftover_bytes = backup_bytes[: 1024]
+    leftover.write_bytes(leftover_bytes)
+
+    with pytest.raises(InvariantViolation) as caught:
+        recovery.restore_database(backup, backup_digest, blocked)
+    assert str(caught.value).startswith("ERR_RESTORE_TARGET_EXISTS")
+    assert blocked.is_dir(), "the refused resume replaced the interrupted target"
+    assert leftover.read_bytes() == leftover_bytes, (
+        "the refused resume wrote into the interrupted target"
+    )
+
+    shutil.rmtree(blocked)
+    resumed_dir_target = recovery.restore_database(backup, backup_digest, blocked)
+    assert resumed_dir_target["status"] == "RESTORE_READBACK_PASS"
+    assert blocked.is_file()
+    assert blocked.read_bytes() == backup_bytes, (
+        "the resumed restore is not byte-identical to the backup"
+    )
+    assert _sha256(blocked) == backup_digest
+    assert _rows(blocked) == PAYLOADS
 
     # Resuming did not consume or rewrite the backup either.
     assert _sha256(backup) == backup_digest
     assert backup.read_bytes() == backup_bytes
+
+
+@pytest.mark.xfail(
+    strict=True,
+    reason="R15_1#1418 operation_id / readback reconciliation absent",
+)
+def test_resume_requires_operation_identity(tmp_path):
+    """A resume has to be addressed by the ``operation_id`` of the attempt it continues.
+
+    Citation: KB ``SBL_HGK_FABRIC_PIPD_LS_PKG_R15_1...#1418`` -- an effect that timed out or lost
+    its transport must not be blindly re-sent; ``operation_id`` is the unique idempotency key and a
+    Native state readback comes first. ``CONFIRMED_EFFECT`` continues with verification only,
+    ``CONFIRMED_NO_EFFECT`` re-requests under the owner's policy, and ``UNKNOWN_EFFECT`` /
+    ``PARTIAL_EFFECT`` pause the affected operation into reconciliation/compensation.
+
+    ``hg_kseos.recovery`` currently has none of that: ``restore_database`` takes no ``operation_id``
+    and its receipts carry no identity, so a caller cannot say which attempt a resume belongs to,
+    cannot read the target back to classify a timed-out restore, and therefore cannot tell a
+    confirmed effect from an unknown one. This test states the contract so the gap is a named
+    failure rather than an unwritten expectation; it is ``xfail(strict=True)`` because the product
+    rule is absent, and it will XPASS -- failing loudly -- as soon as the rule arrives, at which
+    point the marker must be removed deliberately.
+    """
+    database = _seeded_database(tmp_path)
+    receipt = recovery.backup_database(database, tmp_path / "backups")
+    assert "operation_id" in receipt, (
+        "a checkpoint that can be resumed is not addressed by an operation_id"
+    )
+    backup = Path(receipt["backup"])
+    target = tmp_path / "restore" / "spine.db"
+    operation_id = "op-resume-0001"
+
+    parameters = inspect.signature(recovery.restore_database).parameters
+    assert "operation_id" in parameters, (
+        "restore_database cannot be told which operation it resumes, so a timed-out restore can "
+        "only be classified by guessing; #1418 requires the operation_id and a readback first"
+    )
+
+    first = recovery.restore_database(
+        backup, receipt["sha256"], target, operation_id=operation_id
+    )
+    assert first.get("operation_id") == operation_id, (
+        "the restore receipt does not record the operation it served"
+    )
+
+    # A readback under the same operation continues a CONFIRMED_EFFECT; it must not become a
+    # second application of it.
+    readback = recovery.restore_database(
+        backup, receipt["sha256"], target, operation_id=operation_id
+    )
+    assert readback["status"] == "RESTORE_READBACK_PASS"
+    assert readback.get("operation_id") == operation_id
+    assert readback["sha256"] == receipt["sha256"]
+    assert _sha256(target) == receipt["sha256"]
+    assert _rows(target) == PAYLOADS
+
+    # A different operation against a target another operation already owns is UNKNOWN/PARTIAL
+    # reconciliation territory, not a silent overwrite.
+    with pytest.raises(InvariantViolation) as caught:
+        recovery.restore_database(
+            backup, receipt["sha256"], target, operation_id="op-resume-0002"
+        )
+    assert str(caught.value).startswith(
+        ("ERR_RESUME_OPERATION_MISMATCH", "ERR_RESTORE_TARGET_EXISTS")
+    )
+    assert _rows(target) == PAYLOADS

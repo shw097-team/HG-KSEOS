@@ -26,6 +26,11 @@ nm = pytest.importorskip(
     reason="HG-KSEOS src is not importable in this interpreter",
 )
 
+lane_policy = pytest.importorskip(
+    "hg_kseos.lane_policy",
+    reason="HG-KSEOS src is not importable in this interpreter",
+)
+
 ROUTE_VOCABULARY = {"NATIVE", "GSTACK", "OPENSPEC"}
 
 CANONICAL_FLOWS = (
@@ -120,3 +125,62 @@ def test_unknown_flow_does_not_fail_open():
     assert decision["provider"] is None
     assert "state" in decision and "fallback" in decision
     assert decision["final_authority"] is True
+
+
+@pytest.mark.xfail(
+    strict=True,
+    reason=(
+        "R15_1#285 authority boundary absent from the routing surface: "
+        "hg_kseos.lane_policy exposes no scope/permission resolver (see __all__), "
+        "so a route decision cannot be shown to withhold an out-of-scope permission; "
+        "the only typed scope refusal lives in role_binding.validate_binding"
+    ),
+)
+def test_route_decision_is_not_authority():
+    """A route decision must not, by itself, grant a permission.
+
+    The challenge is that ``final_authority=True`` inside a decision dict is a
+    value, not a permission boundary. The boundary would have to be a scope
+    resolver that takes the role's declared scope plus a requested permission
+    and returns a typed refusal for anything outside the declaration.
+
+    ``lane_policy`` has no such surface. Rather than pass by asserting the flag
+    it happens to carry, this test calls the resolver the boundary would need
+    and fails loudly while it is absent; ``xfail(strict=True)`` keeps the gap
+    visible and turns it into a failure the day the surface appears unproven.
+    """
+    resolver = getattr(lane_policy, "resolve_permission", None) or getattr(
+        lane_policy, "resolve_scope", None
+    )
+    assert resolver is not None, (
+        "lane_policy publishes no scope resolver: a route decision is not authority, "
+        "but nothing here can refuse an out-of-scope permission"
+    )
+
+    declared = {"product-write"}
+    requested = "release-promotion"
+    assert requested not in declared
+
+    try:
+        outcome = resolver(declared_scope=declared, permission=requested)
+    except Exception as exc:  # the refusal must be typed, so it must carry a code
+        assert getattr(exc, "code", None), f"refusal without a typed code: {exc!r}"
+    else:
+        pytest.fail(f"an out-of-scope permission was admitted by routing: {outcome!r}")
+
+
+def test_registry_route_is_deterministic_and_non_empty():
+    """The active set is non-empty and every canonical flow routes identically twice.
+
+    Determinism is asserted in bulk: both passes are collected into lists and
+    compared once, so one call per flow, one assert. A per-flow test would
+    report the same property eight times and hide the aggregate disagreement.
+    """
+    assert nm.ACTIVE_SELECTED, "ACTIVE_SELECTED must not be empty"
+
+    first = [nm.route(flow) for flow in CANONICAL_FLOWS]
+    second = [nm.route(flow) for flow in CANONICAL_FLOWS]
+
+    assert first == second, [
+        (flow, a, b) for flow, a, b in zip(CANONICAL_FLOWS, first, second) if a != b
+    ]

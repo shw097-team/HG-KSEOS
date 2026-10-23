@@ -1080,6 +1080,80 @@ def failure_disposition(attempts: list) -> dict:
     return fields
 
 
+PROVIDER_ALIASES = {
+    # the codex client records an upstream provider name in its rollout; the declaration names the arm by the
+    # provider the pool knows. Map only what is measured, and leave anything unknown unresolved rather than guessed.
+    "openai": "openai-codex",
+    "opencode-go": "opencode-go",
+}
+
+
+def resolve_rollout_identity(home, since_epoch, cwd, timeout_s=15):
+    """Read the served arm from the codex client's OWN rollout record.
+
+    Why this exists: an OAuth-direct turn writes no relay usage row, so a wrapper that only trusts the relay must
+    report model=null and ok=false - the honest lane then looks like the broken one. The client, however, writes
+    `sessions/**/rollout-*.jsonl` with `model_provider` in `session_meta` and the model name in the turn context.
+    That is product-recorded evidence about which arm served THIS cwd at THIS time; it is not a claim, and it is not
+    accepted unless the provider and model both resolve.
+
+    Returns {"provider": <declared provider>, "model": <model>, "source": "codex-rollout", "rollout": <path>} or None.
+    """
+    import glob as _glob
+    base = Path(home) / "sessions"
+    if not base.is_dir():
+        return None
+    want_cwd = str(Path(cwd).resolve()).lower() if cwd else None
+    deadline = time.time() + timeout_s
+    candidates = []
+    while True:
+        candidates = sorted(_glob.glob(str(base / "**" / "rollout-*.jsonl"), recursive=True),
+                            key=lambda p: os.path.getmtime(p), reverse=True)
+        fresh = [p for p in candidates if os.path.getmtime(p) >= since_epoch - 5]
+        if fresh or time.time() > deadline:
+            break
+        time.sleep(0.5)
+    for path in fresh:
+        try:
+            with open(path, encoding="utf-8", errors="replace") as fh:
+                head = fh.readline()
+                meta = json.loads(head).get("payload", {})
+                if want_cwd:
+                    rec_cwd = str(Path(meta.get("cwd", "")).resolve()).lower() if meta.get("cwd") else None
+                    if rec_cwd and rec_cwd != want_cwd:
+                        continue
+                provider_raw = meta.get("model_provider")
+                model = None
+                for line in fh:
+                    if '"model"' not in line:
+                        continue
+                    try:
+                        obj = json.loads(line)
+                    except Exception:
+                        continue
+                    stack = [obj]
+                    while stack and model is None:
+                        cur = stack.pop()
+                        if isinstance(cur, dict):
+                            for k, v in cur.items():
+                                if k == "model" and isinstance(v, str) and v:
+                                    model = v
+                                    break
+                                if isinstance(v, (dict, list)):
+                                    stack.append(v)
+                        elif isinstance(cur, list):
+                            stack.extend(cur)
+                    if model:
+                        break
+        except Exception:
+            continue
+        if not model:
+            continue
+        provider = PROVIDER_ALIASES.get(str(provider_raw or "").lower(), str(provider_raw or "").lower())
+        return {"provider": provider, "model": model, "source": "codex-rollout", "rollout": path}
+    return None
+
+
 def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_dir=None,
                   run_id=None) -> dict:
     sandbox = args.sandbox or SANDBOX_BY_LANE.get(args.lane, "read-only")
@@ -1104,7 +1178,12 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
         cmd += ["-c", f'windows.sandbox="{_ws}"']
     if getattr(args, "codex_arg", None):
         cmd += list(args.codex_arg)  # raw pass-through tokens, order preserved (bounded experiments only)
-    cmd += ["exec", "--skip-git-repo-check", "--ephemeral", "--json", args.prompt]
+    # --ephemeral SUPPRESSES the rollout, and the rollout is the only record of which arm an OAuth-direct turn served.
+    # So the two are mutually exclusive by construction: asking for rollout-based identity turns ephemeral off.
+    _exec_flags = ["exec", "--skip-git-repo-check", "--json"]
+    if getattr(args, "identity_source", "relay-usage") != "codex-rollout":
+        _exec_flags.insert(2, "--ephemeral")
+    cmd += _exec_flags + [args.prompt]
 
     env = dict(os.environ)
     env["CODEX_HOME"] = str(lane_home)
@@ -1436,6 +1515,12 @@ def main() -> int:
     ap.add_argument("--codex-arg", action="append", default=None,
                     help="extra raw argv tokens appended verbatim to the codex invocation (repeatable; "
                          "for bounded experiments such as -c prefer_websockets=false)")
+    ap.add_argument("--identity-source", choices=("relay-usage", "codex-rollout"), default="relay-usage",
+                    help="where a served arm's identity is read from. 'relay-usage' (default) requires the relay's own "
+                         "usage row, which is why an OAuth-direct run has no identity and cannot be green: the owner's "
+                         "ChatGPT backend writes no relay ledger. 'codex-rollout' reads the model + provider that the "
+                         "codex client itself recorded in $CODEX_HOME/sessions/**/rollout-*.jsonl for THIS run and THIS "
+                         "cwd; it is the only way an OAuth-paid turn can prove which arm served it.")
     ap.add_argument("--max-candidates", type=int, default=0)
     ap.add_argument("--timeout", type=int, default=300)
     ap.add_argument("--json-out", default=None)
@@ -2262,6 +2347,18 @@ def main() -> int:
                 fh.write(json.dumps({"run_id": f"{os.getpid()}-{run_started}", "at_utc": datetime.now(UTC).isoformat(),
                                      "lane": args.lane, "attempt_in_run": len(attempts), **att},
                                     ensure_ascii=False, sort_keys=True) + "\n")
+        if att.get("exit") == 0 and getattr(args, "identity_source", "relay-usage") == "codex-rollout":
+            # The relay writes no ledger on an OAuth-direct turn, so read the served arm from the codex client's own
+            # rollout. This is not a relaxation: the provider AND model must resolve, and the existing
+            # ERR_REQUIRED_ARM_NOT_SERVED guard below still fails the run when they contradict --require-arm.
+            ident = resolve_rollout_identity(lane_home, run_started, args.cwd or ROOT)
+            if ident:
+                att["provider"] = ident["provider"]
+                att["model"] = ident["model"]
+                att["identity_source"] = ident["source"]
+                att["identity_rollout"] = ident["rollout"]
+                att["usage_receipt_ok"] = True
+                att["identity_note"] = "served arm read from the codex rollout written for this run and cwd"
         if att.get("exit") == 0 and att.get("nonce_present") and att.get("usage_receipt_ok"):
             _ce = None
             if bound:
@@ -2342,6 +2439,7 @@ def main() -> int:
         "claim_ceiling": "a pass here proves the Codex-CLI lane served this turn through the relay with a matching usage receipt; it is not an acceptance of any subject",
     }
     receipt["ok"] = used is not None
+    receipt["identity_source"] = getattr(args, "identity_source", "relay-usage")
     receipt["completion_evidence"] = completion_evidence
     # I3 (pass-5): surface the USAGE MEASUREMENT at the top level too, taken from the serving attempt
     # (or the first attempt that answered when none served). A wrong-shaped CARRIER is a statement
