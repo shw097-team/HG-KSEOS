@@ -45,6 +45,39 @@ def lane_of_role(m: dict, role: str) -> str:
     return "VERIFY_SECURITY" if role == "VERIFY" else role
 
 
+def _served(r: dict) -> str:
+    """The arm a receipt proves was served.
+
+    hgk-lane-dispatch.py writes the served arm under several keys depending on the outcome
+    (`served_arm` for a --require-arm run, `used_transport_model` for the pinned-primary path, or
+    per attempt). Read all of them; a receipt that only has the attempt list still proves the arm.
+    """
+    if r.get("served_arm"):
+        return r["served_arm"]
+    if r.get("used_transport_model"):
+        return r["used_transport_model"]
+    for a in r.get("attempts") or []:
+        if a.get("nonce_present") and a.get("usage_receipt_ok"):
+            return a.get("transport_model") or ""
+    return ""
+
+
+def _plan_session_receipt(lane: str, need_arm: str):
+    """PLAN runs on the hermes engine, so its evidence is a session-usage row, not a dispatch receipt."""
+    for path in sorted((ROOT / "var").glob("*/receipts/PLAN_session.json")):
+        try:
+            d = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        rows = d.get("rows") or []
+        hit = [r for r in rows
+               if f"{r.get('billing_provider')}/{r.get('model')}" == need_arm]
+        if hit:
+            d["_path"] = str(path.relative_to(ROOT))
+            return d
+    return None
+
+
 def check(role: str) -> int:
     m = mandate()
     lane = lane_of_role(m, role)
@@ -54,17 +87,29 @@ def check(role: str) -> int:
         return 2
     need_arm = spec.get("require_arm")
     need_model = spec.get("model")
+    if spec.get("engine") == "hermes":
+        d = _plan_session_receipt(lane, need_arm)
+        if d:
+            print(f"PASS {lane}: session receipt={d['_path']} served_arm={need_arm} "
+                  f"(engine=hermes, rows={len(d.get('rows') or [])})")
+            return 0
+        print(f"FAIL {lane}: no session-usage row proving {need_arm}")
+        return 1
     ok = []
     for r in receipts():
         if (r.get("lane") or "").upper() != lane:
             continue
-        served = r.get("served_arm") or ""
+        served = _served(r)
+        if not served:
+            continue
         model_field = r.get("model") or served.split("/")[-1]
-        if r.get("ok") is True and r.get("nonce") and served == need_arm and model_field == need_model:
+        # the dispatcher records nonce presence per attempt, not as a top-level field
+        nonce_ok = bool(r.get("nonce")) or any(a.get("nonce_present") for a in (r.get("attempts") or []))
+        if r.get("ok") is True and nonce_ok and served == need_arm and model_field == need_model:
             ok.append(r)
     if ok:
         r = ok[-1]
-        print(f"PASS {lane}: receipt={r['_path']} served_arm={r.get('served_arm')} nonce={str(r.get('nonce'))[:12]}…")
+        print(f"PASS {lane}: receipt={r['_path']} served_arm={_served(r)} nonce={str(r.get('nonce'))[:12]}…")
         return 0
     print(f"FAIL {lane}: no receipt with ok=true, nonce, served_arm=={need_arm}, model=={need_model}")
     print(f"     receipts seen: {[x['_path'] for x in receipts()] or 'none'}")
