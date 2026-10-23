@@ -66,6 +66,9 @@ _HERE = Path(__file__).resolve()
 _SUBJECT = _HERE.parent.parent
 _ROUND = _SUBJECT.parent
 _DEFAULT_DECLARATION = _SUBJECT / "config" / "hermes-codex-lane.json"
+# The single named ACTIVE policy (W02/C02). Absent is the pre-existing state and is reported, never
+# invented; present means the declaration bytes must equal the digest it names or the start is refused.
+_DEFAULT_ACTIVE_POLICY = _SUBJECT / "config" / "active-policy.json"
 _DEFAULT_LEDGER = _ROUND / "_control" / "maker" / "frontdoor-ledger.jsonl"
 _DEFAULT_UPSTREAM = "http://127.0.0.1:10101"
 _DEFAULT_HOST = "127.0.0.1"
@@ -244,6 +247,59 @@ def validate_sanctioned_pair(sanctioned: dict) -> tuple[str, str]:
             f"ERR_EXEC_FRONTDOOR_SANCTIONED_DRIFT: declaration resolves to {provider}/{model!r}, "
             f"which is not a member of the pool allow-list loaded from {_POOL_PATH!r}")
     return provider, model
+
+
+def check_active_policy(sanctioned: dict, designation_path: "str | Path | None" = None,
+                        allow_absent: bool = False) -> dict:
+    """Bind the declaration bytes to the single named active policy. Fail closed.
+
+    W02/C02 says *exactly one active policy version must be named*. So:
+      * a designation that names another file than the one loaded is refused — otherwise a designation
+        could bound a digest of a policy nobody is running;
+      * a missing designation is refused too, unless the caller passes ``allow_absent`` explicitly. An
+        earlier revision returned ABSENT for a missing file, which made the control bypassable by
+        deleting one file (found by the independent challenge, 2026-10-23). A bypass that leaves a
+        banner line is still a bypass.
+      * ``BOUND`` — the designation names this declaration's real path and this declaration's digest.
+    """
+    path = Path(designation_path) if designation_path else _DEFAULT_ACTIVE_POLICY
+    loaded = Path(sanctioned["path"]).resolve()
+    actual = hashlib.sha256(loaded.read_bytes()).hexdigest()
+    if not path.exists():
+        if allow_absent:
+            return {"state": "ABSENT_ALLOWED_BY_FLAG", "designation_path": str(path),
+                    "actual_digest": actual}
+        raise ValueError(
+            "ERR_EXEC_FRONTDOOR_ACTIVE_POLICY_ABSENT: no active-policy designation at "
+            f"{path}; W02 requires exactly one named active policy. Pass --allow-absent-active-policy "
+            "to run without one, which is recorded in the start banner.")
+    try:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        raise ValueError(f"ERR_EXEC_FRONTDOOR_ACTIVE_POLICY_INVALID: {path}: {exc}") from exc
+    named = doc.get("policy_path")
+    if named:
+        try:
+            named_resolved = Path(str(named)).resolve()
+        except Exception as exc:
+            raise ValueError(
+                f"ERR_EXEC_FRONTDOOR_ACTIVE_POLICY_INVALID: policy_path {named!r} is not a path: {exc}") from exc
+        if named_resolved != loaded:
+            raise ValueError(
+                "ERR_EXEC_FRONTDOOR_ACTIVE_POLICY_MISMATCH: the designation names "
+                f"{named_resolved} but the front door loaded {loaded}")
+    declared = str(doc.get("policy_digest", "")).strip().lower()
+    if len(declared) != 64 or any(c not in "0123456789abcdef" for c in declared):
+        raise ValueError(
+            f"ERR_EXEC_FRONTDOOR_ACTIVE_POLICY_INVALID: {path} names {declared!r}, not a sha256 hex digest")
+    if declared != actual:
+        raise ValueError(
+            "ERR_EXEC_FRONTDOOR_POLICY_DIGEST_MISMATCH: "
+            f"active policy {path.name} names {declared} but the loaded declaration "
+            f"{loaded.name} hashes to {actual}")
+    return {"state": "BOUND", "designation_path": str(path),
+            "declared_digest": declared, "actual_digest": actual,
+            "declared_by": doc.get("declared_by"), "declared_at": doc.get("declared_at")}
 
 
 # -------------------------------------------------------------------------------------------------
@@ -884,6 +940,14 @@ def build_parser() -> argparse.ArgumentParser:
                         help="fixed loopback relay base URL; requests go to <upstream><path>")
     parser.add_argument("--declaration", default=None,
                         help="lane declaration (default: subject/config/hermes-codex-lane.json)")
+    parser.add_argument("--active-policy", default=None,
+                        help="the single named ACTIVE policy designation (default: "
+                             "subject/config/active-policy.json). Absent is REFUSED unless "
+                             "--allow-absent-active-policy is given; a designation whose digest or "
+                             "policy_path is not the loaded declaration refuses to start")
+    parser.add_argument("--allow-absent-active-policy", action="store_true",
+                        help="run without a designation (recorded as ABSENT_ALLOWED_BY_FLAG in the banner). "
+                             "An auditable bypass, never a default")
     parser.add_argument("--pool", default=None,
                         help="lane-route pool artifact; when given, the allow-set is the union of the "
                              "selected lanes' declared, qualified and transport ids")
@@ -934,10 +998,20 @@ def serve(args: argparse.Namespace) -> int:
             _POOL_PATH = str(args.pool)
         sanctioned = load_sanctioned(args.declaration)
         validate_sanctioned_pair(sanctioned)
+        active_policy = check_active_policy(sanctioned, args.active_policy,
+                                            allow_absent=args.allow_absent_active_policy)
     except ValueError as exc:
         text = str(exc)
         if "SANCTIONED_DRIFT" in text:
             return _fail_start("ERR_EXEC_FRONTDOOR_SANCTIONED_DRIFT", text)
+        if "POLICY_DIGEST_MISMATCH" in text:
+            return _fail_start("ERR_EXEC_FRONTDOOR_POLICY_DIGEST_MISMATCH", text)
+        if "ACTIVE_POLICY_ABSENT" in text:
+            return _fail_start("ERR_EXEC_FRONTDOOR_ACTIVE_POLICY_ABSENT", text)
+        if "ACTIVE_POLICY_MISMATCH" in text:
+            return _fail_start("ERR_EXEC_FRONTDOOR_ACTIVE_POLICY_MISMATCH", text)
+        if "ACTIVE_POLICY_INVALID" in text:
+            return _fail_start("ERR_EXEC_FRONTDOOR_ACTIVE_POLICY_INVALID", text)
         if "POOL" in text:
             return _fail_start(text.partition(":")[0].strip(), text)
         return _fail_start("ERR_EXEC_FRONTDOOR_DECLARATION_INVALID", text)
@@ -952,6 +1026,7 @@ def serve(args: argparse.Namespace) -> int:
         "sanctioned_pair": _SANCTIONED_PAIR,
         "pool_path": _POOL_PATH,
         "allowlist_size": len(_ALLOWED_TOKENS),
+        "active_policy": active_policy,
         "declaration_sha256": hashlib.sha256(Path(sanctioned["path"]).read_bytes()).hexdigest(),
         "ledger": str(ledger.path),
     }) + "\n")
