@@ -1058,12 +1058,17 @@ def served_arm_of(provider, model):
 
     Prefix only when the model does not already carry its own provider, and never strip: a model
     qualified by a DIFFERENT provider still composes to an arm that cannot equal the requirement.
+
+    Returns None when no qualified identity can be asserted (missing provider, missing model, or a
+    degenerate provider == model).  A None served arm must be reported as unqualified rather than
+    compared as if it were a model-only identity: a bare ``--require-arm`` would otherwise be
+    satisfied with no provider evidence at all (challenge V04, item 6).
     """
     provider = str(provider or "").strip()
     model = str(model or "").strip()
-    if not provider or not model:
-        return model
-    if model == provider or model.startswith(provider + "/"):
+    if not provider or not model or model == provider:
+        return None
+    if model.startswith(provider + "/"):
         return model
     return f"{provider}/{model}"
 
@@ -2485,7 +2490,12 @@ def main() -> int:
         # Always record the pair positively, so a passing receipt also states WHICH arm served.
         receipt["required_arm"] = str(args.require_arm)
         receipt["served_arm"] = served_arm_of(used["provider"], used["model"])
-        if receipt["served_arm"] != str(args.require_arm):
+        if receipt["served_arm"] is None:
+            # No qualified identity could be composed. That is NOT a match and must not silently
+            # degrade into a model-only comparison (challenge V04, item 6).
+            receipt["ok"] = False
+            receipt["code"] = "ERR_ARM_IDENTITY_UNQUALIFIED"
+        elif receipt["served_arm"] != str(args.require_arm):
             # Surviving the gate is not the guarantee; BEING SERVED is. Without this, a run could pass
             # the required arm's gate and then serve a different arm after a runtime failure, reporting
             # ok:true (hostile-review F11).
