@@ -5,7 +5,7 @@ authorization_basis: 'Owner order 2026-10-23 (R15): the main model is opencode-g
 source_of_routes:
   path: config/model-lane-assignment.json
   revision: 33
-  sha256: ef14bba9f96cae3621a3fd615060752b1645bb3741cf2a285ae76599023d6935
+  sha256: cfbff111c804e2aab7c97dec0c1b98792a731f007d962d92e54924325d62213e
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
