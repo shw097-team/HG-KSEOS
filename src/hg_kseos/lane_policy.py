@@ -171,7 +171,11 @@ def _compact_route(route: dict[str, Any]) -> dict[str, Any]:
         "canonical_identity": route.get("canonical_identity", normalize_model(route["model"])),
         "auth": route["auth"],
         "oauth": bool(route.get("oauth", False)),
-        "fallbacks": list(route.get("fallbacks", [])),
+        # The fallback entries are dicts, so a list() copy would still hand out the registry's own
+        # dict objects: editing one projected fallback would rewrite the parsed registry and every
+        # projection resolved from it afterwards. Carried by deep copy, exactly like `arms`. The
+        # remaining fields are scalars (str/bool/None) and need no copy.
+        "fallbacks": copy.deepcopy(route.get("fallbacks", [])),
         "admission_status": route.get("admission_status", "UNPROVEN"),
         # V5: reasoning_effort is routing-relevant and must survive compaction, otherwise a declared
         # per-lane effort is silently dropped from the projection and cannot be drift-checked.
