@@ -329,11 +329,13 @@ class ProjectLifecycleController:
         return tasks
 
     # ---------- workorder admission ----------
-    def admit_workorders(self, project_id: str) -> dict[str, Any]:
+    def admit_workorders(self, project_id: str, *, admission_bundles: dict | None = None) -> dict[str, Any]:
         state = self._project_state(project_id)
         if state != "PLAN_READY":
             raise LifecycleError(f"ERR_ADMIT_STATE {state}")
         plan = self.plan(project_id)  # idempotent re-derive
+        from .native_admission import absolute_root
+        target_root = absolute_root(plan.get("target_root"))
         admitted: list[str] = []
         # CS-A D2: project-scoped requirement id (embed the FULL project id so a
         # project whose tail is "001" cannot collide with the legacy REQ-001).
@@ -371,16 +373,18 @@ class ProjectLifecycleController:
                 requirement_id=req_id,
                 objective=spec["objective"],
                 owner=spec["owner_wps"][0],
-                writable_root=Path(plan["target_root"] or "worktrees") / spec["taskspec_id"].lower(),
+                writable_root=target_root / spec["taskspec_id"].lower(),
                 permissions={"write_scope": "worktree", "network": False},
                 tests=[spec["acceptance"][0]],
                 evidence_plan="raw + independent evidence per acceptance contract",
+                admission_bundle=(admission_bundles or {}).get(spec["taskspec_id"]),
             )
             wo_id = f"WO-{spec['taskspec_id']}"
             self.spine.create_workorder(
                 wo_id, spec["taskspec_id"], writer="codex",
-                worktree=Path("worktrees") / spec["taskspec_id"].lower(),
+                worktree=target_root / spec["taskspec_id"].lower(),
                 base_head=self._repo_head(project_id),
+                admission_bundle=(admission_bundles or {}).get(wo_id),
             )
             admitted.append(wo_id)
         self.transition(project_id, "WORKORDERS_ADMITTED", trigger="WORKORDER_AUTO_ADMISSION",
@@ -569,7 +573,7 @@ class ProjectLifecycleController:
     # ---------- G0 D2: dynamic denominator expansion ----------
     def admit_requirement(self, project_id: str, requirement_id: str,
                           wording: str, *, owner: str = "owner",
-                          priority: str = "P1") -> dict[str, Any]:
+                          priority: str = "P1", admission_bundles: dict | None = None) -> dict[str, Any]:
         """Admit a late-bound required obligation into the SAME project
         lifecycle: Requirement -> TaskSpec -> WorkOrder -> denominator.
 
@@ -580,6 +584,8 @@ class ProjectLifecycleController:
         state = self._project_state(project_id)
         if state not in ("EXECUTING", "PLAN_READY", "WORKORDERS_ADMITTED"):
             raise LifecycleError(f"ERR_ADMIT_REQUIREMENT_STATE {state}")
+        from .native_admission import absolute_root
+        target_root = absolute_root(self.plan(project_id).get("target_root"))
         self.spine.register_requirement(
             requirement_id=requirement_id,
             source_locator=f"project:{project_id}:late-bound-obligation",
@@ -609,18 +615,22 @@ class ProjectLifecycleController:
                 requirement_id=requirement_id,
                 objective=wording,
                 owner=owner,
-                writable_root=Path("worktrees") / ts_id.lower(),
+                writable_root=target_root / ts_id.lower(),
                 permissions={"write_scope": "worktree", "network": False},
                 tests=[f"test_{ts_id.lower()}.py"],
                 evidence_plan="raw + independent evidence per acceptance contract",
+                admission_bundle=(admission_bundles or {}).get(ts_id),
             )
             self.spine.create_workorder(
                 f"WO-{ts_id}", ts_id, writer="codex",
-                worktree=Path("worktrees") / ts_id.lower(),
+                worktree=target_root / ts_id.lower(),
                 base_head=base_head,
+                admission_bundle=(admission_bundles or {}).get(f"WO-{ts_id}"),
             )
         except InvariantViolation:
-            pass  # idempotent resume
+            # Idempotent replay needs persisted same-subject evidence. An
+            # invariant failure must never be converted into an admitted WO.
+            raise
         return {"requirement_id": requirement_id, "requirement_state": "FROZEN",
                 "taskspec": ts_id, "workorder": f"WO-{ts_id}"}
 
