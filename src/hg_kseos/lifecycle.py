@@ -627,10 +627,10 @@ class ProjectLifecycleController:
                 base_head=base_head,
                 admission_bundle=(admission_bundles or {}).get(f"WO-{ts_id}"),
             )
-        except InvariantViolation as exc:
-            if str(exc).startswith("ERR_NATIVE_"):
-                raise
-            pass  # idempotent resume
+        except InvariantViolation:
+            # Idempotent replay needs persisted same-subject evidence. An
+            # invariant failure must never be converted into an admitted WO.
+            raise
         return {"requirement_id": requirement_id, "requirement_state": "FROZEN",
                 "taskspec": ts_id, "workorder": f"WO-{ts_id}"}
 

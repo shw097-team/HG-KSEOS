@@ -15,6 +15,17 @@ import test_native_admission as fixture
 
 
 class RequestBoundaryTests(unittest.TestCase):
+    def test_late_requirement_does_not_turn_invariant_failure_into_success(self):
+        spine = Mock()
+        spine.create_taskspec.side_effect = InvariantViolation('ERR_TASKSPEC_CRITICAL_FIELD_MISSING')
+        controller = ProjectLifecycleController(spine)
+        with patch.object(controller, '_project_state', return_value='EXECUTING'), \
+             patch.object(controller, 'plan', return_value={'target_root': str(Path.cwd())}), \
+             patch.object(controller, '_repo_head', return_value='a' * 40):
+            with self.assertRaisesRegex(InvariantViolation, 'ERR_TASKSPEC_CRITICAL_FIELD_MISSING'):
+                controller.admit_requirement('P', 'R', 'goal')
+        spine.create_workorder.assert_not_called()
+
     def test_relative_or_missing_roots_are_not_promoted_to_cwd(self):
         for root in (None, '', '.', 'worktrees', Path('relative')):
             with self.subTest(root=root), self.assertRaisesRegex(InvariantViolation, 'ROOT_ABSOLUTE'):
