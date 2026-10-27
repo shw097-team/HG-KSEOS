@@ -147,7 +147,7 @@ def assert_protected(path):
     import base64 as b64
     script=script.replace('param([string]$RegistryPath)',"$RegistryPath=[Console]::In.ReadLine()")
     cmd=['powershell.exe','-NoProfile','-NonInteractive','-EncodedCommand',b64.b64encode(script.encode('utf-16-le')).decode('ascii')]
-    r=subprocess.run(cmd,input=str(path)+'\n',text=True,capture_output=True,timeout=15)
+    r=subprocess.run(cmd,input=str(path)+'\n',text=True,encoding='utf-8',errors='replace',capture_output=True,timeout=15)
     if r.returncode or r.stdout.strip()!='PROTECTED':refuse('TRUST_ACL_UNPROTECTED')
 
 class ProtectedRegistry:
@@ -207,7 +207,7 @@ def held_root(root,expected_identity=None,expected_head=None):
             # file index high/low indices 11/12 (all DWORDs).
             if expected_identity and identity!=expected_identity:refuse('ROOT_ID')
             if expected_head:
-                r=subprocess.run(['git','-C',str(root),'rev-parse','HEAD'],capture_output=True,text=True,timeout=10)
+                r=subprocess.run(['git','-C',str(root),'rev-parse','HEAD'],capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=10)
                 if r.returncode or r.stdout.strip()!=expected_head:refuse('ROOT_HEAD')
             yield identity
         finally:
@@ -218,7 +218,7 @@ def held_root(root,expected_identity=None,expected_head=None):
             st=os.fstat(fd);identity=f'{st.st_dev}:{st.st_ino}'
             if expected_identity and identity!=expected_identity:refuse('ROOT_ID')
             if expected_head:
-                r=subprocess.run(['git','-C',str(root),'rev-parse','HEAD'],capture_output=True,text=True,timeout=10)
+                r=subprocess.run(['git','-C',str(root),'rev-parse','HEAD'],capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=10)
                 if r.returncode or r.stdout.strip()!=expected_head:refuse('ROOT_HEAD')
             yield identity
         finally:os.close(fd)
@@ -316,7 +316,7 @@ class NativeAdmission:
             for artifact in registry['approved_files']:
                 if not isinstance(artifact,dict) or set(artifact)!={'path','sha256'}:refuse('ARTIFACT_SHAPE')
                 rel=artifact['path']
-                if not isinstance(rel,str) or not rel or Path(rel).is_absolute() or '..' in Path(rel).parts or ':' in rel:refuse('ARTIFACT_SCOPE')
+                if not isinstance(rel,str) or not rel or Path(rel).anchor or '..' in Path(rel).parts or ':' in rel:refuse('ARTIFACT_SCOPE')
                 if not isinstance(artifact['sha256'],str) or not re.fullmatch('[0-9a-f]{64}',artifact['sha256']):refuse('ARTIFACT_DIGEST')
                 path=root/rel
                 connection.native_guards.enter_context(held_root(path.parent))
@@ -336,7 +336,7 @@ class NativeAdmission:
             event_id='EVT-NATIVE-'+hashlib.sha256(('|'.join(nonces)).encode()).hexdigest()
             connection.execute('''INSERT INTO canonical_events(event_id,idempotency_key,entity_type,entity_id,from_state,to_state,actor,expected_version,resulting_version,payload_json,evidence_ref,rollback_pointer,created_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)''',(event_id,event_id,'native_admission',target,None,'ADMITTED',registry['owner_os_sid'],generation,generation+1,json.dumps({'operation':operation,'request_sha256':request_sha,'receipt_digests':[digest_request(r) for r in refs]},sort_keys=True),refs[0]['payload']['evidence_ref'],'RB-'+target,now.isoformat()))
             yield {'event_id':event_id,'request_sha256':request_sha}
-            current=subprocess.run(['git','-C',str(root),'rev-parse','HEAD'],capture_output=True,text=True,timeout=10)
+            current=subprocess.run(['git','-C',str(root),'rev-parse','HEAD'],capture_output=True,text=True,encoding='utf-8',errors='replace',timeout=10)
             if current.returncode or current.stdout.strip()!=scope['head']:refuse('HEAD_CHANGED_BEFORE_COMMIT')
             if digest_request(self.registry.snapshot())!=digest_request(registry):refuse('POLICY_CHANGED_BEFORE_COMMIT')
             # This checks mutable refs at both boundaries; it does NOT claim an
