@@ -1,0 +1,24 @@
+schema: HGK-TASK-TOPOLOGY-PROPOSAL/1
+status: UNREGISTERED_NEW_SOURCE_PROPOSAL
+historical_approval_claimed: false
+owner: EXISTING_HGK_TASK_TOPOLOGY_OWNER
+intended_canonical_path: HGK/HGK_TASK_TOPOLOGY_POLICY.yaml
+compatibility: Existing TaskSpec/WorkOrder workflow; ChangeSet and EffectClass stay separate
+native_approval: null
+proposed_kinds:
+  - name: HGK_B1_BOOTSTRAP_REPAIR
+    meaning: Bounded repair of existing issuer/queue/policy/lanes; no full-product scope
+    operations: [create_taskspec, create_workorder]
+    effects: [READ_ONLY_PROBE, REPOSITORY_WRITE, HOST_OPERATIONS]
+    owner: EXISTING_HGK_OWNER
+    state: UNREGISTERED
+  - name: HGK_B1_USER_GOLDEN_WORKORDER
+    meaning: Separate consent-bound USER issuer TODO lifecycle after Host admission
+    operations: [create_taskspec, create_workorder]
+    effects: [USER_DATA_EFFECT]
+    owner: EXISTING_HGK_USER_ISSUER_AND_ACTUAL_USER
+    state: UNREGISTERED
+rejection_rules:
+  - Unknown, unregistered, revoked or wrong-purpose kind must fail before mutation
+  - DEV/OPS cannot substitute for USER consent or permission
+  - This proposed file cannot be projected as approved TaskTopology
