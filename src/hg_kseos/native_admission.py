@@ -316,7 +316,7 @@ class NativeAdmission:
             for artifact in registry['approved_files']:
                 if not isinstance(artifact,dict) or set(artifact)!={'path','sha256'}:refuse('ARTIFACT_SHAPE')
                 rel=artifact['path']
-                if not isinstance(rel,str) or not rel or Path(rel).is_absolute() or '..' in Path(rel).parts or ':' in rel:refuse('ARTIFACT_SCOPE')
+                if not isinstance(rel,str) or not rel or Path(rel).anchor or '..' in Path(rel).parts or ':' in rel:refuse('ARTIFACT_SCOPE')
                 if not isinstance(artifact['sha256'],str) or not re.fullmatch('[0-9a-f]{64}',artifact['sha256']):refuse('ARTIFACT_DIGEST')
                 path=root/rel
                 connection.native_guards.enter_context(held_root(path.parent))
