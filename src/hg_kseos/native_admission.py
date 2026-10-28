@@ -32,6 +32,36 @@ def _programdata():
 
 REGISTRY = _programdata()/'HG-KSEOS'/'native-admission'/'registry.json'
 
+# ---------------------------------------------------------------- trust profile selection (B1 r10 step 1)
+# The r5/'machine' profile needs Administrator + a machine CNG key + a ProgramData ACL. A normal
+# factory WorkOrder does not, so the OWNER authorised a user-scoped alternative. The receiver must
+# therefore resolve WHICH trust root to read instead of hardcoding the ProgramData constant. An
+# unknown profile value is refused - never silently defaulted - because defaulting would let a typo
+# select a weaker root.
+MACHINE_PROFILE = 'machine'
+USER_PROFILE = 'user'
+PROFILES = (MACHINE_PROFILE, USER_PROFILE)
+USER_REGISTRY_SCHEMA = 'HGK-USER-TRUST-REGISTRY/1'
+USER_SCOPE_FILENAME = 'scope.json'
+
+
+def trust_profile():
+    raw = (os.environ.get('HGK_TRUST_PROFILE') or MACHINE_PROFILE).strip().lower()
+    if raw not in PROFILES:
+        refuse('TRUST_PROFILE')
+    return raw
+
+
+def user_registry_path():
+    from . import user_trust
+    return user_trust.paths()['registry']
+
+
+def registry_path(profile=None):
+    """The one place that decides which root backs the receiver."""
+    return REGISTRY if (profile or trust_profile()) == MACHINE_PROFILE else user_registry_path()
+
+
 def refuse(code):
     raise InvariantViolation('ERR_NATIVE_'+code)
 
@@ -120,23 +150,38 @@ def assert_protected(path):
     """
     if os.name!='nt':refuse('PROTECTED_WINDOWS_READER_REQUIRED')
     # Path is passed as process argv, never interpolated into PowerShell code.
+    # FIX (FAR-B1-v4 D-16): the previous body used Get-Acl / Get-Item / Split-Path, i.e. it depended
+    # on Windows PowerShell MODULES loading. On this host PSModulePath inherits a codex runtime module
+    # directory, so `Import-Module Microsoft.PowerShell.Security` fails and `Get-Acl` is a
+    # CommandNotFoundException: the script exited non-zero for EVERY registry and the ACL check became a
+    # permanent false negative (measured: correct ACL, still TRUST_ACL_UNPROTECTED). The check below uses
+    # only .NET ACL APIs, so it reads the same facts without any module dependency.
     script=r'''param([string]$RegistryPath)
     $ErrorActionPreference='Stop'
-    $paths=@($RegistryPath)
-    $cursor=Split-Path -Parent $RegistryPath
-    $programData=[Environment]::GetFolderPath('CommonApplicationData')
-    while($cursor){$paths+=$cursor;if($cursor -eq $programData){break};$cursor=Split-Path -Parent $cursor}
+    $paths=New-Object System.Collections.ArrayList
+    [void]$paths.Add($RegistryPath)
+    $cursor=[System.IO.Path]::GetDirectoryName($RegistryPath)
+    $programData=[System.Environment]::GetFolderPath('CommonApplicationData')
+    while($cursor){
+      [void]$paths.Add($cursor)
+      if($cursor -ieq $programData){break}
+      $cursor=[System.IO.Path]::GetDirectoryName($cursor)
+    }
     foreach($p in $paths){
-      $i=Get-Item -LiteralPath $p -Force
-      if($i.Attributes -band [IO.FileAttributes]::ReparsePoint){exit 23}
-      $a=Get-Acl -LiteralPath $p
-      $owner=([Security.Principal.NTAccount]$a.Owner).Translate([Security.Principal.SecurityIdentifier]).Value
-      if($owner -notin @('S-1-5-18','S-1-5-32-544')){exit 24}
-      if($p -ne $programData -and -not $a.AreAccessRulesProtected){exit 25}
-      foreach($r in $a.Access){
-        $sid=$r.IdentityReference.Translate([Security.Principal.SecurityIdentifier]).Value
-        $mask=if($p -eq $programData){0x000D0040}else{0x000D0156}
-        if($r.AccessControlType -eq 'Allow' -and ([int]$r.FileSystemRights -band $mask) -ne 0 -and $sid -notin @('S-1-5-18','S-1-5-32-544')){exit 26}
+      $attr=[System.IO.File]::GetAttributes($p)
+      if(($attr -band [System.IO.FileAttributes]::ReparsePoint) -ne 0){exit 23}
+      if([System.IO.Directory]::Exists($p)){$a=[System.IO.Directory]::GetAccessControl($p)}
+      else{$a=[System.IO.File]::GetAccessControl($p)}
+      $owner=$a.GetOwner([System.Security.Principal.SecurityIdentifier]).Value
+      if(@('S-1-5-18','S-1-5-32-544') -notcontains $owner){exit 24}
+      if(($p -ine $programData) -and (-not $a.AreAccessRulesProtected)){exit 25}
+      $mask=0x000D0156
+      if($p -ieq $programData){$mask=0x000D0040}
+      foreach($r in $a.GetAccessRules($true,$true,[System.Security.Principal.SecurityIdentifier])){
+        if($r.AccessControlType -ne 'Allow'){continue}
+        if(([int]$r.FileSystemRights -band $mask) -eq 0){continue}
+        if(@('S-1-5-18','S-1-5-32-544') -contains $r.IdentityReference.Value){continue}
+        exit 26
       }
     }
     'PROTECTED'
@@ -147,8 +192,53 @@ def assert_protected(path):
     import base64 as b64
     script=script.replace('param([string]$RegistryPath)',"$RegistryPath=[Console]::In.ReadLine()")
     cmd=['powershell.exe','-NoProfile','-NonInteractive','-EncodedCommand',b64.b64encode(script.encode('utf-16-le')).decode('ascii')]
-    r=subprocess.run(cmd,input=str(path)+'\n',text=True,encoding='utf-8',errors='replace',capture_output=True,timeout=15)
+    # A sanitised module path keeps any future cmdlet use from inheriting a foreign module root.
+    env=dict(os.environ)
+    env['PSModulePath']=r'C:\Windows\system32\WindowsPowerShell\v1.0\Modules'
+    r=subprocess.run(cmd,input=str(path)+'\n',text=True,encoding='utf-8',errors='replace',capture_output=True,timeout=15,env=env)
     if r.returncode or r.stdout.strip()!='PROTECTED':refuse('TRUST_ACL_UNPROTECTED')
+
+def assert_user_protected(path):
+    """The user profile's protection proof: the DACL is explicit and only the current user writes it.
+
+    Deliberately NOT a relaxation of `assert_protected`: the machine rule (owner SYSTEM/Administrators)
+    cannot be satisfied by a %LOCALAPPDATA% root, and simply dropping the check would let any local
+    principal rewrite the trust anchor. This rule pins the owner to the CURRENT process user, demands an
+    explicit (non-inherited) DACL, and refuses any foreign write ACE. Uses .NET ACL APIs only - the same
+    reason as `assert_protected`: a foreign PSModulePath made the cmdlet version a permanent false
+    negative.
+    """
+    if os.name!='nt':refuse('PROTECTED_WINDOWS_READER_REQUIRED')
+    script=r'''param([string]$RegistryPath)
+    $ErrorActionPreference='Stop'
+    $me=[System.Security.Principal.WindowsIdentity]::GetCurrent().User.Value
+    $cursor=$RegistryPath
+    while($cursor){
+      if(-not ([System.IO.Directory]::Exists($cursor) -or [System.IO.File]::Exists($cursor))){exit 22}
+      $attr=[System.IO.File]::GetAttributes($cursor)
+      if(($attr -band [System.IO.FileAttributes]::ReparsePoint) -ne 0){exit 23}
+      $cursor=[System.IO.Path]::GetDirectoryName($cursor)
+    }
+    $a=[System.IO.File]::GetAccessControl($RegistryPath)
+    $owner=$a.GetOwner([System.Security.Principal.SecurityIdentifier]).Value
+    if($owner -ne $me){exit 24}
+    if(-not $a.AreAccessRulesProtected){exit 25}
+    $mask=0x000D0156
+    foreach($r in $a.GetAccessRules($true,$true,[System.Security.Principal.SecurityIdentifier])){
+      if($r.AccessControlType -ne 'Allow'){continue}
+      if(([int]$r.FileSystemRights -band $mask) -eq 0){continue}
+      if(@($me,'S-1-5-18','S-1-5-32-544') -contains $r.IdentityReference.Value){continue}
+      exit 26
+    }
+    'PROTECTED'
+    '''
+    import base64 as b64
+    script=script.replace('param([string]$RegistryPath)',"$RegistryPath=[Console]::In.ReadLine()")
+    cmd=['powershell.exe','-NoProfile','-NonInteractive','-EncodedCommand',b64.b64encode(script.encode('utf-16-le')).decode('ascii')]
+    env=dict(os.environ)
+    env['PSModulePath']=r'C:\Windows\system32\WindowsPowerShell\v1.0\Modules'
+    r=subprocess.run(cmd,input=str(path)+'\n',text=True,encoding='utf-8',errors='replace',capture_output=True,timeout=15,env=env)
+    if r.returncode or r.stdout.strip()!='PROTECTED':refuse('USER_TRUST_ACL_UNPROTECTED')
 
 class ProtectedRegistry:
     @contextmanager
@@ -176,6 +266,99 @@ class ProtectedRegistry:
     def snapshot(self):
         with self.hold_snapshot() as data:
             return data
+
+def _ed25519_spki(raw_b64):
+    """Raw 32-byte Ed25519 public key -> DER SubjectPublicKeyInfo, so verify_signature stays one path."""
+    from cryptography.hazmat.primitives import serialization
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+    try:
+        raw=base64.b64decode(raw_b64,validate=True)
+    except Exception:refuse('USER_KEY_ENCODING')
+    if len(raw)!=32:refuse('USER_KEY_SHAPE')
+    try:
+        pub=Ed25519PublicKey.from_public_bytes(raw)
+    except Exception:refuse('USER_KEY_SHAPE')
+    der=pub.public_bytes(serialization.Encoding.DER,serialization.PublicFormat.SubjectPublicKeyInfo)
+    return base64.b64encode(der).decode('ascii')
+
+def normalize_user_registry(data,scope_doc):
+    """Turn the user-scoped trust anchor + its scope sidecar into the receiver's registry shape.
+
+    Honest ceiling: this profile proves the issue/verify/revoke chain and key isolation by storage.
+    It does NOT prove maker/checker OS-principal separation - the key is DPAPI-protected for the SAME
+    user, so a process running as that user can ask DPAPI to unprotect it. `assurance_level` carries
+    that ceiling into every receipt instead of hiding it.
+    """
+    if not isinstance(data,dict) or data.get('schema')!=USER_REGISTRY_SCHEMA:refuse('USER_REGISTRY_SCHEMA')
+    if data.get('status')!='ACTIVE':refuse('REGISTRY_INACTIVE')
+    owner=data.get('owner_os_sid');checker=data.get('checker_os_sid');maker=data.get('maker_os_sid')
+    if not (owner and checker and maker):refuse('PRINCIPAL_MISSING')
+    if len({owner.casefold(),checker.casefold(),maker.casefold()})!=3:refuse('PRINCIPAL_SEPARATION')
+    if data.get('algorithm')!='Ed25519':refuse('KEY_ALGORITHM')
+    key_id=data.get('key_id')
+    if not isinstance(key_id,str) or not re.fullmatch(r'[A-Za-z0-9_-]{8,64}',key_id):refuse('USER_KEY_ID')
+    if data.get('private_key_location') is None:refuse('USER_KEY_PROVENANCE')
+    raw=json.dumps(data,sort_keys=True)
+    if 'PRIVATE KEY' in raw or '"private_key"' in raw:refuse('USER_KEY_MATERIAL_IN_REGISTRY')
+    anchor_epoch=data.get('policy_epoch')
+    if type(anchor_epoch) is not int:refuse('POLICY_EPOCH')
+    if not isinstance(scope_doc,dict):refuse('USER_PROFILE_SCOPE_REQUIRED')
+    scope=scope_doc.get('scope')
+    if not isinstance(scope,dict) or not scope.get('database_path') or not scope.get('head'):refuse('USER_PROFILE_SCOPE_REQUIRED')
+    if type(scope_doc.get('policy_epoch')) is not int:refuse('USER_PROFILE_SCOPE_REQUIRED')
+    if scope_doc['policy_epoch']!=anchor_epoch:refuse('USER_PROFILE_EPOCH_CONFLICT')
+    for field in ('mission_id','source_manifest_sha256','policy_sha256','max_ttl_seconds','root','approved_files','task_kinds'):
+        if field not in scope_doc:refuse('USER_PROFILE_SCOPE_REQUIRED')
+    absolute_root(scope_doc['root'])
+    kind=scope.get('task_kind')
+    registered=scope_doc['task_kinds'].get(kind) if isinstance(scope_doc['task_kinds'],dict) else None
+    if not registered or registered.get('state')!='REGISTERED':refuse('UNREGISTERED_KIND')
+    return {'schema':'HGK-NATIVE-REGISTRY/1','canonical_profile':PROFILE,'status':'ACTIVE',
+            'trust_profile':USER_PROFILE,'assurance_level':data.get('assurance_level'),
+            'owner_os_sid':owner,'checker_os_sid':checker,'maker_os_sid':maker,
+            'mission_id':scope_doc['mission_id'],'source_manifest_sha256':scope_doc['source_manifest_sha256'],
+            'policy_sha256':scope_doc['policy_sha256'],'policy_epoch':anchor_epoch,
+            'max_ttl_seconds':scope_doc['max_ttl_seconds'],'scope':scope,
+            'root':scope_doc['root'],'approved_files':scope_doc['approved_files'],
+            'task_kinds':scope_doc['task_kinds'],'task_kind':kind,
+            'revoked_nonces':scope_doc.get('revoked_nonces',[]),
+            'keys':{key_id:{'algorithm':'Ed25519','public_spki_b64':_ed25519_spki(data.get('public_key')),
+                            'purposes':list(KINDS),'revoked':False}}}
+
+class UserProfileRegistry:
+    """Reads the %LOCALAPPDATA% trust root instead of the ProgramData constant.
+
+    Same contract as ProtectedRegistry: hold the ancestry, prove the protection, read the bytes once
+    under a pin, refuse on drift. The scope sidecar is a SEPARATE file so the trust anchor (which holds
+    only public key + principals) is never edited to re-scope a mission.
+    """
+    def __init__(self,path=None,scope_path=None):
+        self.path=absolute_root(path or registry_path(USER_PROFILE))
+        self.scope_path=absolute_root(scope_path or (self.path.parent/USER_SCOPE_FILENAME))
+
+    @contextmanager
+    def hold_snapshot(self):
+        if not self.path.is_file():refuse('USER_TRUST_BOOTSTRAP_REQUIRED')
+        if not self.scope_path.is_file():refuse('USER_PROFILE_SCOPE_REQUIRED')
+        with held_root(self.path.parent):
+            assert_user_protected(self.path)
+            assert_user_protected(self.scope_path)
+            with pinned_file(self.path) as stream:
+                raw=stream.read()
+            assert_user_protected(self.path)
+            anchor=strict_json(raw)
+            with pinned_file(self.scope_path) as stream:
+                scope_doc=strict_json(stream.read())
+            assert_user_protected(self.scope_path)
+            yield normalize_user_registry(anchor,scope_doc)
+
+    def snapshot(self):
+        with self.hold_snapshot() as data:
+            return data
+
+def default_registry():
+    """The receiver the host builds when no injected provider was given."""
+    return ProtectedRegistry() if trust_profile()==MACHINE_PROFILE else UserProfileRegistry()
 
 @contextmanager
 def held_root(root,expected_identity=None,expected_head=None):
@@ -256,14 +439,14 @@ def pinned_file_bytes(path):
 class NativeAdmission:
     def __init__(self,registry=None):
         # Only host construction may inject a provider; caller API JSON cannot.
-        self.registry=registry or ProtectedRegistry()
+        self.registry=registry or default_registry()
 
     @contextmanager
     def authorize(self,connection,operation,request,bundle):
         if not isinstance(bundle,dict) or set(bundle)!={'references','lease_generation'}:refuse('BUNDLE_REQUIRED')
         if operation not in PURPOSES:refuse('OPERATION')
         if not hasattr(connection,'native_guards'):refuse('TRANSACTION_GUARD_REQUIRED')
-        if isinstance(self.registry,ProtectedRegistry):
+        if isinstance(self.registry,(ProtectedRegistry,UserProfileRegistry)):
             registry=connection.native_guards.enter_context(self.registry.hold_snapshot())
         else:
             # Explicit host-injected test seam, never selected by caller JSON.

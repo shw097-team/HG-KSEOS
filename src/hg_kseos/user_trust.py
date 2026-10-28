@@ -21,6 +21,7 @@ import base64
 import ctypes
 import json
 import os
+import subprocess
 import uuid
 from ctypes import wintypes
 from datetime import datetime, timedelta, timezone
@@ -82,6 +83,33 @@ def _write(data: dict) -> None:
     tmp = p["registry"].with_suffix(".json.tmp")
     tmp.write_text(json.dumps(data, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     os.replace(tmp, p["registry"])
+    harden()
+
+
+def harden() -> dict:
+    """Give the profile root an EXPLICITLY protected DACL held only by the current user.
+
+    A receiver that reads this root must be able to prove that no other principal can rewrite the
+    registry or the DPAPI blob. Inherited DACLs do not prove that (AreAccessRulesProtected=false), so
+    inheritance is removed per object rather than assumed. Refuses instead of granting anything wider.
+    """
+    p = paths()
+    user = os.environ.get("USERNAME") or os.environ.get("USER")
+    if not user:
+        raise TrustRefusal("ERR_HARDEN_PRINCIPAL")
+    p["root"].mkdir(parents=True, exist_ok=True)
+    targets = [p["root"]] + sorted(q for q in p["root"].iterdir() if q.is_file())
+    for target in targets:
+        # OI/CI grant the owner full control of CHILD objects; on a FILE they are inherit-only flags, so
+        # granting them to the file itself leaves it with no effective ACE and the next read is denied
+        # (measured: CreateFileW/GENERIC_READ failed with ERR_NATIVE_REGISTRY_HANDLE on an enrolled root).
+        scope = "(OI)(CI)F" if target.is_dir() else "F"
+        r = subprocess.run(
+            ["icacls", str(target), "/inheritance:r", "/grant:r", f"{user}:{scope}"],
+            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
+        if r.returncode:
+            raise TrustRefusal("ERR_HARDEN_DACL:" + (r.stdout or r.stderr or "").strip()[:120])
+    return {"hardened": [str(t) for t in targets], "principal": user}
 
 
 def enroll(owner_sid: str, checker_sid: str, maker_sid: str, *, policy_epoch: int = 34) -> dict:
@@ -116,7 +144,17 @@ def _private_key() -> Ed25519PrivateKey:
 
 
 def canonical(payload: dict) -> bytes:
-    return json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    """One canonicalisation authority: the receiver's HGK-B1-ASCII-C14N/1 profile.
+
+    Measured defect this closes: `sign()` used to hash `json.dumps(sort_keys,compact)` while
+    `native_admission.authorize()` verifies over `DOMAIN + ascii json`. Wiring the receiver to this
+    module without fixing that would have produced a path that reads as bound and can never verify a
+    real reference. The domain prefix also stops a signature minted for another protocol being replayed
+    as an admission reference.
+    """
+    from .native_admission import canonical as receiver_canonical
+
+    return receiver_canonical(payload)
 
 
 def sign(payload: dict, *, ttl_seconds: int = 300) -> dict:
