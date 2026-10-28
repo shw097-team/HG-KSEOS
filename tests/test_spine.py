@@ -59,13 +59,17 @@ class SharedSpineTests(unittest.TestCase):
                 "TS-1", "REQ-T1", "Implement", "maker", self.root, {"network": "OFF"}, ["unit"], "evidence"
             )
 
-    def test_taskspec_materializes_after_freeze(self) -> None:
+    def test_frozen_requirement_still_requires_native_admission(self) -> None:
         self.lease()
         self.spine.transition_requirement("REQ-T1", "FROZEN", "maker", "token", 0, "E1", "K1")
-        self.spine.create_taskspec(
-            "TS-1", "REQ-T1", "Implement", "maker", self.root, {"network": "OFF"}, ["unit"], "evidence"
-        )
-        self.assertEqual(self.spine.snapshot()["counts"]["taskspecs"], 1)
+        # Freezing a requirement is not a SourceFreeze/TaskKind/Oracle signature.
+        # Signed-shape materialization is covered by test_native_admission's
+        # explicitly synthetic provider; this default receiver must refuse it.
+        with self.assertRaisesRegex(InvariantViolation, "ERR_NATIVE_BUNDLE_REQUIRED"):
+            self.spine.create_taskspec(
+                "TS-1", "REQ-T1", "Implement", "maker", self.root, {"network": "OFF"}, ["unit"], "evidence"
+            )
+        self.assertEqual(self.spine.snapshot()["counts"]["taskspecs"], 0)
 
     def test_critical_requirement_field_is_mandatory(self) -> None:
         with self.assertRaises(InvariantViolation):
