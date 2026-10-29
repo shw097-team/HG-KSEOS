@@ -2,7 +2,7 @@
 
 > Decision questions（R0）：Q1 殘留/缺口/阻斷/未關閉項目如何關閉？Q2 哪些待 OWNER 決策？Q3 本包還有哪些未完成項目？
 > Owner：本機唯一 OWNER（口令信封 `WIN-254a1c9fbe72`，40 ops，已用 3）｜研究者：Commander/PLAN 車道
-> Subject：`FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2`（44 檔 / 11,664,373 B）
+> Subject：`FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2`（**實測 85 檔 / 145,944,348 B**；先前記的 44 檔 / 11.66 MB 是 MAX_PATH 截斷誤值，見 FAR_R19B §A4）
 > 裁決優先序（衝突時上位勝）：對齊本包 → Native E2E 閉環 → 無人值守可行性 → 高必要性 → 不過度治理 → 不過度工程化 → 低阻力 → 高效率
 > Status：`RESEARCH_PASS_CANDIDATE`（advisory）。非驗收、非 release、非 production。
 
@@ -14,10 +14,10 @@
 |---|---|---|
 | WP-FHS 節點 | 22（SOURCE_READ 5 / HOST_OP 10 / LOCAL_DRAFT_WRITE 4 / REPO_WRITE 2 / RELEASE 1） | `03_TESTS_AND_READBACK/wp_graph.json` |
 | ledger 列 | 26（DONE 6 / PARTIAL 13 / PARKED 7），`--audit rc=0` | `var/R18-FHS-SKELETON-SPINE-20261029/ledger.json` |
-| 套件自檢 | 2,789 checks；**原樣 2,788/1 FAIL**（`SOURCE-BYTES-UNCHANGED`） | `receipts/WP18_CAUSAL_REPAIR_R19.json` phases[0] |
+| 套件自檢 | 2,789 checks；**原樣 2,788/1 FAIL**（`SOURCE-BYTES-UNCHANGED`）；**但交付物內 `static_validation_result.json` 記 2789/0（stale green，見 FAR_R19B §A5）** | `receipts/WP18_CAUSAL_REPAIR_R19.json` phases[0]、`03_TESTS_AND_READBACK/static_validation_result.json` |
 | 修復後 | **2,789/0**，同一複本可逆證成 | 同上 phases[1..2] |
 | 壞 pin | 29 筆（**26** 進 `…\OLD\…`（改名）、**3** 進 `AUDIO` 根層（另一成因）），全部 64-hex 全等改寫 | `RELOCATION_INDEX.json`：rows 172 / in-place 143 / relocated 29 / unresolved 0 |
-| 96 格 oracle | 288 assertions：預期 **DENY 192 / PASS_LOCAL_ORACLE 50 / HOLD 46**；27 次真 CLI；`native_case_pass 0` | `receipts/WP21_ORACLE_RERUN_R19.json` |
+| 96 格 oracle | 288 assertions：預期 **DENY 192 / PASS_LOCAL_ORACLE 50 / HOLD 46**；`native_case_pass 0`；「27 次 CLI」是 fixture 宣告、重跑只重放已存 raw、**不 spawn**（elapsed 0.019s） | `receipts/WP21_ORACLE_RERUN_R19.json` |
 | WP-15 18 stage | declared 18 / **with evidence 0** | `receipts/WP15_TPM_SPEC_TRACE.json` |
 | 15/16 per-ID | 80 列（25 methods / 24 donors / 31 slots），0 個「只引文件就宣稱 INSTALLED」 | `receipts/WP15_16_ID_LEDGER.json` |
 | 權限閘 | `authorize()` 在 `REQUEST_SCOPE` 拒；registry rev 34、1 把 owner key、3 互異 SID | `HG-KSEOS/src/hg_kseos/native_admission.py`、`C:\ProgramData\HG-KSEOS\native-admission\registry.json` |
@@ -143,10 +143,10 @@
 
 **挑戰結果（advisory）**：`HOLD_ADVISORY`，並推翻本文件兩處：
 
-| # | 挑戰 | 本文件處置 |
+| # | 挑戰 | 本文件處置（R19B 已再修正） |
 |---|---|---|
 | R-1 | 29 筆 locator **不是**單一改名成因：26 進 `OLD`、3 進 `AUDIO` | **接受**，已改 F19-1 與分母列 |
 | R-2 | 「13 列權限阻斷」把狀態分母當權限分母；且不應在 installer／rollback／native 收據不存在時就核准 D1 | **接受**，已改 §3 尾段與 D1（改為「先補 installer 再安裝」） |
-| R-3 | 包內 `static_validation_result.json` 是 stale green（記 2789/0） | **駁回**：實讀為 `passed 2788 / failed 1`，與現況一致。checker 此項誤判，記錄不改事實 |
+| R-3 | 包內 `static_validation_result.json` 是 stale green（記 2789/0） | ~~駁回~~ → **改判成立**：交付物內該檔確實記 `passed 2789 / failed 0`，我當時讀的是自己複本的即時結果。詳見 FAR_R19B §A5 |
 
 R-1/R-2 已按證據修訂；R-3 以 bytes 為準駁回。三條全部落在 `DISAGREEMENT_LEDGER_R19.json`。
