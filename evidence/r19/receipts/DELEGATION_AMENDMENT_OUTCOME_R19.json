@@ -1,0 +1,13 @@
+{
+ "schema": "R19.DELEGATION.AMENDMENT_OUTCOME/1",
+ "at": "2026-10-29T11:36:18Z",
+ "attempted": "add LOCAL_DRAFT_WRITE (bounded to var/R19-*/**) + WP-FHS-05/07/15/16 to the signed delegation",
+ "result": "BLOCKED_BY_HARD_DENY_IN_CODE",
+ "evidence": "tools/delegation_gate.py HARD_DENY includes LOCAL_DRAFT_WRITE; measured REFUSED_CLASS_DENIED for WP-FHS-12/LOCAL_DRAFT_WRITE after a valid owner signature",
+ "signature_verified": true,
+ "ops_consumed": 1,
+ "window": "WIN-254a1c9fbe72",
+ "action_taken": "the signed amendment is preserved as delegation_R19_amendment_signed_NOT_INSTALLED.json; the canonical delegation was restored to R18-CANON-6733b6bb",
+ "why_not_edit_the_gate": "HARD_DENY lists LOCAL_DRAFT_WRITE beside RELEASE/main/force-push: loosening it would be the agent lowering its own enforcement point, so it stays the owner's decision",
+ "consequence": "WP-FHS-05 and WP-FHS-16 keep PARTIAL status with engineering VERIFIED receipts; the work is done and rerunnable, the ledger transition is refused by design"
+}

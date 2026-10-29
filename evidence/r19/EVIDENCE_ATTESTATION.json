@@ -1,0 +1,21 @@
+{
+ "schema": "R19.EVIDENCE_ATTESTATION/1",
+ "signed_utc": "2026-10-29T11:36:33Z",
+ "merkle_root_sha256": "1cc851dea58761bbbfe60dfcb25f02d4c7e8d5b9caa89ee1800b435c5f186120",
+ "files": 265,
+ "body": {
+  "claim_ceiling": "attests bytes only; confers no native authority, no acceptance, no release",
+  "files": 265,
+  "root_sha256": "1cc851dea58761bbbfe60dfcb25f02d4c7e8d5b9caa89ee1800b435c5f186120",
+  "round": "R19-FHS-20261029",
+  "schema": "R19.EVIDENCE_MERKLE_ROOT/1",
+  "scope": "evidence/ as committed on branch candidate/r19-fhs-implementation"
+ },
+ "signature_hex": "69d0b85c2bdb3c3ef4d728e145d3406a9b2c2afc555f58c9d0ba6a35c2a27c7bb17ce835bd072ead82fd187fec79cfc2e57b5748d828f3114cc10fe30622390d",
+ "owner_fingerprint": "412b351937be72a1",
+ "signing_window_id": "WIN-254a1c9fbe72",
+ "ops_used_after": 2,
+ "verified_locally": true,
+ "private_key_exposure": "none: the broker signed; this process only holds the public key",
+ "claim_ceiling": "owner attestation of the evidence bytes at this commit; no authority, no acceptance, no release"
+}

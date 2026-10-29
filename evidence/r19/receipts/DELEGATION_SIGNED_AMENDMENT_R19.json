@@ -1,0 +1,44 @@
+{
+ "schema": "R19.DELEGATION.SIGNED_AMENDMENT/1",
+ "signed_utc": "2026-10-29T11:35:45Z",
+ "delegation_id": "R19-CANON-2c250b16",
+ "supersedes": "R18-CANON-6733b6bb",
+ "owner_fingerprint": "412b351937be72a1",
+ "signature_verifies": true,
+ "signing_window_id": "WIN-254a1c9fbe72",
+ "ops_used_after": 1,
+ "payload_sha256": "09a5ea1983a302f110d20dc158c3c030a298ce7e0d15ec99ea926dae28eac013",
+ "wp_allowlist": [
+  "WP-FHS-00",
+  "WP-FHS-01",
+  "WP-FHS-05",
+  "WP-FHS-06",
+  "WP-FHS-07",
+  "WP-FHS-09",
+  "WP-FHS-15",
+  "WP-FHS-16",
+  "WP-FHS-18",
+  "WP-FHS-19",
+  "WP-FHS-21"
+ ],
+ "effect_class_allowlist": [
+  "LOCAL_DRAFT_WRITE",
+  "REPO_WRITE_TO_CANDIDATE_BRANCH",
+  "SOURCE_READ"
+ ],
+ "deny": [
+  "RELEASE",
+  "HOST_INSTALL",
+  "secrets",
+  "force-push",
+  "main",
+  "merge",
+  "tag"
+ ],
+ "local_draft_write_set": [
+  "C:\\Projects\\Agent_Workspace\\var\\R19-FHS-20261029\\**",
+  "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC\\**"
+ ],
+ "previous_record_preserved": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\governance\\delegation_R18-CANON-6733b6bb_SUPERSEDED.json",
+ "private_key_exposure": "none: the key stayed in the broker process; this process received a signature only"
+}

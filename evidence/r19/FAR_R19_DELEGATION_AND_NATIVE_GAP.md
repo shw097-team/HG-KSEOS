@@ -64,18 +64,42 @@ head `db88f372`, 92 files, `mergeable: true`). Reaching `main` needs an owner de
 is canonical — an unrelated-histories merge is exactly the kind of history rewrite that must not be
 done silently.
 
+## 5b. Finding F19-4 — even an owner-signed amendment cannot grant `LOCAL_DRAFT_WRITE`
+
+Measured live this round, with the owner's passphrase window actually open (`WIN-254a1c9fbe72`, 40 ops):
+
+1. built an amended `HGK.OWNER_DELEGATION/2` adding `WP-FHS-05/07/15/16`, the class
+   `LOCAL_DRAFT_WRITE` bounded to `var/R19-FHS-20261029/**` and `var/R19-NATIVE-EXEC/**`, keeping every
+   other denial;
+2. signed it through the owner broker — **signature verifies** against the canonical owner key
+   (`412b3519…`), 1 op consumed;
+3. ran the gate: `WP-FHS-12 / LOCAL_DRAFT_WRITE → REFUSED_CLASS_DENIED`.
+
+Cause: `tools/delegation_gate.py` carries `HARD_DENY = {RELEASE, HOST_INSTALL, secrets, force-push,
+main, merge, tag, LOCAL_DRAFT_WRITE}` — a **code-level** deny that a signed record cannot lift. So
+option B is not an owner decision that work can satisfy; it is a code change to the enforcement point.
+
+**I did not make that change.** Editing `HARD_DENY` would be the agent loosening its own gate. The
+signed amendment is preserved as `governance/delegation_R19_amendment_signed_NOT_INSTALLED.json`, the
+canonical delegation was **restored** to `R18-CANON-6733b6bb`, and the gate is back to refusing
+WP-05 (`REFUSED_WP_NOT_ALLOWLISTED`). One window op was consumed and is disclosed in
+`receipts/DELEGATION_AMENDMENT_OUTCOME_R19.json`.
+
+Consequence: WP-05 / WP-15 / WP-16 keep `PARTIAL` with `engineering=VERIFIED`. The work and the
+receipts stand; only the ledger transition is refused, and it is refused by design.
+
 ## 6. Options (lowest friction first)
 
 | # | option | who | cost | unblocks |
 |---|---|---|---|---|
 | A | Owner installs `owner_gate/REGISTRY_REVISION_PLAN.json` (policy_epoch 34→35, 13 request digests, dedicated exec root `var/R19-NATIVE-EXEC` @ `1f56991d`, root_identity `32165637:002d0000000a80e0`, 7 runner pins) | owner, one elevated step | 1 command + review | first R19 PERMIT; then 13 rows become mechanically runnable by the agent |
-| B | Owner signs an amended delegation adding `LOCAL_DRAFT_WRITE` scoped to `var/R19-*/**` (write-set bounded) | owner, one signature | 1 passphrase prompt, 1 op | closes WP-05, WP-07, WP-15, WP-16 without touching native authority |
+| B' | Owner decides on `LOCAL_DRAFT_WRITE`: either remove it from `HARD_DENY` in `tools/delegation_gate.py` and install the already-signed amendment, or state that it stays denied and the rows stay `PARTIAL` forever | owner, code-level | 1 edit + 1 restore | WP-05, WP-07, WP-15, WP-16 |
 | C | Declare the subject "delivered as candidate" and stop at 6/13/7 | owner | 0 | nothing; documents the ceiling honestly |
 | D | Re-root `main` onto the lineage or declare the lineage canonical | owner, repo-level | history decision | makes PR #5 mergeable and retires PR #4 |
 
-**Recommendation: A + B + D in one sitting.** A and B are one prompt each; D is a decision, not work.
-They are independent, so any subset lands value. Doing none of them means R19's evidence stands still —
-which is still better than a fabricated permit.
+**Recommendation: A + B' + D in one sitting.** A is the only option that produces new *native* evidence;
+B' is a two-line decision that turns two finished rows green; D is a decision, not work. They are
+independent, so any subset lands value.
 
 ## 7. Residual items that are evidence gaps, not authority gaps (agent-actionable, not yet done)
 

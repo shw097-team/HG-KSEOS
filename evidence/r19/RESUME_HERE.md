@@ -52,3 +52,18 @@ var/R19-FHS-20261029/
 ├─ pipd_out/                              # 原始編譯器輸出（intent_card/pi/pd/ecp）
 └─ tools/{locator_repair_r19,wp05_pipd_writer,wp19_supply_chain,wp15_16_id_ledger,owner_gate_plan}.py
 ```
+
+---
+
+## 附錄 R19b — 口令授權後實測（2026-10-29T11:36Z 追加）
+
+owner 在桌面上完成口令輸入 → 信封視窗 `WIN-254a1c9fbe72` OPEN（40 ops、8h、ceiling `REPOSITORY_WRITE`、`broker_alive true`）。
+
+**做了兩件事，並且都沒有放寬任何閘門：**
+
+1. **FAR 選項 B 實測 → 失敗，已回滾**：簽出修訂版 delegation（新增 WP-05/07/15/16 + `LOCAL_DRAFT_WRITE`，寫入集限 `var/R19-*/**`），簽章以 owner 公鑰驗過（`412b3519…`，耗 1 op），但 gate 回 `REFUSED_CLASS_DENIED` —— 因為 `tools/delegation_gate.py` 的 `HARD_DENY` **在程式碼層**就含 `LOCAL_DRAFT_WRITE`，簽章 lift 不了。
+   → 修訂版保存為 `governance/delegation_R19_amendment_signed_NOT_INSTALLED.json`，canonical 已還原 `R18-CANON-6733b6bb`，gate 回到 `WP-FHS-05 → REFUSED_WP_NOT_ALLOWLISTED`（已回讀確認）。
+   → **沒有去改 `HARD_DENY`**：那是 agent 放寬自己的閘門。這一步要不要做，是 owner 的 code-level 裁決（FAR 選項 B'）。
+2. **簽出證據根證明**（不授予任何權限）：`evidence/` 265 檔 merkle root `1cc851dea58761bbbfe60dfcb25f02d4c7e8d5b9caa89ee1800b435c5f186120`，owner 簽章、本地以公鑰驗過，落 `evidence/r19/EVIDENCE_ATTESTATION.json`，耗 1 op。
+
+**視窗仍未關閉**（可再用 ~38 ops）。若 owner 決定 B'（把 `LOCAL_DRAFT_WRITE` 從 `HARD_DENY` 移除），修訂版 delegation 已經簽好、可直接安裝，不必再開窗。
