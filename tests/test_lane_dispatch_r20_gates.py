@@ -160,3 +160,17 @@ def test_unassigned_arm_serving_is_warned_not_silent():
     else:
         # If the pool/assignment changed so rank 2 is assigned, the case is vacuous rather than green.
         pytest.skip(f"rank 2 resolved to an assigned arm ({rec.get('served_arm')}); case not exercised")
+
+
+def test_missing_explicit_executable_is_a_typed_refusal_not_a_traceback():
+    """TT-R20-7: --codex-executable bypasses the pin gate, so a typo used to surface as an uncaught
+    FileNotFoundError from subprocess (no refusal body, no receipt). It must be a typed refusal that
+    is only reachable AFTER the two gates above are cleared -- which is what makes it a real control."""
+    rc, rec, body = run(["--lane", "VERIFY_SECURITY", "--prompt", "noop", "--nonce", "deadbeefdeadbeef",
+                         "--require-arm", "openai-codex/gpt-6.1-sol", "--identity-source", "codex-rollout",
+                         "--codex-home", str(HUMAN), "--allow-human-home-transport", "--relay-base", OAUTH,
+                         "--codex-executable", str(ROOT / "scripts" / "no-such-codex-binary.exe"),
+                         "--timeout", "30"])
+    assert rc == 4, body[-1500:]
+    assert rec.get("code") == "ERR_CODEX_EXECUTABLE_NOT_FOUND", body[-1500:]
+    assert "Traceback" not in body

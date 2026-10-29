@@ -5,19 +5,19 @@
    "tag": "assignment_violation",
    "rc": 4,
    "code": "ERR_ARM_NOT_IN_ASSIGNMENT",
-   "stdout_tail": "d: ['openai-codex/gpt-6.1-sol', 'opencode-go/deepseek-v4.1-flash']\",\n  \"generated_utc\": \"2026-10-29T13:22:34.509444+00:00\",\n  \"lane_assignment\": {\n    \"ok\": true,\n    \"arms\": [\n      \"openai-codex/gpt-6.1-sol\",\n      \"opencode-go/deepseek-v4.1-flash\"\n    ],\n    \"revision\": 35,\n    \"role\": \"VERIFY_SECURITY\",\n    \"authority\": \"owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek\",\n    \"shape\": \"role\",\n    \"alternates_are_operator_selectable\": false\n  },\n  \"say\": \"refusing before any spawn: a pool entry is not an assignment; dispatch an assigned arm, or have the owner revise the assignment\",\n  \"codex_home\": \"C:\\\\Users\\\\user\\\\.codex\",\n  \"codex_home_is_declared_lane_home\": false\n}"
+   "stdout_tail": "CURITY assignment (revision 36); assigned: ['gpt-6.1-sol', 'openai-codex/gpt-6.1-sol']\",\n  \"generated_utc\": \"2026-10-29T14:07:28.534544+00:00\",\n  \"lane_assignment\": {\n    \"ok\": true,\n    \"arms\": [\n      \"gpt-6.1-sol\",\n      \"openai-codex/gpt-6.1-sol\"\n    ],\n    \"revision\": 36,\n    \"role\": \"VERIFY_SECURITY\",\n    \"authority\": \"owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek\",\n    \"shape\": \"role\",\n    \"alternates_are_operator_selectable\": false\n  },\n  \"say\": \"refusing before any spawn: a pool entry is not an assignment; dispatch an assigned arm, or have the owner revise the assignment\",\n  \"codex_home\": \"C:\\\\Users\\\\user\\\\.codex\",\n  \"codex_home_is_declared_lane_home\": false\n}"
   },
   {
    "tag": "sealed_home_oauth",
    "rc": 4,
    "code": "ERR_SEALED_HOME_OAUTH_TRANSPORT",
-   "stdout_tail": "codex-hermes holds no auth.json (sealed / key-auth home)\",\n  \"generated_utc\": \"2026-10-29T13:22:34.691949+00:00\",\n  \"transport_posture\": {\n    \"relay_base\": \"https://chatgpt.com/backend-api/codex\",\n    \"home_has_auth_json\": false,\n    \"home_is_declared_lane_home\": true\n  },\n  \"next_command\": \"--codex-home C:\\\\Users\\\\user\\\\.codex --allow-human-home-transport --relay-base https://chatgpt.com/backend-api/codex\",\n  \"say\": \"refusing before any spawn: sealed home + OAuth relay is the 401-after-a-full-call combination; use the owner's login home with --allow-human-home-transport\",\n  \"codex_home\": \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\HG-KSEOS\\\\codex-hermes\",\n  \"codex_home_is_declared_lane_home\": true\n}"
+   "stdout_tail": "codex-hermes holds no auth.json (sealed / key-auth home)\",\n  \"generated_utc\": \"2026-10-29T14:07:28.740789+00:00\",\n  \"transport_posture\": {\n    \"relay_base\": \"https://chatgpt.com/backend-api/codex\",\n    \"home_has_auth_json\": false,\n    \"home_is_declared_lane_home\": true\n  },\n  \"next_command\": \"--codex-home C:\\\\Users\\\\user\\\\.codex --allow-human-home-transport --relay-base https://chatgpt.com/backend-api/codex\",\n  \"say\": \"refusing before any spawn: sealed home + OAuth relay is the 401-after-a-full-call combination; use the owner's login home with --allow-human-home-transport\",\n  \"codex_home\": \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\HG-KSEOS\\\\codex-hermes\",\n  \"codex_home_is_declared_lane_home\": true\n}"
   },
   {
    "tag": "assigned_arm_passes_gates",
-   "rc": 1,
-   "code": null,
-   "stdout_tail": "\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\.hermes-runtime\\python\\cpython-3.11.17-windows-x86_64-none\\Lib\\subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\.hermes-runtime\\python\\cpython-3.11.17-windows-x86_64-none\\Lib\\subprocess.py\", line 1538, in _execute_child\n    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [WinError 2] 系統找不到指定的檔案。"
+   "rc": 4,
+   "code": "ERR_CODEX_EXECUTABLE_NOT_FOUND",
+   "stdout_tail": "{\n  \"schema\": \"HGK-LANE-RESOLUTION/1\",\n  \"ok\": false,\n  \"lane\": \"VERIFY_SECURITY\",\n  \"code\": \"ERR_CODEX_EXECUTABLE_NOT_FOUND\",\n  \"detail\": \"--codex-executable does not resolve to a file: C:\\\\Projects\\\\Agent_Workspace\\\\HG-KSEOS\\\\scripts\\\\no-such-codex-binary.exe\",\n  \"generated_utc\": \"2026-10-29T14:07:28.975928+00:00\",\n  \"codex_executable\": \"C:\\\\Projects\\\\Agent_Workspace\\\\HG-KSEOS\\\\scripts\\\\no-such-codex-binary.exe\",\n  \"say\": \"refusing before any spawn: an explicitly supplied codex executable is used as given, so it must exist; drop the flag to fall back to the declared pin\",\n  \"codex_home\": \"C:\\\\Users\\\\user\\\\.codex\",\n  \"codex_home_is_declared_lane_home\": false\n}"
   }
  ],
  "verdicts": [
@@ -37,9 +37,9 @@
   },
   {
    "tag": "assigned_arm_passes_gates",
-   "expected": "NOT_ONE_OF_THE_TWO_NEW_CODES",
-   "observed": null,
-   "rc": 1,
+   "expected": "ERR_CODEX_EXECUTABLE_NOT_FOUND",
+   "observed": "ERR_CODEX_EXECUTABLE_NOT_FOUND",
+   "rc": 4,
    "pass": true
   }
  ],

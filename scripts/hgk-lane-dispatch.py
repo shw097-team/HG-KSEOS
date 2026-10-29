@@ -2461,6 +2461,18 @@ def main() -> int:
     # refusals (pool/guard/sandbox/identity/authorization) keep their own codes; the pin gate
     # runs immediately before run_candidate, validating the DECLARED pin via the canonical
     # toolchain verifier (existence + version + digest), never duplicating that logic inline.
+    # R20b (TT-R20-7): an explicit --codex-executable BYPASSES the pin gate above, so its existence
+    # was never checked -- a typo surfaced as an uncaught FileNotFoundError from subprocess, with no
+    # refusal body and no receipt. A supplied path is used as given, so it must exist: typed refusal.
+    if args.codex_executable:
+        _ce = os.path.expanduser(str(args.codex_executable))
+        if not os.path.isfile(_ce):
+            return emit_refusal(args, refusal_body(args.lane, "ERR_CODEX_EXECUTABLE_NOT_FOUND",
+                f"--codex-executable does not resolve to a file: {_ce}",
+                codex_executable=_ce,
+                say="refusing before any spawn: an explicitly supplied codex executable is used as given, "
+                    "so it must exist; drop the flag to fall back to the declared pin"))
+
     if not args.codex_executable and not getattr(args, "no_pin_assert", False):
         _pin_probe = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "hgk-lane-toolchain.py"),

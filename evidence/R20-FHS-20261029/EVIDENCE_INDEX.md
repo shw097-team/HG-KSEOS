@@ -50,6 +50,16 @@ same untrustworthiness.
 
 Oracle cell verdicts behind the HOLD table: `PASS_LOCAL_ORACLE 50 / HOLD 46 / DENY 0` (96 cells).
 
+Two receipts need reading together, and saying so is cheaper than letting someone misread them:
+
+- `receipts/P1D_PACKAGE.json` records the **13:13 build** (`0432b9b4…`, the one whose checksum list was
+  stale). `receipts/P1D_R20B_CHECKSUM_REPAIR.json` is the authoritative record of the shipped archive:
+  source `0432b9b4…` → rebuilt `ee009117…`, 88/88 rows verified.
+- `receipts/P1C_VALIDATE.json` reports `idempotent: false` / `reproducible: false` — that is **raw byte**
+  equality, which cannot hold because the validator writes `elapsed_ms`. The claim actually made is the
+  **verdict projection**, and `receipts/P1C_IDEMPOTENCE.json` measures exactly that: identical semantic
+  digest `534fa4c1…` across runs, 2789 passed / 0 failed.
+
 ## 4. R20b — the two defects the parallel audit found, and what changed
 
 The audit (three read-only sub-agents, `audit/AUDIT_ROUND.md`) was asked to falsify the author's claims.
@@ -78,10 +88,17 @@ assignment file lists no fallbacks; making it default would void the documented 
 | `ERR_SEALED_HOME_OAUTH_TRANSPORT` | OAuth relay + a lane home with no `auth.json` | this pair 401s **after** a full model call |
 | `ERR_LANE_ASSIGNMENT_NO_ROW` | assignment file reads fine but has no row for the role | distinct from a read failure |
 | `ERR_NO_ASSIGNED_ARM` | `--require-assigned-arms` and no assigned arm is in the pool | strict selection emptied the pool |
+| `ERR_CODEX_EXECUTABLE_NOT_FOUND` | `--codex-executable` names a path that does not resolve | that flag **bypasses** the pin gate, so a typo used to surface as an uncaught `FileNotFoundError` from `subprocess` — no refusal body, no receipt (TT-R20-7, now repaired) |
 
 Ordering is deliberate and measured: an arm absent from the *pool* keeps `ERR_LANE_REQUIRED_ARM_ABSENT`,
-so the assignment gate sits after the pool-membership check. Tests: **8 new**;
-suite **144 passed** with the change, **136 without** → 0 regressions.
+so the assignment gate sits after the pool-membership check. Tests: **9 new**;
+suite **145 passed** with the change, **136 without** → 0 regressions.
+
+> The negative-test receipt was itself wrong once, and that is recorded rather than tidied away: the
+> first version scored the control case as "pass" whenever the run *did not* return one of the two new
+> codes — so an uncaught traceback counted as success. A control that accepts a crash cannot distinguish
+> "gates cleared" from "gates never ran". The control now requires `ERR_CODEX_EXECUTABLE_NOT_FOUND`,
+> a code only reachable **after** both gates, and the assertion is equality, not `not in`.
 
 > Two self-inflicted defects were found and fixed en route, both recorded because they are the exact
 > failure modes that make "tests are green" meaningless: (a) the first gate ordering masked the more
