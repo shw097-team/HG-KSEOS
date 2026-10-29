@@ -124,6 +124,31 @@ The single receipted turn is pass 2, and it covers the first build.
 status, and not owner acceptance. Independence is **process-only** (same model family as the maker);
 model diversity is **not** claimed.
 
+## 6b. Configuration snapshot this evidence pins — and a later host change
+
+The committed `config/model-lane-assignment.json` is **revision 35 / registry_epoch 34** — the snapshot this
+round actually ran against. Post-round (discovered while reading the pass-5 lane receipt, not by me looking
+for it) the **host** file had already moved to **revision 36 / registry_epoch 36** with exactly two field
+changes:
+
+```text
+PLAN            transport_model: opencode-go/deepseek-v4.1-flash -> gpt-6.1-sol
+VERIFY_SECURITY transport_model: opencode-go/deepseek-v4.1-flash -> gpt-6.1-sol
+(assigned_provider / assigned_model / authority unchanged in both rows)
+```
+
+Two honest readings, both of which belong here:
+
+1. **Rev 35 was internally inconsistent with the owner's role order.** For PLAN and VERIFY_SECURITY the row
+   said `assigned_model: gpt-6.1-sol` while its `transport_model` pointed at deepseek. Rev 36 removes that
+   contradiction. The lanes in this round were dispatched with `--require-arm openai-codex/gpt-6.1-sol`
+   over the OAuth relay, i.e. matching the owner order — the gate compared against `assigned_model`, so the
+   lane behaviour was right even though the committed row was self-contradictory.
+2. **This branch pins rev 35, not rev 36.** Any later reader must not assume the shipped routing snapshot
+   equals the live host. The drift is recorded rather than absorbed (TT-R20-10), because silently
+   re-baselining evidence onto a config that the round never ran against is exactly the move that makes
+   receipts decorative.
+
 ## 7. Findings that stay open
 
 1. **18/18 stage rows are `ABSENT`** — no machine artifact carries an instance of any stage's output
