@@ -1197,7 +1197,10 @@ def lane_assigned_arms(role: str) -> dict:
         # the old snapshot happened to be taken before the append. A property nothing can violate is not
         # pinned. So the invariant is now CHECKED AT RUNTIME and a row that declares the same arm as both
         # primary and fallback is refused, which is the only shape where the two lists can collide.
-        _overlap = sorted(set(primary) & set(fallback))
+        # C4/TT-R20-20: the checker showed an EXACT-STRING overlap check misses case variants and
+        # declared aliases (primary openai-codex/gpt-6.1-sol vs fallback desktop_router/gpt-6.1-sol are the
+        # same arm). Overlap is therefore decided with the same equivalence the verdict uses.
+        _overlap = sorted({p_ for p_ in primary for f_ in fallback if arm_served_equivalent(p_, f_)} )
         if _overlap:
             return {"ok": False, "arms": [], "revision": data.get("revision"), "role": label,
                     "code": "ERR_ASSIGNMENT_PRIMARY_FALLBACK_OVERLAP", "overlap": _overlap,

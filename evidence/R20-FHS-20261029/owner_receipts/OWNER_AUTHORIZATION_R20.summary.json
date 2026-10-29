@@ -25,7 +25,9 @@
   "max_ops": 24,
   "ops_used_at_signing": 1,
   "expires_at": 1793314427,
-  "effect_class_ceiling": "REPOSITORY_WRITE"
+  "effect_class_ceiling": "REPOSITORY_WRITE",
+  "owner_fingerprint": "412b351937be72a1",
+  "owner_public_hex_sha256_prefix": "71082e1edbd96477"
  },
  "verifies_independently_by": "Ed25519PublicKey.from_public_bytes(bytes.fromhex(owner_public_hex)).verify(bytes.fromhex(signature_hex), body_json.encode()); sha256(body_json) must equal payload_sha256",
  "body_json_sha256_note": "body_json is reproduced verbatim so a third party can verify the signature without any key file; its sha256 is payload_sha256.",
