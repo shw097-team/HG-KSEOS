@@ -1784,6 +1784,11 @@ def main() -> int:
                     help="Shared Spine path used for the --sp-workorder join (default: "
                          "var/shared-spine/hg-kseos.db). Operator/test seam.")
     args = ap.parse_args()
+    # A2/TT-R20-9: identity of THIS source must ride on the receipt it produces. Defined here, in
+    # main(), because the receipt assembly also lives here -- a module-level or attempt-scoped binding
+    # left `_producer` undefined on every path that never ran an attempt (NameError at emit time),
+    # which is how 61 previously-green tests turned red the moment the field was added.
+    _producer = producer_identity()
 
     # ---- Tranche A/B: resolve the persisted per-round role binding (pre-spawn, fail-closed) ------
     # The required ARM and RANK for this lane are DERIVED from the SAME persisted binding document, so

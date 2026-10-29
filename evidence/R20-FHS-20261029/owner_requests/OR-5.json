@@ -1,0 +1,180 @@
+{
+ "schema": "R20.OWNER_REQUEST/1",
+ "id": "OR-5",
+ "kind": "hold_cells",
+ "signer": "OWNER（人類決策）",
+ "reader_class": "HUMAN_DECISION",
+ "count": 16,
+ "ids": [
+  {
+   "case_id": "AC-C39-EDGE-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "467"
+  },
+  {
+   "case_id": "AC-C39-JOURNEY-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "539"
+  },
+  {
+   "case_id": "AC-C39-MUT-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "531"
+  },
+  {
+   "case_id": "AC-C39-NEG-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "459"
+  },
+  {
+   "case_id": "AC-C39-PARITY-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "491"
+  },
+  {
+   "case_id": "AC-C39-PERF-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "483"
+  },
+  {
+   "case_id": "AC-C39-POS-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "451"
+  },
+  {
+   "case_id": "AC-C39-RECOVERY-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "499"
+  },
+  {
+   "case_id": "AC-C39-ROLLBACK-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "515"
+  },
+  {
+   "case_id": "AC-C39-SEC-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "475"
+  },
+  {
+   "case_id": "AC-C39-UNINSTALL-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "ORIGINAL_HUMAN_DECISION_READER_REQUIRED",
+   "next_legal_action": "由原 Owner 出具判定收據；作者不得代簽",
+   "source_alias": "SRC-L-001",
+   "source_line": "523"
+  },
+  {
+   "case_id": "AC-C39-PERF-COMPOSITE",
+   "axis": "COMPOSITE",
+   "first_fail": "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND",
+   "next_legal_action": "PERFORMANCE_UNOBSERVED waiver",
+   "source_alias": "SRC-L-001",
+   "source_line": "484"
+  },
+  {
+   "case_id": "AC-C39-PERF-DETERMINISTIC",
+   "axis": "DETERMINISTIC",
+   "first_fail": "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND",
+   "next_legal_action": "PERFORMANCE_UNOBSERVED waiver",
+   "source_alias": "SRC-L-001",
+   "source_line": "477"
+  },
+  {
+   "case_id": "AC-C39-PERF-PROPERTY",
+   "axis": "PROPERTY",
+   "first_fail": "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND",
+   "next_legal_action": "PERFORMANCE_UNOBSERVED waiver",
+   "source_alias": "SRC-L-001",
+   "source_line": "479"
+  },
+  {
+   "case_id": "AC-C39-PERF-REFERENCE_OUTPUT",
+   "axis": "REFERENCE_OUTPUT",
+   "first_fail": "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND",
+   "next_legal_action": "PERFORMANCE_UNOBSERVED waiver",
+   "source_alias": "SRC-L-001",
+   "source_line": "480"
+  },
+  {
+   "case_id": "AC-C39-PERF-STATE_READBACK",
+   "axis": "STATE_READBACK",
+   "first_fail": "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND",
+   "next_legal_action": "PERFORMANCE_UNOBSERVED waiver",
+   "source_alias": "SRC-L-001",
+   "source_line": "478"
+  }
+ ],
+ "fill": [
+  "decision_per_case",
+  "performance_waiver_accepted (true/false)",
+  "waiver_basis",
+  "signed_at_utc",
+  "signed_by"
+ ],
+ "verify": "python tools/requalify_hold_cells.py --class HUMAN_DECISION",
+ "if_unsigned": "11 cells stay HOLD (never converted to PASS)",
+ "claim_ceiling": "requalification re-runs these cells against YOUR reader; it is not an agent verdict",
+ "waiver_ids": [
+  {
+   "case_id": "AC-C39-PERF-COMPOSITE",
+   "axis": "COMPOSITE",
+   "first_fail": "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND",
+   "why_waiver": "no bound performance threshold exists in any source for this axis"
+  },
+  {
+   "case_id": "AC-C39-PERF-DETERMINISTIC",
+   "axis": "DETERMINISTIC",
+   "first_fail": "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND",
+   "why_waiver": "no bound performance threshold exists in any source for this axis"
+  },
+  {
+   "case_id": "AC-C39-PERF-PROPERTY",
+   "axis": "PROPERTY",
+   "first_fail": "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND",
+   "why_waiver": "no bound performance threshold exists in any source for this axis"
+  },
+  {
+   "case_id": "AC-C39-PERF-REFERENCE_OUTPUT",
+   "axis": "REFERENCE_OUTPUT",
+   "first_fail": "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND",
+   "why_waiver": "no bound performance threshold exists in any source for this axis"
+  },
+  {
+   "case_id": "AC-C39-PERF-STATE_READBACK",
+   "axis": "STATE_READBACK",
+   "first_fail": "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND",
+   "why_waiver": "no bound performance threshold exists in any source for this axis"
+  }
+ ]
+}

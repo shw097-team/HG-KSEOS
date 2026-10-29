@@ -1,0 +1,108 @@
+{
+ "schema": "R20.OWNER_REQUEST/1",
+ "id": "OR-6",
+ "kind": "hold_cells",
+ "signer": "第二 principal（≠ maker，SoD）",
+ "reader_class": "HUMAN_JUDGE",
+ "count": 11,
+ "ids": [
+  {
+   "case_id": "AC-C39-EDGE-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "466"
+  },
+  {
+   "case_id": "AC-C39-JOURNEY-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "538"
+  },
+  {
+   "case_id": "AC-C39-MUT-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "530"
+  },
+  {
+   "case_id": "AC-C39-NEG-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "458"
+  },
+  {
+   "case_id": "AC-C39-PARITY-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "490"
+  },
+  {
+   "case_id": "AC-C39-PERF-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "482"
+  },
+  {
+   "case_id": "AC-C39-POS-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "450"
+  },
+  {
+   "case_id": "AC-C39-RECOVERY-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "498"
+  },
+  {
+   "case_id": "AC-C39-ROLLBACK-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "514"
+  },
+  {
+   "case_id": "AC-C39-SEC-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "474"
+  },
+  {
+   "case_id": "AC-C39-UNINSTALL-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED",
+   "next_legal_action": "指定具名 Judge principal 並簽校準；本輪不得以作者自評替代",
+   "source_alias": "SRC-L-001",
+   "source_line": "522"
+  }
+ ],
+ "fill": [
+  "judge_principal",
+  "separation_of_duties_statement",
+  "verdict_per_case",
+  "signed_at_utc",
+  "signed_by"
+ ],
+ "verify": "python tools/requalify_hold_cells.py --class HUMAN_JUDGE",
+ "if_unsigned": "11 cells stay HOLD (never converted to PASS)",
+ "claim_ceiling": "requalification re-runs these cells against YOUR reader; it is not an agent verdict"
+}
