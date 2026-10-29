@@ -1,0 +1,198 @@
+{
+  "schema": "FAR-RETRIEVAL-LEDGER/1",
+  "workorder_ref": {
+    "id": "R18-FAR-12",
+    "digest": "subject=5a06d8ddfcfaeefdda4430a0fcd0677e5ca036ac9e10072b5f00e141824f430d"
+  },
+  "question": "Which of this round's own failures were routing violations rather than environment limits, and what minimal mechanism prevents each from recurring?",
+  "timestamp_utc": "2026-10-29T08:04:26.868800+00:00",
+  "channels": {
+    "knowledge_base": [
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/SBL實作施工/實作規劃&鑑定/R14之前/POST_FREEZE_CORRECTIONS.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/SBL實作施工/實作規劃&鑑定/R14之前/POST_FREEZE_CORRECTIONS.md",
+        "sha256": "2a1a9764551f200049f3549a76e60340f53199f57f62456a09fb71d3c417a64f",
+        "score": 10,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/SBL實作施工/實作規劃&鑑定/R14之前/POST_FREEZE_CORRECTIONS.md",
+        "origin_artifact_digest": "2a1a9764551f200049f3549a76e60340f53199f57f62456a09fb71d3c417a64f",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/SBL實作施工/實作規劃&鑑定/R14之前/ACCEPTANCE_OFFICER_VERDICT.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/SBL實作施工/實作規劃&鑑定/R14之前/ACCEPTANCE_OFFICER_VERDICT.md",
+        "sha256": "437dabfd2dce4cf988037b2cb084581a3457f81adaac02ce57f098a65b917b9a",
+        "score": 9,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/SBL實作施工/實作規劃&鑑定/R14之前/ACCEPTANCE_OFFICER_VERDICT.md",
+        "origin_artifact_digest": "437dabfd2dce4cf988037b2cb084581a3457f81adaac02ce57f098a65b917b9a",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/S-2W2AC_PUEMR/S-2W2ARC_PUEMR_前雙臂輪+折疊式複合機械臂_機械設計藍圖_v1.1.0_Substantive_Repair_2026-09-15.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/S-2W2AC_PUEMR/S-2W2ARC_PUEMR_前雙臂輪+折疊式複合機械臂_機械設計藍圖_v1.1.0_Substantive_Repair_2026-09-15.md",
+        "sha256": "ce61c37d02cbf096f0b934aceb9daec4e8658ede513a32e63eb89daac178ce3f",
+        "score": 7,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/S-2W2AC_PUEMR/S-2W2ARC_PUEMR_前雙臂輪+折疊式複合機械臂_機械設計藍圖_v1.1.0_Substantive_Repair_2026-09-15.md",
+        "origin_artifact_digest": "ce61c37d02cbf096f0b934aceb9daec4e8658ede513a32e63eb89daac178ce3f",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/參考工程資料庫/GPTs_GENIEMAKER_設計實作/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師_KnowledgePack_and_GPT_Builder_合冊/Reports/GATE_SUMMARY.csv",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/參考工程資料庫/GPTs_GENIEMAKER_設計實作/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師_KnowledgePack_and_GPT_Builder_合冊/Reports/GATE_SUMMARY.csv",
+        "sha256": "89e299cddc35b89f2824a4cad62c30f8e4982c93a5e97cc7f78b372f43902d7b",
+        "score": 7,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/參考工程資料庫/GPTs_GENIEMAKER_設計實作/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師_KnowledgePack_and_GPT_Builder_合冊/Reports/GATE_SUMMARY.csv",
+        "origin_artifact_digest": "89e299cddc35b89f2824a4cad62c30f8e4982c93a5e97cc7f78b372f43902d7b",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/參考工程資料庫/GPTs_GENIEMAKER_設計實作/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師_KnowledgePack_and_GPT_Builder_合冊/Reports/GATE_SUMMARY.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/參考工程資料庫/GPTs_GENIEMAKER_設計實作/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師_KnowledgePack_and_GPT_Builder_合冊/Reports/GATE_SUMMARY.md",
+        "sha256": "a2798e6fd722c3cf98bc13e8d8aceb2e46566c0b00d942820dd656d2377c8ee6",
+        "score": 7,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/參考工程資料庫/GPTs_GENIEMAKER_設計實作/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師/【2】GPTs_GENIEMAKER_AI產品經理_and_設計開發工程師_KnowledgePack_and_GPT_Builder_合冊/Reports/GATE_SUMMARY.md",
+        "origin_artifact_digest": "a2798e6fd722c3cf98bc13e8d8aceb2e46566c0b00d942820dd656d2377c8ee6",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC藍圖/PD-PKG_DOC-06_藍圖/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-06_DOC-00_藍圖&skeleton_2026-09-23_r1.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC藍圖/PD-PKG_DOC-06_藍圖/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-06_DOC-00_藍圖&skeleton_2026-09-23_r1.md",
+        "sha256": "2eb265c27872f39892accbbac798c2f28bb93d06a9fcfee95b77364b0ae5feed",
+        "score": 7,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC藍圖/PD-PKG_DOC-06_藍圖/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-06_DOC-00_藍圖&skeleton_2026-09-23_r1.md",
+        "origin_artifact_digest": "2eb265c27872f39892accbbac798c2f28bb93d06a9fcfee95b77364b0ae5feed",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/S-2W2AC_PUEMR/視覺工程/GM-2_PUEMR_Critical_Mechanism_Geometry_v0.2.0_Downstream_Integrated_Rebase_2026-09-13.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/S-2W2AC_PUEMR/視覺工程/GM-2_PUEMR_Critical_Mechanism_Geometry_v0.2.0_Downstream_Integrated_Rebase_2026-09-13.md",
+        "sha256": "623dfb1b22b4fb71006c61f9793de3ef66c29d08ce21cfc25577b4d4b6b70518",
+        "score": 6,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/S-2W2AC_PUEMR/視覺工程/GM-2_PUEMR_Critical_Mechanism_Geometry_v0.2.0_Downstream_Integrated_Rebase_2026-09-13.md",
+        "origin_artifact_digest": "623dfb1b22b4fb71006c61f9793de3ef66c29d08ce21cfc25577b4d4b6b70518",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/S-2W2AC_PUEMR/視覺工程/GM-4_PUEMR_Mechatronic_Packaging_v0.2.0_Downstream_Integrated_Rebase_2026-09-13.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/S-2W2AC_PUEMR/視覺工程/GM-4_PUEMR_Mechatronic_Packaging_v0.2.0_Downstream_Integrated_Rebase_2026-09-13.md",
+        "sha256": "5b81a4f3e65b520c2f5cd9ec8ff7166f769e6bb568071be49aa123d9c16dfb1f",
+        "score": 6,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/S-2W2AC_PUEMR/視覺工程/GM-4_PUEMR_Mechatronic_Packaging_v0.2.0_Downstream_Integrated_Rebase_2026-09-13.md",
+        "origin_artifact_digest": "5b81a4f3e65b520c2f5cd9ec8ff7166f769e6bb568071be49aa123d9c16dfb1f",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      }
+    ],
+    "memory": [
+      {
+        "source_id": "DOC-0d2ac9838aff5f6f71e8",
+        "title": "技術資料庫\\SQS-THC設計開發\\【4】(舊版)Spartoi-AgentOS\\【2】Spartoi-AgentOS _總系統級&7-child-PRW\\Spartoi_總系統級_SP-TS\\Spartoi_總系統級_SP-TS-01.md",
+        "snippet": "# 《Spartoi_總系統級_SP-TS-01》\n\n> Generated date: 2026-06-20 (Asia/Taipei)  \n> Artifact: Markdown main document + release package materials  \n> Mode: pre-implementation design-only / no runtime / no broker",
+        "score": 6,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-0d2ac9838aff5f6f71e8",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-c0994ca6a84a40f8efda",
+        "title": "技術資料庫\\專業技術文檔\\TW-ICT_當沖技術系列\\市場資訊&台股趨勢_專業技術文檔_v2.0\\台股市場&趨勢_專業技術文檔_v2.0_DOC-00_2026-07-25_r1.md",
+        "snippet": "---\ntitle: \"台股市場&趨勢_專業技術文檔_v2.0_DOC-00\"\nversion: \"2026-07-25_r1\"\ngenerated_at: \"2026-07-25T23:59:00+08:00\"\ntimezone: \"Asia/Taipei\"\nartifact_type: \"S5_single_DOC_professional_body\"\nstage: \"S5_DOC_BODY\"",
+        "score": 6,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-c0994ca6a84a40f8efda",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-00e11cf0e9177e7b46cc",
+        "title": "技術資料庫\\專業技術文檔\\塔勒布思想_專業技術文檔\\塔勒布思想_專業技術文檔_DOC-11_r2.md",
+        "snippet": "---\ntitle: 塔勒布思想_專業技術文檔_DOC-11\nversion: 2026-07-28_r2\ngenerated_at: 2026-07-28T15:59:25+08:00\nartifact_type: S2_PATCHED_S5_DOC_BODY_BODY_ONLY\nroute: PATCH / S2_UPGRADE_REBUILD / S5_DOC_BODY / S7_SINGL",
+        "score": 5,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-00e11cf0e9177e7b46cc",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-14370523a689d254ef65",
+        "title": "技術資料庫\\專業技術文檔\\AGENT\\AI_AGENT_SPEC_專業技術文檔\\AI_AGENT_SPEC_專業技術文檔_DOC-09_2026-07-28_r1.md",
+        "snippet": "---\ntitle: AI_AGENT_SPEC_專業技術文檔_DOC-09\nversion: 2026-07-28_r1\nartifact_type: S5_DOC_BODY\ndoc_id: DOC-09\nofficial_title_zh: 企業治理、風險成熟度與架構選型退出策略\nofficial_title_en: Enterprise Governance, Risk Maturity, ",
+        "score": 5,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-14370523a689d254ef65",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-15d186cd2bd56c2f6b12",
+        "title": "SSOT\\RBWI_WP_CONTROL_PACK\\G07_Tool_Provider_PRW_Windows.md",
+        "snippet": "# G07 — Tool / Provider / PRW / Windows — FULL GROUP r2\n\n> Non-authoritative read-only delivery compilation. Each embedded DOC retains canonical writer identity at `docs/<file>`; this group never beco",
+        "score": 5,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-15d186cd2bd56c2f6b12",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-1b9fff04ed6d18412aef",
+        "title": "技術資料庫\\專業技術文檔\\AQT_v3.0_專業技術文檔\\AQT_v3.0_專業技術文檔_DOC-18_2026-07-24_r1.md",
+        "snippet": "# 《AQT_v3.0_專業技術文檔_DOC-18》\n\n> **Python 軟體工程、DevOps 與雲端自動化｜Python Software Engineering, DevOps and Cloud Automation**\n> **AQT-DOC18-SDS｜Software Delivery Standard｜CH-26｜2026-07-24_r1**\n\n| field | value",
+        "score": 5,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-1b9fff04ed6d18412aef",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-1ed2e52fba133d029a40",
+        "title": "技術資料庫\\專業技術文檔\\TW-ICT_當沖技術系列\\市場資訊&台股趨勢_專業技術文檔_v2.0\\台股市場&趨勢_專業技術文檔_v2.0_DOC-09_2026-07-25_r1.md",
+        "snippet": "---\ntitle: \"台股市場&趨勢_專業技術文檔_v2.0_DOC-09\"\nversion: \"2026-07-25_r1\"\ngenerated_at: \"2026-07-25T23:34:15+08:00\"\ntimezone: \"Asia/Taipei\"\nartifact_type: \"S5_single_DOC_professional_body\"\nstage: \"S5_DOC_BODY\"",
+        "score": 5,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-1ed2e52fba133d029a40",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-29c37860074e417317fc",
+        "title": "技術資料庫\\專業技術文檔\\TW-ICT_當沖技術系列\\ICT_專業技術文檔_v6.0\\ICT_專業技術文檔_v6.0_DOC-03_2026-07-25_r1.md",
+        "snippet": "# 《ICT_專業技術文檔_v6.0_DOC-03》\n\n> **正式主題**：價格交付、Sponsorship、Displacement、CISD 與市場狀態機  \n> **English**: ICT v6.0 Price Delivery, Sponsorship, Displacement, CISD and Market State Machine  \n> **內部簡稱**：`ICT-DO",
+        "score": 5,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-29c37860074e417317fc",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      }
+    ],
+    "web": []
+  },
+  "web_status": "WEB_RETRIEVAL_SKIPPED_NO_ROOTS",
+  "cross_reference_count": 64,
+  "files": {
+    "ledger": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\far-runs\\R18-FAR-12\\retrieval\\RetrievalLedger.json",
+    "cross_reference": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\far-runs\\R18-FAR-12\\retrieval\\CrossReferenceLedger.tsv"
+  }
+}

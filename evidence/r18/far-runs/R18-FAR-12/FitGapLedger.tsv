@@ -1,0 +1,5 @@
+gap_id	gap	severity
+G1	six FAR_*.md memos are not FAR products	HIGH
+G2	judgement work bypassed lanes for ~2.5h	HIGH
+G3	no mechanism stops the round at a milestone	HIGH
+G4	issuer claim asserted before its contract was read	MEDIUM

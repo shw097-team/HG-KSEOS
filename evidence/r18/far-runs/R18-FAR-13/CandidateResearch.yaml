@@ -1,0 +1,9 @@
+schema: LOGICAL_FAR_CANDIDATE_RESEARCH_V1
+run_ref: R18-FAR-13
+decision_question: "For a single owner who is also the package author, which of source_freeze / task_kind / oracle_ratification, policy_epoch and CAP-BOOT can be satisfied locally, and which are authorisation gaps rather than definition gaps?"
+disposition: RESEARCH_PASS_CANDIDATE
+evidence_digests: ["7141dc183b698d78 ClaimLedger.tsv"]
+confidence: 0.92
+limits: "mechanical satisfiability only; oracle_ratification by the author is not independent"
+owner_action_required: "approve owner-held three-key bundle with declared ceiling, or name a second appraiser"
+status: CANDIDATE_ONLY
