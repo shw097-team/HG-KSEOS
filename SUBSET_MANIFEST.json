@@ -9,9 +9,10 @@
   "tests",
   "tools",
   "evidence/R20-FHS-20261029",
-  "docs"
+  "docs",
+  "src"
  ],
- "file_count": 231,
+ "file_count": 237,
  "deleted_not_applied": [
   "docs/FHS-B1_使用說明文檔.md",
   "docs/MANIFEST.json"
@@ -1172,6 +1173,37 @@
    "path": "tools/verify_hlpe.py",
    "source_blob": "16cec84bf99f23f46d6a3b6014fa37c30f1dc81c",
    "bytes": 4813
+  },
+  {
+   "path": "src/hg_kseos/lifecycle.py",
+   "source_blob": "f3cb177d5c72cb6118221c40142db302794402ac",
+   "bytes": 38448
+  },
+  {
+   "path": "src/hg_kseos/native_admission.py",
+   "source_blob": "86c27b5e74fd5425ef35a06b03f427dca4d0b66f",
+   "bytes": 32007
+  },
+  {
+   "path": "src/hg_kseos/schema.sql",
+   "source_blob": "d07d1a96e4d99949cfd081933f6e9abb752056d7",
+   "bytes": 11161
+  },
+  {
+   "path": "src/hg_kseos/spine.py",
+   "source_blob": "6444ccde8212a2ba531421bb96f683a189fb06cb",
+   "bytes": 32855
+  },
+  {
+   "path": "src/hg_kseos/user_trust.py",
+   "source_blob": "48838e7171e788d3d4a37fbae9a15bfe1b5a81b5",
+   "bytes": 9834
+  },
+  {
+   "path": "tests/conftest.py",
+   "source_blob": "candidate/r19-fhs-implementation:tests/conftest.py",
+   "bytes": 700
   }
- ]
+ ],
+ "note_src": "src/ is included because the replayed tests import hg_kseos.native_admission / user_trust, which main does not carry; without it the suite cannot even collect, and a subscription that does not collect proves nothing."
 }
