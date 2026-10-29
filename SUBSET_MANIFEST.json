@@ -205,7 +205,7 @@
   },
   {
    "path": "evidence/R20-FHS-20261029/owner_receipts/OWNER_AUTHORIZATION_R20.summary.json",
-   "blob": "c6279049390c05e546774f76f08d1c7e063267c4",
+   "blob": "5e496e17ea32fe71ed9a93f22121fbb78fcdc580",
    "bytes": 9812
   },
   {
@@ -585,7 +585,7 @@
   },
   {
    "path": "scripts/hgk-lane-dispatch.py",
-   "blob": "2df0a21084f9a4180ddde849cec911a266d226b8",
+   "blob": "529a5af16db0ff07f67d8f7daf8768c757ba704b",
    "bytes": 181837
   },
   {
@@ -1470,7 +1470,7 @@
   },
   {
    "path": "tests/test_lane_assignment_fallbacks.py",
-   "blob": "08fc63f977c657c0347f5953ffd5c95711061ae0",
+   "blob": "6d491f9fb59fb9b05e7cf409c6d8ab6662f7783c",
    "bytes": 8185
   },
   {
@@ -1848,5 +1848,6 @@
    "blob": "16cec84bf99f23f46d6a3b6014fa37c30f1dc81c",
    "bytes": 4813
   }
- ]
+ ],
+ "blob_source": "git hash-object of the WORKING TREE file (an earlier generation used HEAD:<path>, which recorded the pre-sync blob for every file changed in the same commit -- the checker caught 3 such rows)"
 }
