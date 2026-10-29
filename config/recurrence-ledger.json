@@ -1,0 +1,72 @@
+{
+ "schema": "RECURRENCE-LEDGER/1",
+ "note": "One row per *class* of defect, not per instance. A class that has occurred twice may not be worked again without a regression test that fails when the defect returns; that rule is what separates a fix from a retelling.",
+ "classes": [
+  {
+   "class_id": "RC-POLICY-DRIFT",
+   "title": "the governing policy exists in more than one file and the copies disagree",
+   "occurrences": [
+    {"date": "2026-10-21", "ref": "session FAR-LANE-VERSION-MIX-20261021: four routing files, PLAN named glm/gpt/deepseek in different places"},
+    {"date": "2026-10-30", "ref": "FAR-DURABILITY-20261030: registry said PLAN rank-1 = gpt-6.1-sol, lane_chains and the slot pool still said deepseek; the conformance test failed against its own source"}
+   ],
+   "fix": {"commit": "epoch 34", "tools": ["scripts/lane_policy_reconcile.py"], "summary": "one authority (registry.routes); lane_chains and ordered_pool are projections, regenerated, with the epoch digest recorded"},
+   "regression_test": "tests/test_durable_gates.py::test_reconcile_detects_and_repairs_drift",
+   "status": "CLOSED_WITH_TEST"
+  },
+  {
+   "class_id": "RC-DISPOSABLE-REPAIR",
+   "title": "a repair is written into a worktree, a live process or a .bak instead of a commit, a service or a registry row",
+   "occurrences": [
+    {"date": "2026-10-21", "ref": "FAR-LANE-HEALTH-REPAIR: repair stopped at local re-binding; the transport was a manually started process"},
+    {"date": "2026-10-30", "ref": "FAR-DURABILITY-20261030: three implementations (B1, SKELETON_SPINE, HANDOFF-PATCH-v1) live in a directory with no .git at all; the delivery commit carried 9 of 911 files"}
+   ],
+   "fix": {"tools": ["scripts/ir4_subject_gate.py", "scripts/ir_gate.py"], "summary": "a turn may only claim progress on a subject that has a commit; the dispatcher refuses otherwise"},
+   "regression_test": "tests/test_durable_gates.py::test_subject_without_repo_is_refused",
+   "status": "CLOSED_WITH_TEST"
+  },
+  {
+   "class_id": "RC-POLICY-WITHOUT-TRANSACTION",
+   "title": "the effective policy is an uncommitted edit in one working tree",
+   "occurrences": [
+    {"date": "2026-10-23", "ref": "last commit touching config/; revisions 34..38 existed only on disk for seven days"},
+    {"date": "2026-10-30", "ref": "HEAD carried revision 33 while the disk carried revision 38 with a changed schema (lane_group -> role)"}
+   ],
+   "fix": {"tools": ["scripts/ir1_policy_gate.py"], "summary": "POLICY_DIRTY refuses the turn; policy changes must be committed"},
+   "regression_test": "tests/test_durable_gates.py::test_dirty_policy_is_refused",
+   "status": "CLOSED_WITH_TEST"
+  },
+  {
+   "class_id": "RC-ACCEPTANCE-NEVER-GRANTED",
+   "title": "every round ends ACC=NOT_RUN, so no round can promote what it fixed",
+   "occurrences": [
+    {"date": "2026-10-22", "ref": "FAR-20261022-027 trigger_keys: hgk:ACC-...=NOT_RUN, with verify-lane PASS and an AO verdict present"},
+    {"date": "2026-10-30", "ref": "five evidence/FAR-* rounds, five NOT_RUN acceptances"}
+   ],
+   "fix": {"tools": ["scripts/acceptance_default.py"], "summary": "each round must grant or name a refusal with an expiry; NOT_RUN is no longer a terminal state"},
+   "regression_test": "tests/test_durable_gates.py::test_acceptance_requires_grant_or_named_refusal",
+   "status": "CLOSED_WITH_TEST"
+  },
+  {
+   "class_id": "RC-VACUOUS-PASS",
+   "title": "a comparator reports success on missing input",
+   "occurrences": [
+    {"date": "2026-10-21", "ref": "Fabric commit a0b519a: 'every gate certified presence, not correspondence'"},
+    {"date": "2026-10-30", "ref": "durable_import.py reported 95 files / 26 MB with walk_errors=0 for a 911-file / 236 MB tree (MAX_PATH truncation)"}
+   ],
+   "fix": {"tools": ["tools/durable_import.py"], "summary": "WALK_INCOMPLETE / FILE_COUNT_MISMATCH / EMPTY exit non-zero instead of emitting a green manifest"},
+   "regression_test": "tests/test_durable_gates.py::test_manifest_refuses_incomplete_walk",
+   "status": "CLOSED_WITH_TEST"
+  },
+  {
+   "class_id": "RC-LANE-NOT-BOUND",
+   "title": "a lane declares a model it is not required to serve",
+   "occurrences": [
+    {"date": "2026-10-22", "ref": "FAR-20261022-027 receipt: PLAN ran on deepseek in the Hermes session plane while the mandate named gpt-6.1-sol"},
+    {"date": "2026-10-30", "ref": "rev 33 held all three lanes on deepseek (SOD006-C7); PLAN ran on the session model for the third consecutive round"}
+   ],
+   "fix": {"commit": "epoch 34", "summary": "PLAN and VERIFY rank 1 is the mandated gpt-6.1-sol; the dispatcher binds require_arm == served_arm; reconcile keeps the declaration equal to the route"},
+   "regression_test": "tests/test_lane_policy.py::TestLanePolicyConformance::test_registry_and_projection_shape",
+   "status": "CLOSED_WITH_TEST"
+  }
+ ]
+}

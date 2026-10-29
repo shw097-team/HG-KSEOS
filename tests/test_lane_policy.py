@@ -113,22 +113,24 @@ class TestLanePolicyConformance(unittest.TestCase):
 
     # -- 1 -------------------------------------------------------------------------------------
     def test_registry_and_projection_shape(self):
+        # recurrence class RC-LANE-NOT-BOUND: a lane must not declare a model it is not required to serve.
+        # config/recurrence-ledger.json points here; keep the class id in the file or the ledger gate blocks.
+
         root = _source_root()
         registry = lp.load_registry(_registry_path(root))
 
         self.assertEqual(registry["schema"], "HGK-LANE-ROUTING-REGISTRY/1")
         lanes = [r["lane"] for r in registry["routes"]]
         self.assertEqual(lanes, list(lp.LANE_ORDER), "exactly the three mandated lanes, in order")
-        # Owner chain 2026-10-22: PLAN and EXECUTE are unchanged; every
-        # VERIFY_SECURITY slot names opencode-go/deepseek-v4.1-flash.
-        # The same chain-head equality checks remain: no weakening of the
-        # default, fallback-order, admission, drift, or SoD assertions.
-        # R15-MODEL-FALLBACK-20261023: the deleted arm is gone from every position; the promoted
-        # arm (MiMo-V2.6-Flash) takes the fallback-1 slot it vacated, and every lane's rank 1 is
-        # the owner-declared primary opencode-go/deepseek-v4.1-flash.
+        # Owner order 2026-10-24 (R17 S2-05 OD-01), carried by registry epoch 38 and promoted to
+        # in-force epoch 34 on 2026-10-30: PLAN and VERIFY/SECURITY rank 1 is openai-codex/gpt-6.1-sol
+        # (medium, codex-native-oauth); EXECUTE rank 1 stays opencode-go/deepseek-v4.1-flash.
+        # rev 33 held all three lanes on deepseek, so every lane declared a model it was not
+        # required to serve. The demoted primary stays reachable as fallback 1 in both lanes, and
+        # no lane repeats its rank 1 inside its own fallback list (lane_policy_reconcile.py).
         owner_chain = {
-            "PLAN": [("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "glm-5.3-flash"), ("opencode-go", "mimo-v2.6-pro"), ("nvidia", "z-ai/glm-5.3-flash"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
-            "VERIFY_SECURITY": [("opencode-go", "deepseek-v4.1-flash"), ("openai-codex", "gpt-6.1-sol"), ("opencode-go", "glm-5.3-flash"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
+            "PLAN": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "deepseek-v4.1-flash"), ("opencode-go", "glm-5.3-flash"), ("opencode-go", "mimo-v2.6-pro"), ("nvidia", "z-ai/glm-5.3-flash"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
+            "VERIFY_SECURITY": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "deepseek-v4.1-flash"), ("opencode-go", "glm-5.3-flash"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
             "EXECUTE": [("opencode-go", "deepseek-v4.1-flash"), ("opencode-go", "mimo-v2.6-flash"), ("openai-codex", "gpt-6-luna"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
         }
         for route in registry["routes"]:
@@ -388,8 +390,8 @@ class PoolSelectionTests(unittest.TestCase):
     """
 
     MANDATE = {
-        "PLAN": ("opencode-go", "deepseek-v4.1-flash"),
-        "VERIFY_SECURITY": ("opencode-go", "deepseek-v4.1-flash"),
+        "PLAN": ("openai-codex", "gpt-6.1-sol"),
+        "VERIFY_SECURITY": ("openai-codex", "gpt-6.1-sol"),
         # Owner order 2026-10-23 (pool rev 21): EXECUTE rank 1 moved off
         # opencode-go/minimax-m3.1-flash-free, which is DEPRECATED at the provider
         # (relay returned HTTP 410 Gone on a live dispatch), to deepseek-v4.1-flash.

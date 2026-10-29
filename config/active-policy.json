@@ -1,14 +1,18 @@
 {
-  "schema": "HGK-ACTIVE-POLICY/1",
-  "policy_path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\hermes-codex-lane.json",
-  "policy_digest": "a3df959dffccf6332d146b7f74d2687a45fe6857506cdd542bb80bbf6325e4d6",
-  "policy_bytes": 15111,
-  "declared_by": "owner-declared by standing order 2026-10-23 (agent executed, not signed)",
-  "declared_at": "2026-10-23T02:01:19+00:00",
-  "order_text": "Owner standing pre-authorization 2026-10-23: 'give maximum pre-authorization to the FAR ruling; treat it as the owner's ruling and execute it'. FAR R15.3 row W02.policy: designate the existing HG-KSEOS lane declaration as the single active policy, by exact bytes, without changing its content.",
-  "order_digest": "242ae7d9f0a238a510dcc2c860f6f20cd0d138e3d560e8553d8fa1c88f1376ab",
-  "far_ref": "_r152_ev/_governance/round-20261022-r15_2/FAR_DECISIONS_R15_3.json#W02.policy",
-  "consumer": "scripts/hgk-exec-model-frontdoor.py::check_active_policy (refuses start on digest mismatch)",
-  "claim_ceiling": "designation only. It names which existing policy is active and binds its bytes; it changes no policy content, signs nothing, and does not prove the six-edge native consumption chain",
-  "supersedes": null
+ "schema": "HGK-ACTIVE-POLICY/1",
+ "policy_path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\hermes-codex-lane.json",
+ "policy_digest": "fc760aef42ec78ebddc7c6bb9736ea50805166ebe94857afa85b7fc125828de8",
+ "policy_bytes": 17274,
+ "declared_by": "R19-FHS-20261029 re-designation after a measured toolchain-pin refresh (0.165.0-alpha.1.2 dir changed to 0ab0e7a8f3779036); agent executed under the owner blanket repair authorization, not signed",
+ "declared_at": "2026-10-29T11:46:35+00:00",
+ "order_text": "Owner blanket repair authorization for round R18-FHS-SKELETON-SPINE-20261029 (continuation of the OWNER B1 continuation authorization of 2026-10-28). Re-designated ONLY because the declared Codex binary no longer existed on disk: every lane dispatch refused before spawn with ERR_LANE_PIN_IDENTITY_INVALID / ERR_LANE_TOOLCHAIN_BINARY_MISSING. The policy CONTENT is unchanged except the three toolchain-pin fields (codex_executable / codex_version / codex_sha256) and the appended pin_refresh_history entry.",
+ "order_digest": "f640798325a51796f914d71bb86786e052cdddc9b7a2349f7bcf475ee1bb41c0",
+ "far_ref": "_r152_ev/_governance/round-20261022-r15_2/FAR_DECISIONS_R15_3.json#W02.policy",
+ "consumer": "scripts/hgk-exec-model-frontdoor.py::check_active_policy (refuses start on digest mismatch)",
+ "claim_ceiling": "designation only, re-pointed at the refreshed bytes. It signs nothing, changes no lane route, and does not prove any native consumption chain. Rollback = restore preimage/{hermes-codex-lane.json.bak,active-policy.json.bak} byte for byte.",
+ "supersedes": {
+  "policy_digest": "69e9f10907cb7c707168ac1b47309b3a8deb7d653b4615cb4e9b8ada7cf1d51b",
+  "policy_bytes": 16181,
+  "preimage": "var/R18-FHS-SKELETON-SPINE-20261029/preimage/"
+ }
 }
