@@ -233,3 +233,22 @@ r2-revision2 bytes          = UNMODIFIED (85/85 hashes re-measured by an indepen
 Nothing here says "the package is accepted". It says: the archive validates, its own integrity lists are
 now verified rather than decorative, the repairs are digest-gated, an independent lane read it and found
 no disagreement it could substantiate, and everything still open is enumerated with the reader it needs.
+
+---
+
+## §9 Closure round (owner-authorized, 2026-10-29) — `CLOSURE_ROUND.md`
+
+The FAR closure plan (`analysis/FAR_CLOSURE_AND_PROMOTION_20261029.md`, `analysis/CLOSURE_PLAN.json`) was
+executed under an owner authorization anchored to exact bytes, not to a sentence in a chat log.
+
+| claim | where it is checkable |
+|---|---|
+| A1..A8 machine items executed and re-measured | `CLOSURE_ROUND.md` §1; `tools/evidence_reconcile.py`, `tools/config_drift.py`, `tools/compare_lane_receipts.py`, `tools/render_owner_requests.py`; tests `test_lane_assignment_fallbacks.py` (10), `test_lane_dispatch_r20_gates.py` (11) |
+| 8 owner packets cover all 75 residues exactly once | `owner_requests/OR-1..OR-8` (json+md); verify with `render_owner_requests.py --check` |
+| owner authorization is a real, third-party-verifiable act | `owner_receipts/OWNER_AUTHORIZATION_R20.summary.json` — carries `body_json` + `owner_public_hex`; sha256 + Ed25519 verify with no key file |
+| six falsification rounds, final 6 PASS / 4 HOLD / 0 FAIL | `lane/CLOSURE_VERIFY_R20_R6.json`, `lane/BRIEF_VERIFY_CLOSURE.md`, `var/R20-FHS-20261029/lane/receipts_attempt1_FAIL3.json` |
+| suite carries no failure introduced by this round | `DEFECTS_R20B.json` TT-R20-16; baseline id set `var/R20-FHS-20261029/receipts/BASELINE_FAILED_IDS_6086908.txt`; 0 new ids |
+| subset replay for main review | PR #6, `publish/r20-subset`, `SUBSET_MANIFEST.json` (file_count == measured diff, working-tree blobs) |
+
+Ceilings unchanged and explicit: owner acceptance and external acceptance are **NOT_RUN**; the 75 residues
+stay HOLD until the owner signs; release/tag/merge are the owner's acts and were not performed.
