@@ -1192,6 +1192,16 @@ def lane_assigned_arms(role: str) -> dict:
                               else (fb.strip() if isinstance(fb, str) else None)
                               for fb in (row.get("fallbacks") or [])]
         declared_fallbacks = [f for f in declared_fallbacks if f]
+        # C4/TT-R20-19: the independent VERIFY lane showed my "primary excludes fallbacks" TEST was a
+        # tautology -- it passed identically for the composed code and for a contaminating mutant, because
+        # the old snapshot happened to be taken before the append. A property nothing can violate is not
+        # pinned. So the invariant is now CHECKED AT RUNTIME and a row that declares the same arm as both
+        # primary and fallback is refused, which is the only shape where the two lists can collide.
+        _overlap = sorted(set(primary) & set(fallback))
+        if _overlap:
+            return {"ok": False, "arms": [], "revision": data.get("revision"), "role": label,
+                    "code": "ERR_ASSIGNMENT_PRIMARY_FALLBACK_OVERLAP", "overlap": _overlap,
+                    "detail": f"role {label!r} declares the same arm as primary and fallback: {_overlap}"}
         return {"ok": True, "arms": sorted(set(arms)), "revision": data.get("revision"),
                 "role": label, "authority": row.get("authority"),
                 "shape": "role" if row.get("role") else "lane_group",

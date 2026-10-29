@@ -101,3 +101,25 @@ def test_served_equivalence_does_not_inherit_the_bare_model_rule():
     assert mod.arm_served_equivalent("unlisted-provider/gpt-6.1-sol", "gpt-6.1-sol") is False  # verdict
     assert mod.arm_served_equivalent("desktop_router/gpt-6.1-sol", "openai-codex/gpt-6.1-sol") is True
     assert mod.arm_served_equivalent("opencode-go/gpt-6.1-sol", "openai-codex/gpt-6.1-sol") is False
+
+
+def test_a_row_declaring_the_same_arm_as_primary_and_fallback_is_refused(tmp_path):
+    """C4 / TT-R20-19: the only shape in which the two lists can collide, and the shape that makes the
+    separation falsifiable. A contaminating implementation ('primary = list(arms)' AFTER the fallbacks are
+    appended) collapses this case into a duplicate -- which is exactly why it must be a refusal, not a union."""
+    row = {"role": "VERIFY", "assigned_provider": "openai-codex", "assigned_model": "gpt-6.1-sol",
+           "transport_model": "gpt-6.1-sol", "authority": "test",
+           "fallbacks": ["openai-codex/gpt-6.1-sol"]}
+    got = load_module(write(tmp_path, row)).lane_assigned_arms("VERIFY")
+    assert got["ok"] is False
+    assert got["code"] == "ERR_ASSIGNMENT_PRIMARY_FALLBACK_OVERLAP"
+    assert got["overlap"] == ["openai-codex/gpt-6.1-sol"]
+
+
+def test_disjoint_primary_and_fallback_still_resolve(tmp_path):
+    row = {"role": "VERIFY", "assigned_provider": "openai-codex", "assigned_model": "gpt-6.1-sol",
+           "transport_model": "gpt-6.1-sol", "authority": "test",
+           "fallbacks": [{"provider": "opencode-go", "model": "deepseek-v4.1-flash"}]}
+    got = load_module(write(tmp_path, row)).lane_assigned_arms("VERIFY")
+    assert got["ok"] is True
+    assert not (set(got["primary_arms"]) & set(got["fallback_arms"]))
