@@ -1,0 +1,32 @@
+{
+ "schema": "R19.WP21_ORACLE_RERUN/1",
+ "at": "2026-10-29T11:34:07.979366+00:00",
+ "command": "python -B tools/verify_oracles_v2.py (in an isolated copy of the delivered package)",
+ "scope": "AUTHOR_LOCAL_ORACLE_ENGINE_AND_ACTUAL_PRIVATE_CLI_RAW; NOT_NATIVE_QUALIFICATION",
+ "oracle_cells": 96,
+ "checks": {
+  "passed": 679,
+  "failed": 0
+ },
+ "cell_verdicts": {
+  "PASS_LOCAL_ORACLE": 50,
+  "HOLD": 46,
+  "DENY": 0
+ },
+ "actual_cli_process_invocations": 27,
+ "native_case_pass": 0,
+ "independent_verdict": "NOT_RUN",
+ "recomputed_through": "evaluate() — not read back from the stored fixture",
+ "second_run_identical_on": [
+  "passed",
+  "failed",
+  "oracle_cells",
+  "actual_cli_process_invocations",
+  "positive_cell_verdicts",
+  "native_case_pass",
+  "independent_verdict"
+ ],
+ "second_run_identical": true,
+ "why_it_matters": "the 46 HOLD cells are cells whose calibrated reader / human judge does not exist on this host; they are not DENY and not PASS",
+ "claim_ceiling": "AUTHOR_LOCAL_ORACLE + actual private CLI raw; NOT native qualification, NOT independent acceptance"
+}
