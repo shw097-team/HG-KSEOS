@@ -155,6 +155,31 @@ Two honest readings, both of which belong here:
    re-baselining evidence onto a config the earlier phases never ran against is exactly the move that makes
    receipts decorative.
 
+
+### 6c. The lane receipts' nonce fields contradict their own preserved bytes
+
+Measured on the three unreceipted passes:
+
+```text
+pass   stdout_bytes (recorded)   file bytes   nonce bytes in that file   recorded nonce_present_raw_stdout
+3      184,826                  184,826      True                       False
+4      145,105                  145,105      True                       False
+5      21,443                   21,443       True                       False
+```
+
+The attempt log is written **byte-exact from the captured buffer** (`write_bytes(raw)`), so a plain byte
+search over exactly that buffer cannot be false while the nonce is in the file. A control run of the
+current source against the deterministic stub child (`HGK_STUB_EMIT_NONCE=<the dispatched nonce>`) records
+`nonce_present: true` **and** `nonce_present_raw_stdout: true`, so the source in this branch does not
+reproduce the false negative.
+
+Conclusion, stated at the ceiling the evidence supports: **those three receipts were not produced by this
+source revision's capture path** (an older binary or a different composition path — the front door — is
+the remaining candidate; the producer is *not* identified). Consequence for readers: their `ok: false` and
+their `nonce_*` fields are **not citable evidence either way**; only the verdict documents they wrote
+(`VERDICT_R20D_HOLD.json`, `VERDICT_R20E_PASS_WITH_FINDINGS.json`, `FOCUSED_RECHECK_R20.json`) are, and
+those are advisory by construction. TT-R20-9.
+
 ## 7. Findings that stay open
 
 1. **18/18 stage rows are `ABSENT`** — no machine artifact carries an instance of any stage's output
