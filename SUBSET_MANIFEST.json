@@ -1,13 +1,13 @@
 {
  "schema": "R20.SUBSET_MANIFEST/2",
  "source_branch": "candidate/r19-fhs-implementation",
- "source_commit": "5cb3d3af3bb7b6962397b330d5d837ec585177bf",
+ "source_commit": "79f87e0773e568dc36a70e5a47ce652ab798b8d2",
  "base": "origin/main@f6dfb1e",
- "file_count": 365,
+ "file_count": 366,
  "definition": "file_count = number of paths differing from origin/main on this branch, INCLUDING this manifest itself",
- "synced_from_candidate": 259,
+ "synced_from_candidate": 260,
  "excluded_self": "SUBSET_MANIFEST.json is counted in file_count but not listed in files[] (a file cannot contain its own digest)",
- "files_listed": 364,
+ "files_listed": 365,
  "paths": [
   "scripts",
   "config",
@@ -202,6 +202,11 @@
    "path": "evidence/R20-FHS-20261029/notes/VOID_R2_REPORT.md",
    "blob": "8cff8b1b403a6bd8ca0c1d6d3764753cdf3f02dc",
    "bytes": 1493
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_receipts/OWNER_AUTHORIZATION_R20.summary.json",
+   "blob": "HEAD:evidence/R20-FHS-20261029/owner_receipts/OWNER_AUTHORIZATION_R20.summary.json",
+   "bytes": 9711
   },
   {
    "path": "evidence/R20-FHS-20261029/owner_requests/OR-1.json",
@@ -580,7 +585,7 @@
   },
   {
    "path": "scripts/hgk-lane-dispatch.py",
-   "blob": "9927f0904f08a4379baaa8d9f9117cb88b2f7134",
+   "blob": "2df0a21084f9a4180ddde849cec911a266d226b8",
    "bytes": 181487
   },
   {
@@ -1285,7 +1290,7 @@
   },
   {
    "path": "tests/fixtures/assignment_primary_gpt61.json",
-   "blob": "HEAD:tests/fixtures/assignment_primary_gpt61.json",
+   "blob": "38c79f4b0b34c4ffd19a0b41e77dd2a5be853d0a",
    "bytes": 288
   },
   {
@@ -1465,7 +1470,7 @@
   },
   {
    "path": "tests/test_lane_assignment_fallbacks.py",
-   "blob": "54701b11cc1c26352df527377f80b071edd7ee78",
+   "blob": "08fc63f977c657c0347f5953ffd5c95711061ae0",
    "bytes": 6979
   },
   {
@@ -1540,7 +1545,7 @@
   },
   {
    "path": "tests/test_native_boundaries.py",
-   "blob": "1a00375910e64c5318b7df45e5e921c18dbe0eda",
+   "blob": "80b6be3630f0b89262b343f2a0aa9c838882ec68",
    "bytes": 12402
   },
   {
@@ -1555,7 +1560,7 @@
   },
   {
    "path": "tests/test_r6_artifact_scope.py",
-   "blob": "b5db8f6aed7090078ab021052b74e53f4298fcc3",
+   "blob": "6e3cb8b13acd45f01c9f02eeb469b77c16d20569",
    "bytes": 3198
   },
   {
