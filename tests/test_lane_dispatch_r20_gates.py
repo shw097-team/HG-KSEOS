@@ -174,3 +174,22 @@ def test_missing_explicit_executable_is_a_typed_refusal_not_a_traceback():
     assert rc == 4, body[-1500:]
     assert rec.get("code") == "ERR_CODEX_EXECUTABLE_NOT_FOUND", body[-1500:]
     assert "Traceback" not in body
+
+
+# --- TT-R20-17: the verdict must use the SAME equivalence as the selection -------------------------
+# Measured: a run that selected the required arm through an alias (desktop_router/gpt-6.1-sol for
+# openai-codex/gpt-6.1-sol) served it, spent 210.09 s, and was then refused with
+# ERR_REQUIRED_ARM_NOT_SERVED -- the gate refused the thing it had just selected. A gate that can only
+# accept one spelling of an arm it already matched is a false-red generator, not a control.
+
+def test_arm_equivalent_accepts_the_alias_pairs_the_pool_actually_carries():
+    mod = load_module()
+    assert mod.arm_equivalent("desktop_router/gpt-6.1-sol", "openai-codex/gpt-6.1-sol") is True
+    assert mod.arm_equivalent("openai-codex/gpt-6.1-sol", "desktop_router/gpt-6.1-sol") is True
+    assert mod.arm_equivalent("gpt-6.1-sol", "openai-codex/gpt-6.1-sol") is True
+
+
+def test_arm_equivalent_still_rejects_a_different_model_or_provider():
+    mod = load_module()
+    assert mod.arm_equivalent("opencode-go/deepseek-v4.1-flash", "openai-codex/gpt-6.1-sol") is False
+    assert mod.arm_equivalent("opencode-go/gpt-6.1-sol", "openai-codex/gpt-6.1-sol") is False
