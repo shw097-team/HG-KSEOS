@@ -187,7 +187,8 @@ those are advisory by construction. TT-R20-9.
 2. **46 HOLD cells stay HOLD**, each annotated with the reader class it needs (CALIBRATION 11 /
    HUMAN_DECISION 11 / HUMAN_JUDGE 11 / TWO_VERSION 8 / PERFORMANCE 5) and the next legal action.
 3. **Assignment file lists no fallbacks** (TT-R20-6) — a policy decision, not an agent one.
-4. **Long paths**: 37 of 85 subject paths exceed 260 chars on this host; all work ran from short roots.
+4. **Long paths**: 37 of 85 subject paths exceed 260 chars on this host (max absolute path 289 chars);
+   all work ran from short roots.
 5. `validate.py` rewrites 4 files in the tree it runs in → checksum verification must use a fresh extract.
 
 ## 8. Reproduction
