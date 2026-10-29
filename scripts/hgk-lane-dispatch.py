@@ -96,6 +96,17 @@ DEFAULT_POOL = ROOT / "config/lane-route-slots.candidate.json"
 SPINE_DB = ROOT / "var" / "shared-spine" / "hg-kseos.db"
 SPINE_SCHEMA = ROOT / "src" / "hg_kseos" / "schema.sql"
 DEFAULT_LANE_HOME = Path(os.environ.get("LOCALAPPDATA", "")) / "HG-KSEOS" / "codex-hermes"
+# R20 P3 (D7): the pool is a routing table, the assignment is the owner's decision. A pool entry that
+# is not in the lane's assignment must not be dispatchable by naming it.
+ASSIGNMENT_FILE = ROOT / "config" / "model-lane-assignment.json"
+ERR_ARM_NOT_IN_ASSIGNMENT = "ERR_ARM_NOT_IN_ASSIGNMENT"
+ERR_ARM_ASSIGNMENT_UNREADABLE = "ERR_ARM_ASSIGNMENT_UNREADABLE"
+ERR_LANE_ASSIGNMENT_NO_ROW = "ERR_LANE_ASSIGNMENT_NO_ROW"
+ERR_NO_ASSIGNED_ARM = "ERR_NO_ASSIGNED_ARM"
+# R20 P3: an OAuth relay can only serve from a home that holds the login. The sealed lane home holds
+# none by design, so that pair is a guaranteed 401 AFTER a full model call.
+ERR_SEALED_HOME_OAUTH_TRANSPORT = "ERR_SEALED_HOME_OAUTH_TRANSPORT"
+OAUTH_RELAY_MARKER = "backend-api/codex"
 DEFAULT_USAGE = Path(os.environ.get("LOCALAPPDATA", "")) / "HG-KSEOS" / "opencodex-hermes" / "usage.jsonl"
 DEFAULT_RELAY = "http://127.0.0.1:10101/v1"
 # Sandbox per lane. MEASURED 2026-10-10 (T5 outside the workspace root, T5b/T6 inside it): under
@@ -1027,6 +1038,186 @@ def lane_home_isolation(lane_home, declared_lane_home) -> dict:
             "non_isolated": (not is_declared) and has_auth}
 
 
+def human_oauth_home() -> Path:
+    """The owner's login home, resolved lazily.
+
+    Resolved at CALL time, not import time: a lane child can be started with a minimal environment that
+    has no USERPROFILE, and an import-time Path.home() would then kill the whole dispatcher (measured:
+    it turned 13 unrelated lane-guard tests into no-JSON crashes).
+    """
+    try:
+        return Path.home() / ".codex"
+    except Exception:  # noqa: BLE001 - a missing home must not break the refusal path
+        return Path(os.environ.get("USERPROFILE") or ".") / ".codex"
+
+
+def producer_identity() -> dict:
+    """Identify WHICH source produced this receipt.
+
+    MEASURED (R20b/FAR, TT-R20-9): three receipts recorded ``nonce_present_raw_stdout=false`` while the
+    byte-exact stdout they wrote contained the nonce. A plain byte search cannot be false on the buffer it
+    was handed, and a control run of the current source records both nonce fields true -- so those
+    receipts were produced by some other revision/path, and nothing in them said which. A receipt that
+    cannot name its producer cannot be compared with another receipt.
+    """
+    import hashlib as _h
+    try:
+        _src = _h.sha256(Path(__file__).read_bytes()).hexdigest()
+    except Exception:
+        _src = None
+    _head = None
+    try:
+        import subprocess as _sp
+        _head = _sp.run(["git", "-C", str(Path(__file__).resolve().parent.parent), "rev-parse", "HEAD"],
+                        capture_output=True, text=True, timeout=10).stdout.strip() or None
+    except Exception:
+        _head = None
+    return {"script_sha256": _src, "git_head": _head,
+            "schema": "HGK-LANE-DISPATCH-PRODUCER/1"}
+
+
+def arm_equivalent(a: str, b: str) -> bool:
+    """Two arm labels denote the same served model when one is the provider-qualified form of the other.
+
+    MEASURED (R20b/FAR, TT-R20-11): the assignment file at revision 36 lists the bare alias
+    ``gpt-6.1-sol`` next to ``openai-codex/gpt-6.1-sol``. A strict string comparison therefore either
+    refuses the qualified form or lets the pool order pick a different arm first. Comparison is on the
+    model token only when exactly one side carries a provider; otherwise the full label must match.
+    Deliberately NOT a fuzzy match: no prefix, no case folding beyond lower(), no version guessing.
+    """
+    la, lb = str(a or "").strip().lower(), str(b or "").strip().lower()
+    if not la or not lb:
+        return False
+    if la == lb:
+        return True
+    # A DECLARED alias pair is equivalence. Measured (TT-R20-17): the relay labels an OpenCodex-served
+    # turn provider=desktop_router while the governance identity of that same arm is openai-codex, so a
+    # model-only or string comparison refuses the arm the run just selected. The pair is read from
+    # config/lane-arm-aliases.json rather than inferred, because inference would also equate
+    # opencode-go/gpt-6.1-sol -- a different supply path with the same model name.
+    for _x, _y in _declared_alias_pairs():
+        if {la, lb} == {_x, _y}:
+            return True
+    if ("/" in la) != ("/" in lb):
+        return la.rsplit("/", 1)[-1] == lb.rsplit("/", 1)[-1]
+    return False
+
+
+_ALIAS_CACHE: dict = {}
+
+
+def _declared_alias_pairs() -> list[tuple[str, str]]:
+    """Owner-declared arm alias pairs. Unreadable/absent file means NO aliases (fail-closed)."""
+    if "pairs" in _ALIAS_CACHE:
+        return _ALIAS_CACHE["pairs"]
+    pairs: list[tuple[str, str]] = []
+    try:
+        doc = json.loads((Path(__file__).resolve().parent.parent / "config" / "lane-arm-aliases.json")
+                         .read_text(encoding="utf-8"))
+        for row in doc.get("pairs") or []:
+            if isinstance(row, (list, tuple)) and len(row) == 2:
+                pairs.append((str(row[0]).strip().lower(), str(row[1]).strip().lower()))
+    except Exception:
+        pairs = []
+    _ALIAS_CACHE["pairs"] = pairs
+    return pairs
+
+
+def arm_served_equivalent(served: str, required: str) -> bool:
+    """Stricter than arm_equivalent: used for the VERDICT, never for the SELECTION.
+
+    MEASURED (independent VERIFY, C11): arm_equivalent('unlisted-provider/gpt-6.1-sol', 'gpt-6.1-sol')
+    is true through the bare-model rule, so a BARE --require-arm would accept a serve from a provider
+    nobody declared. Selection may stay lenient (the pool entry it selected already carries the provider);
+    the verdict may not. Here only an exact match or an owner-DECLARED alias pair is equivalence.
+    """
+    ls, lr = str(served or "").strip().lower(), str(required or "").strip().lower()
+    if not ls or not lr:
+        return False
+    if ls == lr:
+        return True
+    for x, y in _declared_alias_pairs():
+        if {ls, lr} == {x, y}:
+            return True
+    return False
+
+
+def lane_assigned_arms(role: str) -> dict:
+    """R20 P3: which arms the owner's assignment actually gives this lane.
+
+    Reads config/model-lane-assignment.json (schema HGK-MODEL-LANE-ASSIGNMENT/1). Two shapes exist on
+    this host (measured: rev 33 keys rows by `lane_group` and lists `non_default_alternates`; rev 35 keys
+    them by `role`), so both are accepted. The assigned provider/model pair, the declared transport_model
+    and every non-default alternate are selectable; an alternate is owner-listed and never auto-selected,
+    so naming one with --require-arm is explicit operator selection rather than a violation. An arm that
+    appears nowhere in the file is NOT an assignment, whatever the pool says -- a pool edit must not be
+    equivalent to a routing decision.
+    """
+    try:
+        data = json.loads(ASSIGNMENT_FILE.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001 - a raising gate must become a typed refusal
+        return {"ok": False, "arms": [], "revision": None,
+                "detail": f"cannot read {ASSIGNMENT_FILE}: {type(exc).__name__}: {exc}"}
+    want = str(role).upper()
+    for row in data.get("assignment") or []:
+        label = row.get("role") or row.get("lane_group")
+        if str(label or "").upper() != want:
+            continue
+        # C4/TT-R20-18: primary is COMPOSED, not snapshotted. A `primary = list(arms)` taken before the
+        # fallbacks are appended is correct only by ordering -- one later `arms.append` above it silently
+        # contaminates the owner's decision with an operator fallback. Composed here, the two lists cannot
+        # share an element by accident, and a test can assert that directly.
+        primary = []
+        prov, model = row.get("assigned_provider"), row.get("assigned_model")
+        if prov and model:
+            primary.append(f"{prov}/{model}")
+        if row.get("transport_model"):
+            primary.append(str(row["transport_model"]))
+        arms = list(primary)
+        fallback = []
+        for alt in row.get("non_default_alternates") or []:
+            if alt.get("provider") and alt.get("model"):
+                fallback.append(f"{alt['provider']}/{alt['model']}")
+        # FAR A4 / TT-R20-6: a declared fallback chain must be REPRESENTABLE, otherwise strict selection
+        # has no lawful way to degrade and an operator either edits the pool (silently rewriting the
+        # assignment) or disables strictness. Accept `fallbacks` as provider/model strings or objects.
+        for fb in row.get("fallbacks") or []:
+            if isinstance(fb, dict) and fb.get("provider") and fb.get("model"):
+                fallback.append(f"{fb['provider']}/{fb['model']}")
+            elif isinstance(fb, str) and "/" in fb:
+                fallback.append(fb.strip())
+        arms.extend(fallback)
+        declared_fallbacks = [str(fb.get("provider")) + "/" + str(fb.get("model"))
+                              if isinstance(fb, dict) and fb.get("provider") and fb.get("model")
+                              else (fb.strip() if isinstance(fb, str) else None)
+                              for fb in (row.get("fallbacks") or [])]
+        declared_fallbacks = [f for f in declared_fallbacks if f]
+        # C4/TT-R20-19: the independent VERIFY lane showed my "primary excludes fallbacks" TEST was a
+        # tautology -- it passed identically for the composed code and for a contaminating mutant, because
+        # the old snapshot happened to be taken before the append. A property nothing can violate is not
+        # pinned. So the invariant is now CHECKED AT RUNTIME and a row that declares the same arm as both
+        # primary and fallback is refused, which is the only shape where the two lists can collide.
+        # C4/TT-R20-20: the checker showed an EXACT-STRING overlap check misses case variants and
+        # declared aliases (primary openai-codex/gpt-6.1-sol vs fallback desktop_router/gpt-6.1-sol are the
+        # same arm). Overlap is therefore decided with the same equivalence the verdict uses.
+        _overlap = sorted({p_ for p_ in primary for f_ in fallback if arm_served_equivalent(p_, f_)} )
+        if _overlap:
+            return {"ok": False, "arms": [], "revision": data.get("revision"), "role": label,
+                    "code": "ERR_ASSIGNMENT_PRIMARY_FALLBACK_OVERLAP", "overlap": _overlap,
+                    "detail": f"role {label!r} declares the same arm as primary and fallback: {_overlap}"}
+        return {"ok": True, "arms": sorted(set(arms)), "revision": data.get("revision"),
+                "role": label, "authority": row.get("authority"),
+                "shape": "role" if row.get("role") else "lane_group",
+                "primary_arms": sorted(set(primary)),
+                "primary_source": "assigned_provider/assigned_model + declared transport_model only",
+                "fallback_arms": sorted(set(fallback)),
+                "declared_fallbacks": sorted(set(declared_fallbacks)),
+                "fallbacks_declared": bool(declared_fallbacks),
+                "alternates_are_operator_selectable": bool(row.get("non_default_alternates") or declared_fallbacks)}
+    return {"ok": False, "arms": [], "revision": data.get("revision"),
+            "detail": f"no assignment row for role {role!r} in {ASSIGNMENT_FILE}"}
+
+
 def home_isolation_fields(args) -> dict:
     """FIX 3/4 (C3): the resolved-home verdict EVERY receipt carries, computed from one place.
 
@@ -1338,6 +1529,7 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
     # nonce, so the count recorded on this attempt describes exactly this turn's carrier read.
     reset_carrier_surrogate_count()
     nonce_ok = nonce_in_agent_message(out_b, args.nonce) and nonce_raw
+    _producer = producer_identity()
     carrier_surrogate = carrier_surrogate_count()
 
     # H5 (pass-4 checker) + S3: a wrongly-shaped carrier must produce a TYPED refusal rather than an
@@ -1417,6 +1609,12 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
             "transport_model": entry["transport_model"], "sandbox": sandbox,
             "reasoning_effort": entry.get("reasoning_effort"), "exit": rc, "timed_out": timed_out,
             "seconds": dur, "nonce_present": nonce_ok, "nonce_present_raw_stdout": nonce_raw,
+            # A2 (TT-R20-9): separated semantics -- one field says the nonce appears ANYWHERE in the
+            # captured bytes, another says it appeared in an assistant message. Neither one widens
+            # `ok`; `nonce_present` above still requires the strict carrier.
+            "nonce_present_anywhere": nonce_raw,
+            "nonce_in_agent_message": nonce_in_agent_message(out_b, args.nonce),
+            "producer": _producer,
             "nonce_source": "item.completed/agent_message",
             "usage_rows_after_offset": len(rows), "usage_offset": offset,
             "usage_provider": (matched or {}).get("provider"), "usage_model": (matched or {}).get("model"),
@@ -1559,6 +1757,10 @@ def main() -> int:
     ap.add_argument("--require-arm", default=None,
                     help="provider/model that MUST survive the gate; if it is refused the run fails closed "
                          "instead of silently degrading to another arm (owner ruling: keep the OAuth arm unattended)")
+    ap.add_argument("--require-assigned-arms", action="store_true", dest="require_assigned_arms",
+                    help="selection-time strictness: only arms named in config/model-lane-assignment.json "
+                         "for this lane may serve; if none is available the run refuses with "
+                         "ERR_NO_ASSIGNED_ARM instead of falling back to an unassigned pool arm")
     ap.add_argument("--guard-subject", action="append", default=None,
                     help="file/dir whose digest must not change during the turn (repeatable). removed/changed "
                          "=> the verdict is VOID; this is what makes an escalated-sandbox checker safe")
@@ -1647,6 +1849,11 @@ def main() -> int:
                     help="Shared Spine path used for the --sp-workorder join (default: "
                          "var/shared-spine/hg-kseos.db). Operator/test seam.")
     args = ap.parse_args()
+    # A2/TT-R20-9: identity of THIS source must ride on the receipt it produces. Defined here, in
+    # main(), because the receipt assembly also lives here -- a module-level or attempt-scoped binding
+    # left `_producer` undefined on every path that never ran an attempt (NameError at emit time),
+    # which is how 61 previously-green tests turned red the moment the field was added.
+    _producer = producer_identity()
 
     # ---- Tranche A/B: resolve the persisted per-round role binding (pre-spawn, fail-closed) ------
     # The required ARM and RANK for this lane are DERIVED from the SAME persisted binding document, so
@@ -2034,6 +2241,94 @@ def main() -> int:
                                                        "failing closed instead of silently running a "
                                                        "different arm"))
 
+    # ---- fail-closed arm-assignment gate (pre-spawn) ---------------------------------------------
+    # R20 P3 (D7): the pool is a routing table, not the decision. An arm can sit in the pool from an
+    # earlier epoch while the owner's assignment for this lane names a different one; naming the
+    # stale arm explicitly must not be dispatchable, otherwise editing the pool silently rewrites the
+    # assignment. Runs AFTER the pool-membership check so an arm that is absent from the pool keeps its
+    # more specific ERR_LANE_REQUIRED_ARM_ABSENT refusal.
+    if args.require_arm:
+        asg = lane_assigned_arms(args.lane)
+        if not asg["ok"]:
+            _code = (ERR_LANE_ASSIGNMENT_NO_ROW if "no assignment row" in str(asg.get("detail"))
+                     else ERR_ARM_ASSIGNMENT_UNREADABLE)
+            return emit_refusal(args, refusal_body(args.lane, _code,
+                asg.get("detail"), lane_assignment=asg,
+                say="refusing before any spawn: the lane assignment could not be read, so no arm can "
+                    "be shown to be the assigned one"))
+        if str(args.require_arm) not in asg["arms"]:
+            return emit_refusal(args, refusal_body(args.lane, ERR_ARM_NOT_IN_ASSIGNMENT,
+                f"--require-arm {args.require_arm} is not in the {args.lane} assignment "
+                f"(revision {asg['revision']}); assigned: {asg['arms']}",
+                lane_assignment=asg,
+                say="refusing before any spawn: a pool entry is not an assignment; dispatch an "
+                    "assigned arm, or have the owner revise the assignment"))
+
+    # ---- fail-closed transport/home posture gate (pre-spawn) -------------------------------------
+    # R20 P3: an OAuth relay serves only from a home that HOLDS the login. The sealed lane home holds
+    # none by design, so sealing + OAuth is a guaranteed 401 delivered AFTER a full model call --
+    # expensive, slow, and easily misread as "the arm is down". Name the mismatch and print the shape
+    # that works, instead of letting the run discover it.
+    _relay_effective = str(args.relay_base or "")
+    if OAUTH_RELAY_MARKER in _relay_effective.lower() and not (lane_home / "auth.json").is_file():
+        return emit_refusal(args, refusal_body(args.lane, ERR_SEALED_HOME_OAUTH_TRANSPORT,
+            f"--relay-base {_relay_effective} needs an OAuth login, but {str(lane_home)} holds no "
+            f"auth.json (sealed / key-auth home)",
+            transport_posture={"relay_base": _relay_effective, "home_has_auth_json": False,
+                               "home_is_declared_lane_home": home_isolation["codex_home_is_declared_lane_home"]},
+            next_command=(f"--codex-home {human_oauth_home()} --allow-human-home-transport "
+                          f"--relay-base {_relay_effective}"),
+            say="refusing before any spawn: sealed home + OAuth relay is the 401-after-a-full-call "
+                "combination; use the owner's login home with --allow-human-home-transport"))
+
+    # ---- assignment enforcement at SELECTION, not only at naming (R20b, audit finding) -----------
+    # Measured: 9 of 14 pool arms sit outside their lane's assignment, so a naming-only gate left
+    # --force-rank and plain pool order able to dispatch them. Strict mode blocks that; the default
+    # keeps the documented fallback chains but makes an unassigned serving arm VISIBLE (receipt +
+    # WARN), because "silent" is the part that was wrong.
+    # R20b/FAR A8 (TT-R20-11): --require-arm used to be validated only AFTER the model call, so a run
+    # that named openai-codex/gpt-6.1-sol was still served by whatever the pool ranked first (measured:
+    # 350.27s spent on rank-1 deepseek, then ERR_REQUIRED_ARM_NOT_SERVED). A required arm must constrain
+    # the SELECTION, not merely the verdict; if it cannot, refuse before any spawn.
+    selection_filter = {"required_arm": (str(args.require_arm) if args.require_arm else None),
+                        "candidates_before": [f"{e['provider']}/{e['model']}" for e in entries],
+                        "candidates_after": None, "why": None}
+    if args.require_arm:
+        _kept = [e for e in entries
+                 if arm_equivalent(f"{e['provider']}/{e['model']}", str(args.require_arm))]
+        if not _kept:
+            return emit_refusal(args, refusal_body(args.lane, "ERR_REQUIRED_ARM_NOT_IN_POOL",
+                f"--require-arm {args.require_arm} matches no dispatchable candidate after the "
+                f"force-rank filter; candidates were {selection_filter['candidates_before']}",
+                selection_filter=selection_filter, required_arm=str(args.require_arm),
+                say="refusing before any spawn: an unmatched required arm would spend a full model call "
+                    "on a different arm and only then be refused"))
+        entries = _kept
+        selection_filter["candidates_after"] = [f"{e['provider']}/{e['model']}" for e in entries]
+        selection_filter["why"] = "selection constrained by --require-arm (alias-equivalent), not only judged after the call"
+
+    assignment_selection = {"enforced": bool(getattr(args, "require_assigned_arms", False)),
+                            "posture": lane_assigned_arms(args.lane)}
+    if assignment_selection["posture"]["ok"]:
+        _allowed = set(assignment_selection["posture"]["arms"])
+        _outside = [f"{e['provider']}/{e['model']}" for e in entries
+                    if f"{e['provider']}/{e['model']}" not in _allowed]
+        assignment_selection["arms_outside_assignment"] = _outside
+        if assignment_selection["enforced"]:
+            _kept = [e for e in entries if f"{e['provider']}/{e['model']}" in _allowed]
+            assignment_selection["filtered_out"] = _outside
+            if not _kept:
+                return emit_refusal(args, refusal_body(args.lane, ERR_NO_ASSIGNED_ARM,
+                    f"none of this lane's pool arms is in the {args.lane} assignment "
+                    f"(revision {assignment_selection['posture']['revision']}); "
+                    f"assigned: {sorted(_allowed)}",
+                    lane_assignment=assignment_selection,
+                    say="refusing before any spawn: --require-assigned-arms is on and no assigned "
+                        "arm is available in this pool"))
+            entries = _kept
+    else:
+        assignment_selection["arms_outside_assignment"] = None
+
     # ---- non-mutation guard (makes an escalated-sandbox checker safe) --------------------------
     guard_roots = list(args.guard_subject or [])
     # MEASURED (probe E5b): a guard root the native process cannot resolve produced a ZERO-FILE
@@ -2328,6 +2623,18 @@ def main() -> int:
     # refusals (pool/guard/sandbox/identity/authorization) keep their own codes; the pin gate
     # runs immediately before run_candidate, validating the DECLARED pin via the canonical
     # toolchain verifier (existence + version + digest), never duplicating that logic inline.
+    # R20b (TT-R20-7): an explicit --codex-executable BYPASSES the pin gate above, so its existence
+    # was never checked -- a typo surfaced as an uncaught FileNotFoundError from subprocess, with no
+    # refusal body and no receipt. A supplied path is used as given, so it must exist: typed refusal.
+    if args.codex_executable:
+        _ce = os.path.expanduser(str(args.codex_executable))
+        if not os.path.isfile(_ce):
+            return emit_refusal(args, refusal_body(args.lane, "ERR_CODEX_EXECUTABLE_NOT_FOUND",
+                f"--codex-executable does not resolve to a file: {_ce}",
+                codex_executable=_ce,
+                say="refusing before any spawn: an explicitly supplied codex executable is used as given, "
+                    "so it must exist; drop the flag to fall back to the declared pin"))
+
     if not args.codex_executable and not getattr(args, "no_pin_assert", False):
         _pin_probe = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / "hgk-lane-toolchain.py"),
@@ -2461,6 +2768,14 @@ def main() -> int:
         "used_transport_model": used["transport_model"] if used else None,
         "used_seconds": used["seconds"] if used else None,
         "generated_utc": datetime.now(UTC).isoformat(),
+        "assignment_posture": assignment_selection,
+        "producer": _producer,
+        "comparison_policy": ("compare two receipts ONLY when producer.script_sha256 is equal; "
+                             "tools/compare_lane_receipts.py refuses otherwise (TT-R20-9)"),
+        "selection_filter": selection_filter,
+        "served_arm_assigned": (None if not assignment_selection["posture"]["ok"] else
+                               (f"{used['provider']}/{used['model']}" in set(assignment_selection["posture"]["arms"])
+                                if used else None)),
         "claim_ceiling": "a pass here proves the Codex-CLI lane served this turn through the relay with a matching usage receipt; it is not an acceptance of any subject",
     }
     receipt["ok"] = used is not None
@@ -2487,6 +2802,10 @@ def main() -> int:
         # only those fall back to the generic exhausted code.
         receipt.update(failure_disposition(attempts))
     if used is not None and args.require_arm:
+        # TT-R20-17: the SELECTION accepts an alias-equivalent arm (desktop_router/gpt-6.1-sol for
+        # openai-codex/gpt-6.1-sol), so the VERDICT must use the same equivalence. Comparing the pair with
+        # `!=` after filtering with arm_equivalent made every aliased run end ERR_REQUIRED_ARM_NOT_SERVED
+        # even though the required arm had served: a gate that refuses the thing it just selected.
         # Always record the pair positively, so a passing receipt also states WHICH arm served.
         receipt["required_arm"] = str(args.require_arm)
         receipt["served_arm"] = served_arm_of(used["provider"], used["model"])
@@ -2495,7 +2814,7 @@ def main() -> int:
             # degrade into a model-only comparison (challenge V04, item 6).
             receipt["ok"] = False
             receipt["code"] = "ERR_ARM_IDENTITY_UNQUALIFIED"
-        elif receipt["served_arm"] != str(args.require_arm):
+        elif not arm_served_equivalent(receipt["served_arm"], str(args.require_arm)):
             # Surviving the gate is not the guarantee; BEING SERVED is. Without this, a run could pass
             # the required arm's gate and then serve a different arm after a runtime failure, reporting
             # ok:true (hostile-review F11).
@@ -2547,6 +2866,14 @@ def main() -> int:
         out = Path(args.json_out)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(receipt, indent=2, ensure_ascii=False), encoding="utf-8")
+    # R20b: an unassigned arm may not serve SILENTLY. Detection is always on; --require-assigned-arms
+    # turns it into a refusal. Placed on the SUCCESS path, where a serving arm actually exists.
+    _ap = receipt.get("assignment_posture") or {}
+    if _ap.get("posture", {}).get("ok") and receipt.get("served_arm_assigned") is False:
+        print(f"WARN_LANE_SERVED_UNASSIGNED_ARM: {receipt.get('served_arm')} is not in the "
+              f"{args.lane} assignment (revision {_ap['posture'].get('revision')}); "
+              f"assigned: {_ap['posture'].get('arms')} -- pass --require-assigned-arms to make this refuse",
+              file=sys.stderr)
     print(json.dumps(receipt, indent=2, ensure_ascii=False))
     return 0 if receipt["ok"] else 3
 

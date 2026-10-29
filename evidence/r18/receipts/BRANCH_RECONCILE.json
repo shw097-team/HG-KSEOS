@@ -1,0 +1,51 @@
+{
+ "schema": "R18.BRANCH_RECONCILE/1",
+ "delivery_tip": {
+  "branch": "candidate/r18-openspec-only",
+  "sha": "b2159b094dc21ced8fcf3fe877adb913eaa3d295"
+ },
+ "other": {
+  "branch": "candidate/r18-fhs-skeleton-spine-20261029",
+  "sha": "190df334532ac5a9c4df7e20155a165098625069"
+ },
+ "actions": [],
+ "other_is_ancestor_of_delivery": false,
+ "delivery_is_ancestor_of_other": false,
+ "verdict": "DIVERGED_NEEDS_OWNER_CHOICE",
+ "keeper": "candidate/r18-openspec-only",
+ "state": "UNRELATED_HISTORIES_NEEDS_OWNER_CHOICE",
+ "measured": {
+  "at": "2026-10-29T07:55:13Z",
+  "a": {
+   "rev": "candidate/r18-openspec-only",
+   "tip": "9f543e5 evidence(r18): terminal state — 22/22 WPs defensible with named owner + next_legal_action + resume_pre",
+   "root_commits": [
+    "a2389c138cf51641c95494c3fa551c249a6c0058"
+   ],
+   "commit_count": 10,
+   "contains_evidence_dir": "evidence/r18",
+   "commit_count_note": "int(); an earlier version of this field used len(stdout.split()) and reported 1 for every branch"
+  },
+  "b": {
+   "rev": "190df33",
+   "tip": "190df33 openspec: add fhs-msc-skeleton-spine-revision2 change + round R18 evidence index",
+   "root_commits": [
+    "ec58a0be385b2b387bb7fb336aceef90259e7a1a"
+   ],
+   "commit_count": 198,
+   "contains_evidence_dir": null,
+   "commit_count_note": "int(); an earlier version of this field used len(stdout.split()) and reported 1 for every branch"
+  },
+  "merge_attempt": "git merge --no-ff 190df33 -> fatal: refusing to merge unrelated histories"
+ },
+ "ruling": "the two branches do not share a root commit, so this is not a divergence that a normal merge can repair. Merging would require --allow-unrelated-histories and would put two independent roots in one tree, which is a delivery decision, not an agent decision. Recommendation: keep candidate/r18-openspec-only as the delivery tip (it carries the evidence/ receipts and PR #4) and mark the other branch SUPERSEDED_BY by its owner. No force-push, no deletion, no unrelated-history merge.",
+ "not_done_by_agent": "marking the other branch superseded, because that writes to a branch I do not own",
+ "root_cause": "candidate/r18-openspec-only is an ORPHAN branch: 10 commits from root a2389c13, sharing no history with the repository. candidate/r18-fhs-skeleton-spine-20261029 is the real lineage: 198 commits from root ec58a0be. That is why there is no merge base and why 'merge' can never repair it.",
+ "plan": [
+  "1. use the 198-commit lineage as the base: branch candidate/r18-delivery from candidate/r18-fhs-skeleton-spine-20261029",
+  "2. apply this round's evidence tree onto it (evidence/r18/ + openspec delta), one commit, no history rewrite",
+  "3. open a PR from candidate/r18-delivery; leave PR #4 in place but state that it rides an orphan branch",
+  "4. the orphan branch is marked SUPERSEDED_BY candidate/r18-delivery by its owner, not deleted and not force-pushed"
+ ],
+ "why_not_done_now": "applying the evidence tree needs a clean checkout of the 198-commit lineage; the current worktree holds the orphan branch"
+}

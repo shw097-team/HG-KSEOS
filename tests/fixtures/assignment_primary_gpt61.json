@@ -1,0 +1,14 @@
+{
+ "schema": "HGK-MODEL-LANE-ASSIGNMENT/1",
+ "revision": 99,
+ "registry_epoch": 99,
+ "assignment": [
+  {
+   "role": "VERIFY",
+   "assigned_provider": "openai-codex",
+   "assigned_model": "gpt-6.1-sol",
+   "transport_model": "gpt-6.1-sol",
+   "authority": "fixture"
+  }
+ ]
+}

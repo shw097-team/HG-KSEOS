@@ -1,0 +1,898 @@
+{
+  "checker": "VERIFY_SECURITY lane / openai-codex gpt-6.1-sol (fresh context)",
+  "subject_mutation": "CLEAN",
+  "claims": [
+    {
+      "id": "C1",
+      "verdict": "PASS",
+      "measured": {
+        "archive_members": 89,
+        "nested_zip_members": []
+      },
+      "note": "Measured shipped archive; unpacked revision3 directory named in brief is absent."
+    },
+    {
+      "id": "C2",
+      "verdict": "PASS",
+      "measured": {
+        "rewritten_rows": 29,
+        "matched": 29,
+        "rows": [
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\AUDIO & PROMPT\\AUDIT_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_實質正文_FULL_DESTRUCTIVE_AUDIT_2026-10-29_r1.md",
+            "expected": "2eb90f7186024d836c8f6323e8059ba6275d27ac87a933aecfb6bd3b274085d9",
+            "actual": "2eb90f7186024d836c8f6323e8059ba6275d27ac87a933aecfb6bd3b274085d9",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\AUDIO & PROMPT\\CODEX_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_升級修補版_產出指令_2026-10-29_r2.md",
+            "expected": "a780248c4df9702ca1c9d1db471f0e4c2463f10b2468826092cb4ddb0977f5e6",
+            "actual": "a780248c4df9702ca1c9d1db471f0e4c2463f10b2468826092cb4ddb0977f5e6",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\AUDIO & PROMPT\\CODEX_薄PROMPT_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_升級修補_2026-10-29_r2.md",
+            "expected": "4bb39db18e2cb539790eaff8eabcadb0ed217bf021e92b11b55b888213f3f27d",
+            "actual": "4bb39db18e2cb539790eaff8eabcadb0ed217bf021e92b11b55b888213f3f27d",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\COVERAGE_REPORT.md",
+            "expected": "a7eba4b9eef0a2575d2ad35c38705fd8ec3ca60e1759566fa73705b44a6dc69d",
+            "actual": "a7eba4b9eef0a2575d2ad35c38705fd8ec3ca60e1759566fa73705b44a6dc69d",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\INDEX.md",
+            "expected": "f2900d20a0b64404ca4ee4baadc3b5b221402fb91f268bf405ae725517080fcd",
+            "actual": "f2900d20a0b64404ca4ee4baadc3b5b221402fb91f268bf405ae725517080fcd",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\MANIFEST.md",
+            "expected": "87c8194e0cd81f50fe69c7adc175ff58759eca906fb62a8fb4c3e816852d1f06",
+            "actual": "87c8194e0cd81f50fe69c7adc175ff58759eca906fb62a8fb4c3e816852d1f06",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\README.md",
+            "expected": "60b7f2611786d2268dee7051203150c9056c39b5a61536f0e3e064c04a464e63",
+            "actual": "60b7f2611786d2268dee7051203150c9056c39b5a61536f0e3e064c04a464e63",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\00_INDEX_AND_DECISION.md",
+            "expected": "1c79d52259b40182d976b8a949c81e12f9b57be636ef0756844dfc5fc334bc18",
+            "actual": "1c79d52259b40182d976b8a949c81e12f9b57be636ef0756844dfc5fc334bc18",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+            "expected": "97fd4aba184f55889baf8f2aa8725b4df5c752148240ce835a1fd760c50bd850",
+            "actual": "97fd4aba184f55889baf8f2aa8725b4df5c752148240ce835a1fd760c50bd850",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+            "expected": "92bae9db228b4a8052e38761f5a29692c33d116add96338922d4e14d7257ddb1",
+            "actual": "92bae9db228b4a8052e38761f5a29692c33d116add96338922d4e14d7257ddb1",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\03_ARCHITECTURE_ABI_AND_EFFECT.md",
+            "expected": "f3fb530f5c64187aa74884299c1b2471a9191b6ed17cf9146de6e1a8bc8c5efd",
+            "actual": "f3fb530f5c64187aa74884299c1b2471a9191b6ed17cf9146de6e1a8bc8c5efd",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\04_FABRIC_HGK_CONTROL.md",
+            "expected": "2c5b849d8e663d893169359b52c80e6203cde8766ce6ab19d4802d02f6eaecdc",
+            "actual": "2c5b849d8e663d893169359b52c80e6203cde8766ce6ab19d4802d02f6eaecdc",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+            "expected": "2aed27ca1cc2f27f6f83880040206208428227c7f88450ac5b357dc28b54f89d",
+            "actual": "2aed27ca1cc2f27f6f83880040206208428227c7f88450ac5b357dc28b54f89d",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\06_FHS_EXECUTE_HERMES_RUNTIME.md",
+            "expected": "78746ae16deee8532c19f90d06505ad88f71788ecd7f360924a4b442fea50388",
+            "actual": "78746ae16deee8532c19f90d06505ad88f71788ecd7f360924a4b442fea50388",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\07_ACCEPTANCE_CHALLENGE.md",
+            "expected": "a1834709d6278033e4f0653a8364a840422785b27ddb86f0a64d54adad6bad5e",
+            "actual": "a1834709d6278033e4f0653a8364a840422785b27ddb86f0a64d54adad6bad5e",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+            "expected": "d810e97cef8eb31be439ba168f47b766ca011b5c4b414d2affa26b4d1f663713",
+            "actual": "d810e97cef8eb31be439ba168f47b766ca011b5c4b414d2affa26b4d1f663713",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\09A_R15_949_ORIGINAL_ATOMS.md",
+            "expected": "e5e3da2e070c61d0e3deeb5c1fea8a674af7634993b2612c4c4bb329a5e2e82c",
+            "actual": "e5e3da2e070c61d0e3deeb5c1fea8a674af7634993b2612c4c4bb329a5e2e82c",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\09B_KIND_MODE_HOST_192.md",
+            "expected": "41cdd5e5ab16bc2b44ab47155e6cd09e81eef98c56753ae7dd03d0484385a4cd",
+            "actual": "41cdd5e5ab16bc2b44ab47155e6cd09e81eef98c56753ae7dd03d0484385a4cd",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\09_SBL_DOC00_13_FULL_UPGRADE.md",
+            "expected": "2f5ff0ddde499ee84ef844bc1ec5b3a6b5d697ac9279839854f932e0aa013b7d",
+            "actual": "2f5ff0ddde499ee84ef844bc1ec5b3a6b5d697ac9279839854f932e0aa013b7d",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\10A_B1_TQAEP_120_124_38.md",
+            "expected": "a3233c665420b56f6317ed43875c681d22f1558a3c875e3f61d1a163e82a6a86",
+            "actual": "a3233c665420b56f6317ed43875c681d22f1558a3c875e3f61d1a163e82a6a86",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\10B_B1_PI27_PD31.md",
+            "expected": "f53c0a09f4f2de1a48a184ff4fcd1ee61ee8fb2c35eb864869d6f277e7222b3e",
+            "actual": "f53c0a09f4f2de1a48a184ff4fcd1ee61ee8fb2c35eb864869d6f277e7222b3e",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\10_B1_W18_SELF_BOOTSTRAP.md",
+            "expected": "24815475eb097446b4e6a6953a4fe649c6404a8c8232727e192e437bd9542002",
+            "actual": "24815475eb097446b4e6a6953a4fe649c6404a8c8232727e192e437bd9542002",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\11_WORKPACKAGES_AND_DAG.md",
+            "expected": "e3be4f8321e71caf12331f175538e9b9909d5bf9cfcbb4f93eafa9327c4498ab",
+            "actual": "e3be4f8321e71caf12331f175538e9b9909d5bf9cfcbb4f93eafa9327c4498ab",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\12_VERIFICATION_AND_DELIVERY.md",
+            "expected": "6dfefc3fd590baa5d94b8b65955840bad462fef5ebdbe6c7273a9fba8c247ac7",
+            "actual": "6dfefc3fd590baa5d94b8b65955840bad462fef5ebdbe6c7273a9fba8c247ac7",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E01_SOURCE_MANIFEST_AND_SEARCH.md",
+            "expected": "3cdcaf999771df3913b8f4363c668eac8b0b69447387b70f0d4b43e2f57d0431",
+            "actual": "3cdcaf999771df3913b8f4363c668eac8b0b69447387b70f0d4b43e2f57d0431",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E02_REQUIREMENT_TRACE_AND_DENOMINATORS.md",
+            "expected": "b06d2112cb1e801031a1e5403ee826f2f7d895e4c08fe608e0287f9abf79510b",
+            "actual": "b06d2112cb1e801031a1e5403ee826f2f7d895e4c08fe608e0287f9abf79510b",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E03_ABI_SCHEMAS_AND_FIXTURE_AUDIT.md",
+            "expected": "d812d4eedf67cbffe3aeb125fad1fade472f65a4aab6d3beebb1876b66900daa",
+            "actual": "d812d4eedf67cbffe3aeb125fad1fade472f65a4aab6d3beebb1876b66900daa",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E04_CONFLICT_RCA_ADOPTION_AND_HOLDS.md",
+            "expected": "4eaa529e268e1a54e4f563b2f45d99cd00bcc345acc5bd79c2b7c64382e7cc88",
+            "actual": "4eaa529e268e1a54e4f563b2f45d99cd00bcc345acc5bd79c2b7c64382e7cc88",
+            "match": true,
+            "error": null
+          },
+          {
+            "path": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E05_QA_READBACK_AND_CLAIM_CEILING.md",
+            "expected": "72cb158d427b781e7309be41b07a2b41617bc325835a6433d908ed5494f383f7",
+            "actual": "72cb158d427b781e7309be41b07a2b41617bc325835a6433d908ed5494f383f7",
+            "match": true,
+            "error": null
+          }
+        ]
+      },
+      "note": ""
+    },
+    {
+      "id": "C3",
+      "verdict": "PASS",
+      "measured": {
+        "revision3": {
+          "returncode": 0,
+          "passed": 2789,
+          "failed": 0,
+          "failures": [],
+          "scope": "AUTHOR_STATIC_FIXTURES_ONLY"
+        },
+        "baseline": {
+          "returncode": 1,
+          "passed": 2788,
+          "failed": 1,
+          "failures": [
+            {
+              "case_id": "SOURCE-BYTES-UNCHANGED",
+              "scope": "AUTHOR_STATIC",
+              "expected": true,
+              "actual": false,
+              "status": "FAIL",
+              "elapsed_ms": 0.012
+            }
+          ],
+          "scope": "AUTHOR_STATIC_FIXTURES_ONLY"
+        }
+      },
+      "note": "Executed exact python -B tools/validate.py on hash-verified scratch copies; dependencies available."
+    },
+    {
+      "id": "C4",
+      "verdict": "PASS",
+      "measured": {
+        "baseline_shipped": {
+          "passed": 2789,
+          "failed": 0
+        },
+        "baseline_fresh": {
+          "returncode": 1,
+          "passed": 2788,
+          "failed": 1,
+          "failures": [
+            {
+              "case_id": "SOURCE-BYTES-UNCHANGED",
+              "scope": "AUTHOR_STATIC",
+              "expected": true,
+              "actual": false,
+              "status": "FAIL",
+              "elapsed_ms": 0.012
+            }
+          ],
+          "scope": "AUTHOR_STATIC_FIXTURES_ONLY"
+        }
+      },
+      "note": ""
+    },
+    {
+      "id": "C5",
+      "verdict": "PASS",
+      "measured": {
+        "rows": 46,
+        "fixture_cells": 96,
+        "hold_cells": 46,
+        "missing": [],
+        "extra_or_relabelled": [],
+        "duplicate_ids": 0,
+        "metadata_mismatches": []
+      },
+      "note": "Compared actual_positive verdicts and cell/source metadata, not just declared expected verdicts."
+    },
+    {
+      "id": "C6",
+      "verdict": "PASS",
+      "measured": {
+        "rows": 18,
+        "distinct_stages": 18,
+        "statuses": {
+          "ABSENT": 18
+        }
+      },
+      "note": "All 18 rows explicitly ABSENT; no positive machine-evidence claims require opening an artifact."
+    },
+    {
+      "id": "C7",
+      "verdict": "PASS",
+      "measured": {
+        "archive_entries": 89,
+        "extracted_files": 89,
+        "denominator_files": 89,
+        "denominator_zip_entries": 89,
+        "nested_zip_members": [],
+        "archive_sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+        "sidecar_sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+        "rebuilt_sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f"
+      },
+      "note": "Rebuilt from a pristine, hash-verified scratch tree using sorted names, fixed 1980 timestamp, deflate, and mode 0644. Original unpacked revision3 tree is absent; this verifies the delivered archive tree."
+    },
+    {
+      "id": "C8",
+      "verdict": "PASS",
+      "measured": {
+        "rows": 88,
+        "matched": 88,
+        "mismatched": 0,
+        "manifest": {
+          "path": "MANIFEST.md",
+          "expected": "8ece6d7ed10358325451e7322d9aa0a01e50bbfffce5b63341dcab1d479b5b23",
+          "actual": "8ece6d7ed10358325451e7322d9aa0a01e50bbfffce5b63341dcab1d479b5b23",
+          "match": true
+        },
+        "rows_detail": [
+          {
+            "path": "01_BODY/00_INDEX_AND_DECISION.md",
+            "expected": "fee2de9aadd6bb57a4e852bf324438f9541dc2010ce0220a30222287d83f90cf",
+            "actual": "fee2de9aadd6bb57a4e852bf324438f9541dc2010ce0220a30222287d83f90cf",
+            "match": true
+          },
+          {
+            "path": "01_BODY/01_PRODUCT_AUTHORITY_SPINE.md",
+            "expected": "48d3d533b03fb8ded97a67958efb132a4114e6aeaf16a96c5b3fddc472a795cf",
+            "actual": "48d3d533b03fb8ded97a67958efb132a4114e6aeaf16a96c5b3fddc472a795cf",
+            "match": true
+          },
+          {
+            "path": "01_BODY/02_PIPD_LIFECYCLE_AND_TPM.md",
+            "expected": "f8d500ef14cb6c830129081be27f35983bf662b193211b8e1395e59490d3075f",
+            "actual": "f8d500ef14cb6c830129081be27f35983bf662b193211b8e1395e59490d3075f",
+            "match": true
+          },
+          {
+            "path": "01_BODY/03_ARCHITECTURE_ABI_AND_EFFECT.md",
+            "expected": "696083e0db101a2aaa71434aeb4c30edc06d2ff10152c2c80aa37070ee3a518f",
+            "actual": "696083e0db101a2aaa71434aeb4c30edc06d2ff10152c2c80aa37070ee3a518f",
+            "match": true
+          },
+          {
+            "path": "01_BODY/04_FABRIC_HGK_CONTROL.md",
+            "expected": "e8fd5317b76bffe1260aabb25ab39dd3f4a1299ef88057a179de7879cec87747",
+            "actual": "e8fd5317b76bffe1260aabb25ab39dd3f4a1299ef88057a179de7879cec87747",
+            "match": true
+          },
+          {
+            "path": "01_BODY/05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+            "expected": "c8c706e9726888ca4b0e9473d1ecf783ec9d668408e7ff54723c776fd911896c",
+            "actual": "c8c706e9726888ca4b0e9473d1ecf783ec9d668408e7ff54723c776fd911896c",
+            "match": true
+          },
+          {
+            "path": "01_BODY/06_FHS_EXECUTE_HERMES_RUNTIME.md",
+            "expected": "d457b7b0ebd303ae7817516eb61bc82b0a7611030cac3d038ace2339b8b8e652",
+            "actual": "d457b7b0ebd303ae7817516eb61bc82b0a7611030cac3d038ace2339b8b8e652",
+            "match": true
+          },
+          {
+            "path": "01_BODY/07_ACCEPTANCE_CHALLENGE.md",
+            "expected": "5037c52d8bf6d0f2ec6b4b70784f2d1977af02b2d125f4e9b961e2901796f6c0",
+            "actual": "5037c52d8bf6d0f2ec6b4b70784f2d1977af02b2d125f4e9b961e2901796f6c0",
+            "match": true
+          },
+          {
+            "path": "01_BODY/08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+            "expected": "29e1be9a0c602831c27684c944e89063079b2035eb2d97ae0ea4eaa0db680f91",
+            "actual": "29e1be9a0c602831c27684c944e89063079b2035eb2d97ae0ea4eaa0db680f91",
+            "match": true
+          },
+          {
+            "path": "01_BODY/09A_R15_949_ORIGINAL_ATOMS.md",
+            "expected": "198bdcf7c301b1e9162b9d934c73b230fa36ba32201422c5a691b4189151b12b",
+            "actual": "198bdcf7c301b1e9162b9d934c73b230fa36ba32201422c5a691b4189151b12b",
+            "match": true
+          },
+          {
+            "path": "01_BODY/09B_KIND_MODE_HOST_192.md",
+            "expected": "2c38c8e20858570ca7b7d4673e7c08ce9277dd82b63f3c3dce99770998eae773",
+            "actual": "2c38c8e20858570ca7b7d4673e7c08ce9277dd82b63f3c3dce99770998eae773",
+            "match": true
+          },
+          {
+            "path": "01_BODY/09_SBL_DOC00_13_FULL_UPGRADE.md",
+            "expected": "a010b53b26eb5c903c2ca1ad13981d9efb4b2aec46ab930c68ad992d0834728a",
+            "actual": "a010b53b26eb5c903c2ca1ad13981d9efb4b2aec46ab930c68ad992d0834728a",
+            "match": true
+          },
+          {
+            "path": "01_BODY/10A_B1_TQAEP_120_124_38.md",
+            "expected": "dba3759dd32043fdae4be258320d7d57e00f8c7b6c9be7441cfe722202afc449",
+            "actual": "dba3759dd32043fdae4be258320d7d57e00f8c7b6c9be7441cfe722202afc449",
+            "match": true
+          },
+          {
+            "path": "01_BODY/10B_B1_PI27_PD31.md",
+            "expected": "9b2f863ff0b0242b39027fb44f0a4f7fdb8026b65b078f3a58799a011991dc23",
+            "actual": "9b2f863ff0b0242b39027fb44f0a4f7fdb8026b65b078f3a58799a011991dc23",
+            "match": true
+          },
+          {
+            "path": "01_BODY/10_B1_W18_SELF_BOOTSTRAP.md",
+            "expected": "a99a00d3a8bc5493fbe4957a3d3b855f3ef1582b4ba0bc3b36a2c914ac508be6",
+            "actual": "a99a00d3a8bc5493fbe4957a3d3b855f3ef1582b4ba0bc3b36a2c914ac508be6",
+            "match": true
+          },
+          {
+            "path": "01_BODY/11_WORKPACKAGES_AND_DAG.md",
+            "expected": "0f0c226986b5bc57dfba733e5474f2cd95e3b18d6de09ff109a371df405b2172",
+            "actual": "0f0c226986b5bc57dfba733e5474f2cd95e3b18d6de09ff109a371df405b2172",
+            "match": true
+          },
+          {
+            "path": "01_BODY/12_VERIFICATION_AND_DELIVERY.md",
+            "expected": "91835bc51e1767febf0bd014a1e6cbd975b5528fc9c9842a2bd37d3a340a1e10",
+            "actual": "91835bc51e1767febf0bd014a1e6cbd975b5528fc9c9842a2bd37d3a340a1e10",
+            "match": true
+          },
+          {
+            "path": "02_EVIDENCE_APPENDICES/E01_SOURCE_MANIFEST_AND_SEARCH.md",
+            "expected": "9a2eb889efc6196107c98a558c685403b06249aeb359f236f138c6fc99b96654",
+            "actual": "9a2eb889efc6196107c98a558c685403b06249aeb359f236f138c6fc99b96654",
+            "match": true
+          },
+          {
+            "path": "02_EVIDENCE_APPENDICES/E02_REQUIREMENT_TRACE_AND_DENOMINATORS.md",
+            "expected": "7355e0d59280ccb95a544f1c1ffc55e6bbdb6bc5c7f1410a91fe23fcc40e40d3",
+            "actual": "7355e0d59280ccb95a544f1c1ffc55e6bbdb6bc5c7f1410a91fe23fcc40e40d3",
+            "match": true
+          },
+          {
+            "path": "02_EVIDENCE_APPENDICES/E03_ABI_SCHEMAS_AND_FIXTURE_AUDIT.md",
+            "expected": "7c72f2175b173257043b5d1632b0c47ae5ff7a724d879c4a8d56fc3832dd0101",
+            "actual": "7c72f2175b173257043b5d1632b0c47ae5ff7a724d879c4a8d56fc3832dd0101",
+            "match": true
+          },
+          {
+            "path": "02_EVIDENCE_APPENDICES/E04_CONFLICT_RCA_ADOPTION_AND_HOLDS.md",
+            "expected": "fa2b03d94dd8e096fed8d97a906f6c8bbeeebbffd42e4e7006074f14ab22b43f",
+            "actual": "fa2b03d94dd8e096fed8d97a906f6c8bbeeebbffd42e4e7006074f14ab22b43f",
+            "match": true
+          },
+          {
+            "path": "02_EVIDENCE_APPENDICES/E05_QA_READBACK_AND_CLAIM_CEILING.md",
+            "expected": "bf372134dcb99fbc552eaa7de4446f11b31d4a45bd2389b6ec0cc3968c1b9d03",
+            "actual": "bf372134dcb99fbc552eaa7de4446f11b31d4a45bd2389b6ec0cc3968c1b9d03",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/HOLD_DISPOSITION.tsv",
+            "expected": "b549fd57a19d0eb69558490c0e909013fa8de63b0d3b64cf5ebe07f05511d755",
+            "actual": "b549fd57a19d0eb69558490c0e909013fa8de63b0d3b64cf5ebe07f05511d755",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/PACKAGE_DENOMINATOR.json",
+            "expected": "753d7b5a5ae7f3c5bbc54af7db40c075a88322661b3fa6e49e8d3f162ef58de8",
+            "actual": "753d7b5a5ae7f3c5bbc54af7db40c075a88322661b3fa6e49e8d3f162ef58de8",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/STAGE18_TRACE.tsv",
+            "expected": "a0b9f195b751487157ed63a8cb72a5cfff446a4ecd384a82d68f9730f7fcd462",
+            "actual": "a0b9f195b751487157ed63a8cb72a5cfff446a4ecd384a82d68f9730f7fcd462",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/VOID_R2_REPORT.md",
+            "expected": "d0bc70e32e44443f93765dbab1cd3ed83f5d0481b288702b6e0305526ba48aae",
+            "actual": "d0bc70e32e44443f93765dbab1cd3ed83f5d0481b288702b6e0305526ba48aae",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/WORK_REMAINING.md",
+            "expected": "cb28a1f3c00696111278abe5087ae65a08c6d2ae2762b0bd629fdbed8b46939f",
+            "actual": "cb28a1f3c00696111278abe5087ae65a08c6d2ae2762b0bd629fdbed8b46939f",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/acceptance_edges15.json",
+            "expected": "eb3bf698964bfc9723b96a41cf7b8269367c16db7a57bc772d9ae8e5bc9f29b0",
+            "actual": "eb3bf698964bfc9723b96a41cf7b8269367c16db7a57bc772d9ae8e5bc9f29b0",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/asset_sets.json",
+            "expected": "648a66b5d581f25c15f9128b20adf202fe7c5c50e6f2d4710ec26e1e831238bc",
+            "actual": "648a66b5d581f25c15f9128b20adf202fe7c5c50e6f2d4710ec26e1e831238bc",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/author_challenge_scope.md",
+            "expected": "7aa6bef99bc42d6776105725b0357a3ed459675cc5750db70bbc06f0e25f23ef",
+            "actual": "7aa6bef99bc42d6776105725b0357a3ed459675cc5750db70bbc06f0e25f23ef",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/b1_case_specs.json",
+            "expected": "7ac1d82f266035b3974544d8b248a227234e96be89e809139419a92861bdac2c",
+            "actual": "7ac1d82f266035b3974544d8b248a227234e96be89e809139419a92861bdac2c",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/b1_edges31.json",
+            "expected": "2bd4106b31f92c4a9b69e82ec2e7cbf7e73e643ae90de7dcd36e5c8b9c6f4542",
+            "actual": "2bd4106b31f92c4a9b69e82ec2e7cbf7e73e643ae90de7dcd36e5c8b9c6f4542",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/candidate_freeze.json",
+            "expected": "70008ea5c03f8b7fdb444692e9399a627fd29fac9d85b5891e943a4ba24b51f4",
+            "actual": "70008ea5c03f8b7fdb444692e9399a627fd29fac9d85b5891e943a4ba24b51f4",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/cells192.json",
+            "expected": "4399b25a4ee3621e92f1ca76bda7d7c77b3fe17ea8f599c6f12b4ef3aefe3216",
+            "actual": "4399b25a4ee3621e92f1ca76bda7d7c77b3fe17ea8f599c6f12b4ef3aefe3216",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/challenge96.json",
+            "expected": "a12fc410021dbd2524b8a3695a4bfc6f5242092e5199893fe5aff60f0e9f7b78",
+            "actual": "a12fc410021dbd2524b8a3695a4bfc6f5242092e5199893fe5aff60f0e9f7b78",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/children149.json",
+            "expected": "fca4549f84eda0c91f5f3600793f27eef52193be63893cbf02101bd87e8727a8",
+            "actual": "fca4549f84eda0c91f5f3600793f27eef52193be63893cbf02101bd87e8727a8",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/cli_probes.json",
+            "expected": "9c4f4fa5e3a5977825e58a9eb701a6da44dab83929713c17ec369ed3b4f9ba77",
+            "actual": "9c4f4fa5e3a5977825e58a9eb701a6da44dab83929713c17ec369ed3b4f9ba77",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/denominators.json",
+            "expected": "a3d960b2b87218d651252613723120b11207376c6095f6e983c893b00c1b8c7b",
+            "actual": "a3d960b2b87218d651252613723120b11207376c6095f6e983c893b00c1b8c7b",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/document_parse_issues.json",
+            "expected": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "actual": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/encoding_errors.json",
+            "expected": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "actual": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/holds.json",
+            "expected": "be7e88314cb9102cb4dcff305296cf17bb64ee2e76e93498df4325fabd4f48c0",
+            "actual": "be7e88314cb9102cb4dcff305296cf17bb64ee2e76e93498df4325fabd4f48c0",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/isolated_actual_cli.json",
+            "expected": "178f3378cfb82e63669d1407d422e58f1b855e180da326f757ec4cda51616799",
+            "actual": "178f3378cfb82e63669d1407d422e58f1b855e180da326f757ec4cda51616799",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/loss_map.json",
+            "expected": "9c105b73396a9ff3d51bf72f44c8869f314990f5ad087d5c1010824f8102a714",
+            "actual": "9c105b73396a9ff3d51bf72f44c8869f314990f5ad087d5c1010824f8102a714",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/loss_map.md",
+            "expected": "b7fee2b06fbce3cf2ff886aef88938a792e3104ee032d3799e710ef86ef23d53",
+            "actual": "b7fee2b06fbce3cf2ff886aef88938a792e3104ee032d3799e710ef86ef23d53",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/native_abi.json",
+            "expected": "f2d50f8bb839dfef3aadf44910971a810db55f3ab526d0d84a1c68a74e5dc58d",
+            "actual": "f2d50f8bb839dfef3aadf44910971a810db55f3ab526d0d84a1c68a74e5dc58d",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/native_interfaces.json",
+            "expected": "29d53f11fe77ed97b996ce067ee7a9db42e2fded95d523aa0e9b2e6caa437817",
+            "actual": "29d53f11fe77ed97b996ce067ee7a9db42e2fded95d523aa0e9b2e6caa437817",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/native_schema_fixtures.json",
+            "expected": "69608d4759a54ed45dfad1c128da8b1db223a46973dd1f0c9dd1863e7ad38145",
+            "actual": "69608d4759a54ed45dfad1c128da8b1db223a46973dd1f0c9dd1863e7ad38145",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/native_schema_results.json",
+            "expected": "033662fcc39ce02fa916c4cbfb035539fe6018aa965557c876ad88b79d15708f",
+            "actual": "033662fcc39ce02fa916c4cbfb035539fe6018aa965557c876ad88b79d15708f",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/oracle96_semantic_fixtures_v2.json",
+            "expected": "9d5c6f02968cbe123bc395b6dbcc1ad0f7fc58440dae6fe0eaa1edbd9589617c",
+            "actual": "9d5c6f02968cbe123bc395b6dbcc1ad0f7fc58440dae6fe0eaa1edbd9589617c",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/oracle96_semantic_results_v2.json",
+            "expected": "39d18852f94878861387ccc68e580bef189071c4141c532414cb0a60af456258",
+            "actual": "39d18852f94878861387ccc68e580bef189071c4141c532414cb0a60af456258",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/oracle96_verification_v2.json",
+            "expected": "a9ec66f01d0b4c88ce5b904296a30189018d086f8d3b9f19ad44e1c1500da247",
+            "actual": "a9ec66f01d0b4c88ce5b904296a30189018d086f8d3b9f19ad44e1c1500da247",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/oracle96_verification_v2.md",
+            "expected": "5ae40e92bb711b23c29e26607f5d0ae40c4008396ce578668c11bd1af7df5cf2",
+            "actual": "5ae40e92bb711b23c29e26607f5d0ae40c4008396ce578668c11bd1af7df5cf2",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/plugin_invocation.json",
+            "expected": "daa2731bc090792f3edad5d6fba36dfded9ee686963c7efc52e7cdbfe94c7b12",
+            "actual": "daa2731bc090792f3edad5d6fba36dfded9ee686963c7efc52e7cdbfe94c7b12",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/plugin_pi_input_schema.json",
+            "expected": "af5a04e7a63ec4d1412f7f8aa8a54727ee837d89f54d27f972b76724793b7d75",
+            "actual": "af5a04e7a63ec4d1412f7f8aa8a54727ee837d89f54d27f972b76724793b7d75",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/prior_seal.json",
+            "expected": "8b92c8930601a0db3becf3516221aec45591f91816d47a7840a66a25295cbde6",
+            "actual": "8b92c8930601a0db3becf3516221aec45591f91816d47a7840a66a25295cbde6",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/r15_atoms949.json",
+            "expected": "ff69cfc4a09b3e0ba347afbc9ed24f53d47cb6104567a860a877eb0715c6dfce",
+            "actual": "ff69cfc4a09b3e0ba347afbc9ed24f53d47cb6104567a860a877eb0715c6dfce",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/regression_red_patch_round2.json",
+            "expected": "dd73a9bde71b2bfa4780b30c205af41bcd30ab769baa4978de51ddde4d5d68cc",
+            "actual": "dd73a9bde71b2bfa4780b30c205af41bcd30ab769baa4978de51ddde4d5d68cc",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/repair_closure26.json",
+            "expected": "668e01dead23819a607f0d55f9ed547085972e40ec073c6d3c71c0b1bca1f5d8",
+            "actual": "668e01dead23819a607f0d55f9ed547085972e40ec073c6d3c71c0b1bca1f5d8",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/repo_final_readback.json",
+            "expected": "d93d4b8db61f21be08e8708f3e2511063820485c8044f0beeaaf755c529091da",
+            "actual": "d93d4b8db61f21be08e8708f3e2511063820485c8044f0beeaaf755c529091da",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/repo_readback.json",
+            "expected": "524472ea498cabaeb2a5b618ed83735f3305b4212557f1be50149764a2a52082",
+            "actual": "524472ea498cabaeb2a5b618ed83735f3305b4212557f1be50149764a2a52082",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/revision2_integrity_audit.md",
+            "expected": "de7483ad3b80b8315dc86c7972227616f9d5e0b7b2c307b80471a5ad1a5755a4",
+            "actual": "de7483ad3b80b8315dc86c7972227616f9d5e0b7b2c307b80471a5ad1a5755a4",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/runner_bindings.json",
+            "expected": "9c74c7e3315a492233e0addc4814d980280e461318d5f1527101b13ef4facd26",
+            "actual": "9c74c7e3315a492233e0addc4814d980280e461318d5f1527101b13ef4facd26",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/seal_format_checks.md",
+            "expected": "4e9b8c227372187de5a0ba9323bd5bccaa2d771b7a8f7162daad55ba43182799",
+            "actual": "4e9b8c227372187de5a0ba9323bd5bccaa2d771b7a8f7162daad55ba43182799",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/source_alias_map.json",
+            "expected": "a88715dc27fe614d68e3cf9acd4343b160ca9ccc83f3b486442b4a2552fa2601",
+            "actual": "a88715dc27fe614d68e3cf9acd4343b160ca9ccc83f3b486442b4a2552fa2601",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/source_alias_resolution.json",
+            "expected": "d6523bc5131a5e8e5e4a377e07cb0d124d471adffde7bbea043dc67f0b9de971",
+            "actual": "d6523bc5131a5e8e5e4a377e07cb0d124d471adffde7bbea043dc67f0b9de971",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/source_keyword_hits.jsonl",
+            "expected": "89468fc4778d4d7a2a55a3869f5332a443395096f27265dfaa6924642e15a8ea",
+            "actual": "89468fc4778d4d7a2a55a3869f5332a443395096f27265dfaa6924642e15a8ea",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/source_manifest.json",
+            "expected": "beff2590c8f3d780a0e211878aaeb2e87214cfd236369906d804bad6aa96d6d4",
+            "actual": "beff2590c8f3d780a0e211878aaeb2e87214cfd236369906d804bad6aa96d6d4",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/source_recheck.json",
+            "expected": "33dca2e361214a46b73167af047bbe09d40a319d09f816d1eaaff310e00f36eb",
+            "actual": "33dca2e361214a46b73167af047bbe09d40a319d09f816d1eaaff310e00f36eb",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/source_resolution.json",
+            "expected": "0c72781de8befaf703f95ece38321374fcb1796a77c07f51c0271eedd429bfb9",
+            "actual": "0c72781de8befaf703f95ece38321374fcb1796a77c07f51c0271eedd429bfb9",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/source_resolution.md",
+            "expected": "e248c737c70501334af80edf3a5e99b96d2421d38a847c70105a5c6ca54ec293",
+            "actual": "e248c737c70501334af80edf3a5e99b96d2421d38a847c70105a5c6ca54ec293",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/static_red_round1.json",
+            "expected": "6e1e3f0c472a0844e8d258c10c3c2426ec086faa9c03847f31282d3627eeac8a",
+            "actual": "6e1e3f0c472a0844e8d258c10c3c2426ec086faa9c03847f31282d3627eeac8a",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/static_validation_result.json",
+            "expected": "737e7091f54b408a8bdb4dbb1bb09051a465b1121e79cdff4a9692647a168195",
+            "actual": "737e7091f54b408a8bdb4dbb1bb09051a465b1121e79cdff4a9692647a168195",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/static_validation_result.md",
+            "expected": "235cdbe4a501a3bef0214520be1727f2a478a032f8f913b21b2390fe756a67b8",
+            "actual": "235cdbe4a501a3bef0214520be1727f2a478a032f8f913b21b2390fe756a67b8",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/test_matrix.md",
+            "expected": "235cdbe4a501a3bef0214520be1727f2a478a032f8f913b21b2390fe756a67b8",
+            "actual": "235cdbe4a501a3bef0214520be1727f2a478a032f8f913b21b2390fe756a67b8",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/u03_nine_subtests.json",
+            "expected": "7497789914193cfa7b31f2d686ce8944911d800ada6d3ec30aad93d82ae3350f",
+            "actual": "7497789914193cfa7b31f2d686ce8944911d800ada6d3ec30aad93d82ae3350f",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/verification_scope.md",
+            "expected": "e2c84ee07300af798f319debf7e9656242c58d2decf1362b243232cfc5c41c1c",
+            "actual": "e2c84ee07300af798f319debf7e9656242c58d2decf1362b243232cfc5c41c1c",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/verification_scope_revision2.md",
+            "expected": "78773af2c0d2cf3be2568aa8e91868c3b5669ec283ba25667759df1f21fbed28",
+            "actual": "78773af2c0d2cf3be2568aa8e91868c3b5669ec283ba25667759df1f21fbed28",
+            "match": true
+          },
+          {
+            "path": "03_TESTS_AND_READBACK/wp_graph.json",
+            "expected": "48e4e0fff55fd514ab25e11c75b951f34f3ce538c91ea95bb05989be1c585542",
+            "actual": "48e4e0fff55fd514ab25e11c75b951f34f3ce538c91ea95bb05989be1c585542",
+            "match": true
+          },
+          {
+            "path": "COVERAGE_REPORT.md",
+            "expected": "40d080e546e046ba3292a3b3c96a17f0770ea85df54df8cd417441aa80c32021",
+            "actual": "40d080e546e046ba3292a3b3c96a17f0770ea85df54df8cd417441aa80c32021",
+            "match": true
+          },
+          {
+            "path": "INDEX.md",
+            "expected": "34094efb22b222171ded954bd4e4b758a10d028baeeaf0a3b22796e899c17b95",
+            "actual": "34094efb22b222171ded954bd4e4b758a10d028baeeaf0a3b22796e899c17b95",
+            "match": true
+          },
+          {
+            "path": "MANIFEST.md",
+            "expected": "8ece6d7ed10358325451e7322d9aa0a01e50bbfffce5b63341dcab1d479b5b23",
+            "actual": "8ece6d7ed10358325451e7322d9aa0a01e50bbfffce5b63341dcab1d479b5b23",
+            "match": true
+          },
+          {
+            "path": "README.md",
+            "expected": "a02200361f645bb1b096c1252e561230a0d7569179fe7c41de48b9a648d16492",
+            "actual": "a02200361f645bb1b096c1252e561230a0d7569179fe7c41de48b9a648d16492",
+            "match": true
+          },
+          {
+            "path": "REPAIR_CLOSURE_REPORT.md",
+            "expected": "61de444b7eb4f456543eab5500867358df536a2d91913a89d73d0c1e9833b074",
+            "actual": "61de444b7eb4f456543eab5500867358df536a2d91913a89d73d0c1e9833b074",
+            "match": true
+          },
+          {
+            "path": "REVISION3_NOTES.md",
+            "expected": "1a9f9f2b97742532ee4ee54c64b52563d024d31a3ca6629f1dc34f95f164d452",
+            "actual": "1a9f9f2b97742532ee4ee54c64b52563d024d31a3ca6629f1dc34f95f164d452",
+            "match": true
+          },
+          {
+            "path": "tools/author_oracles.py",
+            "expected": "b18023cd8e5b05e29a125451105102bb1472a2c835921d112a9f5cdfc43dc8f7",
+            "actual": "b18023cd8e5b05e29a125451105102bb1472a2c835921d112a9f5cdfc43dc8f7",
+            "match": true
+          },
+          {
+            "path": "tools/source_reader.py",
+            "expected": "023046b950d4e72defb1a0e39a317cee4b2fa67c1f1cb531d472ea4f70dc6fe2",
+            "actual": "023046b950d4e72defb1a0e39a317cee4b2fa67c1f1cb531d472ea4f70dc6fe2",
+            "match": true
+          },
+          {
+            "path": "tools/validate.py",
+            "expected": "c67b511e65539682987e03e52d0e9996fb8d5f6dec0ec10f5401b596854f1917",
+            "actual": "c67b511e65539682987e03e52d0e9996fb8d5f6dec0ec10f5401b596854f1917",
+            "match": true
+          },
+          {
+            "path": "tools/verify_oracles_v2.py",
+            "expected": "ceb126774281668932d1d589c10f9a6337711dbe5079d1eba2bc2861149adf5c",
+            "actual": "ceb126774281668932d1d589c10f9a6337711dbe5079d1eba2bc2861149adf5c",
+            "match": true
+          }
+        ]
+      },
+      "note": "Hashed pristine delivered bytes before any validator rewrites; checksum list is excluded from its own coverage."
+    },
+    {
+      "id": "C9",
+      "verdict": "HOLD",
+      "measured": {
+        "nested_zip_members": [],
+        "archive_sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+        "sidecar_sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+        "matches_sidecar": true,
+        "expected_sha256_in_brief": null
+      },
+      "note": "No *.zip member. BRIEF_VERIFY_R20.md supplies no literal expected archive SHA-256, so equality to a value in the brief cannot be measured. Sidecar equality is independently measured but does not fill the missing brief reference."
+    }
+  ],
+  "disagreements": [
+    "C9 is incomplete: no expected SHA-256 value appears in the supplied brief.",
+    "The brief names an unpacked revision3 package directory that is absent; measurements used the delivered ZIP and hash-verified scratch extractions."
+  ],
+  "overall": "HOLD",
+  "claim_ceiling": "advisory verdict only; not an OracleReceipt and not canonical acceptance",
+  "run_nonce": "5f87478e826aac8d",
+  "subject_integrity": {
+    "zip_sha256_before": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+    "zip_sha256_after": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+    "unchanged": true
+  },
+  "measurement_scope": "All validation executed on scratch copies outside the package; original ZIP and baseline were read only."
+}

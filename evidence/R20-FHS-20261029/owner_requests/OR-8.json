@@ -1,0 +1,106 @@
+{
+ "schema": "R20.OWNER_REQUEST/1",
+ "id": "OR-8",
+ "kind": "external_holds",
+ "signer": "5 external owner classes (SOURCE/ABI/HOST/CHECKER/RELEASE)",
+ "count": 11,
+ "classes": {
+  "SOURCE": 2,
+  "ABI": 4,
+  "HOST": 3,
+  "CHECKER": 1,
+  "RELEASE": 1
+ },
+ "ids": [
+  {
+   "class": "SOURCE",
+   "affected_scope": "SRC-L-009 v1產出指令",
+   "owner": "原設計來源Owner",
+   "next_legal_action": "提供該版本bytes或確認由已指定thin+AUDIT替代本輪repair控制",
+   "resume_predicate": "exact SHA/heading讀回或明確Owner supersession"
+  },
+  {
+   "class": "SOURCE",
+   "affected_scope": "149 child inherited context fragment / B1九個UNRESOLVED Node",
+   "owner": "原SBL/PIPD Clause Owner",
+   "next_legal_action": "讀回原Parent/fragment/Node來源並ratify相容mapping",
+   "resume_predicate": "原source/Owner決議可讀，不靠候選自簽"
+  },
+  {
+   "class": "ABI",
+   "affected_scope": "13原verb vs 當期14 parser",
+   "owner": "PIPD CLI Owner",
+   "next_legal_action": "判定compile-cc版本相容/alias及13原verb承諾",
+   "resume_predicate": "具版本/原Owner決議/roundtrip正反"
+  },
+  {
+   "class": "ABI",
+   "affected_scope": "19 Schema內層{}與native EffectClass value set未ratify",
+   "owner": "PIPD Registry/ECP Owner",
+   "next_legal_action": "將domain semantic Reader與原Registry兼容綁定；enum由原Owner裁定",
+   "resume_predicate": "原Writer semantic fixture及ACK，非schema-only PASS"
+  },
+  {
+   "class": "ABI",
+   "affected_scope": "DOC07 ↔ legacy DOC03、12risk→9context",
+   "owner": "原PIPD Oracle/Profile Owner",
+   "next_legal_action": "提供loss ledger/alias migration與roundtrip",
+   "resume_predicate": "原Writer ACK與原語義/否定scope保全"
+  },
+  {
+   "class": "ABI",
+   "affected_scope": "192 legacy ON/OFF label與ProviderOff含義矛盾",
+   "owner": "SBL Product＋各Host Owner",
+   "next_legal_action": "確認原raw token到boolean映射；重測provider禁止外呼",
+   "resume_predicate": "Owner映射+本Host POS/NEG"
+  },
+  {
+   "class": "HOST",
+   "affected_scope": "Fabric Active/Loaded/Consumer、HGK Issuer/Wake/Lease/NormalMode",
+   "owner": "原Fabric/HGK/Hermes/Host Owner",
+   "next_legal_action": "唯讀當期原Registry/module origin/loaded SHA，再依原OPS准入最小needed子圖",
+   "resume_predicate": "當期同Subject/Scope/Epoch原Consumer ACK/真Raw"
+  },
+  {
+   "class": "HOST",
+   "affected_scope": "Default30/Donor24/Method25/TECH386 upstream pin/license/適用Host",
+   "owner": "原Tech/License/Host Owner",
+   "next_legal_action": "依每ID BuildOrUseRecipe補pin/license/manifest/help，純方法不造installer",
+   "resume_predicate": "該ID原Need/Owner/Host binding，NOT_OBSERVED不冒ABSENT"
+  },
+  {
+   "class": "HOST",
+   "affected_scope": "B1 282 RunnerBindings",
+   "owner": "每case原Runner/Oracle Owner",
+   "next_legal_action": "原Registry以case_id/source/Host解析signature與raw schema",
+   "resume_predicate": "同case/候選/Host的真Runner Raw"
+  },
+  {
+   "class": "CHECKER",
+   "affected_scope": "不同受保護principal",
+   "owner": "原Checker Owner",
+   "next_legal_action": "原protected Reader核identity及Raw/oracle，真實執行",
+   "resume_predicate": "原Checker本輪簽章receipt；Maker/模型角色不可替"
+  },
+  {
+   "class": "RELEASE",
+   "affected_scope": "正式Publisher/GHP-02",
+   "owner": "原Publisher",
+   "next_legal_action": "只在原發行授權成立後發布與readback",
+   "resume_predicate": "正式signature/channel/readback；本輪只有本機文件交付"
+  }
+ ],
+ "also_open": [
+  "CR-ORACLE-001 (DOC-07 vs DOC-03 writer authority)",
+  "N11/N14 chapter split ruling (DOC-00:1546 TT-003)",
+  "PERFORMANCE cells (5) with no bound threshold -- waiver rides OR-5"
+ ],
+ "fill": [
+  "per_id_reply_or_supersession",
+  "signed_at_utc",
+  "signed_by"
+ ],
+ "verify": "python tools/check_external_holds.py --receipts-dir _handover/R20-FHS-20261029/owner_receipts",
+ "if_unsigned": "11 holds stay OPEN; affected consumers keep DOC_ROUTE_HOLD (DOC-00:1582)",
+ "claim_ceiling": "release gate is owner-only (DOC-02:10643); this packet cannot substitute for it"
+}

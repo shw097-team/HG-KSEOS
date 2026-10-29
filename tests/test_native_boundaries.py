@@ -11,7 +11,7 @@ from hg_kseos import native_admission as n
 from hg_kseos.errors import InvariantViolation
 from hg_kseos.lifecycle import ProjectLifecycleController
 from hg_kseos.spine import SharedSpine
-import test_native_admission as fixture
+from . import test_native_admission as fixture  # tests/ is a package; no bare-name fallback
 
 
 class RequestBoundaryTests(unittest.TestCase):

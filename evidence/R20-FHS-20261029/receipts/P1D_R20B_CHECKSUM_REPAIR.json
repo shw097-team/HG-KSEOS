@@ -1,0 +1,26 @@
+{
+ "schema": "R20B.CHECKSUM_REPAIR/1",
+ "source_zip": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\build\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip",
+ "manifest_row_before": "6f22bc1067d3a8f7d7d222d786cc9a37235863c6f498db044626ef6472b71d13",
+ "manifest_row_after": "8ece6d7ed10358325451e7322d9aa0a01e50bbfffce5b63341dcab1d479b5b23",
+ "rows_verified": 88,
+ "missing": [],
+ "stale": [],
+ "new_zip": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\build\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip",
+ "new_zip_sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+ "new_zip_bytes": 13578117,
+ "entries": 89,
+ "validator_on_fresh_extract": {
+  "rc": 0,
+  "passed": 2789,
+  "failed": 0,
+  "failures": [],
+  "scope": "AUTHOR_STATIC_FIXTURES_ONLY"
+ },
+ "source_zip_sha256_measured_after_overwrite": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+ "source_zip_sha256": "0432b9b4e572369d8856803f35b88b85b2d976b3f8d80e9f2f14c30eece1b06c",
+ "note_source_sha": "the first measurement was taken after the rebuild overwrote the same path; the preserved superseded copy is the authoritative source digest",
+ "superseded_copy": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\build\\SUPERSEDED_r20_first_build.zip",
+ "superseded_sha256": "0432b9b4e572369d8856803f35b88b85b2d976b3f8d80e9f2f14c30eece1b06c",
+ "rebuild_deterministic": true
+}

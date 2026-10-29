@@ -1,0 +1,473 @@
+{
+  "checker": "VERIFY_SECURITY lane / openai-codex gpt-6.1-sol (fresh context)",
+  "subject_mutation": "CLEAN",
+  "claims": [
+    {
+      "id": "C1",
+      "verdict": "PASS",
+      "measured": {
+        "files": 88,
+        "bytes": 132414887,
+        "archives": [],
+        "self_copies": []
+      },
+      "note": "All 88 files were read; ZIP signatures and entry names were inspected, including archives without ZIP extensions."
+    },
+    {
+      "id": "C2",
+      "verdict": "PASS",
+      "measured": {
+        "repaired_rows": 29,
+        "full_sha256_equal": 29,
+        "baseline_pins_unchanged": true,
+        "old_locators_match_baseline": true
+      },
+      "note": "Read and hashed each target independently; per-row 64-hex comparisons are attached. Baseline locator comparisons normalize only the Windows extended-length prefix."
+    },
+    {
+      "id": "C3",
+      "verdict": "PASS",
+      "measured": {
+        "2": {
+          "passed": 2788,
+          "failed": 1,
+          "failures": [
+            {
+              "case_id": "SOURCE-BYTES-UNCHANGED",
+              "scope": "AUTHOR_STATIC",
+              "expected": true,
+              "actual": false,
+              "status": "FAIL",
+              "elapsed_ms": 0.027
+            }
+          ],
+          "scope": "AUTHOR_STATIC_FIXTURES_ONLY"
+        },
+        "3": {
+          "passed": 2789,
+          "failed": 0,
+          "failures": [],
+          "scope": "AUTHOR_STATIC_FIXTURES_ONLY"
+        }
+      },
+      "note": "Validator code and input bytes were copied without alteration; only scratch copies had read-only attributes cleared to permit report writes. Original subject was never run in place."
+    },
+    {
+      "id": "C4",
+      "verdict": "PASS",
+      "measured": {
+        "baseline_shipped": {
+          "passed": 2789,
+          "failed": 0
+        },
+        "baseline_fresh": {
+          "passed": 2788,
+          "failed": 1,
+          "failures": [
+            {
+              "case_id": "SOURCE-BYTES-UNCHANGED",
+              "scope": "AUTHOR_STATIC",
+              "expected": true,
+              "actual": false,
+              "status": "FAIL",
+              "elapsed_ms": 0.027
+            }
+          ],
+          "scope": "AUTHOR_STATIC_FIXTURES_ONLY"
+        }
+      },
+      "note": "Confirmed stale green by reading the original shipped report and running the baseline validator independently."
+    },
+    {
+      "id": "C5",
+      "verdict": "PASS",
+      "measured": {
+        "table_rows": 46,
+        "fixture_cells": 96,
+        "fixture_HOLD_cells": 46,
+        "missing": [],
+        "extra_or_relabelled": [],
+        "field_mismatches": [],
+        "fixture_verdict_counts": {
+          "PASS_LOCAL_ORACLE": 50,
+          "HOLD": 46
+        }
+      },
+      "note": "Exact cell-ID multiset equality; also compared test class, axis, first failure, source alias, line and clause hash prefix. No PASS cell appears in HOLD disposition."
+    },
+    {
+      "id": "C6",
+      "verdict": "PASS",
+      "measured": {
+        "rows": 18,
+        "distinct_stages": 18,
+        "statuses": {
+          "ABSENT": 18
+        },
+        "unsupported_non_ABSENT_rows": []
+      },
+      "note": "All 18 expected stage identifiers occur exactly once; all are ABSENT. This proves the stated disjunction and does not claim stage execution or independently prove global absence."
+    },
+    {
+      "id": "C7",
+      "verdict": "PASS",
+      "measured": {
+        "entries": 88,
+        "unique_entries": 88,
+        "self_entries": [],
+        "entry_byte_mismatches": [],
+        "entry_set_equals_tree": true,
+        "shipped_sha256": "713e8a257a8cd0635d23953ed0b028f164e6bd332c083617bf9c42d232df9613",
+        "rebuilt_sha256": "713e8a257a8cd0635d23953ed0b028f164e6bd332c083617bf9c42d232df9613",
+        "sidecar_recorded_sha256": "713e8a257a8cd0635d23953ed0b028f164e6bd332c083617bf9c42d232df9613",
+        "author_receipt_recorded_sha256": "713e8a257a8cd0635d23953ed0b028f164e6bd332c083617bf9c42d232df9613"
+      },
+      "note": "Rebuilt sorted relative files with fixed 1980 timestamp, DEFLATE and 0644 attributes; byte-for-byte SHA256 equality. All shipped entries were also read and compared with original tree bytes."
+    }
+  ],
+  "disagreements": [
+    "REVISION3_NOTES.md section 2 and reproduction instructions still state 84 files / 84 ZIP entries; measured final tree and shipped ZIP both contain 88. C7 in the brief correctly states 88. Notes also state 132,391,661 bytes; measured final tree is 132,414,887 bytes."
+  ],
+  "overall": "PASS_WITH_FINDINGS",
+  "claim_ceiling": "advisory verdict only; not an OracleReceipt and not canonical acceptance",
+  "evidence": {
+    "locator_rows": [
+      {
+        "row_index": 89,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\AUDIO & PROMPT\\AUDIT_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_實質正文_FULL_DESTRUCTIVE_AUDIT_2026-10-29_r1.md",
+        "pinned_sha256": "2eb90f7186024d836c8f6323e8059ba6275d27ac87a933aecfb6bd3b274085d9",
+        "actual_sha256": "2eb90f7186024d836c8f6323e8059ba6275d27ac87a933aecfb6bd3b274085d9",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 90,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\AUDIO & PROMPT\\CODEX_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_升級修補版_產出指令_2026-10-29_r2.md",
+        "pinned_sha256": "a780248c4df9702ca1c9d1db471f0e4c2463f10b2468826092cb4ddb0977f5e6",
+        "actual_sha256": "a780248c4df9702ca1c9d1db471f0e4c2463f10b2468826092cb4ddb0977f5e6",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 91,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\AUDIO & PROMPT\\CODEX_薄PROMPT_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_升級修補_2026-10-29_r2.md",
+        "pinned_sha256": "4bb39db18e2cb539790eaff8eabcadb0ed217bf021e92b11b55b888213f3f27d",
+        "actual_sha256": "4bb39db18e2cb539790eaff8eabcadb0ed217bf021e92b11b55b888213f3f27d",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 92,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\COVERAGE_REPORT.md",
+        "pinned_sha256": "a7eba4b9eef0a2575d2ad35c38705fd8ec3ca60e1759566fa73705b44a6dc69d",
+        "actual_sha256": "a7eba4b9eef0a2575d2ad35c38705fd8ec3ca60e1759566fa73705b44a6dc69d",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 93,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\INDEX.md",
+        "pinned_sha256": "f2900d20a0b64404ca4ee4baadc3b5b221402fb91f268bf405ae725517080fcd",
+        "actual_sha256": "f2900d20a0b64404ca4ee4baadc3b5b221402fb91f268bf405ae725517080fcd",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 94,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\MANIFEST.md",
+        "pinned_sha256": "87c8194e0cd81f50fe69c7adc175ff58759eca906fb62a8fb4c3e816852d1f06",
+        "actual_sha256": "87c8194e0cd81f50fe69c7adc175ff58759eca906fb62a8fb4c3e816852d1f06",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 95,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\README.md",
+        "pinned_sha256": "60b7f2611786d2268dee7051203150c9056c39b5a61536f0e3e064c04a464e63",
+        "actual_sha256": "60b7f2611786d2268dee7051203150c9056c39b5a61536f0e3e064c04a464e63",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 96,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\00_INDEX_AND_DECISION.md",
+        "pinned_sha256": "1c79d52259b40182d976b8a949c81e12f9b57be636ef0756844dfc5fc334bc18",
+        "actual_sha256": "1c79d52259b40182d976b8a949c81e12f9b57be636ef0756844dfc5fc334bc18",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 97,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+        "pinned_sha256": "97fd4aba184f55889baf8f2aa8725b4df5c752148240ce835a1fd760c50bd850",
+        "actual_sha256": "97fd4aba184f55889baf8f2aa8725b4df5c752148240ce835a1fd760c50bd850",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 98,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "pinned_sha256": "92bae9db228b4a8052e38761f5a29692c33d116add96338922d4e14d7257ddb1",
+        "actual_sha256": "92bae9db228b4a8052e38761f5a29692c33d116add96338922d4e14d7257ddb1",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 99,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\03_ARCHITECTURE_ABI_AND_EFFECT.md",
+        "pinned_sha256": "f3fb530f5c64187aa74884299c1b2471a9191b6ed17cf9146de6e1a8bc8c5efd",
+        "actual_sha256": "f3fb530f5c64187aa74884299c1b2471a9191b6ed17cf9146de6e1a8bc8c5efd",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 100,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\04_FABRIC_HGK_CONTROL.md",
+        "pinned_sha256": "2c5b849d8e663d893169359b52c80e6203cde8766ce6ab19d4802d02f6eaecdc",
+        "actual_sha256": "2c5b849d8e663d893169359b52c80e6203cde8766ce6ab19d4802d02f6eaecdc",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 101,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+        "pinned_sha256": "2aed27ca1cc2f27f6f83880040206208428227c7f88450ac5b357dc28b54f89d",
+        "actual_sha256": "2aed27ca1cc2f27f6f83880040206208428227c7f88450ac5b357dc28b54f89d",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 102,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\06_FHS_EXECUTE_HERMES_RUNTIME.md",
+        "pinned_sha256": "78746ae16deee8532c19f90d06505ad88f71788ecd7f360924a4b442fea50388",
+        "actual_sha256": "78746ae16deee8532c19f90d06505ad88f71788ecd7f360924a4b442fea50388",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 103,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\07_ACCEPTANCE_CHALLENGE.md",
+        "pinned_sha256": "a1834709d6278033e4f0653a8364a840422785b27ddb86f0a64d54adad6bad5e",
+        "actual_sha256": "a1834709d6278033e4f0653a8364a840422785b27ddb86f0a64d54adad6bad5e",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 104,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "pinned_sha256": "d810e97cef8eb31be439ba168f47b766ca011b5c4b414d2affa26b4d1f663713",
+        "actual_sha256": "d810e97cef8eb31be439ba168f47b766ca011b5c4b414d2affa26b4d1f663713",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 105,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\09A_R15_949_ORIGINAL_ATOMS.md",
+        "pinned_sha256": "e5e3da2e070c61d0e3deeb5c1fea8a674af7634993b2612c4c4bb329a5e2e82c",
+        "actual_sha256": "e5e3da2e070c61d0e3deeb5c1fea8a674af7634993b2612c4c4bb329a5e2e82c",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 106,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\09B_KIND_MODE_HOST_192.md",
+        "pinned_sha256": "41cdd5e5ab16bc2b44ab47155e6cd09e81eef98c56753ae7dd03d0484385a4cd",
+        "actual_sha256": "41cdd5e5ab16bc2b44ab47155e6cd09e81eef98c56753ae7dd03d0484385a4cd",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 107,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\09_SBL_DOC00_13_FULL_UPGRADE.md",
+        "pinned_sha256": "2f5ff0ddde499ee84ef844bc1ec5b3a6b5d697ac9279839854f932e0aa013b7d",
+        "actual_sha256": "2f5ff0ddde499ee84ef844bc1ec5b3a6b5d697ac9279839854f932e0aa013b7d",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 108,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\10A_B1_TQAEP_120_124_38.md",
+        "pinned_sha256": "a3233c665420b56f6317ed43875c681d22f1558a3c875e3f61d1a163e82a6a86",
+        "actual_sha256": "a3233c665420b56f6317ed43875c681d22f1558a3c875e3f61d1a163e82a6a86",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 109,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\10B_B1_PI27_PD31.md",
+        "pinned_sha256": "f53c0a09f4f2de1a48a184ff4fcd1ee61ee8fb2c35eb864869d6f277e7222b3e",
+        "actual_sha256": "f53c0a09f4f2de1a48a184ff4fcd1ee61ee8fb2c35eb864869d6f277e7222b3e",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 110,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\10_B1_W18_SELF_BOOTSTRAP.md",
+        "pinned_sha256": "24815475eb097446b4e6a6953a4fe649c6404a8c8232727e192e437bd9542002",
+        "actual_sha256": "24815475eb097446b4e6a6953a4fe649c6404a8c8232727e192e437bd9542002",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 111,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\11_WORKPACKAGES_AND_DAG.md",
+        "pinned_sha256": "e3be4f8321e71caf12331f175538e9b9909d5bf9cfcbb4f93eafa9327c4498ab",
+        "actual_sha256": "e3be4f8321e71caf12331f175538e9b9909d5bf9cfcbb4f93eafa9327c4498ab",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 112,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\12_VERIFICATION_AND_DELIVERY.md",
+        "pinned_sha256": "6dfefc3fd590baa5d94b8b65955840bad462fef5ebdbe6c7273a9fba8c247ac7",
+        "actual_sha256": "6dfefc3fd590baa5d94b8b65955840bad462fef5ebdbe6c7273a9fba8c247ac7",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 113,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E01_SOURCE_MANIFEST_AND_SEARCH.md",
+        "pinned_sha256": "3cdcaf999771df3913b8f4363c668eac8b0b69447387b70f0d4b43e2f57d0431",
+        "actual_sha256": "3cdcaf999771df3913b8f4363c668eac8b0b69447387b70f0d4b43e2f57d0431",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 114,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E02_REQUIREMENT_TRACE_AND_DENOMINATORS.md",
+        "pinned_sha256": "b06d2112cb1e801031a1e5403ee826f2f7d895e4c08fe608e0287f9abf79510b",
+        "actual_sha256": "b06d2112cb1e801031a1e5403ee826f2f7d895e4c08fe608e0287f9abf79510b",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 115,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E03_ABI_SCHEMAS_AND_FIXTURE_AUDIT.md",
+        "pinned_sha256": "d812d4eedf67cbffe3aeb125fad1fade472f65a4aab6d3beebb1876b66900daa",
+        "actual_sha256": "d812d4eedf67cbffe3aeb125fad1fade472f65a4aab6d3beebb1876b66900daa",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 116,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E04_CONFLICT_RCA_ADOPTION_AND_HOLDS.md",
+        "pinned_sha256": "4eaa529e268e1a54e4f563b2f45d99cd00bcc345acc5bd79c2b7c64382e7cc88",
+        "actual_sha256": "4eaa529e268e1a54e4f563b2f45d99cd00bcc345acc5bd79c2b7c64382e7cc88",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      },
+      {
+        "row_index": 117,
+        "target": "\\\\?\\C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E05_QA_READBACK_AND_CLAIM_CEILING.md",
+        "pinned_sha256": "72cb158d427b781e7309be41b07a2b41617bc325835a6433d908ed5494f383f7",
+        "actual_sha256": "72cb158d427b781e7309be41b07a2b41617bc325835a6433d908ed5494f383f7",
+        "equal": true,
+        "error": null,
+        "baseline_pin_unchanged": true,
+        "old_locator_matches_baseline": true
+      }
+    ],
+    "fresh_r2": {
+      "command": "python -B tools/validate.py",
+      "cwd": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\lane\\work\\measure_130903\\r2",
+      "exit": 1,
+      "raw_output": "{\r\n  \"passed\": 2788,\r\n  \"failed\": 1,\r\n  \"failures\": [\r\n    {\r\n      \"case_id\": \"SOURCE-BYTES-UNCHANGED\",\r\n      \"scope\": \"AUTHOR_STATIC\",\r\n      \"expected\": true,\r\n      \"actual\": false,\r\n      \"status\": \"FAIL\",\r\n      \"elapsed_ms\": 0.027\r\n    }\r\n  ],\r\n  \"scope\": \"AUTHOR_STATIC_FIXTURES_ONLY\"\r\n}\r\n",
+      "raw_sha256": "7ae187fe6e276ff5a71f784d9af2446abf1fe397bffa7575bbd46df298e7831b",
+      "copy_byte_identical_before_run": true,
+      "max_copy_path_chars": 148
+    },
+    "fresh_r3": {
+      "command": "python -B tools/validate.py",
+      "cwd": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\lane\\work\\measure_130903\\r3",
+      "exit": 0,
+      "raw_output": "{\r\n  \"passed\": 2789,\r\n  \"failed\": 0,\r\n  \"failures\": [],\r\n  \"scope\": \"AUTHOR_STATIC_FIXTURES_ONLY\"\r\n}\r\n",
+      "raw_sha256": "a9f9c542ff632aaf1558e1813fc1e90d7ba81e7bb776bc9221c26dabb7fb2fcc",
+      "copy_byte_identical_before_run": true,
+      "max_copy_path_chars": 141
+    }
+  },
+  "subject_identity": {
+    "package": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3",
+    "baseline": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2",
+    "zip": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip",
+    "candidate_zip_sha256": "713e8a257a8cd0635d23953ed0b028f164e6bd332c083617bf9c42d232df9613",
+    "tree_listing_sha256": {
+      "2": "fcb71cf093d4be34194c5fa7142cef90ada892297dca807cdb9a9b6db8122792",
+      "3": "ab43a6235ee9faa2574a488668945c78aa174a07197c3d03785abe34fe9d383d"
+    },
+    "before_after_file_bytes_identical": true,
+    "changes": []
+  },
+  "method": {
+    "output_root": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\lane\\work\\measure_130903",
+    "command": "python -B verify_this_turn.py; python -B save_measured_verdict.py",
+    "scratch_roots": [
+      "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\lane\\work\\measure_130903\\r2",
+      "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\lane\\work\\measure_130903\\r3"
+    ],
+    "originals_read_via_extended_length_paths": true,
+    "scope": "C1-C7 only; no native execution or acceptance; file-byte before/after equality does not detect transient writes by unrelated processes"
+  },
+  "delivery": {
+    "requested_output_root": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\lane\\out",
+    "status": "BLOCKED_BY_SANDBOX",
+    "error": "PermissionError: [Errno 13] Permission denied writing requested verdict path",
+    "fallback_output_root": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\lane\\work"
+  }
+}

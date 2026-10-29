@@ -1,0 +1,22 @@
+{
+ "schema": "R20.AUTHOR_TABLES/1",
+ "at": "2026-10-29T12:57:55.501156+00:00",
+ "oracle_cells": 96,
+ "hold_rows": 46,
+ "hold_by_reader_class": {
+  "CALIBRATION": 11,
+  "HUMAN_DECISION": 11,
+  "HUMAN_JUDGE": 11,
+  "PERFORMANCE": 5,
+  "TWO_VERSION": 8
+ },
+ "stage_rows": 18,
+ "stage_status": {
+  "ABSENT": 18
+ },
+ "files": [
+  "03_TESTS_AND_READBACK/HOLD_DISPOSITION.tsv",
+  "03_TESTS_AND_READBACK/STAGE18_TRACE.tsv"
+ ],
+ "claim_ceiling": "author-side disposition derived from the package's own machine artifacts; no HOLD is converted to PASS and no stage is called evidenced without an artifact"
+}

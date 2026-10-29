@@ -1,0 +1,60 @@
+{
+ "schema": "R19.DISAGREEMENT_LEDGER/1",
+ "at": "2026-10-29T11:57:24Z",
+ "challenger": {
+  "lane": "VERIFY_SECURITY",
+  "transport": "codex exec via human home (desktop_router)",
+  "served_model": "gpt-5.6-sol",
+  "requested_model": "gpt-6.1-sol (user-specified; unavailable)",
+  "payer": "owner OAuth",
+  "tokens": 113342,
+  "nonce_present": true,
+  "verdict": "HOLD_ADVISORY"
+ },
+ "specified_lane_unavailable": {
+  "attempts": 3,
+  "measured": [
+   {
+    "arm": "openai-codex/gpt-6.1-sol",
+    "error": "401 Unauthorized from chatgpt.com/backend-api/codex"
+   },
+   {
+    "arm": "openai-codex/gpt-6.1-sol",
+    "error": "same 401 on retry after pin refresh"
+   },
+   {
+    "arm": "opencode-go/glm-5.3-flash",
+    "error": "relay 502 'openai-chat requires a non-empty credential (authMode: key)'"
+   },
+   {
+    "catalog": "relay :10101 lists 90 models; gpt-6.1 absent; gpt-5.6-sol present"
+   }
+  ],
+  "consequence": "model-axis independence holds (gpt-5.6-sol vs deepseek executor) but the named gpt-6.1-sol lane is NOT proven"
+ },
+ "items": [
+  {
+   "id": "R-1",
+   "claim": "29 locators are one renamed-directory defect",
+   "challenge": "26 into OLD, 3 into AUDIO root",
+   "disposition": "ACCEPTED",
+   "action": "F19-1 and denominator row rewritten; RELOCATION_INDEX re-read confirms 26/3 (see FAR_R19B)"
+  },
+  {
+   "id": "R-2",
+   "claim": "13 rows are authority-bound; approve D1 registry revision",
+   "challenge": "PARTIAL = 4 HOST_OP + 4 LOCAL_DRAFT_WRITE + 2 REPO_WRITE + 3 SOURCE_READ; PARKED = 6 HOST_OP + 1 RELEASE. Installing a registry revision without an installer/rollback/native receipt is premature",
+   "disposition": "ACCEPTED",
+   "action": "Q1 table and D1 rewritten: build installer + rollback + dry-run before the elevated step (see FAR_R19B)"
+  },
+  {
+   "id": "R-3",
+   "claim": "the package ships a stale green static_validation_result.json (2789/0)",
+   "challenge": "author re-read the file",
+   "disposition": "ACCEPTED_ON_REMEASURE",
+   "action": "re-measured with a long-path-safe copy: the SHIPPED 03_TESTS_AND_READBACK/static_validation_result.json records passed 2789 / failed 0, while a fresh run gives 2788/1; the earlier rejection used the author's own copy as the exhibit instead of the delivered file"
+  }
+ ],
+ "rule": "a challenge is accepted only if the bytes support it. R-3 was first rejected on the wrong exhibit (my own copy) and is now accepted on the delivered file: verifying a copy is not verifying the artefact.",
+ "superseded_by": "FAR_R19B_ORPHAN_AND_DENOMINATOR_ANALYSIS.md"
+}

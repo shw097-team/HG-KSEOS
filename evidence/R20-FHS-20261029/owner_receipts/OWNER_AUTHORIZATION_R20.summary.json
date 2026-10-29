@@ -1,0 +1,121 @@
+{
+ "schema": "R20.OWNER_RECEIPT_SUMMARY/2",
+ "receipt_kind": "owner_authorization_anchor",
+ "window_id": "WIN-7d092fd95ffc",
+ "task_id": "R20-FHS-CLOSURE",
+ "owner_fingerprint": "412b351937be72a1",
+ "signed_at_utc": "2026-10-29T14:58:01Z",
+ "payload_sha256": "5d266d3cdf6c62382e7d41ecc463e25d75650fca99baaa0c0ee350a50396dc48",
+ "merkle_root": "40a9fd3040a6741432969ee4ade62cf135895620abd2327303e0f2f9fffbce98",
+ "signature_hex": "31f8f347493a7dc50384704daeeee45d3dc24d6d89705d44299e57855ed7f7752d673a51312bf09a4e3735b24a21f6b9f0734eb95410ece58089f3471a2f980d",
+ "signature_verification": {
+  "verified": true,
+  "method": "Ed25519PublicKey.from_public_bytes(window.owner_public_hex).verify(sig, body_json.encode())",
+  "verified_at_utc": "2026-10-29T14:58:43Z",
+  "sig_hex_head": "31f8f347493a7dc50384704daeeee45d"
+ },
+ "owner_public_hex": "d42c654cd1afba803ef78bee501aa3e2a3d33ff1305c52f914d3ff27bb9be379",
+ "window_at_sign": {
+  "window_id": "WIN-7d092fd95ffc",
+  "task_id": "R20-FHS-CLOSURE",
+  "scope": [
+   "registry_row_sign",
+   "merkle_root_sign"
+  ],
+  "max_ops": 24,
+  "ops_used_at_signing": 1,
+  "expires_at": 1793314427,
+  "effect_class_ceiling": "REPOSITORY_WRITE",
+  "owner_fingerprint": "412b351937be72a1",
+  "owner_public_hex_sha256_prefix": "71082e1edbd96477"
+ },
+ "verifies_independently_by": "Ed25519PublicKey.from_public_bytes(bytes.fromhex(owner_public_hex)).verify(bytes.fromhex(signature_hex), body_json.encode()); sha256(body_json) must equal payload_sha256",
+ "body_json_sha256_note": "body_json is reproduced verbatim so a third party can verify the signature without any key file; its sha256 is payload_sha256.",
+ "artifacts_signed": [
+  {
+   "path": "/FAR_CLOSURE_AND_PROMOTION_20261029.md",
+   "sha256": "301f439c65ad85e2168c215c6a8d7b81f60bdc2eb450ae2af7a65ff0e7b92000"
+  },
+  {
+   "path": "/receipts/CLOSURE_PLAN.json",
+   "sha256": "e2e75e2137c4f140bb67e8561e652f1b4d2450427f9c651c73abf34276f180fc"
+  },
+  {
+   "path": "/owner_requests/OR-1.json",
+   "sha256": "b211ed01409672149bdb10050265dff9040627b76de7d5547fddb15a6d8f1560"
+  },
+  {
+   "path": "/owner_requests/OR-2.json",
+   "sha256": "5559f151368751305eb2af4f35e3a86d8879012a8a74e9b443e72a9c52e25270"
+  },
+  {
+   "path": "/owner_requests/OR-3.json",
+   "sha256": "a59fec23133b0c002ebe6a6e05b321560bcb1d3508ef5eaf699d0a3d70e703f3"
+  },
+  {
+   "path": "/owner_requests/OR-4.json",
+   "sha256": "3bff599120f401b0cf6d00f747e8c460f0ee21254b589f12e4870b226a45fa41"
+  },
+  {
+   "path": "/owner_requests/OR-5.json",
+   "sha256": "a70692959e0b4cbdaf1c7565d35a52c5f4088468854393b65ce5c8a091bc6c35"
+  },
+  {
+   "path": "/owner_requests/OR-6.json",
+   "sha256": "745fa434717d1b93b894b0ec5b2e4d662a63a62d7cb8286ca6c11e5c7582e1fa"
+  },
+  {
+   "path": "/owner_requests/OR-7.json",
+   "sha256": "681c3b821fe8346c4f24e7aab6460d9dcee3681b00b284cd734ebbebb020d924"
+  },
+  {
+   "path": "/owner_requests/OR-8.json",
+   "sha256": "2970875480109b7aa602264b328cb0792ba388977c91cab019c4c230360fc2c6"
+  },
+  {
+   "path": "/owner_requests/OR-1.md",
+   "sha256": "40591cc88e94be9739115ec3574a047c81672fb6a97ed6f4e8cd18921aafca33"
+  },
+  {
+   "path": "/owner_requests/OR-2.md",
+   "sha256": "885e20e329154242f2ea7763a4a87c8f26cc00e1ebc8d736d0b6f2f62c1f6be3"
+  },
+  {
+   "path": "/owner_requests/OR-3.md",
+   "sha256": "a04182375ab78b7b457c5c7389757150c1773c70f93e35e6fa6c1deae61acd80"
+  },
+  {
+   "path": "/owner_requests/OR-4.md",
+   "sha256": "01095e80226381dbf8c4dd20577a05caaf2a39bc874934bbaadf64ba415f3556"
+  },
+  {
+   "path": "/owner_requests/OR-5.md",
+   "sha256": "51b955f0d6ddd2199232f9db0f993460784cf1de071a57f644de980c89b908cd"
+  },
+  {
+   "path": "/owner_requests/OR-6.md",
+   "sha256": "d0f4bbbe19660fecf992167c8d9fd47ad9618c2a410585569eb75a78919713a0"
+  },
+  {
+   "path": "/owner_requests/OR-7.md",
+   "sha256": "cee3d4f72d64433db5cfaa97d76fedb16022516b6fe489dfb674657599b802c8"
+  },
+  {
+   "path": "/owner_requests/OR-8.md",
+   "sha256": "e1f00bc6f6c2d82786b61b89a7a5f08aefd22e071f6ab564297885960ea8c47f"
+  }
+ ],
+ "authorises": [
+  "A1..A8 machine items of the R20 closure plan (executed before this signature; receipts in var/R20-FHS-20261029/receipts)",
+  "preparation of the 8 owner-request packets (OR-1..OR-8) and their publication",
+  "replay of the R20 subset onto main as a reviewable PR (publish/r20-subset, PR #6) -- not a merge"
+ ],
+ "does_not_authorise": [
+  "filling OR-1..OR-8 decision fields on the owner's behalf",
+  "OR-6 separation of duties (a second principal cannot be the maker)",
+  "OR-8 external acceptance (SOURCE/ABI/HOST/CHECKER/RELEASE owners must reply)",
+  "release, tag, sourcefreeze, or merging to main (broker refuses these kinds)"
+ ],
+ "claim_ceiling": "OWNER_AUTHORIZED_SESSION_SCOPED -- an owner act, not an independent verification",
+ "body_json": "{\"artifacts\":[{\"bytes\":21097,\"path\":\"C:/Projects/Agent_Workspace/_handover/R20-FHS-20261029/FAR_CLOSURE_AND_PROMOTION_20261029.md\",\"sha256\":\"301f439c65ad85e2168c215c6a8d7b81f60bdc2eb450ae2af7a65ff0e7b92000\"},{\"bytes\":14222,\"path\":\"C:/Projects/Agent_Workspace/var/R20-FHS-20261029/receipts/CLOSURE_PLAN.json\",\"sha256\":\"e2e75e2137c4f140bb67e8561e652f1b4d2450427f9c651c73abf34276f180fc\"},{\"bytes\":1279,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-1.json\",\"sha256\":\"b211ed01409672149bdb10050265dff9040627b76de7d5547fddb15a6d8f1560\"},{\"bytes\":1272,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-2.json\",\"sha256\":\"5559f151368751305eb2af4f35e3a86d8879012a8a74e9b443e72a9c52e25270\"},{\"bytes\":1266,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-3.json\",\"sha256\":\"a59fec23133b0c002ebe6a6e05b321560bcb1d3508ef5eaf699d0a3d70e703f3\"},{\"bytes\":3709,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-4.json\",\"sha256\":\"3bff599120f401b0cf6d00f747e8c460f0ee21254b589f12e4870b226a45fa41\"},{\"bytes\":5807,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-5.json\",\"sha256\":\"a70692959e0b4cbdaf1c7565d35a52c5f4088468854393b65ce5c8a091bc6c35\"},{\"bytes\":4043,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-6.json\",\"sha256\":\"745fa434717d1b93b894b0ec5b2e4d662a63a62d7cb8286ca6c11e5c7582e1fa\"},{\"bytes\":2783,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-7.json\",\"sha256\":\"681c3b821fe8346c4f24e7aab6460d9dcee3681b00b284cd734ebbebb020d924\"},{\"bytes\":4160,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-8.json\",\"sha256\":\"2970875480109b7aa602264b328cb0792ba388977c91cab019c4c230360fc2c6\"},{\"bytes\":895,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-1.md\",\"sha256\":\"40591cc88e94be9739115ec3574a047c81672fb6a97ed6f4e8cd18921aafca33\"},{\"bytes\":888,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-2.md\",\"sha256\":\"885e20e329154242f2ea7763a4a87c8f26cc00e1ebc8d736d0b6f2f62c1f6be3\"},{\"bytes\":882,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-3.md\",\"sha256\":\"a04182375ab78b7b457c5c7389757150c1773c70f93e35e6fa6c1deae61acd80\"},{\"bytes\":2269,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-4.md\",\"sha256\":\"01095e80226381dbf8c4dd20577a05caaf2a39bc874934bbaadf64ba415f3556\"},{\"bytes\":2597,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-5.md\",\"sha256\":\"51b955f0d6ddd2199232f9db0f993460784cf1de071a57f644de980c89b908cd\"},{\"bytes\":2572,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-6.md\",\"sha256\":\"d0f4bbbe19660fecf992167c8d9fd47ad9618c2a410585569eb75a78919713a0\"},{\"bytes\":1762,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-7.md\",\"sha256\":\"cee3d4f72d64433db5cfaa97d76fedb16022516b6fe489dfb674657599b802c8\"},{\"bytes\":2107,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/_handover/R20-FHS-20261029/owner_requests/OR-8.md\",\"sha256\":\"e1f00bc6f6c2d82786b61b89a7a5f08aefd22e071f6ab564297885960ea8c47f\"}],\"authorises\":[\"A1..A8 machine items of the R20 closure plan (executed before this signature; receipts in var/R20-FHS-20261029/receipts)\",\"preparation of the 8 owner-request packets (OR-1..OR-8) and their publication\",\"replay of the R20 subset onto main as a reviewable PR (publish/r20-subset, PR #6) -- not a merge\"],\"claim_ceiling\":\"OWNER_AUTHORIZED_SESSION_SCOPED -- an owner act, not an independent verification\",\"declaration\":\"用戶授權 & 簽章執行FAR提出的全部最佳「裁決、授權、簽章」建議，和全部的建議執行方案。(2026-10-29, session 20261029_204015_f8e085)\",\"declaration_source\":\"owner message in session 20261029_204015_f8e085\",\"does_not_authorise\":[\"filling OR-1..OR-8 decision fields on the owner's behalf\",\"OR-6 separation of duties (a second principal cannot be the maker)\",\"OR-8 external acceptance (SOURCE/ABI/HOST/CHECKER/RELEASE owners must reply)\",\"release, tag, sourcefreeze, or merging to main (broker refuses these kinds)\"],\"merkle_root\":\"40a9fd3040a6741432969ee4ade62cf135895620abd2327303e0f2f9fffbce98\",\"owner_fingerprint\":\"412b351937be72a1\",\"schema\":\"R20.OWNER_AUTHORIZATION/1\",\"task\":\"R20-FHS-CLOSURE\",\"window_id\":\"WIN-7d092fd95ffc\"}"
+}

@@ -1,0 +1,185 @@
+{
+  "schema": "HGK-LANE-RESOLUTION/1",
+  "lane": "VERIFY_SECURITY",
+  "role": "checker",
+  "role_binding_source": null,
+  "engine": "codex-cli",
+  "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\0ab0e7a8f3779036\\codex.exe",
+  "codex_home": "C:\\Users\\user\\.codex",
+  "relay_base": "https://chatgpt.com/backend-api/codex",
+  "codex_home_is_declared_lane_home": false,
+  "human_home_transport_acknowledged": true,
+  "skipped_arms": [],
+  "transport": "opencodex relay via per-invocation -c openai_base_url (no config mutation)",
+  "transport_target": "https://chatgpt.com/backend-api/codex",
+  "front_door_port": null,
+  "front_door_note": "the lane-scoped pool door (10103 VERIFY_SECURITY / 10105 EXECUTE) carries the hop and ledgers every decision; the sealed single-model 10100 door is unchanged and unused; None here means direct to the relay on 10101",
+  "sandbox": "read-only",
+  "sandbox_by_role_default": "read-only",
+  "sandbox_escalation_authorised": false,
+  "cwd": "C:/Projects/Agent_Workspace/var/R20-FHS-20261029/lane/outf",
+  "side_effect_note": "no write access granted by the sandbox mode",
+  "receipt_binding": "usage rows appended after this attempt started (byte offset bound)",
+  "pool": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\lane-route-slots.candidate.json",
+  "candidates_considered": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "mode": "pinned_primary",
+  "unguarded_escalation_acknowledged": false,
+  "inject_429_first": false,
+  "identity_gate": {
+    "state": "enforced",
+    "lane_home": "C:\\Users\\user\\.codex",
+    "relay_home": "C:\\Users\\user\\AppData\\Local\\HG-KSEOS\\opencodex-hermes",
+    "arms": [
+      {
+        "rank": 1,
+        "provider": "opencode-go",
+        "model": "deepseek-v4.1-flash",
+        "requirement": "none",
+        "ok": true,
+        "detail": "key-auth arm: no human-attended identity"
+      },
+      {
+        "rank": 2,
+        "provider": "openai-codex",
+        "model": "gpt-6.1-sol",
+        "requirement": "relay_pool",
+        "ok": true,
+        "detail": "non-empty refreshable credential present in codex-accounts.json"
+      },
+      {
+        "rank": 3,
+        "provider": "opencode-go",
+        "model": "glm-5.3-flash",
+        "requirement": "none",
+        "ok": true,
+        "detail": "key-auth arm: no human-attended identity"
+      },
+      {
+        "rank": 4,
+        "provider": "nvidia",
+        "model": "deepseek-ai/deepseek-v4.1-flash",
+        "requirement": "none",
+        "ok": true,
+        "detail": "key-auth arm: no human-attended identity"
+      }
+    ],
+    "degraded": false,
+    "required_arm": "openai-codex/gpt-6.1-sol"
+  },
+  "authorization": {
+    "checked": false
+  },
+  "subject_mutation": {
+    "state": "not_guarded"
+  },
+  "attempt_log_dir": "C:/Projects/Agent_Workspace/var/R20-FHS-20261029/lane/far_verify_stdout.json.logs",
+  "output_dir_policy": {
+    "mode": "explicit-path",
+    "derived": null,
+    "existing": false
+  },
+  "repair_precondition": {
+    "checked": false
+  },
+  "remote_write_precheck": {
+    "mode": "DETECTION_ONLY",
+    "ran": true,
+    "brief": "C:/Projects/Agent_Workspace/var/R20-FHS-20261029/lane/BRIEF_VERIFY_FAR.md",
+    "markers": [],
+    "publication_wo": null,
+    "would_refuse": false
+  },
+  "attempts": [
+    {
+      "rank": 1,
+      "provider": "desktop_router",
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "transport_model": "opencode-go/deepseek-v4.1-flash",
+      "sandbox": "read-only",
+      "reasoning_effort": null,
+      "exit": 0,
+      "timed_out": false,
+      "seconds": 350.27,
+      "nonce_present": true,
+      "nonce_present_raw_stdout": true,
+      "nonce_source": "item.completed/agent_message",
+      "usage_rows_after_offset": 0,
+      "usage_offset": 36046236,
+      "usage_provider": null,
+      "usage_model": null,
+      "usage_status": null,
+      "usage_receipt_ok": true,
+      "usage_receipt_reason": "no usage row was appended after the attempt offset",
+      "usage_ledger_rewritten": false,
+      "usage_rows_shape_invalid": 0,
+      "usage_rows_undecodable": 0,
+      "carrier_lines_undecodable": 0,
+      "carrier_lines_surrogate": 0,
+      "credential_posture": {
+        "verdict": "INCONCLUSIVE",
+        "decision": "WARN_CONTINUE",
+        "reason": "helper-only verdict (no child env asserted): helper_resolution_reset=PASS; helper_non_interactive=UNKNOWN",
+        "prompt_capable_helper": null,
+        "origin": null,
+        "git_terminal_prompt": "0"
+      },
+      "attempt_log_dir": "C:/Projects/Agent_Workspace/var/R20-FHS-20261029/lane/far_verify_stdout.json.logs",
+      "stdout_byte_exact": true,
+      "stdout_path": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\lane\\far_verify_stdout.json.logs\\attempt-21008-1793283940-1-stdout.txt",
+      "stdout_bytes": 1154776,
+      "stdout_sha256": "7fc91dcb6bc95a5a7846b7ab4e2b991cfb5ff52c7151dfa694471fbc83be4e9d",
+      "stderr_byte_exact": true,
+      "stderr_path": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\lane\\far_verify_stdout.json.logs\\attempt-21008-1793283940-1-stderr.txt",
+      "stderr_bytes": 2000,
+      "stderr_sha256": "8a7309de4a149f270cbc0229e58cb309a08f09581722d6bca8420a8bb6e24ea2",
+      "stdout_tail": "ely because C10 was never executed — nine clean reproductions cannot lift a claim I could not run. If you re-run this on a host with a writable temp dir, C10 is the only row that needs re-measuring.\\n\\nNONCE=2720d151239048d6\"}}\n{\"type\":\"turn.completed\",\"usage\":{\"input_tokens\":1976499,\"cached_input_tokens\":1806848,\"cache_write_input_tokens\":0,\"output_tokens\":34912,\"reasoning_output_tokens\":15105}}\n",
+      "stderr_tail": "nst that ref.\"' is not a valid hunk header. Valid hunk headers: '*** Add File: {path}', '*** Delete File: {path}', '*** Update File: {path}'\n2026-10-29T14:30:48.112706Z ERROR codex_core::tools::router: error=patch rejected: writing is blocked by read-only sandbox; rejected by user approval settings\n",
+      "identity_source": "codex-rollout",
+      "identity_rollout": "C:\\Users\\user\\.codex\\sessions\\2026\\10\\29\\rollout-2026-10-29T22-25-42-01a1880d-67bf-7293-8041-e459fd44145a.jsonl",
+      "identity_note": "served arm read from the codex rollout written for this run and cwd"
+    }
+  ],
+  "used_rank": 1,
+  "used_transport_model": "opencode-go/deepseek-v4.1-flash",
+  "used_seconds": 350.27,
+  "generated_utc": "2026-10-29T14:31:32.542314+00:00",
+  "assignment_posture": {
+    "enforced": false,
+    "posture": {
+      "ok": true,
+      "arms": [
+        "gpt-6.1-sol",
+        "openai-codex/gpt-6.1-sol"
+      ],
+      "revision": 36,
+      "role": "VERIFY_SECURITY",
+      "authority": "owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek",
+      "shape": "role",
+      "alternates_are_operator_selectable": false
+    },
+    "arms_outside_assignment": [
+      "opencode-go/deepseek-v4.1-flash",
+      "opencode-go/glm-5.3-flash",
+      "nvidia/deepseek-ai/deepseek-v4.1-flash"
+    ]
+  },
+  "served_arm_assigned": false,
+  "claim_ceiling": "a pass here proves the Codex-CLI lane served this turn through the relay with a matching usage receipt; it is not an acceptance of any subject",
+  "ok": false,
+  "identity_source": "codex-rollout",
+  "completion_evidence": {
+    "checked": false
+  },
+  "usage_receipt_ok": true,
+  "usage_rows_shape_invalid": 0,
+  "usage_rows_undecodable": 0,
+  "required_arm": "openai-codex/gpt-6.1-sol",
+  "served_arm_raw": "desktop_router/opencode-go/deepseek-v4.1-flash",
+  "served_arm": "desktop_router/opencode-go/deepseek-v4.1-flash",
+  "code": "ERR_REQUIRED_ARM_NOT_SERVED"
+}

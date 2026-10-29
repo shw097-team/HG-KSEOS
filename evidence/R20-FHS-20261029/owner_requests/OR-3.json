@@ -1,0 +1,51 @@
+{
+ "schema": "R20.OWNER_REQUEST/1",
+ "id": "OR-3",
+ "kind": "stage_artifacts",
+ "signer": "ProgramOwner",
+ "count": 6,
+ "ids": [
+  {
+   "stage": "TPgM:T0",
+   "output_contract": "ProgramIntent@1",
+   "current_status": "ABSENT"
+  },
+  {
+   "stage": "TPgM:T1",
+   "output_contract": "SchedulingAssumptions@1",
+   "current_status": "ABSENT"
+  },
+  {
+   "stage": "TPgM:T2",
+   "output_contract": "ProgramDAG@1",
+   "current_status": "ABSENT"
+  },
+  {
+   "stage": "TPgM:T3",
+   "output_contract": "ProgramSPEC@1",
+   "current_status": "ABSENT"
+  },
+  {
+   "stage": "TPgM:T4",
+   "output_contract": "HandoffReferral@1",
+   "current_status": "ABSENT"
+  },
+  {
+   "stage": "TPgM:T5",
+   "output_contract": "ProgramReview@1",
+   "current_status": "ABSENT"
+  }
+ ],
+ "you_must_either": [
+  "publish a machine artifact that instantiates each output_contract, or",
+  "sign a per-stage typed waiver naming the stage and the accepted claim ceiling"
+ ],
+ "fill": [
+  "artifact_path_or_waiver_per_stage",
+  "signed_at_utc",
+  "signed_by"
+ ],
+ "verify": "python tools/check_stage_artifacts.py --owner ProgramOwner",
+ "if_unsigned": "6/18 stages stay ABSENT; nothing else changes",
+ "claim_ceiling": "an artifact proves an instance exists; it does not prove the package is accepted"
+}

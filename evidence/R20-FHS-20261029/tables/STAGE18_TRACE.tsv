@@ -1,0 +1,19 @@
+stage	output_contract	owner_to_consumer	status	evidence_artifacts	why
+PM:T0	ProductKnownState@1	ProductOwner → ProductOwner/PIPD Reader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+PM:T1	QuestionPriority@1	ProductOwner → ProductOwner/PIPD Reader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+PM:T2	ProductSuccess@1	ProductOwner → ProductOwner/PIPD Reader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+PM:T3	ProductSPECDraft@1	ProductOwner → ProductOwner/PIPD Reader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+PM:T4	ProductAcceptanceProposal@1	ProductOwner → ProductOwner/PIPD Reader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+PM:T5	ProductReviewRequest@1	ProductOwner → ProductOwner/PIPD Reader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+SE:T0	SystemReadset@1	ArchitectureOwner → ArchitectureOwner/HostReader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+SE:T1	OwnershipSeamMap@1	ArchitectureOwner → ArchitectureOwner/HostReader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+SE:T2	ADRSet@1	ArchitectureOwner → ArchitectureOwner/HostReader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+SE:T3	ArchitectureSPEC@1	ArchitectureOwner → ArchitectureOwner/HostReader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+SE:T4	ArchitectureNEGRequest@1	ArchitectureOwner → ArchitectureOwner/HostReader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+SE:T5	ArchitectureReview@1	ArchitectureOwner → ArchitectureOwner/HostReader	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+TPgM:T0	ProgramIntent@1	ProgramOwner → ProgramOwner/NativeRouter	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+TPgM:T1	SchedulingAssumptions@1	ProgramOwner → ProgramOwner/NativeRouter	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+TPgM:T2	ProgramDAG@1	ProgramOwner → ProgramOwner/NativeRouter	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+TPgM:T3	ProgramSPEC@1	ProgramOwner → ProgramOwner/NativeRouter	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+TPgM:T4	HandoffReferral@1	ProgramOwner → ProgramOwner/NativeRouter	ABSENT	-	no machine artifact carries an instance of this stage's output contract
+TPgM:T5	ProgramReview@1	ProgramOwner → ProgramOwner/NativeRouter	ABSENT	-	no machine artifact carries an instance of this stage's output contract

@@ -1,0 +1,387 @@
+{
+  "schema": "R20.CLOSURE_PLAN/1",
+  "round": "R20-FHS-20261029",
+  "subject": "FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2",
+  "deliverable": {
+    "archive": "FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip",
+    "sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+    "bytes": 13578117,
+    "entries": 89
+  },
+  "claim_ceiling": {
+    "now": "AUTHOR_SIDE_LOCAL",
+    "t1_author_side_all_green": "4/6 achieved (validator, checksum, determinism, gates); missing A1 (bare pytest) and A7 (reconciliation)",
+    "t2_owner_accepted_local": "NOT_RUN (needs OR-1..OR-7)",
+    "t3_external_accepted_release": "NOT_RUN (needs OR-8 + real Host/Checker/Publisher receipts)",
+    "main_merge": "NOT_DONE",
+    "release_or_tag": "NOT_DONE (owner-only, DOC-02:10643)"
+  },
+  "governing_clauses": [
+    {
+      "ref": "SBL_PIPD-LS-PKG_DOC-00.md:1557",
+      "rule": "claim ceiling literals; conflicts stay Open until a lawful Owner rules"
+    },
+    {
+      "ref": "SBL_PIPD-LS-PKG_DOC-00.md:1582",
+      "rule": "without Owner ruling: DOC_ROUTE_HOLD, readable but no promotion; no Gate relaxation"
+    },
+    {
+      "ref": "SBL_PIPD-LS-PKG_DOC-00.md:1546",
+      "rule": "Owner closes a TT with a signed ChapterRegistry/supersession"
+    },
+    {
+      "ref": "SBL_PIPD-LS-PKG_DOC-00.md:504",
+      "rule": "self-signing is not independent review"
+    },
+    {
+      "ref": "SBL_PIPD-LS-PKG_DOC-01.md:4906",
+      "rule": "author-side results are syntax/ID/ABI only; text replacement closes nothing"
+    },
+    {
+      "ref": "SBL_PIPD-LS-PKG_DOC-01.md:4936",
+      "rule": "reopen conditions are per-first-fail scope, unaffected scopes stay usable"
+    },
+    {
+      "ref": "SBL_PIPD-LS-PKG_DOC-02.md:10567",
+      "rule": "closing a TT requires a real Owner Receipt + same-subject evidence + requalification"
+    },
+    {
+      "ref": "SBL_PIPD-LS-PKG_DOC-02.md:10643",
+      "rule": "release gate is issued by the Owner only"
+    },
+    {
+      "ref": "SBL_PIPD-LS-PKG_DOC-04.md:569",
+      "rule": "evidence and claims contract: raw receipts, SoD, invalidation, claim ceiling"
+    }
+  ],
+  "items": [
+    {
+      "id": "A1",
+      "class": "machine",
+      "lane": "EXECUTE",
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "title": "bare `pytest tests` has 2 collection errors (TT-R20-8)",
+      "action": "fix import/collection only, never test semantics",
+      "verify": "PYTHONPATH=src python -m pytest tests -q --collect-only | tail -2",
+      "done_when": "0 errors, 0 failures at collection",
+      "owner_required": false,
+      "ceiling": "code",
+      "blocks": [
+        "T1"
+      ]
+    },
+    {
+      "id": "A2",
+      "class": "machine",
+      "lane": "EXECUTE",
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "title": "lane receipt nonce fields contradict their own byte-exact stdout (TT-R20-9)",
+      "action": "record producer_revision; add nonce_present_anywhere as a SEPARATE field; refuse cross-revision comparison; do not widen ok",
+      "verify": "HGK_STUB_EMIT_NONCE=<nonce> stub control + pytest tests/test_lane_dispatch_r20_gates.py -q",
+      "done_when": "stub control nonce_present=true; receipts carry producer_revision; 9 gate tests green",
+      "owner_required": false,
+      "ceiling": "code",
+      "blocks": [
+        "T1"
+      ]
+    },
+    {
+      "id": "A3",
+      "class": "machine",
+      "lane": "EXECUTE",
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "title": "host assignment rev36 vs branch-pinned rev35 (TT-R20-10)",
+      "action": "emit CONFIG_DRIFT.json (field diff, affected lanes, whether issued evidence is affected); do NOT re-baseline evidence",
+      "verify": "python tools/config_drift.py --repo-rev 35 --host-rev 36",
+      "done_when": "fields=2 (PLAN, VERIFY_SECURITY transport_model), affects_issued_evidence=false",
+      "owner_required": false,
+      "ceiling": "disclosure",
+      "blocks": [
+        "T2"
+      ]
+    },
+    {
+      "id": "A4",
+      "class": "machine",
+      "lane": "EXECUTE",
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "title": "assignment schema has no fallbacks (mechanical half of TT-R20-6)",
+      "action": "add fallbacks[]; strict constrains the PRIMARY arm only; alternates must be explicitly operator-selectable",
+      "verify": "pytest tests/test_lane_assignment_fallbacks.py -q",
+      "done_when": "strict + fallbacks coexist; passing test",
+      "owner_required": false,
+      "ceiling": "code",
+      "blocks": [
+        "D-fallback-policy"
+      ]
+    },
+    {
+      "id": "A5",
+      "class": "machine",
+      "lane": "EXECUTE",
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "title": "delivery never reached main (no common ancestor)",
+      "action": "create publish/r20-subset off main with the 207-file curated subset + SUBSET_MANIFEST.json (per-file source commit); no force, main untouched",
+      "verify": "git diff --shortstat main...publish/r20-subset  # 207 files, 42745 insertions(+), 723 deletions(-)",
+      "done_when": "branch exists, every file traces to a source commit, PR opened",
+      "owner_required": false,
+      "ceiling": "candidate",
+      "blocks": [
+        "M2"
+      ]
+    },
+    {
+      "id": "A6",
+      "class": "machine",
+      "lane": "PLAN",
+      "model": "openai-codex/gpt-6.1-sol",
+      "title": "the 8 owner-decision packets do not exist yet",
+      "action": "render owner_requests/OR-01..OR-08.{json,md} with per-ID and per-cell tables plus verification commands",
+      "verify": "python tools/render_owner_requests.py --check",
+      "done_when": "8 packets, 0 missing fields, each cell appears exactly once across all packets",
+      "owner_required": false,
+      "ceiling": "draft",
+      "blocks": [
+        "T2"
+      ]
+    },
+    {
+      "id": "A7",
+      "class": "machine",
+      "lane": "EXECUTE",
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "title": "document numbers can drift from receipts",
+      "action": "tools/evidence_reconcile.py asserts every number in EVIDENCE_INDEX against receipts",
+      "verify": "python tools/evidence_reconcile.py",
+      "done_when": "mismatches=[]",
+      "owner_required": false,
+      "ceiling": "code",
+      "blocks": [
+        "T1"
+      ]
+    },
+    {
+      "id": "A8",
+      "class": "machine",
+      "lane": "EXECUTE",
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "title": "--require-arm does not constrain SELECTION, only refuses afterwards (TT-R20-11)",
+      "action": "filter the candidate pool by required/assigned arm BEFORE the loop; normalise the rev36 alias (gpt-6.1-sol == openai-codex/gpt-6.1-sol); fail closed with a typed refusal",
+      "verify": "dispatch with --require-arm openai-codex/gpt-6.1-sol and NO --force-rank -> must serve the required arm or refuse pre-spawn, never spend a call on rank 1",
+      "done_when": "no post-hoc ERR_REQUIRED_ARM_NOT_SERVED is reachable for a resolvable required arm",
+      "owner_required": false,
+      "ceiling": "code",
+      "blocks": [
+        "routing-integrity"
+      ]
+    },
+    {
+      "id": "OR-1",
+      "class": "owner_signature",
+      "signer": "ProductOwner",
+      "scope": "stages PM:T0..T5 (6)",
+      "signs": "publish the 6 `@1` output artifacts, or a per-stage typed waiver",
+      "verify": "python tools/check_stage_artifacts.py --owner ProductOwner",
+      "if_unsigned": "6/18 stages stay ABSENT",
+      "ceiling": "T2"
+    },
+    {
+      "id": "OR-2",
+      "class": "owner_signature",
+      "signer": "ArchitectureOwner",
+      "scope": "stages SE:T0..T5 (6)",
+      "signs": "same form as OR-1",
+      "verify": "python tools/check_stage_artifacts.py --owner ArchitectureOwner",
+      "if_unsigned": "6/18 stages stay ABSENT",
+      "ceiling": "T2"
+    },
+    {
+      "id": "OR-3",
+      "class": "owner_signature",
+      "signer": "ProgramOwner",
+      "scope": "stages TPgM:T0..T5 (6)",
+      "signs": "same form as OR-1",
+      "verify": "python tools/check_stage_artifacts.py --owner ProgramOwner",
+      "if_unsigned": "6/18 stages stay ABSENT",
+      "ceiling": "T2"
+    },
+    {
+      "id": "OR-4",
+      "class": "owner_signature",
+      "signer": "protected Calibration Reader appointee",
+      "scope": "11 CALIBRATION cells",
+      "signs": "reader identity + calibrated source bytes pinned by SHA",
+      "verify": "python tools/requalify_hold_cells.py --class CALIBRATION",
+      "if_unsigned": "11 cells stay HOLD",
+      "ceiling": "T2"
+    },
+    {
+      "id": "OR-5",
+      "class": "owner_signature",
+      "signer": "OWNER (human decision)",
+      "scope": "11 HUMAN_DECISION cells + PERFORMANCE waiver (5)",
+      "signs": "per-cell decision values in one batch, plus an explicit PERFORMANCE_UNOBSERVED waiver (no fabricated threshold)",
+      "verify": "python tools/requalify_hold_cells.py --class HUMAN_DECISION --waiver PERFORMANCE",
+      "if_unsigned": "11 + 5 cells stay HOLD",
+      "ceiling": "T2"
+    },
+    {
+      "id": "OR-6",
+      "class": "owner_signature",
+      "signer": "second principal (not the maker)",
+      "scope": "11 HUMAN_JUDGE cells",
+      "signs": "separation-of-duties declaration + verdicts (self-signing does not count, DOC-00:504)",
+      "verify": "python tools/requalify_hold_cells.py --class HUMAN_JUDGE --require-distinct-principal",
+      "if_unsigned": "11 cells stay HOLD",
+      "ceiling": "T2"
+    },
+    {
+      "id": "OR-7",
+      "class": "owner_signature",
+      "signer": "two-version reader binder",
+      "scope": "8 TWO_VERSION cells",
+      "signs": "both reader ids + version hashes",
+      "verify": "python tools/requalify_hold_cells.py --class TWO_VERSION",
+      "if_unsigned": "8 cells stay HOLD",
+      "ceiling": "T2"
+    },
+    {
+      "id": "OR-8",
+      "class": "external_authority",
+      "signer": "5 external owner classes",
+      "scope": "11 package holds (SOURCE 2 / ABI 4 / HOST 3 / CHECKER 1 / RELEASE 1) + CR-ORACLE-001 + N11/N14",
+      "signs": "per-ID reply or supersession in the DOC-00:1546 form",
+      "verify": "python tools/check_external_holds.py --receipts-dir _handover/R20-FHS-20261029/owner_receipts",
+      "if_unsigned": "11 holds OPEN; DOC_ROUTE_HOLD on the affected consumers",
+      "ceiling": "T3"
+    },
+    {
+      "id": "M1",
+      "class": "merge",
+      "target": "main",
+      "branch": "candidate/r18-openspec-only (PR #4)",
+      "decision": "MERGE (only lineage-clean candidate: branched from main f6dfb1e, 11 commits, 81 files, docs+evidence)",
+      "precondition": "owner presses merge; no rebase needed",
+      "risk": "low"
+    },
+    {
+      "id": "M2",
+      "class": "merge",
+      "target": "main",
+      "branch": "publish/r20-subset (to be created by A5)",
+      "decision": "MERGE after A5 + owner review; do NOT merge r19 with --allow-unrelated-histories (941 files, unrelated root)",
+      "precondition": "A5 manifest complete, 207 files, tests green on the subset branch",
+      "risk": "medium (scope review)"
+    },
+    {
+      "id": "M3",
+      "class": "merge",
+      "target": "r18 (stacked)",
+      "branch": "candidate/r19-fhs-implementation (PR #5)",
+      "decision": "KEEP as lineage record; after M2 merges, close #5 as superseded by an owner receipt (DOC-02:10567)",
+      "precondition": "M2 merged",
+      "risk": "low"
+    },
+    {
+      "id": "M4",
+      "class": "merge",
+      "target": "main",
+      "branch": "codex/b1-r5-native-admission (PR #1), codex/b1-r6-artifact-scope (PR #2)",
+      "decision": "DO NOT merge as-is (no common ancestor); replay only src/hg_kseos/native_admission.py + its tests onto a branch from main if main needs the fix",
+      "precondition": "scoped replay + owner review",
+      "risk": "medium"
+    }
+  ],
+  "lane_plan": [
+    {
+      "phase": "P1",
+      "lane": "EXECUTE",
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "items": [
+        "A1",
+        "A2",
+        "A3",
+        "A7",
+        "A8"
+      ],
+      "exit": "T1 six-of-six green"
+    },
+    {
+      "phase": "P2",
+      "lane": "VERIFY",
+      "model": "openai-codex/gpt-6.1-sol",
+      "items": [
+        "falsify P1 deliverables"
+      ],
+      "exit": "no unrefuted counter-evidence"
+    },
+    {
+      "phase": "P3",
+      "lane": "EXECUTE",
+      "model": "opencode-go/deepseek-v4.1-flash",
+      "items": [
+        "A4",
+        "A5"
+      ],
+      "exit": "fallback schema + subset branch"
+    },
+    {
+      "phase": "P4",
+      "lane": "OWNER",
+      "model": "-",
+      "items": [
+        "OR-1..OR-8"
+      ],
+      "exit": "8 receipts on disk"
+    },
+    {
+      "phase": "P5",
+      "lane": "VERIFY",
+      "model": "openai-codex/gpt-6.1-sol",
+      "items": [
+        "requalify only the signed scopes"
+      ],
+      "exit": "ACCEPTANCE_RECORD.json scoped to signed scopes"
+    },
+    {
+      "phase": "P6",
+      "lane": "PLAN",
+      "model": "openai-codex/gpt-6.1-sol",
+      "items": [
+        "M1",
+        "M2"
+      ],
+      "exit": "PRs reviewable; release untouched"
+    }
+  ],
+  "measured_repo_state": {
+    "main_commits": 4,
+    "main_root": "a2389c13",
+    "r19_commits": 214,
+    "r19_root": "ec58a0be",
+    "merge_base_main_r19": null,
+    "tree_diff_main_r19": {
+      "files": 941,
+      "insertions": 121019,
+      "deletions": 5438
+    },
+    "narrow_subset": {
+      "paths": "scripts config tests evidence/R20-FHS-20261029 docs",
+      "files": 207,
+      "insertions": 42745,
+      "deletions": 723
+    },
+    "r18_is_ancestor_of_r19": true,
+    "openspec_only_commits_from_main": 11
+  },
+  "explicitly_not_done": [
+    "re-running r2",
+    "mutating r3 bytes",
+    "re-signing oracles",
+    "relaxing TTL or gates",
+    "merging main with --allow-unrelated-histories",
+    "fabricating PERFORMANCE thresholds",
+    "closing 18 stages by prose",
+    "declaring T2/T3 without owner receipts"
+  ]
+}

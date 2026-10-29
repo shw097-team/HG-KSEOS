@@ -1,0 +1,124 @@
+{
+ "nonce": "47baed5dd95c6358",
+ "claims": [
+  {
+   "id": "C1",
+   "verdict": "PASS",
+   "measured": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+   "method": "Read shipped archive bytes and independently calculate SHA-256."
+  },
+  {
+   "id": "C2",
+   "verdict": "PASS",
+   "measured": {
+    "bytes": 13578117,
+    "entries": 89,
+    "directory_entries": 0,
+    "crc_errors": 0
+   },
+   "method": "Measure archive byte length, enumerate ZIP entries, and verify member CRCs."
+  },
+  {
+   "id": "C3",
+   "verdict": "HOLD",
+   "measured": "No fresh validator execution.",
+   "method": "Inspect shipped validator source. Fresh extraction and validator output writes are prohibited by the read-only policy. The claimed 2789 passed / 0 failed was not independently reproduced."
+  },
+  {
+   "id": "C4",
+   "verdict": "PASS",
+   "measured": {
+    "rows": 88,
+    "verified": 88,
+    "mismatches": 0,
+    "missing_members": 0,
+    "self_references": 0
+   },
+   "method": "Parse shipped checksum list and independently hash every referenced ZIP member."
+  },
+  {
+   "id": "C5",
+   "verdict": "PASS",
+   "measured": {
+    "rows": 46,
+    "CALIBRATION": 11,
+    "HUMAN_DECISION": 11,
+    "HUMAN_JUDGE": 11,
+    "TWO_VERSION": 8,
+    "PERFORMANCE": 5
+   },
+   "method": "Parse shipped HOLD_DISPOSITION.tsv and count reader_class values."
+  },
+  {
+   "id": "C6",
+   "verdict": "PASS",
+   "measured": {
+    "rows": 18,
+    "ABSENT": 18,
+    "ProductOwner": 6,
+    "ArchitectureOwner": 6,
+    "ProgramOwner": 6
+   },
+   "method": "Parse shipped STAGE18_TRACE.tsv and count status and owner_to_consumer values."
+  },
+  {
+   "id": "C7",
+   "verdict": "PASS",
+   "measured": {
+    "rows": 11,
+    "SOURCE": 2,
+    "ABI": 4,
+    "HOST": 3,
+    "CHECKER": 1,
+    "RELEASE": 1
+   },
+   "method": "Parse shipped holds.json and independently count class values."
+  },
+  {
+   "id": "C8",
+   "verdict": "HOLD",
+   "measured": {
+    "local_main": "Missing; merge-base command exits 128, not claimed 1.",
+    "r19_commits": 214,
+    "r18_is_ancestor_of_r19": true,
+    "cached_origin_main_commits": 4,
+    "cached_origin_main_merge_base_rc": 1,
+    "cached_origin_main": "f6dfb1e57162dc3868dc488482d249fc095eb429",
+    "r19": "6086908e5f89e2af6b4d32515612e5e0ad6567ed"
+   },
+   "method": "Read Git refs; run rev-list and merge-base. Cached origin/main corroborates the numeric claims, but current main cannot be tested."
+  },
+  {
+   "id": "C9",
+   "verdict": "HOLD",
+   "measured": {
+    "local_main": "Missing; documented diff commands exit 128.",
+    "cached_origin_main_to_r19": {
+     "files": 941,
+     "insertions": 121019,
+     "deletions": 5438
+    },
+    "cached_origin_main_to_r19_narrow_subset": {
+     "files": 207,
+     "insertions": 42745,
+     "deletions": 723
+    }
+   },
+   "method": "Run Git shortstat and independently sum numstat using cached origin/main. Snapshot numbers match; current main comparison remains untestable."
+  },
+  {
+   "id": "C10",
+   "verdict": "HOLD",
+   "measured": "9 test functions found; full suite not executed.",
+   "method": "Inspect gate test source. Three tests explicitly create temporary directories and write fixtures or ledgers, which the read-only policy prohibits. Test count does not establish 9 passed."
+  }
+ ],
+ "disagreements": [
+  "C8: document expects main merge-base rc=1; local main is absent and the command returns rc=128. Cached origin/main returns rc=1.",
+  "C9: document presents main diff commands as reproducible; local main is absent and those commands return rc=128. Cached origin/main reproduces both claimed totals."
+ ],
+ "overall": "HOLD",
+ "claim_ceiling": "advisory only; you are not an acceptance authority",
+ "artifact_written": false,
+ "write_blocker": "Session filesystem policy is read-only."
+}

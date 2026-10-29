@@ -1,0 +1,206 @@
+{
+ "schema": "R18.WP18.DEFECT_D-R18-01_REPAIR/1",
+ "defect": "D-R18-01 source_manifest pins the superseded _SKELETON_SPINE_DRAFT tree",
+ "pre_repair_measurement": {
+  "passed": 2788,
+  "failed": 1,
+  "failing_case": "SOURCE-BYTES-UNCHANGED"
+ },
+ "manifest_rows_before": 172,
+ "manifest_rows_after": 163,
+ "pins_refreshed": 20,
+ "pins_refreshed_with_changed_bytes": 20,
+ "pins_dropped_named_reason": 9,
+ "refreshed": [
+  {
+   "name": "COVERAGE_REPORT.md",
+   "rel": "COVERAGE_REPORT.md",
+   "old_sha256": "a7eba4b9eef0a2575d2ad35c38705fd8ec3ca60e1759566fa73705b44a6dc69d",
+   "new_sha256": "40d080e546e046ba3292a3b3c96a17f0770ea85df54df8cd417441aa80c32021",
+   "changed": true
+  },
+  {
+   "name": "INDEX.md",
+   "rel": "INDEX.md",
+   "old_sha256": "f2900d20a0b64404ca4ee4baadc3b5b221402fb91f268bf405ae725517080fcd",
+   "new_sha256": "34094efb22b222171ded954bd4e4b758a10d028baeeaf0a3b22796e899c17b95",
+   "changed": true
+  },
+  {
+   "name": "MANIFEST.md",
+   "rel": "MANIFEST.md",
+   "old_sha256": "87c8194e0cd81f50fe69c7adc175ff58759eca906fb62a8fb4c3e816852d1f06",
+   "new_sha256": "e91990a2c388f8703cc5ba6b2fabb1a88e04d5c9f32af7d977006262e9c04ee6",
+   "changed": true
+  },
+  {
+   "name": "README.md",
+   "rel": "README.md",
+   "old_sha256": "60b7f2611786d2268dee7051203150c9056c39b5a61536f0e3e064c04a464e63",
+   "new_sha256": "a8b5b206b2a263ebbe90f83d600f433df0fae51a11870e2dde900703067648f6",
+   "changed": true
+  },
+  {
+   "name": "00_INDEX_AND_DECISION.md",
+   "rel": "01_BODY\\00_INDEX_AND_DECISION.md",
+   "old_sha256": "1c79d52259b40182d976b8a949c81e12f9b57be636ef0756844dfc5fc334bc18",
+   "new_sha256": "fee2de9aadd6bb57a4e852bf324438f9541dc2010ce0220a30222287d83f90cf",
+   "changed": true
+  },
+  {
+   "name": "01_PRODUCT_AUTHORITY_SPINE.md",
+   "rel": "01_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+   "old_sha256": "97fd4aba184f55889baf8f2aa8725b4df5c752148240ce835a1fd760c50bd850",
+   "new_sha256": "48d3d533b03fb8ded97a67958efb132a4114e6aeaf16a96c5b3fddc472a795cf",
+   "changed": true
+  },
+  {
+   "name": "02_PIPD_LIFECYCLE_AND_TPM.md",
+   "rel": "01_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+   "old_sha256": "92bae9db228b4a8052e38761f5a29692c33d116add96338922d4e14d7257ddb1",
+   "new_sha256": "f8d500ef14cb6c830129081be27f35983bf662b193211b8e1395e59490d3075f",
+   "changed": true
+  },
+  {
+   "name": "03_ARCHITECTURE_ABI_AND_EFFECT.md",
+   "rel": "01_BODY\\03_ARCHITECTURE_ABI_AND_EFFECT.md",
+   "old_sha256": "f3fb530f5c64187aa74884299c1b2471a9191b6ed17cf9146de6e1a8bc8c5efd",
+   "new_sha256": "696083e0db101a2aaa71434aeb4c30edc06d2ff10152c2c80aa37070ee3a518f",
+   "changed": true
+  },
+  {
+   "name": "04_FABRIC_HGK_CONTROL.md",
+   "rel": "01_BODY\\04_FABRIC_HGK_CONTROL.md",
+   "old_sha256": "2c5b849d8e663d893169359b52c80e6203cde8766ce6ab19d4802d02f6eaecdc",
+   "new_sha256": "e8fd5317b76bffe1260aabb25ab39dd3f4a1299ef88057a179de7879cec87747",
+   "changed": true
+  },
+  {
+   "name": "06_FHS_EXECUTE_HERMES_RUNTIME.md",
+   "rel": "01_BODY\\06_FHS_EXECUTE_HERMES_RUNTIME.md",
+   "old_sha256": "78746ae16deee8532c19f90d06505ad88f71788ecd7f360924a4b442fea50388",
+   "new_sha256": "d457b7b0ebd303ae7817516eb61bc82b0a7611030cac3d038ace2339b8b8e652",
+   "changed": true
+  },
+  {
+   "name": "07_ACCEPTANCE_CHALLENGE.md",
+   "rel": "01_BODY\\07_ACCEPTANCE_CHALLENGE.md",
+   "old_sha256": "a1834709d6278033e4f0653a8364a840422785b27ddb86f0a64d54adad6bad5e",
+   "new_sha256": "5037c52d8bf6d0f2ec6b4b70784f2d1977af02b2d125f4e9b961e2901796f6c0",
+   "changed": true
+  },
+  {
+   "name": "08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+   "rel": "01_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+   "old_sha256": "d810e97cef8eb31be439ba168f47b766ca011b5c4b414d2affa26b4d1f663713",
+   "new_sha256": "29e1be9a0c602831c27684c944e89063079b2035eb2d97ae0ea4eaa0db680f91",
+   "changed": true
+  },
+  {
+   "name": "09A_R15_949_ORIGINAL_ATOMS.md",
+   "rel": "01_BODY\\09A_R15_949_ORIGINAL_ATOMS.md",
+   "old_sha256": "e5e3da2e070c61d0e3deeb5c1fea8a674af7634993b2612c4c4bb329a5e2e82c",
+   "new_sha256": "198bdcf7c301b1e9162b9d934c73b230fa36ba32201422c5a691b4189151b12b",
+   "changed": true
+  },
+  {
+   "name": "09B_KIND_MODE_HOST_192.md",
+   "rel": "01_BODY\\09B_KIND_MODE_HOST_192.md",
+   "old_sha256": "41cdd5e5ab16bc2b44ab47155e6cd09e81eef98c56753ae7dd03d0484385a4cd",
+   "new_sha256": "2c38c8e20858570ca7b7d4673e7c08ce9277dd82b63f3c3dce99770998eae773",
+   "changed": true
+  },
+  {
+   "name": "09_SBL_DOC00_13_FULL_UPGRADE.md",
+   "rel": "01_BODY\\09_SBL_DOC00_13_FULL_UPGRADE.md",
+   "old_sha256": "2f5ff0ddde499ee84ef844bc1ec5b3a6b5d697ac9279839854f932e0aa013b7d",
+   "new_sha256": "a010b53b26eb5c903c2ca1ad13981d9efb4b2aec46ab930c68ad992d0834728a",
+   "changed": true
+  },
+  {
+   "name": "10A_B1_TQAEP_120_124_38.md",
+   "rel": "01_BODY\\10A_B1_TQAEP_120_124_38.md",
+   "old_sha256": "a3233c665420b56f6317ed43875c681d22f1558a3c875e3f61d1a163e82a6a86",
+   "new_sha256": "dba3759dd32043fdae4be258320d7d57e00f8c7b6c9be7441cfe722202afc449",
+   "changed": true
+  },
+  {
+   "name": "10B_B1_PI27_PD31.md",
+   "rel": "01_BODY\\10B_B1_PI27_PD31.md",
+   "old_sha256": "f53c0a09f4f2de1a48a184ff4fcd1ee61ee8fb2c35eb864869d6f277e7222b3e",
+   "new_sha256": "9b2f863ff0b0242b39027fb44f0a4f7fdb8026b65b078f3a58799a011991dc23",
+   "changed": true
+  },
+  {
+   "name": "10_B1_W18_SELF_BOOTSTRAP.md",
+   "rel": "01_BODY\\10_B1_W18_SELF_BOOTSTRAP.md",
+   "old_sha256": "24815475eb097446b4e6a6953a4fe649c6404a8c8232727e192e437bd9542002",
+   "new_sha256": "a99a00d3a8bc5493fbe4957a3d3b855f3ef1582b4ba0bc3b36a2c914ac508be6",
+   "changed": true
+  },
+  {
+   "name": "11_WORKPACKAGES_AND_DAG.md",
+   "rel": "01_BODY\\11_WORKPACKAGES_AND_DAG.md",
+   "old_sha256": "e3be4f8321e71caf12331f175538e9b9909d5bf9cfcbb4f93eafa9327c4498ab",
+   "new_sha256": "0f0c226986b5bc57dfba733e5474f2cd95e3b18d6de09ff109a371df405b2172",
+   "changed": true
+  },
+  {
+   "name": "12_VERIFICATION_AND_DELIVERY.md",
+   "rel": "01_BODY\\12_VERIFICATION_AND_DELIVERY.md",
+   "old_sha256": "6dfefc3fd590baa5d94b8b65955840bad462fef5ebdbe6c7273a9fba8c247ac7",
+   "new_sha256": "91835bc51e1767febf0bd014a1e6cbd975b5528fc9c9842a2bd37d3a340a1e10",
+   "changed": true
+  }
+ ],
+ "dropped": [
+  {
+   "name": "AUDIT_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_實質正文_FULL_DESTRUCTIVE_AUDIT_2026-10-29_r1.md",
+   "pinned_path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\AUDIT_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_實質正文_FULL_DESTRUCTIVE_AUDIT_2026-10-29_r1.md",
+   "reason": "NO_EQUIVALENT_IN_DELIVERED_REVISION2; the pin describes the superseded _SKELETON_SPINE_DRAFT tree and is not a delivered input"
+  },
+  {
+   "name": "CODEX_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_升級修補版_產出指令_2026-10-29_r2.md",
+   "pinned_path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\CODEX_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_升級修補版_產出指令_2026-10-29_r2.md",
+   "reason": "NO_EQUIVALENT_IN_DELIVERED_REVISION2; the pin describes the superseded _SKELETON_SPINE_DRAFT tree and is not a delivered input"
+  },
+  {
+   "name": "CODEX_薄PROMPT_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_升級修補_2026-10-29_r2.md",
+   "pinned_path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\CODEX_薄PROMPT_FHS-MSC_PIPD-LS-PKG_SKELETON+SPINE_升級修補_2026-10-29_r2.md",
+   "reason": "NO_EQUIVALENT_IN_DELIVERED_REVISION2; the pin describes the superseded _SKELETON_SPINE_DRAFT tree and is not a delivered input"
+  },
+  {
+   "name": "05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+   "pinned_path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+   "reason": "NO_EQUIVALENT_IN_DELIVERED_REVISION2; the pin describes the superseded _SKELETON_SPINE_DRAFT tree and is not a delivered input"
+  },
+  {
+   "name": "E01_SOURCE_MANIFEST_AND_SEARCH.md",
+   "pinned_path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E01_SOURCE_MANIFEST_AND_SEARCH.md",
+   "reason": "NO_EQUIVALENT_IN_DELIVERED_REVISION2; the pin describes the superseded _SKELETON_SPINE_DRAFT tree and is not a delivered input"
+  },
+  {
+   "name": "E02_REQUIREMENT_TRACE_AND_DENOMINATORS.md",
+   "pinned_path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E02_REQUIREMENT_TRACE_AND_DENOMINATORS.md",
+   "reason": "NO_EQUIVALENT_IN_DELIVERED_REVISION2; the pin describes the superseded _SKELETON_SPINE_DRAFT tree and is not a delivered input"
+  },
+  {
+   "name": "E03_ABI_SCHEMAS_AND_FIXTURE_AUDIT.md",
+   "pinned_path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E03_ABI_SCHEMAS_AND_FIXTURE_AUDIT.md",
+   "reason": "NO_EQUIVALENT_IN_DELIVERED_REVISION2; the pin describes the superseded _SKELETON_SPINE_DRAFT tree and is not a delivered input"
+  },
+  {
+   "name": "E04_CONFLICT_RCA_ADOPTION_AND_HOLDS.md",
+   "pinned_path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E04_CONFLICT_RCA_ADOPTION_AND_HOLDS.md",
+   "reason": "NO_EQUIVALENT_IN_DELIVERED_REVISION2; the pin describes the superseded _SKELETON_SPINE_DRAFT tree and is not a delivered input"
+  },
+  {
+   "name": "E05_QA_READBACK_AND_CLAIM_CEILING.md",
+   "pinned_path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E05_QA_READBACK_AND_CLAIM_CEILING.md",
+   "reason": "NO_EQUIVALENT_IN_DELIVERED_REVISION2; the pin describes the superseded _SKELETON_SPINE_DRAFT tree and is not a delivered input"
+  }
+ ],
+ "validator_untouched": true,
+ "preimage": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\preimage\\source_manifest.json.bak",
+ "claim_ceiling": "isolated-copy repair; the delivered candidate remains byte-frozen and still carries the defect - the fix is offered to the author, not silently applied to the sealed package"
+}

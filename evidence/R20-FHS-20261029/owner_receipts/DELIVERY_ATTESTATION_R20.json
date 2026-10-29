@@ -1,0 +1,115 @@
+{
+ "schema": "R20.DELIVERY_ATTESTATION_RECEIPT/1",
+ "window_id": "WIN-7d092fd95ffc",
+ "task_id": "R20-FHS-CLOSURE",
+ "owner_fingerprint": "412b351937be72a1",
+ "owner_public_hex": "d42c654cd1afba803ef78bee501aa3e2a3d33ff1305c52f914d3ff27bb9be379",
+ "signed_at_utc": "2026-10-29T16:07:19Z",
+ "payload_sha256": "fc75b54de9f0e38454aa63b018baa4b0c724caab90c9c7fd3f9a6b4db8e1e423",
+ "merkle_root": "6062ce82cce1325582472ae339e752bcd60117f68a033e9d85ec61c66a23cd77",
+ "signature_hex": "892afb3456a2112c4245a993497c4fc94736ea4b19f72acd5eb5139d8579fb3db246956f6474c1b57207dace36f42a5ae9b9e9f34d8a101344e7f39c8cad380e",
+ "signature_verification": {
+  "verified": true,
+  "method": "Ed25519PublicKey.from_public_bytes(owner_public_hex).verify(sig, body_json)"
+ },
+ "ops_used_after": 2,
+ "body_json": "{\"artifacts\":[{\"bytes\":5983,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/CLOSURE_ROUND.md\",\"sha256\":\"ea0cac7c338cea98eca29dfb0a89688f67c72de61ea53dee8042072615a48e6c\"},{\"bytes\":21097,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/analysis/FAR_CLOSURE_AND_PROMOTION_20261029.md\",\"sha256\":\"301f439c65ad85e2168c215c6a8d7b81f60bdc2eb450ae2af7a65ff0e7b92000\"},{\"bytes\":14222,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/analysis/CLOSURE_PLAN.json\",\"sha256\":\"e2e75e2137c4f140bb67e8561e652f1b4d2450427f9c651c73abf34276f180fc\"},{\"bytes\":8706,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/lane/CLOSURE_VERIFY_R20_R6.json\",\"sha256\":\"00cd61580f6bb4dacc52025db78bd4c2866b9617b00a6cd52c8208e6f24268a9\"},{\"bytes\":9691,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_receipts/OWNER_AUTHORIZATION_R20.summary.json\",\"sha256\":\"8b770a9003ffa0f8f168c32594c2dc7218fab7e16f056a83bd370a25e6249e9f\"},{\"bytes\":3927,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/DEFECTS_R20B.json\",\"sha256\":\"44b5693223bb5e852ddb9c7fbf7c77c8bbbdd36e839e01db6374d20a44eba9aa\"},{\"bytes\":53163,\"path\":\"C:/Projects/Agent_Workspace/wt-r20-subset/SUBSET_MANIFEST.json\",\"sha256\":\"0120fc6190fecff035ceebe2fcf16d49031f532417ab08bcb27cbbc1d7bfa0dd\"},{\"bytes\":1279,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-1.json\",\"sha256\":\"b211ed01409672149bdb10050265dff9040627b76de7d5547fddb15a6d8f1560\"},{\"bytes\":1272,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-2.json\",\"sha256\":\"5559f151368751305eb2af4f35e3a86d8879012a8a74e9b443e72a9c52e25270\"},{\"bytes\":1266,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-3.json\",\"sha256\":\"a59fec23133b0c002ebe6a6e05b321560bcb1d3508ef5eaf699d0a3d70e703f3\"},{\"bytes\":3709,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-4.json\",\"sha256\":\"3bff599120f401b0cf6d00f747e8c460f0ee21254b589f12e4870b226a45fa41\"},{\"bytes\":5807,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-5.json\",\"sha256\":\"a70692959e0b4cbdaf1c7565d35a52c5f4088468854393b65ce5c8a091bc6c35\"},{\"bytes\":4043,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-6.json\",\"sha256\":\"745fa434717d1b93b894b0ec5b2e4d662a63a62d7cb8286ca6c11e5c7582e1fa\"},{\"bytes\":2783,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-7.json\",\"sha256\":\"681c3b821fe8346c4f24e7aab6460d9dcee3681b00b284cd734ebbebb020d924\"},{\"bytes\":4160,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-8.json\",\"sha256\":\"2970875480109b7aa602264b328cb0792ba388977c91cab019c4c230360fc2c6\"},{\"bytes\":895,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-1.md\",\"sha256\":\"40591cc88e94be9739115ec3574a047c81672fb6a97ed6f4e8cd18921aafca33\"},{\"bytes\":888,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-2.md\",\"sha256\":\"885e20e329154242f2ea7763a4a87c8f26cc00e1ebc8d736d0b6f2f62c1f6be3\"},{\"bytes\":882,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-3.md\",\"sha256\":\"a04182375ab78b7b457c5c7389757150c1773c70f93e35e6fa6c1deae61acd80\"},{\"bytes\":2269,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-4.md\",\"sha256\":\"01095e80226381dbf8c4dd20577a05caaf2a39bc874934bbaadf64ba415f3556\"},{\"bytes\":2597,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-5.md\",\"sha256\":\"51b955f0d6ddd2199232f9db0f993460784cf1de071a57f644de980c89b908cd\"},{\"bytes\":2572,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-6.md\",\"sha256\":\"d0f4bbbe19660fecf992167c8d9fd47ad9618c2a410585569eb75a78919713a0\"},{\"bytes\":1762,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-7.md\",\"sha256\":\"cee3d4f72d64433db5cfaa97d76fedb16022516b6fe489dfb674657599b802c8\"},{\"bytes\":2107,\"path\":\"C:/Projects/Agent_Workspace/wt-r19-delivery/evidence/R20-FHS-20261029/owner_requests/OR-8.md\",\"sha256\":\"e1f00bc6f6c2d82786b61b89a7a5f08aefd22e071f6ab564297885960ea8c47f\"},{\"bytes\":3491,\"path\":\"C:/Projects/Agent_Workspace/var/R20-FHS-20261029/receipts/CLOSURE_MACHINE_ITEMS.json\",\"sha256\":\"a1af17f2841f0894cf7df55e1c577e4ce231627727add8de30baeaf178cb9d59\"}],\"attests\":[\"the delivered bytes listed below are the bytes the closure report describes\",\"A1..A8 were executed and re-measured by the author; no independently ACCEPTED claim is made\",\"six VERIFY rounds were run; the last one returned 6 PASS / 4 HOLD / 0 FAIL (advisory, not acceptance)\",\"75 residues remain HOLD pending the owner's signatures on OR-1..OR-8\"],\"claim_ceiling\":\"OWNER_AUTHORIZED_DELIVERY_ATTESTATION -- binds the delivered bytes; it is not acceptance\",\"does_not_attest\":[\"owner acceptance of the 75 residues (the OR packets are unsigned)\",\"OR-6 separation of duties and OR-8 external acceptance\",\"release, tag, sourcefreeze, or merge to main\"],\"merkle_root\":\"6062ce82cce1325582472ae339e752bcd60117f68a033e9d85ec61c66a23cd77\",\"owner_fingerprint\":\"412b351937be72a1\",\"schema\":\"R20.DELIVERY_ATTESTATION/1\",\"task\":\"R20-FHS-CLOSURE\",\"window_id\":\"WIN-7d092fd95ffc\"}",
+ "artifacts_signed": [
+  {
+   "path": "/CLOSURE_ROUND.md",
+   "sha256": "ea0cac7c338cea98eca29dfb0a89688f67c72de61ea53dee8042072615a48e6c"
+  },
+  {
+   "path": "/analysis/FAR_CLOSURE_AND_PROMOTION_20261029.md",
+   "sha256": "301f439c65ad85e2168c215c6a8d7b81f60bdc2eb450ae2af7a65ff0e7b92000"
+  },
+  {
+   "path": "/analysis/CLOSURE_PLAN.json",
+   "sha256": "e2e75e2137c4f140bb67e8561e652f1b4d2450427f9c651c73abf34276f180fc"
+  },
+  {
+   "path": "/lane/CLOSURE_VERIFY_R20_R6.json",
+   "sha256": "00cd61580f6bb4dacc52025db78bd4c2866b9617b00a6cd52c8208e6f24268a9"
+  },
+  {
+   "path": "/owner_receipts/OWNER_AUTHORIZATION_R20.summary.json",
+   "sha256": "8b770a9003ffa0f8f168c32594c2dc7218fab7e16f056a83bd370a25e6249e9f"
+  },
+  {
+   "path": "/DEFECTS_R20B.json",
+   "sha256": "44b5693223bb5e852ddb9c7fbf7c77c8bbbdd36e839e01db6374d20a44eba9aa"
+  },
+  {
+   "path": "C:/Projects/Agent_Workspace/wt-r20-subset/SUBSET_MANIFEST.json",
+   "sha256": "0120fc6190fecff035ceebe2fcf16d49031f532417ab08bcb27cbbc1d7bfa0dd"
+  },
+  {
+   "path": "/owner_requests/OR-1.json",
+   "sha256": "b211ed01409672149bdb10050265dff9040627b76de7d5547fddb15a6d8f1560"
+  },
+  {
+   "path": "/owner_requests/OR-2.json",
+   "sha256": "5559f151368751305eb2af4f35e3a86d8879012a8a74e9b443e72a9c52e25270"
+  },
+  {
+   "path": "/owner_requests/OR-3.json",
+   "sha256": "a59fec23133b0c002ebe6a6e05b321560bcb1d3508ef5eaf699d0a3d70e703f3"
+  },
+  {
+   "path": "/owner_requests/OR-4.json",
+   "sha256": "3bff599120f401b0cf6d00f747e8c460f0ee21254b589f12e4870b226a45fa41"
+  },
+  {
+   "path": "/owner_requests/OR-5.json",
+   "sha256": "a70692959e0b4cbdaf1c7565d35a52c5f4088468854393b65ce5c8a091bc6c35"
+  },
+  {
+   "path": "/owner_requests/OR-6.json",
+   "sha256": "745fa434717d1b93b894b0ec5b2e4d662a63a62d7cb8286ca6c11e5c7582e1fa"
+  },
+  {
+   "path": "/owner_requests/OR-7.json",
+   "sha256": "681c3b821fe8346c4f24e7aab6460d9dcee3681b00b284cd734ebbebb020d924"
+  },
+  {
+   "path": "/owner_requests/OR-8.json",
+   "sha256": "2970875480109b7aa602264b328cb0792ba388977c91cab019c4c230360fc2c6"
+  },
+  {
+   "path": "/owner_requests/OR-1.md",
+   "sha256": "40591cc88e94be9739115ec3574a047c81672fb6a97ed6f4e8cd18921aafca33"
+  },
+  {
+   "path": "/owner_requests/OR-2.md",
+   "sha256": "885e20e329154242f2ea7763a4a87c8f26cc00e1ebc8d736d0b6f2f62c1f6be3"
+  },
+  {
+   "path": "/owner_requests/OR-3.md",
+   "sha256": "a04182375ab78b7b457c5c7389757150c1773c70f93e35e6fa6c1deae61acd80"
+  },
+  {
+   "path": "/owner_requests/OR-4.md",
+   "sha256": "01095e80226381dbf8c4dd20577a05caaf2a39bc874934bbaadf64ba415f3556"
+  },
+  {
+   "path": "/owner_requests/OR-5.md",
+   "sha256": "51b955f0d6ddd2199232f9db0f993460784cf1de071a57f644de980c89b908cd"
+  },
+  {
+   "path": "/owner_requests/OR-6.md",
+   "sha256": "d0f4bbbe19660fecf992167c8d9fd47ad9618c2a410585569eb75a78919713a0"
+  },
+  {
+   "path": "/owner_requests/OR-7.md",
+   "sha256": "cee3d4f72d64433db5cfaa97d76fedb16022516b6fe489dfb674657599b802c8"
+  },
+  {
+   "path": "/owner_requests/OR-8.md",
+   "sha256": "e1f00bc6f6c2d82786b61b89a7a5f08aefd22e071f6ab564297885960ea8c47f"
+  },
+  {
+   "path": "/receipts/CLOSURE_MACHINE_ITEMS.json",
+   "sha256": "a1af17f2841f0894cf7df55e1c577e4ce231627727add8de30baeaf178cb9d59"
+  }
+ ]
+}

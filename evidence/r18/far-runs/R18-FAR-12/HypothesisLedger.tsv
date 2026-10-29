@@ -1,0 +1,6 @@
+hyp_id	hypothesis	status
+H1	goal pause is state-machine noise, not gate failure	SUPPORTED
+H2	todo staleness is agent omission	SUPPORTED
+H3	lanes were skipped by choice, not unavailability	SUPPORTED
+H4	'blocked on another principal' was an assumption	SUPPORTED
+H5	branch is unmergable because it is an orphan	SUPPORTED

@@ -1,0 +1,4 @@
+query_id	channel	query	result_count
+Q1	local	read round receipts	7
+Q2	git	git rev-list --count	2
+Q3	python	inspect NativeAdmission.authorize	1

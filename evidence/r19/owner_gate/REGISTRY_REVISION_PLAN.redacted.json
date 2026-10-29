@@ -1,0 +1,82 @@
+{
+ "schema": "HGK-OWNER-ENABLE-PLAN/1",
+ "note": "Proposed revision for owner review. The current registry was installed by an owner elevated step (see registry.revision.installed_by); this plan reproduces that shape for R19 and MUST be installed by the owner, not by an agent.",
+ "mission_id": "FHS-MSC-R19-Skeleton-Spine-Implementation",
+ "source_manifest_sha256": "dbbfcb78cab9cfad697ba2016669507cfec219f0b5c4b7df8ab3e5537c07ab21",
+ "policy_sha256": "7c0132ce7299f531f29d8f26bd27c1fdf892834a7dfc395a77aa41348a4b8638",
+ "policy_epoch": 35,
+ "max_ttl_seconds": 3600,
+ "head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+ "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+ "approved_files": [
+  {
+   "path": "runners/native_e2e_lib.py",
+   "sha256": "b27f064933fb16afc5a9386c8d8763ac28f8fd553fb13a11224e000082988275"
+  },
+  {
+   "path": "runners/native_issuer_runner.py",
+   "sha256": "5f124bf5400f3ca808d46fc810c10f32ad22ceec610b787598f5e54ffa939242"
+  },
+  {
+   "path": "runners/native_receiver_runner.py",
+   "sha256": "add792e33ea65834c98277703c529d14ee06bda748cb701c86601db3773e3aeb"
+  },
+  {
+   "path": "runners/host_lane_readback_runner.py",
+   "sha256": "96f5c0c1c2210b83d05b46afe7f0f2ad0023b17bfc4f67ff1dd391c1641fee0b"
+  },
+  {
+   "path": "runners/loaded_identity_runner.py",
+   "sha256": "f21c1b65a4c74f406478072a6c8fd7ff861c43695cbd8aefd1e6144c19d88952"
+  },
+  {
+   "path": "runners/revoke_boundary_runner.py",
+   "sha256": "a7a8af7a694c97f125e66f326f5822464bd4d5520075d059d4b522366747b954"
+  },
+  {
+   "path": "runners/post_revoke_successor_runner.py",
+   "sha256": "49aae19aa9de6512daf14cb0739a74cdb01e82aa5a6897c0f85c185e47c08420"
+  }
+ ],
+ "checker_os_sid": "S-1-5-21-<redacted>",
+ "maker_os_sid": "S-1-5-21-<redacted>",
+ "scope": {
+  "database_path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\shared-spine\\hg-kseos.db",
+  "head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+  "root_identity": "32165637:002d0000000a80e0",
+  "task_kind": "B1_BOOTSTRAP_REPAIR",
+  "lease_generation": 0,
+  "request_sha256": [
+   "f930879f6f517f2e8c0be8f907ea160a86f5fce48f043eed0dea891d4415d944",
+   "c350d634ef78300bf2559735de76790f6d0216d8c2f978d43f3943885a564ad9",
+   "34a337b834157fd7f9b3e2cf3a9a827bb4d82342e0c5eed98868a48164177f93",
+   "e14c3c2a3e6e868917dc79fba09242649c5818276573c98275e26cd8d09b8cca",
+   "8d9fa5e93845773d2124eab2c738947de65f6c2c9992c2e342d041e1fab72a7e",
+   "ec3e1e92b503620d9ab3fb233454dea05e63b93d6231c716ec113caa1c6c99f7",
+   "cee79a150668c1bd800f05018283378aaad8da1ba18e553d16e173e282d0c5e6",
+   "2b0a9444862bc33fbe7bdb7d0036f6119b26057bbad92eb3c071be09944934ee",
+   "d0388f96c103053a9883e3b01f12bd11b2855810a15a0aee77656619799cf9bd",
+   "7143c6f0f58c5c34030e94bcac143709e4de3d997c372252e1b6e128d4193353",
+   "99206842a5b44a213355dbcef4238277f84b4eea9be6b6442277355b0ca4e737",
+   "a646d9ca1073e235055dd3f6344ef4a9d6c34da5554207e53889c62ea8f206c7",
+   "bb72783c4babaa0ca48008c3b6f49b11b473b42d8c36db82b460c23183e4a7d5"
+  ]
+ },
+ "task_kinds": {
+  "B1_BOOTSTRAP_REPAIR": {
+   "state": "REGISTERED",
+   "source_sha256": "dbbfcb78cab9cfad697ba2016669507cfec219f0b5c4b7df8ab3e5537c07ab21",
+   "operations": [
+    "create_taskspec",
+    "create_workorder"
+   ],
+   "registered_at": "2026-10-29",
+   "registered_by": "owner reviewed revision (plan sha pinned into the registry)"
+  }
+ },
+ "approval_source": "OWNER instruction 2026-10-29: pre-authorise the R19 gated work packages (13 rows) so one bounded reference window can admit them natively",
+ "supersedes": {
+  "registry_sha256": "73b4dec3225ffa81cbf4f30af631d73d73d482cef02a2b338c82ebf2119a8a87",
+  "policy_epoch": 34
+ }
+}

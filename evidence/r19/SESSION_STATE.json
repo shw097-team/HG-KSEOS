@@ -1,0 +1,189 @@
+{
+ "schema": "R19.SESSION_STATE/2",
+ "written_utc": "2026-10-29T12:26:16Z",
+ "supersedes_schema": "R19.SESSION_STATE/1",
+ "round": "R19-FHS-20261029",
+ "session": {
+  "id": "20261029_191425_c7d21a",
+  "platform": "hermes desktop",
+  "goal_set": true,
+  "todo_list": true
+ },
+ "subject": {
+  "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2",
+  "files": 85,
+  "bytes": 145944348,
+  "max_rel_path_len": 289,
+  "largest": [
+   "03_TESTS_AND_READBACK/source_keyword_hits.jsonl:112296081",
+   "FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2.zip:13326288"
+  ],
+  "self_embedded_zip": true,
+  "note": "44 files / 11,664,373 B in earlier receipts is a MAX_PATH truncation artifact and is VOID",
+  "short_path_copy": "C:\\r19pkg"
+ },
+ "validator": {
+  "checks": 2789,
+  "fresh_on_copy": {
+   "passed": 2788,
+   "failed": 1,
+   "case": "SOURCE-BYTES-UNCHANGED"
+  },
+  "shipped_report": {
+   "passed": 2789,
+   "failed": 0,
+   "status": "STALE_GREEN_DO_NOT_USE"
+  }
+ },
+ "ledger": {
+  "path": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\ledger.json",
+  "rows": 26,
+  "done": 6,
+  "partial": 13,
+  "parked": 7,
+  "audit_rc": 0,
+  "partial_breakdown": {
+   "HOST_OP": 4,
+   "LOCAL_DRAFT_WRITE": 4,
+   "REPO_WRITE": 2,
+   "SOURCE_READ": 3
+  },
+  "parked_breakdown": {
+   "HOST_OP": 6,
+   "RELEASE": 1
+  }
+ },
+ "lanes": {
+  "PROVEN_VERIFY": {
+   "arm": "openai-codex/gpt-6.1-sol",
+   "transport": "human home + --allow-human-home-transport",
+   "recipe": "--codex-home C:/Users/user/.codex --allow-human-home-transport --relay-base https://chatgpt.com/backend-api/codex --identity-source codex-rollout",
+   "measured": {
+    "ok": true,
+    "used_seconds": 205.4,
+    "served_arm_equals_required": true,
+    "usage_receipt_ok": true
+   }
+  },
+  "PROVEN_EXECUTE": {
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "transport": "keyed relay :10101",
+   "measured": {
+    "relay_healthz": 200,
+    "responses_completed": true
+   }
+  },
+  "FORBIDDEN": [
+   "--force-rank 3 (glm-5.3-flash, not in model-lane-assignment.json)",
+   "sealed home for an OAuth turn",
+   "--sandbox danger-full-access",
+   "--ignore-user-config"
+  ]
+ },
+ "authority": {
+  "owner_window": {
+   "id": "WIN-254a1c9fbe72",
+   "state": "OPEN",
+   "ops_max": 40,
+   "ops_used": 3
+  },
+  "registry": {
+   "revision": 34,
+   "revise_mode": "ABSENT",
+   "authorize_refuses_at": "REQUEST_SCOPE",
+   "plan": "owner_gate\\REGISTRY_REVISION_PLAN.json",
+   "plan_sha256": "0807eba282724591ae5963a59529843d12b2f026f618fe28caf02f1404720202"
+  },
+  "delegation": {
+   "canonical": "R18-CANON-6733b6bb",
+   "amendment": "SIGNED_NOT_INSTALLED",
+   "blocker": "tools/delegation_gate.py HARD_DENY contains LOCAL_DRAFT_WRITE (code-level)",
+   "amendment_file": "var\\R18-FHS-SKELETON-SPINE-20261029\\governance\\delegation_R19_amendment_signed_NOT_INSTALLED.json"
+  },
+  "native_admission_receipts": 0
+ },
+ "governance_files_changed_by_this_session": [
+  {
+   "file": "config/hermes-codex-lane.json",
+   "why": "codex toolchain pin refreshed to the installed build 0.165.0-alpha.1.2 (bin/0ab0e7a8f3779036)",
+   "rollback": "preimage/hermes-codex-lane.json.bak"
+  },
+  {
+   "file": "config/active-policy.json",
+   "why": "re-designation after the pin refresh",
+   "digest": "fc760aef42ec78eb...",
+   "bytes": 17274,
+   "rollback": "preimage/active-policy.json.bak"
+  }
+ ],
+ "self_corrections": [
+  "package denominator 44->85 files (MAX_PATH truncation)",
+  "R-3 stale-green: challenge was RIGHT; shipped report is green while fresh run is red",
+  "gpt-6.1-sol IS available with the B1 recipe; the 401 was a sealed-home choice",
+  "TT-R19-LANE-SANDBOX withdrawn -> TT-R19-SEALED-HOME-HELPER",
+  "glm-5.3-flash use was a mandate violation (not in assignment); model itself is alive"
+ ],
+ "next_actions": [
+  {
+   "id": "P0",
+   "what": "long-path-safe denominator freeze (85 files, per-file sha256)",
+   "lane": "EXECUTE",
+   "exit": "DENOMINATOR.json with file count assertion"
+  },
+  {
+   "id": "P1",
+   "what": "build r2-revision3: 29 locator repairs + regenerated static_validation_result (old marked STALE) + remove self-embedded ZIP",
+   "lane": "EXECUTE",
+   "exit": "validate 2789/0 twice-identical"
+  },
+  {
+   "id": "P2",
+   "what": "fresh-context independent adjudication of r3",
+   "lane": "VERIFY gpt-6.1-sol",
+   "exit": "DIFFERENTIAL_VERDICT_R19B.json, subject_mutation CLEAN measured long-path"
+  },
+  {
+   "id": "P3",
+   "what": "dispatcher fail-closed assertions: arm-in-assignment, sealed+OAuth refusal",
+   "lane": "EXECUTE",
+   "exit": "both negative tests refuse"
+  },
+  {
+   "id": "P4",
+   "what": "owner rulings D1-D11",
+   "lane": "OWNER",
+   "exit": "signed decisions"
+  },
+  {
+   "id": "P5",
+   "what": "deliver r3 + HOLD_DISPOSITION.tsv(46) + STAGE18_TRACE.tsv(18) into PR #5",
+   "lane": "EXECUTE",
+   "exit": "PR updated, attestation re-signed"
+  }
+ ],
+ "owner_decisions_pending": {
+  "D1": "install registry revision AFTER an installer+rollback+dry-run exists",
+  "D2": "keep LOCAL_DRAFT_WRITE denied; present as AUTHOR_COMPLETE",
+  "D3": "accept candidate-only ceiling; WP-14 stays PARKED",
+  "D4": "declare lineage canonical (main is an unrelated root)",
+  "D5": "accept 46 HOLD as designed; publish per-cell reasons",
+  "D6": "scope out 149/386/949 semantic debt for this package",
+  "D7": "bind dispatcher pool to model-lane-assignment (fail closed)",
+  "D8": "promote the OAuth recipe into dispatcher defaults (skill already patched)",
+  "D9": "make every enumeration long-path safe and fail-closed",
+  "D10": "remove the self-embedded ZIP in r3",
+  "D11": "regenerate static_validation_result and mark the old one STALE"
+ },
+ "delivery": {
+  "repo": "shw097-team/HG-KSEOS",
+  "branch": "candidate/r19-fhs-implementation",
+  "head": "63fa343",
+  "pr": 5,
+  "pr_url": "https://github.com/shw097-team/HG-KSEOS/pull/5",
+  "commits": 8,
+  "files": 105,
+  "main_relation": "no common history (422 measured)",
+  "force_push": false
+ },
+ "claim_ceiling": "AUTHOR_SIDE + ISOLATED_LOCAL; native 0; release NOT_RUN; independent acceptance NOT_RUN; production NOT_CLAIMED"
+}
