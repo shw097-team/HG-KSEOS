@@ -1,0 +1,6 @@
+claim_id	claim_text	support_source_ids	counter_source_ids	status	confidence	freshness	owner
+CL1	the three reference kinds are source_freeze, task_kind and oracle_ratification	S01:25		SUPPORTED	1.0	2026-10-29T11:06:17Z	owner
+CL2	one owner can hold all three keys mechanically; only oracle_ratification carries a self-appraisal conflict	S01:25,S03		SUPPORTED_WITH_LIMIT	0.9	2026-10-29T11:06:17Z	owner
+CL3	policy_epoch is a field of the user-scoped scope.json that must equal the anchor epoch, so it is creatable locally	S01:305-309		SUPPORTED	0.95	2026-10-29T11:06:17Z	owner
+CL4	CAP-BOOT has no contract anywhere in HG-KSEOS src or config	S01,S02		MISSING	0.9	2026-10-29T11:06:17Z	owner
+CL5	the author may declare ACCEPTANCE edges, but that declaration is not independent acceptance	S01:445,S03		SUPPORTED_WITH_LIMIT	0.95	2026-10-29T11:06:17Z	owner

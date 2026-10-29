@@ -1,0 +1,2 @@
+{"source_id": "S01", "atom": "KINDS = ('source_freeze','task_kind','oracle_ratification')", "line": 25}
+{"source_id": "S01", "atom": "normalize_user_registry requires scope.database_path, scope.head and policy_epoch == anchor_epoch", "line": 305}

@@ -1,0 +1,13 @@
+schema: LOGICAL_FAR_RESEARCH_HANDOFF_V1
+run_ref: R18-FAR-12
+terminal: RESEARCH_PASS_CANDIDATE
+owner: "single owner (fp 412b3519...)"
+next_actions:
+  - "state machine: goal status may only change through the driver's exit code"
+  - "lane enforcement: judgement tasks must carry a lane receipt id or be refused"
+  - "stop guard: the round may not end while any ledger row is not DONE and the driver reports actionable work"
+  - "issuer path: construct NativeAdmission against the canonical DB with three signed refs"
+durable_change_route: "OpenSpec change + Codex writer; this candidate does not touch canonical state"
+open_questions:
+  - "which three key kinds KINDS requires, and whether the owner already holds all three"
+nonclaims: "not an acceptance; not native; not a release"

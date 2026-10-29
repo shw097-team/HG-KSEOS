@@ -1,0 +1,173 @@
+{
+ "schema": "R19.WP05_PIPD_WRITER_RECEIPT/1",
+ "at": "2026-10-29T11:23:59.983644+00:00",
+ "writer": {
+  "package": "pipd_ls_sp",
+  "version": "0.1.1a4",
+  "entry": "python -m pipd_ls_sp.cli",
+  "source_root": "C:\\Projects\\Agent_Workspace\\PIPD_closure_20261029\\src",
+  "writer_is_original_product": true
+ },
+ "output_root_isolated": "C:\\Projects\\Agent_Workspace\\var\\R19-FHS-20261029\\pipd_out",
+ "intent_subject_id": "INTENT-aa1d6e0966dd5d54",
+ "pi_subject_id": "PI-41fc6c7753d754a7",
+ "pi_replay": {
+  "identity_equal": true,
+  "iterations": 2,
+  "replay_verdict": "PASS",
+  "subject_id": "PI-41fc6c7753d754a7"
+ },
+ "artifacts": {
+  "intent_card.json": {
+   "sha256": "daa60526b85dddceee8fdbab76ed677fffbf9fb823d65d7bd9e80a993edcb41f",
+   "bytes": 650396
+  },
+  "pi.json": {
+   "sha256": "25068346b4f7d050bb1eefb9916562e50985a93b051007b0e0a88a580b8c9f4a",
+   "bytes": 1129469
+  },
+  "pd.json": {
+   "sha256": "8a1f68ac62aa8c008878d4eb65759f109453303cc1d4054f0ffdcf0cbcd9c958",
+   "bytes": 2389
+  },
+  "ecp.json": {
+   "sha256": "98e6009f06e7370b0a397314b70b0a1b2140658b933a2802b8dbab771e8422dd",
+   "bytes": 967
+  }
+ },
+ "steps": [
+  {
+   "argv": [
+    "pipd",
+    "init"
+   ],
+   "rc": 0,
+   "stdout_tail": "\": 19,\n \"created\": [],\n \"root\": \"C:\\\\Projects\\\\Agent_Workspace\\\\var\\\\R19-FHS-20261029\\\\pipd_out\",\n \"schema_source\": {\n  \"mode\": \"SOURCE\",\n  \"path\": \"C:\\\\Projects\\\\Agent_Workspace\\\\PIPD_closure_20261029\\\\schemas\",\n  \"tried\": [\n   \"C:\\\\Projects\\\\Agent_Workspace\\\\var\\\\R19-FHS-20261029\\\\pipd_out\\\\schemas\",\n   \"C:\\\\Projects\\\\Agent_Workspace\\\\PIPD_closure_20261029\\\\schemas\"\n  ]\n },\n \"verdict\": \"PASS\"\n}\n",
+   "stderr_tail": "",
+   "step": "init"
+  },
+  {
+   "argv": [
+    "pipd",
+    "intake",
+    "--goal",
+    "FHS-MSC Skeleton+Spine r2-revision2 實作與檢驗（WP-FHS-00..21 typed DAG）",
+    "--source",
+    "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY",
+    "--source",
+    "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\02_EVIDENCE_APPENDICES",
+    "--source",
+    "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\wp_graph.json",
+    "--constraint",
+    "sources are read-only; candidate-only writes inside the isolated output root",
+    "--non-goal",
+    "no release, no promotion, no main-merge"
+   ],
+   "rc": 0,
+   "stdout_tail": "-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\\\02_EVIDENCE_APPENDICES\",\n  \"C:\\\\Projects\\\\Agent_Workspace\\\\知識庫\\\\實作相關DOC\\\\Fabric vNext\\\\Semantic World OS Fabric\\\\SBL_PIPD\\\\FHS-MSC\\\\FHS-MSC_PIPD-LS-PKG\\\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\\\03_TESTS_AND_READBACK\\\\wp_graph.json\"\n ],\n \"subject_id\": \"INTENT-aa1d6e0966dd5d54\"\n}\n",
+   "stderr_tail": "",
+   "step": "intake"
+  },
+  {
+   "argv": [
+    "pipd",
+    "profile",
+    "--profile",
+    "LITE"
+   ],
+   "rc": 0,
+   "stdout_tail": "{\n \"artifact_depth\": \"L1_SCHEMA_CONTRACT\",\n \"assurance\": [\n  \"deterministic_validator\"\n ],\n \"axes\": [\n  \"intent\"\n ],\n \"canonical_truth\": \"single\",\n \"escalated\": false,\n \"escalation_reason\": null,\n \"profile\": \"LITE\",\n \"requested_profile\": \"LITE\",\n \"risk_assessment\": \"NOT_ASSESSED\",\n \"vetoes\": []\n}\n",
+   "stderr_tail": "",
+   "step": "profile"
+  },
+  {
+   "argv": [
+    "pipd",
+    "compile-pi",
+    "--intent",
+    "C:\\Projects\\Agent_Workspace\\var\\R19-FHS-20261029\\pipd_out\\intent_card.json",
+    "--profile",
+    "LITE",
+    "--replay",
+    "--explain"
+   ],
+   "rc": 0,
+   "stdout_tail": ",\n   \"from_id\": \"PI-41fc6c7753d754a7\",\n   \"from_type\": \"PI-PKG\",\n   \"rationale\": \"PI derives this atom from the frozen intent\",\n   \"schema_version\": \"TraceLink@1\",\n   \"subject_id\": \"TL-0db3ee71e74177c7\",\n   \"to_hash\": \"ed3e59695c2ef1ae0f50a82197833840a3e734229431aad3b419d459606dad04\",\n   \"to_id\": \"ATOM-ed3e59695c2ef1ae\",\n   \"to_type\": \"RequirementAtom\",\n   \"version\": \"1\"\n  }\n ],\n \"version\": \"1\"\n}\n",
+   "stderr_tail": "",
+   "step": "compile-pi"
+  },
+  {
+   "argv": [
+    "pipd",
+    "bind-pd",
+    "--pi",
+    "C:\\Projects\\Agent_Workspace\\var\\R19-FHS-20261029\\pipd_out\\pi.json",
+    "--repo-root",
+    "C:\\Projects\\Agent_Workspace\\PIPD_closure_20261029"
+   ],
+   "rc": 0,
+   "stdout_tail": "g\": {\n  \"binding_scope\": \"affected_only\",\n  \"bound_at\": \"PD\",\n  \"writable_scope\": \"src/**\",\n  \"writable_scope_check\": {\n   \"authorized\": [\n    \"src/**\",\n    \"tests/**\",\n    \"tools/**\",\n    \"fixtures/**\"\n   ],\n   \"findings\": [],\n   \"requested\": [\n    \"src/**\"\n   ],\n   \"subset\": true,\n   \"verdict\": \"PASS\"\n  }\n },\n \"schema_version\": \"PD-PKG@1\",\n \"subject_id\": \"PD-5839868c0fac549f\",\n \"version\": \"1\"\n}\n",
+   "stderr_tail": "",
+   "step": "bind-pd"
+  },
+  {
+   "argv": [
+    "pipd",
+    "compile-ecp",
+    "--pd",
+    "C:\\Projects\\Agent_Workspace\\var\\R19-FHS-20261029\\pipd_out\\pd.json",
+    "--pi",
+    "C:\\Projects\\Agent_Workspace\\var\\R19-FHS-20261029\\pipd_out\\pi.json",
+    "--explain"
+   ],
+   "rc": 0,
+   "stdout_tail": "uarantee\": \"at_most_once\",\n  \"key\": \"IDEM-d00a0b686ecbbd5b\"\n },\n \"permission\": {\n  \"scope\": \"src/**\",\n  \"token_required\": true\n },\n \"readback\": {\n  \"kind\": \"residue_scan\",\n  \"required\": true\n },\n \"retries\": {\n  \"backoff\": \"none\",\n  \"max\": 1\n },\n \"rollback\": {\n  \"pointer\": \"baseline_commit\",\n  \"required\": true\n },\n \"schema_version\": \"ECP@1\",\n \"subject_id\": \"ECP-07173cd5fd6b5631\",\n \"version\": \"1\"\n}\n",
+   "stderr_tail": "",
+   "step": "compile-ecp"
+  }
+ ],
+ "negative_controls": [
+  {
+   "case": "N1a_unknown_key_no_semantic_effect",
+   "rc": 0,
+   "clean_content_hash": "41fc6c7753d754a7a159003e8f747696b3a85d3ba1289562beda9e7b3e2a5e5c",
+   "variant_content_hash": "41fc6c7753d754a7a159003e8f747696b3a85d3ba1289562beda9e7b3e2a5e5c",
+   "identical": true,
+   "verdict": "PASS"
+  },
+  {
+   "case": "N1b_strict_type_violation_refused",
+   "rc": 2,
+   "verdict_field": "FAIL",
+   "code": "INTAKE_INVALID",
+   "refused": true,
+   "verdict": "PASS"
+  },
+  {
+   "case": "N2_sidecar_not_promoted",
+   "rc": 0,
+   "injected_present": false,
+   "verdict": "PASS"
+  }
+ ],
+ "ack_basis": "the artefacts above are the compiler's own output; the receipt binds command, exit code and sha256. This is a WRITER PRODUCTION ACK, not a promotion ACK and not an independent acceptance.",
+ "claim_ceiling": "CANDIDATE_ONLY: PI/PD/ECP produced by the original writer into an isolated output root; no native effect, no promotion, no independent PASS",
+ "negative_controls_note": "N1 in the first pass was a false positive: the string 'expected' is a legitimate field name inside PI oracle definitions. N1a/N1b replace it with a semantic-leak test (content hash identity) and a strict type-violation refusal test.",
+ "negative_controls_first_pass": [
+  {
+   "case": "N1_expected_in_strict_input",
+   "rc": 0,
+   "expected_value_leaked_into_pi_strict": true,
+   "refused_or_quarantined": false,
+   "detail": null
+  },
+  {
+   "case": "N2_sidecar_promoted_to_strict",
+   "rc": 0,
+   "sidecar_value_promoted": false,
+   "refused_or_quarantined": true,
+   "verdict": null
+  }
+ ],
+ "steps_note": "the compiler's JSON payloads are omitted here for size; each step's argv, rc and stdout tail are kept and rerunnable via the shipped tool"
+}

@@ -1,0 +1,30 @@
+{
+ "schema": "R18.CONCURRENCY_STAMP/1",
+ "repos": {
+  "HG-KSEOS": {
+   "head": "190df334532ac5a9c4df7e20155a165098625069",
+   "branch": "candidate/r18-fhs-skeleton-spine-20261029",
+   "dirty_files": 9,
+   "lane_dispatcher_modified": true
+  },
+  "PIPD": {
+   "head": "995c7ad0c69a05a0c5cf6528155a62020ce31f87",
+   "branch": "rescue/r5p-uncommitted-20261016",
+   "dirty_files": 231,
+   "lane_dispatcher_modified": false
+  },
+  "Fabric": {
+   "head": "fffcb98bf8063e04f3fad2c726eb43fd70336d04",
+   "branch": "pub/far-minimax-mandate-20261021",
+   "dirty_files": 13,
+   "lane_dispatcher_modified": false
+  },
+  "SBL": {
+   "head": "826ca066a1c2df2976c0d402018b79e1c79a444f",
+   "branch": "candidate/r14-ts15-kinds",
+   "dirty_files": 47,
+   "lane_dispatcher_modified": false
+  }
+ },
+ "note": "lane receipts produced while scripts/hgk-lane-dispatch.py is dirty are reproducible only against this working tree, not against any commit"
+}

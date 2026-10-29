@@ -1,0 +1,171 @@
+[
+ {
+  "wp": "WP-FHS-02",
+  "request": {
+   "target_id": "WO-R19-02-01",
+   "taskspec_id": "TS-R19-02-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-02"
+  },
+  "request_sha256": "f930879f6f517f2e8c0be8f907ea160a86f5fce48f043eed0dea891d4415d944"
+ },
+ {
+  "wp": "WP-FHS-03",
+  "request": {
+   "target_id": "WO-R19-03-01",
+   "taskspec_id": "TS-R19-03-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-03"
+  },
+  "request_sha256": "c350d634ef78300bf2559735de76790f6d0216d8c2f978d43f3943885a564ad9"
+ },
+ {
+  "wp": "WP-FHS-04",
+  "request": {
+   "target_id": "WO-R19-04-01",
+   "taskspec_id": "TS-R19-04-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-04"
+  },
+  "request_sha256": "34a337b834157fd7f9b3e2cf3a9a827bb4d82342e0c5eed98868a48164177f93"
+ },
+ {
+  "wp": "WP-FHS-06",
+  "request": {
+   "target_id": "WO-R19-06-01",
+   "taskspec_id": "TS-R19-06-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-06"
+  },
+  "request_sha256": "e14c3c2a3e6e868917dc79fba09242649c5818276573c98275e26cd8d09b8cca"
+ },
+ {
+  "wp": "WP-FHS-08",
+  "request": {
+   "target_id": "WO-R19-08-01",
+   "taskspec_id": "TS-R19-08-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-08"
+  },
+  "request_sha256": "8d9fa5e93845773d2124eab2c738947de65f6c2c9992c2e342d041e1fab72a7e"
+ },
+ {
+  "wp": "WP-FHS-10",
+  "request": {
+   "target_id": "WO-R19-10-01",
+   "taskspec_id": "TS-R19-10-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-10"
+  },
+  "request_sha256": "ec3e1e92b503620d9ab3fb233454dea05e63b93d6231c716ec113caa1c6c99f7"
+ },
+ {
+  "wp": "WP-FHS-11",
+  "request": {
+   "target_id": "WO-R19-11-01",
+   "taskspec_id": "TS-R19-11-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-11"
+  },
+  "request_sha256": "cee79a150668c1bd800f05018283378aaad8da1ba18e553d16e173e282d0c5e6"
+ },
+ {
+  "wp": "WP-FHS-12",
+  "request": {
+   "target_id": "WO-R19-12-01",
+   "taskspec_id": "TS-R19-12-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-12"
+  },
+  "request_sha256": "2b0a9444862bc33fbe7bdb7d0036f6119b26057bbad92eb3c071be09944934ee"
+ },
+ {
+  "wp": "WP-FHS-13",
+  "request": {
+   "target_id": "WO-R19-13-01",
+   "taskspec_id": "TS-R19-13-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-13"
+  },
+  "request_sha256": "d0388f96c103053a9883e3b01f12bd11b2855810a15a0aee77656619799cf9bd"
+ },
+ {
+  "wp": "WP-FHS-14",
+  "request": {
+   "target_id": "WO-R19-14-01",
+   "taskspec_id": "TS-R19-14-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-14"
+  },
+  "request_sha256": "7143c6f0f58c5c34030e94bcac143709e4de3d997c372252e1b6e128d4193353"
+ },
+ {
+  "wp": "WP-FHS-17",
+  "request": {
+   "target_id": "WO-R19-17-01",
+   "taskspec_id": "TS-R19-17-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-17"
+  },
+  "request_sha256": "99206842a5b44a213355dbcef4238277f84b4eea9be6b6442277355b0ca4e737"
+ },
+ {
+  "wp": "WP-FHS-20",
+  "request": {
+   "target_id": "WO-R19-20-01",
+   "taskspec_id": "TS-R19-20-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-20"
+  },
+  "request_sha256": "a646d9ca1073e235055dd3f6344ef4a9d6c34da5554207e53889c62ea8f206c7"
+ },
+ {
+  "wp": "WP-FHS-07",
+  "request": {
+   "target_id": "WO-R19-07-01",
+   "taskspec_id": "TS-R19-07-01",
+   "writer": "HERMES-NATIVE-EXECUTOR",
+   "root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "base_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "permissions_json": "[\"read\",\"write\"]",
+   "requirement_id": "WP-FHS-07"
+  },
+  "request_sha256": "bb72783c4babaa0ca48008c3b6f49b11b473b42d8c36db82b460c23183e4a7d5"
+ }
+]

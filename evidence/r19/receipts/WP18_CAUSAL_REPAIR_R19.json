@@ -1,0 +1,38 @@
+{
+ "schema": "R19.WP18_CAUSAL_REPAIR/1",
+ "causal": true,
+ "phases": [
+  {
+   "phase": "1_pristine_before_repair",
+   "rc": 1,
+   "passed": 2788,
+   "failed": 1,
+   "failing": [
+    "SOURCE-BYTES-UNCHANGED"
+   ]
+  },
+  {
+   "phase": "2_after_locator_repair",
+   "manifest_sha256_before": "a62cbd344823398d5c9536446c30ba84241c34822a99588337247830d0a3cbee",
+   "manifest_sha256_after": "224c03b6c15aac4a59cc4d3777c213d1e8eb23eb361624a3cafb491a7e502b8d",
+   "rc": 0,
+   "passed": 2789,
+   "failed": 0,
+   "failing": []
+  },
+  {
+   "phase": "3_unpatched_same_copy",
+   "rc": 1,
+   "passed": 2788,
+   "failed": 1,
+   "failing": [
+    "SOURCE-BYTES-UNCHANGED"
+   ]
+  }
+ ],
+ "defect": "29 source_manifest.json locators pinned a directory that was renamed: ...\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\... -> ...\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\...",
+ "root_cause_class": "STALE_LOCATOR_NOT_ORACLE_DEFECT (deterministic, not environment-dependent)",
+ "repair": "rewrite only the 29 locators whose full sha256 equals the pinned value; 29/29 exact-byte, 0 unresolved, 0 name-matched",
+ "oracle_change": "none. SOURCE-BYTES-UNCHANGED still compares real file bytes against the identical pinned sha256.",
+ "claim_ceiling": "author-side mechanical check on an isolated copy; not native, not independent acceptance"
+}
