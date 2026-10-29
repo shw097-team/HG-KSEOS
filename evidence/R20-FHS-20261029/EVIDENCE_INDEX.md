@@ -252,3 +252,14 @@ executed under an owner authorization anchored to exact bytes, not to a sentence
 
 Ceilings unchanged and explicit: owner acceptance and external acceptance are **NOT_RUN**; the 75 residues
 stay HOLD until the owner signs; release/tag/merge are the owner's acts and were not performed.
+
+### §9b Delivery attestation (second owner operation, same envelope)
+
+`owner_receipts/DELIVERY_ATTESTATION_R20.json` binds the owner envelope to the **delivered** bytes: the closure
+report, the FAR closure study, the closure plan, the round-6 lane receipt, the authorization projection, the
+defect ledger, all 8 packets (json+md), the subset manifest and the author-side closure receipt — 24 artifacts,
+merkle root `6062ce82…`, Ed25519 `892afb34…`, `ops_used=2`.
+
+It attests that the delivered bytes are the bytes described, and explicitly does **not** attest owner
+acceptance of the 75 residues, OR-6/OR-8, release, or any merge. Same verification path as §9: the file carries
+`body_json` + `owner_public_hex`, so sha256 and signature check without any key file.

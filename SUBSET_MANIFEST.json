@@ -1,14 +1,14 @@
 {
  "schema": "R20.SUBSET_MANIFEST/2",
  "source_branch": "candidate/r19-fhs-implementation",
- "source_commit": "3946ae4e95a4d3e72eb9cf8698a1a59f11c0983f",
+ "source_commit": "eb194925dde9bfff05bd26ad6f1c58ac9f8b4493",
  "base": "origin/main@f6dfb1e",
- "file_count": 370,
+ "file_count": 371,
  "definition": "file_count = number of paths differing from origin/main on this branch, INCLUDING this manifest itself",
- "synced_from_candidate": 264,
+ "synced_from_candidate": 265,
  "excluded_self": "SUBSET_MANIFEST.json is counted in file_count but not listed in files[] (a file cannot contain its own digest)",
  "blob_source": "git hash-object of the WORKING TREE file",
- "files_listed": 369,
+ "files_listed": 370,
  "paths": [
   "scripts",
   "config",
@@ -116,8 +116,8 @@
   },
   {
    "path": "evidence/R20-FHS-20261029/EVIDENCE_INDEX.md",
-   "blob": "91cc2c2933f59c4e55784c67ea6abd79531c20ca",
-   "bytes": 16908
+   "blob": "9bfe8736577fdc4bdfc8621fedff0c4fc00be759",
+   "bytes": 17692
   },
   {
    "path": "evidence/R20-FHS-20261029/HASHES.json",
@@ -223,6 +223,11 @@
    "path": "evidence/R20-FHS-20261029/notes/VOID_R2_REPORT.md",
    "blob": "8cff8b1b403a6bd8ca0c1d6d3764753cdf3f02dc",
    "bytes": 1493
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_receipts/DELIVERY_ATTESTATION_R20.json",
+   "blob": "6d43eeff1754960da0ba362d691bf8ee3eda09e5",
+   "bytes": 9942
   },
   {
    "path": "evidence/R20-FHS-20261029/owner_receipts/OWNER_AUTHORIZATION_R20.summary.json",
