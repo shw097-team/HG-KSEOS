@@ -3,9 +3,11 @@
  "source_branch": "candidate/r19-fhs-implementation",
  "source_commit": "6ce6afbb11d1fe67b844f28fe4bbc2702819118a",
  "base": "origin/main@f6dfb1e",
- "file_count": 363,
- "definition": "file_count = number of paths differing from origin/main on this branch (git diff --name-only origin/main HEAD)",
+ "file_count": 364,
+ "definition": "file_count = number of paths differing from origin/main on this branch, INCLUDING this manifest itself",
  "synced_from_candidate": 258,
+ "excluded_self": "SUBSET_MANIFEST.json is counted in file_count but not listed in files[] (a file cannot contain its own digest)",
+ "files_listed": 363,
  "paths": [
   "scripts",
   "config",
@@ -22,24 +24,24 @@
  "deletion_policy": "deletions in the candidate lineage are NOT replayed (they would remove files that exist on main); removing them is a separate reviewable decision.",
  "files": [
   {
-   "path": "SUBSET_MANIFEST.json",
-   "blob": "f0bf7dcc8647fa9f896e5b167618a394ae42b100",
-   "bytes": 36762
-  },
-  {
    "path": "config/active-policy.json",
    "blob": "1a4227dc28a482c93e92272f7b7a1f18ed46d56c",
    "bytes": 1223
   },
   {
    "path": "config/hermes-codex-lane.json",
-   "blob": "cf4fe00e1f3a8428bc97d8d145b83189d3916079",
+   "blob": "0285a97fa4bc24368be8da60955610212d01b07a",
    "bytes": 15340
   },
   {
    "path": "config/hermes.json",
    "blob": "f8c783c328a74b02bb1b1bd66a23e8c6ae6b5ed4",
    "bytes": 6384
+  },
+  {
+   "path": "config/lane-arm-aliases.json",
+   "blob": "82da804248c377061b8ead7ba212f49d2a4cd6d8",
+   "bytes": 1081
   },
   {
    "path": "config/lane-route-slots.candidate.json",
@@ -578,7 +580,7 @@
   },
   {
    "path": "scripts/hgk-lane-dispatch.py",
-   "blob": "a09db30efc2fa561ca2eb711cc7795f7a33fedc2",
+   "blob": "9927f0904f08a4379baaa8d9f9117cb88b2f7134",
    "bytes": 179266
   },
   {
@@ -1468,7 +1470,7 @@
   },
   {
    "path": "tests/test_lane_dispatch_r20_gates.py",
-   "blob": "87f404b85202206acccd1f6e52fe7a2021db2491",
+   "blob": "9713181542791f6ed7051cf7ea439171153d140d",
    "bytes": 9584
   },
   {
