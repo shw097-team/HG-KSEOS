@@ -1,13 +1,14 @@
 {
  "schema": "R20.SUBSET_MANIFEST/2",
  "source_branch": "candidate/r19-fhs-implementation",
- "source_commit": "96f0daaa6c6c5a407a4a8ca534339b76ed607e4f",
+ "source_commit": "3946ae4e95a4d3e72eb9cf8698a1a59f11c0983f",
  "base": "origin/main@f6dfb1e",
- "file_count": 366,
+ "file_count": 370,
  "definition": "file_count = number of paths differing from origin/main on this branch, INCLUDING this manifest itself",
- "synced_from_candidate": 260,
+ "synced_from_candidate": 264,
  "excluded_self": "SUBSET_MANIFEST.json is counted in file_count but not listed in files[] (a file cannot contain its own digest)",
- "files_listed": 365,
+ "blob_source": "git hash-object of the WORKING TREE file",
+ "files_listed": 369,
  "paths": [
   "scripts",
   "config",
@@ -104,9 +105,19 @@
    "bytes": 46973
   },
   {
+   "path": "evidence/R20-FHS-20261029/CLOSURE_ROUND.md",
+   "blob": "5026c3c4aaa3e33ea94935d43488bf22b2022dcf",
+   "bytes": 6056
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/DEFECTS_R20B.json",
+   "blob": "6a5ee9dd2663dfab25fd2a6f7f2ce3cde879bacf",
+   "bytes": 3984
+  },
+  {
    "path": "evidence/R20-FHS-20261029/EVIDENCE_INDEX.md",
-   "blob": "5eba651b808c0dd7c2bd0e62f9ff4b928d5fa53a",
-   "bytes": 15218
+   "blob": "91cc2c2933f59c4e55784c67ea6abd79531c20ca",
+   "bytes": 16908
   },
   {
    "path": "evidence/R20-FHS-20261029/HASHES.json",
@@ -149,9 +160,19 @@
    "bytes": 4876
   },
   {
+   "path": "evidence/R20-FHS-20261029/lane/BRIEF_VERIFY_CLOSURE.md",
+   "blob": "c1d466089e702b673e981690e10c5b549dd96848",
+   "bytes": 11029
+  },
+  {
    "path": "evidence/R20-FHS-20261029/lane/BRIEF_VERIFY_R20.md",
    "blob": "27b51b20dc2cf1432c3c397c37e4fdff3e377b32",
    "bytes": 5641
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/lane/CLOSURE_VERIFY_R20_R6.json",
+   "blob": "1067591c4683fed538815d0270001d3a5cb02f15",
+   "bytes": 8706
   },
   {
    "path": "evidence/R20-FHS-20261029/lane/FOCUSED_RECHECK_R20.json",
@@ -1848,6 +1869,5 @@
    "blob": "16cec84bf99f23f46d6a3b6014fa37c30f1dc81c",
    "bytes": 4813
   }
- ],
- "blob_source": "git hash-object of the WORKING TREE file (an earlier generation used HEAD:<path>, which recorded the pre-sync blob for every file changed in the same commit -- the checker caught 3 such rows)"
+ ]
 }
