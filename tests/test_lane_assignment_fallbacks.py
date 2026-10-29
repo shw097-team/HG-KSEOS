@@ -123,3 +123,24 @@ def test_disjoint_primary_and_fallback_still_resolve(tmp_path):
     got = load_module(write(tmp_path, row)).lane_assigned_arms("VERIFY")
     assert got["ok"] is True
     assert not (set(got["primary_arms"]) & set(got["fallback_arms"]))
+
+
+def test_alias_equivalent_overlap_is_refused_even_when_the_strings_differ(tmp_path):
+    """C4 / TT-R20-20: exact-string overlap detection missed case variants and declared aliases. The arm
+    desktop_router/gpt-6.1-sol IS openai-codex/gpt-6.1-sol, so a row that lists one as primary and the other
+    as fallback declares the same arm twice."""
+    row = {"role": "VERIFY", "assigned_provider": "openai-codex", "assigned_model": "gpt-6.1-sol",
+           "transport_model": "gpt-6.1-sol", "authority": "test",
+           "fallbacks": ["desktop_router/gpt-6.1-sol"]}
+    got = load_module(write(tmp_path, row)).lane_assigned_arms("VERIFY")
+    assert got["ok"] is False
+    assert got["code"] == "ERR_ASSIGNMENT_PRIMARY_FALLBACK_OVERLAP"
+
+
+def test_case_variant_overlap_is_refused(tmp_path):
+    row = {"role": "VERIFY", "assigned_provider": "OpenAI-Codex", "assigned_model": "GPT-6.1-SOL",
+           "transport_model": "gpt-6.1-sol", "authority": "test",
+           "fallbacks": ["openai-codex/gpt-6.1-sol"]}
+    got = load_module(write(tmp_path, row)).lane_assigned_arms("VERIFY")
+    assert got["ok"] is False
+    assert got["code"] == "ERR_ASSIGNMENT_PRIMARY_FALLBACK_OVERLAP"

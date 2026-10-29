@@ -1,7 +1,7 @@
 {
  "schema": "R20.SUBSET_MANIFEST/2",
  "source_branch": "candidate/r19-fhs-implementation",
- "source_commit": "79f87e0773e568dc36a70e5a47ce652ab798b8d2",
+ "source_commit": "96f0daaa6c6c5a407a4a8ca534339b76ed607e4f",
  "base": "origin/main@f6dfb1e",
  "file_count": 366,
  "definition": "file_count = number of paths differing from origin/main on this branch, INCLUDING this manifest itself",
@@ -205,8 +205,8 @@
   },
   {
    "path": "evidence/R20-FHS-20261029/owner_receipts/OWNER_AUTHORIZATION_R20.summary.json",
-   "blob": "HEAD:evidence/R20-FHS-20261029/owner_receipts/OWNER_AUTHORIZATION_R20.summary.json",
-   "bytes": 9711
+   "blob": "c6279049390c05e546774f76f08d1c7e063267c4",
+   "bytes": 9812
   },
   {
    "path": "evidence/R20-FHS-20261029/owner_requests/OR-1.json",
@@ -586,7 +586,7 @@
   {
    "path": "scripts/hgk-lane-dispatch.py",
    "blob": "2df0a21084f9a4180ddde849cec911a266d226b8",
-   "bytes": 181487
+   "bytes": 181837
   },
   {
    "path": "scripts/hgk-lane-guard.py",
@@ -1471,7 +1471,7 @@
   {
    "path": "tests/test_lane_assignment_fallbacks.py",
    "blob": "08fc63f977c657c0347f5953ffd5c95711061ae0",
-   "bytes": 6979
+   "bytes": 8185
   },
   {
    "path": "tests/test_lane_dispatch_ao_guard.py",
