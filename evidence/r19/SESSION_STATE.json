@@ -1,0 +1,88 @@
+{
+ "schema": "R19.SESSION_STATE/1",
+ "written_at": "2026-10-29T11:40:00Z",
+ "session": {
+  "id": "20261029_191425_c7d21a",
+  "surface": "hermes desktop",
+  "goal_set": true,
+  "todo_list": true,
+  "predecessor": "20261029_123118_143d2d (R18)"
+ },
+ "round": {
+  "id": "R19-FHS-20261029",
+  "root": "C:\\Projects\\Agent_Workspace\\var\\R19-FHS-20261029",
+  "carries": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029",
+  "subject": "FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2",
+  "subject_files": 44,
+  "subject_bytes": 11664373,
+  "subject_integrity": "44/44 byte-identical"
+ },
+ "ledger": {
+  "rows": 26,
+  "by_status": {"DONE": 6, "PARTIAL": 13, "PARKED": 7},
+  "audit": "rc=0",
+  "closed_rows": ["WP-FHS-00", "WP-FHS-01", "WP-FHS-18", "WP-FHS-19", "R18-ADMIT", "R18-HANDOFF"]
+ },
+ "measured_this_round": {
+  "wp18_causality": {"red": "2788/1", "repaired": "2789/0", "unpatched": "2788/1", "causal": true,
+                     "locators_relocated": 29, "unresolved": 0, "name_matched": 0,
+                     "oracle_changed": false},
+  "wp05_writer": {"writer": "pipd_ls_sp 0.1.1a4", "pi_replay_identity": "PASS",
+                  "artifacts": ["intent_card.json", "pi.json", "pd.json", "ecp.json"],
+                  "negatives_passed": 3},
+  "wp19_supply_chain": {"files": 44, "bytes": 11664373, "stable_two_passes": true,
+                        "secret_hits": 0, "canary_fired": true,
+                        "third_party": ["jsonschema", "markdown_it", "yaml"],
+                        "license": "ABSENT_NAMED_FINDING", "notice": "ABSENT_NAMED_FINDING"},
+  "wp15_16_per_id": {"rows": 80, "methods": 25, "donors": 24, "slots": 31,
+                     "illegal_install_claims": 0, "plugin_manifest_match": true, "plugin_ops": 11},
+  "wp21_oracle": {"checks": 679, "failed": 0, "cells": 96, "pass_local_oracle": 50, "hold": 46,
+                  "deny": 0, "cli_invocations": 27, "native_case_pass": 0}
+ },
+ "delivery": {
+  "repo": "shw097-team/HG-KSEOS",
+  "branch": "candidate/r19-fhs-implementation",
+  "head": "db88f372",
+  "pr": 5,
+  "pr_base": "candidate/r18-fhs-skeleton-spine-20261029",
+  "pr_files": 92,
+  "pr_mergeable": true,
+  "main_blocker": "remote main f6dfb1e5 shares no history with the lineage 190df334 (POST /pulls -> 422)"
+ },
+ "gates": {
+  "native_permit": {
+   "status": "OWNER_GATED",
+   "blocker": "authorize() refuses REQUEST_SCOPE unless the digest is pre-listed in the protected registry; that registry is written by an owner elevated step and native-trust-maintenance.ps1 has no revise mode",
+   "rows_affected": 13,
+   "plan": "var/R19-FHS-20261029/owner_gate/REGISTRY_REVISION_PLAN.json",
+   "plan_sha256": "0807eba282724591ae5963a59529843d12b2f026f618fe28caf02f1404720202",
+   "exec_root": "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC",
+   "exec_root_head": "1f56991d9737c399a0f302b4c29b7498b264b2eb",
+   "root_identity": "32165637:002d0000000a80e0",
+   "request_digests": 13
+  },
+  "delegation_scope": {
+   "status": "TOO_NARROW_FOR_THE_DAG",
+   "allowlist": ["WP-FHS-00", "WP-FHS-01", "WP-FHS-09", "WP-FHS-19", "WP-FHS-21", "WP-FHS-06", "WP-FHS-18"],
+   "classes": ["SOURCE_READ", "REPO_WRITE_TO_CANDIDATE_BRANCH"],
+   "denies_class_needed_by": ["WP-FHS-05", "WP-FHS-07", "WP-FHS-15", "WP-FHS-16"],
+   "measured": "ledger DONE transition refused with ERR_NO_DERIVED_PERMIT for WP-FHS-05 and WP-FHS-16"
+  },
+  "owner_window": {
+   "state": "REQUESTED_PASSPHRASE_PROMPT_OPENED",
+   "note": "the R18 window WIN-796b69117680 was marked CLOSED because its broker process was gone (the key only ever lived in it); a new window was opened for task R19-FHS-SKELETON-SPINE. If the prompt was not answered, no signing capability exists in this round."
+  }
+ },
+ "next_actions_ordered": [
+  {"n": 1, "owner": true, "action": "install owner_gate/REGISTRY_REVISION_PLAN.json (epoch 34->35)", "unblocks": "first R19 PERMIT; 13 rows"},
+  {"n": 2, "owner": true, "action": "sign amended delegation adding LOCAL_DRAFT_WRITE scoped to var/R19-*/**", "unblocks": "WP-05, WP-07, WP-15, WP-16"},
+  {"n": 3, "owner": true, "action": "decide canonical root: main f6dfb1e5 vs lineage 190df334", "unblocks": "PR #5 mergeability; retires PR #4"},
+  {"n": 4, "agent": true, "action": "after 1: mint 3-key bundle per WP, run authorize() on the canonical DB, record native receipts", "needs": "1"},
+  {"n": 5, "agent": true, "action": "after 2: flip WP-05/16 to DONE through delegation_gate, re-run ledger audit", "needs": "2"},
+  {"n": 6, "agent": true, "action": "close the evidence gaps that need no authority: none left on this host"}],
+ "non_claims": [
+  "no native admission, no permit, no reference signature",
+  "no independent acceptance, no promotion, no release",
+  "no main merge, no force-push, no tag"
+ ]
+}
