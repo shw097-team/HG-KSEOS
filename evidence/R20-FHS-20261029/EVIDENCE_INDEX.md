@@ -1,10 +1,10 @@
-# R20 — FHS-MSC PIPD-LS PKG SKELETON SPINE, revision3 (2026-10-29)
+# R20 — FHS-MSC PIPD-LS PKG SKELETON SPINE, revision3 (2026-10-29, round R20 + repair R20b)
 
 Round: `R20-FHS-20261029` · Subject: `FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2`
-Delivered sibling: `…_r2-revision3` · Claim ceiling: **AUTHOR_SIDE / LOCAL / CANDIDATE**
+Delivered artifact: `…_r2-revision3.zip` · Claim ceiling: **AUTHOR_SIDE / LOCAL / CANDIDATE**
 
-This bundle exists so an outside engineer can re-run every claim below without access to this host's
-`var/` tree. Each claim names the receipt that carries its raw measurement.
+Everything below is a measurement with a receipt. Where a measurement contradicted the author, the
+contradiction is kept and the artifact was rebuilt — not the number.
 
 ---
 
@@ -12,134 +12,150 @@ This bundle exists so an outside engineer can re-run every claim below without a
 
 | Item | Measurement | Receipt |
 |---|---|---|
-| r2 file denominator | **85 files / 145,944,348 B** (R19's own tools had measured 44 — `pathlib.rglob` hit MAX_PATH) | `receipts/DENOMINATOR.json` |
+| r2 file denominator | **85 files / 145,944,348 B** (R19 measured 44 — `pathlib.rglob` hit MAX_PATH) | `receipts/DENOMINATOR.json` |
 | r2 validator, shipped bytes, fresh run | **2788 passed / 1 failed** | `receipts/validate_r2_pristine.out` |
-| r2's own shipped report | claimed **2789 passed / 0 failed** | **VOID** — see `notes/VOID_R2_REPORT.md` |
-| broken locators carried in from R19 | **29 rows**, each pinned to a 64-hex digest | `receipts/P1B_LOCATOR_REPAIR.json` |
-| ZIP self-embedding in r2 | the archive shipped **inside itself** | `notes/VOID_R2_REPORT.md` §3 |
+| r2's shipped report | claimed **2789 / 0** | **VOID** — `notes/VOID_R2_REPORT.md` |
+| locators carried in from R19 | **29 rows**, each pinned to a 64-hex digest | `receipts/P1B_LOCATOR_REPAIR.json` |
+| r2 archive | shipped **inside itself** | void notice §3 |
 
-The r2 report is not "slightly off": the same bytes, run again, produce a different verdict than the
-report shipped with them. It is voided rather than corrected in place, because a corrected number in
-the same file would inherit the same untrustworthiness.
+The r2 report is not "slightly off": the same bytes produce a different verdict than the report shipped
+with them. It is voided rather than corrected in place — a corrected number in the same file inherits the
+same untrustworthiness.
 
 ## 2. What revision3 does differently
 
-1. **Hash-gated relocation, not name matching.** A row moves only when the candidate file hashes to the
-   pinned 64-hex value; otherwise the row stays HOLD. 29/29 moved.
-2. **Line endings normalised to LF** in the added documents — the validator's `markdown_issues()` check
-   (`F-23-POS`) reads CRLF as a document-parse issue. Measured: it fired on the first rebuild.
-3. **No self-embedded archive.** Derived lists are rebuilt excluding the archive, and the two generated
-   TSVs are excluded from their own checksum corpus.
-4. **Package counts have one home.** `03_TESTS_AND_READBACK/PACKAGE_DENOMINATOR.json` is written after
-   all content exists and before the derived lists, so prose points at it instead of restating numbers
-   that can drift. (The independent checker found exactly that drift in pass 1 — see §4.)
+1. **Hash-gated relocation** — a row moves only when the candidate file hashes to the pinned 64-hex value.
+   29/29 moved; name/prefix similarity is never evidence.
+2. **LF normalisation** of added documents — the validator's document-parse check (`F-23-POS`) reads CRLF
+   as a defect (measured on the first rebuild).
+3. **No self-embedded archive**; derived lists exclude the archive, and the two generated TSVs exclude
+   themselves from their own checksum corpus.
+4. **One home for package counts** — `03_TESTS_AND_READBACK/PACKAGE_DENOMINATOR.json`, written after all
+   content exists and before the derived lists (independent pass 1 caught prose drift here).
+5. **Checksum list written last and verified at build time** (R20b, §4).
 
-## 3. Result
+## 3. Result (final bytes)
 
 | Metric | Value |
 |---|---|
-| Files in the shipped tree | **89** |
-| Validator (shipped bytes) | **2789 passed / 0 failed** (`AUTHOR_STATIC_FIXTURES_ONLY`) |
-| Same-input re-run | semantically identical; the validator writes `elapsed_ms`, so raw byte equality is impossible and is **not** claimed (`receipts/P1C_IDEMPOTENCE.json`) |
-| ZIP entries / bytes | 89 / 13,578,116 |
-| ZIP sha256 | `0432b9b4e572369d8856803f35b88b85b2d976b3f8d80e9f2f14c30eece1b06c` |
-| Rebuild determinism | rebuilt archive equals shipped archive (`receipts/P1E_SHIPPED_VERIFICATION.json`) |
+| Files in the archive | **89** (0 directory entries) |
+| Tree bytes | 132,416,007 |
+| Validator, fresh extract of the shipped archive | **2789 passed / 0 failed** (`AUTHOR_STATIC_FIXTURES_ONLY`) |
+| Same-input re-run | semantically identical; the validator writes `elapsed_ms`, so raw byte equality is **not** claimed (`receipts/P1C_IDEMPOTENCE.json`) |
+| Archive sha256 | **`ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f`** |
+| Archive bytes | 13,578,117 |
+| Rebuild from the tree | byte-identical archive (deterministic) |
+| Superseded first build | `0432b9b4…` kept as `build/SUPERSEDED_r20_first_build.zip` |
 | Disposition tables | `HOLD_DISPOSITION.tsv` **46 rows**, `STAGE18_TRACE.tsv` **18 rows** |
 
 Oracle cell verdicts behind the HOLD table: `PASS_LOCAL_ORACLE 50 / HOLD 46 / DENY 0` (96 cells).
 
-## 4. Independent VERIFY lane (advisory, not acceptance)
+## 4. R20b — the two defects the parallel audit found, and what changed
 
-Dispatched through `scripts/hgk-lane-dispatch.py`, `--lane VERIFY_SECURITY`, arm pinned by
-`--require-arm` + `--force-rank`.
+The audit (three read-only sub-agents, `audit/AUDIT_ROUND.md`) was asked to falsify the author's claims.
+It found two real defects:
 
-| Pass | Lane result | Verdict |
+**D1 — the checksum list pinned a stale `MANIFEST.md`.** 87/88 rows correct; the `MANIFEST.md` row held
+the **pre-write** digest (`6f22bc10…` vs actual `8ece6d7e…`). `tools/validate.py` never reads that list,
+so the 2789 PASS did not cover it. Root cause: the list was generated *before* `MANIFEST.md` was rewritten.
+Repair: packaging order inverted, and the list is now **verified row-by-row at build time** (any miss aborts
+with `CHECKSUM_LIST_INVALID`). The shipped archive was rebuilt from its own bytes with that one row
+corrected: **88/88 rows verified, 0 missing, 0 stale** (`receipts/P1D_R20B_CHECKSUM_REPAIR.json`).
+
+**D2 — the assignment gate was a naming gate, not a dispatch gate.** The gate body was
+`if args.require_arm:`, so `--force-rank 3` still reached spawn with an arm outside the lane's assignment
+(9 of 14 pool arms are in that position). Repair: `--require-assigned-arms` (strict selection, typed
+`ERR_NO_ASSIGNED_ARM`), plus always-on detection — the receipt records `served_arm_assigned` and an
+unassigned serving arm emits `WARN_LANE_SERVED_UNASSIGNED_ARM`. Strict is **not** the default because the
+assignment file lists no fallbacks; making it default would void the documented PLAN/VERIFY fallback chain
+(TT-R20-6, owner decision).
+
+## 5. Dispatcher gates added this round
+
+| Code | Trigger | Rationale |
 |---|---|---|
-| 1 | `code=ERR_NO_ARM_EMITTED_NONCE` — the brief never told the child to echo the nonce, so the run could not be receipted | `PASS_WITH_FINDINGS`: one real finding — `REVISION3_NOTES.md` still quoted pre-table counts (84 files / 132,391,661 B) |
-| 2 | `ok=true`, `required_arm == served_arm == openai-codex/gpt-6.1-sol`, 150.9 s, usage receipt OK, subject mutation CLEAN | **PASS**, 7/7 claims (C1–C7), zero disagreements |
+| `ERR_ARM_NOT_IN_ASSIGNMENT` | `--require-arm` names an arm absent from the lane's assignment | a pool entry is not the owner's routing decision |
+| `ERR_SEALED_HOME_OAUTH_TRANSPORT` | OAuth relay + a lane home with no `auth.json` | this pair 401s **after** a full model call |
+| `ERR_LANE_ASSIGNMENT_NO_ROW` | assignment file reads fine but has no row for the role | distinct from a read failure |
+| `ERR_NO_ASSIGNED_ARM` | `--require-assigned-arms` and no assigned arm is in the pool | strict selection emptied the pool |
 
-Pass 1 is reported, not hidden: a check that cannot be receipted is not a pass. The finding it raised was
-repaired by removing the volatile numbers (single home: `PACKAGE_DENOMINATOR.json`), and pass 2 ran
-against the repaired bytes.
+Ordering is deliberate and measured: an arm absent from the *pool* keeps `ERR_LANE_REQUIRED_ARM_ABSENT`,
+so the assignment gate sits after the pool-membership check. Tests: **8 new**;
+suite **144 passed** with the change, **136 without** → 0 regressions.
+
+> Two self-inflicted defects were found and fixed en route, both recorded because they are the exact
+> failure modes that make "tests are green" meaningless: (a) the first gate ordering masked the more
+> specific pool refusal; (b) an import-time `Path.home()` killed the module under a minimal child env and
+> took 13 unrelated lane-guard tests with it.
+
+## 6. Independent VERIFY lane (advisory, not acceptance)
+
+| Pass | Lane receipt | Verdict | Notes |
+|---|---|---|---|
+| 1 | `ERR_NO_ARM_EMITTED_NONCE` (brief never asked for the nonce) | `PASS_WITH_FINDINGS` | found real drift in the package notes → repaired by centralising counts |
+| 2 | **`ok=true`**, `required == served == openai-codex/gpt-6.1-sol`, 150.9 s, usage OK | **PASS**, C1–C7 | against the **first** build (`0432b9b4…`) |
+| 3 | `ERR_NO_ARM_EMITTED_NONCE` | **HOLD** | C9 untestable: the brief never stated the expected archive digest. Correct behaviour — an untestable claim is not a pass |
+| 4 | `ERR_NO_ARM_EMITTED_NONCE` | **PASS_WITH_FINDINGS**, C1–C9 all PASS, mutation CLEAN | against the repaired archive `ee009117…`; findings are the known baseline defect + brief wording |
+| 5 | `ERR_NO_ARM_EMITTED_NONCE` | focused re-check **C8 PASS** (88/88 rows), **C9 PASS** (sha/bytes/entries equal) | `lane/FOCUSED_RECHECK_R20.json`, nonce `7143390aec96508f` |
+
+Passes 3–5 produced verdicts but **no receipt-able lane identity/nonce** (`served_arm: null`), which
+appeared only after `--guard-subject` was pointed at the 13.5 MB archive. Recorded as TT-R20-7 rather than
+smoothed over: the verdicts are attributable by the nonce they quote, but the lane did not certify them.
+The single receipted turn is pass 2, and it covers the first build.
 
 **Ceiling:** the lane verdict is advisory. It is not an `OracleReceipt`, not a canonical acceptance
-status, and not owner acceptance. Independence is **process-only** (checker and maker share the same
-model family); model diversity is **not** claimed.
+status, and not owner acceptance. Independence is **process-only** (same model family as the maker);
+model diversity is **not** claimed.
 
-## 5. Dispatcher gates added in this round
+## 7. Findings that stay open
 
-Two pre-spawn refusals in `scripts/hgk-lane-dispatch.py`, both fail-closed with typed codes:
+1. **18/18 stage rows are `ABSENT`** — no machine artifact carries an instance of any stage's output
+   contract.
+2. **46 HOLD cells stay HOLD**, each annotated with the reader class it needs (CALIBRATION 11 /
+   HUMAN_DECISION 11 / HUMAN_JUDGE 11 / TWO_VERSION 8 / PERFORMANCE 5) and the next legal action.
+3. **Assignment file lists no fallbacks** (TT-R20-6) — a policy decision, not an agent one.
+4. **Long paths**: 37 of 85 subject paths exceed 260 chars on this host; all work ran from short roots.
+5. `validate.py` rewrites 4 files in the tree it runs in → checksum verification must use a fresh extract.
 
-| Code | Trigger | Why it exists |
-|---|---|---|
-| `ERR_ARM_NOT_IN_ASSIGNMENT` | `--require-arm <arm>` where the arm is absent from `config/model-lane-assignment.json` for that lane | the pool is a routing table, not the decision; otherwise a pool edit silently rewrites the owner's assignment |
-| `ERR_SEALED_HOME_OAUTH_TRANSPORT` | OAuth relay (`backend-api/codex`) + a lane home with no `auth.json` | this pair returns 401 **after** a full model call; measured as a slow, expensive false failure |
-
-Ordering matters and was measured: an arm that is absent from the pool keeps
-`ERR_LANE_REQUIRED_ARM_ABSENT`, so the assignment gate is placed **after** the pool-membership check.
-
-Tests: `tests/test_lane_dispatch_r20_gates.py` (5 cases: 2 negative, 2 unit, 1 control that proves the
-gates do not over-refuse an assigned arm). Suite with the change: **141 passed**; suite without it:
-**136 passed** → no regressions.
-
-> An earlier draft resolved `Path.home()` at import time. With a minimal child environment (tests pass a
-> bare `env`), that killed the module and turned 13 unrelated lane-guard tests into no-JSON crashes. The
-> fix resolves the home lazily inside the refusal path. Recorded because "the gate broke the tests" is a
-> real failure mode, not noise.
-
-## 6. Findings that stay open (not hidden)
-
-1. **All 18 stage rows are `ABSENT`** (`tables/STAGE18_TRACE.tsv`): no machine artifact in the package
-   carries an instance of any stage's output contract. The trace states the measurement; it does not
-   claim the stages were executed.
-2. **46 HOLD cells stay HOLD** (`tables/HOLD_DISPOSITION.tsv`), each with its reader class
-   (CALIBRATION 11 / HUMAN_DECISION 11 / HUMAN_JUDGE 11 / TWO_VERSION 8 / PERFORMANCE 5), the required
-   reader, the next legal action, and the source line + clause digest. They are not converted to PASS.
-3. **The repo copy of `config/model-lane-assignment.json` was stale (rev 33)** relative to the machine
-   (rev 35: PLAN/VERIFY = `openai-codex/gpt-6.1-sol`, EXECUTE = `opencode-go/deepseek-v4.1-flash`).
-   The delivered branch carries rev 35, which is the routing the owner declared for this round; the
-   discrepancy is recorded rather than silently reconciled.
-4. **Long paths.** 37 of 85 subject paths exceed 260 chars with Win32 long-path support disabled on this
-   host. All validation/packaging ran from short roots (`C:\r20pkg*`); the bundled ZIP is the exact
-   shipped archive.
-
-## 7. Reproduction
+## 8. Reproduction
 
 ```bash
-# 1. subject is frozen: r2-revision2 is never written. r3 is a sibling.
-# 2. expand the bundled archive into a SHORT root (long paths are off on this host)
-unzip evidence/R20-FHS-20261029/package/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip -d C:/r20check
-cd C:/r20check && python -B tools/validate.py
-#   expected: passed 2789 / failed 0
+# 1. r2-revision2 stays frozen; the delivered artifact is the archive.
+unzip evidence/R20-FHS-20261029/package/*_r2-revision3.zip -d C:/r20check     # short root: long paths are off here
+cd C:/r20check && python -B tools/validate.py                                # expected: 2789 passed / 0 failed
 
-# 3. determinism: rebuild the archive from the tree and compare digests
+# 2. checksum list (R20b): every row must match
 python - <<'PY'
-import hashlib, pathlib, zipfile
-z = pathlib.Path("C:/r20check/../r3.zip")
-# rebuild with the same ordered-entry rule the packaging step used, then:
-#   sha256(expected) == 0432b9b4e572369d8856803f35b88b85b2d976b3f8d80e9f2f14c30eece1b06c
+import hashlib, pathlib
+root = pathlib.Path("C:/r20check")
+bad = []
+for ln in (root/"03_TESTS_AND_READBACK/artifact_checksums.sha256").read_text(encoding="utf-8").splitlines():
+    h, name = ln.split("  ", 1)
+    if hashlib.sha256((root/name).read_bytes()).hexdigest() != h:
+        bad.append(name)
+print("mismatched:", bad)          # expected: []
 PY
 
+# 3. archive identity
+sha256sum evidence/R20-FHS-20261029/package/*_r2-revision3.zip
+#   expected: ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f
+
 # 4. gates
-cd <repo> && PYTHONPATH=src python -m pytest tests/test_lane_dispatch_r20_gates.py -q
-#   expected: 5 passed
-python scripts/hgk-lane-dispatch.py --lane EXECUTE --prompt noop --nonce deadbeefdeadbeef \
-  --codex-home "$LOCALAPPDATA/HG-KSEOS/codex-hermes" --relay-base https://chatgpt.com/backend-api/codex
-#   expected: exit 4 / ERR_SEALED_HOME_OAUTH_TRANSPORT + the corrected command
+PYTHONPATH=src python -m pytest tests/test_lane_dispatch_r20_gates.py -q      # expected: 8 passed
 ```
 
-## 8. Claim ceiling (read before quoting anything here)
+## 9. Claim ceiling (read before quoting anything here)
 
 ```text
-revision3 package          = AUTHOR_SIDE_LOCAL, validator green on shipped bytes
-independent VERIFY verdict = ADVISORY (process-only independence)
-owner acceptance           = NOT_RUN
-external acceptance        = NOT_RUN
-repo main merge            = NOT_DONE (candidate branch only)
-production / live / remote = NOT_CLAIMED
-r2-revision2 bytes         = UNMODIFIED (rollback point preserved)
+revision3 archive           = AUTHOR_SIDE_LOCAL; validator green on shipped bytes; checksum list verified
+independent VERIFY verdict  = ADVISORY (process-only independence; one receipted turn, on the first build)
+owner acceptance            = NOT_RUN
+external acceptance         = NOT_RUN
+repo main merge             = NOT_DONE (candidate branch only)
+production / live / remote  = NOT_CLAIMED
+r2-revision2 bytes          = UNMODIFIED (85/85 hashes re-measured by an independent sub-agent)
 ```
 
-Nothing in this bundle may be read as "the package is accepted". It says: the package validates, the
-repairs are digest-gated, one independent lane read it and agreed, and the remaining HOLDs are enumerated
-with the reader each one needs.
+Nothing here says "the package is accepted". It says: the archive validates, its own integrity lists are
+now verified rather than decorative, the repairs are digest-gated, an independent lane read it and found
+no disagreement it could substantiate, and everything still open is enumerated with the reader it needs.

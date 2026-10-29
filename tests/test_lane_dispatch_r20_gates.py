@@ -81,3 +81,82 @@ def test_assigned_arm_passes_both_gates():
                         "--codex-executable", str(ROOT / "scripts" / "no-such-codex-binary.exe"),
                         "--timeout", "15"])
     assert rec.get("code") not in ("ERR_ARM_NOT_IN_ASSIGNMENT", "ERR_SEALED_HOME_OAUTH_TRANSPORT"), raw
+
+# --------------------------------------------------------------------------------------------------
+# R20b: the audit proved the first version was only a NAMING gate -- `--force-rank` still reached
+# spawn with an arm outside the lane's assignment. These three cases pin the repaired behaviour.
+# --------------------------------------------------------------------------------------------------
+
+STUB = ROOT / "tests" / "fixtures" / "stub_lane_child.py"
+
+
+def _stub_env(scratch: Path, nonce: str):
+    env = dict(os.environ)
+    env["HGK_STUB_EMIT_NONCE"] = nonce
+    env["HGK_STUB_USAGE"] = str(scratch)
+    env["HGK_STUB_USAGE_LINE"] = json.dumps({"provider": "stub", "model": "stub", "status": 200})
+    return env
+
+
+def _run_with_stub(extra_args, nonce="HGK_R20B_NONCE"):
+    import tempfile
+    tmp = Path(tempfile.mkdtemp(prefix="r20b-"))
+    ledger = tmp / "usage.jsonl"
+    ledger.write_bytes(b"")
+    r = subprocess.run([sys.executable, str(DISPATCH), "--prompt", "noop", "--nonce", nonce,
+                        "--codex-executable", str(STUB), "--usage", str(ledger),
+                        "--timeout", "60"] + extra_args,
+                       cwd=str(ROOT), capture_output=True, text=True, timeout=180,
+                       env=_stub_env(ledger, nonce))
+    body = (r.stdout or "") + (r.stderr or "")
+    try:
+        rec = json.loads((r.stdout or "")[body.find("{"):body.rfind("}") + 1])
+    except Exception:
+        rec = {}
+    return r.returncode, rec, body
+
+
+def test_lane_group_shape_and_alternates_are_accepted():
+    """A rev-33 shaped file (lane_group + non_default_alternates) must not read as 'no assignment'."""
+    import tempfile
+    mod = load_module()
+    tmp = Path(tempfile.mkdtemp(prefix="r20b-asg-"))
+    fixture = tmp / "assignment.json"
+    fixture.write_text(json.dumps({"revision": 33, "assignment": [{
+        "lane_group": "VERIFY_SECURITY", "assigned_provider": "opencode-go",
+        "assigned_model": "deepseek-v4.1-flash",
+        "non_default_alternates": [{"provider": "openai-codex", "model": "gpt-6.1-sol"}]}]},
+        ensure_ascii=False), encoding="utf-8")
+    original = mod.ASSIGNMENT_FILE
+    try:
+        mod.ASSIGNMENT_FILE = fixture
+        asg = mod.lane_assigned_arms("VERIFY_SECURITY")
+    finally:
+        mod.ASSIGNMENT_FILE = original
+    assert asg["ok"] is True, asg
+    assert asg["shape"] == "lane_group"
+    assert set(asg["arms"]) == {"opencode-go/deepseek-v4.1-flash", "openai-codex/gpt-6.1-sol"}
+    assert asg["alternates_are_operator_selectable"] is True
+
+
+def test_require_assigned_arms_filters_the_pool():
+    """Strict mode: the serving arm must come from the assignment, and the filtered ones are recorded."""
+    rc, rec, body = _run_with_stub(["--lane", "EXECUTE", "--require-assigned-arms"])
+    assert rc == 0, body[-1500:]
+    assert rec["ok"] is True, body[-1500:]
+    posture = rec["assignment_posture"]
+    assert posture["enforced"] is True
+    assert posture["filtered_out"], "EXECUTE's pool does contain arms outside the assignment"
+    assert rec["served_arm_assigned"] is True, rec.get("served_arm")
+
+
+def test_unassigned_arm_serving_is_warned_not_silent():
+    """Default mode keeps fallbacks, but an unassigned serving arm must be visible on receipt + stderr."""
+    rc, rec, body = _run_with_stub(["--lane", "EXECUTE", "--force-rank", "2"])
+    assert rc == 0, body[-1500:]
+    if rec.get("served_arm_assigned") is False:
+        assert "WARN_LANE_SERVED_UNASSIGNED_ARM" in body
+        assert rec["assignment_posture"]["arms_outside_assignment"]
+    else:
+        # If the pool/assignment changed so rank 2 is assigned, the case is vacuous rather than green.
+        pytest.skip(f"rank 2 resolved to an assigned arm ({rec.get('served_arm')}); case not exercised")

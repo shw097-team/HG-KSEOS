@@ -1,0 +1,55 @@
+{
+  "nonce": "7143390aec96508f",
+  "archive": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip",
+  "source_of_expected_values": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\lane\\BRIEF_VERIFY_R20.md",
+  "measurement_scope": "C8 and C9 only; archive read directly without extraction; no writes inside guard subject",
+  "C8": {
+    "verdict": "PASS",
+    "expected": {
+      "rows": 88,
+      "matched": 88,
+      "mismatched": 0
+    },
+    "measured": {
+      "rows": 88,
+      "matched": 88,
+      "mismatched": 0
+    },
+    "row_count_matches_expected": true,
+    "manifest_rows": [
+      {
+        "file": "MANIFEST.md",
+        "expected_sha256": "8ece6d7ed10358325451e7322d9aa0a01e50bbfffce5b63341dcab1d479b5b23",
+        "actual_sha256": "8ece6d7ed10358325451e7322d9aa0a01e50bbfffce5b63341dcab1d479b5b23",
+        "matched": true
+      }
+    ],
+    "mismatches": []
+  },
+  "C9": {
+    "verdict": "PASS",
+    "expected": {
+      "sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+      "byte_size": 13578117,
+      "entry_count": 89,
+      "directory_count": 0,
+      "zip_member_count": 0
+    },
+    "measured": {
+      "sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+      "byte_size": 13578117,
+      "entry_count": 89,
+      "directory_count": 0,
+      "zip_member_count": 0,
+      "zip_members": []
+    },
+    "comparison": {
+      "sha256_matches": true,
+      "byte_size_matches": true,
+      "entry_count_matches": true,
+      "directory_count_matches": true,
+      "zip_member_count_matches": true
+    }
+  },
+  "overall": "PASS"
+}

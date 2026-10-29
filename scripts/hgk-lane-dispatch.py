@@ -101,6 +101,8 @@ DEFAULT_LANE_HOME = Path(os.environ.get("LOCALAPPDATA", "")) / "HG-KSEOS" / "cod
 ASSIGNMENT_FILE = ROOT / "config" / "model-lane-assignment.json"
 ERR_ARM_NOT_IN_ASSIGNMENT = "ERR_ARM_NOT_IN_ASSIGNMENT"
 ERR_ARM_ASSIGNMENT_UNREADABLE = "ERR_ARM_ASSIGNMENT_UNREADABLE"
+ERR_LANE_ASSIGNMENT_NO_ROW = "ERR_LANE_ASSIGNMENT_NO_ROW"
+ERR_NO_ASSIGNED_ARM = "ERR_NO_ASSIGNED_ARM"
 # R20 P3: an OAuth relay can only serve from a home that holds the login. The sealed lane home holds
 # none by design, so that pair is a guaranteed 401 AFTER a full model call.
 ERR_SEALED_HOME_OAUTH_TRANSPORT = "ERR_SEALED_HOME_OAUTH_TRANSPORT"
@@ -1619,6 +1621,10 @@ def main() -> int:
     ap.add_argument("--require-arm", default=None,
                     help="provider/model that MUST survive the gate; if it is refused the run fails closed "
                          "instead of silently degrading to another arm (owner ruling: keep the OAuth arm unattended)")
+    ap.add_argument("--require-assigned-arms", action="store_true", dest="require_assigned_arms",
+                    help="selection-time strictness: only arms named in config/model-lane-assignment.json "
+                         "for this lane may serve; if none is available the run refuses with "
+                         "ERR_NO_ASSIGNED_ARM instead of falling back to an unassigned pool arm")
     ap.add_argument("--guard-subject", action="append", default=None,
                     help="file/dir whose digest must not change during the turn (repeatable). removed/changed "
                          "=> the verdict is VOID; this is what makes an escalated-sandbox checker safe")
@@ -2103,7 +2109,9 @@ def main() -> int:
     if args.require_arm:
         asg = lane_assigned_arms(args.lane)
         if not asg["ok"]:
-            return emit_refusal(args, refusal_body(args.lane, ERR_ARM_ASSIGNMENT_UNREADABLE,
+            _code = (ERR_LANE_ASSIGNMENT_NO_ROW if "no assignment row" in str(asg.get("detail"))
+                     else ERR_ARM_ASSIGNMENT_UNREADABLE)
+            return emit_refusal(args, refusal_body(args.lane, _code,
                 asg.get("detail"), lane_assignment=asg,
                 say="refusing before any spawn: the lane assignment could not be read, so no arm can "
                     "be shown to be the assigned one"))
@@ -2131,6 +2139,33 @@ def main() -> int:
                           f"--relay-base {_relay_effective}"),
             say="refusing before any spawn: sealed home + OAuth relay is the 401-after-a-full-call "
                 "combination; use the owner's login home with --allow-human-home-transport"))
+
+    # ---- assignment enforcement at SELECTION, not only at naming (R20b, audit finding) -----------
+    # Measured: 9 of 14 pool arms sit outside their lane's assignment, so a naming-only gate left
+    # --force-rank and plain pool order able to dispatch them. Strict mode blocks that; the default
+    # keeps the documented fallback chains but makes an unassigned serving arm VISIBLE (receipt +
+    # WARN), because "silent" is the part that was wrong.
+    assignment_selection = {"enforced": bool(getattr(args, "require_assigned_arms", False)),
+                            "posture": lane_assigned_arms(args.lane)}
+    if assignment_selection["posture"]["ok"]:
+        _allowed = set(assignment_selection["posture"]["arms"])
+        _outside = [f"{e['provider']}/{e['model']}" for e in entries
+                    if f"{e['provider']}/{e['model']}" not in _allowed]
+        assignment_selection["arms_outside_assignment"] = _outside
+        if assignment_selection["enforced"]:
+            _kept = [e for e in entries if f"{e['provider']}/{e['model']}" in _allowed]
+            assignment_selection["filtered_out"] = _outside
+            if not _kept:
+                return emit_refusal(args, refusal_body(args.lane, ERR_NO_ASSIGNED_ARM,
+                    f"none of this lane's pool arms is in the {args.lane} assignment "
+                    f"(revision {assignment_selection['posture']['revision']}); "
+                    f"assigned: {sorted(_allowed)}",
+                    lane_assignment=assignment_selection,
+                    say="refusing before any spawn: --require-assigned-arms is on and no assigned "
+                        "arm is available in this pool"))
+            entries = _kept
+    else:
+        assignment_selection["arms_outside_assignment"] = None
 
     # ---- non-mutation guard (makes an escalated-sandbox checker safe) --------------------------
     guard_roots = list(args.guard_subject or [])
@@ -2559,6 +2594,10 @@ def main() -> int:
         "used_transport_model": used["transport_model"] if used else None,
         "used_seconds": used["seconds"] if used else None,
         "generated_utc": datetime.now(UTC).isoformat(),
+        "assignment_posture": assignment_selection,
+        "served_arm_assigned": (None if not assignment_selection["posture"]["ok"] else
+                               (f"{used['provider']}/{used['model']}" in set(assignment_selection["posture"]["arms"])
+                                if used else None)),
         "claim_ceiling": "a pass here proves the Codex-CLI lane served this turn through the relay with a matching usage receipt; it is not an acceptance of any subject",
     }
     receipt["ok"] = used is not None
@@ -2645,6 +2684,14 @@ def main() -> int:
         out = Path(args.json_out)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(receipt, indent=2, ensure_ascii=False), encoding="utf-8")
+    # R20b: an unassigned arm may not serve SILENTLY. Detection is always on; --require-assigned-arms
+    # turns it into a refusal. Placed on the SUCCESS path, where a serving arm actually exists.
+    _ap = receipt.get("assignment_posture") or {}
+    if _ap.get("posture", {}).get("ok") and receipt.get("served_arm_assigned") is False:
+        print(f"WARN_LANE_SERVED_UNASSIGNED_ARM: {receipt.get('served_arm')} is not in the "
+              f"{args.lane} assignment (revision {_ap['posture'].get('revision')}); "
+              f"assigned: {_ap['posture'].get('arms')} -- pass --require-assigned-arms to make this refuse",
+              file=sys.stderr)
     print(json.dumps(receipt, indent=2, ensure_ascii=False))
     return 0 if receipt["ok"] else 3
 

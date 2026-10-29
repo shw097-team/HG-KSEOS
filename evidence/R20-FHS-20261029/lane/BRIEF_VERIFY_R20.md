@@ -66,3 +66,32 @@ Rules for your verdict:
 - "PASS" only if you measured it yourself in this turn. Reading the author's receipt is not measuring.
 - If you cannot measure something (missing tool, path too long, timeout), say `HOLD` and name what is missing.
 - Do not soften: if a claim is false or unfalsifiable as stated, say so and say why.
+
+## R20b addition (pass 3) — re-test the defect the pass-2 round shipped
+
+Pass 2 returned PASS, but a parallel audit then found a real defect the pass did not catch:
+`03_TESTS_AND_READBACK/artifact_checksums.sha256` pinned the **pre-write** bytes of `MANIFEST.md`
+(87/88 rows correct, 1 stale), and `tools/validate.py` never reads that list, so the 2789 PASS did not
+cover it. The packaging order has been fixed and the shipped archive rebuilt.
+
+Add these two checks to your adjudication:
+
+- **C8**: for every row in `03_TESTS_AND_READBACK/artifact_checksums.sha256`, re-hash the file in the
+  package and report matched/mismatched. Expected: all matched, and `MANIFEST.md`'s row equals the
+  actual MANIFEST.md digest.
+- **C9**: confirm the archive contains no `*.zip` member and that the archive's own sha256 equals the
+  value in the brief. Report both.
+
+If either fails, the verdict must be FAIL regardless of C1-C7.
+
+## Expected values (verbatim — every claim must be checked against these strings)
+
+```text
+shipped artifact : FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip  (ONLY the zip ships; there is no unpacked delivery directory)
+zip sha256       : ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f
+zip bytes        : 13578117
+zip entries      : 89 (0 directory entries, 0 *.zip members)
+validator        : passed 2789 / failed 0, scope AUTHOR_STATIC_FIXTURES_ONLY
+tables           : HOLD_DISPOSITION.tsv 46 rows, STAGE18_TRACE.tsv 18 rows (18 x ABSENT)
+checksum list    : 88 rows, every row must match the file it names (this is C8)
+```
