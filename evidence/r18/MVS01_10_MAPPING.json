@@ -1,0 +1,68 @@
+{
+ "schema": "R18.MVS01_10_MAPPING/2",
+ "refreshed_utc": "2026-10-29T07:33:58Z",
+ "evidence_basis": "this round's own receipts; a mission is DONE only where a receipt exists",
+ "rows": [
+  {
+   "mvs": "MVS01",
+   "status": "DONE",
+   "evidence": "receipts/WP00_SOURCE_CURRENTNESS.json",
+   "note": "source/manifest/ZIP/DAG currentness measured"
+  },
+  {
+   "mvs": "MVS02",
+   "status": "PARTIAL",
+   "evidence": "receipts/WP0203_17_BINDINGS.json",
+   "note": "Fabric policy present but carries no epoch; binding not demonstrable"
+  },
+  {
+   "mvs": "MVS03",
+   "status": "PARTIAL",
+   "evidence": "receipts/WP0203_17_BINDINGS.json",
+   "note": "Issuer module present, registry present, registry_rev None -> issuance unproven"
+  },
+  {
+   "mvs": "MVS04",
+   "status": "DONE",
+   "evidence": "receipts/WP04_DURABLE_RUNTIME.json",
+   "note": "journal/fence/parked readback (257 entries); no live lease held by this round"
+  },
+  {
+   "mvs": "MVS05",
+   "status": "PARTIAL",
+   "evidence": "receipts/LANES_CONSOLIDATED.json, checker/VERIFY6_R18.json",
+   "note": "EXECUTE and PLAN compliant; VERIFY compliant only via --force-rank 2, toolchain dirty"
+  },
+  {
+   "mvs": "MVS06",
+   "status": "DONE",
+   "evidence": "receipts/WP_CONTRACT_RESULTS.json",
+   "note": "22/22 contract checks over declared fields"
+  },
+  {
+   "mvs": "MVS07",
+   "status": "DONE",
+   "evidence": "receipts/VALIDATE_RERUN.json, receipts/ORACLE96_RERUN.json",
+   "note": "2789/0 and 50/46/0 reproduced on an isolated copy"
+  },
+  {
+   "mvs": "MVS08",
+   "status": "DONE",
+   "evidence": "receipts/WP19_SUPPLY_CHAIN.json",
+   "note": "supply-chain scan incl. planted canary"
+  },
+  {
+   "mvs": "MVS09",
+   "status": "PARTIAL",
+   "evidence": "checker/VERDICT_FORCE_RANK2.md",
+   "note": "independent verdict is HOLD; no acceptance"
+  },
+  {
+   "mvs": "MVS10",
+   "status": "PARTIAL",
+   "evidence": "PR #4 https://github.com/shw097-team/HG-KSEOS/pull/4 (branch head b2159b09)",
+   "note": "EXECUTED for HG-KSEOS only: candidate branch pushed and PR updated 2026-10-29. Fabric/PIPD/SBL received no publishable artefact this round -> NOT_RUN with scope statement, not a silent PASS"
+  }
+ ],
+ "claim_ceiling": "mapping of receipts that exist; it is not an acceptance and not a release"
+}
