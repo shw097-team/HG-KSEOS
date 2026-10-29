@@ -124,12 +124,10 @@ The single receipted turn is pass 2, and it covers the first build.
 status, and not owner acceptance. Independence is **process-only** (same model family as the maker);
 model diversity is **not** claimed.
 
-## 6b. Configuration snapshot this evidence pins — and a later host change
+## 6b. Configuration snapshot this evidence pins — and when the host moved
 
-The committed `config/model-lane-assignment.json` is **revision 35 / registry_epoch 34** — the snapshot this
-round actually ran against. Post-round (discovered while reading the pass-5 lane receipt, not by me looking
-for it) the **host** file had already moved to **revision 36 / registry_epoch 36** with exactly two field
-changes:
+The committed `config/model-lane-assignment.json` is **revision 35 / registry_epoch 34**. The **host** file
+is now **revision 36 / registry_epoch 36**, with exactly two field changes:
 
 ```text
 PLAN            transport_model: opencode-go/deepseek-v4.1-flash -> gpt-6.1-sol
@@ -137,16 +135,24 @@ VERIFY_SECURITY transport_model: opencode-go/deepseek-v4.1-flash -> gpt-6.1-sol
 (assigned_provider / assigned_model / authority unchanged in both rows)
 ```
 
+**The change happened mid-round, not after it.** The lane receipts date it: the P3 gate tests at
+`13:22:34Z` recorded `revision: 35` (arms without the bare `gpt-6.1-sol` alias), while passes 3–5 at
+`13:49:52Z` / `13:54:52Z` / `13:57:00Z` all quote `revision: 36` with arms
+`["gpt-6.1-sol", "openai-codex/gpt-6.1-sol"]`. Pass 2 (`13:16:42Z`) predates the `assignment_posture`
+field, so it carries no revision at all — its lane identity (`required == served == openai-codex/gpt-6.1-sol`)
+is unaffected by the change, since both revisions assign that model to VERIFY_SECURITY.
+
 Two honest readings, both of which belong here:
 
 1. **Rev 35 was internally inconsistent with the owner's role order.** For PLAN and VERIFY_SECURITY the row
    said `assigned_model: gpt-6.1-sol` while its `transport_model` pointed at deepseek. Rev 36 removes that
-   contradiction. The lanes in this round were dispatched with `--require-arm openai-codex/gpt-6.1-sol`
-   over the OAuth relay, i.e. matching the owner order — the gate compared against `assigned_model`, so the
-   lane behaviour was right even though the committed row was self-contradictory.
-2. **This branch pins rev 35, not rev 36.** Any later reader must not assume the shipped routing snapshot
-   equals the live host. The drift is recorded rather than absorbed (TT-R20-10), because silently
-   re-baselining evidence onto a config that the round never ran against is exactly the move that makes
+   contradiction. This round's lanes were dispatched with `--require-arm openai-codex/gpt-6.1-sol` over the
+   OAuth relay — matching the owner order — and the gate compares against `assigned_model`, so lane
+   behaviour was right even while the committed row contradicted itself.
+2. **This branch pins rev 35, not rev 36.** A later reader must not assume the shipped routing snapshot
+   equals the live host, and must not assume the round ran entirely under one revision — passes 3–5 ran
+   after the host had already moved. Recorded as TT-R20-10 rather than absorbed, because silently
+   re-baselining evidence onto a config the earlier phases never ran against is exactly the move that makes
    receipts decorative.
 
 ## 7. Findings that stay open
