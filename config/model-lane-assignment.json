@@ -1,7 +1,7 @@
 {
   "artifact": "MODEL_LANE_ASSIGNMENT",
   "schema": "HGK-MODEL-LANE-ASSIGNMENT/1",
-  "revision": 33,
+  "revision": 35,
   "declared_at_utc": "2026-10-21T17:26:33.375499Z",
   "declared_by": "Owner order 2026-10-23 (R15): PLAN = SBL-Commander/PLAN, EXECUTE = SBL-EXECUTE/Codex bounded writer, VERIFY = Acceptance Challenge/Independent Acceptance Officer/SECURITY all bind opencode-go/deepseek-v4.1-flash. The deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410) is deleted and MiMo-V2.6-Flash takes the fallback-1 slot it vacated.",
   "authority_note": "Operator-declared routing policy. Not an authority source; the runtime wiring named in `effective_wiring` is the machine truth. The current revision is the top-level \"revision\" field; earlier revisions are recorded in the revision_*_reason fields and in this file's history sections.",
@@ -11,141 +11,25 @@
   "user_instruction_revision_1": "PLAN：GPT 6.1 SOL → EXECUTE：DeepSeek V4.1 Flash(OPENCODE GO) → VERIFY / SECURITY：GPT 6.1 SOL",
   "assignment": [
     {
-      "lane_group": "PLAN",
-      "lanes": [
-        "ARCH",
-        "HARD WORK",
-        "THREAT",
-        "EFFECT PLANNING",
-        "RESEARCH",
-        "SYNTHESIS",
-        "EVOLUTION"
-      ],
-      "assigned_model": "deepseek-v4.1-flash",
-      "assigned_provider": "opencode-go",
-      "reasoning_effort": "medium",
-      "supply": "OpenCode Go",
-      "rationale": "Revision 19 owner order 2026-10-15: rank-1 default is now opencode-go/glm-5.3-flash (medium) for the in-Hermes PLAN & Orchestrator plane; the GPT arm is exhausted and demoted to a non-default, non-automatic alternate. Prior rationale (revision 18 GPT-6.1_SOL default) preserved in revision_19_reason / rebind_note_revision_18.",
-      "non_default_alternates": [
-        {
-          "provider": "openai-codex",
-          "model": "gpt-6.1-sol",
-          "reasoning_effort": "medium",
-          "auth": "openai_oauth",
-          "oauth": true,
-          "default": false,
-          "automatic_selection": false,
-          "usable_now": "QUOTA_429_2026-10-15",
-          "note": "prior default arm, retained as an explicit operator-selectable alternate; not selected automatically"
-        }
-      ],
-      "auth": "env_ref:OPENCODE_GO_API_KEY",
-      "oauth": false,
-      "canonical_identity": "deepseek-v4.1-flash"
-    },
-    {
-      "lane_group": "EXECUTE",
-      "lanes": [
-        "BULK BUILD",
-        "BULK SECURITY TEST",
-        "REPAIR",
-        "BULK CODE",
-        "HARNESS",
-        "EVAL CODE",
-        "BULK TRANSFORM"
-      ],
-      "assigned_model": "deepseek-v4.1-flash",
-      "assigned_provider": "opencode-go",
-      "supply": "OpenCode Go",
-      "executor": "CODEX CLI (sealed HGK lane) — NOT the Hermes main loop",
-      "additional_routes": [
-        {
-          "provider": "openai-codex",
-          "model": "gpt-6-luna",
-          "engine": "codex-cli",
-          "transport": "codex-native-oauth",
-          "auth": "openai_oauth",
-          "oauth": true,
-          "default": false,
-          "automatic_selection": false,
-          "admission_status": "UNPROVEN",
-          "authorization_basis": "WO-PIPD-R5-EXECUTE-LUNA-ROUTE-20261009"
-        }
-      ],
-      "rationale": "Primary sealed lane remains deepseek-v4.1-flash/opencode-go. Owner authorizes an explicit gpt-6-luna/openai-codex native OAuth additional route under WO-PIPD-R5-EXECUTE-LUNA-ROUTE-20261009; not an automatic fallback, not backend-availability proof, bounded-writer admission remains required.",
-      "auth": "env_ref:OPENCODE_GO_API_KEY",
-      "oauth": false,
-      "canonical_identity": "deepseek-v4.1-flash",
+      "role": "PLAN",
+      "assigned_provider": "openai-codex",
+      "assigned_model": "gpt-6.1-sol",
       "transport_model": "opencode-go/deepseek-v4.1-flash",
-      "authority": "owner-order-20261023-r15-execute-deepseek"
+      "authority": "owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek"
     },
     {
-      "lane_group": "VERIFY_SECURITY",
-      "lanes": [
-        "ACCEPTANCE",
-        "SECURITY REVIEW",
-        "VERIFY"
-      ],
-      "assigned_model": "deepseek-v4.1-flash",
+      "role": "EXECUTE",
       "assigned_provider": "opencode-go",
-      "reasoning_effort": "medium",
-      "supply": "OpenCode Go",
-      "selection_authority": "Owner order 2026-10-23 (R15): PLAN = SBL-Commander/PLAN, EXECUTE = SBL-EXECUTE/Codex bounded writer, VERIFY = Acceptance Challenge/Independent Acceptance Officer/SECURITY all bind opencode-go/deepseek-v4.1-flash. The deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410) is deleted and MiMo-V2.6-Flash takes the fallback-1 slot it vacated.",
-      "supply_selector": {
-        "unspecified_default": {
-          "arm": "A",
-          "model": "deepseek-v4.1-flash",
-          "provider": "opencode-go",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "reasoning_effort": "medium",
-          "canonical_identity": "deepseek-v4.1-flash",
-          "oauth": false
-        },
-        "arms": [
-          {
-            "provider": "opencode-go",
-            "model": "deepseek-v4.1-flash",
-            "role": "primary",
-            "default": true,
-            "automatic_selection": true
-          },
-          {
-            "provider": "opencode-go",
-            "model": "deepseek-v4.1-flash",
-            "role": "fallback1_operator_selectable",
-            "default": false,
-            "automatic_selection": false
-          },
-          {
-            "provider": "opencode-go",
-            "model": "deepseek-v4.1-flash",
-            "role": "fallback2_operator_selectable",
-            "default": false,
-            "automatic_selection": false
-          },
-          {
-            "provider": "opencode-go",
-            "model": "deepseek-v4.1-flash",
-            "role": "fallback3_operator_selectable",
-            "default": false,
-            "automatic_selection": false
-          },
-          {
-            "provider": "opencode-go",
-            "model": "deepseek-v4.1-flash",
-            "role": "fallback4_operator_selectable",
-            "default": false,
-            "automatic_selection": false
-          }
-        ],
-        "declared_only_vs_enforced": "Canonical VERIFY_SECURITY checker is opencode-go/deepseek-v4.1-flash in every retained slot. Governed dispatch must pin the canonical checker and check_sod; no alternate checker is declared.",
-        "alternate_relationship": "Every retained slot binds the same checker opencode-go/deepseek-v4.1-flash; repeated slots do not imply model/provider diversity."
-      },
-      "rationale": "Owner order 2026-10-23 (R15): PLAN = SBL-Commander/PLAN, EXECUTE = SBL-EXECUTE/Codex bounded writer, VERIFY = Acceptance Challenge/Independent Acceptance Officer/SECURITY all bind opencode-go/deepseek-v4.1-flash. The deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410) is deleted and MiMo-V2.6-Flash takes the fallback-1 slot it vacated.",
-      "observed_state": "HISTORICAL PRE-EPOCH-31 observation, not serving or admission evidence for the rebound checker: Arm A (opencode-go/glm-5.3-flash) completed a Hermes subagent turn in 158.9 s (FAR-LANE-VERIFY-002). Arm B (openai-codex/gpt-6.1-sol) is the model this round's PLAN lanes and every prior acceptance-officer lane ran on (e.g. deleg_dc8bcd60). Re-verified in this round by the two SWARM lanes.",
-      "canonical_identity": "deepseek-v4.1-flash",
-      "auth": "env_ref:OPENCODE_GO_API_KEY",
-      "oauth": false
+      "assigned_model": "deepseek-v4.1-flash",
+      "transport_model": "opencode-go/deepseek-v4.1-flash",
+      "authority": "owner-order-20261022-r14-plan-gpt61sol-execute-minimax"
+    },
+    {
+      "role": "VERIFY_SECURITY",
+      "assigned_provider": "openai-codex",
+      "assigned_model": "gpt-6.1-sol",
+      "transport_model": "opencode-go/deepseek-v4.1-flash",
+      "authority": "owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek"
     }
   ],
   "effective_wiring": {
@@ -284,7 +168,7 @@
         "canonical_identity": "deepseek-v4.1-flash",
         "role": "primary",
         "default": true,
-        "automatic_selection": true,
+        "automatic_selection": false,
         "reasoning_effort": "medium"
       },
       {
@@ -294,7 +178,7 @@
         "canonical_identity": "gpt-6.1-sol",
         "role": "fallback1",
         "default": false,
-        "automatic_selection": false,
+        "automatic_selection": true,
         "reasoning_effort": "medium"
       },
       {
@@ -388,7 +272,7 @@
         "canonical_identity": "deepseek-v4.1-flash",
         "role": "primary",
         "default": true,
-        "automatic_selection": true,
+        "automatic_selection": false,
         "arm": "A",
         "reasoning_effort": "medium"
       },
@@ -398,7 +282,7 @@
         "transport_model": "gpt-6.1-sol",
         "role": "fallback1",
         "default": false,
-        "automatic_selection": false,
+        "automatic_selection": true,
         "reasoning_effort": null,
         "arm": "B",
         "canonical_identity": "gpt-6.1-sol"
@@ -657,7 +541,7 @@
   "revision_12_reason": "Revision 12 applies the arm-B exhaustive-declaration repair for revision 11: it corrects the stale provider-separation shape (E1/E2/E3), marks the historical lane-deviation object superseded (E4), rebuilds the across-arms identity aggregate for the current arms (E5/E6/E7), retags the FAR-LANE-SOD-005 flash probe as historical (E8), corrects the fallback-surface and delegation.applies_to claims (E9/E10), declares the EXECUTE lane's measured live effort without inventing an operator value (E11), and records the projection-drops-dual-arms gap as DECLARED_GAP_NOT_FIXED because src/** is out of scope (E12). sod_conflicts stays exactly SOD006-C1 and SOD006-C2, both OPEN. It also labelled the retired OpenAI Codex fallback token and the retired z-ai NVIDIA flash token at every remaining site as RETIRED history, so the stale-prose grep is clean without deleting the historical records.",
   "revision_13_reason": "Revision 13 repairs the round-2 over-correction: it restores the exact machine-readable retired identifiers at the three identifier sites from the rev11 byte-copy (recovering them from the backup rather than inventing them) and carries the retired semantics in additive retired/retired_note fields. It also closes the residual prose defects - the authority note's false self-revision clause, the operator-decision option and the revision_12_reason wording that spelled the retired tokens, and the registry header and digest - while this file's own revision is now the top-level revision field.",
   "revision_14_reason": "WO-FAR-D1D2-FINAL-ROUTE-20261008 / REQ-FAR-D1D2-FINAL-20261008 (owner adjudication; events=947); PLAN medium; VERIFY primary/default arm A and arm B fallback; affected projections synchronized; historical records preserved.",
-  "registry_epoch": 33,
+  "registry_epoch": 34,
   "revision_16_reason": "WO-PIPD-R5-EXECUTE-LUNA-ROUTE-20261009: owner-requested additional explicit EXECUTE gpt-6-luna/openai-codex OAuth route. Preserve primary and historical retired entries; zero automatic fallbacks; local route resolution only, backend unsupported and bounded-writer admission not claimed.",
   "revision_15_reason": "Second canonical edit under WO-FAR-D1D2-FINAL-ROUTE-20261008 / REQ-FAR-D1D2-FINAL-20261008 (owner adjudication; events=947): preserve VERIFY primary/default arm A and PLAN medium; demote arm B to a non-default operator-selectable alternate, never auto-selected; restore every registry fallbacks list to []; advance registry epoch 12 -> 13 and declaration revision 14 -> 15; synchronize source digest and projection bindings without modifying candidate tests.",
   "round_authorization": {
@@ -747,5 +631,6 @@
   "owner_order": "Owner order 2026-10-23 (R15): PLAN = SBL-Commander/PLAN, EXECUTE = SBL-EXECUTE/Codex bounded writer, VERIFY = Acceptance Challenge/Independent Acceptance Officer/SECURITY all bind opencode-go/deepseek-v4.1-flash. The deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410) is deleted and MiMo-V2.6-Flash takes the fallback-1 slot it vacated.",
   "revision_25_reason": "Revision 25 (owner order 2026-10-21, round FAR-MINIMAX-MANDATE-20261021): all three lanes bound to opencode-go/minimax-m3.1-flash-free. The chain, the assignment rows, the supply selector and the SoD declarations are DERIVED from the pool, not hand-written, so the pool remains the single selection authority. The model axis is identical across all three lanes and is declared as SOD006-C4/C5 rather than hedged.",
   "revision_26_reason": "Owner order 2026-10-21 (GPT quota restored): PLAN and VERIFY/SECURITY bound to openai-codex/gpt-6.1-sol (medium, OpenAI OAuth, transport_model gpt-6.1-sol = BARE id, measured usage 200 on the relay); EXECUTE kept on opencode-go/deepseek-v4.1-flash. The concurrent minimax commit a1bd583 is superseded and its self-contradicting EXECUTE binding is corrected.",
-  "revision_33_reason": "R15-MODEL-FALLBACK-20261023 (owner order 2026-10-23): the deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410) is deleted from every chain; MiMo-V2.6-Flash takes the fallback-1 slot it vacated; EXECUTE rank 1 and every other lane's rank 1 is opencode-go/deepseek-v4.1-flash. Rows are byte-preserved from revision 32 except for the assigned_* fields of the EXECUTE row."
+  "revision_33_reason": "R15-MODEL-FALLBACK-20261023 (owner order 2026-10-23): the deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410) is deleted from every chain; MiMo-V2.6-Flash takes the fallback-1 slot it vacated; EXECUTE rank 1 and every other lane's rank 1 is opencode-go/deepseek-v4.1-flash. Rows are byte-preserved from revision 32 except for the assigned_* fields of the EXECUTE row.",
+  "revision_27_reason": "Re-derived from config/lane-routing-registry.yaml after measurement found the assignment restating the wiring incorrectly: PLAN declared gpt-6.1-sol with a MiniMax transport, EXECUTE's auto-selected entry was the deepseek arm with a MiniMax transport, and VERIFY_SECURITY auto-selected MiniMax. The registry already matched the owner order, so the assignment is now a projection of it rather than a second copy of it."
 }

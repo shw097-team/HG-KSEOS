@@ -96,6 +96,15 @@ DEFAULT_POOL = ROOT / "config/lane-route-slots.candidate.json"
 SPINE_DB = ROOT / "var" / "shared-spine" / "hg-kseos.db"
 SPINE_SCHEMA = ROOT / "src" / "hg_kseos" / "schema.sql"
 DEFAULT_LANE_HOME = Path(os.environ.get("LOCALAPPDATA", "")) / "HG-KSEOS" / "codex-hermes"
+# R20 P3 (D7): the pool is a routing table, the assignment is the owner's decision. A pool entry that
+# is not in the lane's assignment must not be dispatchable by naming it.
+ASSIGNMENT_FILE = ROOT / "config" / "model-lane-assignment.json"
+ERR_ARM_NOT_IN_ASSIGNMENT = "ERR_ARM_NOT_IN_ASSIGNMENT"
+ERR_ARM_ASSIGNMENT_UNREADABLE = "ERR_ARM_ASSIGNMENT_UNREADABLE"
+# R20 P3: an OAuth relay can only serve from a home that holds the login. The sealed lane home holds
+# none by design, so that pair is a guaranteed 401 AFTER a full model call.
+ERR_SEALED_HOME_OAUTH_TRANSPORT = "ERR_SEALED_HOME_OAUTH_TRANSPORT"
+OAUTH_RELAY_MARKER = "backend-api/codex"
 DEFAULT_USAGE = Path(os.environ.get("LOCALAPPDATA", "")) / "HG-KSEOS" / "opencodex-hermes" / "usage.jsonl"
 DEFAULT_RELAY = "http://127.0.0.1:10101/v1"
 # Sandbox per lane. MEASURED 2026-10-10 (T5 outside the workspace root, T5b/T6 inside it): under
@@ -1025,6 +1034,57 @@ def lane_home_isolation(lane_home, declared_lane_home) -> dict:
     has_auth = (Path(lane_home) / "auth.json").is_file()
     return {"codex_home_is_declared_lane_home": is_declared,
             "non_isolated": (not is_declared) and has_auth}
+
+
+def human_oauth_home() -> Path:
+    """The owner's login home, resolved lazily.
+
+    Resolved at CALL time, not import time: a lane child can be started with a minimal environment that
+    has no USERPROFILE, and an import-time Path.home() would then kill the whole dispatcher (measured:
+    it turned 13 unrelated lane-guard tests into no-JSON crashes).
+    """
+    try:
+        return Path.home() / ".codex"
+    except Exception:  # noqa: BLE001 - a missing home must not break the refusal path
+        return Path(os.environ.get("USERPROFILE") or ".") / ".codex"
+
+
+def lane_assigned_arms(role: str) -> dict:
+    """R20 P3: which arms the owner's assignment actually gives this lane.
+
+    Reads config/model-lane-assignment.json (schema HGK-MODEL-LANE-ASSIGNMENT/1). Two shapes exist on
+    this host (measured: rev 33 keys rows by `lane_group` and lists `non_default_alternates`; rev 35 keys
+    them by `role`), so both are accepted. The assigned provider/model pair, the declared transport_model
+    and every non-default alternate are selectable; an alternate is owner-listed and never auto-selected,
+    so naming one with --require-arm is explicit operator selection rather than a violation. An arm that
+    appears nowhere in the file is NOT an assignment, whatever the pool says -- a pool edit must not be
+    equivalent to a routing decision.
+    """
+    try:
+        data = json.loads(ASSIGNMENT_FILE.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001 - a raising gate must become a typed refusal
+        return {"ok": False, "arms": [], "revision": None,
+                "detail": f"cannot read {ASSIGNMENT_FILE}: {type(exc).__name__}: {exc}"}
+    want = str(role).upper()
+    for row in data.get("assignment") or []:
+        label = row.get("role") or row.get("lane_group")
+        if str(label or "").upper() != want:
+            continue
+        arms = []
+        prov, model = row.get("assigned_provider"), row.get("assigned_model")
+        if prov and model:
+            arms.append(f"{prov}/{model}")
+        if row.get("transport_model"):
+            arms.append(str(row["transport_model"]))
+        for alt in row.get("non_default_alternates") or []:
+            if alt.get("provider") and alt.get("model"):
+                arms.append(f"{alt['provider']}/{alt['model']}")
+        return {"ok": True, "arms": sorted(set(arms)), "revision": data.get("revision"),
+                "role": label, "authority": row.get("authority"),
+                "shape": "role" if row.get("role") else "lane_group",
+                "alternates_are_operator_selectable": bool(row.get("non_default_alternates"))}
+    return {"ok": False, "arms": [], "revision": data.get("revision"),
+            "detail": f"no assignment row for role {role!r} in {ASSIGNMENT_FILE}"}
 
 
 def home_isolation_fields(args) -> dict:
@@ -2033,6 +2093,44 @@ def main() -> int:
                                                    say="the required arm did not survive the identity gate; "
                                                        "failing closed instead of silently running a "
                                                        "different arm"))
+
+    # ---- fail-closed arm-assignment gate (pre-spawn) ---------------------------------------------
+    # R20 P3 (D7): the pool is a routing table, not the decision. An arm can sit in the pool from an
+    # earlier epoch while the owner's assignment for this lane names a different one; naming the
+    # stale arm explicitly must not be dispatchable, otherwise editing the pool silently rewrites the
+    # assignment. Runs AFTER the pool-membership check so an arm that is absent from the pool keeps its
+    # more specific ERR_LANE_REQUIRED_ARM_ABSENT refusal.
+    if args.require_arm:
+        asg = lane_assigned_arms(args.lane)
+        if not asg["ok"]:
+            return emit_refusal(args, refusal_body(args.lane, ERR_ARM_ASSIGNMENT_UNREADABLE,
+                asg.get("detail"), lane_assignment=asg,
+                say="refusing before any spawn: the lane assignment could not be read, so no arm can "
+                    "be shown to be the assigned one"))
+        if str(args.require_arm) not in asg["arms"]:
+            return emit_refusal(args, refusal_body(args.lane, ERR_ARM_NOT_IN_ASSIGNMENT,
+                f"--require-arm {args.require_arm} is not in the {args.lane} assignment "
+                f"(revision {asg['revision']}); assigned: {asg['arms']}",
+                lane_assignment=asg,
+                say="refusing before any spawn: a pool entry is not an assignment; dispatch an "
+                    "assigned arm, or have the owner revise the assignment"))
+
+    # ---- fail-closed transport/home posture gate (pre-spawn) -------------------------------------
+    # R20 P3: an OAuth relay serves only from a home that HOLDS the login. The sealed lane home holds
+    # none by design, so sealing + OAuth is a guaranteed 401 delivered AFTER a full model call --
+    # expensive, slow, and easily misread as "the arm is down". Name the mismatch and print the shape
+    # that works, instead of letting the run discover it.
+    _relay_effective = str(args.relay_base or "")
+    if OAUTH_RELAY_MARKER in _relay_effective.lower() and not (lane_home / "auth.json").is_file():
+        return emit_refusal(args, refusal_body(args.lane, ERR_SEALED_HOME_OAUTH_TRANSPORT,
+            f"--relay-base {_relay_effective} needs an OAuth login, but {str(lane_home)} holds no "
+            f"auth.json (sealed / key-auth home)",
+            transport_posture={"relay_base": _relay_effective, "home_has_auth_json": False,
+                               "home_is_declared_lane_home": home_isolation["codex_home_is_declared_lane_home"]},
+            next_command=(f"--codex-home {human_oauth_home()} --allow-human-home-transport "
+                          f"--relay-base {_relay_effective}"),
+            say="refusing before any spawn: sealed home + OAuth relay is the 401-after-a-full-call "
+                "combination; use the owner's login home with --allow-human-home-transport"))
 
     # ---- non-mutation guard (makes an escalated-sandbox checker safe) --------------------------
     guard_roots = list(args.guard_subject or [])

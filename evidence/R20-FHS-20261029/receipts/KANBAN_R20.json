@@ -1,0 +1,69 @@
+[
+ {
+  "title": "P0 denominator (85 files, long-path safe)",
+  "rc": 0,
+  "stdout": "Created t_27a25bc5  (ready, assignee=-)",
+  "stderr": "",
+  "complete_rc": 2
+ },
+ {
+  "title": "P1a r2 fresh validate red 2788/1",
+  "rc": 0,
+  "stdout": "Created t_7ff015a4  (ready, assignee=-)",
+  "stderr": "",
+  "complete_rc": 2
+ },
+ {
+  "title": "P1b 29 exact-byte locator repairs",
+  "rc": 0,
+  "stdout": "Created t_d4ba75cd  (ready, assignee=-)",
+  "stderr": "",
+  "complete_rc": 2
+ },
+ {
+  "title": "P1c r3 validate green 2789/0 (reproducible verdict)",
+  "rc": 0,
+  "stdout": "Created t_a583e7c8  (ready, assignee=-)",
+  "stderr": "",
+  "complete_rc": 2
+ },
+ {
+  "title": "P1d package: drop self-embedded ZIP, deterministic ZIP",
+  "rc": 0,
+  "stdout": "Created t_a0ce32cd  (ready, assignee=-)",
+  "stderr": "",
+  "complete_rc": 2
+ },
+ {
+  "title": "P1e shipped verification (fresh copy + zip rebuild)",
+  "rc": 0,
+  "stdout": "Created t_d0fc8206  (ready, assignee=-)",
+  "stderr": "",
+  "complete_rc": 2
+ },
+ {
+  "title": "Author tables: HOLD 46 + STAGE18 18",
+  "rc": 0,
+  "stdout": "Created t_1cfbd75d  (ready, assignee=-)",
+  "stderr": "",
+  "complete_rc": 2
+ },
+ {
+  "title": "P2 VERIFY lane independent adjudication (gpt-6.1-sol)",
+  "rc": 0,
+  "stdout": "Created t_c5531f62  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "P3 dispatcher fail-closed assertions + negative tests",
+  "rc": 0,
+  "stdout": "Created t_219bd5d5  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "P5 candidate branch commit + push + PR update",
+  "rc": 0,
+  "stdout": "Created t_7447b671  (ready, assignee=-)",
+  "stderr": ""
+ }
+]

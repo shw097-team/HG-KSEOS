@@ -1,0 +1,17 @@
+{
+ "schema": "R20.R3_IDEMPOTENCE/1",
+ "rc": 0,
+ "files_changed_between_runs": [
+  "03_TESTS_AND_READBACK/static_validation_result.json",
+  "03_TESTS_AND_READBACK/static_validation_result.md",
+  "03_TESTS_AND_READBACK/test_matrix.md"
+ ],
+ "semantic_digest_run_prev": "534fa4c190f5db06f4a61efbbb90a8532e1ce68890ddeb59d95794101a1696f5",
+ "semantic_digest_run_now": "534fa4c190f5db06f4a61efbbb90a8532e1ce68890ddeb59d95794101a1696f5",
+ "semantic_identical": true,
+ "case_count": 2789,
+ "passed": 2789,
+ "failed": 0,
+ "verdict_reproducible": true,
+ "note": "raw bytes differ only in timing fields; the verdict projection is the claim"
+}
