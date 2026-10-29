@@ -1,0 +1,19 @@
+{
+ "schema": "R19.LANE_RECEIPT.VERIFY/1",
+ "at": "2026-10-29T11:57:24Z",
+ "role": "VERIFY_SECURITY",
+ "dispatch_attempts": 3,
+ "dispatch_ok": false,
+ "served_by": "codex exec (human home, model_provider=desktop_router)",
+ "served_model": "gpt-5.6-sol",
+ "served_model_evidence": "~/.codex/sessions/2026/10/29/rollout-2026-10-29T19-51-33-*.jsonl → 7x \"model\":\"gpt-5.6-sol\", 1x \"model_provider\":\"desktop_router\"",
+ "requested_model": "gpt-6.1-sol",
+ "requested_model_status": "UNAVAILABLE_401_AND_ABSENT_FROM_RELAY_CATALOG",
+ "nonce": "R19V-20261029-9f3a",
+ "nonce_present": true,
+ "tokens": 113342,
+ "payer": "owner OAuth",
+ "verdict": "HOLD_ADVISORY",
+ "subject_guard": "package dir passed as --guard-subject on the dispatch attempts; the human-home turn was run with -s workspace-write in the lane dir and wrote nothing",
+ "claim_ceiling": "advisory only; not an acceptance, not a native receipt, not a substitute for the named gpt-6.1-sol lane"
+}
