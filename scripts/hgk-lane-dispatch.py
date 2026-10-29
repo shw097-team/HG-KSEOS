@@ -1123,6 +1123,25 @@ def _declared_alias_pairs() -> list[tuple[str, str]]:
     return pairs
 
 
+def arm_served_equivalent(served: str, required: str) -> bool:
+    """Stricter than arm_equivalent: used for the VERDICT, never for the SELECTION.
+
+    MEASURED (independent VERIFY, C11): arm_equivalent('unlisted-provider/gpt-6.1-sol', 'gpt-6.1-sol')
+    is true through the bare-model rule, so a BARE --require-arm would accept a serve from a provider
+    nobody declared. Selection may stay lenient (the pool entry it selected already carries the provider);
+    the verdict may not. Here only an exact match or an owner-DECLARED alias pair is equivalence.
+    """
+    ls, lr = str(served or "").strip().lower(), str(required or "").strip().lower()
+    if not ls or not lr:
+        return False
+    if ls == lr:
+        return True
+    for x, y in _declared_alias_pairs():
+        if {ls, lr} == {x, y}:
+            return True
+    return False
+
+
 def lane_assigned_arms(role: str) -> dict:
     """R20 P3: which arms the owner's assignment actually gives this lane.
 
@@ -1144,13 +1163,17 @@ def lane_assigned_arms(role: str) -> dict:
         label = row.get("role") or row.get("lane_group")
         if str(label or "").upper() != want:
             continue
-        arms = []
+        # C4/TT-R20-18: primary is COMPOSED, not snapshotted. A `primary = list(arms)` taken before the
+        # fallbacks are appended is correct only by ordering -- one later `arms.append` above it silently
+        # contaminates the owner's decision with an operator fallback. Composed here, the two lists cannot
+        # share an element by accident, and a test can assert that directly.
+        primary = []
         prov, model = row.get("assigned_provider"), row.get("assigned_model")
         if prov and model:
-            arms.append(f"{prov}/{model}")
+            primary.append(f"{prov}/{model}")
         if row.get("transport_model"):
-            arms.append(str(row["transport_model"]))
-        primary = list(arms)                      # what the owner assigned -- the decision
+            primary.append(str(row["transport_model"]))
+        arms = list(primary)
         fallback = []
         for alt in row.get("non_default_alternates") or []:
             if alt.get("provider") and alt.get("model"):
@@ -1173,6 +1196,7 @@ def lane_assigned_arms(role: str) -> dict:
                 "role": label, "authority": row.get("authority"),
                 "shape": "role" if row.get("role") else "lane_group",
                 "primary_arms": sorted(set(primary)),
+                "primary_source": "assigned_provider/assigned_model + declared transport_model only",
                 "fallback_arms": sorted(set(fallback)),
                 "declared_fallbacks": sorted(set(declared_fallbacks)),
                 "fallbacks_declared": bool(declared_fallbacks),
@@ -2777,7 +2801,7 @@ def main() -> int:
             # degrade into a model-only comparison (challenge V04, item 6).
             receipt["ok"] = False
             receipt["code"] = "ERR_ARM_IDENTITY_UNQUALIFIED"
-        elif not arm_equivalent(receipt["served_arm"], str(args.require_arm)):
+        elif not arm_served_equivalent(receipt["served_arm"], str(args.require_arm)):
             # Surviving the gate is not the guarantee; BEING SERVED is. Without this, a run could pass
             # the required arm's gate and then serve a different arm after a runtime failure, reporting
             # ok:true (hostile-review F11).

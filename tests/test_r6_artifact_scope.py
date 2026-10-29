@@ -5,10 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-try:  # tests/ is a package: pytest imports this module as tests.<name>
-    from . import test_native_admission as fixture
-except ImportError:  # pragma: no cover - direct file execution
-    import test_native_admission as fixture
+from . import test_native_admission as fixture  # tests/ is a package; no bare-name fallback
 from hg_kseos import native_admission as n
 
 
