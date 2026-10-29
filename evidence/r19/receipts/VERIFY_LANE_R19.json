@@ -2,7 +2,7 @@
  "schema": "R19.LANE_RECEIPT.VERIFY/1",
  "at": "2026-10-29T11:57:24Z",
  "role": "VERIFY_SECURITY",
- "dispatch_attempts": 3,
+ "dispatch_attempts": 5,
  "dispatch_ok": false,
  "served_by": "codex exec (human home, model_provider=desktop_router)",
  "served_model": "gpt-5.6-sol",
@@ -15,5 +15,40 @@
  "payer": "owner OAuth",
  "verdict": "HOLD_ADVISORY",
  "subject_guard": "package dir passed as --guard-subject on the dispatch attempts; the human-home turn was run with -s workspace-write in the lane dir and wrote nothing",
- "claim_ceiling": "advisory only; not an acceptance, not a native receipt, not a substitute for the named gpt-6.1-sol lane"
+ "claim_ceiling": "advisory only; not an acceptance, not a native receipt, not a substitute for the named gpt-6.1-sol lane",
+ "dispatch_diagnosis": [
+  {
+   "arm": "openai-codex/gpt-6.1-sol",
+   "transport": "human home OAuth",
+   "result": "401 Unauthorized from chatgpt.com/backend-api/codex (twice)"
+  },
+  {
+   "arm": "opencode-go/glm-5.3-flash",
+   "transport": "relay :10101",
+   "result": "502 'openai-chat requires a non-empty credential' — CAUSE WAS MINE: the listening instance had been started without provider keys"
+  },
+  {
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "transport": "relay :10101 keyed",
+   "result": "relay healthy: POST /v1/responses returned a real completion (model deepseek-v4.1-flash), so the arm is NOT unavailable"
+  },
+  {
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "transport": "dispatcher, --sandbox workspace-write",
+   "result": "spawn failed: 'orchestrator_helper_launch_canceled: ShellExecuteExW failed to launch setup helper: 1223' after 260s"
+  },
+  {
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "transport": "dispatcher, --sandbox danger-full-access",
+   "result": "ERR_SANDBOX_ESCALATION_REFUSED (policy)"
+  }
+ ],
+ "conclusion": "the sanctioned dispatcher cannot serve a file-reading checker on this host right now: workspace-write cannot launch the Windows sandbox setup helper (1223) and danger-full-access is refused by policy. The models themselves are reachable — a manual codex exec on the human home completed the same brief. This is a DISPATCHER/SANDBOX defect (TT), not a model withdrawal.",
+ "tt": {
+  "id": "TT-R19-LANE-SANDBOX",
+  "severity": "blocking for unattended VERIFY",
+  "owner": "HGK lane owner",
+  "symptom": "dispatcher VERIFY_SECURITY: workspace-write -> ShellExecuteExW 1223; danger-full-access -> ERR_SANDBOX_ESCALATION_REFUSED",
+  "workaround_measured": "codex exec with CODEX_HOME=~/.codex, -s workspace-write, -m <model> completes and reads the subject"
+ }
 }

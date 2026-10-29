@@ -131,7 +131,11 @@
 
 ## 10. 獨立判讀車道（VERIFY）與 Disagreement ledger
 
-**車道收據**：`scripts/hgk-lane-dispatch.py` 三次派工（rank2 `openai-codex/gpt-6.1-sol` ×2、rank3 `opencode-go/glm-5.3-flash` ×1）全部失敗，兩個不同根因已量測：
+**車道收據（5 次派工，含一次自我更正）**：先前把 `502 non-empty credential` 記成 arm 不可用是錯的 —— 監聽中的 relay 是我自己用**無金鑰**方式啟動的；`ocx stop` 後帶 `OPENCODE_GO_API_KEY` 重啟，`POST /v1/responses` 對 `deepseek-v4.1-flash` 回真實 completion，**arm 健康**。
+
+真正卡住的是**派送器的 sandbox**：`--sandbox workspace-write` 在 spawn 階段失敗（`orchestrator_helper_launch_canceled: ShellExecuteExW failed to launch setup helper: 1223`，260s 後判定），`--sandbox danger-full-access` 被政策拒（`ERR_SANDBOX_ESCALATION_REFUSED`）。→ 列為 **TT-R19-LANE-SANDBOX**（無人值守 VERIFY 的阻斷），已量測的繞道是 `codex exec`（human home、`-s workspace-write`）可完成同一 brief。
+
+**以下為原始三次派工紀錄**：`scripts/hgk-lane-dispatch.py` 三次派工（rank2 `openai-codex/gpt-6.1-sol` ×2、rank3 `opencode-go/glm-5.3-flash` ×1）全部失敗，兩個不同根因已量測：
 - `openai-codex/gpt-6.1-sol` → `401 Unauthorized`（`wss://chatgpt.com/backend-api/codex/responses`），human-home OAuth 對該後端不可用；
 - relay `:10101` 目錄中**沒有** `gpt-6.1-sol`（只有 `gpt-5.6-sol`），且 relay 對 `openai-chat` provider 回 `502 non-empty credential required`。
 
