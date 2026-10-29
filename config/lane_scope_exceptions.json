@@ -1,0 +1,6 @@
+{
+  "schema": "SBL-LANE-SCOPE-EXCEPTIONS/1",
+  "registry_epoch": 31,
+  "reason": "Values below were written by a round whose mandate differed and were not re-derived afterwards. They are registered so the guard fails on NEW divergence only, and so this history stays visible instead of being silently normalised away.",
+  "exceptions": []
+}

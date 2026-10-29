@@ -1,0 +1,14 @@
+{
+ "schema": "R20.R3_LOCATOR_REPAIR/1",
+ "at": "2026-10-29T12:52:21.244456+00:00",
+ "target": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3",
+ "manifest": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\source_manifest.json",
+ "manifest_sha256_before": "a62cbd344823398d5c9536446c30ba84241c34822a99588337247830d0a3cbee",
+ "manifest_sha256_after": "beff2590c8f3d780a0e211878aaeb2e87214cfd236369906d804bad6aa96d6d4",
+ "rows": 172,
+ "rewritten": 29,
+ "refusals": [],
+ "unresolved_after": [],
+ "rule": "rewrite only on full 64-hex equality; no name/size/prefix matching",
+ "oracle_change": "none"
+}
