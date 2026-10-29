@@ -1,7 +1,7 @@
 {
  "schema": "R20.SUBSET_MANIFEST/1",
  "source_branch": "candidate/r19-fhs-implementation",
- "source_commit": "ba9b0f31aa2c35de3a626bedf769ac3f85997506",
+ "source_commit": "eb4b7ab9d05e7815443ac37809175c60ca5885e2",
  "base": "origin/main@f6dfb1e",
  "paths": [
   "scripts",
@@ -12,12 +12,15 @@
   "docs",
   "src"
  ],
- "file_count": 237,
+ "file_count": 257,
  "deleted_not_applied": [
   "docs/FHS-B1_使用說明文檔.md",
   "docs/MANIFEST.json"
  ],
  "deletion_policy": "deletions in the candidate lineage are NOT replayed (they would remove files that exist on main); removing them is a separate reviewable decision.",
+ "superseded_here": [
+  "tests/conftest.py"
+ ],
  "files": [
   {
    "path": "config/active-policy.json",
@@ -96,8 +99,8 @@
   },
   {
    "path": "evidence/R20-FHS-20261029/EVIDENCE_INDEX.md",
-   "source_blob": "bfb05723fce66d741ed73bdf7c18b949b97ab3e5",
-   "bytes": 15184
+   "source_blob": "5eba651b808c0dd7c2bd0e62f9ff4b928d5fa53a",
+   "bytes": 15218
   },
   {
    "path": "evidence/R20-FHS-20261029/HASHES.json",
@@ -193,6 +196,86 @@
    "path": "evidence/R20-FHS-20261029/notes/VOID_R2_REPORT.md",
    "source_blob": "8cff8b1b403a6bd8ca0c1d6d3764753cdf3f02dc",
    "bytes": 1493
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-1.json",
+   "source_blob": "2ac6c5798a0825b0afc941809f2985def945b61f",
+   "bytes": 1330
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-1.md",
+   "source_blob": "701cad4beb4473a32c08461181f6041a045a2ac8",
+   "bytes": 918
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-2.json",
+   "source_blob": "a498145567549d909e977150102263cc31f53e9c",
+   "bytes": 1323
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-2.md",
+   "source_blob": "3e45b8d52fe2e5028098b96abc31cc4485622600",
+   "bytes": 911
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-3.json",
+   "source_blob": "3edf7f774a802385b58355070689e767c52e5b67",
+   "bytes": 1317
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-3.md",
+   "source_blob": "4b4f9c4cb2f510c31492a0a4a21e293b2433edab",
+   "bytes": 905
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-4.json",
+   "source_blob": "20f8ce7e63aebb44554828cc74c0fc36c8ed4d75",
+   "bytes": 3818
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-4.md",
+   "source_blob": "6322c65c6b31d99ae28e975c94c49af76da2313d",
+   "bytes": 2297
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-5.json",
+   "source_blob": "f14b850680318380b9f9c0d5665515c763306d64",
+   "bytes": 5987
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-5.md",
+   "source_blob": "8487a43945ffca099deaa5c50f4080945da126a9",
+   "bytes": 2630
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-6.json",
+   "source_blob": "f0eb1221ee97f65d90d1631ea6d0234d0345bf4a",
+   "bytes": 4151
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-6.md",
+   "source_blob": "89cd847401c478147748a3ef18375e4794f9323e",
+   "bytes": 2600
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-7.json",
+   "source_blob": "3692b6ef8d5d0efebd0dba1cabb2823d9a5a5391",
+   "bytes": 2868
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-7.md",
+   "source_blob": "7b4effdc53ef4b975e381eb9c1a1cf7c1fa1347d",
+   "bytes": 1787
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-8.json",
+   "source_blob": "12e692122bacb1340c18cad69b73fc9233597732",
+   "bytes": 4266
+  },
+  {
+   "path": "evidence/R20-FHS-20261029/owner_requests/OR-8.md",
+   "source_blob": "171efacf0410c05f6854576ef32f0fd5443d57de",
+   "bytes": 2135
   },
   {
    "path": "evidence/R20-FHS-20261029/package/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip",
@@ -466,8 +549,8 @@
   },
   {
    "path": "scripts/hgk-lane-dispatch.py",
-   "source_blob": "73c27527cc74394a52bedc2c2c132966f7ae6bce",
-   "bytes": 171127
+   "source_blob": "a09db30efc2fa561ca2eb711cc7795f7a33fedc2",
+   "bytes": 177481
   },
   {
    "path": "scripts/hgk-lane-guard.py",
@@ -670,6 +753,31 @@
    "bytes": 487
   },
   {
+   "path": "src/hg_kseos/lifecycle.py",
+   "source_blob": "f3cb177d5c72cb6118221c40142db302794402ac",
+   "bytes": 38448
+  },
+  {
+   "path": "src/hg_kseos/native_admission.py",
+   "source_blob": "86c27b5e74fd5425ef35a06b03f427dca4d0b66f",
+   "bytes": 32007
+  },
+  {
+   "path": "src/hg_kseos/schema.sql",
+   "source_blob": "d07d1a96e4d99949cfd081933f6e9abb752056d7",
+   "bytes": 11161
+  },
+  {
+   "path": "src/hg_kseos/spine.py",
+   "source_blob": "6444ccde8212a2ba531421bb96f683a189fb06cb",
+   "bytes": 32855
+  },
+  {
+   "path": "src/hg_kseos/user_trust.py",
+   "source_blob": "48838e7171e788d3d4a37fbae9a15bfe1b5a81b5",
+   "bytes": 9834
+  },
+  {
    "path": "tests/fixtures/stub_lane_child.py",
    "source_blob": "c3953bd5cd1a439c36f01a7ffa6a938b5262a47d",
    "bytes": 5900
@@ -845,6 +953,11 @@
    "bytes": 3226
   },
   {
+   "path": "tests/test_lane_assignment_fallbacks.py",
+   "source_blob": "54701b11cc1c26352df527377f80b071edd7ee78",
+   "bytes": 3847
+  },
+  {
    "path": "tests/test_lane_dispatch_ao_guard.py",
    "source_blob": "e844c7b95980940d5342069912d7721b4ec8b36d",
    "bytes": 123387
@@ -916,8 +1029,8 @@
   },
   {
    "path": "tests/test_native_boundaries.py",
-   "source_blob": "1602951fd840e38feeef238df8d0f6785e2328a3",
-   "bytes": 12349
+   "source_blob": "1a00375910e64c5318b7df45e5e921c18dbe0eda",
+   "bytes": 12543
   },
   {
    "path": "tests/test_package_local.py",
@@ -931,8 +1044,8 @@
   },
   {
    "path": "tests/test_r6_artifact_scope.py",
-   "source_blob": "17772863b69783a62b15bd05eea8afbd66599d01",
-   "bytes": 3145
+   "source_blob": "b5db8f6aed7090078ab021052b74e53f4298fcc3",
+   "bytes": 3339
   },
   {
    "path": "tests/test_recovery_release.py",
@@ -1115,6 +1228,11 @@
    "bytes": 7977
   },
   {
+   "path": "tools/compare_lane_receipts.py",
+   "source_blob": "e8f9f96e9181ce4da468c1c6cbcd6ff808cd543e",
+   "bytes": 3024
+  },
+  {
    "path": "tools/compile_acceptance_cases.py",
    "source_blob": "bcc445f177440580ccde6323a30d5fb44914333d",
    "bytes": 4059
@@ -1123,6 +1241,16 @@
    "path": "tools/compile_requirements.py",
    "source_blob": "13c58bb46af07890b04f895f66f67ab916267f89",
    "bytes": 8710
+  },
+  {
+   "path": "tools/config_drift.py",
+   "source_blob": "d8f3b8c2139b0e03f69ddf372872e5e919841269",
+   "bytes": 4032
+  },
+  {
+   "path": "tools/evidence_reconcile.py",
+   "source_blob": "41a1ac50f54d27aa1f0b4c5f0d5751dc91a8fda6",
+   "bytes": 4507
   },
   {
    "path": "tools/generate_sbom.py",
@@ -1150,6 +1278,11 @@
    "bytes": 3145
   },
   {
+   "path": "tools/render_owner_requests.py",
+   "source_blob": "c6e4843193202579adfeacec48bceaff06c9015e",
+   "bytes": 10689
+  },
+  {
    "path": "tools/restore_drill.py",
    "source_blob": "ff36358ade926a6467bfcb0b7d03fbaeea353156",
    "bytes": 2768
@@ -1173,37 +1306,6 @@
    "path": "tools/verify_hlpe.py",
    "source_blob": "16cec84bf99f23f46d6a3b6014fa37c30f1dc81c",
    "bytes": 4813
-  },
-  {
-   "path": "src/hg_kseos/lifecycle.py",
-   "source_blob": "f3cb177d5c72cb6118221c40142db302794402ac",
-   "bytes": 38448
-  },
-  {
-   "path": "src/hg_kseos/native_admission.py",
-   "source_blob": "86c27b5e74fd5425ef35a06b03f427dca4d0b66f",
-   "bytes": 32007
-  },
-  {
-   "path": "src/hg_kseos/schema.sql",
-   "source_blob": "d07d1a96e4d99949cfd081933f6e9abb752056d7",
-   "bytes": 11161
-  },
-  {
-   "path": "src/hg_kseos/spine.py",
-   "source_blob": "6444ccde8212a2ba531421bb96f683a189fb06cb",
-   "bytes": 32855
-  },
-  {
-   "path": "src/hg_kseos/user_trust.py",
-   "source_blob": "48838e7171e788d3d4a37fbae9a15bfe1b5a81b5",
-   "bytes": 9834
-  },
-  {
-   "path": "tests/conftest.py",
-   "source_blob": "candidate/r19-fhs-implementation:tests/conftest.py",
-   "bytes": 700
   }
- ],
- "note_src": "src/ is included because the replayed tests import hg_kseos.native_admission / user_trust, which main does not carry; without it the suite cannot even collect, and a subscription that does not collect proves nothing."
+ ]
 }

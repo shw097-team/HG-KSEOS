@@ -1,0 +1,51 @@
+{
+ "schema": "R20.OWNER_REQUEST/1",
+ "id": "OR-1",
+ "kind": "stage_artifacts",
+ "signer": "ProductOwner",
+ "count": 6,
+ "ids": [
+  {
+   "stage": "PM:T0",
+   "output_contract": "ProductKnownState@1",
+   "current_status": "ABSENT"
+  },
+  {
+   "stage": "PM:T1",
+   "output_contract": "QuestionPriority@1",
+   "current_status": "ABSENT"
+  },
+  {
+   "stage": "PM:T2",
+   "output_contract": "ProductSuccess@1",
+   "current_status": "ABSENT"
+  },
+  {
+   "stage": "PM:T3",
+   "output_contract": "ProductSPECDraft@1",
+   "current_status": "ABSENT"
+  },
+  {
+   "stage": "PM:T4",
+   "output_contract": "ProductAcceptanceProposal@1",
+   "current_status": "ABSENT"
+  },
+  {
+   "stage": "PM:T5",
+   "output_contract": "ProductReviewRequest@1",
+   "current_status": "ABSENT"
+  }
+ ],
+ "you_must_either": [
+  "publish a machine artifact that instantiates each output_contract, or",
+  "sign a per-stage typed waiver naming the stage and the accepted claim ceiling"
+ ],
+ "fill": [
+  "artifact_path_or_waiver_per_stage",
+  "signed_at_utc",
+  "signed_by"
+ ],
+ "verify": "python tools/check_stage_artifacts.py --owner ProductOwner",
+ "if_unsigned": "6/18 stages stay ABSENT; nothing else changes",
+ "claim_ceiling": "an artifact proves an instance exists; it does not prove the package is accepted"
+}

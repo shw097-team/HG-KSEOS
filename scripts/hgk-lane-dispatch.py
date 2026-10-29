@@ -1051,6 +1051,50 @@ def human_oauth_home() -> Path:
         return Path(os.environ.get("USERPROFILE") or ".") / ".codex"
 
 
+def producer_identity() -> dict:
+    """Identify WHICH source produced this receipt.
+
+    MEASURED (R20b/FAR, TT-R20-9): three receipts recorded ``nonce_present_raw_stdout=false`` while the
+    byte-exact stdout they wrote contained the nonce. A plain byte search cannot be false on the buffer it
+    was handed, and a control run of the current source records both nonce fields true -- so those
+    receipts were produced by some other revision/path, and nothing in them said which. A receipt that
+    cannot name its producer cannot be compared with another receipt.
+    """
+    import hashlib as _h
+    try:
+        _src = _h.sha256(Path(__file__).read_bytes()).hexdigest()
+    except Exception:
+        _src = None
+    _head = None
+    try:
+        import subprocess as _sp
+        _head = _sp.run(["git", "-C", str(Path(__file__).resolve().parent.parent), "rev-parse", "HEAD"],
+                        capture_output=True, text=True, timeout=10).stdout.strip() or None
+    except Exception:
+        _head = None
+    return {"script_sha256": _src, "git_head": _head,
+            "schema": "HGK-LANE-DISPATCH-PRODUCER/1"}
+
+
+def arm_equivalent(a: str, b: str) -> bool:
+    """Two arm labels denote the same served model when one is the provider-qualified form of the other.
+
+    MEASURED (R20b/FAR, TT-R20-11): the assignment file at revision 36 lists the bare alias
+    ``gpt-6.1-sol`` next to ``openai-codex/gpt-6.1-sol``. A strict string comparison therefore either
+    refuses the qualified form or lets the pool order pick a different arm first. Comparison is on the
+    model token only when exactly one side carries a provider; otherwise the full label must match.
+    Deliberately NOT a fuzzy match: no prefix, no case folding beyond lower(), no version guessing.
+    """
+    la, lb = str(a or "").strip().lower(), str(b or "").strip().lower()
+    if not la or not lb:
+        return False
+    if la == lb:
+        return True
+    if ("/" in la) != ("/" in lb):
+        return la.rsplit("/", 1)[-1] == lb.rsplit("/", 1)[-1]
+    return False
+
+
 def lane_assigned_arms(role: str) -> dict:
     """R20 P3: which arms the owner's assignment actually gives this lane.
 
@@ -1078,13 +1122,33 @@ def lane_assigned_arms(role: str) -> dict:
             arms.append(f"{prov}/{model}")
         if row.get("transport_model"):
             arms.append(str(row["transport_model"]))
+        primary = list(arms)                      # what the owner assigned -- the decision
+        fallback = []
         for alt in row.get("non_default_alternates") or []:
             if alt.get("provider") and alt.get("model"):
-                arms.append(f"{alt['provider']}/{alt['model']}")
+                fallback.append(f"{alt['provider']}/{alt['model']}")
+        # FAR A4 / TT-R20-6: a declared fallback chain must be REPRESENTABLE, otherwise strict selection
+        # has no lawful way to degrade and an operator either edits the pool (silently rewriting the
+        # assignment) or disables strictness. Accept `fallbacks` as provider/model strings or objects.
+        for fb in row.get("fallbacks") or []:
+            if isinstance(fb, dict) and fb.get("provider") and fb.get("model"):
+                fallback.append(f"{fb['provider']}/{fb['model']}")
+            elif isinstance(fb, str) and "/" in fb:
+                fallback.append(fb.strip())
+        arms.extend(fallback)
+        declared_fallbacks = [str(fb.get("provider")) + "/" + str(fb.get("model"))
+                              if isinstance(fb, dict) and fb.get("provider") and fb.get("model")
+                              else (fb.strip() if isinstance(fb, str) else None)
+                              for fb in (row.get("fallbacks") or [])]
+        declared_fallbacks = [f for f in declared_fallbacks if f]
         return {"ok": True, "arms": sorted(set(arms)), "revision": data.get("revision"),
                 "role": label, "authority": row.get("authority"),
                 "shape": "role" if row.get("role") else "lane_group",
-                "alternates_are_operator_selectable": bool(row.get("non_default_alternates"))}
+                "primary_arms": sorted(set(primary)),
+                "fallback_arms": sorted(set(fallback)),
+                "declared_fallbacks": sorted(set(declared_fallbacks)),
+                "fallbacks_declared": bool(declared_fallbacks),
+                "alternates_are_operator_selectable": bool(row.get("non_default_alternates") or declared_fallbacks)}
     return {"ok": False, "arms": [], "revision": data.get("revision"),
             "detail": f"no assignment row for role {role!r} in {ASSIGNMENT_FILE}"}
 
@@ -1400,6 +1464,7 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
     # nonce, so the count recorded on this attempt describes exactly this turn's carrier read.
     reset_carrier_surrogate_count()
     nonce_ok = nonce_in_agent_message(out_b, args.nonce) and nonce_raw
+    _producer = producer_identity()
     carrier_surrogate = carrier_surrogate_count()
 
     # H5 (pass-4 checker) + S3: a wrongly-shaped carrier must produce a TYPED refusal rather than an
@@ -1479,6 +1544,12 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
             "transport_model": entry["transport_model"], "sandbox": sandbox,
             "reasoning_effort": entry.get("reasoning_effort"), "exit": rc, "timed_out": timed_out,
             "seconds": dur, "nonce_present": nonce_ok, "nonce_present_raw_stdout": nonce_raw,
+            # A2 (TT-R20-9): separated semantics -- one field says the nonce appears ANYWHERE in the
+            # captured bytes, another says it appeared in an assistant message. Neither one widens
+            # `ok`; `nonce_present` above still requires the strict carrier.
+            "nonce_present_anywhere": nonce_raw,
+            "nonce_in_agent_message": nonce_in_agent_message(out_b, args.nonce),
+            "producer": _producer,
             "nonce_source": "item.completed/agent_message",
             "usage_rows_after_offset": len(rows), "usage_offset": offset,
             "usage_provider": (matched or {}).get("provider"), "usage_model": (matched or {}).get("model"),
@@ -1713,6 +1784,11 @@ def main() -> int:
                     help="Shared Spine path used for the --sp-workorder join (default: "
                          "var/shared-spine/hg-kseos.db). Operator/test seam.")
     args = ap.parse_args()
+    # A2/TT-R20-9: identity of THIS source must ride on the receipt it produces. Defined here, in
+    # main(), because the receipt assembly also lives here -- a module-level or attempt-scoped binding
+    # left `_producer` undefined on every path that never ran an attempt (NameError at emit time),
+    # which is how 61 previously-green tests turned red the moment the field was added.
+    _producer = producer_identity()
 
     # ---- Tranche A/B: resolve the persisted per-round role binding (pre-spawn, fail-closed) ------
     # The required ARM and RANK for this lane are DERIVED from the SAME persisted binding document, so
@@ -2145,6 +2221,27 @@ def main() -> int:
     # --force-rank and plain pool order able to dispatch them. Strict mode blocks that; the default
     # keeps the documented fallback chains but makes an unassigned serving arm VISIBLE (receipt +
     # WARN), because "silent" is the part that was wrong.
+    # R20b/FAR A8 (TT-R20-11): --require-arm used to be validated only AFTER the model call, so a run
+    # that named openai-codex/gpt-6.1-sol was still served by whatever the pool ranked first (measured:
+    # 350.27s spent on rank-1 deepseek, then ERR_REQUIRED_ARM_NOT_SERVED). A required arm must constrain
+    # the SELECTION, not merely the verdict; if it cannot, refuse before any spawn.
+    selection_filter = {"required_arm": (str(args.require_arm) if args.require_arm else None),
+                        "candidates_before": [f"{e['provider']}/{e['model']}" for e in entries],
+                        "candidates_after": None, "why": None}
+    if args.require_arm:
+        _kept = [e for e in entries
+                 if arm_equivalent(f"{e['provider']}/{e['model']}", str(args.require_arm))]
+        if not _kept:
+            return emit_refusal(args, refusal_body(args.lane, "ERR_REQUIRED_ARM_NOT_IN_POOL",
+                f"--require-arm {args.require_arm} matches no dispatchable candidate after the "
+                f"force-rank filter; candidates were {selection_filter['candidates_before']}",
+                selection_filter=selection_filter, required_arm=str(args.require_arm),
+                say="refusing before any spawn: an unmatched required arm would spend a full model call "
+                    "on a different arm and only then be refused"))
+        entries = _kept
+        selection_filter["candidates_after"] = [f"{e['provider']}/{e['model']}" for e in entries]
+        selection_filter["why"] = "selection constrained by --require-arm (alias-equivalent), not only judged after the call"
+
     assignment_selection = {"enforced": bool(getattr(args, "require_assigned_arms", False)),
                             "posture": lane_assigned_arms(args.lane)}
     if assignment_selection["posture"]["ok"]:
@@ -2607,6 +2704,10 @@ def main() -> int:
         "used_seconds": used["seconds"] if used else None,
         "generated_utc": datetime.now(UTC).isoformat(),
         "assignment_posture": assignment_selection,
+        "producer": _producer,
+        "comparison_policy": ("compare two receipts ONLY when producer.script_sha256 is equal; "
+                             "tools/compare_lane_receipts.py refuses otherwise (TT-R20-9)"),
+        "selection_filter": selection_filter,
         "served_arm_assigned": (None if not assignment_selection["posture"]["ok"] else
                                (f"{used['provider']}/{used['model']}" in set(assignment_selection["posture"]["arms"])
                                 if used else None)),

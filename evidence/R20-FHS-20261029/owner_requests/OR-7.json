@@ -1,0 +1,85 @@
+{
+ "schema": "R20.OWNER_REQUEST/1",
+ "id": "OR-7",
+ "kind": "hold_cells",
+ "signer": "前後版 Reader 綁定人",
+ "reader_class": "TWO_VERSION",
+ "count": 8,
+ "ids": [
+  {
+   "case_id": "AC-C39-UPGRADE-COMPOSITE",
+   "axis": "COMPOSITE",
+   "first_fail": "UPGRADE_TWO_VERSION_BINDING_REQUIRED",
+   "next_legal_action": "提供前一版與當版可讀 bytes 與升版資格收據",
+   "source_alias": "SRC-L-001",
+   "source_line": "508"
+  },
+  {
+   "case_id": "AC-C39-UPGRADE-DETERMINISTIC",
+   "axis": "DETERMINISTIC",
+   "first_fail": "UPGRADE_TWO_VERSION_BINDING_REQUIRED",
+   "next_legal_action": "提供前一版與當版可讀 bytes 與升版資格收據",
+   "source_alias": "SRC-L-001",
+   "source_line": "501"
+  },
+  {
+   "case_id": "AC-C39-UPGRADE-HUMAN",
+   "axis": "HUMAN",
+   "first_fail": "UPGRADE_TWO_VERSION_BINDING_REQUIRED",
+   "next_legal_action": "提供前一版與當版可讀 bytes 與升版資格收據",
+   "source_alias": "SRC-L-001",
+   "source_line": "507"
+  },
+  {
+   "case_id": "AC-C39-UPGRADE-PROPERTY",
+   "axis": "PROPERTY",
+   "first_fail": "UPGRADE_TWO_VERSION_BINDING_REQUIRED",
+   "next_legal_action": "提供前一版與當版可讀 bytes 與升版資格收據",
+   "source_alias": "SRC-L-001",
+   "source_line": "503"
+  },
+  {
+   "case_id": "AC-C39-UPGRADE-REFERENCE_OUTPUT",
+   "axis": "REFERENCE_OUTPUT",
+   "first_fail": "UPGRADE_TWO_VERSION_BINDING_REQUIRED",
+   "next_legal_action": "提供前一版與當版可讀 bytes 與升版資格收據",
+   "source_alias": "SRC-L-001",
+   "source_line": "504"
+  },
+  {
+   "case_id": "AC-C39-UPGRADE-SEMANTIC_JUDGE",
+   "axis": "SEMANTIC_JUDGE",
+   "first_fail": "UPGRADE_TWO_VERSION_BINDING_REQUIRED",
+   "next_legal_action": "提供前一版與當版可讀 bytes 與升版資格收據",
+   "source_alias": "SRC-L-001",
+   "source_line": "506"
+  },
+  {
+   "case_id": "AC-C39-UPGRADE-STATE_READBACK",
+   "axis": "STATE_READBACK",
+   "first_fail": "UPGRADE_TWO_VERSION_BINDING_REQUIRED",
+   "next_legal_action": "提供前一版與當版可讀 bytes 與升版資格收據",
+   "source_alias": "SRC-L-001",
+   "source_line": "502"
+  },
+  {
+   "case_id": "AC-C39-UPGRADE-STATISTICAL",
+   "axis": "STATISTICAL",
+   "first_fail": "UPGRADE_TWO_VERSION_BINDING_REQUIRED",
+   "next_legal_action": "提供前一版與當版可讀 bytes 與升版資格收據",
+   "source_alias": "SRC-L-001",
+   "source_line": "505"
+  }
+ ],
+ "fill": [
+  "older_reader_id",
+  "older_version_sha256",
+  "newer_reader_id",
+  "newer_version_sha256",
+  "signed_at_utc",
+  "signed_by"
+ ],
+ "verify": "python tools/requalify_hold_cells.py --class TWO_VERSION",
+ "if_unsigned": "8 cells stay HOLD (never converted to PASS)",
+ "claim_ceiling": "requalification re-runs these cells against YOUR reader; it is not an agent verdict"
+}
