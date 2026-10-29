@@ -25,6 +25,7 @@ def load_module(tmp_assignment: Path):
 
 
 BASE = {"schema": "HGK-MODEL-LANE-ASSIGNMENT/1", "revision": 99, "registry_epoch": 99}
+BASE_ASSIGNMENT = Path(__file__).resolve().parent / "fixtures" / "assignment_primary_gpt61.json"
 
 
 def write(tmp_path: Path, row: dict) -> Path:
@@ -74,3 +75,51 @@ def test_pool_membership_never_creates_a_fallback(tmp_path):
     got = load_module(p).lane_assigned_arms("EXECUTE")
     assert "openai-codex/gpt-6.1-sol" not in got["arms"]
     assert got["fallback_arms"] == []
+
+
+def test_declared_fallback_is_never_in_primary_arms(tmp_path):
+    """C4 / TT-R20-18: the independent VERIFY lane held this claim because no test excluded a declared
+    fallback from primary_arms -- ordering alone was doing the work. Now it is an assertion."""
+    d = {"schema": "HGK-MODEL-LANE-ASSIGNMENT/1", "revision": 99, "assignment": [{
+        "role": "VERIFY", "assigned_provider": "openai-codex", "assigned_model": "gpt-6.1-sol",
+        "transport_model": "gpt-6.1-sol", "authority": "test",
+        "fallbacks": [{"provider": "opencode-go", "model": "deepseek-v4.1-flash"}],
+    }]}
+    p = tmp_path / "assignment.json"
+    p.write_text(json.dumps(d), encoding="utf-8")
+    got = load_module(p).lane_assigned_arms("VERIFY")
+    assert "opencode-go/deepseek-v4.1-flash" not in got["primary_arms"]
+    assert "opencode-go/deepseek-v4.1-flash" in got["fallback_arms"]
+    assert got["primary_arms"] == ["gpt-6.1-sol", "openai-codex/gpt-6.1-sol"]
+    assert "assigned_provider/assigned_model" in got["primary_source"]
+
+
+def test_served_equivalence_does_not_inherit_the_bare_model_rule():
+    """C11: a BARE --require-arm must not accept a serve from an undeclared provider."""
+    mod = load_module(BASE_ASSIGNMENT)
+    assert mod.arm_equivalent("unlisted-provider/gpt-6.1-sol", "gpt-6.1-sol") is True      # selection
+    assert mod.arm_served_equivalent("unlisted-provider/gpt-6.1-sol", "gpt-6.1-sol") is False  # verdict
+    assert mod.arm_served_equivalent("desktop_router/gpt-6.1-sol", "openai-codex/gpt-6.1-sol") is True
+    assert mod.arm_served_equivalent("opencode-go/gpt-6.1-sol", "openai-codex/gpt-6.1-sol") is False
+
+
+def test_a_row_declaring_the_same_arm_as_primary_and_fallback_is_refused(tmp_path):
+    """C4 / TT-R20-19: the only shape in which the two lists can collide, and the shape that makes the
+    separation falsifiable. A contaminating implementation ('primary = list(arms)' AFTER the fallbacks are
+    appended) collapses this case into a duplicate -- which is exactly why it must be a refusal, not a union."""
+    row = {"role": "VERIFY", "assigned_provider": "openai-codex", "assigned_model": "gpt-6.1-sol",
+           "transport_model": "gpt-6.1-sol", "authority": "test",
+           "fallbacks": ["openai-codex/gpt-6.1-sol"]}
+    got = load_module(write(tmp_path, row)).lane_assigned_arms("VERIFY")
+    assert got["ok"] is False
+    assert got["code"] == "ERR_ASSIGNMENT_PRIMARY_FALLBACK_OVERLAP"
+    assert got["overlap"] == ["openai-codex/gpt-6.1-sol"]
+
+
+def test_disjoint_primary_and_fallback_still_resolve(tmp_path):
+    row = {"role": "VERIFY", "assigned_provider": "openai-codex", "assigned_model": "gpt-6.1-sol",
+           "transport_model": "gpt-6.1-sol", "authority": "test",
+           "fallbacks": [{"provider": "opencode-go", "model": "deepseek-v4.1-flash"}]}
+    got = load_module(write(tmp_path, row)).lane_assigned_arms("VERIFY")
+    assert got["ok"] is True
+    assert not (set(got["primary_arms"]) & set(got["fallback_arms"]))

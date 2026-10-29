@@ -1,13 +1,13 @@
 {
  "schema": "R20.SUBSET_MANIFEST/2",
  "source_branch": "candidate/r19-fhs-implementation",
- "source_commit": "6ce6afbb11d1fe67b844f28fe4bbc2702819118a",
+ "source_commit": "5cb3d3af3bb7b6962397b330d5d837ec585177bf",
  "base": "origin/main@f6dfb1e",
- "file_count": 364,
+ "file_count": 365,
  "definition": "file_count = number of paths differing from origin/main on this branch, INCLUDING this manifest itself",
- "synced_from_candidate": 258,
+ "synced_from_candidate": 259,
  "excluded_self": "SUBSET_MANIFEST.json is counted in file_count but not listed in files[] (a file cannot contain its own digest)",
- "files_listed": 363,
+ "files_listed": 364,
  "paths": [
   "scripts",
   "config",
@@ -581,7 +581,7 @@
   {
    "path": "scripts/hgk-lane-dispatch.py",
    "blob": "9927f0904f08a4379baaa8d9f9117cb88b2f7134",
-   "bytes": 179266
+   "bytes": 181487
   },
   {
    "path": "scripts/hgk-lane-guard.py",
@@ -1284,6 +1284,11 @@
    "bytes": 33791
   },
   {
+   "path": "tests/fixtures/assignment_primary_gpt61.json",
+   "blob": "HEAD:tests/fixtures/assignment_primary_gpt61.json",
+   "bytes": 288
+  },
+  {
    "path": "tests/fixtures/stub_lane_child.py",
    "blob": "c3953bd5cd1a439c36f01a7ffa6a938b5262a47d",
    "bytes": 5900
@@ -1461,7 +1466,7 @@
   {
    "path": "tests/test_lane_assignment_fallbacks.py",
    "blob": "54701b11cc1c26352df527377f80b071edd7ee78",
-   "bytes": 3847
+   "bytes": 6979
   },
   {
    "path": "tests/test_lane_dispatch_ao_guard.py",
@@ -1536,7 +1541,7 @@
   {
    "path": "tests/test_native_boundaries.py",
    "blob": "1a00375910e64c5318b7df45e5e921c18dbe0eda",
-   "bytes": 12543
+   "bytes": 12402
   },
   {
    "path": "tests/test_package_local.py",
@@ -1551,7 +1556,7 @@
   {
    "path": "tests/test_r6_artifact_scope.py",
    "blob": "b5db8f6aed7090078ab021052b74e53f4298fcc3",
-   "bytes": 3339
+   "bytes": 3198
   },
   {
    "path": "tests/test_recovery_release.py",
