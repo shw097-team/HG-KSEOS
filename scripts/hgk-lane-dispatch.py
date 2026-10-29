@@ -1090,9 +1090,37 @@ def arm_equivalent(a: str, b: str) -> bool:
         return False
     if la == lb:
         return True
+    # A DECLARED alias pair is equivalence. Measured (TT-R20-17): the relay labels an OpenCodex-served
+    # turn provider=desktop_router while the governance identity of that same arm is openai-codex, so a
+    # model-only or string comparison refuses the arm the run just selected. The pair is read from
+    # config/lane-arm-aliases.json rather than inferred, because inference would also equate
+    # opencode-go/gpt-6.1-sol -- a different supply path with the same model name.
+    for _x, _y in _declared_alias_pairs():
+        if {la, lb} == {_x, _y}:
+            return True
     if ("/" in la) != ("/" in lb):
         return la.rsplit("/", 1)[-1] == lb.rsplit("/", 1)[-1]
     return False
+
+
+_ALIAS_CACHE: dict = {}
+
+
+def _declared_alias_pairs() -> list[tuple[str, str]]:
+    """Owner-declared arm alias pairs. Unreadable/absent file means NO aliases (fail-closed)."""
+    if "pairs" in _ALIAS_CACHE:
+        return _ALIAS_CACHE["pairs"]
+    pairs: list[tuple[str, str]] = []
+    try:
+        doc = json.loads((Path(__file__).resolve().parent.parent / "config" / "lane-arm-aliases.json")
+                         .read_text(encoding="utf-8"))
+        for row in doc.get("pairs") or []:
+            if isinstance(row, (list, tuple)) and len(row) == 2:
+                pairs.append((str(row[0]).strip().lower(), str(row[1]).strip().lower()))
+    except Exception:
+        pairs = []
+    _ALIAS_CACHE["pairs"] = pairs
+    return pairs
 
 
 def lane_assigned_arms(role: str) -> dict:
@@ -2737,6 +2765,10 @@ def main() -> int:
         # only those fall back to the generic exhausted code.
         receipt.update(failure_disposition(attempts))
     if used is not None and args.require_arm:
+        # TT-R20-17: the SELECTION accepts an alias-equivalent arm (desktop_router/gpt-6.1-sol for
+        # openai-codex/gpt-6.1-sol), so the VERDICT must use the same equivalence. Comparing the pair with
+        # `!=` after filtering with arm_equivalent made every aliased run end ERR_REQUIRED_ARM_NOT_SERVED
+        # even though the required arm had served: a gate that refuses the thing it just selected.
         # Always record the pair positively, so a passing receipt also states WHICH arm served.
         receipt["required_arm"] = str(args.require_arm)
         receipt["served_arm"] = served_arm_of(used["provider"], used["model"])
@@ -2745,7 +2777,7 @@ def main() -> int:
             # degrade into a model-only comparison (challenge V04, item 6).
             receipt["ok"] = False
             receipt["code"] = "ERR_ARM_IDENTITY_UNQUALIFIED"
-        elif receipt["served_arm"] != str(args.require_arm):
+        elif not arm_equivalent(receipt["served_arm"], str(args.require_arm)):
             # Surviving the gate is not the guarantee; BEING SERVED is. Without this, a run could pass
             # the required arm's gate and then serve a different arm after a runtime failure, reporting
             # ok:true (hostile-review F11).
