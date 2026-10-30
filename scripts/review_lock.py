@@ -122,9 +122,11 @@ def _holder_alive(lock: dict) -> bool | None:
     if not isinstance(pid, int):
         return None
     try:
-        out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV", "/NH"],
-                             capture_output=True, text=True, timeout=20).stdout
-        return str(pid) in out
+        # tasklist speaks the console code page, not UTF-8: decoding it as text raised
+        # UnicodeDecodeError on this host and every lock was reported "unknown" and kept forever.
+        raw = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV", "/NH"],
+                             capture_output=True, timeout=20).stdout
+        return str(pid) in raw.decode("utf-8", errors="replace") or str(pid) in raw.decode("mbcs", errors="replace")
     except Exception:  # noqa: BLE001
         return None
 
