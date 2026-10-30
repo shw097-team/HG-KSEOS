@@ -39,6 +39,7 @@ from pathlib import Path
 
 QUEUE = Path(r"C:/wg/queue")
 BOARD = "fhs-msc-allpass-20261030"
+STALE_AFTER = 240  # two cron ticks; past this a reader must say STALE, not RUNNING
 STATUS_JSON = QUEUE / "STATUS.json"
 STATUS_MD = QUEUE / "STATUS.md"
 KANBAN_MARK = QUEUE / "kanban_cards.json"
@@ -124,6 +125,27 @@ def kanban_sync(state: dict, live: list[dict]) -> list[str]:
     return created
 
 
+def fresh() -> int:
+    """One line a reader can trust: RUNNING (live, within its own validity) or STALE/IDLE. This exists because a
+    status file read without its age is how "finished" got reported as "running" for eight minutes."""
+    if not STATUS_JSON.is_file():
+        print("STATUS: MISSING — nothing has ever been recorded")
+        return 3
+    d = json.loads(STATUS_JSON.read_text(encoding="utf-8"))
+    age = time.time() - time.mktime(time.strptime(d.get("as_of", "1970-01-01T00:00:00"), "%Y-%m-%dT%H:%M:%S"))
+    limit = int(d.get("stale_after_seconds") or STALE_AFTER)
+    head = f"as of {d.get('as_of')} ({int(age)}s ago, valid {limit}s)"
+    if age > limit:
+        print(f"STATUS: STALE — {head}; do not read this as running")
+        return 3
+    if d.get("live"):
+        w = ", ".join(f"{x['wp']} {x['lane']} pid {x['pid']} {x['minutes']}min" for x in d["live"])
+        print(f"STATUS: RUNNING — {w} · {head}")
+        return 0
+    print(f"STATUS: IDLE — nothing is running · {head}")
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--board", default=BOARD)
@@ -131,12 +153,21 @@ def main(argv=None) -> int:
     # Measured preference, 2026-10-30: the owner wants running work inside todo_list + the goal, not a card per
     # dispatch and not a window. Cards are now opt-in (--cards); the goal anchor card is never recreated here.
     ap.add_argument("--cards", action="store_true")
+    ap.add_argument("--fresh", action="store_true")
     args = ap.parse_args(argv or sys.argv[1:])
+
+    if args.fresh:
+        return fresh()
 
     live = live_dispatches()
     wps = [wp_state(d) for d in sorted(p for p in QUEUE.glob("WP-FHS-*") if p.is_dir())]
+    # OD-Z1: a projection with no age can only become wrong, never self-correct. `as_of` + `stale_after_seconds`
+    # let a reader tell "quiet" from "nobody has looked recently", which is the difference between a status file and
+    # a claim. `alive` is re-checked per pid here rather than trusted from when the dispatch was recorded.
     body = {
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "as_of": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "stale_after_seconds": STALE_AFTER,
         "live": live,
         "running_count": len(live),
         "verdict": "WORK_IN_FLIGHT" if live else "IDLE",
@@ -145,7 +176,8 @@ def main(argv=None) -> int:
     STATUS_JSON.write_text(json.dumps(body, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
     lines = [
-        f"# HG-KSEOS round status — {time.strftime('%Y-%m-%d %H:%M:%S')}",
+        f"# HG-KSEOS round status — as of {time.strftime('%Y-%m-%d %H:%M:%S')} "
+        f"(valid {STALE_AFTER}s; older than that reads STALE, never RUNNING)",
         "",
         f"**{'RUNNING: ' + str(len(live)) + ' dispatch(es)' if live else 'IDLE — nothing is running'}**",
         "",

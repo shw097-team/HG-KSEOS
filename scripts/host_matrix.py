@@ -48,7 +48,10 @@ HOST_PROBE = {
     "Hermes Agent": {"binary": "hermes", "argv": ["hermes", "--version"]},
     "Codex": {"binary": "codex", "argv": ["codex", "--version"]},
     "Claude Code": {"binary": "claude", "argv": ["claude", "--version"]},
-    "DeepSeek Harness": {"binary": None, "argv": None},
+    # Deployment mapping, stated rather than assumed: `opencodex` (ocx 2.11.0) is the CLI that routes Codex CLI to
+    # the opencode-go provider, which is how DeepSeek is reached on this host. It is recorded in the raw as
+    # host_binary=opencodex so no reader has to guess what produced the evidence.
+    "DeepSeek Harness": {"binary": "opencodex", "argv": ["opencodex", "--version"]},
 }
 
 

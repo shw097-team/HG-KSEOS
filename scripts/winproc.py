@@ -26,6 +26,7 @@ DETACHED_PROCESS = 0x00000008
 CREATE_NEW_PROCESS_GROUP = 0x00000200
 
 _INSTALLED = False
+_HIDDEN = {"run": 0, "popen": 0}
 
 
 def hidden_flags(base: int = 0) -> int:
@@ -47,16 +48,24 @@ def install() -> bool:
     def run_hidden(*args, **kwargs):
         if kwargs.pop("_visible", False):      # explicit escape hatch for a genuinely interactive child
             return run(*args, **kwargs)
+        _HIDDEN["run"] += 1
         return run(*args, **_apply(kwargs))
 
     def popen_hidden(*args, **kwargs):
         if kwargs.pop("_visible", False):
             return popen(*args, **kwargs)
+        _HIDDEN["popen"] += 1
         return popen(*args, **_apply(kwargs))
 
     subprocess.run, subprocess.Popen = run_hidden, popen_hidden
     _INSTALLED = True
     return True
+
+
+def stats() -> dict:
+    """How many children were launched without a console. A count of 0 after real work means the wrapper was never
+    installed at this entry point -- which is exactly the defect that put 96 windows on the owner's desktop."""
+    return dict(_HIDDEN, installed=_INSTALLED)
 
 
 def probe(python_exe: str, seconds: int = 20) -> dict:
