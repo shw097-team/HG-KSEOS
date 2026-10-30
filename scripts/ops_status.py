@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import sys
 import time
@@ -125,6 +126,25 @@ def kanban_sync(state: dict, live: list[dict]) -> list[str]:
     return created
 
 
+def goal_status() -> str:
+    """The goal is a lock the owner believes is on. Nothing checked it, and it was found PAUSED while three turns
+    reported progress -- so it is now read on every status refresh rather than remembered."""
+    try:
+        import sqlite3
+        db = Path(os.environ.get("HERMES_HOME", r"C:/Users/user/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/"
+                                 r"LocalCache/Local/hermes/profiles/hgk-governed")) / "state.db"
+        con = sqlite3.connect(str(db))
+        rows = con.execute("select key,value from state_meta where key like 'goal:%'").fetchall()
+        con.close()
+        if not rows:
+            return "GOAL: none recorded"
+        k, v = rows[-1]
+        d = json.loads(v)
+        return f"GOAL: {d.get('status')} ({k.split(':',1)[1]}, turns {d.get('turns_used', 0)}/{d.get('max_turns')})"
+    except Exception as exc:
+        return f"GOAL: UNREADABLE ({type(exc).__name__})"
+
+
 def fresh() -> int:
     """One line a reader can trust: RUNNING (live, within its own validity) or STALE/IDLE. This exists because a
     status file read without its age is how "finished" got reported as "running" for eight minutes."""
@@ -141,8 +161,10 @@ def fresh() -> int:
     if d.get("live"):
         w = ", ".join(f"{x['wp']} {x['lane']} pid {x['pid']} {x['minutes']}min" for x in d["live"])
         print(f"STATUS: RUNNING — {w} · {head}")
+        print(goal_status())
         return 0
     print(f"STATUS: IDLE — nothing is running · {head}")
+    print(goal_status())
     return 0
 
 

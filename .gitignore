@@ -43,3 +43,7 @@ worktrees/
 /evidence/review/HG-KSEOS_CURRENT_TEST_DENOMINATOR.json
 /evidence/review/HG-KSEOS_COVERAGE_REDUCER_TASK013_DECISION.json
 /evidence/review/HG-KSEOS_USER_EXPERIENCE_REDUCER_TASK013_DECISION.json
+
+# issuer key material: the seed is DPAPI-bound to this logon and must never enter git
+config/issuer/issuer.key
+config/issuer/nonce-ledger.jsonl

@@ -48,11 +48,25 @@ def newest_desktop_session() -> str | None:
         con.close()
 
 
+def cmd_resume(args) -> int:
+    """Re-open a paused goal without rewriting it. A goal that can be paused by anything and noticed by nothing is
+    the same defect as a status file without an age: the owner believes a lock is on while it is off."""
+    g = load_goal(args.session)
+    if not g:
+        print("NO_GOAL")
+        return 3
+    g.status = "active"
+    g.paused_at = None
+    save_goal(args.session, g)
+    print(f"GOAL_RESUMED session={args.session} status={g.status} max_turns={g.max_turns}")
+    return 0
+
+
 def main(argv=None) -> int:
     os.environ.setdefault("HERMES_HOME", str(HERMES_HOME))
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
-    for name in ("show", "set", "clear"):
+    for name in ("show", "set", "clear", "resume"):
         p = sub.add_parser(name)
         p.add_argument("--session", default=None)
         if name == "set":
@@ -77,6 +91,19 @@ def main(argv=None) -> int:
         print(f"session={session} " + ("NO_GOAL" if state is None else
               f"status={state.status} turns={state.turns_used}/{state.max_turns} goal={state.goal[:160]}"))
         return 0
+
+    if args.cmd == "resume":
+        state = load_goal(session)
+        if state is None:
+            print("NO_GOAL")
+            return 3
+        state.status = "active"
+        state.paused_at = None
+        save_goal(session, state)
+        back = load_goal(session)
+        print(f"{'GOAL_RESUMED' if back and back.status == 'active' else 'GOAL_RESUME_UNVERIFIED'} "
+              f"session={session} max_turns={back.max_turns if back else '?'}")
+        return 0 if back and back.status == "active" else 3
 
     if args.cmd == "clear":
         clear_goal(session)

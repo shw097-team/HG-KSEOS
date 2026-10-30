@@ -46,7 +46,9 @@ PY = sys.executable
 CODEX = Path(r"C:/Users/user/AppData/Local/OpenAI/Codex/bin/22cfb1d302613eae/codex.exe")
 RELAY = "https://chatgpt.com/backend-api/codex"
 QUEUE = Path(r"C:/wg/queue")
-MAX_PHASE_ATTEMPTS = 3   # two failures are a flake; the third is a defect and stops the loop
+MAX_PHASE_ATTEMPTS = 3
+# A FAIL is a specification, but not an infinite one: after this many EXECUTE rounds the unit needs a ruling.
+MAX_EXECUTE_ROUNDS = 3   # two failures are a flake; the third is a defect and stops the loop
 STATE = QUEUE / "driver_state.json"
 LOG = QUEUE / "driver.log"
 
@@ -198,6 +200,49 @@ def verify_prompt(wp: str, queue_dir: Path, nonce: str) -> str:
     )
 
 
+def latest_verdict(queue_dir: Path) -> tuple[Path | None, dict | None]:
+    """The operative officer verdict for this unit, if any. Only `verdict.json` counts: a SUPERSEDED or VOIDED copy
+    is history, and treating history as current is how a card gets re-judged against an old ruling."""
+    for cand in sorted(queue_dir.rglob("verdict.json")):
+        try:
+            return cand, json.loads(cand.read_text(encoding="utf-8", errors="replace"))
+        except json.JSONDecodeError:
+            continue
+    return None, None
+
+
+def execute_prompt(wp: str, queue_dir: Path, nonce: str, verdict: dict) -> str:
+    """One work package, one bounded writer, and the officer's own words as the specification.
+
+    This is the phase that was missing. PLAN wrote a brief and VERIFY judged it, so a FAIL had nowhere to go: the
+    loop could produce objections but never the work that answers them, which is why every round needed a new
+    assistant turn and looked like "stopping". The officer already states what must exist; EXECUTE reads that and
+    nothing else.
+    """
+    gaps = verdict.get("must_contain") or verdict.get("decisive_reasons") or verdict.get("reason") or []
+    if isinstance(gaps, str):
+        gaps = [gaps]
+    body = "\n".join(f"  - {g}" for g in list(gaps)[:12]) or "  - (officer stated no itemised gaps; read its verdict)"
+    return (
+        f"NONCE-ECHO: {nonce}\n\n"
+        f"You are the EXECUTE lane (bounded writer) answering the Independent Acceptance Officer's FAIL on {wp}.\n"
+        f"Your FIRST line must be exactly: NONCE-ECHO: {nonce}\n\n"
+        f"Read the officer's verdict at {queue_dir}/officer/verdict.json and the brief at {queue_dir}/brief.md.\n"
+        f"The officer named these gaps:\n{body}\n\n"
+        f"Write the artefacts that close exactly those gaps, inside this work package only. Rules:\n"
+        f"  1. One work package. Do not touch other WP directories.\n"
+        f"  2. Every artefact you claim must be producible by a command that a checker can re-run; put the command in\n"
+        f"     the file's header. No hand-written results.\n"
+        f"  3. Do not change the acceptance standard, the oracle, or any prior verdict. If a gap cannot be closed,\n"
+        f"     say so plainly in EVIDENCE_GAP.md with what is missing -- that is a finding, not a failure to hide.\n"
+        f"  4. Write only under {queue_dir}. Report the files you created at the end, one per line."
+    )
+
+
+def execute_rounds(queue_dir: Path) -> int:
+    return len(list(queue_dir.glob("*-execute-*.json")))
+
+
 def record_officer_verdict(wp: str, queue_dir: Path) -> dict:
     """Transcribe the officer's own verdict into the registry — mechanically, with provenance.
 
@@ -274,9 +319,30 @@ def main(argv=None) -> int:
 
     stamp = time.strftime("%Y%m%d%H%M%S")
     nonce = f"NONCE-{wp}-AUTO-{stamp}"
+
+    # The phase the queue reports is about artefacts (brief / verdict present). What the loop needs is one step
+    # further: a FAIL is not the end of a unit, it is the specification for the next EXECUTE dispatch.
+    vpath, verdict = latest_verdict(queue_dir)
+    if phase == "AWAITING_RECORD" and vpath is not None and str(verdict.get("verdict", "")).upper() == "FAIL":
+        ex = execute_rounds(queue_dir)
+        newer_execute = any(p.stat().st_mtime > vpath.stat().st_mtime for p in queue_dir.glob("*-execute-*.json"))
+        if newer_execute:
+            phase = "REVERIFY"          # EXECUTE already answered this verdict: let VERIFY judge the answer
+        elif ex >= MAX_EXECUTE_ROUNDS:
+            log({"action": "halted_execute", "wp": wp, "rounds": ex})
+            refresh_status()
+            print(json.dumps({"verdict": "HALTED_EXECUTE", "wp": wp, "rounds": ex,
+                              "detail": "the officer has failed this unit after the allowed number of EXECUTE rounds; "
+                                        "another round would be a loop, not work"}, ensure_ascii=False))
+            return 0
+        else:
+            phase = "EXECUTE_READY"
+
     if phase == "NO_BRIEF":
         prompt, lane = plan_prompt(wp, item["title"], queue_dir, nonce), "PLAN"
-    elif phase == "BRIEF_READY":
+    elif phase == "EXECUTE_READY":
+        prompt, lane = execute_prompt(wp, queue_dir, nonce, verdict or {}), "EXECUTE"
+    elif phase in ("BRIEF_READY", "REVERIFY"):
         prompt, lane = verify_prompt(wp, queue_dir, nonce), "VERIFY_SECURITY"
     else:  # AWAITING_RECORD -- the gate decides, the driver only reports
         # The gate judges a DISPATCH RECEIPT, not the officer's verdict: they are different objects, and asking
@@ -287,13 +353,24 @@ def main(argv=None) -> int:
         gate = subprocess.run(
             [PY, str(K / "scripts" / "lane_evidence_gate.py"), str(target),
              "--lane", "VERIFY_SECURITY", "--json"], capture_output=True, text=True, timeout=120)
-        refresh_status()
-        rec = record_officer_verdict(wp, queue_dir) if args.auto_record else {"recorded": None}
-        refresh_status()
-        print(json.dumps({"verdict": "AWAITING_RECORD", "wp": wp, "gate": gate.stdout.strip()[:400],
-                          "recorded": rec}, ensure_ascii=False))
-        log({"action": "awaiting_record", "wp": wp, "gate": gate.stdout.strip()[:400]})
-        return 0
+        # A gate that says NO_ATTEMPT while there is no verdict means the dispatch never produced a usable receipt,
+        # not that the unit is finished. Returning AWAITING_RECORD there parked the queue forever -- measured twice.
+        gate_verdict = ""
+        try:
+            gate_verdict = str(json.loads(gate.stdout).get("verdict") or "")
+        except json.JSONDecodeError:
+            pass
+        if vpath is None and gate_verdict in ("NO_ATTEMPT", "RECEIPT_MISSING", "RECEIPT_NOT_FOUND"):
+            log({"action": "no_attempt_retry", "wp": wp, "gate": gate_verdict})
+            phase, lane = "BRIEF_READY", "VERIFY_SECURITY"
+            prompt = verify_prompt(wp, queue_dir, nonce)
+        else:
+            rec = record_officer_verdict(wp, queue_dir) if args.auto_record else {"recorded": None}
+            refresh_status()
+            print(json.dumps({"verdict": "AWAITING_RECORD", "wp": wp, "gate": gate.stdout.strip()[:400],
+                              "recorded": rec}, ensure_ascii=False))
+            log({"action": "awaiting_record", "wp": wp, "gate": gate.stdout.strip()[:400]})
+            return 0
 
     died = dead_attempts(queue_dir)
     if died:
