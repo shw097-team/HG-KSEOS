@@ -39,6 +39,7 @@ PY = sys.executable
 CODEX = Path(r"C:/Users/user/AppData/Local/OpenAI/Codex/bin/22cfb1d302613eae/codex.exe")
 RELAY = "https://chatgpt.com/backend-api/codex"
 QUEUE = Path(r"C:/wg/queue")
+MAX_PHASE_ATTEMPTS = 3   # two failures are a flake; the third is a defect and stops the loop
 STATE = QUEUE / "driver_state.json"
 LOG = QUEUE / "driver.log"
 
@@ -57,16 +58,21 @@ def dispatch_alive() -> bool:
     is worse than none -- it would let the driver start a second dispatch on top of a live one. So: PowerShell
     CIM, and if even that fails the answer is "assume alive" (refuse to start), not "assume free".
     """
-    query = ("Get-CimInstance Win32_Process -Filter \"Name='python.exe'\" | "
-             "Where-Object { $_.CommandLine -like '*hgk-lane-dispatch.py*' } | Measure-Object | "
-             "Select-Object -ExpandProperty Count")
+    # Quoting note: passing `-Filter \"Name='python.exe'\"` through subprocess mangles the inner quotes, and the
+    # resulting PowerShell error text was itself mistaken for output -- the driver then reported
+    # DISPATCH_IN_FLIGHT forever while nothing was running. Filtering in Where-Object needs no inner quoting
+    # at all, and a parseable integer is required before anything is believed.
+    query = ("$p = Get-CimInstance Win32_Process | Where-Object { $_.Name -eq 'python.exe' -and "
+             "$_.CommandLine -like '*hgk-lane-dispatch.py*' }; ($p | Measure-Object).Count")
     try:
-        done = subprocess.run(["powershell", "-NoProfile", "-Command", query],
-                              capture_output=True, timeout=60)
+        done = subprocess.run(["powershell", "-NoProfile", "-Command", query], capture_output=True, timeout=60)
+        out = done.stdout.decode("utf-8", errors="replace") if isinstance(done.stdout, bytes) else str(done.stdout)
+        digits = "".join(ch for ch in out.strip().splitlines()[-1:] and out.strip().splitlines()[-1] if ch.isdigit())
+        if not digits:
+            return True          # unreadable answer -> refuse to start a second dispatch
+        return int(digits) > 0
     except (OSError, subprocess.SubprocessError):
         return True
-    text = done.stdout.decode("utf-8", errors="replace") if isinstance(done.stdout, bytes) else done.stdout
-    return text.strip() not in ("0", "")
 
 
 def next_item() -> dict:
@@ -77,8 +83,31 @@ def next_item() -> dict:
     return json.loads(done.stdout.strip().splitlines()[-1])
 
 
+def guard_snapshot(nonce: str) -> tuple[Path, str]:
+    """Freeze the guarded subject for the duration of one dispatch.
+
+    Measured six times tonight: a VERIFY/PLAN run is voided with ERR_CHECKER_MUTATED_SUBJECT because the maker
+    edited `scripts/` while the review was reading it. `review_lock` blocks commits, not file writes, so a maker
+    who is actively developing will void every review he runs. The guarded subject must therefore be a snapshot:
+    the review reads a fixed tree, the working tree stays editable, and the snapshot digest is recorded.
+    """
+    import hashlib, shutil
+    src = K / "scripts"
+    dst = Path(r"C:/wg/guard-snapshots") / nonce / "scripts"
+    if dst.parent.exists():
+        shutil.rmtree(dst.parent, ignore_errors=True)
+    shutil.copytree(src, dst, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    digest = hashlib.sha256()
+    for f in sorted(dst.rglob("*.py")):
+        digest.update(f.name.encode())
+        digest.update(f.read_bytes())
+    log({"action": "guard_snapshot", "nonce": nonce, "path": str(dst), "sha256": digest.hexdigest()})
+    return dst, digest.hexdigest()
+
+
 def launch(lane: str, prompt: str, nonce: str, cwd: Path, json_out: Path, timeout: int = 900) -> int:
     cwd.mkdir(parents=True, exist_ok=True)
+    guard_subject, guard_sha = guard_snapshot(nonce)
     argv = [
         PY, str(K / "scripts" / "hgk-lane-dispatch.py"),
         "--lane", lane,
@@ -93,7 +122,7 @@ def launch(lane: str, prompt: str, nonce: str, cwd: Path, json_out: Path, timeou
         "--timeout", str(timeout),
         "--sandbox", "workspace-write",
         "--allow-sandbox-escalation",
-        "--guard-subject", str(K / "scripts"),
+        "--guard-subject", str(guard_subject),
         "--require-durable-gates",
         "--durable-gates-subject", str(K / "config" / "recurrence-ledger.json"),
         "--json-out", str(json_out),
@@ -166,11 +195,24 @@ def main(argv=None) -> int:
     elif phase == "BRIEF_READY":
         prompt, lane = verify_prompt(wp, queue_dir, nonce), "VERIFY_SECURITY"
     else:  # AWAITING_RECORD -- the gate decides, the driver only reports
+        # The gate judges a DISPATCH RECEIPT, not the officer's verdict: they are different objects, and asking
+        # the gate to read a verdict produced RECEIPT_MISSING -- a check that could never pass.
+        receipts = sorted(queue_dir.glob("*-*.json"), key=lambda p: p.stat().st_mtime)
+        receipts = [r for r in receipts if "attempts" not in r.name]
+        target = receipts[-1] if receipts else queue_dir / "verdict.json"
         gate = subprocess.run(
-            [PY, str(K / "scripts" / "lane_evidence_gate.py"), str(queue_dir / "verdict.json"),
+            [PY, str(K / "scripts" / "lane_evidence_gate.py"), str(target),
              "--lane", "VERIFY_SECURITY", "--json"], capture_output=True, text=True, timeout=120)
         print(json.dumps({"verdict": "AWAITING_RECORD", "wp": wp, "gate": gate.stdout.strip()[:400]}))
         log({"action": "awaiting_record", "wp": wp, "gate": gate.stdout.strip()[:400]})
+        return 0
+
+    receipts = [p for p in queue_dir.glob("*.json") if "attempts" not in p.name]
+    if len(receipts) >= MAX_PHASE_ATTEMPTS:
+        log({"action": "halted_repeat", "wp": wp, "receipts": len(receipts)})
+        print(json.dumps({"verdict": "HALTED_REPEAT", "wp": wp, "receipts": len(receipts),
+                          "detail": "this unit has already been dispatched more than the allowed times without a "
+                                    "recorded verdict; it needs a human ruling, not another attempt"}, ensure_ascii=False))
         return 0
 
     json_out = queue_dir / f"{wp}-{lane.lower()}-{stamp}.json"

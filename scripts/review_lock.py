@@ -26,7 +26,7 @@ import os
 import pathlib
 import subprocess
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone, timedelta, timezone
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 LOCKS = ROOT / "var" / "review-locks"
@@ -34,6 +34,24 @@ LOCKS = ROOT / "var" / "review-locks"
 
 def now() -> datetime:
     return datetime.now(timezone.utc)
+
+
+def _expiry(value) -> datetime | None:
+    """Accept every shape an expiry can arrive in.
+
+    Measured 2026-10-30: a lock restored by hand carried `expires_at` as an epoch integer, `fromisoformat`
+    raised TypeError inside the pre-commit hook, and every commit died with a traceback instead of a refusal.
+    A gate may refuse; it may not crash. Unreadable expiry is treated as "still live" -- the safe direction.
+    """
+    if isinstance(value, (int, float)):
+        return datetime.fromtimestamp(value, tz=timezone.utc)
+    if isinstance(value, str):
+        try:
+            parsed = datetime.fromisoformat(value)
+            return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
+        except ValueError:
+            return None
+    return None
 
 
 def live() -> list[dict]:
@@ -45,8 +63,10 @@ def live() -> list[dict]:
             d = json.loads(p.read_text(encoding="utf-8"))
         except Exception:  # noqa: BLE001 - a corrupt lock must not block silently
             continue
-        expires = datetime.fromisoformat(d["expires_at"])
-        if expires > now():
+        if not {"subject", "nonce"} <= set(d):
+            continue
+        expires = _expiry(d.get("expires_at"))
+        if expires is None or expires > now():
             d["_path"] = str(p)
             out.append(d)
     return out
@@ -116,19 +136,28 @@ def cmd_check(args) -> int:
 
 
 def _holder_alive(lock: dict) -> bool | None:
-    """Is the PID that took this lock still running? Checked by PID, never by "is python running" --
-    the reaper itself runs in python, so the coarse check would keep every lock forever."""
+    """Is the PID that took this lock still running?
+
+    Measured failure, 2026-10-30: this answered "dead" for a LIVE dispatch, `reap` removed its lock, and the
+    pre-commit hook then let two commits land during a review -- the exact defect review_lock exists to prevent,
+    reintroduced by the reaper. `tasklist` output is not reliably decodable on this host, so the check asks
+    PowerShell (already proven reliable for the driver) and treats any failure as ALIVE. Refusing to reap is the
+    safe direction: a stale lock costs a manual release, a wrongly reaped one costs a voided verdict.
+    """
     pid = lock.get("pid")
     if not isinstance(pid, int):
         return None
+    cmd = "if (Get-Process -Id %d -ErrorAction SilentlyContinue) { 'ALIVE' } else { 'DEAD' }" % pid
     try:
-        # tasklist speaks the console code page, not UTF-8: decoding it as text raised
-        # UnicodeDecodeError on this host and every lock was reported "unknown" and kept forever.
-        raw = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV", "/NH"],
-                             capture_output=True, timeout=20).stdout
-        return str(pid) in raw.decode("utf-8", errors="replace") or str(pid) in raw.decode("mbcs", errors="replace")
+        done = subprocess.run(["powershell", "-NoProfile", "-Command", cmd], capture_output=True, timeout=45)
+        text = done.stdout.decode("utf-8", errors="replace") if isinstance(done.stdout, bytes) else str(done.stdout)
+        if "ALIVE" in text:
+            return True
+        if "DEAD" in text:
+            return False
+        return True
     except Exception:  # noqa: BLE001
-        return None
+        return True
 
 
 def cmd_reap(_args) -> int:

@@ -134,12 +134,35 @@ def phase(wp: str) -> str:
     """What has to happen next for this WP. Briefs live in a fixed queue directory so the driver is stateless."""
     q = Path(r"C:/wg/queue") / wp
     brief = q / "brief.md"
-    verdict = q / "verdict.json"
+    # The officer writes its verdict wherever its brief tells it to -- measured 2026-10-30: the WP-FHS-11 officer
+    # wrote `officer/verdict.json`, the driver looked only at the queue root, so the phase never advanced and the
+    # unit was re-dispatched on every tick. Search the tree, do not assume the path.
+    verdict = next(iter(q.rglob("verdict.json")), None)
     if not brief.is_file():
         return "NO_BRIEF"
-    if not verdict.is_file():
+    if verdict is None:
         return "BRIEF_READY"
     return "AWAITING_RECORD"
+
+
+def cmd_settle(args) -> int:
+    """Record what a phase actually produced, so the loop stops re-running a unit that FAILED.
+
+    Without this the driver had no way to move past a FAIL: the officer failed WP-FHS-11 with
+    HOST_SP_MATRIX_INCOMPLETE, the queue kept it in FAIL, `next` kept returning it, and every tick would have
+    dispatched it again -- the repeat-block the owner asked me to watch for, built into my own loop.
+    A settled FAIL stays visible as NEEDS_RULING; it is not a PASS and it is not silently dropped.
+    """
+    con = connect()
+    cur = con.execute("SELECT state FROM work_queue WHERE wp_id=?", (args.wp,))
+    if cur.fetchone() is None:
+        print(json.dumps({"error": "UNKNOWN_WP", "wp": args.wp}))
+        return 2
+    con.execute("UPDATE work_queue SET state=?, evidence_ref=?, updated_at=? WHERE wp_id=?",
+                (args.verdict, args.evidence, now(), args.wp))
+    con.commit()
+    print(json.dumps({"settled": args.wp, "state": args.verdict, "evidence": args.evidence}, ensure_ascii=False))
+    return 0
 
 
 def cmd_show(_args) -> int:
@@ -162,13 +185,17 @@ def cmd_next(args) -> int:
     refresh(con)
     rows = load(con)
     by_id = {r["wp_id"]: r for r in rows}
+    settled_fail = [r["wp_id"] for r in rows if r["state"] in ("FAIL", "BLOCKED") and r.get("evidence_ref")]
     for r in rows:  # DAG order = id order minus already-done
         if r["state"] == "PASS":
             continue
+        if r["state"] in ("FAIL", "BLOCKED") and r.get("evidence_ref"):
+            continue   # settled: retrying it without a ruling is the repeat-block pattern
         b = blockers(r, by_id)
         if b:
             continue
         print(json.dumps({"wp": r["wp_id"], "title": r["title"], "effect_class": r["effect_class"],
+                          "settled_failures": settled_fail,
                           "phase": phase(r["wp_id"]),
                           "queue_dir": str(Path(r"C:/wg/queue") / r["wp_id"]),
                           "remaining_fail": [x["wp_id"] for x in rows if x["state"] == "FAIL"]},
@@ -183,6 +210,8 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("init"); p.add_argument("--delivery", default=str(DELIVERY)); p.set_defaults(fn=cmd_init)
+    s = sub.add_parser("settle"); s.add_argument("--wp", required=True); s.add_argument("--verdict", required=True)
+    s.add_argument("--evidence", default=None); s.set_defaults(fn=cmd_settle)
     sub.add_parser("show").set_defaults(fn=cmd_show)
     sub.add_parser("next").set_defaults(fn=cmd_next)
     args = ap.parse_args(argv)

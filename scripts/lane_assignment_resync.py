@@ -41,9 +41,31 @@ def main(apply: bool) -> int:
     flat = []
     for role in ROLES:
         route = by_lane[role]
-        flat.append({"role": role, "assigned_provider": route["provider"], "assigned_model": route["model"],
-                     "transport_model": route["arms"][0].get("transport_model"),
-                     "authority": route.get("selection_authority")})
+        # The flat row names the arm the lane ACTUALLY auto-selects, not arms[0]: the registry's arm
+        # order is a fallback ladder, so arms[0] is routinely a non-selected arm (measured 2026-10-29:
+        # PLAN/VERIFY declare openai-codex/gpt-6.1-sol with automatic_selection on arms[1], yet this
+        # projection wrote arms[0]'s opencode-go transport into the `assigned_model` gpt-6.1-sol row -
+        # an identity/transport mismatch that every re-run of this script silently re-created).
+        auto = next((a for a in route["arms"] if a.get("automatic_selection")), route["arms"][0])
+        # R2: the oracle (projections[].bindings) also expects supply_selector / additional_routes /
+        # reasoning_effort on these rows. Emit them from the registry's own arms so the projection
+        # surface is never narrower than the expected surface again (measured 2026-10-29: 17 pointers
+        # had no emitting code at all, which is what made check_drift fail closed).
+        arms = route.get("arms", [])
+        supply = {"arms": [{k: a.get(k) for k in ("provider", "model", "transport_model", "role",
+                                                 "default", "automatic_selection")} for a in arms],
+                  "unspecified_default": {"provider": auto.get("provider")}}
+        extra = [{"provider": a.get("provider"), "model": a.get("model"),
+                  "transport": ("codex-native-oauth" if a.get("provider") == "openai-codex" else a.get("transport")),
+                  "automatic_selection": a.get("automatic_selection", False),
+                  "default": a.get("default", False)}
+                 for a in arms if a.get("provider") != route.get("provider")]
+        row = {"role": role, "assigned_provider": route["provider"], "assigned_model": route["model"],
+               "transport_model": auto.get("transport_model"), "authority": route.get("selection_authority"),
+               "supply_selector": supply, "additional_routes": extra}
+        if route.get("reasoning_effort"):
+            row["reasoning_effort"] = route["reasoning_effort"]
+        flat.append(row)
     if doc.get("assignment") != flat:
         changes.append({"role": "*", "field": "assignment", "was": len(doc.get("assignment", [])), "now": len(flat)})
         doc["assignment"] = flat
