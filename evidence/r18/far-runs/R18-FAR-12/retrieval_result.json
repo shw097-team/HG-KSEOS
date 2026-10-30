@@ -1,0 +1,9 @@
+{
+ "retrieval_count": 16,
+ "cross_reference_count": 64,
+ "web_status": "WEB_RETRIEVAL_SKIPPED_NO_ROOTS",
+ "files": {
+  "ledger": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\far-runs\\R18-FAR-12\\retrieval\\RetrievalLedger.json",
+  "cross_reference": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\far-runs\\R18-FAR-12\\retrieval\\CrossReferenceLedger.tsv"
+ }
+}

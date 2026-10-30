@@ -1,0 +1,136 @@
+{
+ "schema": "R18.SESSION_STATE/2",
+ "written_at": "2026-10-29T11:08:47Z",
+ "session": {
+  "id": "20261029_123118_143d2d",
+  "closing": true,
+  "successor_must_read": [
+   "RESUME_HERE.md",
+   "SESSION_STATE.json",
+   "CORRECTIONS.md",
+   "receipts/TERMINAL_STATE.json"
+  ]
+ },
+ "round": {
+  "id": "R18-FHS-SKELETON-SPINE-20261029",
+  "root": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029",
+  "subject_digest": "5a06d8ddfcfaeefdda4430a0fcd0677e5ca036ac9e10072b5f00e141824f430d"
+ },
+ "ledger": {
+  "rows": 26,
+  "by_status": {
+   "DONE": 4,
+   "PARTIAL": 14,
+   "HOLD": 1,
+   "PARKED": 7
+  },
+  "audit": "rc=0",
+  "terminal_state": {
+   "defensible": 22,
+   "total": 22,
+   "stop_condition_met": true
+  }
+ },
+ "guards": {
+  "file": "tools/guards.py",
+  "receipt": "receipts/SELFREPAIR_GUARDS.json",
+  "g1_state_single_writer": true,
+  "g2_lane_required_for_verdicts": true,
+  "g3_stop_only_when_no_actionable": true,
+  "goal_status": "active"
+ },
+ "far": {
+  "runs": {
+   "R18-FAR-12": 16,
+   "R18-FAR-13": 18
+  },
+  "rule": "a file may only be called FAR if ResearchRequest + denominator + ClaimLedger exist",
+  "memos_that_are_not_far_products": [
+   "FAR_R18.md",
+   "FAR_R18_07_STOP_REVIEW_AND_OWNER_ENVELOPE.md",
+   "FAR_R18_09_CLAIM_RECHECK.md",
+   "FAR_R18_10_CONCURRENT_SESSION_RECHECK.md",
+   "FAR_R18_11_WHY_IT_STOPS.md",
+   "FAR_R18_12_SEVEN_QUESTIONS.md"
+  ]
+ },
+ "git": {
+  "branch": "candidate/r18-openspec-only",
+  "head": "9f543e5",
+  "head_subject": "evidence(r18): terminal state — 22/22 WPs defensible with named owner + next_legal_action ",
+  "worktree": "C:\\Projects\\Agent_Workspace\\wt-r18-openspec",
+  "repo": "shw097-team/HG-KSEOS",
+  "pr": 4,
+  "orphan": {
+   "this_branch_root": "a2389c13",
+   "this_branch_commits": 10,
+   "repo_lineage_branch": "candidate/r18-fhs-skeleton-spine-20261029",
+   "repo_lineage_root": "ec58a0be",
+   "repo_lineage_commits": 198,
+   "merge": "impossible without --allow-unrelated-histories"
+  }
+ },
+ "issuer": {
+  "kinds": [
+   "source_freeze",
+   "task_kind",
+   "oracle_ratification"
+  ],
+  "permit_requirements": 6,
+  "ceiling": "AUTHOR_SELF_RATIFIED for oracle_ratification signed by the author",
+  "cap_boot": "UNDEFINED_IN_ALL_SOURCES"
+ },
+ "owner": {
+  "window": "WIN-796b69117680",
+  "broker": "var/B1-PIPD-PKG-20261027/owner_window.py serve",
+  "canonical_fp": "412b3519...",
+  "note": "8h window opened this session; re-open if expired"
+ },
+ "scheduling": {
+  "cron": "2897733e2ca1",
+  "every": "30m",
+  "gateway": "installed as login item; PID 23508 at close"
+ },
+ "next_actions_ordered": [
+  {
+   "n": 1,
+   "action": "write policy_epoch + database_path + head into the user-scope sidecar; mark registry ACTIVE",
+   "needs": "nothing",
+   "unblocks": "normalize_user_registry"
+  },
+  {
+   "n": 2,
+   "action": "build the three-key bundle and call NativeAdmission(registry).authorize on the canonical DB",
+   "needs": "step 1",
+   "unblocks": "first PERMIT"
+  },
+  {
+   "n": 3,
+   "action": "execute one HOST_OP WP under that PERMIT and record the native receipt",
+   "needs": "step 2",
+   "unblocks": "native evidence for the 96 cells"
+  },
+  {
+   "n": 4,
+   "action": "batch the remaining 11 rows through the same recipe",
+   "needs": "step 3"
+  },
+  {
+   "n": 5,
+   "action": "declare 22 ACCEPTANCE edges as DECLARED_BY_OWNER and fix the DAG binding",
+   "needs": "nothing",
+   "ceiling": "declared, not independently validated"
+  },
+  {
+   "n": 6,
+   "action": "branch candidate/r18-delivery from the 198-commit lineage and apply evidence/r18 as one commit",
+   "needs": "clean checkout",
+   "why": "the current branch is an orphan and can never be merged"
+  },
+  {
+   "n": 7,
+   "action": "ask the author what CAP-BOOT means",
+   "needs": "owner answer"
+  }
+ ]
+}

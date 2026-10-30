@@ -1,0 +1,26 @@
+{
+ "schema": "FAR_RUN_RECEIPT_V1",
+ "run_ref": "R18-FAR-12",
+ "at": "2026-10-29T08:04:26Z",
+ "channels": {},
+ "artifacts": [
+  "CandidateResearch.yaml",
+  "ClaimLedger.tsv",
+  "ContradictionLedger.tsv",
+  "ExtractionLedger.jsonl",
+  "FitGapLedger.tsv",
+  "HypothesisLedger.tsv",
+  "QueryLedger.tsv",
+  "ResearchHandoff.yaml",
+  "ResearchPlan.yaml",
+  "ResearchRequest.yaml",
+  "ResearchSourceDenominator.tsv",
+  "ResearchSynthesis.md",
+  "SourceDispositionLedger.tsv",
+  "SourceSnapshotLedger.tsv",
+  "retrieval_result.json"
+ ],
+ "retrieval_written": true,
+ "claim_count": 9,
+ "source_count": 7
+}

@@ -1,0 +1,181 @@
+{
+ "schema": "R18.SESSION_STATE/1",
+ "round": "R18-FHS-SKELETON-SPINE-20261029",
+ "subject_package": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2",
+ "work_root": "C:/Projects/Agent_Workspace/var/R18-FHS-SKELETON-SPINE-20261029",
+ "governing_prompt": "HERMES_FHS-MSC_SKELETON_SPINE_revision2_Native_Direct_Thin_Prompt_2026-10-29_r1",
+ "spine_project": "FHS-MSC-R18-20261029",
+ "kanban_board": "fhs-msc-skeleton-spine-r18",
+ "kanban_cards": 27,
+ "ledger": {
+  "DONE": 7,
+  "PARTIAL": 11,
+  "HOLD": 1,
+  "PARKED": 7
+ },
+ "measured": {
+  "source_freeze": {
+   "manifest_rows": 82,
+   "checksums_ok": 83,
+   "zip_members": 84,
+   "dag_nodes": 22,
+   "dag_edges": 36
+  },
+  "candidate_validator": {
+   "as_delivered": {
+    "pass": 2788,
+    "fail": 1
+   },
+   "after_repair": {
+    "pass": 2789,
+    "fail": 0
+   },
+   "failing_case": "SOURCE-BYTES-UNCHANGED",
+   "stale_pins": 29,
+   "repinned": 20,
+   "dropped": 9
+  },
+  "oracle96": {
+   "cells": 96,
+   "pass_local_oracle": 50,
+   "hold": 46,
+   "fail": 0,
+   "author_checks": 679,
+   "verdict": "MATCH"
+  },
+  "wp_oracle_trace": {
+   "unbacked_pos": 22,
+   "unbacked_neg": 22
+  },
+  "supply_chain": {
+   "files": 85,
+   "secrets": 0,
+   "canary_fired": true,
+   "files_with_host_paths": 9
+  },
+  "holds": {
+   "total": 11,
+   "by_class": {
+    "HOST": 3,
+    "ABI": 4,
+    "SOURCE": 2,
+    "CHECKER": 1,
+    "RELEASE": 1
+   }
+  },
+  "b1_baseline": {
+   "baseline": "B1-LOCAL-2026-10-28",
+   "tags_ok": true,
+   "spine_events": {
+    "native_admission": 245,
+    "nonces": 735,
+    "leases": 245
+   },
+   "gate_after_repair": {
+    "selfcheck": "108/108",
+    "G-A": "6/6",
+    "G-B": "PASS",
+    "GWO": "3/3",
+    "conjunction": "PASS",
+    "mission_complete": true
+   }
+  }
+ },
+ "lanes": {
+  "required": {
+   "PLAN": "GPT 6.1 Sol, medium, OpenAI OAuth",
+   "EXECUTE": "DeepSeek V4.1 Flash via OpenCode Go",
+   "VERIFY_SECURITY": "GPT 6.1 Sol, medium, OpenAI OAuth"
+  },
+  "session_pin_is_not_a_lane_binding": true,
+  "exec_lane_finding": "required arm returned 401/502; rank-3 gpt-6-luna served twice with NONCE+usage receipt; relay rehomed to the sealed home with the Hermes credential and deepseek-v4.1-flash now returns HTTP 200",
+  "receipts": [
+   "lane/EXECUTE_WP21_attempt2.json",
+   "lane/EXECUTE_WP21_attempt4.json",
+   "lane/PLAN_R18.json",
+   "checker/VERIFY_R18.json",
+   "receipts/RELAY_REHOME.json",
+   "receipts/LANE_CREDENTIAL_PROBE.json"
+  ]
+ },
+ "repairs": [
+  {
+   "id": "D-R18-01",
+   "what": "stale source_manifest pins into the superseded DRAFT tree",
+   "preimage": "preimage/source_manifest.json.bak",
+   "status": "REPAIRED_ISOLATED_COPY_ONLY"
+  },
+  {
+   "id": "D-R18-02",
+   "what": "B1 C99 compared a live DB digest with a receipt-time constant (unsatisfiable)",
+   "preimage": "preimage/selfcheck2.py.bak",
+   "status": "REPAIRED_WITH_NEGATIVE_CONTROL"
+  },
+  {
+   "id": "FAR-R18-03",
+   "what": "declared codex binary replaced by an in-place CLI upgrade",
+   "preimage": "preimage/{hermes-codex-lane.json,active-policy.json}.bak",
+   "status": "PIN_REFRESHED_AND_REVERIFIED"
+  },
+  {
+   "id": "FAR-R18-04",
+   "what": "relay started from the human home had no opencode-go credential",
+   "status": "REHOMED_TO_SEALED_HOME_ARM_SERVES_200"
+  }
+ ],
+ "claim_ceiling": {
+  "native_qualification": false,
+  "independent_acceptance": false,
+  "main_branch_or_release": false,
+  "what_is_proven": "source freeze, candidate self-consistency after one data repair, 96-cell reproduction, supply-chain cleanliness with a proven detector, B1 baseline reuse with a repaired and fail-able gate",
+  "what_is_not": "native WP execution, WP-level oracle backing, independent checker verdict, delivery to remote"
+ },
+ "next_legal_action": [
+  "read lane/PLAN_R18.json and checker/VERIFY_R18.json; re-mint SPINV-<TAG>-<12hex> and re-dispatch if refused",
+  "author the WP->case traceability matrix (author-side, no synthesis)",
+  "obtain the native bundle for WP-07 if the native leg is wanted this round",
+  "open the HG-KSEOS candidate branch carrying the OpenSpec change and a round evidence index, then push and open a PR"
+ ],
+ "resume_here": "STATUS_HANDOFF.md",
+ "owner_delegation": {
+  "delegation_id": "R18-CANON-6733b6bb",
+  "owner_fingerprint": "412b351937be72a1",
+  "identity": "CANONICAL_HGK_OWNER (~/.hgk-owner/owner.key.enc)",
+  "window": "WIN-796b69117680",
+  "window_budget": "8h / 40 ops",
+  "wp_allowlist": [
+   "WP-FHS-00",
+   "WP-FHS-01",
+   "WP-FHS-09",
+   "WP-FHS-19",
+   "WP-FHS-21",
+   "WP-FHS-06",
+   "WP-FHS-18"
+  ],
+  "gate_matrix": "receipts/DELEGATION_GATE_MATRIX_CANONICAL.json (7/7 permit, 6/6 refuse)",
+  "second_key": "RETIRED (governance/SECOND_KEY_RETIRED.json)"
+ },
+ "refreshed_utc": "2026-10-29T07:33:58Z",
+ "driver": {
+  "script": "tools/r18_autodriver.py",
+  "cron_job": "2897733e2ca1",
+  "schedule": "every 30m",
+  "no_agent": true,
+  "journal": "receipts/DRIVER_JOURNAL.jsonl",
+  "state_file": "DRIVER_STATE.json",
+  "gateway_pid_at_start": 23508
+ },
+ "delivery": {
+  "branch": "candidate/r18-openspec-only",
+  "head": "b2159b09",
+  "pr": "https://github.com/shw097-team/HG-KSEOS/pull/4",
+  "repos_published": [
+   "HG-KSEOS"
+  ],
+  "repos_not_run": [
+   "Fabric",
+   "PIPD",
+   "SBL"
+  ]
+ }
+}
