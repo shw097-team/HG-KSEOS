@@ -48,7 +48,10 @@ RELAY = "https://chatgpt.com/backend-api/codex"
 QUEUE = Path(r"C:/wg/queue")
 MAX_PHASE_ATTEMPTS = 3
 # A FAIL is a specification, but not an infinite one: after this many EXECUTE rounds the unit needs a ruling.
-MAX_EXECUTE_ROUNDS = 3   # two failures are a flake; the third is a defect and stops the loop
+MAX_EXECUTE_ROUNDS = 3
+# Measured 2026-10-31: an EXECUTE attempt was cut at 900.09s while still writing files, so its receipt could not
+# be cited. A writer that needs to finish is not the same budget as a reader.
+LANE_TIMEOUTS = {"PLAN": 900, "VERIFY_SECURITY": 900, "EXECUTE": 1800}   # two failures are a flake; the third is a defect and stops the loop
 STATE = QUEUE / "driver_state.json"
 LOG = QUEUE / "driver.log"
 
@@ -235,7 +238,11 @@ def execute_prompt(wp: str, queue_dir: Path, nonce: str, verdict: dict) -> str:
         f"     the file's header. No hand-written results.\n"
         f"  3. Do not change the acceptance standard, the oracle, or any prior verdict. If a gap cannot be closed,\n"
         f"     say so plainly in EVIDENCE_GAP.md with what is missing -- that is a finding, not a failure to hide.\n"
-        f"  4. Write only under {queue_dir}. Report the files you created at the end, one per line."
+        f"  4. Write only under {queue_dir}. Report the files you created at the end, one per line.\n"
+        f"  5. Files from an earlier attempt may already exist in this directory; read them and finish them rather than\n"
+        f"     starting over. Say in the report what you kept and what you replaced.\n"
+        f"  6. Write `EXECUTE_REPORT.md` whose FIRST line is exactly `NONCE-ECHO: {nonce}`, then the files you\n"
+        f"     created and the command that reproduces each. The line must be in the file, not only in your reply."
     )
 
 
@@ -325,7 +332,24 @@ def main(argv=None) -> int:
     vpath, verdict = latest_verdict(queue_dir)
     if phase == "AWAITING_RECORD" and vpath is not None and str(verdict.get("verdict", "")).upper() == "FAIL":
         ex = execute_rounds(queue_dir)
-        newer_execute = any(p.stat().st_mtime > vpath.stat().st_mtime for p in queue_dir.glob("*-execute-*.json"))
+        # An EXECUTE receipt only answers a verdict if it is CITABLE. Measured: attempt 1 wrote real files and then
+        # timed out at 900.09s with nonce_present=false; counting that mtime as an answer would send VERIFY to judge
+        # work nothing can cite, which is how a timed-out write becomes an unearned FAIL.
+        def citable(path):
+            if path.stat().st_mtime <= vpath.stat().st_mtime:
+                return False
+            try:
+                d = json.loads(path.read_text(encoding="utf-8", errors="replace"))
+            except json.JSONDecodeError:
+                return False
+            if d.get("receipt_complete") is False and not d.get("attempts"):
+                return False
+            for a in d.get("attempts") or []:
+                if a.get("nonce_present") and str(a.get("exit")) in ("0", "OK", "SUCCESS"):
+                    return True
+            return False
+
+        newer_execute = any(citable(p) for p in queue_dir.glob("*-execute-*.json"))
         if newer_execute:
             phase = "REVERIFY"          # EXECUTE already answered this verdict: let VERIFY judge the answer
         elif ex >= MAX_EXECUTE_ROUNDS:
@@ -375,10 +399,13 @@ def main(argv=None) -> int:
     died = dead_attempts(queue_dir)
     if died:
         log({"action": "phase_died", "wp": wp, "count": len(died), "attempts": died[-3:]})
+    # Count attempts of THIS phase, not receipts of the unit. PLAN once + VERIFY once + EXECUTE once is three phases
+    # working correctly, not one step failing three times -- conflating them halted a unit that was making progress.
     receipts = [p for p in queue_dir.glob("*.json") if "attempts" not in p.name]
-    if len(receipts) >= MAX_PHASE_ATTEMPTS:
-        log({"action": "halted_repeat", "wp": wp, "receipts": len(receipts)})
-        print(json.dumps({"verdict": "HALTED_REPEAT", "wp": wp, "receipts": len(receipts),
+    same_phase = [r for r in receipts if f"-{lane.lower()}-" in r.name.lower() or f"-{lane.lower().replace('_','-')}-" in r.name.lower()]
+    if len(same_phase) >= MAX_PHASE_ATTEMPTS:
+        log({"action": "halted_repeat", "wp": wp, "lane": lane, "receipts": len(same_phase)})
+        print(json.dumps({"verdict": "HALTED_REPEAT", "wp": wp, "lane": lane, "receipts": len(same_phase),
                           "detail": "this unit has already been dispatched more than the allowed times without a "
                                     "recorded verdict; it needs a human ruling, not another attempt"}, ensure_ascii=False))
         return 0
