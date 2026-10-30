@@ -177,12 +177,14 @@ evidence for it is.
 Evidence: `receipts/P8_DELIVERED_RECORD_ANOMALY.json`.
 Next: re-execute the harness and ship the real record, with a timestamp.
 
-## F-15 — the QA harness has an undeclared dependency (`jsonschema`)
+## F-15 — the harness loses `jsonschema` even though the interpreter has it
 
-**Medium (reproducibility).** The 35-check harness imports `jsonschema` inside its validation path. On an
-interpreter without it, three cases fail as `ValidationFail:jsonschema unavailable` and the run scores below
-the recorded 35/35 — the same tree, the same tools, a different score. Measured 2026-10-30 on Python 3.11.17
-(`jsonschema 4.26.0` installed: the failures disappear). The delivery names no dependency and has no
-preflight import check, so "35/35" was never a property of the artefact set alone.
-Next: pin the dependency in the delivery (requirements + a one-line `import jsonschema` preflight that fails
-loudly), or vendor it.
+**Medium (reproducibility).** Three validation cases fail as `ValidationFail: jsonschema unavailable: No module
+named 'jsonschema'` when the harness runs, while `python -c "import jsonschema"` in the **same** interpreter,
+the **same** working directory, succeeds (`jsonschema 4.26.0`). So the score is sensitive to how the harness
+reaches site-packages, not to whether the package is installed. The earlier 35/35 in this round came from a
+tree that resolved the import; the same tree now scores lower. Root mechanism **not isolated** — do not claim
+the cause is "missing dependency" when a direct import works.
+Next: instrument `pipd_ls_sp/validate.py::_validator` to dump `sys.executable`, `sys.path[:5]` and
+`sys.flags` on the ImportError (5 lines, no semantic change), then pin the interpreter/path in the delivery.
+Until then treat every 35/35 as environment-conditional.

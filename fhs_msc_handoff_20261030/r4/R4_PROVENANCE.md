@@ -25,9 +25,11 @@ still rebuild byte-exactly (AO O2/O3, `P13`).
 
 1. **`F-13` stays open.** `prepare.py` does not carry `tests/fixtures` into the READERS snapshot, so a clean
    rebuild can still miss fixtures. r4 does not guess at a patch for a snapshot list it has not seen.
-2. **`F-15` (new).** The harness needs `jsonschema` in the interpreter that runs it. Without it three
-   validation cases fail with `ValidationFail:jsonschema unavailable` and the run scores below the recorded
-   35/35 — an undeclared dependency of the delivery. Measured 2026-10-30 on Python 3.11.17.
+2. **`F-15` (new) — and this patch is NOT verified green here.** Running the fixed tool in two trees produced
+   `ValidationFail: jsonschema unavailable` on three cases, although `import jsonschema` succeeds in the very
+   same interpreter and directory. The ordering fix is therefore confirmed only to remove the original
+   `AssertionError` failure mode; a 35/35 run was **not** reproduced in this environment, and the dependency
+   mechanism is not isolated. Do not read `tools/check_first_work.py` as "the fix that makes it 35/35".
 
 ## What r4 does **not** do
 
