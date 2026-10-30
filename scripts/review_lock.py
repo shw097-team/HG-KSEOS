@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import pathlib
 import subprocess
 import sys
@@ -67,6 +68,7 @@ def cmd_acquire(args) -> int:
     LOCKS.mkdir(parents=True, exist_ok=True)
     record = {
         "nonce": args.nonce,
+        "pid": os.getpid(),
         "subject": str(subject),
         "reason": args.reason,
         "created_at": now().isoformat(timespec="seconds"),
@@ -113,13 +115,16 @@ def cmd_check(args) -> int:
     return 0
 
 
-def _holder_alive(nonce: str) -> bool | None:
-    """Is the process that took this lock still running? Best effort, never blocks a reaper."""
+def _holder_alive(lock: dict) -> bool | None:
+    """Is the PID that took this lock still running? Checked by PID, never by "is python running" --
+    the reaper itself runs in python, so the coarse check would keep every lock forever."""
+    pid = lock.get("pid")
+    if not isinstance(pid, int):
+        return None
     try:
-        import subprocess as _sp
-        out = _sp.run(["tasklist", "/FI", "IMAGENAME eq python.exe", "/FO", "CSV", "/NH"],
-                      capture_output=True, text=True, timeout=20).stdout.lower()
-        return "python.exe" in out
+        out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/FO", "CSV", "/NH"],
+                             capture_output=True, text=True, timeout=20).stdout
+        return str(pid) in out
     except Exception:  # noqa: BLE001
         return None
 
@@ -129,7 +134,7 @@ def cmd_reap(_args) -> int:
     pre-commit hook then refused legitimate commits -- the cure must not become the next outage."""
     reaped, kept = [], []
     for lock in live():
-        alive = _holder_alive(lock["nonce"])
+        alive = _holder_alive(lock)
         if alive is False:
             pathlib.Path(lock["_path"]).unlink(missing_ok=True)
             reaped.append(lock["nonce"])

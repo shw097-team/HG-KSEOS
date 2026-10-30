@@ -66,13 +66,13 @@ def test_reap_removes_a_lock_whose_holder_is_gone():
     LOCKS.mkdir(parents=True, exist_ok=True)
     lock = LOCKS / f"{nonce}.json"
     lock.write_text(json.dumps({
-        "nonce": nonce, "subject": str((ROOT / "scripts").resolve()),
+        "nonce": nonce, "pid": 999999, "subject": str((ROOT / "scripts").resolve()),
         "created_at": "2099-01-01T00:00:00+00:00", "expires_at": "2099-01-01T00:10:00+00:00",
     }), encoding="utf-8")
     try:
         out = run("reap")
         assert out.returncode == 0, out.stderr
         reaped = json.loads(out.stdout)["reaped"]
-        assert nonce in reaped or not lock.exists(), "a lock with no living holder must be reaped or re-checked"
+        assert nonce in reaped and not lock.exists(), "a lock whose pid is gone must be reaped"
     finally:
         lock.unlink(missing_ok=True)
