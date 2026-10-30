@@ -1,0 +1,26 @@
+{
+  "schema": "AO-TRANSCRIPTION/3",
+  "work_package": "WP-FHS-02",
+  "verdict_author": "Independent Acceptance Officer, tenth sitting (VERIFY_SECURITY lane)",
+  "row_mover": "assistant (mechanical transcription; does not judge)",
+  "officer_overall": "PASS",
+  "stage_verdict": "PASS: separately observable normalized candidate JSON preserves all 18 class metadata fields across nine classes; a scratch native staging replay reproduces exact reviewed bytes; live STAGE_DERIVES and independently measured byte/source digests match the receipt and scoped ACK; scratch edits are detected. The missing Stage layer from sitting nine is now supplied.",
+  "receipt": "C:/wg/ao13/ao_r28j.json",
+  "nonce": "NONCE-AO-R28-J-20261030",
+  "lane_receipt": {
+    "ok": true,
+    "rank": 1,
+    "model": "gpt-6.1-sol",
+    "nonce_present": true,
+    "usage_receipt_ok": true,
+    "seconds": 183.57
+  },
+  "cited_evidence": [
+    "POLICY_LOADED_CONSUMER_ACK.json",
+    "STAGE_RECEIPT.json",
+    "AO10-verdict.json",
+    "AO10-ao_r28j.json"
+  ],
+  "transcription_note": "the officer's own wording is preserved in stage_verdict; the metadata-field count is the officer's, not mine",
+  "recorded_at": "2026-10-30T22:33:07"
+}
