@@ -5,8 +5,8 @@
   "repro": "C:\\wg\\repro",
   "package": "C:\\wg\\pkg"
  },
- "files": 75,
- "total_bytes": 5580768,
+ "files": 76,
+ "total_bytes": 5582392,
  "entries": [
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",
@@ -92,6 +92,11 @@
    "path": "receipts/P8_DELIVERED_RECORD_ANOMALY.json",
    "bytes": 1109,
    "sha256": "5eac38d32cb8683f356b8ac0939771d8c87580c327033eab9c5d5805cbbf0044"
+  },
+  {
+   "path": "receipts/P9_OWNER_WINDOW.json",
+   "bytes": 1624,
+   "sha256": "5e97256b1ca975a12e143785a2cf95d48cd991b5d5e8b59af919fba49fa7abf1"
   },
   {
    "path": "tools/exec_checks.py",
