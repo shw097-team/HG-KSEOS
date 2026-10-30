@@ -1,0 +1,23 @@
+{
+  "instrument": "owner authorization for this round",
+  "granted_at": "2026-10-30T16:20:00Z",
+  "recorded_at": "2026-10-31T00:20:53+0800",
+  "session": "20261030_134733_756c82",
+  "grantor": "the sole owner and issuer of this system",
+  "authorization_quote": [
+    "全系統唯一OWNER & issuer授權你執行FAR提出的全部最佳「裁決、授權、簽章」建議，和全部的建議執行方案。",
+    "全系統唯一OWNER & issuer授權你必須完成『FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1』剩餘項目，直到全部項目實際執行完成 & ALL PASS。",
+    "全系統唯一OWNER & issuer最高授權你進行「Native E2E 自主執行閉環、無人值守高自動化執行長任務」，整個執行過程不需要停下回報或詢問用戶才裁決"
+  ],
+  "authorized_actions": [
+    "issue OPS grants for install_occupant",
+    "bind the provider enum dimension (OWNER_BIND_HOLD)",
+    "execute FAR rulings without further approval"
+  ],
+  "limits": [
+    "no change to the acceptance standard",
+    "PASS only from an independent officer verdict",
+    "no UNKNOWN substituted for FAIL"
+  ],
+  "note": "This record is what the issuer key signs under; its sha256 is bound into every grant so a grant can be traced to the sentence that permitted it."
+}

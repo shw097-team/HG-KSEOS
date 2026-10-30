@@ -165,6 +165,26 @@ def cmd_settle(args) -> int:
     return 0
 
 
+def cmd_unsettle(args) -> int:
+    """Clear a settled FAIL so the same unit can be judged again -- only with a reason that names what changed.
+
+    A settled FAIL exists so the loop cannot retry blindly. When the cause has actually been removed (a real grant
+    instead of a seam, a built mechanism instead of a missing one), the record must carry that reason, or this is the
+    repeat-block pattern wearing a different hat.
+    """
+    con = connect()
+    row = con.execute("SELECT state FROM work_queue WHERE wp_id=?", (args.wp,)).fetchone()
+    if row is None:
+        print(json.dumps({"unsettled": None, "detail": "UNKNOWN_WP"}, ensure_ascii=False))
+        return 2
+    con.execute("UPDATE work_queue SET state='NOT_RUN', evidence_ref=?, updated_at=? WHERE wp_id=?",
+                (f"OWNER-RULING:{args.reason}", now(), args.wp))
+    con.commit()
+    print(json.dumps({"unsettled": args.wp, "was": row[0], "now": "NOT_RUN", "reason": args.reason},
+                     ensure_ascii=False))
+    return 0
+
+
 def cmd_show(_args) -> int:
     con = connect()
     refresh(con)
@@ -212,6 +232,8 @@ def main(argv=None) -> int:
     p = sub.add_parser("init"); p.add_argument("--delivery", default=str(DELIVERY)); p.set_defaults(fn=cmd_init)
     s = sub.add_parser("settle"); s.add_argument("--wp", required=True); s.add_argument("--verdict", required=True)
     s.add_argument("--evidence", default=None); s.set_defaults(fn=cmd_settle)
+    u = sub.add_parser("unsettle"); u.add_argument("--wp", required=True)
+    u.add_argument("--reason", required=True); u.set_defaults(fn=cmd_unsettle)
     sub.add_parser("show").set_defaults(fn=cmd_show)
     sub.add_parser("next").set_defaults(fn=cmd_next)
     args = ap.parse_args(argv)

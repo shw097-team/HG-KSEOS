@@ -80,10 +80,25 @@ def validate_grant(grant: dict, writeset: list[dict], root: Path) -> str | None:
         return "GRANT_EPOCH"
     # A grant that does not state its assurance level cannot be told apart from a forged one, so the level is
     # mandatory and travels into the receipt. CONFORMANCE_ONLY_TEST_SEAM is a real ceiling, not a pass.
-    if grant.get("assurance_level") not in ("PRODUCTION_ISSUER", "CONFORMANCE_ONLY_TEST_SEAM"):
+    level = grant.get("assurance_level")
+    if level not in ("PRODUCTION_ISSUER_SOFTWARE", "CONFORMANCE_ONLY_TEST_SEAM"):
         return "GRANT_ASSURANCE_UNDECLARED"
+    # A label is not authority. A production-level grant must verify: Ed25519 signature over its own payload, a
+    # ledgered nonce, an unexpired TTL, and the owner authorization it claims to act under. Anything less is the
+    # exact defect the officer refused -- a field that says "production" because someone typed it.
+    if level == "PRODUCTION_ISSUER_SOFTWARE":
+        try:
+            sys.path.insert(0, str(Path(__file__).resolve().parent))
+            import issue_grant  # noqa: E402
+            problems = issue_grant.verify(grant)
+        except Exception as exc:  # noqa: BLE001
+            return f"GRANT_VERIFIER_UNAVAILABLE:{type(exc).__name__}"
+        if problems:
+            return "GRANT_REFUSED:" + ",".join(problems)
+    # Signed two ways, and either is enough: an Ed25519 signature over the payload (production path), or the
+    # reference triple a conformance seam carries. Neither present means unsigned.
     refs = grant.get("references")
-    if not isinstance(refs, list) or len(refs) < 1:
+    if not grant.get("signature_b64") and (not isinstance(refs, list) or len(refs) < 1):
         return "GRANT_UNSIGNED"
     declared = {(w.get("path"), w.get("preimage")) for w in grant.get("writeset") or []}
     needed = {(w["path"], w["preimage"]) for w in writeset}
