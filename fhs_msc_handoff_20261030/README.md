@@ -50,4 +50,4 @@ and the original HGK issuer still has to admit anything that becomes an effect.
 
 ## Reading order
 
-`EXECUTION_REPORT.md` → `FINDINGS.md` → `REPRODUCE.md` → `EVIDENCE_INDEX.md` → `ADVISORY_AUDIT.md`.
+`EXECUTION_REPORT.md` → `FINDINGS.md` → `REPRODUCE.md` → `EVIDENCE_INDEX.md` → `ADVISORY_AUDIT.md` → `FAR_CLOSURE_AND_PROMOTION_20261030.md`.

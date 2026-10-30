@@ -49,6 +49,13 @@
 `STAGED_MANIFEST.json` is an inventory: it lists what was copied and with which SHA-256 so later tampering
 is detectable. It does not establish that the copy was correct — that is what `receipts/` is for.
 
+## Decision dossier
+
+`FAR_CLOSURE_AND_PROMOTION_20261030.md` — what is not PASS, why "all PASS" is unreachable today, the nine
+mechanical fixes, eight owner decisions with pre-filled payloads (`receipts/P11_OWNER_DECISIONS_PREFILLED.json`),
+the promotion ladder, and the measured merge order for the six open PRs. Its lane-availability probe is
+`receipts/P10_LANE_AVAILABILITY.json`.
+
 ## Advisory audit
 
 `ADVISORY_AUDIT.md` records three independent read-only processes that attacked the claims above, which of

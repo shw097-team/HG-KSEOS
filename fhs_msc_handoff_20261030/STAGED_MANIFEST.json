@@ -5,9 +5,19 @@
   "repro": "C:\\wg\\repro",
   "package": "C:\\wg\\pkg"
  },
- "files": 76,
- "total_bytes": 5582392,
+ "files": 78,
+ "total_bytes": 5588185,
  "entries": [
+  {
+   "path": "receipts/P10_LANE_AVAILABILITY.json",
+   "bytes": 2451,
+   "sha256": "1fef11190e6460ac94e6b43c1ef71e6cd80403ff110636184572dc0b475cf1d5"
+  },
+  {
+   "path": "receipts/P11_OWNER_DECISIONS_PREFILLED.json",
+   "bytes": 3342,
+   "sha256": "c55fce78ef9445cd1f6a3c4d254ce341f3980f168d437b3873af7d047f879a22"
+  },
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",
    "bytes": 5479,
