@@ -9,7 +9,9 @@ Python 3.11. No network. Nothing here writes into the delivered package.
 cd "$PKG" && mv 01_FHS-MSC_PIPD-LS-PKG_BODY 01_SUBSTANTIVE_BODY
 ```
 
-Skip this and verification reports 429 missing rows. That is the defect, not corruption.
+Skip this and 31 of 909 rows resolve to a directory that is not there. Separately, 415 more rows are
+invisible to a naive `Path.exists()` because of the 260-character Win32 limit — walk with the `\\?\`
+prefix (or unpack at a short root) or you will see roughly half the payload as missing (F-02b).
 
 ## 1. Payload integrity — expect 909/909
 

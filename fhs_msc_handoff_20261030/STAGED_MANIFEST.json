@@ -5,8 +5,8 @@
   "repro": "C:\\wg\\repro",
   "package": "C:\\wg\\pkg"
  },
- "files": 62,
- "total_bytes": 5314092,
+ "files": 65,
+ "total_bytes": 5359792,
  "entries": [
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",
@@ -69,6 +69,16 @@
    "sha256": "f2b9d80375c2b68de0ebc9bc679361df4b8845dbfc763e9edd11c8fb839dda03"
   },
   {
+   "path": "receipts/P5D_REPO_READBACK.json",
+   "bytes": 34548,
+   "sha256": "41fbc8fd3b50a3fb24037491784c9c7c117e3276ac17e8d4bd03539575cf39fe"
+  },
+  {
+   "path": "receipts/P6_GITHUB_READBACK.json",
+   "bytes": 1792,
+   "sha256": "bcbddea5e3cc52a2eb798fcb975b330e936f6a8b37ed0a99f6fb8e239796a110"
+  },
+  {
    "path": "tools/exec_checks.py",
    "bytes": 6592,
    "sha256": "e0544d5fe470a457d927c36c952d20258676a505ebbfdc0b3053e2bfb76f8987"
@@ -82,6 +92,11 @@
    "path": "tools/p1_package_integrity.py",
    "bytes": 18925,
    "sha256": "6189d04e815fef4edc2fcbc7a1fec1d29c307f0e269aa67fdfc2dbd7ffa5808b"
+  },
+  {
+   "path": "tools/p5_repo_readback.py",
+   "bytes": 9360,
+   "sha256": "98986d07d8ae48c704195271a96e15e6e4e0680b6b7ac0d5682719e65593bf84"
   },
   {
    "path": "tools/seal_package.py",

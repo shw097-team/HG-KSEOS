@@ -1,0 +1,67 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-READBACK/1",
+ "repo": "shw097-team/HG-KSEOS",
+ "commit": "9750b842011e8b0fe0adcafea904eefa37d8a241",
+ "branch": "fhs-msc-handoff-patch-v1-exec-20261030",
+ "pr": 7,
+ "method": "GitHub contents API, base64 blob decoded, SHA-256 compared to the local file after CRLF->LF normalisation (git stores LF)",
+ "files": [
+  {
+   "name": "README.md",
+   "blob_bytes": 2367,
+   "sha256_equal_after_eol_normalisation": true,
+   "kind": "docs"
+  },
+  {
+   "name": "EXECUTION_REPORT.md",
+   "blob_bytes": 6327,
+   "sha256_equal_after_eol_normalisation": true,
+   "kind": "docs"
+  },
+  {
+   "name": "FINDINGS.md",
+   "blob_bytes": 7632,
+   "sha256_equal_after_eol_normalisation": true,
+   "kind": "docs"
+  },
+  {
+   "name": "REPRODUCE.md",
+   "blob_bytes": 4672,
+   "sha256_equal_after_eol_normalisation": true,
+   "kind": "docs"
+  },
+  {
+   "name": "EVIDENCE_INDEX.md",
+   "blob_bytes": 3446,
+   "sha256_equal_after_eol_normalisation": true,
+   "kind": "docs"
+  },
+  {
+   "name": "P5C_LANE_VERIFY_BLOCKED.json",
+   "blob_bytes": 1502,
+   "sha256_equal_after_eol_normalisation": true,
+   "kind": "receipts"
+  },
+  {
+   "name": "proposal.md",
+   "blob_bytes": 2738,
+   "sha256_equal_after_eol_normalisation": true,
+   "kind": "openspec"
+  },
+  {
+   "name": "spec.md",
+   "blob_bytes": 4375,
+   "sha256_equal_after_eol_normalisation": true,
+   "kind": "openspec"
+  }
+ ],
+ "all_equal": true,
+ "tree": {
+  "blobs_total": 137,
+  "delivery_blobs": 65,
+  "receipts": 11,
+  "books": 17,
+  "tools": 5
+ },
+ "reading": "the pushed branch is byte-identical to the audited local tree for every document and receipt checked; nothing was pushed that is not in the local tree and nothing local differs from what was pushed"
+}

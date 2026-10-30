@@ -35,8 +35,10 @@
 - [x] Repair the dispatcher receipt-builder `NameError` and record before/after SHA-256 (F-07)
 - [x] Record the toolchain-pin absence and the explicit-executable bypass (F-06)
 - [x] Record the `served_arm_assigned` false negative (F-08)
-- [ ] Independent acceptance by the VERIFY lane (`openai-codex/gpt-6.1-sol`) — out of this change's
-      authority; runs as a separate turn and its verdict is published with the PR, not inside this file
+- [ ] Independent acceptance by the VERIFY lane (`openai-codex/gpt-6.1-sol`) — **attempted and blocked**:
+      the assigned arm returned an upstream 401 and the lane has no fallback, so no verdict exists
+      (`receipts/P5C_LANE_VERIFY_BLOCKED.json`). The advisory audit recorded in `ADVISORY_AUDIT.md` is
+      not a lane verdict and does not close this box.
 - [ ] Release, tag, merge — out of scope, not claimed
 
 ## Delivery

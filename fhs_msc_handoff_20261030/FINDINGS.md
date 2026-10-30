@@ -16,18 +16,31 @@ Next: adopt `receipts/P1C_SEAL_AND_READBACK.json` as the sealing claim or re-del
 ## F-02 — the unpacked tree does not match its own manifest layout
 
 **Medium.** On disk the book directory is `01_FHS-MSC_PIPD-LS-PKG_BODY/`; the payload manifest and
-`INDEX.md` both address `01_SUBSTANTIVE_BODY/`. As delivered, 429 of 909 rows fail to resolve purely by
-name. After the rename: 909/909.
-Evidence: `receipts/P1_PACKAGE_INTEGRITY.json` (429 missing) vs `receipts/P1B_...` (0 missing).
-Consequence: a mechanical verifier reads 47% of the payload as missing.
+`INDEX.md` both address `01_SUBSTANTIVE_BODY/`. Exactly **31 of 909 rows** fail on that rename alone.
+After the rename: 909/909.
+Evidence: recomputation from `SHA256_PAYLOAD_MANIFEST.json` against the delivered tree; canonical result
+in `receipts/P1B_PACKAGE_INTEGRITY_CANONICAL.json`.
+Consequence: a verifier resolves 96.6% and blames the payload for the rest.
+
+## F-02b — most of the apparent loss is the Win32 path limit, not the package
+
+**High (tooling).** A second 415 rows fail a naive `Path.exists()` because the absolute path runs past
+260 characters; with the `\\?\` prefix all 415 resolve and verify. So 446 misses split 31 layout +
+415 path-length. Consequences: a receiver on a deep checkout reports ~446 missing rows and looks like a
+corrupted delivery; `os.walk` silently truncates whole subtrees; and any manifest check written without
+the prefix is unusable on this package.
+Evidence: measured this round — 446 plain misses, 31 with the prefix. The prior handoff already carried
+the same lesson (`p0_denominator.py`, short root + `\\?\` walk).
+Next: ship the tree at a short root or a `.tar`; every verifier must walk with the prefix.
 Next: ship the canonical name; make the verifier raise a named alias error, not a missing-file count.
 
 ## F-03 — the shipped 35-check harness fails on the shipped tree
 
 **High (it is the package's own acceptance harness).** `check_first_work.py` calls
 `loadTestsFromNames(...)` at line 81 and inserts `03_HANDOFF_EVIDENCE/READERS/PIPD` into `sys.path` at
-line 83. The five affected tests fail to import (`ModuleNotFoundError: No module named 'tests'`) and the
-harness reports **34 PASS / 1 FAIL**. The delivered `EXISTING_AFFECTED_TESTS_RAW.txt` shows 5/5 OK, so
+line 83, so the five affected tests are imported before the path exists. The check records
+`AssertionError: expected True; actual False`; the recorded root cause is
+`ModuleNotFoundError: No module named 'tests'`. Result **34 PASS / 1 FAIL**. The delivered `EXISTING_AFFECTED_TESTS_RAW.txt` shows 5/5 OK, so
 that evidence was produced with the snapshot importable for another reason (author cwd), not by the
 shipped code path.
 Evidence: `receipts/P2B_...` (34/35) and `receipts/P2D_...` (35/35 after the ordering repair).

@@ -6,7 +6,7 @@
 
 | File | Verdict | Decisive | Establishes |
 |---|---|---|---|
-| `P1_PACKAGE_INTEGRITY.json` | FAIL by design | informative | the tree **as delivered** (renamed directory): 429/909 rows unresolved. Proves F-02. |
+| `P1_PACKAGE_INTEGRITY.json` | A/D/E PASS, C FAIL | informative | the first run, which tolerated the renamed book directory via an alias. Its `B_undeclared_files` writes `extra: 33` where the set has 2 members — a counting bug, superseded by P1B and by P1_VERIFIED (both report the two manifests). Do not cite its arithmetic. |
 | `P1B_PACKAGE_INTEGRITY_CANONICAL.json` | A/D/E PASS, C FAIL | **decisive** | 909/909 payload rows match bytes+SHA-256 on the canonical layout; 30/30 links; three delivery rows absent (F-01). |
 | `P1C_SEAL_AND_READBACK.json` | PASS | **decisive** | the new seal: two archives, per-entry readback, second seal byte-identical. |
 | `P2_FIRST_WORK_RUN.json` | PASS | **decisive** | 24 clauses → 24 atoms, PI PASS, 3 SPECs, KnownAnswer 0, `NATIVE_NOT_RUN`, per-file identical/differing table. |
@@ -17,7 +17,7 @@
 | `P5A_LANE_PROBE_EXECUTE.json` | ok=true | **decisive** | EXECUTE lane served `opencode-go/deepseek-v4.1-flash` with nonce echo; also the F-08 artefact. |
 | `P5B_LANE_EXECUTE_WRITER.json` | ok=true | **decisive** | a bounded single-file write through the same lane, 28 s, own nonce. |
 | `P5C_LANE_VERIFY_BLOCKED.json` | ok=false | **decisive** | the VERIFY arm returned upstream 401 / all routes exhausted: independent acceptance did not run (F-10). |
-| `P1_PACKAGE_INTEGRITY_VERIFIED.json` | PASS | informative | an independent re-derivation of the same 909/909 result by a separate verification run; corroborates P1B. |
+| `P1_PACKAGE_INTEGRITY_VERIFIED.json` | A/B/D/E PASS, C FAIL | informative | produced by an independent worker run on the same tree: 909/909, two undeclared manifests, and the declared BODY archive recorded **absent** — it corroborates F-01, it does not soften it. |
 
 ## Logs
 
@@ -42,6 +42,12 @@
 
 `STAGED_MANIFEST.json` is an inventory: it lists what was copied and with which SHA-256 so later tampering
 is detectable. It does not establish that the copy was correct — that is what `receipts/` is for.
+
+## Advisory audit
+
+`ADVISORY_AUDIT.md` records three independent read-only processes that attacked the claims above, which of
+their findings were confirmed by re-measurement, and which one was rejected. It is explicitly not a lane
+verdict.
 
 ## Claim ceiling
 

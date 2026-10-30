@@ -13,9 +13,12 @@ to, and only additively.
 911 files on disk; `SHA256_PAYLOAD_MANIFEST.json` declares 909 rows (it excludes itself and
 `SHA256_DELIVERY_MANIFEST.md` by construction).
 
-- As delivered, 429 rows did not resolve: the unpacked directory was `01_FHS-MSC_PIPD-LS-PKG_BODY/`
-  while the manifest and `INDEX.md` address `01_SUBSTANTIVE_BODY/`. Every file existed; only the path
-  differed.
+- A naive `Path.exists()` on the manifest paths fails for 446 of 909 rows, and the two causes are
+  different. **31 rows** name `01_SUBSTANTIVE_BODY/` while the unpacked directory is
+  `01_FHS-MSC_PIPD-LS-PKG_BODY/` — a real layout mismatch, every file present, only the name differs.
+  The other **415 rows** exist and are unreadable only because the absolute path exceeds the
+  260-character Win32 limit: with the `\\?\` prefix all 415 resolve. Measured on the original tree;
+  a verifier that does not walk with a long-path prefix will report roughly half the payload missing.
 - After restoring the canonical name: **909/909 rows match on bytes and SHA-256**, 0 mismatch,
   0 missing; the only undeclared files are the two manifests; **30/30** relative links resolve.
 - `SHA256_DELIVERY_MANIFEST.md`: 6 of 9 rows verify, **3 absent** (both archives and
@@ -43,11 +46,13 @@ composition is not reconstructible from the tree.
 Re-executed in an isolated root: 24 functional clauses → 24 atoms, PI reader PASS, strict handoff reader
 PASS, three SPECs, KnownAnswer re-asked 0, `NATIVE_NOT_RUN`, no native WorkOrder.
 
-- As shipped the 35-check harness returns **34/35**; `EXISTING_5_AFFECTED_TESTS` fails with
-  `ModuleNotFoundError: No module named 'tests'` (import order, F-03).
+- As shipped the 35-check harness returns **34/35**. `EXISTING_5_AFFECTED_TESTS` records
+  `AssertionError: expected True; actual False`; the recorded root cause is
+  `ModuleNotFoundError: No module named 'tests'` — `loadTestsFromNames()` imports the test modules
+  before the `sys.path.insert` on the next line (F-03).
 - With the two-line ordering change only: **35/35**.
 - Determinism: `ProductSPEC`, `ArchitectureSPEC`, `ProgramSPEC`, `SourceReadback` and the 22-WP DAG are
-  **byte-identical** to the delivery. `PI-PKG`, `TaskSpecSeed`, `ExecutionHandoff` differ, and the cause
+  **byte-identical** to the delivery. `PI-PKG`, `TaskSpecSeed`, `RUN/FUO` and `ExecutionHandoff` differ, and the cause
   is proved: absolute-root identity. Two absolute roots → two `content_hash`; root-relative intake →
   identical `PI-d0974c55d63bc021` at both (`receipts/P2C_...`). No writer code was modified.
 
