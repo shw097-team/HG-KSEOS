@@ -1,0 +1,386 @@
+[
+  {
+    "check": "requirement_frozen",
+    "forced_outcome": "REFUSED_FOR_WRONG_REASON",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\requirement_frozen\\REFUSED_FOR_WRONG_REASON\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "requirement_frozen"
+    ],
+    "pass": true
+  },
+  {
+    "check": "requirement_frozen",
+    "forced_outcome": "REFUSED",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\requirement_frozen\\REFUSED\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "requirement_frozen"
+    ],
+    "pass": true
+  },
+  {
+    "check": "requirement_frozen",
+    "forced_outcome": "ERROR",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\requirement_frozen\\ERROR\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "requirement_frozen"
+    ],
+    "pass": true
+  },
+  {
+    "check": "requirement_frozen",
+    "forced_outcome": "VACUOUS_PASS",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\requirement_frozen\\VACUOUS_PASS\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "requirement_frozen"
+    ],
+    "pass": true
+  },
+  {
+    "check": "taskspec_admitted",
+    "forced_outcome": "REFUSED_FOR_WRONG_REASON",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\taskspec_admitted\\REFUSED_FOR_WRONG_REASON\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "taskspec_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "taskspec_admitted",
+    "forced_outcome": "REFUSED",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\taskspec_admitted\\REFUSED\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "taskspec_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "taskspec_admitted",
+    "forced_outcome": "ERROR",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\taskspec_admitted\\ERROR\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "taskspec_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "taskspec_admitted",
+    "forced_outcome": "VACUOUS_PASS",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\taskspec_admitted\\VACUOUS_PASS\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "taskspec_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "wrong_subject_refused",
+    "forced_outcome": "REFUSED_FOR_WRONG_REASON",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\wrong_subject_refused\\REFUSED_FOR_WRONG_REASON\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "wrong_subject_refused"
+    ],
+    "pass": true
+  },
+  {
+    "check": "wrong_subject_refused",
+    "forced_outcome": "REFUSED",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\wrong_subject_refused\\REFUSED\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "wrong_subject_refused"
+    ],
+    "pass": true
+  },
+  {
+    "check": "wrong_subject_refused",
+    "forced_outcome": "ERROR",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\wrong_subject_refused\\ERROR\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "wrong_subject_refused"
+    ],
+    "pass": true
+  },
+  {
+    "check": "wrong_subject_refused",
+    "forced_outcome": "VACUOUS_PASS",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\wrong_subject_refused\\VACUOUS_PASS\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "wrong_subject_refused"
+    ],
+    "pass": true
+  },
+  {
+    "check": "workorder_admitted",
+    "forced_outcome": "REFUSED_FOR_WRONG_REASON",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\workorder_admitted\\REFUSED_FOR_WRONG_REASON\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "workorder_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "workorder_admitted",
+    "forced_outcome": "REFUSED",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\workorder_admitted\\REFUSED\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "workorder_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "workorder_admitted",
+    "forced_outcome": "ERROR",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\workorder_admitted\\ERROR\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "workorder_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "workorder_admitted",
+    "forced_outcome": "VACUOUS_PASS",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\workorder_admitted\\VACUOUS_PASS\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "workorder_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "second_taskspec_admitted",
+    "forced_outcome": "REFUSED_FOR_WRONG_REASON",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\second_taskspec_admitted\\REFUSED_FOR_WRONG_REASON\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "second_taskspec_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "second_taskspec_admitted",
+    "forced_outcome": "REFUSED",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\second_taskspec_admitted\\REFUSED\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "second_taskspec_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "second_taskspec_admitted",
+    "forced_outcome": "ERROR",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\second_taskspec_admitted\\ERROR\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "second_taskspec_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "second_taskspec_admitted",
+    "forced_outcome": "VACUOUS_PASS",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\second_taskspec_admitted\\VACUOUS_PASS\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "second_taskspec_admitted"
+    ],
+    "pass": true
+  },
+  {
+    "check": "bundle_bound_to_subject",
+    "forced_outcome": "REFUSED_FOR_WRONG_REASON",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\bundle_bound_to_subject\\REFUSED_FOR_WRONG_REASON\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "bundle_bound_to_subject"
+    ],
+    "pass": true
+  },
+  {
+    "check": "bundle_bound_to_subject",
+    "forced_outcome": "REFUSED",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\bundle_bound_to_subject\\REFUSED\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "bundle_bound_to_subject"
+    ],
+    "pass": true
+  },
+  {
+    "check": "bundle_bound_to_subject",
+    "forced_outcome": "ERROR",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\bundle_bound_to_subject\\ERROR\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "bundle_bound_to_subject"
+    ],
+    "pass": true
+  },
+  {
+    "check": "bundle_bound_to_subject",
+    "forced_outcome": "VACUOUS_PASS",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\bundle_bound_to_subject\\VACUOUS_PASS\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "bundle_bound_to_subject"
+    ],
+    "pass": true
+  },
+  {
+    "check": "workorder_result_recorded",
+    "forced_outcome": "REFUSED_FOR_WRONG_REASON",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\workorder_result_recorded\\REFUSED_FOR_WRONG_REASON\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "workorder_result_recorded"
+    ],
+    "pass": true
+  },
+  {
+    "check": "workorder_result_recorded",
+    "forced_outcome": "REFUSED",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\workorder_result_recorded\\REFUSED\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "workorder_result_recorded"
+    ],
+    "pass": true
+  },
+  {
+    "check": "workorder_result_recorded",
+    "forced_outcome": "ERROR",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\workorder_result_recorded\\ERROR\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "workorder_result_recorded"
+    ],
+    "pass": true
+  },
+  {
+    "check": "workorder_result_recorded",
+    "forced_outcome": "VACUOUS_PASS",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\workorder_result_recorded\\VACUOUS_PASS\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "workorder_result_recorded"
+    ],
+    "pass": true
+  },
+  {
+    "check": "officer_added_check",
+    "forced_outcome": "REFUSED_FOR_WRONG_REASON",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\officer_added_check\\REFUSED_FOR_WRONG_REASON\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "officer_added_check"
+    ],
+    "pass": true
+  },
+  {
+    "check": "officer_added_check",
+    "forced_outcome": "REFUSED",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\officer_added_check\\REFUSED\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "officer_added_check"
+    ],
+    "pass": true
+  },
+  {
+    "check": "officer_added_check",
+    "forced_outcome": "ERROR",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\officer_added_check\\ERROR\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "officer_added_check"
+    ],
+    "pass": true
+  },
+  {
+    "check": "officer_added_check",
+    "forced_outcome": "VACUOUS_PASS",
+    "path": "C:\\wg\\ao6\\outcome_matrix\\officer_added_check\\VACUOUS_PASS\\run.json",
+    "injected_once": true,
+    "verdict": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "failing": [
+      "officer_added_check"
+    ],
+    "pass": true
+  }
+]
