@@ -6,7 +6,7 @@
   "package": "C:\\wg\\pkg"
  },
  "files": 74,
- "total_bytes": 5578975,
+ "total_bytes": 5579114,
  "entries": [
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",
@@ -75,8 +75,8 @@
   },
   {
    "path": "receipts/P6_GITHUB_READBACK.json",
-   "bytes": 778,
-   "sha256": "4607a4f9c974e79354cbec11acfd3380be5722ed23c803e005089226a9ee1678"
+   "bytes": 917,
+   "sha256": "8ce54d8f7579cee09db1525714a5815a37f7b6c06672a59fcf541a2871311ed2"
   },
   {
    "path": "receipts/P7_SEAL_AND_PARTITION.json",
