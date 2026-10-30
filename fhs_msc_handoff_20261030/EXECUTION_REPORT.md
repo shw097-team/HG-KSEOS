@@ -26,20 +26,29 @@ to, and only additively.
 
 Verdict: payload **PASS** after the rename; sealing **FAIL** as delivered.
 
-## Phase 2 — reproducible seal (`receipts/P1C_SEAL_AND_READBACK.json`)
+## Phase 2 — sealing: what reproduces and what does not (`receipts/P7_SEAL_AND_PARTITION.json`)
 
-`tools/seal_package.py` seals with a pinned recipe (sorted entries, zip-epoch timestamps, deflate 9, no
-directory entries) and reads every entry back for CRC32, bytes, SHA-256 and UTF-8:
+The delivery names two archives and a `PACKAGE_READBACK.json`; none of the three is in the tree. Whether
+their digests were ever verifiable depends on whether the membership can be recovered, so this phase used
+the delivery's **own partition** — BODY = rows under `01_SUBSTANTIVE_BODY/` or `02_FIRST_WORK/` or at the
+root, EVIDENCE = rows under `02_EVIDENCE_AUDIT_APPENDICES/` or `03_HANDOFF_EVIDENCE/` — with the pinned
+recipe (sorted names, fixed timestamp, deflate 9, no directory entries).
 
-| Archive | Bytes | SHA-256 | Entries |
-|---|---:|---|---:|
-| `FHS-MSC_BODY_...-EXEC.zip` | 483,623 | `07d62b49…` | 17 |
-| `FHS-MSC_EVIDENCE_...-EXEC.zip` | 25,987,085 | `9497133b…` | 880 |
+| Archive | Entries | Built | Declared | Verdict |
+|---|---:|---|---|---|
+| `…_BODY_…zip` | 114 | 4,007,065 B / `5e722cfb…` | 4,007,065 B / `5e722cfb…` | **PASS — byte-exact** |
+| `…_EVIDENCE_…zip` | 797 | 25,909,480 B | 25,914,281 B / `0e7763b8…` | **FAIL — 4,801 B short** |
+| `PACKAGE_READBACK.json` | — | — | — | **absent**, no membership recoverable |
 
-17/17 and 880/880 clean; a second seal from the same input is byte-identical. This is a **new** seal, not
-a reproduction: the declared evidence size (25,914,281 B) is within 0.28%, but the declared BODY size
-(4,007,065 B) cannot hold 4,808,325 raw bytes that deflate to 0.48 MB, so the declared BODY archive's
-composition is not reconstructible from the tree.
+So the declared BODY seal is sound and is now verified; the declared EVIDENCE digest is not reproducible
+from this tree; and the readback manifest is missing outright.
+
+**Two corrections to this round's own earlier work.** The first seal published here was built on a
+non-recursive `01_SUBSTANTIVE_BODY/*.md` glob with an invented membership: 17 entries, 483,623 B, which
+silently excluded 14 files (29,121,570 B) under `01_SUBSTANTIVE_BODY/SBL_DOC00_13_INTEGRATED_READER_UPGRADES/`
+and reproduced neither declared digest. It is superseded by P7. And the inference drawn from it — that the
+declared BODY archive's composition could not be reconstructed from the tree — was wrong and is retracted:
+it reconstructed exactly on the first try once the manifest's partition was used instead of a guess.
 
 ## Phase 3 — first work `WP-FHS-15` (`receipts/P2*.json`)
 
@@ -76,7 +85,7 @@ may re-type the edge.
 
 | Turn | Lane | Arm served | Seconds | ok |
 |---|---|---|---:|---|
-| probe | EXECUTE | `opencode-go/deepseek-v4.1-flash` | 2.31 | true |
+| probe | EXECUTE | `opencode-go/deepseek-v4.1-flash` | 7.2 | true |
 | bounded single-file write | EXECUTE | `opencode-go/deepseek-v4.1-flash` | 27.99 | true |
 | independent acceptance | VERIFY_SECURITY | **none** — `ERR_LANE_ALL_ROUTES_EXHAUSTED`, upstream 401 | 0 | **false** |
 

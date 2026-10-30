@@ -15,7 +15,7 @@
 - [x] Re-run `prepare.py` in an isolated root and snapshot the four readers plus the TPM plugin
 - [x] Re-run `first_work.py`: 24 functional clauses → 24 atoms, PI reader PASS, 3 SPECs
 - [x] Run the delivered 35-check harness as shipped and record 34/35 (F-03)
-- [x] Apply the two-line ordering repair and record 35/35
+- [x] Apply the one-line ordering repair (`lines_changed: 2`) and record 35/35, noting its dependence on the delivered READERS snapshot (F-13)
 - [x] Compare every first-work artefact against the delivery and classify each difference
 - [x] Prove the absolute-root identity mechanism and the root-relative repair (F-04)
 

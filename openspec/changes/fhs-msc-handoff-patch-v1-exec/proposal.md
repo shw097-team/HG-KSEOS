@@ -27,9 +27,9 @@ Nothing is moved into a normative path: the seventeen books stay under the deliv
 | the delivered payload is intact | 909/909 manifest rows match byte length and SHA-256, once the canonical directory name is restored |
 | the delivery seal is not | three of nine delivery-manifest rows are absent, including both archives and the readback |
 | the first work is reproducible | three SPECs, `SourceReadback` and the 22-WP DAG reproduce byte-identically; PI/TaskSpecSeed differ only through an absolute-root identity |
-| the package's own harness fails as shipped | 34/35, `EXISTING_5_AFFECTED_TESTS` import-order defect; 35/35 after a two-line repair |
+| the package's own harness fails as shipped | 34/35, `EXISTING_5_AFFECTED_TESTS` import-order defect; 35/35 after a one-line move (`lines_changed: 2`), conditional on the delivered READERS snapshot (F-13) |
 | the graph and the declaration disagree | declared closure `{00,01,15}` versus edge-derived `{00,15}` |
-| the lanes work and say so | EXECUTE served `opencode-go/deepseek-v4.1-flash` with nonce echo; receipt defects F-07/F-08 recorded |
+| one lane works and says so, one fails closed | EXECUTE served `opencode-go/deepseek-v4.1-flash` with nonce echo; VERIFY returned an upstream 401 and no fallback existed, so independent acceptance did not run (F-10); receipt defects F-07/F-08 recorded |
 
 ## Impact
 
@@ -38,7 +38,7 @@ Nothing is moved into a normative path: the seventeen books stay under the deliv
 - **No control-plane mutation.** The only write outside this directory is an OpenSpec change; the live
   HG-KSEOS working tree is untouched except for the one-line dispatcher repair documented in F-07, which
   is recorded with its before/after SHA-256 and its backup.
-- **For the next team**: 8 findings, each with one next action, plus a reproduction path that a reviewer
+- **For the next team**: 14 numbered findings (F-01..F-14), each with one next action, plus a reproduction path that a reviewer
   can run in five minutes.
 
 ## Claim ceiling

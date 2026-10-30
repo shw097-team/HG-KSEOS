@@ -23,17 +23,27 @@ Expect `A_payload_manifest: PASS, rows 909, match 909, mismatch 0, missing 0`; `
 REVIEW` listing exactly the two manifests (declared self-excluded); `D_relative_links: PASS, links 30,
 broken 0`. `C_delivery_manifest` stays `FAIL` — that is F-01 and it is real.
 
-## 2. Seal — expect two byte-reproducible archives
+## 2. The declared archives — BODY reproduces, EVIDENCE does not
 
 ```bash
-python tools/seal_package.py "$PKG" "$WORK/seal"
-python tools/seal_package.py "$PKG" "$WORK/seal2"
-sha256sum "$WORK"/seal/*.zip "$WORK"/seal2/*.zip
+python tools/p1_package_integrity.py "$PKG"
 ```
 
-On these inputs: body `483623` / `07d62b49…`, evidence `25987085` / `9497133b…`, identical in `seal2`.
-`PACKAGE_READBACK.json` in `$WORK/seal` carries the per-entry CRC32/bytes/SHA-256 readback. Different
-inputs give different hashes — the recipe reproduces, not the value.
+The membership comes from the delivery's own payload manifest (`01_SUBSTANTIVE_BODY/`, `02_FIRST_WORK/`,
+root files -> BODY; `02_EVIDENCE_AUDIT_APPENDICES/`, `03_HANDOFF_EVIDENCE/` -> EVIDENCE), the recipe from
+`receipts/P7_SEAL_AND_PARTITION.json`. Expect:
+
+| Archive | Entries | Bytes | SHA-256 |
+|---|---:|---|---|
+| BODY | 114 | 4,007,065 | `5e722cfb…` **equals declared** |
+| EVIDENCE | 797 | 25,909,480 | `0e7763b8…` declared; 4,801 B short |
+
+So the BODY claim is checkable and checks out; the EVIDENCE claim cannot be reproduced from the tree; the
+declared `PACKAGE_READBACK.json` is absent.
+
+`tools/seal_package.py` is this round's **first** seal and is retained only as the artefact behind F-12: it
+globs `01_SUBSTANTIVE_BODY/*.md` non-recursively and therefore covers 897 of 911 files. Do not adopt it as
+a sealing claim.
 
 ## 3. First work — expect 24 clauses, 24 atoms, 3 SPECs
 
@@ -69,6 +79,11 @@ sys.path.insert(0, plain(E / 'READERS/PIPD'))
 ```bash
 python check_first_work.py     # 35 pass / 0 fail
 ```
+
+Caveat (F-13): this result depends on the delivered `READERS/PIPD` snapshot, which already contains
+`fixtures/`. Rebuild that snapshot with the shipped `prepare.py` and it will not — its list omits
+`fixtures` — and then the harness stays 34/1 even after the fix, with two tests erroring on
+`fixtures/REQ-COMPOUND/source.txt`.
 
 ## 5. Structural checks — six PASS, one REVIEW
 

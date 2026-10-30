@@ -50,7 +50,8 @@ def main() -> int:
     for src in sorted((ROUND / "tools").glob("*.py")):
         staged.append(put(src, f"tools/{src.name}"))
     for name in ("first_work.out", "check_first_work.out", "check_first_work_patched.out",
-                 "PIPD_5_AFFECTED_TESTS_RAW.txt"):
+                 "PIPD_5_AFFECTED_TESTS_RAW.txt", "lane_probe.out", "lane_verify.out",
+                 "lane_writer.out", "hgk-lane-dispatch.py.before-R-EXEC-02"):
         src = ROUND / "logs" / name
         if src.is_file():
             staged.append(put(src, f"logs/{name}"))
@@ -78,6 +79,14 @@ def main() -> int:
                  "VERSION_AND_DELIVERY.md", "HANDOFF_README.md", "FIRST_WORK_RECEIVER_CONTRACT.md",
                  "CURRENT_READER_SCOPE.json"):
         staged.append(put(PKG / name, f"package/{name}"))
+    # the delivered artefacts two findings rest on: the 5/5 raw snapshot (F-03) and the pair whose
+    # timing is identical to 16 digits (F-14)
+    for rel, dst in (("03_HANDOFF_EVIDENCE/EXISTING_AFFECTED_TESTS_RAW.txt", "package/EXISTING_AFFECTED_TESTS_RAW.txt"),
+                     ("03_HANDOFF_EVIDENCE/MINIMAL_STATIC_TESTS.json", "package/MINIMAL_STATIC_TESTS.json"),
+                     ("03_HANDOFF_EVIDENCE/MINIMAL_STATIC_TESTS_INITIAL.json", "package/MINIMAL_STATIC_TESTS_INITIAL.json")):
+        src = PKG / rel
+        if src.is_file():
+            staged.append(put(src, dst))
 
     manifest = {
         "schema": "FHS-MSC-HANDOFF-EXEC-DELIVERY/1",

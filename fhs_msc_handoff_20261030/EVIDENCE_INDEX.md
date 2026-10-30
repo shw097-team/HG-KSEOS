@@ -17,7 +17,9 @@
 | `P5A_LANE_PROBE_EXECUTE.json` | ok=true | **decisive** | EXECUTE lane served `opencode-go/deepseek-v4.1-flash` with nonce echo; also the F-08 artefact. |
 | `P5B_LANE_EXECUTE_WRITER.json` | ok=true | **decisive** | a bounded single-file write through the same lane, 28 s, own nonce. |
 | `P5C_LANE_VERIFY_BLOCKED.json` | ok=false | **decisive** | the VERIFY arm returned upstream 401 / all routes exhausted: independent acceptance did not run (F-10). |
-| `P1_PACKAGE_INTEGRITY_VERIFIED.json` | A/B/D/E PASS, C FAIL | informative | produced by an independent worker run on the same tree: 909/909, two undeclared manifests, and the declared BODY archive recorded **absent** — it corroborates F-01, it does not soften it. |
+| `P7_SEAL_AND_PARTITION.json` | BODY PASS / EVIDENCE FAIL | **decisive** | the declared archives rebuilt from the manifest's own partition: BODY byte-exact (114 entries, 4,007,065 B, `5e722cfb…`), EVIDENCE 4,801 B short; also records the withdrawn first seal (F-01, F-12). |
+| `P8_DELIVERED_RECORD_ANOMALY.json` | ANOMALY | **decisive** | the delivery's 35/0 record and its 34/1 predecessor share `elapsed_seconds` to sixteen digits (F-14). |
+| `P1_PACKAGE_INTEGRITY_VERIFIED.json` | **FAIL** (A/B/D PASS; C/E/F/G/H FAIL, I SKIPPED) | **decisive** | an independent worker run on the same tree. Its `F_reseal_deterministic` rebuilds the BODY archive to the declared digest byte-exactly while the EVIDENCE archive falls short — the first evidence that the BODY claim was checkable. It is a FAILing receipt: do not read it as corroboration of a PASS. |
 
 ## Logs
 
@@ -26,7 +28,9 @@
 | `first_work.out` | stdout of the first-work run. |
 | `check_first_work.out` | harness as shipped: 34/35, failing check named. |
 | `check_first_work_patched.out` | after the ordering repair: 35/35. |
-| `PIPD_5_AFFECTED_TESTS_RAW.txt` | raw `unittest -v` of the five named tests in the live PIPD repo at `995c7ad`. |
+| `PIPD_5_AFFECTED_TESTS_RAW.txt` | raw `unittest -v` of the five named tests. The file records no commit, path or command; the `995c7ad` attribution comes from `REPRODUCE.md` step 7, run in this round. |
+| `lane_probe.out`, `lane_verify.out`, `lane_writer.out` | the three lane turns as the dispatcher printed them, including the 401 and the `ERR_LANE_ALL_ROUTES_EXHAUSTED` (F-06, F-08, F-10). |
+| `hgk-lane-dispatch.py.before-R-EXEC-02` | the dispatcher before the `NameError` repair, so the before/after digest pair in F-07 has an artefact. |
 
 ## Tools
 

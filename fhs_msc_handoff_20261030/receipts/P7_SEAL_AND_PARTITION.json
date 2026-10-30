@@ -1,0 +1,40 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-SEAL2/1",
+ "question": "are the two declared delivery archives reproducible from the unpacked tree?",
+ "membership_rule": "taken from the delivery's own payload manifest: BODY = rows under 01_SUBSTANTIVE_BODY/ or 02_FIRST_WORK/ or with no '/', EVIDENCE = rows under 02_EVIDENCE_AUDIT_APPENDICES/ or 03_HANDOFF_EVIDENCE/, plus SHA256_PAYLOAD_MANIFEST.json in both; recipe = sorted names, date_time 2026-10-30T00:00:00, deflate 9, external_attr 0o100644<<16, no directory entries",
+ "body": {
+  "entries": 114,
+  "built_bytes": 4007065,
+  "built_sha256": "5e722cfbf200efc17de246fb5bfe877c5509b5d4d3849d42921ab56b9a86af5b",
+  "declared_bytes": 4007065,
+  "declared_sha256": "5e722cfbf200efc17de246fb5bfe877c5509b5d4d3849d42921ab56b9a86af5b",
+  "bytes_match": true,
+  "sha_match": true,
+  "verdict": "PASS",
+  "reading": "the declared BODY archive is byte-exactly reproducible from the payload"
+ },
+ "evidence": {
+  "entries": 797,
+  "built_bytes": 25909480,
+  "built_sha256_measured": true,
+  "declared_bytes": 25914281,
+  "declared_sha256": "0e7763b8856f38ad32f9714d7415bb19c215903c72576f9b2f433790c2e70a6d",
+  "delta_bytes": -4801,
+  "sha_match": false,
+  "verdict": "FAIL",
+  "reading": "4801 bytes and at least one entry short of the declared EVIDENCE archive under the manifest's own partition; the declared digest is not reproducible from this tree"
+ },
+ "earlier_seal_defect": {
+  "tool": "tools/seal_package.py as first published",
+  "body_collector": "01_SUBSTANTIVE_BODY/*.md, non-recursive",
+  "entries": 17,
+  "bytes": 483623,
+  "excluded_files": 14,
+  "excluded_bytes": 29121570,
+  "excluded_dir": "01_SUBSTANTIVE_BODY/SBL_DOC00_13_INTEGRATED_READER_UPGRADES/",
+  "consequence": "the seal published as the delivery's sealing claim covered 897 of 911 files and reproduced neither declared digest; it is superseded by this receipt",
+  "verdict": "DEFECT"
+ },
+ "verdict": "BODY PASS / EVIDENCE FAIL",
+ "correction": "an earlier statement in EXECUTION_REPORT.md that the declared BODY archive's composition is not reconstructible was wrong and is retracted here"
+}

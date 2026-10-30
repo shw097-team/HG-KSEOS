@@ -1,17 +1,25 @@
 # Findings — round `FHS-MSC-HANDOFF-PATCH-v1-EXEC-20261030`
 
-Twelve defects (F-01..F-11, with F-02 split in two), ordered by cost to the next team. Each has an artefact, a severity and one next action.
+Fourteen numbered defects (F-01..F-14; F-02 is split into F-02 and F-02b), ordered by cost to the next team. Each has an artefact, a severity and one next action.
 A repaired harness is not an acceptance, and a green check is not a permit.
 
-## F-01 — the delivered archives and the readback manifest do not exist
+## F-01 — the delivered archives are absent, and only one of them is reproducible
 
-**High (evidence).** `SHA256_DELIVERY_MANIFEST.md` lists 9 rows; 3 are absent:
-`FHS-MSC_BODY_..._HANDOFF-PATCH-v1.zip`, `FHS-MSC_EVIDENCE_..._HANDOFF-PATCH-v1.zip`,
-`PACKAGE_READBACK.json`. Six verify byte-for-byte.
-Evidence: `receipts/P1B_PACKAGE_INTEGRITY_CANONICAL.json` (check C).
-Consequence: the two archive SHAs have never been verifiable. Anyone quoting the manifest's "sealed
-once, every entry read back" sentence is quoting prose.
-Next: adopt `receipts/P1C_SEAL_AND_READBACK.json` as the sealing claim or re-deliver the bytes.
+**High (evidence).** `SHA256_DELIVERY_MANIFEST.md` lists 9 rows; 3 are absent from the tree: both
+archives and `PACKAGE_READBACK.json`. Six verify byte-for-byte. The question that matters is whether the
+two digest claims were ever checkable, so the membership was recovered from the payload manifest's own
+partition and both archives rebuilt with the pinned recipe (`receipts/P7_SEAL_AND_PARTITION.json`):
+
+| Archive | Rebuilt | Declared | Verdict |
+|---|---|---|---|
+| BODY (114 entries) | 4,007,065 B / `5e722cfb…` | 4,007,065 B / `5e722cfb…` | **byte-exact** |
+| EVIDENCE (797 entries) | 25,909,480 B | 25,914,281 B / `0e7763b8…` | **4,801 B short** |
+| `PACKAGE_READBACK.json` | — | — | absent, membership unrecoverable |
+
+So the BODY claim is sound and is now verified; the EVIDENCE claim is not reproducible from the tree, and
+the readback manifest does not exist at all.
+Evidence: `receipts/P7_SEAL_AND_PARTITION.json`, `receipts/P1B_PACKAGE_INTEGRITY_CANONICAL.json` (C).
+Next: deliver the bytes, or restate the manifest as BODY-only and drop the EVIDENCE row.
 
 ## F-02 — the unpacked tree does not match its own manifest layout
 
@@ -43,8 +51,12 @@ line 83, so the five affected tests are imported before the path exists. The che
 `ModuleNotFoundError: No module named 'tests'`. Result **34 PASS / 1 FAIL**. The delivered `EXISTING_AFFECTED_TESTS_RAW.txt` shows 5/5 OK, so
 that evidence was produced with the snapshot importable for another reason (author cwd), not by the
 shipped code path.
-Evidence: `receipts/P2B_...` (34/35) and `receipts/P2D_...` (35/35 after the ordering repair).
-Next: apply the two-line repair, re-run, keep the as-shipped failure in the record.
+Evidence: `receipts/P2B_CHECK_FIRST_WORK_AS_SHIPPED.json` (34/35), `receipts/P2D_CHECK_FIRST_WORK_REPAIRED.json`
+(35/35); the delivered snapshot it disagrees with is `03_HANDOFF_EVIDENCE/EXISTING_AFFECTED_TESTS_RAW.txt`
+in the package, which is not staged into this tree.
+Next: apply the one-line move (`lines_changed: 2` — remove the later insert, add it before the loader), re-run,
+keep the as-shipped failure in the record. Note F-13: the repaired count depends on the delivered READERS
+snapshot, which the shipped tooling cannot rebuild.
 
 ## F-04 — first-work identity is a function of the absolute draft root
 
@@ -119,8 +131,41 @@ Next: provision the OAuth credential for the PLAN/VERIFY arm, then dispatch the 
 
 ## F-11 — a bounded-writer lane turn overran without producing files
 
-**Low (sizing).** A first attempt to have the EXECUTE lane author the five narrative documents spent
-more than nine minutes reading and cross-checking and produced nothing; it was terminated with no side
-effects. The same lane wrote a single exact file in 28 s.
+**Low (sizing).** A first attempt to have the EXECUTE lane author the five narrative documents ran from
+14:20:30 to its termination at 14:29 — eight and a half minutes of reading and cross-checking, no file
+written, no side effect (codex rollout `…/sessions/2026/10/30/rollout-2026-10-30T14-20-30-01a18b77-…jsonl`,
+last entry 14:20, process terminated 14:29). The same lane wrote a single exact file in 27.99 s
+(`receipts/P5B`).
 Next: keep lane writes single-artefact and exactly specified; keep open-ended authoring with the
 operator.
+
+## F-12 — the first seal published here was wrong and is withdrawn
+
+**High (self-inflicted, repaired).** `tools/seal_package.py` collected the body with a non-recursive
+`01_SUBSTANTIVE_BODY/*.md` glob, so the archive it produced held 17 entries and 483,623 B while silently
+omitting 14 declared files (29,121,570 B) under `01_SUBSTANTIVE_BODY/SBL_DOC00_13_INTEGRATED_READER_UPGRADES/`
+— 897 of 911 files covered. Worse, it used an invented membership rather than the manifest's partition,
+so it reproduced neither declared digest and made the declared BODY archive look unreconstructible.
+Evidence: `receipts/P7_SEAL_AND_PARTITION.json`, field `earlier_seal_defect`.
+Next: never seal with a glob; seal the manifest's partition or say plainly which subset you sealed.
+
+## F-13 — 35/35 is conditional on a snapshot the shipped tooling cannot rebuild
+
+**High (reproducibility).** `prepare.py` snapshots `src`, `schemas`, the named `tests/...`, `docs` and
+`skills` — but not `fixtures`. Rebuilding `READERS/PIPD` from the shipped QA_TOOLS therefore yields a tree
+without `fixtures/`, and on that faithful rebuild the harness stays **34/1 even after the import-order fix**:
+`test_every_atom_traces_orphan_free` and `test_semantic_collapse_is_refused` error with
+`FileNotFoundError: …\READERS\PIPD\fixtures\REQ-COMPOUND\source.txt`.
+Evidence: reported by an independent audit run; both counts reproduced against the delivered snapshot.
+Next: add `fixtures` to the snapshot list, or state that the 35/35 depends on the delivered READERS tree.
+
+## F-14 — the delivery's own 35/0 record carries a pre-fix timing identical to 16 digits
+
+**High (delivered evidence).** `03_HANDOFF_EVIDENCE/MINIMAL_STATIC_TESTS.json` (35 pass / 0 fail) and
+`MINIMAL_STATIC_TESTS_INITIAL.json` (34 / 1) both record `elapsed_seconds: 1.0183297000003222`. A re-run
+cannot reproduce a wall-clock value to sixteen significant digits: this round's own two runs measured
+6.1035 s and 5.4547 s. The 35/0 record looks like the 34/1 record with the counts edited.
+The count itself is not in doubt — it reproduced here under the delivered snapshot — but the delivery's
+evidence for it is.
+Evidence: `receipts/P8_DELIVERED_RECORD_ANOMALY.json`.
+Next: re-execute the harness and ship the real record, with a timestamp.

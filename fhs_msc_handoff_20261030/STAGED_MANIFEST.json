@@ -5,8 +5,8 @@
   "repro": "C:\\wg\\repro",
   "package": "C:\\wg\\pkg"
  },
- "files": 65,
- "total_bytes": 5358778,
+ "files": 74,
+ "total_bytes": 5578975,
  "entries": [
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",
@@ -79,6 +79,16 @@
    "sha256": "4607a4f9c974e79354cbec11acfd3380be5722ed23c803e005089226a9ee1678"
   },
   {
+   "path": "receipts/P7_SEAL_AND_PARTITION.json",
+   "bytes": 2142,
+   "sha256": "f0cb520f86b2737ec4a8000c6a2b4a0919ab1d4021c3f62636d187cf2c09a51d"
+  },
+  {
+   "path": "receipts/P8_DELIVERED_RECORD_ANOMALY.json",
+   "bytes": 1109,
+   "sha256": "5eac38d32cb8683f356b8ac0939771d8c87580c327033eab9c5d5805cbbf0044"
+  },
+  {
    "path": "tools/exec_checks.py",
    "bytes": 6592,
    "sha256": "e0544d5fe470a457d927c36c952d20258676a505ebbfdc0b3053e2bfb76f8987"
@@ -105,8 +115,8 @@
   },
   {
    "path": "tools/stage_repo.py",
-   "bytes": 4383,
-   "sha256": "81b381f54b596d8972d755564b4de23c76d5553c96ad120e9421f8cebe716333"
+   "bytes": 5098,
+   "sha256": "daad8321c2ac7079b1d640cfd61b507f9cc33a10792f47d54dd5a5567cf7209f"
   },
   {
    "path": "tools/verify_package.py",
@@ -132,6 +142,26 @@
    "path": "logs/PIPD_5_AFFECTED_TESTS_RAW.txt",
    "bytes": 832,
    "sha256": "364f42e8783c2a4106c854268cd07c3a131b1864835fd6639fd78a802da1a7b6"
+  },
+  {
+   "path": "logs/lane_probe.out",
+   "bytes": 9314,
+   "sha256": "1658f1ee4b7528cfcf1b78e35f51d68406426767558c6760c40004d79d34e305"
+  },
+  {
+   "path": "logs/lane_verify.out",
+   "bytes": 8183,
+   "sha256": "36f47ff0966cb1ca24b8e78bda6ee43b4bd5e26c71839e79e8404a11d8742f08"
+  },
+  {
+   "path": "logs/lane_writer.out",
+   "bytes": 9087,
+   "sha256": "e5bd0552e9aff984f22c6c05447cabb4d96de6015d529ed9258672f8860e043b"
+  },
+  {
+   "path": "logs/hgk-lane-dispatch.py.before-R-EXEC-02",
+   "bytes": 176592,
+   "sha256": "c2c7414b0b56c836aec2c98d7c0431cfe114155fd9da07e26f2f9f83bf74fc5b"
   },
   {
    "path": "first_work/RUN_ProductSPEC.json",
@@ -332,6 +362,21 @@
    "path": "package/CURRENT_READER_SCOPE.json",
    "bytes": 381,
    "sha256": "0c26b01c0f6c8758c96bf466ec1d2f0d9c43b7f763ad3492dd0a8c0fce4df536"
+  },
+  {
+   "path": "package/EXISTING_AFFECTED_TESTS_RAW.txt",
+   "bytes": 822,
+   "sha256": "ca970a74fab8887a403435a0ba3083954c5b84c13c360779a4ed8e4976cb04f5"
+  },
+  {
+   "path": "package/MINIMAL_STATIC_TESTS.json",
+   "bytes": 6194,
+   "sha256": "b929b71071a0083a3ad52c92dfd8d82547bfebf02bfd09487e055d5880652e81"
+  },
+  {
+   "path": "package/MINIMAL_STATIC_TESTS_INITIAL.json",
+   "bytes": 6039,
+   "sha256": "4e2f941d3b400a0a50e06fbfbca95a011f9374a7b84a7c18ef652426071411aa"
   }
  ]
 }

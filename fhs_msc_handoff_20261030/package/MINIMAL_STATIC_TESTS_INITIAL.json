@@ -1,0 +1,221 @@
+{
+  "scope": "WP15 functional PI + WP00/WP01 prerequisites + receiver contracts only",
+  "tests": [
+    {
+      "case": "FUNCTIONAL_PI_FULL_MEMBER_READER",
+      "status": "PASS",
+      "actual": "PASS",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "EMPTY_GOAL",
+      "status": "PASS",
+      "actual": "INTAKE_INVALID",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "FOREIGN_OR_MISSING_SOURCE",
+      "status": "PASS",
+      "actual": "AUTHORITY_UNKNOWN",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "CORPUS24",
+      "status": "PASS",
+      "actual": 24,
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PATH_ESCAPE",
+      "status": "PASS",
+      "actual": "PATH_ESCAPE",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "SOURCE_SHA_DRIFT",
+      "status": "PASS",
+      "actual": "SOURCE_DRIFT",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "KNOWNANSWER_NO_REASK",
+      "status": "PASS",
+      "actual": false,
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "KNOWNANSWER_SOURCE_CHANGED",
+      "status": "PASS",
+      "actual": true,
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PRODUCT_REQUIRED_persona",
+      "status": "PASS",
+      "actual": "SPEC_REQUIRED_FIELDS",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PRODUCT_REQUIRED_jtbd",
+      "status": "PASS",
+      "actual": "SPEC_REQUIRED_FIELDS",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PRODUCT_REQUIRED_fuo",
+      "status": "PASS",
+      "actual": "SPEC_REQUIRED_FIELDS",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PRODUCT_OWN_NEG_REQUIRED",
+      "status": "PASS",
+      "actual": "SPEC_ACCEPTANCE_ORPHAN",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "ONE_WRITER_SEAM",
+      "status": "PASS",
+      "actual": "ONE_WRITER_PER_SEAM",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "DAG_CYCLE",
+      "status": "PASS",
+      "actual": "DAG_CYCLE_OR_UNKNOWN_DEPENDENCY",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "ORIGINAL22_DAG_ACYCLIC",
+      "status": "PASS",
+      "actual": 22,
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "MISSING_OPS_DOES_NOT_BLOCK_FIRST_WORK",
+      "status": "PASS",
+      "actual": true,
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "CAP_BOOT_BEFORE_FIRST_EFFECT",
+      "status": "PASS",
+      "actual": true,
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PROFILE_PROVIDER_OFF_SAFETY_VETO",
+      "status": "PASS",
+      "actual": "STANDARD",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "OFFLINE_ORIGINAL_READER_ZERO_NETWORK",
+      "status": "PASS",
+      "actual": true,
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PROVIDER_OFF_CONNECTION_ATTEMPT_DENIED",
+      "status": "PASS",
+      "actual": "AUTHOR_PROVIDER_OFF_NETWORK_DENY",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PD_ORIGINAL_SCHEMA_READER",
+      "status": "PASS",
+      "actual": "PASS",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PD_CONTEXT_ACTUALLY_PROBED",
+      "status": "PASS",
+      "actual": true,
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PD_MISSING_CONTEXT_REFUSED",
+      "status": "PASS",
+      "actual": "REPO_CONTEXT_MISSING",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PD_SPOOF_FRESHNESS_REFUSED",
+      "status": "PASS",
+      "actual": "STALE_PROVIDER",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PD_UNBOUNDED_SCOPE_REFUSED",
+      "status": "PASS",
+      "actual": "EFFECT_UNKNOWN",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "ORIGINAL_HGK_REQUEST_CONSTRUCTORS_ACCEPT",
+      "status": "PASS",
+      "actual": true,
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "HGK_FOREIGN_WORKTREE_REFUSED",
+      "status": "PASS",
+      "actual": "ERR_NATIVE_TASKSPEC_ROOT",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "ORIGINAL_LEASE_GUARD_POS",
+      "status": "PASS",
+      "actual": true,
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "OLD_LEASE_REFUSED",
+      "status": "PASS",
+      "actual": "ERR_LEASE_EXPIRED:STATIC-TEST-WORKID",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "UNKNOWN_EFFECT_RECONCILE_BEFORE_RETRY",
+      "status": "PASS",
+      "actual": "RECONCILE_BEFORE_RETRY",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "NO_LIVE_RECEIPT_FOR_READONLY",
+      "status": "PASS",
+      "actual": "READY",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "NO_FALSE_INDEPENDENT_CHECKER",
+      "status": "PASS",
+      "actual": "TQ_SOD",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PI_ATOM_TAMPER_REFUSED",
+      "status": "PASS",
+      "actual": "FAIL",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "PI_UNDECLARED_AUTHORITY_REFUSED",
+      "status": "PASS",
+      "actual": "FAIL",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    },
+    {
+      "case": "EXISTING_5_AFFECTED_TESTS",
+      "status": "FAIL",
+      "actual": "AssertionError:expected True; actual False",
+      "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+    }
+  ],
+  "pass": 34,
+  "fail": 1,
+  "elapsed_seconds": 1.0183297000003222,
+  "native": "NATIVE_NOT_RUN",
+  "claim": "STATIC_HANDOFF_CONTRACT_ONLY",
+  "PD_fixture_is_live_RepoContext": false
+}

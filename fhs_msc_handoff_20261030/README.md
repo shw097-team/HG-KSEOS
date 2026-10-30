@@ -1,8 +1,8 @@
 # FHS-MSC PIPD-LS-PKG — HANDOFF-PATCH-v1 execution evidence
 
 Execution record of round **`FHS-MSC-HANDOFF-PATCH-v1-EXEC-20261030`**: the receiving side took the
-delivered package, verified it, re-executed its first work, sealed it reproducibly, ran the bounded
-lanes, and wrote down every defect it hit. Addressed to the external engineering team that continues
+delivered package, verified it against its own manifests, re-executed its first work, rebuilt both
+declared archives, ran the bounded lanes, and wrote down every defect it hit — including three of its own. Addressed to the external engineering team that continues
 the build.
 
 **Claim ceiling: `PIPD_CONSTRUCTION_HANDOFF_READY`** — author-side, static, reproducible.
@@ -21,11 +21,14 @@ Nothing here is production ready, accepted, certified or released; nothing here 
 ```bash
 python fhs_msc_handoff_20261030/tools/verify_package.py <unpacked-package>
 python fhs_msc_handoff_20261030/tools/exec_checks.py    <reproduced-first-work>
-python fhs_msc_handoff_20261030/tools/seal_package.py   <unpacked-package> <out-dir>
+python fhs_msc_handoff_20261030/tools/p1_package_integrity.py <unpacked-package>   # rebuilds both declared archives
 ```
 
 Expect `A_payload_manifest PASS, rows 909, match 909`; `D1..D7` with exactly one `REVIEW`
-(`D2_wp15_closure`); `verdict PASS` plus `idempotence.body_identical: true`.
+(`D2_wp15_closure`); and from the integrity tool: `A/B/D PASS`, `C FAIL` (the archives are absent),
+`E/F/G/H FAIL` — its `F` check rebuilds the BODY archive to the declared digest byte-exactly and the
+EVIDENCE archive 4,801 B short. `seal_package.py` is this round's own seal and is **not** the delivery's
+membership; it is kept only because the finding about it (F-12) needs the artefact.
 
 ## Tree
 
@@ -34,9 +37,9 @@ Expect `A_payload_manifest PASS, rows 909, match 909`; `D1..D7` with exactly one
 | `receipts/` | one JSON per check: command, measured numbers, verdict |
 | `tools/` | the verifiers actually used; read them before trusting a number |
 | `first_work/` | the WP-FHS-15 output reproduced this round: 3 SPECs, PI-PKG, TaskSpecSeed, FUO, DAG, planner artefacts |
-| `docs/` | the 17 current books, byte-identical to the delivery |
-| `package/` | the delivery's own manifests, byte-exact, so an outsider can re-verify 909/909 |
-| `logs/` | raw stdout: first-work run, the 35-check harness before and after repair, the five affected tests |
+| `docs/` | the 17 current books at the top of `01_SUBSTANTIVE_BODY/`; they are byte-identical to the delivery, which the payload manifest verifies row by row (the other 14 files in that directory sit one level down and are deliberately not staged) |
+| `package/` | the delivery's own manifests byte-exact, plus the two artefacts findings F-03 and F-14 rest on |
+| `logs/` | raw output: first-work run, the 35-check harness before and after repair, the five affected tests, the three lane turns, and the dispatcher binary before its `NameError` repair |
 | `STAGED_MANIFEST.json` | per-file SHA-256 of the staged tree (inventory, not proof) |
 
 ## Not here

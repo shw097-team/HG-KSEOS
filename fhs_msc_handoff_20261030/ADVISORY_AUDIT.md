@@ -1,60 +1,46 @@
 # Advisory audit — three independent read-only processes
 
-**What this is not.** It is not the VERIFY lane. That lane was dispatched
-(`VERIFY_SECURITY`, assigned arm `openai-codex/gpt-6.1-sol`) and returned `ERR_LANE_ALL_ROUTES_EXHAUSTED`
-with an upstream `401` before any model ran (`receipts/P5C_LANE_VERIFY_BLOCKED.json`). No verdict exists
-and no box in `tasks.md` is closed by this file.
+**What this is not.** It is not the VERIFY lane. That lane was dispatched (`VERIFY_SECURITY`, assigned arm
+`openai-codex/gpt-6.1-sol`) and returned `ERR_LANE_ALL_ROUTES_EXHAUSTED` with an upstream `401` before any
+model ran (`receipts/P5C_LANE_VERIFY_BLOCKED.json`). No verdict exists, nothing here closes a box in
+`tasks.md`, and the claim ceiling stays `PIPD_CONSTRUCTION_HANDOFF_READY`.
 
-**What it is.** Because the gate was blocked, three separate processes were started with no context from
-the writing session and told to attack specific claims. Each had its own scratch directory and was told
-not to modify anything. Their reports are adversarial input, not evidence: every claim below was
-re-measured against the receipts before it changed a document, and one of their findings was wrong.
+**What it is.** Because the gate was blocked, three processes with no context from the writing session were
+told to attack the work. They were right about most of what they hit. This file records which findings I
+could reproduce, which I could not, and what changed — including two claims withdrawn from earlier commits
+of this branch.
 
-## Audit A — payload integrity and seal
+## What held up
 
-**Reported.** 909 rows declared, 909 checked, 909 match, 0 mismatch; exactly two undeclared files (the two
-manifests); body archive `483,623 B` / `07d62b49fa35dabfdae0d7bc481fcd19155c9248aeb2727a1e814d68bc50b225`;
-evidence archive `25,987,085 B` / `9497133b150c260dec26a2855e66a1a70f91def96e2241d5693208d55…`; two seal
-runs byte-identical.
-
-**Verified.** Identical to `receipts/P1C_SEAL_AND_READBACK.json` and `receipts/P1B_…`. No document changed.
-
-## Audit B — first-work reproducibility
-
-**Reported.** Byte-identical: `ProductSPEC`, `ArchitectureSPEC`, `ProgramSPEC`, `SourceReadback`,
-`ORIGINAL_22_WP_DAG`. Differing: `PI-PKG`, `TaskSpecSeed`, `RUN/FUO`, `ExecutionHandoff`. Harness 34/1 as
-shipped → 35/0 after the import-order repair. Identity probe: control differs, repair matches.
-
-**Verified** against `receipts/P2_FIRST_WORK_RUN.json`, `P2B`, `P2D`, `P2C`. `EXECUTION_REPORT.md` Phase 3
-listed only three differing files and was **corrected to four** (`RUN/FUO.json` was missing). The quoted
-failure text was also tightened: the check records `AssertionError: expected True; actual False`, and the
-recorded root cause is `ModuleNotFoundError: No module named 'tests'` — the earlier wording presented the
-cause as if it were the observed failure.
-
-## Audit C — document review against receipts
-
-**Reported, and acted on:**
-
-| Finding | My re-measurement | Change |
+| Finding | Re-measured here | Change |
 |---|---|---|
-| "429 rows unresolved" appears in no receipt | Confirmed: no receipt contains 429. Re-measured from `SHA256_PAYLOAD_MANIFEST.json` against the delivered tree: 446 plain misses, of which **31** are the directory rename and **415** resolve with the `\\?\` prefix — i.e. the 260-character Win32 limit, not layout | Every "429" replaced with the measured split; new finding **F-02b** |
-| `P1`'s `B_undeclared_files` writes `extra: 33` where the set has 2 members | Confirmed; P1B and P1_VERIFIED both say 2 | `EVIDENCE_INDEX` now warns not to cite P1's arithmetic |
-| `P1_PACKAGE_INTEGRITY_VERIFIED.json` described as "PASS … independent re-derivation" | Confirmed misleading: its C check records the declared BODY archive **absent** | Row rewritten: A/B/D/E PASS, C FAIL, corroborates F-01 |
-| `tasks.md` asserted a VERIFY verdict "is published with the PR" when none was produced | Confirmed; the box can never close itself | Rewritten as attempted-and-blocked with the receipt named |
-| Six `### Requirement:` blocks, nine `#### Scenario:` blocks, no credential material, no over-claim of native admission or release | Confirmed by my own count and grep | No change; recorded as the one place the corpus is disciplined |
+| The seal published in the first push covered 17 body files and excluded 14 declared files (29,121,570 B) | Confirmed: the collector is `01_SUBSTANTIVE_BODY/*.md`, non-recursive | Seal withdrawn; **F-12**; replaced by `P7` |
+| The declared BODY archive *is* reproducible, so "not reconstructible" was false | **Confirmed first-hand**: using the payload manifest's own partition and the pinned recipe, BODY rebuilds to 114 entries / 4,007,065 B / `5e722cfb…` — the declared digest exactly. EVIDENCE rebuilds to 797 entries / 25,909,480 B, 4,801 B short | Phase 2 rewritten; **F-01** restated as BODY PASS / EVIDENCE FAIL; the false sentence retracted |
+| `EVIDENCE_INDEX` described `P1_PACKAGE_INTEGRITY_VERIFIED.json` as "PASS … independent re-derivation" | Confirmed: its own verdict is **FAIL**, with C/E/F/G/H failing and I skipped. Its `F` check is nonetheless the first evidence that the BODY digest was checkable | Row rewritten to FAIL, decisive for F-01 |
+| `RUN/FUO.json` also differs, and by `elapsed_ms` only — which no path explains | Confirmed against `P2_FIRST_WORK_RUN.json` (four differing artefacts) and by inspection of the file | Report corrected to four; determinism now separates identity differences from the timing field |
+| "2.31 s" probe latency appears in no receipt | Confirmed: `P5A` records `seconds: 7.2` | Replaced |
+| Five cited artefacts were not in the tree (`lane_probe.out`, `lane_verify.out`, the dispatcher backup, the delivered `EXISTING_AFFECTED_TESTS_RAW.txt`, this file) | Confirmed: they existed in the round workspace and were never staged. This file did not exist yet when they looked | `stage_repo.py` now stages all of them; `logs/` and `package/` grew accordingly |
+| The staging inventory never listed the five narrative documents | Confirmed — F-09's failure mode was still visible in the inventory built to catch it | Why the second commit exists; staging is subtree-scoped now, not `rmtree` |
+| Finding counts disagreed (ten, eleven, eight) across three files | Confirmed | One count: fourteen numbered findings |
+| `prepare.py` does not snapshot `fixtures`, so a clean rebuild stays 34/1 even after the import-order fix | **Accepted as reported** — I did not rebuild from scratch to confirm the two `FileNotFoundError`s, so it is recorded with that caveat | **F-13**; the 35/35 claim is now conditional |
+| The delivery's 35/0 record shares `elapsed_seconds` with its 34/1 predecessor to sixteen digits | **Confirmed directly**: both files carry `1.0183297000003222`; this round's two runs measured 6.1035 s and 5.4547 s | **F-14**; a defect of the delivered package, not of this round |
 
-**Reported, and rejected:** the auditor read the Phase 2 argument ("the declared BODY archive cannot hold
-4,808,325 raw bytes that deflate to 0.48 MB") as a contradiction. It is not: the 4,808,325 figure is the
-raw byte total of the files the manifest assigns to that archive, and the point being made is that a
-4,007,065-byte archive cannot contain them uncompressed — which compresses to the size we observe. The
-sentence stands.
+## What they got wrong
+
+- **"429 rows unresolved"** was flagged untraced. Correct — and worse than they knew: there is no such
+  number. Re-measured from the manifest against the delivered tree: 446 plain `Path.exists()` misses, of
+  which **31** are the book-directory rename and **415** resolve with the `\\?\` prefix (the 260-character
+  Win32 limit). Every "429" in the findings and the report is gone — it survives only in this
+  correction note; **F-02 / F-02b** carry the split.
+- One auditor read the Phase 2 argument as an unbuildability proof from compression arithmetic. The archive
+  is unbuildable for a different reason — the membership was wrong — and the arithmetic argument was a bad
+  inference on top of a real gap. Both withdrawn; `P7` replaces them.
+- The same auditor called the writer overrun "more than nine minutes" unsupported. It was eight and a half;
+  F-11 now cites the rollout file and the termination time instead of a rounded feeling.
 
 ## Score
 
-Three blocks of claims attacked. One was materially wrong (429), two were imprecise (differing-file count,
-failure-text framing), one document contained an assertion that could never be true (`tasks.md`), and one
-receipt was being oversold (`P1_VERIFIED`). All five are corrected in this commit. Nothing in the audit
-raised a native-admission, release or acceptance claim, and nothing raised a credential leak.
-
-That is the honest return on an advisory audit: it is worth roughly what it caught, and it is not a
-substitute for the lane that failed closed.
+Nine findings reproduced and acted on, one accepted with a stated caveat, two rejected. The three that
+mattered most — a seal that excluded 29 MB, a receipt labelled PASS whose own verdict was FAIL, and a false
+"not reconstructible" inference — were mine, and all three were caught by processes with no reason to be
+kind. That is what an advisory audit is worth. It is still not the lane that failed closed.
