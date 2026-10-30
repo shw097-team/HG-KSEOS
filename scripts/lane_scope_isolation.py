@@ -31,6 +31,17 @@ from pathlib import Path
 
 import yaml
 
+# Every child of this process is headless. On this host a console program started by a GUI parent gets a fresh
+# console window, so a gate that shells out to git or PowerShell puts a window on the owner's screen (measured: the
+# owner reported windows appearing more often once the loop began running every 3 minutes).
+try:
+    import sys as _sys
+    _sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parent))
+    import winproc as _winproc
+    _winproc.install()
+except Exception:
+    pass
+
 ROOT = Path(__file__).resolve().parents[1]
 REG = ROOT / "config/lane-routing-registry.yaml"
 ASG = ROOT / "config/model-lane-assignment.json"

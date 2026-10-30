@@ -89,3 +89,35 @@ def probe(python_exe: str, seconds: int = 20) -> dict:
 if __name__ == "__main__":
     install()
     print(probe(sys.executable))
+
+
+def audit(root=None) -> list[dict]:
+    """Report spawn sites in this repo that could put a console on the owner's screen.
+
+    Install-time hiding only covers processes that import this module. A script nobody calls install() from is
+    invisible to that guarantee, and the owner sees the result as a window. So the audit is a check, not a promise:
+    every `subprocess.*(` in scripts/ must either sit next to creationflags or live in a file that installs winproc.
+    """
+    import re
+    from pathlib import Path
+    base = Path(root) if root else Path(__file__).resolve().parent
+    findings = []
+    for path in sorted(base.glob("*.py")):
+        text = path.read_text(encoding="utf-8", errors="replace")
+        if "subprocess." not in text:
+            continue
+        installs = "winproc.install()" in text or "_winproc.install()" in text
+        if installs:
+            continue
+        for m in re.finditer(r"subprocess\.(run|Popen|check_output|call)\(", text):
+            window = text[m.start():m.start() + 420]
+            if "creationflags" in window:
+                continue
+            findings.append({"file": path.name, "line": text[:m.start()].count("\n") + 1})
+    return findings
+
+
+if __name__ == "__main__":
+    import json as _json
+    hits = audit()
+    print(_json.dumps({"unhidden_spawn_sites": len(hits), "sites": hits[:40]}, ensure_ascii=False))

@@ -110,7 +110,10 @@ def inflight(wp: str) -> bool:
                 continue
             if not isinstance(d, dict):   # a receipt may legitimately be a list; only dicts carry a phase
                 continue
-            if d.get("phase") == "PRE_ATTEMPT" and time.time() - rec.stat().st_mtime < 3600:
+            # Seconds, not an hour. A PRE_ATTEMPT receipt with no live process is a DEAD attempt: measured 01:07-01:35,
+            # WP-FHS-17's round-2 receipt kept the unit "in flight" for 28 minutes while nothing ran, and the
+            # supervisor stopped dispatching anything for it.
+            if d.get("phase") == "PRE_ATTEMPT" and time.time() - rec.stat().st_mtime < 120:
                 return True
     return False
 
