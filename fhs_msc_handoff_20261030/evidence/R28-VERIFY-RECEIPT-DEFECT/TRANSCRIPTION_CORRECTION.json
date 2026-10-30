@@ -1,0 +1,39 @@
+{
+  "schema": "TRANSCRIPTION-CORRECTION/1",
+  "what_was_claimed": "ACC-WP-FHS-03/04/08-V2 = PASS, evidence_ref EV-WP-FHS-03-04-08-ADMISSION-CHAIN-AO-R28C",
+  "what_is_true": "that receipt carries ok:false, code ERR_CHECKER_MUTATED_SUBJECT, verdict_void_reason 'the guarded subject changed during the turn: changed=2 removed=0' -- the maker's own commits voided it; lane_evidence_gate returns LANE_CLAIM_UNSUPPORTED",
+  "current_status_of_the_three_rows": "PASS stands as the officer's judgement, but its machine provenance is VOID. The rows are recorded here as unsupported, not corrected away, because an acceptance verdict is terminal in the schema",
+  "what_does_hold": {
+    "sitting": 6,
+    "nonce": "NONCE-AO-R28-F-20261030",
+    "officer_verdict": "PASS 6/6, 0 convictions",
+    "lane_gate": {
+      "verdict": "LANE_SERVED_PROVISIONAL",
+      "receipt_complete": false,
+      "lane": "VERIFY_SECURITY",
+      "asked": null,
+      "served": "gpt-6.1-sol",
+      "rank": 1,
+      "seconds": 131.72,
+      "problems": [],
+      "receipt": "C:\\wg\\ao9\\ao_r28f.json"
+    },
+    "ceiling": "LANE_SERVED_PROVISIONAL: the arm that served is proven (rank 1, openai-codex/gpt-6.1-sol, exit 0, 131.72 s); the clean finish of the turn is not"
+  },
+  "sitting_3_gate": {
+    "verdict": "LANE_CLAIM_UNSUPPORTED",
+    "receipt_complete": true,
+    "lane": "VERIFY_SECURITY",
+    "asked": "opencode-go/deepseek-v4.1-flash",
+    "served": "gpt-6.1-sol",
+    "rank": 1,
+    "seconds": 158.08,
+    "problems": [
+      "dispatch_not_ok",
+      "silent_substitution: asked=opencode-go/deepseek-v4.1-flash served=gpt-6.1-sol"
+    ],
+    "receipt": "C:\\wg\\ao6\\ao_r28c.json"
+  },
+  "remedy": "TT-VERIFY-RECEIPT-NOT-PERSISTED (blocking): a dispatch must write receipt_complete:true with nonce echo and usage receipt before the three rows can be re-justified",
+  "recorded_at": "2026-10-30T22:00:03"
+}
