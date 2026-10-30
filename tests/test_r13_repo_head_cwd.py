@@ -1,0 +1,123 @@
+"""R9-06 regression: `_repo_head()` must resolve the PROJECT target, not the process CWD.
+
+Both tests drive the real lifecycle admission path (no mocks, no fabricated hashes) against real
+temporary git repositories. They are RED on the pre-patch code and GREEN after the bounded repair.
+"""
+from __future__ import annotations
+
+import subprocess
+
+import pytest
+
+from hg_kseos.errors import InvariantViolation
+from hg_kseos.lifecycle import ProjectLifecycleController, ProjectRequest
+from hg_kseos.spine import SharedSpine
+
+
+def _mkrepo(path, seed: str = "seed") -> str:
+    path.mkdir(parents=True, exist_ok=True)
+    subprocess.run(["git", "init", "-q", str(path)], check=True)
+    (path / "seed.txt").write_text(seed, encoding="utf-8")
+    subprocess.run(["git", "-C", str(path), "add", "seed.txt"], check=True)
+    subprocess.run(
+        ["git", "-C", str(path), "-c", "user.email=t@example.invalid", "-c", "user.name=t",
+         "commit", "-q", "-m", f"seed {seed}"],
+        check=True,
+    )
+    return subprocess.run(["git", "-C", str(path), "rev-parse", "HEAD"],
+                          capture_output=True, text=True, check=True).stdout.strip()
+
+
+def _admit(tmp_path, target) -> tuple[ProjectLifecycleController, str, SharedSpine]:
+    spine = SharedSpine(tmp_path / "spine.db")
+    spine.initialize()
+    controller = ProjectLifecycleController(spine)
+    request = ProjectRequest(goal="resolve the project repo head", target_root=str(target))
+    pid = "P-R13"
+    controller.start(request, project_id=pid)
+    controller.intake(pid, request)
+    order = ["SOURCE_DISCOVERY", "SOURCE_ADMISSION", "INTENT_BOUND", "REQUIREMENTS_READY", "DESIGN_READY"]
+    current = controller.status(pid)["state"]
+    for state in order[order.index(current) + 1:]:
+        controller.transition(pid, state, trigger="r13-test")
+    controller.plan(pid)
+    return controller, pid, spine
+
+
+def test_admission_uses_target_head_not_process_cwd(tmp_path, monkeypatch):
+    target = tmp_path / "target_repo"
+    elsewhere = tmp_path / "cwd_repo"
+    target_head = _mkrepo(target, "target")
+    cwd_head = _mkrepo(elsewhere, "cwd")
+    assert target_head != cwd_head, "the two repos must have different HEADs for this test to mean anything"
+
+    controller, pid, spine = _admit(tmp_path, target)
+    monkeypatch.chdir(elsewhere)          # the defect: pre-patch this is what HEAD would come from
+    assert cwd_head == subprocess.run(["git", "-C", str(elsewhere), "rev-parse", "HEAD"],
+                                      capture_output=True, text=True, check=True).stdout.strip()
+
+    controller.admit_workorders(pid)
+    with spine.connect() as conn:
+        heads = {row["base_head"] for row in conn.execute("SELECT base_head FROM workorders")}
+    assert heads == {target_head}, f"base_head must be the target repo HEAD, got {heads}"
+
+
+def test_admission_fails_closed_when_target_is_not_a_repo(tmp_path, monkeypatch):
+    """A target that is not in any worktree is refused with ERR_REPO_HEAD.
+
+    Guarded on purpose: `git -C <dir> rev-parse HEAD` succeeds for ANY directory inside a worktree,
+    and under the lane sandbox TMPDIR points inside the workspace, so tmp_path is itself inside a
+    repository there. The control only means something when the target is genuinely outside every
+    repository; otherwise the inheritance case below is the applicable contract.
+    """
+    if subprocess.run(["git", "-C", str(tmp_path), "rev-parse", "--show-toplevel"],
+                      capture_output=True, text=True).returncode == 0:
+        pytest.skip(f"fixture path {tmp_path} is inside the repository "
+                    f"{subprocess.run(['git','-C',str(tmp_path),'rev-parse','--show-toplevel'],capture_output=True,text=True).stdout.strip()}"
+                    " - the inheritance contract applies instead")
+
+    not_a_repo = tmp_path / "plain_directory"
+    not_a_repo.mkdir()
+    elsewhere = tmp_path / "cwd_repo"
+    _mkrepo(elsewhere, "cwd")
+
+    controller, pid, _ = _admit(tmp_path, not_a_repo)
+    monkeypatch.chdir(elsewhere)          # a valid repo in the CWD must NOT be used as a fallback
+
+    with pytest.raises(InvariantViolation) as excinfo:
+        controller.admit_workorders(pid)
+    assert "ERR_REPO_HEAD" in str(excinfo.value), f"expected a typed repo-head refusal, got {excinfo.value!r}"
+
+
+def test_target_inside_another_repo_inherits_that_repo_head(tmp_path, monkeypatch):
+    """A project target that is a SUBDIRECTORY of a repository resolves to that repository's HEAD.
+
+    This is the intended contract, and it is exactly what a hard "target must be a repo root" check
+    would break: nine lifecycle tests in this suite use repo-relative targets such as "worktrees".
+    git answers rev-parse HEAD for any path inside a worktree, so what must hold is that the HEAD is
+    read from the TARGET's enclosing repository rather than from the caller's CWD - not that the
+    target be a repository root. The assertion is therefore environmental-independent: the recorded
+    head must be the outer repository's, even though the process CWD is a different repository.
+    """
+    outer = tmp_path / "outer_repo"
+    _mkrepo(outer, "outer")
+    outer_head = subprocess.run(["git", "-C", str(outer), "rev-parse", "HEAD"],
+                                capture_output=True, text=True).stdout.strip()
+    inner = outer / "nested_project"
+    inner.mkdir()
+    elsewhere = tmp_path / "cwd_repo"
+    _mkrepo(elsewhere, "cwd")
+    cwd_head = subprocess.run(["git", "-C", str(elsewhere), "rev-parse", "HEAD"],
+                              capture_output=True, text=True).stdout.strip()
+
+    controller, pid, _ = _admit(tmp_path, inner)
+    monkeypatch.chdir(elsewhere)
+    controller.admit_workorders(pid)
+
+    with controller.spine.transaction() as connection:
+        cols = [r[1] for r in connection.execute("PRAGMA table_info(workorders)").fetchall()]
+        assert "base_head" in cols, cols
+        heads = [r[0] for r in connection.execute("SELECT base_head FROM workorders").fetchall()]
+    assert heads, "no workorder was recorded"
+    assert outer_head in heads, f"workorder base_head {heads!r} did not come from the target repo {outer_head!r}"
+    assert cwd_head not in heads, "the CWD repository's head leaked into the workorder"

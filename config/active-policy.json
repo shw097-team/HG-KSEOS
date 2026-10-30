@@ -1,0 +1,14 @@
+{
+  "schema": "HGK-ACTIVE-POLICY/1",
+  "policy_path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\hermes-codex-lane.json",
+  "policy_digest": "a3df959dffccf6332d146b7f74d2687a45fe6857506cdd542bb80bbf6325e4d6",
+  "policy_bytes": 15111,
+  "declared_by": "owner-declared by standing order 2026-10-23 (agent executed, not signed)",
+  "declared_at": "2026-10-23T02:01:19+00:00",
+  "order_text": "Owner standing pre-authorization 2026-10-23: 'give maximum pre-authorization to the FAR ruling; treat it as the owner's ruling and execute it'. FAR R15.3 row W02.policy: designate the existing HG-KSEOS lane declaration as the single active policy, by exact bytes, without changing its content.",
+  "order_digest": "242ae7d9f0a238a510dcc2c860f6f20cd0d138e3d560e8553d8fa1c88f1376ab",
+  "far_ref": "_r152_ev/_governance/round-20261022-r15_2/FAR_DECISIONS_R15_3.json#W02.policy",
+  "consumer": "scripts/hgk-exec-model-frontdoor.py::check_active_policy (refuses start on digest mismatch)",
+  "claim_ceiling": "designation only. It names which existing policy is active and binds its bytes; it changes no policy content, signs nothing, and does not prove the six-edge native consumption chain",
+  "supersedes": null
+}

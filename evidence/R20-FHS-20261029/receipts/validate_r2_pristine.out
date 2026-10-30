@@ -1,0 +1,15 @@
+{
+  "passed": 2788,
+  "failed": 1,
+  "failures": [
+    {
+      "case_id": "SOURCE-BYTES-UNCHANGED",
+      "scope": "AUTHOR_STATIC",
+      "expected": true,
+      "actual": false,
+      "status": "FAIL",
+      "elapsed_ms": 0.013
+    }
+  ],
+  "scope": "AUTHOR_STATIC_FIXTURES_ONLY"
+}

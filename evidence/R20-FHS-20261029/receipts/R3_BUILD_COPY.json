@@ -1,0 +1,21 @@
+{
+ "schema": "R20.R3_BUILD_COPY/1",
+ "at": "2026-10-29T12:51:20.991541+00:00",
+ "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2",
+ "target": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3",
+ "copy_rc": 1,
+ "files_copied": 85,
+ "bytes_copied": 145944348,
+ "denominator_match": {
+  "files": 85,
+  "bytes": 145944348
+ },
+ "per_file_mismatch": [],
+ "self_embedded_zip_removed": {
+  "path": "FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2.zip",
+  "bytes": 13326288,
+  "sha256": "4f5d6e93a7fb300da452f3807f2a2e2368b4e57f2b8b980fdd0e4706a4b773a5"
+ },
+ "files_after_removal": 84,
+ "bytes_after_removal": 132618060
+}

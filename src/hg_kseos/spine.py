@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
-from contextlib import contextmanager
+from contextlib import contextmanager, ExitStack
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any, Iterator
@@ -10,6 +10,7 @@ from typing import Any, Iterator
 from .errors import InvariantViolation, LeaseConflict, StaleState
 from .util import canonical_json, new_id, sha256_text, utc_now
 from . import role_binding
+from .native_admission import NativeAdmission, taskspec_request, workorder_request
 
 
 TRANSITIONS: dict[str, dict[str | None, set[str]]] = {
@@ -46,13 +47,18 @@ TRANSITIONS: dict[str, dict[str | None, set[str]]] = {
 }
 
 
+class _TransactionConnection(sqlite3.Connection):
+    """Allows transaction-scoped OS guards without global/thread-shared state."""
+
+
 class SharedSpine:
-    def __init__(self, database: Path, schema: Path | None = None) -> None:
+    def __init__(self, database: Path, schema: Path | None = None, *, admission=None) -> None:
         self.database = database.resolve()
         self.schema = schema or Path(__file__).with_name("schema.sql")
+        self.admission = admission if admission is not None else NativeAdmission()
 
     def _open(self) -> sqlite3.Connection:
-        connection = sqlite3.connect(self.database, timeout=15)
+        connection = sqlite3.connect(self.database, timeout=15, factory=_TransactionConnection)
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA foreign_keys = ON")
         connection.execute("PRAGMA journal_mode = WAL")
@@ -79,15 +85,24 @@ class SharedSpine:
     @contextmanager
     def transaction(self) -> Iterator[sqlite3.Connection]:
         connection = self._open()
+        connection.native_guards = ExitStack()
         try:
             connection.execute("BEGIN IMMEDIATE")
             yield connection
             connection.commit()
-        except Exception:
-            connection.rollback()
+        except BaseException:
+            try:
+                connection.rollback()
+            except BaseException:
+                # Closing also rolls back. Do so before releasing OS guards.
+                connection.close()
+                raise
             raise
         finally:
-            connection.close()
+            try:
+                connection.native_guards.close()
+            finally:
+                connection.close()
 
     def create_project(self, project_id: str = "HGK-P0", name: str = "HG-KSEOS") -> None:
         now = utc_now()
@@ -272,6 +287,8 @@ class SharedSpine:
         permissions: dict[str, Any],
         tests: list[str],
         evidence_plan: str,
+        *,
+        admission_bundle: dict[str, Any] | None = None,
     ) -> None:
         if not objective or not tests or not evidence_plan:
             raise InvariantViolation("ERR_TASKSPEC_CRITICAL_FIELD_MISSING")
@@ -282,6 +299,14 @@ class SharedSpine:
             ).fetchone()
             if not requirement or requirement["state"] != "FROZEN":
                 raise InvariantViolation("ERR_TASKSPEC_REQUIRES_FROZEN_REQUIREMENT")
+            request = taskspec_request(taskspec_id, requirement_id, objective, owner,
+                                       writable_root, permissions, tests, evidence_plan)
+            with self.admission.authorize(connection, "create_taskspec", request, admission_bundle):
+                self._insert_taskspec(connection, taskspec_id, requirement_id, objective, owner,
+                                      writable_root, permissions, tests, evidence_plan, now)
+
+    def _insert_taskspec(self, connection, taskspec_id, requirement_id, objective, owner,
+                         writable_root, permissions, tests, evidence_plan, now):
             connection.execute(
                 """INSERT INTO taskspecs
                    (taskspec_id,requirement_id,objective,owner,writable_root,permissions_json,
@@ -309,16 +334,24 @@ class SharedSpine:
         writer: str,
         worktree: Path,
         base_head: str,
+        *,
+        admission_bundle: dict[str, Any] | None = None,
     ) -> None:
         if not writer or not base_head:
             raise InvariantViolation("ERR_WORKORDER_CRITICAL_FIELD_MISSING")
         now = utc_now()
         with self.transaction() as connection:
             taskspec = connection.execute(
-                "SELECT state FROM taskspecs WHERE taskspec_id=?", (taskspec_id,)
+                "SELECT * FROM taskspecs WHERE taskspec_id=?", (taskspec_id,)
             ).fetchone()
             if not taskspec or taskspec["state"] != "DRAFT":
                 raise InvariantViolation("ERR_WORKORDER_REQUIRES_DRAFT_TASKSPEC")
+            request = workorder_request(workorder_id, taskspec, writer, worktree, base_head)
+            with self.admission.authorize(connection, "create_workorder", request, admission_bundle):
+                self._insert_workorder(connection, workorder_id, taskspec_id, writer,
+                                       worktree, base_head, now)
+
+    def _insert_workorder(self, connection, workorder_id, taskspec_id, writer, worktree, base_head, now):
             connection.execute(
                 "UPDATE taskspecs SET state='ADMITTED',version=version+1,updated_at=? WHERE taskspec_id=?",
                 (now, taskspec_id),

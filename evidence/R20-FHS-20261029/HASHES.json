@@ -1,0 +1,160 @@
+{
+ "artifacts": {
+  "evidence/R20-FHS-20261029/EVIDENCE_INDEX.md": {
+   "bytes": 11375,
+   "sha256": "b4d27032d5c8752cd670548f074dd4abd695689c340937ca13ada2ad98c60118"
+  },
+  "evidence/R20-FHS-20261029/audit/AUDIT_ROUND.md": {
+   "bytes": 4809,
+   "sha256": "710b67aed280d8f1d336fa79ee24a4eb064e3427df866f9989553ba47008677d"
+  },
+  "evidence/R20-FHS-20261029/lane/BRIEF_VERIFY_R20.md": {
+   "bytes": 5544,
+   "sha256": "3b5732be202309bf1142eea294ae1a9bda7b2765e7ad75d7da94f6b18a19471e"
+  },
+  "evidence/R20-FHS-20261029/lane/FOCUSED_RECHECK_R20.json": {
+   "bytes": 1865,
+   "sha256": "2bd7d9165e1bed008f9daa6ae892df0b2b4dbce86ffce6ed2a25f967ae480174"
+  },
+  "evidence/R20-FHS-20261029/lane/LANE_RECEIPT_PASS1.json": {
+   "bytes": 6787,
+   "sha256": "191727353431651121ed1b28c69c208a73cf01bc4f0d8cc88bd5b9878c0cb29a"
+  },
+  "evidence/R20-FHS-20261029/lane/LANE_RECEIPT_PASS2.json": {
+   "bytes": 7106,
+   "sha256": "5ba7cf9ef4c555c204a5a7c4a6af10d805be683a17d2c6fa5a42fbe3ddeb4802"
+  },
+  "evidence/R20-FHS-20261029/lane/LANE_RECEIPT_PASS3.json": {
+   "bytes": 7263,
+   "sha256": "e8f9c30cfb9eba78a7ab357aef5d5f0d18fea17287c556252c0e341f5f5692b8"
+  },
+  "evidence/R20-FHS-20261029/lane/VERDICT_R20B.json": {
+   "bytes": 27430,
+   "sha256": "1d530faf1c3b17d4b7414c615d4ada4e8bb6ae7afd9a4d9a7cca4b0907691ec7"
+  },
+  "evidence/R20-FHS-20261029/lane/VERDICT_R20C.json": {
+   "bytes": 21056,
+   "sha256": "a868f962e5a96261826789019a35540f9cae33488dda78737915f9fe5cdbc950"
+  },
+  "evidence/R20-FHS-20261029/lane/VERDICT_R20D_HOLD.json": {
+   "bytes": 48512,
+   "sha256": "52896462500e89d12b874c5d82084fed215e944fa0f501a54f1e32532eded737"
+  },
+  "evidence/R20-FHS-20261029/lane/VERDICT_R20E_PASS_WITH_FINDINGS.json": {
+   "bytes": 76069,
+   "sha256": "b6975f4869f7841687a13d30f876ce6cfb3d08fb8def07b62b1560b100da14c5"
+  },
+  "evidence/R20-FHS-20261029/notes/REVISION3_NOTES.md": {
+   "bytes": 4992,
+   "sha256": "1a9f9f2b97742532ee4ee54c64b52563d024d31a3ca6629f1dc34f95f164d452"
+  },
+  "evidence/R20-FHS-20261029/notes/VOID_R2_REPORT.md": {
+   "bytes": 1469,
+   "sha256": "d0bc70e32e44443f93765dbab1cd3ed83f5d0481b288702b6e0305526ba48aae"
+  },
+  "evidence/R20-FHS-20261029/package/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip": {
+   "bytes": 13578117,
+   "sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f"
+  },
+  "evidence/R20-FHS-20261029/receipts/DENOMINATOR.json": {
+   "bytes": 19229,
+   "sha256": "d7173397e371d8a9b4e67676f38066c42b79b6f1e6b8bf22b7f9e550203b47c8"
+  },
+  "evidence/R20-FHS-20261029/receipts/DENOMINATOR_RECHECK.json": {
+   "bytes": 18837,
+   "sha256": "4920e6a00a8b2cd5e38259d3207ed5b9d3810e1b94257f8e3c4b6af22794dcc0"
+  },
+  "evidence/R20-FHS-20261029/receipts/KANBAN_R20.json": {
+   "bytes": 1620,
+   "sha256": "d9a688887d9c399c7886421a2b93c59f538ddc68997efefc2616986270c14ba1"
+  },
+  "evidence/R20-FHS-20261029/receipts/P1B_LOCATOR_REPAIR.json": {
+   "bytes": 1012,
+   "sha256": "3654835cd42bf9832da8dff88b2a1d0b21c0163c7ebabbbb08b6ca59aa860d9b"
+  },
+  "evidence/R20-FHS-20261029/receipts/P1C_IDEMPOTENCE.json": {
+   "bytes": 630,
+   "sha256": "854a302b5d30fc2492f15e4d46839b8767e0b436f28ae829a79d9bc9904d4591"
+  },
+  "evidence/R20-FHS-20261029/receipts/P1C_VALIDATE.json": {
+   "bytes": 1475,
+   "sha256": "575f8665156a815340d9ad863fe2b7584817bd09cc575a80ea49dfb51a7ae73a"
+  },
+  "evidence/R20-FHS-20261029/receipts/P1D_PACKAGE.json": {
+   "bytes": 1290,
+   "sha256": "91c2aadff38321c8aedb766ff42f8e9942c171432bbc303342a6ecc49a59392c"
+  },
+  "evidence/R20-FHS-20261029/receipts/P1D_R20B_CHECKSUM_REPAIR.json": {
+   "bytes": 1450,
+   "sha256": "c3722df27238b98da4fb19fece14097e96148dea5cf641081904d94cd6068127"
+  },
+  "evidence/R20-FHS-20261029/receipts/P1E_SHIPPED_VERIFICATION.json": {
+   "bytes": 603,
+   "sha256": "538f4f1be7d23604a5c457f0223389adb1844143de2bf9bfb8be22add7dc3a1f"
+  },
+  "evidence/R20-FHS-20261029/receipts/P2A_AUTHOR_TABLES.json": {
+   "bytes": 596,
+   "sha256": "0e95e262fb01ae807c0401f3fafe184262304abb545c21320af7c57b8a8f0a59"
+  },
+  "evidence/R20-FHS-20261029/receipts/P3_DISPATCHER_NEGATIVE_TESTS.json": {
+   "bytes": 3229,
+   "sha256": "8635943c63d41e158cbf6e60133a194a3038eb7168a07945282025e62ce2f46a"
+  },
+  "evidence/R20-FHS-20261029/receipts/R3_BUILD_COPY.json": {
+   "bytes": 1051,
+   "sha256": "2f0509ed78df0100dee528e75566491aa386b87c50d54e8bd9f93e829e1c7d78"
+  },
+  "evidence/R20-FHS-20261029/receipts/VERIFY_LANE_R20.json": {
+   "bytes": 6785,
+   "sha256": "ae979b6e212963521906ca468364b5e0f328ff1826b2d0f58d7ea6debd5bddfa"
+  },
+  "evidence/R20-FHS-20261029/receipts/VERIFY_LANE_R20_PASS2.json": {
+   "bytes": 7104,
+   "sha256": "02af3480b4488520efafd8ce12bbde20ab58ebd2d3a99a02d71904cdfe09896a"
+  },
+  "evidence/R20-FHS-20261029/receipts/VERIFY_LANE_R20_PASS3.json": {
+   "bytes": 7261,
+   "sha256": "e27a30bbb4e9e343eb69d33c9df46fe99066f0e9220a3b13bab45fa4b8e498f0"
+  },
+  "evidence/R20-FHS-20261029/receipts/VERIFY_LANE_R20_PASS4.json": {
+   "bytes": 7628,
+   "sha256": "c3b8a0f001eb7305928edfe4a9379020347bf0c372f6e80757c7797e37aa6124"
+  },
+  "evidence/R20-FHS-20261029/receipts/VERIFY_LANE_R20_PASS5.json": {
+   "bytes": 7256,
+   "sha256": "ed8b8b61af07962c11fcbde600432f6c1493992c8d9b37b68704c2cb062290e5"
+  },
+  "evidence/R20-FHS-20261029/receipts/validate_r2_pristine.out": {
+   "bytes": 298,
+   "sha256": "c00c1ef1e95cfe071004e97e41f4c17cbc9cff192793b2db6d11d961a9c76e4b"
+  },
+  "evidence/R20-FHS-20261029/receipts/validate_r3_run1.out": {
+   "bytes": 102,
+   "sha256": "a9f9c542ff632aaf1558e1813fc1e90d7ba81e7bb776bc9221c26dabb7fb2fcc"
+  },
+  "evidence/R20-FHS-20261029/receipts/validate_r3_run2.out": {
+   "bytes": 102,
+   "sha256": "a9f9c542ff632aaf1558e1813fc1e90d7ba81e7bb776bc9221c26dabb7fb2fcc"
+  },
+  "evidence/R20-FHS-20261029/receipts/validate_r3_shipped.out": {
+   "bytes": 102,
+   "sha256": "a9f9c542ff632aaf1558e1813fc1e90d7ba81e7bb776bc9221c26dabb7fb2fcc"
+  },
+  "evidence/R20-FHS-20261029/tables/HOLD_DISPOSITION.tsv": {
+   "bytes": 12965,
+   "sha256": "b549fd57a19d0eb69558490c0e909013fa8de63b0d3b64cf5ebe07f05511d755"
+  },
+  "evidence/R20-FHS-20261029/tables/STAGE18_TRACE.tsv": {
+   "bytes": 2800,
+   "sha256": "a0b9f195b751487157ed63a8cb72a5cfff446a4ecd384a82d68f9730f7fcd462"
+  }
+ },
+ "package_tree": {
+  "files": 89,
+  "validator_failed": 0,
+  "validator_passed": 2789,
+  "zip_bytes": 13578117,
+  "zip_sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f"
+ },
+ "schema": "R20.DELIVERY_HASHES/1"
+}

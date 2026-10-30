@@ -1,0 +1,33 @@
+{
+ "schema": "R20.R3_VALIDATE/1",
+ "at": "2026-10-29T12:52:56.084329+00:00",
+ "revision3": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3",
+ "short_root": "C:\\r20pkg3",
+ "short_root_reason": "Win32 long paths disabled on this host; 37/85 subject paths exceed 260 chars",
+ "copy_byte_identical": true,
+ "copy_file_count": 84,
+ "run1": {
+  "tag": "run1",
+  "rc": 0,
+  "passed": 2789,
+  "failed": 0,
+  "failing_cases": [],
+  "scope": "AUTHOR_STATIC_FIXTURES_ONLY",
+  "stdout_path": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\receipts\\validate_r3_run1.out"
+ },
+ "run2": {
+  "tag": "run2",
+  "rc": 0,
+  "passed": 2789,
+  "failed": 0,
+  "failing_cases": [],
+  "scope": "AUTHOR_STATIC_FIXTURES_ONLY",
+  "stdout_path": "C:\\Projects\\Agent_Workspace\\var\\R20-FHS-20261029\\receipts\\validate_r3_run2.out"
+ },
+ "tree_hash_after_run1": "b89b55c552f0f02f212e50ad4c2307728f0bfe369964d46d7fa4b91b584b8f5b",
+ "tree_hash_after_run2": "e8cc5f40f7996a32c3dc1061d5ba776c5d9d0391fc567152fff60fa3e5f62e37",
+ "idempotent": false,
+ "static_validation_result_sha256_after_run1": "d96981a4856f34849a5b874930dc0d33598d541dfea798504e5d917e871a90ec",
+ "static_validation_result_sha256_after_run2": "db91ddc608e74da0ca9ff49a4e1113fa7622ab11a21e6d5079e93149dcf302f2",
+ "reproducible": false
+}

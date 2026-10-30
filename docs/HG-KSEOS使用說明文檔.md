@@ -9,23 +9,6 @@ authority_note: operational projection; normative truth lives in Master/Stage co
 
 # HG-KSEOS 使用說明文檔
 
-> **B1 closure 2026-10-28（本節為本次新增，原文以下保留不動）**
->
-> 本棧在 FHS-MSC B1（PKG_00～08）的角色、驗證方式與證據位置，已整合進
-> `docs/FHS-B1_使用說明文檔.md`（跨棧單一入口）。要五分鐘驗證請看該文件 §2；
-> 要看本棧專屬狀態請看本節 §B1。
-> claim ceiling：**本地已升格基線 `B1-LOCAL-2026-10-28`**，但 `release: NOT_RUN`、repo `main` 未合併、無第三方驗收。
-
-## B1 狀態快照（2026-10-28，實測）
-
-| 項目 | 值 |
-|---|---|
-| 閘門 | `G-A 6/6 PASS`、`GWO ALL_THREE_PASS`、`G-B PASS`、`gates_conjunction PASS`、`mission_complete true` |
-| native 路徑 | 245 筆 `native_admission`（1 首發 ＋ 244 案 corpus）、735 nonce、245 lease、`case_fail 0` |
-| 簽章 | registry rev10（`d7019575…`）、宣告 `9fb04a82…`、裁決 `a587491e…`、升格收據 `5a19f3cd…`，全部 `VERIFIED` |
-| 回推點 | `var/B1-PIPD-PKG-20261027/SNAPSHOTS/B1_PRE_PROMOTION_20261028/`（逐檔 sha256） |
-| 證據索引 | PR 分支 `b1/closure-20261028` 的 `b1_closure_20261028/EVIDENCE_INDEX.md` |
-
 > 本文是 **projection / operational manual**，不是 authority / policy source / requirement source。
 > 權威來源依 Master/Stage contracts 與 current machine truth：RP-002 master（sha `3bc4ad6c…`）、Stage-2 r2（`66c4f708…`）、subject（`946de0d7…`）、`Fabric\stage\RP002-STAGE-HGK\` 內 seal / handoff / receipts。
 > **Current claim**: RP-002 v2.0 **Stage-2 externally accepted**（`Fabric\stage\RP002-STAGE-HGK\EXTERNAL_ACCEPTANCE_RECEIPT_STAGE2.yaml`，`PASS_CHALLENGE` / `GRANTED`）。Next gate = **SQP1（NOT_AUTHORIZED）**；本文件任務**不執行 Stage-3 / SQP1**。Production / live / remote 一律 `NOT_CLAIMED`。
@@ -536,23 +519,3 @@ powershell -File .\scripts\start-hgk-hermes.ps1 -Action Verify   # lane 隔離�
 - **2026-08-12 A-3 operability delta**：`WO-HGK-A3-001`（v2026.08.12-r2）README / User Guide / Skill steering hardening；claim ceiling = `HGK_SQS_A3_OPERABILITY_STEERING_READY`（never production / live / remote）。
 - **Hermes reinstall handoff（historical）**：`C:\Projects\Agent_Workspace\Fabric\evidence\review\RP002_PRE_HERMES_REINSTALL_HANDOFF.md` / `RP002_POST_HERMES_REINSTALL_HANDOFF.md` 屬 pre/post reinstall 歷史；current binding 以 `config/hermes.json` fresh-read 為準。
 - **RP-002 早期狀態**：`Fabric\rp002\CHECKPOINT.json`（CP-003，D1→C1）為 Stage-2 早期 checkpoint，屬歷史；current 以 Stage-2 seal / external receipt 為準。Knowledge K1/KG1 已於 Stage-2 完成治理（§23/§31b），不再 DEFERRED。
-
-## B1 專節：native admission kernel
-
-- 信任根：`C:\ProgramData\HG-KSEOS
-ative-admissionegistry.json`，`status ACTIVE`、3 個互異 OS SID、1 把 owner key。
-- `assert_protected()` 已改**純 .NET ACL API**（`[System.IO.File]::GetAccessControl`）並消毒 `PSModulePath`：
-  舊版透過 PowerShell `Get-Acl`，在 `PSModulePath` 被外部 runtime 污染時 `Import-Module Microsoft.PowerShell.Security` 失敗，
-  造成**永久假陰性** `ERR_NATIVE_TRUST_ACL_UNPROTECTED`（D-16）。
-- 車道：`served_arm` 走 OWNER 宣告的 `HGK-LANE-ARM-ALIASES/1`，另留 `served_arm_raw`，不把 `desktop_router` 冒充 `openai-codex`。
-- 驗證：
-
-```bash
-PYTHONPATH=C:/Projects/Agent_Workspace/HG-KSEOS/src python -c "from hg_kseos.native_admission import ProtectedRegistry as P; print(P().snapshot())"
-python -m pytest tests/test_user_trust.py tests/test_native_admission.py tests/test_native_boundaries.py tests/test_spine.py -q
-```
-
-## B1 專節：無人值守邊界
-
-- reference TTL 由 `native-trust-maintenance.ps1:151` 硬性限制 3600 秒（>3600 直接 throw）；**不要放寬**，用排程解鎖 ＋ journal 續跑。
-- 一次解鎖可簽完整批（load-once）；把同一目的的簽章排進同一次口令提示。

@@ -105,6 +105,18 @@ CREATE TABLE IF NOT EXISTS leases (
     created_at TEXT NOT NULL
 );
 
+-- Native admission v1 is in the existing SharedSpine database and transaction.
+-- Apply only through an Owner-admitted maintenance migration; no parallel DB.
+CREATE TABLE IF NOT EXISTS native_admission_nonces (
+    nonce TEXT PRIMARY KEY,
+    subject_sha256 TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS native_admission_leases (
+    resource_id TEXT PRIMARY KEY,
+    generation INTEGER NOT NULL CHECK(generation >= 1)
+);
+INSERT OR REPLACE INTO schema_meta(key,value) VALUES ('native_admission_schema_version','1');
+
 CREATE TABLE IF NOT EXISTS canonical_events (
     event_id TEXT PRIMARY KEY,
     idempotency_key TEXT NOT NULL UNIQUE,

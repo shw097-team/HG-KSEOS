@@ -1,0 +1,21 @@
+{
+ "schema": "R20.R3_SHIPPED_VERIFICATION/1",
+ "package_files": 89,
+ "copy_ok": true,
+ "copy_byte_identical": true,
+ "validator": {
+  "rc": 0,
+  "passed": 2789,
+  "failed": 0,
+  "scope": "AUTHOR_STATIC_FIXTURES_ONLY",
+  "failing_cases": []
+ },
+ "zip": {
+  "published_sha256": "0432b9b4e572369d8856803f35b88b85b2d976b3f8d80e9f2f14c30eece1b06c",
+  "rebuilt_sha256": "0432b9b4e572369d8856803f35b88b85b2d976b3f8d80e9f2f14c30eece1b06c",
+  "deterministic": true,
+  "entries": 89,
+  "entries_match_files": true
+ },
+ "tree_sha256_of_listing": "912456225f6a70090356aa720f3463e62eb9b8091f07ab0fb40e52d410bc4c42"
+}
