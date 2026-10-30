@@ -1,0 +1,155 @@
+{
+  "schema": "POLICY-LOADED-CONSUMER-ACK/1",
+  "work_package": "WP-FHS-02",
+  "scope": {
+    "subject": "FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1/WP-FHS-02",
+    "source_sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+    "candidate_sha256": "2bd4d56f2b90fdd5dbc6efd28e681521530254c2a5970415f0841f8be5dbc8bd",
+    "policy_epoch": "34",
+    "policy_status": "IN_FORCE"
+  },
+  "layers": [
+    {
+      "layer": "source",
+      "plane": "Fabric",
+      "state": "PRESENT",
+      "path": "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\rp002\\RP002_CHANGE_CLASS_ROUTER.yaml",
+      "sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+      "note": "the policy source the consumer reads"
+    },
+    {
+      "layer": "stage",
+      "plane": "Fabric",
+      "state": "ABSENT",
+      "note": "no staged copy exists for this policy on this host"
+    },
+    {
+      "layer": "approve",
+      "plane": "Fabric",
+      "state": "PRESENT",
+      "path": "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\rp002\\FROZEN_ACCEPTANCE_ORACLE.yaml",
+      "sha256": "6e58423cf9016f8e028893f41b3443450270c080a35c6a033f10d1c91b31db4a",
+      "note": "the frozen acceptance oracle that approves the class routes"
+    },
+    {
+      "layer": "active",
+      "plane": "HG-KSEOS",
+      "state": "PRESENT",
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\lane-routing-registry.yaml",
+      "sha256": "d7a1bfd1abc43c162aae954e0ec9233d9dd0977121a1765467880e7457089787",
+      "note": "Fabric has no policy-epoch object; the in-force epoch declaration is the control plane's",
+      "contract_epoch": "34",
+      "status": "IN_FORCE"
+    },
+    {
+      "layer": "loaded",
+      "plane": "Fabric consumer",
+      "state": "PRESENT",
+      "module": "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\fabric\\consumers\\hgk_policy_consumer.py",
+      "module_sha256": "2bd4d56f2b90fdd5dbc6efd28e681521530254c2a5970415f0841f8be5dbc8bd",
+      "policy_file_read": "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\rp002\\RP002_CHANGE_CLASS_ROUTER.yaml",
+      "policy_sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+      "classes_loaded": [
+        "CONFIG_PREAPPROVED",
+        "CONSTITUTIONAL_CHANGE",
+        "DOMAIN_CHANGE",
+        "PIPELINE_CHANGE",
+        "PROFILE_CHANGE",
+        "PROVIDER_UPGRADE",
+        "RUNTIME_TRANSIENT",
+        "SKILL_CHANGE",
+        "STACK_CHANGE"
+      ],
+      "classes_count": 9
+    },
+    {
+      "layer": "consumer",
+      "plane": "Fabric consumer",
+      "state": "PRESENT",
+      "route_readback": {
+        "CONFIG_PREAPPROVED": {
+          "verdict": "ROUTE_OK",
+          "route": "OWNING_STACK_ORCHESTRATOR_APPLY_SMOKE_READBACK",
+          "consumer": "owning-stack-orchestrator",
+          "precondition": "EXISTING_ADMITTED_PROFILE_AND_POLICY"
+        },
+        "CONSTITUTIONAL_CHANGE": {
+          "verdict": "ROUTE_OK",
+          "route": "HUMAN_META_ORACLE",
+          "consumer": "human/meta-oracle",
+          "auto_promotion": false
+        },
+        "DOMAIN_CHANGE": {
+          "verdict": "ROUTE_OK",
+          "route": "DOMAIN_AUTHORITY_TO_ORACLE_TO_HGK",
+          "consumer": "domain-owner->oracle->hgk",
+          "domain_checker_required": true
+        },
+        "PIPELINE_CHANGE": {
+          "verdict": "ROUTE_OK",
+          "route": "ORACLE_TO_HGK",
+          "consumer": "oracle-commander->hgk",
+          "oracle_required": true,
+          "pack": "multi-profile-pipeline"
+        },
+        "PROFILE_CHANGE": {
+          "verdict": "ROUTE_OK",
+          "route": "ORACLE_TO_HGK",
+          "consumer": "oracle-commander->hgk",
+          "oracle_required": true,
+          "pack": "profile"
+        },
+        "PROVIDER_UPGRADE": {
+          "verdict": "ROUTE_OK",
+          "route": "ORACLE_TO_HGK_QUALIFICATION_ONLY",
+          "consumer": "oracle-commander->hgk",
+          "oracle_required": true,
+          "pack": "shared-service"
+        },
+        "RUNTIME_TRANSIENT": {
+          "verdict": "ROUTE_OK",
+          "route": "HERMES_NATIVE",
+          "consumer": "hermes-native",
+          "oracle_required": false
+        },
+        "SKILL_CHANGE": {
+          "verdict": "ROUTE_OK",
+          "route": "ORACLE_TO_HGK",
+          "consumer": "oracle-commander->hgk",
+          "oracle_required": true,
+          "pack": "skill"
+        },
+        "STACK_CHANGE": {
+          "verdict": "ROUTE_OK",
+          "route": "ORACLE_TO_HGK",
+          "consumer": "oracle-commander->hgk",
+          "oracle_required": true,
+          "pack": "stack"
+        },
+        "__unknown_class__": {
+          "verdict": "FAIL_CLOSED",
+          "reason": "UNKNOWN_CHANGE_CLASS:NOT_A_CLASS"
+        }
+      },
+      "all_route_ok": true,
+      "unknown_class_fails_closed": true
+    }
+  ],
+  "layers_present": [
+    "source",
+    "approve",
+    "active",
+    "loaded",
+    "consumer"
+  ],
+  "layers_absent": [
+    "stage"
+  ],
+  "problems": [],
+  "verdict_inputs": {
+    "all_six_present": false,
+    "consumer_readback_by_the_original_consumer": true,
+    "unknown_class_fails_closed": true
+  },
+  "recorded_at": "2026-10-30T14:15:02+00:00"
+}
