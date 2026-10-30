@@ -49,7 +49,11 @@ def judge(entry: dict) -> dict:
         "occurrences": occ,
         "status": entry.get("status", "OPEN"),
         "regression_test": test,
-        "blocked": bool(problems) and entry.get("status") != "CLOSED_WITH_TEST",
+        # A self-declared CLOSED_WITH_TEST status is NOT a licence: if the named test is missing or
+        # does not mention the class, the class is open no matter what the row says. Measured by the
+        # independent checker on 2026-10-30: a two-occurrence entry pointing at a nonexistent file
+        # returned blocked=false while its own `problems` explained the file was missing.
+        "blocked": bool(problems),
         "problems": problems,
     }
 

@@ -161,3 +161,28 @@ def test_manifest_refuses_incomplete_walk(tmp_path):
                         "--out", str(tmp_path / "out")], capture_output=True, text=True)
     assert p.returncode == 7
     assert "EMPTY" in p.stdout
+
+
+def test_recurrence_gate_does_not_fail_open(tmp_path):
+    """RC-VACUOUS-PASS: a declared status must not excuse a missing regression test.
+
+    The independent checker (2026-10-30) convicted the first version of this gate: an entry whose
+    status said CLOSED_WITH_TEST but whose named test did not exist returned blocked=false while its
+    own `problems` field said the file was missing.
+    """
+    ledger = tmp_path / "ledger.json"
+    ledger.write_text(json.dumps({"schema": "RECURRENCE-LEDGER/1", "classes": [{
+        "class_id": "RC-PROBE", "occurrences": [{"date": "d1"}, {"date": "d2"}],
+        "status": "CLOSED_WITH_TEST",
+        "regression_test": "tests/does_not_exist.py::test_nope"}]}), encoding="utf-8")
+
+    script = SCRIPTS / "recurrence_gate.py"
+    src = script.read_text(encoding="utf-8").replace(
+        'LEDGER = ROOT / "config" / "recurrence-ledger.json"', f'LEDGER = Path(r"{ledger}")')
+    local = tmp_path / "recurrence_gate_local.py"
+    local.write_text(src.replace('ROOT = Path(__file__).resolve().parents[1]', f'ROOT = Path(r"{tmp_path}")'),
+                     encoding="utf-8")
+    p = subprocess.run([sys.executable, str(local), "--all"], capture_output=True, text=True)
+    assert p.returncode == 2, p.stdout + p.stderr
+    out = json.loads(p.stdout)
+    assert out["blocked"] == ["RC-PROBE"]
