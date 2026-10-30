@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """review_lock — the maker may not move the subject while a checker is reading it.
 
+
+try:  # keep every console child off the owner's desktop (see scripts/winproc.py)
+    import winproc as _winproc  # noqa: E402  (same directory)
+    _winproc.install()
+except Exception:  # a missing helper must not stop a lane
+    pass
 Why this exists: on 2026-10-30 two independent checker sittings ended with
 `ERR_CHECKER_MUTATED_SUBJECT` / `verdict_void_reason: the guarded subject changed during the turn`
 because the maker committed into the guarded tree while the checker was running. The guard did its job

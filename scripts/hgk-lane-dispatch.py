@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 """hgk-lane-dispatch.py - lane-parameterised Codex-CLI dispatch over the ordered pool.
 
+
+try:  # keep every console child off the owner's desktop (see scripts/winproc.py)
+    import winproc as _winproc  # noqa: E402  (same directory)
+    _winproc.install()
+except Exception:  # a missing helper must not stop a lane
+    pass
 FAR ruling (owner instruction 2026-10-10): PLAN stays on the harness engine; EXECUTE and
 VERIFY_SECURITY are handed to the CODEX CLI. The pool artifact is the selection AUTHORITY; this
 call site owns MEASUREMENT (it runs the real Codex turn per candidate).

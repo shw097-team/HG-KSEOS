@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """stall_monitor -- does the running work look stuck, and if so, stop it instead of waiting.
 
+
+try:  # keep every console child off the owner's desktop (see scripts/winproc.py)
+    import winproc as _winproc  # noqa: E402  (same directory)
+    _winproc.install()
+except Exception:  # a missing helper must not stop a lane
+    pass
 The owner's rule, turned into a check: any task running longer than 10 minutes, and any task blocked more than
 4 times by the same abnormal cause, must be diagnosed or paused immediately rather than left to grind.
 

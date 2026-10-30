@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """ops_status -- one surface that answers "is anything running right now", for a human, at a glance.
 
+
+try:  # keep every console child off the owner's desktop (see scripts/winproc.py)
+    import winproc as _winproc  # noqa: E402  (same directory)
+    _winproc.install()
+except Exception:  # a missing helper must not stop a lane
+    pass
 Two failures made this necessary, both measured on 2026-10-30:
 
   1. I told the owner a VERIFY run was in flight. It had already finished 3 minutes earlier and produced no

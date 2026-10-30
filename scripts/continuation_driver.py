@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """continuation_driver -- keeps the round moving when no turn is running.
 
+
+try:  # keep every console child off the owner's desktop (see scripts/winproc.py)
+    import winproc as _winproc  # noqa: E402  (same directory)
+    _winproc.install()
+except Exception:  # a missing helper must not stop a lane
+    pass
 The problem this solves, measured: the owner's standing order is "do not stop to report or ask". The assistant's
 only output is a message, and a turn ends when it stops calling tools, so no gate, hook or event is ever invoked
 at that moment. Nothing in this deployment resumed work afterwards -- `hermes cron list` was empty, the queue of
