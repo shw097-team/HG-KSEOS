@@ -1,0 +1,81 @@
+{
+  "claim_ceiling": "same-host original consumer executed; this is not a host activation by a separate issuer",
+  "done_check": {
+    "caveat": "the Active layer is the stack manifest, not an epoch object; if Fabric later declares an epoch the Active hash must be re-issued",
+    "six_layers_hashed_in_same_scope": true
+  },
+  "layers": {
+    "Active": {
+      "note": "Fabric carries no declared policy epoch; the stack manifest is the object in force. Recorded as an interpretation with a falsifier.",
+      "object": "HGK_STACK_MANIFEST.yaml",
+      "sha256": "400c0502dd809ea32f96b2f1fa6983e42651ce932a06a768d64f3581cb2cfc96"
+    },
+    "Approve": {
+      "by": "owner envelope WIN-12cb9b954e99",
+      "scope": "merge_authorization,registry_row_sign"
+    },
+    "Consumer": {
+      "acks": {
+        "CONFIG_PREAPPROVED": {
+          "consumer": "owning-stack-orchestrator",
+          "precondition": "EXISTING_ADMITTED_PROFILE_AND_POLICY",
+          "route": "OWNING_STACK_ORCHESTRATOR_APPLY_SMOKE_READBACK",
+          "verdict": "ROUTE_OK"
+        },
+        "PIPELINE_CHANGE": {
+          "consumer": "oracle-commander->hgk",
+          "oracle_required": true,
+          "pack": "multi-profile-pipeline",
+          "route": "ORACLE_TO_HGK",
+          "verdict": "ROUTE_OK"
+        },
+        "PROFILE_CHANGE": {
+          "consumer": "oracle-commander->hgk",
+          "oracle_required": true,
+          "pack": "profile",
+          "route": "ORACLE_TO_HGK",
+          "verdict": "ROUTE_OK"
+        },
+        "RUNTIME_TRANSIENT": {
+          "consumer": "hermes-native",
+          "oracle_required": false,
+          "route": "HERMES_NATIVE",
+          "verdict": "ROUTE_OK"
+        },
+        "SKILL_CHANGE": {
+          "consumer": "oracle-commander->hgk",
+          "oracle_required": true,
+          "pack": "skill",
+          "route": "ORACLE_TO_HGK",
+          "verdict": "ROUTE_OK"
+        }
+      },
+      "call": "hgk_policy_consumer.route_event(change_class)"
+    },
+    "Loaded": {
+      "interpreter": "3.11.17",
+      "module": "C:\\Projects/Agent_Workspace/Fabric/FABRIC\\fabric\\consumers\\hgk_policy_consumer.py",
+      "router_rows_loaded": 9,
+      "sha256": "2bd4d56f2b90fdd5dbc6efd28e681521530254c2a5970415f0841f8be5dbc8bd"
+    },
+    "Source": {
+      "git_head": "fffcb98bf8063e04f3fad2c726eb43fd70336d04",
+      "repo": "Fabric",
+      "scope": "C:/Projects/Agent_Workspace/Fabric/FABRIC"
+    },
+    "Stage": {
+      "equals_head": true,
+      "router_file": "rp002/RP002_CHANGE_CLASS_ROUTER.yaml",
+      "sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734"
+    }
+  },
+  "neg_control": {
+    "case": "Stage document posing as Loaded ACK",
+    "expected_first_fail": "WP-FHS-02.FIRST_FAIL:POLICY_NOT_LOADED",
+    "how_to_reproduce": "load the yaml as text without importing the consumer and claim ROUTE_OK; the claim has no route_event ACK and is refused"
+  },
+  "recorded_at": "2026-10-30T20:11:27",
+  "run": "FAR-HANDOFF-V1-CAPABILITY-MISREAD-20261030",
+  "schema": "POLICY-CONSUMER-CHAIN/1",
+  "wp": "WP-FHS-02"
+}
