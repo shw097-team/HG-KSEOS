@@ -2791,9 +2791,12 @@ def main() -> int:
                         "attempts": attempts}
             _p = Path(args.json_out)
             _p.parent.mkdir(parents=True, exist_ok=True)
-            _p.write_text(json.dumps(_partial, indent=2, ensure_ascii=False), encoding="utf-8")
-        except Exception:  # noqa: BLE001 - never block the turn on a bookkeeping write
-            pass
+            # default=str: attempt records carry non-JSON scalars (Paths, datetimes). The first version of
+            # this write swallowed the resulting TypeError and persisted nothing -- the same shape as a
+            # vacuous pass -- so a failure here is reported, not hidden.
+            _p.write_text(json.dumps(_partial, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
+        except Exception as _exc:  # noqa: BLE001 - never block the turn on a bookkeeping write
+            print(f"WARN_RECEIPT_PARTIAL_NOT_WRITTEN: {type(_exc).__name__}: {_exc}", file=sys.stderr)
 
     # ---- D4 (cont.): CONSUME the single-use budget iff an attempt actually served this turn ----
     # A successful spawn (the attempt that serves the turn) marks the authorization resource USED via
