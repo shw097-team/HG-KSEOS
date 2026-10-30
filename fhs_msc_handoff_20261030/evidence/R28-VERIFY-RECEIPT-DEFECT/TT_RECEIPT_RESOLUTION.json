@@ -1,0 +1,38 @@
+{
+  "schema": "TT-CLOSURE/1",
+  "tt_id": "TT-VERIFY-RECEIPT-NOT-PERSISTED",
+  "root_cause": "the dispatcher marks an attempt as serving only when the child echoes the nonce in its output stream; five briefs asked the officer to record the nonce inside verdict.json but not in its reply, so nonce_present stayed false, no attempt was ever accepted as serving, and the run ended without a final receipt",
+  "why_it_looked_like_a_crash": "the receipt existed only as the provisional write; the final write never ran because `used` was never set",
+  "fix": "the briefing contract now requires `NONCE-ECHO: <nonce>` as the first line of the officer's reply; the dispatcher is unchanged",
+  "proof": {
+    "sitting": 8,
+    "nonce": "NONCE-AO-R28-H-20261030",
+    "receipt": "C:/wg/ao11/ao_r28h.json",
+    "ok": true,
+    "receipt_complete": true,
+    "nonce_present": true,
+    "usage_receipt_ok": true,
+    "asked": "gpt-6.1-sol",
+    "served": "gpt-6.1-sol",
+    "rank": 1,
+    "seconds": 163.65,
+    "gate": {
+      "verdict": "LANE_SERVED_AS_CLAIMED",
+      "receipt_complete": true,
+      "lane": "VERIFY_SECURITY",
+      "asked": "gpt-6.1-sol",
+      "served": "gpt-6.1-sol",
+      "rank": 1,
+      "seconds": 163.65,
+      "problems": [],
+      "receipt": "C:\\wg\\ao11\\ao_r28h.json"
+    },
+    "officer_verdict": "PASS 6/6, 0 convictions"
+  },
+  "observation": {
+    "provider_field": "desktop_router",
+    "expected_in_registry": "openai-codex",
+    "note": "the model identity matches and rank is 1; the provider label differs and the gate does not compare it yet -- recorded, not hidden"
+  },
+  "closed_at": "2026-10-30T22:11:43"
+}
