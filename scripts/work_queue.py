@@ -1,0 +1,193 @@
+#!/usr/bin/env python3
+"""work_queue -- the delivery's WPs as control-plane rows, so "what is next" is computed, not remembered.
+
+Why this exists: the remaining work for this round kept living in a session's context. Two turns ago that
+produced a WP ordering that contradicted the delivery's own DAG (10 → 11 → 12 → 13 → 17 → 20 where the
+dependencies require 17 → 20 → 11 → 13 → 10 → 12). A queue in `hg-kseos.db` cannot be lost to a compaction.
+
+Rows are seeded from the delivery's `DAG dependency` lines, not from prose written by hand, and refreshed with
+the verdict actually present in `acceptances`.
+
+Usage:
+  work_queue.py init      [--delivery PATH]        seed/refresh rows from the delivery
+  work_queue.py show                               every row, in DAG order, with what blocks it
+  work_queue.py next      [--json]                 the one WP that may run now, and its phase
+Exit 0 always for show/next (an empty queue is a result, not an error); init exits 2 if the delivery is unreadable.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sqlite3
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+DB = Path(r"C:/Projects/Agent_Workspace/HG-KSEOS/var/shared-spine/hg-kseos.db")
+DELIVERY = Path(
+    r"C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/"
+    r"FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1/"
+    r"01_FHS-MSC_PIPD-LS-PKG_BODY/11_WORKPACKAGES_AND_DAG.md"
+)
+
+SCHEMA = """
+CREATE TABLE IF NOT EXISTS work_queue (
+    wp_id       TEXT PRIMARY KEY,
+    title       TEXT NOT NULL,
+    depends_on  TEXT NOT NULL DEFAULT '',   -- comma separated WP-FHS-nn
+    effect_class TEXT NOT NULL DEFAULT '',
+    state       TEXT NOT NULL DEFAULT 'PENDING',
+    evidence_ref TEXT,
+    updated_at  TEXT NOT NULL
+)
+"""
+
+
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def connect() -> sqlite3.Connection:
+    con = sqlite3.connect(DB)
+    con.execute(SCHEMA)
+    return con
+
+
+def parse_delivery(path: Path) -> list[dict]:
+    text = path.read_text(encoding="utf-8", errors="replace")
+    rows: list[dict] = []
+    for block in re.split(r"###\s+", text)[1:]:
+        m = re.match(r"WP-FHS-(\d\d)｜(.+)", block)
+        if not m:
+            continue
+        wp = f"WP-FHS-{m.group(1)}"
+        dep = re.search(r"\*\*DAG dependency\*\*：(.+?)\n", block)
+        eff = re.search(r"\*\*EffectClass / Admission\*\*：(.+?)\n", block)
+        deps = re.findall(r"WP-FHS-\d\d", dep.group(1)) if dep else []
+        rows.append({"wp_id": wp, "title": m.group(2).strip(), "depends_on": ",".join(deps),
+                     "effect_class": (eff.group(1).split("`")[1] if eff and "`" in eff.group(1) else "")})
+    return rows
+
+
+def verdicts(con: sqlite3.Connection) -> dict[str, str]:
+    """A WP is PASS only if some acceptance row for it says PASS (a -V2 upgrade counts; history stays)."""
+    out: dict[str, str] = {}
+    try:
+        rows = con.execute(
+            "SELECT acceptance_id, verdict FROM acceptances WHERE acceptance_id LIKE 'ACC-WP-FHS-%'"
+        ).fetchall()
+    except sqlite3.OperationalError:
+        return out
+    for aid, verd in rows:
+        wp = "WP-FHS-" + aid.replace("ACC-WP-FHS-", "").split("-")[0]
+        if out.get(wp) != "PASS":
+            out[wp] = verd
+    return out
+
+
+def refresh(con: sqlite3.Connection) -> None:
+    v = verdicts(con)
+    for wp, state in v.items():
+        con.execute("UPDATE work_queue SET state=?, updated_at=? WHERE wp_id=?", (state, now(), wp))
+    con.commit()
+
+
+def cmd_init(args) -> int:
+    path = Path(args.delivery)
+    if not path.is_file():
+        print(json.dumps({"error": "DELIVERY_UNREADABLE", "path": str(path)}))
+        return 2
+    rows = parse_delivery(path)
+    if not rows:
+        print(json.dumps({"error": "NO_WORK_PACKAGES_PARSED", "path": str(path)}))
+        return 2
+    con = connect()
+    for r in rows:
+        con.execute(
+            "INSERT INTO work_queue (wp_id,title,depends_on,effect_class,state,updated_at) "
+            "VALUES (?,?,?,?,'PENDING',?) ON CONFLICT(wp_id) DO UPDATE SET "
+            "title=excluded.title, depends_on=excluded.depends_on, effect_class=excluded.effect_class",
+            (r["wp_id"], r["title"], r["depends_on"], r["effect_class"], now()),
+        )
+    con.commit()
+    refresh(con)
+    n = con.execute("SELECT COUNT(*) FROM work_queue").fetchone()[0]
+    print(json.dumps({"seeded": n, "delivery": str(path), "classes": sorted({r["effect_class"] for r in rows})}))
+    return 0
+
+
+def load(con: sqlite3.Connection) -> list[dict]:
+    con.row_factory = sqlite3.Row
+    return [dict(r) for r in con.execute(
+        "SELECT wp_id,title,depends_on,effect_class,state,evidence_ref FROM work_queue ORDER BY wp_id")]
+
+
+def blockers(row: dict, by_id: dict[str, dict]) -> list[str]:
+    if not row["depends_on"]:
+        return []
+    return [d for d in row["depends_on"].split(",") if d and by_id.get(d, {}).get("state") != "PASS"]
+
+
+def phase(wp: str) -> str:
+    """What has to happen next for this WP. Briefs live in a fixed queue directory so the driver is stateless."""
+    q = Path(r"C:/wg/queue") / wp
+    brief = q / "brief.md"
+    verdict = q / "verdict.json"
+    if not brief.is_file():
+        return "NO_BRIEF"
+    if not verdict.is_file():
+        return "BRIEF_READY"
+    return "AWAITING_RECORD"
+
+
+def cmd_show(_args) -> int:
+    con = connect()
+    refresh(con)
+    rows = load(con)
+    by_id = {r["wp_id"]: r for r in rows}
+    for r in rows:
+        b = blockers(r, by_id)
+        print(f"{r['wp_id']}  {r['state']:<7} {r['effect_class']:<8} "
+              f"{'blocked by ' + ','.join(b) if b else 'ready'}")
+    print(f"\ntotal={len(rows)} pass={sum(1 for r in rows if r['state']=='PASS')} "
+          f"fail={sum(1 for r in rows if r['state']=='FAIL')} "
+          f"pending={sum(1 for r in rows if r['state']=='PENDING')}")
+    return 0
+
+
+def cmd_next(args) -> int:
+    con = connect()
+    refresh(con)
+    rows = load(con)
+    by_id = {r["wp_id"]: r for r in rows}
+    for r in rows:  # DAG order = id order minus already-done
+        if r["state"] == "PASS":
+            continue
+        b = blockers(r, by_id)
+        if b:
+            continue
+        print(json.dumps({"wp": r["wp_id"], "title": r["title"], "effect_class": r["effect_class"],
+                          "phase": phase(r["wp_id"]),
+                          "queue_dir": str(Path(r"C:/wg/queue") / r["wp_id"]),
+                          "remaining_fail": [x["wp_id"] for x in rows if x["state"] == "FAIL"]},
+                         ensure_ascii=False))
+        return 0
+    print(json.dumps({"wp": None, "verdict": "QUEUE_DRAINED",
+                      "remaining_fail": [x["wp_id"] for x in rows if x["state"] == "FAIL"]}))
+    return 0
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser()
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    p = sub.add_parser("init"); p.add_argument("--delivery", default=str(DELIVERY)); p.set_defaults(fn=cmd_init)
+    sub.add_parser("show").set_defaults(fn=cmd_show)
+    sub.add_parser("next").set_defaults(fn=cmd_next)
+    args = ap.parse_args(argv)
+    return args.fn(args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
