@@ -301,14 +301,58 @@ def refresh_status() -> None:
         pass
 
 
+def parallel_tick(n: int, dry_run: bool) -> int:
+    """Fan out one tick into up to N detached single-unit runs.
+
+    Measured 2026-10-31: a long-lived supervisor process kept creating a new class of defect every time it was
+    touched -- three copies of itself, a pid file written by two owners, and a unit wedged "in flight" for 28 minutes
+    by a receipt from a process that had died. The units are independent; the only thing needed is that several start
+    together. So there is no daemon: this tick starts N detached children and exits, and the next tick tops up.
+    """
+    import sqlite3
+    con = sqlite3.connect(str(K / "var" / "shared-spine" / "hg-kseos.db"))
+    wps = [r[0] for r in con.execute("select wp_id from work_queue order by wp_id")]
+    con.close()
+
+    started = []
+    for wp in wps:
+        if len(started) >= n:
+            break
+        if dispatch_alive(wp):
+            continue                     # this unit already owns a lane; never two dispatches of one unit
+        item = next_item(wp)             # the DAG projection decides whether it is ready, not this loop
+        if item.get("wp") != wp:
+            continue
+        if dry_run:
+            started.append({"wp": wp, "phase": item.get("phase"), "dry_run": True})
+            continue
+        flags = 0x08000000 | 0x00000008 | 0x01000000   # CREATE_NO_WINDOW | DETACHED | BREAKAWAY_FROM_JOB
+        logf = QUEUE / f"{wp}.tick.log"
+        with logf.open("a", encoding="utf-8") as fh:
+            proc = subprocess.Popen([PY, str(Path(__file__).resolve()), "--once", "--auto-record", "--wp", wp],
+                                    cwd=str(K), stdout=fh, stderr=subprocess.STDOUT,
+                                    creationflags=flags, close_fds=True)
+        started.append({"wp": wp, "phase": item.get("phase"), "pid": proc.pid})
+        log({"action": "parallel_dispatch", "wp": wp, "phase": item.get("phase"), "pid": proc.pid})
+        time.sleep(1.0)
+    refresh_status()
+    print(json.dumps({"verdict": "PARALLEL_TICK", "dispatched": started}, ensure_ascii=False))
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--once", action="store_true", help="run one step (the cron body)")
-    ap.add_argument("--wp", default=None, help="work this one unit only (parallel supervision)")
+    ap.add_argument("--wp", default=None, help="work this one unit only")
+    ap.add_argument("--parallel", type=int, default=1,
+                    help="dispatch up to N independent units in this tick, each detached (no daemon, no pid file)")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--auto-record", action="store_true",
                     help="transcribe the officer's PASS/FAIL into the registry (verdict_author stays the officer)")
     args = ap.parse_args(argv or sys.argv[1:])
+
+    if args.parallel > 1 and not args.wp:
+        return parallel_tick(args.parallel, args.dry_run)
 
     try:
         item = next_item(args.wp) if args.wp else next_item()
