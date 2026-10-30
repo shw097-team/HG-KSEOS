@@ -1716,7 +1716,26 @@ def durable_gate_preflight(args) -> dict:
         return {"verdict": "NO_GO", "detail": {"reason": "gate_unparseable", "exit": p.returncode,
                                                 "stdout_tail": (p.stdout or "")[-300:],
                                                 "stderr_tail": (p.stderr or "")[-300:]}}
-    return {"verdict": out.get("verdict", "NO_GO"), "detail": out}
+    if out.get("verdict") != "GO":
+        return {"verdict": "NO_GO", "detail": out}
+
+    # IR-2: the transport has to be alive before the spawn, or the turn reports a credential failure
+    # that is really a dead relay (observed twice: 401 with `ocx status` saying Proxy: not running).
+    relay = tools / "relay_preflight.py"
+    base = getattr(args, "relay_base", None) or ""
+    if relay.exists() and base.startswith("http"):
+        rp = subprocess.run([sys.executable, str(relay), "--base", base, "--json"],
+                            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
+        try:
+            rj = json.loads((rp.stdout or "").strip().splitlines()[-1])
+        except Exception:
+            rj = {"verdict": "RELAY_UNKNOWN", "stdout_tail": (rp.stdout or "")[-200:]}
+        if rj.get("verdict") != "RELAY_ALIVE":
+            return {"verdict": "NO_GO", "detail": {"transport": rj, "gates": out}}
+        out = dict(out)
+        out["transport"] = rj.get("verdict")
+
+    return {"verdict": "GO", "detail": out}
 
 
 def main() -> int:
