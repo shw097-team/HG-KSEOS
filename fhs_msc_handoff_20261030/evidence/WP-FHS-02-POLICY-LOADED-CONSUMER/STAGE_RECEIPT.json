@@ -1,0 +1,32 @@
+{
+  "receipt_schema": "FABRIC-STAGE-RECEIPT/1",
+  "operation": "stage_policy",
+  "producer": "Fabric Policy Owner (native staging operation, staged by stage_policy.py)",
+  "policy": "rp002/RP002_CHANGE_CLASS_ROUTER.yaml",
+  "staged_path": "C:\\Projects\\Agent_Workspace\\Fabric\\stage\\RP002-STAGE-HGK\\POLICY\\RP002_CHANGE_CLASS_ROUTER.staged.json",
+  "source_sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+  "source_bytes": 1021,
+  "stage_sha256": "e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2",
+  "stage_bytes": 2385,
+  "class_count": 9,
+  "class_names": [
+    "CONFIG_PREAPPROVED",
+    "CONSTITUTIONAL_CHANGE",
+    "DOMAIN_CHANGE",
+    "PIPELINE_CHANGE",
+    "PROFILE_CHANGE",
+    "PROVIDER_UPGRADE",
+    "RUNTIME_TRANSIENT",
+    "SKILL_CHANGE",
+    "STACK_CHANGE"
+  ],
+  "unknown_routes": [],
+  "byte_identical_to_source": false,
+  "transformation": [
+    "yaml -> json (structure preserved, no field dropped)",
+    "classes sorted by name",
+    "route_interpretation added per class from the consumer's known-route set"
+  ],
+  "staged_at": "2026-10-30T14:25:47+00:00",
+  "re_derivation": "stage_policy.py --check rebuilds this document from the source and compares classes"
+}

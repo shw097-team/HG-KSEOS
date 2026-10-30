@@ -1,0 +1,615 @@
+{
+  "schema": "INDEPENDENT-ACCEPTANCE-VERDICT/1",
+  "nonce": "NONCE-AO-R28-J-20261030",
+  "officer": "Independent Acceptance Officer",
+  "sitting": 10,
+  "work_package": "WP-FHS-02",
+  "overall": "PASS",
+  "recorded_at": "2026-10-30T14:30:04.119681+00:00",
+  "scope": {
+    "subject": "FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1/WP-FHS-02",
+    "source_sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+    "candidate_sha256": "2bd4d56f2b90fdd5dbc6efd28e681521530254c2a5970415f0841f8be5dbc8bd",
+    "policy_epoch": "34",
+    "policy_status": "IN_FORCE"
+  },
+  "authority": "Independent advisory verification only; no canonical acceptance, promotion, release, or host activation performed.",
+  "checks": [
+    {
+      "id": 1,
+      "name": "Distinct candidate representation and complete class metadata",
+      "result": "PASS",
+      "evidence": {
+        "source_schema": "RP002-CHANGE-CLASS-ROUTER/1",
+        "stage_schema": "FABRIC-CANDIDATE-STAGE/1",
+        "source_consumer": {
+          "default": "CURRENT_HGK_APL_OR_OWNING_STACK_ORCHESTRATOR_WRAPPER",
+          "policy_source": "FABRIC_GOVERNANCE_CONTRACTS",
+          "fabric_daemon": false
+        },
+        "source_class_count": 9,
+        "stage_class_count": 9,
+        "sorted_classes": true,
+        "class_names_match": true,
+        "provenance": {
+          "source_bytes": 1021,
+          "source_path": "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\rp002\\RP002_CHANGE_CLASS_ROUTER.yaml",
+          "source_sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+          "transformation": [
+            "yaml -> json (structure preserved, no field dropped)",
+            "classes sorted by name",
+            "route_interpretation added per class from the consumer's known-route set"
+          ]
+        },
+        "classes": {
+          "RUNTIME_TRANSIENT": {
+            "source_field_count": 2,
+            "stage_field_count": 3,
+            "field_comparisons": {
+              "route": {
+                "source": "HERMES_NATIVE",
+                "stage": "HERMES_NATIVE",
+                "equal": true
+              },
+              "examples": {
+                "source": [
+                  "session_state",
+                  "heartbeat",
+                  "retry_counter",
+                  "scratch"
+                ],
+                "stage": [
+                  "session_state",
+                  "heartbeat",
+                  "retry_counter",
+                  "scratch"
+                ],
+                "equal": true
+              }
+            },
+            "extra_fields": [
+              "route_interpretation"
+            ],
+            "route_interpretation": "HERMES_NATIVE"
+          },
+          "CONFIG_PREAPPROVED": {
+            "source_field_count": 2,
+            "stage_field_count": 3,
+            "field_comparisons": {
+              "route": {
+                "source": "OWNING_STACK_ORCHESTRATOR_APPLY_SMOKE_READBACK",
+                "stage": "OWNING_STACK_ORCHESTRATOR_APPLY_SMOKE_READBACK",
+                "equal": true
+              },
+              "precondition": {
+                "source": "EXISTING_ADMITTED_PROFILE_AND_POLICY",
+                "stage": "EXISTING_ADMITTED_PROFILE_AND_POLICY",
+                "equal": true
+              }
+            },
+            "extra_fields": [
+              "route_interpretation"
+            ],
+            "route_interpretation": "OWNING_STACK_ORCHESTRATOR_APPLY_SMOKE_READBACK"
+          },
+          "PROFILE_CHANGE": {
+            "source_field_count": 2,
+            "stage_field_count": 3,
+            "field_comparisons": {
+              "route": {
+                "source": "ORACLE_TO_HGK",
+                "stage": "ORACLE_TO_HGK",
+                "equal": true
+              },
+              "pack": {
+                "source": "profile",
+                "stage": "profile",
+                "equal": true
+              }
+            },
+            "extra_fields": [
+              "route_interpretation"
+            ],
+            "route_interpretation": "ORACLE_TO_HGK"
+          },
+          "SKILL_CHANGE": {
+            "source_field_count": 2,
+            "stage_field_count": 3,
+            "field_comparisons": {
+              "route": {
+                "source": "ORACLE_TO_HGK",
+                "stage": "ORACLE_TO_HGK",
+                "equal": true
+              },
+              "pack": {
+                "source": "skill",
+                "stage": "skill",
+                "equal": true
+              }
+            },
+            "extra_fields": [
+              "route_interpretation"
+            ],
+            "route_interpretation": "ORACLE_TO_HGK"
+          },
+          "PIPELINE_CHANGE": {
+            "source_field_count": 2,
+            "stage_field_count": 3,
+            "field_comparisons": {
+              "route": {
+                "source": "ORACLE_TO_HGK",
+                "stage": "ORACLE_TO_HGK",
+                "equal": true
+              },
+              "pack": {
+                "source": "multi-profile-pipeline",
+                "stage": "multi-profile-pipeline",
+                "equal": true
+              }
+            },
+            "extra_fields": [
+              "route_interpretation"
+            ],
+            "route_interpretation": "ORACLE_TO_HGK"
+          },
+          "STACK_CHANGE": {
+            "source_field_count": 2,
+            "stage_field_count": 3,
+            "field_comparisons": {
+              "route": {
+                "source": "ORACLE_TO_HGK",
+                "stage": "ORACLE_TO_HGK",
+                "equal": true
+              },
+              "pack": {
+                "source": "stack",
+                "stage": "stack",
+                "equal": true
+              }
+            },
+            "extra_fields": [
+              "route_interpretation"
+            ],
+            "route_interpretation": "ORACLE_TO_HGK"
+          },
+          "PROVIDER_UPGRADE": {
+            "source_field_count": 2,
+            "stage_field_count": 3,
+            "field_comparisons": {
+              "route": {
+                "source": "ORACLE_TO_HGK_QUALIFICATION_ONLY",
+                "stage": "ORACLE_TO_HGK_QUALIFICATION_ONLY",
+                "equal": true
+              },
+              "pack": {
+                "source": "shared-service",
+                "stage": "shared-service",
+                "equal": true
+              }
+            },
+            "extra_fields": [
+              "route_interpretation"
+            ],
+            "route_interpretation": "ORACLE_TO_HGK_QUALIFICATION_ONLY"
+          },
+          "DOMAIN_CHANGE": {
+            "source_field_count": 2,
+            "stage_field_count": 3,
+            "field_comparisons": {
+              "route": {
+                "source": "DOMAIN_AUTHORITY_TO_ORACLE_TO_HGK",
+                "stage": "DOMAIN_AUTHORITY_TO_ORACLE_TO_HGK",
+                "equal": true
+              },
+              "requires_domain_checker": {
+                "source": true,
+                "stage": true,
+                "equal": true
+              }
+            },
+            "extra_fields": [
+              "route_interpretation"
+            ],
+            "route_interpretation": "DOMAIN_AUTHORITY_TO_ORACLE_TO_HGK"
+          },
+          "CONSTITUTIONAL_CHANGE": {
+            "source_field_count": 2,
+            "stage_field_count": 3,
+            "field_comparisons": {
+              "route": {
+                "source": "HUMAN_META_ORACLE",
+                "stage": "HUMAN_META_ORACLE",
+                "equal": true
+              },
+              "auto_promotion": {
+                "source": false,
+                "stage": false,
+                "equal": true
+              }
+            },
+            "extra_fields": [
+              "route_interpretation"
+            ],
+            "route_interpretation": "HUMAN_META_ORACLE"
+          }
+        }
+      },
+      "source_metadata_fields_compared": 18,
+      "stage_class_fields": 27,
+      "dropped_class_fields": 0,
+      "assessment": "Schema-versioned JSON differs from source YAML. Nine sorted classes retain all source class fields and types, including examples, precondition, pack, requires_domain_checker and auto_promotion; each adds its correct route_interpretation. Source top-level schema and consumer header are not projected as class metadata; source provenance binds the original YAML."
+    },
+    {
+      "id": 2,
+      "name": "Native staging operation and re-derivation",
+      "result": "PASS",
+      "tool_path": "C:/Projects/Agent_Workspace/Fabric/FABRIC/fabric/staging/stage_policy.py",
+      "code_review": "load_source reads source bytes, requires a nonempty class mapping and a route in each class; build_stage copies every class field, sorts names and adds interpretation/provenance. --stage writes exact UTF-8 JSON payload and separate receipt, then re-reads/re-derives classes. --check additionally hashes on-disk stage bytes against receipt.",
+      "live_command": {
+        "command": [
+          "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+          "C:/Projects/Agent_Workspace/Fabric/FABRIC/fabric/staging/stage_policy.py",
+          "--check"
+        ],
+        "exit_code": 0,
+        "stdout": "{\"verdict\": \"STAGE_DERIVES\", \"reason\": \"stage re-derives from source\", \"stage_sha256_on_disk\": \"e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2\", \"stage_sha256_in_receipt\": \"e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2\", \"digest_matches_receipt\": true, \"classes\": 9}",
+        "stderr": ""
+      },
+      "scratch_operation_replay": {
+        "commands": [
+          {
+            "command": [
+              "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+              "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\fabric\\staging\\stage_policy.py",
+              "--stage",
+              "--stage-root",
+              "C:\\wg\\ao13\\operation_replay"
+            ],
+            "exit_code": 0,
+            "stdout": "{\"verdict\": \"STAGED\", \"staged\": \"C:\\\\wg\\\\ao13\\\\operation_replay\\\\RP002_CHANGE_CLASS_ROUTER.staged.json\", \"receipt\": \"C:\\\\wg\\\\ao13\\\\operation_replay\\\\STAGE_RECEIPT.json\", \"source_sha256\": \"93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734\", \"stage_sha256\": \"e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2\", \"classes\": 9, \"unknown_routes\": [], \"check\": \"stage re-derives from source\"}",
+            "stderr": ""
+          },
+          {
+            "command": [
+              "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+              "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\fabric\\staging\\stage_policy.py",
+              "--check",
+              "--stage-root",
+              "C:\\wg\\ao13\\operation_replay"
+            ],
+            "exit_code": 0,
+            "stdout": "{\"verdict\": \"STAGE_DERIVES\", \"reason\": \"stage re-derives from source\", \"stage_sha256_on_disk\": \"e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2\", \"stage_sha256_in_receipt\": \"e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2\", \"digest_matches_receipt\": true, \"classes\": 9}",
+            "stderr": ""
+          }
+        ],
+        "replay_stage_byte_identical_to_reviewed_stage": true,
+        "tool_sha256": "deb077c96a5743c52e8e81fa36d964ea6a71f4306fc8839e52e4e6680b9fa5d6"
+      },
+      "assessment": "Native --stage replay into officer scratch reproduced reviewed stage bytes exactly. This establishes reproducibility and operation consistency; no historical execution attestation beyond the recorded receipt is claimed."
+    },
+    {
+      "id": 3,
+      "name": "Honest stage byte digest",
+      "result": "PASS",
+      "evidence": {
+        "path": "C:\\Projects\\Agent_Workspace\\Fabric\\stage\\RP002-STAGE-HGK\\POLICY\\RP002_CHANGE_CLASS_ROUTER.staged.json",
+        "sha256": "e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2",
+        "bytes": 2385,
+        "receipt_sha256": "e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2",
+        "matches": true
+      },
+      "receipt_bytes": 2385,
+      "assessment": "Independently hashed the 2385 bytes on disk; exact receipt match. Digest is external to the stage document, avoiding the prior self-digest defect."
+    },
+    {
+      "id": 4,
+      "name": "Source and scope binding",
+      "result": "PASS",
+      "evidence": {
+        "path": "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\rp002\\RP002_CHANGE_CLASS_ROUTER.yaml",
+        "sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+        "bytes": 1021,
+        "receipt_sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+        "matches": true
+      },
+      "binding": {
+        "ack_path": "C:/wg/r28/WP02_ACK.json",
+        "ack_sha256": "1403e141e905978fc827a1b7201e5d60c124109baeba381923ee0cf254788c28",
+        "scope": {
+          "subject": "FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1/WP-FHS-02",
+          "source_sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+          "candidate_sha256": "2bd4d56f2b90fdd5dbc6efd28e681521530254c2a5970415f0841f8be5dbc8bd",
+          "policy_epoch": "34",
+          "policy_status": "IN_FORCE"
+        },
+        "stage_receipt_sha256_measured": "cfceb17fcafefacea01cbe4d24de02108ac9b714539a131e84dc1fbf14dd84ad",
+        "stage_receipt_sha256_matches_ack": true,
+        "receipt_body_matches_ack": true,
+        "source_digest_matches_scope_and_provenance": true,
+        "stage_digest_matches_ack_and_receipt": true,
+        "candidate_digest_matches_consumer": true,
+        "policy_epoch_matches_control_plane": true,
+        "stage_path_matches_receipt": true
+      },
+      "assessment": "Receipt directly binds source and stage hashes; refreshed ACK joins them to the same subject, candidate consumer digest and HGK contract epoch. Subject/epoch are ACK bindings, not native fields in the stage receipt."
+    },
+    {
+      "id": 5,
+      "name": "Edited stage detection",
+      "result": "PASS",
+      "evidence": [
+        {
+          "case": "baseline",
+          "command": [
+            "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+            "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\fabric\\staging\\stage_policy.py",
+            "--check",
+            "--stage-root",
+            "C:\\wg\\ao13\\baseline"
+          ],
+          "exit_code": 0,
+          "stdout": "{\"verdict\": \"STAGE_DERIVES\", \"reason\": \"stage re-derives from source\", \"stage_sha256_on_disk\": \"e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2\", \"stage_sha256_in_receipt\": \"e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2\", \"digest_matches_receipt\": true, \"classes\": 9}",
+          "stderr": ""
+        },
+        {
+          "case": "class_edit",
+          "command": [
+            "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+            "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\fabric\\staging\\stage_policy.py",
+            "--check",
+            "--stage-root",
+            "C:\\wg\\ao13\\class_edit"
+          ],
+          "exit_code": 3,
+          "stdout": "{\"verdict\": \"STAGE_STALE\", \"reason\": \"stage does not re-derive: the file differs from a fresh build\", \"stage_sha256_on_disk\": \"de25f029af42430851214f2d1999799a1179801cada3de80da40603a5fe93d6a\", \"stage_sha256_in_receipt\": \"e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2\", \"digest_matches_receipt\": false, \"classes\": 9}",
+          "stderr": ""
+        },
+        {
+          "case": "class_edit_rehashed",
+          "command": [
+            "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+            "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\fabric\\staging\\stage_policy.py",
+            "--check",
+            "--stage-root",
+            "C:\\wg\\ao13\\class_edit_rehashed"
+          ],
+          "exit_code": 3,
+          "stdout": "{\"verdict\": \"STAGE_STALE\", \"reason\": \"stage does not re-derive: the file differs from a fresh build\", \"stage_sha256_on_disk\": \"de25f029af42430851214f2d1999799a1179801cada3de80da40603a5fe93d6a\", \"stage_sha256_in_receipt\": \"de25f029af42430851214f2d1999799a1179801cada3de80da40603a5fe93d6a\", \"digest_matches_receipt\": true, \"classes\": 9}",
+          "stderr": ""
+        },
+        {
+          "case": "provenance_edit",
+          "command": [
+            "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+            "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\fabric\\staging\\stage_policy.py",
+            "--check",
+            "--stage-root",
+            "C:\\wg\\ao13\\provenance_edit"
+          ],
+          "exit_code": 3,
+          "stdout": "{\"verdict\": \"STAGE_STALE\", \"reason\": \"stage re-derives from source\", \"stage_sha256_on_disk\": \"a820a2d9c832390e71a9ef937df40b17a2df2f91a9c77cd63826c1ea158c06b9\", \"stage_sha256_in_receipt\": \"e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2\", \"digest_matches_receipt\": false, \"classes\": 9}",
+          "stderr": ""
+        }
+      ],
+      "assessment": "Unmodified scratch control passes. Class edits and provenance edits with original receipt fail exit 3. Class edit remains rejected even with a matching scratch receipt hash because classes do not re-derive. This demonstrates edited-stage detection without mutating real candidates.",
+      "limits": "Re-derivation compares classes only. A coordinated rewrite of non-class stage metadata and its receipt digest is not authenticated by --check; it also does not independently compare receipt source_sha256 against current source. The officer performed those source/provenance/scope checks separately. Adequate for this sitting's current-byte checks and scratch edited-stage requirement; not a claim of authenticated or complete-document staleness protection."
+    },
+    {
+      "id": 6,
+      "name": "Other five layers unchanged and sound within assigned review",
+      "result": "PASS",
+      "ninth_sitting_comparison": {
+        "source": {
+          "current_sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+          "ninth_sitting_sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+          "equal": true
+        },
+        "approve": {
+          "current_sha256": "6e58423cf9016f8e028893f41b3443450270c080a35c6a033f10d1c91b31db4a",
+          "ninth_sitting_sha256": "6e58423cf9016f8e028893f41b3443450270c080a35c6a033f10d1c91b31db4a",
+          "equal": true
+        },
+        "active": {
+          "current_sha256": "d7a1bfd1abc43c162aae954e0ec9233d9dd0977121a1765467880e7457089787",
+          "ninth_sitting_sha256": "d7a1bfd1abc43c162aae954e0ec9233d9dd0977121a1765467880e7457089787",
+          "equal": true
+        },
+        "loaded": {
+          "current_sha256": "2bd4d56f2b90fdd5dbc6efd28e681521530254c2a5970415f0841f8be5dbc8bd",
+          "ninth_sitting_sha256": "2bd4d56f2b90fdd5dbc6efd28e681521530254c2a5970415f0841f8be5dbc8bd",
+          "equal": true
+        }
+      },
+      "scope_unchanged_from_ninth": true,
+      "evidence": {
+        "layers": {
+          "source": {
+            "path": "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\rp002\\RP002_CHANGE_CLASS_ROUTER.yaml",
+            "sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+            "ack_sha256": "93ec36da9f487b41dc3655ff94a788b0cedb7d8a16a26687e1243d0e4b3aa734",
+            "matches_ack": true,
+            "bytes": 1021
+          },
+          "stage": {
+            "path": "C:\\Projects\\Agent_Workspace\\Fabric\\stage\\RP002-STAGE-HGK\\POLICY\\RP002_CHANGE_CLASS_ROUTER.staged.json",
+            "sha256": "e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2",
+            "ack_sha256": "e70dc37d39c2f501a59e662f302ab9aad0dc603fcc01aa88e7fd6e70733ca7c2",
+            "matches_ack": true,
+            "bytes": 2385
+          },
+          "approve": {
+            "path": "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\rp002\\FROZEN_ACCEPTANCE_ORACLE.yaml",
+            "sha256": "6e58423cf9016f8e028893f41b3443450270c080a35c6a033f10d1c91b31db4a",
+            "ack_sha256": "6e58423cf9016f8e028893f41b3443450270c080a35c6a033f10d1c91b31db4a",
+            "matches_ack": true,
+            "bytes": 1169
+          },
+          "active": {
+            "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\lane-routing-registry.yaml",
+            "sha256": "d7a1bfd1abc43c162aae954e0ec9233d9dd0977121a1765467880e7457089787",
+            "ack_sha256": "d7a1bfd1abc43c162aae954e0ec9233d9dd0977121a1765467880e7457089787",
+            "matches_ack": true,
+            "bytes": 45345
+          },
+          "loaded": {
+            "path": "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\fabric\\consumers\\hgk_policy_consumer.py",
+            "sha256": "2bd4d56f2b90fdd5dbc6efd28e681521530254c2a5970415f0841f8be5dbc8bd",
+            "ack_sha256": "2bd4d56f2b90fdd5dbc6efd28e681521530254c2a5970415f0841f8be5dbc8bd",
+            "matches_ack": true,
+            "bytes": 6452
+          }
+        },
+        "approve_document": {
+          "schema": "RP002-FROZEN-ACCEPTANCE-ORACLE/2",
+          "project_id": "HGK-REFERENCE-PROJECT-002",
+          "frozen_at": "2026-08-11T22:30:00+08:00",
+          "bootstrap_oracle": {
+            "type": "EXTERNAL_FROZEN_ORACLE",
+            "contract_digest": "c3f34ca28a6bc8c8b7255c721173ff00e694366eb3b15891d15b3b97f5453c70",
+            "knowledge_pack_digest": "24aa0390a0d27ea3049db0e6499f2e1cd3e4b5bd4cfdf5b24016fe4c82f1d4c7",
+            "prompt_compiler_digest": "214c7f048f7361fe0bc4a324a0c99aaaf0df4191a430b645b8a97d24620064b6",
+            "sources": [
+              "PROMPT_R1 (user attachment, 19834 bytes)",
+              "BLUEPRINT_R3 (Fabric/RP-002_DOC, 131172 bytes, sha256 6900e451e578bdcbb9b6e4fa5792277ef11a8389ae9b7fced94254d89d00f147)",
+              "HGK current controls (AGENTS.md, config/hermes.json, User Guide)"
+            ]
+          },
+          "internal_oracle_candidate": {
+            "profile_id": "construction-acceptance-oracle",
+            "distribution_commit": null,
+            "subject_digest": null,
+            "promotion_gate": "O1"
+          },
+          "hard_gates_from": "RP002_GATE_CATALOG.yaml",
+          "execution_graph_from": "RP002_EXECUTION_GRAPH.yaml",
+          "claim_ceiling": {
+            "local_acceptance": "allowed_if_all_applicable_gates_pass",
+            "production_autonomy": "NOT_CLAIMED",
+            "live_trading": "NOT_AUTHORIZED",
+            "remote_deployment": "NOT_CLAIMED"
+          }
+        },
+        "active": {
+          "schema": "HGK-LANE-ROUTING-REGISTRY/1",
+          "status": "IN_FORCE",
+          "epoch": 38,
+          "contract_epoch": 34
+        },
+        "loaded": {
+          "classes": [
+            "CONFIG_PREAPPROVED",
+            "CONSTITUTIONAL_CHANGE",
+            "DOMAIN_CHANGE",
+            "PIPELINE_CHANGE",
+            "PROFILE_CHANGE",
+            "PROVIDER_UPGRADE",
+            "RUNTIME_TRANSIENT",
+            "SKILL_CHANGE",
+            "STACK_CHANGE"
+          ],
+          "count": 9,
+          "exactly_matches_source": true,
+          "policy_file_read": "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\rp002\\RP002_CHANGE_CLASS_ROUTER.yaml"
+        },
+        "consumer_readback": {
+          "CONFIG_PREAPPROVED": {
+            "verdict": "ROUTE_OK",
+            "route": "OWNING_STACK_ORCHESTRATOR_APPLY_SMOKE_READBACK",
+            "consumer": "owning-stack-orchestrator",
+            "precondition": "EXISTING_ADMITTED_PROFILE_AND_POLICY"
+          },
+          "CONSTITUTIONAL_CHANGE": {
+            "verdict": "ROUTE_OK",
+            "route": "HUMAN_META_ORACLE",
+            "consumer": "human/meta-oracle",
+            "auto_promotion": false
+          },
+          "DOMAIN_CHANGE": {
+            "verdict": "ROUTE_OK",
+            "route": "DOMAIN_AUTHORITY_TO_ORACLE_TO_HGK",
+            "consumer": "domain-owner->oracle->hgk",
+            "domain_checker_required": true
+          },
+          "PIPELINE_CHANGE": {
+            "verdict": "ROUTE_OK",
+            "route": "ORACLE_TO_HGK",
+            "consumer": "oracle-commander->hgk",
+            "oracle_required": true,
+            "pack": "multi-profile-pipeline"
+          },
+          "PROFILE_CHANGE": {
+            "verdict": "ROUTE_OK",
+            "route": "ORACLE_TO_HGK",
+            "consumer": "oracle-commander->hgk",
+            "oracle_required": true,
+            "pack": "profile"
+          },
+          "PROVIDER_UPGRADE": {
+            "verdict": "ROUTE_OK",
+            "route": "ORACLE_TO_HGK_QUALIFICATION_ONLY",
+            "consumer": "oracle-commander->hgk",
+            "oracle_required": true,
+            "pack": "shared-service"
+          },
+          "RUNTIME_TRANSIENT": {
+            "verdict": "ROUTE_OK",
+            "route": "HERMES_NATIVE",
+            "consumer": "hermes-native",
+            "oracle_required": false
+          },
+          "SKILL_CHANGE": {
+            "verdict": "ROUTE_OK",
+            "route": "ORACLE_TO_HGK",
+            "consumer": "oracle-commander->hgk",
+            "oracle_required": true,
+            "pack": "skill"
+          },
+          "STACK_CHANGE": {
+            "verdict": "ROUTE_OK",
+            "route": "ORACLE_TO_HGK",
+            "consumer": "oracle-commander->hgk",
+            "oracle_required": true,
+            "pack": "stack"
+          },
+          "__unknown_class__": {
+            "verdict": "FAIL_CLOSED",
+            "reason": "UNKNOWN_CHANGE_CLASS:NOT_A_CLASS"
+          }
+        },
+        "matches_refreshed_ack": true,
+        "matches_ninth_sitting_readback": true,
+        "consumer_selfcheck": {
+          "command": [
+            "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+            "C:\\Projects\\Agent_Workspace\\Fabric\\FABRIC\\fabric\\consumers\\hgk_policy_consumer.py",
+            "selfcheck"
+          ],
+          "exit_code": 0,
+          "stdout": "CONSUMER_OK {\"RUNTIME_TRANSIENT\": {\"verdict\": \"ROUTE_OK\", \"route\": \"HERMES_NATIVE\", \"consumer\": \"hermes-native\", \"oracle_required\": false}, \"CONFIG_PREAPPROVED\": {\"verdict\": \"ROUTE_OK\", \"route\": \"OWNING_STACK_ORCHESTRATOR_APPLY_SMOKE_READBACK\", \"consumer\": \"owning-stack-orchestrator\", \"precondition\": \"EXISTING_ADMITTED_PROFILE_AND_POLICY\"}, \"PROFILE_CHANGE\": {\"verdict\": \"ROUTE_OK\", \"route\": \"ORACLE_TO_HGK\", \"consumer\": \"oracle-commander->hgk\", \"oracle_required\": true, \"pack\": \"profile\"}, \"SKILL_CHANGE\": {\"verdict\": \"ROUTE_OK\", \"route\": \"ORACLE_TO_HGK\", \"consumer\": \"oracle-commander->hgk\", \"oracle_required\": true, \"pack\": \"skill\"}, \"PIPELINE_CHANGE\": {\"verdict\": \"ROUTE_OK\", \"route\": \"ORACLE_TO_HGK\", \"consumer\": \"oracle-commander->hgk\", \"oracle_required\": true, \"pack\": \"multi-profile-pipeline\"}, \"STACK_CHANGE\": {\"verdict\": \"ROUTE_OK\", \"route\": \"ORACLE_TO_HGK\", \"consumer\": \"oracle-commander->hgk\", \"oracle_required\": true, \"pack\": \"stack\"}, \"PROVIDER_UPGRADE\": {\"verdict\": \"ROUTE_OK\", \"route\": \"ORACLE_TO_HGK_QUALIFICATION_ONLY\", \"consumer\": \"oracle-commander->hgk\", \"oracle_required\": true, \"pack\": \"shared-service\"}, \"DOMAIN_CHANGE\": {\"verdict\": \"ROUTE_OK\", \"route\": \"DOMAIN_AUTHORITY_TO_ORACLE_TO_HGK\", \"consumer\": \"domain-owner->oracle->hgk\", \"domain_checker_required\": true}, \"CONSTITUTIONAL_CHANGE\": {\"verdict\": \"ROUTE_OK\", \"route\": \"HUMAN_META_ORACLE\", \"consumer\": \"human/meta-oracle\", \"auto_promotion\": false}, \"UNKNOWN_X\": {\"verdict\": \"FAIL_CLOSED\", \"reason\": \"UNKNOWN_CHANGE_CLASS:UNKNOWN_X\"}}",
+          "stderr": ""
+        }
+      },
+      "assessment": "Source, frozen approval oracle, active registry and original consumer module hashes match ninth-sitting raw measurements and refreshed ACK. Registry projection epoch is 38; contract_epoch is 34 IN_FORCE as required. Original load_router returns all nine complete class entries; original route_event reads source and returns all nine routes plus FAIL_CLOSED for NOT_A_CLASS. Frozen oracle is the unchanged bootstrap approval reference, not a newly issued subject-specific approval or activation receipt."
+    }
+  ],
+  "stage_verdict": "PASS: separately observable normalized candidate JSON preserves all 18 class metadata fields across nine classes; a scratch native staging replay reproduces exact reviewed bytes; live STAGE_DERIVES and independently measured byte/source digests match the receipt and scoped ACK; scratch edits are detected. The missing Stage layer from sitting nine is now supplied.",
+  "observations": [
+    {
+      "severity": "nonblocking",
+      "finding": "ACK stage note still says no staged copy exists although its state is PRESENT. Actual bytes, receipt and live check establish presence; stale prose is not used as evidence."
+    },
+    {
+      "severity": "out_of_scope",
+      "finding": "Thin Stage tree and missing historical seals are excluded from this layer verdict by the brief; no finding closure or wider Stage acceptance claimed."
+    }
+  ],
+  "write_boundary": "All officer writes confined to C:/wg/ao13; source repositories and C:/wg/r28 read-only. Python bytecode writes disabled for external module execution/import.",
+  "evidence_files": {
+    "check1.json": "ffc59e8262fc0a74cabaf1e44b1c56f66ae834572b3417d144606f2fd8860e7f",
+    "hashes.json": "825454e0fe37ebf65e34585cd90b871e9e8488a0724f51e8143c599ed259138e",
+    "negative_checks.json": "e447ad292b7fd29e52cf907c3bc375a3bc8daae7c744aded1d41dbd2016061c9",
+    "operation_replay.json": "66db9c48553ef8d16db84de60e50be689de29fe9bc7a2384daec4ab1479d5470",
+    "other_layers.json": "a4666b4a11862bf7d176a38205a08e045e37024f22be1dbf6f9e6d97202bb210",
+    "stage_check.txt": "517476eafca6ddc42ddf1ea647f3030489f5d2830bd40796074ba2af55fad03f"
+  }
+}
