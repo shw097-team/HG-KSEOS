@@ -2756,6 +2756,20 @@ def main() -> int:
                 fh.write(json.dumps({"run_id": f"{os.getpid()}-{run_started}", "at_utc": datetime.now(UTC).isoformat(),
                                      "lane": args.lane, "attempt_in_run": len(attempts), **att},
                                     ensure_ascii=False, sort_keys=True) + "\n")
+        # Persist the receipt HERE, immediately after an attempt lands. This is the last point where the
+        # process is known to be alive: three sittings reached the ndjson write, then vanished without a
+        # receipt, and a lane that genuinely served the turn could not be claimed. `receipt_complete:false`
+        # marks it as provisional; the final receipt overwrites it.
+        if args.json_out:
+            try:
+                Path(args.json_out).write_text(
+                    json.dumps({"schema": SCHEMA, "lane": args.lane, "nonce": getattr(args, "nonce", None),
+                                "receipt_complete": False,
+                                "note": "provisional: written where the attempt landed, overwritten by the final receipt",
+                                "attempts": attempts},
+                               indent=2, ensure_ascii=False, default=str), encoding="utf-8")
+            except Exception as _exc:  # noqa: BLE001
+                print(f"WARN_RECEIPT_PARTIAL_NOT_WRITTEN: {type(_exc).__name__}: {_exc}", file=sys.stderr)
         if att.get("exit") == 0 and getattr(args, "identity_source", "relay-usage") == "codex-rollout":
             # The relay writes no ledger on an OAuth-direct turn, so read the served arm from the codex client's own
             # rollout. This is not a relaxation: the provider AND model must resolve, and the existing

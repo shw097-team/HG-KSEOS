@@ -192,12 +192,20 @@
       "occurrences": [
         {
           "date": "2026-10-30",
-          "ref": "AO sitting 3 proc_0a72a0e04d22: verdict.json written, ao_r28c.json absent; only ao_r28c.json.attempts.ndjson survived (rank 1, gpt-6.1-sol, 158.08 s)"
+          "ref": "AO sitting 3 proc_0a72a0e04d22: verdict.json written, ao_r28c.json absent"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "AO sitting 4 proc_b1a649c88f7f: same; receipt still absent after the 'write right after attempts' patch"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "root cause measured: the partial write serialised attempt records carrying Paths/datetimes, raised TypeError, and the bare `except: pass` hid it"
         }
       ],
-      "last_fix_commit": null,
-      "regression_test": null,
-      "rule": "a lane claim needs the receipt file; when the dispatcher fails to persist one, the round does not close -- the gate refusing is the correct outcome, not an inconvenience"
+      "last_fix_commit": "bd59c971",
+      "regression_test": "the partial receipt is written with default=str and reports WARN_RECEIPT_PARTIAL_NOT_WRITTEN instead of passing silently",
+      "rule": "a lane claim needs a receipt file; a bookkeeping write that can fail silently is the same defect as a vacuous pass -- report it, never swallow it"
     },
     {
       "class_id": "RC-MAKER-MUTATES-UNDER-REVIEW",
