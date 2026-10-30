@@ -1,0 +1,29 @@
+{
+  "sittings": [
+    {
+      "n": 1,
+      "nonce": "NONCE-AO-R28-20261030",
+      "overall": "FAIL",
+      "convictions": [
+        "O2 verdict did not aggregate every check",
+        "O3 wrong-reason refusal"
+      ]
+    },
+    {
+      "n": 2,
+      "nonce": "NONCE-AO-R28-B-20261030",
+      "overall": "FAIL",
+      "convictions": [
+        "O2 fault injection survived the aggregation"
+      ]
+    },
+    {
+      "n": 3,
+      "nonce": "NONCE-AO-R28-C-20261030",
+      "overall": "PASS",
+      "convictions": []
+    }
+  ],
+  "rule": "the maker transcribed the verdict; it did not author it",
+  "recorded_at": "2026-10-30T21:28:15"
+}

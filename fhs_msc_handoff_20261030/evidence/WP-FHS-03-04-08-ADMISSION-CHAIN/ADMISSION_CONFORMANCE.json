@@ -40,6 +40,23 @@
    "outcome": "PASS"
   }
  ],
+ "aggregation": {
+  "derived_from_all_checks": true,
+  "allowed_outcomes": [
+   "PASS",
+   "REFUSED_AS_DESIGNED"
+  ],
+  "failing": [],
+  "steps": {
+   "requirement": true,
+   "taskspec": true,
+   "workorder": true,
+   "result": true,
+   "second_taskspec": true,
+   "reuse_negative": true,
+   "wrong_subject_negative": true
+  }
+ },
  "readback": {
   "requirement": [
    {
@@ -50,14 +67,14 @@
   ],
   "taskspec": [
    {
-    "taskspec_id": "TS-CONF-7cece942",
+    "taskspec_id": "TS-CONF-53a1d24b",
     "state": "ADMITTED",
     "requirement_id": "REQ-CONFORMANCE-ADMISSION"
    }
   ],
   "workorder": [
    {
-    "workorder_id": "WO-CONF-d38b0763",
+    "workorder_id": "WO-CONF-b3dbe150",
     "state": "VERIFIED",
     "writer": "codex",
     "result_json": "{\"checker\":\"ao\",\"evidence_refs\":[\"EV-CONF-BOUNDED-WRITE\"],\"verdict\":\"PASS\"}"
@@ -66,15 +83,15 @@
   "nonces": 9,
   "lease_rows": [
    {
-    "resource_id": "TS-CONF-7cece942",
+    "resource_id": "TS-CONF-53a1d24b",
     "generation": 1
    },
    {
-    "resource_id": "WO-CONF-d38b0763",
+    "resource_id": "WO-CONF-b3dbe150",
     "generation": 1
    },
    {
-    "resource_id": "TS-CONF-B-8c8385",
+    "resource_id": "TS-CONF-B-59da1a",
     "generation": 1
    }
   ]
@@ -82,5 +99,5 @@
  "result": {
   "verdict": "PASS"
  },
- "recorded_at": "2026-10-30T13:21:41+00:00"
+ "recorded_at": "2026-10-30T13:24:29+00:00"
 }

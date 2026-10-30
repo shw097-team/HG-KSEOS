@@ -92,14 +92,41 @@
     ],
     "no_canonical_token": "no acceptance token may be derived from this receipt"
   },
-  "conformance_digest": "c56648494842a342fff08557ddf0be78a149f1a395a6f17ac1ffc0c0c3deefba",
-  "tool_digest": "3af42b1b0ed01db5f71e449c282eb382190f68bdb786f28c1bf0850aa4a02210",
-  "recorded_at": "2026-10-30T21:22:05",
+  "conformance_digest": "3246466a33aeeab3e4c195975a0e9c4595e615e9c7acbd64ded514effb3e71d6",
+  "tool_digest": "3d23bc9527fbef0b5b8948d413eb0f7a16932ac699daa5578ccdf649fcfe0be1",
+  "recorded_at": "2026-10-30T21:24:38",
   "defect_found_by_the_checker_and_fixed": {
     "found_by": "Independent Acceptance Officer, its own re-run (proc_d8a405f07ae3)",
     "symptom": "in its run second_taskspec_admitted was refused (ERR_NATIVE_ROOT_HEAD) and bundle_bound_to_subject was then refused for WORKORDER_REQUIRES_DRAFT_TASKSPEC -- a wrong-reason refusal the harness still recorded as REFUSED_AS_DESIGNED",
     "root_cause": "the reuse negative ran after the bounded write, which moves HEAD, so the later authorisation failed on ROOT_HEAD first; and run_negative accepted ANY refusal",
     "fix": "the second TaskSpec and the reuse negative now run BEFORE the write; run_negative takes expected codes and records REFUSED_FOR_WRONG_REASON as a failure",
     "regression": "the verdict now also requires second_ok and reuse_ok"
-  }
+  },
+  "aggregation": {
+    "derived_from_all_checks": true,
+    "allowed_outcomes": [
+      "PASS",
+      "REFUSED_AS_DESIGNED"
+    ],
+    "failing": [],
+    "steps": {
+      "requirement": true,
+      "taskspec": true,
+      "workorder": true,
+      "result": true,
+      "second_taskspec": true,
+      "reuse_negative": true,
+      "wrong_subject_negative": true
+    }
+  },
+  "defects_found_by_checkers": [
+    {
+      "sitting": 2,
+      "found_by": "Independent Acceptance Officer, second sitting (fault injection at the API boundary)",
+      "claim_convicted": "the verdict did not account for every check outcome",
+      "proof": "restricting the wrong-subject negative to fail produced REFUSED_FOR_WRONG_REASON while the harness still printed CHAIN_ADMITS, exit 0",
+      "fix": "the verdict is now derived from every recorded outcome plus every step boolean; a new check cannot fall out of the aggregate",
+      "structural_note": "the class of defect is 'hand-picked aggregation'; the fix removes hand-picking rather than adding the missing term"
+    }
+  ]
 }
