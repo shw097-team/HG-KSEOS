@@ -21,6 +21,7 @@ import argparse
 import hashlib
 import json
 import pathlib
+import subprocess
 import sys
 from datetime import datetime, timezone
 
@@ -37,6 +38,18 @@ def sha256(path: pathlib.Path) -> str | None:
         return hashlib.sha256(path.read_bytes()).hexdigest()
     except OSError:
         return None
+
+
+def _stage_check(fabric: pathlib.Path) -> dict:
+    """Ask the staging operation itself whether the stage still re-derives from the source."""
+    tool = fabric / "fabric" / "staging" / "stage_policy.py"
+    if not tool.is_file():
+        return {"verdict": "TOOL_ABSENT"}
+    done = subprocess.run([sys.executable, str(tool), "--check"], capture_output=True, text=True)
+    try:
+        return json.loads(done.stdout.strip() or "{}")
+    except json.JSONDecodeError:
+        return {"verdict": "UNPARSEABLE", "raw": done.stdout[-200:]}
 
 
 def layer(name: str, plane: str, path: pathlib.Path | None, note: str) -> dict:
@@ -63,10 +76,29 @@ def main() -> int:
     router = fabric / "rp002" / "RP002_CHANGE_CLASS_ROUTER.yaml"
     layers.append(layer("source", "Fabric", router, "the policy source the consumer reads"))
 
-    # A staged artefact is only a layer if the governance tree actually stages one for this policy.
-    staged = fabric / "stage" / "RP002-STAGE-HGK" / "RP002_CHANGE_CLASS_ROUTER.staged.yaml"
-    layers.append(layer("stage", "Fabric", staged if staged.exists() else None,
-                        "no staged copy exists for this policy on this host"))
+    # The stage tree lives beside the repository root on this host (Fabric/stage/...), not inside
+    # Fabric/FABRIC/. Looking only inside the repo reported "stage absent" for a tree that exists -- the
+    # miss that made WP-FHS-02 look like it had no Stage layer at all.
+    stage_dirs = [fabric.parent / "stage" / "RP002-STAGE-HGK" / "POLICY",
+                  fabric / "stage" / "RP002-STAGE-HGK" / "POLICY"]
+    staged = next((d / "RP002_CHANGE_CLASS_ROUTER.staged.json" for d in stage_dirs
+                   if (d / "RP002_CHANGE_CLASS_ROUTER.staged.json").is_file()), None)
+    stage_layer = layer("stage", "Fabric", staged,
+                        "no staged copy exists for this policy on this host")
+    if staged is not None:
+        receipt_file = staged.parent / "STAGE_RECEIPT.json"
+        stage_layer["stage_receipt"] = str(receipt_file) if receipt_file.is_file() else None
+        if receipt_file.is_file():
+            try:
+                stage_layer["stage_receipt_sha256"] = sha256(receipt_file)
+                stage_layer["stage_receipt_body"] = json.loads(receipt_file.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError) as exc:
+                problems.append(f"stage_receipt_unreadable: {exc}")
+        stage_layer["stage_producer"] = "Fabric Policy Owner (stage_policy.py --stage)"
+        stage_layer["binds_source_sha256"] = (stage_layer.get("stage_receipt_body") or {}).get("source_sha256")
+        stage_layer["digest_matches_receipt"] = (
+            (stage_layer.get("stage_receipt_body") or {}).get("stage_sha256") == stage_layer.get("sha256"))
+    layers.append(stage_layer)
 
     approve = fabric / "rp002" / "FROZEN_ACCEPTANCE_ORACLE.yaml"
     layers.append(layer("approve", "Fabric", approve, "the frozen acceptance oracle that approves the class routes"))
@@ -134,6 +166,7 @@ def main() -> int:
         "layers_absent": absent,
         "problems": problems,
         "verdict_inputs": {
+            "stage_re_derives_from_source": _stage_check(fabric),
             "all_six_present": not absent,
             "consumer_readback_by_the_original_consumer": consumer.get("all_route_ok") is True,
             "unknown_class_fails_closed": consumer.get("unknown_class_fails_closed") is True,
