@@ -2391,6 +2391,23 @@ def main() -> int:
 
     # ---- non-mutation guard (makes an escalated-sandbox checker safe) --------------------------
     guard_roots = list(args.guard_subject or [])
+    # A checker reads the subject while the maker may still be working. Three rounds in a row lost a
+    # checker verdict to `ERR_CHECKER_MUTATED_SUBJECT` because the maker committed into the guarded tree
+    # mid-turn. The guard was right; the maker should not have been able to commit. Hold a review lock for
+    # the life of this dispatch so scripts/review_lock.py refuses those commits.
+    _review_lock_nonce = None
+    if guard_roots:
+        try:
+            _lock = subprocess.run([sys.executable, str(Path(__file__).with_name("review_lock.py")),
+                                    "acquire", "--subject", str(guard_roots[0]),
+                                    "--nonce", str(getattr(args, "nonce", "") or "dispatch"),
+                                    "--reason", f"{args.lane} checker reading the subject",
+                                    "--ttl-min", str(max(30, int((args.timeout or 600) // 60) + 15))],
+                                   capture_output=True, text=True, timeout=30)
+            if _lock.returncode == 0:
+                _review_lock_nonce = str(getattr(args, "nonce", "") or "dispatch")
+        except Exception:  # noqa: BLE001 - a lock failure must not stop the dispatch, only be reported
+            _review_lock_nonce = None
     # MEASURED (probe E5b): a guard root the native process cannot resolve produced a ZERO-FILE
     # snapshot, and the receipt then read `mutated: false` - a vacuous guard reported as a clean
     # subject. An unresolvable root is a setup error, so it must refuse instead of bless.
@@ -2933,6 +2950,14 @@ def main() -> int:
         out = Path(args.json_out)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(receipt, indent=2, ensure_ascii=False), encoding="utf-8")
+    if _review_lock_nonce:
+        try:
+            subprocess.run([sys.executable, str(Path(__file__).with_name("review_lock.py")),
+                            "release", "--nonce", _review_lock_nonce],
+                           capture_output=True, text=True, timeout=30)
+            receipt["review_lock"] = {"nonce": _review_lock_nonce, "released_at_exit": True}
+        except Exception:  # noqa: BLE001
+            receipt["review_lock"] = {"nonce": _review_lock_nonce, "released_at_exit": False}
     # R20b: an unassigned arm may not serve SILENTLY. Detection is always on; --require-assigned-arms
     # turns it into a refusal. Placed on the SUCCESS path, where a serving arm actually exists.
     _ap = receipt.get("assignment_posture") or {}

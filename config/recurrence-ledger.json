@@ -198,6 +198,27 @@
       "last_fix_commit": null,
       "regression_test": null,
       "rule": "a lane claim needs the receipt file; when the dispatcher fails to persist one, the round does not close -- the gate refusing is the correct outcome, not an inconvenience"
+    },
+    {
+      "class_id": "RC-MAKER-MUTATES-UNDER-REVIEW",
+      "title": "the maker commits into the guarded tree while a checker is reading it, so the checker's verdict voids itself",
+      "occurrences": [
+        {
+          "date": "2026-10-30",
+          "ref": "VERIFY 310.18 s FAIL: subject-mutation guard voided the verdict"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "AO sitting 1 proc_d8a405f07ae3 exit 3: changed=1 removed=0"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "AO sitting 2 proc_a0c85fea9051 exit 3: changed=1 removed=0"
+        }
+      ],
+      "last_fix_commit": null,
+      "regression_test": "tests/test_review_lock.py",
+      "rule": "the guard is right and the maker is wrong; make the maker's commit impossible while a checker reads the subject (scripts/review_lock.py + pre-commit hook + dispatcher hold)"
     }
   ]
 }
