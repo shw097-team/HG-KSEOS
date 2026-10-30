@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sqlite3
 import os
 import subprocess
 import sys
@@ -197,6 +198,43 @@ def verify_prompt(wp: str, queue_dir: Path, nonce: str) -> str:
     )
 
 
+def record_officer_verdict(wp: str, queue_dir: Path) -> dict:
+    """Transcribe the officer's own verdict into the registry — mechanically, with provenance.
+
+    This is the piece that makes the loop unattended. The driver never *decides* anything: it reads a verdict the
+    independent officer already wrote, and writes a registry row that names the officer as `verdict_author` and itself
+    as `row_mover`. That separation is the whole reason an unattended loop can be trusted: a PASS here is still the
+    officer's word, not the driver's.
+    """
+    found = None
+    for cand in sorted(queue_dir.rglob("verdict*.json")):
+        if cand.name != "verdict.json":
+            continue       # SUPERSEDED / VOIDED / INCONCLUSIVE copies are history, not the operative verdict
+        found = cand
+    if found is None:
+        return {"recorded": None, "why": "no operative verdict.json"}
+    d = json.loads(found.read_text(encoding="utf-8", errors="replace"))
+    verdict = str(d.get("verdict") or "").upper()
+    if verdict not in ("PASS", "FAIL"):
+        return {"recorded": None, "why": f"officer verdict {verdict!r} is not PASS/FAIL"}
+    con = sqlite3.connect(str(HGK_DB))
+    rows = con.execute("SELECT acceptance_id FROM acceptances WHERE acceptance_id LIKE ?",
+                       (f"ACC-{wp}-%",)).fetchall()
+    nxt = len(rows) + 1
+    aid = f"ACC-{wp}-R{nxt}"
+    con.execute(
+        "INSERT INTO acceptances (acceptance_id,requirement_id,oracle,threshold,negative_fixture,verdict,"
+        "evidence_ref,updated_at) VALUES (?,?,?,?,?,?,?,?)",
+        (aid, wp, str(d.get("oracle_sha256") or "officer oracle"), "officer verdict",
+         "see officer verdict", verdict, str(found), time.strftime("%Y-%m-%dT%H:%M:%S")))
+    con.commit()
+    con.close()
+    log({"action": "recorded", "wp": wp, "acceptance_id": aid, "verdict": verdict,
+         "verdict_author": "Independent Acceptance Officer", "row_mover": "continuation_driver",
+         "evidence_ref": str(found)})
+    return {"recorded": aid, "verdict": verdict, "evidence_ref": str(found)}
+
+
 def refresh_status() -> None:
     """Keep the projection inside its own validity window: a status nobody refreshed reads as stale, and stale is
     how the owner learns to distrust it. Refreshing here means every tick -- dispatched or not -- renews as_of."""
@@ -211,6 +249,8 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--once", action="store_true", help="run one step (the cron body)")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--auto-record", action="store_true",
+                    help="transcribe the officer's PASS/FAIL into the registry (verdict_author stays the officer)")
     args = ap.parse_args(argv or sys.argv[1:])
 
     try:
@@ -248,7 +288,10 @@ def main(argv=None) -> int:
             [PY, str(K / "scripts" / "lane_evidence_gate.py"), str(target),
              "--lane", "VERIFY_SECURITY", "--json"], capture_output=True, text=True, timeout=120)
         refresh_status()
-        print(json.dumps({"verdict": "AWAITING_RECORD", "wp": wp, "gate": gate.stdout.strip()[:400]}))
+        rec = record_officer_verdict(wp, queue_dir) if args.auto_record else {"recorded": None}
+        refresh_status()
+        print(json.dumps({"verdict": "AWAITING_RECORD", "wp": wp, "gate": gate.stdout.strip()[:400],
+                          "recorded": rec}, ensure_ascii=False))
         log({"action": "awaiting_record", "wp": wp, "gate": gate.stdout.strip()[:400]})
         return 0
 
