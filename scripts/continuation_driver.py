@@ -229,7 +229,7 @@ def main(argv=None) -> int:
     queue_dir = Path(item["queue_dir"])
     if dispatch_alive():
         refresh_status()
-    print(json.dumps({"verdict": "DISPATCH_IN_FLIGHT", "wp": wp}))
+        print(json.dumps({"verdict": "DISPATCH_IN_FLIGHT", "wp": wp}))
         return 0
 
     stamp = time.strftime("%Y%m%d%H%M%S")
@@ -247,6 +247,7 @@ def main(argv=None) -> int:
         gate = subprocess.run(
             [PY, str(K / "scripts" / "lane_evidence_gate.py"), str(target),
              "--lane", "VERIFY_SECURITY", "--json"], capture_output=True, text=True, timeout=120)
+    refresh_status()
         print(json.dumps({"verdict": "AWAITING_RECORD", "wp": wp, "gate": gate.stdout.strip()[:400]}))
         log({"action": "awaiting_record", "wp": wp, "gate": gate.stdout.strip()[:400]})
         return 0
