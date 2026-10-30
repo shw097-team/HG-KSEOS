@@ -5,8 +5,8 @@
   "repro": "C:\\wg\\repro",
   "package": "C:\\wg\\pkg"
  },
- "files": 61,
- "total_bytes": 5312091,
+ "files": 62,
+ "total_bytes": 5314092,
  "entries": [
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",
@@ -64,6 +64,11 @@
    "sha256": "31c2e8d95ca3cdcc04c67eebbecd9eb8efa7e1fbdad5ae6d63238477dea54836"
   },
   {
+   "path": "receipts/P5C_LANE_VERIFY_BLOCKED.json",
+   "bytes": 1528,
+   "sha256": "f2b9d80375c2b68de0ebc9bc679361df4b8845dbfc763e9edd11c8fb839dda03"
+  },
+  {
    "path": "tools/exec_checks.py",
    "bytes": 6592,
    "sha256": "e0544d5fe470a457d927c36c952d20258676a505ebbfdc0b3053e2bfb76f8987"
@@ -85,8 +90,8 @@
   },
   {
    "path": "tools/stage_repo.py",
-   "bytes": 3910,
-   "sha256": "b90afef7577f6ccc613c0b2f78a397b355048bf1eb8c0b72b16713a9530c48c3"
+   "bytes": 4383,
+   "sha256": "81b381f54b596d8972d755564b4de23c76d5553c96ad120e9421f8cebe716333"
   },
   {
    "path": "tools/verify_package.py",

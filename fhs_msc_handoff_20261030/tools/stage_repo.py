@@ -34,9 +34,13 @@ def put(src: Path, dst_rel: str) -> dict:
 
 
 def main() -> int:
-    if OUT.exists():
-        shutil.rmtree(OUT)
-    OUT.mkdir(parents=True)
+    # REPAIR (round finding F-09): the first version rmtree'd OUT, which destroyed the narrative
+    # documents authored after staging. Staging now owns only the four copied subtrees plus the
+    # inventory; narrative files are never deleted by a re-stage.
+    OUT.mkdir(parents=True, exist_ok=True)
+    for sub in ("receipts", "tools", "logs", "first_work", "docs", "package"):
+        if (OUT / sub).exists():
+            shutil.rmtree(OUT / sub)
 
     staged: list[dict] = []
 
