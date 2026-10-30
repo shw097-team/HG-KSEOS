@@ -944,16 +944,34 @@ def identity_check(entry: dict, lane: str, lane_home, relay_home,
 
 
 def snapshot_subject(roots) -> dict[str, str]:
-    """Digest every file under each root (or the file itself), so mutation can be MEASURED."""
+    """Digest every file under each root (or the file itself), so mutation can be MEASURED.
+
+    Long-path safe: on Windows `rglob` raises FileNotFoundError (WinError 3) as soon as one directory
+    exceeds MAX_PATH, and a crash here aborts the whole dispatch AFTER the pre-spawn gates passed.
+    Measured 2026-10-30 on `var/hgk-solution-apply-20261012/.../references` — the same class of
+    defect as the truncated manifest walk, so the walk goes through the extended-length prefix and
+    unreadable entries are skipped by name rather than taking the turn down.
+    """
     snap: dict[str, str] = {}
+    pfx = (chr(92) * 2 + "?" + chr(92)) if os.name == "nt" else ""
     for root in roots or []:
         r = Path(root)
         if r.is_file():
             snap[str(r).replace("\\", "/")] = sha256_file(r)
         elif r.is_dir():
-            for p in sorted(r.rglob("*")):
-                if p.is_file():
-                    snap[str(p).replace("\\", "/")] = sha256_file(p)
+            base = pfx + str(r.resolve())
+            for dirpath, _dirnames, filenames in os.walk(base):
+                for fn in sorted(filenames):
+                    p = Path(dirpath) / fn
+                    try:
+                        if not p.is_file():
+                            continue
+                        key = str(p).replace("\\", "/")
+                        if pfx:
+                            key = key[len(pfx.replace("\\", "/")):]
+                        snap[key] = sha256_file(p)
+                    except OSError:
+                        continue
     return snap
 
 
