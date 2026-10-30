@@ -1,0 +1,86 @@
+{
+ "schema": "ADMISSION-CONFORMANCE/1",
+ "verdict": "CHAIN_ADMITS",
+ "assurance_level": "CONFORMANCE_ONLY_TEST_SEAM",
+ "ceiling": "principal separation on the OS axis is NOT APPLICABLE on this single-account host (AGENTS.md rule 8); this run proves the mechanism under the module's own injected registry seam and no canonical acceptance token may be derived from it",
+ "workspace": "C:\\wg\\r28\\ws",
+ "heads": {
+  "base": "7955c5a0d06394520dc6ef135aa4b23ca912cf53",
+  "after_write": "7955c5a0d06394520dc6ef135aa4b23ca912cf53"
+ },
+ "checks": [
+  {
+   "check": "requirement_frozen",
+   "outcome": "PASS"
+  },
+  {
+   "check": "taskspec_admitted",
+   "outcome": "PASS"
+  },
+  {
+   "check": "wrong_subject_refused",
+   "outcome": "REFUSED_AS_DESIGNED",
+   "code": "ERR_NATIVE_REQUEST_SCOPE"
+  },
+  {
+   "check": "workorder_admitted",
+   "outcome": "PASS"
+  },
+  {
+   "check": "workorder_result_recorded",
+   "outcome": "PASS"
+  },
+  {
+   "check": "second_taskspec_admitted",
+   "outcome": "PASS"
+  },
+  {
+   "check": "bundle_bound_to_subject",
+   "outcome": "REFUSED_AS_DESIGNED",
+   "code": "ERR_NATIVE_REQUEST_SCOPE"
+  }
+ ],
+ "readback": {
+  "requirement": [
+   {
+    "requirement_id": "REQ-CONFORMANCE-ADMISSION",
+    "state": "FROZEN",
+    "version": 1
+   }
+  ],
+  "taskspec": [
+   {
+    "taskspec_id": "TS-CONF-b382ff7f",
+    "state": "ADMITTED",
+    "requirement_id": "REQ-CONFORMANCE-ADMISSION"
+   }
+  ],
+  "workorder": [
+   {
+    "workorder_id": "WO-CONF-cf5dfb91",
+    "state": "VERIFIED",
+    "writer": "codex",
+    "result_json": "{\"checker\":\"ao\",\"evidence_refs\":[\"EV-CONF-BOUNDED-WRITE\"],\"verdict\":\"PASS\"}"
+   }
+  ],
+  "nonces": 9,
+  "lease_rows": [
+   {
+    "resource_id": "TS-CONF-b382ff7f",
+    "generation": 1
+   },
+   {
+    "resource_id": "WO-CONF-cf5dfb91",
+    "generation": 1
+   },
+   {
+    "resource_id": "TS-CONF-B-95b15f",
+    "generation": 1
+   }
+  ]
+ },
+ "result": {
+  "verdict": "PASS"
+ },
+ "recorded_at": "2026-10-30T13:19:50+00:00"
+}
