@@ -1,0 +1,2644 @@
+{
+ "closed_at": "2026-10-31",
+ "by": "lane governance (owner authorization recorded in HG-KSEOS/config/issuer)",
+ "trees": [
+  {
+   "path": "B1",
+   "files": 141,
+   "bytes": 17669675,
+   "ext": {
+    ".md": 89,
+    ".json": 20,
+    ".zip": 3,
+    ".txt": 1,
+    ".source": 11,
+    ".diff": 10,
+    ".py": 5,
+    ".ps1": 1,
+    ".tsv": 1
+   },
+   "class_counts": {
+    "ARCHIVE_DOC": 89,
+    "PROMOTED_CODE": 26,
+    "DISCARD_ARTEFACT": 26
+   },
+   "promoted_to": "C:\\wg\\repo\\b1_closure_20261028",
+   "items": [
+    {
+     "rel": "B1\\B1_施工\\B1指揮施工_總紀錄.md",
+     "bytes": 365435,
+     "sha256": "5e83ec59cf226d66",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT.md",
+     "bytes": 248187,
+     "sha256": "6f24b2aac28dd8b3",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工狀況_總鑑定分析.md",
+     "bytes": 355565,
+     "sha256": "a7b17816b46d8f4f",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1狀況根因解決_討論.md",
+     "bytes": 140843,
+     "sha256": "f692f87ea6753454",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\FHS_MSC_B1_Task_Handoff_Report_v1_2026-10-27.md",
+     "bytes": 80850,
+     "sha256": "aa006bc849c5bb64",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT\\FHS_MSC_B1-r10_Hermes_UserScoped_Native_Autonomous_Thin_Command_2026-10-27_r10.md",
+     "bytes": 16413,
+     "sha256": "d7094756e0826f14",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT\\FHS_MSC_B1-r1_Codex_Master_Mission_Prompt_2026-10-26_r1.md",
+     "bytes": 42507,
+     "sha256": "043f9de523a1c604",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT\\FHS_MSC_B1-r2_Codex_Resume_Command_2026-10-27_r2.md",
+     "bytes": 36017,
+     "sha256": "db997580d0ad7a35",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT\\FHS_MSC_B1-r3_Codex_Continuous_Resume_Command_2026-10-27_r3.md",
+     "bytes": 36096,
+     "sha256": "0dba58c453f7afae",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT\\FHS_MSC_B1-r4_Codex_Continuous_Resume_Command_2026-10-27_r4.md",
+     "bytes": 36603,
+     "sha256": "5ca69da0d185559d",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT\\FHS_MSC_B1-r5_Codex_Thin_Autonomous_Repair_Command_2026-10-27_r5.md",
+     "bytes": 12679,
+     "sha256": "db7fcd3c63d1dc7f",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT\\FHS_MSC_B1-r6_Codex_Thin_Native_Acceptance_Command_2026-10-27_r6.md",
+     "bytes": 15233,
+     "sha256": "1491788c4ba701bc",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT\\FHS_MSC_B1-r7_Hermes_Thin_Autonomous_Construction_Acceptance_2026-10-27_r7.md",
+     "bytes": 13147,
+     "sha256": "9ccd6ac77b49a7a3",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT\\FHS_MSC_B1-r8_Hermes_Single_Owner_Autonomous_Native_Thin_Command_2026-10-27_r8.md",
+     "bytes": 15925,
+     "sha256": "d566e3eb0eaaaab9",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工_PROMPT\\FHS_MSC_B1-r9_Hermes_Thin_Autonomous_Closeout_Command_2026-10-27_r9.md",
+     "bytes": 16960,
+     "sha256": "c753a0391ad773f6",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工狀況_鑑定分析\\B1施工狀況_鑑定分析-1.md",
+     "bytes": 117066,
+     "sha256": "964789b0fcdf9375",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工狀況_鑑定分析\\B1施工狀況_鑑定分析-2.md",
+     "bytes": 83733,
+     "sha256": "c73d450f2e68b204",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工狀況_鑑定分析\\B1施工狀況_鑑定分析-3_單一 OWNER 全自動授權與 Native 驗收鏈路修復方案.md",
+     "bytes": 24468,
+     "sha256": "38a28bbdcf42b87c",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工狀況_鑑定分析\\B1施工狀況_鑑定分析-4_Hermes 自治施工、四庫整合與正式 Native 驗收鑑定報告.md",
+     "bytes": 23415,
+     "sha256": "fae5161cd4afd791",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工狀況_鑑定分析\\B1施工狀況_鑑定分析-5_Native 授權鏈路的架構審查與修正裁決.md",
+     "bytes": 25204,
+     "sha256": "305d35fb583b26d1",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工狀況_鑑定分析\\B1施工狀況_鑑定分析-6_B1_HERMES_R10_任務停止根因自鑑定回報.md",
+     "bytes": 12577,
+     "sha256": "0ae72e5901688162",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工狀況_鑑定分析\\B1施工狀況_鑑定分析-7_高自動化停工根因、治理鏈路與四系統工程鑑定報告.md",
+     "bytes": 36274,
+     "sha256": "d700944f61856441",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\B1_施工\\B1施工狀況_鑑定分析\\B1施工狀況_鑑定分析-8_PIPD-LS-SP 與 FHS-MSC B1 高自動化失效｜工具設計、產包治理與執行鏈路專項鑑定報告.md",
+     "bytes": 27007,
+     "sha256": "2a1c50de1cef181f",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS-MSC_B1_Bootstrap_Repair_PIPD-LS-PKG_藍圖.md",
+     "bytes": 707354,
+     "sha256": "b7c7888e84d00b41",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS-MSC_R00-R001_FINAL_HANDOFF_ACCEPTANCE_REPORT.md",
+     "bytes": 29250,
+     "sha256": "a13e3e8d7a120d81",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_Codex_Thin_Autonomous_DOC00-08_Repair_Command_2026-10-27.md",
+     "bytes": 9457,
+     "sha256": "c51ce28c29a19b51",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_DOC00-08_Codex_High_Automation_Repair_Plan_v1_2026-10-27.md",
+     "bytes": 82064,
+     "sha256": "371fbb7be6a0a54d",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\AUTHORITY_AND_VERSION_MATRIX.json",
+     "bytes": 2168,
+     "sha256": "81fb4225dc1c0cb5",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\AUTHOR_SIDE_REVIEW.md",
+     "bytes": 1399,
+     "sha256": "756e01144b851943",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\B1_DOC_REPAIR_DELIVERY_2026-10-27.zip",
+     "bytes": 654793,
+     "sha256": "a2d5b8253df1831e",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BUILD_CONTEXT.json",
+     "bytes": 996,
+     "sha256": "1f868212b84f6f60",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\CHANGES.json",
+     "bytes": 70601,
+     "sha256": "5f208f4480d5d202",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\CHANGES_AND_DECISIONS.md",
+     "bytes": 1423,
+     "sha256": "93ca8f5d8e7bf6be",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF_STATS.json",
+     "bytes": 3045,
+     "sha256": "596f2a7482fef292",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\EXECUTION_PROJECTION_CANDIDATE.json",
+     "bytes": 23459,
+     "sha256": "0198ef19ddfa3a10",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\FILE_SHA_MANIFEST.json",
+     "bytes": 10492,
+     "sha256": "79febd2dabb082af",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\IDENTITY_INVENTORY.json",
+     "bytes": 168060,
+     "sha256": "9afb8d402e25ef13",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\ISSUE_AND_CR_REGISTER.md",
+     "bytes": 3214,
+     "sha256": "874dabbf36b2037c",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\NEXT_B1_HERMES_HANDOFF.md",
+     "bytes": 1758,
+     "sha256": "5ea6a570b8b7415f",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\PLAN_39_SOURCE_COMPARISON.json",
+     "bytes": 14958,
+     "sha256": "d1ce80d2912a9448",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\RCA_48_COVERAGE.md",
+     "bytes": 13917,
+     "sha256": "4e5806b05477c2a6",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\RCA_EVIDENCE.json",
+     "bytes": 329672,
+     "sha256": "5d73cd00d6007da9",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\README_修補版導覽.md",
+     "bytes": 3611,
+     "sha256": "6634af984f8bb18c",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\SOURCE_AND_CANDIDATE_SHA.md",
+     "bytes": 1456,
+     "sha256": "19ea6a1217505d76",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\SOURCE_REFERENCE_AUDIT.json",
+     "bytes": 107834,
+     "sha256": "099e839cdd336eed",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\SOURCE_RELOCATION_LOG.json",
+     "bytes": 1240,
+     "sha256": "47617f2ca212a9b7",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\SOURCE_SHA_MANIFEST.json",
+     "bytes": 89659,
+     "sha256": "599612b5b8ae7db9",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\VALIDATION_REPORT.md",
+     "bytes": 3272,
+     "sha256": "8e845a4871688a7a",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\ZIP_CONTENTS.json",
+     "bytes": 3261,
+     "sha256": "56703eabdb5d106d",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\ZIP_SHA256.txt",
+     "bytes": 105,
+     "sha256": "99389a2ef64ff8d7",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\ZIP_VERIFY_REPORT.json",
+     "bytes": 13319,
+     "sha256": "29d0760cd071117f",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_Codex_Thin_Autonomous_DOC00-08_Repair_Command_2026-10-27.source",
+     "bytes": 9457,
+     "sha256": "c51ce28c29a19b51",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_DOC00-08_Codex_High_Automation_Repair_Plan_v1_2026-10-27.source",
+     "bytes": 82064,
+     "sha256": "371fbb7be6a0a54d",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_PIPD_LS_PKG_00_GOVERNANCE_AND_CONTROL.source",
+     "bytes": 10324,
+     "sha256": "3096e98096ad48b3",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_PIPD_LS_PKG_01_DOC_B1_PI.source",
+     "bytes": 53244,
+     "sha256": "e1d8931c036a1e9d",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_PIPD_LS_PKG_02_DOC_B1_PD.source",
+     "bytes": 62807,
+     "sha256": "8e15b92a69302bbb",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_PIPD_LS_PKG_03_DOC_B1_OPS_ECP.source",
+     "bytes": 24829,
+     "sha256": "54a17818473f2a4b",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_PIPD_LS_PKG_04_DOC_B1_DEV_ECP.source",
+     "bytes": 9287,
+     "sha256": "7a1e44dfd91bd240",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.source",
+     "bytes": 455090,
+     "sha256": "1e09126f0c8e92fc",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_PIPD_LS_PKG_06_PRODUCT_COVERAGE_AND_R15.source",
+     "bytes": 859287,
+     "sha256": "f929d9cffd462d23",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_PIPD_LS_PKG_07_NATIVE_TOOLCHAIN_EXACT_USAGE.source",
+     "bytes": 19392,
+     "sha256": "d1e0283200ad57cf",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\BASELINE\\FHS_MSC_B1_PIPD_LS_PKG_08_GOLDEN_WORKORDERS_E2E.source",
+     "bytes": 6741,
+     "sha256": "bc12a5fca45e4f68",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF\\FHS_MSC_B1_PIPD_LS_PKG_00_GOVERNANCE_AND_CONTROL.diff",
+     "bytes": 9253,
+     "sha256": "c7644a62607cf7c1",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF\\FHS_MSC_B1_PIPD_LS_PKG_01_DOC_B1_PI.diff",
+     "bytes": 4194,
+     "sha256": "57fbf7497ebadcab",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF\\FHS_MSC_B1_PIPD_LS_PKG_02_DOC_B1_PD.diff",
+     "bytes": 7068,
+     "sha256": "a747505fe88e1702",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF\\FHS_MSC_B1_PIPD_LS_PKG_03_DOC_B1_OPS_ECP.diff",
+     "bytes": 4568,
+     "sha256": "24442640ea6c3126",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF\\FHS_MSC_B1_PIPD_LS_PKG_04_DOC_B1_DEV_ECP.diff",
+     "bytes": 4910,
+     "sha256": "4f56b549c67d9d17",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF\\FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.diff",
+     "bytes": 6020,
+     "sha256": "b17d01f1d0a0f6bc",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF\\FHS_MSC_B1_PIPD_LS_PKG_06_PRODUCT_COVERAGE_AND_R15.diff",
+     "bytes": 3862,
+     "sha256": "4e76f0e4fd9b94a4",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF\\FHS_MSC_B1_PIPD_LS_PKG_07_NATIVE_TOOLCHAIN_EXACT_USAGE.diff",
+     "bytes": 7063,
+     "sha256": "8ea256b6e2310955",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF\\FHS_MSC_B1_PIPD_LS_PKG_08_GOLDEN_WORKORDERS_E2E.diff",
+     "bytes": 8287,
+     "sha256": "def3018b5b9cc9ff",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\DIFF\\FULL.diff",
+     "bytes": 55233,
+     "sha256": "5f84cf5580e3429e",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\evidence\\DIFF_CHECK_REPORT.json",
+     "bytes": 6825,
+     "sha256": "845157bd2db41036",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\evidence\\GREEN_TEST_REPORT.json",
+     "bytes": 23135,
+     "sha256": "66280404a82e04c9",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\evidence\\POWERSHELL_PARSE_REPORT.json",
+     "bytes": 580,
+     "sha256": "14341228a29d7117",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\evidence\\RED_TEST_REPORT.json",
+     "bytes": 24669,
+     "sha256": "00ec470cc51d7051",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\PKG\\FHS_MSC_B1_PIPD_LS_PKG_00_GOVERNANCE_AND_CONTROL.md",
+     "bytes": 16657,
+     "sha256": "b0583e0304b90fac",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\PKG\\FHS_MSC_B1_PIPD_LS_PKG_01_DOC_B1_PI.md",
+     "bytes": 56371,
+     "sha256": "792fac362cd988d2",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\PKG\\FHS_MSC_B1_PIPD_LS_PKG_02_DOC_B1_PD.md",
+     "bytes": 66248,
+     "sha256": "504ba53c9eb2c291",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\PKG\\FHS_MSC_B1_PIPD_LS_PKG_03_DOC_B1_OPS_ECP.md",
+     "bytes": 28200,
+     "sha256": "eb29d79f6c7a6ef3",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\PKG\\FHS_MSC_B1_PIPD_LS_PKG_04_DOC_B1_DEV_ECP.md",
+     "bytes": 12942,
+     "sha256": "f4bc16a67355113c",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\PKG\\FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.md",
+     "bytes": 458745,
+     "sha256": "78d1505dd7f0f03f",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\PKG\\FHS_MSC_B1_PIPD_LS_PKG_06_PRODUCT_COVERAGE_AND_R15.md",
+     "bytes": 862039,
+     "sha256": "9fe50508f012417c",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\PKG\\FHS_MSC_B1_PIPD_LS_PKG_07_NATIVE_TOOLCHAIN_EXACT_USAGE.md",
+     "bytes": 22908,
+     "sha256": "65ecaae372aba8a9",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\PKG\\FHS_MSC_B1_PIPD_LS_PKG_08_GOLDEN_WORKORDERS_E2E.md",
+     "bytes": 10626,
+     "sha256": "fbbf945900483903",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\tests\\build_delivery_source.py",
+     "bytes": 38216,
+     "sha256": "616521a75b89051b",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\tests\\contract_model.py",
+     "bytes": 4678,
+     "sha256": "dace63ea0e35d4cb",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\tests\\finalize_delivery_source.py",
+     "bytes": 18873,
+     "sha256": "02730443c650e19e",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\tests\\prepare_evidence_source.py",
+     "bytes": 10678,
+     "sha256": "114d05a53b22422e",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\tests\\README.md",
+     "bytes": 914,
+     "sha256": "4606a164c38a9b3d",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\tests\\validate_delivery.py",
+     "bytes": 20119,
+     "sha256": "1fc6b963090e3f49",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\tests\\verify_powershell.ps1",
+     "bytes": 1198,
+     "sha256": "303c55c33270b881",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\B1_DOC_REPAIR_DELIVERY_2026-10-27\\tests\\schemas\\profile.input.schema.json",
+     "bytes": 954,
+     "sha256": "d0cb4edc3ff9992d",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_PIPD_LS_PKG\\FHS_MSC_B1_PIPD_LS_PKG_00_GOVERNANCE_AND_CONTROL.md",
+     "bytes": 10324,
+     "sha256": "3096e98096ad48b3",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_PIPD_LS_PKG\\FHS_MSC_B1_PIPD_LS_PKG_01_DOC_B1_PI.md",
+     "bytes": 53244,
+     "sha256": "e1d8931c036a1e9d",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_PIPD_LS_PKG\\FHS_MSC_B1_PIPD_LS_PKG_02_DOC_B1_PD.md",
+     "bytes": 62807,
+     "sha256": "8e15b92a69302bbb",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_PIPD_LS_PKG\\FHS_MSC_B1_PIPD_LS_PKG_03_DOC_B1_OPS_ECP.md",
+     "bytes": 24829,
+     "sha256": "54a17818473f2a4b",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_PIPD_LS_PKG\\FHS_MSC_B1_PIPD_LS_PKG_04_DOC_B1_DEV_ECP.md",
+     "bytes": 9287,
+     "sha256": "7a1e44dfd91bd240",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_PIPD_LS_PKG\\FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.md",
+     "bytes": 455090,
+     "sha256": "1e09126f0c8e92fc",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_PIPD_LS_PKG\\FHS_MSC_B1_PIPD_LS_PKG_06_PRODUCT_COVERAGE_AND_R15.md",
+     "bytes": 859287,
+     "sha256": "f929d9cffd462d23",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_PIPD_LS_PKG\\FHS_MSC_B1_PIPD_LS_PKG_07_NATIVE_TOOLCHAIN_EXACT_USAGE.md",
+     "bytes": 19392,
+     "sha256": "d1e0283200ad57cf",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_PIPD_LS_PKG\\FHS_MSC_B1_PIPD_LS_PKG_08_GOLDEN_WORKORDERS_E2E.md",
+     "bytes": 6741,
+     "sha256": "bc12a5fca45e4f68",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS-MSC_B1_Bootstrap_Repair\\FHS_MSC_B1_PIPD_LS_PKG\\FHS_MSC_B1_PIPD_LS_PKG_FINAL_INTEGRATED_SUBSTANTIVE_BODY.md",
+     "bytes": 1498571,
+     "sha256": "956231462511ec24",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS_MSC_B1_Four_Party\\FHS_MSC_B1_Four_Party_Dogfood_Native_Execution_Plan_r1_1_W18_2026-10-28.md",
+     "bytes": 148669,
+     "sha256": "ce4b07e5949e7229",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS_MSC_B1_Four_Party\\HERMES_薄PROMPT_FHS-MSC_B1_Four-Party_Dogfood_r1_1_W18_Native_AutoDeploy_GitHub_2026-10-28.md",
+     "bytes": 15482,
+     "sha256": "a7fcd293ea65124f",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS_MSC_B1_Four_Party\\OLD\\FHS_MSC_B1_Four_Party_Dogfood_Native_Execution_Plan_2026-10-28.md",
+     "bytes": 99239,
+     "sha256": "201fc83e12595320",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS_MSC_B1_Four_Party\\OLD\\HERMES 薄 PROMPT｜FHS-MSC B1 Native Bootstrap & Four-Party Dogfood Mission.md",
+     "bytes": 15108,
+     "sha256": "9cba830e008dd09a",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS_MSC_B1_Four_Party\\討論\\FHS-MSC B1 Native Bootstrap & Four-Party Dogfood Mission_討論.md",
+     "bytes": 225686,
+     "sha256": "ca8a3fe33d95c956",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS_MSC_B1_Four_Party\\討論\\FHS-MSC｜B1 完成後，Hermes 常態任務的啟動方式與 Fabric／HGK 自動接管機制鑑定報告.md",
+     "bytes": 15299,
+     "sha256": "99b193ec8baa558d",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\FHS_MSC_B1_Four_Party\\討論\\W18_討論.md",
+     "bytes": 48502,
+     "sha256": "a396e955c70c81b4",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\HERMES_B1_任務回報.md",
+     "bytes": 17955,
+     "sha256": "c1d8c31bfbbfbedf",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL-TPM-SP_Native-SBL-TPM_升級藍圖.md",
+     "bytes": 108939,
+     "sha256": "76277ebeba22bd20",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL_Commander_and_SBL-Commander-Skill_重構升級藍圖.md",
+     "bytes": 104758,
+     "sha256": "2f5a0d41fd64d6a9",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL-TPM-SP_Native-SBL-TPM_升級\\CODEX_薄PROMPT_SBL-TPM-SP_P4整合升級_2026-10-28.md",
+     "bytes": 10790,
+     "sha256": "1b4252c21f7d6e24",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL-TPM-SP_Native-SBL-TPM_升級\\DELIVERY_REPORT.md",
+     "bytes": 13335,
+     "sha256": "cd6cbaeb0c889952",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL-TPM-SP_Native-SBL-TPM_升級\\SBL-TPM-SP & Native SBL-TPM_升級討論.md",
+     "bytes": 241225,
+     "sha256": "92305bce348b0dc4",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL-TPM-SP_Native-SBL-TPM_升級\\sbl-tpm-sp-0.2.0rc1-private.zip",
+     "bytes": 4987096,
+     "sha256": "7cc15a09dafee9f7",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL-TPM-SP_Native-SBL-TPM_升級\\SBL-TPM-SP_Codex_高自動化升級修補執行方案_r1_2026-10-27.md",
+     "bytes": 106913,
+     "sha256": "e15b8b694da6396f",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL-TPM-SP_Native-SBL-TPM_升級\\SBL-TPM-SP_Native-SBL-TPM_升級藍圖.md",
+     "bytes": 108939,
+     "sha256": "76277ebeba22bd20",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL_Commander_and_SBL-Commander-Skill_重構升級\\SBL Commander & SBL-Commander-Skill_升級討論.md",
+     "bytes": 126454,
+     "sha256": "61c16f2d9a8100c0",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL_Commander_and_SBL-Commander-Skill_重構升級\\sbl-commander-guide-CANDIDATE.zip",
+     "bytes": 6273,
+     "sha256": "276afd052da1900f",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL_Commander_and_SBL-Commander-Skill_重構升級\\SBL_Commander-SP_to_SBL-Commander-Skill_Codex_薄指揮_PROMPT_2026-10-28.md",
+     "bytes": 11940,
+     "sha256": "ec038a7ab2cb98fc",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL_Commander_and_SBL-Commander-Skill_重構升級\\SBL_Commander-SP_to_SBL-Commander-Skill_Codex_高自動化重構升級施工方案_2026-10-27_v1.md",
+     "bytes": 169883,
+     "sha256": "86bf842c5ea46b71",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\SBL_Commander_and_SBL-Commander-Skill_重構升級\\SBL_Commander_and_SBL-Commander-Skill_重構升級藍圖.md",
+     "bytes": 104758,
+     "sha256": "2f5a0d41fd64d6a9",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\01_compaction_event_discrepancy.md",
+     "bytes": 2985,
+     "sha256": "f1d97e180666afb1",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\01_g2_counter_correction.md",
+     "bytes": 2903,
+     "sha256": "22c35dcdadb636b0",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\02_compaction_first_event.json",
+     "bytes": 5046,
+     "sha256": "66ed7ede8573ef19",
+     "class": "PROMOTED_CODE"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\02_source_mechanism_crosswalk.md",
+     "bytes": 3276,
+     "sha256": "98d326b42aaf9474",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\02_upgrade_diff_and_integrity.md",
+     "bytes": 3201,
+     "sha256": "68196585e44cbde6",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\04_minimum_patch_or_keep_decision.md",
+     "bytes": 2424,
+     "sha256": "3243ca6ab65167b7",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\05_G4_COMPACTION_ROOT_CAUSE_AND_REPAIR_REPORT.md",
+     "bytes": 10910,
+     "sha256": "73e0037fcc8d849d",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\05_ops_checkpoint_rollback.md",
+     "bytes": 2505,
+     "sha256": "66e328843716129d",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\06_decision_and_rollback.md",
+     "bytes": 2312,
+     "sha256": "482fe5ac593099cd",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\07_owner_operations_handoff.md",
+     "bytes": 2139,
+     "sha256": "7c956e87a22b802a",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\B1_R5_CROSS_MODEL_ENGINEERING_PROVENANCE_AUDIT.md",
+     "bytes": 23462,
+     "sha256": "d00cbcc95cd49bd5",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\B1_R5_T0_T1_T2_FILE_DELTA.tsv",
+     "bytes": 2963,
+     "sha256": "25dceadb90a70c36",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\HERMES_AGENT_Codex_Compaction_G2_MinimalFix_OwnerDirective_2026-10-27.md",
+     "bytes": 33667,
+     "sha256": "e2f6e3b39e683af9",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\HERMES_AGENT_Codex_DualRouter_G3_Autonomous_Upgrade_Compaction_Repair_2026-10-27.md",
+     "bytes": 28995,
+     "sha256": "8f4f8eeccd175115",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\HERMES_AGENT_Codex_G4_Desktop_DeepSeek_RealTask_Primary_Closeout_2026-10-27.md",
+     "bytes": 25459,
+     "sha256": "c067418b1378108c",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\HERMES_AGENT_Codex_OpenCodeGo_Compaction_Router_AB_Repair_2026-10-27_r1.md",
+     "bytes": 38804,
+     "sha256": "c1bfa21d27237804",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "B1\\升級 & 修補\\雙模型路由\\從 GPT-6.1 Sol 變更為 DeepSeek V4.1 Flash.md",
+     "bytes": 269213,
+     "sha256": "cbd0d96e418c68e4",
+     "class": "ARCHIVE_DOC"
+    }
+   ]
+  },
+  {
+   "path": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE",
+   "files": 291,
+   "bytes": 429171511,
+   "ext": {
+    ".md": 144,
+    ".json": 124,
+    ".zip": 2,
+    ".sha256": 4,
+    ".jsonl": 3,
+    ".py": 12,
+    ".tsv": 2
+   },
+   "class_counts": {
+    "ARCHIVE_DOC": 144,
+    "ARCHIVE_CODE": 136,
+    "DISCARD_ARTEFACT": 11
+   },
+   "promoted_to": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\deliveries\\SKELETON_SPINE_r2_revision2.zip",
+   "items": [
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FINAL_HANDOFF.md",
+     "bytes": 8110,
+     "sha256": "76739ae5068141d0",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\COVERAGE_REPORT.md",
+     "bytes": 4684,
+     "sha256": "40d080e546e046ba",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\DELIVERY_READBACK.json",
+     "bytes": 11366,
+     "sha256": "7422832c902eef0f",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2.zip",
+     "bytes": 13326288,
+     "sha256": "4f5d6e93a7fb300d",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2.zip.sha256",
+     "bytes": 138,
+     "sha256": "a5b0171fdeee7f53",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\INDEX.md",
+     "bytes": 2112,
+     "sha256": "34094efb22b22217",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\MANIFEST.md",
+     "bytes": 10191,
+     "sha256": "e91990a2c388f870",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\README.md",
+     "bytes": 2092,
+     "sha256": "a8b5b206b2a263eb",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\REPAIR_CLOSURE_REPORT.md",
+     "bytes": 14736,
+     "sha256": "61de444b7eb4f456",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\00_INDEX_AND_DECISION.md",
+     "bytes": 3168,
+     "sha256": "fee2de9aadd6bb57",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+     "bytes": 3399,
+     "sha256": "48d3d533b03fb8de",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+     "bytes": 81103,
+     "sha256": "f8d500ef14cb6c83",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\03_ARCHITECTURE_ABI_AND_EFFECT.md",
+     "bytes": 4989,
+     "sha256": "696083e0db101a2a",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\04_FABRIC_HGK_CONTROL.md",
+     "bytes": 41681,
+     "sha256": "e8fd5317b76bffe1",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+     "bytes": 30586,
+     "sha256": "c8c706e9726888ca",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\06_FHS_EXECUTE_HERMES_RUNTIME.md",
+     "bytes": 33739,
+     "sha256": "d457b7b0ebd303ae",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\07_ACCEPTANCE_CHALLENGE.md",
+     "bytes": 375721,
+     "sha256": "5037c52d8bf6d0f2",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+     "bytes": 1244798,
+     "sha256": "29e1be9a0c602831",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\09A_R15_949_ORIGINAL_ATOMS.md",
+     "bytes": 1651796,
+     "sha256": "198bdcf7c301b1e9",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\09B_KIND_MODE_HOST_192.md",
+     "bytes": 327634,
+     "sha256": "2c38c8e20858570c",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\09_SBL_DOC00_13_FULL_UPGRADE.md",
+     "bytes": 152493,
+     "sha256": "a010b53b26eb5c90",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\10A_B1_TQAEP_120_124_38.md",
+     "bytes": 526951,
+     "sha256": "dba3759dd32043fd",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\10B_B1_PI27_PD31.md",
+     "bytes": 161395,
+     "sha256": "9b2f863ff0b0242b",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\10_B1_W18_SELF_BOOTSTRAP.md",
+     "bytes": 46083,
+     "sha256": "a99a00d3a8bc5493",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\11_WORKPACKAGES_AND_DAG.md",
+     "bytes": 43940,
+     "sha256": "0f0c226986b5bc57",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\01_BODY\\12_VERIFICATION_AND_DELIVERY.md",
+     "bytes": 3142,
+     "sha256": "91835bc51e1767fe",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\02_EVIDENCE_APPENDICES\\E01_SOURCE_MANIFEST_AND_SEARCH.md",
+     "bytes": 43851,
+     "sha256": "9a2eb889efc61961",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\02_EVIDENCE_APPENDICES\\E02_REQUIREMENT_TRACE_AND_DENOMINATORS.md",
+     "bytes": 2395,
+     "sha256": "7355e0d59280ccb9",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\02_EVIDENCE_APPENDICES\\E03_ABI_SCHEMAS_AND_FIXTURE_AUDIT.md",
+     "bytes": 1008,
+     "sha256": "7c72f2175b173257",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\02_EVIDENCE_APPENDICES\\E04_CONFLICT_RCA_ADOPTION_AND_HOLDS.md",
+     "bytes": 3680,
+     "sha256": "fa2b03d94dd8e096",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\02_EVIDENCE_APPENDICES\\E05_QA_READBACK_AND_CLAIM_CEILING.md",
+     "bytes": 2591,
+     "sha256": "bf372134dcb99fbc",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\acceptance_edges15.json",
+     "bytes": 19122,
+     "sha256": "eb3bf698964bfc97",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\artifact_checksums.sha256",
+     "bytes": 8884,
+     "sha256": "746922b6e2d07458",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\asset_sets.json",
+     "bytes": 1871032,
+     "sha256": "648a66b5d581f25c",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\author_challenge_scope.md",
+     "bytes": 649,
+     "sha256": "7aa6bef99bc42d67",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\b1_case_specs.json",
+     "bytes": 964428,
+     "sha256": "7ac1d82f266035b3",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\b1_edges31.json",
+     "bytes": 31471,
+     "sha256": "2bd4106b31f92c4a",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\candidate_freeze.json",
+     "bytes": 3157,
+     "sha256": "70008ea5c03f8b7f",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\cells192.json",
+     "bytes": 350172,
+     "sha256": "4399b25a4ee3621e",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\challenge96.json",
+     "bytes": 199508,
+     "sha256": "a12fc410021dbd25",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\children149.json",
+     "bytes": 151499,
+     "sha256": "fca4549f84eda0c9",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\cli_probes.json",
+     "bytes": 22561,
+     "sha256": "9c4f4fa5e3a59778",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\denominators.json",
+     "bytes": 560,
+     "sha256": "a3d960b2b87218d6",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\document_parse_issues.json",
+     "bytes": 3,
+     "sha256": "37517e5f3dc66819",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\encoding_errors.json",
+     "bytes": 3,
+     "sha256": "37517e5f3dc66819",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\holds.json",
+     "bytes": 3366,
+     "sha256": "be7e88314cb9102c",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\isolated_actual_cli.json",
+     "bytes": 53733,
+     "sha256": "178f3378cfb82e63",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\loss_map.json",
+     "bytes": 258,
+     "sha256": "9c105b73396a9ff3",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\loss_map.md",
+     "bytes": 440,
+     "sha256": "b7fee2b06fbce3cf",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\native_abi.json",
+     "bytes": 53175,
+     "sha256": "f2d50f8bb839dfef",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\native_interfaces.json",
+     "bytes": 48651,
+     "sha256": "29d53f11fe77ed97",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\native_schema_fixtures.json",
+     "bytes": 59050,
+     "sha256": "69608d4759a54ed4",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\native_schema_results.json",
+     "bytes": 6410,
+     "sha256": "033662fcc39ce02f",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\oracle96_semantic_fixtures_v2.json",
+     "bytes": 612973,
+     "sha256": "9d5c6f02968cbe12",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\oracle96_semantic_results_v2.json",
+     "bytes": 41916,
+     "sha256": "39d18852f9487886",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\oracle96_verification_v2.json",
+     "bytes": 113350,
+     "sha256": "a9ec66f01d0b4c88",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\oracle96_verification_v2.md",
+     "bytes": 54529,
+     "sha256": "5ae40e92bb711b23",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\plugin_invocation.json",
+     "bytes": 125476,
+     "sha256": "daa2731bc090792f",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\plugin_pi_input_schema.json",
+     "bytes": 1976,
+     "sha256": "af5a04e7a63ec4d1",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\prior_seal.json",
+     "bytes": 415,
+     "sha256": "8b92c8930601a0db",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\r15_atoms949.json",
+     "bytes": 2844598,
+     "sha256": "ff69cfc4a09b3e0b",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\regression_red_patch_round2.json",
+     "bytes": 947,
+     "sha256": "dd73a9bde71b2bfa",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\repair_closure26.json",
+     "bytes": 55708,
+     "sha256": "668e01dead23819a",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\repo_final_readback.json",
+     "bytes": 1659,
+     "sha256": "d93d4b8db61f21be",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\repo_readback.json",
+     "bytes": 148373,
+     "sha256": "524472ea498cabae",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\revision2_integrity_audit.md",
+     "bytes": 1141,
+     "sha256": "de7483ad3b80b831",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\runner_bindings.json",
+     "bytes": 253534,
+     "sha256": "9c74c7e3315a4922",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\seal_format_checks.md",
+     "bytes": 236,
+     "sha256": "4e9b8c227372187d",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\source_alias_map.json",
+     "bytes": 1705499,
+     "sha256": "a88715dc27fe614d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\source_alias_resolution.json",
+     "bytes": 1326230,
+     "sha256": "d6523bc5131a5e8e",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\source_keyword_hits.jsonl",
+     "bytes": 112296081,
+     "sha256": "89468fc4778d4d7a",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\source_manifest.json",
+     "bytes": 2084362,
+     "sha256": "a62cbd344823398d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\source_recheck.json",
+     "bytes": 77720,
+     "sha256": "33dca2e361214a46",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\source_resolution.json",
+     "bytes": 1139274,
+     "sha256": "0c72781de8befaf7",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\source_resolution.md",
+     "bytes": 170,
+     "sha256": "e248c737c7050133",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\static_red_round1.json",
+     "bytes": 167336,
+     "sha256": "6e1e3f0c472a0844",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\static_validation_result.json",
+     "bytes": 530302,
+     "sha256": "3e6f43cccaf67491",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\static_validation_result.md",
+     "bytes": 150285,
+     "sha256": "8a0e8b35398ec1e0",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\test_matrix.md",
+     "bytes": 150285,
+     "sha256": "8a0e8b35398ec1e0",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\u03_nine_subtests.json",
+     "bytes": 5148,
+     "sha256": "7497789914193cfa",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\verification_scope.md",
+     "bytes": 607,
+     "sha256": "e2c84ee07300af79",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\verification_scope_revision2.md",
+     "bytes": 1175,
+     "sha256": "78773af2c0d2cf3b",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\WORK_REMAINING.md",
+     "bytes": 1161,
+     "sha256": "cb28a1f3c0069611",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\03_TESTS_AND_READBACK\\wp_graph.json",
+     "bytes": 20658,
+     "sha256": "48e4e0fff55fd514",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\tools\\author_oracles.py",
+     "bytes": 5998,
+     "sha256": "b18023cd8e5b05e2",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\tools\\source_reader.py",
+     "bytes": 1327,
+     "sha256": "023046b950d4e72d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\tools\\validate.py",
+     "bytes": 25002,
+     "sha256": "c67b511e65539682",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2\\tools\\verify_oracles_v2.py",
+     "bytes": 4519,
+     "sha256": "ceb1267742816689",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip",
+     "bytes": 13578116,
+     "sha256": "0432b9b4e572369d",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\COVERAGE_REPORT.md",
+     "bytes": 5322,
+     "sha256": "a7eba4b9eef0a257",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\INDEX.md",
+     "bytes": 4372,
+     "sha256": "f2900d20a0b64404",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\MANIFEST.md",
+     "bytes": 4648,
+     "sha256": "87c8194e0cd81f50",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\README.md",
+     "bytes": 2261,
+     "sha256": "60b7f2611786d226",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\00_INDEX_AND_DECISION.md",
+     "bytes": 16800,
+     "sha256": "1c79d52259b40182",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+     "bytes": 16031,
+     "sha256": "97fd4aba184f5588",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+     "bytes": 38445,
+     "sha256": "92bae9db228b4a80",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\03_ARCHITECTURE_ABI_AND_EFFECT.md",
+     "bytes": 20656,
+     "sha256": "f3fb530f5c64187a",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\04_FABRIC_HGK_CONTROL.md",
+     "bytes": 40513,
+     "sha256": "2c5b849d8e663d89",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+     "bytes": 27829,
+     "sha256": "2aed27ca1cc2f27f",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\06_FHS_EXECUTE_HERMES_RUNTIME.md",
+     "bytes": 27667,
+     "sha256": "78746ae16deee853",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\07_ACCEPTANCE_CHALLENGE.md",
+     "bytes": 98907,
+     "sha256": "a1834709d6278033",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+     "bytes": 388513,
+     "sha256": "d810e97cef8eb31b",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\09A_R15_949_ORIGINAL_ATOMS.md",
+     "bytes": 771021,
+     "sha256": "e5e3da2e070c61d0",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\09B_KIND_MODE_HOST_192.md",
+     "bytes": 86068,
+     "sha256": "41cdd5e5ab16bc2b",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\09_SBL_DOC00_13_FULL_UPGRADE.md",
+     "bytes": 142659,
+     "sha256": "2f5ff0ddde499ee8",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\10A_B1_TQAEP_120_124_38.md",
+     "bytes": 458968,
+     "sha256": "a3233c665420b56f",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\10B_B1_PI27_PD31.md",
+     "bytes": 121599,
+     "sha256": "f53c0a09f4f2de1a",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\10_B1_W18_SELF_BOOTSTRAP.md",
+     "bytes": 44867,
+     "sha256": "24815475eb097446",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\11_WORKPACKAGES_AND_DAG.md",
+     "bytes": 41991,
+     "sha256": "e3be4f8321e71caf",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\01_BODY\\12_VERIFICATION_AND_DELIVERY.md",
+     "bytes": 7610,
+     "sha256": "6dfefc3fd590baa5",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E01_SOURCE_MANIFEST_AND_SEARCH.md",
+     "bytes": 19461,
+     "sha256": "3cdcaf999771df39",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E02_REQUIREMENT_TRACE_AND_DENOMINATORS.md",
+     "bytes": 255823,
+     "sha256": "b06d2112cb1e8010",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E03_ABI_SCHEMAS_AND_FIXTURE_AUDIT.md",
+     "bytes": 3386,
+     "sha256": "d812d4eedf67cbff",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E04_CONFLICT_RCA_ADOPTION_AND_HOLDS.md",
+     "bytes": 3792,
+     "sha256": "4eaa529e268e1a54",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_DRAFT\\02_EVIDENCE_APPENDICES\\E05_QA_READBACK_AND_CLAIM_CEILING.md",
+     "bytes": 3375,
+     "sha256": "72cb158d427b781e",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\COVERAGE_REPORT.md",
+     "bytes": 4684,
+     "sha256": "40d080e546e046ba",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\INDEX.md",
+     "bytes": 2112,
+     "sha256": "34094efb22b22217",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\MANIFEST.md",
+     "bytes": 10770,
+     "sha256": "8ece6d7ed1035832",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\README.md",
+     "bytes": 2747,
+     "sha256": "a02200361f645bb1",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\REPAIR_CLOSURE_REPORT.md",
+     "bytes": 14736,
+     "sha256": "61de444b7eb4f456",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\REVISION3_NOTES.md",
+     "bytes": 4992,
+     "sha256": "1a9f9f2b97742532",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\00_INDEX_AND_DECISION.md",
+     "bytes": 3168,
+     "sha256": "fee2de9aadd6bb57",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+     "bytes": 3399,
+     "sha256": "48d3d533b03fb8de",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+     "bytes": 81103,
+     "sha256": "f8d500ef14cb6c83",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\03_ARCHITECTURE_ABI_AND_EFFECT.md",
+     "bytes": 4989,
+     "sha256": "696083e0db101a2a",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\04_FABRIC_HGK_CONTROL.md",
+     "bytes": 41681,
+     "sha256": "e8fd5317b76bffe1",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+     "bytes": 30586,
+     "sha256": "c8c706e9726888ca",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\06_FHS_EXECUTE_HERMES_RUNTIME.md",
+     "bytes": 33739,
+     "sha256": "d457b7b0ebd303ae",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\07_ACCEPTANCE_CHALLENGE.md",
+     "bytes": 375721,
+     "sha256": "5037c52d8bf6d0f2",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+     "bytes": 1244798,
+     "sha256": "29e1be9a0c602831",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\09A_R15_949_ORIGINAL_ATOMS.md",
+     "bytes": 1651796,
+     "sha256": "198bdcf7c301b1e9",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\09B_KIND_MODE_HOST_192.md",
+     "bytes": 327634,
+     "sha256": "2c38c8e20858570c",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\09_SBL_DOC00_13_FULL_UPGRADE.md",
+     "bytes": 152493,
+     "sha256": "a010b53b26eb5c90",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\10A_B1_TQAEP_120_124_38.md",
+     "bytes": 526951,
+     "sha256": "dba3759dd32043fd",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\10B_B1_PI27_PD31.md",
+     "bytes": 161395,
+     "sha256": "9b2f863ff0b0242b",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\10_B1_W18_SELF_BOOTSTRAP.md",
+     "bytes": 46083,
+     "sha256": "a99a00d3a8bc5493",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\11_WORKPACKAGES_AND_DAG.md",
+     "bytes": 43940,
+     "sha256": "0f0c226986b5bc57",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\01_BODY\\12_VERIFICATION_AND_DELIVERY.md",
+     "bytes": 3142,
+     "sha256": "91835bc51e1767fe",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\02_EVIDENCE_APPENDICES\\E01_SOURCE_MANIFEST_AND_SEARCH.md",
+     "bytes": 43851,
+     "sha256": "9a2eb889efc61961",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\02_EVIDENCE_APPENDICES\\E02_REQUIREMENT_TRACE_AND_DENOMINATORS.md",
+     "bytes": 2395,
+     "sha256": "7355e0d59280ccb9",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\02_EVIDENCE_APPENDICES\\E03_ABI_SCHEMAS_AND_FIXTURE_AUDIT.md",
+     "bytes": 1008,
+     "sha256": "7c72f2175b173257",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\02_EVIDENCE_APPENDICES\\E04_CONFLICT_RCA_ADOPTION_AND_HOLDS.md",
+     "bytes": 3680,
+     "sha256": "fa2b03d94dd8e096",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\02_EVIDENCE_APPENDICES\\E05_QA_READBACK_AND_CLAIM_CEILING.md",
+     "bytes": 2591,
+     "sha256": "bf372134dcb99fbc",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\acceptance_edges15.json",
+     "bytes": 19122,
+     "sha256": "eb3bf698964bfc97",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\artifact_checksums.sha256",
+     "bytes": 9403,
+     "sha256": "60e8f882000fe612",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\asset_sets.json",
+     "bytes": 1871032,
+     "sha256": "648a66b5d581f25c",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\author_challenge_scope.md",
+     "bytes": 649,
+     "sha256": "7aa6bef99bc42d67",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\b1_case_specs.json",
+     "bytes": 964428,
+     "sha256": "7ac1d82f266035b3",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\b1_edges31.json",
+     "bytes": 31471,
+     "sha256": "2bd4106b31f92c4a",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\candidate_freeze.json",
+     "bytes": 3157,
+     "sha256": "70008ea5c03f8b7f",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\cells192.json",
+     "bytes": 350172,
+     "sha256": "4399b25a4ee3621e",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\challenge96.json",
+     "bytes": 199508,
+     "sha256": "a12fc410021dbd25",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\children149.json",
+     "bytes": 151499,
+     "sha256": "fca4549f84eda0c9",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\cli_probes.json",
+     "bytes": 22561,
+     "sha256": "9c4f4fa5e3a59778",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\denominators.json",
+     "bytes": 560,
+     "sha256": "a3d960b2b87218d6",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\document_parse_issues.json",
+     "bytes": 3,
+     "sha256": "37517e5f3dc66819",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\encoding_errors.json",
+     "bytes": 3,
+     "sha256": "37517e5f3dc66819",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\holds.json",
+     "bytes": 3366,
+     "sha256": "be7e88314cb9102c",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\HOLD_DISPOSITION.tsv",
+     "bytes": 12965,
+     "sha256": "b549fd57a19d0eb6",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\isolated_actual_cli.json",
+     "bytes": 53733,
+     "sha256": "178f3378cfb82e63",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\loss_map.json",
+     "bytes": 258,
+     "sha256": "9c105b73396a9ff3",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\loss_map.md",
+     "bytes": 440,
+     "sha256": "b7fee2b06fbce3cf",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\native_abi.json",
+     "bytes": 53175,
+     "sha256": "f2d50f8bb839dfef",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\native_interfaces.json",
+     "bytes": 48651,
+     "sha256": "29d53f11fe77ed97",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\native_schema_fixtures.json",
+     "bytes": 59050,
+     "sha256": "69608d4759a54ed4",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\native_schema_results.json",
+     "bytes": 6410,
+     "sha256": "033662fcc39ce02f",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\oracle96_semantic_fixtures_v2.json",
+     "bytes": 612973,
+     "sha256": "9d5c6f02968cbe12",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\oracle96_semantic_results_v2.json",
+     "bytes": 41916,
+     "sha256": "39d18852f9487886",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\oracle96_verification_v2.json",
+     "bytes": 113350,
+     "sha256": "a9ec66f01d0b4c88",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\oracle96_verification_v2.md",
+     "bytes": 54529,
+     "sha256": "5ae40e92bb711b23",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\PACKAGE_DENOMINATOR.json",
+     "bytes": 367,
+     "sha256": "753d7b5a5ae7f3c5",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\plugin_invocation.json",
+     "bytes": 125476,
+     "sha256": "daa2731bc090792f",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\plugin_pi_input_schema.json",
+     "bytes": 1976,
+     "sha256": "af5a04e7a63ec4d1",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\prior_seal.json",
+     "bytes": 415,
+     "sha256": "8b92c8930601a0db",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\r15_atoms949.json",
+     "bytes": 2844598,
+     "sha256": "ff69cfc4a09b3e0b",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\regression_red_patch_round2.json",
+     "bytes": 947,
+     "sha256": "dd73a9bde71b2bfa",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\repair_closure26.json",
+     "bytes": 55708,
+     "sha256": "668e01dead23819a",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\repo_final_readback.json",
+     "bytes": 1659,
+     "sha256": "d93d4b8db61f21be",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\repo_readback.json",
+     "bytes": 148373,
+     "sha256": "524472ea498cabae",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\revision2_integrity_audit.md",
+     "bytes": 1141,
+     "sha256": "de7483ad3b80b831",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\runner_bindings.json",
+     "bytes": 253534,
+     "sha256": "9c74c7e3315a4922",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\seal_format_checks.md",
+     "bytes": 236,
+     "sha256": "4e9b8c227372187d",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\source_alias_map.json",
+     "bytes": 1705499,
+     "sha256": "a88715dc27fe614d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\source_alias_resolution.json",
+     "bytes": 1326230,
+     "sha256": "d6523bc5131a5e8e",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\source_keyword_hits.jsonl",
+     "bytes": 112296081,
+     "sha256": "89468fc4778d4d7a",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\source_manifest.json",
+     "bytes": 1857807,
+     "sha256": "beff2590c8f3d780",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\source_recheck.json",
+     "bytes": 77720,
+     "sha256": "33dca2e361214a46",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\source_resolution.json",
+     "bytes": 1139274,
+     "sha256": "0c72781de8befaf7",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\source_resolution.md",
+     "bytes": 170,
+     "sha256": "e248c737c7050133",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\STAGE18_TRACE.tsv",
+     "bytes": 2800,
+     "sha256": "a0b9f195b7514871",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\static_red_round1.json",
+     "bytes": 167336,
+     "sha256": "6e1e3f0c472a0844",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\static_validation_result.json",
+     "bytes": 530338,
+     "sha256": "737e7091f54b408a",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\static_validation_result.md",
+     "bytes": 150345,
+     "sha256": "235cdbe4a501a3be",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\test_matrix.md",
+     "bytes": 150345,
+     "sha256": "235cdbe4a501a3be",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\u03_nine_subtests.json",
+     "bytes": 5148,
+     "sha256": "7497789914193cfa",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\verification_scope.md",
+     "bytes": 607,
+     "sha256": "e2c84ee07300af79",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\verification_scope_revision2.md",
+     "bytes": 1175,
+     "sha256": "78773af2c0d2cf3b",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\VOID_R2_REPORT.md",
+     "bytes": 1469,
+     "sha256": "d0bc70e32e44443f",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\WORK_REMAINING.md",
+     "bytes": 1161,
+     "sha256": "cb28a1f3c0069611",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\03_TESTS_AND_READBACK\\wp_graph.json",
+     "bytes": 20658,
+     "sha256": "48e4e0fff55fd514",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\tools\\author_oracles.py",
+     "bytes": 5998,
+     "sha256": "b18023cd8e5b05e2",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\tools\\source_reader.py",
+     "bytes": 1327,
+     "sha256": "023046b950d4e72d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\tools\\validate.py",
+     "bytes": 25002,
+     "sha256": "c67b511e65539682",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3\\tools\\verify_oracles_v2.py",
+     "bytes": 4519,
+     "sha256": "ceb1267742816689",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\COVERAGE_REPORT.md",
+     "bytes": 4684,
+     "sha256": "40d080e546e046ba",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\FINAL_STOP_STATUS.md",
+     "bytes": 742,
+     "sha256": "3045a5cbea6e7438",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\INDEX.md",
+     "bytes": 2112,
+     "sha256": "34094efb22b22217",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\MANIFEST.md",
+     "bytes": 10191,
+     "sha256": "e91990a2c388f870",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\README.md",
+     "bytes": 2092,
+     "sha256": "a8b5b206b2a263eb",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\REPAIR_CLOSURE_REPORT.md",
+     "bytes": 14736,
+     "sha256": "61de444b7eb4f456",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\00_INDEX_AND_DECISION.md",
+     "bytes": 3168,
+     "sha256": "fee2de9aadd6bb57",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+     "bytes": 3399,
+     "sha256": "48d3d533b03fb8de",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+     "bytes": 81647,
+     "sha256": "7a4452b8d060bc42",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\03_ARCHITECTURE_ABI_AND_EFFECT.md",
+     "bytes": 4989,
+     "sha256": "696083e0db101a2a",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\04_FABRIC_HGK_CONTROL.md",
+     "bytes": 41681,
+     "sha256": "e8fd5317b76bffe1",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+     "bytes": 30586,
+     "sha256": "c8c706e9726888ca",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\06_FHS_EXECUTE_HERMES_RUNTIME.md",
+     "bytes": 33739,
+     "sha256": "d457b7b0ebd303ae",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\07_ACCEPTANCE_CHALLENGE.md",
+     "bytes": 375721,
+     "sha256": "5037c52d8bf6d0f2",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+     "bytes": 482522,
+     "sha256": "080127b5f535f4c3",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\09A_R15_949_ORIGINAL_ATOMS.md",
+     "bytes": 1652299,
+     "sha256": "4c0e8cc6e84ddca1",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\09B_KIND_MODE_HOST_192.md",
+     "bytes": 327133,
+     "sha256": "819775d9a786e908",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\09_SBL_DOC00_13_FULL_UPGRADE.md",
+     "bytes": 94397,
+     "sha256": "e301b2e2ac6e319c",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\10A_B1_TQAEP_120_124_38.md",
+     "bytes": 563548,
+     "sha256": "6d859f4ff2600bd4",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\10B_B1_PI27_PD31.md",
+     "bytes": 161395,
+     "sha256": "9b2f863ff0b0242b",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\10_B1_W18_SELF_BOOTSTRAP.md",
+     "bytes": 46083,
+     "sha256": "a99a00d3a8bc5493",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\11_WORKPACKAGES_AND_DAG.md",
+     "bytes": 43940,
+     "sha256": "0f0c226986b5bc57",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\01_BODY\\12_VERIFICATION_AND_DELIVERY.md",
+     "bytes": 3142,
+     "sha256": "91835bc51e1767fe",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\02_EVIDENCE_APPENDICES\\E01_SOURCE_MANIFEST_AND_SEARCH.md",
+     "bytes": 43851,
+     "sha256": "9a2eb889efc61961",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\02_EVIDENCE_APPENDICES\\E02_REQUIREMENT_TRACE_AND_DENOMINATORS.md",
+     "bytes": 2395,
+     "sha256": "7355e0d59280ccb9",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\02_EVIDENCE_APPENDICES\\E03_ABI_SCHEMAS_AND_FIXTURE_AUDIT.md",
+     "bytes": 1008,
+     "sha256": "7c72f2175b173257",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\02_EVIDENCE_APPENDICES\\E04_CONFLICT_RCA_ADOPTION_AND_HOLDS.md",
+     "bytes": 3680,
+     "sha256": "fa2b03d94dd8e096",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\02_EVIDENCE_APPENDICES\\E05_QA_READBACK_AND_CLAIM_CEILING.md",
+     "bytes": 2591,
+     "sha256": "bf372134dcb99fbc",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\acceptance_edges15.json",
+     "bytes": 19122,
+     "sha256": "eb3bf698964bfc97",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\artifact_checksums.sha256",
+     "bytes": 8884,
+     "sha256": "746922b6e2d07458",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\asset_sets.json",
+     "bytes": 2278598,
+     "sha256": "bd16cc0497c84637",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\author_challenge_scope.md",
+     "bytes": 649,
+     "sha256": "7aa6bef99bc42d67",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\b1_case_specs.json",
+     "bytes": 964428,
+     "sha256": "7ac1d82f266035b3",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\b1_edges31.json",
+     "bytes": 31471,
+     "sha256": "2bd4106b31f92c4a",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\candidate_freeze.json",
+     "bytes": 3157,
+     "sha256": "70008ea5c03f8b7f",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\cells192.json",
+     "bytes": 357372,
+     "sha256": "910ae684095392c5",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\challenge96.json",
+     "bytes": 199508,
+     "sha256": "a12fc410021dbd25",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\children149.json",
+     "bytes": 232842,
+     "sha256": "34ba7fdab014e27d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\children149_fixtures.json",
+     "bytes": 269775,
+     "sha256": "00927309f4d627a4",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\cli_probes.json",
+     "bytes": 22561,
+     "sha256": "9c4f4fa5e3a59778",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\denominators.json",
+     "bytes": 560,
+     "sha256": "a3d960b2b87218d6",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\document_parse_issues.json",
+     "bytes": 3,
+     "sha256": "37517e5f3dc66819",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\encoding_errors.json",
+     "bytes": 3,
+     "sha256": "37517e5f3dc66819",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\holds.json",
+     "bytes": 3366,
+     "sha256": "be7e88314cb9102c",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\isolated_actual_cli.json",
+     "bytes": 53733,
+     "sha256": "178f3378cfb82e63",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\loss_map.json",
+     "bytes": 258,
+     "sha256": "9c105b73396a9ff3",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\loss_map.md",
+     "bytes": 440,
+     "sha256": "b7fee2b06fbce3cf",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\native_abi.json",
+     "bytes": 53175,
+     "sha256": "f2d50f8bb839dfef",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\native_interfaces.json",
+     "bytes": 48651,
+     "sha256": "29d53f11fe77ed97",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\native_schema_fixtures.json",
+     "bytes": 59050,
+     "sha256": "69608d4759a54ed4",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\native_schema_results.json",
+     "bytes": 6410,
+     "sha256": "033662fcc39ce02f",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\oracle96_semantic_fixtures_v2.json",
+     "bytes": 612973,
+     "sha256": "9d5c6f02968cbe12",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\oracle96_semantic_results_v2.json",
+     "bytes": 41916,
+     "sha256": "39d18852f9487886",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\oracle96_verification_v2.json",
+     "bytes": 113350,
+     "sha256": "a9ec66f01d0b4c88",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\oracle96_verification_v2.md",
+     "bytes": 54529,
+     "sha256": "5ae40e92bb711b23",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\plugin_invocation.json",
+     "bytes": 125476,
+     "sha256": "daa2731bc090792f",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\plugin_pi_input_schema.json",
+     "bytes": 1976,
+     "sha256": "af5a04e7a63ec4d1",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\prior_seal.json",
+     "bytes": 280,
+     "sha256": "990f0e8065c55806",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\r15_atoms949.json",
+     "bytes": 2844598,
+     "sha256": "ff69cfc4a09b3e0b",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\regression_red_patch_round2.json",
+     "bytes": 947,
+     "sha256": "dd73a9bde71b2bfa",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\repair_closure26.json",
+     "bytes": 55708,
+     "sha256": "668e01dead23819a",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\repo_final_readback.json",
+     "bytes": 1659,
+     "sha256": "d93d4b8db61f21be",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\repo_readback.json",
+     "bytes": 148373,
+     "sha256": "524472ea498cabae",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\revision2_integrity_audit.md",
+     "bytes": 1141,
+     "sha256": "de7483ad3b80b831",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\runner_bindings.json",
+     "bytes": 317989,
+     "sha256": "7a6029869157106d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\seal_format_checks.md",
+     "bytes": 236,
+     "sha256": "4e9b8c227372187d",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\source_alias_map.json",
+     "bytes": 1705499,
+     "sha256": "a88715dc27fe614d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\source_alias_resolution.json",
+     "bytes": 1326230,
+     "sha256": "d6523bc5131a5e8e",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\source_keyword_hits.jsonl",
+     "bytes": 112296081,
+     "sha256": "89468fc4778d4d7a",
+     "class": "DISCARD_ARTEFACT"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\source_manifest.json",
+     "bytes": 2084362,
+     "sha256": "a62cbd344823398d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\source_recheck.json",
+     "bytes": 77720,
+     "sha256": "33dca2e361214a46",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\source_resolution.json",
+     "bytes": 1139274,
+     "sha256": "0c72781de8befaf7",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\source_resolution.md",
+     "bytes": 170,
+     "sha256": "e248c737c7050133",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\static_red_round1.json",
+     "bytes": 167336,
+     "sha256": "6e1e3f0c472a0844",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\static_validation_result.json",
+     "bytes": 530317,
+     "sha256": "4c5fbefc9f370f72",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\static_validation_result.md",
+     "bytes": 150285,
+     "sha256": "d29623422e899414",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\technology_donor_fixtures.json",
+     "bytes": 1895050,
+     "sha256": "af4ed87a9e06b50d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\test_matrix.md",
+     "bytes": 150285,
+     "sha256": "d29623422e899414",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\u03_nine_subtests.json",
+     "bytes": 5148,
+     "sha256": "7497789914193cfa",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\verification_scope.md",
+     "bytes": 607,
+     "sha256": "e2c84ee07300af79",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\verification_scope_revision2.md",
+     "bytes": 1175,
+     "sha256": "78773af2c0d2cf3b",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\WORK_REMAINING.md",
+     "bytes": 1161,
+     "sha256": "cb28a1f3c0069611",
+     "class": "ARCHIVE_DOC"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\03_TESTS_AND_READBACK\\wp_graph.json",
+     "bytes": 20658,
+     "sha256": "48e4e0fff55fd514",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\tools\\author_oracles.py",
+     "bytes": 5998,
+     "sha256": "b18023cd8e5b05e2",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\tools\\source_reader.py",
+     "bytes": 1327,
+     "sha256": "023046b950d4e72d",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\tools\\validate.py",
+     "bytes": 25002,
+     "sha256": "c67b511e65539682",
+     "class": "ARCHIVE_CODE"
+    },
+    {
+     "rel": "FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE\\OLD\\FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3_STOPPED_CURRENT\\tools\\verify_oracles_v2.py",
+     "bytes": 4519,
+     "sha256": "ceb1267742816689",
+     "class": "ARCHIVE_CODE"
+    }
+   ]
+  }
+ ]
+}
