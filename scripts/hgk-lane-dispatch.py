@@ -2779,6 +2779,22 @@ def main() -> int:
                 used = att
                 break
 
+    # Persist what is already known BEFORE the post-processing: a dispatch that is terminated between the
+    # last attempt and the final write used to leave NO receipt at all, so a lane that really served this
+    # turn could not be claimed (RC-UNPERSISTED-RECEIPT, 2026-10-30). The partial receipt is marked
+    # `receipt_complete: false` and is overwritten below; it is never mistakable for a finished one.
+    if args.json_out:
+        try:
+            _partial = {"schema": SCHEMA, "lane": args.lane, "nonce": getattr(args, "nonce", None),
+                        "receipt_complete": False,
+                        "note": "written immediately after the attempts; the final receipt overwrites it",
+                        "attempts": attempts}
+            _p = Path(args.json_out)
+            _p.parent.mkdir(parents=True, exist_ok=True)
+            _p.write_text(json.dumps(_partial, indent=2, ensure_ascii=False), encoding="utf-8")
+        except Exception:  # noqa: BLE001 - never block the turn on a bookkeeping write
+            pass
+
     # ---- D4 (cont.): CONSUME the single-use budget iff an attempt actually served this turn ----
     # A successful spawn (the attempt that serves the turn) marks the authorization resource USED via
     # the durable CONSUMED tombstone, so a second acquisition by ANY holder -- sequential or concurrent
