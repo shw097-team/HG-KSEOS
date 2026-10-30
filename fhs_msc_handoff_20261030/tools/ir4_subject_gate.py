@@ -42,7 +42,8 @@ def main() -> int:
         print(json.dumps(out) if a.json else out["verdict"])
         return 0 if a.advisory else 3
 
-    rc, top = git(str(target), "rev-parse", "--show-toplevel")
+    cwd = str(target if target.is_dir() else target.parent)
+    rc, top = git(cwd, "rev-parse", "--show-toplevel")
     if rc != 0:
         out = {"verdict": "NO_REPO", "path": a.path,
                "detail": "not inside any git worktree: no lineage, no diff, no rollback",
