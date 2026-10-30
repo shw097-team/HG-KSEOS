@@ -1,0 +1,96 @@
+{
+  "schema": "HGK-HERMES-BINDING/3",
+  "status": "ACTIVE_SELECTED_REINSTALL_BASELINE",
+  "claim_ceiling": "binding identity revalidated for the effective runtime; this does not claim RP002_LOCAL_ACCEPTANCE_PASS, and it does not resolve the two-tree ambiguity (MSIX tree vs D:/Hermes-Recovery/h22), which is filed as TT-HERMES-TWO-TREE-IDENTITY-001",
+  "release": {
+    "version": "0.22.5",
+    "tag": "v2026.9.24",
+    "commit": "bf0203a794a0",
+    "reported_by": "hermes --version (venv launcher)",
+    "repository": "https://github.com/NousResearch/hermes-agent.git",
+    "identity_verified": "hermes --version = Hermes Agent v0.22.5 (2026.9.24) stable local bf0203a794a0, install D:/Hermes-Recovery/h22, python 3.14.9; the MSIX tree reports pyproject 0.21.5 and git describe v2026.9.24 at f97608f178d1 -- both are recorded, neither is asserted to be the other"
+  },
+  "rollback_baseline": {
+    "version": "0.18.2",
+    "tag": "v2026.7.7.2",
+    "commit": "9de9c25f620ff7f1ce0fd5457d596052d5159596",
+    "role": "RECOVERY_ONLY_BASELINE (not active after Scheme B cutover)",
+    "runnable_verified": "Hermes Agent v0.18.2 (2026.7.7.2) + real opencode-go/deepseek-v4-flash inference OK"
+  },
+  "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.cmd",
+  "python_executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+  "install_root": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv",
+  "runtime_switch_required": false,
+  "runtime_switch_note": "revalidated 2026-10-30 under close criteria (b): qualification gates re-run against the effective interpreter; see evidence/FAR-RUNTIME-DRIFT-CLOSE-20261030/",
+  "qualification_home": "disposable: %TEMP%\\hgk-hermes-v020-qual (isolated venv + HERMES_HOME + kanban.db)",
+  "path_mutation": true,
+  "global_git_mutation": false,
+  "provider_credentials_configured": true,
+  "provider_route": {
+    "provider": "opencode-go",
+    "model": "deepseek-v4.1-flash",
+    "base_url": "https://opencode.ai/zen/go/v1",
+    "openai_fallback": false,
+    "codex_route": "Codex CLI -> OpenCodex -> OpenCode Go -> deepseek-v4.1-flash (owner mandate 2026-10-21, handover round; the arm is measured live on the EXECUTE lane)",
+    "owner_mandate_20261021": "Owner mandate 2026-10-21 (verbatim): PLAN = GPT 6.1 SOL-MEDIUM (Open AI OAuth); Codex bounded writer / EXECUTE handed to the CODEX CLI, provider/model = MiniMax M3.1 Flash (OPENCODE GO); Independent Acceptance Officer / VERIFY / SECURITY handed to the CODEX CLI, checker = GPT 6.1 SOL-MEDIUM (Open AI OAuth). EXECUTE moves from deepseek-v4.1-flash to minimax-m3.1-flash-free; PLAN and VERIFY_SECURITY are unchanged.",
+    "owner_mandate_20261021b": "Owner mandate 2026-10-21 (handover round, verbatim): PLAN = MiniMax M3.1 Flash (OPENCODE GO); Codex bounded writer / EXECUTE handed to the CODEX CLI, provider/model = DeepSeek V4.1 Flash (OPENCODE GO); Independent Acceptance Officer / VERIFY / SECURITY handed to the CODEX CLI, checker = GPT 6.1 SOL-MEDIUM (Open AI OAuth). This SUPERSEDES the earlier 2026-10-21 order (PLAN gpt-6.1-sol, EXECUTE minimax): PLAN and EXECUTE swap. No arm removed.",
+    "owner_mandate_20261023": "Owner order 2026-10-23 (R15, verbatim-condensed): the main model is DEEPSEEK V4.1 FLASH (OPENCODE GO). Delete the MiniMax M3.1 Flash (OPENCODE GO) model option from the fallback-first position and promote the former second fallback MiMo-V2.6-Flash (OPENCODE GO) to fallback 1. SBL-Commander & PLAN, SBL-EXECUTE & Codex bounded writer and the Independent Acceptance Officer / VERIFY / SECURITY all run DEEPSEEK V4.1 FLASH (OPENCODE GO) via the CODEX CLI where applicable. Deletion is a REPAIR: the provider answers HTTP 410 ModelDeprecated for minimax-m3.1-flash-free (measured 2026-10-23)."
+  },
+  "formal_adapter": {
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\hermes-core.ps1",
+    "allowed_operation": "version verification only",
+    "blocked_until_hitl": [
+      "setup",
+      "login",
+      "auth",
+      "provider-bound prompt",
+      "gateway install",
+      "update",
+      "uninstall",
+      "--yolo",
+      "--accept-hooks"
+    ]
+  },
+  "evidence": [
+    "evidence/review/HG-KSEOS_HERMES_V020_IDENTITY_READBACK.json",
+    "evidence/review/HG-KSEOS_HERMES_V0182_TO_V020_CAPABILITY_DELTA.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_REUSE_BINDING_MATRIX.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_WINDOWS_QUALIFICATION.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_PROVIDER_ROUTE_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_KANBAN_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_GOAL_CONTRACT_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_TOOL_RECOVERY_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_APPROVALS_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_COMPRESSION_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_SKILL_GOVERNANCE_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_ROLLBACK_ACCEPTANCE.json",
+    "evidence/review/HG-KSEOS_HERMES_V020_INDEPENDENT_ACCEPTANCE.json"
+  ],
+  "canonical_hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes",
+  "canonical_kanban_db": "C:\\Users\\user\\AppData\\Local\\hermes\\kanban.db",
+  "kanban_state": "RESTORED_AND_ACTIVE_RP002_STAGE1",
+  "kanban_note": "Repaired 2026-08-12 by RP-002 v2.0 Stage-1 G1: kanban.db existed at canonical_kanban_db; board rp002-stage1 created; 4-task DAG G0->G1->FAB->EVD created/claimed/heartbeat OK; prior NOT_RESTORED_REBUILD_REQUIRED was stale post-reinstall state.",
+  "governed_hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
+  "governed_hermes_home_note": "Additive (O4): the governed PLAN/Orchestrator plane launches under this profile, which carries governed_runtime + model.default=gpt-6.1-sol/openai-codex. canonical_hermes_home is UNCHANGED so the lane/execution launcher and every un-governed consumer keep their existing binding. Absent key => behaviour is byte-identical to before.",
+  "revalidated_20261030": {
+    "at": "2026-10-30T20:58:09",
+    "gates": {
+      "command": "pytest tests/test_hermes_qualification.py tests/test_task013_hermes_v020_closure.py",
+      "result": "12 passed in 0.53s",
+      "exit": 0
+    },
+    "before": {
+      "release": {
+        "version": "0.20.0",
+        "tag": "v2026.8.3",
+        "commit": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb",
+        "repository": "https://github.com/NousResearch/hermes-agent.git",
+        "identity_verified": "git rev-parse HEAD = git tag --points-at HEAD = v2026.8.3; pyproject version 0.20.0; runtime hermes --version = Hermes Agent v0.20.0 (2026.8.3)"
+      },
+      "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.exe",
+      "python_executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+      "install_root": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent",
+      "canonical_hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes"
+    }
+  }
+}

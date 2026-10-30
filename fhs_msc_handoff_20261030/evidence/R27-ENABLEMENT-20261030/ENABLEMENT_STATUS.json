@@ -1,0 +1,50 @@
+{
+  "schema": "ENABLEMENT-STATUS/1",
+  "round": "FHS-MSC-ALLPASS-R27-20261030",
+  "owner_envelope": "WIN-7b77e3d4419f",
+  "scope_includes": "permit_sign",
+  "gates_built_and_wired": [
+    {
+      "gate": "refusal_gate.py",
+      "state": "ENABLED",
+      "where": "HG-KSEOS/scripts, consumed by acceptance_default.py",
+      "tests": 4
+    },
+    {
+      "gate": "lane_evidence_gate.py",
+      "state": "ENABLED",
+      "where": "HG-KSEOS/scripts, consumed by round_close_gate.py",
+      "tests": 6
+    },
+    {
+      "gate": "round_close_gate.py",
+      "state": "ENABLED",
+      "where": "HG-KSEOS/scripts, the closing step of a round",
+      "tests": "probe measured"
+    },
+    {
+      "gate": "acceptance_default.py",
+      "state": "ENABLED",
+      "change": "a named refusal must cite a gate-passing record"
+    }
+  ],
+  "blocking_tt_closed": {
+    "tt": "TT-RUNTIME-VERSION-DRIFT-001",
+    "how": "criterion (b) revalidation",
+    "gates": "12 passed",
+    "config": "HGK-HERMES-BINDING/3"
+  },
+  "new_tt": {
+    "tt": "TT-HERMES-TWO-TREE-IDENTITY-001",
+    "blocking": false,
+    "why": "launcher reports D:/Hermes-Recovery/h22 v0.22.5 while the MSIX tree carries 0.21.5; both recorded, neither asserted"
+  },
+  "next_blocking_visible": {
+    "WP-FHS-03": "spine refuses without an owner-signed native admission bundle (ERR_NATIVE_BUNDLE_REQUIRED); the bundle format is the actual WP-03 output"
+  },
+  "not_claimed": [
+    "any work package reopened this round",
+    "native checker"
+  ],
+  "recorded_at": "2026-10-30T20:59:22"
+}
