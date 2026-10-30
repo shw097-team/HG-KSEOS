@@ -27,6 +27,8 @@ import sys
 import time
 from pathlib import Path
 
+CREATE_NO_WINDOW = 0x08000000
+
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import winproc  # noqa: E402
 
@@ -75,6 +77,21 @@ def snapshot() -> set:
     return out
 
 
+def parent_of(pid: int) -> tuple[int, str]:
+    """Who created the window's process. Without this the event says a window appeared but not which of the four
+    spawn paths caused it -- and the four have different fixes."""
+    r = subprocess.run(["powershell", "-NoProfile", "-Command",
+                        f"$p = Get-CimInstance Win32_Process -Filter \"ProcessId={pid}\"; "
+                        f"if ($p) {{ $pp = $p.ParentProcessId; $n = (Get-CimInstance Win32_Process -Filter \"ProcessId=$pp\").Name; "
+                        f"'{{0}}|{{1}}' -f $pp, $n }} else {{ '0|?' }}"],
+                       capture_output=True, text=True, timeout=30, creationflags=CREATE_NO_WINDOW)
+    out = (r.stdout or "").strip()
+    if "|" in out:
+        a, _, b = out.partition("|")
+        return int(a or 0), b.strip()
+    return 0, "?"
+
+
 def interesting(pid: int, cls: str) -> str | None:
     exe = exe_name(pid)
     if cls in CONSOLE_CLASSES:
@@ -84,22 +101,62 @@ def interesting(pid: int, cls: str) -> str | None:
     return None
 
 
+def lanes_alive() -> int:
+    r = subprocess.run(["powershell", "-NoProfile", "-Command",
+                        "(Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*hgk-lane-dispatch.py*' }).Count"],
+                       capture_output=True, text=True, timeout=60, creationflags=CREATE_NO_WINDOW)
+    digits = "".join(ch for ch in (r.stdout or "") if ch.isdigit())
+    return int(digits or 0)
+
+
+def refresh_status() -> None:
+    try:
+        subprocess.run([sys.executable, str(K / "scripts" / "ops_status.py")], capture_output=True, timeout=180,
+                       creationflags=CREATE_NO_WINDOW)
+    except (OSError, subprocess.SubprocessError):
+        pass
+
+
+def kick_if_idle(last_kick: float) -> float:
+    """The clock lives inside this already-hidden process, so no tick ever needs a console of its own.
+
+    Measured 2026-10-31 01:59:50: the only console window this host produced came from the cron job's own python.exe
+    at the moment the scheduler fired it -- the window exists before any of our code runs and cannot be hidden from
+    inside. With the tick chained from a finished unit, the scheduler is no longer needed; this keeps a liveness
+    fallback without adding a window.
+    """
+    if time.time() - last_kick < 90:
+        return last_kick
+    if lanes_alive():
+        return time.time()
+    r = subprocess.run([sys.executable, str(K / "scripts" / "continuation_driver.py"), "--parallel", "3",
+                        "--auto-record"], cwd=str(K), capture_output=True, text=True, timeout=1800,
+                       creationflags=CREATE_NO_WINDOW, env=dict(os.environ, HGK_CHAIN_DEPTH="1"))
+    return time.time()
+
+
 def loop(seconds: float = 0) -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     base = snapshot()
     deadline = time.time() + seconds if seconds else None
+    last_kick = time.time()
     with OUT.open("a", encoding="utf-8") as fh:
         while True:
             cur = snapshot()
             for hwnd, pid, cls, title in cur - base:
                 who = interesting(pid, cls)
                 if who:
+                    ppid, pname_ = parent_of(pid)
                     fh.write(json.dumps({"at": time.strftime("%Y-%m-%dT%H:%M:%S"), "exe": who, "pid": pid,
-                                         "class": cls, "title": title}, ensure_ascii=False) + "\n")
+                                         "class": cls, "title": title, "parent_pid": ppid,
+                                         "parent": pname_}, ensure_ascii=False) + "\n")
                     fh.flush()
                 base.add((hwnd, pid, cls, title))
             for gone in base - cur:
                 base.discard(gone)
+            if time.time() - last_kick > 30:
+                refresh_status()
+            last_kick = kick_if_idle(last_kick)
             if deadline and time.time() > deadline:
                 return 0
             time.sleep(0.02)
@@ -127,7 +184,7 @@ def main(argv=None) -> int:
         if alive():
             print(json.dumps({"window_watch": "ALREADY", "pid": alive()}, ensure_ascii=False))
             return 0
-        flags = winproc.CREATE_NO_WINDOW | 0x00000008 | 0x01000000
+        flags = winproc.CREATE_NO_WINDOW | 0x01000000
         proc = subprocess.Popen([sys.executable, str(Path(__file__).resolve()), "--loop"], close_fds=True,
                                 creationflags=flags, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         PIDF.write_text(str(proc.pid), encoding="utf-8")

@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from subprocess import Popen
 import sqlite3
 import os
 import subprocess
@@ -54,6 +55,25 @@ MAX_EXECUTE_ROUNDS = 3
 LANE_TIMEOUTS = {"PLAN": 900, "VERIFY_SECURITY": 900, "EXECUTE": 1800}   # two failures are a flake; the third is a defect and stops the loop
 STATE = QUEUE / "driver_state.json"
 LOG = QUEUE / "driver.log"
+
+
+CREATE_NO_WINDOW = 0x08000000
+
+
+def sp_run(argv, **kw):
+    """subprocess.run that cannot put a window on the owner's desktop.
+
+    Explicit flags rather than the winproc monkeypatch: measured 2026-10-31 02:01, a tick still produced eight
+    `python.exe` console windows although winproc.install() reported True in the same tree. Whatever the reason
+    (an install that silently failed in a detached child), the call site is the one place that can be certain.
+    """
+    kw["creationflags"] = int(kw.get("creationflags") or 0) | CREATE_NO_WINDOW
+    return subprocess.run(argv, **kw)
+
+
+def sp_popen(argv, **kw):
+    kw["creationflags"] = int(kw.get("creationflags") or 0) | CREATE_NO_WINDOW
+    return subprocess.Popen(argv, **kw)
 
 
 def log(event: dict) -> None:
@@ -81,7 +101,7 @@ def dispatch_alive(wp: str | None = None) -> bool:
              "$_.CommandLine -like '*hgk-lane-dispatch.py*' -and "
              f"$_.CommandLine -like '*{unit}*' }}; ($p | Measure-Object).Count")
     try:
-        done = subprocess.run(["powershell", "-NoProfile", "-Command", query], capture_output=True, timeout=60)
+        done = sp_run(["powershell", "-NoProfile", "-Command", query], capture_output=True, timeout=60)
         out = done.stdout.decode("utf-8", errors="replace") if isinstance(done.stdout, bytes) else str(done.stdout)
         digits = "".join(ch for ch in out.strip().splitlines()[-1:] and out.strip().splitlines()[-1] if ch.isdigit())
         if not digits:
@@ -107,7 +127,7 @@ def dead_attempts(queue_dir: Path) -> list[dict]:
 
 
 def next_item(only_wp: str | None = None) -> dict:
-    done = subprocess.run([PY, str(K / "scripts" / "work_queue.py"), "next"] + ([ "--wp", only_wp] if only_wp else []),
+    done = sp_run([PY, str(K / "scripts" / "work_queue.py"), "next"] + ([ "--wp", only_wp] if only_wp else []),
                           capture_output=True, text=True, timeout=120)
     if done.returncode != 0 or not done.stdout.strip():
         raise RuntimeError(f"work_queue next failed rc={done.returncode}: {done.stderr[-300:]}")
@@ -178,7 +198,7 @@ def launch(lane: str, prompt: str, nonce: str, cwd: Path, json_out: Path, timeou
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     log_path = cwd / f"{json_out.stem}.log"
     with log_path.open("wb") as fh:
-        proc = subprocess.Popen(argv, cwd=str(K), stdout=fh, stderr=subprocess.STDOUT,
+        proc = sp_popen(argv, cwd=str(K), stdout=fh, stderr=subprocess.STDOUT,
                                 creationflags=flags, close_fds=True)
     log({"action": "spawned", "pid": proc.pid, "log": str(log_path)})
     return proc.pid
@@ -295,7 +315,7 @@ def refresh_status() -> None:
     """Keep the projection inside its own validity window: a status nobody refreshed reads as stale, and stale is
     how the owner learns to distrust it. Refreshing here means every tick -- dispatched or not -- renews as_of."""
     try:
-        subprocess.run([sys.executable, str(Path(__file__).with_name("ops_status.py"))],
+        sp_run([sys.executable, str(Path(__file__).with_name("ops_status.py"))],
                        capture_output=True, timeout=120)
     except Exception:
         pass
@@ -326,10 +346,10 @@ def parallel_tick(n: int, dry_run: bool) -> int:
         if dry_run:
             started.append({"wp": wp, "phase": item.get("phase"), "dry_run": True})
             continue
-        flags = 0x08000000 | 0x00000008 | 0x01000000   # CREATE_NO_WINDOW | DETACHED | BREAKAWAY_FROM_JOB
+        flags = 0x08000000 | 0x01000000   # CREATE_NO_WINDOW | DETACHED | BREAKAWAY_FROM_JOB
         logf = QUEUE / f"{wp}.tick.log"
         with logf.open("a", encoding="utf-8") as fh:
-            proc = subprocess.Popen([PY, str(Path(__file__).resolve()), "--once", "--auto-record", "--wp", wp],
+            proc = sp_popen([PY, str(Path(__file__).resolve()), "--once", "--auto-record", "--wp", wp],
                                     cwd=str(K), stdout=fh, stderr=subprocess.STDOUT,
                                     creationflags=flags, close_fds=True)
         started.append({"wp": wp, "phase": item.get("phase"), "pid": proc.pid})
@@ -338,6 +358,35 @@ def parallel_tick(n: int, dry_run: bool) -> int:
     refresh_status()
     print(json.dumps({"verdict": "PARALLEL_TICK", "dispatched": started}, ensure_ascii=False))
     return 0
+
+
+def chain_next(reason: str) -> None:
+    """Start the next tick from the unit that just finished, hidden, instead of from a clock.
+
+    Measured 2026-10-31 01:59:50: the only console window this host produced during the whole loop was the cron job's
+    own `python.exe` at the moment the scheduler fired it -- the window exists before any of our code can hide
+    anything, and it appears inside a new Windows Terminal window on screen. A clock that has to be launched by
+    something outside the loop costs a window every tick. So the tick is chained from inside the loop instead: the
+    process that just finished a unit starts the next one, and it was itself created with CREATE_NO_WINDOW.
+    """
+    depth = int(os.environ.get("HGK_CHAIN_DEPTH", "0"))
+    if depth >= 12:
+        return
+    try:
+        probe = sp_run([PY, str(K / "scripts" / "work_queue.py"), "next"], capture_output=True, text=True,
+                               timeout=120)
+        item = json.loads(probe.stdout.strip().splitlines()[-1]) if probe.returncode == 0 and probe.stdout.strip() else {}
+    except (OSError, subprocess.SubprocessError, json.JSONDecodeError):
+        return
+    if not item.get("wp"):
+        log({"action": "chain_stop", "reason": "nothing ready", "trigger": reason})
+        return
+    flags = 0x08000000 | 0x01000000
+    env = dict(os.environ, HGK_CHAIN_DEPTH=str(depth + 1))
+    Popen([PY, str(Path(__file__).resolve()), "--parallel", "3", "--auto-record"],
+          cwd=str(K), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+          creationflags=flags, close_fds=True, env=env)
+    log({"action": "chain_next", "trigger": reason, "depth": depth + 1, "next": item.get("wp")})
 
 
 def main(argv=None) -> int:
@@ -423,7 +472,7 @@ def main(argv=None) -> int:
         receipts = sorted(queue_dir.glob("*-*.json"), key=lambda p: p.stat().st_mtime)
         receipts = [r for r in receipts if "attempts" not in r.name]
         target = receipts[-1] if receipts else queue_dir / "verdict.json"
-        gate = subprocess.run(
+        gate = sp_run(
             [PY, str(K / "scripts" / "lane_evidence_gate.py"), str(target),
              "--lane", "VERIFY_SECURITY", "--json"], capture_output=True, text=True, timeout=120)
         # A gate that says NO_ATTEMPT while there is no verdict means the dispatch never produced a usable receipt,
@@ -445,7 +494,7 @@ def main(argv=None) -> int:
             log({"action": "awaiting_record", "wp": wp, "gate": gate.stdout.strip()[:400]})
             return 0
 
-    closed = subprocess.run([PY, str(K / "scripts" / "closed_paths_gate.py"), "check", str(queue_dir)],
+    closed = sp_run([PY, str(K / "scripts" / "closed_paths_gate.py"), "check", str(queue_dir)],
                             capture_output=True, text=True, timeout=60)
     if closed.returncode == 3:
         log({"action": "refused_closed_path", "wp": wp, "detail": closed.stdout.strip()[:300]})
@@ -476,6 +525,9 @@ def main(argv=None) -> int:
     print(json.dumps({"verdict": "DISPATCHED", "wp": wp, "lane": lane, "phase": phase, "pid": pid,
                       "previous_dead_attempts": len(died),
                       "json_out": str(json_out), "nonce": nonce}, ensure_ascii=False))
+    # This unit's turn is over (launch() is synchronous: it returns when the lane finishes). The next tick starts from
+    # here, hidden, rather than from a clock that puts a console on screen before any of our code runs.
+    chain_next(f"{wp}:{lane}")
     return 0
 
 

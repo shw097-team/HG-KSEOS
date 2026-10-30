@@ -60,7 +60,7 @@ def main() -> int:
             return 0
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    flags = winproc.CREATE_NO_WINDOW | DETACHED_PROCESS | CREATE_BREAKAWAY_FROM_JOB
+    flags = winproc.CREATE_NO_WINDOW | CREATE_BREAKAWAY_FROM_JOB   # no DETACHED_PROCESS: see winproc.window_origin
     with OUT.open("a", encoding="utf-8") as fh:
         proc = subprocess.Popen(
             [sys.executable, str(K / "scripts" / "lane_supervisor.py"),
