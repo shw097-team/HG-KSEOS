@@ -75,6 +75,21 @@ def dispatch_alive() -> bool:
         return True
 
 
+def dead_attempts(queue_dir: Path) -> list[dict]:
+    """Receipts still saying PRE_ATTEMPT: the process started and never recorded finishing."""
+    out = []
+    for p in queue_dir.glob("*-*.json"):
+        if "attempts" in p.name:
+            continue
+        try:
+            d = json.loads(p.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        if isinstance(d, dict) and d.get("phase") == "PRE_ATTEMPT":
+            out.append({"receipt": str(p), "nonce": d.get("nonce"), "started_at": d.get("started_at")})
+    return out
+
+
 def next_item() -> dict:
     done = subprocess.run([PY, str(K / "scripts" / "work_queue.py"), "next"],
                           capture_output=True, text=True, timeout=120)
@@ -135,6 +150,16 @@ def launch(lane: str, prompt: str, nonce: str, cwd: Path, json_out: Path, timeou
     log({"action": "spawn", "lane": lane, "nonce": nonce, "json_out": str(json_out), "cwd": str(cwd)})
     # A detached launch with its output thrown away is unobservable: the first attempt died instantly and left
     # no trace at all. Every dispatch therefore owns a log next to its receipt.
+    # Third occurrence of the same shape, 2026-10-30: a PLAN dispatch ran (it wrote a 14,962-byte brief), then
+    # vanished leaving neither a receipt nor a traceback. A run that cannot be seen ended is indistinguishable from
+    # a run that never started. So the intent is written BEFORE the child exists; if nothing ever overwrites it, the
+    # file itself says "attempt started at T, pid N, never completed".
+    json_out.write_text(json.dumps({
+        "phase": "PRE_ATTEMPT", "lane": lane, "nonce": nonce, "pid": None,
+        "started_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "ok": None, "receipt_complete": False,
+        "note": "written by continuation_driver before spawn; the dispatcher overwrites this on completion",
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     log_path = cwd / f"{json_out.stem}.log"
     with log_path.open("wb") as fh:
         proc = subprocess.Popen(argv, cwd=str(K), stdout=fh, stderr=subprocess.STDOUT,
@@ -209,6 +234,9 @@ def main(argv=None) -> int:
         log({"action": "awaiting_record", "wp": wp, "gate": gate.stdout.strip()[:400]})
         return 0
 
+    died = dead_attempts(queue_dir)
+    if died:
+        log({"action": "phase_died", "wp": wp, "count": len(died), "attempts": died[-3:]})
     receipts = [p for p in queue_dir.glob("*.json") if "attempts" not in p.name]
     if len(receipts) >= MAX_PHASE_ATTEMPTS:
         log({"action": "halted_repeat", "wp": wp, "receipts": len(receipts)})
@@ -224,6 +252,7 @@ def main(argv=None) -> int:
         return 0
     pid = launch(lane, prompt, nonce, queue_dir, json_out)
     print(json.dumps({"verdict": "DISPATCHED", "wp": wp, "lane": lane, "phase": phase, "pid": pid,
+                      "previous_dead_attempts": len(died),
                       "json_out": str(json_out), "nonce": nonce}, ensure_ascii=False))
     return 0
 
