@@ -31,7 +31,13 @@ def judge(receipt: dict, lane: str, nonce: str | None = None, allow_rank: int = 
     attempts = receipt.get("attempts") or []
     if not attempts:
         return {"verdict": "NO_ATTEMPT", "lane": lane, "problems": ["receipt carries no attempt"]}
-    a = attempts[0]
+    # Which attempt counts? For a finished receipt the attempt that served is the one the dispatcher
+    # accepted; for a provisional receipt there is no such mark, so the LAST attempt is the one the run
+    # ended on. Judging attempts[0] told a comfortable story: sitting 6's first attempt served
+    # gpt-6.1-sol and failed nothing, while the run actually fell through to rank 4 (nvidia deepseek,
+    # exit 1). A gate that reports the first attempt as the served arm is the same defect as a summary
+    # that only quotes the good part.
+    a = attempts[-1]
 
     if receipt.get("lane") != lane:
         problems.append(f"lane_mismatch: receipt={receipt.get('lane')} claimed={lane}")
@@ -44,6 +50,7 @@ def judge(receipt: dict, lane: str, nonce: str | None = None, allow_rank: int = 
     # exists to answer -- and it cannot prove the turn finished cleanly. The distinction is carried in the
     # verdict rather than flattened, and --require-final refuses it outright.
     provisional = receipt.get("receipt_complete") is False
+    fallthrough = len(attempts) > 1
     if provisional:
         a_prov = True
         if a.get("exit") != 0:
@@ -78,6 +85,8 @@ def judge(receipt: dict, lane: str, nonce: str | None = None, allow_rank: int = 
         if not found:
             problems.append(f"nonce_not_echoed: {nonce}")
 
+    if provisional and fallthrough:
+        problems.append(f"provisional_fallthrough: {len(attempts)} attempts; the run did not accept the first")
     if problems:
         verdict = "LANE_CLAIM_UNSUPPORTED"
     elif provisional:

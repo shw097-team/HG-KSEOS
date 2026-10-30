@@ -85,3 +85,19 @@ def test_a_provisional_receipt_with_a_bad_attempt_is_refused():
     receipt["attempts"][0]["exit"] = 0
     receipt["attempts"][0]["model"] = None
     assert GATE.judge(receipt, "VERIFY_SECURITY")["verdict"] == "LANE_CLAIM_UNSUPPORTED"
+
+
+def test_the_gate_judges_the_attempt_the_run_ended_on():
+    """Reporting attempts[0] flattered sitting 6: the first attempt served gpt-6.1-sol, the run fell
+    through to rank 4 and exited 1. The gate must read the attempt the run actually ended on."""
+    receipt = {"lane": "VERIFY_SECURITY", "receipt_complete": False,
+               "attempts": [
+                   {"rank": 1, "provider": "openai-codex", "model": "gpt-6.1-sol", "exit": 0},
+                   {"rank": 2, "provider": "opencode-go", "model": "glm-5.3-flash", "exit": 1},
+                   {"rank": 4, "provider": "nvidia", "model": "deepseek-ai/deepseek-v4.1-flash", "exit": 1},
+               ]}
+    v = GATE.judge(receipt, "VERIFY_SECURITY")
+    assert v["verdict"] == "LANE_CLAIM_UNSUPPORTED"
+    assert v["rank"] == 4
+    assert v["served"] == "deepseek-ai/deepseek-v4.1-flash"
+    assert any("fallthrough" in p for p in v["problems"])
