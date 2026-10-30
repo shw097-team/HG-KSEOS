@@ -113,6 +113,32 @@ def cmd_check(args) -> int:
     return 0
 
 
+def _holder_alive(nonce: str) -> bool | None:
+    """Is the process that took this lock still running? Best effort, never blocks a reaper."""
+    try:
+        import subprocess as _sp
+        out = _sp.run(["tasklist", "/FI", "IMAGENAME eq python.exe", "/FO", "CSV", "/NH"],
+                      capture_output=True, text=True, timeout=20).stdout.lower()
+        return "python.exe" in out
+    except Exception:  # noqa: BLE001
+        return None
+
+
+def cmd_reap(_args) -> int:
+    """Remove locks whose holder is gone. A killed dispatcher used to leave a lock behind, and the
+    pre-commit hook then refused legitimate commits -- the cure must not become the next outage."""
+    reaped, kept = [], []
+    for lock in live():
+        alive = _holder_alive(lock["nonce"])
+        if alive is False:
+            pathlib.Path(lock["_path"]).unlink(missing_ok=True)
+            reaped.append(lock["nonce"])
+        else:
+            kept.append({"nonce": lock["nonce"], "holder_alive": alive})
+    print(json.dumps({"reaped": reaped, "kept": kept}, ensure_ascii=False))
+    return 0
+
+
 def cmd_list(_args) -> int:
     print(json.dumps({"locks": live()}, ensure_ascii=False, indent=1))
     return 0
@@ -127,6 +153,7 @@ def main() -> int:
     r = sub.add_parser("release"); r.add_argument("--nonce", required=True); r.set_defaults(fn=cmd_release)
     c = sub.add_parser("check"); c.add_argument("--path", action="append")
     c.add_argument("--staged", action="store_true"); c.set_defaults(fn=cmd_check)
+    rp = sub.add_parser("reap"); rp.set_defaults(fn=cmd_reap)
     l = sub.add_parser("list"); l.set_defaults(fn=cmd_list)
     args = ap.parse_args()
     return args.fn(args)

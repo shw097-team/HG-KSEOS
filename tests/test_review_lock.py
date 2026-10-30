@@ -58,3 +58,21 @@ def test_an_expired_lock_does_not_block(monkeypatch):
             "an expired lock must not wedge the repository"
     finally:
         lock.unlink(missing_ok=True)
+
+
+def test_reap_removes_a_lock_whose_holder_is_gone():
+    """A killed dispatcher must not leave a lock that blocks the next legitimate commit."""
+    nonce = "TEST-LOCK-REAP"
+    LOCKS.mkdir(parents=True, exist_ok=True)
+    lock = LOCKS / f"{nonce}.json"
+    lock.write_text(json.dumps({
+        "nonce": nonce, "subject": str((ROOT / "scripts").resolve()),
+        "created_at": "2099-01-01T00:00:00+00:00", "expires_at": "2099-01-01T00:10:00+00:00",
+    }), encoding="utf-8")
+    try:
+        out = run("reap")
+        assert out.returncode == 0, out.stderr
+        reaped = json.loads(out.stdout)["reaped"]
+        assert nonce in reaped or not lock.exists(), "a lock with no living holder must be reaped or re-checked"
+    finally:
+        lock.unlink(missing_ok=True)
