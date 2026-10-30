@@ -5,8 +5,8 @@
   "repro": "C:\\wg\\repro",
   "package": "C:\\wg\\pkg"
  },
- "files": 81,
- "total_bytes": 5596201,
+ "files": 82,
+ "total_bytes": 5597250,
  "entries": [
   {
    "path": "receipts/P10_LANE_AVAILABILITY.json",
@@ -32,6 +32,11 @@
    "path": "receipts/P13_SEAL_REPRODUCTION_VERBATIM.json",
    "bytes": 993,
    "sha256": "f232e528f10be31cbb5f6c2b96dd2d0581784e149abf8677a3b0514cccc0d9a0"
+  },
+  {
+   "path": "receipts/P14_LAYOUT_PREFIX_EVIDENCE.json",
+   "bytes": 1049,
+   "sha256": "bbea2f266267b36f727114de7bc9c8f51ee6dd22076f13a09f7370f895265167"
   },
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",

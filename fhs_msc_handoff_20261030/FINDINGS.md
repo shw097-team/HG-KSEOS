@@ -30,8 +30,11 @@ Next: regenerate `PACKAGE_READBACK.json` with the shipped packer, or drop that r
 **Medium.** On disk the book directory is `01_FHS-MSC_PIPD-LS-PKG_BODY/`; the payload manifest and
 `INDEX.md` both address `01_SUBSTANTIVE_BODY/`. Exactly **31 of 909 rows** fail on that rename alone.
 After the rename: 909/909.
-Evidence: recomputation from `SHA256_PAYLOAD_MANIFEST.json` against the delivered tree; canonical result
-in `receipts/P1B_PACKAGE_INTEGRITY_CANONICAL.json`.
+Evidence: `receipts/P14_LAYOUT_PREFIX_EVIDENCE.json` measures the count directly against the delivered tree
+with long-path handling: 31 rows carry the `01_SUBSTANTIVE_BODY/` prefix, **0 resolve as declared**, **31
+resolve after the directory alias**. `receipts/P1B_PACKAGE_INTEGRITY_CANONICAL.json` is the post-alias
+result (909/909, `path_alias_applied`) and does not itself carry the 31 — it is cited for the closure, not
+for the count.
 Consequence: a verifier resolves 96.6% and blames the payload for the rest.
 
 ## F-02b — most of the apparent loss is the Win32 path limit, not the package
