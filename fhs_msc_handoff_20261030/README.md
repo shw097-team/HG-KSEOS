@@ -16,6 +16,18 @@ the build.
 
 Nothing here is production ready, accepted, certified or released; nothing here grants a permit.
 
+## Acceptance state
+
+`AO_ACCEPTANCE.json` records an **oracle-bound independent acceptance** (`P15`): the Acceptance Officer lane
+(`gpt-6.1-sol`, nonce `NONCE-AO-20261030-B`) judged the eight pre-registered claims against
+`C:/wg/ao/ORACLE_20261030.json` (SHA-256 `68cfb998…`, hashed before dispatch) and returned **ACCEPTED**, 8/8.
+The first pass returned **NOT_ACCEPTED** on O5, which was then closed by measuring the disputed count (`P14`)
+rather than by arguing about it.
+
+Acceptance is bounded: it covers payload integrity, both archive digests, DAG disclosure, findings-citation
+integrity, ceiling honesty, harness reporting and the lane correction. **Native verification, release and
+per-workpackage acceptance remain `NOT_RUN`.**
+
 ## Five-minute verification
 
 ```bash

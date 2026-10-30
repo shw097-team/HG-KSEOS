@@ -176,3 +176,13 @@ The count itself is not in doubt — it reproduced here under the delivered snap
 evidence for it is.
 Evidence: `receipts/P8_DELIVERED_RECORD_ANOMALY.json`.
 Next: re-execute the harness and ship the real record, with a timestamp.
+
+## F-15 — the QA harness has an undeclared dependency (`jsonschema`)
+
+**Medium (reproducibility).** The 35-check harness imports `jsonschema` inside its validation path. On an
+interpreter without it, three cases fail as `ValidationFail:jsonschema unavailable` and the run scores below
+the recorded 35/35 — the same tree, the same tools, a different score. Measured 2026-10-30 on Python 3.11.17
+(`jsonschema 4.26.0` installed: the failures disappear). The delivery names no dependency and has no
+preflight import check, so "35/35" was never a property of the artefact set alone.
+Next: pin the dependency in the delivery (requirements + a one-line `import jsonschema` preflight that fails
+loudly), or vendor it.
