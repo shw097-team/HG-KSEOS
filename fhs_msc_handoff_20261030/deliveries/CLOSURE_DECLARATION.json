@@ -1,0 +1,31 @@
+{
+  "argument": {
+    "indegree_zero": [
+      "WP-FHS-00"
+    ],
+    "nodes": 22,
+    "top_level_edges": 0,
+    "typed_edges": 36,
+    "why_01_is_not_in_the_closure": "WP-FHS-01 produces AuthorityConflictLedger and is a typed dependency of WP-FHS-15; a dependency is not a closure member",
+    "why_15_is_in_the_closure": "WP-FHS-15 emits the three SPEC objects the delivery is judged by"
+  },
+  "decided_by": "OD-E",
+  "decided_under": "FAR-HANDOFF-V1-ALLPASS-GAP-20261030",
+  "declared_closure": [
+    "WP-FHS-00",
+    "WP-FHS-15"
+  ],
+  "previously_declared": [
+    "WP-FHS-00",
+    "WP-FHS-01",
+    "WP-FHS-15"
+  ],
+  "recorded_at": "2026-10-30T19:58:06",
+  "rejected_alternative": {
+    "option": "keep {00,01,15} and add typed edges 00->01 and 01->15",
+    "reason": "invents structure to justify a number that was declared before the edges were counted"
+  },
+  "requirement": "R18-WP-FHS-DAG-CLOSURE",
+  "round": "FHS-MSC-ALLPASS-20261030",
+  "schema": "CLOSURE-DECLARATION/1"
+}
