@@ -197,6 +197,16 @@ def verify_prompt(wp: str, queue_dir: Path, nonce: str) -> str:
     )
 
 
+def refresh_status() -> None:
+    """Keep the projection inside its own validity window: a status nobody refreshed reads as stale, and stale is
+    how the owner learns to distrust it. Refreshing here means every tick -- dispatched or not -- renews as_of."""
+    try:
+        subprocess.run([sys.executable, str(Path(__file__).with_name("ops_status.py"))],
+                       capture_output=True, timeout=120)
+    except Exception:
+        pass
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--once", action="store_true", help="run one step (the cron body)")
@@ -218,7 +228,8 @@ def main(argv=None) -> int:
     wp, phase = item["wp"], item["phase"]
     queue_dir = Path(item["queue_dir"])
     if dispatch_alive():
-        print(json.dumps({"verdict": "DISPATCH_IN_FLIGHT", "wp": wp}))
+        refresh_status()
+    print(json.dumps({"verdict": "DISPATCH_IN_FLIGHT", "wp": wp}))
         return 0
 
     stamp = time.strftime("%Y%m%d%H%M%S")
@@ -257,6 +268,7 @@ def main(argv=None) -> int:
                           "nonce": nonce, "json_out": str(json_out)}, ensure_ascii=False))
         return 0
     pid = launch(lane, prompt, nonce, queue_dir, json_out)
+    refresh_status()
     print(json.dumps({"verdict": "DISPATCHED", "wp": wp, "lane": lane, "phase": phase, "pid": pid,
                       "previous_dead_attempts": len(died),
                       "json_out": str(json_out), "nonce": nonce}, ensure_ascii=False))
