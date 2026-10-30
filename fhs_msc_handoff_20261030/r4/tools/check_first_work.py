@@ -2,6 +2,12 @@ from prepare import *
 from first_work import module
 import time,copy,sqlite3,platform,contextlib,io,unittest,socket
 from unittest.mock import patch
+# F-15 preflight: a missing dependency must stop the run loudly, not degrade into ValidationFail.
+try:
+ import jsonschema as _pf_js
+ _PREFLIGHT={"python":platform.python_version(),"executable":sys.executable,"jsonschema":getattr(_pf_js,"__version__","unknown")}
+except Exception as _pf_exc:
+ raise SystemExit("PREFLIGHT_FAIL: jsonschema not importable under "+sys.executable+" ("+type(_pf_exc).__name__+")")
 def main():
  tick=time.perf_counter();results=[];core=module('handoff_check_core',E/'READERS/sbl-tpm-sp/scripts/core.py');pplug=E/'READERS/sbl-tpm-sp'
  sys.path.insert(0,plain(E/'READERS/PIPD/src'));sys.path.insert(0,plain(E/'READERS/HG-KSEOS/src'))

@@ -1,0 +1,45 @@
+ 144| <a id="current-67e965b5bc6e975dd798"></a>
+ 202| - **原定位**：`BODY-09B:169`；真 Cell Id `CELL-b6b3031965fa`（不得借其他 Host/Mode 之 receipt）。
+ 212| - **R2 生效隔離**：raw_token=`OFF`；semantic_mapping_status=`UNBOUND_OWNER_CONFLICT`；host_provider_off_boolean=`null`；owner_ack_version=`null`；`runtime_effect_allowed=false`，不得使用同段舊 candidate 規則產生真正 Provider 呼叫；只能產 `b6b3031965fa` 的唯讀 Cell 產品設計候選。
+ 270| <a id="current-17f9b5c53ccff4d96173"></a>
+ 412| - **原定位**：`BODY-09B:334`；真 Cell Id `CELL-e05964530c47`（不得借其他 Host/Mode 之 receipt）。
+ 422| - **R2 生效隔離**：raw_token=`ON`；semantic_mapping_status=`UNBOUND_OWNER_CONFLICT`；host_provider_off_boolean=`null`；owner_ack_version=`null`；`runtime_effect_allowed=false`，不得使用同段舊 candidate 規則產生真正 Provider 呼叫；只能產 `e05964530c47` 的唯讀 Cell 產品設計候選。
+ 550| <a id="current-dfaeb4be996325b21e7f"></a>
+ 578| <a id="current-ae8b9550499896d1d319"></a>
+ 704| <a id="current-2be97aab52965b3ccecf"></a>
+ 732| <a id="current-9698b9e037ba36a2583b"></a>
+ 760| <a id="current-b3966d9746f1c73d169f"></a>
+ 776| - **原定位**：`BODY-09B:620`；真 Cell Id `CELL-f0a4964020d6`（不得借其他 Host/Mode 之 receipt）。
+ 786| - **R2 生效隔離**：raw_token=`ON`；semantic_mapping_status=`UNBOUND_OWNER_CONFLICT`；host_provider_off_boolean=`null`；owner_ack_version=`null`；`runtime_effect_allowed=false`，不得使用同段舊 candidate 規則產生真正 Provider 呼叫；只能產 `f0a4964020d6` 的唯讀 Cell 產品設計候選。
+ 888| - **原定位**：`BODY-09B:708`；真 Cell Id `CELL-84fa01909649`（不得借其他 Host/Mode 之 receipt）。
+ 898| - **R2 生效隔離**：raw_token=`ON`；semantic_mapping_status=`UNBOUND_OWNER_CONFLICT`；host_provider_off_boolean=`null`；owner_ack_version=`null`；`runtime_effect_allowed=false`，不得使用同段舊 candidate 規則產生真正 Provider 呼叫；只能產 `84fa01909649` 的唯讀 Cell 產品設計候選。
+ 900| <a id="current-a5cccd3ae43ce3969d86"></a>
+ 928| <a id="current-6a4b81a18f7696357e26"></a>
+ 956| <a id="current-4960dc715ac4e8b7784b"></a>
+ 959| - Trigger/input：此Kind需求在此Mode與此Host被要求；source v1:L96，SHA `41cdd5e5ab16bc2b44ab47155e6cd09e81eef98c56753ae7dd03d0484385a4cd`。
+1000| - **原定位**：`BODY-09B:796`；真 Cell Id `CELL-09c21bb6612b`（不得借其他 Host/Mode 之 receipt）。
+1096| <a id="current-43af3108e98bb82e9693"></a>
+1210| - **原定位**：`BODY-09B:961`；真 Cell Id `CELL-4f536bbc5402`（不得借其他 Host/Mode 之 receipt）。
+1320| <a id="current-1baf6783bf145966b7fd"></a>
+1362| <a id="current-38fea59648568d966fed"></a>
+1558| <a id="current-3e96b2cf5ca8cb8a95b5"></a>
+1602| - **原定位**：`BODY-09B:1269`；真 Cell Id `CELL-0836e4dc5096`（不得借其他 Host/Mode 之 receipt）。
+1612| - **R2 生效隔離**：raw_token=`OFF`；semantic_mapping_status=`UNBOUND_OWNER_CONFLICT`；host_provider_off_boolean=`null`；owner_ack_version=`null`；`runtime_effect_allowed=false`，不得使用同段舊 candidate 規則產生真正 Provider 呼叫；只能產 `0836e4dc5096` 的唯讀 Cell 產品設計候選。
+1812| - **原定位**：`BODY-09B:1434`；真 Cell Id `CELL-4199689808cf`（不得借其他 Host/Mode 之 receipt）。
+1822| - **R2 生效隔離**：raw_token=`ON`；semantic_mapping_status=`UNBOUND_OWNER_CONFLICT`；host_provider_off_boolean=`null`；owner_ack_version=`null`；`runtime_effect_allowed=false`，不得使用同段舊 candidate 規則產生真正 Provider 呼叫；只能產 `4199689808cf` 的唯讀 Cell 產品設計候選。
+1922| <a id="current-0514430b396ce08bb9d8"></a>
+2090| <a id="current-df6c571f97c90d960968"></a>
+2359| - Trigger/input：此Kind需求在此Mode與此Host被要求；source v1:L196，SHA `41cdd5e5ab16bc2b44ab47155e6cd09e81eef98c56753ae7dd03d0484385a4cd`。
+2400| - **原定位**：`BODY-09B:1896`；真 Cell Id `CELL-5c0c72c957ed`（不得借其他 Host/Mode 之 receipt）。
+2484| - **原定位**：`BODY-09B:1962`；真 Cell Id `CELL-510726a815d2`（不得借其他 Host/Mode 之 receipt）。
+2538| <a id="current-53115c3c7c4496a72b43"></a>
+2540| - **原定位**：`BODY-09B:2006`；真 Cell Id `CELL-d69adf2f1965`（不得借其他 Host/Mode 之 receipt）。
+2550| - **R2 生效隔離**：raw_token=`ON`；semantic_mapping_status=`UNBOUND_OWNER_CONFLICT`；host_provider_off_boolean=`null`；owner_ack_version=`null`；`runtime_effect_allowed=false`，不得使用同段舊 candidate 規則產生真正 Provider 呼叫；只能產 `d69adf2f1965` 的唯讀 Cell 產品設計候選。
+2664| <a id="current-f3fd1cf896ca3e35a6ed"></a>
+2678| <a id="current-b96d78735b0b9507ef87"></a>
+2796| ### PROPOSAL-CHATGPT-f0a4964020d6｜`SIMPLE_AGENT` × `STANDALONE` × legacy `ON`
+2797| - 源身份：`CELL-f0a4964020d6` / `DeepSeek Harness`（保留，不改名）；產品要求另為 `ChatGPT`，本 ID **尚非 Original 192 Cell**。
+2800| - 負例：假造 ChatGPT 擁有 DeepSeek 進程／host runner，或用 `CELL-f0a4964020d6` 的 Raw 當 ChatGPT → `HOST_IDENTITY_DRIFT`；`PREW3_SHADOW` 禁 World Write。
+2810| ### PROPOSAL-CHATGPT-84fa01909649｜`SIMPLE_AGENT` × `PREW3_SHADOW` × legacy `ON`
+2811| - 源身份：`CELL-84fa01909649` / `DeepSeek Harness`（保留，不改名）；產品要求另為 `ChatGPT`，本 ID **尚非 Original 192 Cell**。
+2814| - 負例：假造 ChatGPT 擁有 DeepSeek 進程／host runner，或用 `CELL-84fa01909649` 的 Raw 當 ChatGPT → `HOST_IDENTITY_DRIFT`；`PREW3_SHADOW` 禁 World Write。

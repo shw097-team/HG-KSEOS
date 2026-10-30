@@ -1,0 +1,34 @@
+{
+  "conclusion": "the shipped harness is correct; the earlier 34/1 was an environment fault, not a code fault. The repair that moved sys.path.insert is NOT required and is not claimed as a fix.",
+  "durable_fix": "a preflight that refuses to run without jsonschema, so a missing dependency can never again degrade into a ValidationFail verdict",
+  "finding": "F-15: first-work harness reported 34/1 as shipped and validation failures under a repaired loader",
+  "generated_at": "2026-10-30T19:15:26",
+  "interpreter_pin": {
+    "jsonschema": "4.26.0",
+    "path": "C:/Users/user/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/hermes/hermes-agent/venv/Scripts/python",
+    "python": "3.11.17"
+  },
+  "measurements": [
+    {
+      "command": "<venv>/python check_first_work_shipped.py",
+      "exit": 0,
+      "result": "{\"pass\": 35, \"fail\": 0, \"failures\": []}",
+      "run": "as-shipped harness, pinned interpreter"
+    },
+    {
+      "command": "<venv>/python check_first_work_pinned.py",
+      "exit": 0,
+      "result": "{\"pass\": 35, \"fail\": 0, \"failures\": []}",
+      "run": "r4 harness with preflight, pinned interpreter"
+    },
+    {
+      "command": ".hermes-runtime python check_first_work_pinned.py",
+      "exit": 1,
+      "result": "PREFLIGHT_FAIL: jsonschema not importable under <runtime python> (ModuleNotFoundError)",
+      "run": "r4 harness with preflight, runtime interpreter"
+    }
+  ],
+  "root_cause": "two interpreters. `python` on PATH resolves to the hermes venv (3.11.17, jsonschema 4.26.0); the runtime interpreter at .hermes-runtime\\python\\cpython-3.11.17-...\\python.exe has no jsonschema. The harness imported whatever interpreter launched it, so the same file produced different verdicts.",
+  "schema": "F15-RESOLUTION/1",
+  "status": "CLOSED"
+}
