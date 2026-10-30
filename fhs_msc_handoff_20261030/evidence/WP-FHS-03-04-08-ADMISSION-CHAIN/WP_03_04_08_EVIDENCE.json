@@ -31,10 +31,6 @@
       "outcome": "PASS"
     },
     {
-      "check": "workorder_result_recorded",
-      "outcome": "PASS"
-    },
-    {
       "check": "second_taskspec_admitted",
       "outcome": "PASS"
     },
@@ -42,6 +38,10 @@
       "check": "bundle_bound_to_subject",
       "outcome": "REFUSED_AS_DESIGNED",
       "code": "ERR_NATIVE_REQUEST_SCOPE"
+    },
+    {
+      "check": "workorder_result_recorded",
+      "outcome": "PASS"
     }
   ],
   "readback": {
@@ -54,14 +54,14 @@
     ],
     "taskspec": [
       {
-        "taskspec_id": "TS-CONF-b382ff7f",
+        "taskspec_id": "TS-CONF-7cece942",
         "state": "ADMITTED",
         "requirement_id": "REQ-CONFORMANCE-ADMISSION"
       }
     ],
     "workorder": [
       {
-        "workorder_id": "WO-CONF-cf5dfb91",
+        "workorder_id": "WO-CONF-d38b0763",
         "state": "VERIFIED",
         "writer": "codex",
         "result_json": "{\"checker\":\"ao\",\"evidence_refs\":[\"EV-CONF-BOUNDED-WRITE\"],\"verdict\":\"PASS\"}"
@@ -70,15 +70,15 @@
     "nonces": 9,
     "lease_rows": [
       {
-        "resource_id": "TS-CONF-b382ff7f",
+        "resource_id": "TS-CONF-7cece942",
         "generation": 1
       },
       {
-        "resource_id": "WO-CONF-cf5dfb91",
+        "resource_id": "WO-CONF-d38b0763",
         "generation": 1
       },
       {
-        "resource_id": "TS-CONF-B-95b15f",
+        "resource_id": "TS-CONF-B-8c8385",
         "generation": 1
       }
     ]
@@ -92,7 +92,14 @@
     ],
     "no_canonical_token": "no acceptance token may be derived from this receipt"
   },
-  "conformance_digest": "b3c44d19003c8886c3d1d2505b2e7286f844b6b13294801e73d9146616d4e269",
-  "tool_digest": "4b947d51f4bf7c5e3a8fafffe5fdf5a89f7eb7b5c836ec3cd806650e8de153d9",
-  "recorded_at": "2026-10-30T21:20:07"
+  "conformance_digest": "c56648494842a342fff08557ddf0be78a149f1a395a6f17ac1ffc0c0c3deefba",
+  "tool_digest": "3af42b1b0ed01db5f71e449c282eb382190f68bdb786f28c1bf0850aa4a02210",
+  "recorded_at": "2026-10-30T21:22:05",
+  "defect_found_by_the_checker_and_fixed": {
+    "found_by": "Independent Acceptance Officer, its own re-run (proc_d8a405f07ae3)",
+    "symptom": "in its run second_taskspec_admitted was refused (ERR_NATIVE_ROOT_HEAD) and bundle_bound_to_subject was then refused for WORKORDER_REQUIRES_DRAFT_TASKSPEC -- a wrong-reason refusal the harness still recorded as REFUSED_AS_DESIGNED",
+    "root_cause": "the reuse negative ran after the bounded write, which moves HEAD, so the later authorisation failed on ROOT_HEAD first; and run_negative accepted ANY refusal",
+    "fix": "the second TaskSpec and the reuse negative now run BEFORE the write; run_negative takes expected codes and records REFUSED_FOR_WRONG_REASON as a failure",
+    "regression": "the verdict now also requires second_ok and reuse_ok"
+  }
 }

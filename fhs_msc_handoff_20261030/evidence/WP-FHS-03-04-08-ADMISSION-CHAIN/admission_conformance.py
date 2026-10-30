@@ -177,12 +177,19 @@ def main() -> int:
     state: dict = {}
     TOKEN = "LEASE-TOKEN-CONF"
 
-    def run_negative(name: str, fn):
+    def run_negative(name: str, fn, expect: tuple[str, ...]):
+        """A refusal only counts if it is the refusal under test. Any other refusal is a
+        wrong-reason refusal and is recorded as a failure, never as a pass (vacuous-pass ban)."""
         try:
             fn()
         except InvariantViolation as exc:
-            checks.append({"check": name, "outcome": "REFUSED_AS_DESIGNED", "code": str(exc)})
-            return True
+            code = str(exc)
+            if any(e in code for e in expect):
+                checks.append({"check": name, "outcome": "REFUSED_AS_DESIGNED", "code": code})
+                return True
+            checks.append({"check": name, "outcome": "REFUSED_FOR_WRONG_REASON",
+                           "code": code, "expected_any_of": list(expect)})
+            return False
         except Exception as exc:  # noqa: BLE001
             checks.append({"check": name, "outcome": "ERROR", "code": f"{type(exc).__name__}: {exc}"})
             return False
@@ -216,7 +223,8 @@ def main() -> int:
     run_negative("wrong_subject_refused", lambda: spine.create_taskspec(
         f"TS-CONF-BAD-{secrets.token_hex(3)}", requirement_id, "bad subject", "hgk-agent", ws,
         {"write": ["out.txt"]}, ["python -c 'print(1)'"], "bad subject",
-        admission_bundle=bundle("create_taskspec", 0, "0" * 64)))
+        admission_bundle=bundle("create_taskspec", 0, "0" * 64)),
+        ("REQUEST_SCOPE", "SAME_SUBJECT_BINDING"))
 
     # 3. WorkOrder admitted, bound to the same head and a fresh lease generation
     workorder_id = f"WO-CONF-{secrets.token_hex(4)}"
@@ -235,20 +243,10 @@ def main() -> int:
         state["workorder"] = True
     workorder_ok = run("workorder_admitted", do_workorder)
 
-    # 4. the bounded writer produces an artefact, the result is recorded, the row is read back
-    def do_result():
-        (ws / "out.txt").write_text("bounded write by the conformance writer\n", encoding="utf-8")
-        subprocess.run(["git", "-C", str(ws), "add", "-A"], capture_output=True)
-        subprocess.run(["git", "-C", str(ws), "-c", "user.name=writer", "-c", "user.email=w@local",
-                        "commit", "-q", "-m", "bounded write"], capture_output=True)
-        state["write_head"] = git_head(ws)
-        row = spine.record_workorder_result(workorder_id, "codex", "ao", "PASS",
-                                            ["EV-CONF-BOUNDED-WRITE"], evidence_subject=state.get("sha_wo", sha_wo))
-        state["result"] = {k: row.get(k) for k in ("workorder_id", "verdict", "state", "version") if k in row}
-    result_ok = run("workorder_result_recorded", do_result)
-
-    # 5. a bundle is bound to its subject: the same references cannot admit another WorkOrder.
-    #    A second TaskSpec is admitted first, so the refusal cannot be blamed on "not DRAFT".
+    # 4. a bundle is bound to its subject: the same references cannot admit another WorkOrder.
+    #    A second TaskSpec is admitted FIRST, so the refusal cannot be blamed on "not DRAFT";
+    #    and this runs BEFORE the bounded write, because the write moves HEAD and a later
+    #    authorization would be refused for ROOT_HEAD instead of for the binding.
     ts2 = f"TS-CONF-B-{secrets.token_hex(3)}"
     req_ts2 = na.taskspec_request(ts2, requirement_id, "second taskspec for the binding test", "hgk-agent",
                                   ws, {"write": ["out.txt"]}, ["python -c 'print(1)'"], "binding test")
@@ -264,7 +262,21 @@ def main() -> int:
     def do_reuse():
         spine.create_workorder(f"WO-CONF-REUSE-{secrets.token_hex(3)}", ts2, "codex", ws, head,
                                admission_bundle=state["workorder_bundle"])
-    run_negative("bundle_bound_to_subject", do_reuse)
+    reuse_ok = run_negative("bundle_bound_to_subject", do_reuse,
+                            ("REQUEST_SCOPE", "SAME_SUBJECT_BINDING"))
+
+    # 4. the bounded writer produces an artefact, the result is recorded, the row is read back
+    def do_result():
+        (ws / "out.txt").write_text("bounded write by the conformance writer\n", encoding="utf-8")
+        subprocess.run(["git", "-C", str(ws), "add", "-A"], capture_output=True)
+        subprocess.run(["git", "-C", str(ws), "-c", "user.name=writer", "-c", "user.email=w@local",
+                        "commit", "-q", "-m", "bounded write"], capture_output=True)
+        state["write_head"] = git_head(ws)
+        row = spine.record_workorder_result(workorder_id, "codex", "ao", "PASS",
+                                            ["EV-CONF-BOUNDED-WRITE"], evidence_subject=state.get("sha_wo", sha_wo))
+        state["result"] = {k: row.get(k) for k in ("workorder_id", "verdict", "state", "version") if k in row}
+    result_ok = run("workorder_result_recorded", do_result)
+
 
     # 6. read back the plane, not the intention
     with spine.connect() as con:
@@ -280,7 +292,9 @@ def main() -> int:
                 "SELECT resource_id,generation FROM native_admission_leases ORDER BY rowid")],
         }
 
-    verdict = "CHAIN_ADMITS" if (requirement_ok and taskspec_ok and workorder_ok and result_ok) else "CHAIN_REFUSED"
+    negatives_ok = reuse_ok
+    verdict = "CHAIN_ADMITS" if (requirement_ok and taskspec_ok and workorder_ok and result_ok
+                                 and second_ok and negatives_ok) else "CHAIN_REFUSED"
     receipt = {
         "schema": "ADMISSION-CONFORMANCE/1",
         "verdict": verdict,
