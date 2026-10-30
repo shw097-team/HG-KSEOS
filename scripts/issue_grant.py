@@ -156,6 +156,9 @@ def cmd_issue(args) -> int:
         "key_id": key_id(),
         "owner_authorization_sha256": auth["sha256"],
         "scope": args.scope or "install_occupant: bounded WriteSet only",
+        "subject": args.subject,
+        "candidate_sha256": args.candidate_sha,
+        "admission_id": args.admission,
     }
     signature = _key().sign(canonical(payload))
     grant = dict(payload)
@@ -201,6 +204,49 @@ def verify(grant: dict) -> list[str]:
     return problems
 
 
+def cmd_admit(args) -> int:
+    """An admission record is the thing a grant points AT. Without it, a grant is a permission slip with no file:
+    anyone holding one can install anything, which is precisely "admission can be bypassed"."""
+    payload = {
+        "admission_id": f"ADM-{key_id()}-{int(time.time())}-{os.urandom(3).hex()}",
+        "task_spec": args.task_spec,
+        "operation": args.operation,
+        "subject": args.subject,
+        "candidate_sha256": args.candidate_sha,
+        "cell": args.cell,
+        "issued_at": int(time.time()),
+        "expires_at": int(time.time()) + int(args.ttl),
+        "key_id": key_id(),
+        "owner_authorization_sha256": owner_authorization()["sha256"],
+    }
+    payload["signature_b64"] = base64.b64encode(_key().sign(canonical(payload))).decode()
+    payload["signature_alg"] = "Ed25519"
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps({"admitted": str(out), "admission_id": payload["admission_id"],
+                      "subject": args.subject, "candidate_sha256": args.candidate_sha}, ensure_ascii=False))
+    return 0
+
+
+def verify_admission(record: dict) -> list[str]:
+    problems = []
+    sig = record.get("signature_b64")
+    if not sig:
+        return ["ADMISSION_UNSIGNED"]
+    payload = {k: v for k, v in record.items() if k not in ("signature_b64", "signature_alg")}
+    if payload.get("key_id") != key_id():
+        problems.append("ADMISSION_KEY_UNKNOWN")
+    try:
+        pub = Ed25519PublicKey.from_public_bytes(base64.b64decode(public_key_b64()))
+        pub.verify(base64.b64decode(sig), canonical(payload))
+    except Exception:
+        problems.append("ADMISSION_SIGNATURE_INVALID")
+    if int(record.get("expires_at") or 0) < time.time():
+        problems.append("ADMISSION_EXPIRED")
+    return problems
+
+
 def cmd_verify(args) -> int:
     grant = json.loads(Path(args.grant).read_text(encoding="utf-8"))
     problems = verify(grant)
@@ -211,7 +257,7 @@ def cmd_verify(args) -> int:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("action", choices=["init", "issue", "verify", "public-key"])
+    ap.add_argument("action", choices=["init", "issue", "admit", "verify", "public-key"])
     ap.add_argument("--principal", default="owner")
     ap.add_argument("--operation", default="install_occupant")
     ap.add_argument("--writeset")
@@ -221,6 +267,12 @@ def main(argv=None) -> int:
     ap.add_argument("--nonce")
     ap.add_argument("--out", default="C:/wg/grants/grant.json")
     ap.add_argument("--grant")
+    ap.add_argument("--admission")
+    ap.add_argument("--task-spec", default="TS-WP-FHS-17-OCCUPANT")
+    ap.add_argument("--subject", default="WP-FHS-17")
+    ap.add_argument("--candidate-sha", default="")
+    ap.add_argument("--cell", default="CAP-BOOT")
+    ap.add_argument("--admission-id", dest="admission", default="")
     a = ap.parse_args(argv or sys.argv[1:])
     if a.action == "init":
         return cmd_init(a)
@@ -228,6 +280,8 @@ def main(argv=None) -> int:
         if not a.writeset:
             raise SystemExit("--writeset is required")
         return cmd_issue(a)
+    if a.action == "admit":
+        return cmd_admit(a)
     if a.action == "verify":
         if not a.grant:
             raise SystemExit("--grant is required")

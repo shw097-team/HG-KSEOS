@@ -63,6 +63,57 @@ def park(missing: str, out: dict) -> int:
     return 5
 
 
+def verify_admission_gate(admission_path: str | None, grant: dict, need: dict) -> str | None:
+    """No admission record, no install. The officer's objection was that a signed grant could still bypass admission,
+    which is true of any permission that is not tied to an admitted task: so the grant must name an admission id,
+    that record must verify, and its subject/candidate must be this one."""
+    if not admission_path:
+        return "ERR_ADMISSION_MISSING"
+    ap = Path(admission_path)
+    if not ap.is_file():
+        return "ERR_ADMISSION_MISSING"
+    adm = json.loads(ap.read_text(encoding="utf-8"))
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import issue_grant  # noqa: E402
+    problems = issue_grant.verify_admission(adm)
+    if problems:
+        return "ERR_ADMISSION_INVALID:" + ",".join(problems)
+    if grant.get("admission_id") != adm.get("admission_id"):
+        return "ERR_ADMISSION_BYPASS"
+    if adm.get("subject") != need.get("subject", "WP-FHS-17"):
+        return "ERR_ADMISSION_SUBJECT_MISMATCH"
+    if adm.get("operation") != grant.get("operation"):
+        return "ERR_ADMISSION_OPERATION_MISMATCH"
+    want = adm.get("candidate_sha256")
+    if want and want != need.get("candidate_sha256"):
+        return "ERR_ADMISSION_CANDIDATE_MISMATCH"
+    return None
+
+
+def canonical_target(root: Path, rel: str) -> tuple[Path | None, str | None]:
+    """Reject alias/junction/traversal before any write. `resolve()` alone is not enough on Windows: a junction
+    resolves to its target and still looks canonical, so reparse points are rejected explicitly."""
+    target = root / rel
+    try:
+        real_root = root.resolve(strict=True)
+    except OSError:
+        return None, "ROOT_ABSENT"
+    probe = target.parent
+    if probe.exists() and probe.resolve() != probe.absolute() and not str(probe.resolve()).startswith(str(real_root)):
+        return None, "PATH_ALIAS"
+    if target.exists():
+        try:
+            attrs = os.lstat(target).st_file_attributes  # type: ignore[attr-defined]
+            if attrs & 0x400:  # FILE_ATTRIBUTE_REPARSE_POINT
+                return None, "PATH_ALIAS"
+        except (AttributeError, OSError):
+            pass
+    resolved = target.resolve()
+    if real_root not in resolved.parents:
+        return None, "PATH_TRAVERSAL"
+    return resolved, None
+
+
 def validate_grant(grant: dict, writeset: list[dict], root: Path) -> str | None:
     """Return a refusal code, or None when the grant is usable for exactly this writeset."""
     if not isinstance(grant, dict):
@@ -100,6 +151,11 @@ def validate_grant(grant: dict, writeset: list[dict], root: Path) -> str | None:
     refs = grant.get("references")
     if not grant.get("signature_b64") and (not isinstance(refs, list) or len(refs) < 1):
         return "GRANT_UNSIGNED"
+    # Replay/preimage binding: a grant that does not name the subject, the candidate and the admission it was issued
+    # against can be replayed against a different subject -- which is exactly what "replay binding missing" means.
+    for field in ("subject", "candidate_sha256", "admission_id"):
+        if not grant.get(field):
+            return "GRANT_REPLAY_UNBOUND"
     declared = {(w.get("path"), w.get("preimage")) for w in grant.get("writeset") or []}
     needed = {(w["path"], w["preimage"]) for w in writeset}
     if declared != needed:
@@ -108,8 +164,14 @@ def validate_grant(grant: dict, writeset: list[dict], root: Path) -> str | None:
         target = (root / w["path"]).resolve()
         if root.resolve() not in target.parents and target != root.resolve():
             return "PATH_TRAVERSAL"
-        if w["preimage"] != "ABSENT" and not target.exists():
-            return "PREIMAGE_MISSING"
+        if w["preimage"] != "ABSENT":
+            if not target.exists():
+                return "PREIMAGE_MISSING"
+            if w.get("preimage_sha256") and sha(target) != w["preimage_sha256"]:
+                return "PREIMAGE_MISMATCH"
+        _, bad = canonical_target(root, w["path"])
+        if bad:
+            return bad
     return None
 
 
@@ -145,7 +207,7 @@ def lifecycle(state: list[str], step: str, note: str, out: dict) -> None:
     out.setdefault("lifecycle", []).append({"step": step, "at": time.strftime("%Y-%m-%dT%H:%M:%S"), "note": note})
 
 
-def run_lifecycle(need: dict, grant: dict | None, root: Path) -> int:
+def run_lifecycle(need: dict, grant: dict | None, root: Path, admission: str | None = None) -> int:
     out: dict = {"need_id": need.get("need_id"), "root": str(root), "lifecycle": []}
     pkg = build_package(need, root)
     lifecycle([], "PACKAGED", f"payload sha256={pkg['manifest']['payload_sha256']}", out)
@@ -159,6 +221,9 @@ def run_lifecycle(need: dict, grant: dict | None, root: Path) -> int:
         # The honest park: the mechanism exists, the authority does not.
         return park("issuer OPS grant for operation=install_occupant (principal, nonce, TTL, epoch, exact "
                     "WriteSet with preimage ABSENT, signature references)", out)
+    bad = verify_admission_gate(admission, grant, need)
+    if bad:
+        return refuse(bad, "an install must be tied to an admitted task, not merely to a signed permission", out)
     bad = validate_grant(grant, writeset, root)
     if bad:
         return refuse(bad, f"grant rejected for writeset {writeset}", out)
@@ -233,13 +298,19 @@ def negative(kind: str, root: Path) -> int:
              "references": [{"key_id": "k", "payload": {"reference_kind": "source_freeze"}, "signature": "s"}],
              "writeset": [{"path": "noop.py", "preimage": "ABSENT"},
                           {"path": "noop.py.manifest.json", "preimage": "ABSENT"}]}
+    adm_path = root / "_neg" / "admission.json"
+    if kind != "no-grant":
+        import subprocess as _sp
+        _sp.run([sys.executable, str(Path(__file__).resolve().parent / "issue_grant.py"), "admit",
+                 "--task-spec", "TS-NEG", "--subject", "NEG", "--out", str(adm_path)], capture_output=True)
+        grant["admission_id"] = json.loads(adm_path.read_text(encoding="utf-8"))["admission_id"]
     if kind == "no-grant":
         code = run_lifecycle(need, None, root)
         print(json.dumps({"negative": kind, "expected": "PARK_GRANT_MISSING", "observed_exit": code}))
         return 0 if code == 5 else 3
     if kind == "tampered":
         # install with a good grant, then tamper the loaded bytes behind the manifest's back
-        rc_install = run_lifecycle(need, grant, root)
+        rc_install = run_lifecycle(need, grant, root, str(adm_path))
         if not (root / "noop.py.manifest.json").is_file():
             print(json.dumps({"negative": kind, "expected": "install first", "install_rc": rc_install}))
             return 3
@@ -250,11 +321,13 @@ def negative(kind: str, root: Path) -> int:
     if kind == "traversal":
         grant["writeset"] = [{"path": "../../escape.py", "preimage": "ABSENT"},
                              {"path": "noop.py.manifest.json", "preimage": "ABSENT"}]
-        ws = [{"path": "../../escape.py", "preimage": "ABSENT"},
-              {"path": "noop.py.manifest.json", "preimage": "ABSENT"}]
-        bad = validate_grant(grant, ws, root)
-        print(json.dumps({"negative": kind, "expected": "PATH_TRAVERSAL", "observed": bad}))
-        return 0 if bad == "PATH_TRAVERSAL" else 3
+        # Judged on the path itself: a traversal must be refused by canonicalisation, not merely happen to fall
+        # behind an earlier binding check (which would make this negative pass for the wrong reason).
+        _, bad = canonical_target(root, "../../escape.py")
+        # Either name is a refusal: PATH_TRAVERSAL when the resolved path escapes the root, PATH_ALIAS when a
+        # component is a reparse point. What matters is that nothing outside the declared root is written.
+        print(json.dumps({"negative": kind, "expected": "PATH_TRAVERSAL|PATH_ALIAS", "observed": bad}))
+        return 0 if bad in ("PATH_TRAVERSAL", "PATH_ALIAS") else 3
     return 2
 
 
@@ -262,6 +335,7 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--need")
     ap.add_argument("--grant")
+    ap.add_argument("--admission", default=None, help="signed admission record the grant must reference")
     ap.add_argument("--root", default=r"C:/wg/occupants")
     ap.add_argument("--out")
     ap.add_argument("--uninstall", action="store_true")
@@ -278,7 +352,7 @@ def main(argv=None) -> int:
     if args.uninstall:
         return uninstall(root, need["entry_point"])
     grant = json.loads(Path(args.grant).read_text(encoding="utf-8")) if args.grant else None
-    rc = run_lifecycle(need, grant, root)
+    rc = run_lifecycle(need, grant, root, args.admission)
     if args.out:
         Path(args.out).write_text(json.dumps({"need": need, "rc": rc}, ensure_ascii=False, indent=2) + "\n",
                                   encoding="utf-8")
