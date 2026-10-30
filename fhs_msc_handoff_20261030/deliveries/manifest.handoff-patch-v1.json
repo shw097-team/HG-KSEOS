@@ -2,7 +2,7 @@
  "schema": "DURABLE-IMPORT-MANIFEST/1",
  "id": "handoff-patch-v1",
  "source_root": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1",
- "built_at_utc": "2026-10-30T10:06:37+00:00",
+ "built_at_utc": "2026-10-30T10:10:49+00:00",
  "files": [
   {
    "path": "COVERAGE_REPORT.md",

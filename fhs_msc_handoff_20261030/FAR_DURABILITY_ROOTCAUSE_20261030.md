@@ -177,3 +177,31 @@ durable_import.py --root HANDOFF-PATCH-v1 --id handoff-patch-v1 → 911 檔 / 23
 ```
 
 陰性對照之所以重要：一個永遠回 `NO_GO` 的閘門跟沒有閘門一樣。`GO` 那行證明它會放行。
+
+---
+
+## §10 本輪自己踩到同一個坑（最有說服力的證據）
+
+第一批 manifest 是在修長路徑**之前**跑的，結果是：
+
+| id | 回報 | 實情 | 通過的樣子 |
+|---|---|---|---|
+| `handoff-patch-v1` | 95 檔 / 26,186,077 B / `2d0f7eb4…` | **911 檔 / 236,157,841 B** | `walk_errors: 0`、rollup 正常、manifest 寫出成功 |
+| `skeleton-spine-r2-revision2` | 83 檔 / 20,330,950 B / `949bb22a…` | 86 檔 / 33,659,771 B | 同上 |
+
+**它只讀到 10% 的 payload，卻產生了一份完全綠色的收據。** 這不是長路徑的錯，是比較器在輸入缺失時回報成功的錯——`AGENTS.md` 規則 4 的「空泛通過（vacuous pass）禁令」，我在同一天、同一份工具上又犯了一次。
+
+崩潰訊息指出了機制：`os.scandir` 在
+`…\02_EVIDENCE_AUDIT_APPENDICES\HISTORICAL_R2_READONLY\_machine\R2_OFFLINE_PIPD_CANDIDATES\historical_schema_snapshots`
+回 `WinError 3`（路徑不存在／超長）。同一棵樹加上 `\\?\` 前綴後 911 檔全數可讀、0 error。**交付包裡至少有一個目錄，在不加前綴時根本無法 `scandir`**——這就是當初 446 次 `exists()` 失敗、以及「95 檔綠收據」的同一個根。
+
+**已加的三道 fail-closed**（實測）：
+```
+--assert-files 911  → 911 檔，rollup 6ca537df…（與已 commit 版本 byte-identical）
+--assert-files 9110 → {"verdict":"FILE_COUNT_MISMATCH","found":911,"expected":9110}  exit=6
+walk_errors 非空    → {"verdict":"WALK_INCOMPLETE"}  exit=5（除非 --allow-walk-errors，且不該用）
+找到 0 檔           → exit=7
+```
+
+**這就是 D-5 的活體標本**：缺陷類別（會回報成功的空比較器）在 10-21 被命名、在 `AGENTS.md` 被寫成通則、在今天由我自己再度觸發。**記憶不存在於文件裡，只存在於會失敗的測試裡。**
+

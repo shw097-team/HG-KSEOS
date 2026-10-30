@@ -42,6 +42,10 @@ def main() -> int:
     ap.add_argument("--id", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--exclude-glob", action="append", default=[])
+    ap.add_argument("--assert-files", type=int, default=None,
+                    help="fail unless exactly this many files are found (independent counter)")
+    ap.add_argument("--allow-walk-errors", action="store_true",
+                    help="downgrade walk errors to a warning (never use this to make a manifest 'pass')")
     ap.add_argument("--derived-glob", action="append", default=[],
                     help="reproducible derived artefacts: recorded, not hashed into the payload rollup")
     a = ap.parse_args()
@@ -77,6 +81,23 @@ def main() -> int:
                 continue
             rows.append({"path": rel, "bytes": size, "sha256": sha256_file(apath)})
             total += size
+
+    # A walk that could not read part of the tree must not produce a manifest that looks complete.
+    # Observed live: without the extended-length prefix this tool reported 95 files / 26 MB with
+    # walk_errors=0 for a 911-file / 236 MB delivery -- a green receipt for 10% of the payload.
+    if walk_errors and not a.allow_walk_errors:
+        print(json.dumps({"id": a.id, "verdict": "WALK_INCOMPLETE",
+                          "files_found": len(rows), "walk_errors": walk_errors[:5],
+                          "rule": "a manifest must not certify a tree it could not read"}, ensure_ascii=False))
+        return 5
+    if a.assert_files is not None and len(rows) != a.assert_files:
+        print(json.dumps({"id": a.id, "verdict": "FILE_COUNT_MISMATCH",
+                          "found": len(rows), "expected": a.assert_files}, ensure_ascii=False))
+        return 6
+    if len(rows) == 0:
+        print(json.dumps({"id": a.id, "verdict": "EMPTY", "rule": "zero files is a failure, not a manifest"},
+                         ensure_ascii=False))
+        return 7
 
     rollup = hashlib.sha256()
     for r in rows:
