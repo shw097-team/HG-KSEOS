@@ -64,3 +64,24 @@ def test_refuses_a_dispatch_that_did_not_succeed():
 def test_a_receipt_with_no_attempt_is_not_a_lane_use():
     out = GATE.judge({"lane": "PLAN", "attempts": []}, "PLAN")
     assert out["verdict"] == "NO_ATTEMPT"
+
+
+def test_a_provisional_receipt_proves_the_arm_but_not_the_finish(tmp_path):
+    """Falling back to a provisional receipt must weaken the claim, not silently satisfy it."""
+    receipt = {"lane": "VERIFY_SECURITY", "receipt_complete": False,
+               "attempts": [{"rank": 1, "provider": "openai-codex", "model": "gpt-6.1-sol",
+                             "exit": 0, "seconds": 131.7}]}
+    v = GATE.judge(receipt, "VERIFY_SECURITY")
+    assert v["verdict"] == "LANE_SERVED_PROVISIONAL"
+    assert v["receipt_complete"] is False
+    assert v["served"] == "gpt-6.1-sol"
+
+
+def test_a_provisional_receipt_with_a_bad_attempt_is_refused():
+    receipt = {"lane": "VERIFY_SECURITY", "receipt_complete": False,
+               "attempts": [{"rank": 1, "provider": "openai-codex", "model": "gpt-6.1-sol", "exit": 3}]}
+    assert GATE.judge(receipt, "VERIFY_SECURITY")["verdict"] == "LANE_CLAIM_UNSUPPORTED"
+
+    receipt["attempts"][0]["exit"] = 0
+    receipt["attempts"][0]["model"] = None
+    assert GATE.judge(receipt, "VERIFY_SECURITY")["verdict"] == "LANE_CLAIM_UNSUPPORTED"

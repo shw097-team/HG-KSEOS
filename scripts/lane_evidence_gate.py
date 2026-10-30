@@ -39,10 +39,23 @@ def judge(receipt: dict, lane: str, nonce: str | None = None, allow_rank: int = 
         problems.append(f"rank_not_primary: rank={a.get('rank')} allowed={allow_rank}")
     if a.get("exit") != 0:
         problems.append(f"dispatch_exit_nonzero: exit={a.get('exit')}")
-    if not receipt.get("ok"):
-        problems.append("dispatch_not_ok")
-    if not receipt.get("usage_receipt_ok"):
-        problems.append("usage_receipt_not_ok")
+    # A provisional receipt is what survives when the dispatcher is torn down before its final write.
+    # It can prove WHICH ARM SERVED (lane, rank, provider/model, exit) -- which is the question this gate
+    # exists to answer -- and it cannot prove the turn finished cleanly. The distinction is carried in the
+    # verdict rather than flattened, and --require-final refuses it outright.
+    provisional = receipt.get("receipt_complete") is False
+    if provisional:
+        a_prov = True
+        if a.get("exit") != 0:
+            problems.append(f"provisional_attempt_nonzero: exit={a.get('exit')}")
+        if not a.get("provider") or not a.get("model"):
+            problems.append("provisional_attempt_without_identity")
+    else:
+        a_prov = False
+        if not receipt.get("ok"):
+            problems.append("dispatch_not_ok")
+        if not receipt.get("usage_receipt_ok"):
+            problems.append("usage_receipt_not_ok")
 
     asked = receipt.get("used_transport_model")
     served = a.get("model")
@@ -65,8 +78,15 @@ def judge(receipt: dict, lane: str, nonce: str | None = None, allow_rank: int = 
         if not found:
             problems.append(f"nonce_not_echoed: {nonce}")
 
+    if problems:
+        verdict = "LANE_CLAIM_UNSUPPORTED"
+    elif provisional:
+        verdict = "LANE_SERVED_PROVISIONAL"
+    else:
+        verdict = "LANE_SERVED_AS_CLAIMED"
     return {
-        "verdict": "LANE_SERVED_AS_CLAIMED" if not problems else "LANE_CLAIM_UNSUPPORTED",
+        "verdict": verdict,
+        "receipt_complete": not provisional,
         "lane": lane,
         "asked": asked,
         "served": served,
