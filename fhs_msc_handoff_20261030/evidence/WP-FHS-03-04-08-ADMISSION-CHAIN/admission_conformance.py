@@ -220,7 +220,7 @@ def main() -> int:
     taskspec_ok = run("taskspec_admitted", do_taskspec)
 
     # 2. a wrong subject is refused (its request digest is not in scope)
-    run_negative("wrong_subject_refused", lambda: spine.create_taskspec(
+    wrong_subject_ok = run_negative("wrong_subject_refused", lambda: spine.create_taskspec(
         f"TS-CONF-BAD-{secrets.token_hex(3)}", requirement_id, "bad subject", "hgk-agent", ws,
         {"write": ["out.txt"]}, ["python -c 'print(1)'"], "bad subject",
         admission_bundle=bundle("create_taskspec", 0, "0" * 64)),
@@ -292,9 +292,14 @@ def main() -> int:
                 "SELECT resource_id,generation FROM native_admission_leases ORDER BY rowid")],
         }
 
-    negatives_ok = reuse_ok
-    verdict = "CHAIN_ADMITS" if (requirement_ok and taskspec_ok and workorder_ok and result_ok
-                                 and second_ok and negatives_ok) else "CHAIN_REFUSED"
+    # The verdict is derived from EVERY check outcome, never from a hand-picked subset: an
+    # independent checker proved that omitting one negative's return value lets a wrong-reason
+    # refusal print CHAIN_ADMITS. Adding a check now cannot silently fall out of the aggregate.
+    allowed = {"PASS", "REFUSED_AS_DESIGNED"}
+    failing = [c for c in checks if c.get("outcome") not in allowed]
+    steps_ok = all([requirement_ok, taskspec_ok, workorder_ok, result_ok, second_ok,
+                    reuse_ok, wrong_subject_ok])
+    verdict = "CHAIN_ADMITS" if (not failing and steps_ok) else "CHAIN_REFUSED"
     receipt = {
         "schema": "ADMISSION-CONFORMANCE/1",
         "verdict": verdict,
@@ -305,6 +310,12 @@ def main() -> int:
         "workspace": str(ws),
         "heads": {"base": head, "after_write": state.get("write_head")},
         "checks": checks,
+        "aggregation": {"derived_from_all_checks": True, "allowed_outcomes": sorted(allowed),
+                        "failing": [c.get("check") for c in failing],
+                        "steps": {"requirement": requirement_ok, "taskspec": taskspec_ok,
+                                  "workorder": workorder_ok, "result": result_ok,
+                                  "second_taskspec": second_ok, "reuse_negative": reuse_ok,
+                                  "wrong_subject_negative": wrong_subject_ok}},
         "readback": readback,
         "result": state.get("result"),
         "recorded_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
