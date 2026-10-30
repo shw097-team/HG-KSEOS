@@ -1,0 +1,345 @@
+{
+ "kind": "P1_PACKAGE_INTEGRITY",
+ "root": "C:\\wg\\pkg",
+ "task": "t_bc8df794",
+ "started_at": "2026-10-30T14:18:55+0800",
+ "checks": {
+  "A_payload_manifest": {
+   "verdict": "PASS",
+   "rows": 909,
+   "declared_rows_expected": 909,
+   "match": 909,
+   "mismatch": 0,
+   "missing": 0,
+   "unique_paths": 909,
+   "sorted_posix": false,
+   "self_excluded": true,
+   "manifest_bytes": 205955,
+   "manifest_sha256": "61d84df32df91a0b0f14806204dd872a524b54d639e332d04e76a8b6097e0a8e",
+   "mismatch_sample": [],
+   "missing_sample": [],
+   "path_alias_applied": null
+  },
+  "B_undeclared_files": {
+   "verdict": "PASS",
+   "on_disk": 911,
+   "declared": 909,
+   "extra": [
+    "SHA256_DELIVERY_MANIFEST.md",
+    "SHA256_PAYLOAD_MANIFEST.json"
+   ],
+   "extra_classified": {
+    "construction_excluded": [
+     "SHA256_DELIVERY_MANIFEST.md",
+     "SHA256_PAYLOAD_MANIFEST.json"
+    ],
+    "zip_artifacts": [],
+    "readback": [],
+    "unexpected": []
+   },
+   "note": "SHA256_PAYLOAD_MANIFEST.json and SHA256_DELIVERY_MANIFEST.md are excluded from the payload by construction (manifest.json->self_excluded_by_construction; delivery table states 此表不列自身). .zip and PACKAGE_READBACK.json are delivery artifacts, not payload."
+  },
+  "C_delivery_manifest_as_found": {
+   "verdict": "FAIL",
+   "rows_total": 9,
+   "pass": 6,
+   "absent": [
+    "FHS-MSC_BODY_2026-10-30_HANDOFF-PATCH-v1.zip",
+    "FHS-MSC_EVIDENCE_2026-10-30_HANDOFF-PATCH-v1.zip",
+    "PACKAGE_READBACK.json"
+   ],
+   "mismatch": [],
+   "rows": [
+    {
+     "file": "FHS-MSC_BODY_2026-10-30_HANDOFF-PATCH-v1.zip",
+     "declared_bytes": 4007065,
+     "declared_sha": "5e722cfbf200efc17de246fb5bfe877c5509b5d4d3849d42921ab56b9a86af5b",
+     "present": false,
+     "bytes_now": null,
+     "sha_now": null,
+     "verdict": "ABSENT"
+    },
+    {
+     "file": "FHS-MSC_EVIDENCE_2026-10-30_HANDOFF-PATCH-v1.zip",
+     "declared_bytes": 25914281,
+     "declared_sha": "0e7763b8856f38ad32f9714d7415bb19c215903c72576f9b2f433790c2e70a6d",
+     "present": false,
+     "bytes_now": null,
+     "sha_now": null,
+     "verdict": "ABSENT"
+    },
+    {
+     "file": "HANDOFF_README.md",
+     "declared_bytes": 2194,
+     "declared_sha": "8611f2c1b706aa7f446836876bc33381c2e4ee47a5d3b512db78109212a98628",
+     "present": true,
+     "bytes_now": 2194,
+     "sha_now": "8611f2c1b706aa7f446836876bc33381c2e4ee47a5d3b512db78109212a98628",
+     "verdict": "PASS"
+    },
+    {
+     "file": "FIRST_WORK_RECEIVER_CONTRACT.md",
+     "declared_bytes": 2520,
+     "declared_sha": "781c9292bff4553d5a12c9e1303b1117bde0e33d073fdb43b3fcd00cd61c3908",
+     "present": true,
+     "bytes_now": 2520,
+     "sha_now": "781c9292bff4553d5a12c9e1303b1117bde0e33d073fdb43b3fcd00cd61c3908",
+     "verdict": "PASS"
+    },
+    {
+     "file": "INDEX.md",
+     "declared_bytes": 1560,
+     "declared_sha": "e0d67f24385006180780a211672614f2d4c9ed6ce5392507c2602b644bfff03a",
+     "present": true,
+     "bytes_now": 1560,
+     "sha_now": "e0d67f24385006180780a211672614f2d4c9ed6ce5392507c2602b644bfff03a",
+     "verdict": "PASS"
+    },
+    {
+     "file": "VERSION_AND_DELIVERY.md",
+     "declared_bytes": 1190,
+     "declared_sha": "55741272c5eb52153d9fd7ff0515010580a07d4218dfa277a159f5021ee3d118",
+     "present": true,
+     "bytes_now": 1190,
+     "sha_now": "55741272c5eb52153d9fd7ff0515010580a07d4218dfa277a159f5021ee3d118",
+     "verdict": "PASS"
+    },
+    {
+     "file": "CURRENT_READER_SCOPE.json",
+     "declared_bytes": 381,
+     "declared_sha": "0c26b01c0f6c8758c96bf466ec1d2f0d9c43b7f763ad3492dd0a8c0fce4df536",
+     "present": true,
+     "bytes_now": 381,
+     "sha_now": "0c26b01c0f6c8758c96bf466ec1d2f0d9c43b7f763ad3492dd0a8c0fce4df536",
+     "verdict": "PASS"
+    },
+    {
+     "file": "SHA256_PAYLOAD_MANIFEST.json",
+     "declared_bytes": 205955,
+     "declared_sha": "61d84df32df91a0b0f14806204dd872a524b54d639e332d04e76a8b6097e0a8e",
+     "present": true,
+     "bytes_now": 205955,
+     "sha_now": "61d84df32df91a0b0f14806204dd872a524b54d639e332d04e76a8b6097e0a8e",
+     "verdict": "PASS"
+    },
+    {
+     "file": "PACKAGE_READBACK.json",
+     "declared_bytes": 1856,
+     "declared_sha": "02a6e603d564fa702cb97bebf95803760c7e4a4c943d73ebcbf1fe9f54c80de6",
+     "present": false,
+     "bytes_now": null,
+     "sha_now": null,
+     "verdict": "ABSENT"
+    }
+   ]
+  },
+  "D_relative_links": {
+   "verdict": "PASS",
+   "links": 35,
+   "broken": 0,
+   "per_file": {
+    "INDEX.md": 19,
+    "HANDOFF_README.md": 11,
+    "FIRST_WORK_RECEIVER_CONTRACT.md": 0,
+    "VERSION_AND_DELIVERY.md": 0,
+    "COVERAGE_REPORT.md": 2,
+    "REPAIR_CLOSURE_REPORT.md": 3
+   },
+   "broken_sample": []
+  },
+  "E_entry_links": {
+   "verdict": "FAIL",
+   "payload_rows": 909,
+   "body_entries": 114,
+   "evidence_entries": 797,
+   "union": 910,
+   "missing_from_both_zips": [],
+   "not_in_payload": [
+    "SHA256_PAYLOAD_MANIFEST.json"
+   ],
+   "shared_entries": [
+    "SHA256_PAYLOAD_MANIFEST.json"
+   ],
+   "all_payload_utf8_declared": true
+  },
+  "F_reseal_deterministic": {
+   "verdict": "FAIL",
+   "algorithm": "sorted entry names; ZipInfo date_time=(2026,10,30,0,0,0); ZIP_DEFLATED level 9; external_attr=0o100644<<16; writestr per entry; no directory entries",
+   "zips": [
+    {
+     "kind": "BODY",
+     "filename": "FHS-MSC_BODY_2026-10-30_HANDOFF-PATCH-v1.zip",
+     "entries": 114,
+     "built_bytes": 4007065,
+     "built_sha256": "5e722cfbf200efc17de246fb5bfe877c5509b5d4d3849d42921ab56b9a86af5b",
+     "declared_bytes": 4007065,
+     "declared_sha256": "5e722cfbf200efc17de246fb5bfe877c5509b5d4d3849d42921ab56b9a86af5b",
+     "bytes_match": true,
+     "sha_match": true,
+     "readback": {
+      "verdict": "PASS",
+      "entries": 114,
+      "unique": true,
+      "crc_first_error": null,
+      "utf8_fail": 0,
+      "byte_readback_fail": 0
+     },
+     "verdict": "PASS"
+    },
+    {
+     "kind": "EVIDENCE",
+     "filename": "FHS-MSC_EVIDENCE_2026-10-30_HANDOFF-PATCH-v1.zip",
+     "entries": 797,
+     "built_bytes": 25909480,
+     "built_sha256": "a9caf6eec01c2f335a622f48f3d6f189aa8bef7988bd564ba491fd500349065a",
+     "declared_bytes": 25914281,
+     "declared_sha256": "0e7763b8856f38ad32f9714d7415bb19c215903c72576f9b2f433790c2e70a6d",
+     "bytes_match": false,
+     "sha_match": false,
+     "readback": {
+      "verdict": "PASS",
+      "entries": 797,
+      "unique": true,
+      "crc_first_error": null,
+      "utf8_fail": 0,
+      "byte_readback_fail": 0
+     },
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  "G_install_and_readback": {
+   "verdict": "FAIL",
+   "reason": "RESEAL_DID_NOT_REPRODUCE_DECLARED_DIGEST",
+   "installed": [],
+   "note": "root left untouched; staged candidates kept for inspection"
+  },
+  "H_delivery_rows_after_reseal": {
+   "verdict": "FAIL",
+   "rows_total": 9,
+   "pass": 6,
+   "non_pass": [
+    {
+     "file": "FHS-MSC_BODY_2026-10-30_HANDOFF-PATCH-v1.zip",
+     "verdict": "ABSENT"
+    },
+    {
+     "file": "FHS-MSC_EVIDENCE_2026-10-30_HANDOFF-PATCH-v1.zip",
+     "verdict": "ABSENT"
+    },
+    {
+     "file": "PACKAGE_READBACK.json",
+     "verdict": "ABSENT"
+    }
+   ],
+   "rows": [
+    {
+     "file": "FHS-MSC_BODY_2026-10-30_HANDOFF-PATCH-v1.zip",
+     "declared_bytes": 4007065,
+     "declared_sha": "5e722cfbf200efc17de246fb5bfe877c5509b5d4d3849d42921ab56b9a86af5b",
+     "present": false,
+     "bytes_now": null,
+     "sha_now": null,
+     "verdict": "ABSENT"
+    },
+    {
+     "file": "FHS-MSC_EVIDENCE_2026-10-30_HANDOFF-PATCH-v1.zip",
+     "declared_bytes": 25914281,
+     "declared_sha": "0e7763b8856f38ad32f9714d7415bb19c215903c72576f9b2f433790c2e70a6d",
+     "present": false,
+     "bytes_now": null,
+     "sha_now": null,
+     "verdict": "ABSENT"
+    },
+    {
+     "file": "HANDOFF_README.md",
+     "declared_bytes": 2194,
+     "declared_sha": "8611f2c1b706aa7f446836876bc33381c2e4ee47a5d3b512db78109212a98628",
+     "present": true,
+     "bytes_now": 2194,
+     "sha_now": "8611f2c1b706aa7f446836876bc33381c2e4ee47a5d3b512db78109212a98628",
+     "verdict": "PASS"
+    },
+    {
+     "file": "FIRST_WORK_RECEIVER_CONTRACT.md",
+     "declared_bytes": 2520,
+     "declared_sha": "781c9292bff4553d5a12c9e1303b1117bde0e33d073fdb43b3fcd00cd61c3908",
+     "present": true,
+     "bytes_now": 2520,
+     "sha_now": "781c9292bff4553d5a12c9e1303b1117bde0e33d073fdb43b3fcd00cd61c3908",
+     "verdict": "PASS"
+    },
+    {
+     "file": "INDEX.md",
+     "declared_bytes": 1560,
+     "declared_sha": "e0d67f24385006180780a211672614f2d4c9ed6ce5392507c2602b644bfff03a",
+     "present": true,
+     "bytes_now": 1560,
+     "sha_now": "e0d67f24385006180780a211672614f2d4c9ed6ce5392507c2602b644bfff03a",
+     "verdict": "PASS"
+    },
+    {
+     "file": "VERSION_AND_DELIVERY.md",
+     "declared_bytes": 1190,
+     "declared_sha": "55741272c5eb52153d9fd7ff0515010580a07d4218dfa277a159f5021ee3d118",
+     "present": true,
+     "bytes_now": 1190,
+     "sha_now": "55741272c5eb52153d9fd7ff0515010580a07d4218dfa277a159f5021ee3d118",
+     "verdict": "PASS"
+    },
+    {
+     "file": "CURRENT_READER_SCOPE.json",
+     "declared_bytes": 381,
+     "declared_sha": "0c26b01c0f6c8758c96bf466ec1d2f0d9c43b7f763ad3492dd0a8c0fce4df536",
+     "present": true,
+     "bytes_now": 381,
+     "sha_now": "0c26b01c0f6c8758c96bf466ec1d2f0d9c43b7f763ad3492dd0a8c0fce4df536",
+     "verdict": "PASS"
+    },
+    {
+     "file": "SHA256_PAYLOAD_MANIFEST.json",
+     "declared_bytes": 205955,
+     "declared_sha": "61d84df32df91a0b0f14806204dd872a524b54d639e332d04e76a8b6097e0a8e",
+     "present": true,
+     "bytes_now": 205955,
+     "sha_now": "61d84df32df91a0b0f14806204dd872a524b54d639e332d04e76a8b6097e0a8e",
+     "verdict": "PASS"
+    },
+    {
+     "file": "PACKAGE_READBACK.json",
+     "declared_bytes": 1856,
+     "declared_sha": "02a6e603d564fa702cb97bebf95803760c7e4a4c943d73ebcbf1fe9f54c80de6",
+     "present": false,
+     "bytes_now": null,
+     "sha_now": null,
+     "verdict": "ABSENT"
+    }
+   ]
+  },
+  "I_package_readback": {
+   "verdict": "SKIPPED",
+   "reason": "reseal failed"
+  }
+ },
+ "summary": {
+  "payload_rows": 909,
+  "payload_match": 909,
+  "links": 35,
+  "body_entries": 114,
+  "evidence_entries": 797,
+  "zips_resealed_byte_exact": false,
+  "checks": {
+   "A_payload_manifest": "PASS",
+   "B_undeclared_files": "PASS",
+   "C_delivery_manifest_as_found": "FAIL",
+   "D_relative_links": "PASS",
+   "E_entry_links": "FAIL",
+   "F_reseal_deterministic": "FAIL",
+   "G_install_and_readback": "FAIL",
+   "H_delivery_rows_after_reseal": "FAIL",
+   "I_package_readback": "SKIPPED"
+  }
+ },
+ "verdict": "FAIL",
+ "finished_at": "2026-10-30T14:19:07+0800"
+}

@@ -1,0 +1,42 @@
+{
+  "kind": "AUTHOR_RECEIVER_INSTRUCTIONS_NOT_A_NEW_NATIVE_SCHEMA",
+  "first_work": "WP-FHS-15",
+  "PI": {
+    "subject_id": "PI-4298cad2300fb52f",
+    "content_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb"
+  },
+  "taskspec_seed": "TSS-c8c7132522a53fda",
+  "producer": "PIPD original pipeline.bind_pd",
+  "consumer": "original PIPD PD Reader then HGK SharedSpine adapter",
+  "actual_input_signature": "bind_pd(pi, repo_context={root,writable_scope,...observed claims})",
+  "receiver_actions": [
+    "Resolve the actual receiver-authorized isolated draft root; no source-root mutation",
+    "Probe actual HEAD/index/untracked/root identity immediately before PD binding; compare actual source pins",
+    "Choose finite five-output WriteSet contained in the authorized root; never pass ** or a foreign root",
+    "Bind actual source/profile/PI identity; call original bind_pd; validate actual PD-PKG using pinned registry",
+    "Translate TaskSpecSeed to native_admission.taskspec_request without creating Canonical state in this author run",
+    "Original HGK resolves requirement frozen identity then create_taskspec/create_workorder under its own protected admission",
+    "Use returned real WorkID in original Hermes Queue/Lease/Journal; never substitute candidate subject ID as real WorkID"
+  ],
+  "optional_PD_now": false,
+  "why_PD_not_live_now": "Real executor worktree/root/principal/HEAD are measured by the receiver at construction; no fake live RepoContext is serialized here",
+  "SOURCE_READ_LOCAL_DRAFT": "No live effect Permit predecessor; original Canonical admission is separate when actually creating native TaskSpec/WorkOrder",
+  "effect_split": {
+    "REPO_WRITE": "DEV ECP + exact root/write set + original HGK admission before mutation",
+    "HOST_OP": "independent OPS ECP + original Host Owner/Issuer",
+    "USER_OP": "user consent scope + original User receiver",
+    "REMOTE_WRITE": "original remote principal and remote ECP",
+    "RELEASE": "original Publisher + protected checker"
+  },
+  "resume_key": [
+    "real WorkID",
+    "subject",
+    "source_sha",
+    "scope",
+    "policy_epoch",
+    "operation_id",
+    "lease_generation"
+  ],
+  "UNKNOWN": "PARK affected operation; original World Reconcile; no blind resend",
+  "ProviderOff": "Explicit true for this first-work deterministic path; raw legacy ON/OFF never mapped to call permission"
+}
