@@ -1,0 +1,81 @@
+{
+  "claims_not_made": [
+    "any native verdict",
+    "Fabric or PIPD changes",
+    "the 909 older NOT_RUN rows"
+  ],
+  "f15": {
+    "repaired": "35/0",
+    "root_cause": "tests package sits beside src, not under it",
+    "state": "CLOSED",
+    "unmodified": "34/1"
+  },
+  "generated_at": "2026-10-30T19:42:06",
+  "merges": {
+    "#1": {
+      "evidence": "git merge-base origin/main tb1 -> empty; root a2389c13 vs f6dfb1e5",
+      "state": "BLOCKED_UNRELATED_HISTORY"
+    },
+    "#2": {
+      "evidence": "same; base branch is #1's branch",
+      "state": "BLOCKED_UNRELATED_HISTORY"
+    },
+    "#4": {
+      "sha": "91f47a500b",
+      "state": "merged"
+    },
+    "#6": {
+      "sha": "da1d033bc0",
+      "state": "merged"
+    },
+    "#7": {
+      "sha": "1e98abf71b",
+      "state": "merged"
+    }
+  },
+  "officer": {
+    "pass1": {
+      "conviction": "O2",
+      "nonce": "NONCE-AO-20261030-E",
+      "overall": "FAIL"
+    },
+    "pass2": {
+      "claim": "O2",
+      "nonce": "NONCE-AO-20261030-F",
+      "verdict": "PASS"
+    }
+  },
+  "owner_envelope": "WIN-12cb9b954e99",
+  "round": "FHS-MSC-ALLPASS-20261030",
+  "schema": "MERGE-AND-ACCEPTANCE-RECEIPT/1",
+  "work_packages": {
+    "NOT_RUN_remaining": 0,
+    "PASS": [
+      "00",
+      "01",
+      "05",
+      "06",
+      "07",
+      "09",
+      "14",
+      "15",
+      "16",
+      "18",
+      "19",
+      "21"
+    ],
+    "REFUSED_NAMED": [
+      "02",
+      "03",
+      "04",
+      "08",
+      "10",
+      "11",
+      "12",
+      "13",
+      "17",
+      "20"
+    ],
+    "expires": "2026-12-31"
+  }
+}
