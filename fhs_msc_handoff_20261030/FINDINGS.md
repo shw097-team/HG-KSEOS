@@ -1,6 +1,6 @@
 # Findings — round `FHS-MSC-HANDOFF-PATCH-v1-EXEC-20261030`
 
-Ten defects, ordered by cost to the next team. Each has an artefact, a severity and one next action.
+Twelve defects (F-01..F-11, with F-02 split in two), ordered by cost to the next team. Each has an artefact, a severity and one next action.
 A repaired harness is not an acceptance, and a green check is not a permit.
 
 ## F-01 — the delivered archives and the readback manifest do not exist

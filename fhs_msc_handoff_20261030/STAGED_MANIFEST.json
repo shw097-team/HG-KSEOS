@@ -6,7 +6,7 @@
   "package": "C:\\wg\\pkg"
  },
  "files": 65,
- "total_bytes": 5359792,
+ "total_bytes": 5358778,
  "entries": [
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",
@@ -75,8 +75,8 @@
   },
   {
    "path": "receipts/P6_GITHUB_READBACK.json",
-   "bytes": 1792,
-   "sha256": "bcbddea5e3cc52a2eb798fcb975b330e936f6a8b37ed0a99f6fb8e239796a110"
+   "bytes": 778,
+   "sha256": "4607a4f9c974e79354cbec11acfd3380be5722ed23c803e005089226a9ee1678"
   },
   {
    "path": "tools/exec_checks.py",
