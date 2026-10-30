@@ -1,0 +1,82 @@
+{
+  "effect": "none of these ten may be claimed as delivered; each remains visible in the denominator as refused",
+  "expires": "2026-12-31",
+  "issued_at": "2026-10-30T19:41:17",
+  "issued_by": "hgk-agent under owner envelope WIN-12cb9b954e99",
+  "refusals": [
+    {
+      "acceptance": "ACC-WP-FHS-02",
+      "expires": "2026-12-31",
+      "reason": "Fabric Policy Consumer needs a live policy-consumption trace from a running consumer; none exists on this host",
+      "review_trigger": "a host binding for this effect class is demonstrated to exist",
+      "wp": "WP-FHS-02"
+    },
+    {
+      "acceptance": "ACC-WP-FHS-03",
+      "expires": "2026-12-31",
+      "reason": "HGK Registry/Issuer binding needs an issuer credential separate from the agent; the owner holds the only one",
+      "review_trigger": "a host binding for this effect class is demonstrated to exist",
+      "wp": "WP-FHS-03"
+    },
+    {
+      "acceptance": "ACC-WP-FHS-04",
+      "expires": "2026-12-31",
+      "reason": "Hermes durable runtime wake-lease binding needs a scheduler-managed lease; Hermes runs interactively here",
+      "review_trigger": "a host binding for this effect class is demonstrated to exist",
+      "wp": "WP-FHS-04"
+    },
+    {
+      "acceptance": "ACC-WP-FHS-08",
+      "expires": "2026-12-31",
+      "reason": "FHS execute worker needs a host worker with a journal cursor; no such worker is deployed",
+      "review_trigger": "a host binding for this effect class is demonstrated to exist",
+      "wp": "WP-FHS-08"
+    },
+    {
+      "acceptance": "ACC-WP-FHS-10",
+      "expires": "2026-12-31",
+      "reason": "B1 three-GWO needs three independent officers; one account, one principal",
+      "review_trigger": "a host binding for this effect class is demonstrated to exist",
+      "wp": "WP-FHS-10"
+    },
+    {
+      "acceptance": "ACC-WP-FHS-11",
+      "expires": "2026-12-31",
+      "reason": "portable host dogfood needs a second host; only one host is available",
+      "review_trigger": "a host binding for this effect class is demonstrated to exist",
+      "wp": "WP-FHS-11"
+    },
+    {
+      "acceptance": "ACC-WP-FHS-12",
+      "expires": "2026-12-31",
+      "reason": "W18 normal mode needs a fresh process tree with its own PID lineage; not provisioned",
+      "review_trigger": "a host binding for this effect class is demonstrated to exist",
+      "wp": "WP-FHS-12"
+    },
+    {
+      "acceptance": "ACC-WP-FHS-13",
+      "expires": "2026-12-31",
+      "reason": "CAP on-demand plus hot-swap needs a capability broker that can swap at runtime; absent",
+      "review_trigger": "a host binding for this effect class is demonstrated to exist",
+      "wp": "WP-FHS-13"
+    },
+    {
+      "acceptance": "ACC-WP-FHS-17",
+      "expires": "2026-12-31",
+      "reason": "CAP-BOOT native occupants need host occupant slots; absent",
+      "review_trigger": "a host binding for this effect class is demonstrated to exist",
+      "wp": "WP-FHS-17"
+    },
+    {
+      "acceptance": "ACC-WP-FHS-20",
+      "expires": "2026-12-31",
+      "reason": "CLI/Agent/Host kind matrix needs the 192-cell host matrix to be executable, not only declared",
+      "review_trigger": "a host binding for this effect class is demonstrated to exist",
+      "wp": "WP-FHS-20"
+    }
+  ],
+  "round": "FHS-MSC-ALLPASS-20261030",
+  "schema": "REFUSAL-RECORD/1",
+  "subject": "the ten work packages that require host capability this machine does not have",
+  "why_refused_rather_than_deferred": "NOT_RUN reads as work pending and keeps a phantom backlog alive; a named refusal with an expiry is a decision"
+}
