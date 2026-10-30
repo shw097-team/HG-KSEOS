@@ -122,6 +122,9 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--board", default=BOARD)
     ap.add_argument("--quiet", action="store_true")
+    # Measured preference, 2026-10-30: the owner wants running work inside todo_list + the goal, not a card per
+    # dispatch and not a window. Cards are now opt-in (--cards); the goal anchor card is never recreated here.
+    ap.add_argument("--cards", action="store_true")
     args = ap.parse_args(argv or sys.argv[1:])
 
     live = live_dispatches()
@@ -171,15 +174,23 @@ def main(argv=None) -> int:
         "updated_at": body["generated_at"],
     }
     (QUEUE / "GOAL.json").write_text(json.dumps(goal, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    running_by_wp = {d["wp"]: d for d in live if d.get("wp")}
     todo = ["# Todo (derived from the control plane, not from a session)", ""]
     for line in queue_rows.strip().splitlines():
-        if line.startswith("WP-FHS-"):
-            parts = line.split()
-            box = "[x]" if "PASS" in parts[1] else ("[!]" if parts[1] in ("FAIL", "BLOCKED") else "[ ]")
-            todo.append(f"- {box} {' '.join(parts[:3])}")
+        if not line.startswith("WP-FHS-"):
+            continue
+        parts = line.split()
+        wp, state = parts[0], (parts[1] if len(parts) > 1 else "")
+        live_row = running_by_wp.get(wp)
+        if live_row:
+            # A unit that is running must never read as "pending" -- that is the exact confusion the owner hit.
+            todo.append(f"- [>] {wp} RUNNING {live_row['lane']} pid {live_row['pid']} ({live_row['minutes']} min)")
+        else:
+            box = "[x]" if state == "PASS" else ("[!]" if state in ("FAIL", "BLOCKED") else "[ ]")
+            todo.append(f"- {box} {wp} {state}")
     (QUEUE / "TODO.md").write_text("\n".join(todo) + "\n", encoding="utf-8")
 
-    cards = kanban_sync(body, live)
+    cards = kanban_sync(body, live) if args.cards else []
     if not args.quiet:
         print(json.dumps({"status_json": str(STATUS_JSON), "status_md": str(STATUS_MD),
                           "running": len(live), "cards_created": cards}, ensure_ascii=False))

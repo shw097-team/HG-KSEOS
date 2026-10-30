@@ -129,7 +129,9 @@ def launch(lane: str, prompt: str, nonce: str, cwd: Path, json_out: Path, timeou
     ]
     flags = 0
     if os.name == "nt":
-        flags = subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP
+        # The owner sees one console window per dispatch otherwise, and asked for no windows at all. A detached
+        # child with CREATE_NO_WINDOW has no console, so the loop is invisible in the task bar and still logged.
+        flags = subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_NO_WINDOW
     log({"action": "spawn", "lane": lane, "nonce": nonce, "json_out": str(json_out), "cwd": str(cwd)})
     # A detached launch with its output thrown away is unobservable: the first attempt died instantly and left
     # no trace at all. Every dispatch therefore owns a log next to its receipt.
