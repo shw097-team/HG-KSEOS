@@ -5,8 +5,8 @@
   "repro": "C:\\wg\\repro",
   "package": "C:\\wg\\pkg"
  },
- "files": 74,
- "total_bytes": 5579114,
+ "files": 75,
+ "total_bytes": 5580768,
  "entries": [
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",
@@ -72,6 +72,11 @@
    "path": "receipts/P5D_REPO_READBACK.json",
    "bytes": 34548,
    "sha256": "41fbc8fd3b50a3fb24037491784c9c7c117e3276ac17e8d4bd03539575cf39fe"
+  },
+  {
+   "path": "receipts/P5E_LANE_WRITER_OVERRUN.json",
+   "bytes": 1654,
+   "sha256": "4130cce9e290c1d393c1717749a18bed94c798ef0881de285de913ca8cccdd40"
   },
   {
    "path": "receipts/P6_GITHUB_READBACK.json",

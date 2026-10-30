@@ -135,7 +135,7 @@ Next: provision the OAuth credential for the PLAN/VERIFY arm, then dispatch the 
 14:20:30 to its termination at 14:29 — eight and a half minutes of reading and cross-checking, no file
 written, no side effect (codex rollout `…/sessions/2026/10/30/rollout-2026-10-30T14-20-30-01a18b77-…jsonl`,
 last entry 14:20, process terminated 14:29). The same lane wrote a single exact file in 27.99 s
-(`receipts/P5B`).
+(`receipts/P5B`). The dispatcher's own record of the overrun is `receipts/P5E_LANE_WRITER_OVERRUN.json`, including the reaping artefact that made it exit `ERR_LANE_ALL_ROUTES_EXHAUSTED` (`4294967295`) instead of `ERR_LANE_TIMEOUT` — do not read that code as a routing verdict.
 Next: keep lane writes single-artefact and exactly specified; keep open-ended authoring with the
 operator.
 

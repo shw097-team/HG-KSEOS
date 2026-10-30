@@ -16,6 +16,7 @@
 | `P3_STRUCTURAL_CHECKS.json` | 6 PASS + 1 REVIEW | **decisive** | DAG shape, closure mismatch (F-05), 24 complete atoms, FUO ten fields, SPEC acceptance, 2,221 unique readers. |
 | `P5A_LANE_PROBE_EXECUTE.json` | ok=true | **decisive** | EXECUTE lane served `opencode-go/deepseek-v4.1-flash` with nonce echo; also the F-08 artefact. |
 | `P5B_LANE_EXECUTE_WRITER.json` | ok=true | **decisive** | a bounded single-file write through the same lane, 28 s, own nonce. |
+| `P5E_LANE_WRITER_OVERRUN.json` | OVERRUN_TERMINATED | **decisive** | the terminated authoring turn: 8.5 min, 0 files, and the `4294967295` reaping artefact (F-11). |
 | `P5C_LANE_VERIFY_BLOCKED.json` | ok=false | **decisive** | the VERIFY arm returned upstream 401 / all routes exhausted: independent acceptance did not run (F-10). |
 | `P7_SEAL_AND_PARTITION.json` | BODY PASS / EVIDENCE FAIL | **decisive** | the declared archives rebuilt from the manifest's own partition: BODY byte-exact (114 entries, 4,007,065 B, `5e722cfb…`), EVIDENCE 4,801 B short; also records the withdrawn first seal (F-01, F-12). |
 | `P8_DELIVERED_RECORD_ANOMALY.json` | ANOMALY | **decisive** | the delivery's 35/0 record and its 34/1 predecessor share `elapsed_seconds` to sixteen digits (F-14). |
