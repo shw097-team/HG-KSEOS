@@ -1,0 +1,49 @@
+{
+  "batch_A": {
+    "acceptance_basis": "the officer's independent re-derivation (claim O5), not a producer receipt",
+    "artifacts_written": [
+      {
+        "path": "evidence/WP-FHS-15-18-STAGE/SPEC_18_STAGE.json",
+        "sha256": "c512ab13604c2ebdc2e557f41bf718d481b1e6f86d51a462b288c348d8d60c87",
+        "wp": "15"
+      },
+      {
+        "path": "evidence/WP-FHS-16-SLOT-TRANSLATION/SLOT_TRANSLATION.json",
+        "sha256": "428aa198b796a3a5d4b4553053b9814e6574adda38671044adef247e63e4d6f1",
+        "wp": "16"
+      }
+    ],
+    "command_nonce": "NONCE-WPA-20261030",
+    "dispatch_exit": 124,
+    "receipt": "NONE — the dispatch was killed at the 1500 s wrapper limit before writing wpA.json"
+  },
+  "batch_B": {
+    "acceptance_basis": "artifact content, independently re-derived by the officer (claim O5)",
+    "artifacts_written": [
+      {
+        "path": "evidence/WP-FHS-01-AUTHORITY/AUTHORITY_CONFLICT_LEDGER.json",
+        "sha256": "4e1c4a7b86d1ba4e79f283611d149cc03b842b7ff1185f02a9e90b6a01584522",
+        "wp": "01"
+      },
+      {
+        "path": "evidence/WP-FHS-05-PIPD-CANDIDATES/PI_PD_DEV_OPS_CANDIDATES.json",
+        "sha256": "769e9669a9cf9c9b3f3183a5a851a206352c381cb2e99019d07864beb4f48476",
+        "wp": "05"
+      }
+    ],
+    "assignment_posture_enforced": false,
+    "command_nonce": "NONCE-WPB-20261030",
+    "dispatch_exit": 0,
+    "finding": "the run asked the relay for opencode-go/deepseek-v4.1-flash (rank 1, usage receipt ok) and the attempt record reports opencode-go/mimo-v2.6-flash as the model that answered. A lane binding is a request, not a guarantee; the dispatch did not compare requested against served.",
+    "requested_model": "opencode-go/deepseek-v4.1-flash",
+    "served_arm_assigned": false,
+    "served_provider_reported": "desktop_router",
+    "served_reported_in_attempt": "opencode-go/mimo-v2.6-flash"
+  },
+  "batch_C": "recorded separately in WP_FHS_LANE_OVERRUN_BATCH_C.json",
+  "recommended_follow_up": "make hgk-lane-dispatch refuse when the served model reported by the attempt differs from the requested transport model, so a silent substitution cannot pass as a binding",
+  "recorded_at": "2026-10-30T19:48:40",
+  "round": "FHS-MSC-ALLPASS-20261030",
+  "schema": "LANE-RECEIPT-GAPS/1",
+  "why_recorded": "two of three EXECUTE batches carry no clean receipt, and one of them was served by a different model than the one requested. The work packages stand on the officer's re-derivation; anyone reading the acceptance rows later must be able to see that."
+}
