@@ -5,13 +5,18 @@
   "repro": "C:\\wg\\repro",
   "package": "C:\\wg\\pkg"
  },
- "files": 78,
- "total_bytes": 5588185,
+ "files": 79,
+ "total_bytes": 5593858,
  "entries": [
   {
    "path": "receipts/P10_LANE_AVAILABILITY.json",
    "bytes": 2451,
    "sha256": "1fef11190e6460ac94e6b43c1ef71e6cd80403ff110636184572dc0b475cf1d5"
+  },
+  {
+   "path": "receipts/P11_LANE_TRUTH_AND_ROOTCAUSE.json",
+   "bytes": 5673,
+   "sha256": "c909318e7da6e825d0f2b93252077b5c892a8f061893ff1bf7b7b7abceb2f11d"
   },
   {
    "path": "receipts/P11_OWNER_DECISIONS_PREFILLED.json",
