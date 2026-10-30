@@ -23,6 +23,8 @@
 | `P11_LANE_TRUTH_AND_ROOTCAUSE.json` | CORRECTION | **decisive** | relay 10101 was not running; 10102 is the desktop plane; `gpt-6.1-sol` served in 6.19 s once given the owner home — the "no independent arm" verdict is withdrawn (RC-1..RC-4). |
 | `P15_AO_ACCEPTANCE.json` | **ACCEPTED** | **decisive** | oracle-bound independent acceptance: 8/8 PASS at `bb37523`, `gpt-6.1-sol`, nonce `NONCE-AO-20261030-B`; O5 convicted at `34b40ef` then closed. |
 | `r4/` | receiver revision | supporting | additive: receiver readback, the one-statement harness fix (hashes in `r4/SHA256_R4.json`), provenance; no re-seal, no digest rewrite. |
+| `P16_IR1_POLICY_GATE.json` | POLICY_DIRTY (exit 2) | **decisive** | the IR-1 gate run against the live control plane: four routing files uncommitted, policy 5 revisions (rev 33→38) ahead of HEAD with a changed schema. |
+| `FAR_ROOT_CAUSE_REPORT_20261030.md` | L3 root cause | **decisive** | why the same defects recur across rounds: repairs land in the disposable layer, acceptances never granted (5/5 NOT_RUN), defect classes have no memory. |
 | `P14_LAYOUT_PREFIX_EVIDENCE.json` | 31 / 0 / 31 | **decisive** | long-path measurement of the layout claim: 31 rows carry the wrong prefix, 0 resolve as declared, 31 resolve after the alias (conviction O5 fix). |
 | `P12_INDEPENDENT_VERDICT.json` | FAIL / V1,V2,V5 PASS | **decisive** | first real independent verdict: payload 909/909, BODY byte-exact, EVIDENCE refutes my shortfall claim, harness INCONCLUSIVE under read-only, DAG closure mismatch confirmed. |
 | `P13_SEAL_REPRODUCTION_VERBATIM.json` | BOTH byte-exact | **decisive** | both archives rebuilt with the shipped packer's own rule: 114/4,007,065/`5e722cfb…` and 801/25,914,281/`0e7763b8…`. Supersedes the EVIDENCE row in `P7`. |

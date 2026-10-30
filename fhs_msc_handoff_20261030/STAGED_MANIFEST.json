@@ -5,8 +5,8 @@
   "repro": "C:\\wg\\repro",
   "package": "C:\\wg\\pkg"
  },
- "files": 83,
- "total_bytes": 5599768,
+ "files": 84,
+ "total_bytes": 5601201,
  "entries": [
   {
    "path": "receipts/P10_LANE_AVAILABILITY.json",
@@ -42,6 +42,11 @@
    "path": "receipts/P15_AO_ACCEPTANCE.json",
    "bytes": 2200,
    "sha256": "668395d87750c6c92d2ba86d655e17232b589553a4f646f31228ef91741c62a3"
+  },
+  {
+   "path": "receipts/P16_IR1_POLICY_GATE.json",
+   "bytes": 1433,
+   "sha256": "2c37f8dbc297a5a837de7561cccd9d7a340097a5062f2b8bb7bdff791ce84c7f"
   },
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",
