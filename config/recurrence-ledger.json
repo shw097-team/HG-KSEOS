@@ -1,143 +1,203 @@
 {
- "schema": "RECURRENCE-LEDGER/1",
- "note": "One row per *class* of defect, not per instance. A class that has occurred twice may not be worked again without a regression test that fails when the defect returns; that rule is what separates a fix from a retelling.",
- "classes": [
-  {
-   "class_id": "RC-POLICY-DRIFT",
-   "title": "the governing policy exists in more than one file and the copies disagree",
-   "occurrences": [
+  "schema": "RECURRENCE-LEDGER/1",
+  "note": "One row per *class* of defect, not per instance. A class that has occurred twice may not be worked again without a regression test that fails when the defect returns; that rule is what separates a fix from a retelling. | 2026-10-30: three classes added from the admission-chain checker sittings",
+  "classes": [
     {
-     "date": "2026-10-21",
-     "ref": "session FAR-LANE-VERSION-MIX-20261021: four routing files, PLAN named glm/gpt/deepseek in different places"
+      "class_id": "RC-POLICY-DRIFT",
+      "title": "the governing policy exists in more than one file and the copies disagree",
+      "occurrences": [
+        {
+          "date": "2026-10-21",
+          "ref": "session FAR-LANE-VERSION-MIX-20261021: four routing files, PLAN named glm/gpt/deepseek in different places"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "FAR-DURABILITY-20261030: registry said PLAN rank-1 = gpt-6.1-sol, lane_chains and the slot pool still said deepseek; the conformance test failed against its own source"
+        }
+      ],
+      "fix": {
+        "commit": "epoch 34",
+        "tools": [
+          "scripts/lane_policy_reconcile.py"
+        ],
+        "summary": "one authority (registry.routes); lane_chains and ordered_pool are projections, regenerated, with the epoch digest recorded"
+      },
+      "regression_test": "tests/test_durable_gates.py::test_reconcile_detects_and_repairs_drift",
+      "status": "CLOSED_WITH_TEST"
     },
     {
-     "date": "2026-10-30",
-     "ref": "FAR-DURABILITY-20261030: registry said PLAN rank-1 = gpt-6.1-sol, lane_chains and the slot pool still said deepseek; the conformance test failed against its own source"
+      "class_id": "RC-DISPOSABLE-REPAIR",
+      "title": "a repair is written into a worktree, a live process or a .bak instead of a commit, a service or a registry row",
+      "occurrences": [
+        {
+          "date": "2026-10-21",
+          "ref": "FAR-LANE-HEALTH-REPAIR: repair stopped at local re-binding; the transport was a manually started process"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "FAR-DURABILITY-20261030: three implementations (B1, SKELETON_SPINE, HANDOFF-PATCH-v1) live in a directory with no .git at all; the delivery commit carried 9 of 911 files"
+        }
+      ],
+      "fix": {
+        "tools": [
+          "scripts/ir4_subject_gate.py",
+          "scripts/ir_gate.py"
+        ],
+        "summary": "a turn may only claim progress on a subject that has a commit; the dispatcher refuses otherwise"
+      },
+      "regression_test": "tests/test_durable_gates.py::test_subject_without_repo_is_refused",
+      "status": "CLOSED_WITH_TEST"
+    },
+    {
+      "class_id": "RC-POLICY-WITHOUT-TRANSACTION",
+      "title": "the effective policy is an uncommitted edit in one working tree",
+      "occurrences": [
+        {
+          "date": "2026-10-23",
+          "ref": "last commit touching config/; revisions 34..38 existed only on disk for seven days"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "HEAD carried revision 33 while the disk carried revision 38 with a changed schema (lane_group -> role)"
+        }
+      ],
+      "fix": {
+        "tools": [
+          "scripts/ir1_policy_gate.py"
+        ],
+        "summary": "POLICY_DIRTY refuses the turn; policy changes must be committed"
+      },
+      "regression_test": "tests/test_durable_gates.py::test_dirty_policy_is_refused",
+      "status": "CLOSED_WITH_TEST"
+    },
+    {
+      "class_id": "RC-ACCEPTANCE-NEVER-GRANTED",
+      "title": "every round ends ACC=NOT_RUN, so no round can promote what it fixed",
+      "occurrences": [
+        {
+          "date": "2026-10-22",
+          "ref": "FAR-20261022-027 trigger_keys: hgk:ACC-...=NOT_RUN, with verify-lane PASS and an AO verdict present"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "five evidence/FAR-* rounds, five NOT_RUN acceptances"
+        }
+      ],
+      "fix": {
+        "tools": [
+          "scripts/acceptance_default.py"
+        ],
+        "summary": "each round must grant or name a refusal with an expiry; NOT_RUN is no longer a terminal state"
+      },
+      "regression_test": "tests/test_durable_gates.py::test_acceptance_requires_grant_or_named_refusal",
+      "status": "CLOSED_WITH_TEST"
+    },
+    {
+      "class_id": "RC-VACUOUS-PASS",
+      "title": "a comparator reports success on missing input",
+      "occurrences": [
+        {
+          "date": "2026-10-21",
+          "ref": "Fabric commit a0b519a: 'every gate certified presence, not correspondence'"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "durable_import.py reported 95 files / 26 MB with walk_errors=0 for a 911-file / 236 MB tree (MAX_PATH truncation)"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "independent checker (gpt-6.1-sol, nonce NONCE-AO-20261030-C) convicted recurrence_gate.judge: an entry with status CLOSED_WITH_TEST and a nonexistent regression-test file returned blocked=false"
+        }
+      ],
+      "fix": {
+        "tools": [
+          "tools/durable_import.py",
+          "scripts/recurrence_gate.py"
+        ],
+        "summary": "blocked is a function of findings only; a self-declared status is not a licence"
+      },
+      "regression_test": "tests/test_durable_gates.py::test_manifest_refuses_incomplete_walk",
+      "status": "CLOSED_WITH_TEST"
+    },
+    {
+      "class_id": "RC-LANE-NOT-BOUND",
+      "title": "a lane declares a model it is not required to serve",
+      "occurrences": [
+        {
+          "date": "2026-10-22",
+          "ref": "FAR-20261022-027 receipt: PLAN ran on deepseek in the Hermes session plane while the mandate named gpt-6.1-sol"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "rev 33 held all three lanes on deepseek (SOD006-C7); PLAN ran on the session model for the third consecutive round"
+        }
+      ],
+      "fix": {
+        "commit": "epoch 34",
+        "summary": "PLAN and VERIFY rank 1 is the mandated gpt-6.1-sol; the dispatcher binds require_arm == served_arm; reconcile keeps the declaration equal to the route"
+      },
+      "regression_test": "tests/test_lane_policy.py::TestLanePolicyConformance::test_registry_and_projection_shape",
+      "status": "CLOSED_WITH_TEST"
+    },
+    {
+      "class_id": "RC-WRONG-REASON-REFUSAL",
+      "title": "a negative check accepts any refusal, so a refusal for an unrelated reason counts as the proof",
+      "occurrences": [
+        {
+          "date": "2026-10-30",
+          "ref": "AO sitting 1 NONCE-AO-R28-20261030: bundle_bound_to_subject refused with ERR_WORKORDER_REQUIRES_DRAFT_TASKSPEC and still recorded REFUSED_AS_DESIGNED"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "AO sitting 2 NONCE-AO-R28-B-20261030: fault injection showed the wrong-subject negative could fail with ROOT_HEAD unnoticed"
+        }
+      ],
+      "last_fix_commit": "279fc058",
+      "regression_test": "scripts/admission_conformance.py::run_negative(expect=...) + the O5/O6 criteria in C:/wg/r28/oracle/ORACLE-WP-03-04-08.json",
+      "rule": "a refusal counts only if it is the refusal under test; the expected code is an argument, not a hope"
+    },
+    {
+      "class_id": "RC-HAND-PICKED-AGGREGATION",
+      "title": "a verdict is computed from a hand-listed subset of checks, so a new or broken check cannot change it",
+      "occurrences": [
+        {
+          "date": "2026-10-30",
+          "ref": "AO sitting 2 NONCE-AO-R28-B-20261030: aggregation named six booleans and omitted wrong_subject_ok; CHAIN_ADMITS survived a forced failure"
+        }
+      ],
+      "last_fix_commit": "279fc058",
+      "regression_test": "the verdict is derived from every recorded outcome (admission_conformance.py, aggregation.derived_from_all_checks)",
+      "rule": "aggregate over the evidence, never over a list you maintain by hand"
+    },
+    {
+      "class_id": "RC-REFUSAL-WITHOUT-FALSIFIER",
+      "title": "a negative capability claim is accepted without an absent object, a reproduction and a falsifier",
+      "occurrences": [
+        {
+          "date": "2026-10-30",
+          "ref": "ten host work packages refused as impossible; refusal_gate.py measured REFUSAL_NOT_FALSIFIABLE: 10 refusal(s)"
+        },
+        {
+          "date": "2026-10-30",
+          "ref": "the same shape again as 'ALL PASS unreachable on this machine'"
+        }
+      ],
+      "last_fix_commit": "7848623",
+      "regression_test": "tests/test_refusal_gate.py + scripts/acceptance_default.py --refusal-record",
+      "rule": "a refusal must cite the text, name the absent object, reproduce the absence, and state what would falsify it"
+    },
+    {
+      "class_id": "RC-UNPERSISTED-RECEIPT",
+      "title": "a dispatch exits 0 and produces its artefact but leaves no receipt file, so the lane claim is unproven",
+      "occurrences": [
+        {
+          "date": "2026-10-30",
+          "ref": "AO sitting 3 proc_0a72a0e04d22: verdict.json written, ao_r28c.json absent; only ao_r28c.json.attempts.ndjson survived (rank 1, gpt-6.1-sol, 158.08 s)"
+        }
+      ],
+      "last_fix_commit": null,
+      "regression_test": null,
+      "rule": "a lane claim needs the receipt file; when the dispatcher fails to persist one, the round does not close -- the gate refusing is the correct outcome, not an inconvenience"
     }
-   ],
-   "fix": {
-    "commit": "epoch 34",
-    "tools": [
-     "scripts/lane_policy_reconcile.py"
-    ],
-    "summary": "one authority (registry.routes); lane_chains and ordered_pool are projections, regenerated, with the epoch digest recorded"
-   },
-   "regression_test": "tests/test_durable_gates.py::test_reconcile_detects_and_repairs_drift",
-   "status": "CLOSED_WITH_TEST"
-  },
-  {
-   "class_id": "RC-DISPOSABLE-REPAIR",
-   "title": "a repair is written into a worktree, a live process or a .bak instead of a commit, a service or a registry row",
-   "occurrences": [
-    {
-     "date": "2026-10-21",
-     "ref": "FAR-LANE-HEALTH-REPAIR: repair stopped at local re-binding; the transport was a manually started process"
-    },
-    {
-     "date": "2026-10-30",
-     "ref": "FAR-DURABILITY-20261030: three implementations (B1, SKELETON_SPINE, HANDOFF-PATCH-v1) live in a directory with no .git at all; the delivery commit carried 9 of 911 files"
-    }
-   ],
-   "fix": {
-    "tools": [
-     "scripts/ir4_subject_gate.py",
-     "scripts/ir_gate.py"
-    ],
-    "summary": "a turn may only claim progress on a subject that has a commit; the dispatcher refuses otherwise"
-   },
-   "regression_test": "tests/test_durable_gates.py::test_subject_without_repo_is_refused",
-   "status": "CLOSED_WITH_TEST"
-  },
-  {
-   "class_id": "RC-POLICY-WITHOUT-TRANSACTION",
-   "title": "the effective policy is an uncommitted edit in one working tree",
-   "occurrences": [
-    {
-     "date": "2026-10-23",
-     "ref": "last commit touching config/; revisions 34..38 existed only on disk for seven days"
-    },
-    {
-     "date": "2026-10-30",
-     "ref": "HEAD carried revision 33 while the disk carried revision 38 with a changed schema (lane_group -> role)"
-    }
-   ],
-   "fix": {
-    "tools": [
-     "scripts/ir1_policy_gate.py"
-    ],
-    "summary": "POLICY_DIRTY refuses the turn; policy changes must be committed"
-   },
-   "regression_test": "tests/test_durable_gates.py::test_dirty_policy_is_refused",
-   "status": "CLOSED_WITH_TEST"
-  },
-  {
-   "class_id": "RC-ACCEPTANCE-NEVER-GRANTED",
-   "title": "every round ends ACC=NOT_RUN, so no round can promote what it fixed",
-   "occurrences": [
-    {
-     "date": "2026-10-22",
-     "ref": "FAR-20261022-027 trigger_keys: hgk:ACC-...=NOT_RUN, with verify-lane PASS and an AO verdict present"
-    },
-    {
-     "date": "2026-10-30",
-     "ref": "five evidence/FAR-* rounds, five NOT_RUN acceptances"
-    }
-   ],
-   "fix": {
-    "tools": [
-     "scripts/acceptance_default.py"
-    ],
-    "summary": "each round must grant or name a refusal with an expiry; NOT_RUN is no longer a terminal state"
-   },
-   "regression_test": "tests/test_durable_gates.py::test_acceptance_requires_grant_or_named_refusal",
-   "status": "CLOSED_WITH_TEST"
-  },
-  {
-   "class_id": "RC-VACUOUS-PASS",
-   "title": "a comparator reports success on missing input",
-   "occurrences": [
-    {
-     "date": "2026-10-21",
-     "ref": "Fabric commit a0b519a: 'every gate certified presence, not correspondence'"
-    },
-    {
-     "date": "2026-10-30",
-     "ref": "durable_import.py reported 95 files / 26 MB with walk_errors=0 for a 911-file / 236 MB tree (MAX_PATH truncation)"
-    },
-    {
-     "date": "2026-10-30",
-     "ref": "independent checker (gpt-6.1-sol, nonce NONCE-AO-20261030-C) convicted recurrence_gate.judge: an entry with status CLOSED_WITH_TEST and a nonexistent regression-test file returned blocked=false"
-    }
-   ],
-   "fix": {
-    "tools": [
-     "tools/durable_import.py",
-     "scripts/recurrence_gate.py"
-    ],
-    "summary": "blocked is a function of findings only; a self-declared status is not a licence"
-   },
-   "regression_test": "tests/test_durable_gates.py::test_manifest_refuses_incomplete_walk",
-   "status": "CLOSED_WITH_TEST"
-  },
-  {
-   "class_id": "RC-LANE-NOT-BOUND",
-   "title": "a lane declares a model it is not required to serve",
-   "occurrences": [
-    {
-     "date": "2026-10-22",
-     "ref": "FAR-20261022-027 receipt: PLAN ran on deepseek in the Hermes session plane while the mandate named gpt-6.1-sol"
-    },
-    {
-     "date": "2026-10-30",
-     "ref": "rev 33 held all three lanes on deepseek (SOD006-C7); PLAN ran on the session model for the third consecutive round"
-    }
-   ],
-   "fix": {
-    "commit": "epoch 34",
-    "summary": "PLAN and VERIFY rank 1 is the mandated gpt-6.1-sol; the dispatcher binds require_arm == served_arm; reconcile keeps the declaration equal to the route"
-   },
-   "regression_test": "tests/test_lane_policy.py::TestLanePolicyConformance::test_registry_and_projection_shape",
-   "status": "CLOSED_WITH_TEST"
-  }
- ]
+  ]
 }
