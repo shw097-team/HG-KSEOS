@@ -147,7 +147,7 @@ def guard_snapshot(nonce: str) -> tuple[Path, str]:
     dst = Path(r"C:/wg/guard-snapshots") / nonce / "scripts"
     if dst.parent.exists():
         shutil.rmtree(dst.parent, ignore_errors=True)
-    shutil.copytree(src, dst, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    shutil.copytree(src, dst, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"), dirs_exist_ok=True)
     digest = hashlib.sha256()
     for f in sorted(dst.rglob("*.py")):
         digest.update(f.name.encode())
