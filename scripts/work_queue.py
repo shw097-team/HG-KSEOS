@@ -207,6 +207,8 @@ def cmd_next(args) -> int:
     by_id = {r["wp_id"]: r for r in rows}
     settled_fail = [r["wp_id"] for r in rows if r["state"] in ("FAIL", "BLOCKED") and r.get("evidence_ref")]
     for r in rows:  # DAG order = id order minus already-done
+        if getattr(args, "wp", None) and r["wp_id"] != args.wp:
+            continue
         if r["state"] == "PASS":
             continue
         if r["state"] in ("FAIL", "BLOCKED") and r.get("evidence_ref"):
@@ -235,7 +237,7 @@ def main(argv=None) -> int:
     u = sub.add_parser("unsettle"); u.add_argument("--wp", required=True)
     u.add_argument("--reason", required=True); u.set_defaults(fn=cmd_unsettle)
     sub.add_parser("show").set_defaults(fn=cmd_show)
-    sub.add_parser("next").set_defaults(fn=cmd_next)
+    pn = sub.add_parser("next"); pn.add_argument("--wp", default=None); pn.set_defaults(fn=cmd_next)
     args = ap.parse_args(argv)
     return args.fn(args)
 

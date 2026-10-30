@@ -1,0 +1,27 @@
+{
+  "closed_paths": [
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\B1",
+      "reason": "implementation was written into a documentation tree that is not a git repository; the promoted copy lives in the delivery repo at b1_closure_20261028/",
+      "promoted_to": "C:\\wg\\repo\\b1_closure_20261028",
+      "status": "CLOSED_READ_ONLY",
+      "closed_at": "2026-10-31",
+      "undo": "icacls \"<path>\" /remove:d %USERNAME%"
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\SKELETON_SPINE",
+      "reason": "same: not a repo; shipped as deliveries/SKELETON_SPINE_r2_revision2.zip with a manifest",
+      "promoted_to": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\deliveries\\SKELETON_SPINE_r2_revision2.zip",
+      "status": "CLOSED_READ_ONLY",
+      "closed_at": "2026-10-31",
+      "undo": "icacls \"<path>\" /remove:d %USERNAME%"
+    }
+  ],
+  "read_only_not_closed": [
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1",
+      "reason": "this IS the delivery being verified -- a primary source; never written, never closed"
+    }
+  ],
+  "rule": "An agent may not create, modify or delete anything under a closed path. The gate refuses before a dispatch starts, and the ACL refuses if a tool ignores the gate. Promotion is the only way content leaves a closed path."
+}

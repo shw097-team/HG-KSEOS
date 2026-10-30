@@ -63,7 +63,7 @@ def log(event: dict) -> None:
         fh.write(json.dumps(event, ensure_ascii=False) + "\n")
 
 
-def dispatch_alive() -> bool:
+def dispatch_alive(wp: str | None = None) -> bool:
     """A dispatch in flight owns the lane; starting another would contend for the same arm and the same repo.
 
     `wmic` does not exist on this host (measured: WinError 2), and a check that silently answers "no" every time
@@ -74,8 +74,12 @@ def dispatch_alive() -> bool:
     # resulting PowerShell error text was itself mistaken for output -- the driver then reported
     # DISPATCH_IN_FLIGHT forever while nothing was running. Filtering in Where-Object needs no inner quoting
     # at all, and a parseable integer is required before anything is believed.
+    # Per-unit, not global: two independent units may be in flight at once (that is the point of a parallel
+    # supervisor), but never two dispatches of the SAME unit -- those contend for one arm and one repo.
+    unit = f"-{wp}-" if wp else ""
     query = ("$p = Get-CimInstance Win32_Process | Where-Object { $_.Name -eq 'python.exe' -and "
-             "$_.CommandLine -like '*hgk-lane-dispatch.py*' }; ($p | Measure-Object).Count")
+             "$_.CommandLine -like '*hgk-lane-dispatch.py*' -and "
+             f"$_.CommandLine -like '*{unit}*' }}; ($p | Measure-Object).Count")
     try:
         done = subprocess.run(["powershell", "-NoProfile", "-Command", query], capture_output=True, timeout=60)
         out = done.stdout.decode("utf-8", errors="replace") if isinstance(done.stdout, bytes) else str(done.stdout)
@@ -102,8 +106,8 @@ def dead_attempts(queue_dir: Path) -> list[dict]:
     return out
 
 
-def next_item() -> dict:
-    done = subprocess.run([PY, str(K / "scripts" / "work_queue.py"), "next"],
+def next_item(only_wp: str | None = None) -> dict:
+    done = subprocess.run([PY, str(K / "scripts" / "work_queue.py"), "next"] + ([ "--wp", only_wp] if only_wp else []),
                           capture_output=True, text=True, timeout=120)
     if done.returncode != 0 or not done.stdout.strip():
         raise RuntimeError(f"work_queue next failed rc={done.returncode}: {done.stderr[-300:]}")
@@ -300,13 +304,14 @@ def refresh_status() -> None:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--once", action="store_true", help="run one step (the cron body)")
+    ap.add_argument("--wp", default=None, help="work this one unit only (parallel supervision)")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--auto-record", action="store_true",
                     help="transcribe the officer's PASS/FAIL into the registry (verdict_author stays the officer)")
     args = ap.parse_args(argv or sys.argv[1:])
 
     try:
-        item = next_item()
+        item = next_item(args.wp) if args.wp else next_item()
     except Exception as exc:  # noqa: BLE001 - a driver that cannot read the queue must say so, not hang
         log({"action": "error", "detail": str(exc)})
         print(json.dumps({"verdict": "DRIVER_BLOCKED", "detail": str(exc)}))
@@ -319,7 +324,7 @@ def main(argv=None) -> int:
 
     wp, phase = item["wp"], item["phase"]
     queue_dir = Path(item["queue_dir"])
-    if dispatch_alive():
+    if dispatch_alive(wp):
         refresh_status()
         print(json.dumps({"verdict": "DISPATCH_IN_FLIGHT", "wp": wp}))
         return 0
@@ -395,6 +400,13 @@ def main(argv=None) -> int:
                               "recorded": rec}, ensure_ascii=False))
             log({"action": "awaiting_record", "wp": wp, "gate": gate.stdout.strip()[:400]})
             return 0
+
+    closed = subprocess.run([PY, str(K / "scripts" / "closed_paths_gate.py"), "check", str(queue_dir)],
+                            capture_output=True, text=True, timeout=60)
+    if closed.returncode == 3:
+        log({"action": "refused_closed_path", "wp": wp, "detail": closed.stdout.strip()[:300]})
+        print(closed.stdout.strip())
+        return 3
 
     died = dead_attempts(queue_dir)
     if died:

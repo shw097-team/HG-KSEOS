@@ -98,7 +98,7 @@ def wp_state(qdir: Path) -> dict:
         "artefacts": len(files),
         "last_artefact": {"name": newest.name, "at": time.strftime("%H:%M:%S", time.localtime(newest.stat().st_mtime))} if newest else None,
         "receipts": [{"name": p.name,
-                      "ok": (json.loads(p.read_text(encoding="utf-8", errors="replace")).get("ok")
+                      "ok": (json.loads(p.read_text(encoding="utf-8", errors="replace")).get("ok") if isinstance(json.loads(p.read_text(encoding="utf-8", errors="replace")), dict) else None
                              if p.suffix == ".json" else None)} for p in receipts[-4:]],
     }
 
@@ -124,6 +124,22 @@ def kanban_sync(state: dict, live: list[dict]) -> list[str]:
         known[key] = created[-1]
     KANBAN_MARK.write_text(json.dumps(known, ensure_ascii=False, indent=1), encoding="utf-8")
     return created
+
+
+def supervisor_status() -> str:
+    """The clock is a process, not a guarantee. Measured 2026-10-31: the cron job had been PAUSED since 00:24:11 and
+    three turns still described 'the 15-minute loop'; a paused clock is invisible until something prints it."""
+    pid_file = K / "var" / "lane_supervisor.pid"
+    if not pid_file.exists():
+        return "SUPERVISOR: not started"
+    try:
+        pid = int(pid_file.read_text(encoding="utf-8").strip() or 0)
+    except (OSError, ValueError):
+        return "SUPERVISOR: pid unreadable"
+    r = subprocess.run(["powershell", "-NoProfile", "-Command",
+                        f"if (Get-Process -Id {pid} -ErrorAction SilentlyContinue) {{ 1 }} else {{ 0 }}"],
+                       capture_output=True, text=True, timeout=60)
+    return f"SUPERVISOR: {'alive pid ' + str(pid) if r.stdout.strip().endswith('1') else 'DEAD (pid file stale)'}"
 
 
 def goal_status() -> str:
@@ -162,9 +178,11 @@ def fresh() -> int:
         w = ", ".join(f"{x['wp']} {x['lane']} pid {x['pid']} {x['minutes']}min" for x in d["live"])
         print(f"STATUS: RUNNING — {w} · {head}")
         print(goal_status())
+        print(supervisor_status())
         return 0
     print(f"STATUS: IDLE — nothing is running · {head}")
     print(goal_status())
+    print(supervisor_status())
     return 0
 
 
