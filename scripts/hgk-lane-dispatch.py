@@ -1722,7 +1722,10 @@ def durable_gate_preflight(args) -> dict:
     # IR-2: the transport has to be alive before the spawn, or the turn reports a credential failure
     # that is really a dead relay (observed twice: 401 with `ocx status` saying Proxy: not running).
     relay = tools / "relay_preflight.py"
-    base = getattr(args, "relay_base", None) or ""
+    # The relay's health endpoint is LOCAL: --relay-base points at the upstream provider
+    # (https://chatgpt.com/backend-api/codex), and appending /healthz there answers 403. IR-2 is about
+    # the local proxy being alive, so the health base is the loopback address, overridable by env.
+    base = os.environ.get("HGK_RELAY_HEALTH", "http://127.0.0.1:10101")
     if relay.exists() and base.startswith("http"):
         rp = subprocess.run([sys.executable, str(relay), "--base", base, "--json"],
                             capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
