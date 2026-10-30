@@ -1,0 +1,105 @@
+{
+  "schema": "WP-CHAIN-EVIDENCE/1",
+  "work_packages": [
+    "WP-FHS-03",
+    "WP-FHS-04",
+    "WP-FHS-08"
+  ],
+  "delivery_clause": "EffectClass / Admission: HOST_OP; OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+  "proved": {
+    "WP-FHS-03 issuer binding": "three references of kinds source_freeze/task_kind/oracle_ratification, each signed ed25519, each bound to subject/policy/epoch/head/root_identity; an out-of-scope subject is refused",
+    "WP-FHS-04 durable runtime": "requirement leased then frozen; TaskSpec admitted; lease generation allocated in native_admission_leases; replayed subject refused",
+    "WP-FHS-08 bounded writer": "WorkOrder admitted against the stored TaskSpec row, bounded write committed, record_workorder_result stored with evidence_subject",
+    "guards": "a bundle is bound to its subject: the same references cannot admit a second WorkOrder (REFUSED, REQUEST_SCOPE)"
+  },
+  "checks": [
+    {
+      "check": "requirement_frozen",
+      "outcome": "PASS"
+    },
+    {
+      "check": "taskspec_admitted",
+      "outcome": "PASS"
+    },
+    {
+      "check": "wrong_subject_refused",
+      "outcome": "REFUSED_AS_DESIGNED",
+      "code": "ERR_NATIVE_REQUEST_SCOPE"
+    },
+    {
+      "check": "workorder_admitted",
+      "outcome": "PASS"
+    },
+    {
+      "check": "second_taskspec_admitted",
+      "outcome": "PASS"
+    },
+    {
+      "check": "bundle_bound_to_subject",
+      "outcome": "REFUSED_AS_DESIGNED",
+      "code": "ERR_NATIVE_REQUEST_SCOPE"
+    },
+    {
+      "check": "workorder_result_recorded",
+      "outcome": "PASS"
+    }
+  ],
+  "readback": {
+    "requirement": [
+      {
+        "requirement_id": "REQ-CONFORMANCE-ADMISSION",
+        "state": "FROZEN",
+        "version": 1
+      }
+    ],
+    "taskspec": [
+      {
+        "taskspec_id": "TS-CONF-7cece942",
+        "state": "ADMITTED",
+        "requirement_id": "REQ-CONFORMANCE-ADMISSION"
+      }
+    ],
+    "workorder": [
+      {
+        "workorder_id": "WO-CONF-d38b0763",
+        "state": "VERIFIED",
+        "writer": "codex",
+        "result_json": "{\"checker\":\"ao\",\"evidence_refs\":[\"EV-CONF-BOUNDED-WRITE\"],\"verdict\":\"PASS\"}"
+      }
+    ],
+    "nonces": 9,
+    "lease_rows": [
+      {
+        "resource_id": "TS-CONF-7cece942",
+        "generation": 1
+      },
+      {
+        "resource_id": "WO-CONF-d38b0763",
+        "generation": 1
+      },
+      {
+        "resource_id": "TS-CONF-B-8c8385",
+        "generation": 1
+      }
+    ]
+  },
+  "ceiling": {
+    "level": "CONFORMANCE_ONLY_TEST_SEAM",
+    "why": "the receiver requires three distinct OS principals; this host has one Windows account, and AGENTS.md rule 8 makes that axis NOT APPLICABLE rather than faked",
+    "what_the_seam_does_not_prove": [
+      "OS principal separation",
+      "DPAPI or CNG key custody on the production anchor"
+    ],
+    "no_canonical_token": "no acceptance token may be derived from this receipt"
+  },
+  "conformance_digest": "c56648494842a342fff08557ddf0be78a149f1a395a6f17ac1ffc0c0c3deefba",
+  "tool_digest": "3af42b1b0ed01db5f71e449c282eb382190f68bdb786f28c1bf0850aa4a02210",
+  "recorded_at": "2026-10-30T21:22:05",
+  "defect_found_by_the_checker_and_fixed": {
+    "found_by": "Independent Acceptance Officer, its own re-run (proc_d8a405f07ae3)",
+    "symptom": "in its run second_taskspec_admitted was refused (ERR_NATIVE_ROOT_HEAD) and bundle_bound_to_subject was then refused for WORKORDER_REQUIRES_DRAFT_TASKSPEC -- a wrong-reason refusal the harness still recorded as REFUSED_AS_DESIGNED",
+    "root_cause": "the reuse negative ran after the bounded write, which moves HEAD, so the later authorisation failed on ROOT_HEAD first; and run_negative accepted ANY refusal",
+    "fix": "the second TaskSpec and the reuse negative now run BEFORE the write; run_negative takes expected codes and records REFUSED_FOR_WRONG_REASON as a failure",
+    "regression": "the verdict now also requires second_ok and reuse_ok"
+  }
+}
