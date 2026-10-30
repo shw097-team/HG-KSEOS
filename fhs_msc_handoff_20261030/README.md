@@ -27,7 +27,7 @@ python fhs_msc_handoff_20261030/tools/p1_package_integrity.py <unpacked-package>
 Expect `A_payload_manifest PASS, rows 909, match 909`; `D1..D7` with exactly one `REVIEW`
 (`D2_wp15_closure`); and from the integrity tool: `A/B/D PASS`, `C FAIL` (the archives are absent),
 `E/F/G/H FAIL` — its `F` check rebuilds the BODY archive to the declared digest byte-exactly and the
-EVIDENCE archive 4,801 B short. `seal_package.py` is this round's own seal and is **not** the delivery's
+EVIDENCE archive to its declared digest too once the shipped `package.py` rule is used (`P13`); an earlier note claiming a 4,801 B shortfall was my own partition error and is withdrawn. `seal_package.py` is this round's own seal and is **not** the delivery's
 membership; it is kept only because the finding about it (F-12) needs the artefact.
 
 ## Tree

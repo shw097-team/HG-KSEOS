@@ -3,23 +3,27 @@
 Fourteen numbered defects (F-01..F-14; F-02 is split into F-02 and F-02b), ordered by cost to the next team. Each has an artefact, a severity and one next action.
 A repaired harness is not an acceptance, and a green check is not a permit.
 
-## F-01 — the delivered archives are absent, and only one of them is reproducible
+## F-01 — both archive digests are reproducible; the readback manifest is genuinely absent
 
-**High (evidence).** `SHA256_DELIVERY_MANIFEST.md` lists 9 rows; 3 are absent from the tree: both
-archives and `PACKAGE_READBACK.json`. Six verify byte-for-byte. The question that matters is whether the
-two digest claims were ever checkable, so the membership was recovered from the payload manifest's own
-partition and both archives rebuilt with the pinned recipe (`receipts/P7_SEAL_AND_PARTITION.json`):
+**Medium (evidence) — revised down from High after independent check.** `SHA256_DELIVERY_MANIFEST.md`
+lists 9 rows; 3 are absent from the tree: both archives and `PACKAGE_READBACK.json`. Six verify
+byte-for-byte. Rebuilding both archives **with the recipe in the shipped `QA_TOOLS/package.py`**
+(manifest exclusions, UTF-8 filter, sorted names, fixed `date_time`, deflate 9, `external_attr 0o100644<<16`)
+gives:
 
 | Archive | Rebuilt | Declared | Verdict |
 |---|---|---|---|
 | BODY (114 entries) | 4,007,065 B / `5e722cfb…` | 4,007,065 B / `5e722cfb…` | **byte-exact** |
-| EVIDENCE (797 entries) | 25,909,480 B | 25,914,281 B / `0e7763b8…` | **4,801 B short** |
-| `PACKAGE_READBACK.json` | — | — | absent, membership unrecoverable |
+| EVIDENCE (801 entries) | 25,914,281 B / `0e7763b8…` | 25,914,281 B / `0e7763b8…` | **byte-exact** |
+| `PACKAGE_READBACK.json` | — | — | absent; regenerable by running the shipped `package.py` |
 
-So the BODY claim is sound and is now verified; the EVIDENCE claim is not reproducible from the tree, and
-the readback manifest does not exist at all.
-Evidence: `receipts/P7_SEAL_AND_PARTITION.json`, `receipts/P1B_PACKAGE_INTEGRITY_CANONICAL.json` (C).
-Next: deliver the bytes, or restate the manifest as BODY-only and drop the EVIDENCE row.
+**Withdrawn claim (F-01c).** An earlier revision of this file reported EVIDENCE "4,801 B short". That was
+an artefact of my own partition rule: it produced 797 entries because it handled the root-level file set
+differently, not because the delivery was wrong. The independent checker hit the same conclusion from the
+other direction (it reproduced the declared digest and called the shortfall claim false), and I then
+re-derived both archives verbatim. `receipts/P13_SEAL_REPRODUCTION_VERBATIM.json`.
+Evidence: `receipts/P13_SEAL_REPRODUCTION_VERBATIM.json`, `receipts/P12_INDEPENDENT_VERDICT.json` (V2/V3).
+Next: regenerate `PACKAGE_READBACK.json` with the shipped packer, or drop that row from the manifest.
 
 ## F-02 — the unpacked tree does not match its own manifest layout
 

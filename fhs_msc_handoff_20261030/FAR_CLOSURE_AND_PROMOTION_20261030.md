@@ -91,12 +91,15 @@ OR-6（需不同 principal）與 OR-8（需外部 SOURCE/ABI/HOST/CHECKER/RELEAS
 `fixtures`）。三件事一起做才算關閉：補 `fixtures` 進快照清單 → 乾淨重建 → 真跑一次並寫時間戳。
 少做任何一件，35/35 就還是「在我機器上成立」。
 
-### A6+A7 — 封存
+### A6+A7 — 封存（已由我執行並更正）
 
-BODY 已 byte-exact（114 entries / 4,007,065 B / `5e722cfb…`），這條是真的，保留。
-EVIDENCE 差 4,801 B、797 vs 宣告的 entries ⇒ 不要「修」舊 digest，而是**另立一列**：
-新 digest＋membership 明細＋`supersedes: <舊 sha>`。舊列標 `WITHDRAWN_NOT_REPRODUCIBLE`。
-理由：digest 是可驗證性資產，改一個數字就等於宣告過去所有引用都無效。
+**兩個封存都 byte-exact**（依交付包自己的 `QA_TOOLS/package.py` 規則重算）：
+BODY 114 entries / 4,007,065 B / `5e722cfb…`；EVIDENCE 801 entries / 25,914,281 B / `0e7763b8…`。
+我上一輪報的「EVIDENCE 差 4,801 B」是**我的配方錯**（我的列舉少算 4 個根層檔案，797 vs 801），
+已撤回；獨立 checker 從另一側得到同一結論（`P12` V3），我再逐位元組重算確認（`P13`）。
+
+真正缺的只有 `PACKAGE_READBACK.json`（可由出廠 `package.py` 重生成）。因此 OD-3 從「重封 EVIDENCE」
+降級為「補回 readback 或刪除該列」，工作量 S，且不再需要任何簽章。
 
 ### A8 — 控制平面三修
 
@@ -213,7 +216,7 @@ EVIDENCE 差 4,801 B、797 vs 宣告的 entries ⇒ 不要「修」舊 digest，
 | BODY archive byte-exact 重建 | T1 | **T2** | 已實測 byte-exact | ✅ 升（第 2 條） |
 | WP-FHS-15 first-work 可重現 | T1 | **T2** | 5 identical / 4 具名差異 | ✅ 升（第 3 條） |
 | 22-WP DAG 無環、24/24 atoms | T1 | **T2** | 結構檢查 6 PASS 1 REVIEW | ✅ 升（第 4 條，D2 待 OD-1） |
-| EVIDENCE archive | — | 不可升 | 差 4,801 B | ❌ 先重封（OD-3） |
+| EVIDENCE archive | T1 | **T2** | **更正：byte-exact**（801 entries / 25,914,281 B / `0e7763b8…`，依出廠 `package.py` 規則重算；原「差 4,801 B」是我的配方錯，已撤回） | ✅ 升（第 5 條） |
 | 35/35 harness | 條件 T1 | 暫不升 | 依賴不可重建的快照 | ❌ 先做 A3+A4 |
 | 22 WP 個別 WP | T0 | 不可升 | 只有文件宣告 | ❌ 只做 WP-15 切片（OD-7） |
 | R20 `r2-revision3.zip` | T1 | T2 可討論 | 已封存、外部審計重現 | ⚙️ 建議與本輪同批簽 |

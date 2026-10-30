@@ -37,11 +37,14 @@ recipe (sorted names, fixed timestamp, deflate 9, no directory entries).
 | Archive | Entries | Built | Declared | Verdict |
 |---|---:|---|---|---|
 | `…_BODY_…zip` | 114 | 4,007,065 B / `5e722cfb…` | 4,007,065 B / `5e722cfb…` | **PASS — byte-exact** |
-| `…_EVIDENCE_…zip` | 797 | 25,909,480 B | 25,914,281 B / `0e7763b8…` | **FAIL — 4,801 B short** |
-| `PACKAGE_READBACK.json` | — | — | — | **absent**, no membership recoverable |
+| `…_EVIDENCE_…zip` | 801 | 25,914,281 B / `0e7763b8…` | 25,914,281 B / `0e7763b8…` | **PASS — byte-exact** |
+| `PACKAGE_READBACK.json` | — | — | — | **absent**, regenerable by the shipped `package.py` |
 
-So the declared BODY seal is sound and is now verified; the declared EVIDENCE digest is not reproducible
-from this tree; and the readback manifest is missing outright.
+**Corrected after independent check.** An earlier revision of this phase reported the EVIDENCE rebuild at
+797 entries and 25,909,480 B ("4,801 B short"). That was my partition rule dropping four root-level files,
+not a defect in the delivery: rebuilt with the recipe in the shipped `QA_TOOLS/package.py`, both archives
+match their declared size and digest exactly (`P13`, and the checker's V2/V3 in `P12`). The only real
+absence is `PACKAGE_READBACK.json`.
 
 **Two corrections to this round's own earlier work.** The first seal published here was built on a
 non-recursive `01_SUBSTANTIVE_BODY/*.md` glob with an invented membership: 17 entries, 483,623 B, which

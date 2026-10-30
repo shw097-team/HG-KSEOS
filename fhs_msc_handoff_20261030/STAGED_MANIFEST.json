@@ -5,8 +5,8 @@
   "repro": "C:\\wg\\repro",
   "package": "C:\\wg\\pkg"
  },
- "files": 79,
- "total_bytes": 5593858,
+ "files": 81,
+ "total_bytes": 5596201,
  "entries": [
   {
    "path": "receipts/P10_LANE_AVAILABILITY.json",
@@ -22,6 +22,16 @@
    "path": "receipts/P11_OWNER_DECISIONS_PREFILLED.json",
    "bytes": 3342,
    "sha256": "c55fce78ef9445cd1f6a3c4d254ce341f3980f168d437b3873af7d047f879a22"
+  },
+  {
+   "path": "receipts/P12_INDEPENDENT_VERDICT.json",
+   "bytes": 1350,
+   "sha256": "61a4571eba495fdea50f11ff2e58a804aa83c4fc082a159b04443534d809d3ee"
+  },
+  {
+   "path": "receipts/P13_SEAL_REPRODUCTION_VERBATIM.json",
+   "bytes": 993,
+   "sha256": "f232e528f10be31cbb5f6c2b96dd2d0581784e149abf8677a3b0514cccc0d9a0"
   },
   {
    "path": "receipts/P1_PACKAGE_INTEGRITY.json",

@@ -1,0 +1,25 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-INDEPENDENT-VERDICT/1",
+ "round": "FAR-CLOSURE-PROMOTION-20261030",
+ "lane": "VERIFY_SECURITY",
+ "served_arm": "openai-codex/gpt-6.1-sol",
+ "independence": "process_only (owner D-3)",
+ "nonce": "NONCE-VERIFY-20261030-D",
+ "seconds": 114.25,
+ "attempt_receipt": "C:/wg/verify/lane_verify_r3.json",
+ "rollout": "C:/Users/user/.codex/sessions/2026/10/30/rollout-2026-10-30T15-45-06-01a18bc5-0245-7ed2-a736-eff81b692b3e.jsonl",
+ "overall": "FAIL",
+ "criteria": {
+  "V1_payload": "PASS 909/909/0",
+  "V2_body_archive": "PASS 4,007,065 B / 5e722cfb… / 114 entries",
+  "V3_evidence_archive": "FAIL — checker reproduced the DECLARED 25,914,281 B / 0e7763b8… exactly, refuting the author's shortfall claim; PACKAGE_READBACK.json still absent (0 files)",
+  "V4_first_work_harness": "INCONCLUSIVE — read-only sandbox blocked the harness fixture write",
+  "V5_dag": "PASS 22 nodes/36 edges, acyclic, closure {00,15} vs declared {00,01,15}"
+ },
+ "invalidated_prior_run": {
+  "nonce": "NONCE-VERIFY-20261030-C",
+  "reason": "SUBJECT_MOVED — author committed c627006 during the audit; lane returned governance-correct FAIL (310.18 s)",
+  "note": "the subject-mutation guard works"
+ },
+ "author_action": "F-01 shortfall claim WITHDRAWN; author reproduced the shipped packer rule independently (P13)"
+}
