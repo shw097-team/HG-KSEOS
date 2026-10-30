@@ -111,13 +111,30 @@ def test_reconcile_detects_and_repairs_drift(tmp_path):
 
 
 def test_acceptance_requires_grant_or_named_refusal(tmp_path):
-    """RC-ACCEPTANCE-NEVER-GRANTED: NOT_RUN is not a terminal state."""
+    """RC-ACCEPTANCE-NEVER-GRANTED: NOT_RUN is not a terminal state.
+
+    A named refusal is also a claim now: it must cite a record that survives refusal_gate, so a bare
+    reason plus an expiry no longer closes a round.
+    """
     rc, out = run("acceptance_default.py", "--round", "R", "--requirement", "REQ")
     assert rc == 2 and "NOT_RUN" in out
 
     rc, out = run("acceptance_default.py", "--round", "R", "--requirement", "REQ",
                   "--refusal-owner", "OWNER-1", "--expires", "2026-11-30")
-    assert rc == 0 and "REFUSED_NAMED" in out
+    assert rc == 2 and "refusal_gate" in out, out
+
+    record = tmp_path / "refusal.json"
+    record.write_text(json.dumps({"refusals": [{
+        "wp": "WP-X", "reason": "Fabric carries no policy epoch object",
+        "cited_text": "Done: Source/Stage/Approve/Active/Loaded/Consumer each hash in the same scope",
+        "absent_object": "Fabric policy epoch object",
+        "reproduction": ["grep -rl POLICY_EPOCH FABRIC/ -> empty"],
+        "falsifier": "an epoch object appears in FABRIC/control", "expiry": "2026-11-30"}]}),
+        encoding="utf-8")
+    rc, out = run("acceptance_default.py", "--round", "R", "--requirement", "REQ",
+                  "--refusal-owner", "OWNER-1", "--expires", "2026-11-30",
+                  "--refusal-record", str(record))
+    assert rc == 0 and "REFUSED_NAMED" in out, out
 
     oracle = tmp_path / "oracle.json"
     verdict = tmp_path / "verdict.json"

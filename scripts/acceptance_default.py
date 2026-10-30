@@ -30,6 +30,27 @@ def digest(p: Path) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
 
 
+def _refusal_verdict(record: Path) -> dict:
+    """Judge a refusal record with the same gate a pass faces.
+
+    A one-line reason plus an expiry used to be enough to close a round as REFUSED_NAMED, which made a
+    refusal the cheapest claim in the system. It now has to name the absent object, quote the sentence that
+    created the obligation, show the search, and carry a falsifier.
+    """
+    here = Path(__file__).resolve().parent
+    if str(here) not in sys.path:
+        sys.path.insert(0, str(here))
+    import refusal_gate  # noqa: PLC0415
+
+    if not record.exists():
+        return {"verdict": "RECORD_MISSING", "record": str(record)}
+    try:
+        doc = json.loads(record.read_text(encoding="utf-8"))
+    except Exception as exc:  # unreadable is not acceptable
+        return {"verdict": "RECORD_UNREADABLE", "detail": str(exc)[:200]}
+    return refusal_gate.judge(doc)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--round", required=True)
@@ -39,6 +60,8 @@ def main() -> int:
     ap.add_argument("--refusal-owner", default=None)
     ap.add_argument("--expires", default=None, help="YYYY-MM-DD; required for a named refusal")
     ap.add_argument("--reason", default=None)
+    ap.add_argument("--refusal-record", default=None,
+                    help="JSON refusal record; must pass refusal_gate.py before a refusal may close a round")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
 
@@ -51,8 +74,20 @@ def main() -> int:
         if not a.expires:
             print(json.dumps({"verdict": "INVALID", "detail": "a named refusal needs --expires"}))
             return 2
+        if not a.refusal_record:
+            print(json.dumps({"verdict": "NOT_ALLOWED",
+                              "detail": "a named refusal must cite a record that survives refusal_gate",
+                              "fix": "pass --refusal-record <json>; a one-line reason is not a finding"}))
+            return 2
+        gate = _refusal_verdict(Path(a.refusal_record))
+        if gate.get("verdict") != "REFUSALS_FALSIFIABLE":
+            print(json.dumps({"verdict": "NOT_ALLOWED",
+                              "detail": "the refusal record is not falsifiable",
+                              "gate": gate}, ensure_ascii=False))
+            return 2
         state = "REFUSED_NAMED"
-        detail = {"owner": a.refusal_owner, "expires": a.expires, "reason": a.reason}
+        detail = {"owner": a.refusal_owner, "expires": a.expires, "reason": a.reason,
+                  "refusal_record": str(a.refusal_record), "refusal_gate": gate["verdict"]}
     else:
         if not oracle or not verdict:
             print(json.dumps({"verdict": "NOT_ALLOWED",

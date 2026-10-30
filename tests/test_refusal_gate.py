@@ -62,3 +62,34 @@ def test_missing_record_is_an_error_not_a_pass(tmp_path):
     rc = GATE.main.__wrapped__ if hasattr(GATE.main, "__wrapped__") else GATE.main
     sys.argv = ["refusal_gate", str(missing), "--json"]
     assert rc() == 3, "a missing record must be an error, not a pass"
+
+
+def test_acceptance_default_refuses_to_close_a_round_on_a_bare_reason(tmp_path):
+    """The wiring that matters: a one-line reason plus an expiry can no longer close a round."""
+    import subprocess
+
+    script = pathlib.Path(__file__).resolve().parents[1] / "scripts" / "acceptance_default.py"
+    r = subprocess.run([sys.executable, str(script), "--round", "T", "--requirement", "R",
+                        "--refusal-owner", "o", "--expires", "2026-12-31", "--reason", "no host capability"],
+                       capture_output=True, text=True)
+    assert r.returncode == 2
+    assert "refusal_gate" in r.stdout
+
+
+def test_acceptance_default_accepts_a_falsifiable_refusal(tmp_path):
+    import subprocess
+
+    record = tmp_path / "refusal.json"
+    record.write_text(json.dumps({"refusals": [{
+        "wp": "WP-X", "reason": "Fabric carries no policy epoch object",
+        "cited_text": "Done: Source/Stage/Approve/Active/Loaded/Consumer each hash in the same scope",
+        "absent_object": "Fabric policy epoch object",
+        "reproduction": ["grep -rl POLICY_EPOCH FABRIC/ -> empty"],
+        "falsifier": "an epoch object appears in FABRIC/control", "expiry": "2026-12-31"}]}),
+        encoding="utf-8")
+    script = pathlib.Path(__file__).resolve().parents[1] / "scripts" / "acceptance_default.py"
+    r = subprocess.run([sys.executable, str(script), "--round", "T", "--requirement", "R",
+                        "--refusal-owner", "o", "--expires", "2026-12-31", "--reason", "x",
+                        "--refusal-record", str(record)], capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "REFUSED_NAMED" in r.stdout
