@@ -1,0 +1,2070 @@
+{
+  "candidates": [
+    {
+      "id": "REQ-a584e0b1de38016b7120",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-a584e0b1de38016b7120/negative: violate MUST: The first work must accept an ordinary nonempty Goal from its caller",
+      "obligation": "MUST: The first work must accept an ordinary nonempty Goal from its caller",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-a584e0b1de38016b7120: predicate 'The first work must accept an ordinary nonempty Goal from its caller' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 34,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The first work must accept an ordinary nonempty Goal from its caller"
+    },
+    {
+      "id": "REQ-3eb05a3066c7390caad0",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-3eb05a3066c7390caad0/negative: violate MUST: The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents",
+      "obligation": "MUST: The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-3eb05a3066c7390caad0: predicate 'The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 65,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents"
+    },
+    {
+      "id": "REQ-02bb6765b8fe37d173e6",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-02bb6765b8fe37d173e6/negative: violate MUST: The source reader must compare every admitted corpus file against its frozen SHA256",
+      "obligation": "MUST: The source reader must compare every admitted corpus file against its frozen SHA256",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-02bb6765b8fe37d173e6: predicate 'The source reader must compare every admitted corpus file against its frozen SHA256' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 96,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The source reader must compare every admitted corpus file against its frozen SHA256"
+    },
+    {
+      "id": "REQ-ccd15898bc8ffbd49423",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-ccd15898bc8ffbd49423/negative: violate MUST: The source reader must reject a locator escaping its admitted corpus root",
+      "obligation": "MUST: The source reader must reject a locator escaping its admitted corpus root",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-ccd15898bc8ffbd49423: predicate 'The source reader must reject a locator escaping its admitted corpus root' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 127,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The source reader must reject a locator escaping its admitted corpus root"
+    },
+    {
+      "id": "REQ-9f77f15f40b73a74163c",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-9f77f15f40b73a74163c/negative: violate MUST: The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key",
+      "obligation": "MUST: The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-9f77f15f40b73a74163c: predicate 'The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 158,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key"
+    },
+    {
+      "id": "REQ-ea8f7c8540d0e4604627",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-ea8f7c8540d0e4604627/negative: violate MUST: The ProductSPEC must identify the actual first work persona",
+      "obligation": "MUST: The ProductSPEC must identify the actual first work persona",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-ea8f7c8540d0e4604627: predicate 'The ProductSPEC must identify the actual first work persona' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 189,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The ProductSPEC must identify the actual first work persona"
+    },
+    {
+      "id": "REQ-2ab85ae7e2f1551e0fa3",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-2ab85ae7e2f1551e0fa3/negative: violate MUST: The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal",
+      "obligation": "MUST: The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-2ab85ae7e2f1551e0fa3: predicate 'The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 220,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal"
+    },
+    {
+      "id": "REQ-fd83cdbda7ab38d42434",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-fd83cdbda7ab38d42434/negative: violate MUST: The ProductSPEC must define a readable three SPEC output as the first useful outcome",
+      "obligation": "MUST: The ProductSPEC must define a readable three SPEC output as the first useful outcome",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-fd83cdbda7ab38d42434: predicate 'The ProductSPEC must define a readable three SPEC output as the first useful outcome' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 251,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The ProductSPEC must define a readable three SPEC output as the first useful outcome"
+    },
+    {
+      "id": "REQ-39836c9993f89955bb0c",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-39836c9993f89955bb0c/negative: violate MUST: The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement",
+      "obligation": "MUST: The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-39836c9993f89955bb0c: predicate 'The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 282,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement"
+    },
+    {
+      "id": "REQ-35196e0dec18c3f97c56",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-35196e0dec18c3f97c56/negative: violate MUST: The ArchitectureSPEC must name one original writer for every interface seam",
+      "obligation": "MUST: The ArchitectureSPEC must name one original writer for every interface seam",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-35196e0dec18c3f97c56: predicate 'The ArchitectureSPEC must name one original writer for every interface seam' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 313,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The ArchitectureSPEC must name one original writer for every interface seam"
+    },
+    {
+      "id": "REQ-74fa13d4c2ef6382c2a5",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-74fa13d4c2ef6382c2a5/negative: violate MUST: The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload",
+      "obligation": "MUST: The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-74fa13d4c2ef6382c2a5: predicate 'The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 344,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload"
+    },
+    {
+      "id": "REQ-4e2375181a0b3f485dd2",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-4e2375181a0b3f485dd2/negative: violate MUST: The ProgramSPEC must retain an acyclic dependency closure for the first work",
+      "obligation": "MUST: The ProgramSPEC must retain an acyclic dependency closure for the first work",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-4e2375181a0b3f485dd2: predicate 'The ProgramSPEC must retain an acyclic dependency closure for the first work' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 375,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The ProgramSPEC must retain an acyclic dependency closure for the first work"
+    },
+    {
+      "id": "REQ-f8ac567139df4124980b",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-f8ac567139df4124980b/negative: violate MUST: The ProgramSPEC must bind each prerequisite to its original owner",
+      "obligation": "MUST: The ProgramSPEC must bind each prerequisite to its original owner",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-f8ac567139df4124980b: predicate 'The ProgramSPEC must bind each prerequisite to its original owner' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 406,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The ProgramSPEC must bind each prerequisite to its original owner"
+    },
+    {
+      "id": "REQ-5db7ca05175f82d4a025",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-5db7ca05175f82d4a025/negative: violate MUST: The first work must write its three SPEC drafts only inside the admitted isolated draft directory",
+      "obligation": "MUST: The first work must write its three SPEC drafts only inside the admitted isolated draft directory",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-5db7ca05175f82d4a025: predicate 'The first work must write its three SPEC drafts only inside the admitted isolated draft directory' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 437,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The first work must write its three SPEC drafts only inside the admitted isolated draft directory"
+    },
+    {
+      "id": "REQ-5ff866306d6c3adb4e6d",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-5ff866306d6c3adb4e6d/negative: violate MUST: The receiver must invalidate only the outputs dependent on a changed source hash",
+      "obligation": "MUST: The receiver must invalidate only the outputs dependent on a changed source hash",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-5ff866306d6c3adb4e6d: predicate 'The receiver must invalidate only the outputs dependent on a changed source hash' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 468,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The receiver must invalidate only the outputs dependent on a changed source hash"
+    },
+    {
+      "id": "REQ-2e8100c408cd684c6c25",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-2e8100c408cd684c6c25/negative: violate MUST: The first work must start source reading plus local drafting without a future execution receipt",
+      "obligation": "MUST: The first work must start source reading plus local drafting without a future execution receipt",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-2e8100c408cd684c6c25: predicate 'The first work must start source reading plus local drafting without a future execution receipt' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 499,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The first work must start source reading plus local drafting without a future execution receipt"
+    },
+    {
+      "id": "REQ-c36528e9727b829a40a3",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-c36528e9727b829a40a3/negative: violate MUST: The first work must complete its deterministic source reading plus draft materialization with provider access disabled",
+      "obligation": "MUST: The first work must complete its deterministic source reading plus draft materialization with provider access disabled",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-c36528e9727b829a40a3: predicate 'The first work must complete its deterministic source reading plus draft materialization with provider access disabled' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 530,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The first work must complete its deterministic source reading plus draft materialization with provider access disabled"
+    },
+    {
+      "id": "REQ-864212b754aff1d3df58",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-864212b754aff1d3df58/negative: violate MUST: The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases",
+      "obligation": "MUST: The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-864212b754aff1d3df58: predicate 'The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 561,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance "
+    },
+    {
+      "id": "REQ-30db55a02db550183cf7",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-30db55a02db550183cf7/negative: violate MUST: The receiver must derive the actual RepoContext immediately before any PD construction binding",
+      "obligation": "MUST: The receiver must derive the actual RepoContext immediately before any PD construction binding",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-30db55a02db550183cf7: predicate 'The receiver must derive the actual RepoContext immediately before any PD construction binding' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 592,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The receiver must derive the actual RepoContext immediately before any PD construction binding"
+    },
+    {
+      "id": "REQ-f58e267ecc9f53aa4a4e",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-f58e267ecc9f53aa4a4e/negative: violate MUST: The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation",
+      "obligation": "MUST: The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-f58e267ecc9f53aa4a4e: predicate 'The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 623,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The receiver must obtain the matching original effect admission before a repository or host or user or remote or release"
+    },
+    {
+      "id": "REQ-a70293a669e68e3fd046",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-a70293a669e68e3fd046/negative: violate MUST: The worker receiver must reject an expired lease before continuing a governed effect",
+      "obligation": "MUST: The worker receiver must reject an expired lease before continuing a governed effect",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-a70293a669e68e3fd046: predicate 'The worker receiver must reject an expired lease before continuing a governed effect' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 654,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The worker receiver must reject an expired lease before continuing a governed effect"
+    },
+    {
+      "id": "REQ-75db0565545dc5de5ec8",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-75db0565545dc5de5ec8/negative: violate MUST: The resume receiver must reconcile an unknown world effect before any retry",
+      "obligation": "MUST: The resume receiver must reconcile an unknown world effect before any retry",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-75db0565545dc5de5ec8: predicate 'The resume receiver must reconcile an unknown world effect before any retry' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 685,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The resume receiver must reconcile an unknown world effect before any retry"
+    },
+    {
+      "id": "REQ-108d5abf80ec11624ee2",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-108d5abf80ec11624ee2/negative: violate MUST: The handoff must retain the original Hermes WorkID queue lease plus journal ownership",
+      "obligation": "MUST: The handoff must retain the original Hermes WorkID queue lease plus journal ownership",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-108d5abf80ec11624ee2: predicate 'The handoff must retain the original Hermes WorkID queue lease plus journal ownership' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 716,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The handoff must retain the original Hermes WorkID queue lease plus journal ownership"
+    },
+    {
+      "id": "REQ-79c44bb7ff316afc4084",
+      "kind": "PI",
+      "neg_check": "Fixture fixtures/REQ-79c44bb7ff316afc4084/negative: violate MUST: The delivery receiver must request the original protected checker after world readback",
+      "obligation": "MUST: The delivery receiver must request the original protected checker after world readback",
+      "owner": "PIPD-EC",
+      "polarity": "MUST",
+      "pos_check": "Oracle ORACLE-REQ-79c44bb7ff316afc4084: predicate 'The delivery receiver must request the original protected checker after world readback' expected 'required'",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "line": 747,
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      "title": "The delivery receiver must request the original protected checker after world readback"
+    },
+    {
+      "id": "PI-035c5e6e6333148b",
+      "kind": "PI",
+      "neg_check": "Missing atom or trace, foreign hash, or a schema drift -> the PI stays unbound and PI promotion holds (PI_HOLD, 02_PIPD_LIFECYCLE_AND_TPM.md:80).",
+      "obligation": "The original pipeline.validate_pi must accept the PI subject with its ProfileBinding, 24 RequirementAtom and 24 TraceLink entries; a strict TaskSpecSeed/ExecutionHandoff/WorkOrderCandidate must validate against frozen context.",
+      "pos_check": "Observed in PI-PKG.json: 24 req_id entries, 24 TraceLink entries, every trace from_hash equals content_hash 035c5e6e6333148b4808492d7c9277dd83cfcd503201e0f508dad14e1d7bafb3.",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 20,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "title": "PI-PKG subject of the first work: 24 RequirementAtom and 24 TraceLink validated by the original pipeline"
+    },
+    {
+      "id": "PI-SCHEMA",
+      "kind": "PI",
+      "neg_check": "- Domain NEG：sidecar appended as top-level _profile_meta → `PI_SCHEMA`；與 missing-required/unknown-key 的 schema拒收分開。",
+      "obligation": "- required：stable_semantic_contract, trace, acceptance, subject_id, version, content_hash, schema_version。",
+      "pos_check": "- 專屬 Reader invariant：stable_semantic_contract 包含全部原原子 trace；Oracle canonical Writer相容。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 197,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "source_lines": {
+        "neg_check": 197,
+        "obligation": 195,
+        "pos_check": 196
+      },
+      "title": "PI-PKG reader: no sidecar injected into the strict payload"
+    },
+    {
+      "id": "PI-ATOM-POLARITY",
+      "kind": "PI",
+      "neg_check": "- Domain NEG：positive wording replaces source prohibition → `ATOM_POLARITY_LOSS`；與 missing-required/unknown-key 的 schema拒收分開。",
+      "obligation": "- required：req_id, source_clause, owner, acceptance_cue, risk_guard, subject_id, version, content_hash, schema_version。",
+      "pos_check": "- 專屬 Reader invariant：source_clause 實讀、owner 可識別、acceptance_cue 可反證、risk_guard 不空；保留否定作用域。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 217,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "source_lines": {
+        "neg_check": 217,
+        "obligation": 215,
+        "pos_check": 216
+      },
+      "title": "RequirementAtom reader: source polarity must survive"
+    },
+    {
+      "id": "PI-TRACE",
+      "kind": "PI",
+      "neg_check": "- Domain NEG：to_hash names another candidate → `TRACE_HASH_MISMATCH`；與 missing-required/unknown-key 的 schema拒收分開。",
+      "obligation": "- required：from_type, from_id, from_hash, to_type, to_id, to_hash, rationale, subject_id, version, content_hash, schema_version。",
+      "pos_check": "- 專屬 Reader invariant：from_id/from_hash 與 to_id/to_hash 可在 bundle雙向解析；方向不交換。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 267,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "source_lines": {
+        "neg_check": 267,
+        "obligation": 265,
+        "pos_check": 266
+      },
+      "title": "TraceLink reader: to_hash must name the same candidate"
+    },
+    {
+      "id": "PI-COMPILE-VERB",
+      "kind": "PI",
+      "neg_check": "Unknown Oracle or Schema drift -> PI_HOLD.",
+      "obligation": "RequirementAtom and Source enter the original compile-pi and leave as PI-PKG.",
+      "pos_check": "PI-PKG emitted with source atom, original polarity, oracle binding and TraceLinks.",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 80,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "title": "pipd-pi-compile: RequirementAtom/Source to compile-pi to PI-PKG"
+    },
+    {
+      "effect_class": "SOURCE_READ",
+      "id": "PD-01",
+      "kind": "PD",
+      "neg_check": "- NEG：`alias/junction traversal or changed HEAD -> ROOT_ALIAS_OR_PATH_ESCAPE`。NEG 細分碼 `ROOT_ALIAS_OR_PATH_ESCAPE` → canonical `ROOT_ALIAS_OR_PATH_ESCAPE`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Same handle/file-ID inside signed root; two scans no change；本域判準：same file ID and signed root; staged/unstaged/untracked snapshot stable。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 21,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 26,
+        "obligation": 24,
+        "pos_check": 25,
+        "tqaep": 28
+      },
+      "title": "PD-01 / EDGE-OBS-B1-A1 / domain ROOT_RAW"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-02",
+      "kind": "PD",
+      "neg_check": "- NEG：`wrong issuer or replayed nonce -> PERMIT_SUBJECT_NONCE_REPLAY`。NEG 細分碼 `PERMIT_SUBJECT_NONCE_REPLAY` → canonical `PERMIT_SUBJECT_NONCE_REPLAY`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Token signature/principal/nonce/subject/TTL checked native-side before spawn；本域判準：issuer-signed exact subject/scope checked before spawn; nonce consumed once。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 33,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 38,
+        "obligation": 36,
+        "pos_check": 37,
+        "tqaep": 40
+      },
+      "title": "PD-02 / EDGE-WO-B1-A2 / domain ISSUER_SUBJECT"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-03",
+      "kind": "PD",
+      "neg_check": "- NEG：`duplicate claim, starved B/C or stale generation -> LOST_LEASE_OR_DUPLICATE_CLAIM`。NEG 細分碼 `LOST_LEASE_OR_DUPLICATE_CLAIM` → canonical `LOST_LEASE_OR_DUPLICATE_CLAIM`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Scan at most K blocked cards, B/C independent advance; CAS generation single holder；本域判準：blocked A parked; independent B/C progressed within bounded K; generation CAS unique。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 45,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 50,
+        "obligation": 48,
+        "pos_check": 49,
+        "tqaep": 52
+      },
+      "title": "PD-03 / EDGE-WO-B1-A3 / domain QUEUE_WO"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-04",
+      "kind": "PD",
+      "neg_check": "- NEG：`mocked ACK/wrong ABI/absent native event -> RECEIVER_NOT_LIVE`。NEG 細分碼 `LIVE_RECEIVER_NOT_VERIFIED` → canonical `RECEIVER_NOT_LIVE`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Ack contains issuer and host identity; mocked ACK rejected；本域判準：true receiver ACK signed for exact subject; mock ACK never qualifies。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 57,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 62,
+        "obligation": 60,
+        "pos_check": 61,
+        "tqaep": 64
+      },
+      "title": "PD-04 / EDGE-WO-B1-A4 / domain RECEIVER_ABI"
+    },
+    {
+      "effect_class": "SOURCE_READ",
+      "id": "PD-05",
+      "kind": "PD",
+      "neg_check": "- NEG：`silent model fallback or missing served arm -> MODEL_REQUIRED_NOT_SERVED`。NEG 細分碼 `SERVED_MODEL_MISMATCH` → canonical `MODEL_REQUIRED_NOT_SERVED`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Every required lane served in exact epoch/host; one lane failure blocks Gate；本域判準：each mandatory lane actually served, same host and policy epoch。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 69,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 74,
+        "obligation": 72,
+        "pos_check": 73,
+        "tqaep": 76
+      },
+      "title": "PD-05 / EDGE-OBS-B1-A5 / domain MODEL_LANES"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-06",
+      "kind": "PD",
+      "neg_check": "- NEG：`duplicate operation or retry-on-timeout -> UNKNOWN_EFFECT_REPLAY`。NEG 細分碼 `DUPLICATE_OR_UNKNOWN_EFFECT` → canonical `UNKNOWN_EFFECT_REPLAY`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：UNKNOWN_EFFECT cannot retry until world-state reconciled；本域判準：at-most-once effect; UNKNOWN_EFFECT reconciled before any next claim。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 81,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 86,
+        "obligation": 84,
+        "pos_check": 85,
+        "tqaep": 88
+      },
+      "title": "PD-06 / EDGE-WO-B1-A6 / domain EFFECT_JOURNAL"
+    },
+    {
+      "effect_class": "SOURCE_READ",
+      "id": "PD-07",
+      "kind": "PD",
+      "neg_check": "- NEG：`self-attested or mismatched witness -> RAW_OR_CHECKER_MISMATCH`。NEG 細分碼 `RAW_SUBJECT_OR_WITNESS_MISSING` → canonical `RAW_OR_CHECKER_MISMATCH`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Maker!=Checker; no self-attested checker receipt；本域判準：distinct principal checker receipt matches same candidate and non-empty RAW。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 93,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 98,
+        "obligation": 96,
+        "pos_check": 97,
+        "tqaep": 100
+      },
+      "title": "PD-07 / EDGE-OBS-B1-A7 / domain RAW_EVIDENCE"
+    },
+    {
+      "effect_class": "REPO_WRITE",
+      "id": "PD-08",
+      "kind": "PD",
+      "neg_check": "- NEG：`unbounded writes or missing red reproducer -> HOTPATH_UNRESOLVED`。NEG 細分碼 `UNMEASURED_REPAIR_OR_SCOPE_ESCAPE` → canonical `HOTPATH_UNRESOLVED`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Exact current hotpath with rollback pointer and independent regression；本域判準：exact loaded callsite identified and scoped regression independent。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 105,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 110,
+        "obligation": 108,
+        "pos_check": 109,
+        "tqaep": 112
+      },
+      "title": "PD-08 / EDGE-WO-B1-A8 / domain NATIVE_HOTPATH"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-09",
+      "kind": "PD",
+      "neg_check": "- NEG：`external actor still triggering -> EXTERNAL_TRIGGER_STILL_REQUIRED`。NEG 細分碼 `EXTERNAL_REENTRY_OR_NONNATIVE_SUCCESSOR` → canonical `EXTERNAL_TRIGGER_STILL_REQUIRED`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Resume after external token revoked, initiated by native source；本域判準：native successor advances after external revoke with new session and no external trigger。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 117,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 122,
+        "obligation": 120,
+        "pos_check": 121,
+        "tqaep": 124
+      },
+      "title": "PD-09 / EDGE-WO-B1-A9 / domain NATIVE_CONTINUATION"
+    },
+    {
+      "effect_class": "SOURCE_READ",
+      "id": "PD-10",
+      "kind": "PD",
+      "neg_check": "- NEG：`missing oracle or fabricated source -> PI_SOURCE_OR_ORACLE_UNBOUND`。NEG 細分碼 `UNKNOWN_ATOM_SOURCE` → canonical `PI_SOURCE_OR_ORACLE_UNBOUND`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Missing/ambiguous clause opens TT; no fabricated PI issuer；本域判準：one-to-one source clause/owner/oracle joins; missing clause is HOLD。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 129,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 134,
+        "obligation": 132,
+        "pos_check": 133,
+        "tqaep": 136
+      },
+      "title": "PD-10 / EDGE-OBS-B1-B1 / domain SOURCE_ATOMS"
+    },
+    {
+      "effect_class": "SOURCE_READ",
+      "id": "PD-11",
+      "kind": "PD",
+      "neg_check": "- NEG：`stale/escaping context -> REPO_CONTEXT_NOT_FRESH`。NEG 細分碼 `PD_CONTEXT_STALE_OR_PATH_ESCAPE` → canonical `REPO_CONTEXT_NOT_FRESH`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：No DEV effect for observation; no PD when no writable scope；本域判準：P4 PD only with actual repo root, HEAD and affected-only allowed write scope。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 141,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 146,
+        "obligation": 144,
+        "pos_check": 145,
+        "tqaep": 148
+      },
+      "title": "PD-11 / EDGE-OBS-B1-B2 / domain REPO_CONTEXT"
+    },
+    {
+      "effect_class": "REPO_WRITE",
+      "id": "PD-12",
+      "kind": "PD",
+      "neg_check": "- NEG：`second issuer or shared receipt -> SECOND_ISSUER_OR_MIXED_EFFECT`。NEG 細分碼 `HANDOFF_ABI_OR_MOCK_ACK` → canonical `SECOND_ISSUER_OR_MIXED_EFFECT`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：DEV file patch != OPS native admission; two WO, two ECP where affected；本域判準：DEV/OPS different WOs, separate source diff and real native ACK。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 153,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 158,
+        "obligation": 156,
+        "pos_check": 157,
+        "tqaep": 160
+      },
+      "title": "PD-12 / EDGE-WO-B1-B3-DEV / domain SBL_TO_NATIVE"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-13",
+      "kind": "PD",
+      "neg_check": "- NEG：`second issuer or shared receipt -> SECOND_ISSUER_OR_MIXED_EFFECT`。NEG 細分碼 `HANDOFF_ABI_OR_MOCK_ACK` → canonical `SECOND_ISSUER_OR_MIXED_EFFECT`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：DEV file patch != OPS native admission; two WO, two ECP where affected；本域判準：DEV/OPS different WOs, separate source diff and real native ACK。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 165,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 170,
+        "obligation": 168,
+        "pos_check": 169,
+        "tqaep": 172
+      },
+      "title": "PD-13 / EDGE-WO-B1-B3-OPS / domain SBL_TO_NATIVE"
+    },
+    {
+      "effect_class": "REPO_WRITE",
+      "id": "PD-14",
+      "kind": "PD",
+      "neg_check": "- NEG：`two active ECPs/unknown class -> ECP_MULTIPLE_OR_CLASS_UNKNOWN`。NEG 細分碼 `ECP_DOUBLE_ACTIVE_OR_CLASS_MISMATCH` → canonical `ECP_MULTIPLE_OR_CLASS_UNKNOWN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Ambiguous/multiple ECP gets NACK before dispatch；本域判準：one active ECP per WO; split iff distinct effects。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 177,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 182,
+        "obligation": 180,
+        "pos_check": 181,
+        "tqaep": 184
+      },
+      "title": "PD-14 / EDGE-WO-B1-B4-DEV / domain ECP_SELECTOR"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-15",
+      "kind": "PD",
+      "neg_check": "- NEG：`two active ECPs/unknown class -> ECP_MULTIPLE_OR_CLASS_UNKNOWN`。NEG 細分碼 `ECP_DOUBLE_ACTIVE_OR_CLASS_MISMATCH` → canonical `ECP_MULTIPLE_OR_CLASS_UNKNOWN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Ambiguous/multiple ECP gets NACK before dispatch；本域判準：one active ECP per WO; split iff distinct effects。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 189,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 194,
+        "obligation": 192,
+        "pos_check": 193,
+        "tqaep": 196
+      },
+      "title": "PD-15 / EDGE-WO-B1-B4-OPS / domain ECP_SELECTOR"
+    },
+    {
+      "effect_class": "REPO_WRITE",
+      "id": "PD-16",
+      "kind": "PD",
+      "neg_check": "- NEG：`missing host invocation -> SP_HOST_LOAD_UNPROVEN`。NEG 細分碼 `SP_ROLE_OR_HOST_NOT_ACTUALLY_LOADED` → canonical `SP_HOST_LOAD_UNPROVEN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Three separate true host-issued identities; ZIP-only denied；本域判準：three host identities and isolated permission readbacks; ZIP-only not pass。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 201,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 206,
+        "obligation": 204,
+        "pos_check": 205,
+        "tqaep": 208
+      },
+      "title": "PD-16 / EDGE-WO-B1-B5-DEV / domain THREE_SP"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-17",
+      "kind": "PD",
+      "neg_check": "- NEG：`missing host invocation -> SP_HOST_LOAD_UNPROVEN`。NEG 細分碼 `SP_ROLE_OR_HOST_NOT_ACTUALLY_LOADED` → canonical `SP_HOST_LOAD_UNPROVEN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Three separate true host-issued identities; ZIP-only denied；本域判準：three host identities and isolated permission readbacks; ZIP-only not pass。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 213,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 218,
+        "obligation": 216,
+        "pos_check": 217,
+        "tqaep": 220
+      },
+      "title": "PD-17 / EDGE-WO-B1-B5-OPS / domain THREE_SP"
+    },
+    {
+      "effect_class": "USER_OP",
+      "id": "PD-18",
+      "kind": "PD",
+      "neg_check": "- NEG：`user effect misclassified or no actual state -> CLI_EFFECT_MISCLASSIFIED`。NEG 細分碼 `USER_TASK_EXECUTION_NOT_OBSERVED` → canonical `CLI_EFFECT_MISCLASSIFIED`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：User data add/delete not DEV; rollback state + uninstall exact sandbox；本域判準：isolated store add -> separate list -> delete -> zero residue。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 225,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 230,
+        "obligation": 228,
+        "pos_check": 229,
+        "tqaep": 232
+      },
+      "title": "PD-18 / EDGE-WO-B1-B6-USER / domain TODO_PERSISTENCE"
+    },
+    {
+      "effect_class": "SOURCE_READ",
+      "id": "PD-19",
+      "kind": "PD",
+      "neg_check": "- NEG：`silent fallback -> NOFIT_OR_PROVIDER_OFF`。NEG 細分碼 `GUARDRAIL_BYPASS_OR_NOFIT_INCOMPLETE` → canonical `NOFIT_OR_PROVIDER_OFF`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Provider-off never silent swap or third-party issue；本域判準：deterministic capability NOFIT with user-readable reason and zero unauthorized delta。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 237,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 242,
+        "obligation": 240,
+        "pos_check": 241,
+        "tqaep": 244
+      },
+      "title": "PD-19 / EDGE-OBS-B1-B7 / domain NOFIT_ROUTE"
+    },
+    {
+      "effect_class": "SOURCE_READ",
+      "id": "PD-20",
+      "kind": "PD",
+      "neg_check": "- NEG：`foreign/sibling witness -> TRACE_CLOSURE_FAIL`。NEG 細分碼 `SUBJECT_HASH_BREAK_OR_ORPHAN` → canonical `TRACE_CLOSURE_FAIL`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Any orphan/alias/hash-mismatch yields TRACE_CLOSURE_FAIL；本域判準：nonempty exact IDs and hashes, zero orphans and zero bad edges。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 249,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 254,
+        "obligation": 252,
+        "pos_check": 253,
+        "tqaep": 256
+      },
+      "title": "PD-20 / EDGE-OBS-B1-B8 / domain TRACE_GRAPH"
+    },
+    {
+      "effect_class": "SOURCE_READ",
+      "id": "PD-21",
+      "kind": "PD",
+      "neg_check": "- NEG：`missing ID or generic proxy pass -> R15_DENOMINATOR_SHRINK`。NEG 細分碼 `FULL_PRODUCT_PROXY_PASS` → canonical `R15_DENOMINATOR_SHRINK`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：No silent ID drops; deferred != verified; no orphan family；本域判準：949 unique 18-family IDs, 66/254/629 and source-specific disposition。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 261,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 266,
+        "obligation": 264,
+        "pos_check": 265,
+        "tqaep": 268
+      },
+      "title": "PD-21 / EDGE-OBS-B1-B9 / domain R"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-22",
+      "kind": "PD",
+      "neg_check": "- NEG：`stage mistaken as active or missing consumer -> FABRIC_LOADED_ABSENT`。NEG 細分碼 `FABRIC_REVERSE_PROJECTION_OR_POLICY_EPOCH` → canonical `FABRIC_LOADED_ABSENT`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Stage/CI only never equals loaded; per-effect token；本域判準：independent stage approval; active and loaded exact digest; consumer projection ACK。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 273,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 278,
+        "obligation": 276,
+        "pos_check": 277,
+        "tqaep": 280
+      },
+      "title": "PD-22 / EDGE-WO-B1-C1 / domain FABRIC_PROMOTION"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-23",
+      "kind": "PD",
+      "neg_check": "- NEG：`ghost worker/forged permit -> GWO_HGK_NOT_NATIVE`。NEG 細分碼 `HGK_FORGED_PERMIT_OR_GHOST_WORKER` → canonical `GWO_HGK_NOT_NATIVE`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Canary native same WO signature; fake mock ignored；本域判準：true SBL entry -> native HGK issuer -> Hermes lease -> reversible observable result。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 285,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 290,
+        "obligation": 288,
+        "pos_check": 289,
+        "tqaep": 292
+      },
+      "title": "PD-23 / EDGE-WO-B1-C2 / domain HGK_GWO"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-24",
+      "kind": "PD",
+      "neg_check": "- NEG：`install count used as add success -> GWO_SBL_USER_STATE_UNPROVEN`。NEG 細分碼 `SBL_EMPTY_TEST_OR_NO_USER_OUTCOME` → canonical `GWO_SBL_USER_STATE_UNPROVEN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：CLI add/delete and install/uninstall are effects; exact data restored；本域判準：separate Host install and USER effects with independent readbacks。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 297,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 302,
+        "obligation": 300,
+        "pos_check": 301,
+        "tqaep": 304
+      },
+      "title": "PD-24 / EDGE-WO-B1-C3-OPS / domain SBL_GWO"
+    },
+    {
+      "effect_class": "USER_OP",
+      "id": "PD-25",
+      "kind": "PD",
+      "neg_check": "- NEG：`install count used as add success -> GWO_SBL_USER_STATE_UNPROVEN`。NEG 細分碼 `SBL_EMPTY_TEST_OR_NO_USER_OUTCOME` → canonical `GWO_SBL_USER_STATE_UNPROVEN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：CLI add/delete and install/uninstall are effects; exact data restored；本域判準：separate Host install and USER effects with independent readbacks。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 309,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 314,
+        "obligation": 312,
+        "pos_check": 313,
+        "tqaep": 316
+      },
+      "title": "PD-25 / EDGE-WO-B1-C3-USER / domain SBL_GWO"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-26",
+      "kind": "PD",
+      "neg_check": "- NEG：`scope expansion -> EXTERNAL_SCOPE_ESCAPED`。NEG 細分碼 `EXTERNAL_GRANT_SCOPE_OR_TTL` → canonical `EXTERNAL_SCOPE_ESCAPED`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：No broader GitHub/Windows authority via standing mission；本域判準：bounded external grant and no residual capability on revoke。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 321,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 326,
+        "obligation": 324,
+        "pos_check": 325,
+        "tqaep": 328
+      },
+      "title": "PD-26 / EDGE-WO-B1-C4 / domain EXTERNAL_GRANT"
+    },
+    {
+      "effect_class": "REPO_WRITE",
+      "id": "PD-27",
+      "kind": "PD",
+      "neg_check": "- NEG：`checker edits same diff or no red test -> UNBOUNDED_PATCH_OR_REGRESSION`。NEG 細分碼 `CODEX_UNMEASURED_PATCH_OR_CHECKER_MUTATION` → canonical `UNBOUNDED_PATCH_OR_REGRESSION`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：No edit outside allowlist; narrow rollback；本域判準：only affected files changed and full regression independent。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 333,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 338,
+        "obligation": 336,
+        "pos_check": 337,
+        "tqaep": 340
+      },
+      "title": "PD-27 / EDGE-WO-B1-C5 / domain CODEX_MINPATCH"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-28",
+      "kind": "PD",
+      "neg_check": "- NEG：`reused token after revoke -> REVOKED_TOKEN_REPLAY`。NEG 細分碼 `POST_REVOKE_TOKEN_REPLAY` → canonical `REVOKED_TOKEN_REPLAY`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Unknown effect not erased, previously admitted in-flight reconciled；本域判準：post-revoke use fails before spawn; existing effects reconciled。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 345,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 350,
+        "obligation": 348,
+        "pos_check": 349,
+        "tqaep": 352
+      },
+      "title": "PD-28 / EDGE-WO-B1-C6 / domain REVOKE_RACE"
+    },
+    {
+      "effect_class": "SOURCE_READ",
+      "id": "PD-29",
+      "kind": "PD",
+      "neg_check": "- NEG：`green patch with stale loaded binary -> LOADED_BINARY_MISMATCH`。NEG 細分碼 `PATCH_GREEN_NOT_LOADED` → canonical `LOADED_BINARY_MISMATCH`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：No source hash used as proof of loaded binary；本域判準：all four identity layers tied to same subject, not merely file on disk。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 357,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 362,
+        "obligation": 360,
+        "pos_check": 361,
+        "tqaep": 364
+      },
+      "title": "PD-29 / EDGE-OBS-B1-C7 / domain FOUR_LAYER_ID"
+    },
+    {
+      "effect_class": "HOST_OP",
+      "id": "PD-30",
+      "kind": "PD",
+      "neg_check": "- NEG：`successor still external-triggered -> NATIVE_SUCCESSOR_NOT_PROVEN`。NEG 細分碼 `NATIVE_SUCCESSOR_NOT_AUTONOMOUS` → canonical `NATIVE_SUCCESSOR_NOT_PROVEN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Post-turn continuation must originate in Hermes native source；本域判準：fresh separate session native trigger progresses after external account revoked。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 369,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 374,
+        "obligation": 372,
+        "pos_check": 373,
+        "tqaep": 376
+      },
+      "title": "PD-30 / EDGE-WO-B1-C8 / domain NATIVE_SUCCESSOR"
+    },
+    {
+      "effect_class": "SOURCE_READ",
+      "id": "PD-31",
+      "kind": "PD",
+      "neg_check": "- NEG：`same receipt reused -> GWO_RECEIPT_ALIAS`。NEG 細分碼 `THREE_GWO_PROXY_PASS` → canonical `GWO_RECEIPT_ALIAS`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pos_check": "- ACC/POS：Swapped receipts, same principal, absent third yields FAIL；本域判準：3 different domain receipts, all same intended crosswalk, not aliases。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 381,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "source_lines": {
+        "neg_check": 386,
+        "obligation": 384,
+        "pos_check": 385,
+        "tqaep": 388
+      },
+      "title": "PD-31 / EDGE-OBS-B1-C9 / domain TRIPLE_GWO"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 23,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "ROOT_RAW",
+      "edges": [
+        "EDGE-OBS-B1-A1"
+      ],
+      "effect_class": "SOURCE_READ",
+      "id": "PI-B1-A1",
+      "kind": "PI",
+      "neg_check": "- NEG：`alias/junction traversal or changed HEAD -> ROOT_ALIAS_OR_PATH_ESCAPE`。NEG 細分碼 `ROOT_ALIAS_OR_PATH_ESCAPE` → canonical `ROOT_ALIAS_OR_PATH_ESCAPE`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-01"
+      ],
+      "pos_check": "- ACC/POS：Same handle/file-ID inside signed root; two scans no change；本域判準：same file ID and signed root; staged/unstaged/untracked snapshot stable。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 23,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-A1 bound to PD-01 / EDGE-OBS-B1-A1 (domain ROOT_RAW)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 35,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "ISSUER_SUBJECT",
+      "edges": [
+        "EDGE-WO-B1-A2"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-A2",
+      "kind": "PI",
+      "neg_check": "- NEG：`wrong issuer or replayed nonce -> PERMIT_SUBJECT_NONCE_REPLAY`。NEG 細分碼 `PERMIT_SUBJECT_NONCE_REPLAY` → canonical `PERMIT_SUBJECT_NONCE_REPLAY`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-02"
+      ],
+      "pos_check": "- ACC/POS：Token signature/principal/nonce/subject/TTL checked native-side before spawn；本域判準：issuer-signed exact subject/scope checked before spawn; nonce consumed once。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 35,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-A2 bound to PD-02 / EDGE-WO-B1-A2 (domain ISSUER_SUBJECT)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 47,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "QUEUE_WO",
+      "edges": [
+        "EDGE-WO-B1-A3"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-A3",
+      "kind": "PI",
+      "neg_check": "- NEG：`duplicate claim, starved B/C or stale generation -> LOST_LEASE_OR_DUPLICATE_CLAIM`。NEG 細分碼 `LOST_LEASE_OR_DUPLICATE_CLAIM` → canonical `LOST_LEASE_OR_DUPLICATE_CLAIM`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-03"
+      ],
+      "pos_check": "- ACC/POS：Scan at most K blocked cards, B/C independent advance; CAS generation single holder；本域判準：blocked A parked; independent B/C progressed within bounded K; generation CAS unique。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 47,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-A3 bound to PD-03 / EDGE-WO-B1-A3 (domain QUEUE_WO)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 59,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "RECEIVER_ABI",
+      "edges": [
+        "EDGE-WO-B1-A4"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-A4",
+      "kind": "PI",
+      "neg_check": "- NEG：`mocked ACK/wrong ABI/absent native event -> RECEIVER_NOT_LIVE`。NEG 細分碼 `LIVE_RECEIVER_NOT_VERIFIED` → canonical `RECEIVER_NOT_LIVE`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-04"
+      ],
+      "pos_check": "- ACC/POS：Ack contains issuer and host identity; mocked ACK rejected；本域判準：true receiver ACK signed for exact subject; mock ACK never qualifies。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 59,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-A4 bound to PD-04 / EDGE-WO-B1-A4 (domain RECEIVER_ABI)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 71,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "MODEL_LANES",
+      "edges": [
+        "EDGE-OBS-B1-A5"
+      ],
+      "effect_class": "SOURCE_READ",
+      "id": "PI-B1-A5",
+      "kind": "PI",
+      "neg_check": "- NEG：`silent model fallback or missing served arm -> MODEL_REQUIRED_NOT_SERVED`。NEG 細分碼 `SERVED_MODEL_MISMATCH` → canonical `MODEL_REQUIRED_NOT_SERVED`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-05"
+      ],
+      "pos_check": "- ACC/POS：Every required lane served in exact epoch/host; one lane failure blocks Gate；本域判準：each mandatory lane actually served, same host and policy epoch。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 71,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-A5 bound to PD-05 / EDGE-OBS-B1-A5 (domain MODEL_LANES)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 83,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "EFFECT_JOURNAL",
+      "edges": [
+        "EDGE-WO-B1-A6"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-A6",
+      "kind": "PI",
+      "neg_check": "- NEG：`duplicate operation or retry-on-timeout -> UNKNOWN_EFFECT_REPLAY`。NEG 細分碼 `DUPLICATE_OR_UNKNOWN_EFFECT` → canonical `UNKNOWN_EFFECT_REPLAY`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-06"
+      ],
+      "pos_check": "- ACC/POS：UNKNOWN_EFFECT cannot retry until world-state reconciled；本域判準：at-most-once effect; UNKNOWN_EFFECT reconciled before any next claim。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 83,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-A6 bound to PD-06 / EDGE-WO-B1-A6 (domain EFFECT_JOURNAL)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 95,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "RAW_EVIDENCE",
+      "edges": [
+        "EDGE-OBS-B1-A7"
+      ],
+      "effect_class": "SOURCE_READ",
+      "id": "PI-B1-A7",
+      "kind": "PI",
+      "neg_check": "- NEG：`self-attested or mismatched witness -> RAW_OR_CHECKER_MISMATCH`。NEG 細分碼 `RAW_SUBJECT_OR_WITNESS_MISSING` → canonical `RAW_OR_CHECKER_MISMATCH`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-07"
+      ],
+      "pos_check": "- ACC/POS：Maker!=Checker; no self-attested checker receipt；本域判準：distinct principal checker receipt matches same candidate and non-empty RAW。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 95,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-A7 bound to PD-07 / EDGE-OBS-B1-A7 (domain RAW_EVIDENCE)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 107,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "NATIVE_HOTPATH",
+      "edges": [
+        "EDGE-WO-B1-A8"
+      ],
+      "effect_class": "REPO_WRITE",
+      "id": "PI-B1-A8",
+      "kind": "PI",
+      "neg_check": "- NEG：`unbounded writes or missing red reproducer -> HOTPATH_UNRESOLVED`。NEG 細分碼 `UNMEASURED_REPAIR_OR_SCOPE_ESCAPE` → canonical `HOTPATH_UNRESOLVED`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-08"
+      ],
+      "pos_check": "- ACC/POS：Exact current hotpath with rollback pointer and independent regression；本域判準：exact loaded callsite identified and scoped regression independent。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 107,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-A8 bound to PD-08 / EDGE-WO-B1-A8 (domain NATIVE_HOTPATH)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 119,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "NATIVE_CONTINUATION",
+      "edges": [
+        "EDGE-WO-B1-A9"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-A9",
+      "kind": "PI",
+      "neg_check": "- NEG：`external actor still triggering -> EXTERNAL_TRIGGER_STILL_REQUIRED`。NEG 細分碼 `EXTERNAL_REENTRY_OR_NONNATIVE_SUCCESSOR` → canonical `EXTERNAL_TRIGGER_STILL_REQUIRED`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-09"
+      ],
+      "pos_check": "- ACC/POS：Resume after external token revoked, initiated by native source；本域判準：native successor advances after external revoke with new session and no external trigger。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 119,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-A9 bound to PD-09 / EDGE-WO-B1-A9 (domain NATIVE_CONTINUATION)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 131,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "SOURCE_ATOMS",
+      "edges": [
+        "EDGE-OBS-B1-B1"
+      ],
+      "effect_class": "SOURCE_READ",
+      "id": "PI-B1-B1",
+      "kind": "PI",
+      "neg_check": "- NEG：`missing oracle or fabricated source -> PI_SOURCE_OR_ORACLE_UNBOUND`。NEG 細分碼 `UNKNOWN_ATOM_SOURCE` → canonical `PI_SOURCE_OR_ORACLE_UNBOUND`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-10"
+      ],
+      "pos_check": "- ACC/POS：Missing/ambiguous clause opens TT; no fabricated PI issuer；本域判準：one-to-one source clause/owner/oracle joins; missing clause is HOLD。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 131,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-B1 bound to PD-10 / EDGE-OBS-B1-B1 (domain SOURCE_ATOMS)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 143,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "REPO_CONTEXT",
+      "edges": [
+        "EDGE-OBS-B1-B2"
+      ],
+      "effect_class": "SOURCE_READ",
+      "id": "PI-B1-B2",
+      "kind": "PI",
+      "neg_check": "- NEG：`stale/escaping context -> REPO_CONTEXT_NOT_FRESH`。NEG 細分碼 `PD_CONTEXT_STALE_OR_PATH_ESCAPE` → canonical `REPO_CONTEXT_NOT_FRESH`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-11"
+      ],
+      "pos_check": "- ACC/POS：No DEV effect for observation; no PD when no writable scope；本域判準：P4 PD only with actual repo root, HEAD and affected-only allowed write scope。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 143,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-B2 bound to PD-11 / EDGE-OBS-B1-B2 (domain REPO_CONTEXT)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 155,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 167,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "SBL_TO_NATIVE",
+      "edges": [
+        "EDGE-WO-B1-B3-DEV",
+        "EDGE-WO-B1-B3-OPS"
+      ],
+      "effect_class": "REPO_WRITE",
+      "id": "PI-B1-B3",
+      "kind": "PI",
+      "neg_check": "- NEG：`second issuer or shared receipt -> SECOND_ISSUER_OR_MIXED_EFFECT`。NEG 細分碼 `HANDOFF_ABI_OR_MOCK_ACK` → canonical `SECOND_ISSUER_OR_MIXED_EFFECT`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-12",
+        "PD-13"
+      ],
+      "pos_check": "- ACC/POS：DEV file patch != OPS native admission; two WO, two ECP where affected；本域判準：DEV/OPS different WOs, separate source diff and real native ACK。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 155,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-B3 bound to PD-12 / EDGE-WO-B1-B3-DEV, PD-13 / EDGE-WO-B1-B3-OPS (domain SBL_TO_NATIVE)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 179,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 191,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "ECP_SELECTOR",
+      "edges": [
+        "EDGE-WO-B1-B4-DEV",
+        "EDGE-WO-B1-B4-OPS"
+      ],
+      "effect_class": "REPO_WRITE",
+      "id": "PI-B1-B4",
+      "kind": "PI",
+      "neg_check": "- NEG：`two active ECPs/unknown class -> ECP_MULTIPLE_OR_CLASS_UNKNOWN`。NEG 細分碼 `ECP_DOUBLE_ACTIVE_OR_CLASS_MISMATCH` → canonical `ECP_MULTIPLE_OR_CLASS_UNKNOWN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-14",
+        "PD-15"
+      ],
+      "pos_check": "- ACC/POS：Ambiguous/multiple ECP gets NACK before dispatch；本域判準：one active ECP per WO; split iff distinct effects。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 179,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-B4 bound to PD-14 / EDGE-WO-B1-B4-DEV, PD-15 / EDGE-WO-B1-B4-OPS (domain ECP_SELECTOR)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 203,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 215,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "THREE_SP",
+      "edges": [
+        "EDGE-WO-B1-B5-DEV",
+        "EDGE-WO-B1-B5-OPS"
+      ],
+      "effect_class": "REPO_WRITE",
+      "id": "PI-B1-B5",
+      "kind": "PI",
+      "neg_check": "- NEG：`missing host invocation -> SP_HOST_LOAD_UNPROVEN`。NEG 細分碼 `SP_ROLE_OR_HOST_NOT_ACTUALLY_LOADED` → canonical `SP_HOST_LOAD_UNPROVEN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-16",
+        "PD-17"
+      ],
+      "pos_check": "- ACC/POS：Three separate true host-issued identities; ZIP-only denied；本域判準：three host identities and isolated permission readbacks; ZIP-only not pass。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 203,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-B5 bound to PD-16 / EDGE-WO-B1-B5-DEV, PD-17 / EDGE-WO-B1-B5-OPS (domain THREE_SP)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 227,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "TODO_PERSISTENCE",
+      "edges": [
+        "EDGE-WO-B1-B6-USER"
+      ],
+      "effect_class": "USER_OP",
+      "id": "PI-B1-B6",
+      "kind": "PI",
+      "neg_check": "- NEG：`user effect misclassified or no actual state -> CLI_EFFECT_MISCLASSIFIED`。NEG 細分碼 `USER_TASK_EXECUTION_NOT_OBSERVED` → canonical `CLI_EFFECT_MISCLASSIFIED`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-18"
+      ],
+      "pos_check": "- ACC/POS：User data add/delete not DEV; rollback state + uninstall exact sandbox；本域判準：isolated store add -> separate list -> delete -> zero residue。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 227,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-B6 bound to PD-18 / EDGE-WO-B1-B6-USER (domain TODO_PERSISTENCE)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 239,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "NOFIT_ROUTE",
+      "edges": [
+        "EDGE-OBS-B1-B7"
+      ],
+      "effect_class": "SOURCE_READ",
+      "id": "PI-B1-B7",
+      "kind": "PI",
+      "neg_check": "- NEG：`silent fallback -> NOFIT_OR_PROVIDER_OFF`。NEG 細分碼 `GUARDRAIL_BYPASS_OR_NOFIT_INCOMPLETE` → canonical `NOFIT_OR_PROVIDER_OFF`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-19"
+      ],
+      "pos_check": "- ACC/POS：Provider-off never silent swap or third-party issue；本域判準：deterministic capability NOFIT with user-readable reason and zero unauthorized delta。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 239,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-B7 bound to PD-19 / EDGE-OBS-B1-B7 (domain NOFIT_ROUTE)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 251,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "TRACE_GRAPH",
+      "edges": [
+        "EDGE-OBS-B1-B8"
+      ],
+      "effect_class": "SOURCE_READ",
+      "id": "PI-B1-B8",
+      "kind": "PI",
+      "neg_check": "- NEG：`foreign/sibling witness -> TRACE_CLOSURE_FAIL`。NEG 細分碼 `SUBJECT_HASH_BREAK_OR_ORPHAN` → canonical `TRACE_CLOSURE_FAIL`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-20"
+      ],
+      "pos_check": "- ACC/POS：Any orphan/alias/hash-mismatch yields TRACE_CLOSURE_FAIL；本域判準：nonempty exact IDs and hashes, zero orphans and zero bad edges。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 251,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-B8 bound to PD-20 / EDGE-OBS-B1-B8 (domain TRACE_GRAPH)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 263,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "R",
+      "edges": [
+        "EDGE-OBS-B1-B9"
+      ],
+      "effect_class": "SOURCE_READ",
+      "id": "PI-B1-B9",
+      "kind": "PI",
+      "neg_check": "- NEG：`missing ID or generic proxy pass -> R15_DENOMINATOR_SHRINK`。NEG 細分碼 `FULL_PRODUCT_PROXY_PASS` → canonical `R15_DENOMINATOR_SHRINK`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-21"
+      ],
+      "pos_check": "- ACC/POS：No silent ID drops; deferred != verified; no orphan family；本域判準：949 unique 18-family IDs, 66/254/629 and source-specific disposition。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 263,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-B9 bound to PD-21 / EDGE-OBS-B1-B9 (domain R)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 275,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "FABRIC_PROMOTION",
+      "edges": [
+        "EDGE-WO-B1-C1"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-C1",
+      "kind": "PI",
+      "neg_check": "- NEG：`stage mistaken as active or missing consumer -> FABRIC_LOADED_ABSENT`。NEG 細分碼 `FABRIC_REVERSE_PROJECTION_OR_POLICY_EPOCH` → canonical `FABRIC_LOADED_ABSENT`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-22"
+      ],
+      "pos_check": "- ACC/POS：Stage/CI only never equals loaded; per-effect token；本域判準：independent stage approval; active and loaded exact digest; consumer projection ACK。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 275,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-C1 bound to PD-22 / EDGE-WO-B1-C1 (domain FABRIC_PROMOTION)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 287,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "HGK_GWO",
+      "edges": [
+        "EDGE-WO-B1-C2"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-C2",
+      "kind": "PI",
+      "neg_check": "- NEG：`ghost worker/forged permit -> GWO_HGK_NOT_NATIVE`。NEG 細分碼 `HGK_FORGED_PERMIT_OR_GHOST_WORKER` → canonical `GWO_HGK_NOT_NATIVE`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-23"
+      ],
+      "pos_check": "- ACC/POS：Canary native same WO signature; fake mock ignored；本域判準：true SBL entry -> native HGK issuer -> Hermes lease -> reversible observable result。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 287,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-C2 bound to PD-23 / EDGE-WO-B1-C2 (domain HGK_GWO)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 299,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 311,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "SBL_GWO",
+      "edges": [
+        "EDGE-WO-B1-C3-OPS",
+        "EDGE-WO-B1-C3-USER"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-C3",
+      "kind": "PI",
+      "neg_check": "- NEG：`install count used as add success -> GWO_SBL_USER_STATE_UNPROVEN`。NEG 細分碼 `SBL_EMPTY_TEST_OR_NO_USER_OUTCOME` → canonical `GWO_SBL_USER_STATE_UNPROVEN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-24",
+        "PD-25"
+      ],
+      "pos_check": "- ACC/POS：CLI add/delete and install/uninstall are effects; exact data restored；本域判準：separate Host install and USER effects with independent readbacks。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 299,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-C3 bound to PD-24 / EDGE-WO-B1-C3-OPS, PD-25 / EDGE-WO-B1-C3-USER (domain SBL_GWO)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 323,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "EXTERNAL_GRANT",
+      "edges": [
+        "EDGE-WO-B1-C4"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-C4",
+      "kind": "PI",
+      "neg_check": "- NEG：`scope expansion -> EXTERNAL_SCOPE_ESCAPED`。NEG 細分碼 `EXTERNAL_GRANT_SCOPE_OR_TTL` → canonical `EXTERNAL_SCOPE_ESCAPED`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-26"
+      ],
+      "pos_check": "- ACC/POS：No broader GitHub/Windows authority via standing mission；本域判準：bounded external grant and no residual capability on revoke。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 323,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-C4 bound to PD-26 / EDGE-WO-B1-C4 (domain EXTERNAL_GRANT)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 335,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "CODEX_MINPATCH",
+      "edges": [
+        "EDGE-WO-B1-C5"
+      ],
+      "effect_class": "REPO_WRITE",
+      "id": "PI-B1-C5",
+      "kind": "PI",
+      "neg_check": "- NEG：`checker edits same diff or no red test -> UNBOUNDED_PATCH_OR_REGRESSION`。NEG 細分碼 `CODEX_UNMEASURED_PATCH_OR_CHECKER_MUTATION` → canonical `UNBOUNDED_PATCH_OR_REGRESSION`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-27"
+      ],
+      "pos_check": "- ACC/POS：No edit outside allowlist; narrow rollback；本域判準：only affected files changed and full regression independent。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 335,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-C5 bound to PD-27 / EDGE-WO-B1-C5 (domain CODEX_MINPATCH)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 347,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "REVOKE_RACE",
+      "edges": [
+        "EDGE-WO-B1-C6"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-C6",
+      "kind": "PI",
+      "neg_check": "- NEG：`reused token after revoke -> REVOKED_TOKEN_REPLAY`。NEG 細分碼 `POST_REVOKE_TOKEN_REPLAY` → canonical `REVOKED_TOKEN_REPLAY`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-28"
+      ],
+      "pos_check": "- ACC/POS：Unknown effect not erased, previously admitted in-flight reconciled；本域判準：post-revoke use fails before spawn; existing effects reconciled。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 347,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-C6 bound to PD-28 / EDGE-WO-B1-C6 (domain REVOKE_RACE)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 359,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "FOUR_LAYER_ID",
+      "edges": [
+        "EDGE-OBS-B1-C7"
+      ],
+      "effect_class": "SOURCE_READ",
+      "id": "PI-B1-C7",
+      "kind": "PI",
+      "neg_check": "- NEG：`green patch with stale loaded binary -> LOADED_BINARY_MISMATCH`。NEG 細分碼 `PATCH_GREEN_NOT_LOADED` → canonical `LOADED_BINARY_MISMATCH`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-29"
+      ],
+      "pos_check": "- ACC/POS：No source hash used as proof of loaded binary；本域判準：all four identity layers tied to same subject, not merely file on disk。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 359,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-C7 bound to PD-29 / EDGE-OBS-B1-C7 (domain FOUR_LAYER_ID)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 371,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "NATIVE_SUCCESSOR",
+      "edges": [
+        "EDGE-WO-B1-C8"
+      ],
+      "effect_class": "HOST_OP",
+      "id": "PI-B1-C8",
+      "kind": "PI",
+      "neg_check": "- NEG：`successor still external-triggered -> NATIVE_SUCCESSOR_NOT_PROVEN`。NEG 細分碼 `NATIVE_SUCCESSOR_NOT_AUTONOMOUS` → canonical `NATIVE_SUCCESSOR_NOT_PROVEN`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-30"
+      ],
+      "pos_check": "- ACC/POS：Post-turn continuation must originate in Hermes native source；本域判準：fresh separate session native trigger progresses after external account revoked。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 371,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-C8 bound to PD-30 / EDGE-WO-B1-C8 (domain NATIVE_SUCCESSOR)"
+    },
+    {
+      "atom_sources": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 383,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+        }
+      ],
+      "domain": "TRIPLE_GWO",
+      "edges": [
+        "EDGE-OBS-B1-C9"
+      ],
+      "effect_class": "SOURCE_READ",
+      "id": "PI-B1-C9",
+      "kind": "PI",
+      "neg_check": "- NEG：`same receipt reused -> GWO_RECEIPT_ALIAS`。NEG 細分碼 `THREE_GWO_PROXY_PASS` → canonical `GWO_RECEIPT_ALIAS`；EDGE 僅在本域引入適用 drift（不強制 READ_ONLY 具有 lease 或 TODO 有 Git HEAD）；SEC 以同域 token/host/alias 攻擊為反例。",
+      "obligation": "- trigger/input：原子本域需求＋下方原PD slot的Input，轉原Consumer typed output，原source/owner不可改。",
+      "pd_slots": [
+        "PD-31"
+      ],
+      "pos_check": "- ACC/POS：Swapped receipts, same principal, absent third yields FAIL；本域判準：3 different domain receipts, all same intended crosswalk, not aliases。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 383,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "PI-B1-C9 bound to PD-31 / EDGE-OBS-B1-C9 (domain TRIPLE_GWO)"
+    },
+    {
+      "id": "DEVOPS-01",
+      "kind": "DEV-OPS",
+      "neg_check": "缺 WriteSet/Permit 禁 Apply；回原 preimage",
+      "obligation": "原 PD＋preimage、exact files、Tests、Rollback→原 `pipd compile-ecp`/原 DEV Construction Owner→DEV ECP/ConstructionContract",
+      "pos_check": "POS 原 DEV Writer＋Original HGK Admission 才可 Repo Write",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 65,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "title": "E3 PD->DEV: E3 `PD→DEV`"
+    },
+    {
+      "id": "DEVOPS-02",
+      "kind": "DEV-OPS",
+      "neg_check": "不能把 DEV Grant 轉成 Host/Remote Permit；UNKNOWN 經原 Receiver Reconcile",
+      "obligation": "原 PD＋HostTarget/PolicyEpoch/Effect/Compensation→原 `pipd compile-ecp`/OPS Writer→OPS ECP Proposal",
+      "pos_check": "POS 同 Host/Scope/Issuer",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 66,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "title": "E4 PD->OPS/Host/User/Remote: E4 `PD→OPS/Host/User/Remote`"
+    },
+    {
+      "id": "DEVOPS-03",
+      "kind": "DEV-OPS",
+      "neg_check": "未跑/同 Maker 並非 Checker PASS；回補受影 Case 而非重建全部",
+      "obligation": "PD＋每 Atom 原 Oracle/ACC POS+NEG/CaseID→原 `pipd compile-tqaep`／DOC07→PlannedTQAEP",
+      "pos_check": "POS 原 Case/Oracle 可定位",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 67,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "title": "E5 PD->PlannedTQAEP: E5 `PD→PlannedTQAEP`"
+    },
+    {
+      "id": "DEVOPS-04",
+      "kind": "DEV-OPS",
+      "neg_check": "無 Exact WriteSet/Permit→`ADMISSION_HOLD`",
+      "obligation": "PD/EffectScope→原 `compile-ecp`→DEV/OPS ECP",
+      "pos_check": "PD/EffectScope→原 `compile-ecp`→DEV/OPS ECP",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 82,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "title": "pipd-execution-contract: `pipd-execution-contract`"
+    },
+    {
+      "id": "DEVOPS-05",
+      "kind": "DEV-OPS",
+      "neg_check": "- Domain NEG：scope=** or path escapes root → `CC_SCOPE`；與 missing-required/unknown-key 的 schema拒收分開。",
+      "obligation": "- required：subject, writable_scope, expected_changes, tests, rollback, evidence_expectations, subject_id, version, content_hash, schema_version。",
+      "pos_check": "- 專屬 Reader invariant：writable_scope exact contained paths，expected_changes/tests/rollback 對同 preimage。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 127,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "source_lines": {
+        "neg_check": 127,
+        "obligation": 125,
+        "pos_check": 126
+      },
+      "title": "ConstructionContract reader: exact writable scope"
+    },
+    {
+      "id": "DEVOPS-06",
+      "kind": "DEV-OPS",
+      "neg_check": "- Domain NEG：DEV permission used for HOST_OP → `WRONG_EFFECT_GRANT`；與 missing-required/unknown-key 的 schema拒收分開。",
+      "obligation": "- required：effect_intent, permission, retries, idempotency, readback, rollback, subject_id, version, content_hash, schema_version。",
+      "pos_check": "- 專屬 Reader invariant：effect_intent/permission/retries/idempotency/readback/rollback按同scope；UNKNOWN不得重播。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 137,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "source_lines": {
+        "neg_check": 137,
+        "obligation": 135,
+        "pos_check": 136
+      },
+      "title": "ECP reader: DEV permission must not carry a host effect"
+    },
+    {
+      "id": "DEVOPS-07",
+      "kind": "DEV-OPS",
+      "neg_check": "- Domain NEG：foreign lease generation used to execute → `LEASE_FENCING_DENY`；與 missing-required/unknown-key 的 schema拒收分開。",
+      "obligation": "- required：receiver_binding_id, receiver_binding_version, receiver_binding_hash, lease, state, subject_id, version, content_hash, schema_version。",
+      "pos_check": "- 專屬 Reader invariant：receiver_binding_id/version/hash+lease/state同原HGK Reader；seam不取代Issuer。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "line": 157,
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "source_lines": {
+        "neg_check": 157,
+        "obligation": 155,
+        "pos_check": 156
+      },
+      "title": "ExecutionBindingRef reader: lease fencing generation"
+    },
+    {
+      "id": "DEVOPS-08",
+      "kind": "DEV-OPS",
+      "neg_check": "Stage/Canary 冒 Active→`POLICY_CONSUMED_HOLD`。回復原 epoch 只由 Fabric Owner 執行。",
+      "obligation": "1. **Policy Flow**：Original Fabric Source＋Owner Approved Epoch→原 `route_event()` 是決策 Reader，不是 Host Activation；由原 Host Consumer 產 `ActiveEpoch/LoadedSHA/ConsumedACK` 真 Receipt；HGK 只 consume 相同 PolicyEpoch。Stage/Canary 冒 Active→`POLICY_CONSUMED_HOLD`。回復原 epoch 只由 Fabric Owner 執行。",
+      "pos_check": "Original Fabric Source＋Owner Approved Epoch→原 `route_event()` 是決策 Reader，不是 Host Activation；由原 Host Consumer 產 `ActiveEpoch/LoadedSHA/ConsumedACK` 真 Receipt；HGK 只 consume 相同 PolicyEpoch。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+        "line": 42,
+        "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f"
+      },
+      "title": "Fabric Policy flow: route_event is a decision reader, not host activation"
+    },
+    {
+      "id": "DEVOPS-09",
+      "kind": "DEV-OPS",
+      "neg_check": "若無實際 Issuer/launcher ABI 只能 `ADMISSION_HOLD`。真 Process PID、Loaded Module Origin、Requested/Served 都必讀。",
+      "obligation": "3. **Execution Flow**：PIPD PD/DEV/OPS ECP→原 HGK WorkOrder/Permit/Lease→Hermes pinned Profile+Worker；原 Worker/Tool 只執 exact `OperationSemanticID/WriteSet/HostTarget`；返回 Native Raw；若無實際 Issuer/launcher ABI 只能 `ADMISSION_HOLD`。真 Process PID、Loaded Module Origin、Requested/Served 都必讀。",
+      "pos_check": "PIPD PD/DEV/OPS ECP→原 HGK WorkOrder/Permit/Lease→Hermes pinned Profile+Worker；原 Worker/Tool 只執 exact `OperationSemanticID/WriteSet/HostTarget`；返回 Native Raw",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+        "line": 44,
+        "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f"
+      },
+      "title": "PIPD PD/DEV/OPS ECP -> HGK WorkOrder/Permit/Lease -> Hermes pinned worker"
+    },
+    {
+      "id": "DEVOPS-10",
+      "kind": "DEV-OPS",
+      "neg_check": "ToolDone 不等於 EffectKnown，未知必 `RECONCILE_REQUIRED`；Repo/Host/User/Remote 由各原 Owner 按原補償 ECP 清理 residue。",
+      "obligation": "4. **World Flow**：Hermes Tool 完成事件→原 Receiver 查受治理世界狀態和 Journal→分類 `APPLIED/PARTIAL/NO_EFFECT/UNKNOWN`；ToolDone 不等於 EffectKnown，未知必 `RECONCILE_REQUIRED`；Repo/Host/User/Remote 由各原 Owner 按原補償 ECP 清理 residue。",
+      "pos_check": "Hermes Tool 完成事件→原 Receiver 查受治理世界狀態和 Journal→分類 `APPLIED/PARTIAL/NO_EFFECT/UNKNOWN`",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+        "line": 45,
+        "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f"
+      },
+      "title": "World flow: tool-done is not effect-known; UNKNOWN forces reconcile"
+    },
+    {
+      "id": "DEVOPS-11",
+      "kind": "DEV-OPS",
+      "neg_check": "Foreign/Stale/Replay/OutScope→DENIED，不 Spawn",
+      "obligation": "HGK 原 Issuer/Receiver 證 Permit/TTL/Nonce/Subject/Operation/WriteSet",
+      "pos_check": "`ADMITTED`（原 State Enum 讀值，不自造）",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+        "line": 55,
+        "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f"
+      },
+      "title": "ADMISSION state: HGK issuer proves Permit/TTL/Nonce/Subject/Operation/WriteSet"
+    },
+    {
+      "id": "DEVOPS-12",
+      "kind": "DEV-OPS",
+      "neg_check": "舊 Generation 的 Worker ACK 無效，不因 timeout 假定無效果",
+      "obligation": "HGK SharedSpine transaction、WorkerIdentity、LeaseGeneration/FencingToken",
+      "pos_check": "唯一當期 holder 可進 `RUNNING`",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+        "line": 56,
+        "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f"
+      },
+      "title": "LEASE_CAS state: unique current holder via fenced generation"
+    },
+    {
+      "id": "DEVOPS-13",
+      "kind": "DEV-OPS",
+      "neg_check": "`blank_goal`、Source Escape、`_profile_meta`、zero atom、broad scope、stale repo、DEV token 充 OPS、no rollback、self checker、cross case raw → 各自受影 NACK",
+      "obligation": "**真正接收測試**：`blank_goal`、Source Escape、`_profile_meta`、zero atom、broad scope、stale repo、DEV token 充 OPS、no rollback、self checker、cross case raw → 各自受影 NACK；非效果 L0/L1 維持可續工，並保留 27 PI 與 31 PD 原 ID 及各自原 Oracle/NEG。",
+      "pos_check": "非效果 L0/L1 維持可續工，並保留 27 PI 與 31 PD 原 ID 及各自原 Oracle/NEG。",
+      "source": {
+        "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "line": 405,
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      "title": "Real receive tests for the handoff: ten named negative inputs, each with its affected NACK"
+    }
+  ],
+  "counts": {
+    "DEV-OPS": 13,
+    "PD": 31,
+    "PI": 56
+  },
+  "derivation_note": "PI atoms are read from 02_FIRST_WORK/PI-PKG.json (acceptance_cue, oracle, negative fixture) and from the B1 bridge in 10B_B1_PI27_PD31.md. The 31 PD slots are the 31 EDGE blocks. obligation/pos_check/neg_check are verbatim excerpts of the block lines named in source / source_lines; the four B1 atoms that bridge two slots (PI-B1-B3, B4, B5, C3) appear once with both pd_slots listed, since their block text is identical on both sides. Where a source line is a table row, cells are quoted as written; where it is prose, pos_check/neg_check are minimal restatements of that same line. The cited line is authoritative over every restatement.",
+  "generated_at": "2026-10-30T19:21:46+08:00",
+  "inputs": {
+    "files": [
+      {
+        "bytes": 73292,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      {
+        "bytes": 16794,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+        "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f"
+      },
+      {
+        "bytes": 44264,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      {
+        "bytes": 57292,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      }
+    ],
+    "nonce": "NONCE-WPB-20261030",
+    "package_root": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1"
+  },
+  "promotion": "NONE - candidate surface only",
+  "schema": "fhs.pi_pd_dev_ops_candidates@1",
+  "scope_note": "Artefact only: a candidate surface, no verdict and no promotion. Nothing here asserts that any PI, PD or DEV-OPS slot was executed, admitted or accepted; native status stays NATIVE_NOT_RUN. Local readback only - not external acceptance, not release.",
+  "status": "OK",
+  "work_package": "WP-FHS-05"
+}

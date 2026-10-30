@@ -1,0 +1,16 @@
+{
+  "persona": "持有普通工程 Goal 的單人 Owner",
+  "clean_start": false,
+  "source_sha": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+  "selected_path": "WP-FHS-00→WP-FHS-01 / WP-FHS-15→original PIPD compile",
+  "first_useful_output": "RUN/ProductSPEC.json",
+  "elapsed_ms": 1832.616,
+  "questions_reasked": 0,
+  "error_count": 0,
+  "provider_off": true,
+  "consumer_acceptance": {
+    "reader": "original PIPD pipeline.validate_pi + validate_bundle",
+    "verdict": "PASS",
+    "native": "NATIVE_NOT_RUN"
+  }
+}

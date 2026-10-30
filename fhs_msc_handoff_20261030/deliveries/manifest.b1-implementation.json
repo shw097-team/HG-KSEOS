@@ -1,0 +1,729 @@
+{
+ "schema": "DURABLE-IMPORT-MANIFEST/1",
+ "id": "b1-implementation",
+ "source_root": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\B1",
+ "built_at_utc": "2026-10-30T10:06:46+00:00",
+ "files": [
+  {
+   "path": "B1_施工/B1指揮施工_總紀錄.md",
+   "bytes": 365435,
+   "sha256": "5e83ec59cf226d666146f0d73436cd87b30e35d30918657c6762f04ee576208c"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT.md",
+   "bytes": 248187,
+   "sha256": "6f24b2aac28dd8b3aa4823250dc6c18115580f743f141d2db2fb3011e8804409"
+  },
+  {
+   "path": "B1_施工/B1施工狀況_總鑑定分析.md",
+   "bytes": 355565,
+   "sha256": "a7b17816b46d8f4ff38a3b62b336b7d36895d9730e82e6b8f892141f013f4936"
+  },
+  {
+   "path": "B1_施工/B1狀況根因解決_討論.md",
+   "bytes": 140843,
+   "sha256": "f692f87ea6753454c3415738e3db3ca2621f58a4c7fda03b2516992ae27b8691"
+  },
+  {
+   "path": "B1_施工/FHS_MSC_B1_Task_Handoff_Report_v1_2026-10-27.md",
+   "bytes": 80850,
+   "sha256": "aa006bc849c5bb6404265de6a28678e0a4ed8b75b13521b39d5dcf28fc07162d"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT/FHS_MSC_B1-r10_Hermes_UserScoped_Native_Autonomous_Thin_Command_2026-10-27_r10.md",
+   "bytes": 16413,
+   "sha256": "d7094756e0826f1422562053cfb1602a25c33d97c01f0a68d683dad834d9c749"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT/FHS_MSC_B1-r1_Codex_Master_Mission_Prompt_2026-10-26_r1.md",
+   "bytes": 42507,
+   "sha256": "043f9de523a1c6043121809788667fed62968ad8034465c5d9a88471c8a1c6f5"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT/FHS_MSC_B1-r2_Codex_Resume_Command_2026-10-27_r2.md",
+   "bytes": 36017,
+   "sha256": "db997580d0ad7a351d198bfa0a462d71670f2c43b32024995af555f7d3138dbc"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT/FHS_MSC_B1-r3_Codex_Continuous_Resume_Command_2026-10-27_r3.md",
+   "bytes": 36096,
+   "sha256": "0dba58c453f7afae1e33754a693660842365f0ae963fd77fb213dbdae2b0a843"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT/FHS_MSC_B1-r4_Codex_Continuous_Resume_Command_2026-10-27_r4.md",
+   "bytes": 36603,
+   "sha256": "5ca69da0d185559d86ac6f01f73ed2b52a9d29837db177d8b9a2f766008b44ca"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT/FHS_MSC_B1-r5_Codex_Thin_Autonomous_Repair_Command_2026-10-27_r5.md",
+   "bytes": 12679,
+   "sha256": "db7fcd3c63d1dc7f374afc171d1466c5d70f7dd73622458197e39876977a4785"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT/FHS_MSC_B1-r6_Codex_Thin_Native_Acceptance_Command_2026-10-27_r6.md",
+   "bytes": 15233,
+   "sha256": "1491788c4ba701bcf1c2a8007dfc8a0437ac1949c4bc2cfa222c1ea58a8f78e3"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT/FHS_MSC_B1-r7_Hermes_Thin_Autonomous_Construction_Acceptance_2026-10-27_r7.md",
+   "bytes": 13147,
+   "sha256": "9ccd6ac77b49a7a3b51a53f208ea17189172b278ad745b93916d09f676329bb8"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT/FHS_MSC_B1-r8_Hermes_Single_Owner_Autonomous_Native_Thin_Command_2026-10-27_r8.md",
+   "bytes": 15925,
+   "sha256": "d566e3eb0eaaaab9ac32735c015be5a71edcece6cc68b673cd8ee881effd85dd"
+  },
+  {
+   "path": "B1_施工/B1施工_PROMPT/FHS_MSC_B1-r9_Hermes_Thin_Autonomous_Closeout_Command_2026-10-27_r9.md",
+   "bytes": 16960,
+   "sha256": "c753a0391ad773f662f384a94c3691d3afb4e5c07e5f4917b01167206dc7630a"
+  },
+  {
+   "path": "B1_施工/B1施工狀況_鑑定分析/B1施工狀況_鑑定分析-1.md",
+   "bytes": 117066,
+   "sha256": "964789b0fcdf9375755f8de6086d37dbe37a6355c465f0a3cbdf7054384d59f3"
+  },
+  {
+   "path": "B1_施工/B1施工狀況_鑑定分析/B1施工狀況_鑑定分析-2.md",
+   "bytes": 83733,
+   "sha256": "c73d450f2e68b204a6b50ff414ccca7f8a94dd59bbaa8a9f52fe7e21716cee0b"
+  },
+  {
+   "path": "B1_施工/B1施工狀況_鑑定分析/B1施工狀況_鑑定分析-3_單一 OWNER 全自動授權與 Native 驗收鏈路修復方案.md",
+   "bytes": 24468,
+   "sha256": "38a28bbdcf42b87ca4e1cbe39c946acad045fcf778b88e6e52ff43d8e8fc5175"
+  },
+  {
+   "path": "B1_施工/B1施工狀況_鑑定分析/B1施工狀況_鑑定分析-4_Hermes 自治施工、四庫整合與正式 Native 驗收鑑定報告.md",
+   "bytes": 23415,
+   "sha256": "fae5161cd4afd791d09115c5592b74a7dee5a9b2df0897d4cc236dced216b310"
+  },
+  {
+   "path": "B1_施工/B1施工狀況_鑑定分析/B1施工狀況_鑑定分析-5_Native 授權鏈路的架構審查與修正裁決.md",
+   "bytes": 25204,
+   "sha256": "305d35fb583b26d1461ec0af12c9cd03c6a8afeeda862e3400fa70ee4455003b"
+  },
+  {
+   "path": "B1_施工/B1施工狀況_鑑定分析/B1施工狀況_鑑定分析-6_B1_HERMES_R10_任務停止根因自鑑定回報.md",
+   "bytes": 12577,
+   "sha256": "0ae72e59016881622f6c81fc278880775a34bf1087acba2709fbbbdf97934f83"
+  },
+  {
+   "path": "B1_施工/B1施工狀況_鑑定分析/B1施工狀況_鑑定分析-7_高自動化停工根因、治理鏈路與四系統工程鑑定報告.md",
+   "bytes": 36274,
+   "sha256": "d700944f618564419e4506f20beb9118387634150f90843e8a8c411f7f1181f1"
+  },
+  {
+   "path": "B1_施工/B1施工狀況_鑑定分析/B1施工狀況_鑑定分析-8_PIPD-LS-SP 與 FHS-MSC B1 高自動化失效｜工具設計、產包治理與執行鏈路專項鑑定報告.md",
+   "bytes": 27007,
+   "sha256": "2a1c50de1cef181fb47e595f9bae7da4dccb846c3320d4c2504de7f3b932d481"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS-MSC_B1_Bootstrap_Repair_PIPD-LS-PKG_藍圖.md",
+   "bytes": 707354,
+   "sha256": "b7c7888e84d00b41eff7e8e492eed967ece9b84c1b6145edc18c30408c7d4abb"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS-MSC_R00-R001_FINAL_HANDOFF_ACCEPTANCE_REPORT.md",
+   "bytes": 29250,
+   "sha256": "a13e3e8d7a120d8141eaba700d098123a055b32b5971e5c97352376a9bab9043"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_Codex_Thin_Autonomous_DOC00-08_Repair_Command_2026-10-27.md",
+   "bytes": 9457,
+   "sha256": "c51ce28c29a19b5157ec18dcf64298109d7acbc4836209452aabb3e71bee73bd"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_DOC00-08_Codex_High_Automation_Repair_Plan_v1_2026-10-27.md",
+   "bytes": 82064,
+   "sha256": "371fbb7be6a0a54d1b939d8e640eef2fb449569aef9df090a20ae08d814996b3"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/AUTHORITY_AND_VERSION_MATRIX.json",
+   "bytes": 2168,
+   "sha256": "81fb4225dc1c0cb52e5ac4f6b65753711cb6bc85c79b5be8904e6e4710592ea8"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/AUTHOR_SIDE_REVIEW.md",
+   "bytes": 1399,
+   "sha256": "756e01144b851943dae0d8df728f7cde88f7c89eb75c97caf2bbd339854b7eb8"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/B1_DOC_REPAIR_DELIVERY_2026-10-27.zip",
+   "bytes": 654793,
+   "sha256": "a2d5b8253df1831e4de0aeb66f99fc60ca5e2e018f4ad0c727f8045550a45da6"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BUILD_CONTEXT.json",
+   "bytes": 996,
+   "sha256": "1f868212b84f6f6003023130f0b599faa1239408dd6d073a7ca1a9350ad90b4d"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/CHANGES.json",
+   "bytes": 70601,
+   "sha256": "5f208f4480d5d202afd39cfbbfa383d0786223abdecfdd957b50efd4832b3ec4"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/CHANGES_AND_DECISIONS.md",
+   "bytes": 1423,
+   "sha256": "93ca8f5d8e7bf6bea601d13f979640d8001f003837ff2c5712d8b430525c9aa1"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF_STATS.json",
+   "bytes": 3045,
+   "sha256": "596f2a7482fef292a3d1570c449fce47c5d9a4a1b2f60a4e597bebd3195c28cb"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/EXECUTION_PROJECTION_CANDIDATE.json",
+   "bytes": 23459,
+   "sha256": "0198ef19ddfa3a1068b75eb95b9f0e3f53119e9c325a58d057b7001d6c532479"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/FILE_SHA_MANIFEST.json",
+   "bytes": 10492,
+   "sha256": "79febd2dabb082afba48f679f258d615cf01d32761f8f473f69725749827b8f7"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/IDENTITY_INVENTORY.json",
+   "bytes": 168060,
+   "sha256": "9afb8d402e25ef1326c6dd0533a024b64dc0e4e3d5a34ae900d013ac4666fc34"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/ISSUE_AND_CR_REGISTER.md",
+   "bytes": 3214,
+   "sha256": "874dabbf36b2037c9949788297043c277dcca17f82630e8af3285deb5650dc84"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/NEXT_B1_HERMES_HANDOFF.md",
+   "bytes": 1758,
+   "sha256": "5ea6a570b8b7415f98e34f1047bd8248292406ac18edc103f7abbc436af5bab7"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/PLAN_39_SOURCE_COMPARISON.json",
+   "bytes": 14958,
+   "sha256": "d1ce80d2912a94489c7e8ecb748be9c2b04fea40b3d4ba39ac4d9f6e6843ac84"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/RCA_48_COVERAGE.md",
+   "bytes": 13917,
+   "sha256": "4e5806b05477c2a61dd9bdcdf827986fb598d2d31b0f64d199821006f3ef66f1"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/RCA_EVIDENCE.json",
+   "bytes": 329672,
+   "sha256": "5d73cd00d6007da953a87990c2606d2c16d6342d0ce0e2fc9fa1977b42e2b089"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/README_修補版導覽.md",
+   "bytes": 3611,
+   "sha256": "6634af984f8bb18cc462a78b8ee39afe37a540c0c128f40292ece91665998b95"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/SOURCE_AND_CANDIDATE_SHA.md",
+   "bytes": 1456,
+   "sha256": "19ea6a1217505d76d21ce66fbdc7416d3f8cff722d4be201196359bf094b981d"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/SOURCE_REFERENCE_AUDIT.json",
+   "bytes": 107834,
+   "sha256": "099e839cdd336eed3e392f9a6ea80840c512941ca984b85629985ceeee17740c"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/SOURCE_RELOCATION_LOG.json",
+   "bytes": 1240,
+   "sha256": "47617f2ca212a9b70e44c552084f6133036fe62d0acbd60aad89420c51795842"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/SOURCE_SHA_MANIFEST.json",
+   "bytes": 89659,
+   "sha256": "599612b5b8ae7db9b3f1227e9c85656f8f0b17576c4d1bdb396c41a8e37087f1"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/VALIDATION_REPORT.md",
+   "bytes": 3272,
+   "sha256": "8e845a4871688a7a3a35ec92c0caaa2902efcaa5033ffa8c0f263fc733db3014"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/ZIP_CONTENTS.json",
+   "bytes": 3261,
+   "sha256": "56703eabdb5d106dc2502e35929f0656ac3515eab5069ed6c6b8db2acab302ec"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/ZIP_SHA256.txt",
+   "bytes": 105,
+   "sha256": "99389a2ef64ff8d7cb231cb30a4835226d0ad2f6bf67fb7aa7e382c94061b75a"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/ZIP_VERIFY_REPORT.json",
+   "bytes": 13319,
+   "sha256": "29d0760cd071117f6003a5f484fdc73f6496d8a9ac622fc3902c67af0ccbcf46"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_Codex_Thin_Autonomous_DOC00-08_Repair_Command_2026-10-27.source",
+   "bytes": 9457,
+   "sha256": "c51ce28c29a19b5157ec18dcf64298109d7acbc4836209452aabb3e71bee73bd"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_DOC00-08_Codex_High_Automation_Repair_Plan_v1_2026-10-27.source",
+   "bytes": 82064,
+   "sha256": "371fbb7be6a0a54d1b939d8e640eef2fb449569aef9df090a20ae08d814996b3"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_00_GOVERNANCE_AND_CONTROL.source",
+   "bytes": 10324,
+   "sha256": "3096e98096ad48b3b3cfda07c6075ccffba8b44c1851a804d63f0ab103aef576"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_01_DOC_B1_PI.source",
+   "bytes": 53244,
+   "sha256": "e1d8931c036a1e9dc97f79a3d0d00f151ea5a29dc81fb3d7aa488d5446d7b666"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_02_DOC_B1_PD.source",
+   "bytes": 62807,
+   "sha256": "8e15b92a69302bbb0f9a6352f80c9687fdfb3a217006703a87b3ba559f42eb2b"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_03_DOC_B1_OPS_ECP.source",
+   "bytes": 24829,
+   "sha256": "54a17818473f2a4b7c4f0f8f504bc96e4e1450540facfd30cf38234fa89e8b8a"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_04_DOC_B1_DEV_ECP.source",
+   "bytes": 9287,
+   "sha256": "7a1e44dfd91bd24011c019f3ff73446e6cebf4b7847d7220f7c78dc25927def5"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.source",
+   "bytes": 455090,
+   "sha256": "1e09126f0c8e92fcd6e8531072a3f1f3033d82a671c2b4bb62c9916e675b7127"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_06_PRODUCT_COVERAGE_AND_R15.source",
+   "bytes": 859287,
+   "sha256": "f929d9cffd462d23bbdb52171f72a450e96e59c8333bc05ebd739a2d38338337"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_07_NATIVE_TOOLCHAIN_EXACT_USAGE.source",
+   "bytes": 19392,
+   "sha256": "d1e0283200ad57cf1a3a1fc62bc09c6980ff118d4b7af4401d011ea87a009ea7"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_08_GOLDEN_WORKORDERS_E2E.source",
+   "bytes": 6741,
+   "sha256": "bc12a5fca45e4f68c1b1a4772b00ca72e0c07be8293527bbaafceadc7347290f"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF/FHS_MSC_B1_PIPD_LS_PKG_00_GOVERNANCE_AND_CONTROL.diff",
+   "bytes": 9253,
+   "sha256": "c7644a62607cf7c1f5ad18987b4e2d26a7efa07db4d9829039983fa3eb779f22"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF/FHS_MSC_B1_PIPD_LS_PKG_01_DOC_B1_PI.diff",
+   "bytes": 4194,
+   "sha256": "57fbf7497ebadcab343f2a3a04c6e62296fae7a1d8b8d79e87635b5575532c1c"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF/FHS_MSC_B1_PIPD_LS_PKG_02_DOC_B1_PD.diff",
+   "bytes": 7068,
+   "sha256": "a747505fe88e17027d802becea14cc081d6c314a5ae208bd00916117254c2af5"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF/FHS_MSC_B1_PIPD_LS_PKG_03_DOC_B1_OPS_ECP.diff",
+   "bytes": 4568,
+   "sha256": "24442640ea6c3126fa08359dbf870c854096f0fba2933eb4f67e7b189ac8b464"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF/FHS_MSC_B1_PIPD_LS_PKG_04_DOC_B1_DEV_ECP.diff",
+   "bytes": 4910,
+   "sha256": "4f56b549c67d9d17e21a3d0f0fd35e962b381a7722a591a260c9b2ad1b59d3fd"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF/FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.diff",
+   "bytes": 6020,
+   "sha256": "b17d01f1d0a0f6bce138055a4ab9ae0c3f249de7019b88e9e536712060674968"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF/FHS_MSC_B1_PIPD_LS_PKG_06_PRODUCT_COVERAGE_AND_R15.diff",
+   "bytes": 3862,
+   "sha256": "4e76f0e4fd9b94a4060b78bfd0136cc5996c0bcaec84d409a7b17895aa7dc2bd"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF/FHS_MSC_B1_PIPD_LS_PKG_07_NATIVE_TOOLCHAIN_EXACT_USAGE.diff",
+   "bytes": 7063,
+   "sha256": "8ea256b6e23109550c93fd4f381f7ca708f2f822e1e4b2fde75334fae3920f73"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF/FHS_MSC_B1_PIPD_LS_PKG_08_GOLDEN_WORKORDERS_E2E.diff",
+   "bytes": 8287,
+   "sha256": "def3018b5b9cc9fffd87c8444992434ff975f905666671233018d4a67c9935e5"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/DIFF/FULL.diff",
+   "bytes": 55233,
+   "sha256": "5f84cf5580e3429e9194a6699cb3df64ecc527d9df2fbe32c5db6cd81e358ec1"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/evidence/DIFF_CHECK_REPORT.json",
+   "bytes": 6825,
+   "sha256": "845157bd2db410362c466a1e222f8510df86bebf40810e414d3d5e40795ee0b9"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/evidence/GREEN_TEST_REPORT.json",
+   "bytes": 23135,
+   "sha256": "66280404a82e04c905329b1fe2492ed62aaeefbe81740500165d31cdc35d0f72"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/evidence/POWERSHELL_PARSE_REPORT.json",
+   "bytes": 580,
+   "sha256": "14341228a29d7117c613395055f273aae59e4f7344e38e53371e9cd475fcfd25"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/evidence/RED_TEST_REPORT.json",
+   "bytes": 24669,
+   "sha256": "00ec470cc51d7051151e5a53a3f7adec890e8cc02ccb2a194102291e21ec00d6"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/PKG/FHS_MSC_B1_PIPD_LS_PKG_00_GOVERNANCE_AND_CONTROL.md",
+   "bytes": 16657,
+   "sha256": "b0583e0304b90fac57a014668b7033446470ada61af76f280532f418f61fac45"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/PKG/FHS_MSC_B1_PIPD_LS_PKG_01_DOC_B1_PI.md",
+   "bytes": 56371,
+   "sha256": "792fac362cd988d2375a002e672ef9b78957a7d34463d00b1935cc20187a532a"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/PKG/FHS_MSC_B1_PIPD_LS_PKG_02_DOC_B1_PD.md",
+   "bytes": 66248,
+   "sha256": "504ba53c9eb2c29160c4d9c6c496d28b38923e1dedbb03003187bb0bd4339567"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/PKG/FHS_MSC_B1_PIPD_LS_PKG_03_DOC_B1_OPS_ECP.md",
+   "bytes": 28200,
+   "sha256": "eb29d79f6c7a6ef3d822ea3cb10c33c4f8b83a2ac250ee3618dc52cd5fb0db81"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/PKG/FHS_MSC_B1_PIPD_LS_PKG_04_DOC_B1_DEV_ECP.md",
+   "bytes": 12942,
+   "sha256": "f4bc16a67355113ce37122e83a6c9f51d13458dea7eecea15a754d991f22188a"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/PKG/FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.md",
+   "bytes": 458745,
+   "sha256": "78d1505dd7f0f03f7667dc090f1168c78f6d3a0c6dc6884579f6b6b78d7ea338"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/PKG/FHS_MSC_B1_PIPD_LS_PKG_06_PRODUCT_COVERAGE_AND_R15.md",
+   "bytes": 862039,
+   "sha256": "9fe50508f012417caf3691d3af82b826ef4a2cda31f3052ef7c0364bf5823af8"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/PKG/FHS_MSC_B1_PIPD_LS_PKG_07_NATIVE_TOOLCHAIN_EXACT_USAGE.md",
+   "bytes": 22908,
+   "sha256": "65ecaae372aba8a94b61e5c8968437dd544e9ca97c1a4448dc6ec2ab0e7a4620"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/PKG/FHS_MSC_B1_PIPD_LS_PKG_08_GOLDEN_WORKORDERS_E2E.md",
+   "bytes": 10626,
+   "sha256": "fbbf94590048390343cda3028894e6ce8bb6c36e940e8aef376705eda4ebaa7c"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/tests/README.md",
+   "bytes": 914,
+   "sha256": "4606a164c38a9b3d4ec5617adfcf17b9bd4a858c8be0e004287a71424679e6ae"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/tests/build_delivery_source.py",
+   "bytes": 38216,
+   "sha256": "616521a75b89051b8c3005d5f01bdc994794450e309e2c484936b1dbb1ef187b"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/tests/contract_model.py",
+   "bytes": 4678,
+   "sha256": "dace63ea0e35d4cb34b800240fc37dfb7231efb6b51c2df70f6cb8f18ea27814"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/tests/finalize_delivery_source.py",
+   "bytes": 18873,
+   "sha256": "02730443c650e19e3b4636ffcec9320a356705fcc0d99baac877987d83aa0d90"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/tests/prepare_evidence_source.py",
+   "bytes": 10678,
+   "sha256": "114d05a53b22422e9936bfa209e3497ce774ca958dfa9e8c7d64690a8c16f93d"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/tests/validate_delivery.py",
+   "bytes": 20119,
+   "sha256": "1fc6b963090e3f497421c935bb7773f3baa9e49af0bb7ac37295d2fc493a26c2"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/tests/verify_powershell.ps1",
+   "bytes": 1198,
+   "sha256": "303c55c33270b881fb5883973047ad2a374a275dc69d0b14805ef641aac60125"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/tests/schemas/profile.input.schema.json",
+   "bytes": 954,
+   "sha256": "d0cb4edc3ff9992d520d3c706234ef7036adb39f1c2f18fbf6bc892d43e8e92a"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_00_GOVERNANCE_AND_CONTROL.md",
+   "bytes": 10324,
+   "sha256": "3096e98096ad48b3b3cfda07c6075ccffba8b44c1851a804d63f0ab103aef576"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_01_DOC_B1_PI.md",
+   "bytes": 53244,
+   "sha256": "e1d8931c036a1e9dc97f79a3d0d00f151ea5a29dc81fb3d7aa488d5446d7b666"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_02_DOC_B1_PD.md",
+   "bytes": 62807,
+   "sha256": "8e15b92a69302bbb0f9a6352f80c9687fdfb3a217006703a87b3ba559f42eb2b"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_03_DOC_B1_OPS_ECP.md",
+   "bytes": 24829,
+   "sha256": "54a17818473f2a4b7c4f0f8f504bc96e4e1450540facfd30cf38234fa89e8b8a"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_04_DOC_B1_DEV_ECP.md",
+   "bytes": 9287,
+   "sha256": "7a1e44dfd91bd24011c019f3ff73446e6cebf4b7847d7220f7c78dc25927def5"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.md",
+   "bytes": 455090,
+   "sha256": "1e09126f0c8e92fcd6e8531072a3f1f3033d82a671c2b4bb62c9916e675b7127"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_06_PRODUCT_COVERAGE_AND_R15.md",
+   "bytes": 859287,
+   "sha256": "f929d9cffd462d23bbdb52171f72a450e96e59c8333bc05ebd739a2d38338337"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_07_NATIVE_TOOLCHAIN_EXACT_USAGE.md",
+   "bytes": 19392,
+   "sha256": "d1e0283200ad57cf1a3a1fc62bc09c6980ff118d4b7af4401d011ea87a009ea7"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_08_GOLDEN_WORKORDERS_E2E.md",
+   "bytes": 6741,
+   "sha256": "bc12a5fca45e4f68c1b1a4772b00ca72e0c07be8293527bbaafceadc7347290f"
+  },
+  {
+   "path": "FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_FINAL_INTEGRATED_SUBSTANTIVE_BODY.md",
+   "bytes": 1498571,
+   "sha256": "956231462511ec24e699e87239c1aa41a0395646cc476e295f3ecc33c0af3d90"
+  },
+  {
+   "path": "FHS_MSC_B1_Four_Party/FHS_MSC_B1_Four_Party_Dogfood_Native_Execution_Plan_r1_1_W18_2026-10-28.md",
+   "bytes": 148669,
+   "sha256": "ce4b07e5949e72298c5ae277cc78db4c6be855142204aad49c55cdbd00ed0cda"
+  },
+  {
+   "path": "FHS_MSC_B1_Four_Party/HERMES_薄PROMPT_FHS-MSC_B1_Four-Party_Dogfood_r1_1_W18_Native_AutoDeploy_GitHub_2026-10-28.md",
+   "bytes": 15482,
+   "sha256": "a7fcd293ea65124f4fcfcf2dab559ec3c9b396d898f0156495905782da5c13a2"
+  },
+  {
+   "path": "FHS_MSC_B1_Four_Party/OLD/FHS_MSC_B1_Four_Party_Dogfood_Native_Execution_Plan_2026-10-28.md",
+   "bytes": 99239,
+   "sha256": "201fc83e12595320030db61362f6ae17361710ec93aa796cb15300fe38fd5983"
+  },
+  {
+   "path": "FHS_MSC_B1_Four_Party/OLD/HERMES 薄 PROMPT｜FHS-MSC B1 Native Bootstrap & Four-Party Dogfood Mission.md",
+   "bytes": 15108,
+   "sha256": "9cba830e008dd09a1ed21db29dda26eca82f13956129c4978e3bf371dfe4c476"
+  },
+  {
+   "path": "FHS_MSC_B1_Four_Party/討論/FHS-MSC B1 Native Bootstrap & Four-Party Dogfood Mission_討論.md",
+   "bytes": 225686,
+   "sha256": "ca8a3fe33d95c9563fc4c40b7dda859f66684ab0ea2e21ccb29953ce3203e540"
+  },
+  {
+   "path": "FHS_MSC_B1_Four_Party/討論/FHS-MSC｜B1 完成後，Hermes 常態任務的啟動方式與 Fabric／HGK 自動接管機制鑑定報告.md",
+   "bytes": 15299,
+   "sha256": "99b193ec8baa558d1963bc2c6702a29eccf40fb5f39bbf96177594ed045fe07c"
+  },
+  {
+   "path": "FHS_MSC_B1_Four_Party/討論/W18_討論.md",
+   "bytes": 48502,
+   "sha256": "a396e955c70c81b4c17ed7eb40353b21ba0fe953da61c7976714fd60f7ed6314"
+  },
+  {
+   "path": "升級 & 修補/HERMES_B1_任務回報.md",
+   "bytes": 17955,
+   "sha256": "c1d8c31bfbbfbedf93a8926eb61d4a35d07425659c6c8234d9f291e8ab4d5d9f"
+  },
+  {
+   "path": "升級 & 修補/SBL-TPM-SP_Native-SBL-TPM_升級藍圖.md",
+   "bytes": 108939,
+   "sha256": "76277ebeba22bd20a1a2204ca8c5d3893938e4fb3e3d410d08a7a9ff9b2412a7"
+  },
+  {
+   "path": "升級 & 修補/SBL_Commander_and_SBL-Commander-Skill_重構升級藍圖.md",
+   "bytes": 104758,
+   "sha256": "2f5a0d41fd64d6a932a7243db9364dcff9e8d7771c7d51844aa3bb49c89d0eed"
+  },
+  {
+   "path": "升級 & 修補/SBL-TPM-SP_Native-SBL-TPM_升級/CODEX_薄PROMPT_SBL-TPM-SP_P4整合升級_2026-10-28.md",
+   "bytes": 10790,
+   "sha256": "1b4252c21f7d6e242ebf8b92ad52d542a4b7e19cef7087736918d398b6cac5ad"
+  },
+  {
+   "path": "升級 & 修補/SBL-TPM-SP_Native-SBL-TPM_升級/DELIVERY_REPORT.md",
+   "bytes": 13335,
+   "sha256": "cd6cbaeb0c889952a9c7b91427d5d5a4f066dc76f242e0541df9e8db74f635f2"
+  },
+  {
+   "path": "升級 & 修補/SBL-TPM-SP_Native-SBL-TPM_升級/SBL-TPM-SP & Native SBL-TPM_升級討論.md",
+   "bytes": 241225,
+   "sha256": "92305bce348b0dc4af27f9cf56432ba195b2ad5def3150440f0a61450c0b15c4"
+  },
+  {
+   "path": "升級 & 修補/SBL-TPM-SP_Native-SBL-TPM_升級/SBL-TPM-SP_Codex_高自動化升級修補執行方案_r1_2026-10-27.md",
+   "bytes": 106913,
+   "sha256": "e15b8b694da6396f58a010df0a22fb7ee404d7da8a0fca325f6b96471138dd16"
+  },
+  {
+   "path": "升級 & 修補/SBL-TPM-SP_Native-SBL-TPM_升級/SBL-TPM-SP_Native-SBL-TPM_升級藍圖.md",
+   "bytes": 108939,
+   "sha256": "76277ebeba22bd20a1a2204ca8c5d3893938e4fb3e3d410d08a7a9ff9b2412a7"
+  },
+  {
+   "path": "升級 & 修補/SBL-TPM-SP_Native-SBL-TPM_升級/sbl-tpm-sp-0.2.0rc1-private.zip",
+   "bytes": 4987096,
+   "sha256": "7cc15a09dafee9f724306d802374c3161a7f5d0c964fd32f4287618e3b5f8c25"
+  },
+  {
+   "path": "升級 & 修補/SBL_Commander_and_SBL-Commander-Skill_重構升級/SBL Commander & SBL-Commander-Skill_升級討論.md",
+   "bytes": 126454,
+   "sha256": "61c16f2d9a8100c0e60265666ccf238c05d3eda87f0123ec7730b1064bec5c8e"
+  },
+  {
+   "path": "升級 & 修補/SBL_Commander_and_SBL-Commander-Skill_重構升級/SBL_Commander-SP_to_SBL-Commander-Skill_Codex_薄指揮_PROMPT_2026-10-28.md",
+   "bytes": 11940,
+   "sha256": "ec038a7ab2cb98fc73fc5a65ab5e4e02fd586d1599a558cd60b4e39f41821aad"
+  },
+  {
+   "path": "升級 & 修補/SBL_Commander_and_SBL-Commander-Skill_重構升級/SBL_Commander-SP_to_SBL-Commander-Skill_Codex_高自動化重構升級施工方案_2026-10-27_v1.md",
+   "bytes": 169883,
+   "sha256": "86bf842c5ea46b71bea42485b48e6f91138ceb64db7f620cd1bb4971f8cd5a8a"
+  },
+  {
+   "path": "升級 & 修補/SBL_Commander_and_SBL-Commander-Skill_重構升級/SBL_Commander_and_SBL-Commander-Skill_重構升級藍圖.md",
+   "bytes": 104758,
+   "sha256": "2f5a0d41fd64d6a932a7243db9364dcff9e8d7771c7d51844aa3bb49c89d0eed"
+  },
+  {
+   "path": "升級 & 修補/SBL_Commander_and_SBL-Commander-Skill_重構升級/sbl-commander-guide-CANDIDATE.zip",
+   "bytes": 6273,
+   "sha256": "276afd052da1900ff665f3cb6583c176a63da12ac5c11862b72116722f9aadaf"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/01_compaction_event_discrepancy.md",
+   "bytes": 2985,
+   "sha256": "f1d97e180666afb1682ac240ae2b0aef6502961eb3214236f506f46d2cd21042"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/01_g2_counter_correction.md",
+   "bytes": 2903,
+   "sha256": "22c35dcdadb636b0d2eafc925300a15d4ba4b29ce85c6dce0cb174bffab2770e"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/02_compaction_first_event.json",
+   "bytes": 5046,
+   "sha256": "66ed7ede8573ef1918b79ae19baf9daa976dec48a34e53736b4151280ecd910a"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/02_source_mechanism_crosswalk.md",
+   "bytes": 3276,
+   "sha256": "98d326b42aaf947475929675bb14b1fd01683b0efc1e9d96a5ce45762053d24f"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/02_upgrade_diff_and_integrity.md",
+   "bytes": 3201,
+   "sha256": "68196585e44cbde66503d8ef6c5a14a025991810246a73cc23bfe3d02644fd99"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/04_minimum_patch_or_keep_decision.md",
+   "bytes": 2424,
+   "sha256": "3243ca6ab65167b7cc35cddc80d64d665165b9cb4583c02b7597d634e9cc3d89"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/05_G4_COMPACTION_ROOT_CAUSE_AND_REPAIR_REPORT.md",
+   "bytes": 10910,
+   "sha256": "73e0037fcc8d849d7b7c4de71f294caddb860068967cf5f4f95af007bc8fb2a7"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/05_ops_checkpoint_rollback.md",
+   "bytes": 2505,
+   "sha256": "66e328843716129d469b3780de6ea0cce2d81953d9f2eb0865dafbb836d2bf96"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/06_decision_and_rollback.md",
+   "bytes": 2312,
+   "sha256": "482fe5ac593099cd43487618b71b14e1350c98798922124cd1001ffa40a11f5b"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/07_owner_operations_handoff.md",
+   "bytes": 2139,
+   "sha256": "7c956e87a22b802a154792e3a8db27c5fe2a9b2915b961e95b05544e86c872d3"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/B1_R5_CROSS_MODEL_ENGINEERING_PROVENANCE_AUDIT.md",
+   "bytes": 23462,
+   "sha256": "d00cbcc95cd49bd526ff31d74c64a874b7dccdf256705de4dea9d82a77d3f074"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/B1_R5_T0_T1_T2_FILE_DELTA.tsv",
+   "bytes": 2963,
+   "sha256": "25dceadb90a70c365cf393951d565acbc365c8705ff2800bf497d29ceaba4909"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/HERMES_AGENT_Codex_Compaction_G2_MinimalFix_OwnerDirective_2026-10-27.md",
+   "bytes": 33667,
+   "sha256": "e2f6e3b39e683af9a84f00891f1d9497c72c4b5afbff2406efbcd42e37937cb2"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/HERMES_AGENT_Codex_DualRouter_G3_Autonomous_Upgrade_Compaction_Repair_2026-10-27.md",
+   "bytes": 28995,
+   "sha256": "8f4f8eeccd17511595531aad76a965ab0402ce3180e43fcbb91bc75b4ce10c9d"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/HERMES_AGENT_Codex_G4_Desktop_DeepSeek_RealTask_Primary_Closeout_2026-10-27.md",
+   "bytes": 25459,
+   "sha256": "c067418b1378108cf0692cb9a7e5a26f1f368a5dec2405b0cf2d0c84fdfa6642"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/HERMES_AGENT_Codex_OpenCodeGo_Compaction_Router_AB_Repair_2026-10-27_r1.md",
+   "bytes": 38804,
+   "sha256": "c1bfa21d27237804f32933449e4415b950cc5b61172202f0de5edd17bf0d64b9"
+  },
+  {
+   "path": "升級 & 修補/雙模型路由/從 GPT-6.1 Sol 變更為 DeepSeek V4.1 Flash.md",
+   "bytes": 269213,
+   "sha256": "cbd0d96e418c68e4464d5c51fd05448eb9cc27fbce0224ae503a4969936a1ee5"
+  }
+ ],
+ "files_count": 141,
+ "payload_bytes": 17669675,
+ "payload_rollup_sha256": "6287198b818c9a01b639ef65b2191f1fb2f2bbb3349292d00229cde228b3f96c",
+ "derived_not_hashed": [],
+ "skipped": [],
+ "walk_errors": [],
+ "durability": {
+  "state": "MANIFEST_ONLY",
+  "what_is_needed": [
+   "commit this manifest",
+   "seal the payload into one deterministic archive and publish it as an immutable release asset",
+   "record the archive digest in the receipt",
+   "register the id in the control-plane registry"
+  ],
+  "why": "a directory on disk is not durable: no lineage, no digest other than this one, no way for a second party to verify it after the machine changes"
+ }
+}

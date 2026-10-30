@@ -1,0 +1,719 @@
+{
+  "goal": "為普通 Goal 產生有來源與可判 POS/NEG 的 Product、Architecture、Program SPEC，交原 PIPD，再交 Hermes 於原權限下續工",
+  "sources": [
+    "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md"
+  ],
+  "constraints": [
+    "SOURCE_READ then LOCAL_DRAFT",
+    "provider_off=true",
+    "exact isolated draft outputs"
+  ],
+  "non_goals": [
+    "Native admission",
+    "install/build",
+    "world effect",
+    "independent acceptance",
+    "release"
+  ],
+  "subject_id": "INTENT-3aa8fef95d17e62b",
+  "content_hash": "3aa8fef95d17e62b1da5f2f411d5623e4683ef82f9b0218b2d8e97eae11f3293",
+  "schema_version": "IntentCard@1",
+  "atoms": [
+    {
+      "req_id": "REQ-8ca31c3b63e9d8413f79",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-0-68",
+        "span": [
+          0,
+          68
+        ],
+        "child": 0,
+        "text": "The first work must accept an ordinary nonempty Goal from its caller",
+        "source_text": "The first work must accept an ordinary nonempty Goal from its caller",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "verification",
+      "acceptance_cue": "MUST: The first work must accept an ordinary nonempty Goal from its caller",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-8ca31c3b63e9d8413f79",
+          "predicate": "The first work must accept an ordinary nonempty Goal from its caller",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-8ca31c3b63e9d8413f79/negative",
+        "failure_condition": "violate MUST: The first work must accept an ordinary nonempty Goal from its caller"
+      }
+    },
+    {
+      "req_id": "REQ-fb32edfab84f37c859d3",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-70-165",
+        "span": [
+          70,
+          165
+        ],
+        "child": 0,
+        "text": "The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents",
+        "source_text": "The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-fb32edfab84f37c859d3",
+          "predicate": "The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-fb32edfab84f37c859d3/negative",
+        "failure_condition": "violate MUST: The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents"
+      }
+    },
+    {
+      "req_id": "REQ-65751e46474c1c7285c5",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-167-250",
+        "span": [
+          167,
+          250
+        ],
+        "child": 0,
+        "text": "The source reader must compare every admitted corpus file against its frozen SHA256",
+        "source_text": "The source reader must compare every admitted corpus file against its frozen SHA256",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The source reader must compare every admitted corpus file against its frozen SHA256",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-65751e46474c1c7285c5",
+          "predicate": "The source reader must compare every admitted corpus file against its frozen SHA256",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-65751e46474c1c7285c5/negative",
+        "failure_condition": "violate MUST: The source reader must compare every admitted corpus file against its frozen SHA256"
+      }
+    },
+    {
+      "req_id": "REQ-d880316cfcf6864c306f",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-252-325",
+        "span": [
+          252,
+          325
+        ],
+        "child": 0,
+        "text": "The source reader must reject a locator escaping its admitted corpus root",
+        "source_text": "The source reader must reject a locator escaping its admitted corpus root",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The source reader must reject a locator escaping its admitted corpus root",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-d880316cfcf6864c306f",
+          "predicate": "The source reader must reject a locator escaping its admitted corpus root",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-d880316cfcf6864c306f/negative",
+        "failure_condition": "violate MUST: The source reader must reject a locator escaping its admitted corpus root"
+      }
+    },
+    {
+      "req_id": "REQ-fd4ebdda798ab51a503e",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-327-433",
+        "span": [
+          327,
+          433
+        ],
+        "child": 0,
+        "text": "The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key",
+        "source_text": "The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-fd4ebdda798ab51a503e",
+          "predicate": "The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-fd4ebdda798ab51a503e/negative",
+        "failure_condition": "violate MUST: The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key"
+      }
+    },
+    {
+      "req_id": "REQ-9a3917c3e7c727825c13",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-435-494",
+        "span": [
+          435,
+          494
+        ],
+        "child": 0,
+        "text": "The ProductSPEC must identify the actual first work persona",
+        "source_text": "The ProductSPEC must identify the actual first work persona",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The ProductSPEC must identify the actual first work persona",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-9a3917c3e7c727825c13",
+          "predicate": "The ProductSPEC must identify the actual first work persona",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-9a3917c3e7c727825c13/negative",
+        "failure_condition": "violate MUST: The ProductSPEC must identify the actual first work persona"
+      }
+    },
+    {
+      "req_id": "REQ-3d10ca454fa1adf5bbef",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-496-601",
+        "span": [
+          496,
+          601
+        ],
+        "child": 0,
+        "text": "The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal",
+        "source_text": "The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-3d10ca454fa1adf5bbef",
+          "predicate": "The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-3d10ca454fa1adf5bbef/negative",
+        "failure_condition": "violate MUST: The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal"
+      }
+    },
+    {
+      "req_id": "REQ-ddf075f96bb5b78cfa7c",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-603-687",
+        "span": [
+          603,
+          687
+        ],
+        "child": 0,
+        "text": "The ProductSPEC must define a readable three SPEC output as the first useful outcome",
+        "source_text": "The ProductSPEC must define a readable three SPEC output as the first useful outcome",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The ProductSPEC must define a readable three SPEC output as the first useful outcome",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-ddf075f96bb5b78cfa7c",
+          "predicate": "The ProductSPEC must define a readable three SPEC output as the first useful outcome",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-ddf075f96bb5b78cfa7c/negative",
+        "failure_condition": "violate MUST: The ProductSPEC must define a readable three SPEC output as the first useful outcome"
+      }
+    },
+    {
+      "req_id": "REQ-9b72cb316849a211287f",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-689-798",
+        "span": [
+          689,
+          798
+        ],
+        "child": 0,
+        "text": "The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement",
+        "source_text": "The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-9b72cb316849a211287f",
+          "predicate": "The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-9b72cb316849a211287f/negative",
+        "failure_condition": "violate MUST: The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement"
+      }
+    },
+    {
+      "req_id": "REQ-77415e64e678a32ade72",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-800-875",
+        "span": [
+          800,
+          875
+        ],
+        "child": 0,
+        "text": "The ArchitectureSPEC must name one original writer for every interface seam",
+        "source_text": "The ArchitectureSPEC must name one original writer for every interface seam",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The ArchitectureSPEC must name one original writer for every interface seam",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-77415e64e678a32ade72",
+          "predicate": "The ArchitectureSPEC must name one original writer for every interface seam",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-77415e64e678a32ade72/negative",
+        "failure_condition": "violate MUST: The ArchitectureSPEC must name one original writer for every interface seam"
+      }
+    },
+    {
+      "req_id": "REQ-5c8089f128e1c7978a42",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-877-964",
+        "span": [
+          877,
+          964
+        ],
+        "child": 0,
+        "text": "The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload",
+        "source_text": "The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-5c8089f128e1c7978a42",
+          "predicate": "The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-5c8089f128e1c7978a42/negative",
+        "failure_condition": "violate MUST: The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload"
+      }
+    },
+    {
+      "req_id": "REQ-f0e34fe35adb4e26de4f",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-966-1042",
+        "span": [
+          966,
+          1042
+        ],
+        "child": 0,
+        "text": "The ProgramSPEC must retain an acyclic dependency closure for the first work",
+        "source_text": "The ProgramSPEC must retain an acyclic dependency closure for the first work",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The ProgramSPEC must retain an acyclic dependency closure for the first work",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-f0e34fe35adb4e26de4f",
+          "predicate": "The ProgramSPEC must retain an acyclic dependency closure for the first work",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-f0e34fe35adb4e26de4f/negative",
+        "failure_condition": "violate MUST: The ProgramSPEC must retain an acyclic dependency closure for the first work"
+      }
+    },
+    {
+      "req_id": "REQ-c0b6a4ab1021e82f4146",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-1044-1109",
+        "span": [
+          1044,
+          1109
+        ],
+        "child": 0,
+        "text": "The ProgramSPEC must bind each prerequisite to its original owner",
+        "source_text": "The ProgramSPEC must bind each prerequisite to its original owner",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The ProgramSPEC must bind each prerequisite to its original owner",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-c0b6a4ab1021e82f4146",
+          "predicate": "The ProgramSPEC must bind each prerequisite to its original owner",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-c0b6a4ab1021e82f4146/negative",
+        "failure_condition": "violate MUST: The ProgramSPEC must bind each prerequisite to its original owner"
+      }
+    },
+    {
+      "req_id": "REQ-65dbc76056e227804d00",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-1111-1208",
+        "span": [
+          1111,
+          1208
+        ],
+        "child": 0,
+        "text": "The first work must write its three SPEC drafts only inside the admitted isolated draft directory",
+        "source_text": "The first work must write its three SPEC drafts only inside the admitted isolated draft directory",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The first work must write its three SPEC drafts only inside the admitted isolated draft directory",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-65dbc76056e227804d00",
+          "predicate": "The first work must write its three SPEC drafts only inside the admitted isolated draft directory",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-65dbc76056e227804d00/negative",
+        "failure_condition": "violate MUST: The first work must write its three SPEC drafts only inside the admitted isolated draft directory"
+      }
+    },
+    {
+      "req_id": "REQ-37af4ad25a3ef8cacbde",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-1210-1290",
+        "span": [
+          1210,
+          1290
+        ],
+        "child": 0,
+        "text": "The receiver must invalidate only the outputs dependent on a changed source hash",
+        "source_text": "The receiver must invalidate only the outputs dependent on a changed source hash",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The receiver must invalidate only the outputs dependent on a changed source hash",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-37af4ad25a3ef8cacbde",
+          "predicate": "The receiver must invalidate only the outputs dependent on a changed source hash",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-37af4ad25a3ef8cacbde/negative",
+        "failure_condition": "violate MUST: The receiver must invalidate only the outputs dependent on a changed source hash"
+      }
+    },
+    {
+      "req_id": "REQ-d2b33c0e476af2c957be",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-1292-1387",
+        "span": [
+          1292,
+          1387
+        ],
+        "child": 0,
+        "text": "The first work must start source reading plus local drafting without a future execution receipt",
+        "source_text": "The first work must start source reading plus local drafting without a future execution receipt",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The first work must start source reading plus local drafting without a future execution receipt",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-d2b33c0e476af2c957be",
+          "predicate": "The first work must start source reading plus local drafting without a future execution receipt",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-d2b33c0e476af2c957be/negative",
+        "failure_condition": "violate MUST: The first work must start source reading plus local drafting without a future execution receipt"
+      }
+    },
+    {
+      "req_id": "REQ-d437fde8c62b1cf9d431",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-1389-1507",
+        "span": [
+          1389,
+          1507
+        ],
+        "child": 0,
+        "text": "The first work must complete its deterministic source reading plus draft materialization with provider access disabled",
+        "source_text": "The first work must complete its deterministic source reading plus draft materialization with provider access disabled",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The first work must complete its deterministic source reading plus draft materialization with provider access disabled",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-d437fde8c62b1cf9d431",
+          "predicate": "The first work must complete its deterministic source reading plus draft materialization with provider access disabled",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-d437fde8c62b1cf9d431/negative",
+        "failure_condition": "violate MUST: The first work must complete its deterministic source reading plus draft materialization with provider access disabled"
+      }
+    },
+    {
+      "req_id": "REQ-668f3d2c96af876c51b3",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-1509-1634",
+        "span": [
+          1509,
+          1634
+        ],
+        "child": 0,
+        "text": "The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases",
+        "source_text": "The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "knowledge",
+      "acceptance_cue": "MUST: The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-668f3d2c96af876c51b3",
+          "predicate": "The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-668f3d2c96af876c51b3/negative",
+        "failure_condition": "violate MUST: The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases"
+      }
+    },
+    {
+      "req_id": "REQ-44d6c0127d4f89f133d7",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-1636-1730",
+        "span": [
+          1636,
+          1730
+        ],
+        "child": 0,
+        "text": "The receiver must derive the actual RepoContext immediately before any PD construction binding",
+        "source_text": "The receiver must derive the actual RepoContext immediately before any PD construction binding",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "intent",
+      "acceptance_cue": "MUST: The receiver must derive the actual RepoContext immediately before any PD construction binding",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-44d6c0127d4f89f133d7",
+          "predicate": "The receiver must derive the actual RepoContext immediately before any PD construction binding",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-44d6c0127d4f89f133d7/negative",
+        "failure_condition": "violate MUST: The receiver must derive the actual RepoContext immediately before any PD construction binding"
+      }
+    },
+    {
+      "req_id": "REQ-ce6ff8a699d0cafa931b",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-1732-1861",
+        "span": [
+          1732,
+          1861
+        ],
+        "child": 0,
+        "text": "The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation",
+        "source_text": "The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "release",
+      "acceptance_cue": "MUST: The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-ce6ff8a699d0cafa931b",
+          "predicate": "The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-ce6ff8a699d0cafa931b/negative",
+        "failure_condition": "violate MUST: The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation"
+      }
+    },
+    {
+      "req_id": "REQ-5d6191c7f95d61645dc6",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-1863-1947",
+        "span": [
+          1863,
+          1947
+        ],
+        "child": 0,
+        "text": "The worker receiver must reject an expired lease before continuing a governed effect",
+        "source_text": "The worker receiver must reject an expired lease before continuing a governed effect",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "trust_boundary",
+      "acceptance_cue": "MUST: The worker receiver must reject an expired lease before continuing a governed effect",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-5d6191c7f95d61645dc6",
+          "predicate": "The worker receiver must reject an expired lease before continuing a governed effect",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-5d6191c7f95d61645dc6/negative",
+        "failure_condition": "violate MUST: The worker receiver must reject an expired lease before continuing a governed effect"
+      }
+    },
+    {
+      "req_id": "REQ-f022bfea4a4affc17e79",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-1949-2024",
+        "span": [
+          1949,
+          2024
+        ],
+        "child": 0,
+        "text": "The resume receiver must reconcile an unknown world effect before any retry",
+        "source_text": "The resume receiver must reconcile an unknown world effect before any retry",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "intent",
+      "acceptance_cue": "MUST: The resume receiver must reconcile an unknown world effect before any retry",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-f022bfea4a4affc17e79",
+          "predicate": "The resume receiver must reconcile an unknown world effect before any retry",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-f022bfea4a4affc17e79/negative",
+        "failure_condition": "violate MUST: The resume receiver must reconcile an unknown world effect before any retry"
+      }
+    },
+    {
+      "req_id": "REQ-2cf8ea9fa834f3a15857",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-2026-2111",
+        "span": [
+          2026,
+          2111
+        ],
+        "child": 0,
+        "text": "The handoff must retain the original Hermes WorkID queue lease plus journal ownership",
+        "source_text": "The handoff must retain the original Hermes WorkID queue lease plus journal ownership",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "intent",
+      "acceptance_cue": "MUST: The handoff must retain the original Hermes WorkID queue lease plus journal ownership",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-2cf8ea9fa834f3a15857",
+          "predicate": "The handoff must retain the original Hermes WorkID queue lease plus journal ownership",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-2cf8ea9fa834f3a15857/negative",
+        "failure_condition": "violate MUST: The handoff must retain the original Hermes WorkID queue lease plus journal ownership"
+      }
+    },
+    {
+      "req_id": "REQ-e24889f23fdcda5f543f",
+      "source_clause": {
+        "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+        "kind": "file",
+        "clause_id": "clause-2113-2199",
+        "span": [
+          2113,
+          2199
+        ],
+        "child": 0,
+        "text": "The delivery receiver must request the original protected checker after world readback",
+        "source_text": "The delivery receiver must request the original protected checker after world readback",
+        "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3"
+      },
+      "owner": "PIPD-EC",
+      "axis": "release",
+      "acceptance_cue": "MUST: The delivery receiver must request the original protected checker after world readback",
+      "risk_guard": {
+        "polarity": "MUST",
+        "oracle": {
+          "id": "ORACLE-REQ-e24889f23fdcda5f543f",
+          "predicate": "The delivery receiver must request the original protected checker after world readback",
+          "expected": "required"
+        },
+        "negative_fixture": "fixtures/REQ-e24889f23fdcda5f543f/negative",
+        "failure_condition": "violate MUST: The delivery receiver must request the original protected checker after world readback"
+      }
+    }
+  ]
+}

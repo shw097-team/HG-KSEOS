@@ -1,0 +1,115 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-OWNER-DECISIONS/1",
+ "round": "FAR-CLOSURE-PROMOTION-20261030",
+ "prepared_by": "operator session (opencode-go/deepseek-v4.1-flash) — NOT a PLAN-lane artefact, see P10",
+ "window_request": {
+  "ttl_hours": 4,
+  "max_ops": 12,
+  "effect_ceiling": "REPOSITORY_WRITE",
+  "scope": [
+   "registry_row_sign",
+   "merkle_root_sign"
+  ]
+ },
+ "decisions": [
+  {
+   "id": "OD-1",
+   "topic": "WP-FHS-15 declared closure vs typed edges",
+   "requires_owner_key": true,
+   "options": [
+    "A: amend declaration to {00,15}",
+    "B: add edge 01->15"
+   ],
+   "recommend": "A",
+   "effect": "D2 goes REVIEW->PASS without inventing a dependency",
+   "cost": "S"
+  },
+  {
+   "id": "OD-2",
+   "topic": "PI identity bound to absolute draft root",
+   "requires_owner_key": true,
+   "options": [
+    "A: keep, declare source_root_policy + root_id",
+    "B: re-key to content-addressed"
+   ],
+   "recommend": "A",
+   "effect": "B invalidates every receipt and PI hash from this round",
+   "cost": "S"
+  },
+  {
+   "id": "OD-3",
+   "topic": "EVIDENCE digest unverifiable",
+   "requires_owner_key": true,
+   "options": [
+    "A: mark WITHDRAWN_NOT_REPRODUCIBLE + new row with supersedes",
+    "B: rewrite the old digest"
+   ],
+   "recommend": "A",
+   "effect": "keeps history auditable",
+   "cost": "S"
+  },
+  {
+   "id": "OD-4",
+   "topic": "issue delivery revision r4",
+   "requires_owner_key": true,
+   "options": [
+    "A: r3 frozen, publish r4 with F-02/F-03/F-12/F-13/F-14 + manifests",
+    "B: patch the copy"
+   ],
+   "recommend": "A",
+   "effect": "closes five findings at the delivery level instead of compensating",
+   "cost": "M"
+  },
+  {
+   "id": "OD-5",
+   "topic": "control-plane three-fix (pin, NameError, served-arm)",
+   "requires_owner_key": true,
+   "options": [
+    "A: one PR + regression test",
+    "B: leave local"
+   ],
+   "recommend": "A",
+   "effect": "without it no lane turn can prove it happened",
+   "cost": "M"
+  },
+  {
+   "id": "OD-6",
+   "topic": "VERIFY independence",
+   "requires_owner_key": true,
+   "priority": "highest",
+   "options": [
+    "A: provision gpt-6.1-sol OAuth (also unblocks PLAN)",
+    "B: declare a different live arm (none exists today)",
+    "C: external checker (T3 only)"
+   ],
+   "recommend": "A + C, plus config gate independence_requirement",
+   "effect": "without it INDEPENDENT_ACCEPTED stays NOT_RUN forever",
+   "cost": "M"
+  },
+  {
+   "id": "OD-7",
+   "topic": "native acceptance scope",
+   "requires_owner_key": true,
+   "options": [
+    "A: all 22 WP",
+    "B: WP-FHS-15 vertical slice"
+   ],
+   "recommend": "B",
+   "effect": "22/22 is 22x the same pipeline; the unknown is the pipeline",
+   "cost": "L per slice"
+  },
+  {
+   "id": "OD-8",
+   "topic": "merge and release policy",
+   "requires_owner_key": true,
+   "options": [
+    "A: #7 -> #6 -> #4 -> (#1/#2) ; #5 into r18 base ; tag after native slice",
+    "B: merge #6 first"
+   ],
+   "recommend": "A",
+   "effect": "#7 has zero path overlap with every open PR; #6 supersedes #5 for main (79/79 identical blobs)",
+   "cost": "S"
+  }
+ ],
+ "note": "payloads are pre-filled so the owner makes one passphrase entry and eight confirmations; nothing here is signed yet and no decision is applied"
+}

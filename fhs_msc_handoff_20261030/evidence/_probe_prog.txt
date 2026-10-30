@@ -1,0 +1,97 @@
+   1| {
+   2|   "schema": "SBL.ProgramSPECDraft@1",
+   3|   "status": "DESIGN_CANDIDATE",
+   4|   "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+   5|   "source_refs": [
+   6|     {
+   7|       "source_id": "SBL-04",
+   8|       "sha256": "ee90cb1c86f6f7350c11c9c962233a89b035ca41ff82c8968f7968608fc6f6e0",
+   9|       "line_from": 500,
+  10|       "line_to": 527
+  11|     },
+  12|     {
+  13|       "source_id": "SBL-00",
+  14|       "sha256": "bd9c1a85ea0cae68fa8cde617e5592fca6123f72b4caf1a9d2894167d9a82e01",
+  15|       "line_from": 60,
+  16|       "line_to": 78
+  17|     },
+  18|     {
+  19|       "wp": "WP-FHS-15",
+  20|       "source_sha256": "8f06076a129a2a8e3f460e7dd066561fe58aa42e3a8cabc1c28e74d20b280c00"
+  21|     }
+  22|   ],
+  23|   "goal": "為普通 Goal 產生有來源與可判 POS/NEG 的 Product、Architecture、Program SPEC，交原 PIPD，再交 Hermes 於原權限下續工",
+  24|   "non_goals": [
+  25|     "Native admission",
+  26|     "install/build",
+  27|     "world effect",
+  28|     "independent acceptance",
+  29|     "release"
+  30|   ],
+  31|   "acceptance": [
+  32|     {
+  33|       "requirement": "Goal intake",
+  34|       "positive": "nonempty goal preserved",
+  35|       "negative": "empty goal refused",
+  36|       "oracle_ref": "SBL-04:PM:T0"
+  37|     },
+  38|     {
+  39|       "requirement": "Corpus identities",
+  40|       "positive": "24 source identities read",
+  41|       "negative": "missing source identity refused",
+  42|       "oracle_ref": "SBL-04:K0"
+  43|     },
+  44|     {
+  45|       "requirement": "Source integrity",
+  46|       "positive": "same bytes admitted",
+  47|       "negative": "modified source bytes refused",
+  48|       "oracle_ref": "SBL-04:K0"
+  49|     },
+  50|     {
+  51|       "requirement": "Bounded source read",
+  52|       "positive": "admitted relative path read",
+  53|       "negative": "parent traversal refused",
+  54|       "oracle_ref": "SBL-04:K3"
+  55|     },
+  56|     {
+  57|       "requirement": "Known answers",
+  58|       "positive": "same key returns ask false",
+  59|       "negative": "changed source hash requires a fresh answer",
+  60|       "oracle_ref": "SBL-04:PM:T0"
+...
+  95|       "negative": "unknown extra record key refused",
+  96|       "oracle_ref": "SBL-04:SE:T3"
+  97|     },
+  98|     {
+  99|       "requirement": "Program dependencies",
+ 100|       "positive": "WP00 WP01 WP15 closure sorted",
+ 101|       "negative": "cycle refused",
+ 102|       "oracle_ref": "SBL-04:TPgM:T2"
+ 103|     },
+ 104|     {
+ 105|       "requirement": "Program ownership",
+ 106|       "positive": "owner for every node",
+ 107|       "negative": "missing node owner refused",
+ 108|       "oracle_ref": "SBL-04:TPgM:T3"
+ 109|     },
+ 110|     {
+ 111|       "requirement": "Local draft scope",
+ 112|       "positive": "three paths inside draft scope",
+ 113|       "negative": "path outside admitted draft root refused",
+ 114|       "oracle_ref": "WP-FHS-15"
+ 115|     },
+ 116|     {
+ 117|       "requirement": "Source drift recovery",
+ 118|       "positive": "affected descendants blocked",
+ 119|       "negative": "unrelated ready source reader remains available",
+ 120|       "oracle_ref": "WP-FHS-00"
+ 121|     },
+ 122|     {
+ 123|       "requirement": "No receipt inversion",
+ 124|       "positive": "no live receipt predecessor",
+ 125|       "negative": "future receipt as prerequisite refused",
+ 126|       "oracle_ref": "WP-FHS-15"
+ 127|     },
+ 128|     {
+ 129|       "requirement": "Provider off",
+ 130|       "positive": "zero network calls during positive run",

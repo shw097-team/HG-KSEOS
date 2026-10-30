@@ -1,0 +1,156 @@
+{
+ "root": "C:\\wg\\pkg",
+ "checks": {
+  "A_payload_manifest": {
+   "verdict": "PASS",
+   "rows": 909,
+   "match": 909,
+   "mismatch": 0,
+   "missing": 0,
+   "mismatch_sample": [],
+   "missing_sample": [],
+   "path_alias_applied": "01_FHS-MSC_PIPD-LS-PKG_BODY"
+  },
+  "B_undeclared_files": {
+   "verdict": "REVIEW",
+   "on_disk": 911,
+   "declared": 909,
+   "extra": 33,
+   "extra_sample": [
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/00_INDEX_AND_DECISION.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/01_PRODUCT_AUTHORITY_SPINE.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/02_PIPD_LIFECYCLE_AND_TPM.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/03_ARCHITECTURE_ABI_AND_EFFECT.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/04_FABRIC_HGK_CONTROL.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/06_FHS_EXECUTE_HERMES_RUNTIME.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/07_ACCEPTANCE_CHALLENGE.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/09A_R15_949_ORIGINAL_ATOMS.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/09B_KIND_MODE_HOST_192.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/09_SBL_DOC00_13_FULL_UPGRADE.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/10A_B1_TQAEP_120_124_38.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/10B_B1_PI27_PD31.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/10_B1_W18_SELF_BOOTSTRAP.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/11_WORKPACKAGES_AND_DAG.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/12_VERIFICATION_AND_DELIVERY.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/SBL_DOC00_13_INTEGRATED_READER_UPGRADES/SBL_PIPD-LS-PKG_DOC-00_FHS_INTEGRATED_UPGRADE.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/SBL_DOC00_13_INTEGRATED_READER_UPGRADES/SBL_PIPD-LS-PKG_DOC-01_FHS_INTEGRATED_UPGRADE.md",
+    "01_FHS-MSC_PIPD-LS-PKG_BODY/SBL_DOC00_13_INTEGRATED_READER_UPGRADES/SBL_PIPD-LS-PKG_DOC-02_FHS_INTEGRATED_UPGRADE.md"
+   ]
+  },
+  "C_delivery_manifest": {
+   "verdict": "FAIL",
+   "rows": [
+    {
+     "file": "FHS-MSC_BODY_2026-10-30_HANDOFF-PATCH-v1.zip",
+     "declared_bytes": 4007065,
+     "declared_sha": "5e722cfbf200efc17de246fb5bfe877c5509b5d4d3849d42921ab56b9a86af5b",
+     "present": false,
+     "bytes_now": null,
+     "sha_now": null,
+     "verdict": "ABSENT"
+    },
+    {
+     "file": "FHS-MSC_EVIDENCE_2026-10-30_HANDOFF-PATCH-v1.zip",
+     "declared_bytes": 25914281,
+     "declared_sha": "0e7763b8856f38ad32f9714d7415bb19c215903c72576f9b2f433790c2e70a6d",
+     "present": false,
+     "bytes_now": null,
+     "sha_now": null,
+     "verdict": "ABSENT"
+    },
+    {
+     "file": "HANDOFF_README.md",
+     "declared_bytes": 2194,
+     "declared_sha": "8611f2c1b706aa7f446836876bc33381c2e4ee47a5d3b512db78109212a98628",
+     "present": true,
+     "bytes_now": 2194,
+     "sha_now": "8611f2c1b706aa7f446836876bc33381c2e4ee47a5d3b512db78109212a98628",
+     "verdict": "PASS"
+    },
+    {
+     "file": "FIRST_WORK_RECEIVER_CONTRACT.md",
+     "declared_bytes": 2520,
+     "declared_sha": "781c9292bff4553d5a12c9e1303b1117bde0e33d073fdb43b3fcd00cd61c3908",
+     "present": true,
+     "bytes_now": 2520,
+     "sha_now": "781c9292bff4553d5a12c9e1303b1117bde0e33d073fdb43b3fcd00cd61c3908",
+     "verdict": "PASS"
+    },
+    {
+     "file": "INDEX.md",
+     "declared_bytes": 1560,
+     "declared_sha": "e0d67f24385006180780a211672614f2d4c9ed6ce5392507c2602b644bfff03a",
+     "present": true,
+     "bytes_now": 1560,
+     "sha_now": "e0d67f24385006180780a211672614f2d4c9ed6ce5392507c2602b644bfff03a",
+     "verdict": "PASS"
+    },
+    {
+     "file": "VERSION_AND_DELIVERY.md",
+     "declared_bytes": 1190,
+     "declared_sha": "55741272c5eb52153d9fd7ff0515010580a07d4218dfa277a159f5021ee3d118",
+     "present": true,
+     "bytes_now": 1190,
+     "sha_now": "55741272c5eb52153d9fd7ff0515010580a07d4218dfa277a159f5021ee3d118",
+     "verdict": "PASS"
+    },
+    {
+     "file": "CURRENT_READER_SCOPE.json",
+     "declared_bytes": 381,
+     "declared_sha": "0c26b01c0f6c8758c96bf466ec1d2f0d9c43b7f763ad3492dd0a8c0fce4df536",
+     "present": true,
+     "bytes_now": 381,
+     "sha_now": "0c26b01c0f6c8758c96bf466ec1d2f0d9c43b7f763ad3492dd0a8c0fce4df536",
+     "verdict": "PASS"
+    },
+    {
+     "file": "SHA256_PAYLOAD_MANIFEST.json",
+     "declared_bytes": 205955,
+     "declared_sha": "61d84df32df91a0b0f14806204dd872a524b54d639e332d04e76a8b6097e0a8e",
+     "present": true,
+     "bytes_now": 205955,
+     "sha_now": "61d84df32df91a0b0f14806204dd872a524b54d639e332d04e76a8b6097e0a8e",
+     "verdict": "PASS"
+    },
+    {
+     "file": "PACKAGE_READBACK.json",
+     "declared_bytes": 1856,
+     "declared_sha": "02a6e603d564fa702cb97bebf95803760c7e4a4c943d73ebcbf1fe9f54c80de6",
+     "present": false,
+     "bytes_now": null,
+     "sha_now": null,
+     "verdict": "ABSENT"
+    }
+   ]
+  },
+  "D_relative_links": {
+   "verdict": "PASS",
+   "links": 30,
+   "broken": 0,
+   "broken_sample": []
+  },
+  "E_claim_keywords": {
+   "verdict": "PASS",
+   "by_file": {
+    "VERSION_AND_DELIVERY.md": {
+     "NATIVE_NOT_RUN": 1,
+     "RELEASE_NOT_RUN": 3,
+     "PIPD_CONSTRUCTION_HANDOFF_READY": 1
+    },
+    "HANDOFF_README.md": {
+     "NATIVE_NOT_RUN": 1,
+     "RELEASE_NOT_RUN": 3,
+     "PIPD_CONSTRUCTION_HANDOFF_READY": 1
+    },
+    "CURRENT_READER_SCOPE.json": {
+     "NATIVE_NOT_RUN": 1,
+     "RELEASE_NOT_RUN": 0,
+     "PIPD_CONSTRUCTION_HANDOFF_READY": 0
+    }
+   }
+  }
+ },
+ "overall": "FAIL"
+}

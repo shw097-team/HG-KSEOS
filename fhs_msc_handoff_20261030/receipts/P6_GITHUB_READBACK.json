@@ -1,0 +1,44 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-READBACK/3",
+ "repo": "shw097-team/HG-KSEOS",
+ "commit": "69eb55dd21095001d03eeac790981aef37a793b8",
+ "branch": "fhs-msc-handoff-patch-v1-exec-20261030",
+ "pr": 7,
+ "method": "GitHub tree API for counts, contents API base64 blobs for per-file SHA-256 against the local tree normalised CRLF->LF",
+ "counts": {
+  "delivery_blobs": 81,
+  "receipts": 16,
+  "books": 17,
+  "tools": 7,
+  "logs": 8,
+  "package": 9,
+  "first_work": 17
+ },
+ "files": {
+  "README.md": {
+   "bytes": 3082,
+   "equal": true
+  },
+  "EXECUTION_REPORT.md": {
+   "bytes": 7832,
+   "equal": true
+  },
+  "FINDINGS.md": {
+   "bytes": 12029,
+   "equal": true
+  },
+  "REPRODUCE.md": {
+   "bytes": 5681,
+   "equal": true
+  },
+  "EVIDENCE_INDEX.md": {
+   "bytes": 4983,
+   "equal": true
+  },
+  "ADVISORY_AUDIT.md": {
+   "bytes": 4915,
+   "equal": true
+  }
+ },
+ "all_equal": true
+}

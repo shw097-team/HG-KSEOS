@@ -1,0 +1,723 @@
+   5| # 07 ACCEPTANCE CHALLENGE｜FHS-MSC_PIPD-LS-PKG 2026-10-30 整合實質正文
+  12| ## 本輪同域受影修復：r2 §8 AC15／96 Oracle 真 Consumer
+  14| ## 8. Acceptance Challenge 15 異構 Edge 與 96 原 Oracle：每邊各自資料形狀
+  16| 各 Edge 的 `Input Payload/Required Field→Transform/Typed Output→Original Receiver`、POS/NEG、權限、Resume **不得與另一邊互借**；Portable `challenge-review` 只可製造 Advisory Finding，Checker Verdict 必須由不同 Principal 的原 Protected AO 簽發。96 Oracle 每個 ID 保存本 Case Class 專用判準；若原 Oracle 還是設計候選，不能以外部 Review 構造 Native PASS。[BODY07 R2-07-AC/C39]
+  18| ### 8.1 AC-E01～E15 原 Handoff
+  21| #### AC-E01｜OWNER/TPM → TPM Intake
+  31| #### AC-E02｜SBL TPM → 原PIPD Intake
+  41| #### AC-E03｜原Source/Profile Writer → 原PIPD DOC02 Writer
+  44| - transform/output：strict shape/source/Oracle相容才編譯 → PI-PKG；只有原PIPD DOC02 Writer可出ACK(payload_hash,consumer_identity,原schema_version)；NACK含first_fail/affected_scope/resume。
+  46| - POS：strict shape/source/Oracle相容才編譯。NEG：unknown _profile_meta/錯Oracle alias → PI_SCHEMA_OR_ORACLE_HOLD。
+  51| #### AC-E04｜原PIPD DOC02 → 原PIPD DOC03 Binder
+  61| #### AC-E05｜原PD Writer → 原DOC05 ECP/DOC07 TQAEP
+  63| - trigger/input：當此邊的上游產物ready，接收ExecutionPlanSplit；required=pd_ref, dev_scope, ops_scope, case_oracles。
+  71| #### AC-E06｜原PIPD ECP/Admission → 原HGK Issuer
+  81| #### AC-E07｜原HGK Admission → 原Hermes SharedSpine
+  91| #### AC-E08｜原Hermes Worker → 原World Effect Receiver
+ 101| #### AC-E09｜原World Raw Reader → 原Frozen Readset Reader
+ 111| #### AC-E10｜Frozen Reader → SBL External Challenge
+ 121| #### AC-E11｜SBL Challenge Advisory → 原HGK AO Receiver
+ 131| #### AC-E12｜原AO Receiver ACK → 原Protected Checker
+ 133| - trigger/input：當此邊的上游產物ready，接收ProtectedCheckerRun；required=checker_request, oracle_refs, actual_raw_refs, maker_principal, checker_binding。
+ 134| - transform/output：原Checker讀Raw執Oracle；signature可由protected Reader驗 → ProtectedVerdictReceipt；只有原Protected Checker可出ACK(payload_hash,consumer_identity,原schema_version)；NACK含first_fail/affected_scope/resume。
+ 136| - POS：原Checker讀Raw執Oracle；signature可由protected Reader驗。NEG：LeaseCAS object冒verdict或Maker自簽 → NACK_WRONG_DOMAIN_SCHEMA/SELF_ACCEPTANCE_DENY。
+ 141| #### AC-E13｜Protected AO Checker → 原HGK Reducer
+ 144| - transform/output：有效signature/Oracle/candidate與CAS同revision → ReducedStateACK；只有原HGK Reducer可出ACK(payload_hash,consumer_identity,原schema_version)；NACK含first_fail/affected_scope/resume。
+ 146| - POS：有效signature/Oracle/candidate與CAS同revision。NEG：advisory字串PASS當protected verdict → VERDICT_AUTHORITY_DENY。
+ 151| #### AC-E14｜原Reducer/Native Commander → 原Maker/Authorized Dev
+ 154| - transform/output：原Oracle下RED→bounded patch→GREEN與新candidate → NewCandidate+RedGreenRaw；只有原Maker/Authorized Dev可出ACK(payload_hash,consumer_identity,原schema_version)；NACK含first_fail/affected_scope/resume。
+ 156| - POS：原Oracle下RED→bounded patch→GREEN與新candidate。NEG：改Oracle/擴WriteSet/覆蓋舊Evidence → REPAIR_SCOPE_DENY。
+ 161| #### AC-E15｜Closed B1 Evidence → 原W18 NormalMode Owner
+ 170| ### 8.2 96 個原異構 Oracle 專屬處理
+ 171| <a id="current-31d3fe0a459635a2b9a7"></a>
+ 172| #### AC-C39-POS-DETERMINISTIC
+ 175| - **Source** `BODY-07:165`，原 Oracle `AC-C39-POS-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 176| - trigger/input：本TestClass domain=POS，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 178| - 原條款：| `POS/DETERMINISTIC` | `SBL DOC08:L392` 原規則 `L3855 REQUIRED for RUNTIME machine-checkable predicate in each GJ` | `feature_invoked and acceptance_predicate_declared && DETERMINISTIC_inputs_bound`；requires feature invoked + acceptance predicate; consumer output and real raw | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/pos/deterministic := __CORRUPT__001` → `MISSING_POS_FUNCTION`；`AC-C39-POS-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 179| - trigger/input：本TestClass domain=POS，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 180| - transform/typed output：先執POS專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 181| - POS domain與oracle輸入：
+ 184| #### AC-C39-POS-STATE_READBACK
+ 187| - **Source** `BODY-07:207`，原 Oracle `AC-C39-POS-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 188| - trigger/input：本TestClass domain=POS，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 190| - 原條款：| `POS/STATE_READBACK` | `SBL DOC08:L393` 原規則 `L3856 REQUIRED if RUNTIME changes state; SHADOW readonly snapshot allowed only` | `feature_invoked and acceptance_predicate_declared && STATE_READBACK_inputs_bound`；requires feature invoked + acceptance predicate; consumer output and real raw | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/pos/state_readback := __CORRUPT__002` → `MISSING_POS_FUNCTION`；`AC-C39-POS-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 191| - trigger/input：本TestClass domain=POS，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 192| - transform/typed output：先執POS專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 193| - POS domain與oracle輸入：
+ 196| #### AC-C39-POS-PROPERTY
+ 199| - **Source** `BODY-07:266`，原 Oracle `AC-C39-POS-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 200| - trigger/input：本TestClass domain=POS，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 202| - 原條款：| `POS/PROPERTY` | `SBL DOC08:L394` 原規則 `L3857 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `feature_invoked and acceptance_predicate_declared && PROPERTY_inputs_bound`；requires feature invoked + acceptance predicate; consumer output and real raw | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/pos/property := __CORRUPT__003` → `MISSING_POS_FUNCTION`；`AC-C39-POS-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 203| - trigger/input：本TestClass domain=POS，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 204| - transform/typed output：先執POS專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 205| - POS domain與oracle輸入：
+ 208| #### AC-C39-POS-REFERENCE_OUTPUT
+ 211| - **Source** `BODY-07:318`，原 Oracle `AC-C39-POS-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 212| - trigger/input：本TestClass domain=POS，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 214| - 原條款：| `POS/REFERENCE_OUTPUT` | `SBL DOC08:L395` 原規則 `L3858 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `feature_invoked and acceptance_predicate_declared && REFERENCE_OUTPUT_inputs_bound`；requires feature invoked + acceptance predicate; consumer output and real raw | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/pos/reference_output := __CORRUPT__004` → `MISSING_POS_FUNCTION`；`AC-C39-POS-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 215| - trigger/input：本TestClass domain=POS，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 216| - transform/typed output：先執POS專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 217| - POS domain與oracle輸入：
+ 220| #### AC-C39-POS-STATISTICAL
+ 223| - **Source** `BODY-07:372`，原 Oracle `AC-C39-POS-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 224| - trigger/input：本TestClass domain=POS，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 226| - 原條款：| `POS/STATISTICAL` | `SBL DOC08:L396` 原規則 `L3859 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `feature_invoked and acceptance_predicate_declared && STATISTICAL_inputs_bound`；requires feature invoked + acceptance predicate; consumer output and real raw | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/pos/statistical := __CORRUPT__005` → `MISSING_POS_FUNCTION`；`AC-C39-POS-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 227| - trigger/input：本TestClass domain=POS，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 228| - transform/typed output：先執POS專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 229| - POS domain與oracle輸入：
+ 232| #### AC-C39-POS-SEMANTIC_JUDGE
+ 235| - **Source** `BODY-07:418`，原 Oracle `AC-C39-POS-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 236| - trigger/input：本TestClass domain=POS，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 238| - 原條款：| `POS/SEMANTIC_JUDGE` | `SBL DOC08:L397` 原規則 `L3860 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `feature_invoked and acceptance_predicate_declared && SEMANTIC_JUDGE_inputs_bound`；requires feature invoked + acceptance predicate; consumer output and real raw | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/pos/semantic_judge := __CORRUPT__006` → `MISSING_POS_FUNCTION`；`AC-C39-POS-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 239| - trigger/input：本TestClass domain=POS，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 240| - transform/typed output：先執POS專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 241| - POS domain與oracle輸入：
+ 244| #### AC-C39-POS-HUMAN
+ 247| - **Source** `BODY-07:461`，原 Oracle `AC-C39-POS-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 248| - trigger/input：本TestClass domain=POS，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 250| - 原條款：| `POS/HUMAN` | `SBL DOC08:L398` 原規則 `L3861 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `feature_invoked and acceptance_predicate_declared && HUMAN_inputs_bound`；requires feature invoked + acceptance predicate; consumer output and real raw | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/pos/human := __CORRUPT__007` → `MISSING_POS_FUNCTION`；`AC-C39-POS-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 251| - trigger/input：本TestClass domain=POS，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 252| - transform/typed output：先執POS專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 253| - POS domain與oracle輸入：
+ 256| #### AC-C39-POS-COMPOSITE
+ 259| - **Source** `BODY-07:503`，原 Oracle `AC-C39-POS-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 260| - trigger/input：本TestClass domain=POS，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 262| - 原條款：| `POS/COMPOSITE` | `SBL DOC08:L399` 原規則 `L3862 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `feature_invoked and acceptance_predicate_declared && COMPOSITE_inputs_bound`；requires feature invoked + acceptance predicate; consumer output and real raw | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/pos/composite := __CORRUPT__008` → `MISSING_POS_FUNCTION`；`AC-C39-POS-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 263| - trigger/input：本TestClass domain=POS，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 264| - transform/typed output：先執POS專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 265| - POS domain與oracle輸入：
+ 268| #### AC-C39-NEG-DETERMINISTIC
+ 271| - **Source** `BODY-07:578`，原 Oracle `AC-C39-NEG-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 272| - trigger/input：本TestClass domain=NEG，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 274| - 原條款：| `NEG/DETERMINISTIC` | `SBL DOC08:L400` 原規則 `L3863 REQUIRED for RUNTIME machine-checkable predicate in each GJ` | `invalid_input_contract or forbidden_action_declared && DETERMINISTIC_inputs_bound`；requires forbidden action or invalid input; deny with world no diff | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/neg/deterministic := __CORRUPT__009` → `NEGATIVE_ACCEPTED`；`AC-C39-NEG-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 275| - trigger/input：本TestClass domain=NEG，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 276| - transform/typed output：先執NEG專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 277| - POS domain與oracle輸入：
+ 280| #### AC-C39-NEG-STATE_READBACK
+ 283| - **Source** `BODY-07:682`，原 Oracle `AC-C39-NEG-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 284| - trigger/input：本TestClass domain=NEG，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 286| - 原條款：| `NEG/STATE_READBACK` | `SBL DOC08:L401` 原規則 `L3864 REQUIRED if RUNTIME changes state; SHADOW readonly snapshot allowed only` | `invalid_input_contract or forbidden_action_declared && STATE_READBACK_inputs_bound`；requires forbidden action or invalid input; deny with world no diff | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/neg/state_readback := __CORRUPT__010` → `NEGATIVE_ACCEPTED`；`AC-C39-NEG-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 287| - trigger/input：本TestClass domain=NEG，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 288| - transform/typed output：先執NEG專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 289| - POS domain與oracle輸入：
+ 292| #### AC-C39-NEG-PROPERTY
+ 295| - **Source** `BODY-07:822`，原 Oracle `AC-C39-NEG-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 296| - trigger/input：本TestClass domain=NEG，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 298| - 原條款：| `NEG/PROPERTY` | `SBL DOC08:L402` 原規則 `L3865 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `invalid_input_contract or forbidden_action_declared && PROPERTY_inputs_bound`；requires forbidden action or invalid input; deny with world no diff | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/neg/property := __CORRUPT__011` → `NEGATIVE_ACCEPTED`；`AC-C39-NEG-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 299| - trigger/input：本TestClass domain=NEG，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 300| - transform/typed output：先執NEG專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 301| - POS domain與oracle輸入：
+ 304| #### AC-C39-NEG-REFERENCE_OUTPUT
+ 307| - **Source** `BODY-07:967`，原 Oracle `AC-C39-NEG-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 308| - trigger/input：本TestClass domain=NEG，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 310| - 原條款：| `NEG/REFERENCE_OUTPUT` | `SBL DOC08:L403` 原規則 `L3866 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `invalid_input_contract or forbidden_action_declared && REFERENCE_OUTPUT_inputs_bound`；requires forbidden action or invalid input; deny with world no diff | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/neg/reference_output := __CORRUPT__012` → `NEGATIVE_ACCEPTED`；`AC-C39-NEG-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 311| - trigger/input：本TestClass domain=NEG，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 312| - transform/typed output：先執NEG專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 313| - POS domain與oracle輸入：
+ 316| #### AC-C39-NEG-STATISTICAL
+ 319| - **Source** `BODY-07:1081`，原 Oracle `AC-C39-NEG-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 320| - trigger/input：本TestClass domain=NEG，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 322| - 原條款：| `NEG/STATISTICAL` | `SBL DOC08:L404` 原規則 `L3867 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `invalid_input_contract or forbidden_action_declared && STATISTICAL_inputs_bound`；requires forbidden action or invalid input; deny with world no diff | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/neg/statistical := __CORRUPT__013` → `NEGATIVE_ACCEPTED`；`AC-C39-NEG-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 323| - trigger/input：本TestClass domain=NEG，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 324| - transform/typed output：先執NEG專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 325| - POS domain與oracle輸入：
+ 328| #### AC-C39-NEG-SEMANTIC_JUDGE
+ 331| - **Source** `BODY-07:1189`，原 Oracle `AC-C39-NEG-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 332| - trigger/input：本TestClass domain=NEG，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 334| - 原條款：| `NEG/SEMANTIC_JUDGE` | `SBL DOC08:L405` 原規則 `L3868 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `invalid_input_contract or forbidden_action_declared && SEMANTIC_JUDGE_inputs_bound`；requires forbidden action or invalid input; deny with world no diff | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/neg/semantic_judge := __CORRUPT__014` → `NEGATIVE_ACCEPTED`；`AC-C39-NEG-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 335| - trigger/input：本TestClass domain=NEG，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 336| - transform/typed output：先執NEG專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 337| - POS domain與oracle輸入：
+ 340| #### AC-C39-NEG-HUMAN
+ 343| - **Source** `BODY-07:1294`，原 Oracle `AC-C39-NEG-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 344| - trigger/input：本TestClass domain=NEG，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 346| - 原條款：| `NEG/HUMAN` | `SBL DOC08:L406` 原規則 `L3869 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `invalid_input_contract or forbidden_action_declared && HUMAN_inputs_bound`；requires forbidden action or invalid input; deny with world no diff | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/neg/human := __CORRUPT__015` → `NEGATIVE_ACCEPTED`；`AC-C39-NEG-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 347| - trigger/input：本TestClass domain=NEG，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 348| - transform/typed output：先執NEG專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 349| - POS domain與oracle輸入：
+ 352| #### AC-C39-NEG-COMPOSITE
+ 355| - **Source** `BODY-07:1398`，原 Oracle `AC-C39-NEG-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 356| - trigger/input：本TestClass domain=NEG，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 358| - 原條款：| `NEG/COMPOSITE` | `SBL DOC08:L407` 原規則 `L3870 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `invalid_input_contract or forbidden_action_declared && COMPOSITE_inputs_bound`；requires forbidden action or invalid input; deny with world no diff | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/neg/composite := __CORRUPT__016` → `NEGATIVE_ACCEPTED`；`AC-C39-NEG-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 359| - trigger/input：本TestClass domain=NEG，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-NEG-DUPLICATE']；無Raw不可假裝已跑Native。
+ 360| - transform/typed output：先執NEG專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 361| - POS domain與oracle輸入：
+ 364| #### AC-C39-EDGE-DETERMINISTIC
+ 367| - **Source** `BODY-07:1555`，原 Oracle `AC-C39-EDGE-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 368| - trigger/input：本TestClass domain=EDGE，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 370| - 原條款：| `EDGE/DETERMINISTIC` | `SBL DOC08:L408` 原規則 `L3871 REQUIRED for RUNTIME machine-checkable predicate in each GJ` | `input_boundary_or_resource_limit_declared && DETERMINISTIC_inputs_bound`；requires input bound or resource limit; one-past boundary rejection | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/edge/deterministic := __CORRUPT__017` → `EDGE_BOUND_VIOLATION`；`AC-C39-EDGE-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 371| - trigger/input：本TestClass domain=EDGE，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 372| - transform/typed output：先執EDGE專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 373| - POS domain與oracle輸入：
+ 376| #### AC-C39-EDGE-STATE_READBACK
+ 379| - **Source** `BODY-07:1659`，原 Oracle `AC-C39-EDGE-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 380| - trigger/input：本TestClass domain=EDGE，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 382| - 原條款：| `EDGE/STATE_READBACK` | `SBL DOC08:L409` 原規則 `L3872 REQUIRED if RUNTIME changes state; SHADOW readonly snapshot allowed only` | `input_boundary_or_resource_limit_declared && STATE_READBACK_inputs_bound`；requires input bound or resource limit; one-past boundary rejection | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/edge/state_readback := __CORRUPT__018` → `EDGE_BOUND_VIOLATION`；`AC-C39-EDGE-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 383| - trigger/input：本TestClass domain=EDGE，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 384| - transform/typed output：先執EDGE專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 385| - POS domain與oracle輸入：
+ 388| #### AC-C39-EDGE-PROPERTY
+ 391| - **Source** `BODY-07:1799`，原 Oracle `AC-C39-EDGE-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 392| - trigger/input：本TestClass domain=EDGE，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 394| - 原條款：| `EDGE/PROPERTY` | `SBL DOC08:L410` 原規則 `L3873 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `input_boundary_or_resource_limit_declared && PROPERTY_inputs_bound`；requires input bound or resource limit; one-past boundary rejection | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/edge/property := __CORRUPT__019` → `EDGE_BOUND_VIOLATION`；`AC-C39-EDGE-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 395| - trigger/input：本TestClass domain=EDGE，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 396| - transform/typed output：先執EDGE專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 397| - POS domain與oracle輸入：
+ 400| #### AC-C39-EDGE-REFERENCE_OUTPUT
+ 403| - **Source** `BODY-07:1944`，原 Oracle `AC-C39-EDGE-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 404| - trigger/input：本TestClass domain=EDGE，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 406| - 原條款：| `EDGE/REFERENCE_OUTPUT` | `SBL DOC08:L411` 原規則 `L3874 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `input_boundary_or_resource_limit_declared && REFERENCE_OUTPUT_inputs_bound`；requires input bound or resource limit; one-past boundary rejection | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/edge/reference_output := __CORRUPT__020` → `EDGE_BOUND_VIOLATION`；`AC-C39-EDGE-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 407| - trigger/input：本TestClass domain=EDGE，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 408| - transform/typed output：先執EDGE專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 409| - POS domain與oracle輸入：
+ 412| #### AC-C39-EDGE-STATISTICAL
+ 415| - **Source** `BODY-07:2058`，原 Oracle `AC-C39-EDGE-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 416| - trigger/input：本TestClass domain=EDGE，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 418| - 原條款：| `EDGE/STATISTICAL` | `SBL DOC08:L412` 原規則 `L3875 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `input_boundary_or_resource_limit_declared && STATISTICAL_inputs_bound`；requires input bound or resource limit; one-past boundary rejection | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/edge/statistical := __CORRUPT__021` → `EDGE_BOUND_VIOLATION`；`AC-C39-EDGE-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 419| - trigger/input：本TestClass domain=EDGE，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 420| - transform/typed output：先執EDGE專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 421| - POS domain與oracle輸入：
+ 424| #### AC-C39-EDGE-SEMANTIC_JUDGE
+ 427| - **Source** `BODY-07:2166`，原 Oracle `AC-C39-EDGE-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 428| - trigger/input：本TestClass domain=EDGE，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 430| - 原條款：| `EDGE/SEMANTIC_JUDGE` | `SBL DOC08:L413` 原規則 `L3876 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `input_boundary_or_resource_limit_declared && SEMANTIC_JUDGE_inputs_bound`；requires input bound or resource limit; one-past boundary rejection | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/edge/semantic_judge := __CORRUPT__022` → `EDGE_BOUND_VIOLATION`；`AC-C39-EDGE-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 431| - trigger/input：本TestClass domain=EDGE，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 432| - transform/typed output：先執EDGE專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 433| - POS domain與oracle輸入：
+ 436| #### AC-C39-EDGE-HUMAN
+ 439| - **Source** `BODY-07:2271`，原 Oracle `AC-C39-EDGE-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 440| - trigger/input：本TestClass domain=EDGE，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 442| - 原條款：| `EDGE/HUMAN` | `SBL DOC08:L414` 原規則 `L3877 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `input_boundary_or_resource_limit_declared && HUMAN_inputs_bound`；requires input bound or resource limit; one-past boundary rejection | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/edge/human := __CORRUPT__023` → `EDGE_BOUND_VIOLATION`；`AC-C39-EDGE-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 443| - trigger/input：本TestClass domain=EDGE，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 444| - transform/typed output：先執EDGE專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 445| - POS domain與oracle輸入：
+ 448| #### AC-C39-EDGE-COMPOSITE
+ 451| - **Source** `BODY-07:2375`，原 Oracle `AC-C39-EDGE-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 452| - trigger/input：本TestClass domain=EDGE，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 454| - 原條款：| `EDGE/COMPOSITE` | `SBL DOC08:L415` 原規則 `L3878 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `input_boundary_or_resource_limit_declared && COMPOSITE_inputs_bound`；requires input bound or resource limit; one-past boundary rejection | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/edge/composite := __CORRUPT__024` → `EDGE_BOUND_VIOLATION`；`AC-C39-EDGE-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 455| - trigger/input：本TestClass domain=EDGE，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-EDGE-EMPTY-TITLE']；無Raw不可假裝已跑Native。
+ 456| - transform/typed output：先執EDGE專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 457| - POS domain與oracle輸入：
+ 460| #### AC-C39-SEC-DETERMINISTIC
+ 463| - **Source** `BODY-07:2532`，原 Oracle `AC-C39-SEC-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 464| - trigger/input：本TestClass domain=SEC，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 466| - 原條款：| `SEC/DETERMINISTIC` | `SBL DOC08:L416` 原規則 `L3879 REQUIRED for EFFECT machine-checkable predicate in each GJ` | `trust_boundary or secrets or untrusted_source or permission_effect && DETERMINISTIC_inputs_bound`；requires trust/secrets/untrusted source/permission effect; rights stay bounded | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/sec/deterministic := __CORRUPT__025` → `SECURITY_BOUNDARY_BREACH`；`AC-C39-SEC-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 467| - trigger/input：本TestClass domain=SEC，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 468| - transform/typed output：先執SEC專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 469| - POS domain與oracle輸入：
+ 472| #### AC-C39-SEC-STATE_READBACK
+ 475| - **Source** `BODY-07:2608`，原 Oracle `AC-C39-SEC-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 476| - trigger/input：本TestClass domain=SEC，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 478| - 原條款：| `SEC/STATE_READBACK` | `SBL DOC08:L417` 原規則 `L3880 REQUIRED if EFFECT changes state; SHADOW readonly snapshot allowed only` | `trust_boundary or secrets or untrusted_source or permission_effect && STATE_READBACK_inputs_bound`；requires trust/secrets/untrusted source/permission effect; rights stay bounded | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/sec/state_readback := __CORRUPT__026` → `SECURITY_BOUNDARY_BREACH`；`AC-C39-SEC-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 479| - trigger/input：本TestClass domain=SEC，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 480| - transform/typed output：先執SEC專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 481| - POS domain與oracle輸入：
+ 484| #### AC-C39-SEC-PROPERTY
+ 487| - **Source** `BODY-07:2692`，原 Oracle `AC-C39-SEC-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 488| - trigger/input：本TestClass domain=SEC，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 490| - 原條款：| `SEC/PROPERTY` | `SBL DOC08:L418` 原規則 `L3881 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `trust_boundary or secrets or untrusted_source or permission_effect && PROPERTY_inputs_bound`；requires trust/secrets/untrusted source/permission effect; rights stay bounded | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/sec/property := __CORRUPT__027` → `SECURITY_BOUNDARY_BREACH`；`AC-C39-SEC-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 491| - trigger/input：本TestClass domain=SEC，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 492| - transform/typed output：先執SEC專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 493| - POS domain與oracle輸入：
+ 496| #### AC-C39-SEC-REFERENCE_OUTPUT
+ 499| - **Source** `BODY-07:2795`，原 Oracle `AC-C39-SEC-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 500| - trigger/input：本TestClass domain=SEC，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 502| - 原條款：| `SEC/REFERENCE_OUTPUT` | `SBL DOC08:L419` 原規則 `L3882 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `trust_boundary or secrets or untrusted_source or permission_effect && REFERENCE_OUTPUT_inputs_bound`；requires trust/secrets/untrusted source/permission effect; rights stay bounded | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/sec/reference_output := __CORRUPT__028` → `SECURITY_BOUNDARY_BREACH`；`AC-C39-SEC-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 503| - trigger/input：本TestClass domain=SEC，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 504| - transform/typed output：先執SEC專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 505| - POS domain與oracle輸入：
+ 508| #### AC-C39-SEC-STATISTICAL
+ 511| - **Source** `BODY-07:2881`，原 Oracle `AC-C39-SEC-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 512| - trigger/input：本TestClass domain=SEC，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 514| - 原條款：| `SEC/STATISTICAL` | `SBL DOC08:L420` 原規則 `L3883 CONDITIONAL: EFFECT benchmark with calibrated dataset+confidence; no stand-alone release` | `trust_boundary or secrets or untrusted_source or permission_effect && STATISTICAL_inputs_bound`；requires trust/secrets/untrusted source/permission effect; rights stay bounded | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/sec/statistical := __CORRUPT__029` → `SECURITY_BOUNDARY_BREACH`；`AC-C39-SEC-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 515| - trigger/input：本TestClass domain=SEC，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 516| - transform/typed output：先執SEC專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 517| - POS domain與oracle輸入：
+ 520| #### AC-C39-SEC-SEMANTIC_JUDGE
+ 523| - **Source** `BODY-07:2961`，原 Oracle `AC-C39-SEC-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 524| - trigger/input：本TestClass domain=SEC，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 526| - 原條款：| `SEC/SEMANTIC_JUDGE` | `SBL DOC08:L421` 原規則 `L3884 CONDITIONAL: EFFECT benchmark with calibrated dataset+confidence; no stand-alone release` | `trust_boundary or secrets or untrusted_source or permission_effect && SEMANTIC_JUDGE_inputs_bound`；requires trust/secrets/untrusted source/permission effect; rights stay bounded | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/sec/semantic_judge := __CORRUPT__030` → `SECURITY_BOUNDARY_BREACH`；`AC-C39-SEC-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 527| - trigger/input：本TestClass domain=SEC，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 528| - transform/typed output：先執SEC專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 529| - POS domain與oracle輸入：
+ 532| #### AC-C39-SEC-HUMAN
+ 535| - **Source** `BODY-07:3038`，原 Oracle `AC-C39-SEC-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 536| - trigger/input：本TestClass domain=SEC，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 538| - 原條款：| `SEC/HUMAN` | `SBL DOC08:L422` 原規則 `L3885 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `trust_boundary or secrets or untrusted_source or permission_effect && HUMAN_inputs_bound`；requires trust/secrets/untrusted source/permission effect; rights stay bounded | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/sec/human := __CORRUPT__031` → `SECURITY_BOUNDARY_BREACH`；`AC-C39-SEC-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 539| - trigger/input：本TestClass domain=SEC，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 540| - transform/typed output：先執SEC專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 541| - POS domain與oracle輸入：
+ 544| #### AC-C39-SEC-COMPOSITE
+ 547| - **Source** `BODY-07:3114`，原 Oracle `AC-C39-SEC-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 548| - trigger/input：本TestClass domain=SEC，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 550| - 原條款：| `SEC/COMPOSITE` | `SBL DOC08:L423` 原規則 `L3886 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `trust_boundary or secrets or untrusted_source or permission_effect && COMPOSITE_inputs_bound`；requires trust/secrets/untrusted source/permission effect; rights stay bounded | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/sec/composite := __CORRUPT__032` → `SECURITY_BOUNDARY_BREACH`；`AC-C39-SEC-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 551| - trigger/input：本TestClass domain=SEC，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+ 552| - transform/typed output：先執SEC專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 553| - POS domain與oracle輸入：
+ 556| #### AC-C39-PERF-DETERMINISTIC
+ 559| - **Source** `BODY-07:3215`，原 Oracle `AC-C39-PERF-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 560| - trigger/input：本TestClass domain=PERF，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 562| - 原條款：| `PERF/DETERMINISTIC` | `SBL DOC08:L424` 原規則 `L3887 REQUIRED for PERF machine-checkable predicate in each GJ` | `nfr_sli_slo_id and benchmark_dataset_pin and metric_threshold && DETERMINISTIC_inputs_bound`；requires actual SLI/SLO + pinned benchmark; do not proxy latency | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/perf/deterministic := __CORRUPT__033` → `PERF_SLO_EXCEEDED`；`AC-C39-PERF-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 563| - trigger/input：本TestClass domain=PERF，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 564| - transform/typed output：先執PERF專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 565| - POS domain與oracle輸入：
+ 568| #### AC-C39-PERF-STATE_READBACK
+ 571| - **Source** `BODY-07:3279`，原 Oracle `AC-C39-PERF-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 572| - trigger/input：本TestClass domain=PERF，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 574| - 原條款：| `PERF/STATE_READBACK` | `SBL DOC08:L425` 原規則 `L3888 REQUIRED if PERF changes state; SHADOW readonly snapshot allowed only` | `nfr_sli_slo_id and benchmark_dataset_pin and metric_threshold && STATE_READBACK_inputs_bound`；requires actual SLI/SLO + pinned benchmark; do not proxy latency | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/perf/state_readback := __CORRUPT__034` → `PERF_SLO_EXCEEDED`；`AC-C39-PERF-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 575| - trigger/input：本TestClass domain=PERF，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 576| - transform/typed output：先執PERF專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 577| - POS domain與oracle輸入：
+ 580| #### AC-C39-PERF-PROPERTY
+ 583| - **Source** `BODY-07:3384`，原 Oracle `AC-C39-PERF-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 584| - trigger/input：本TestClass domain=PERF，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 586| - 原條款：| `PERF/PROPERTY` | `SBL DOC08:L426` 原規則 `L3889 CONDITIONAL: PERF typed property/reference/composite defined with source and fixtures` | `nfr_sli_slo_id and benchmark_dataset_pin and metric_threshold && PROPERTY_inputs_bound`；requires actual SLI/SLO + pinned benchmark; do not proxy latency | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/perf/property := __CORRUPT__035` → `PERF_SLO_EXCEEDED`；`AC-C39-PERF-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 587| - trigger/input：本TestClass domain=PERF，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 588| - transform/typed output：先執PERF專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 589| - POS domain與oracle輸入：
+ 592| #### AC-C39-PERF-REFERENCE_OUTPUT
+ 595| - **Source** `BODY-07:3469`，原 Oracle `AC-C39-PERF-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 596| - trigger/input：本TestClass domain=PERF，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 598| - 原條款：| `PERF/REFERENCE_OUTPUT` | `SBL DOC08:L427` 原規則 `L3890 CONDITIONAL: PERF typed property/reference/composite defined with source and fixtures` | `nfr_sli_slo_id and benchmark_dataset_pin and metric_threshold && REFERENCE_OUTPUT_inputs_bound`；requires actual SLI/SLO + pinned benchmark; do not proxy latency | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/perf/reference_output := __CORRUPT__036` → `PERF_SLO_EXCEEDED`；`AC-C39-PERF-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 599| - trigger/input：本TestClass domain=PERF，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 600| - transform/typed output：先執PERF專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 601| - POS domain與oracle輸入：
+ 604| #### AC-C39-PERF-STATISTICAL
+ 607| - **Source** `BODY-07:3541`，原 Oracle `AC-C39-PERF-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 608| - trigger/input：本TestClass domain=PERF，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 610| - 原條款：| `PERF/STATISTICAL` | `SBL DOC08:L428` 原規則 `L3891 CONDITIONAL: PERF benchmark with calibrated dataset+confidence; no stand-alone release g` | `nfr_sli_slo_id and benchmark_dataset_pin and metric_threshold && STATISTICAL_inputs_bound`；requires actual SLI/SLO + pinned benchmark; do not proxy latency | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/perf/statistical := __CORRUPT__037` → `PERF_SLO_EXCEEDED`；`AC-C39-PERF-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 611| - trigger/input：本TestClass domain=PERF，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 612| - transform/typed output：先執PERF專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 613| - POS domain與oracle輸入：
+ 616| #### AC-C39-PERF-SEMANTIC_JUDGE
+ 619| - **Source** `BODY-07:3609`，原 Oracle `AC-C39-PERF-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 620| - trigger/input：本TestClass domain=PERF，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 622| - 原條款：| `PERF/SEMANTIC_JUDGE` | `SBL DOC08:L429` 原規則 `L3892 CONDITIONAL: PERF benchmark with calibrated dataset+confidence; no stand-alone release g` | `nfr_sli_slo_id and benchmark_dataset_pin and metric_threshold && SEMANTIC_JUDGE_inputs_bound`；requires actual SLI/SLO + pinned benchmark; do not proxy latency | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/perf/semantic_judge := __CORRUPT__038` → `PERF_SLO_EXCEEDED`；`AC-C39-PERF-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 623| - trigger/input：本TestClass domain=PERF，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 624| - transform/typed output：先執PERF專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 625| - POS domain與oracle輸入：
+ 628| #### AC-C39-PERF-HUMAN
+ 631| - **Source** `BODY-07:3674`，原 Oracle `AC-C39-PERF-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 632| - trigger/input：本TestClass domain=PERF，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 634| - 原條款：| `PERF/HUMAN` | `SBL DOC08:L430` 原規則 `L3893 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `nfr_sli_slo_id and benchmark_dataset_pin and metric_threshold && HUMAN_inputs_bound`；requires actual SLI/SLO + pinned benchmark; do not proxy latency | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/perf/human := __CORRUPT__039` → `PERF_SLO_EXCEEDED`；`AC-C39-PERF-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 635| - trigger/input：本TestClass domain=PERF，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 636| - transform/typed output：先執PERF專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 637| - POS domain與oracle輸入：
+ 640| #### AC-C39-PERF-COMPOSITE
+ 643| - **Source** `BODY-07:3738`，原 Oracle `AC-C39-PERF-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 644| - trigger/input：本TestClass domain=PERF，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 646| - 原條款：| `PERF/COMPOSITE` | `SBL DOC08:L431` 原規則 `L3894 CONDITIONAL: PERF typed property/reference/composite defined with source and fixtures` | `nfr_sli_slo_id and benchmark_dataset_pin and metric_threshold && COMPOSITE_inputs_bound`；requires actual SLI/SLO + pinned benchmark; do not proxy latency | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/perf/composite := __CORRUPT__040` → `PERF_SLO_EXCEEDED`；`AC-C39-PERF-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 647| - trigger/input：本TestClass domain=PERF，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-PERF-LIST-00', 'CLI-PERF-LIST-01', 'CLI-PERF-LIST-02', 'CLI-PERF-LIST-03', 'CLI-PERF-LIST-04', 'CLI-PERF-LIST-05', 'CLI-PERF-LIST-06', 'CLI-PERF-LIST-07', 'CLI-PERF-LIST-08', 'CLI-PERF-LIST-09', 'CLI-PERF-LIST-10', 'CLI-PERF-LIST-11']；無Raw不可假裝已跑Native。
+ 648| - transform/typed output：先執PERF專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 649| - POS domain與oracle輸入：
+ 652| #### AC-C39-PARITY-DETERMINISTIC
+ 655| - **Source** `BODY-07:3849`，原 Oracle `AC-C39-PARITY-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 656| - trigger/input：本TestClass domain=PARITY，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 658| - 原條款：| `PARITY/DETERMINISTIC` | `SBL DOC08:L432` 原規則 `L3895 REQUIRED for RUNTIME machine-checkable predicate in each GJ` | `provider_off_required and provider_off_profile_id and fallback_contract && DETERMINISTIC_inputs_bound`；requires provider-off profile + fallback; no network egress | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/parity/deterministic := __CORRUPT__041` → `PARITY_PROVIDER_OFF_FAIL`；`AC-C39-PARITY-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 659| - trigger/input：本TestClass domain=PARITY，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 660| - transform/typed output：先執PARITY專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 661| - POS domain與oracle輸入：
+ 664| #### AC-C39-PARITY-STATE_READBACK
+ 667| - **Source** `BODY-07:3929`，原 Oracle `AC-C39-PARITY-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 668| - trigger/input：本TestClass domain=PARITY，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 670| - 原條款：| `PARITY/STATE_READBACK` | `SBL DOC08:L433` 原規則 `L3896 REQUIRED if RUNTIME changes state; SHADOW readonly snapshot allowed only` | `provider_off_required and provider_off_profile_id and fallback_contract && STATE_READBACK_inputs_bound`；requires provider-off profile + fallback; no network egress | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/parity/state_readback := __CORRUPT__042` → `PARITY_PROVIDER_OFF_FAIL`；`AC-C39-PARITY-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 671| - trigger/input：本TestClass domain=PARITY，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 672| - transform/typed output：先執PARITY專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 673| - POS domain與oracle輸入：
+ 676| #### AC-C39-PARITY-PROPERTY
+ 679| - **Source** `BODY-07:4036`，原 Oracle `AC-C39-PARITY-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 680| - trigger/input：本TestClass domain=PARITY，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 682| - 原條款：| `PARITY/PROPERTY` | `SBL DOC08:L434` 原規則 `L3897 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `provider_off_required and provider_off_profile_id and fallback_contract && PROPERTY_inputs_bound`；requires provider-off profile + fallback; no network egress | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/parity/property := __CORRUPT__043` → `PARITY_PROVIDER_OFF_FAIL`；`AC-C39-PARITY-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 683| - trigger/input：本TestClass domain=PARITY，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 684| - transform/typed output：先執PARITY專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 685| - POS domain與oracle輸入：
+ 688| #### AC-C39-PARITY-REFERENCE_OUTPUT
+ 691| - **Source** `BODY-07:4149`，原 Oracle `AC-C39-PARITY-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 692| - trigger/input：本TestClass domain=PARITY，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 694| - 原條款：| `PARITY/REFERENCE_OUTPUT` | `SBL DOC08:L435` 原規則 `L3898 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `provider_off_required and provider_off_profile_id and fallback_contract && REFERENCE_OUTPUT_inputs_bound`；requires provider-off profile + fallback; no network egress | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/parity/reference_output := __CORRUPT__044` → `PARITY_PROVIDER_OFF_FAIL`；`AC-C39-PARITY-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 695| - trigger/input：本TestClass domain=PARITY，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 696| - transform/typed output：先執PARITY專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 697| - POS domain與oracle輸入：
+ 700| #### AC-C39-PARITY-STATISTICAL
+ 703| - **Source** `BODY-07:4239`，原 Oracle `AC-C39-PARITY-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 704| - trigger/input：本TestClass domain=PARITY，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 706| - 原條款：| `PARITY/STATISTICAL` | `SBL DOC08:L436` 原規則 `L3899 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `provider_off_required and provider_off_profile_id and fallback_contract && STATISTICAL_inputs_bound`；requires provider-off profile + fallback; no network egress | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/parity/statistical := __CORRUPT__045` → `PARITY_PROVIDER_OFF_FAIL`；`AC-C39-PARITY-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 707| - trigger/input：本TestClass domain=PARITY，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 708| - transform/typed output：先執PARITY專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 709| - POS domain與oracle輸入：
+ 712| #### AC-C39-PARITY-SEMANTIC_JUDGE
+ 715| - **Source** `BODY-07:4323`，原 Oracle `AC-C39-PARITY-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 716| - trigger/input：本TestClass domain=PARITY，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 718| - 原條款：| `PARITY/SEMANTIC_JUDGE` | `SBL DOC08:L437` 原規則 `L3900 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `provider_off_required and provider_off_profile_id and fallback_contract && SEMANTIC_JUDGE_inputs_bound`；requires provider-off profile + fallback; no network egress | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/parity/semantic_judge := __CORRUPT__046` → `PARITY_PROVIDER_OFF_FAIL`；`AC-C39-PARITY-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 719| - trigger/input：本TestClass domain=PARITY，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 720| - transform/typed output：先執PARITY專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 721| - POS domain與oracle輸入：
+ 724| #### AC-C39-PARITY-HUMAN
+ 727| - **Source** `BODY-07:4404`，原 Oracle `AC-C39-PARITY-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 728| - trigger/input：本TestClass domain=PARITY，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 730| - 原條款：| `PARITY/HUMAN` | `SBL DOC08:L438` 原規則 `L3901 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `provider_off_required and provider_off_profile_id and fallback_contract && HUMAN_inputs_bound`；requires provider-off profile + fallback; no network egress | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/parity/human := __CORRUPT__047` → `PARITY_PROVIDER_OFF_FAIL`；`AC-C39-PARITY-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 731| - trigger/input：本TestClass domain=PARITY，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 732| - transform/typed output：先執PARITY專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 733| - POS domain與oracle輸入：
+ 735| <a id="current-080760ed5a3c18ed496b"></a>
+ 736| #### AC-C39-PARITY-COMPOSITE
+ 739| - **Source** `BODY-07:4484`，原 Oracle `AC-C39-PARITY-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 740| - trigger/input：本TestClass domain=PARITY，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 742| - 原條款：| `PARITY/COMPOSITE` | `SBL DOC08:L439` 原規則 `L3902 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `provider_off_required and provider_off_profile_id and fallback_contract && COMPOSITE_inputs_bound`；requires provider-off profile + fallback; no network egress | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/parity/composite := __CORRUPT__048` → `PARITY_PROVIDER_OFF_FAIL`；`AC-C39-PARITY-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 743| - trigger/input：本TestClass domain=PARITY，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID', 'CLI-PARITY-SECOND-ENTRYPOINT']；無Raw不可假裝已跑Native。
+ 744| - transform/typed output：先執PARITY專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 745| - POS domain與oracle輸入：
+ 748| #### AC-C39-RECOVERY-DETERMINISTIC
+ 751| - **Source** `BODY-07:4607`，原 Oracle `AC-C39-RECOVERY-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 752| - trigger/input：本TestClass domain=RECOVERY，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 754| - 原條款：| `RECOVERY/DETERMINISTIC` | `SBL DOC08:L440` 原規則 `L3903 REQUIRED for EFFECT machine-checkable predicate in each GJ` | `effect_or_failure_recovery_required and rollback_ref && DETERMINISTIC_inputs_bound`；requires failure recovery + rollback ref; pre/post and no residue | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/recovery/deterministic := __CORRUPT__049` → `RECOVERY_STATE_MISMATCH`；`AC-C39-RECOVERY-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 755| - trigger/input：本TestClass domain=RECOVERY，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 756| - transform/typed output：先執RECOVERY專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 757| - POS domain與oracle輸入：
+ 760| #### AC-C39-RECOVERY-STATE_READBACK
+ 763| - **Source** `BODY-07:4651`，原 Oracle `AC-C39-RECOVERY-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 764| - trigger/input：本TestClass domain=RECOVERY，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 766| - 原條款：| `RECOVERY/STATE_READBACK` | `SBL DOC08:L441` 原規則 `L3904 REQUIRED if EFFECT changes state; SHADOW readonly snapshot allowed only` | `effect_or_failure_recovery_required and rollback_ref && STATE_READBACK_inputs_bound`；requires failure recovery + rollback ref; pre/post and no residue | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/recovery/state_readback := __CORRUPT__050` → `RECOVERY_STATE_MISMATCH`；`AC-C39-RECOVERY-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 767| - trigger/input：本TestClass domain=RECOVERY，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 768| - transform/typed output：先執RECOVERY專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 769| - POS domain與oracle輸入：
+ 772| #### AC-C39-RECOVERY-PROPERTY
+ 775| - **Source** `BODY-07:4720`，原 Oracle `AC-C39-RECOVERY-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 776| - trigger/input：本TestClass domain=RECOVERY，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 778| - 原條款：| `RECOVERY/PROPERTY` | `SBL DOC08:L442` 原規則 `L3905 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `effect_or_failure_recovery_required and rollback_ref && PROPERTY_inputs_bound`；requires failure recovery + rollback ref; pre/post and no residue | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/recovery/property := __CORRUPT__051` → `RECOVERY_STATE_MISMATCH`；`AC-C39-RECOVERY-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 779| - trigger/input：本TestClass domain=RECOVERY，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 780| - transform/typed output：先執RECOVERY專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 781| - POS domain與oracle輸入：
+ 784| #### AC-C39-RECOVERY-REFERENCE_OUTPUT
+ 787| - **Source** `BODY-07:4775`，原 Oracle `AC-C39-RECOVERY-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 788| - trigger/input：本TestClass domain=RECOVERY，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 789| - applicability/source：存在restart/timeout/checkpoint情境；REFERENCE_OUTPUT的required inputs全綁且原source適用；原SRC-L-001:L496，SHA `0af1fd914a2bbb1f3221c4959facc6d0bbb4b43d4a6d385ed57f9cde8f8eab99`。
+ 790| - 原條款：| `RECOVERY/REFERENCE_OUTPUT` | `SBL DOC08:L443` 原規則 `L3906 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `effect_or_failure_recovery_required and rollback_ref && REFERENCE_OUTPUT_inputs_bound`；requires failure recovery + rollback ref; pre/post and no residue | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/recovery/reference_output := __CORRUPT__052` → `RECOVERY_STATE_MISMATCH`；`AC-C39-RECOVERY-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 791| - trigger/input：本TestClass domain=RECOVERY，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 792| - transform/typed output：先執RECOVERY專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 793| - POS domain與oracle輸入：
+ 796| #### AC-C39-RECOVERY-STATISTICAL
+ 799| - **Source** `BODY-07:4829`，原 Oracle `AC-C39-RECOVERY-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 800| - trigger/input：本TestClass domain=RECOVERY，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 802| - 原條款：| `RECOVERY/STATISTICAL` | `SBL DOC08:L444` 原規則 `L3907 CONDITIONAL: EFFECT benchmark with calibrated dataset+confidence; no stand-alone release` | `effect_or_failure_recovery_required and rollback_ref && STATISTICAL_inputs_bound`；requires failure recovery + rollback ref; pre/post and no residue | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/recovery/statistical := __CORRUPT__053` → `RECOVERY_STATE_MISMATCH`；`AC-C39-RECOVERY-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 803| - trigger/input：本TestClass domain=RECOVERY，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 804| - transform/typed output：先執RECOVERY專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 805| - POS domain與oracle輸入：
+ 808| #### AC-C39-RECOVERY-SEMANTIC_JUDGE
+ 811| - **Source** `BODY-07:4877`，原 Oracle `AC-C39-RECOVERY-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 812| - trigger/input：本TestClass domain=RECOVERY，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 814| - 原條款：| `RECOVERY/SEMANTIC_JUDGE` | `SBL DOC08:L445` 原規則 `L3908 CONDITIONAL: EFFECT benchmark with calibrated dataset+confidence; no stand-alone release` | `effect_or_failure_recovery_required and rollback_ref && SEMANTIC_JUDGE_inputs_bound`；requires failure recovery + rollback ref; pre/post and no residue | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/recovery/semantic_judge := __CORRUPT__054` → `RECOVERY_STATE_MISMATCH`；`AC-C39-RECOVERY-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 815| - trigger/input：本TestClass domain=RECOVERY，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 816| - transform/typed output：先執RECOVERY專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 817| - POS domain與oracle輸入：
+ 820| #### AC-C39-RECOVERY-HUMAN
+ 823| - **Source** `BODY-07:4922`，原 Oracle `AC-C39-RECOVERY-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 824| - trigger/input：本TestClass domain=RECOVERY，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 826| - 原條款：| `RECOVERY/HUMAN` | `SBL DOC08:L446` 原規則 `L3909 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `effect_or_failure_recovery_required and rollback_ref && HUMAN_inputs_bound`；requires failure recovery + rollback ref; pre/post and no residue | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/recovery/human := __CORRUPT__055` → `RECOVERY_STATE_MISMATCH`；`AC-C39-RECOVERY-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 827| - trigger/input：本TestClass domain=RECOVERY，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 828| - transform/typed output：先執RECOVERY專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 829| - POS domain與oracle輸入：
+ 832| #### AC-C39-RECOVERY-COMPOSITE
+ 835| - **Source** `BODY-07:4966`，原 Oracle `AC-C39-RECOVERY-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 836| - trigger/input：本TestClass domain=RECOVERY，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 838| - 原條款：| `RECOVERY/COMPOSITE` | `SBL DOC08:L447` 原規則 `L3910 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `effect_or_failure_recovery_required and rollback_ref && COMPOSITE_inputs_bound`；requires failure recovery + rollback ref; pre/post and no residue | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/recovery/composite := __CORRUPT__056` → `RECOVERY_STATE_MISMATCH`；`AC-C39-RECOVERY-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 839| - trigger/input：本TestClass domain=RECOVERY，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+ 840| - transform/typed output：先執RECOVERY專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 841| - POS domain與oracle輸入：
+ 844| #### AC-C39-UPGRADE-DETERMINISTIC
+ 847| - **Source** `BODY-07:5051`，原 Oracle `AC-C39-UPGRADE-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 848| - trigger/input：本TestClass domain=UPGRADE，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 850| - 原條款：| `UPGRADE/DETERMINISTIC` | `SBL DOC08:L448` 原規則 `L3911 REQUIRED for RUNTIME machine-checkable predicate in each GJ` | `upgrade_path_declared and from_version and to_version && DETERMINISTIC_inputs_bound`；requires from/to migration invariant + schema versions | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/upgrade/deterministic := __CORRUPT__057` → `UPGRADE_VERSION_MISMATCH`；`AC-C39-UPGRADE-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 851| - trigger/input：本TestClass domain=UPGRADE，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 852| - transform/typed output：先執UPGRADE專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 853| - POS domain與oracle輸入：
+ 856| #### AC-C39-UPGRADE-STATE_READBACK
+ 859| - **Source** `BODY-07:5095`，原 Oracle `AC-C39-UPGRADE-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 860| - trigger/input：本TestClass domain=UPGRADE，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 862| - 原條款：| `UPGRADE/STATE_READBACK` | `SBL DOC08:L449` 原規則 `L3912 REQUIRED if RUNTIME changes state; SHADOW readonly snapshot allowed only` | `upgrade_path_declared and from_version and to_version && STATE_READBACK_inputs_bound`；requires from/to migration invariant + schema versions | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/upgrade/state_readback := __CORRUPT__058` → `UPGRADE_VERSION_MISMATCH`；`AC-C39-UPGRADE-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 863| - trigger/input：本TestClass domain=UPGRADE，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 864| - transform/typed output：先執UPGRADE專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 865| - POS domain與oracle輸入：
+ 868| #### AC-C39-UPGRADE-PROPERTY
+ 871| - **Source** `BODY-07:5141`，原 Oracle `AC-C39-UPGRADE-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 872| - trigger/input：本TestClass domain=UPGRADE，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 874| - 原條款：| `UPGRADE/PROPERTY` | `SBL DOC08:L450` 原規則 `L3913 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `upgrade_path_declared and from_version and to_version && PROPERTY_inputs_bound`；requires from/to migration invariant + schema versions | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/upgrade/property := __CORRUPT__059` → `UPGRADE_VERSION_MISMATCH`；`AC-C39-UPGRADE-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 875| - trigger/input：本TestClass domain=UPGRADE，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 876| - transform/typed output：先執UPGRADE專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 877| - POS domain與oracle輸入：
+ 879| <a id="current-79c5b1cb2af4059656a4"></a>
+ 880| #### AC-C39-UPGRADE-REFERENCE_OUTPUT
+ 883| - **Source** `BODY-07:5196`，原 Oracle `AC-C39-UPGRADE-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 884| - trigger/input：本TestClass domain=UPGRADE，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 886| - 原條款：| `UPGRADE/REFERENCE_OUTPUT` | `SBL DOC08:L451` 原規則 `L3914 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `upgrade_path_declared and from_version and to_version && REFERENCE_OUTPUT_inputs_bound`；requires from/to migration invariant + schema versions | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/upgrade/reference_output := __CORRUPT__060` → `UPGRADE_VERSION_MISMATCH`；`AC-C39-UPGRADE-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 887| - trigger/input：本TestClass domain=UPGRADE，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 888| - transform/typed output：先執UPGRADE專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 889| - POS domain與oracle輸入：
+ 892| #### AC-C39-UPGRADE-STATISTICAL
+ 895| - **Source** `BODY-07:5242`，原 Oracle `AC-C39-UPGRADE-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 896| - trigger/input：本TestClass domain=UPGRADE，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 898| - 原條款：| `UPGRADE/STATISTICAL` | `SBL DOC08:L452` 原規則 `L3915 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `upgrade_path_declared and from_version and to_version && STATISTICAL_inputs_bound`；requires from/to migration invariant + schema versions | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/upgrade/statistical := __CORRUPT__061` → `UPGRADE_VERSION_MISMATCH`；`AC-C39-UPGRADE-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 899| - trigger/input：本TestClass domain=UPGRADE，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 900| - transform/typed output：先執UPGRADE專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 901| - POS domain與oracle輸入：
+ 904| #### AC-C39-UPGRADE-SEMANTIC_JUDGE
+ 907| - **Source** `BODY-07:5290`，原 Oracle `AC-C39-UPGRADE-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 908| - trigger/input：本TestClass domain=UPGRADE，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 910| - 原條款：| `UPGRADE/SEMANTIC_JUDGE` | `SBL DOC08:L453` 原規則 `L3916 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `upgrade_path_declared and from_version and to_version && SEMANTIC_JUDGE_inputs_bound`；requires from/to migration invariant + schema versions | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/upgrade/semantic_judge := __CORRUPT__062` → `UPGRADE_VERSION_MISMATCH`；`AC-C39-UPGRADE-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 911| - trigger/input：本TestClass domain=UPGRADE，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 912| - transform/typed output：先執UPGRADE專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 913| - POS domain與oracle輸入：
+ 916| #### AC-C39-UPGRADE-HUMAN
+ 919| - **Source** `BODY-07:5335`，原 Oracle `AC-C39-UPGRADE-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 920| - trigger/input：本TestClass domain=UPGRADE，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 922| - 原條款：| `UPGRADE/HUMAN` | `SBL DOC08:L454` 原規則 `L3917 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `upgrade_path_declared and from_version and to_version && HUMAN_inputs_bound`；requires from/to migration invariant + schema versions | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/upgrade/human := __CORRUPT__063` → `UPGRADE_VERSION_MISMATCH`；`AC-C39-UPGRADE-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 923| - trigger/input：本TestClass domain=UPGRADE，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 924| - transform/typed output：先執UPGRADE專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 925| - POS domain與oracle輸入：
+ 928| #### AC-C39-UPGRADE-COMPOSITE
+ 931| - **Source** `BODY-07:5379`，原 Oracle `AC-C39-UPGRADE-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 932| - trigger/input：本TestClass domain=UPGRADE，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 934| - 原條款：| `UPGRADE/COMPOSITE` | `SBL DOC08:L455` 原規則 `L3918 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `upgrade_path_declared and from_version and to_version && COMPOSITE_inputs_bound`；requires from/to migration invariant + schema versions | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/upgrade/composite := __CORRUPT__064` → `UPGRADE_VERSION_MISMATCH`；`AC-C39-UPGRADE-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 935| - trigger/input：本TestClass domain=UPGRADE，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=[]；無Raw不可假裝已跑Native。
+ 936| - transform/typed output：先執UPGRADE專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 937| - POS domain與oracle輸入：
+ 940| #### AC-C39-ROLLBACK-DETERMINISTIC
+ 943| - **Source** `BODY-07:5444`，原 Oracle `AC-C39-ROLLBACK-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 944| - trigger/input：本TestClass domain=ROLLBACK，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+ 946| - 原條款：| `ROLLBACK/DETERMINISTIC` | `SBL DOC08:L456` 原規則 `L3919 REQUIRED for EFFECT machine-checkable predicate in each GJ` | `mutating_effect and rollback_ref and preimage_digest && DETERMINISTIC_inputs_bound`；requires mutating effect + preimage; exact state restore | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/rollback/deterministic := __CORRUPT__065` → `ROLLBACK_PREIMAGE_MISSING`；`AC-C39-ROLLBACK-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 947| - trigger/input：本TestClass domain=ROLLBACK，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+ 948| - transform/typed output：先執ROLLBACK專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 949| - POS domain與oracle輸入：
+ 952| #### AC-C39-ROLLBACK-STATE_READBACK
+ 955| - **Source** `BODY-07:5490`，原 Oracle `AC-C39-ROLLBACK-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 956| - trigger/input：本TestClass domain=ROLLBACK，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+ 958| - 原條款：| `ROLLBACK/STATE_READBACK` | `SBL DOC08:L457` 原規則 `L3920 REQUIRED if EFFECT changes state; SHADOW readonly snapshot allowed only` | `mutating_effect and rollback_ref and preimage_digest && STATE_READBACK_inputs_bound`；requires mutating effect + preimage; exact state restore | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/rollback/state_readback := __CORRUPT__066` → `ROLLBACK_PREIMAGE_MISSING`；`AC-C39-ROLLBACK-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 959| - trigger/input：本TestClass domain=ROLLBACK，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+ 960| - transform/typed output：先執ROLLBACK專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 961| - POS domain與oracle輸入：
+ 964| #### AC-C39-ROLLBACK-PROPERTY
+ 967| - **Source** `BODY-07:5542`，原 Oracle `AC-C39-ROLLBACK-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 968| - trigger/input：本TestClass domain=ROLLBACK，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+ 970| - 原條款：| `ROLLBACK/PROPERTY` | `SBL DOC08:L458` 原規則 `L3921 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `mutating_effect and rollback_ref and preimage_digest && PROPERTY_inputs_bound`；requires mutating effect + preimage; exact state restore | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/rollback/property := __CORRUPT__067` → `ROLLBACK_PREIMAGE_MISSING`；`AC-C39-ROLLBACK-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 971| - trigger/input：本TestClass domain=ROLLBACK，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+ 972| - transform/typed output：先執ROLLBACK專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 973| - POS domain與oracle輸入：
+ 976| #### AC-C39-ROLLBACK-REFERENCE_OUTPUT
+ 979| - **Source** `BODY-07:5598`，原 Oracle `AC-C39-ROLLBACK-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 980| - trigger/input：本TestClass domain=ROLLBACK，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+ 982| - 原條款：| `ROLLBACK/REFERENCE_OUTPUT` | `SBL DOC08:L459` 原規則 `L3922 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `mutating_effect and rollback_ref and preimage_digest && REFERENCE_OUTPUT_inputs_bound`；requires mutating effect + preimage; exact state restore | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/rollback/reference_output := __CORRUPT__068` → `ROLLBACK_PREIMAGE_MISSING`；`AC-C39-ROLLBACK-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 983| - trigger/input：本TestClass domain=ROLLBACK，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+ 984| - transform/typed output：先執ROLLBACK專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 985| - POS domain與oracle輸入：
+ 988| #### AC-C39-ROLLBACK-STATISTICAL
+ 991| - **Source** `BODY-07:5652`，原 Oracle `AC-C39-ROLLBACK-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 992| - trigger/input：本TestClass domain=ROLLBACK，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+ 994| - 原條款：| `ROLLBACK/STATISTICAL` | `SBL DOC08:L460` 原規則 `L3923 CONDITIONAL: EFFECT benchmark with calibrated dataset+confidence; no stand-alone release` | `mutating_effect and rollback_ref and preimage_digest && STATISTICAL_inputs_bound`；requires mutating effect + preimage; exact state restore | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/rollback/statistical := __CORRUPT__069` → `ROLLBACK_PREIMAGE_MISSING`；`AC-C39-ROLLBACK-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+ 995| - trigger/input：本TestClass domain=ROLLBACK，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+ 996| - transform/typed output：先執ROLLBACK專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+ 997| - POS domain與oracle輸入：
+1000| #### AC-C39-ROLLBACK-SEMANTIC_JUDGE
+1003| - **Source** `BODY-07:5702`，原 Oracle `AC-C39-ROLLBACK-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1004| - trigger/input：本TestClass domain=ROLLBACK，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1006| - 原條款：| `ROLLBACK/SEMANTIC_JUDGE` | `SBL DOC08:L461` 原規則 `L3924 CONDITIONAL: EFFECT benchmark with calibrated dataset+confidence; no stand-alone release` | `mutating_effect and rollback_ref and preimage_digest && SEMANTIC_JUDGE_inputs_bound`；requires mutating effect + preimage; exact state restore | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/rollback/semantic_judge := __CORRUPT__070` → `ROLLBACK_PREIMAGE_MISSING`；`AC-C39-ROLLBACK-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1007| - trigger/input：本TestClass domain=ROLLBACK，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1008| - transform/typed output：先執ROLLBACK專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1009| - POS domain與oracle輸入：
+1012| #### AC-C39-ROLLBACK-HUMAN
+1015| - **Source** `BODY-07:5749`，原 Oracle `AC-C39-ROLLBACK-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1016| - trigger/input：本TestClass domain=ROLLBACK，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1018| - 原條款：| `ROLLBACK/HUMAN` | `SBL DOC08:L462` 原規則 `L3925 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `mutating_effect and rollback_ref and preimage_digest && HUMAN_inputs_bound`；requires mutating effect + preimage; exact state restore | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/rollback/human := __CORRUPT__071` → `ROLLBACK_PREIMAGE_MISSING`；`AC-C39-ROLLBACK-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1019| - trigger/input：本TestClass domain=ROLLBACK，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1020| - transform/typed output：先執ROLLBACK專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1021| - POS domain與oracle輸入：
+1024| #### AC-C39-ROLLBACK-COMPOSITE
+1027| - **Source** `BODY-07:5795`，原 Oracle `AC-C39-ROLLBACK-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1028| - trigger/input：本TestClass domain=ROLLBACK，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1030| - 原條款：| `ROLLBACK/COMPOSITE` | `SBL DOC08:L463` 原規則 `L3926 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `mutating_effect and rollback_ref and preimage_digest && COMPOSITE_inputs_bound`；requires mutating effect + preimage; exact state restore | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/rollback/composite := __CORRUPT__072` → `ROLLBACK_PREIMAGE_MISSING`；`AC-C39-ROLLBACK-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1031| - trigger/input：本TestClass domain=ROLLBACK，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1032| - transform/typed output：先執ROLLBACK專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1033| - POS domain與oracle輸入：
+1036| #### AC-C39-UNINSTALL-DETERMINISTIC
+1039| - **Source** `BODY-07:5862`，原 Oracle `AC-C39-UNINSTALL-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1040| - trigger/input：本TestClass domain=UNINSTALL，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1042| - 原條款：| `UNINSTALL/DETERMINISTIC` | `SBL DOC08:L464` 原規則 `L3927 REQUIRED for EFFECT machine-checkable predicate in each GJ` | `installation_workpackage and retention_policy && DETERMINISTIC_inputs_bound`；requires installed workpackage + retention; no stale hooks | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/uninstall/deterministic := __CORRUPT__073` → `UNINSTALL_RESIDUE`；`AC-C39-UNINSTALL-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1043| - trigger/input：本TestClass domain=UNINSTALL，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1044| - transform/typed output：先執UNINSTALL專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1045| - POS domain與oracle輸入：
+1048| #### AC-C39-UNINSTALL-STATE_READBACK
+1051| - **Source** `BODY-07:5904`，原 Oracle `AC-C39-UNINSTALL-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1052| - trigger/input：本TestClass domain=UNINSTALL，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1054| - 原條款：| `UNINSTALL/STATE_READBACK` | `SBL DOC08:L465` 原規則 `L3928 REQUIRED if EFFECT changes state; SHADOW readonly snapshot allowed only` | `installation_workpackage and retention_policy && STATE_READBACK_inputs_bound`；requires installed workpackage + retention; no stale hooks | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/uninstall/state_readback := __CORRUPT__074` → `UNINSTALL_RESIDUE`；`AC-C39-UNINSTALL-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1055| - trigger/input：本TestClass domain=UNINSTALL，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1056| - transform/typed output：先執UNINSTALL專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1057| - POS domain與oracle輸入：
+1060| #### AC-C39-UNINSTALL-PROPERTY
+1063| - **Source** `BODY-07:5961`，原 Oracle `AC-C39-UNINSTALL-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1064| - trigger/input：本TestClass domain=UNINSTALL，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1066| - 原條款：| `UNINSTALL/PROPERTY` | `SBL DOC08:L466` 原規則 `L3929 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `installation_workpackage and retention_policy && PROPERTY_inputs_bound`；requires installed workpackage + retention; no stale hooks | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/uninstall/property := __CORRUPT__075` → `UNINSTALL_RESIDUE`；`AC-C39-UNINSTALL-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1067| - trigger/input：本TestClass domain=UNINSTALL，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1068| - transform/typed output：先執UNINSTALL專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1069| - POS domain與oracle輸入：
+1072| #### AC-C39-UNINSTALL-REFERENCE_OUTPUT
+1075| - **Source** `BODY-07:6013`，原 Oracle `AC-C39-UNINSTALL-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1076| - trigger/input：本TestClass domain=UNINSTALL，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1078| - 原條款：| `UNINSTALL/REFERENCE_OUTPUT` | `SBL DOC08:L467` 原規則 `L3930 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `installation_workpackage and retention_policy && REFERENCE_OUTPUT_inputs_bound`；requires installed workpackage + retention; no stale hooks | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/uninstall/reference_output := __CORRUPT__076` → `UNINSTALL_RESIDUE`；`AC-C39-UNINSTALL-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1079| - trigger/input：本TestClass domain=UNINSTALL，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1080| - transform/typed output：先執UNINSTALL專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1081| - POS domain與oracle輸入：
+1084| #### AC-C39-UNINSTALL-STATISTICAL
+1087| - **Source** `BODY-07:6065`，原 Oracle `AC-C39-UNINSTALL-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1088| - trigger/input：本TestClass domain=UNINSTALL，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1090| - 原條款：| `UNINSTALL/STATISTICAL` | `SBL DOC08:L468` 原規則 `L3931 CONDITIONAL: EFFECT benchmark with calibrated dataset+confidence; no stand-alone release` | `installation_workpackage and retention_policy && STATISTICAL_inputs_bound`；requires installed workpackage + retention; no stale hooks | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/uninstall/statistical := __CORRUPT__077` → `UNINSTALL_RESIDUE`；`AC-C39-UNINSTALL-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1091| - trigger/input：本TestClass domain=UNINSTALL，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1092| - transform/typed output：先執UNINSTALL專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1093| - POS domain與oracle輸入：
+1096| #### AC-C39-UNINSTALL-SEMANTIC_JUDGE
+1099| - **Source** `BODY-07:6111`，原 Oracle `AC-C39-UNINSTALL-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1100| - trigger/input：本TestClass domain=UNINSTALL，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1102| - 原條款：| `UNINSTALL/SEMANTIC_JUDGE` | `SBL DOC08:L469` 原規則 `L3932 CONDITIONAL: EFFECT benchmark with calibrated dataset+confidence; no stand-alone release` | `installation_workpackage and retention_policy && SEMANTIC_JUDGE_inputs_bound`；requires installed workpackage + retention; no stale hooks | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/uninstall/semantic_judge := __CORRUPT__078` → `UNINSTALL_RESIDUE`；`AC-C39-UNINSTALL-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1103| - trigger/input：本TestClass domain=UNINSTALL，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1104| - transform/typed output：先執UNINSTALL專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1105| - POS domain與oracle輸入：
+1108| #### AC-C39-UNINSTALL-HUMAN
+1111| - **Source** `BODY-07:6154`，原 Oracle `AC-C39-UNINSTALL-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1112| - trigger/input：本TestClass domain=UNINSTALL，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1114| - 原條款：| `UNINSTALL/HUMAN` | `SBL DOC08:L470` 原規則 `L3933 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `installation_workpackage and retention_policy && HUMAN_inputs_bound`；requires installed workpackage + retention; no stale hooks | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/uninstall/human := __CORRUPT__079` → `UNINSTALL_RESIDUE`；`AC-C39-UNINSTALL-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1115| - trigger/input：本TestClass domain=UNINSTALL，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1116| - transform/typed output：先執UNINSTALL專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1117| - POS domain與oracle輸入：
+1120| #### AC-C39-UNINSTALL-COMPOSITE
+1123| - **Source** `BODY-07:6196`，原 Oracle `AC-C39-UNINSTALL-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1124| - trigger/input：本TestClass domain=UNINSTALL，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1126| - 原條款：| `UNINSTALL/COMPOSITE` | `SBL DOC08:L471` 原規則 `L3934 CONDITIONAL: EFFECT typed property/reference/composite defined with source and fixtures` | `installation_workpackage and retention_policy && COMPOSITE_inputs_bound`；requires installed workpackage + retention; no stale hooks | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/uninstall/composite := __CORRUPT__080` → `UNINSTALL_RESIDUE`；`AC-C39-UNINSTALL-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1127| - trigger/input：本TestClass domain=UNINSTALL，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-UNINSTALL-OWNED-REMOVE', 'CLI-UNINSTALL-FOREIGN-DENY']；無Raw不可假裝已跑Native。
+1128| - transform/typed output：先執UNINSTALL專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1129| - POS domain與oracle輸入：
+1131| <a id="current-d76cf7b11b96431b1610"></a>
+1132| #### AC-C39-MUT-DETERMINISTIC
+1134| - **原 NEG 本版有效保留**：oracle忽略被mutate欄位；observed_value改成非expected
+1135| - **Source** `BODY-07:6269`，原 Oracle `AC-C39-MUT-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1136| - trigger/input：本TestClass domain=MUT，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1138| - 原條款：| `MUT/DETERMINISTIC` | `SBL DOC08:L472` 原規則 `L3935 REQUIRED for MUT machine-checkable predicate in each GJ` | `testable_predicate and mutation_operator and fixed_seed && DETERMINISTIC_inputs_bound`；requires testable predicate + operator + fixed seed; mutant killed | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/mut/deterministic := __CORRUPT__081` → `MUTANT_SURVIVED`；`AC-C39-MUT-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1139| - trigger/input：本TestClass domain=MUT，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1140| - transform/typed output：先執MUT專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1141| - POS domain與oracle輸入：
+1144| #### AC-C39-MUT-STATE_READBACK
+1146| - **原 NEG 本版有效保留**：oracle忽略被mutate欄位；actual_post_state不同或foreign world Reader
+1147| - **Source** `BODY-07:6307`，原 Oracle `AC-C39-MUT-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1148| - trigger/input：本TestClass domain=MUT，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1150| - 原條款：| `MUT/STATE_READBACK` | `SBL DOC08:L473` 原規則 `L3936 REQUIRED if MUT changes state; SHADOW readonly snapshot allowed only` | `testable_predicate and mutation_operator and fixed_seed && STATE_READBACK_inputs_bound`；requires testable predicate + operator + fixed seed; mutant killed | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/mut/state_readback := __CORRUPT__082` → `MUTANT_SURVIVED`；`AC-C39-MUT-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1151| - trigger/input：本TestClass domain=MUT，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1152| - transform/typed output：先執MUT專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1153| - POS domain與oracle輸入：
+1156| #### AC-C39-MUT-PROPERTY
+1158| - **原 NEG 本版有效保留**：oracle忽略被mutate欄位；至少一generated case破invariant
+1159| - **Source** `BODY-07:6381`，原 Oracle `AC-C39-MUT-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1160| - trigger/input：本TestClass domain=MUT，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1162| - 原條款：| `MUT/PROPERTY` | `SBL DOC08:L474` 原規則 `L3937 CONDITIONAL: MUT typed property/reference/composite defined with source and fixtures` | `testable_predicate and mutation_operator and fixed_seed && PROPERTY_inputs_bound`；requires testable predicate + operator + fixed seed; mutant killed | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/mut/property := __CORRUPT__083` → `MUTANT_SURVIVED`；`AC-C39-MUT-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1163| - trigger/input：本TestClass domain=MUT，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1164| - transform/typed output：先執MUT專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1165| - POS domain與oracle輸入：
+1168| #### AC-C39-MUT-REFERENCE_OUTPUT
+1170| - **原 NEG 本版有效保留**：oracle忽略被mutate欄位；更換reference或輸出差異
+1171| - **Source** `BODY-07:6427`，原 Oracle `AC-C39-MUT-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1172| - trigger/input：本TestClass domain=MUT，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1174| - 原條款：| `MUT/REFERENCE_OUTPUT` | `SBL DOC08:L475` 原規則 `L3938 CONDITIONAL: MUT typed property/reference/composite defined with source and fixtures` | `testable_predicate and mutation_operator and fixed_seed && REFERENCE_OUTPUT_inputs_bound`；requires testable predicate + operator + fixed seed; mutant killed | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/mut/reference_output := __CORRUPT__084` → `MUTANT_SURVIVED`；`AC-C39-MUT-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1175| - trigger/input：本TestClass domain=MUT，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1176| - transform/typed output：先執MUT專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1177| - POS domain與oracle輸入：
+1180| #### AC-C39-MUT-STATISTICAL
+1182| - **原 NEG 本版有效保留**：oracle忽略被mutate欄位；刪dataset/改confidence/樣本不達界
+1183| - **Source** `BODY-07:6473`，原 Oracle `AC-C39-MUT-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1184| - trigger/input：本TestClass domain=MUT，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1186| - 原條款：| `MUT/STATISTICAL` | `SBL DOC08:L476` 原規則 `L3939 CONDITIONAL: MUT benchmark with calibrated dataset+confidence; no stand-alone release gr` | `testable_predicate and mutation_operator and fixed_seed && STATISTICAL_inputs_bound`；requires testable predicate + operator + fixed seed; mutant killed | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/mut/statistical := __CORRUPT__085` → `MUTANT_SURVIVED`；`AC-C39-MUT-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1187| - trigger/input：本TestClass domain=MUT，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1188| - transform/typed output：先執MUT專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1189| - POS domain與oracle輸入：
+1192| #### AC-C39-MUT-SEMANTIC_JUDGE
+1194| - **原 NEG 本版有效保留**：oracle忽略被mutate欄位；judge未校準/不同rubric卻聲稱一致
+1195| - **Source** `BODY-07:6515`，原 Oracle `AC-C39-MUT-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1196| - trigger/input：本TestClass domain=MUT，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1198| - 原條款：| `MUT/SEMANTIC_JUDGE` | `SBL DOC08:L477` 原規則 `L3940 CONDITIONAL: MUT benchmark with calibrated dataset+confidence; no stand-alone release gr` | `testable_predicate and mutation_operator and fixed_seed && SEMANTIC_JUDGE_inputs_bound`；requires testable predicate + operator + fixed seed; mutant killed | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/mut/semantic_judge := __CORRUPT__086` → `MUTANT_SURVIVED`；`AC-C39-MUT-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1199| - trigger/input：本TestClass domain=MUT，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1200| - transform/typed output：先執MUT專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1201| - POS domain與oracle輸入：
+1204| #### AC-C39-MUT-HUMAN
+1206| - **原 NEG 本版有效保留**：oracle忽略被mutate欄位；Maker冒Human或決議是另一scope
+1207| - **Source** `BODY-07:6554`，原 Oracle `AC-C39-MUT-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1208| - trigger/input：本TestClass domain=MUT，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1210| - 原條款：| `MUT/HUMAN` | `SBL DOC08:L478` 原規則 `L3941 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `testable_predicate and mutation_operator and fixed_seed && HUMAN_inputs_bound`；requires testable predicate + operator + fixed seed; mutant killed | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/mut/human := __CORRUPT__087` → `MUTANT_SURVIVED`；`AC-C39-MUT-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1211| - trigger/input：本TestClass domain=MUT，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1212| - transform/typed output：先執MUT專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1213| - POS domain與oracle輸入：
+1216| #### AC-C39-MUT-COMPOSITE
+1218| - **原 NEG 本版有效保留**：oracle忽略被mutate欄位；刪hard component或soft分數蓋hard fail
+1219| - **Source** `BODY-07:6592`，原 Oracle `AC-C39-MUT-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1220| - trigger/input：本TestClass domain=MUT，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1222| - 原條款：| `MUT/COMPOSITE` | `SBL DOC08:L479` 原規則 `L3942 CONDITIONAL: MUT typed property/reference/composite defined with source and fixtures` | `testable_predicate and mutation_operator and fixed_seed && COMPOSITE_inputs_bound`；requires testable predicate + operator + fixed seed; mutant killed | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/mut/composite := __CORRUPT__088` → `MUTANT_SURVIVED`；`AC-C39-MUT-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1223| - trigger/input：本TestClass domain=MUT，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+1224| - transform/typed output：先執MUT專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1225| - POS domain與oracle輸入：
+1228| #### AC-C39-JOURNEY-DETERMINISTIC
+1231| - **Source** `BODY-07:6683`，原 Oracle `AC-C39-JOURNEY-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1232| - trigger/input：本TestClass domain=JOURNEY，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1234| - 原條款：| `JOURNEY/DETERMINISTIC` | `SBL DOC08:L480` 原規則 `L3943 REQUIRED for RUNTIME machine-checkable predicate in each GJ` | `consumer_entrypoint and user_outcome_defined and supported_kind && DETERMINISTIC_inputs_bound`；requires consumer entrypoint/outcome and product-kind; real end-user result | `expected_value` → `observed_value`；`exact_eq / observed must equal source-bound expected` | `/outcome/journey/deterministic := __CORRUPT__089` → `FUNCTIONAL_CONSUMER_MISSING`；`AC-C39-JOURNEY-DETERMINISTIC` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1235| - trigger/input：本TestClass domain=JOURNEY，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1236| - transform/typed output：先執JOURNEY專屬domain_predicate，再執DETERMINISTIC的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1237| - POS domain與oracle輸入：
+1240| #### AC-C39-JOURNEY-STATE_READBACK
+1243| - **Source** `BODY-07:6749`，原 Oracle `AC-C39-JOURNEY-STATE_READBACK`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1244| - trigger/input：本TestClass domain=JOURNEY，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1246| - 原條款：| `JOURNEY/STATE_READBACK` | `SBL DOC08:L481` 原規則 `L3944 REQUIRED if RUNTIME changes state; SHADOW readonly snapshot allowed only` | `consumer_entrypoint and user_outcome_defined and supported_kind && STATE_READBACK_inputs_bound`；requires consumer entrypoint/outcome and product-kind; real end-user result | `pre_digest+expected_post_digest` → `native_world_pre+native_world_post`；`state_transition / pre+post digest from real world` | `/outcome/journey/state_readback := __CORRUPT__090` → `FUNCTIONAL_CONSUMER_MISSING`；`AC-C39-JOURNEY-STATE_READBACK` | `REQUIRED_UNLESS_REAL_NATIVE_OWNER_WAIVES; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1247| - trigger/input：本TestClass domain=JOURNEY，Oracle=STATE_READBACK；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1248| - transform/typed output：先執JOURNEY專屬domain_predicate，再執STATE_READBACK的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1249| - POS domain與oracle輸入：
+1252| #### AC-C39-JOURNEY-PROPERTY
+1255| - **Source** `BODY-07:6829`，原 Oracle `AC-C39-JOURNEY-PROPERTY`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1256| - trigger/input：本TestClass domain=JOURNEY，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1258| - 原條款：| `JOURNEY/PROPERTY` | `SBL DOC08:L482` 原規則 `L3945 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `consumer_entrypoint and user_outcome_defined and supported_kind && PROPERTY_inputs_bound`；requires consumer entrypoint/outcome and product-kind; real end-user result | `invariant+seed` → `generated_cases+minimal_counterexample`；`all_invariant / seeded generated cases + shrunk counterexample` | `/outcome/journey/property := __CORRUPT__091` → `FUNCTIONAL_CONSUMER_MISSING`；`AC-C39-JOURNEY-PROPERTY` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1259| - trigger/input：本TestClass domain=JOURNEY，Oracle=PROPERTY；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1260| - transform/typed output：先執JOURNEY專屬domain_predicate，再執PROPERTY的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1261| - POS domain與oracle輸入：
+1264| #### AC-C39-JOURNEY-REFERENCE_OUTPUT
+1267| - **Source** `BODY-07:6917`，原 Oracle `AC-C39-JOURNEY-REFERENCE_OUTPUT`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1268| - trigger/input：本TestClass domain=JOURNEY，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1270| - 原條款：| `JOURNEY/REFERENCE_OUTPUT` | `SBL DOC08:L483` 原規則 `L3946 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `consumer_entrypoint and user_outcome_defined and supported_kind && REFERENCE_OUTPUT_inputs_bound`；requires consumer entrypoint/outcome and product-kind; real end-user result | `reference_sha+canonical_output` → `observed_output`；`pinned_reference_eq / reference SHA pinned` | `/outcome/journey/reference_output := __CORRUPT__092` → `FUNCTIONAL_CONSUMER_MISSING`；`AC-C39-JOURNEY-REFERENCE_OUTPUT` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1271| - trigger/input：本TestClass domain=JOURNEY，Oracle=REFERENCE_OUTPUT；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1272| - transform/typed output：先執JOURNEY專屬domain_predicate，再執REFERENCE_OUTPUT的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1273| - POS domain與oracle輸入：
+1276| #### AC-C39-JOURNEY-STATISTICAL
+1279| - **Source** `BODY-07:6993`，原 Oracle `AC-C39-JOURNEY-STATISTICAL`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1280| - trigger/input：本TestClass domain=JOURNEY，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1282| - 原條款：| `JOURNEY/STATISTICAL` | `SBL DOC08:L484` 原規則 `L3947 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `consumer_entrypoint and user_outcome_defined and supported_kind && STATISTICAL_inputs_bound`；requires consumer entrypoint/outcome and product-kind; real end-user result | `dataset_sha+calibration_sha+confidence+threshold` → `sample_metrics`；`bound_confidence / dataset+calibration+threshold` | `/outcome/journey/statistical := __CORRUPT__093` → `FUNCTIONAL_CONSUMER_MISSING`；`AC-C39-JOURNEY-STATISTICAL` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1283| - trigger/input：本TestClass domain=JOURNEY，Oracle=STATISTICAL；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1284| - transform/typed output：先執JOURNEY專屬domain_predicate，再執STATISTICAL的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1285| - POS domain與oracle輸入：
+1288| #### AC-C39-JOURNEY-SEMANTIC_JUDGE
+1291| - **Source** `BODY-07:7063`，原 Oracle `AC-C39-JOURNEY-SEMANTIC_JUDGE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1292| - trigger/input：本TestClass domain=JOURNEY，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1294| - 原條款：| `JOURNEY/SEMANTIC_JUDGE` | `SBL DOC08:L485` 原規則 `L3948 CONDITIONAL: RUNTIME benchmark with calibrated dataset+confidence; no stand-alone releas` | `consumer_entrypoint and user_outcome_defined and supported_kind && SEMANTIC_JUDGE_inputs_bound`；requires consumer entrypoint/outcome and product-kind; real end-user result | `rubric_sha+judge_model_pin+human_calibration` → `scores+disagreements`；`calibrated_rubric / model+human calibration+disagreement` | `/outcome/journey/semantic_judge := __CORRUPT__094` → `FUNCTIONAL_CONSUMER_MISSING`；`AC-C39-JOURNEY-SEMANTIC_JUDGE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1295| - trigger/input：本TestClass domain=JOURNEY，Oracle=SEMANTIC_JUDGE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1296| - transform/typed output：先執JOURNEY專屬domain_predicate，再執SEMANTIC_JUDGE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1297| - POS domain與oracle輸入：
+1300| #### AC-C39-JOURNEY-HUMAN
+1303| - **Source** `BODY-07:7130`，原 Oracle `AC-C39-JOURNEY-HUMAN`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1304| - trigger/input：本TestClass domain=JOURNEY，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1306| - 原條款：| `JOURNEY/HUMAN` | `SBL DOC08:L486` 原規則 `L3949 CONDITIONAL: human rights/risk veto + signed rubric; never sole oracle for deterministic` | `consumer_entrypoint and user_outcome_defined and supported_kind && HUMAN_inputs_bound`；requires consumer entrypoint/outcome and product-kind; real end-user result | `rubric+principal+consent_or_basis` → `signed_human_decision`；`rights_veto / real authorized principal, consent and signed decision` | `/outcome/journey/human := __CORRUPT__095` → `FUNCTIONAL_CONSUMER_MISSING`；`AC-C39-JOURNEY-HUMAN` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1307| - trigger/input：本TestClass domain=JOURNEY，Oracle=HUMAN；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1308| - transform/typed output：先執JOURNEY專屬domain_predicate，再執HUMAN的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1309| - POS domain與oracle輸入：
+1312| #### AC-C39-JOURNEY-COMPOSITE
+1315| - **Source** `BODY-07:7196`，原 Oracle `AC-C39-JOURNEY-COMPOSITE`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+1316| - trigger/input：本TestClass domain=JOURNEY，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1318| - 原條款：| `JOURNEY/COMPOSITE` | `SBL DOC08:L487` 原規則 `L3950 CONDITIONAL: RUNTIME typed property/reference/composite defined with source and fixtures` | `consumer_entrypoint and user_outcome_defined and supported_kind && COMPOSITE_inputs_bound`；requires consumer entrypoint/outcome and product-kind; real end-user result | `components+ordering+failure_policy` → `component_raw_receipts`；`all_hard_and / ordered hard component receipts` | `/outcome/journey/composite := __CORRUPT__096` → `FUNCTIONAL_CONSUMER_MISSING`；`AC-C39-JOURNEY-COMPOSITE` | `CONDITIONAL_ON_SOURCE_INPUT; live `REQUIRED/CONDITIONAL/N_A_REASONED/HOLD` after Owner predicate & DOC07 native ALL`；原 Oracle Owner=PIPD DOC07，SBL Reader/Checker；`NOT_EXECUTED` |
+1319| - trigger/input：本TestClass domain=JOURNEY，Oracle=COMPOSITE；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-EMPTY-LIST', 'CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID', 'CLI-ROLLBACK-REMOVE', 'CLI-JOURNEY-FINAL-EMPTY']；無Raw不可假裝已跑Native。
+1320| - transform/typed output：先執JOURNEY專屬domain_predicate，再執COMPOSITE的機制，回AUTHOR.LocalOracleOutcome(case_id,verdict,first_fail,claim_ceiling)。
+1321| - POS domain與oracle輸入：
+1329| ## 本版未受影條文（完整沿用、當期生效）
+1331| ## R2-07-AC：15 條異構Edge與三種Challenge效果
+1336| ## R2-07-H4-SEAM：12 H4與11 SEAM保持原Oracle
+1350| | H4-11 RepairCone / SRC-01:L212 | 原 first failing invariant, DAG, legal writeset → minimal repair cone；Consumer/Owner Maker/Repair Owner；用受限 L2 ECP；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS 只修依賴受影最小集合，重測對應案；NEG 擴寫無關 Source/Oracle → REPAIR_SCOPE_OVERREACH；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1355| | SEAM-04 Internal Oracle / SRC-01:L224 | oracle.principal_id != maker；受影 Domain Reader=Oracle/Checker Owners。 | 有權 Checker 真分離；Maker 上白名單 → TQ_SOD；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1364| ## R2-07-ACTUAL-ACCEPTANCE：原Spine Reader的證據邊界
+1370| NEG：註冊但來自另一subject的evidence_ref不得僅因exists就接受。受影scope為AC-E09/12/13及欲借該Raw結案的B1 Case；其他來源/設計Reader繼續。Next legal action：原Owner對同candidate/requirement的evidence binding做兼容遷移與原Checker回歸，保留舊journal和history。

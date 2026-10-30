@@ -1,0 +1,35 @@
+{
+ "verdict": "PASS",
+ "idempotence": {
+  "body_identical": true,
+  "evidence_identical": true
+ },
+ "zips": [
+  {
+   "file": "FHS-MSC_BODY_2026-10-30_HANDOFF-PATCH-v1-EXEC.zip",
+   "bytes": 483623,
+   "sha256": "07d62b49fa35dabfdae0d7bc481fcd19155c9248aeb2727a1e814d68bc50b225",
+   "entries": 17
+  },
+  {
+   "file": "FHS-MSC_EVIDENCE_2026-10-30_HANDOFF-PATCH-v1-EXEC.zip",
+   "bytes": 25987085,
+   "sha256": "9497133b150c260dec26a2855e66a1a70f91def96e2241d5693208d55a30cc67",
+   "entries": 880
+  }
+ ],
+ "readback": [
+  {
+   "file": "FHS-MSC_BODY_2026-10-30_HANDOFF-PATCH-v1-EXEC.zip",
+   "entries_verified": 17,
+   "problems": [],
+   "verdict": "PASS"
+  },
+  {
+   "file": "FHS-MSC_EVIDENCE_2026-10-30_HANDOFF-PATCH-v1-EXEC.zip",
+   "entries_verified": 880,
+   "problems": [],
+   "verdict": "PASS"
+  }
+ ]
+}

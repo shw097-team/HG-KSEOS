@@ -1,0 +1,177 @@
+{
+  "schema": "SBL.PlannedTQAEP@1",
+  "subject_sha256": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+  "state": "PLANNED",
+  "tests": [
+    {
+      "req_id": "REQ-8ca31c3b63e9d8413f79",
+      "source_ref": "SRC-19e062f852f001b88078",
+      "oracle_ref": "ORACLE-REQ-8ca31c3b63e9d8413f79",
+      "positive_fixture": "fixtures/REQ-8ca31c3b63e9d8413f79_POS.json",
+      "negative_fixture": "fixtures/REQ-8ca31c3b63e9d8413f79_NEG.json"
+    },
+    {
+      "req_id": "REQ-fb32edfab84f37c859d3",
+      "source_ref": "SRC-9a2b5e5f43164e1ac1f3",
+      "oracle_ref": "ORACLE-REQ-fb32edfab84f37c859d3",
+      "positive_fixture": "fixtures/REQ-fb32edfab84f37c859d3_POS.json",
+      "negative_fixture": "fixtures/REQ-fb32edfab84f37c859d3_NEG.json"
+    },
+    {
+      "req_id": "REQ-65751e46474c1c7285c5",
+      "source_ref": "SRC-7d5d74cebfec0424e7b5",
+      "oracle_ref": "ORACLE-REQ-65751e46474c1c7285c5",
+      "positive_fixture": "fixtures/REQ-65751e46474c1c7285c5_POS.json",
+      "negative_fixture": "fixtures/REQ-65751e46474c1c7285c5_NEG.json"
+    },
+    {
+      "req_id": "REQ-d880316cfcf6864c306f",
+      "source_ref": "SRC-3be49e5c8cd7cff87173",
+      "oracle_ref": "ORACLE-REQ-d880316cfcf6864c306f",
+      "positive_fixture": "fixtures/REQ-d880316cfcf6864c306f_POS.json",
+      "negative_fixture": "fixtures/REQ-d880316cfcf6864c306f_NEG.json"
+    },
+    {
+      "req_id": "REQ-fd4ebdda798ab51a503e",
+      "source_ref": "SRC-e9acd8b24c82a902cfc4",
+      "oracle_ref": "ORACLE-REQ-fd4ebdda798ab51a503e",
+      "positive_fixture": "fixtures/REQ-fd4ebdda798ab51a503e_POS.json",
+      "negative_fixture": "fixtures/REQ-fd4ebdda798ab51a503e_NEG.json"
+    },
+    {
+      "req_id": "REQ-9a3917c3e7c727825c13",
+      "source_ref": "SRC-db95afb92dc3ff4ae1d7",
+      "oracle_ref": "ORACLE-REQ-9a3917c3e7c727825c13",
+      "positive_fixture": "fixtures/REQ-9a3917c3e7c727825c13_POS.json",
+      "negative_fixture": "fixtures/REQ-9a3917c3e7c727825c13_NEG.json"
+    },
+    {
+      "req_id": "REQ-3d10ca454fa1adf5bbef",
+      "source_ref": "SRC-f63008b1f8efa5811688",
+      "oracle_ref": "ORACLE-REQ-3d10ca454fa1adf5bbef",
+      "positive_fixture": "fixtures/REQ-3d10ca454fa1adf5bbef_POS.json",
+      "negative_fixture": "fixtures/REQ-3d10ca454fa1adf5bbef_NEG.json"
+    },
+    {
+      "req_id": "REQ-ddf075f96bb5b78cfa7c",
+      "source_ref": "SRC-92bc05841b2fc9a5ad61",
+      "oracle_ref": "ORACLE-REQ-ddf075f96bb5b78cfa7c",
+      "positive_fixture": "fixtures/REQ-ddf075f96bb5b78cfa7c_POS.json",
+      "negative_fixture": "fixtures/REQ-ddf075f96bb5b78cfa7c_NEG.json"
+    },
+    {
+      "req_id": "REQ-9b72cb316849a211287f",
+      "source_ref": "SRC-b2f1951e96a0404c3089",
+      "oracle_ref": "ORACLE-REQ-9b72cb316849a211287f",
+      "positive_fixture": "fixtures/REQ-9b72cb316849a211287f_POS.json",
+      "negative_fixture": "fixtures/REQ-9b72cb316849a211287f_NEG.json"
+    },
+    {
+      "req_id": "REQ-77415e64e678a32ade72",
+      "source_ref": "SRC-b6a1be2c9e4b175425a8",
+      "oracle_ref": "ORACLE-REQ-77415e64e678a32ade72",
+      "positive_fixture": "fixtures/REQ-77415e64e678a32ade72_POS.json",
+      "negative_fixture": "fixtures/REQ-77415e64e678a32ade72_NEG.json"
+    },
+    {
+      "req_id": "REQ-5c8089f128e1c7978a42",
+      "source_ref": "SRC-213fac8a3975c82dc4bb",
+      "oracle_ref": "ORACLE-REQ-5c8089f128e1c7978a42",
+      "positive_fixture": "fixtures/REQ-5c8089f128e1c7978a42_POS.json",
+      "negative_fixture": "fixtures/REQ-5c8089f128e1c7978a42_NEG.json"
+    },
+    {
+      "req_id": "REQ-f0e34fe35adb4e26de4f",
+      "source_ref": "SRC-1625a99af870827c5380",
+      "oracle_ref": "ORACLE-REQ-f0e34fe35adb4e26de4f",
+      "positive_fixture": "fixtures/REQ-f0e34fe35adb4e26de4f_POS.json",
+      "negative_fixture": "fixtures/REQ-f0e34fe35adb4e26de4f_NEG.json"
+    },
+    {
+      "req_id": "REQ-c0b6a4ab1021e82f4146",
+      "source_ref": "SRC-2be5498066f4cf472a51",
+      "oracle_ref": "ORACLE-REQ-c0b6a4ab1021e82f4146",
+      "positive_fixture": "fixtures/REQ-c0b6a4ab1021e82f4146_POS.json",
+      "negative_fixture": "fixtures/REQ-c0b6a4ab1021e82f4146_NEG.json"
+    },
+    {
+      "req_id": "REQ-65dbc76056e227804d00",
+      "source_ref": "SRC-81081a5dbca62a952c1f",
+      "oracle_ref": "ORACLE-REQ-65dbc76056e227804d00",
+      "positive_fixture": "fixtures/REQ-65dbc76056e227804d00_POS.json",
+      "negative_fixture": "fixtures/REQ-65dbc76056e227804d00_NEG.json"
+    },
+    {
+      "req_id": "REQ-37af4ad25a3ef8cacbde",
+      "source_ref": "SRC-4cd383c1adaf0b89f1a4",
+      "oracle_ref": "ORACLE-REQ-37af4ad25a3ef8cacbde",
+      "positive_fixture": "fixtures/REQ-37af4ad25a3ef8cacbde_POS.json",
+      "negative_fixture": "fixtures/REQ-37af4ad25a3ef8cacbde_NEG.json"
+    },
+    {
+      "req_id": "REQ-d2b33c0e476af2c957be",
+      "source_ref": "SRC-21d09fa5df8ad0471c69",
+      "oracle_ref": "ORACLE-REQ-d2b33c0e476af2c957be",
+      "positive_fixture": "fixtures/REQ-d2b33c0e476af2c957be_POS.json",
+      "negative_fixture": "fixtures/REQ-d2b33c0e476af2c957be_NEG.json"
+    },
+    {
+      "req_id": "REQ-d437fde8c62b1cf9d431",
+      "source_ref": "SRC-2679e450038a57dcc0be",
+      "oracle_ref": "ORACLE-REQ-d437fde8c62b1cf9d431",
+      "positive_fixture": "fixtures/REQ-d437fde8c62b1cf9d431_POS.json",
+      "negative_fixture": "fixtures/REQ-d437fde8c62b1cf9d431_NEG.json"
+    },
+    {
+      "req_id": "REQ-668f3d2c96af876c51b3",
+      "source_ref": "SRC-50c847d7cb64a4e72885",
+      "oracle_ref": "ORACLE-REQ-668f3d2c96af876c51b3",
+      "positive_fixture": "fixtures/REQ-668f3d2c96af876c51b3_POS.json",
+      "negative_fixture": "fixtures/REQ-668f3d2c96af876c51b3_NEG.json"
+    },
+    {
+      "req_id": "REQ-44d6c0127d4f89f133d7",
+      "source_ref": "SRC-49d89deb7d8f73b0a7b7",
+      "oracle_ref": "ORACLE-REQ-44d6c0127d4f89f133d7",
+      "positive_fixture": "fixtures/REQ-44d6c0127d4f89f133d7_POS.json",
+      "negative_fixture": "fixtures/REQ-44d6c0127d4f89f133d7_NEG.json"
+    },
+    {
+      "req_id": "REQ-ce6ff8a699d0cafa931b",
+      "source_ref": "SRC-d6684be663d5253993bf",
+      "oracle_ref": "ORACLE-REQ-ce6ff8a699d0cafa931b",
+      "positive_fixture": "fixtures/REQ-ce6ff8a699d0cafa931b_POS.json",
+      "negative_fixture": "fixtures/REQ-ce6ff8a699d0cafa931b_NEG.json"
+    },
+    {
+      "req_id": "REQ-5d6191c7f95d61645dc6",
+      "source_ref": "SRC-224682e398695d09aea7",
+      "oracle_ref": "ORACLE-REQ-5d6191c7f95d61645dc6",
+      "positive_fixture": "fixtures/REQ-5d6191c7f95d61645dc6_POS.json",
+      "negative_fixture": "fixtures/REQ-5d6191c7f95d61645dc6_NEG.json"
+    },
+    {
+      "req_id": "REQ-f022bfea4a4affc17e79",
+      "source_ref": "SRC-b1ebf9e242ac407076b0",
+      "oracle_ref": "ORACLE-REQ-f022bfea4a4affc17e79",
+      "positive_fixture": "fixtures/REQ-f022bfea4a4affc17e79_POS.json",
+      "negative_fixture": "fixtures/REQ-f022bfea4a4affc17e79_NEG.json"
+    },
+    {
+      "req_id": "REQ-2cf8ea9fa834f3a15857",
+      "source_ref": "SRC-f3abedde3d75c6480e70",
+      "oracle_ref": "ORACLE-REQ-2cf8ea9fa834f3a15857",
+      "positive_fixture": "fixtures/REQ-2cf8ea9fa834f3a15857_POS.json",
+      "negative_fixture": "fixtures/REQ-2cf8ea9fa834f3a15857_NEG.json"
+    },
+    {
+      "req_id": "REQ-e24889f23fdcda5f543f",
+      "source_ref": "SRC-894d135f03d80a3dddc2",
+      "oracle_ref": "ORACLE-REQ-e24889f23fdcda5f543f",
+      "positive_fixture": "fixtures/REQ-e24889f23fdcda5f543f_POS.json",
+      "negative_fixture": "fixtures/REQ-e24889f23fdcda5f543f_NEG.json"
+    }
+  ],
+  "claim_ceiling": "DESIGN_CANDIDATE",
+  "live_acceptance": "NOT_RUN"
+}

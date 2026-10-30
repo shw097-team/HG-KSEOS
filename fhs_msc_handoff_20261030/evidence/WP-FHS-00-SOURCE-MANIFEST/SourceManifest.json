@@ -1,0 +1,197 @@
+{
+ "schema": "SOURCE-MANIFEST/1",
+ "work_package": "WP-FHS-00",
+ "effect_class": "SOURCE_READ",
+ "generated_at": "2026-10-30T19:11:33",
+ "corpus_root": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus",
+ "declared_document_count": 24,
+ "measured_document_count": 24,
+ "declared_corpus_sha": "d2b5bfbd3489771ddf90897255cc416a0048fc6109e47be4c6e658f2cb3ab761",
+ "rollup_formula_tried": [
+  "sha256 of 'class/name\\tsha256' lines",
+  "sha256 of concatenated sha256",
+  "sha256 of 'class/name' lines"
+ ],
+ "declared_corpus_sha_reproduced": false,
+ "declared_corpus_sha_note": "the declared scalar is not reproducible from the 24 per-document digests by any of the three formulas tried; per-document truth is recorded instead of a scalar that cannot be checked",
+ "by_class": {
+  "sbl": 14,
+  "pipd": 10
+ },
+ "documents": [
+  {
+   "source_id": "SBL-00",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-00.md",
+   "bytes": 465363,
+   "sha256": "bd9c1a85ea0cae68fa8cde617e5592fca6123f72b4caf1a9d2894167d9a82e01"
+  },
+  {
+   "source_id": "SBL-01",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-01.md",
+   "bytes": 1041962,
+   "sha256": "43a0a7ed26d2adf9c2803062032019ccb6acce27cebb49af4d37c3cd4b0a3a2f"
+  },
+  {
+   "source_id": "SBL-02",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-02.md",
+   "bytes": 1148207,
+   "sha256": "4ff0cda5ab00ba5f577151e5b004d2167d933e912e302c9e3529b237ccb9e035"
+  },
+  {
+   "source_id": "SBL-03",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-03.md",
+   "bytes": 1704253,
+   "sha256": "ea69e1d3718ed86aecd74a3ebcc933960eacc30b586ab80fcb9f733037e33476"
+  },
+  {
+   "source_id": "SBL-04",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-04.md",
+   "bytes": 618110,
+   "sha256": "ee90cb1c86f6f7350c11c9c962233a89b035ca41ff82c8968f7968608fc6f6e0"
+  },
+  {
+   "source_id": "SBL-05",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-05.md",
+   "bytes": 2382349,
+   "sha256": "3b47a0b6224b1984a4047cf53aac5ac50615c93a560fea46e1b43d079a5d9f27"
+  },
+  {
+   "source_id": "SBL-06",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-06.md",
+   "bytes": 1554880,
+   "sha256": "64ea4977dab3093301f82dc7469413cc754998fc53946467842e06d83645102b"
+  },
+  {
+   "source_id": "SBL-07",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-07.md",
+   "bytes": 1265128,
+   "sha256": "a366d3783c82089c5593ffabb0704d8507632cce45622684f7a0186f2ae310f8"
+  },
+  {
+   "source_id": "SBL-08",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-08.md",
+   "bytes": 925526,
+   "sha256": "c7029c1ff07abe3135d33d3abf858a5fecedd911b494cd69c16eb1ddb8158288"
+  },
+  {
+   "source_id": "SBL-09",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-09.md",
+   "bytes": 904598,
+   "sha256": "6450f7c15915ec8b304f4e5fd4093ea707434db8bae9d2bb6e66c30ab6eed2e1"
+  },
+  {
+   "source_id": "SBL-10",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-10.md",
+   "bytes": 1397936,
+   "sha256": "a64aa21c977334dd74d660a86377ee10c4d329aa5fde0dae25ff81a3e69e8d8f"
+  },
+  {
+   "source_id": "SBL-11",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-11.md",
+   "bytes": 1831131,
+   "sha256": "12f8705d780b76f264457c194a6ff359da8d74b5d6d8c83fa245b74d2a37508e"
+  },
+  {
+   "source_id": "SBL-12",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-12.md",
+   "bytes": 982931,
+   "sha256": "d1e470d82ca14319582cb8947aa52007927aa38e726249b1430804cfe8c8ca56"
+  },
+  {
+   "source_id": "SBL-13",
+   "class": "sbl",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/sbl/SBL_PIPD-LS-PKG_DOC-13.md",
+   "bytes": 1251068,
+   "sha256": "7cc0c8b17311130c875910b2548b93c28bd4e1c8ee04d300f85fc33d4c09beb1"
+  },
+  {
+   "source_id": "PIPD-00_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY",
+   "class": "pipd",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/pipd/PIPD_LS_DOC-00_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY.md",
+   "bytes": 251982,
+   "sha256": "be3a672ec20aa0e6b5e0e35097fc08de749bfe7f59f827d18e38aef67dd68ea4"
+  },
+  {
+   "source_id": "PIPD-01_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY",
+   "class": "pipd",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/pipd/PIPD_LS_DOC-01_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY.md",
+   "bytes": 177451,
+   "sha256": "b753f2e5cdd5598a818f8a113d57b7f815aeb3f1dfa061ce74c76bb3553ac8c7"
+  },
+  {
+   "source_id": "PIPD-02_2026-10-07_r2_HIGH_RETENTION_AUDIT_PATCHED_FULL_REPAIR_FULL_SUBSTANTIVE_BODY (1)",
+   "class": "pipd",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/pipd/PIPD_LS_DOC-02_2026-10-07_r2_HIGH_RETENTION_AUDIT_PATCHED_FULL_REPAIR_FULL_SUBSTANTIVE_BODY (1).md",
+   "bytes": 1306240,
+   "sha256": "a021998dd3b63015e89af1dd40e0b413744a69b872da46c6bf5f4d92f7f23d0b"
+  },
+  {
+   "source_id": "PIPD-03_2026-10-07_r2_AUDIT_REPAIR_FULL_SUBSTANTIVE_BODY",
+   "class": "pipd",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/pipd/PIPD_LS_DOC-03_2026-10-07_r2_AUDIT_REPAIR_FULL_SUBSTANTIVE_BODY.md",
+   "bytes": 454167,
+   "sha256": "d89d82dcd2c8603ec6b86c5ec8c40845e4594bc181adf5272bd48a3de7c88f0f"
+  },
+  {
+   "source_id": "PIPD-04_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY",
+   "class": "pipd",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/pipd/PIPD_LS_DOC-04_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY.md",
+   "bytes": 181988,
+   "sha256": "fa64d84da3d747b183e4affff62f4d2fb86c80bb5075f5dd933c09b20caeddcf"
+  },
+  {
+   "source_id": "PIPD-05_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY",
+   "class": "pipd",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/pipd/PIPD_LS_DOC-05_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY.md",
+   "bytes": 227894,
+   "sha256": "7b40584540c162cda6debfd09a4c04321416706acdb03a7a3c2b41383dc585f4"
+  },
+  {
+   "source_id": "PIPD-06_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY",
+   "class": "pipd",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/pipd/PIPD_LS_DOC-06_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY.md",
+   "bytes": 405028,
+   "sha256": "20e44ea4dd8e53c9b0a076ce861136bbea86f52687019307f6e995cd9079d303"
+  },
+  {
+   "source_id": "PIPD-07_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY",
+   "class": "pipd",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/pipd/PIPD_LS_DOC-07_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY.md",
+   "bytes": 689563,
+   "sha256": "a68dae1c3670d07bcfa3476a1e37463c534594df5cd65d8dab0dca064b5a9fc1"
+  },
+  {
+   "source_id": "PIPD-08_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY",
+   "class": "pipd",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/pipd/PIPD_LS_DOC-08_2026-10-07_r2_HIGH_RETENTION_FULL_REPAIR_FULL_SUBSTANTIVE_BODY.md",
+   "bytes": 197972,
+   "sha256": "e46caa7e440392a6cfa7a86421aead5bce8a2a229fec97b133429db6b6748e42"
+  },
+  {
+   "source_id": "PIPD-09_2026-10-07_r2_HIGH_RETENTION_AUDIT_PATCHED_FULL_REPAIR_FULL_SUBSTANTIVE_BODY",
+   "class": "pipd",
+   "path": "03_HANDOFF_EVIDENCE/READERS/sbl-tpm-sp/references/corpus/pipd/PIPD_LS_DOC-09_2026-10-07_r2_HIGH_RETENTION_AUDIT_PATCHED_FULL_REPAIR_FULL_SUBSTANTIVE_BODY.md",
+   "bytes": 144948,
+   "sha256": "eaf0aefe2b4711c140fc3274223d88fdc38ad4ec2b7184f756a0f2471f3b0b54"
+  }
+ ],
+ "reader_disagreement": {
+  "reader_artifact": "02_FIRST_WORK/RUN/SourceReadback.json",
+  "reader_documents_field": "24 (scalar)",
+  "manifest_documents": 24,
+  "finding": "the reader asserts a count where an identity list is required; the manifest supplies the identities"
+ }
+}

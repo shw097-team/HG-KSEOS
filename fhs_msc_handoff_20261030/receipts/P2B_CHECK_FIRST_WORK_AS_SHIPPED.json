@@ -1,0 +1,23 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-CHECK35/1",
+ "mode": "AS_SHIPPED",
+ "command": "python check_first_work.py (delivered QA_TOOLS, unmodified)",
+ "result": {
+  "pass": 34,
+  "fail": 1,
+  "failures": [
+   {
+    "case": "EXISTING_5_AFFECTED_TESTS",
+    "status": "FAIL",
+    "actual": "AssertionError:expected True; actual False",
+    "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"
+   }
+  ]
+ },
+ "root_cause": {
+  "check": "EXISTING_5_AFFECTED_TESTS",
+  "error": "ModuleNotFoundError: No module named 'tests'",
+  "why": "loadTestsFromNames() imports the test modules before sys.path.insert(0, 03_HANDOFF_EVIDENCE/READERS/PIPD) runs"
+ },
+ "log": "C:\\Projects\\Agent_Workspace\\var\\FHS-HANDOFF-EXEC-20261030\\logs\\check_first_work.out"
+}

@@ -1,0 +1,88 @@
+{
+ "schema": "FHS-HANDOFF-PATCH-v1/RECEIVER_READBACK/1",
+ "producer": "RECEIVER (independent of the author packaging run)",
+ "producer_note": "Not the author's PACKAGE_READBACK.json; closes the 'no readback' defect without impersonating an author artefact.",
+ "subject_root": "C:/wg/pkg",
+ "delivery_manifest_rows": 8,
+ "present_and_byte_exact": 5,
+ "absent": 3,
+ "rows": [
+  {
+   "file": "FHS-MSC_BODY_2026-10-30_HANDOFF-PATCH-v1.zip",
+   "declared_bytes": 4007065,
+   "declared_sha256": "5e722cfbf200efc17de246fb5bfe877c5509b5d4d3849d42921ab56b9a86af5b",
+   "present": false,
+   "recomputed": "absent from the tree; re-derived in memory from the shipped packer rule, byte-exact (P13, AO O2)"
+  },
+  {
+   "file": "FHS-MSC_EVIDENCE_2026-10-30_HANDOFF-PATCH-v1.zip",
+   "declared_bytes": 25914281,
+   "declared_sha256": "0e7763b8856f38ad32f9714d7415bb19c215903c72576f9b2f433790c2e70a6d",
+   "present": false,
+   "recomputed": "absent; re-derived in memory, 801 entries, byte-exact (P13, AO O3)"
+  },
+  {
+   "file": "HANDOFF_README.md",
+   "declared_bytes": 2194,
+   "declared_sha256": "8611f2c1b706aa7f446836876bc33381c2e4ee47a5d3b512db78109212a98628",
+   "present": true
+  },
+  {
+   "file": "FIRST_WORK_RECEIVER_CONTRACT.md",
+   "declared_bytes": 2520,
+   "declared_sha256": "781c9292bff4553d5a12c9e1303b1117bde0e33d073fdb43b3fcd00cd61c3908",
+   "present": true
+  },
+  {
+   "file": "INDEX.md",
+   "declared_bytes": 1560,
+   "declared_sha256": "e0d67f24385006180780a211672614f2d4c9ed6ce5392507c2602b644bfff03a",
+   "present": true
+  },
+  {
+   "file": "VERSION_AND_DELIVERY.md",
+   "declared_bytes": 1190,
+   "declared_sha256": "55741272c5eb52153d9fd7ff0515010580a07d4218dfa277a159f5021ee3d118",
+   "present": true
+  },
+  {
+   "file": "CURRENT_READER_SCOPE.json",
+   "declared_bytes": 381,
+   "declared_sha256": "0c26b01c0f6c8758c96bf466ec1d2f0d9c43b7f763ad3492dd0a8c0fce4df536",
+   "present": true
+  },
+  {
+   "file": "PACKAGE_READBACK.json",
+   "declared_bytes": 1856,
+   "declared_sha256": null,
+   "present": false,
+   "recomputed": "NOT REGENERABLE AS THE AUTHOR ARTEFACT: it embeds author-side run results (minimal_static, one_light_global, link_count). This receiver readback is the honest substitute; restate the row or supply the author artefact."
+  }
+ ],
+ "archives": {
+  "BODY": {
+   "entries": 114,
+   "bytes": 4007065,
+   "sha256": "5e722cfbf200efc17de246fb5bfe877c5509b5d4d3849d42921ab56b9a86af5b",
+   "match": true
+  },
+  "EVIDENCE": {
+   "entries": 801,
+   "bytes": 25914281,
+   "sha256": "0e7763b8856f38ad32f9714d7415bb19c215903c72576f9b2f433790c2e70a6d",
+   "match": true
+  }
+ },
+ "payload": {
+  "rows_declared": 909,
+  "rows_matched": 909,
+  "mismatched": 0,
+  "on_disk": 911
+ },
+ "claims": {
+  "Native": "NATIVE_NOT_RUN",
+  "Release": "NOT_RUN",
+  "Independent": "see AO verdict, oracle 68cfb998..."
+ },
+ "generated_utc": "2026-10-30T16:30:00Z"
+}

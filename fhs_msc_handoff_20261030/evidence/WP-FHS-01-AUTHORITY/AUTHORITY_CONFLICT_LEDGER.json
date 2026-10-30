@@ -1,0 +1,384 @@
+{
+  "count_definitions": {
+    "conflicting": "items where at least two declarations disagree in content",
+    "single_source": "items resting on exactly one declaration, i.e. not cross-checkable inside this package",
+    "total": "number of declared authority/oracle/profile items in this ledger"
+  },
+  "counts": {
+    "conflicting": 5,
+    "single_source": 0,
+    "total": 13
+  },
+  "generated_at": "2026-10-30T19:22:15+08:00",
+  "inputs": {
+    "files": [
+      {
+        "bytes": 8236,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+        "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635"
+      },
+      {
+        "bytes": 17661,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+        "sha256": "e257dfcd01f2e8afeda1dd88fdd33b4ef7346bf224572e60935bf9834d25b02c"
+      },
+      {
+        "bytes": 73292,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      {
+        "bytes": 16794,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+        "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f"
+      },
+      {
+        "bytes": 44264,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+        "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64"
+      },
+      {
+        "bytes": 57292,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+        "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3"
+      },
+      {
+        "bytes": 547,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\FUO.json",
+        "sha256": "50c9a28037beeb900d95cbdef5846c169e9da6492dc20d3c6411b420edb77f5f"
+      },
+      {
+        "bytes": 12352,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json",
+        "sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066"
+      },
+      {
+        "bytes": 507,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\SourceReadback.json",
+        "sha256": "974359ae9495147b71da2d233686da1e3fce28491f47165552897f5dcc6d29d5"
+      }
+    ],
+    "nonce": "NONCE-WPB-20261030",
+    "package_root": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1"
+  },
+  "items": [
+    {
+      "conflict": true,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+          "line": 81,
+          "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635",
+          "text": "| PIPD-LS-SP | `e95942abcb6aa07e69304607ab8afc22a74fc67d` | `f6335a94157c61da75d92121d14c43feb413e981` | 0 / 0 |"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+          "line": 69,
+          "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2",
+          "text": "**遠端 main 此版 CLI 精確 13 命令**：`init, intake, profile, compile-pi, bind-pd, compile-ecp, compile-tqaep, validate, doctor, project, export, diff, repair`。`Agent_Workspace/PIPD` 本地 HEAD `995c7ad0c69a05a0c5cf6528155a62020ce31f87` 的實作另外具有 `compile-cc`，實測 COMMANDS=14；遠端 main `f6335a94157c61da75d92121d14c43feb413e981` 為13。兩者分版本保存，不把本地14當遠端已生效契約，也不把它隱藏成不存在。正式 Verb Parser 以 `PIPD-LS-SP/src/pipd_ls_sp/cli.py::COMMANDS` 為 Code Fact；`pipeline.intake()` 等已存在 Python 函式的參數仍要按該版呼叫，不由本文擅改函式簽章。[…"
+        }
+      ],
+      "id": "AUTH-01",
+      "resolution_hint": "INDEX records local HEAD e95942ab... for repo `PIPD-LS-SP`; PIPD L69 records local HEAD 995c7ad0... for `Agent_Workspace/PIPD` with COMMANDS=14 and remote main f6335a94... at 13 verbs. Neither declaration states the two trees are the same, yet both are offered as the local PIPD implementation, and the CLI cardinality differs (13 vs 14, `compile-cc` being the extra verb). Do not pick one silently: an officer must rule which identity binds the PI/PD/DEV-OPS candidates and which verb set is normative. This artefact resolves nothing.",
+      "subject": "Which local PIPD implementation tree and CLI verb set (13 vs 14) is the RepoContext source for the PIPD candidates."
+    },
+    {
+      "conflict": true,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+          "line": 16,
+          "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635",
+          "text": "本輪有效完成目標只有 `PIPD_CONSTRUCTION_HANDOFF_READY`。首工作為原 `WP-FHS-15`，業務成果為普通 Goal→來源/KnownAnswer 約束的三 SPEC→原 PIPD 功能 PI→TaskSpecSeed 與 PD 晚綁接收契約。此首工作的入口與本文第一受影契約在原書原位生效；不把未完成的全部產品要求當成本輪先決條件。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+          "line": 115,
+          "sha256": "e257dfcd01f2e8afeda1dd88fdd33b4ef7346bf224572e60935bf9834d25b02c",
+          "text": "- **起跑線**：WP-FHS-00 → WP-FHS-01 → WP-FHS-02 先 source/authority/Host 唯讀；依 Need 選 ready WP，無 effect 時可停於可交付 design FUO。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json",
+          "line": 296,
+          "sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066",
+          "text": "\"topological_order\": ["
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+          "line": 20,
+          "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f",
+          "text": "若真正進入 OPS才缺 grant，原 DAG的受影後代 PARK；`WP00/01/05/15` 仍可 source/draft/compile。原插件 `affected_work` 實測結果在 `OPS_PARK_AFFECTED_CONE.json`。不增設第二 policy、issuer、queue或state DB，不以 elapsed time或既有文件封裝當 receipt。"
+        }
+      ],
+      "id": "AUTH-02",
+      "resolution_hint": "INDEX fixes the first work as the original WP-FHS-15; SPINE orders WP-FHS-00 -> WP-FHS-01 -> WP-FHS-02 source/authority/Host read-only; ProgramSPEC's typed dag contains only WP-FHS-00, WP-FHS-01 and WP-FHS-15 (topological_order [00,01,15]) and no WP-FHS-02 node at all; HGK L20 admits WP00/01/05/15 concurrently at source/draft/compile. INDEX L60 says scheduling comes only from the BODY-11 typed edges, which are not part of this package slice. Officer records the decision; do not add DAG edges to justify a number.",
+      "subject": "Entry point and closure order of the handoff program (first WP, and whether only typed DAG edges schedule work)."
+    },
+    {
+      "conflict": true,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\PI-PKG.json",
+          "line": 900,
+          "sha256": "33fde19debb20e779521ac17ab4b2e29fb59a141a7d0581abafdddd0b983d1e3",
+          "text": "\"oracle_source\": \"DOC-03 DOMAIN_ORACLES\""
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+          "line": 24,
+          "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2",
+          "text": "**不構成阻斷的舊差異**：全17冊直接 intake 的舊 NACK 不適用這24條已接收的必要閉包。CLI13/14 差異只隔離新增 compile-cc 本身，本首工作使用兩版共有的 intake/profile/compile-pi/bind-pd/validate Reader。PI legacy `DOC-03 DOMAIN_ORACLES` 依原 Schema 原字保留；DOC07為 semantic Owner 的正式 ratification 只在原 Protected Checker/Native promotion消費時受影，不改 strict payload、不阻斷本輪 source/draft/PI規劃。T4/T5 的正式 StateEnum 未被草稿產生改寫。"
+        }
+      ],
+      "id": "AUTH-03",
+      "resolution_hint": "PI-PKG acceptance binds oracle_source `DOC-03 DOMAIN_ORACLES`, while PIPD L24 keeps DOC-03 verbatim as legacy and designates DOC07 as the semantic Owner ratification consumed only at Protected Checker / Native promotion (`CR_ORACLE_001`). The two documents are not the same oracle source. Payload stays verbatim; officer must rule whether DOC07 ratification is required before any PI promotion, and must not rewrite the PI hash.",
+      "subject": "Oracle document authorising PI acceptance for the first work (DOC-03 legacy vs DOC07 Owner ratification)."
+    },
+    {
+      "conflict": true,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+          "line": 20,
+          "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2",
+          "text": "**原 Compiler 輸出**：PI=`PI-035c5e6e6333148b`，hash=`035c5e6e6333148b4808492d7c9277dd83cfcd503201e0f508dad14e1d7bafb3`。原 `pipeline.validate_pi` 驗 PI、ProfileBinding、24個 RequirementAtom、24條 TraceLink，回覆 PASS；另對 strict TaskSpecSeed/ExecutionHandoff/WorkOrderCandidate 驗 Schema與 frozen context回覆 PASS。每 Atom 的專屬 Consumer、POS、NEG、原 Source coordinate 在 `FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json`，不是只有 ID/FirstFail 的投影。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 16,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64",
+          "text": "B1 原 27 原子對 31 PD Slot 的同 Subject 橋接分 OBS/DEV/OPS/USER；每個 Edge 只帶原 domain 的 EffectClass/ECP/Oracle，不把 read-only 强迫具有 nonce，也不得借 DEV Grant 做 OPS。B1 120+124+38=282 項是 Case/Node **規格集合**，不是 282 個真已執行的 Native Runner。缺真 Runner Module/ABI/Checker Reader→`RUNNER_NOT_BOUND`／`NATIVE_NOT_RUN`，可繼續其他已批准受界工作。[BODY10A R2-10A-RUNNER／BODY10B R2-10B-EDGES]"
+        }
+      ],
+      "id": "AUTH-04",
+      "resolution_hint": "24 first-work functional atoms (REQ-*, observed as 24 req_id entries and 24 trace links in PI-PKG.json) are a different namespace from the 27 B1 atoms (PI-B1-A1..C9) that bridge onto 31 PD slots. 24/24 must not be reported as coverage of 27 or of 31. Officer confirms the two denominators stay separate in any downstream receipt; this artefact does not merge them.",
+      "subject": "Requirement-atom denominator for the first work (24 functional atoms vs 27 B1 atoms vs 31 PD slots)."
+    },
+    {
+      "conflict": true,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+          "line": 1,
+          "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635",
+          "text": "<!-- artifact_version: 2026-10-30_CODEX-STATIC-REPAIR-v1.0_SOURCE_BOUND_HIGH_RETENTION; scope: FHS_DESIGN_READER; native: NATIVE_NOT_RUN; release: NOT_RUN -->"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+          "line": 26,
+          "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635",
+          "text": "1. **實質正文字句是工作契約，不是證據收據。** 後段各 `原 ID` 的動作、輸入、輸出、POS/NEG、NoFit 和回復為原 BODY 規格的來源約束施工投影，未實際執行不得自稱 Native PASS。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+          "line": 52,
+          "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635",
+          "text": "**新版本：** `2026-10-30_r2_HIGH_RETENTION_AUDIT_PATCHED_SOURCE_BOUND`；`NO_NATIVE_EFFECT / NOT_INDEPENDENTLY_RATIFIED`。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\FUO.json",
+          "line": 13,
+          "sha256": "50c9a28037beeb900d95cbdef5846c169e9da6492dc20d3c6411b420edb77f5f",
+          "text": "\"verdict\": \"PASS\","
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+          "line": 54,
+          "sha256": "e257dfcd01f2e8afeda1dd88fdd33b4ef7346bf224572e60935bf9834d25b02c",
+          "text": "| **Native FHS-TPM** | 已准入的 PLAN WorkOrder→原 PLAN Role/Revision CAS→同 WorkID 的真 PlanRevision | 原 HGK PLAN Consumer；沒有真 Registry/Permit 不自稱 Native Stage Done。 |"
+        }
+      ],
+      "id": "AUTH-05",
+      "resolution_hint": "FUO L13 carries `verdict: PASS` from the original PIPD readers (pipeline.validate_pi + validate_bundle) while the same file and INDEX L1/L52 record NATIVE_NOT_RUN / NOT_INDEPENDENTLY_RATIFIED, and INDEX L26 forbids self-declared Native PASS. SPINE L54 reserves the word `Native` for a stage holding a real Registry/Permit. The disagreement is in the claim surface, not in the underlying fact: relabel the PASS as an original-PIPD pipeline verdict; do not escalate it to Native or independent ratification.",
+      "subject": "Whether the first-work `PASS` may be read as a Native or independently ratified verdict."
+    },
+    {
+      "conflict": false,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+          "line": 9,
+          "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635",
+          "text": "> **ClaimCeiling** `SOURCE_BOUND_INTEGRATED_DESIGN_WITH_LOCAL_READBACK`；`REPO_SOURCE_REMOTE_OBSERVED` 不代表 `LOCAL_REPOCONTEXT_BOUND`，不得藉本檔取得原授權。本冊有效設計正文包含未受影條文；原 Domain Canonical Writer 不移轉。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+          "line": 102,
+          "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f",
+          "text": "**來源證據界線**：GitHub commit/檔案 blob SHA 不是 Windows process PID、loaded hash、Owner grant、Issuer Permit 或 Native Runner 調用；本輪沒有看到 local HEAD/index/untracked，禁止推定本機 dirty=0。所有 Repo patch 須有現役 Owner 的 exact WriteSet/DEV-ECP/受權 Scope。本版可提供 static patch 契約，不能執行真四庫修改。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+          "line": 145,
+          "sha256": "e257dfcd01f2e8afeda1dd88fdd33b4ef7346bf224572e60935bf9834d25b02c",
+          "text": "輸入「為此既有產品加入離線來源查詢」：PM 指定離線可查 source locator 是 FUO；SE 指定 SOURCE_READ、provider_off=true、不新建 Authority DB；TPgM 產唯讀 source probe 和隔離 spec 卡。輸出三 SPEC + trace + unresolved bindings，交原 PIPD Intake。若沒有原 Writer ACK，狀態為 SPEC_CANDIDATE；使用者仍可讀 SPEC，只有 PI promotion HOLD。NEG：未找到 CLI 就聲稱 PI_COMPILED 或擅 install 三十套工具 → `CLAIM_ESCALATION/UNNEEDED_EFFECT`。退出僅撤本輪隔離候選，保留來源及既有 admitted work。"
+        }
+      ],
+      "id": "AUTH-06",
+      "resolution_hint": "Consistent: SOURCE_BOUND_INTEGRATED_DESIGN_WITH_LOCAL_READBACK; a source blob SHA is not a PID, loaded hash, Owner grant, Permit or Checker receipt; SPEC output stays SPEC_CANDIDATE until an original Writer ACK. No action.",
+      "subject": "Claim ceiling attached to the handoff design and its readbacks."
+    },
+    {
+      "conflict": false,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+          "line": 18,
+          "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2",
+          "text": "**可直接讀取的實例**：`02_FIRST_WORK/RUN/ProductSPEC.json`、`ArchitectureSPEC.json`、`ProgramSPEC.json` 由原 sbl-tpm-sp `plan_spec` 實際產生；`SourceAuthority.json` 由原 PIPD `freeze_authority` 產生，SourceFamily digest/locator 逐檔釘住；`IntentCard.json` 由原 `intake` 讀 `FIRST_WORK_FUNCTIONAL_SOURCE.md` 24條業務功能；`ProfileBinding.json` 與 Compiler 的有效 Profile 使用原九軸安全 veto，沒有將十二風險分數塞成九軸 enum。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+          "line": 206,
+          "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2",
+          "text": "- 專屬 Reader invariant：九軸 strict enum、去重與 safety veto 只升級；十二軸另存 lossless bridge。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+          "line": 207,
+          "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2",
+          "text": "- Domain NEG：unknown axis or downgrade ASSURED → `PROFILE_VETO`；與 missing-required/unknown-key 的 schema拒收分開。"
+        }
+      ],
+      "id": "AUTH-07",
+      "resolution_hint": "One source, one meaning: nine-axis strict enum with upgrade-only veto, twelve risk axes stored separately and losslessly; unknown axis or downgrade of ASSURED fails as PROFILE_VETO, distinct from schema rejection. Never map the twelve scores into the nine-axis enum. Declarations agree.",
+      "subject": "Profile binding semantics: nine strict axes plus a separate twelve-axis bridge."
+    },
+    {
+      "conflict": false,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+          "line": 111,
+          "sha256": "e257dfcd01f2e8afeda1dd88fdd33b4ef7346bf224572e60935bf9834d25b02c",
+          "text": "**ADR-01**：共享核心不等於共享 Principal；不新增 Issuer、Queue、Policy、Checker、Release Authority。**ADR-02**：`SOURCE_READ`/`LOCAL_DRAFT_WRITE` 和 L2/L3 真效果分流；零效果不要求不存在的 operation nonce。**ADR-03**：無實際 Registry Reader、Ho…"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+          "line": 141,
+          "sha256": "e257dfcd01f2e8afeda1dd88fdd33b4ef7346bf224572e60935bf9834d25b02c",
+          "text": "Master 決定跨域意圖，Domain v2 決定該域設計，SBL DOC00–13 保留原產品義務，PIPD DOC00–09 保留 formal Writer。Fabric Policy、HGK Issuer、SharedSpine、Checker、Publisher 的真 registry/ACL 不受文稿改寫。三 SP 各自 install/load/invoke 九子測在 [BODY-09](09_SBL_DOC00_13_FULL_UPGRADE.md)。舊 SBL Commander-SP 僅作歷史來源；現役路線只能使用非 legacy Producer 或正確 `C PARK`。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+          "line": 20,
+          "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f",
+          "text": "若真正進入 OPS才缺 grant，原 DAG的受影後代 PARK；`WP00/01/05/15` 仍可 source/draft/compile。原插件 `affected_work` 實測結果在 `OPS_PARK_AFFECTED_CONE.json`。不增設第二 policy、issuer、queue或state DB，不以 elapsed time或既有文件封裝當 receipt。"
+        }
+      ],
+      "id": "AUTH-08",
+      "resolution_hint": "ADR-01 (sharing core does not share Principal; no new Issuer/Queue/Policy/Checker/Release Authority), SPINE L141 (real registries/ACL are not rewritten by prose) and HGK L20 (no second policy, issuer, queue or state DB) say the same thing. Consistent.",
+      "subject": "Single-writer ownership of Issuer, Queue, Policy, Checker and state DB."
+    },
+    {
+      "conflict": false,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+          "line": 111,
+          "sha256": "e257dfcd01f2e8afeda1dd88fdd33b4ef7346bf224572e60935bf9834d25b02c",
+          "text": "**ADR-01**：共享核心不等於共享 Principal；不新增 Issuer、Queue、Policy、Checker、Release Authority。**ADR-02**：`SOURCE_READ`/`LOCAL_DRAFT_WRITE` 和 L2/L3 真效果分流；零效果不要求不存在的 operation nonce。**ADR-03**：無實際 Registry Reader、Host Process Raw 或 Schema 時提案保持 `PROPOSED/NOT_BOUND`，不得猜 enum。**ADR-04**：既有同 scope WorkID/cursor 先 resume；unknown effect 先 reconcile 而非重播。**ADR-05**：PREW3_SHADOW 只讀 frozen readset；產品建置在獨立 LOCAL_BUILD subject 中運行，不拿 Shadow 上升權限。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+          "line": 63,
+          "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2",
+          "text": "| E1 `SOURCE/PROFILE→PI` | Goal＋SourceFamily ManifestSHA＋Profile nine-axis/Oracle→原 `pipd intake/profile/compile-pi` 和 PIPD DOC02 原 Writer→`PI-PKG/RequirementAtom` | POS strict schema＋SourceSHA 同 Subject；缺 Source、Profile veto、外欄或舊 Oracle alias NACK；不讓 Matt/OpenSpec Writer 簽 PI |"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+          "line": 20,
+          "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635",
+          "text": "`SOURCE_READ/LOCAL_DRAFT` 可以現在合法開始；即時 Host Loaded、Native Permit、World Raw、不同 Principal Checker 只在對應原生效果/驗收階段要求，不反向作為本輪 Spec/PI 的輸入。包內 Worker/WorkOrderCandidate 是接收候選，不是已准入 WorkID。"
+        }
+      ],
+      "id": "AUTH-09",
+      "resolution_hint": "ADR-02 separates SOURCE_READ/LOCAL_DRAFT_WRITE from L2/L3 real effects and requires no operation nonce for zero effect; E1 (SOURCE/PROFILE->PI) admits source/profile work into the original intake/compile path; INDEX L20 lets SOURCE_READ/LOCAL_DRAFT start now. Consistent.",
+      "subject": "Whether zero-effect work needs no permit, nonce or admission."
+    },
+    {
+      "conflict": false,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+          "line": 29,
+          "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635",
+          "text": "4. **One Canonical Plan Owner / Multi Scoped Methods**。同一 Goal 可分時用 OpenSpec Delta、Superpowers TDD、FAR、gstack Review；只有一個原 Canonical Plan Writer，且各方法無權自行頒發 Permit、Checker PASS、Release。修正 r1「每 Goal 只能使用一種方法」的過窄解讀。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\01_PRODUCT_AUTHORITY_SPINE.md",
+          "line": 24,
+          "sha256": "e257dfcd01f2e8afeda1dd88fdd33b4ef7346bf224572e60935bf9834d25b02c",
+          "text": "3. 原 MethodDecision 先定一次**主要 Plan Owner**及可按 Stage 調用的受限方法鏈（不是全 Donor 串行）；列出選用理由、不選理由和終止／NoFit 路線。"
+        }
+      ],
+      "id": "AUTH-10",
+      "resolution_hint": "INDEX L29 states one canonical plan writer with multi scoped methods and explicitly corrects the earlier r1 reading of 'one method per Goal'; SPINE L24 states one primary plan owner plus a stage-callable restricted method chain. The r1 reading is superseded, not a live conflict.",
+      "subject": "Plan-method ownership per Goal: one canonical plan owner with multiple stage-scoped methods."
+    },
+    {
+      "conflict": false,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\10B_B1_PI27_PD31.md",
+          "line": 16,
+          "sha256": "7c33e2472a6510a6c15b5b8eee2fca6dd9e4865c7ad3beb8c19d1e4618886f64",
+          "text": "B1 原 27 原子對 31 PD Slot 的同 Subject 橋接分 OBS/DEV/OPS/USER；每個 Edge 只帶原 domain 的 EffectClass/ECP/Oracle，不把 read-only 强迫具有 nonce，也不得借 DEV Grant 做 OPS。B1 120+124+38=282 項是 Case/Node **規格集合**，不是 282 個真已執行的 Native Runner。缺真 Runner Module/ABI/Checker Reader→`RUNNER_NOT_BOUND`／`NATIVE_NOT_RUN`，可繼續其他已批准受界工作。[BODY10A R2-10A-RUNNER／BODY10B R2-10B-EDGES]"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+          "line": 28,
+          "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635",
+          "text": "3. **高保留 ≠ 全量安裝**。本版在正文逐名保留 Native20 20、Default30 30、Donor24 24、Method25 25、TECH386 386、R15 949、Cell 192、AC15、96 Oracle、WP22、PD Edge31、B1 Case/Node282；對不觸發者標示保留原處置／不啟動，不自行調整原 Disposition。"
+        }
+      ],
+      "id": "AUTH-11",
+      "resolution_hint": "Both state 282 = 120+124+38 as a case/node spec set, not 282 executed runners; missing Runner Module/ABI/Checker Reader yields RUNNER_NOT_BOUND / NATIVE_NOT_RUN. Consistent; no Native denominator follows from 282.",
+      "subject": "B1 282 figure: specification denominator versus executed Native runners."
+    },
+    {
+      "conflict": false,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\00_INDEX_AND_DECISION.md",
+          "line": 64,
+          "sha256": "cb4727d5b0c190aba40559f72b6989964659923eed6c27504ab62acfdc3b2635",
+          "text": "`L0=設計/本輪隔離文稿；L1=唯讀/靜態；L2=有界受權 Repo 寫入；L3=受准入 Native/User/Remote 效果；L4=原 Publisher 發行`。tier 是此設計投影，不替代真 Host enum。EffectClass 是正交維度；對 legacy `L1 patch` 或 `HOST_LOAD_SCOPE` 必先拒收，再由原 Owner 重新綁定，不能重新解釋成許可。"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\04_FABRIC_HGK_CONTROL.md",
+          "line": 59,
+          "sha256": "a7d54bdeb9129e7e1979bbc1af1944189b1054760e76424f8ffd8547a682eb1f",
+          "text": "| `WORLD_RECONCILE` | 原 Receiver 比對 PreImage/Journal/PostWorld | `APPLIED`、`PARTIAL`、`NO_EFFECT`、`UNKNOWN`（**判定分類**，非假定 Native enum） | `APPLIED` 只續收證據；`PARTIAL` 原 Compensation ECP；`NO_EFFECT` 仍須 fresh original admission；`UNKNOWN` HOLD、不可重試 |"
+        }
+      ],
+      "id": "AUTH-12",
+      "resolution_hint": "The L0-L4 tier is a design projection and explicitly does not replace the real Host enum; APPLIED/PARTIAL/NO_EFFECT/UNKNOWN at HGK L59 are a classification result, not an invented Native enum. Consistent.",
+      "subject": "Risk tier labels L0-L4 versus host/effect enumerations."
+    },
+    {
+      "conflict": false,
+      "declarations": [
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\SourceReadback.json",
+          "line": 3,
+          "sha256": "974359ae9495147b71da2d233686da1e3fce28491f47165552897f5dcc6d29d5",
+          "text": "\"documents\": 24,"
+        },
+        {
+          "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+          "line": 32,
+          "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2",
+          "text": "`K0 ImmutableCorpusBundle`：14 SBL＋10 PIPD DOC bytes/sha/Owner/License→原 Host Reader，24/24 可校驗；`K1 ClauseIndex`：Heading/Line/TextSHA/ACL 索引；`K2 SupersessionConflictRegistry`：依同 Domain Writer/Scope/Supersedes 判 current，不由較新日期跨域篡位；`K3 OnDemandReader`：同 Subject/Source/Clause/ACL 輸出 SourceBoundExcerpt 給三 SPEC。發現 K0 缺文件、K1 stale、K2 writer conflict、K3 Injection 時各走受影 HOLD、退回前一可信 Readset；未全裝的 Host 不能稱 `HOST_LOADED`。[BODY02 §6.1]"
+        }
+      ],
+      "id": "AUTH-13",
+      "resolution_hint": "SourceReadback records documents = 24 bound to one corpus_source_sha; K0 requires 14 SBL + 10 PIPD bytes/sha/Owner/License verifiable 24/24. A scalar count is not an identity list: do not accept the count as per-file proof. Declarations do not disagree.",
+      "subject": "Corpus denominator: scalar document count versus per-document identity."
+    }
+  ],
+  "schema": "fhs.authority_conflict_ledger@1",
+  "scope_note": "Artefact only. Every text field is a verbatim excerpt of the cited package line (truncated with U+2026 only when longer than 480 chars), carried with the sha256 of the file as read at generation time. No verdict, no PASS, no approval and no promotion is expressed here; an officer judges. Local readback only - not external acceptance, not release.",
+  "status": "OK",
+  "work_package": "WP-FHS-01"
+}

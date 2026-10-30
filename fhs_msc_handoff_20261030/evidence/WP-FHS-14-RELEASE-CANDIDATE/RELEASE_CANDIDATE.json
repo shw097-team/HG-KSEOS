@@ -1,0 +1,35 @@
+{
+  "assets": [
+    {
+      "bytes": 8326893,
+      "entries": 141,
+      "manifest": "manifest.b1-implementation.json",
+      "name": "B1_implementation.zip",
+      "sha256": "2d388b91f64ab04fb39fe7b0d212ec7190b090c37ffb30138e89531637ec7ca3"
+    },
+    {
+      "bytes": 15620407,
+      "entries": 86,
+      "manifest": "manifest.skeleton-spine-r2-revision2.json",
+      "name": "SKELETON_SPINE_r2_revision2.zip",
+      "sha256": "c344edaf54979dfcbf513287521fa2528ebffb6e195482d419b95be52a6871ec"
+    },
+    {
+      "bytes": 29867503,
+      "entries": 911,
+      "manifest": "manifest.handoff-patch-v1.json",
+      "name": "HANDOFF_PATCH_v1.zip",
+      "sha256": "af054950f38eb64175d909d4f07f7072ffd34370f020b5ef1237972d0b670527"
+    }
+  ],
+  "candidate": "https://github.com/shw097-team/HG-KSEOS/releases/tag/fhs-msc-deliveries-20261030",
+  "effect_class": "RELEASE",
+  "generated_at": "2026-10-30T19:14:12",
+  "predecessor": "WP-FHS-06 (reversible slice) must be merged before this candidate may be tagged as a release of main",
+  "published": true,
+  "published_evidence": "each asset downloaded from the release URL and re-hashed in this round; all three matched",
+  "schema": "RELEASE-CANDIDATE/1",
+  "status": "CANDIDATE_PUBLISHED; main does not yet contain it",
+  "tag": "fhs-msc-deliveries-20261030",
+  "work_package": "WP-FHS-14"
+}

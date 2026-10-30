@@ -1,0 +1,20 @@
+{
+  "subject_id": "PB-74dbad15cbb1121d",
+  "version": "1",
+  "content_hash": "74dbad15cbb1121da90f5ce3d93b69bb43d7f58eaadd47525929bba3aae519c1",
+  "schema_version": "ProfileBinding@1",
+  "profile": "STANDARD",
+  "axes": [
+    "intent",
+    "knowledge",
+    "profile",
+    "trust_boundary",
+    "verification"
+  ],
+  "vetoes": [],
+  "artifact_depth": "L3_INTEGRATION_RUNTIME",
+  "assurance": [
+    "deterministic_validator",
+    "negative_security"
+  ]
+}
