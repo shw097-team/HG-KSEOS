@@ -1,0 +1,30 @@
+{
+  "schema": "VERIFY-RECEIPT-DEFECT/1",
+  "symptom": "a VERIFY_SECURITY dispatch serves the turn (rank 1, openai-codex/gpt-6.1-sol, exit 0, 131-158 s), the officer writes verdict.json, the attempts.ndjson and the provisional receipt land -- and then the dispatcher process disappears before the final receipt",
+  "evidence": {
+    "sittings": [
+      {
+        "nonce": "NONCE-AO-R28-C-20261030",
+        "secs": 158.08
+      },
+      {
+        "nonce": "NONCE-AO-R28-D-20261030",
+        "secs": 143.93
+      },
+      {
+        "nonce": "NONCE-AO-R28-E-20261030",
+        "secs": null
+      },
+      {
+        "nonce": "NONCE-AO-R28-F-20261030",
+        "secs": 131.72
+      }
+    ],
+    "provisional_receipt": "C:/wg/ao9/ao_r28f.json has receipt_complete:false and attempt fields exit=0, rank=1, provider=openai-codex, model=gpt-6.1-sol, nonce_present=false, usage_receipt_ok=false",
+    "death_point": "after the attempts.ndjson and the provisional write, inside the post-attempt identity/completion-evidence block (that is where nonce_present and usage_receipt_ok are set)"
+  },
+  "consequence": "the lane claim cannot pass scripts/lane_evidence_gate.py (no nonce echo, no usage receipt, ok unset), so scripts/round_close_gate.py refuses the round -- correctly",
+  "not_a_workaround": "the officer's verdict is real and its run is real; the missing artefact is the provenance, and the round stays open rather than being closed on an unproven lane",
+  "what_this_does_not_say": "it does not say the chain is unaccepted by a human judge; it says the machine cannot yet prove which arm served",
+  "recorded_at": "2026-10-30T21:54:17"
+}
