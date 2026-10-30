@@ -129,9 +129,10 @@ def kick_if_idle(last_kick: float) -> float:
         return last_kick
     if lanes_alive():
         return time.time()
-    r = subprocess.run([sys.executable, str(K / "scripts" / "continuation_driver.py"), "--parallel", "3",
-                        "--auto-record"], cwd=str(K), capture_output=True, text=True, timeout=1800,
-                       creationflags=CREATE_NO_WINDOW, env=dict(os.environ, HGK_CHAIN_DEPTH="1"))
+    subprocess.Popen([sys.executable, str(K / "scripts" / "continuation_driver.py"), "--parallel", "3",
+                      "--auto-record"], cwd=str(K), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                     creationflags=CREATE_NO_WINDOW | 0x01000000, close_fds=True,
+                     env=dict(os.environ, HGK_CHAIN_DEPTH="1"))
     return time.time()
 
 
@@ -154,8 +155,7 @@ def loop(seconds: float = 0) -> int:
                 base.add((hwnd, pid, cls, title))
             for gone in base - cur:
                 base.discard(gone)
-            if time.time() - last_kick > 30:
-                refresh_status()
+            refresh_status()          # status is cheap and must never be behind the tick
             last_kick = kick_if_idle(last_kick)
             if deadline and time.time() > deadline:
                 return 0

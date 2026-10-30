@@ -119,6 +119,28 @@ def host_available(host: str) -> tuple[bool, str]:
     return True, "OK"
 
 
+def refusal_evidence(host: str) -> dict:
+    """What a NoFit is allowed to rest on.
+
+    Measured 2026-10-31: 48 cells recorded `NOFIT / BINARY_NOT_INSTALLED` for Claude Code while Claude Code 2.1.314
+    was installed and answering `--version`. The refusal was produced by a lookup that did not see the npm shim, and
+    nothing in the raw let a reader falsify it. So a refusal now carries the names searched, the extensions tried, and
+    whether the npm shim directory is on PATH -- enough for a reader to reproduce the negative instead of trusting it.
+    """
+    from shutil import which
+    spec = HOST_PROBE.get(host) or {}
+    binary = spec.get("binary") or ""
+    npm = os.path.join(os.environ.get("APPDATA", ""), "npm")
+    return {
+        "searched_binaries": [binary, f"{binary}.cmd", f"{binary}.exe", f"{binary}.bat"],
+        "resolved": which(binary) if binary else None,
+        "pathext": os.environ.get("PATHEXT"),
+        "npm_shim_dir_on_path": any(os.path.normcase(p) == os.path.normcase(npm)
+                                    for p in os.environ.get("PATH", "").split(os.pathsep)),
+        "rule": "a refusal must name what was looked for, where, and with which extension set",
+    }
+
+
 def host_argv(host: str) -> list[str]:
     """Resolve the host binary to something CreateProcess will actually run (npm/git-bash shims are not it)."""
     from shutil import which
@@ -139,7 +161,7 @@ def probe_cell(cell: dict, out_dir: Path) -> dict:
            "mode": cell["mode"], "legacy": cell["legacy"]}
     if not ok:
         raw = {"cell_id": cell["cell_id"], "host": cell["host"], "status": "NOFIT", "reason": why,
-               "environment": env, "at": _now()}
+               "environment": env, "refusal": refusal_evidence(cell["host"]), "at": _now()}
     else:
         # The cell id travels in the environment: no host has a `--cell` flag, and inventing argv a host rejects
         # would produce a raw that only looks like evidence.

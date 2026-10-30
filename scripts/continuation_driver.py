@@ -49,7 +49,7 @@ RELAY = "https://chatgpt.com/backend-api/codex"
 QUEUE = Path(r"C:/wg/queue")
 MAX_PHASE_ATTEMPTS = 3
 # A FAIL is a specification, but not an infinite one: after this many EXECUTE rounds the unit needs a ruling.
-MAX_EXECUTE_ROUNDS = 3
+MAX_EXECUTE_ROUNDS = 6
 # Measured 2026-10-31: an EXECUTE attempt was cut at 900.09s while still writing files, so its receipt could not
 # be cited. A writer that needs to finish is not the same budget as a reader.
 LANE_TIMEOUTS = {"PLAN": 900, "VERIFY_SECURITY": 900, "EXECUTE": 1800}   # two failures are a flake; the third is a defect and stops the loop
@@ -230,7 +230,10 @@ def verify_prompt(wp: str, queue_dir: Path, nonce: str) -> str:
 def latest_verdict(queue_dir: Path) -> tuple[Path | None, dict | None]:
     """The operative officer verdict for this unit, if any. Only `verdict.json` counts: a SUPERSEDED or VOIDED copy
     is history, and treating history as current is how a card gets re-judged against an old ruling."""
-    for cand in sorted(queue_dir.rglob("verdict.json")):
+    # Newest by mtime, not by name: sittings are named after the nonce, and reading the first name in sorted order
+    # returned the oldest ruling -- so a unit that had just been judged VOID was routed on a FAIL from an hour before.
+    cands = sorted(queue_dir.rglob("verdict.json"), key=lambda x: x.stat().st_mtime, reverse=True)
+    for cand in cands:
         try:
             return cand, json.loads(cand.read_text(encoding="utf-8", errors="replace"))
         except json.JSONDecodeError:
@@ -246,15 +249,19 @@ def execute_prompt(wp: str, queue_dir: Path, nonce: str, verdict: dict) -> str:
     assistant turn and looked like "stopping". The officer already states what must exist; EXECUTE reads that and
     nothing else.
     """
-    gaps = verdict.get("must_contain") or verdict.get("decisive_reasons") or verdict.get("reason") or []
+    gaps = (verdict.get("must_contain") or verdict.get("decisive_reasons")
+            or verdict.get("mandatory_failures") or verdict.get("reason") or [])
     if isinstance(gaps, str):
         gaps = [gaps]
+    if verdict.get("maker_return"):
+        gaps = list(gaps) + [f"officer's instruction: {verdict['maker_return']}"]
     body = "\n".join(f"  - {g}" for g in list(gaps)[:12]) or "  - (officer stated no itemised gaps; read its verdict)"
     return (
         f"NONCE-ECHO: {nonce}\n\n"
         f"You are the EXECUTE lane (bounded writer) answering the Independent Acceptance Officer's FAIL on {wp}.\n"
         f"Your FIRST line must be exactly: NONCE-ECHO: {nonce}\n\n"
-        f"Read the officer's verdict at {queue_dir}/officer/verdict.json and the brief at {queue_dir}/brief.md.\n"
+        f"Read the officer's verdict at {verdict.get('_path') or queue_dir / 'officer' / 'verdict.json'} "
+        f"and the brief at {queue_dir}/brief.md.\n"
         f"The officer named these gaps:\n{body}\n\n"
         f"Write the artefacts that close exactly those gaps, inside this work package only. Rules:\n"
         f"  1. One work package. Do not touch other WP directories.\n"
@@ -428,7 +435,22 @@ def main(argv=None) -> int:
     # The phase the queue reports is about artefacts (brief / verdict present). What the loop needs is one step
     # further: a FAIL is not the end of a unit, it is the specification for the next EXECUTE dispatch.
     vpath, verdict = latest_verdict(queue_dir)
-    if phase == "AWAITING_RECORD" and vpath is not None and str(verdict.get("verdict", "")).upper() == "FAIL":
+    vword = str(verdict.get("verdict", "")).upper() if verdict else ""
+    if vword == "VOID":
+        # A void sitting is not a verdict on the work: the officer could not judge the candidate at all. It must still
+        # move the unit, or the loop parks on a state no one records. Two voids and the unit stops with a named reason.
+        voids = len(list(queue_dir.rglob("verdict.json"))) + len(list(queue_dir.rglob("verdict.VOID*.json")))
+        if voids >= 3 or execute_rounds(queue_dir) >= MAX_EXECUTE_ROUNDS:
+            log({"action": "halted_void", "wp": wp, "void_sittings": voids})
+            refresh_status()
+            print(json.dumps({"verdict": "HALTED_SITTING_VOID", "wp": wp, "void_sittings": voids,
+                              "officer_named": verdict.get("mandatory_failures"),
+                              "maker_return": verdict.get("maker_return"),
+                              "detail": "the officer could not judge this candidate and the allowed rounds are spent; "
+                                        "another dispatch would be a loop, not work"}, ensure_ascii=False))
+            return 0
+        phase = "EXECUTE_READY"
+    if phase == "AWAITING_RECORD" and vpath is not None and vword in ("FAIL", "VOID"):
         ex = execute_rounds(queue_dir)
         # An EXECUTE receipt only answers a verdict if it is CITABLE. Measured: attempt 1 wrote real files and then
         # timed out at 900.09s with nonce_present=false; counting that mtime as an answer would send VERIFY to judge
@@ -463,7 +485,9 @@ def main(argv=None) -> int:
     if phase == "NO_BRIEF":
         prompt, lane = plan_prompt(wp, item["title"], queue_dir, nonce), "PLAN"
     elif phase == "EXECUTE_READY":
-        prompt, lane = execute_prompt(wp, queue_dir, nonce, verdict or {}), "EXECUTE"
+        v = dict(verdict or {})
+        v["_path"] = str(vpath) if vpath else None
+        prompt, lane = execute_prompt(wp, queue_dir, nonce, v), "EXECUTE"
     elif phase in ("BRIEF_READY", "REVERIFY"):
         prompt, lane = verify_prompt(wp, queue_dir, nonce), "VERIFY_SECURITY"
     else:  # AWAITING_RECORD -- the gate decides, the driver only reports
@@ -507,6 +531,11 @@ def main(argv=None) -> int:
     # Count attempts of THIS phase, not receipts of the unit. PLAN once + VERIFY once + EXECUTE once is three phases
     # working correctly, not one step failing three times -- conflating them halted a unit that was making progress.
     receipts = [p for p in queue_dir.glob("*.json") if "attempts" not in p.name]
+    if vpath is not None:
+        # A receipt older than the officer's last word has already been answered -- even a VOID sitting answers it,
+        # because the candidate it judged is no longer the one being dispatched. Counting those made a unit that was
+        # moving look like a unit that was looping.
+        receipts = [r for r in receipts if r.stat().st_mtime > vpath.stat().st_mtime]
     same_phase = [r for r in receipts if f"-{lane.lower()}-" in r.name.lower() or f"-{lane.lower().replace('_','-')}-" in r.name.lower()]
     if len(same_phase) >= MAX_PHASE_ATTEMPTS:
         log({"action": "halted_repeat", "wp": wp, "lane": lane, "receipts": len(same_phase)})
