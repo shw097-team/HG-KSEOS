@@ -1,0 +1,969 @@
+{
+  "claim_ceiling": "LOCAL_DESIGN_ARTEFACT_ONLY. The table records what the package declares, not what any host did. No slot was installed, loaded, or invoked; NATIVE_NOT_RUN. Judgement belongs to a separate officer.",
+  "counts": {
+    "method_entries": 25,
+    "slot_entries": 24,
+    "slots_unmatched_disposition": 0,
+    "unsourced_count": 0
+  },
+  "generated_at": "2026-10-30T19:21:35",
+  "host_binding": {
+    "cell_count": 192,
+    "cells_with_r2_isolation_record": 191,
+    "cells_without_r2_isolation_record": [
+      {
+        "cell": "CELL-5370fdd74e46",
+        "line": 2693
+      }
+    ],
+    "consequence": "the package fixes no slot-to-cell assignment, so this translation cannot name a host cell for any slot without an Owner decision; it stays at method level.",
+    "global_rule": "every CELL keeps its original Kind/Mode/Host/legacy label and is bound by the per-clause ModeGate/HostCaps/POS/NEG/NoFit; the ON/OFF label semantics are UNBOUND_OWNER_ACK_REQUIRED pending Product/Host Owner signature, so runtime_effect_allowed=false",
+    "global_rule_source": {
+      "line": 16,
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\09B_KIND_MODE_HOST_192.md",
+      "sha256": "aed2234821768307d81991aa56d5ff3a98fc9b884ff79e2930f2b9c4ae8e441d"
+    },
+    "slot_or_method_identifiers_in_09b": 0,
+    "slot_to_cell_assignment": "NOT_PROVIDED_BY_PACKAGE",
+    "sweep": "Select-String -Pattern 'SLOT-|METHOD-' over 09B returned 0 matches; '### CELL-' headings counted 192"
+  },
+  "inputs": [
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+      "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\09B_KIND_MODE_HOST_192.md",
+      "sha256": "aed2234821768307d81991aa56d5ff3a98fc9b884ff79e2930f2b9c4ae8e441d"
+    },
+    {
+      "note": "WP-FHS-16 contract (input/output/POS/NEG) quoted at lines 288-296",
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+      "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811"
+    }
+  ],
+  "method_inventory": [
+    {
+      "disposition": "METHOD_ONLY (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-01",
+      "name": "BMAD-METHOD",
+      "source": {
+        "line": 1207,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "METHOD_ONLY (not installed claim)",
+      "donor_family": "MP",
+      "method_id": "Method25:METHOD-02",
+      "name": "mattpocock/skills:grill-with-docs",
+      "source": {
+        "line": 1224,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "METHOD_ONLY (not installed claim)",
+      "donor_family": "MP",
+      "method_id": "Method25:METHOD-03",
+      "name": "mattpocock/skills:domain-modeling",
+      "source": {
+        "line": 1241,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "METHOD_ONLY (not installed claim)",
+      "donor_family": "MP",
+      "method_id": "Method25:METHOD-04",
+      "name": "mattpocock/skills:to-spec",
+      "source": {
+        "line": 1258,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "METHOD_ONLY (not installed claim)",
+      "donor_family": "MP",
+      "method_id": "Method25:METHOD-05",
+      "name": "mattpocock/skills:to-tickets",
+      "source": {
+        "line": 1275,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "CANDIDATE_TRANSLATE (not installed claim)",
+      "donor_family": "OS",
+      "method_id": "Method25:METHOD-06",
+      "name": "OpenSpec",
+      "source": {
+        "line": 1292,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "CANDIDATE_WRAP (not installed claim)",
+      "donor_family": "SK",
+      "method_id": "Method25:METHOD-07",
+      "name": "Spec Kit",
+      "source": {
+        "line": 1309,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "CANDIDATE_TRANSLATE (not installed claim)",
+      "donor_family": "SP",
+      "method_id": "Method25:METHOD-08",
+      "name": "Superpowers",
+      "source": {
+        "line": 1326,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "CANDIDATE_WRAP (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-09",
+      "name": "GitHub Actions",
+      "source": {
+        "line": 1343,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "PROTOCOL_ONLY (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-10",
+      "name": "MCP",
+      "source": {
+        "line": 1360,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "PROTOCOL_ONLY (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-11",
+      "name": "ACP",
+      "source": {
+        "line": 1377,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "SUPPORT_ONLY (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-12",
+      "name": "OpenSSF Scorecard",
+      "source": {
+        "line": 1394,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "SUPPORT_ONLY (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-13",
+      "name": "SLSA",
+      "source": {
+        "line": 1411,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "SUPPORT_ONLY (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-14",
+      "name": "OWASP",
+      "source": {
+        "line": 1428,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "CANDIDATE (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-15",
+      "name": "CodeQL",
+      "source": {
+        "line": 1445,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "CANDIDATE (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-16",
+      "name": "Semgrep",
+      "source": {
+        "line": 1462,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "DEFER (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-17",
+      "name": "Renovate",
+      "source": {
+        "line": 1479,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "NO_SOURCE_EVIDENCE (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-18",
+      "name": "Dependabot",
+      "source": {
+        "line": 1496,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "CANDIDATE (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-19",
+      "name": "Cosign",
+      "source": {
+        "line": 1513,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "CANDIDATE (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-20",
+      "name": "Syft",
+      "source": {
+        "line": 1530,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "CANDIDATE (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-21",
+      "name": "Trivy",
+      "source": {
+        "line": 1547,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "LOCAL_FIRST_OPTION (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-22",
+      "name": "SQLite/FTS5",
+      "source": {
+        "line": 1564,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "HGK_FABRIC_EXISTING_ONLY (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-23",
+      "name": "FAR/FDA",
+      "source": {
+        "line": 1581,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "SUPPORT_QUARANTINE (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-24",
+      "name": "OpenAI Agents SDK",
+      "source": {
+        "line": 1598,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition": "PORTABILITY_SPEC (not installed claim)",
+      "donor_family": null,
+      "method_id": "Method25:METHOD-25",
+      "name": "Agent Skills specification",
+      "source": {
+        "line": 1613,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    }
+  ],
+  "method_inventory_note": "the 25-method set (BODY08 §5.4) is a second donor set, inventoried here rather than merged into the 24 slots; donor_family is a mechanical name match (exact product name or 'product:' prefix), not a disposition decision.",
+  "parity_legend": {
+    "DISPOSITION_MISMATCH_UNVERIFIED": "both ends sourced but our entry does not restate the donor disposition literal; untested",
+    "SOURCE_DECLARED_PARITY_UNVERIFIED": "both ends sourced and the package restates the same disposition class; no host run, so parity is a declaration, not a measurement",
+    "UNSOURCED": "the donor method for that slot could not be found in the package; no ours entry is claimed"
+  },
+  "producer": "EXECUTE bounded writer, batch A, nonce NONCE-WPA-20261030",
+  "schema": "SLOT-TRANSLATION/1",
+  "slot_translation": [
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "SELECTIVE_NATIVE_REUSE",
+      "donor_method": "OpenSpec",
+      "donor_need": "OS-01: if unclear→Explore; if conflict→TT",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.OPENSPEC",
+      "ours_source": {
+        "line": 248,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'SELECTIVE_NATIVE_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-OS-01",
+      "slot_heading_source": {
+        "line": 761,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 775,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "SELECTIVE_NATIVE_REUSE",
+      "donor_method": "OpenSpec",
+      "donor_need": "OS-02: diff current spec to requested behavior",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.OPENSPEC",
+      "ours_source": {
+        "line": 248,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'SELECTIVE_NATIVE_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-OS-02",
+      "slot_heading_source": {
+        "line": 779,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 793,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "SELECTIVE_NATIVE_REUSE",
+      "donor_method": "OpenSpec",
+      "donor_need": "OS-03: apply only legal write paths then verify",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.OPENSPEC",
+      "ours_source": {
+        "line": 248,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'SELECTIVE_NATIVE_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-OS-03",
+      "slot_heading_source": {
+        "line": 797,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 811,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "SELECTIVE_NATIVE_REUSE",
+      "donor_method": "OpenSpec",
+      "donor_need": "OS-04: archive only when truth & trace settled",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.OPENSPEC",
+      "ours_source": {
+        "line": 248,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'SELECTIVE_NATIVE_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-OS-04",
+      "slot_heading_source": {
+        "line": 815,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 829,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "OPTIONAL_GREENFIELD",
+      "donor_method": "Spec Kit",
+      "donor_need": "SK-01: carry precedence into all downstream artifacts",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.SPEC_KIT",
+      "ours_source": {
+        "line": 299,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'OPTIONAL_GREENFIELD' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-SK-01",
+      "slot_heading_source": {
+        "line": 833,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 847,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "OPTIONAL_GREENFIELD",
+      "donor_method": "Spec Kit",
+      "donor_need": "SK-02: clarify only new high-value unknowns",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.SPEC_KIT",
+      "ours_source": {
+        "line": 299,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'OPTIONAL_GREENFIELD' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-SK-02",
+      "slot_heading_source": {
+        "line": 851,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 865,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "OPTIONAL_GREENFIELD",
+      "donor_method": "Spec Kit",
+      "donor_need": "SK-03: topologically sort task nodes after dependencies",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.SPEC_KIT",
+      "ours_source": {
+        "line": 299,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'OPTIONAL_GREENFIELD' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-SK-03",
+      "slot_heading_source": {
+        "line": 869,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 883,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "OPTIONAL_GREENFIELD",
+      "donor_method": "Spec Kit",
+      "donor_need": "SK-04: compose only admitted modules",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.SPEC_KIT",
+      "ours_source": {
+        "line": 299,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'OPTIONAL_GREENFIELD' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-SK-04",
+      "slot_heading_source": {
+        "line": 887,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 901,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "METHOD_REUSE",
+      "donor_method": "mattpocock/skills",
+      "donor_need": "MP-01: route domain need, not donor brand",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.MATTP_SKILLS",
+      "ours_source": {
+        "line": 316,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'METHOD_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-MP-01",
+      "slot_heading_source": {
+        "line": 905,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 919,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "METHOD_REUSE",
+      "donor_method": "mattpocock/skills",
+      "donor_need": "MP-02: maximize information gain / known answers never reask",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.MATTP_SKILLS",
+      "ours_source": {
+        "line": 316,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'METHOD_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-MP-02",
+      "slot_heading_source": {
+        "line": 923,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 937,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "METHOD_REUSE",
+      "donor_method": "mattpocock/skills",
+      "donor_need": "MP-03: normalize glossary before ADR",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.MATTP_SKILLS",
+      "ours_source": {
+        "line": 316,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'METHOD_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-MP-03",
+      "slot_heading_source": {
+        "line": 941,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 955,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "METHOD_REUSE",
+      "donor_method": "mattpocock/skills",
+      "donor_need": "MP-04: atom→task seed and acceptance ref",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.MATTP_SKILLS",
+      "ours_source": {
+        "line": 316,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'METHOD_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-MP-04",
+      "slot_heading_source": {
+        "line": 959,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 973,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "REFERENCE_ONLY/ARCHIVED_LINEAGE_CHECK",
+      "donor_method": "GSD",
+      "donor_need": "GS-01: partition immutable refs and task context",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.GSD",
+      "ours_source": {
+        "line": 333,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'REFERENCE_ONLY/ARCHIVED_LINEAGE_CHECK' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-GS-01",
+      "slot_heading_source": {
+        "line": 977,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 991,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "REFERENCE_ONLY/ARCHIVED_LINEAGE_CHECK",
+      "donor_method": "GSD",
+      "donor_need": "GS-02: gate previous phase before next",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.GSD",
+      "ours_source": {
+        "line": 333,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'REFERENCE_ONLY/ARCHIVED_LINEAGE_CHECK' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-GS-02",
+      "slot_heading_source": {
+        "line": 995,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1009,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "REFERENCE_ONLY/ARCHIVED_LINEAGE_CHECK",
+      "donor_method": "GSD",
+      "donor_need": "GS-03: resume after readback and nonce proof",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.GSD",
+      "ours_source": {
+        "line": 333,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'REFERENCE_ONLY/ARCHIVED_LINEAGE_CHECK' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-GS-03",
+      "slot_heading_source": {
+        "line": 1013,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1027,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "REFERENCE_ONLY/ARCHIVED_LINEAGE_CHECK",
+      "donor_method": "GSD",
+      "donor_need": "GS-04: bind release input sha to test sha",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.GSD",
+      "ours_source": {
+        "line": 333,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'REFERENCE_ONLY/ARCHIVED_LINEAGE_CHECK' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-GS-04",
+      "slot_heading_source": {
+        "line": 1031,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1045,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "REFERENCE/EVAL_ONLY",
+      "donor_method": "gstack",
+      "donor_need": "GT-01: role review product value with concrete alternatives",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.GSTACK",
+      "ours_source": {
+        "line": 265,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'REFERENCE/EVAL_ONLY' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-GT-01",
+      "slot_heading_source": {
+        "line": 1049,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1063,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "REFERENCE/EVAL_ONLY",
+      "donor_method": "gstack",
+      "donor_need": "GT-02: review usability,NFR,error paths",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.GSTACK",
+      "ours_source": {
+        "line": 265,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'REFERENCE/EVAL_ONLY' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-GT-02",
+      "slot_heading_source": {
+        "line": 1067,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1081,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "REFERENCE/EVAL_ONLY",
+      "donor_method": "gstack",
+      "donor_need": "GT-03: independent review/QA on exact source",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.GSTACK",
+      "ours_source": {
+        "line": 265,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'REFERENCE/EVAL_ONLY' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-GT-03",
+      "slot_heading_source": {
+        "line": 1085,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1099,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "REFERENCE/EVAL_ONLY",
+      "donor_method": "gstack",
+      "donor_need": "GT-04: check ship gate and log retro without modifying Oracle",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.GSTACK",
+      "ours_source": {
+        "line": 265,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'REFERENCE/EVAL_ONLY' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-GT-04",
+      "slot_heading_source": {
+        "line": 1103,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1117,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "METHOD_REUSE",
+      "donor_method": "Superpowers",
+      "donor_need": "SP-01: freeze key ADR before effect",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.SUPERPOWERS",
+      "ours_source": {
+        "line": 282,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'METHOD_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-SP-01",
+      "slot_heading_source": {
+        "line": 1121,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1135,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "METHOD_REUSE",
+      "donor_method": "Superpowers",
+      "donor_need": "SP-02: run Red on old HEAD → modify → Green on new HEAD",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.SUPERPOWERS",
+      "ours_source": {
+        "line": 282,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'METHOD_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-SP-02",
+      "slot_heading_source": {
+        "line": 1139,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1153,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "METHOD_REUSE",
+      "donor_method": "Superpowers",
+      "donor_need": "SP-03: identify invariant then smallest affected cone",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.SUPERPOWERS",
+      "ours_source": {
+        "line": 282,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'METHOD_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-SP-03",
+      "slot_heading_source": {
+        "line": 1157,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1171,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    },
+    {
+      "disposition_literal_found_in_ours": true,
+      "donor_disposition": "METHOD_REUSE",
+      "donor_method": "Superpowers",
+      "donor_need": "SP-04: bounded plan/test/independent review",
+      "ours_disposition": "METHOD_OR_FORMAT",
+      "ours_method": "Native20:METHOD.SUPERPOWERS",
+      "ours_source": {
+        "line": 282,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "parity": "SOURCE_DECLARED_PARITY_UNVERIFIED",
+      "parity_reason": "package declares the reuse class 'METHOD_REUSE' at both ends; functional parity is not executed (NATIVE_NOT_RUN)",
+      "slot": "Donor24:SLOT-SP-04",
+      "slot_heading_source": {
+        "line": 1175,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      },
+      "source": {
+        "line": 1187,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+        "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d"
+      }
+    }
+  ],
+  "status": "DRAFT_TRANSLATION_SOURCE_BOUND",
+  "unsourced_slots": [],
+  "work_package": "WP-FHS-16",
+  "work_package_contract": {
+    "effect_class": "LOCAL_DRAFT_WRITE",
+    "first_fail": "WP-FHS-16.FIRST_FAIL:DONOR_METHOD_DISPOSITION_DENY",
+    "output": "24slot/25method壓製候選",
+    "source": {
+      "line": 290,
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+      "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811"
+    }
+  }
+}

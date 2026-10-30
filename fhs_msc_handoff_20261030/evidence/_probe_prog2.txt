@@ -1,0 +1,73 @@
+ 128|     {
+ 129|       "requirement": "Provider off",
+ 130|       "positive": "zero network calls during positive run",
+ 131|       "negative": "provider connection attempt refused",
+ 132|       "oracle_ref": "WP-FHS-15 and BODY09B"
+ 133|     },
+ 134|     {
+ 135|       "requirement": "PI trace",
+ 136|       "positive": "all atom traces resolve",
+ 137|       "negative": "tampered atom or trace refused",
+ 138|       "oracle_ref": "PIPD RequirementAtom"
+ 139|     },
+ 140|     {
+ 141|       "requirement": "Late bound PD",
+ 142|       "positive": "real measured context",
+ 143|       "negative": "missing root or spoofed freshness refused",
+ 144|       "oracle_ref": "PIPD PD-PKG"
+ 145|     },
+ 146|     {
+ 147|       "requirement": "Effect permissions",
+ 148|       "positive": "read and draft continue",
+ 149|       "negative": "missing OPS permission parks only affected host effect",
+ 150|       "oracle_ref": "BODY03 R2-03-EFFECT"
+ 151|     },
+ 152|     {
+ 153|       "requirement": "Lease fence",
+ 154|       "positive": "current lease accepted in memory fixture",
+ 155|       "negative": "expired lease refused",
+ 156|       "oracle_ref": "HGK SharedSpine"
+ 157|     },
+ 158|     {
+ 159|       "requirement": "Unknown effect",
+ 160|       "positive": "UNKNOWN routes to reconcile",
+ 161|       "negative": "blind retry of UNKNOWN is not dispatched",
+ 162|       "oracle_ref": "BODY06"
+ 163|     },
+ 164|     {
+ 165|       "requirement": "No second queue",
+ 166|       "positive": "existing WorkID reused on resume",
+ 167|       "negative": "new queue or replacement issuer forbidden",
+ 168|       "oracle_ref": "BODY06"
+ 169|     },
+ 170|     {
+ 171|       "requirement": "Distinct checker",
+ 172|       "positive": "request names original checker",
+ 173|       "negative": "maker output never becomes independent acceptance",
+ 174|       "oracle_ref": "BODY07"
+ 175|     }
+ 176|   ],
+ 177|   "dag": {
+ 178|     "WP-FHS-00": [],
+ 179|     "WP-FHS-01": [
+ 180|       "WP-FHS-00"
+ 181|     ],
+ 182|     "WP-FHS-15": [
+ 183|       "WP-FHS-00"
+ 184|     ]
+ 185|   },
+ 186|   "owners": {
+ 187|     "WP-FHS-00": "original SourceReader",
+ 188|     "WP-FHS-01": "original Source/Profile Owner",
+ 189|     "WP-FHS-15": "original TPM/PIPD Reader"
+ 190|   },
+ 191|   "work_packages": {
+ 192|     "WP-FHS-00": {
+ 193|       "id": "WP-FHS-00",
+ 194|       "name": "Source/Host Discovery",
+ 195|       "phase": "DESIGN_OR_BIND",
+ 196|       "tier": "L1",
+ 197|       "effect_class": "SOURCE_READ",
+ 198|       "depends_on": [],
+ 199|       "output": "SourceManifest+RepoContext",
+ 200|       "permission_basis": "原唯讀 ACL/read scope",
