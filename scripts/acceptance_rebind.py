@@ -73,6 +73,8 @@ def main() -> int:
     ap.add_argument("--supersedes", default=None)
     ap.add_argument("--threshold", default="EXPLICIT_ORACLE_PASS")
     ap.add_argument("--negative-fixture", default="EVIDENCE_DIGEST_MISMATCH")
+    ap.add_argument("--verdict", default="PASS", choices=("PASS", "FAIL"),
+                    help="PASS binds evidence that discharges the oracle; FAIL records that it does not")
     ap.add_argument("--dry-run", action="store_true")
     args = ap.parse_args()
 
@@ -161,7 +163,7 @@ def main() -> int:
         spine.acquire_lease(acceptance_id, args.actor, token, ttl_seconds=900)
         result = spine.resolve_acceptance(
             acceptance_id,
-            verdict="PASS",
+            verdict=args.verdict,
             evidence_ref=f"EV-{args.wp}-{Path(ev[0]['path']).stem}"[:120],
             actor=args.actor,
             token=token,
