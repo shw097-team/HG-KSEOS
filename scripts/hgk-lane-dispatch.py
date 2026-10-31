@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 """hgk-lane-dispatch.py - lane-parameterised Codex-CLI dispatch over the ordered pool.
 
+
+try:  # keep every console child off the owner's desktop (see scripts/winproc.py)
+    import winproc as _winproc  # noqa: E402  (same directory)
+    _winproc.install()
+except Exception:  # a missing helper must not stop a lane
+    pass
 FAR ruling (owner instruction 2026-10-10): PLAN stays on the harness engine; EXECUTE and
 VERIFY_SECURITY are handed to the CODEX CLI. The pool artifact is the selection AUTHORITY; this
 call site owns MEASUREMENT (it runs the real Codex turn per candidate).
@@ -29,6 +35,14 @@ Design choices, each to keep friction and drift low:
 Refusals are typed. A policy refusal is TERMINAL and never becomes an empty candidate list.
 """
 from __future__ import annotations
+
+
+try:  # every child of this process must be consoleless; see scripts/winproc.py and console_guard_gate.py
+    import winproc as _winproc  # noqa: E402  (same directory)
+    _winproc.install()
+except Exception:  # a missing helper must not stop the tool
+    pass
+
 
 import argparse
 import hashlib
@@ -91,17 +105,44 @@ ERR_ROLE_BINDING_RANK_MISMATCH = "ERR_ROLE_BINDING_RANK_MISMATCH"
 ERR_ROLE_BINDING_LANE_UNDECLARED = "ERR_ROLE_BINDING_LANE_UNDECLARED"
 ERR_ROLE_BINDING_WORKORDER_REQUIRED = "ERR_ROLE_BINDING_WORKORDER_REQUIRED"
 
+def _tee_crash_log() -> None:
+    """Every dispatch writes its own stderr next to its receipt.
+
+    Measured 2026-10-31: a dispatch started through Win32_Process.Create (no console, no inherited handles) died at
+    ~50 s having written only its PRE_ATTEMPT receipt. `pythonw` with no stderr means a traceback goes nowhere, so the
+    run was indistinguishable from a run that never happened -- the fifth time in this session that the missing thing
+    was a log. Cheap fix: bind stderr to a file before anything else can fail.
+    """
+    try:
+        out = None
+        for i, a in enumerate(sys.argv):
+            if a == "--json-out" and i + 1 < len(sys.argv):
+                out = Path(sys.argv[i + 1] + ".log")
+        if out is None:
+            return
+        out.parent.mkdir(parents=True, exist_ok=True)
+        fh = out.open("a", encoding="utf-8", errors="replace", buffering=1)
+        sys.stderr = fh
+        sys.stdout = fh
+        fh.write(f"\n=== dispatch start {time.strftime('%Y-%m-%dT%H:%M:%S')} pid={os.getpid()} argv={sys.argv[:3]}\n")
+    except Exception:  # noqa: BLE001 - logging must never be the reason a dispatch fails
+        pass
+
+
 SCHEMA = "HGK-LANE-RESOLUTION/1"
 DEFAULT_POOL = ROOT / "config/lane-route-slots.candidate.json"
 SPINE_DB = ROOT / "var" / "shared-spine" / "hg-kseos.db"
 SPINE_SCHEMA = ROOT / "src" / "hg_kseos" / "schema.sql"
 DEFAULT_LANE_HOME = Path(os.environ.get("LOCALAPPDATA", "")) / "HG-KSEOS" / "codex-hermes"
-# R20 P3 (D7): the pool is a routing table, the assignment is the owner's decision. A pool entry that
-# is not in the lane's assignment must not be dispatchable by naming it.
+# R20 P3: the pool is a routing table, the assignment is the owner's decision. A pool entry that is
+# not in the lane's assignment must not be dispatchable by naming it.
 ASSIGNMENT_FILE = ROOT / "config" / "model-lane-assignment.json"
 ERR_ARM_NOT_IN_ASSIGNMENT = "ERR_ARM_NOT_IN_ASSIGNMENT"
 ERR_ARM_ASSIGNMENT_UNREADABLE = "ERR_ARM_ASSIGNMENT_UNREADABLE"
 ERR_LANE_ASSIGNMENT_NO_ROW = "ERR_LANE_ASSIGNMENT_NO_ROW"
+# IR-1/IR-4 pre-spawn gate (round FAR-DURABILITY-20261030): the turn is refused when the policy it
+# would obey is uncommitted, or the subject it would claim progress on has no commit.
+ERR_DURABLE_GATE_NO_GO = "ERR_DURABLE_GATE_NO_GO"
 ERR_NO_ASSIGNED_ARM = "ERR_NO_ASSIGNED_ARM"
 # R20 P3: an OAuth relay can only serve from a home that holds the login. The sealed lane home holds
 # none by design, so that pair is a guaranteed 401 AFTER a full model call.
@@ -791,6 +832,17 @@ def parse_exit_code(marker: str | None) -> int | None:
         return None
 
 
+def _kill_process_tree(pid: int) -> None:
+    """taskkill /T is the only thing on Windows that reaches the grandchildren of a shim (`codex.cmd` -> node)."""
+    if not pid:
+        return
+    try:
+        subprocess.run(["taskkill", "/PID", str(pid), "/T", "/F"], capture_output=True,
+                       timeout=30, creationflags=0x08000000)
+    except Exception:  # noqa: BLE001 - a failed kill must not hide the timeout classification
+        pass
+
+
 def persist_attempt_logs(log_dir, rank, out: str, err: str, run_id=None,
                          out_bytes=None, err_bytes=None) -> dict:
     """Write the FULL attempt output to disk and return its locators/digests.
@@ -941,16 +993,34 @@ def identity_check(entry: dict, lane: str, lane_home, relay_home,
 
 
 def snapshot_subject(roots) -> dict[str, str]:
-    """Digest every file under each root (or the file itself), so mutation can be MEASURED."""
+    """Digest every file under each root (or the file itself), so mutation can be MEASURED.
+
+    Long-path safe: on Windows `rglob` raises FileNotFoundError (WinError 3) as soon as one directory
+    exceeds MAX_PATH, and a crash here aborts the whole dispatch AFTER the pre-spawn gates passed.
+    Measured 2026-10-30 on `var/hgk-solution-apply-20261012/.../references` — the same class of
+    defect as the truncated manifest walk, so the walk goes through the extended-length prefix and
+    unreadable entries are skipped by name rather than taking the turn down.
+    """
     snap: dict[str, str] = {}
+    pfx = (chr(92) * 2 + "?" + chr(92)) if os.name == "nt" else ""
     for root in roots or []:
         r = Path(root)
         if r.is_file():
             snap[str(r).replace("\\", "/")] = sha256_file(r)
         elif r.is_dir():
-            for p in sorted(r.rglob("*")):
-                if p.is_file():
-                    snap[str(p).replace("\\", "/")] = sha256_file(p)
+            base = pfx + str(r.resolve())
+            for dirpath, _dirnames, filenames in os.walk(base):
+                for fn in sorted(filenames):
+                    p = Path(dirpath) / fn
+                    try:
+                        if not p.is_file():
+                            continue
+                        key = str(p).replace("\\", "/")
+                        if pfx:
+                            key = key[len(pfx.replace("\\", "/")):]
+                        snap[key] = sha256_file(p)
+                    except OSError:
+                        continue
     return snap
 
 
@@ -1090,55 +1160,8 @@ def arm_equivalent(a: str, b: str) -> bool:
         return False
     if la == lb:
         return True
-    # A DECLARED alias pair is equivalence. Measured (TT-R20-17): the relay labels an OpenCodex-served
-    # turn provider=desktop_router while the governance identity of that same arm is openai-codex, so a
-    # model-only or string comparison refuses the arm the run just selected. The pair is read from
-    # config/lane-arm-aliases.json rather than inferred, because inference would also equate
-    # opencode-go/gpt-6.1-sol -- a different supply path with the same model name.
-    for _x, _y in _declared_alias_pairs():
-        if {la, lb} == {_x, _y}:
-            return True
     if ("/" in la) != ("/" in lb):
         return la.rsplit("/", 1)[-1] == lb.rsplit("/", 1)[-1]
-    return False
-
-
-_ALIAS_CACHE: dict = {}
-
-
-def _declared_alias_pairs() -> list[tuple[str, str]]:
-    """Owner-declared arm alias pairs. Unreadable/absent file means NO aliases (fail-closed)."""
-    if "pairs" in _ALIAS_CACHE:
-        return _ALIAS_CACHE["pairs"]
-    pairs: list[tuple[str, str]] = []
-    try:
-        doc = json.loads((Path(__file__).resolve().parent.parent / "config" / "lane-arm-aliases.json")
-                         .read_text(encoding="utf-8"))
-        for row in doc.get("pairs") or []:
-            if isinstance(row, (list, tuple)) and len(row) == 2:
-                pairs.append((str(row[0]).strip().lower(), str(row[1]).strip().lower()))
-    except Exception:
-        pairs = []
-    _ALIAS_CACHE["pairs"] = pairs
-    return pairs
-
-
-def arm_served_equivalent(served: str, required: str) -> bool:
-    """Stricter than arm_equivalent: used for the VERDICT, never for the SELECTION.
-
-    MEASURED (independent VERIFY, C11): arm_equivalent('unlisted-provider/gpt-6.1-sol', 'gpt-6.1-sol')
-    is true through the bare-model rule, so a BARE --require-arm would accept a serve from a provider
-    nobody declared. Selection may stay lenient (the pool entry it selected already carries the provider);
-    the verdict may not. Here only an exact match or an owner-DECLARED alias pair is equivalence.
-    """
-    ls, lr = str(served or "").strip().lower(), str(required or "").strip().lower()
-    if not ls or not lr:
-        return False
-    if ls == lr:
-        return True
-    for x, y in _declared_alias_pairs():
-        if {ls, lr} == {x, y}:
-            return True
     return False
 
 
@@ -1163,17 +1186,13 @@ def lane_assigned_arms(role: str) -> dict:
         label = row.get("role") or row.get("lane_group")
         if str(label or "").upper() != want:
             continue
-        # C4/TT-R20-18: primary is COMPOSED, not snapshotted. A `primary = list(arms)` taken before the
-        # fallbacks are appended is correct only by ordering -- one later `arms.append` above it silently
-        # contaminates the owner's decision with an operator fallback. Composed here, the two lists cannot
-        # share an element by accident, and a test can assert that directly.
-        primary = []
+        arms = []
         prov, model = row.get("assigned_provider"), row.get("assigned_model")
         if prov and model:
-            primary.append(f"{prov}/{model}")
+            arms.append(f"{prov}/{model}")
         if row.get("transport_model"):
-            primary.append(str(row["transport_model"]))
-        arms = list(primary)
+            arms.append(str(row["transport_model"]))
+        primary = list(arms)                      # what the owner assigned -- the decision
         fallback = []
         for alt in row.get("non_default_alternates") or []:
             if alt.get("provider") and alt.get("model"):
@@ -1192,24 +1211,10 @@ def lane_assigned_arms(role: str) -> dict:
                               else (fb.strip() if isinstance(fb, str) else None)
                               for fb in (row.get("fallbacks") or [])]
         declared_fallbacks = [f for f in declared_fallbacks if f]
-        # C4/TT-R20-19: the independent VERIFY lane showed my "primary excludes fallbacks" TEST was a
-        # tautology -- it passed identically for the composed code and for a contaminating mutant, because
-        # the old snapshot happened to be taken before the append. A property nothing can violate is not
-        # pinned. So the invariant is now CHECKED AT RUNTIME and a row that declares the same arm as both
-        # primary and fallback is refused, which is the only shape where the two lists can collide.
-        # C4/TT-R20-20: the checker showed an EXACT-STRING overlap check misses case variants and
-        # declared aliases (primary openai-codex/gpt-6.1-sol vs fallback desktop_router/gpt-6.1-sol are the
-        # same arm). Overlap is therefore decided with the same equivalence the verdict uses.
-        _overlap = sorted({p_ for p_ in primary for f_ in fallback if arm_served_equivalent(p_, f_)} )
-        if _overlap:
-            return {"ok": False, "arms": [], "revision": data.get("revision"), "role": label,
-                    "code": "ERR_ASSIGNMENT_PRIMARY_FALLBACK_OVERLAP", "overlap": _overlap,
-                    "detail": f"role {label!r} declares the same arm as primary and fallback: {_overlap}"}
         return {"ok": True, "arms": sorted(set(arms)), "revision": data.get("revision"),
                 "role": label, "authority": row.get("authority"),
                 "shape": "role" if row.get("role") else "lane_group",
                 "primary_arms": sorted(set(primary)),
-                "primary_source": "assigned_provider/assigned_model + declared transport_model only",
                 "fallback_arms": sorted(set(fallback)),
                 "declared_fallbacks": sorted(set(declared_fallbacks)),
                 "fallbacks_declared": bool(declared_fallbacks),
@@ -1262,6 +1267,42 @@ def served_arm_of(provider, model):
     if model.startswith(provider + "/"):
         return model
     return f"{provider}/{model}"
+
+
+# --- Owner-declared provider ALIASES (FAR-B1-v2, N-6) ------------------------------------------
+# Some arms ANSWER under a different provider label than the one the lane bound: the OpenAI-OAuth
+# turn is served through the desktop router, which reports provider=desktop_router, while the pool
+# declares provider=openai-codex, and both are billed to the SAME owner OAuth credential. Before this
+# table the run was recorded as ERR_REQUIRED_ARM_NOT_SERVED while usage_receipt_ok was true.
+#
+# This is a DECLARATION of one measured equivalence, not a relaxation of the guard:
+#   * only pairs listed here are canonicalised -- an undeclared provider still fails closed;
+#   * the payer is recorded with the alias, so the equivalence is "same credential", never "same name";
+#   * both the RAW and the CANONICAL served arm go on the receipt, so a reader can always see what
+#     actually answered and whether an alias was applied to make the comparison pass.
+ARM_ALIASES = {
+    ("desktop_router", "gpt-6.1-sol"): {
+        "arm": "openai-codex/gpt-6.1-sol",
+        "payer": "owner-openai-oauth",
+        "declared_by": "OWNER (FAR-B1-v2 N-6)",
+        "basis": "desktop router proxies the owner's OpenAI OAuth session; pool arm is openai-codex",
+    },
+}
+
+
+def canonical_arm(provider, model):
+    """Compose the served arm, then apply a DECLARED alias if one matches exactly.
+
+    Returns ``(canonical_arm, alias_record_or_None)``. ``alias_record`` is None when no alias applied,
+    so callers can prove that a passing comparison did not depend on an undeclared equivalence.
+    """
+    raw = served_arm_of(provider, model)
+    if raw is None:
+        return None, None
+    rec = ARM_ALIASES.get((str(provider or "").strip(), str(model or "").strip()))
+    if rec and rec.get("arm"):
+        return str(rec["arm"]), dict(rec, raw=raw)
+    return raw, None
 
 
 def failure_disposition(attempts: list) -> dict:
@@ -1366,8 +1407,56 @@ def resolve_rollout_identity(home, since_epoch, cwd, timeout_s=15):
         if not model:
             continue
         provider = PROVIDER_ALIASES.get(str(provider_raw or "").lower(), str(provider_raw or "").lower())
+        # MEASURED 2026-10-31 18:49: the rollout of a relay-fronted turn declares `model_provider: openai`
+        # (the codex client talks to our loopback relay) while the model it was asked for is provider-qualified
+        # (`opencode-go/mimo-v2.6-flash`). Taking the provider from the client turned that into the impossible
+        # pair `openai-codex` + `opencode-go/mimo-v2.6-flash`, and `--require-arm opencode-go/mimo-v2.6-flash`
+        # then refused a turn that had visibly served that exact arm (exit 0, nonce present, usage bound).
+        # A qualified id carries its own provider: it wins over the client's transport provider.
+        if isinstance(model, str) and "/" in model:
+            head, _, tail = model.partition("/")
+            provider = PROVIDER_ALIASES.get(head.lower(), head.lower())
+            model = tail
         return {"provider": provider, "model": model, "source": "codex-rollout", "rollout": path}
     return None
+
+
+WINDOW_LEDGER = ROOT / "var" / "console-window-events.jsonl"
+
+
+def _window_ledger_lines() -> int:
+    """How many console-window events the 20 ms watcher had recorded when the attempt started.
+
+    -1 means "no ledger": a dispatch that cannot be measured must say so, not report zero.
+    """
+    try:
+        with WINDOW_LEDGER.open("rb") as fh:
+            return sum(1 for _ in fh)
+    except OSError:
+        return -1
+
+
+def _window_events_since(count_before: int, since_iso: str) -> list:
+    if count_before < 0:
+        return []
+    rows = []
+    try:
+        with WINDOW_LEDGER.open(encoding="utf-8", errors="replace") as fh:
+            for index, line in enumerate(fh):
+                if index < count_before:
+                    continue
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    row = json.loads(line)
+                except ValueError:
+                    continue
+                if (row.get("at") or "") >= since_iso:
+                    rows.append(row)
+    except OSError:
+        return []
+    return rows
 
 
 def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_dir=None,
@@ -1379,6 +1468,16 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
     launcher = [sys.executable, str(codex)] if str(codex).endswith(".py") else [codex]
     cmd = launcher + ["--model", str(entry["transport_model"]),
            "--sandbox", sandbox, "--ask-for-approval", "never",
+           # MEASURED 2026-10-31: codex 0.166 reports `provider: desktop_router` from the human home's
+           # config.toml, and desktop_router is a loopback router on 127.0.0.1:10102 that is NOT running.
+           # Every lane turn therefore ended in "Reconnecting... waiting for network" and timed out with no
+           # nonce — which was recorded as "the codex client path does not deliver a turn". It is not the
+           # relay and not the model: `-c openai_base_url=` alone does not move a child whose
+           # model_provider is desktop_router, because that key configures the built-in openai provider.
+           # Declaring the provider explicitly makes the relay the transport for EVERY lane:
+           #   gpt-6.1-sol            -> PROBE_B_OK (3.5 s turn, 7,404 tokens)
+           #   deepseek-v4.1-flash    -> PROBE_C_OK (10,163 tokens)
+           "-c", "model_provider=openai",
            "-c", f"openai_base_url={args.relay_base}",
            "--cd", str(args.cwd or ROOT)]
     if entry.get("reasoning_effort"):
@@ -1397,7 +1496,7 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
     # --ephemeral SUPPRESSES the rollout, and the rollout is the only record of which arm an OAuth-direct turn served.
     # So the two are mutually exclusive by construction: asking for rollout-based identity turns ephemeral off.
     _exec_flags = ["exec", "--skip-git-repo-check", "--json"]
-    if getattr(args, "identity_source", "relay-usage") != "codex-rollout":
+    if getattr(args, "identity_source", "codex-rollout") != "codex-rollout":
         _exec_flags.insert(2, "--ephemeral")
     cmd += _exec_flags + [args.prompt]
 
@@ -1477,6 +1576,10 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
               file=sys.stderr)
     usage_path = Path(args.usage)
     offset = usage_path.stat().st_size if usage_path.is_file() else 0
+    # F3 (FAR-20261031-028): the window ledger is sampled on the SAME boundary as the usage ledger, so the
+    # delta below is "windows that appeared while this attempt was running", not "windows since the run began".
+    win_before = _window_ledger_lines()
+    win_since = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     # I1: capture BOTH the offset and a digest of the pre-turn bytes `[0:offset)`. The size-only check
     # cannot see a rewrite that shifts the prefix and copies a stale row PAST the offset (the file
     # GROWS); the digest of the exact prefix can, and does.
@@ -1488,10 +1591,37 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
         # and blocks forever when the parent's stdin is an open pipe that never closes - which is
         # exactly what a background shell provides. The prompt travels as an argv argument, so the
         # child must simply see EOF.
-        p = subprocess.run(cmd, capture_output=True, timeout=args.timeout, env=env,
-                           stdin=subprocess.DEVNULL)
-        rc = p.returncode
-        out_b, err_b = p.stdout or b"", p.stderr or b""
+        # A timeout must actually end the attempt. `subprocess.run(..., timeout=)` kills only the DIRECT child
+        # (`codex.cmd` -> cmd.exe) and then blocks in communicate() for ever, because the grandchildren (`node`,
+        # `codex.exe`) inherited the pipe handles and keep them open. Measured 2026-10-31: a dispatch launched with
+        # --timeout 180 was still alive at 300 s, wrote no receipt, and the loop read that silence as a spent round
+        # until it halted all three open units (TT-LANE-DISPATCH-EXCEEDS-TIMEOUT-001). So: Popen, kill the tree,
+        # then drain whatever the child already wrote.
+        # One hidden console for the whole tree. CREATE_NO_WINDOW leaves the child with no console at all, so the
+        # grandchildren *it* starts (codex -> node -> git) each allocate a NEW console, and a new console is a
+        # Windows Terminal window on the owner's desktop. Measured 2026-10-31: 14 `git.EXE` windows in one tick, none
+        # of them started by us. A console created hidden and inherited is the only shape where nothing downstream
+        # can pop: every descendant shares the one invisible console.
+        _si = None
+        _flags = 0
+        if os.name == "nt":
+            _si = subprocess.STARTUPINFO()
+            _si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            _si.wShowWindow = 0                      # SW_HIDE
+            _flags = subprocess.CREATE_NEW_CONSOLE
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                             stdin=subprocess.DEVNULL, env=env, startupinfo=_si, creationflags=_flags)
+        try:
+            out_b, err_b = p.communicate(timeout=args.timeout)
+            rc = p.returncode
+        except subprocess.TimeoutExpired:
+            _kill_process_tree(p.pid)
+            try:
+                out_b, err_b = p.communicate(timeout=30)
+            except subprocess.TimeoutExpired:
+                p.kill()
+                out_b, err_b = b"", b""
+            raise subprocess.TimeoutExpired(cmd, args.timeout, output=out_b, stderr=err_b)
         # decode ONLY for parsing/tails; the raw bytes are what gets persisted (see
         # persist_attempt_logs: text=True + errors="replace" loses bytes and translates newlines
         # BEFORE any file is written, which made "byte-identical" untrue).
@@ -1638,6 +1768,13 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
             "credential_posture": posture_fields,
             **log_meta,
             "stdout_tail": out[-400:], "stderr_tail": err[-300:]}
+    # F3: a hiding flag cannot be verified by reading code, only by observing the desktop. The receipt carries
+    # the measurement; console_window_gate.py turns it into PASS / FAIL / INCONCLUSIVE for the round.
+    _win_events = _window_events_since(win_before, win_since)
+    attempt["console_window_events_delta"] = (len(_win_events) if win_before >= 0 else None)
+    attempt["console_window_ledger"] = (str(WINDOW_LEDGER) if win_before >= 0 else None)
+    attempt["console_window_owners"] = [{"at": w.get("at"), "pid": w.get("pid"), "exe": w.get("exe"),
+                                         "title": (w.get("title") or "")[:60]} for w in _win_events[:20]]
     if carrier_shape_invalid:
         # J4 (pass-6): a wrong-shaped carrier is a DIAGNOSTIC about the TEXT, recorded as a per-
         # attempt DETAIL -- never as a top-level code. `failure_disposition` owns the top-level
@@ -1710,7 +1847,65 @@ def _resolve_completion_evidence(att, binding, root=None):
                  "subject": (binding or {}).get("subject")})
 
 
+def durable_gate_preflight(args) -> dict:
+    """IR-1 + IR-4, evaluated before any spawn.
+
+    Fail-closed by construction: a missing or unparseable gate binary is NO_GO, never a silent pass.
+    `scripts/ir1_policy_gate.py` refuses uncommitted routing policy; `scripts/ir4_subject_gate.py`
+    refuses a subject that is not in a git worktree. Both exist because a receipt produced against
+    either one describes a world a second party cannot check out.
+    """
+    tools = Path(getattr(args, "durable_gates_dir", None) or (ROOT / "scripts"))
+    gate = tools / "ir_gate.py"
+    if not gate.exists():
+        return {"verdict": "NO_GO", "detail": {"reason": "gate_missing", "path": str(gate)}}
+    subject = getattr(args, "durable_gates_subject", None) or getattr(args, "cwd", None) or str(ROOT)
+    try:
+        p = subprocess.run([sys.executable, str(gate), "--repo", str(ROOT),
+                            "--subject", str(subject), "--json"],
+                           capture_output=True, text=True, encoding="utf-8", errors="replace",
+                           timeout=180)
+    except subprocess.TimeoutExpired:
+        return {"verdict": "NO_GO", "detail": {"reason": "gate_timeout"}}
+    raw = (p.stdout or "").strip()
+    try:
+        out = json.loads(raw)
+    except Exception:
+        try:
+            out = json.loads(raw.splitlines()[-1])
+        except Exception:
+            out = None
+    if out is None:
+        return {"verdict": "NO_GO", "detail": {"reason": "gate_unparseable", "exit": p.returncode,
+                                                "stdout_tail": (p.stdout or "")[-300:],
+                                                "stderr_tail": (p.stderr or "")[-300:]}}
+    if out.get("verdict") != "GO":
+        return {"verdict": "NO_GO", "detail": out}
+
+    # IR-2: the transport has to be alive before the spawn, or the turn reports a credential failure
+    # that is really a dead relay (observed twice: 401 with `ocx status` saying Proxy: not running).
+    relay = tools / "relay_preflight.py"
+    # The relay's health endpoint is LOCAL: --relay-base points at the upstream provider
+    # (https://chatgpt.com/backend-api/codex), and appending /healthz there answers 403. IR-2 is about
+    # the local proxy being alive, so the health base is the loopback address, overridable by env.
+    base = os.environ.get("HGK_RELAY_HEALTH", "http://127.0.0.1:10101")
+    if relay.exists() and base.startswith("http"):
+        rp = subprocess.run([sys.executable, str(relay), "--base", base, "--json"],
+                            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30)
+        try:
+            rj = json.loads((rp.stdout or "").strip().splitlines()[-1])
+        except Exception:
+            rj = {"verdict": "RELAY_UNKNOWN", "stdout_tail": (rp.stdout or "")[-200:]}
+        if rj.get("verdict") != "RELAY_ALIVE":
+            return {"verdict": "NO_GO", "detail": {"transport": rj, "gates": out}}
+        out = dict(out)
+        out["transport"] = rj.get("verdict")
+
+    return {"verdict": "GO", "detail": out}
+
+
 def main() -> int:
+    _tee_crash_log()
     ap = argparse.ArgumentParser(prog="hgk-lane-dispatch.py")
     ap.add_argument("--lane", required=True, help="PLAN | EXECUTE | VERIFY_SECURITY (validated in-contract)")
     ap.add_argument("--prompt", required=True)
@@ -1738,7 +1933,7 @@ def main() -> int:
     ap.add_argument("--codex-arg", action="append", default=None,
                     help="extra raw argv tokens appended verbatim to the codex invocation (repeatable; "
                          "for bounded experiments such as -c prefer_websockets=false)")
-    ap.add_argument("--identity-source", choices=("relay-usage", "codex-rollout"), default="relay-usage",
+    ap.add_argument("--identity-source", choices=("relay-usage", "codex-rollout"), default="codex-rollout",
                     help="where a served arm's identity is read from. 'relay-usage' (default) requires the relay's own "
                          "usage row, which is why an OAuth-direct run has no identity and cannot be green: the owner's "
                          "ChatGPT backend writes no relay ledger. 'codex-rollout' reads the model + provider that the "
@@ -1801,6 +1996,13 @@ def main() -> int:
                     help="D5 escape hatch (recorded): proceed when the prior process liveness could "
                          "NOT be proven. Without it, 'cannot prove the prior pid is gone' is a REFUSAL, "
                          "not a pass. This exists only to drive a deterministic positive control.")
+    ap.add_argument("--require-durable-gates", action="store_true",
+                    help="IR-1/IR-4: refuse to spawn when the routing policy is uncommitted or the "
+                         "subject has no commit (this turn's receipts would not be reproducible)")
+    ap.add_argument("--durable-gates-dir", default=None,
+                    help="directory holding ir_gate.py (default: <repo>/scripts)")
+    ap.add_argument("--durable-gates-subject", default=None,
+                    help="artefact this turn claims progress on (default: --cwd, else the repo root)")
     ap.add_argument("--brief", default=None,
                     help="path to the lane BRIEF text; enables the DETECTION_ONLY remote-write "
                          "pre-check (C4). When unset, no brief-level detection runs.")
@@ -1849,11 +2051,15 @@ def main() -> int:
                     help="Shared Spine path used for the --sp-workorder join (default: "
                          "var/shared-spine/hg-kseos.db). Operator/test seam.")
     args = ap.parse_args()
-    # A2/TT-R20-9: identity of THIS source must ride on the receipt it produces. Defined here, in
-    # main(), because the receipt assembly also lives here -- a module-level or attempt-scoped binding
-    # left `_producer` undefined on every path that never ran an attempt (NameError at emit time),
-    # which is how 61 previously-green tests turned red the moment the field was added.
-    _producer = producer_identity()
+
+    # IR-1/IR-4: refuse a turn whose receipts could not be reproduced by a second party.
+    if getattr(args, "require_durable_gates", False):
+        gate = durable_gate_preflight(args)
+        if gate["verdict"] != "GO":
+            return emit_refusal(args, refusal_body(
+                args.lane, ERR_DURABLE_GATE_NO_GO, gate["detail"],
+                say="refused before spawn: the policy or the subject is not in the durable layer",
+                gate=gate["verdict"]))
 
     # ---- Tranche A/B: resolve the persisted per-round role binding (pre-spawn, fail-closed) ------
     # The required ARM and RANK for this lane are DERIVED from the SAME persisted binding document, so
@@ -2331,6 +2537,23 @@ def main() -> int:
 
     # ---- non-mutation guard (makes an escalated-sandbox checker safe) --------------------------
     guard_roots = list(args.guard_subject or [])
+    # A checker reads the subject while the maker may still be working. Three rounds in a row lost a
+    # checker verdict to `ERR_CHECKER_MUTATED_SUBJECT` because the maker committed into the guarded tree
+    # mid-turn. The guard was right; the maker should not have been able to commit. Hold a review lock for
+    # the life of this dispatch so scripts/review_lock.py refuses those commits.
+    _review_lock_nonce = None
+    if guard_roots:
+        try:
+            _lock = subprocess.run([sys.executable, str(Path(__file__).with_name("review_lock.py")),
+                                    "acquire", "--subject", str(guard_roots[0]),
+                                    "--nonce", str(getattr(args, "nonce", "") or "dispatch"),
+                                    "--reason", f"{args.lane} checker reading the subject",
+                                    "--ttl-min", str(max(30, int((args.timeout or 600) // 60) + 15))],
+                                   capture_output=True, text=True, timeout=30)
+            if _lock.returncode == 0:
+                _review_lock_nonce = str(getattr(args, "nonce", "") or "dispatch")
+        except Exception:  # noqa: BLE001 - a lock failure must not stop the dispatch, only be reported
+            _review_lock_nonce = None
     # MEASURED (probe E5b): a guard root the native process cannot resolve produced a ZERO-FILE
     # snapshot, and the receipt then read `mutated: false` - a vacuous guard reported as a clean
     # subject. An unresolvable root is a setup error, so it must refuse instead of bless.
@@ -2679,7 +2902,21 @@ def main() -> int:
                 fh.write(json.dumps({"run_id": f"{os.getpid()}-{run_started}", "at_utc": datetime.now(UTC).isoformat(),
                                      "lane": args.lane, "attempt_in_run": len(attempts), **att},
                                     ensure_ascii=False, sort_keys=True) + "\n")
-        if att.get("exit") == 0 and getattr(args, "identity_source", "relay-usage") == "codex-rollout":
+        # Persist the receipt HERE, immediately after an attempt lands. This is the last point where the
+        # process is known to be alive: three sittings reached the ndjson write, then vanished without a
+        # receipt, and a lane that genuinely served the turn could not be claimed. `receipt_complete:false`
+        # marks it as provisional; the final receipt overwrites it.
+        if args.json_out:
+            try:
+                Path(args.json_out).write_text(
+                    json.dumps({"schema": SCHEMA, "lane": args.lane, "nonce": getattr(args, "nonce", None),
+                                "receipt_complete": False,
+                                "note": "provisional: written where the attempt landed, overwritten by the final receipt",
+                                "attempts": attempts},
+                               indent=2, ensure_ascii=False, default=str), encoding="utf-8")
+            except Exception as _exc:  # noqa: BLE001
+                print(f"WARN_RECEIPT_PARTIAL_NOT_WRITTEN: {type(_exc).__name__}: {_exc}", file=sys.stderr)
+        if att.get("exit") == 0 and getattr(args, "identity_source", "codex-rollout") == "codex-rollout":
             # The relay writes no ledger on an OAuth-direct turn, so read the served arm from the codex client's own
             # rollout. This is not a relaxation: the provider AND model must resolve, and the existing
             # ERR_REQUIRED_ARM_NOT_SERVED guard below still fails the run when they contradict --require-arm.
@@ -2701,6 +2938,25 @@ def main() -> int:
             if _ce is None:
                 used = att
                 break
+
+    # Persist what is already known BEFORE the post-processing: a dispatch that is terminated between the
+    # last attempt and the final write used to leave NO receipt at all, so a lane that really served this
+    # turn could not be claimed (RC-UNPERSISTED-RECEIPT, 2026-10-30). The partial receipt is marked
+    # `receipt_complete: false` and is overwritten below; it is never mistakable for a finished one.
+    if args.json_out:
+        try:
+            _partial = {"schema": SCHEMA, "lane": args.lane, "nonce": getattr(args, "nonce", None),
+                        "receipt_complete": False,
+                        "note": "written immediately after the attempts; the final receipt overwrites it",
+                        "attempts": attempts}
+            _p = Path(args.json_out)
+            _p.parent.mkdir(parents=True, exist_ok=True)
+            # default=str: attempt records carry non-JSON scalars (Paths, datetimes). The first version of
+            # this write swallowed the resulting TypeError and persisted nothing -- the same shape as a
+            # vacuous pass -- so a failure here is reported, not hidden.
+            _p.write_text(json.dumps(_partial, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
+        except Exception as _exc:  # noqa: BLE001 - never block the turn on a bookkeeping write
+            print(f"WARN_RECEIPT_PARTIAL_NOT_WRITTEN: {type(_exc).__name__}: {_exc}", file=sys.stderr)
 
     # ---- D4 (cont.): CONSUME the single-use budget iff an attempt actually served this turn ----
     # A successful spawn (the attempt that serves the turn) marks the authorization resource USED via
@@ -2724,6 +2980,10 @@ def main() -> int:
         mutation["subject_digest_sha256_after"] = hashlib.sha256(
             json.dumps(sorted(subject_after.items()), sort_keys=True).encode()).hexdigest()
 
+    # R-EXEC-02 (round FHS-MSC-HANDOFF-PATCH-v1-EXEC-20261030): the refactor left the receipt
+    # referencing _producer, a name bound only inside the per-attempt function scope; every lane
+    # turn that reached receipt assembly died with NameError after the spawn completed.
+    _producer = producer_identity()
     receipt = {
         "schema": SCHEMA, "lane": args.lane,
         "role": "checker" if args.lane == "VERIFY_SECURITY" else "writer",
@@ -2779,7 +3039,20 @@ def main() -> int:
         "claim_ceiling": "a pass here proves the Codex-CLI lane served this turn through the relay with a matching usage receipt; it is not an acceptance of any subject",
     }
     receipt["ok"] = used is not None
-    receipt["identity_source"] = getattr(args, "identity_source", "relay-usage")
+    receipt["identity_source"] = getattr(args, "identity_source", "codex-rollout")
+    # The frozen C1 classification is not touched: a run with no acceptable turn still reports
+    # ERR_LANE_ALL_ROUTES_EXHAUSTED. What is added is a DIAGNOSTIC, because the exhausted code alone cannot
+    # distinguish "no arm answered" from "an arm answered and the identity source could not see it" -- and
+    # measured on this host, `relay-usage` can never obtain a usage row for an OAuth-direct turn, so that
+    # confusion reads as a dead lane. Two flags, same lane, same arm: one exhausted, one ok.
+    if (receipt.get("code") == "ERR_LANE_ALL_ROUTES_EXHAUSTED"
+            and getattr(args, "identity_source", "codex-rollout") == "relay-usage"
+            and any(a.get("exit") == 0 and (a.get("stdout_tail") or a.get("stdout"))
+                    for a in (receipt.get("attempts") or []))):
+        receipt["diagnostic"] = "ERR_IDENTITY_SOURCE_NO_USAGE_ROW"
+        receipt["diagnostic_note"] = ("an attempt exited 0 and produced output, but identity_source=relay-usage "
+                                      "found no usage row for it; re-run with --identity-source codex-rollout "
+                                      "before concluding the arm is unavailable")
     receipt["completion_evidence"] = completion_evidence
     # I3 (pass-5): surface the USAGE MEASUREMENT at the top level too, taken from the serving attempt
     # (or the first attempt that answered when none served). A wrong-shaped CARRIER is a statement
@@ -2802,19 +3075,20 @@ def main() -> int:
         # only those fall back to the generic exhausted code.
         receipt.update(failure_disposition(attempts))
     if used is not None and args.require_arm:
-        # TT-R20-17: the SELECTION accepts an alias-equivalent arm (desktop_router/gpt-6.1-sol for
-        # openai-codex/gpt-6.1-sol), so the VERDICT must use the same equivalence. Comparing the pair with
-        # `!=` after filtering with arm_equivalent made every aliased run end ERR_REQUIRED_ARM_NOT_SERVED
-        # even though the required arm had served: a gate that refuses the thing it just selected.
         # Always record the pair positively, so a passing receipt also states WHICH arm served.
         receipt["required_arm"] = str(args.require_arm)
-        receipt["served_arm"] = served_arm_of(used["provider"], used["model"])
+        receipt["served_arm_raw"] = served_arm_of(used["provider"], used["model"])
+        receipt["served_arm"], _alias = canonical_arm(used["provider"], used["model"])
+        if _alias is not None:
+            # The comparison below runs on the CANONICAL arm, so the alias that made it pass must be
+            # legible on the receipt: same-credential equivalence declared by OWNER, not a name match.
+            receipt["served_arm_alias"] = _alias
         if receipt["served_arm"] is None:
             # No qualified identity could be composed. That is NOT a match and must not silently
             # degrade into a model-only comparison (challenge V04, item 6).
             receipt["ok"] = False
             receipt["code"] = "ERR_ARM_IDENTITY_UNQUALIFIED"
-        elif not arm_served_equivalent(receipt["served_arm"], str(args.require_arm)):
+        elif receipt["served_arm"] != str(args.require_arm):
             # Surviving the gate is not the guarantee; BEING SERVED is. Without this, a run could pass
             # the required arm's gate and then serve a different arm after a runtime failure, reporting
             # ok:true (hostile-review F11).
@@ -2830,8 +3104,10 @@ def main() -> int:
         receipt["session"] = binding_fields.get("role_binding_session")
         receipt["round"] = binding_fields.get("role_binding_round")
         receipt["subject"] = binding_fields.get("role_binding_subject")
-        served = served_arm_of(used["provider"], used["model"]) if used is not None else None
+        served, _alias_rb = canonical_arm(used["provider"], used["model"]) if used is not None else (None, None)
         receipt["role_binding_served_arm"] = served
+        if _alias_rb is not None:
+            receipt["role_binding_served_arm_alias"] = _alias_rb
         if used is not None and served != binding_fields.get("role_binding_arm"):
             receipt["ok"] = False
             receipt["code"] = ERR_ROLE_BINDING_ARM_MISMATCH
@@ -2866,6 +3142,14 @@ def main() -> int:
         out = Path(args.json_out)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(receipt, indent=2, ensure_ascii=False), encoding="utf-8")
+    if _review_lock_nonce:
+        try:
+            subprocess.run([sys.executable, str(Path(__file__).with_name("review_lock.py")),
+                            "release", "--nonce", _review_lock_nonce],
+                           capture_output=True, text=True, timeout=30)
+            receipt["review_lock"] = {"nonce": _review_lock_nonce, "released_at_exit": True}
+        except Exception:  # noqa: BLE001
+            receipt["review_lock"] = {"nonce": _review_lock_nonce, "released_at_exit": False}
     # R20b: an unassigned arm may not serve SILENTLY. Detection is always on; --require-assigned-arms
     # turns it into a refusal. Placed on the SUCCESS path, where a serving arm actually exists.
     _ap = receipt.get("assignment_posture") or {}

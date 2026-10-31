@@ -263,7 +263,7 @@ routes:
   # The dispatcher then launched codex with --model gpt-6.1-sol, the usage ledger recorded
   # gpt-6.1-sol, and the identity gate correctly refused the turn: asked != served. The transport id
   # is part of the arm, so it moves with the arm (opencode-go requires the provider-qualified id).
-  transport_model: opencode-go/mimo-v2.6-flash
+  transport_model: gpt-6.1-sol
 invariants:
   unknown_lane: DENY
   maker_checker_distinct_model: true
@@ -288,9 +288,19 @@ sod_invariants:
     note: 'Epoch 34 (2026-10-30): the owner order of 2026-10-24 separates the pair — EXECUTE writes on opencode-go/deepseek-v4.1-flash, VERIFY_SECURITY checks on openai-codex/gpt-6.1-sol — so model AND provider separation are PRESENT and distinct_required is enforced again. The former same-identity arrangement (SOD006-C7) survives only as fallback 1 in the checker chain; the dispatcher refuses a turn where the checker resolves to the writer arm.'
   - maker: PLAN
     checker: VERIFY_SECURITY
-    distinct_required: true
-    note: 'Epoch 39 (2026-10-31, owner order): PLAN binds openai-codex/gpt-6.1-sol while VERIFY_SECURITY binds opencode-go/mimo-v2.6-flash, so the pair is now distinct on BOTH provider and model. SOD006-C4 described the epoch-34 arrangement in which both lanes shared gpt-6.1-sol; that arrangement is superseded by this order, and separation is no longer claimed on process/lane/evidence-path alone. distinct_required stays true so a future rebind that re-collides the two lanes is refused rather than silently accepted.'
+    distinct_required: false
+    note: 'Epoch 40 (2026-10-31, owner order this round): VERIFY_SECURITY rank-1 returns to openai-codex/gpt-6.1-sol medium, so PLAN and VERIFY_SECURITY share the arm again and the epoch-39 claim that the pair is distinct on provider AND model no longer holds. distinct_required is therefore FALSE and the collision is declared as SOD006-C8 with status OWNER_ORDERED_IN_FORCE -- an accepted deviation, not a satisfied invariant. What is NOT given up: EXECUTE (opencode-go/deepseek-v4.1-flash) != VERIFY_SECURITY, so writer/checker model-axis separation still holds; and process, lane, evidence-path independence plus the no-self-acceptance rule remain in force. What IS given up: model-family independence between the planner and the checker, so a shared blind spot between PLAN and VERIFY is no longer detectable by identity comparison. That trade was the owner''s to make and is recorded here rather than hidden.'
   declared_conflicts:
+  - id: SOD006-C8
+    pairs:
+    - - PLAN
+      - VERIFY_SECURITY
+    axis: canonical_identity
+    status: OWNER_ORDERED_IN_FORCE
+    note: 'Epoch 40 (2026-10-31): the owner bound the ACCEPTANCE / SECURITY REVIEW / VERIFY lane to openai-codex/gpt-6.1-sol medium again, which re-collides it with PLAN. This entry is what makes the collision LEGAL rather than merely recorded: sod_declaration_exemption() requires an OWNER_ORDERED_IN_FORCE conflict naming the exact pair, so the guard refuses a same-model pair that is not declared here. The compensating controls are the ones that do not depend on model identity: a separate sealed CODEX-CLI process with a fresh context (process independence), the checker lane never making the artefact it judges (lane independence), the checker re-deriving every decisive claim from artefacts rather than from the writer summary (evidence-path independence), and the dispatcher refusing any single call that would verify its own output (no self-acceptance).'
+    reconciliation:
+      ruled_by: owner order 2026-10-31 (round FHS-MSC-PIPD-LS-PKG-ALL-PASS-20261031), recorded at owner_order_20261031_allpass_verify_sol
+      measured_before_rebind: 'openai-codex/gpt-6.1-sol served VERIFY_SECURITY by rank 2 in 6.75 s and echoed the round nonce; --require-arm refused it only because revision 39 listed MiMo alone (ERR_ARM_NOT_IN_ASSIGNMENT).'
   - id: SOD006-C1
     pairs:
     - - PLAN
@@ -393,7 +403,7 @@ projections:
   - pointer: /registry_epoch
     expected: 39
   - pointer: /revision
-    expected: 39
+    expected: 41
   - pointer: /lane_chains/PLAN/0/provider
     expected: openai-codex
   - pointer: /lane_chains/PLAN/0/model
@@ -497,9 +507,9 @@ projections:
   - pointer: /lane_chains/EXECUTE/3/automatic_selection
     expected: false
   - pointer: /lane_chains/VERIFY_SECURITY/0/provider
-    expected: opencode-go
+    expected: openai-codex
   - pointer: /lane_chains/VERIFY_SECURITY/0/model
-    expected: mimo-v2.6-flash
+    expected: gpt-6.1-sol
   - pointer: /lane_chains/VERIFY_SECURITY/0/arm
     expected: A
   - pointer: /lane_chains/VERIFY_SECURITY/0/default
@@ -507,9 +517,9 @@ projections:
   - pointer: /lane_chains/VERIFY_SECURITY/0/automatic_selection
     expected: true
   - pointer: /lane_chains/VERIFY_SECURITY/1/provider
-    expected: openai-codex
+    expected: opencode-go
   - pointer: /lane_chains/VERIFY_SECURITY/1/model
-    expected: gpt-6.1-sol
+    expected: mimo-v2.6-flash
   - pointer: /lane_chains/VERIFY_SECURITY/1/arm
     expected: B
   - pointer: /lane_chains/VERIFY_SECURITY/1/default
