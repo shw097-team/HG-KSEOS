@@ -70,6 +70,8 @@ def _calls_install(node: ast.AST) -> bool:
 
 
 def guard_state(path: Path) -> dict:
+    if path.name in ("winproc.py", "console_guard_gate.py"):   # implementation and checker, not subjects
+        return {"file": path.name, "state": "GUARD_EXECUTES", "note": "exempt: defines or checks the rule"}
     src = path.read_text(encoding="utf-8", errors="replace")
     try:
         tree = ast.parse(src)
@@ -100,6 +102,46 @@ def guard_state(path: Path) -> dict:
     return {"file": path.name, "state": "CONSOLE_GUARD_NOT_EXECUTED", "detail": "no module-level winproc install"}
 
 
+def _detached_process_use(path: Path) -> dict | None:
+    """A second, independent ban: DETACHED_PROCESS is a window factory on Windows.
+
+    Measured 2026-10-31 (same tick, same work): DETACHED_PROCESS -> 6 console windows, CREATE_NO_WINDOW -> 0. A
+    parent with no console hands a NEW console to every child it starts, and a new console is a Windows Terminal
+    window on the owner's desktop. The flag was removed from three call sites, then reappeared at a fourth through a
+    copy of the same template -- so its absence is now a check, not a memory.
+    """
+    if path.name in ("winproc.py", "console_guard_gate.py"):   # the module and the checker that document the ban
+        return None
+    tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"))
+    # Bare `8` is everywhere (exit codes, hours). The flag is only recognisable either by name, or as a literal
+    # that is OR-ed into a creationflags value / assigned to a name that says DETACHED.
+    or_operands, detach_named = set(), set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.BinOp) and isinstance(node.op, ast.BitOr):
+            stack = [node]
+            while stack:
+                n = stack.pop()
+                if isinstance(n, ast.BinOp) and isinstance(n.op, ast.BitOr):
+                    stack.extend([n.left, n.right])
+                elif isinstance(n, ast.Constant):
+                    or_operands.add(id(n))
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign) and isinstance(node.value, ast.Constant) and node.value.value == 0x8:
+            if any("DETACH" in getattr(t, "id", "") for t in node.targets):
+                detach_named.add(id(node.value))
+    for node in ast.walk(tree):
+        name = None
+        if isinstance(node, ast.Attribute) and node.attr == "DETACHED_PROCESS":
+            name = "subprocess.DETACHED_PROCESS"
+        elif isinstance(node, ast.Constant) and node.value == 0x8 and (id(node) in or_operands or id(node) in detach_named):
+            name = "0x00000008 (DETACHED_PROCESS)"
+        if name:
+            return {"file": path.name, "state": "DETACHED_PROCESS_IS_A_WINDOW_FACTORY",
+                    "detail": f"line {getattr(node, 'lineno', '?')}: {name} gives every child a new console; use "
+                              f"CREATE_NO_WINDOW | CREATE_BREAKAWAY_FROM_JOB"}
+    return None
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--all", action="store_true")
@@ -119,9 +161,17 @@ def main(argv: list[str] | None = None) -> int:
         targets = [Path(f) for f in args.files]
 
     results = [guard_state(p) for p in targets]
+    # The window-factory ban runs over every script, not only the ones that spawn directly: the flag keeps coming
+    # back through copies of a template, so the whole directory is the subject.
+    for p in sorted(SCRIPTS.glob("*.py")):
+        hit = _detached_process_use(p)
+        if hit:
+            results.append(hit)
     bad = [r for r in results if r["state"] != "GUARD_EXECUTES"]
     print(json.dumps({"checked": len(results), "ok": len(results) - len(bad), "bad": bad,
-                      "note": "a guard that is text inside a docstring is not a guard"}, ensure_ascii=False, indent=2))
+                      "note": "a guard that is text inside a docstring is not a guard; "
+                              "DETACHED_PROCESS is a window factory, not a hiding flag"},
+                     ensure_ascii=False, indent=2))
     return 0 if not bad else 3
 
 

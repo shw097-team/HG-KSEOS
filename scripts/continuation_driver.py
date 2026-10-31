@@ -198,9 +198,11 @@ def launch(lane: str, prompt: str, nonce: str, cwd: Path, json_out: Path, timeou
     ]
     flags = 0
     if os.name == "nt":
-        # The owner sees one console window per dispatch otherwise, and asked for no windows at all. A detached
-        # child with CREATE_NO_WINDOW has no console, so the loop is invisible in the task bar and still logged.
-        flags = subprocess.DETACHED_PROCESS | subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.CREATE_NO_WINDOW
+        # DETACHED_PROCESS is a window factory, not a hiding flag: a parent with no console hands a NEW console to
+        # every child it starts, and a new console is a Windows Terminal window on the owner's desktop. Measured
+        # 2026-10-31: same tick, DETACHED_PROCESS 6 windows, CREATE_NO_WINDOW 0. This line carried the ban back in
+        # through a spawn site the earlier sweep did not reach -- the third time this template has reappeared.
+        flags = subprocess.CREATE_NO_WINDOW | subprocess.CREATE_NEW_PROCESS_GROUP | 0x01000000  # BREAKAWAY_FROM_JOB
     log({"action": "spawn", "lane": lane, "nonce": nonce, "json_out": str(json_out), "cwd": str(cwd)})
     # A detached launch with its output thrown away is unobservable: the first attempt died instantly and left
     # no trace at all. Every dispatch therefore owns a log next to its receipt.
@@ -358,8 +360,24 @@ def note_subject(queue_dir: Path) -> None:
 
 
 def execute_rounds(queue_dir: Path) -> int:
-    """Rounds spent on the current ask. A budget reset (subject changed) starts the count over, on the record."""
-    total = len(list(queue_dir.glob("*-execute-*.json")))
+    """Rounds spent on the current ask. A budget reset (subject changed) starts the count over, on the record.
+
+    A receipt that never spawned is not a round. Measured 2026-10-31: all three open work packages sat at
+    `halted_execute rounds: 6` because four gate refusals each (`ERR_DURABLE_GATE_NO_GO`, "refused before spawn") had
+    been counted as maker attempts. The maker never ran, the subject never changed, and the loop stopped itself with a
+    budget it had spent on nothing. Only a receipt that carries a spawn is a round.
+    """
+    total = 0
+    for p in queue_dir.glob("*-execute-*.json"):
+        try:
+            d = json.loads(p.read_text(encoding="utf-8", errors="replace"))
+        except (json.JSONDecodeError, OSError):
+            continue
+        code = str(d.get("code") or "")
+        spawned = bool(d.get("attempts")) or d.get("phase") == "PRE_ATTEMPT" or d.get("pid")
+        if code and not spawned:          # a typed refusal before spawn: the harness said no, the maker never ran
+            continue
+        total += 1
     st = queue_dir / "BUDGET.json"
     if st.exists():
         try:
@@ -526,7 +544,12 @@ def main(argv=None) -> int:
     if vword == "VOID":
         # A void sitting is not a verdict on the work: the officer could not judge the candidate at all. It must still
         # move the unit, or the loop parks on a state no one records. Two voids and the unit stops with a named reason.
-        voids = len(list(queue_dir.rglob("verdict.json"))) + len(list(queue_dir.rglob("verdict.VOID*.json")))
+        # Only voids against the *current* subject count: WP-FHS-20 was judged VOID at 01:21 and 02:09, then the
+        # evidence changed (192 of 192 cells evidenced) and the old sittings still held it hostage at "2 voids".
+        budget = queue_dir / "BUDGET.json"
+        reset_ts = budget.stat().st_mtime if budget.exists() else 0.0
+        voids = sum(1 for p in list(queue_dir.rglob("verdict.json")) + list(queue_dir.rglob("verdict.VOID*.json"))
+                    if p.stat().st_mtime > reset_ts)
         if voids >= 3 or execute_rounds(queue_dir) >= MAX_EXECUTE_ROUNDS:
             log({"action": "halted_void", "wp": wp, "void_sittings": voids})
             refresh_status()

@@ -29,7 +29,7 @@ import time
 from pathlib import Path
 
 CREATE_NO_WINDOW = 0x08000000
-DETACHED = 0x00000008
+CREATE_BREAKAWAY_FROM_JOB = 0x01000000
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 try:
@@ -87,12 +87,12 @@ def start(port: int = 10101) -> dict:
     log.parent.mkdir(parents=True, exist_ok=True)
     fh = open(log, "ab")
     p = subprocess.Popen(argv, stdout=fh, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL,
-                         creationflags=CREATE_NO_WINDOW | DETACHED, close_fds=True)
+                         creationflags=CREATE_NO_WINDOW | CREATE_BREAKAWAY_FROM_JOB, close_fds=True)
     for _ in range(40):
         time.sleep(0.5)
         if health(port) == 200:
             return {"started": True, "pid": p.pid, "argv": argv, "port": port, "health": 200,
-                    "console": "none (CREATE_NO_WINDOW|DETACHED)"}
+                    "console": "none (CREATE_NO_WINDOW|CREATE_BREAKAWAY_FROM_JOB)"}
     return {"started": True, "pid": p.pid, "argv": argv, "port": port, "health": health(port),
             "note": "spawned but /healthz not answering yet; see " + str(log)}
 

@@ -808,6 +808,17 @@ def parse_exit_code(marker: str | None) -> int | None:
         return None
 
 
+def _kill_process_tree(pid: int) -> None:
+    """taskkill /T is the only thing on Windows that reaches the grandchildren of a shim (`codex.cmd` -> node)."""
+    if not pid:
+        return
+    try:
+        subprocess.run(["taskkill", "/PID", str(pid), "/T", "/F"], capture_output=True,
+                       timeout=30, creationflags=0x08000000)
+    except Exception:  # noqa: BLE001 - a failed kill must not hide the timeout classification
+        pass
+
+
 def persist_attempt_logs(log_dir, rank, out: str, err: str, run_id=None,
                          out_bytes=None, err_bytes=None) -> dict:
     """Write the FULL attempt output to disk and return its locators/digests.
@@ -1494,10 +1505,25 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
         # and blocks forever when the parent's stdin is an open pipe that never closes - which is
         # exactly what a background shell provides. The prompt travels as an argv argument, so the
         # child must simply see EOF.
-        p = subprocess.run(cmd, capture_output=True, timeout=args.timeout, env=env,
-                           stdin=subprocess.DEVNULL)
-        rc = p.returncode
-        out_b, err_b = p.stdout or b"", p.stderr or b""
+        # A timeout must actually end the attempt. `subprocess.run(..., timeout=)` kills only the DIRECT child
+        # (`codex.cmd` -> cmd.exe) and then blocks in communicate() for ever, because the grandchildren (`node`,
+        # `codex.exe`) inherited the pipe handles and keep them open. Measured 2026-10-31: a dispatch launched with
+        # --timeout 180 was still alive at 300 s, wrote no receipt, and the loop read that silence as a spent round
+        # until it halted all three open units (TT-LANE-DISPATCH-EXCEEDS-TIMEOUT-001). So: Popen, kill the tree,
+        # then drain whatever the child already wrote.
+        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                             stdin=subprocess.DEVNULL, env=env)
+        try:
+            out_b, err_b = p.communicate(timeout=args.timeout)
+            rc = p.returncode
+        except subprocess.TimeoutExpired:
+            _kill_process_tree(p.pid)
+            try:
+                out_b, err_b = p.communicate(timeout=30)
+            except subprocess.TimeoutExpired:
+                p.kill()
+                out_b, err_b = b"", b""
+            raise subprocess.TimeoutExpired(cmd, args.timeout, output=out_b, stderr=err_b)
         # decode ONLY for parsing/tails; the raw bytes are what gets persisted (see
         # persist_attempt_logs: text=True + errors="replace" loses bytes and translates newlines
         # BEFORE any file is written, which made "byte-identical" untrue).
