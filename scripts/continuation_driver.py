@@ -518,9 +518,18 @@ def chain_next(reason: str) -> None:
     log({"action": "chain_next", "trigger": reason, "depth": depth + 1, "next": item.get("wp")})
 
 
-def _acquire_driver_lock() -> bool:
-    """A pid file with a liveness check -- not a promise, a measurement."""
-    lock = K / "var" / "driver.lock"
+def _acquire_driver_lock(unit: str | None = None) -> bool:
+    """A pid file with a liveness check -- not a promise, a measurement.
+
+    MEASURED 2026-10-31: the lock was GLOBAL, and `--parallel N` works by starting N detached
+    `--once --wp <unit>` children. Every one of them took the same lock the fan-out parent was
+    holding, refused with TICK_ALREADY_RUNNING, and the run reported `dispatched` with pids while
+    nothing was ever dispatched -- twice in a row, three units each time, zero receipts. The
+    anti-amplification property this lock exists for is per-UNIT (a unit must not run twice at
+    once), and the fan-out parent must keep out a second fan-out, so the lock is now keyed by unit:
+    a global lock for a fan-out tick, one lock per unit for a single-unit tick.
+    """
+    lock = K / "var" / ("driver.lock" if not unit else f"driver-{unit}.lock")
     lock.parent.mkdir(parents=True, exist_ok=True)
     try:
         if lock.exists():
@@ -564,7 +573,7 @@ def main(argv=None) -> int:
     # which started a sub-driver per unit, each of which chained again -- ten live dispatches from one command, and the
     # owner sees exactly that as "windows popping in a loop". The lock is the ceiling: a second tick exits instead of
     # fanning out, and a tick started for a single unit never chains.
-    if not args.dry_run and not _acquire_driver_lock():
+    if not args.dry_run and not _acquire_driver_lock(args.wp):
         log({"action": "tick_refused", "why": "another tick owns the driver lock"})
         print(json.dumps({"verdict": "TICK_ALREADY_RUNNING"}))
         return 0
