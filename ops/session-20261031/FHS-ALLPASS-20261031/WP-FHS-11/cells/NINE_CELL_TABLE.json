@@ -1,0 +1,51 @@
+{
+ "schema": "SBL-WP11-NINE-CELLS/1",
+ "wp": "WP-FHS-11",
+ "measured_at": "2026-11-01T01:06:55+0800",
+ "closed_at": "all nine cells carry a state; none is silently blank",
+ "counts": {
+  "PASS": 4,
+  "LOADER_PASS_MODEL_HALF_UNMEASURED": 3,
+  "NO_ARTEFACT_PROFILE_VETO": 2,
+  "total": 9
+ },
+ "cells": {
+  "codex×LITE": {
+   "state": "PASS",
+   "evidence": "SP_CELL_codex_LITE.json"
+  },
+  "codex×STANDARD": {
+   "state": "PASS",
+   "evidence": "SP_CELL_codex_STANDARD.json"
+  },
+  "claude×LITE": {
+   "state": "PASS",
+   "evidence": "SP_CELL_claude_LITE.json"
+  },
+  "claude×STANDARD": {
+   "state": "PASS",
+   "evidence": "SP_CELL_claude_STANDARD.json"
+  },
+  "hermes×LITE": {
+   "state": "LOADER_PASS_MODEL_HALF_UNMEASURED",
+   "evidence": "HERMES_LOADER_CELL.json"
+  },
+  "hermes×STANDARD": {
+   "state": "LOADER_PASS_MODEL_HALF_UNMEASURED",
+   "evidence": "HERMES_LOADER_CELL_STANDARD.json"
+  },
+  "hermes×ASSURED": {
+   "state": "LOADER_PASS_MODEL_HALF_UNMEASURED",
+   "evidence": "HERMES_LOADER_CELL_ASSURED.json"
+  },
+  "codex×ASSURED": {
+   "state": "NO_ARTEFACT_PROFILE_VETO",
+   "why": "pipd export --profile ASSURED exits 2: the tree declares no adversarial/independent_checker, so there is no ASSURED bundle to install"
+  },
+  "claude×ASSURED": {
+   "state": "NO_ARTEFACT_PROFILE_VETO",
+   "why": "same refusal; no artefact exists to measure"
+  }
+ },
+ "why_not_nine_pass": "ASSURED is refused by the packager itself (PROFILE_VETO) because this tree declares no adversarial or independent checker, and the Hermes model half needs hermes -z which cannot start. Neither is a measurement I can manufacture."
+}

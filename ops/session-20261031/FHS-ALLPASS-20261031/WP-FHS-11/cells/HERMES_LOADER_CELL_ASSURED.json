@@ -1,0 +1,12 @@
+{
+ "host": "hermes",
+ "sp": "ASSURED",
+ "badge": "SP-BADGE-HERMES-ASSURED-0C6B43FB",
+ "note": "ASSURED export is refused by PROFILE_VETO, so this cell measures the loader only, not an ASSURED artefact",
+ "positive": {
+  "skill_view_readiness": "available",
+  "badge_served": true
+ },
+ "negative": "skill removed -> skill_view must report not found",
+ "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED"
+}

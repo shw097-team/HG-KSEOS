@@ -1,0 +1,14 @@
+{
+ "host": "hermes",
+ "sp": "STANDARD",
+ "badge": "SP-BADGE-HERMES-STANDARD-181EC4F7",
+ "archive_prefix": "52712b6316fb",
+ "positive": {
+  "skill_view_readiness": "available",
+  "setup_needed": false,
+  "badge_served": true,
+  "digest_prefix_served": "52712b6316fb"
+ },
+ "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED",
+ "limit": "loader contract only; the model half needs hermes -z which cannot start (WP-12)"
+}

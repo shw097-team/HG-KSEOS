@@ -12,10 +12,10 @@
    "state": "FAIL",
    "evidence_ref": "OWNER-RULING:new capability, not a new standard: at 23:04 this unit failed HOST_SP_MATRIX_INCOMPLETE because no writer existed for the nine Host SP lifecycle cells. The continuation graph now carries an EXECUTE actuator (first measured use 00:51:27, lane EXECUTE pid 11032); the acceptance text is untouched.",
    "updated_at": "2026-10-31T15:57:50+00:00",
-   "blocker_code": "HERMES_MODEL_HALF_UNMEASURED",
-   "blocker_cause": "4 of 9 cells PASS (Codex x LITE/STANDARD, Claude x LITE/STANDARD); Hermes LITE measured as a LOADER cell (skill_view readiness=available, badge served, not-found after removal) but the model half needs hermes -z which cannot start (same root as WP-12); Hermes STANDARD/ASSURED not run",
-   "blocker_unblock": "resolve WP-12's runtime path, then run the three Hermes cells through -z so the model half is measured",
-   "blocked_at": "2026-11-01T00:45:28+0800"
+   "blocker_code": "ASSURED_NO_ARTEFACT",
+   "blocker_cause": "all 9 cells carry a state: 4 PASS (Codex/Claude x LITE/STANDARD), 3 LOADER_PASS_MODEL_HALF_UNMEASURED (Hermes x 3 SP), 2 NO_ARTEFACT_PROFILE_VETO (Codex/Claude x ASSURED -- the packager refuses ASSURED because this tree declares no adversarial/independent checker, so no artefact exists to install)",
+   "blocker_unblock": "declare an adversarial + independent_checker assurance in PIPD, or accept NO_ARTEFACT_PROFILE_VETO as the cell state under the new vocabulary",
+   "blocked_at": "2026-11-01T01:07:22+0800"
   },
   {
    "wp_id": "WP-FHS-12",
