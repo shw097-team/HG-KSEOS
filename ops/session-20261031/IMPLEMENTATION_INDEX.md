@@ -52,7 +52,28 @@ file literally named `nul`/`con`/`aux` will reproduce this.
 ```bash
 cd /c/Projects/Agent_Workspace/HG-KSEOS && git log --oneline -5 && git status --porcelain
 cd /c/wg/queue && git log --oneline -1 && git status --porcelain | wc -l    # expect 3fca7b9, 0
-cd /c/Projects/Agent_Workspace/Fabric && git log --oneline -1               # expect 325e4fe
+cd /c/Projects/Agent_Workspace/Fabric && git log --oneline -1               # expect d3a13b1
 python -c "import json;d=json.load(open(r'C:/Projects/Agent_Workspace/HG-KSEOS/ops/session-20261031/receipts/R21_signing_receipt.json',encoding='utf-8'));print(d['signature_verifies'], d['wp_allowlist'])"
 sha256sum /c/wg/queue-20261031.bundle | cut -c1-16                        # expect a3f2c03bf413
 ```
+
+## 5. Close-out stamp
+
+| repo | head | tree | pushed |
+|---|---|---|---|
+| HG-KSEOS (`candidate/r18-fhs-skeleton-spine-20261029`) | **`287c8df`** | clean (0 changes) | branch + tag **`candidate-r21-20261031`** |
+| Fabric (`pub/far-minimax-mandate-20261021`) | **`d3a13b1`** | 6 entries left, all deliberate (below) | yes |
+| `/c/wg/queue` (`master`) | **`3fca7b9`** | clean (0 changes) | **no remote** — bundled instead |
+
+Deliberately left dirty in Fabric, each with a reason rather than a shrug:
+
+| entry | size | why not in this close-out |
+|---|---|---|
+| `fabric-autonomous-research/methods/` | 62 MB | not this session's work; committing 62 MB of methods without reviewing them would be a bulk dump, not a record |
+| `stage/` | 95 MB | staging tree, not evidence |
+| `Fabric-rebind-publish/` | 70 MB | build output of an earlier round |
+| `_far_commit_msg.txt` | 1.3 KB | temp message file from an earlier commit |
+| `W3-SWOF-R153-01.owner-attested.json`, `Fabric使用說明文檔.md` | 9 / 702 lines changed | another session's pending edits; not mine to commit |
+
+The three large trees are the only substantial unversioned material left on this host besides the 228 MB frozen
+subject and the 1 GB `var/` rounds. That is stated, not hidden.
