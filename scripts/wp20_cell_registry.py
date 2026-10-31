@@ -32,10 +32,21 @@ KINDS = ["CLI_TOOL", "AI_SYSTEM", "GENIE", "SIMPLE_AGENT", "PROFILE", "PLUGIN", 
 MODES = ["LITE", "STANDARD", "ASSURED"]
 PROVIDERS = ["PROVIDER_ON", "PROVIDER_OFF"]
 
+# RESOLVED 2026-11-01 from the delivery itself, not by ruling: 09B's R2 section carries 48 `PROPOSAL-CHATGPT-*` entries
+# whose source identity is `CELL-<sha>` / `DeepSeek Harness` and whose text says, in each one, "本 ID 尚非 Original 192
+# Cell" with exit condition "CR-HOST-192 下 MIGRATION_HOLD". Measured: 48 proposals, 48 MIGRATION_HOLD, 48 source
+# identities all DeepSeek Harness.
+#
+# So the Original 192 are Hermes / Codex / Claude Code / DeepSeek Harness, and ChatGPT is not a fourth host of the
+# Original matrix at all -- it is a set of HELD MIGRATION PROPOSALS against 48 of the DeepSeek cells. The "four host
+# conflict" was a proposal read as a substitution. D-A's 144 was wrong for that reason: those 48 cells are admitted
+# (they are DeepSeek Harness); it is the ChatGPT proposal for them that is held.
 HOST_SETS = {
-    "09A_SPINE": ["HERMES", "CODEX", "CLAUDE_CODE", "CHATGPT"],
-    "09B_R2_ORDER": ["HERMES", "CODEX", "CLAUDE_CODE", "DEEPSEEK_HARNESS"],
+    "ORIGINAL_192": ["HERMES", "CODEX", "CLAUDE_CODE", "DEEPSEEK_HARNESS"],
+    "09A_SPINE_READING": ["HERMES", "CODEX", "CLAUDE_CODE", "CHATGPT"],
 }
+HELD_PROPOSALS = {"kind": "PROPOSAL-CHATGPT", "count": 48, "state": "MIGRATION_HOLD",
+                  "source_host": "DEEPSEEK_HARNESS", "overwrites_original_cell_id": False}
 
 
 def build(host_set: str) -> dict:
@@ -63,12 +74,13 @@ def build(host_set: str) -> dict:
         "counts": {"total": len(cells),
                    "by_kind": {k: sum(1 for c in cells if c["kind"] == k) for k in KINDS},
                    "measured": 0, "not_measured": len(cells)},
-        "host_set_conflict": {
-            "09A_SPINE": HOST_SETS["09A_SPINE"],
-            "09B_R2_ORDER": HOST_SETS["09B_R2_ORDER"],
-            "ruling_needed": "D-A is WITHDRAWN: it corrected the denominator on the ChatGPT basis, which the R2 order "
-                             "forbids. The denominator stays 192 under both readings; what is unresolved is which "
-                             "48-cell slice is the conflicted one.",
+        "host_set_resolution": {
+            "settled_by": "the delivery's own text, not by a ruling",
+            "original_hosts": HOST_SETS["ORIGINAL_192"],
+            "held_proposals": HELD_PROPOSALS,
+            "why": "each of the 48 PROPOSAL-CHATGPT entries names its source identity as DeepSeek Harness, states it is "
+                   "not yet an Original 192 Cell, and exits under MIGRATION_HOLD without overwriting the original CellID",
+            "d_a_status": "WITHDRAWN -- it cut the denominator to 144 by treating admitted DeepSeek cells as excluded",
         },
         "cells": cells,
     }
@@ -76,7 +88,7 @@ def build(host_set: str) -> dict:
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--host-set", choices=sorted(HOST_SETS), default="09A_SPINE")
+    ap.add_argument("--host-set", choices=sorted(HOST_SETS), default="ORIGINAL_192")
     ap.add_argument("--out", default=r"C:/Projects/Agent_Workspace/var/FHS-ALLPASS-20261031/wp20/CELL_REGISTRY.json")
     args = ap.parse_args(argv)
     reg = build(args.host_set)
