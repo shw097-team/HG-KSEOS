@@ -7,8 +7,8 @@ owner_order_20261024_s205_od01: 'Owner order 2026-10-24 (R17 S2-05 OD-01): PLAN 
 owner_order_20261031_verify_checker_mimo: 'Owner order 2026-10-31 (this round, epoch 39): 把本次 Acceptance Challenge & Independent Acceptance Officer & VERIFY & SECURITY 車道的 checker model 轉用 MiMo-V2.6-Flash (OPENCODE GO)。 mimo-v2.6-flash is a BUILT arm already declared in this registry (EXECUTE arm B) and in the pool; this order BINDS that existing arm as the VERIFY_SECURITY rank-1 instead of inventing a new one. openai-codex/gpt-6.1-sol is retained as arm 2 and stays reachable. MEASURED before the rebind: opencode-go/mimo-v2.6-flash answered MIMO_OK through the loopback relay on the OpenCode Go inference endpoint. Consequence recorded, not hidden: PLAN (openai-codex/gpt-6.1-sol) and VERIFY (opencode-go/mimo-v2.6-flash) are now distinct on provider AND model, so the SOD006-C4 shared-identity note does not describe the live binding; EXECUTE vs VERIFY stays distinct on the model axis (deepseek-v4.1-flash != mimo-v2.6-flash) with provider separation not required by invariants.'
 source_of_routes:
   path: config/model-lane-assignment.json
-  revision: 38
-  sha256: c9ad7d53951df7b0c62ab6a2c7c0ef6bb0c29c9dc50f22ce916695b54595045e
+  revision: 39
+  sha256: 7914a4c28dffcb94048bbe4bfc0605d14d1ccf9793f7bcc91917f1c5e7388f4a
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
@@ -391,9 +391,9 @@ projections:
     values and registered lane-scope residue are intentionally unchanged.'
   bindings:
   - pointer: /registry_epoch
-    expected: 38
+    expected: 39
   - pointer: /revision
-    expected: 38
+    expected: 39
   - pointer: /lane_chains/PLAN/0/provider
     expected: openai-codex
   - pointer: /lane_chains/PLAN/0/model
@@ -544,7 +544,7 @@ projections:
     expected: openai-codex/gpt-6.1-sol - owner order 2026-10-24; ACCEPTANCE, SECURITY REVIEW and VERIFY use this one checker.
   - pointer: /sod/verify_security_default_arm
     expected: gpt-6.1-sol
-  registry_epoch: 38
+  registry_epoch: 39
   declared_unprojected:
   - /lane_chains/EXECUTE/0/reasoning_effort
   - /lane_chains/EXECUTE/1/reasoning_effort
@@ -610,7 +610,7 @@ projections:
     expected: minimax-m3.1-flash-free
   - pointer: /opencode_go_session_header/required_header
     expected: x-opencode-session
-  registry_epoch: 38
+  registry_epoch: 39
 - id: hermes-binding
   path: config/hermes.json
   format: json
@@ -625,7 +625,7 @@ projections:
     expected: C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes\hermes-agent
   - pointer: /canonical_hermes_home
     expected: C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes
-  registry_epoch: 38
+  registry_epoch: 39
 observations:
 - id: hermes-live-config-yaml
   path: C:/Users/user/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/hermes/config.yaml

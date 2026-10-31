@@ -2,8 +2,8 @@
  "schema": "HGK-LANE-ROUTE-SLOTS/1",
  "status": "CANDIDATE",
  "artifact": "LANE_ROUTE_SLOTS_CANDIDATE",
- "revision": 30,
- "supersedes_revision": 30,
+ "revision": 31,
+ "supersedes_revision": 31,
  "round": "ROUND-R14-LANE-REBIND-20261022",
  "declared_by": "Owner order 2026-10-23: main model DEEPSEEK V4.1 FLASH (OPENCODE GO); the deprecated fallback-first arm MiniMax M3.1 Flash is DELETED and MiMo-V2.6-Flash takes fallback 1. The arm opencode-go/minimax-m3.1-flash-free answers HTTP 410 ModelDeprecated, so deletion is a repair, not a preference. All three lanes stay opencode-go/deepseek-v4.1-flash at rank 1.",
  "authority_basis": "the same owner order that rebind the registry routes, the assignment and the 87 projection bindings in HG-KSEOS 924af95; the pool is the deployment plane and must not disagree with the declared plane",
@@ -255,6 +255,12 @@
    "at_utc": "2026-10-31T02:34:30+00:00",
    "reason": "projected from lane-routing-registry epoch 39: the owner order of 2026-10-24 puts PLAN and VERIFY/SECURITY rank 1 on openai-codex/gpt-6.1-sol and keeps EXECUTE on opencode-go/deepseek-v4.1-flash; the demoted primary stays reachable as fallback 1",
    "evidence": "config/lane-routing-registry.yaml sha256 c5605be0cf038e4766b31f9df22ed1ec4ca3280b8888183cbfab152f0d486358"
+  },
+  {
+   "rev": 31,
+   "at_utc": "2026-10-31T03:51:36+00:00",
+   "reason": "projected from lane-routing-registry epoch 39: the owner order of 2026-10-24 puts PLAN and VERIFY/SECURITY rank 1 on openai-codex/gpt-6.1-sol and keeps EXECUTE on opencode-go/deepseek-v4.1-flash; the demoted primary stays reachable as fallback 1",
+   "evidence": "config/lane-routing-registry.yaml sha256 f52c2fdc7b4a4a332f9f1bfcb42028b54fb3f25b2554708efae57760098e95c9"
   }
  ],
  "placement_rationale": "Kept as a NEW file rather than folded into config/lane-routing-registry.yaml: the registry's routes[] values are bound as 90 drift-pinned JSON pointers across three live sites, so editing it forces a fully synchronised sweep + epoch bump. This file stays inert for the drift gate (verified: validate -> exit 0 / fatal false / 90 sites).",

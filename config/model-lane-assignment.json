@@ -696,7 +696,7 @@
  "revision_12_reason": "Revision 12 applies the arm-B exhaustive-declaration repair for revision 11: it corrects the stale provider-separation shape (E1/E2/E3), marks the historical lane-deviation object superseded (E4), rebuilds the across-arms identity aggregate for the current arms (E5/E6/E7), retags the FAR-LANE-SOD-005 flash probe as historical (E8), corrects the fallback-surface and delegation.applies_to claims (E9/E10), declares the EXECUTE lane's measured live effort without inventing an operator value (E11), and records the projection-drops-dual-arms gap as DECLARED_GAP_NOT_FIXED because src/** is out of scope (E12). sod_conflicts stays exactly SOD006-C1 and SOD006-C2, both OPEN. It also labelled the retired OpenAI Codex fallback token and the retired z-ai NVIDIA flash token at every remaining site as RETIRED history, so the stale-prose grep is clean without deleting the historical records.",
  "revision_13_reason": "Revision 13 repairs the round-2 over-correction: it restores the exact machine-readable retired identifiers at the three identifier sites from the rev11 byte-copy (recovering them from the backup rather than inventing them) and carries the retired semantics in additive retired/retired_note fields. It also closes the residual prose defects - the authority note's false self-revision clause, the operator-decision option and the revision_12_reason wording that spelled the retired tokens, and the registry header and digest - while this file's own revision is now the top-level revision field.",
  "revision_14_reason": "WO-FAR-D1D2-FINAL-ROUTE-20261008 / REQ-FAR-D1D2-FINAL-20261008 (owner adjudication; events=947); PLAN medium; VERIFY primary/default arm A and arm B fallback; affected projections synchronized; historical records preserved.",
- "registry_epoch": 38,
+ "registry_epoch": 39,
  "revision_16_reason": "WO-PIPD-R5-EXECUTE-LUNA-ROUTE-20261009: owner-requested additional explicit EXECUTE gpt-6-luna/openai-codex OAuth route. Preserve primary and historical retired entries; zero automatic fallbacks; local route resolution only, backend unsupported and bounded-writer admission not claimed.",
  "revision_15_reason": "Second canonical edit under WO-FAR-D1D2-FINAL-ROUTE-20261008 / REQ-FAR-D1D2-FINAL-20261008 (owner adjudication; events=947): preserve VERIFY primary/default arm A and PLAN medium; demote arm B to a non-default operator-selectable alternate, never auto-selected; restore every registry fallbacks list to []; advance registry epoch 12 -> 13 and declaration revision 14 -> 15; synchronize source digest and projection bindings without modifying candidate tests.",
  "round_authorization": {
@@ -791,8 +791,8 @@
  "lane_chains_projected_from": {
   "source": "config/lane-routing-registry.yaml",
   "epoch": 39,
-  "sha256": "c5605be0cf038e4766b31f9df22ed1ec4ca3280b8888183cbfab152f0d486358",
-  "projected_at_utc": "2026-10-31T02:34:30+00:00",
+  "sha256": "f52c2fdc7b4a4a332f9f1bfcb42028b54fb3f25b2554708efae57760098e95c9",
+  "projected_at_utc": "2026-10-31T03:51:36+00:00",
   "rule": "lane_chains and the slot pool are projections; edit the registry, then re-run this tool"
  }
 }
