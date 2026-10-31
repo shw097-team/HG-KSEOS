@@ -1,0 +1,11 @@
+{
+ "schema": "SBL-GAP-RECORD/1",
+ "id": "WP11-GAP-PROFILE",
+ "recorded_at": "2026-10-31T23:27:28+0800",
+ "claim": "WP-FHS-11 needs 9 cells = 3 hosts x 3 SP (LITE / STANDARD / ASSURED, per 00_INDEX_AND_DECISION: '八 Kind、三 Mode、四 Host、三 SP').",
+ "measured": "`pipd export --help` exposes --out / --dry-run / --root / --allow-root / --allow-replace. There is no profile flag.",
+ "grep": "`grep -n profile src/pipd_ls_sp/export_bundle.py` returns nothing: the packager never consults profiles.py, so it emits exactly one bundle and cannot produce the three SPs the delivery names.",
+ "consequence": "The 9-cell denominator is unreachable today for a reason that has nothing to do with hosts: there is only one SP to install. Two hosts now pass that one SP cleanly; the remaining 6 cells are blocked on the packager gaining a profile dimension, not on host capability.",
+ "what_would_be_wrong": "adding `--profile` that only relabels the manifest would produce three bundles with three names and one capability. That is the same sin as a label without a load. A correct --profile must compute the profile via profiles.compute_profile, record it, AND enforce its assurance floor, refusing when the bundle cannot supply the required assurance artefacts.",
+ "next": "implement --profile with floor enforcement + tests, then run the clean-cwd cell script against each SP on Codex and Claude Code, then Hermes once D-J unblocks a fresh PID."
+}
