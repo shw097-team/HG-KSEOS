@@ -838,7 +838,7 @@ def _kill_process_tree(pid: int) -> None:
         return
     try:
         subprocess.run(["taskkill", "/PID", str(pid), "/T", "/F"], capture_output=True,
-                       timeout=30, creationflags=0x08000000)
+                       timeout=30, **_hidden_spawn_kw())
     except Exception:  # noqa: BLE001 - a failed kill must not hide the timeout classification
         pass
 
@@ -1902,6 +1902,29 @@ def durable_gate_preflight(args) -> dict:
         out["transport"] = rj.get("verdict")
 
     return {"verdict": "GO", "detail": out}
+
+
+
+def _hidden_spawn_kw(base: dict | None = None) -> dict:
+    """One hidden console for the child and its whole subtree.
+
+    CREATE_NO_WINDOW hides one level only: the child gets NO console, so the console program IT starts (codex.exe,
+    git.exe) allocates a fresh visible one. Measured on this host: the windows that kept appearing were
+    WindowsTerminal/CASCADIA titled `git.EXE`, started from exactly that shape.
+    """
+    import os as _os, subprocess as _sp
+    kw = dict(base or {})
+    if _os.name != "nt":
+        return kw
+    flags = int(kw.get("creationflags") or 0)
+    if flags & 0x00000008:                       # DETACHED_PROCESS: a window factory, leave it alone
+        return kw
+    si = _sp.STARTUPINFO()
+    si.dwFlags |= _sp.STARTF_USESHOWWINDOW
+    si.wShowWindow = 0                           # SW_HIDE
+    kw["creationflags"] = (flags & ~0x08000000) | 0x00000010   # CREATE_NEW_CONSOLE
+    kw.setdefault("startupinfo", si)
+    return kw
 
 
 def main() -> int:

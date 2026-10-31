@@ -82,6 +82,30 @@ LOG = QUEUE / "driver.log"
 
 
 CREATE_NO_WINDOW = 0x08000000
+# MEASURED 2026-10-31 (second window incident in one evening): CREATE_NO_WINDOW on the dispatch gives the dispatch
+# NO console, so the console program IT starts -- codex.exe -- allocates a fresh one, and a fresh console is a
+# window. That is why "the tree stays hidden" was true of the child and false of the grandchild. The fix is the
+# opposite flag: give the dispatch ONE console that is hidden, which every descendant inherits.
+CREATE_NEW_CONSOLE = 0x00000010
+
+
+def _hidden_startupinfo():
+    si = subprocess.STARTUPINFO()
+    si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    si.wShowWindow = 0          # SW_HIDE
+    return si
+
+
+def _hide_tree(kw: dict) -> dict:
+    """One hidden console for the whole tree, inherited by grandchildren."""
+    if os.name != "nt":
+        return kw
+    flags = int(kw.get("creationflags") or 0)
+    if flags & 0x00000008:      # DETACHED_PROCESS: mutually exclusive, and a window factory besides
+        return kw
+    kw["creationflags"] = (flags & ~CREATE_NO_WINDOW) | CREATE_NEW_CONSOLE
+    kw.setdefault("startupinfo", _hidden_startupinfo())
+    return kw
 
 
 def sp_run(argv, **kw):
@@ -91,13 +115,11 @@ def sp_run(argv, **kw):
     `python.exe` console windows although winproc.install() reported True in the same tree. Whatever the reason
     (an install that silently failed in a detached child), the call site is the one place that can be certain.
     """
-    kw["creationflags"] = int(kw.get("creationflags") or 0) | CREATE_NO_WINDOW
-    return subprocess.run(argv, **kw)
+    return subprocess.run(argv, **_hide_tree(kw))
 
 
 def sp_popen(argv, **kw):
-    kw["creationflags"] = int(kw.get("creationflags") or 0) | CREATE_NO_WINDOW
-    return subprocess.Popen(argv, **kw)
+    return subprocess.Popen(argv, **_hide_tree(kw))
 
 
 def _detach_child(argv: list, log_path: Path, env: dict | None = None) -> dict:
@@ -242,10 +264,13 @@ def launch(lane: str, prompt: str, nonce: str, cwd: Path, json_out: Path, timeou
     # created. The SAME argv run from an interactive shell completes and writes a full receipt. A
     # launcher that returns a pid the tick can no longer see is not a launcher: the tick now owns the
     # child for its whole life, so a vanished run is recorded as an exit rather than as silence.
-    flags = 0x08000000 if os.name == "nt" else 0   # CREATE_NO_WINDOW: the tree stays hidden, no new console
+    # One hidden console for the dispatch and everything it starts. CREATE_NO_WINDOW here was the leak: it hid the
+    # dispatch and left codex.exe to allocate a visible console of its own.
+    spawn_kw = _hide_tree({"stdout": subprocess.PIPE, "stderr": subprocess.STDOUT, "cwd": str(K),
+                           "env": dict(os.environ)})
+    flags = spawn_kw.get("creationflags", 0)
     try:
-        proc = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=str(K),
-                                env=dict(os.environ), creationflags=flags)
+        proc = subprocess.Popen(argv, **spawn_kw)
     except OSError as exc:  # noqa: BLE001 - a launcher that cannot launch must not look like a launch
         log({"action": "spawn_failed", "error": f"{type(exc).__name__}: {exc}"})
         raise RuntimeError(f"SPAWN_FAILED: {exc}")
@@ -516,7 +541,9 @@ def parallel_tick(n: int, dry_run: bool) -> int:
         if dry_run:
             started.append({"wp": wp, "phase": item.get("phase"), "dry_run": True})
             continue
-        flags = 0x08000000 | 0x01000000   # CREATE_NO_WINDOW | DETACHED | BREAKAWAY_FROM_JOB
+        # The chained tick is the one spawn whose window survives every other fix: a console-less tick starts
+        # codex.exe and git.exe, and each of those allocates a visible console. One hidden console instead.
+        flags = CREATE_NEW_CONSOLE | 0x01000000
         logf = QUEUE / f"{wp}.tick.log"
         _res = _detach_child([PY, str(Path(__file__).resolve()), "--once", "--auto-record", "--wp", wp], logf)
         proc = type("P", (), {"pid": _res.get("pid") or 0})()
@@ -593,7 +620,7 @@ def _pid_alive(pid: int) -> bool:
             return False
     try:
         out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/NH"], capture_output=True, text=True,
-                             timeout=20, creationflags=0x08000000).stdout or ""
+                             timeout=20, **_hide_tree({})).stdout or ""
         return str(pid) in out
     except Exception:  # noqa: BLE001
         return False
