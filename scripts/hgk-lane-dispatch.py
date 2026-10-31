@@ -1407,8 +1407,56 @@ def resolve_rollout_identity(home, since_epoch, cwd, timeout_s=15):
         if not model:
             continue
         provider = PROVIDER_ALIASES.get(str(provider_raw or "").lower(), str(provider_raw or "").lower())
+        # MEASURED 2026-10-31 18:49: the rollout of a relay-fronted turn declares `model_provider: openai`
+        # (the codex client talks to our loopback relay) while the model it was asked for is provider-qualified
+        # (`opencode-go/mimo-v2.6-flash`). Taking the provider from the client turned that into the impossible
+        # pair `openai-codex` + `opencode-go/mimo-v2.6-flash`, and `--require-arm opencode-go/mimo-v2.6-flash`
+        # then refused a turn that had visibly served that exact arm (exit 0, nonce present, usage bound).
+        # A qualified id carries its own provider: it wins over the client's transport provider.
+        if isinstance(model, str) and "/" in model:
+            head, _, tail = model.partition("/")
+            provider = PROVIDER_ALIASES.get(head.lower(), head.lower())
+            model = tail
         return {"provider": provider, "model": model, "source": "codex-rollout", "rollout": path}
     return None
+
+
+WINDOW_LEDGER = ROOT / "var" / "console-window-events.jsonl"
+
+
+def _window_ledger_lines() -> int:
+    """How many console-window events the 20 ms watcher had recorded when the attempt started.
+
+    -1 means "no ledger": a dispatch that cannot be measured must say so, not report zero.
+    """
+    try:
+        with WINDOW_LEDGER.open("rb") as fh:
+            return sum(1 for _ in fh)
+    except OSError:
+        return -1
+
+
+def _window_events_since(count_before: int, since_iso: str) -> list:
+    if count_before < 0:
+        return []
+    rows = []
+    try:
+        with WINDOW_LEDGER.open(encoding="utf-8", errors="replace") as fh:
+            for index, line in enumerate(fh):
+                if index < count_before:
+                    continue
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    row = json.loads(line)
+                except ValueError:
+                    continue
+                if (row.get("at") or "") >= since_iso:
+                    rows.append(row)
+    except OSError:
+        return []
+    return rows
 
 
 def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_dir=None,
@@ -1528,6 +1576,10 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
               file=sys.stderr)
     usage_path = Path(args.usage)
     offset = usage_path.stat().st_size if usage_path.is_file() else 0
+    # F3 (FAR-20261031-028): the window ledger is sampled on the SAME boundary as the usage ledger, so the
+    # delta below is "windows that appeared while this attempt was running", not "windows since the run began".
+    win_before = _window_ledger_lines()
+    win_since = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     # I1: capture BOTH the offset and a digest of the pre-turn bytes `[0:offset)`. The size-only check
     # cannot see a rewrite that shifts the prefix and copies a stale row PAST the offset (the file
     # GROWS); the digest of the exact prefix can, and does.
@@ -1716,6 +1768,13 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
             "credential_posture": posture_fields,
             **log_meta,
             "stdout_tail": out[-400:], "stderr_tail": err[-300:]}
+    # F3: a hiding flag cannot be verified by reading code, only by observing the desktop. The receipt carries
+    # the measurement; console_window_gate.py turns it into PASS / FAIL / INCONCLUSIVE for the round.
+    _win_events = _window_events_since(win_before, win_since)
+    attempt["console_window_events_delta"] = (len(_win_events) if win_before >= 0 else None)
+    attempt["console_window_ledger"] = (str(WINDOW_LEDGER) if win_before >= 0 else None)
+    attempt["console_window_owners"] = [{"at": w.get("at"), "pid": w.get("pid"), "exe": w.get("exe"),
+                                         "title": (w.get("title") or "")[:60]} for w in _win_events[:20]]
     if carrier_shape_invalid:
         # J4 (pass-6): a wrong-shaped carrier is a DIAGNOSTIC about the TEXT, recorded as a per-
         # attempt DETAIL -- never as a top-level code. `failure_disposition` owns the top-level

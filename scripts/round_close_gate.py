@@ -130,6 +130,22 @@ def main() -> int:
         if verdict["verdict"] != "LANE_SERVED_AS_CLAIMED":
             for p in verdict["problems"]:
                 problems.append(f"lane_not_evidenced: {lane} {p}")
+        # F3 PROMOTED TO BLOCKING (FAR-20261031-028 / FAR-20261031-029). A hiding flag cannot be verified by
+        # reading code; the receipt carries the measurement. Promotion criterion was met before this line was
+        # enabled: two consecutive lane attempts (EXECUTE opencode-go/deepseek-v4.1-flash and VERIFY_SECURITY
+        # opencode-go/mimo-v2.6-flash) served exit 0, nonce present, usage bound, asked == served, and
+        # console_window_events_delta == 0. A null delta means the ledger was absent -- unmeasured is refused
+        # exactly like measured-nonzero, because an unmeasured dispatch has not been shown to be windowless.
+        deltas = [a.get("console_window_events_delta") for a in (receipt.get("attempts") or [])]
+        if deltas:
+            worst = max((d for d in deltas if d is not None), default=None)
+            if worst is None:
+                problems.append(f"ERR_CONSOLE_WINDOW_UNMEASURED: {lane} carries no console_window_events_delta")
+            elif worst > 0:
+                owners = [w.get("exe") for a in (receipt.get("attempts") or [])
+                          for w in (a.get("console_window_owners") or [])][:6]
+                problems.append(f"ERR_CONSOLE_WINDOW_EMITTED: {lane} opened {worst} console window(s) "
+                                f"during the attempt (owners: {owners})")
 
     ledger = check_ledger(pathlib.Path(args.claim_ledger)) if args.claim_ledger else {"checked": 0, "problems": []}
     problems.extend(f"claim_source: {p}" for p in ledger["problems"])

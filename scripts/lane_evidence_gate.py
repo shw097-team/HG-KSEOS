@@ -66,8 +66,33 @@ def judge(receipt: dict, lane: str, nonce: str | None = None, allow_rank: int = 
 
     asked = receipt.get("used_transport_model")
     served = a.get("model")
-    if asked and served and asked != served:
-        problems.append(f"silent_substitution: asked={asked} served={served}")
+
+    def _arm_pair(value, provider_hint=None):
+        """(provider, model) from either a qualified id or a bare one plus its provider.
+
+        MEASURED 2026-10-31 18:54: asked `opencode-go/mimo-v2.6-flash` vs served model `mimo-v2.6-flash`
+        (provider `opencode-go`) was reported as `silent_substitution` -- the receipt's own provider field
+        said it was the same arm. That accusation is the most damaging one this gate can make, so it must not
+        be produced by a string shape: both sides are normalised to (provider, model) before comparing.
+        """
+        if not value:
+            return (None, None)
+        value = str(value)
+        if "/" in value:
+            head, _, tail = value.partition("/")
+            return (head.strip().lower(), tail.strip().lower())
+        return ((str(provider_hint).strip().lower() if provider_hint else None), value.strip().lower())
+
+    if asked:
+        asked_pair = _arm_pair(asked)
+        served_pair = _arm_pair(served, a.get("provider"))
+        # A bare asked id with no provider of its own compares on the model only; a qualified one must match on
+        # both halves, because "same model name, different provider" is exactly the substitution under test.
+        same = (asked_pair[1] == served_pair[1]
+                and (asked_pair[0] is None or asked_pair[0] == served_pair[0]))
+        if served and not same:
+            problems.append(f"silent_substitution: asked={asked} served={served} "
+                            f"(provider={a.get('provider')})")
 
     if nonce:
         blob = json.dumps(receipt, ensure_ascii=False)
