@@ -23,8 +23,8 @@
  "provider_off_parity": "NOT_MEASURED",
  "provider_off_parity_why": "the probe is a static SKILL.md served by the host loader; turning the model provider off mid-session is not available from inside the session, so parity was not measured and is not claimed",
  "nontrigger": {
-  "measured": "token string occurs in exactly one file in the host inventory (the installed SKILL.md) and in no other skill; the host listed 56 skills before install and 57 after",
-  "not_measured": "a fresh-session behavioural nontrigger (a different Goal producing no token)"
+  "measured": "token string occurs in exactly one file in the host inventory (the installed SKILL.md); 56 skills before install, 57 after",
+  "not_measured": "a fresh-session behavioural nontrigger (the same test Codex now has)"
  },
  "observed_at": "2026-10-31T22:54:09+0800",
  "candidate_hash": "6062c729a05b985d2b2fa2bb099a2305d6e9c3b9d27f3cb9f1d020f3da0f04ba",
