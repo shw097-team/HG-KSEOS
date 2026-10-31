@@ -1,0 +1,18 @@
+{
+ "schema": "R18.LANE.RELAY_REHOME/1",
+ "sealed_home": "C:\\Users\\user\\AppData\\Local\\HG-KSEOS\\opencodex-hermes",
+ "health_before": null,
+ "health_after": 200,
+ "credential_source": "sealed apiKeyPool literal oc_sk_* entry (value never printed)",
+ "pool_entries": 3,
+ "required_arm_probe": {
+  "model": "opencode-go/deepseek-v4.1-flash",
+  "http_status": 401,
+  "echo": {
+   "error": "{\"error\":{\"message\":\"Provider error 401: {\\\"error\\\":{\\\"type\\\":\\\"server_error\\\",\\\"message\\\":\\\"Upstream request failed: Invalid credential\\\"}}\",\"type\":\"authentication_error\",\"param\":null,\"code\":\"invalid"
+  }
+ },
+ "verdict": "REQUIRED_ARM_STILL_BROKEN",
+ "relay_pid": 20568,
+ "reading": "the lane's required arm can only serve through the sealed home; the human home has no opencode-go credential, which is what made every required-arm attempt fail fast and let an out-of-spec arm serve in its place"
+}

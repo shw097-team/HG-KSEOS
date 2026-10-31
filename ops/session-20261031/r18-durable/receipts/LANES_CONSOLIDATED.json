@@ -1,0 +1,230 @@
+{
+ "schema": "R18.LANES.CONSOLIDATED/1",
+ "session_pin_is_not_a_lane_binding": true,
+ "session_pin": "deepseek-v4.1-flash on opencode-go (this chat's model) - never used as lane evidence",
+ "by_lane": {
+  "PLAN": {
+   "required_arm": "GPT 6.1 Sol medium / OpenAI OAuth",
+   "attempts": 4,
+   "served_attempt": {
+    "rank": 2,
+    "arm": "gpt-6.1-sol",
+    "seconds": 62.67
+   },
+   "required_arm_satisfied": true,
+   "out_of_spec_serves": []
+  },
+  "EXECUTE": {
+   "required_arm": "DeepSeek V4.1 Flash / OpenCode Go",
+   "attempts": 7,
+   "served_attempt": {
+    "rank": 1,
+    "arm": "opencode-go/deepseek-v4.1-flash",
+    "seconds": 256.87
+   },
+   "required_arm_satisfied": true,
+   "out_of_spec_serves": [
+    {
+     "rank": 3,
+     "arm": "gpt-6-luna"
+    },
+    {
+     "rank": 3,
+     "arm": "gpt-6-luna"
+    }
+   ]
+  },
+  "VERIFY_SECURITY": {
+   "required_arm": "GPT 6.1 Sol medium / OpenAI OAuth",
+   "attempts": 3,
+   "served_attempt": {
+    "rank": 1,
+    "arm": "opencode-go/deepseek-v4.1-flash",
+    "seconds": 191.39
+   },
+   "required_arm_satisfied": false,
+   "out_of_spec_serves": [
+    {
+     "rank": 1,
+     "arm": "opencode-go/deepseek-v4.1-flash"
+    }
+   ]
+  }
+ },
+ "controls": {
+  "out_of_spec_arm_served_once": true,
+  "reading": "an out-of-spec arm did serve with a valid nonce earlier in the round, which is why the qualifying test is the served ARM column, not the presence of a nonce",
+  "destructive_command_refused_by_policy": 0,
+  "policy_block_example": null
+ },
+ "attempts": [
+  {
+   "receipt": "VERIFY_R18.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:38:32.038406+00:00",
+   "lane": "VERIFY_SECURITY",
+   "rank": 1,
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "exit": 0,
+   "seconds": 222.57,
+   "nonce_present": false,
+   "usage_receipt_ok": true,
+   "stderr_tail": "Reading additional input from stdin... | 2026-10-29T05:34:49.512901Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required,"
+  },
+  {
+   "receipt": "VERIFY_R18.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:40:09.344039+00:00",
+   "lane": "VERIFY_SECURITY",
+   "rank": 2,
+   "arm": "gpt-6.1-sol",
+   "exit": 0,
+   "seconds": 96.92,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "stderr_tail": "Reading additional input from stdin... | 2026-10-29T05:38:32.510341Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required,"
+  },
+  {
+   "receipt": "VERIFY_R18.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:41:47.425602+00:00",
+   "lane": "VERIFY_SECURITY",
+   "rank": 1,
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "exit": 0,
+   "seconds": 191.39,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "stderr_tail": "onnect to websocket: HTTP error: 426 Upgrade Required, url: ws://127.0.0.1:10101/v1/responses | 2026-10-29T05:41:12.170292Z ERROR codex_core::tools::router: error=exec_command failed"
+  },
+  {
+   "receipt": "EXECUTE_WP21_attempt2.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:20:26.681874+00:00",
+   "lane": "EXECUTE",
+   "rank": 1,
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "exit": "TIMEOUT",
+   "seconds": 400.02,
+   "nonce_present": false,
+   "usage_receipt_ok": false,
+   "stderr_tail": "o connect to websocket: IO error: 無法連線，因為目標電腦拒絕連線。 (os error 10061), url: ws://127.0.0.1:10101/v1/responses | 2026-10-29T05:14:07.446376Z ERROR codex_api::endpoint::responses_websock"
+  },
+  {
+   "receipt": "EXECUTE_WP21_attempt2.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:22:29.922995+00:00",
+   "lane": "EXECUTE",
+   "rank": 2,
+   "arm": "opencode-go/mimo-v2.6-flash",
+   "exit": 1,
+   "seconds": 122.88,
+   "nonce_present": false,
+   "usage_receipt_ok": false,
+   "stderr_tail": "o connect to websocket: IO error: 無法連線，因為目標電腦拒絕連線。 (os error 10061), url: ws://127.0.0.1:10101/v1/responses | 2026-10-29T05:20:47.567985Z ERROR codex_api::endpoint::responses_websock"
+  },
+  {
+   "receipt": "EXECUTE_WP21_attempt2.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:25:09.469067+00:00",
+   "lane": "EXECUTE",
+   "rank": 3,
+   "arm": "gpt-6-luna",
+   "exit": 0,
+   "seconds": 159.14,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "stderr_tail": "Reading additional input from stdin... | 2026-10-29T05:22:30.431967Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required,"
+  },
+  {
+   "receipt": "EXECUTE_WP21_attempt3.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:26:32.169268+00:00",
+   "lane": "EXECUTE",
+   "rank": 1,
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "exit": 1,
+   "seconds": 25.22,
+   "nonce_present": false,
+   "usage_receipt_ok": false,
+   "stderr_tail": "Reading additional input from stdin... | 2026-10-29T05:26:07.096317Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required,"
+  },
+  {
+   "receipt": "EXECUTE_WP21_attempt3.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:26:57.438893+00:00",
+   "lane": "EXECUTE",
+   "rank": 2,
+   "arm": "opencode-go/mimo-v2.6-flash",
+   "exit": 1,
+   "seconds": 24.95,
+   "nonce_present": false,
+   "usage_receipt_ok": false,
+   "stderr_tail": "Reading additional input from stdin... | 2026-10-29T05:26:32.608916Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required,"
+  },
+  {
+   "receipt": "EXECUTE_WP21_attempt3.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:28:40.319639+00:00",
+   "lane": "EXECUTE",
+   "rank": 3,
+   "arm": "gpt-6-luna",
+   "exit": 0,
+   "seconds": 102.45,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "stderr_tail": "Reading additional input from stdin... | 2026-10-29T05:26:57.923557Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required,"
+  },
+  {
+   "receipt": "EXECUTE_WP21_attempt4.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:37:47.594967+00:00",
+   "lane": "EXECUTE",
+   "rank": 1,
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "exit": 0,
+   "seconds": 256.87,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "stderr_tail": "\"'$file) -ne $cache) { throw \\\\\\\"Unexpected cache file: $file\\\\\\\" }; Remove-Item -LiteralPath $file -Force; Remove-Item -LiteralPath $cache -Force; if (Test-Path -LiteralPath $cach"
+  },
+  {
+   "receipt": "PLAN_R18.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:29:43.064791+00:00",
+   "lane": "PLAN",
+   "rank": 1,
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "exit": 1,
+   "seconds": 25.34,
+   "nonce_present": false,
+   "usage_receipt_ok": false,
+   "stderr_tail": "Reading additional input from stdin... | 2026-10-29T05:29:17.847128Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required,"
+  },
+  {
+   "receipt": "PLAN_R18.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:30:49.535945+00:00",
+   "lane": "PLAN",
+   "rank": 2,
+   "arm": "gpt-6.1-sol",
+   "exit": 0,
+   "seconds": 66.1,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "stderr_tail": "Reading additional input from stdin... | 2026-10-29T05:29:43.522577Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required,"
+  },
+  {
+   "receipt": "PLAN_R18.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:36:29.066184+00:00",
+   "lane": "PLAN",
+   "rank": 1,
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "exit": 0,
+   "seconds": 99.71,
+   "nonce_present": false,
+   "usage_receipt_ok": true,
+   "stderr_tail": "Reading additional input from stdin... | 2026-10-29T05:34:49.513139Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required,"
+  },
+  {
+   "receipt": "PLAN_R18.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:37:32.150510+00:00",
+   "lane": "PLAN",
+   "rank": 2,
+   "arm": "gpt-6.1-sol",
+   "exit": 0,
+   "seconds": 62.67,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "stderr_tail": "Reading additional input from stdin... | 2026-10-29T05:36:29.537392Z ERROR codex_api::endpoint::responses_websocket: failed to connect to websocket: HTTP error: 426 Upgrade Required,"
+  }
+ ]
+}

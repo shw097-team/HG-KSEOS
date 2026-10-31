@@ -1,0 +1,75 @@
+{
+ "schema": "R18.MVS.MAPPING/1",
+ "round": "R18-FHS-SKELETON-SPINE-20261029",
+ "rule": "an MVS is mapped only to a receipt this round actually produced; anything else is NOT_RUN and says so",
+ "mvs": [
+  {
+   "id": "MVS01-Source",
+   "status": "DONE",
+   "receipt": "receipts/WP00_SOURCE_CURRENTNESS.json",
+   "note": "82 rows / 83 digests / 84 zip members / 22-node DAG re-derived from bytes"
+  },
+  {
+   "id": "MVS02-Completeness",
+   "status": "PARTIAL",
+   "receipt": "receipts/WP21_CELL_TRACE.json",
+   "note": "96 cells reproduced, but 22/22 WP oracles are UNBACKED, so completeness is not established at WP level"
+  },
+  {
+   "id": "MVS03-Determinism",
+   "status": "PARTIAL",
+   "receipt": "receipts/ORACLE96_RERUN.json",
+   "note": "two runs agree cell-for-cell; determinism across hosts is untested"
+  },
+  {
+   "id": "MVS04-Traceability",
+   "status": "PARTIAL",
+   "receipt": "receipts/WP21_STALE_SOURCE_PIN_MAPPING.json",
+   "note": "29 source pins could not resolve; 20 revision2 equivalents differ by design"
+  },
+  {
+   "id": "MVS05-Route",
+   "status": "PARTIAL",
+   "receipt": "receipts/LANES_CONSOLIDATED.json",
+   "note": "PLAN gpt-6.1-sol and EXECUTE deepseek-v4.1-flash served on their required arms; VERIFY_SECURITY's admissible run also served gpt-6.1-sol (VERIFY3)"
+  },
+  {
+   "id": "MVS06-Evidence",
+   "status": "DONE",
+   "receipt": "receipts/WP19_SUPPLY_CHAIN.json",
+   "note": "canary-validated secret scan, SBOM, license inventory, 9 files with host paths"
+  },
+  {
+   "id": "MVS07-Holds",
+   "status": "DONE",
+   "receipt": "receipts/WP01_AUTHORITY_LEDGER.json",
+   "note": "11 holds with owner + resume predicate; 0 silent promotions"
+  },
+  {
+   "id": "MVS08-Repair",
+   "status": "DONE",
+   "receipt": "receipts/WP18_D_R18_01_REPAIR.json",
+   "note": "two defects red->green with a fail-able negative control for the second"
+  },
+  {
+   "id": "MVS09-Acceptance",
+   "status": "PARTIAL",
+   "receipt": "receipts/WP09_CHECKER_DISPOSITION.json",
+   "note": "independent verdict HOLD by the required principal on a pristine copy"
+  },
+  {
+   "id": "MVS10-Delivery",
+   "status": "PARTIAL",
+   "receipt": "receipts/PR_HGK_R18.json",
+   "note": "HG-KSEOS candidate branch + PR #4; no artefacts existed for the other three repos"
+  }
+ ],
+ "counts": {
+  "DONE": 4,
+  "PARTIAL": 6,
+  "NOT_RUN": 0
+ },
+ "not_executed": [
+  "MVS10 remote delivery to the other three repositories"
+ ]
+}

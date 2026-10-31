@@ -1,0 +1,41 @@
+{
+  "task": "A2 - re-execute FHS-MSC r2 96-cell semantic oracle suite (oracle96_semantic_results_v2) on isolated copy and measure disposition vs claimed 50 PASS_LOCAL_ORACLE + 46 HOLD and 679 author-side checks",
+  "command": "PYTHONDONTWRITEBYTECODE=1 python -B tools/verify_oracles_v2.py  (cwd=C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\raw\\A2_scratch\\subject_copy, python 3.11.17 MSC v.1944 64-bit)",
+  "exit_code": 0,
+  "duration_secs": 0.1459,
+  "claimed": {
+    "pass_local_oracle": 50,
+    "hold": 46,
+    "author_checks_pass": 679,
+    "author_checks_fail": 0
+  },
+  "measured": {
+    "cells_total": 96,
+    "pass_local_oracle": 50,
+    "hold": 46,
+    "fail": 0,
+    "other": 0,
+    "author_checks_pass": 679,
+    "author_checks_fail": 0
+  },
+  "delta": {
+    "cells_total": 0,
+    "pass_local_oracle": 0,
+    "hold": 0,
+    "fail": 0,
+    "other": 0,
+    "author_checks_pass": 0,
+    "author_checks_fail": 0
+  },
+  "hold_reason_distribution": {
+    "ORIGINAL_CALIBRATED_THRESHOLD_READER_REQUIRED": 11,
+    "ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED": 11,
+    "ORIGINAL_HUMAN_DECISION_READER_REQUIRED": 11,
+    "UPGRADE_TWO_VERSION_BINDING_REQUIRED": 8,
+    "PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND": 5
+  },
+  "disagreeing_cells": [],
+  "verdict": "MATCH",
+  "notes": "Ran on an isolated copytree of the subject (raw/A2_scratch/subject_copy) because verify_oracles_v2.py rewrites 03_TESTS_AND_READBACK/oracle96_verification_v2.json and .md in place (tools/verify_oracles_v2.py lines 33 and 36); the subject itself was left untouched (oracle96_verification_v2.json sha256 still a9ec66f01d0b4c88ce5b904296a30189018d086f8d3b9f19ad44e1c1500da247, mtime 00:00, no __pycache__/*.pyc created). Per-cell disposition was read from the run-produced results: the 96 '<case_id>-POS' check rows in the regenerated oracle96_verification_v2.json (actual field) tally 50 PASS_LOCAL_ORACLE / 46 HOLD / 0 DENY / 0 FAIL, matching the run's own printed positive_cell_verdicts, the fixtures' expected_positive_verdict, the fixtures' stored actual_positive.verdict, and an independent re-invocation of author_oracles.evaluate() per cell (0 mismatches on all four comparisons). author_checks 679/0 is not hardcoded in tools/: it is computed at tools/verify_oracles_v2.py line 32 as sum(status=='PASS') over the results list and printed in the run's stdout; the arithmetic decomposes as 27 actual-CLI events x 3 (RAW-HASH/JSON-READBACK/WRITESET) = 81, plus 96 cells x 6 (POS, NEG-DOMAIN, NEG-ORACLE, ACTUAL-RAW-REFS, FOREIGN-CASE, AUTHOR-RAW-ESCALATION) = 576, plus 11 COMPOSITE-PROXY and 11 FAKE-CALIBRATION destructive checks = 22, total 679. The '679 PASS / 0 FAIL' and '50 PASS_LOCAL_ORACLE + 46 HOLD' wording is asserted in README.md:15, COVERAGE_REPORT.md:47, 02_EVIDENCE_APPENDICES/E05_QA_READBACK_AND_CLAIM_CEILING.md:17 and REPAIR_CLOSURE_REPORT.md:42 (and the regenerated md line 3). All 46 HOLD cells carry a non-empty named reason: each has first_fail stored in its fixture actual_positive and reproduced exactly by re-evaluation (0 empty, 0 mismatched). Reason classes map to test/oracle classes: STATISTICAL non-UPGRADE -> ORIGINAL_CALIBRATED_THRESHOLD_READER_REQUIRED (11), SEMANTIC_JUDGE non-UPGRADE -> ORIGINAL_HUMAN_CALIBRATION_AND_JUDGE_READER_REQUIRED (11), HUMAN non-UPGRADE -> ORIGINAL_HUMAN_DECISION_READER_REQUIRED (11), UPGRADE (all 8 oracle types) -> UPGRADE_TWO_VERSION_BINDING_REQUIRED (8), PERF on the remaining 5 non-HOLD-privileged oracle types -> PERFORMANCE_SOURCE_THRESHOLD_NOT_BOUND (5). Regenerated oracle96_verification_v2.md is byte-identical to the sealed copy (sha256 5ae40e92bb711b23c29e26607f5d0ae40c4008396ce578668c11bd1af7df5cf2); regenerated oracle96_verification_v2.json differs from the sealed copy only in the informational 'elapsed_seconds' scalar (0.0316 -> 0.02221) and in nothing else (all 679 result rows and all other top-level fields identical). stderr was empty (0 bytes). Routing/disposition claims are not native qualification: scope string remains 'AUTHOR_LOCAL_ORACLE_ENGINE_AND_ACTUAL_PRIVATE_CLI_RAW; NOT_NATIVE_QUALIFICATION' with native_case_pass=0 and independent_verdict=NOT_RUN.",
+  "raw_stdout_path": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\raw\\A2_oracle96.stdout.txt"
+}

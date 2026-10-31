@@ -1,0 +1,164 @@
+[
+ {
+  "title": "WP-FHS-00 Source/Host Discovery",
+  "rc": 0,
+  "stdout": "Created t_09251945  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-01 Authority/Oracle/Profile",
+  "rc": 0,
+  "stdout": "Created t_01d7f48d  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-02 Fabric Policy Consumer",
+  "rc": 0,
+  "stdout": "Created t_09ff01d5  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-03 HGK Registry/Issuer",
+  "rc": 0,
+  "stdout": "Created t_35deee4b  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-04 Hermes Durable Runtime",
+  "rc": 0,
+  "stdout": "Created t_d16520d3  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-05 PIPD Native Compiler",
+  "rc": 0,
+  "stdout": "Created t_414bbbe3  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-06 Legal First Reversible Slice",
+  "rc": 0,
+  "stdout": "Created t_0fea5a0a  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-07 Native PLAN Commander A/B/C",
+  "rc": 0,
+  "stdout": "Created t_dd858464  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-08 FHS Execute Worker",
+  "rc": 0,
+  "stdout": "Created t_f568f8c9  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-09 Challenge/Protected AO",
+  "rc": 0,
+  "stdout": "Created t_6bc6d656  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-10 B1 3 GWO & G-A/G-B",
+  "rc": 0,
+  "stdout": "Created t_7d461b4d  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-11 Portable Host Dogfood",
+  "rc": 0,
+  "stdout": "Created t_3018312b  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-12 W18 Normal Mode",
+  "rc": 0,
+  "stdout": "Created t_0857497f  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-13 CAP On-Demand + HotSwap",
+  "rc": 0,
+  "stdout": "Created t_f5b8da3b  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-14 Release/Retire Candidate",
+  "rc": 0,
+  "stdout": "Created t_f69a289d  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-15 TPM Corpus & SPEC 18Stage",
+  "rc": 0,
+  "stdout": "Created t_648cc6ab  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-16 Donor/Method Slot Translation",
+  "rc": 0,
+  "stdout": "Created t_911fe14c  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-17 CAP-BOOT Native Occupants",
+  "rc": 0,
+  "stdout": "Created t_92492334  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-18 FAR Bounded Repair & Incident",
+  "rc": 0,
+  "stdout": "Created t_380ffa56  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-19 CI/Supply Chain & Requal",
+  "rc": 0,
+  "stdout": "Created t_f29057e9  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-20 CLI/Agent/Host Kind Matrix",
+  "rc": 0,
+  "stdout": "Created t_af7749e9  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "WP-FHS-21 Challenge 96/H4/SEAM Coverage",
+  "rc": 0,
+  "stdout": "Created t_99cc3d65  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "R18 ADMISSION (spine project + 22 frozen requirements + gate refusal proof)",
+  "rc": 0,
+  "stdout": "Created t_25b1a93c  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "R18 MVS01-10 receipt mapping",
+  "rc": 0,
+  "stdout": "Created t_4e0a3fc7  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "R18 INDEPENDENT ACCEPTANCE (different principal checker lane)",
+  "rc": 0,
+  "stdout": "Created t_d04c7d70  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "R18 DELIVERY (candidate branch + commit + push + PR per repo)",
+  "rc": 0,
+  "stdout": "Created t_1fdf57e7  (ready, assignee=-)",
+  "stderr": ""
+ },
+ {
+  "title": "R18 HANDOFF (STATUS/HANDOFF + RESUME_HERE + machine state)",
+  "rc": 0,
+  "stdout": "Created t_54ae4c3b  (ready, assignee=-)",
+  "stderr": ""
+ }
+]

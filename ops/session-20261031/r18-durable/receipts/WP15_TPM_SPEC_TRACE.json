@@ -1,0 +1,28 @@
+{
+ "task": "WP-FHS-15 TPM 3-SPEC + 18-stage trace, reuse-and-verify",
+ "wp": "WP-FHS-15",
+ "declared_denominators": {
+  "method25": 25,
+  "slot31": 31,
+  "donor24": 24,
+  "native20": 20,
+  "tech386": 386
+ },
+ "method_count": 25,
+ "slot_count": 31,
+ "donor_count": 24,
+ "native_count": 20,
+ "stage_trace": {
+  "stages_declared": 18,
+  "stages_with_evidence": 0,
+  "evidence_found": "no per-stage execution receipt exists under the round directory"
+ },
+ "invocation_receipts_found": [
+  "raw/A1_scratch/subject_run/03_TESTS_AND_READBACK/plugin_invocation.json",
+  "raw/A2_scratch/subject_copy/03_TESTS_AND_READBACK/plugin_invocation.json",
+  "subject/03_TESTS_AND_READBACK/plugin_invocation.json"
+ ],
+ "disposition": "PARKED_NO_INVOCATION_RECEIPT",
+ "reason": "the 3 SPECs and the 18-stage trace are design artefacts; verifying them requires the real plugin invocation receipt, and none exists in this round",
+ "next_legal_action": "run the plugin once against the sealed home and capture its invocation receipt"
+}

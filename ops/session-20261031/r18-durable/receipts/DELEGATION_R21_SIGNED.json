@@ -1,0 +1,35 @@
+{
+ "schema": "R21.DELEGATION.SIGNED/1",
+ "signed_utc": "2026-10-31T11:53:58Z",
+ "delegation_id": "R21-CANON-c0542636",
+ "owner_fingerprint": "412b351937be72a1",
+ "signature_verifies": true,
+ "signing_window_id": "WIN-b0b6e958d441",
+ "ops_used_after": 3,
+ "payload_sha256": "b31a0a8eca3a53fa844ba9441427da2718ab2b20725be5ad9c576d5fe364632e",
+ "wp_allowlist": [
+  "WP-FHS-08",
+  "WP-FHS-10",
+  "WP-FHS-11",
+  "WP-FHS-12",
+  "WP-FHS-13",
+  "WP-FHS-14",
+  "WP-FHS-20"
+ ],
+ "effect_class_allowlist": [
+  "SOURCE_READ",
+  "REPO_WRITE_TO_CANDIDATE_BRANCH",
+  "LOCAL_DRAFT_WRITE",
+  "HOST_INSTALL"
+ ],
+ "deny": [
+  "RELEASE",
+  "secrets",
+  "force-push",
+  "main",
+  "merge",
+  "tag"
+ ],
+ "not_after": "2026-11-14T00:00:00+00:00",
+ "private_key_exposure": "none: the key stayed in the broker process; the agent only received a signature"
+}

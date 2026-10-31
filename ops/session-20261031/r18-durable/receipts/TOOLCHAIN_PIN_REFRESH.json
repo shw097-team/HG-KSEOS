@@ -1,0 +1,32 @@
+{
+ "schema": "R18.HGK.TOOLCHAIN_PIN_REFRESH/1",
+ "at_utc": "2026-10-29T05:13:38.315255+00:00",
+ "fields_changed": 3,
+ "from": {
+  "path": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\2993767bd1dfb009\\codex.exe",
+  "version": "0.164.0-alpha.11.1",
+  "sha256": "1103e9e09c71fa2cd0afd6d8f3b9a2d63174fe8efd7cb5bd09f1cb14ef58a098"
+ },
+ "to": {
+  "path": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\08d187884f2330d1\\codex.exe",
+  "version": "0.165.0-alpha.1.2",
+  "sha256": "5c1b55966bf9f757dcbf00065c9a6cb862ead55d34b015f1be1939ff18e43943"
+ },
+ "sidecars_present": {
+  "codex.exe": true,
+  "codex-code-mode-host.exe": true,
+  "codex-command-runner.exe": true,
+  "codex-windows-sandbox-setup.exe": true
+ },
+ "declaration_sha256_after": "7c0132ce7299f531f29d8f26bd27c1fdf892834a7dfc395a77aa41348a4b8638",
+ "declaration_bytes_after": 16958,
+ "active_policy_before": {
+  "policy_digest": "69e9f10907cb7c707168ac1b47309b3a8deb7d653b4615cb4e9b8ada7cf1d51b",
+  "policy_bytes": 16181
+ },
+ "active_policy_after": {
+  "policy_digest": "7c0132ce7299f531f29d8f26bd27c1fdf892834a7dfc395a77aa41348a4b8638",
+  "policy_bytes": 16958
+ },
+ "preimage_dir": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\preimage"
+}

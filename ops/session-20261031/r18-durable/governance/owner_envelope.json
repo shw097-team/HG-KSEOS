@@ -1,0 +1,21 @@
+{
+ "schema": "HGK.OWNER_KEY_ENVELOPE/1",
+ "label": "owner-R18-delegation-key",
+ "created_utc": "2026-10-29T06:02:19+00:00",
+ "kdf": {
+  "name": "scrypt",
+  "n": 32768,
+  "r": 8,
+  "p": 1,
+  "salt_b64": "Pb1OiyhqoUlDfggrS4YCGw=="
+ },
+ "cipher": {
+  "name": "AES-256-GCM",
+  "nonce_b64": "frUg+RdQuG84MDfn",
+  "ct_b64": "flvR69hEra92aOtcPQDyr1GSg7MqLoMedI0bUrDzIuuD/XYxBqlUgNEJueDk+UQA",
+  "aad": "r18-owner-key"
+ },
+ "public_key_hex": "97e2000b39a3e49b164b7e62317195ccc6deea36c826b416bba3593fc60321b5",
+ "fingerprint": "be76097571a7d7fd73a84b4625a0b557364ba4e4be919fcfe83d4798a661a002",
+ "claim_ceiling": "the envelope protects a signing key at rest. It does NOT make an agent the owner and it confers no authority by itself: authority comes only from the signed DelegationRecord, which is scope-bounded and expiring."
+}

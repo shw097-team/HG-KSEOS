@@ -1,0 +1,180 @@
+{
+ "schema": "R18.KANBAN_RECONCILE/1",
+ "board": "fhs-msc-skeleton-spine-r18",
+ "cards": 27,
+ "mapped": 27,
+ "unmapped": 0,
+ "ledger_rows": 26,
+ "by_status": {
+  "HOLD": 1,
+  "PARTIAL": 14,
+  "PARKED": 7,
+  "DONE": 4
+ },
+ "unmapped_cards": [],
+ "rows": [
+  {
+   "card_id": null,
+   "title": "WP-FHS-00 Source/Host Discovery",
+   "ledger_id": "WP-FHS-00",
+   "ledger_status": "DONE"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-01 Authority/Oracle/Profile",
+   "ledger_id": "WP-FHS-01",
+   "ledger_status": "DONE"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-02 Fabric Policy Consumer",
+   "ledger_id": "WP-FHS-02",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-03 HGK Registry/Issuer",
+   "ledger_id": "WP-FHS-03",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-04 Hermes Durable Runtime",
+   "ledger_id": "WP-FHS-04",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-05 PIPD Native Compiler",
+   "ledger_id": "WP-FHS-05",
+   "ledger_status": "HOLD"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-06 Legal First Reversible Slice",
+   "ledger_id": "WP-FHS-06",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-07 Native PLAN Commander A/B/C",
+   "ledger_id": "WP-FHS-07",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-08 FHS Execute Worker",
+   "ledger_id": "WP-FHS-08",
+   "ledger_status": "PARKED"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-09 Challenge/Protected AO",
+   "ledger_id": "WP-FHS-09",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-10 B1 3 GWO & G-A/G-B",
+   "ledger_id": "WP-FHS-10",
+   "ledger_status": "PARKED"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-11 Portable Host Dogfood",
+   "ledger_id": "WP-FHS-11",
+   "ledger_status": "PARKED"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-12 W18 Normal Mode",
+   "ledger_id": "WP-FHS-12",
+   "ledger_status": "PARKED"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-13 CAP On-Demand + HotSwap",
+   "ledger_id": "WP-FHS-13",
+   "ledger_status": "PARKED"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-14 Release/Retire Candidate",
+   "ledger_id": "WP-FHS-14",
+   "ledger_status": "PARKED"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-15 TPM Corpus & SPEC 18Stage",
+   "ledger_id": "WP-FHS-15",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-16 Donor/Method Slot Translation",
+   "ledger_id": "WP-FHS-16",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-17 CAP-BOOT Native Occupants",
+   "ledger_id": "WP-FHS-17",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-18 FAR Bounded Repair & Incident",
+   "ledger_id": "WP-FHS-18",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-19 CI/Supply Chain & Requal",
+   "ledger_id": "WP-FHS-19",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-20 CLI/Agent/Host Kind Matrix",
+   "ledger_id": "WP-FHS-20",
+   "ledger_status": "PARKED"
+  },
+  {
+   "card_id": null,
+   "title": "WP-FHS-21 Challenge 96/H4/SEAM Coverage",
+   "ledger_id": "WP-FHS-21",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "R18 ADMISSION (spine project + 22 frozen requirements + gate refusal p",
+   "ledger_id": "R18-ADMIT",
+   "ledger_status": "DONE"
+  },
+  {
+   "card_id": null,
+   "title": "R18 MVS01-10 receipt mapping",
+   "ledger_id": "R18-MVS",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "R18 INDEPENDENT ACCEPTANCE (different principal checker lane)",
+   "ledger_id": "WP-FHS-09",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "R18 DELIVERY (candidate branch + commit + push + PR per repo)",
+   "ledger_id": "R18-DELIVER",
+   "ledger_status": "PARTIAL"
+  },
+  {
+   "card_id": null,
+   "title": "R18 HANDOFF (STATUS/HANDOFF + RESUME_HERE + machine state)",
+   "ledger_id": "R18-HANDOFF",
+   "ledger_status": "DONE"
+  }
+ ],
+ "reading": "every card maps to a ledger row and takes the ledger's status; the ledger is the obligation record and the board is the working surface, so a disagreement is a defect in the round"
+}

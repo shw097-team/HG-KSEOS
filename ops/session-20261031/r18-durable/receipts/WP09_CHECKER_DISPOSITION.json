@@ -1,0 +1,107 @@
+{
+ "schema": "R18.WP09.CHECKER_DISPOSITION/1",
+ "wp": "WP-FHS-09",
+ "verdict_bearing_attempts": [
+  {
+   "attempt_log": "attempt-15696-1793252314-1-stdout.txt",
+   "verdict": "HOLD",
+   "object_mutated_by_this_round": true,
+   "chars": 4968
+  },
+  {
+   "attempt_log": "attempt-4288-1793252088-2-stdout.txt",
+   "verdict": "FAIL",
+   "object_mutated_by_this_round": true,
+   "chars": 3061
+  },
+  {
+   "attempt_log": "attempt-4288-1793252088-1-stdout.txt",
+   "verdict": "HOLD",
+   "object_mutated_by_this_round": true,
+   "chars": 4092
+  }
+ ],
+ "admissible_verdicts_on_frozen_copy": [],
+ "dispatch_receipts": {
+  "VERIFY_R18.json": {
+   "ok": true,
+   "code": null,
+   "served_arm": "opencode-go/deepseek-v4.1-flash",
+   "rank": 1,
+   "seconds": 191.39,
+   "nonce_ok": true
+  },
+  "VERIFY2_R18.json": {
+   "ok": false,
+   "code": "ERR_SP_IDENTITY_NONCE_MISMATCH",
+   "served_arm": null,
+   "rank": null,
+   "seconds": null,
+   "nonce_ok": null
+  },
+  "VERIFY4_R18.json": {
+   "ok": false,
+   "code": "ERR_LANE_REQUIRED_ARM_ABSENT",
+   "served_arm": null,
+   "rank": null,
+   "seconds": null,
+   "nonce_ok": null
+  }
+ },
+ "disposition": "PARTIAL_INDEPENDENT_HOLD",
+ "blocker": null,
+ "next_legal_action": "accept the HOLD as the round's independent verdict; the way past it is native execution evidence, not more author-side checks",
+ "claim_ceiling": "author-local/static package evidence only; no independent acceptance, no native qualification, no release",
+ "what_the_verdicts_did_establish": "the challenge skill did independently detect the copy corruption and the candidate's own non-native scope strings (README.md:13,15; COVERAGE_REPORT.md:45,47)",
+ "pristine_copy_verdict": {
+  "receipt": "checker/VERIFY5_R18.json",
+  "ok": false,
+  "code": "ERR_REQUIRED_ARM_NOT_SERVED",
+  "required_arm": "openai-codex/gpt-6.1-sol",
+  "served_arm": "opencode-go/deepseek-v4.1-flash",
+  "rank": 1,
+  "seconds": 216.47,
+  "nonce_ok": true,
+  "verdict": "PASS_WITH_CEILING",
+  "object": "PRISTINE copy, 83/83 checksums verified before dispatch",
+  "text_path": "checker/VERDICT_FINAL.md",
+  "claimed_ceiling": "package integrity and author-local/static evidence only; native execution, protected Checker acceptance, world effect and release NOT proven",
+  "verdict_quote": "\"83/83 checksums and the independently derived 50/46 cell split match the package while native qualification is expressly disclaimed\""
+ },
+ "guard_control": "this is the round's strongest negative control: without the require-arm guard the same PASS would have been booked as an independent GPT 6.1 Sol acceptance",
+ "admissible_verdict": {
+  "receipt": "checker/VERIFY3_R18.json",
+  "ok": true,
+  "served_arm": "gpt-6.1-sol",
+  "rank": 2,
+  "seconds": 144.95,
+  "nonce_ok": true,
+  "invocation_id": "SPINV-CHALLENGE-9bf28cb67039",
+  "object": "pristine copy (restored from the delivered package, 83/83 re-derived)",
+  "verdict": "HOLD",
+  "reason": "internal fixture consistency does not establish native qualification or authenticated execution provenance",
+  "independently_reproduced": {
+   "cells": 96,
+   "pass_local_oracle": 50,
+   "hold": 46,
+   "deny": 0,
+   "negative_fixtures_deny": 192,
+   "author_checks": "679/679 via the candidate's own oracle engine",
+   "stored_stdout_hashes": "27/27 match"
+  },
+  "not_proven": [
+   "actual plugin/skill invocation",
+   "actual CLI process execution and exclusive WriteSet",
+   "original-source scanning and the 54/55 historical hash matches",
+   "independent rerun of the 2789 static checks",
+   "semantic completeness of the repairs"
+  ],
+  "text_path": "checker/VERDICT_ADMISSIBLE_HOLD.md",
+  "ceiling": "checksum integrity and reproduced local fixture behaviour only; no native acceptance, no Permit, no release"
+ },
+ "verdict_discrepancy": {
+  "note": "two independent challenges on the same pristine object disagreed: VERIFY3 (required arm, admissible) said HOLD; VERIFY5 (out-of-spec arm, refused by the dispatcher) said PASS with an explicit ceiling",
+  "reading": "the difference is not factual - both reproduced 83/83 and the 50/46 split - but the required principal holds that reproduced local fixture behaviour does not establish native qualification, which is the stricter and admissible reading",
+  "admissible_verdict": "HOLD"
+ }
+}

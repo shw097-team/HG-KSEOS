@@ -1,0 +1,38 @@
+{
+ "task": "WP-FHS-16 24-slot / 25-method disposition",
+ "wp": "WP-FHS-16",
+ "slots_declared": 31,
+ "methods_declared": 25,
+ "slots_with_invocation": 0,
+ "methods_with_invocation": 0,
+ "disposition_table": [
+  {
+   "set": "Slot",
+   "declared": 31,
+   "invoked": 0,
+   "status": "DECLARED_NOT_INVOKED"
+  },
+  {
+   "set": "Method",
+   "declared": 25,
+   "invoked": 0,
+   "status": "DECLARED_NOT_INVOKED"
+  },
+  {
+   "set": "Donor",
+   "declared": 24,
+   "invoked": 0,
+   "status": "DECLARED_NOT_INVOKED"
+  },
+  {
+   "set": "Native",
+   "declared": 20,
+   "invoked": 0,
+   "status": "DECLARED_NOT_INVOKED"
+  }
+ ],
+ "repo_readback": {},
+ "disposition": "PARKED_DECLARED_NOT_INVOKED",
+ "reason": "the sets exist and are counted, but nothing in this round invoked a single slot or method",
+ "inherits": "WP-FHS-15's missing invocation receipt"
+}

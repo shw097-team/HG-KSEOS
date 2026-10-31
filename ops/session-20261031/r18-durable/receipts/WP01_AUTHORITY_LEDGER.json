@@ -1,0 +1,203 @@
+{
+ "task": "WP-FHS-01 authority/oracle/profile ledger from the candidate's own evidence",
+ "wp": "WP-FHS-01",
+ "holds": [
+  {
+   "class": "SOURCE",
+   "affected_scope": "SRC-L-009 v1產出指令",
+   "owner": "原設計來源Owner",
+   "next_legal_action": "提供該版本bytes或確認由已指定thin+AUDIT替代本輪repair控制",
+   "resume_predicate": "exact SHA/heading讀回或明確Owner supersession",
+   "locator": "03_TESTS_AND_READBACK/holds.json#4"
+  },
+  {
+   "class": "SOURCE",
+   "affected_scope": "149 child inherited context fragment / B1九個UNRESOLVED Node",
+   "owner": "原SBL/PIPD Clause Owner",
+   "next_legal_action": "讀回原Parent/fragment/Node來源並ratify相容mapping",
+   "resume_predicate": "原source/Owner決議可讀，不靠候選自簽",
+   "locator": "03_TESTS_AND_READBACK/holds.json#11"
+  },
+  {
+   "class": "ABI",
+   "affected_scope": "13原verb vs 當期14 parser",
+   "owner": "PIPD CLI Owner",
+   "next_legal_action": "判定compile-cc版本相容/alias及13原verb承諾",
+   "resume_predicate": "具版本/原Owner決議/roundtrip正反",
+   "locator": "03_TESTS_AND_READBACK/holds.json#18"
+  },
+  {
+   "class": "ABI",
+   "affected_scope": "19 Schema內層{}與native EffectClass value set未ratify",
+   "owner": "PIPD Registry/ECP Owner",
+   "next_legal_action": "將domain semantic Reader與原Registry兼容綁定；enum由原Owner裁定",
+   "resume_predicate": "原Writer semantic fixture及ACK，非schema-only PASS",
+   "locator": "03_TESTS_AND_READBACK/holds.json#25"
+  },
+  {
+   "class": "ABI",
+   "affected_scope": "DOC07 ↔ legacy DOC03、12risk→9context",
+   "owner": "原PIPD Oracle/Profile Owner",
+   "next_legal_action": "提供loss ledger/alias migration與roundtrip",
+   "resume_predicate": "原Writer ACK與原語義/否定scope保全",
+   "locator": "03_TESTS_AND_READBACK/holds.json#32"
+  },
+  {
+   "class": "ABI",
+   "affected_scope": "192 legacy ON/OFF label與ProviderOff含義矛盾",
+   "owner": "SBL Product＋各Host Owner",
+   "next_legal_action": "確認原raw token到boolean映射；重測provider禁止外呼",
+   "resume_predicate": "Owner映射+本Host POS/NEG",
+   "locator": "03_TESTS_AND_READBACK/holds.json#39"
+  },
+  {
+   "class": "HOST",
+   "affected_scope": "Fabric Active/Loaded/Consumer、HGK Issuer/Wake/Lease/NormalMode",
+   "owner": "原Fabric/HGK/Hermes/Host Owner",
+   "next_legal_action": "唯讀當期原Registry/module origin/loaded SHA，再依原OPS准入最小needed子圖",
+   "resume_predicate": "當期同Subject/Scope/Epoch原Consumer ACK/真Raw",
+   "locator": "03_TESTS_AND_READBACK/holds.json#46"
+  },
+  {
+   "class": "HOST",
+   "affected_scope": "Default30/Donor24/Method25/TECH386 upstream pin/license/適用Host",
+   "owner": "原Tech/License/Host Owner",
+   "next_legal_action": "依每ID BuildOrUseRecipe補pin/license/manifest/help，純方法不造installer",
+   "resume_predicate": "該ID原Need/Owner/Host binding，NOT_OBSERVED不冒ABSENT",
+   "locator": "03_TESTS_AND_READBACK/holds.json#53"
+  },
+  {
+   "class": "HOST",
+   "affected_scope": "B1 282 RunnerBindings",
+   "owner": "每case原Runner/Oracle Owner",
+   "next_legal_action": "原Registry以case_id/source/Host解析signature與raw schema",
+   "resume_predicate": "同case/候選/Host的真Runner Raw",
+   "locator": "03_TESTS_AND_READBACK/holds.json#60"
+  },
+  {
+   "class": "CHECKER",
+   "affected_scope": "不同受保護principal",
+   "owner": "原Checker Owner",
+   "next_legal_action": "原protected Reader核identity及Raw/oracle，真實執行",
+   "resume_predicate": "原Checker本輪簽章receipt；Maker/模型角色不可替",
+   "locator": "03_TESTS_AND_READBACK/holds.json#67"
+  },
+  {
+   "class": "RELEASE",
+   "affected_scope": "正式Publisher/GHP-02",
+   "owner": "原Publisher",
+   "next_legal_action": "只在原發行授權成立後發布與readback",
+   "resume_predicate": "正式signature/channel/readback；本輪只有本機文件交付",
+   "locator": "03_TESTS_AND_READBACK/holds.json#74"
+  }
+ ],
+ "silent_promotions": [],
+ "denominators": [
+  {
+   "name": "body17",
+   "count": 17,
+   "evidence_present": true
+  },
+  {
+   "name": "child149",
+   "count": 149,
+   "evidence_present": true
+  },
+  {
+   "name": "r15_atoms949",
+   "count": 949,
+   "evidence_present": true
+  },
+  {
+   "name": "cell192",
+   "count": 192,
+   "evidence_present": true
+  },
+  {
+   "name": "native20",
+   "count": 20,
+   "evidence_present": true
+  },
+  {
+   "name": "default30",
+   "count": 30,
+   "evidence_present": true
+  },
+  {
+   "name": "donor24",
+   "count": 24,
+   "evidence_present": true
+  },
+  {
+   "name": "method25",
+   "count": 25,
+   "evidence_present": true
+  },
+  {
+   "name": "tech386",
+   "count": 386,
+   "evidence_present": true
+  },
+  {
+   "name": "contracts19",
+   "count": 19,
+   "evidence_present": true
+  },
+  {
+   "name": "PI27",
+   "count": 27,
+   "evidence_present": true
+  },
+  {
+   "name": "slot31",
+   "count": 31,
+   "evidence_present": true
+  },
+  {
+   "name": "parent120",
+   "count": 120,
+   "evidence_present": true
+  },
+  {
+   "name": "B1child124",
+   "count": 124,
+   "evidence_present": true
+  },
+  {
+   "name": "node38",
+   "count": 38,
+   "evidence_present": true
+  },
+  {
+   "name": "wp22",
+   "count": 22,
+   "evidence_present": true
+  },
+  {
+   "name": "edge15",
+   "count": 15,
+   "evidence_present": true
+  },
+  {
+   "name": "challenge96",
+   "count": 96,
+   "evidence_present": true
+  }
+ ],
+ "unbound_oracle_profiles": [],
+ "mapping_rule": "a hold blocks every WP whose declared oracle needs the held artefact; this round records the holds and their locators but does not assert a per-WP mapping beyond the ones the candidate itself names",
+ "counts": {
+  "holds_total": 11,
+  "holds_by_class": {
+   "SOURCE": 2,
+   "ABI": 4,
+   "HOST": 3,
+   "RELEASE": 1,
+   "CHECKER": 1
+  },
+  "silent_promotions": 0,
+  "negative_oracle_rows_present": 0
+ },
+ "verdict": "CLEAN",
+ "notes": "no silent promotion found: every held scope in holds.json carries a named owner and a resume predicate; the 46 HOLD cells in the oracle suite carry named reason classes"
+}

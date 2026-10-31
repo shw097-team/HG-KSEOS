@@ -1,0 +1,8 @@
+{
+ "status": 201,
+ "number": 4,
+ "url": "https://github.com/shw097-team/HG-KSEOS/pull/4",
+ "head": "candidate/r18-openspec-only",
+ "base": "main",
+ "title": "openspec: FHS-MSC Skeleton+Spine revision2 change + round R18 evidence index"
+}

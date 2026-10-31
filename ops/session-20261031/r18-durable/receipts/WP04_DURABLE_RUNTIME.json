@@ -1,0 +1,41 @@
+{
+ "task": "WP-FHS-04 Hermes durable runtime reuse: journal / lease / checkpoint readback",
+ "wp": "WP-FHS-04",
+ "source": "C:\\Projects\\Agent_Workspace\\var\\R17-20261023\\runner",
+ "journal_entries": 450,
+ "journal_first_utc": "2026-10-23T12:30:34.658025+00:00",
+ "journal_last_utc": "2026-10-31T11:39:45.554969+00:00",
+ "last_cycle": {
+  "schema": "SBL_R17_READY_DRAIN/1",
+  "ts": "2026-10-31T11:39:45.554969+00:00",
+  "max_cards": 5,
+  "total_budget": 720,
+  "lease_ttl": 900,
+  "cards": [],
+  "stages": [
+   {
+    "stage": "DISCOVER",
+    "seq": 1,
+    "exit": 0,
+    "timeout": false,
+    "secs": 0.6,
+    "stdout_sha256": "ef1e3bf822c22437697a57583f30d3f39dca23d9d6a30544ffe7cb1f33306489",
+    "packet": "runner/raw/20261031T113946_recompute_discover_d5da848c.stdout.txt"
+   }
+  ],
+  "claim_ceiling": "CANDIDATE_TESTED"
+ },
+ "fence": {
+  "fence": 410,
+  "utc": "2026-10-31T11:39:45.559966+00:00"
+ },
+ "parked_rows": 1,
+ "durability_evidence": "a journal with 450 entries, a fence record and a parked set all exist on disk, so the runtime's durable surfaces are readable after the fact",
+ "not_proven": [
+  "that a lease was held by THIS round's process",
+  "that a checkpoint was taken for THIS subject",
+  "that the queue resumes without a human"
+ ],
+ "disposition": "REUSE_READBACK_ONLY",
+ "reason": "the durable surfaces are reusable and readable; this round did not acquire a lease of its own, so no claim about live leasing or resumption is made"
+}

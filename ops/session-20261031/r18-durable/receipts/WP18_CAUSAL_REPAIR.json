@@ -1,0 +1,21 @@
+{
+ "schema": "R18.WP18_CAUSAL_REPAIR/3",
+ "pristine": {
+  "passed": 2789,
+  "failed": 0,
+  "fail_names": []
+ },
+ "repaired": {
+  "passed": 2789,
+  "failed": 0,
+  "fail_names": []
+ },
+ "pristine_repeat": {
+  "passed": 2789,
+  "failed": 0,
+  "fail_names": []
+ },
+ "causal": false,
+ "deterministic": true,
+ "claim_ceiling": "data-side repair in a working copy; delivered candidate stays byte-frozen; SOURCE-BYTES-UNCHANGED depends on external source paths relocated after the freeze"
+}

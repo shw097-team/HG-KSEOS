@@ -1,0 +1,157 @@
+{
+ "schema": "R18.DELEGATION_GATE_MATRIX/1",
+ "delegation_id": "R18-FHS-SKELETON-SPINE-eaee207a",
+ "owner_fingerprint": "be76097571a7d7fd73a84b4625a0b557364ba4e4be919fcfe83d4798a661a002",
+ "pos_cases": 7,
+ "pos_permitted": 7,
+ "neg_cases": 6,
+ "neg_refused": 6,
+ "all_cases_expected": true,
+ "rows": [
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-00",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "now_override": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "expected": "PERMIT_DERIVED"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-01",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "now_override": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "expected": "PERMIT_DERIVED"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-09",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "now_override": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "expected": "PERMIT_DERIVED"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-19",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "now_override": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "expected": "PERMIT_DERIVED"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-21",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "now_override": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "expected": "PERMIT_DERIVED"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-06",
+   "effect_class": "REPO_WRITE_TO_CANDIDATE_BRANCH",
+   "target": "candidate/r18-openspec-only",
+   "now_override": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "expected": "PERMIT_DERIVED"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-18",
+   "effect_class": "REPO_WRITE_TO_CANDIDATE_BRANCH",
+   "target": "candidate/r18-openspec-only",
+   "now_override": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "expected": "PERMIT_DERIVED"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-02",
+   "effect_class": "HOST_OP",
+   "target": "",
+   "now_override": "",
+   "rc": 7,
+   "decision": "REFUSED_CLASS_NOT_ALLOWLISTED",
+   "recorded": false,
+   "expected": "REFUSED_*"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-14",
+   "effect_class": "RELEASE",
+   "target": "",
+   "now_override": "",
+   "rc": 7,
+   "decision": "REFUSED_CLASS_DENIED",
+   "recorded": false,
+   "expected": "REFUSED_*"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-05",
+   "effect_class": "LOCAL_DRAFT_WRITE",
+   "target": "",
+   "now_override": "",
+   "rc": 7,
+   "decision": "REFUSED_CLASS_DENIED",
+   "recorded": false,
+   "expected": "REFUSED_*"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-06",
+   "effect_class": "REPO_WRITE_TO_CANDIDATE_BRANCH",
+   "target": "main",
+   "now_override": "",
+   "rc": 7,
+   "decision": "REFUSED_TARGET_NOT_CANDIDATE",
+   "recorded": false,
+   "expected": "REFUSED_*"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-00",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "now_override": "2027-01-01T00:00:00+00:00",
+   "rc": 7,
+   "decision": "REFUSED_EXPIRED_OR_NOT_YET_VALID",
+   "recorded": false,
+   "expected": "REFUSED_*"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-16",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "now_override": "",
+   "rc": 7,
+   "decision": "REFUSED_WP_EXCLUDED",
+   "recorded": false,
+   "expected": "REFUSED_*"
+  }
+ ],
+ "consumed_effects": 7,
+ "claim_ceiling": "LOCAL_DERIVATION_NOT_NATIVE_BUNDLE: the gate proves the owner-signed scope is enforced; it does not issue native PERMITs, does not run HOST_OP/RELEASE, and does not accept the candidate"
+}

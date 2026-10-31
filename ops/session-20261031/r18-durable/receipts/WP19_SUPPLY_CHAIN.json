@@ -1,0 +1,58 @@
+{
+ "task": "WP-FHS-19 supply-chain scan of the frozen revision2 candidate",
+ "wp": "WP-FHS-19",
+ "scan_root": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\subject",
+ "files_scanned": 85,
+ "bytes_scanned": 145755223,
+ "canary_control": {
+  "planted": true,
+  "detector_fired": true,
+  "canary_hits": [
+   {
+    "file": "CANARY",
+    "line": 1,
+    "rule": "aws_akid",
+    "redacted": "AKIA***20"
+   },
+   {
+    "file": "CANARY",
+    "line": 2,
+    "rule": "github_pat",
+    "redacted": "ghp_***40"
+   }
+  ]
+ },
+ "secrets": {
+  "findings": 0,
+  "by_rule": {},
+  "top_hits": []
+ },
+ "license": {
+  "components": [],
+  "missing": [
+   "no LICENSE/NOTICE/COPYING anywhere in the package"
+  ],
+  "reading": "the candidate declares no licence file of its own; it is an internal design package, not a distributable component"
+ },
+ "sbom": {
+  "path": "raw/A3_sbom.json",
+  "entries": 85,
+  "hash_skipped": 0
+ },
+ "path_leakage": {
+  "files_with_local_paths": 9,
+  "examples": [
+   "01_BODY/02_PIPD_LIFECYCLE_AND_TPM.md",
+   "01_BODY/05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+   "01_BODY/06_FHS_EXECUTE_HERMES_RUNTIME.md",
+   "01_BODY/07_ACCEPTANCE_CHALLENGE.md",
+   "02_EVIDENCE_APPENDICES/E01_SOURCE_MANIFEST_AND_SEARCH.md",
+   "03_TESTS_AND_READBACK/repo_readback.json",
+   "03_TESTS_AND_READBACK/static_validation_result.md",
+   "03_TESTS_AND_READBACK/test_matrix.md"
+  ],
+  "note": "absolute host paths inside the package are why the candidate's own SOURCE-BYTES-UNCHANGED check cannot travel to another host (D-R18-01)"
+ },
+ "verdict": "CLEAN",
+ "notes": "detector validated by a planted canary before the clean reading is trusted"
+}

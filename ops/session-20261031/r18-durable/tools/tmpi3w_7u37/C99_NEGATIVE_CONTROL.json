@@ -1,0 +1,7 @@
+{
+ "pass_branch": true,
+ "fail_branch_on_size_change": true,
+ "fail_branch_on_same_size_byte_change": true,
+ "fail_branch_on_missing": true,
+ "control_ok": true
+}

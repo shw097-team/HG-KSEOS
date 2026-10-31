@@ -1,0 +1,153 @@
+{
+ "task": "MVS05-Route evidence for round R18",
+ "mvs": "MVS05-Route",
+ "declarations": {
+  "source_files": [
+   {
+    "path": "hermes-codex-lane.json",
+    "sha256": "7c0132ce7299f531f29d8f26bd27c1fdf892834a7dfc395a77aa41348a4b8638",
+    "bytes": 16958
+   },
+   {
+    "path": "lane-routing-registry.yaml",
+    "sha256": "6e2e74802f8b9aab5c7306d3b843875b9917110ea63f980d7094338bfd6b8eb9",
+    "bytes": 42490
+   }
+  ],
+  "epoch_or_revision": {
+   "epoch": 34,
+   "revision": null
+  }
+ },
+ "roles": [
+  {
+   "role": "PLAN/Commander",
+   "required_arm": "GPT 6.1 Sol, medium, OpenAI OAuth",
+   "evidence": "NO_RECEIPT_BEFORE_THIS_TURN",
+   "receipt_path": "lane/PLAN_R18.json",
+   "note": "dispatch issued this turn; judged on its own receipt, never on the session's model pin"
+  },
+  {
+   "role": "EXECUTE/Codex bounded writer",
+   "required_arm": "DeepSeek V4.1 Flash via OpenCode Go",
+   "served_arm": [
+    "gpt-6-luna"
+   ],
+   "evidence": "SERVED_PROVEN_BUT_WRONG_ARM",
+   "receipt_path": "lane/EXECUTE_WP21_attempt2.json",
+   "note": "served gpt-6-luna on a rank-3 fallback with a matching usage receipt and the NONCE returned; required arm was deepseek-v4.1-flash, so this is NOT the specified lane"
+  },
+  {
+   "role": "VERIFY_SECURITY/Acceptance Challenge + AO",
+   "required_arm": "GPT 6.1 Sol, medium, OpenAI OAuth",
+   "evidence": "NO_RECEIPT_BEFORE_THIS_TURN",
+   "receipt_path": "checker/VERIFY_R18.json",
+   "note": "independent principal, read-only sandbox, forbidden from trusting candidate results"
+  }
+ ],
+ "this_round_attributable": {
+  "PLAN": null,
+  "EXECUTE": true,
+  "VERIFY_SECURITY": null
+ },
+ "dispatch_command_for_attributable_receipt": "hgk-lane-dispatch.py --lane <LANE> --nonce <NONCE> --brief <BRIEF> --json-out <RECEIPT>",
+ "lane_vs_session_pin": "the session model pin (deepseek-v4.1-flash on opencode-go) is NOT a lane binding; every lane claim above comes from the dispatcher's own attempt log",
+ "negative_control": {
+  "fake_served_shape": "a lane attempt with exit OK but nonce_present=false, i.e. the child ran and produced output that was not the nonce-bearing answer",
+  "guard_catches_it": "hgk-lane-dispatch.py records nonce_present per attempt and refuses the attempt as unattributable; the round therefore only counts attempts whose nonce matched, which is why attempt 1 (pin refusal) and attempt 2 (relay refusal, 400s timeout) contribute no served evidence"
+ },
+ "attempts": [
+  {
+   "log": "EXECUTE_WP21_attempt2.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:20:26.681874+00:00",
+   "lane": "EXECUTE",
+   "transport_model": "opencode-go/deepseek-v4.1-flash",
+   "model": "deepseek-v4.1-flash",
+   "provider": "opencode-go",
+   "rank": 1,
+   "exit": "TIMEOUT",
+   "nonce_present": false,
+   "seconds": 400.02,
+   "usage_receipt_ok": false
+  },
+  {
+   "log": "EXECUTE_WP21_attempt2.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:22:29.922995+00:00",
+   "lane": "EXECUTE",
+   "transport_model": "opencode-go/mimo-v2.6-flash",
+   "model": "mimo-v2.6-flash",
+   "provider": "opencode-go",
+   "rank": 2,
+   "exit": 1,
+   "nonce_present": false,
+   "seconds": 122.88,
+   "usage_receipt_ok": false
+  },
+  {
+   "log": "EXECUTE_WP21_attempt2.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:25:09.469067+00:00",
+   "lane": "EXECUTE",
+   "transport_model": "gpt-6-luna",
+   "model": "gpt-6-luna",
+   "provider": "openai-codex",
+   "rank": 3,
+   "exit": 0,
+   "nonce_present": true,
+   "seconds": 159.14,
+   "usage_receipt_ok": true
+  },
+  {
+   "log": "EXECUTE_WP21_attempt3.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:26:32.169268+00:00",
+   "lane": "EXECUTE",
+   "transport_model": "opencode-go/deepseek-v4.1-flash",
+   "model": "deepseek-v4.1-flash",
+   "provider": "opencode-go",
+   "rank": 1,
+   "exit": 1,
+   "nonce_present": false,
+   "seconds": 25.22,
+   "usage_receipt_ok": false
+  },
+  {
+   "log": "EXECUTE_WP21_attempt3.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:26:57.438893+00:00",
+   "lane": "EXECUTE",
+   "transport_model": "opencode-go/mimo-v2.6-flash",
+   "model": "mimo-v2.6-flash",
+   "provider": "opencode-go",
+   "rank": 2,
+   "exit": 1,
+   "nonce_present": false,
+   "seconds": 24.95,
+   "usage_receipt_ok": false
+  },
+  {
+   "log": "EXECUTE_WP21_attempt3.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:28:40.319639+00:00",
+   "lane": "EXECUTE",
+   "transport_model": "gpt-6-luna",
+   "model": "gpt-6-luna",
+   "provider": "openai-codex",
+   "rank": 3,
+   "exit": 0,
+   "nonce_present": true,
+   "seconds": 102.45,
+   "usage_receipt_ok": true
+  },
+  {
+   "log": "PLAN_R18.json.attempts.ndjson",
+   "at_utc": "2026-10-29T05:29:43.064791+00:00",
+   "lane": "PLAN",
+   "transport_model": "opencode-go/deepseek-v4.1-flash",
+   "model": "deepseek-v4.1-flash",
+   "provider": "opencode-go",
+   "rank": 1,
+   "exit": 1,
+   "nonce_present": false,
+   "seconds": 25.34,
+   "usage_receipt_ok": false
+  }
+ ],
+ "verdict": "SPLIT: EXECUTE served on the wrong arm; PLAN and VERIFY issued this turn"
+}

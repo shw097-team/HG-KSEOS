@@ -1,0 +1,11 @@
+{
+ "schema": "R18.SWARM_BATCH/1",
+ "delegation_id": "deleg_20715b47",
+ "children": [
+  "sa-0-e8ba9660: ledger DONE-row evidence audit (read-only)",
+  "sa-1-0744fff6: delegation gate enforcement + signature recomputation (read-only, no --consume)",
+  "sa-2-454e0f91: 83/83 integrity + validate 2789/0 + oracle 50/46/0 re-run in a throwaway copy"
+ ],
+ "disjoint_writesets": true,
+ "note": "all three are read-only by instruction; results are recorded when they return, not asserted now"
+}

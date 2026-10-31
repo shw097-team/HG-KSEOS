@@ -1,0 +1,22 @@
+{
+ "schema": "R18.GSTACK_ROUTE/1",
+ "at": "2026-10-29T07:35:13Z",
+ "binary_lookup": {
+  "gstack": null,
+  "gstack.exe": null,
+  "hgk-gstack": null,
+  "open-codex": null
+ },
+ "config_files": [],
+ "var_dirs_named_gstack": [
+  "task014_gstack_e2e.py",
+  "task014_gstack_inventory.py"
+ ],
+ "lane_routing_registry_present": true,
+ "lane_routing_mentions_gstack": false,
+ "installed": false,
+ "loaded": false,
+ "invoked": false,
+ "verdict": "NOFIT_ABSENT",
+ "why": "no gstack binary on PATH and no gstack config under HG-KSEOS/config; the round cannot claim a gstack route. Advisory routing for this subject was performed by the native lanes (PLAN gpt-6.1-sol, EXECUTE deepseek-v4.1-flash, VERIFY force-rank 2) and the SWARM verification batch deleg_20715b47, which is what the receipts show."
+}

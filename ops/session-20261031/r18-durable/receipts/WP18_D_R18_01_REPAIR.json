@@ -1,0 +1,19 @@
+{
+ "schema": "R18.WP18.DEFECT_D-R18-01_REPAIR/1",
+ "defect": "D-R18-01 source_manifest pins the superseded _SKELETON_SPINE_DRAFT tree",
+ "pre_repair_measurement": {
+  "passed": 2788,
+  "failed": 1,
+  "failing_case": "SOURCE-BYTES-UNCHANGED"
+ },
+ "manifest_rows_before": 163,
+ "manifest_rows_after": 163,
+ "pins_refreshed": 0,
+ "pins_refreshed_with_changed_bytes": 0,
+ "pins_dropped_named_reason": 0,
+ "refreshed": [],
+ "dropped": [],
+ "validator_untouched": true,
+ "preimage": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\preimage\\source_manifest.json.bak",
+ "claim_ceiling": "isolated-copy repair; the delivered candidate remains byte-frozen and still carries the defect - the fix is offered to the author, not silently applied to the sealed package"
+}

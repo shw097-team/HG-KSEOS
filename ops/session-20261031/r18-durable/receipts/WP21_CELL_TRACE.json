@@ -1,0 +1,392 @@
+{
+  "schema": "R18.WP21.CELL_TRACE/1",
+  "matching_rule": "case ID token equals a declared-oracle token or a WP first_fail token; prose similarity is excluded",
+  "wp_count": 22,
+  "unbacked_pos": [
+    "WP-FHS-00",
+    "WP-FHS-01",
+    "WP-FHS-02",
+    "WP-FHS-03",
+    "WP-FHS-04",
+    "WP-FHS-05",
+    "WP-FHS-06",
+    "WP-FHS-07",
+    "WP-FHS-08",
+    "WP-FHS-09",
+    "WP-FHS-10",
+    "WP-FHS-11",
+    "WP-FHS-12",
+    "WP-FHS-13",
+    "WP-FHS-14",
+    "WP-FHS-15",
+    "WP-FHS-16",
+    "WP-FHS-17",
+    "WP-FHS-18",
+    "WP-FHS-19",
+    "WP-FHS-20",
+    "WP-FHS-21"
+  ],
+  "unbacked_neg": [
+    "WP-FHS-00",
+    "WP-FHS-01",
+    "WP-FHS-02",
+    "WP-FHS-03",
+    "WP-FHS-04",
+    "WP-FHS-05",
+    "WP-FHS-06",
+    "WP-FHS-07",
+    "WP-FHS-08",
+    "WP-FHS-09",
+    "WP-FHS-10",
+    "WP-FHS-11",
+    "WP-FHS-12",
+    "WP-FHS-13",
+    "WP-FHS-14",
+    "WP-FHS-15",
+    "WP-FHS-16",
+    "WP-FHS-17",
+    "WP-FHS-18",
+    "WP-FHS-19",
+    "WP-FHS-20",
+    "WP-FHS-21"
+  ],
+  "unbacked_both": [
+    "WP-FHS-00",
+    "WP-FHS-01",
+    "WP-FHS-02",
+    "WP-FHS-03",
+    "WP-FHS-04",
+    "WP-FHS-05",
+    "WP-FHS-06",
+    "WP-FHS-07",
+    "WP-FHS-08",
+    "WP-FHS-09",
+    "WP-FHS-10",
+    "WP-FHS-11",
+    "WP-FHS-12",
+    "WP-FHS-13",
+    "WP-FHS-14",
+    "WP-FHS-15",
+    "WP-FHS-16",
+    "WP-FHS-17",
+    "WP-FHS-18",
+    "WP-FHS-19",
+    "WP-FHS-20",
+    "WP-FHS-21"
+  ],
+  "counts": {
+    "unbacked_pos": 22,
+    "unbacked_neg": 22,
+    "unbacked_both": 22
+  },
+  "rows": [
+    {
+      "wp_id": "WP-FHS-00",
+      "first_fail": "WP-FHS-00.FIRST_FAIL:ROOT_CURRENTNESS_NOT_PROVEN",
+      "positive_oracle": "根路徑/HEAD/index/untracked/bytes SHA當期可讀",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "README或junction別名冒真root",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-01",
+      "first_fail": "WP-FHS-01.FIRST_FAIL:PROFILE_OR_ORACLE_BIND_HOLD",
+      "positive_oracle": "原Authority/Oracle/Profile衝突被明列而未偷偷promotion",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "九enum直接當十二軸分數",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-02",
+      "first_fail": "WP-FHS-02.FIRST_FAIL:POLICY_NOT_LOADED",
+      "positive_oracle": "Source/Stage/Approve/Active/Loaded/Consumer各自hash同scope",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "Stage文件冒Loaded ACK",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-03",
+      "first_fail": "WP-FHS-03.FIRST_FAIL:ISSUER_BINDING_INVALID",
+      "positive_oracle": "原Receiver/Issuer registry同epoch與scope",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "候選ECP冒Permit",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-04",
+      "first_fail": "WP-FHS-04.FIRST_FAIL:RUNTIME_LEASE_BINDING_DENY",
+      "positive_oracle": "原Journal/Wake/Lease schema及checkpoint可讀",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "新增第二Queue或舊generation commit",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-05",
+      "first_fail": "WP-FHS-05.FIRST_FAIL:PIPD_FORMAL_PROMOTION_HOLD",
+      "positive_oracle": "PI語義/PD scope/DEV-OPS分路與strict input一致",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "sidecar塞strict payload或expected當Raw",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-06",
+      "first_fail": "WP-FHS-06.FIRST_FAIL:FIRST_EFFECT_CAPABILITY_MISSING",
+      "positive_oracle": "needed capability qualified後在exact Repo scope取得可逆diff/Raw",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "WP17尚未具能力就發首effect",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-07",
+      "first_fail": "WP-FHS-07.FIRST_FAIL:COMMANDER_BOOTSTRAP_INVERSION",
+      "positive_oracle": "A只讀/B隔離proposal使用原PLAN CAS Reader",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "要求先有同WO permit才能規劃或呼叫legacy SP",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-08",
+      "first_fail": "WP-FHS-08.FIRST_FAIL:EFFECT_REPLAY_DENY",
+      "positive_oracle": "已admitted WorkID單一lease以Worker真PID完成本operation",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "timeout同nonce盲replay",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-09",
+      "first_fail": "WP-FHS-09.FIRST_FAIL:SELF_ACCEPTANCE_DENY",
+      "positive_oracle": "真Raw與原Oracle交不同principal受保護Reader",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "Maker自簽PASS或借sibling verdict",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-10",
+      "first_fail": "WP-FHS-10.FIRST_FAIL:GWO_EVIDENCE_JOIN_INCOMPLETE",
+      "positive_oracle": "Fabric/HGK/SBL三GWO各自effect與G-A/G-B證據",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "一個GWO冒其餘兩個",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-11",
+      "first_fail": "WP-FHS-11.FIRST_FAIL:HOST_SP_MATRIX_INCOMPLETE",
+      "positive_oracle": "每Portable SP的Host install/load/invoke/nontrigger/remove",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "一SP安裝receipt當三SP9/9",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-12",
+      "first_fail": "WP-FHS-12.FIRST_FAIL:NORMAL_MODE_NOT_QUALIFIED",
+      "positive_oracle": "新PID普通Goal正式Profile/ToolAutoSelect/真served且test-only移除",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "B1專用Prompt或test plugin充NormalMode",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-13",
+      "first_fail": "WP-FHS-13.FIRST_FAIL:CAPABILITY_PARITY_NOT_PROVEN",
+      "positive_oracle": "needed CAP走原route且替代Parity同原功能",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "熱替代Issuer或以選型當invoke",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-14",
+      "first_fail": "WP-FHS-14.FIRST_FAIL:RELEASE_NOT_AUTHORIZED",
+      "positive_oracle": "供應鏈+受保護驗收+原Publisher/GHP-02實際readback",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "CI/作者檔案封裝冒Release",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-15",
+      "first_fail": "WP-FHS-15.FIRST_FAIL:TPM_SOURCE_STAGE_GUARD",
+      "positive_oracle": "24 base docs真hash Reader與18 Stage三SPEC具來源",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "要求重新上傳內建DOC或T4/T5自升正式",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-16",
+      "first_fail": "WP-FHS-16.FIRST_FAIL:DONOR_METHOD_DISPOSITION_DENY",
+      "positive_oracle": "24槽/25方法依原disposition產特定輸出且方法不假installer",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "REFERENCE_ONLY自動安裝",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-17",
+      "first_fail": "WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION",
+      "positive_oracle": "現有Issuer合法installer先建needed occupant再驗LoadedSHA",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "依WP06才准WP17形成循環",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-18",
+      "first_fail": "WP-FHS-18.FIRST_FAIL:REPAIR_SCOPE_DENY",
+      "positive_oracle": "first_fail最小cone在原Oracle Red→Patch→Green且budget有界",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "擴scope/改Oracle或刪舊失敗Raw",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-19",
+      "first_fail": "WP-FHS-19.FIRST_FAIL:SUPPLY_CHAIN_EVIDENCE_MISSING",
+      "positive_oracle": "license/NOTICE/SBOM/dependency/secret輸出與同candidate可回算",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "未執行掃描以名字充通過",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-20",
+      "first_fail": "WP-FHS-20.FIRST_FAIL:HOST_CELL_EVIDENCE_FOREIGN",
+      "positive_oracle": "192組合每Host/Mode/Provider具本cell Raw或明確NoFit",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "Hermes Raw借Claude/DeepSeek",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    },
+    {
+      "wp_id": "WP-FHS-21",
+      "first_fail": "WP-FHS-21.FIRST_FAIL:ORACLE_CELL_NOT_PROVEN",
+      "positive_oracle": "96cell及H4/SEAM按原predicate/校準逐格Reader可判",
+      "positive": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      },
+      "negative_oracle": "同一generic fixture聲稱全部已實測",
+      "negative": {
+        "classification": "UNBACKED",
+        "backing_registers": {}
+      }
+    }
+  ]
+}

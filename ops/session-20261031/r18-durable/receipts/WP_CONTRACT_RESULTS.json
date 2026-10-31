@@ -1,0 +1,483 @@
+{
+ "schema": "R18.WP_CONTRACT_HARNESS/1",
+ "checks_per_wp": 6,
+ "wp_count": 22,
+ "dag_acyclic": true,
+ "edge_types": {
+  "DATA_OR_ADMISSION": 34,
+  "CAPABILITY": 2
+ },
+ "results": [
+  {
+   "wp": "WP-FHS-00",
+   "name": "Source/Host Discovery",
+   "tier": "L1",
+   "effect_class": "SOURCE_READ",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "DONE",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-00.FIRST_FAIL:ROOT_CURRENTNESS_NOT_PROVEN"
+  },
+  {
+   "wp": "WP-FHS-01",
+   "name": "Authority/Oracle/Profile",
+   "tier": "L1",
+   "effect_class": "SOURCE_READ",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "DONE",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-01.FIRST_FAIL:PROFILE_OR_ORACLE_BIND_HOLD"
+  },
+  {
+   "wp": "WP-FHS-02",
+   "name": "Fabric Policy Consumer",
+   "tier": "L3",
+   "effect_class": "HOST_OP",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-02.FIRST_FAIL:POLICY_NOT_LOADED"
+  },
+  {
+   "wp": "WP-FHS-03",
+   "name": "HGK Registry/Issuer",
+   "tier": "L3",
+   "effect_class": "HOST_OP",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-03.FIRST_FAIL:ISSUER_BINDING_INVALID"
+  },
+  {
+   "wp": "WP-FHS-04",
+   "name": "Hermes Durable Runtime",
+   "tier": "L3",
+   "effect_class": "HOST_OP",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-04.FIRST_FAIL:RUNTIME_LEASE_BINDING_DENY"
+  },
+  {
+   "wp": "WP-FHS-05",
+   "name": "PIPD Native Compiler",
+   "tier": "L0",
+   "effect_class": "LOCAL_DRAFT_WRITE",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-05.FIRST_FAIL:PIPD_FORMAL_PROMOTION_HOLD"
+  },
+  {
+   "wp": "WP-FHS-06",
+   "name": "Legal First Reversible Slice",
+   "tier": "L2",
+   "effect_class": "REPO_WRITE",
+   "phase": "FIRST_EFFECT",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-06.FIRST_FAIL:FIRST_EFFECT_CAPABILITY_MISSING"
+  },
+  {
+   "wp": "WP-FHS-07",
+   "name": "Native PLAN Commander A/B/C",
+   "tier": "L0",
+   "effect_class": "LOCAL_DRAFT_WRITE",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-07.FIRST_FAIL:COMMANDER_BOOTSTRAP_INVERSION"
+  },
+  {
+   "wp": "WP-FHS-08",
+   "name": "FHS Execute Worker",
+   "tier": "L3",
+   "effect_class": "HOST_OP",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "PARKED",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-08.FIRST_FAIL:EFFECT_REPLAY_DENY"
+  },
+  {
+   "wp": "WP-FHS-09",
+   "name": "Challenge/Protected AO",
+   "tier": "L1",
+   "effect_class": "SOURCE_READ",
+   "phase": "QUALIFY",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-09.FIRST_FAIL:SELF_ACCEPTANCE_DENY"
+  },
+  {
+   "wp": "WP-FHS-10",
+   "name": "B1 3 GWO & G-A/G-B",
+   "tier": "L3",
+   "effect_class": "HOST_OP",
+   "phase": "QUALIFY",
+   "ledger_status": "PARKED",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-10.FIRST_FAIL:GWO_EVIDENCE_JOIN_INCOMPLETE"
+  },
+  {
+   "wp": "WP-FHS-11",
+   "name": "Portable Host Dogfood",
+   "tier": "L3",
+   "effect_class": "HOST_OP",
+   "phase": "QUALIFY",
+   "ledger_status": "PARKED",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-11.FIRST_FAIL:HOST_SP_MATRIX_INCOMPLETE"
+  },
+  {
+   "wp": "WP-FHS-12",
+   "name": "W18 Normal Mode",
+   "tier": "L3",
+   "effect_class": "HOST_OP",
+   "phase": "QUALIFY",
+   "ledger_status": "PARKED",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-12.FIRST_FAIL:NORMAL_MODE_NOT_QUALIFIED"
+  },
+  {
+   "wp": "WP-FHS-13",
+   "name": "CAP On-Demand + HotSwap",
+   "tier": "L3",
+   "effect_class": "HOST_OP",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "PARKED",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-13.FIRST_FAIL:CAPABILITY_PARITY_NOT_PROVEN"
+  },
+  {
+   "wp": "WP-FHS-14",
+   "name": "Release/Retire Candidate",
+   "tier": "L4",
+   "effect_class": "RELEASE",
+   "phase": "QUALIFY",
+   "ledger_status": "PARKED",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-14.FIRST_FAIL:RELEASE_NOT_AUTHORIZED"
+  },
+  {
+   "wp": "WP-FHS-15",
+   "name": "TPM Corpus & SPEC 18Stage",
+   "tier": "L0",
+   "effect_class": "LOCAL_DRAFT_WRITE",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-15.FIRST_FAIL:TPM_SOURCE_STAGE_GUARD"
+  },
+  {
+   "wp": "WP-FHS-16",
+   "name": "Donor/Method Slot Translation",
+   "tier": "L0",
+   "effect_class": "LOCAL_DRAFT_WRITE",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-16.FIRST_FAIL:DONOR_METHOD_DISPOSITION_DENY"
+  },
+  {
+   "wp": "WP-FHS-17",
+   "name": "CAP-BOOT Native Occupants",
+   "tier": "L3",
+   "effect_class": "HOST_OP",
+   "phase": "HOST_INSTALL_IF_AUTHORIZED",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION"
+  },
+  {
+   "wp": "WP-FHS-18",
+   "name": "FAR Bounded Repair & Incident",
+   "tier": "L2",
+   "effect_class": "REPO_WRITE",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "DONE",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-18.FIRST_FAIL:REPAIR_SCOPE_DENY"
+  },
+  {
+   "wp": "WP-FHS-19",
+   "name": "CI/Supply Chain & Requal",
+   "tier": "L1",
+   "effect_class": "SOURCE_READ",
+   "phase": "DESIGN_OR_BIND",
+   "ledger_status": "DONE",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-19.FIRST_FAIL:SUPPLY_CHAIN_EVIDENCE_MISSING"
+  },
+  {
+   "wp": "WP-FHS-20",
+   "name": "CLI/Agent/Host Kind Matrix",
+   "tier": "L3",
+   "effect_class": "HOST_OP",
+   "phase": "QUALIFY",
+   "ledger_status": "PARKED",
+   "needs_native_authority": true,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-20.FIRST_FAIL:HOST_CELL_EVIDENCE_FOREIGN"
+  },
+  {
+   "wp": "WP-FHS-21",
+   "name": "Challenge 96/H4/SEAM Coverage",
+   "tier": "L1",
+   "effect_class": "SOURCE_READ",
+   "phase": "QUALIFY",
+   "ledger_status": "PARTIAL",
+   "needs_native_authority": false,
+   "checks": {
+    "C1_first_fail_typed": true,
+    "C2_output_declared": true,
+    "C3_permission_basis_declared": true,
+    "C4_write_set_coherent": true,
+    "C5_deps_resolve_acyclic": true,
+    "C6_status_matches_effect_class": true
+   },
+   "failed_checks": [],
+   "contract": "CONTRACT_OK",
+   "invariant_evaluation": "INVARIANT_PROSE_ONLY",
+   "first_fail": "WP-FHS-21.FIRST_FAIL:ORACLE_CELL_NOT_PROVEN"
+  }
+ ],
+ "summary": {
+  "contract_ok": 22,
+  "contract_fail": 0,
+  "needs_native_authority": 11,
+  "executable_without_new_authority": 11,
+  "parked_but_not_native_gated": []
+ },
+ "claim_ceiling": "CONTRACT_LEVEL_NOT_NATIVE_CASE: these are mechanical checks of the DAG's own declared fields, not executions of the underlying work, and the prose invariants are not evaluated",
+ "next_legal_action": "evaluate the prose invariants per WP as executable assertions (contract-to-test generation) so each WP's positive/negative becomes a runnable case"
+}

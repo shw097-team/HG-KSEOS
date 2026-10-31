@@ -1,0 +1,22 @@
+{
+ "task": "WP-FHS-05 PIPD Compiler PI/PD/ECP candidates, reuse-and-verify",
+ "wp": "WP-FHS-05",
+ "pipd_repo": "C:\\Projects\\Agent_Workspace\\PIPD",
+ "pipd_present": true,
+ "candidate_artefacts_found": 61,
+ "candidate_examples": [
+  ".hgk/artifacts/s1/ecp.json",
+  ".hgk/artifacts/s1/pd_pkg.json",
+  ".hgk/artifacts/s1/pi_pkg.json",
+  ".hgk/artifacts/tqaep_design_tmp/ecp.json",
+  ".hgk/artifacts/tqaep_design_tmp/pi_empty_trace.json",
+  ".hgk/rounds/R2-20261009-qualification/execute/candidate/.hgk/artifacts/s1/ecp.json",
+  ".hgk/rounds/R2-20261009-qualification/execute/candidate/.hgk/artifacts/s1/pd_pkg.json",
+  ".hgk/rounds/R2-20261009-qualification/execute/candidate/.hgk/artifacts/s1/pi_pkg.json"
+ ],
+ "writer_ack_found": [],
+ "disposition": "HOLD_NO_WRITER_ACK",
+ "reason": "PI/PD/ECP promotion requires a Writer ACK; none is present, so the candidates stay candidates and this round does not promote them",
+ "next_legal_action": "obtain the Writer ACK from the PIPD Writer principal, then re-verify the candidate set",
+ "resume_predicate": "a Writer ACK artefact exists and names these candidates"
+}

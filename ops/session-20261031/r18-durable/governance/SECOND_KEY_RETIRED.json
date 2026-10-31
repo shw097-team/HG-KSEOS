@@ -1,0 +1,7 @@
+{
+ "schema": "R18.SECOND_OWNER_KEY.RETIRED/1",
+ "fingerprint": "be76097571a7d7fd73a84b4625a0b557364ba4e4be919fcfe83d4798a661a002",
+ "status": "RETIRED_SECOND_OWNER_KEY",
+ "why": "created before FAR_R18-10 established that the canonical owner identity is ~/.hgk-owner/owner.key.enc (fingerprint 412b3519…). It is kept only as evidence of the envelope drill and confers no authority.",
+ "authoritative_delegation": "governance/delegation_R18_canonical.json"
+}

@@ -1,0 +1,63 @@
+{
+ "schema": "HGK.OWNER_DELEGATION/2",
+ "delegation_id": "R19-CANON-2c250b16",
+ "round": "R19-FHS-SKELETON-SPINE",
+ "supersedes": "R18-CANON-6733b6bb",
+ "amendment_reason": "FAR R19 option B: the R18 record allowlisted 7 of 22 work packages and listed LOCAL_DRAFT_WRITE in deny, so two completed rows could not be closed; this record adds that class, bounded to the R19 round directories.",
+ "subject_package": "FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2",
+ "subject_digest_sha256": "5a06d8ddfcfaeefdda4430a0fcd0677e5ca036ac9e10072b5f00e141824f430d",
+ "owner_identity": "CANONICAL_HGK_OWNER (~/.hgk-owner/owner.key.enc)",
+ "owner_fingerprint": "412b351937be72a1",
+ "owner_public_key_hex": "d42c654cd1afba803ef78bee501aa3e2a3d33ff1305c52f914d3ff27bb9be379",
+ "signing_window_id": "WIN-254a1c9fbe72",
+ "signing_window_task": "R19-FHS-SKELETON-SPINE",
+ "signing_window_scope": [
+  "registry_row_sign",
+  "merkle_root_sign"
+ ],
+ "signing_window_effect_ceiling": "REPOSITORY_WRITE",
+ "signing_window_max_ops": 40,
+ "maker_principal": "HERMES-R18-EXECUTE-LANE",
+ "checker_principal": "SBL-ACCEPTANCE-CHALLENGE-SP",
+ "wp_allowlist": [
+  "WP-FHS-00",
+  "WP-FHS-01",
+  "WP-FHS-05",
+  "WP-FHS-06",
+  "WP-FHS-07",
+  "WP-FHS-09",
+  "WP-FHS-15",
+  "WP-FHS-16",
+  "WP-FHS-18",
+  "WP-FHS-19",
+  "WP-FHS-21"
+ ],
+ "effect_class_allowlist": [
+  "LOCAL_DRAFT_WRITE",
+  "REPO_WRITE_TO_CANDIDATE_BRANCH",
+  "SOURCE_READ"
+ ],
+ "deny": [
+  "RELEASE",
+  "HOST_INSTALL",
+  "secrets",
+  "force-push",
+  "main",
+  "merge",
+  "tag"
+ ],
+ "local_draft_write_set": [
+  "C:\\Projects\\Agent_Workspace\\var\\R19-FHS-20261029\\**",
+  "C:\\Projects\\Agent_Workspace\\var\\R19-NATIVE-EXEC\\**"
+ ],
+ "local_draft_write_set_note": "LOCAL_DRAFT_WRITE is permitted only inside these roots; a write outside them is outside the delegation and must be refused by the consumer",
+ "not_before": "2026-10-29T11:35:45+00:00",
+ "not_after": "2026-11-28T11:35:45+00:00",
+ "max_effects_per_class": {
+  "SOURCE_READ": 200,
+  "REPO_WRITE_TO_CANDIDATE_BRANCH": 20,
+  "LOCAL_DRAFT_WRITE": 40
+ },
+ "nonce_seed": "276d469f7597355c6ee835b4a16d2a96",
+ "claim_ceiling": "authorises only the listed WPs/classes for this subject digest until not_after. Not a native bundle, not a release authority, not an acceptance signature."
+}

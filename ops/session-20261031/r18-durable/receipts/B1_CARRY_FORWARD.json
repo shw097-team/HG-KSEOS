@@ -1,0 +1,132 @@
+{
+ "schema": "R18.FHS.B1_CARRY_FORWARD/1",
+ "collected_utc": "2026-10-29T05:11:59.281369+00:00",
+ "baseline_pointer": {
+  "path": "var\\B1-PIPD-PKG-20261027\\PROMOTED.json",
+  "sha256": "6a8477e84aadf026a28050ef3dd2b889ef2e80a426e3f9fab831ec1f5f4961d6",
+  "payload": {
+   "schema": "B1-PROMOTED-POINTER/1",
+   "version": "B1-LOCAL-2026-10-28",
+   "state": "ACTIVE_LOCAL_BASELINE",
+   "promoted_at": "2026-10-28T15:18:03",
+   "receipt": "var/B1-CONT-20261028/wave3/PROMOTION_RECEIPT.json",
+   "receipt_bindings_sha256": "5a19f3cdf8115c12fac4ee94de5396f3f7daf5d820b7e65c3c8a133662b70c57",
+   "signed_by": "OWNER-B1-412b351937be72a1",
+   "rollback_point": "SNAPSHOTS/B1_PRE_PROMOTION_20261028",
+   "verify": [
+    "python ../B1-CONT-20261028/wave3/verify_snapshot.py",
+    "python gates.py"
+   ],
+   "claim_ceiling": {
+    "is": [
+     "local operative baseline",
+     "gates conjunction PASS",
+     "owner-ruled declarations"
+    ],
+    "is_not": [
+     "release (release: NOT_RUN)",
+     "repo main promotion (PRs open)",
+     "third-party acceptance"
+    ]
+   }
+  }
+ },
+ "repos": {
+  "HG-KSEOS": {
+   "worktree_head": "47e10b48c9c36fc90165e79719653678b82e599d",
+   "worktree_branch": "codex/b1-r8-hgk-integration-20261027",
+   "origin_main": "f6dfb1e57162dc3868dc488482d249fc095eb429",
+   "origin_main_subject": "B1 closure 2026-10-28 (HG-KSEOS) — evidence index and docs",
+   "tag_b1_promote": "f6dfb1e57162dc3868dc488482d249fc095eb429",
+   "tag_points_at_origin_main": true
+  },
+  "Fabric": {
+   "worktree_head": "fffcb98bf8063e04f3fad2c726eb43fd70336d04",
+   "worktree_branch": "pub/far-minimax-mandate-20261021",
+   "origin_main": "316b691460638bdf38475c2c58aaad406aa6eb4f",
+   "origin_main_subject": "B1 closure 2026-10-28 (Fabric) — evidence index and docs",
+   "tag_b1_promote": "316b691460638bdf38475c2c58aaad406aa6eb4f",
+   "tag_points_at_origin_main": true
+  },
+  "PIPD": {
+   "worktree_head": "995c7ad0c69a05a0c5cf6528155a62020ce31f87",
+   "worktree_branch": "rescue/r5p-uncommitted-20261016",
+   "origin_main": "f6335a94157c61da75d92121d14c43feb413e981",
+   "origin_main_subject": "B1 closure 2026-10-28 (PIPD-LS-SP) — evidence index and docs",
+   "tag_b1_promote": "f6335a94157c61da75d92121d14c43feb413e981",
+   "tag_points_at_origin_main": true
+  },
+  "SBL": {
+   "worktree_head": "826ca066a1c2df2976c0d402018b79e1c79a444f",
+   "worktree_branch": "candidate/r14-ts15-kinds",
+   "origin_main": "fd62537a7ba29c3f2905fe42ddde9534674405d7",
+   "origin_main_subject": "B1 closure 2026-10-28 (SBL) — evidence index and docs",
+   "tag_b1_promote": "fd62537a7ba29c3f2905fe42ddde9534674405d7",
+   "tag_points_at_origin_main": true
+  }
+ },
+ "spine_population": {
+  "native_admission_events": 245,
+  "native_admission_nonces": 735,
+  "native_admission_leases": 245,
+  "workorders_total": 644,
+  "workorders_verified": 128,
+  "requirements_total": 964,
+  "project_FHS_MSC_R18": 22
+ },
+ "gate_rerun": {
+  "command": "python -B var/B1-PIPD-PKG-20261027/gates.py",
+  "exit_code": 0,
+  "stdout_tail": [
+   "{\"G-A\": \"HOLD\", \"G-A_passed\": \"5/6\", \"G-B\": \"PASS\", \"GWO\": {\"gwos\": 3, \"pass\": 3, \"per_gwo\": {\"GWO-SBL\": \"PASS\", \"GWO-HGK\": \"PASS\", \"GWO-FABRIC\": \"PASS\"}, \"verdict\": \"ALL_THREE_PASS\", \"g_b\": \"PASS\"}, \"release_status\": \"NOT_RUN\", \"owner_signature_attribution\": \"CRYPTOGRAPHIC_OWNER_CONTROL\", \"sourcefreeze_status\": \"NOT_RUN\", \"independent_audit\": \"PASS\", \"gates_conjunction\": \"HOLD\", \"sandbox_conjunction\": \"HOLD\", \"mission_complete\": false, \"blocker\": \"selfcheck failures: C99\"}",
+   " unmet: G-A2 declared denominators conserved (independent self-check)"
+  ],
+  "stderr_tail": []
+ },
+ "carry_forward_documents": [
+  {
+   "path": "var\\B1-CONT-20261028\\CLOSEOUT_2026-10-28.md",
+   "exists": true,
+   "sha256": "7e0bd93675747f7dee9c731a3f75954e49b2235d551ca610d3a0e86be0d05962",
+   "bytes": 5075
+  },
+  {
+   "path": "var\\B1-CONT-20261028\\RESUME_HERE.md",
+   "exists": true,
+   "sha256": "ad8727022fdedd7cad2893fae5dcaaa78b054e1aefe934a18bf57c7417517023",
+   "bytes": 17919
+  },
+  {
+   "path": "var\\B1-CONT-20261028\\SESSION_STATE.json",
+   "exists": true,
+   "sha256": "803b6f37b09a044eb8b87e708f15b5cfd1323a4499382e1dd4bb96cd2fc6ab95",
+   "bytes": 10722
+  },
+  {
+   "path": "var\\B1-CONT-20261028\\FAR_B1_v11_20261028.md",
+   "exists": true,
+   "sha256": "e559a0251631055ed3408bd0f652d9477b7fb68b8dee37c9976f8973f627782d",
+   "bytes": 4035
+  },
+  {
+   "path": "var\\B1-CONT-20261028\\wave3\\PROMOTION_RECEIPT.json",
+   "exists": true,
+   "sha256": "86047c90ceb9e9343f339c3618ddd5ad062be4964694fed368c31296dd469288",
+   "bytes": 2030
+  }
+ ],
+ "reuse_ceiling": {
+  "is": [
+   "B1 local operative baseline B1-LOCAL-2026-10-28",
+   "four repos origin/main carry the B1 closure evidence index and the b1-promote-20261028 tag",
+   "the native admission path ran for real (event/nonce/lease population measured above)"
+  ],
+  "is_not": [
+   "a permit for THIS subject: no native Issuer reference binds FHS-MSC-R18-20261029",
+   "release",
+   "external acceptance",
+   "a licence to reuse a B1 PASS verdict for a new subject"
+  ],
+  "reuse_rule": "reuse only verifiable experience and the local baseline; never borrow a Permit or a PASS across subjects (BODY-00 R2-00-RESUME QuestionKey includes subject and source_sha)."
+ }
+}

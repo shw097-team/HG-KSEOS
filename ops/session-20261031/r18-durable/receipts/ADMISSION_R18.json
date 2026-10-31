@@ -1,0 +1,91 @@
+{
+ "schema": "R18.FHS.ADMISSION/1",
+ "project_id": "FHS-MSC-R18-20261029",
+ "steps": [
+  {
+   "step": "lifecycle.start",
+   "ok": true,
+   "result": {
+    "project_id": "FHS-MSC-R18-20261029",
+    "run_id": "RUN-4E5ECB36",
+    "state": "PROJECT_CREATED",
+    "goal_hash": "2442fc57c8990c668683ac302572f3fa74f141526c501d2f3151eb3505010280",
+    "source_count": 0,
+    "current_workorder": null,
+    "last_checkpoint": null,
+    "attempt_budget": 3,
+    "attempts_used": 0,
+    "repair_count": 0,
+    "updated_at": "2026-10-29T04:43:09.641897Z",
+    "recent_transitions": [
+     {
+      "from": "",
+      "to": "PROJECT_CREATED",
+      "trigger": "PROJECT_CREATE",
+      "at": "2026-10-29T04:43:09.641897Z"
+     }
+    ]
+   }
+  }
+ ],
+ "requirements": {
+  "registered": 22,
+  "frozen": 22,
+  "ids": [
+   "R18-WP-FHS-00",
+   "R18-WP-FHS-01",
+   "R18-WP-FHS-02",
+   "R18-WP-FHS-03",
+   "R18-WP-FHS-04",
+   "R18-WP-FHS-05",
+   "R18-WP-FHS-06",
+   "R18-WP-FHS-07",
+   "R18-WP-FHS-08",
+   "R18-WP-FHS-09",
+   "R18-WP-FHS-10",
+   "R18-WP-FHS-11",
+   "R18-WP-FHS-12",
+   "R18-WP-FHS-13",
+   "R18-WP-FHS-14",
+   "R18-WP-FHS-15",
+   "R18-WP-FHS-16",
+   "R18-WP-FHS-17",
+   "R18-WP-FHS-18",
+   "R18-WP-FHS-19",
+   "R18-WP-FHS-20",
+   "R18-WP-FHS-21"
+  ],
+  "errors": []
+ },
+ "native_admission_probe": {
+  "refused": true,
+  "error_type": "InvariantViolation",
+  "error": "ERR_NATIVE_BUNDLE_REQUIRED",
+  "trace_head": [
+   "  File \"C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\native_admission.py\", line 66, in refuse",
+   "    raise InvariantViolation('ERR_NATIVE_'+code)",
+   "hg_kseos.errors.InvariantViolation: ERR_NATIVE_BUNDLE_REQUIRED"
+  ]
+ },
+ "status": {
+  "project_id": "FHS-MSC-R18-20261029",
+  "run_id": "RUN-4E5ECB36",
+  "state": "PROJECT_CREATED",
+  "goal_hash": "2442fc57c8990c668683ac302572f3fa74f141526c501d2f3151eb3505010280",
+  "source_count": 0,
+  "current_workorder": null,
+  "last_checkpoint": null,
+  "attempt_budget": 3,
+  "attempts_used": 0,
+  "repair_count": 0,
+  "updated_at": "2026-10-29T04:43:09.641897Z",
+  "recent_transitions": [
+   {
+    "from": "",
+    "to": "PROJECT_CREATED",
+    "trigger": "PROJECT_CREATE",
+    "at": "2026-10-29T04:43:09.641897Z"
+   }
+  ]
+ }
+}

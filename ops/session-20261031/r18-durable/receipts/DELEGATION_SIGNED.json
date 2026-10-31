@@ -1,0 +1,27 @@
+{
+ "schema": "R18.DELEGATION.SIGNED/1",
+ "signed_utc": "2026-10-29T06:02:19.980608+00:00",
+ "envelope": "governance/owner_envelope.json",
+ "delegation": "governance/delegation_R18.json",
+ "signature": "governance/delegation_R18.sig",
+ "owner_fingerprint": "be76097571a7d7fd73a84b4625a0b557364ba4e4be919fcfe83d4798a661a002",
+ "owner_public_key_hex": "97e2000b39a3e49b164b7e62317195ccc6deea36c826b416bba3593fc60321b5",
+ "delegation_id": "R18-FHS-SKELETON-SPINE-eaee207a",
+ "subject_digest_sha256": "5a06d8ddfcfaeefdda4430a0fcd0677e5ca036ac9e10072b5f00e141824f430d",
+ "wp_allowlist": [
+  "WP-FHS-00",
+  "WP-FHS-01",
+  "WP-FHS-09",
+  "WP-FHS-19",
+  "WP-FHS-21",
+  "WP-FHS-06",
+  "WP-FHS-18"
+ ],
+ "effect_class_allowlist": [
+  "SOURCE_READ",
+  "REPO_WRITE_TO_CANDIDATE_BRANCH"
+ ],
+ "not_after": "2026-11-28T06:02:19+00:00",
+ "signature_bytes": 64,
+ "signed_by": "owner key, passphrase entered by the human in a local modal window; the agent never saw the passphrase and never held the private key outside the sealed envelope"
+}

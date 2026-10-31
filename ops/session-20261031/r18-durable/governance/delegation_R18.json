@@ -1,0 +1,51 @@
+{
+ "schema": "HGK.OWNER_DELEGATION/1",
+ "delegation_id": "R18-FHS-SKELETON-SPINE-eaee207a",
+ "round": "R18-FHS-SKELETON-SPINE-20261029",
+ "subject_package": "FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2",
+ "subject_digest_sha256": "5a06d8ddfcfaeefdda4430a0fcd0677e5ca036ac9e10072b5f00e141824f430d",
+ "subject_digest_basis": "sha256 over 83 sorted (path, sha256) pairs from artifact_checksums.sha256",
+ "maker_principal": "HERMES-R18-EXECUTE-LANE",
+ "checker_principal": "SBL-ACCEPTANCE-CHALLENGE-SP",
+ "separation_of_duties": "maker != checker; the checker lane runs under its own SP identity and a different credential, and may not consume this delegation to write",
+ "wp_allowlist": [
+  "WP-FHS-00",
+  "WP-FHS-01",
+  "WP-FHS-09",
+  "WP-FHS-19",
+  "WP-FHS-21",
+  "WP-FHS-06",
+  "WP-FHS-18"
+ ],
+ "wp_excluded_with_reason": {
+  "WP-FHS-05": "C4: LOCAL_DRAFT_WRITE vs write_set BIND_EXACT_BY_ORIGINAL_OWNER",
+  "WP-FHS-07": "C4: same contradiction",
+  "WP-FHS-15": "C4: same contradiction",
+  "WP-FHS-16": "C4: same contradiction"
+ },
+ "effect_class_allowlist": [
+  "SOURCE_READ",
+  "REPO_WRITE_TO_CANDIDATE_BRANCH"
+ ],
+ "deny": [
+  "RELEASE",
+  "HOST_INSTALL",
+  "secrets",
+  "force-push",
+  "main",
+  "merge",
+  "tag",
+  "LOCAL_DRAFT_WRITE"
+ ],
+ "not_before": "2026-10-29T06:02:19+00:00",
+ "not_after": "2026-11-28T06:02:19+00:00",
+ "max_effects_per_class": {
+  "SOURCE_READ": 200,
+  "REPO_WRITE_TO_CANDIDATE_BRANCH": 20
+ },
+ "nonce_seed": "b01fc70d1fd64110bb790bba39c1a3bb",
+ "revocation": "delete governance/delegation_R18.json or record its delegation_id in the Issuer denylist; the envelope alone grants nothing",
+ "owner_public_key_hex": "97e2000b39a3e49b164b7e62317195ccc6deea36c826b416bba3593fc60321b5",
+ "owner_fingerprint": "be76097571a7d7fd73a84b4625a0b557364ba4e4be919fcfe83d4798a661a002",
+ "claim_ceiling": "authorises only what is listed, for this subject digest, until not_after. It is not a native bundle, not a release authority, and not an acceptance signature."
+}

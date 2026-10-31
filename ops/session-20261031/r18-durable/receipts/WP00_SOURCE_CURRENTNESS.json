@@ -1,0 +1,255 @@
+{
+ "schema": "R18.FHS.WP00.SOURCE_CURRENTNESS/1",
+ "wp": "WP-FHS-00",
+ "collected_utc": "2026-10-29T04:39:24.304813+00:00",
+ "canonical_package_root": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2",
+ "canonical_root_len": 217,
+ "max_payload_path_len": 289,
+ "path_transport": "win32 extended-length prefix \\\\?\\ (transport only; root string recorded verbatim)",
+ "outer_zip_sha256": "4f5d6e93a7fb300da452f3807f2a2e2368b4e57f2b8b980fdd0e4706a4b773a5",
+ "outer_zip_bytes": 13326288,
+ "counts": {
+  "files_on_disk": 85,
+  "payload_files": 78,
+  "manifest_rows": 82,
+  "checksum_rows": 83
+ },
+ "manifest": {
+  "verified_rows": 82,
+  "missing": [],
+  "mismatch": []
+ },
+ "checksums": {
+  "verified_rows": 83,
+  "missing": [],
+  "mismatch": []
+ },
+ "unlisted_payload_files": [],
+ "outer_zip_readback": {
+  "entries": 84,
+  "findings": [],
+  "covers_self_excluded_checksum": true
+ },
+ "probe_defects_and_corrections": [
+  {
+   "defect": "v1 classifier counted 03_TESTS_AND_READBACK/artifact_checksums.sha256 as an unlisted PAYLOAD file",
+   "why_wrong": "the checksum list is a derived register that by construction cannot list itself; README states the exclusion and the ZIP as the compensating readback",
+   "correction": "classified as DERIVED_CHECKSUM_SELF_EXCLUDED and the outer-ZIP readback was added so the file is still digest-verified against the archive member",
+   "recorded": "this receipt"
+  }
+ ],
+ "dag": {
+  "schema": "AUTHOR.DesignTypedDAG/1",
+  "native_authority": false,
+  "node_count": 22,
+  "edge_count": 36,
+  "edge_types": [
+   "CAPABILITY",
+   "DATA_OR_ADMISSION"
+  ],
+  "findings": [],
+  "waves": {
+   "0": [
+    "WP-FHS-00"
+   ],
+   "1": [
+    "WP-FHS-01",
+    "WP-FHS-04",
+    "WP-FHS-15",
+    "WP-FHS-16",
+    "WP-FHS-19"
+   ],
+   "2": [
+    "WP-FHS-02",
+    "WP-FHS-03",
+    "WP-FHS-05",
+    "WP-FHS-07",
+    "WP-FHS-21"
+   ],
+   "3": [
+    "WP-FHS-11",
+    "WP-FHS-17",
+    "WP-FHS-20"
+   ],
+   "4": [
+    "WP-FHS-06",
+    "WP-FHS-13"
+   ],
+   "5": [
+    "WP-FHS-08"
+   ],
+   "6": [
+    "WP-FHS-09",
+    "WP-FHS-18"
+   ],
+   "7": [
+    "WP-FHS-10",
+    "WP-FHS-14"
+   ],
+   "8": [
+    "WP-FHS-12"
+   ]
+  },
+  "tier_by_wp": {
+   "WP-FHS-00": "L1",
+   "WP-FHS-01": "L1",
+   "WP-FHS-02": "L3",
+   "WP-FHS-03": "L3",
+   "WP-FHS-04": "L3",
+   "WP-FHS-05": "L0",
+   "WP-FHS-06": "L2",
+   "WP-FHS-07": "L0",
+   "WP-FHS-08": "L3",
+   "WP-FHS-09": "L1",
+   "WP-FHS-10": "L3",
+   "WP-FHS-11": "L3",
+   "WP-FHS-12": "L3",
+   "WP-FHS-13": "L3",
+   "WP-FHS-14": "L4",
+   "WP-FHS-15": "L0",
+   "WP-FHS-16": "L0",
+   "WP-FHS-17": "L3",
+   "WP-FHS-18": "L2",
+   "WP-FHS-19": "L1",
+   "WP-FHS-20": "L3",
+   "WP-FHS-21": "L1"
+  },
+  "effect_by_wp": {
+   "WP-FHS-00": "SOURCE_READ",
+   "WP-FHS-01": "SOURCE_READ",
+   "WP-FHS-02": "HOST_OP",
+   "WP-FHS-03": "HOST_OP",
+   "WP-FHS-04": "HOST_OP",
+   "WP-FHS-05": "LOCAL_DRAFT_WRITE",
+   "WP-FHS-06": "REPO_WRITE",
+   "WP-FHS-07": "LOCAL_DRAFT_WRITE",
+   "WP-FHS-08": "HOST_OP",
+   "WP-FHS-09": "SOURCE_READ",
+   "WP-FHS-10": "HOST_OP",
+   "WP-FHS-11": "HOST_OP",
+   "WP-FHS-12": "HOST_OP",
+   "WP-FHS-13": "HOST_OP",
+   "WP-FHS-14": "RELEASE",
+   "WP-FHS-15": "LOCAL_DRAFT_WRITE",
+   "WP-FHS-16": "LOCAL_DRAFT_WRITE",
+   "WP-FHS-17": "HOST_OP",
+   "WP-FHS-18": "REPO_WRITE",
+   "WP-FHS-19": "SOURCE_READ",
+   "WP-FHS-20": "HOST_OP",
+   "WP-FHS-21": "SOURCE_READ"
+  },
+  "native_status_by_wp": {
+   "WP-FHS-00": "NATIVE_NOT_RUN",
+   "WP-FHS-01": "NATIVE_NOT_RUN",
+   "WP-FHS-02": "NATIVE_NOT_RUN",
+   "WP-FHS-03": "NATIVE_NOT_RUN",
+   "WP-FHS-04": "NATIVE_NOT_RUN",
+   "WP-FHS-05": "NATIVE_NOT_RUN",
+   "WP-FHS-06": "NATIVE_NOT_RUN",
+   "WP-FHS-07": "NATIVE_NOT_RUN",
+   "WP-FHS-08": "NATIVE_NOT_RUN",
+   "WP-FHS-09": "NATIVE_NOT_RUN",
+   "WP-FHS-10": "NATIVE_NOT_RUN",
+   "WP-FHS-11": "NATIVE_NOT_RUN",
+   "WP-FHS-12": "NATIVE_NOT_RUN",
+   "WP-FHS-13": "NATIVE_NOT_RUN",
+   "WP-FHS-14": "NATIVE_NOT_RUN",
+   "WP-FHS-15": "NATIVE_NOT_RUN",
+   "WP-FHS-16": "NATIVE_NOT_RUN",
+   "WP-FHS-17": "NATIVE_NOT_RUN",
+   "WP-FHS-18": "NATIVE_NOT_RUN",
+   "WP-FHS-19": "NATIVE_NOT_RUN",
+   "WP-FHS-20": "NATIVE_NOT_RUN",
+   "WP-FHS-21": "NATIVE_NOT_RUN"
+  }
+ },
+ "repos": {
+  "HG-KSEOS": {
+   "root": "C:\\Projects\\Agent_Workspace\\HG-KSEOS",
+   "is_git": true,
+   "head": "47e10b48c9c36fc90165e79719653678b82e599d",
+   "branch": "codex/b1-r8-hgk-integration-20261027",
+   "dirty_count": 8,
+   "dirty_sample": [
+    "M config/active-policy.json",
+    " M config/hermes-codex-lane.json",
+    " M config/lane-routing-registry.yaml",
+    " M config/model-lane-assignment.json",
+    " M \"docs/HG-KSEOS\\344\\275\\277\\347\\224\\250\\350\\252\\252\\346\\230\\216\\346\\226\\207\\346\\252\\224.md\"",
+    " M scripts/hgk-lane-dispatch.py",
+    "?? HG-KSEOS-far-minimax-r2/",
+    "?? evidence/review/EVIDENCE_B1_PIPD_R2_20261027.md"
+   ]
+  },
+  "Fabric": {
+   "root": "C:\\Projects\\Agent_Workspace\\Fabric",
+   "is_git": true,
+   "head": "fffcb98bf8063e04f3fad2c726eb43fd70336d04",
+   "branch": "pub/far-minimax-mandate-20261021",
+   "dirty_count": 12,
+   "dirty_sample": [
+    "M FABRIC/assurance/admissions/W3/W3-SWOF-R153-01.owner-attested.json",
+    " M \"FABRIC/docs/Fabric\\344\\275\\277\\347\\224\\250\\350\\252\\252\\346\\230\\216\\346\\226\\207\\346\\252\\224.md\"",
+    "?? FABRIC/evidence/review/EVIDENCE_B1_PIPD_R2_20261027.md",
+    "?? Fabric-rebind-publish/",
+    "?? _far_commit_msg.txt",
+    "?? evidence/FAR-FBKREORDER-20261021/",
+    "?? evidence/FAR-LANE-REMEDIATION-20261021/",
+    "?? evidence/review/",
+    "?? fabric-autonomous-research/methods/",
+    "?? fabric-autonomous-research/runs/FAR-20261021-024-fallback-chain-reorder/",
+    "?? fabric-autonomous-research/runs/FAR-20261022-027-sbl-hgk-degradation-rca/",
+    "?? stage/"
+   ]
+  },
+  "PIPD": {
+   "root": "C:\\Projects\\Agent_Workspace\\PIPD",
+   "is_git": true,
+   "head": "995c7ad0c69a05a0c5cf6528155a62020ce31f87",
+   "branch": "rescue/r5p-uncommitted-20261016",
+   "dirty_count": 231,
+   "dirty_sample": [
+    "M .hgk/artifacts/s1/TECHNOLOGY_ADMISSIONS.json",
+    " M openspec/changes/b1-native-lane-admission/tasks.md",
+    "?? .b1_evidence/",
+    "?? .hgk/artifacts/tqaep_design_tmp/",
+    "?? .hgk/preflight/R5-compiler/lane/log_ao.txt",
+    "?? .hgk/preflight/R5-compiler/lane/log_ao_attempt4_contaminated.txt",
+    "?? .hgk/preflight/R5-compiler/lane/log_wo1.txt",
+    "?? .hgk/preflight/R5-compiler/lane/log_wo2.txt",
+    "?? .hgk/preflight/R5-compiler/lane/log_wo3.txt",
+    "?? .hgk/preflight/R5-compiler/opencodex-config.backup-20261010.json",
+    "?? .hgk/preflight/R5R-compiler/",
+    "?? .hgk/rounds/R2-20261009-qualification/execute/knowledge/own-derived.db",
+    "?? .hgk/rounds/R4-20261009-focused-repair/W8/raw/W8c_attempt1_provider_error.log",
+    "?? .hgk/rounds/R4-20261009-focused-repair/W8/raw/W8c_attempt2_provider_error.log",
+    "?? .hgk/rounds/R5-20261009-s4-user-operability/ao/attempt4_contaminated/"
+   ]
+  },
+  "SBL": {
+   "root": "C:\\Projects\\Agent_Workspace\\SBL",
+   "is_git": true,
+   "head": "826ca066a1c2df2976c0d402018b79e1c79a444f",
+   "branch": "candidate/r14-ts15-kinds",
+   "dirty_count": 46,
+   "dirty_sample": [
+    "M contracts/compiled/thin-prompt.md",
+    " M evidence/compiler/acceptance.stdout.txt",
+    " M evidence/compiler/activation.stdout.txt",
+    " M evidence/compiler/lint.stdout.txt",
+    "?? SBL-install/",
+    "?? _control/",
+    "?? _handover/",
+    "?? _r11_packet/",
+    "?? _r12_close/",
+    "?? _r12_close_patch/",
+    "?? _r12_docs/",
+    "?? _r12_ev/",
+    "?? _r12_far/",
+    "?? _r12o2_checker_scratch/",
+    "?? _r13_far/"
+   ]
+  }
+ },
+ "verdict": "PASS"
+}

@@ -1,0 +1,148 @@
+{
+ "wp_count": 22,
+ "pooled_ids": {
+  "challenge96": 96,
+  "cells192": 192,
+  "children149": 149,
+  "b1_edges31": 27,
+  "runner_bindings": 282
+ },
+ "wps_with_backed_ref": 0,
+ "oracle_like_fields": {},
+ "edge_refs": 0,
+ "edge_refs_backed": 0,
+ "rows": [
+  {
+   "wp": "WP-FHS-00",
+   "refs_in_node": 1,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-01",
+   "refs_in_node": 2,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-02",
+   "refs_in_node": 2,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-03",
+   "refs_in_node": 2,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-04",
+   "refs_in_node": 2,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-05",
+   "refs_in_node": 2,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-06",
+   "refs_in_node": 6,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-07",
+   "refs_in_node": 3,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-08",
+   "refs_in_node": 3,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-09",
+   "refs_in_node": 3,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-10",
+   "refs_in_node": 3,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-11",
+   "refs_in_node": 3,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-12",
+   "refs_in_node": 3,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-13",
+   "refs_in_node": 3,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-14",
+   "refs_in_node": 4,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-15",
+   "refs_in_node": 2,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-16",
+   "refs_in_node": 2,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-17",
+   "refs_in_node": 4,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-18",
+   "refs_in_node": 2,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-19",
+   "refs_in_node": 2,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-20",
+   "refs_in_node": 3,
+   "refs_backed": 0,
+   "backed_sample": []
+  },
+  {
+   "wp": "WP-FHS-21",
+   "refs_in_node": 2,
+   "refs_backed": 0,
+   "backed_sample": []
+  }
+ ]
+}

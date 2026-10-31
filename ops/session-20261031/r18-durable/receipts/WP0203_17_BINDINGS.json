@@ -1,0 +1,67 @@
+{
+ "schema": "R18.WP0203_17_BINDINGS/1",
+ "measured_utc": null,
+ "wp02": {
+  "schema": "R18.WP02_FABRIC_POLICY_BINDING/1",
+  "policy_path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\active-policy.json",
+  "present": true,
+  "sha256": "a4f10c82679bc6719b37ba5db13c1924b837cb66e92de7a5b46cac6ac99f3ad2",
+  "epoch": null,
+  "keys": [
+   "claim_ceiling",
+   "consumer",
+   "declared_at",
+   "declared_by",
+   "far_ref",
+   "order_digest",
+   "order_text",
+   "policy_bytes",
+   "policy_digest",
+   "policy_path",
+   "schema",
+   "supersedes"
+  ],
+  "names_subject_digest": false,
+  "verdict": "POLICY_PRESENT_NO_EPOCH"
+ },
+ "wp03": {
+  "schema": "R18.WP03_ISSUER_BINDING/1",
+  "issuer_module_present": true,
+  "issuer_module_sha256": "314eeacd207c6808dfa7ddcf5ef12092861eeb2ff96b24ec5a216970fc889440",
+  "issuer_probe": {
+   "module": true,
+   "has_authorize": false
+  },
+  "registry_path": "C:\\ProgramData\\HG-KSEOS\\native-admission\\registry.json",
+  "registry_present": true,
+  "registry_rev": null,
+  "registry_rows": 0,
+  "owner_signed": false,
+  "refusal_reproduced": "ERR_NATIVE_BUNDLE_REQUIRED (recorded in receipts/WP02_03_REFUSAL.json of this round)",
+  "verdict": "ISSUER_PRESENT_REGISTRY_REV_None"
+ },
+ "wp17": {
+  "schema": "R18.WP17_CAPBOOT/1",
+  "candidates": [
+   {
+    "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\cap-boot.json",
+    "present": false,
+    "sha256": null
+   },
+   {
+    "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\shared-spine\\cap-boot.json",
+    "present": false,
+    "sha256": null
+   },
+   {
+    "path": "C:\\Projects\\Agent_Workspace\\Fabric\\config\\cap-boot.json",
+    "present": false,
+    "sha256": null
+   }
+  ],
+  "cap_boot_present": false,
+  "verdict": "MEASURED_ABSENT",
+  "claim_ceiling": "presence measurement only; a CAP-BOOT record is not a permit and authorises nothing"
+ },
+ "claim_ceiling": "binding presence measured on this host at this moment; none of it is a native PERMIT, and WP-02/03/17 remain non-native-effect WPs"
+}
