@@ -1,0 +1,11 @@
+{
+  "op": "traversal",
+  "exit": 3,
+  "started_at": "2026-10-31T21:22:50+0800",
+  "ended_at": "2026-10-31T21:22:50+0800",
+  "duration_s": 0.141,
+  "stdout_sha256": "1bec2a292f1a9c09e16f4a9d3f184892f48921bac00335960060f4e3a8cfe656",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 91,
+  "stderr_bytes": 0
+}

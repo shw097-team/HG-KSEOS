@@ -1,0 +1,56 @@
+{
+  "operation": "validate_grant only; no writes or dispatch",
+  "input_grant": {
+    "path": "C:\\wg\\grants\\wp17_grant.json",
+    "state": "PRESENT",
+    "sha256": "20c8f875e9bbc9b6d6d26a92b9c2dfdc0e511374ec7248444e03418ed100c9e1",
+    "bytes": 780
+  },
+  "mutant": {
+    "operation": "install_occupant",
+    "principal": "owner",
+    "nonce": "G-135455ca00280c39-1793377253-e5f44cfd",
+    "issued_at": 1793377253,
+    "expires_at": 1793463653,
+    "policy_epoch": "34",
+    "writeset": [
+      {
+        "path": "occupant_probe.py",
+        "preimage": "ABSENT"
+      },
+      {
+        "path": "occupant_probe.py.manifest.json",
+        "preimage": "ABSENT"
+      }
+    ],
+    "key_id": "135455ca00280c39",
+    "owner_authorization_sha256": "a73a7d9660b9f9dd941361c7c341c0c778fad075e062947d53f416f5306574fd",
+    "scope": "install_occupant: bounded WriteSet only",
+    "assurance_level": "CONFORMANCE_ONLY_TEST_SEAM",
+    "signature_alg": "Ed25519",
+    "references": [
+      {
+        "untrusted": "officer invalid signature control"
+      }
+    ]
+  },
+  "root": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root",
+  "targets_before": [
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py",
+      "state": "PRESENT",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py.manifest.json",
+      "state": "PRESENT",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    }
+  ],
+  "expected": "Reject unsigned production-grant downgrade and false ABSENT preimage",
+  "observed_refusal_code": null,
+  "accepted_by_validator": true,
+  "ceiling": "Validation-only counterexample; no native HOST_OP or dedicated WP06 fixture executed."
+}

@@ -1,0 +1,11 @@
+{
+  "op": "mark-unknown-absent",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:53+0800",
+  "ended_at": "2026-10-31T21:22:53+0800",
+  "duration_s": 0.143,
+  "stdout_sha256": "7db998cdb8e525b4494686ca2b53a902787387307f323fa72af9bcced46b884f",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 325,
+  "stderr_bytes": 0
+}

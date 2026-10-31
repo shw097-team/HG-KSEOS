@@ -1,0 +1,11 @@
+{
+  "op": "stage-rollback",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:52+0800",
+  "ended_at": "2026-10-31T21:22:52+0800",
+  "duration_s": 0.16,
+  "stdout_sha256": "2f1b08ffcf55ef8c9e45c87edd5569a0731a6e5d4ada1f59427fe775ffc8c014",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 1712,
+  "stderr_bytes": 0
+}

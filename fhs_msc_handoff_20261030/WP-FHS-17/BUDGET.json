@@ -1,0 +1,6 @@
+{
+  "subject": "8abe62fefd5f2f91c2f11fe7b6104429f8a26d20200b64ebd518fbd56595443e",
+  "rounds_at_reset": 25,
+  "reset_at": "2026-10-31T09:08:26",
+  "why": "rounds before this point were attempts that could not end (dispatcher timeout never killed the tree) plus my own repeated manual ticks while measuring; the harness now kills the tree and records exit TIMEOUT, and the child tree shares one hidden console. Budget reset on the record."
+}

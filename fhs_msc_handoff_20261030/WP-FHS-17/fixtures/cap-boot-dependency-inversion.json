@@ -1,0 +1,44 @@
+{
+  "command": "python tools/build_evidence.py",
+  "fixture": "cap-boot-dependency-inversion",
+  "nodes": [
+    "WP-FHS-00",
+    "WP-FHS-02",
+    "WP-FHS-03",
+    "WP-FHS-06",
+    "WP-FHS-17"
+  ],
+  "edges": [
+    [
+      "WP-FHS-00",
+      "WP-FHS-17"
+    ],
+    [
+      "WP-FHS-02",
+      "WP-FHS-17"
+    ],
+    [
+      "WP-FHS-03",
+      "WP-FHS-17"
+    ],
+    [
+      "WP-FHS-17",
+      "WP-FHS-06"
+    ]
+  ],
+  "mutant_added_edge": [
+    "WP-FHS-06",
+    "WP-FHS-17"
+  ],
+  "control_states": {
+    "WP-FHS-00": "READY",
+    "WP-FHS-02": "READY",
+    "WP-FHS-03": "READY",
+    "WP-FHS-06": "INCOMPLETE",
+    "WP-FHS-17": "NOT_RUN"
+  },
+  "expected": {
+    "control": "dispatch_allowed=true, effects=0 until dispatch",
+    "mutant": "WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION, effects=0"
+  }
+}

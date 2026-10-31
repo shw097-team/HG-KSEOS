@@ -1,0 +1,11 @@
+{
+  "op": "load-control",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:47+0800",
+  "ended_at": "2026-10-31T21:22:48+0800",
+  "duration_s": 0.966,
+  "stdout_sha256": "df599bf648cf28309ef0d44fcebef1afdf639fdbe2296107ba642fda4f773c9c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 6163,
+  "stderr_bytes": 0
+}

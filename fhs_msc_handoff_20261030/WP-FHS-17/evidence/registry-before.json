@@ -1,0 +1,257 @@
+{
+  "command": "python tools/registry_readback.py --out evidence/registry-before.json",
+  "generated_at": "2026-10-31T21:22:37+0800",
+  "db": {
+    "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\shared-spine\\hg-kseos.db",
+    "sha256": "73e949f8cb5d260a86f9f2b0698dcfbdfd12370d544b13f2493a46d2f060e75b",
+    "bytes": 823435264,
+    "mtime": 1793445427.085453,
+    "open_mode": "sqlite3 mode=ro&immutable=1 (main db file only; not a transactional live/WAL snapshot)"
+  },
+  "requirement": [
+    {
+      "requirement_id": "R18-WP-FHS-17",
+      "project_id": "FHS-MSC-R18-20261029",
+      "source_locator": "知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2::03_TESTS_AND_READBACK/wp_graph.json#WP-FHS-17",
+      "wording": "CAP-BOOT Native Occupants [L3/HOST_OP] output=needed能力最小HostOccupant+loaded ACK",
+      "priority": "P0",
+      "state": "FROZEN",
+      "version": 1,
+      "acceptance_id": "ACC-WP-FHS-17",
+      "rollback_pointer": "RB-R18-WP-FHS-17",
+      "created_at": "2026-10-29T04:43:11.326258Z",
+      "updated_at": "2026-10-29T04:43:11.396896Z"
+    }
+  ],
+  "acceptance": [
+    {
+      "acceptance_id": "ACC-WP-FHS-17",
+      "requirement_id": "R18-WP-FHS-17",
+      "oracle": "現有Issuer合法installer先建needed occupant再驗LoadedSHA",
+      "threshold": "HOST_INSTALL_IF_AUTHORIZED first_fail=WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION",
+      "negative_fixture": "依WP06才准WP17形成循環",
+      "verdict": "FAIL",
+      "evidence_ref": "REFUSAL-20261030-NO-HOST-CAPABILITY",
+      "updated_at": "2026-10-30T11:41:26.245104Z"
+    },
+    {
+      "acceptance_id": "ACC-WP-FHS-17-V3",
+      "requirement_id": "WP-FHS-17",
+      "oracle": "owner ruling: the officer refused a labelled conformance seam; issue_grant.py now produces an Ed25519-signed grant (key_id 135455ca00280c39) whose signature, nonce ledger, TTL and owner-authorization sha are all verified before any install",
+      "threshold": "PASS only if the install/load/invoke/negative/rollback raw is produced under a verified grant",
+      "negative_fixture": "no grant -> PARK_GRANT_MISSING; tampered payload -> mismatch; traversal -> PATH_TRAVERSAL",
+      "verdict": "NOT_RUN",
+      "evidence_ref": null,
+      "updated_at": "2026-10-31T00:22:22"
+    },
+    {
+      "acceptance_id": "ACC-WP-FHS-17-V4",
+      "requirement_id": "WP-FHS-17",
+      "oracle": "delivery 11_WORKPACKAGES_AND_DAG.md",
+      "threshold": "independent AO PASS",
+      "negative_fixture": "none",
+      "verdict": "NOT_RUN",
+      "evidence_ref": "OWNER-RULING: new capability not a new standard -- the continuation graph now carries an EXECUTE actuator (measured 00:51:27 and 01:07:46); the acceptance text of WP-FHS-11 is unchanged",
+      "updated_at": "2026-10-31T01:19:35"
+    }
+  ],
+  "upstream_acceptance": [
+    {
+      "acceptance_id": "ACC-WP-FHS-00",
+      "requirement_id": "R18-WP-FHS-00",
+      "oracle": "根路徑/HEAD/index/untracked/bytes SHA當期可讀",
+      "threshold": "DESIGN_OR_BIND first_fail=WP-FHS-00.FIRST_FAIL:ROOT_CURRENTNESS_NOT_PROVEN",
+      "negative_fixture": "README或junction別名冒真root",
+      "verdict": "PASS",
+      "evidence_ref": "EV-WP-FHS-00-20261030",
+      "updated_at": "2026-10-30T11:40:57.328660Z"
+    },
+    {
+      "acceptance_id": "ACC-WP-FHS-02",
+      "requirement_id": "R18-WP-FHS-02",
+      "oracle": "Source/Stage/Approve/Active/Loaded/Consumer各自hash同scope",
+      "threshold": "DESIGN_OR_BIND first_fail=WP-FHS-02.FIRST_FAIL:POLICY_NOT_LOADED",
+      "negative_fixture": "Stage文件冒Loaded ACK",
+      "verdict": "FAIL",
+      "evidence_ref": "REFUSAL-20261030-NO-HOST-CAPABILITY",
+      "updated_at": "2026-10-30T11:41:25.930633Z"
+    },
+    {
+      "acceptance_id": "ACC-WP-FHS-02-V2",
+      "requirement_id": "R18-WP-FHS-02",
+      "oracle": "…各自hash同scope；证据由原Consumer读回（officer 第十坐实测）",
+      "threshold": "DESIGN_OR_BIND first_fail=WP-FHS-02.FIRST_FAIL:POLICY_NOT_LOADED",
+      "negative_fixture": "Stage文件冒Loaded ACK（stage 现由 staging 作业产出，可重导，digest 绑定 receipt）",
+      "verdict": "PASS",
+      "evidence_ref": "EV-WP-FHS-02-SIX-LAYER-AO-R28J",
+      "updated_at": "2026-10-30T14:33:26.449239Z"
+    },
+    {
+      "acceptance_id": "ACC-WP-FHS-03",
+      "requirement_id": "R18-WP-FHS-03",
+      "oracle": "原Receiver/Issuer registry同epoch與scope",
+      "threshold": "DESIGN_OR_BIND first_fail=WP-FHS-03.FIRST_FAIL:ISSUER_BINDING_INVALID",
+      "negative_fixture": "候選ECP冒Permit",
+      "verdict": "FAIL",
+      "evidence_ref": "REFUSAL-20261030-NO-HOST-CAPABILITY",
+      "updated_at": "2026-10-30T11:41:25.974185Z"
+    },
+    {
+      "acceptance_id": "ACC-WP-FHS-03-V2",
+      "requirement_id": "REQ-WP-FHS-03-ADMISSION-V2",
+      "oracle": "oracle ORACLE-WP-FHS-03-04-08-CONFORMANCE-20261030 (O1..O6)",
+      "threshold": "independent officer returns overall=PASS with zero convictions",
+      "negative_fixture": "a check refused for the wrong reason, or a verdict that survives a forced failure",
+      "verdict": "PASS",
+      "evidence_ref": "EV-WP-FHS-03-04-08-ADMISSION-CHAIN-AO-R28C",
+      "updated_at": "2026-10-30T13:28:43.825495Z"
+    }
+  ],
+  "work_queue": [
+    {
+      "wp_id": "WP-FHS-00",
+      "title": "Source/Host Discovery",
+      "depends_on": "",
+      "effect_class": "SOURCE_READ",
+      "state": "PASS",
+      "evidence_ref": null,
+      "updated_at": "2026-10-31T11:17:07+00:00"
+    },
+    {
+      "wp_id": "WP-FHS-02",
+      "title": "Fabric Policy Consumer",
+      "depends_on": "WP-FHS-01",
+      "effect_class": "HOST_OP",
+      "state": "PASS",
+      "evidence_ref": null,
+      "updated_at": "2026-10-31T11:17:07+00:00"
+    },
+    {
+      "wp_id": "WP-FHS-03",
+      "title": "HGK Registry/Issuer",
+      "depends_on": "WP-FHS-01",
+      "effect_class": "HOST_OP",
+      "state": "PASS",
+      "evidence_ref": null,
+      "updated_at": "2026-10-31T11:17:07+00:00"
+    },
+    {
+      "wp_id": "WP-FHS-06",
+      "title": "Legal First Reversible Slice",
+      "depends_on": "WP-FHS-02,WP-FHS-03,WP-FHS-04,WP-FHS-05,WP-FHS-17",
+      "effect_class": "REPO_WRITE",
+      "state": "PASS",
+      "evidence_ref": null,
+      "updated_at": "2026-10-31T11:17:07+00:00"
+    },
+    {
+      "wp_id": "WP-FHS-13",
+      "title": "CAP On-Demand + HotSwap",
+      "depends_on": "WP-FHS-16,WP-FHS-17",
+      "effect_class": "HOST_OP",
+      "state": "FAIL",
+      "evidence_ref": null,
+      "updated_at": "2026-10-31T11:17:07+00:00"
+    },
+    {
+      "wp_id": "WP-FHS-17",
+      "title": "CAP-BOOT Native Occupants",
+      "depends_on": "WP-FHS-00,WP-FHS-02,WP-FHS-03",
+      "effect_class": "HOST_OP",
+      "state": "NOT_RUN",
+      "evidence_ref": "OWNER-RULING:production Ed25519 grant via issue_grant.py replaces the conformance seam the officer refused",
+      "updated_at": "2026-10-31T11:17:07+00:00"
+    }
+  ],
+  "taskspecs": [],
+  "native_admission": {
+    "lease_rows_total": 245,
+    "nonce_rows_total": 735,
+    "leases_naming_wp17": [],
+    "nonces_bound_to_wp17_subject": [],
+    "note": "native_admission_nonces stores (nonce, subject_sha256) only; it has no WP-FHS-17 row and no grant payload column, so it cannot admit this operation"
+  },
+  "provider_bindings": [],
+  "current_need_search": {
+    "needles": [
+      "CurrentNeed",
+      "Current Need",
+      "current_need",
+      "SourceSelectionID",
+      "Source Selection",
+      "OriginalDisposition",
+      "Original Disposition"
+    ],
+    "text_hits": {
+      "CurrentNeed": 0,
+      "Current Need": 0,
+      "current_need": 0,
+      "SourceSelectionID": 0,
+      "Source Selection": 20,
+      "OriginalDisposition": 0,
+      "Original Disposition": 0
+    },
+    "examples": {
+      "CurrentNeed": [],
+      "Current Need": [],
+      "current_need": [],
+      "SourceSelectionID": [],
+      "Source Selection": [
+        {
+          "table": "candidates",
+          "column": "body",
+          "rowid": 253,
+          "excerpt": "# 《AQT_v3.0_專業技術文檔_DOC-21》\n\n> **Source-to-Prose、NRTV 與發佈誠實性**  \n> **Source-to-Prose, No-Return-to-Volume and Release Truthfulness**  \n> **AQT-DOC21-CARS｜Compila"
+        },
+        {
+          "table": "candidates",
+          "column": "body",
+          "rowid": 299,
+          "excerpt": "# 《ICT_專業技術文檔_v6.0_DOC-12》\n\n> **正式中文名稱**：ICT v6.0 AI-Readable Developer Interface、Schema、RAG、Retrieval Eval 與 NRTV 專業技術文檔  \n> **English**：ICT v6.0 AI-Readable D"
+        },
+        {
+          "table": "candidates",
+          "column": "body",
+          "rowid": 332,
+          "excerpt": "---\ntitle: \"台股市場&趨勢_專業技術文檔_v2.0_DOC-05\"\nversion: \"2026-07-25_r1\"\ngenerated_at: \"2026-07-25T23:48:55+08:00\"\ntimezone: \"Asia/Taipei\"\nartifact_type: \"S5_single_DOC"
+        }
+      ],
+      "OriginalDisposition": [],
+      "Original Disposition": []
+    },
+    "structural_columns": {
+      "tables_with_need_column": [],
+      "tables_with_selection_column": [],
+      "tables_with_disposition_column": [
+        "provider_bindings"
+      ]
+    },
+    "object_model": {
+      "tables_inspected": 36,
+      "columns_named_like_a_need_or_selection": [],
+      "prose_only_text_hits": true,
+      "prose_tables": [
+        "candidates",
+        "knowledge_docs",
+        "memory_records",
+        "source_units"
+      ],
+      "prose_table_rule": "candidates|knowledge_docs|source_units|memory_records|knowledge_fts*",
+      "non_prose_text_hits": [],
+      "provider_bindings_disposition_values": [
+        "ADAPTED",
+        "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "DEFERRED_BY_EVIDENCE",
+        "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "PREFERRED_DEFAULT"
+      ],
+      "note": "provider_bindings.disposition is the provider enum dimension; it is not an OriginalDisposition for a need and is excluded from the object-model match."
+    },
+    "conclusion": "ABSENT_AS_OBJECT_MODEL: no table or column can hold an admitted CurrentNeed / SourceSelectionID / OriginalDisposition; every text hit is inside a free-text document body"
+  },
+  "notes": [
+    "Read-only: no INSERT/UPDATE/DELETE is issued.",
+    "ACC-WP-FHS-17-V3 is an owner-ruling text row, not an independent officer oracle.",
+    "WAL is not read; a concurrent writer between before/after is not excluded."
+  ]
+}

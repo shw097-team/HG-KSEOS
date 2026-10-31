@@ -1,0 +1,11 @@
+{
+  "need_id": "NEED-WP-FHS-17-CAP-BOOT-LOADED-ACK",
+  "subject_sha256": "4c12bde71577299da3344278bb106c10f082adf86c94ea93249f3d09888d8a76",
+  "nonce": "G-135455ca00280c39-1793452966-dc6c2d20",
+  "payload": {
+    "operation": "invoke_needed_feature",
+    "wp": "WP-FHS-17",
+    "request": "emit CAP-BOOT loaded ACK for the current subject",
+    "input_value": 20261031
+  }
+}

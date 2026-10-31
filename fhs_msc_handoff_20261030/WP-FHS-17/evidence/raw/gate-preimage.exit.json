@@ -1,0 +1,11 @@
+{
+  "op": "gate-preimage",
+  "exit": 3,
+  "started_at": "2026-10-31T21:22:51+0800",
+  "ended_at": "2026-10-31T21:22:52+0800",
+  "duration_s": 0.191,
+  "stdout_sha256": "da2f625aca53636aff2daa13c27f5279356e2fcb3129505a656ebf2e2907200c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 1364,
+  "stderr_bytes": 0
+}

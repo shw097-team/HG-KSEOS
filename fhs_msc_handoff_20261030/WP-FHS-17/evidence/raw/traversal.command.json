@@ -1,0 +1,29 @@
+{
+  "op": "traversal",
+  "argv": [
+    "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+    "C:\\wg\\queue\\WP-FHS-17\\tools\\wp17_receiver.py",
+    "writeset",
+    "--writeset",
+    "fixtures/traversal-writeset.json",
+    "--root",
+    "evidence/traversal-root",
+    "--out",
+    "evidence/negatives/traversal.json"
+  ],
+  "command": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe C:\\wg\\queue\\WP-FHS-17\\tools\\wp17_receiver.py writeset --writeset fixtures/traversal-writeset.json --root evidence/traversal-root --out evidence/negatives/traversal.json",
+  "cwd": "C:\\wg\\queue\\WP-FHS-17",
+  "env": {
+    "python": "3.11.17",
+    "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "username": "user",
+    "computername": "DESKTOP-57EO414",
+    "cwd": "C:\\wg\\queue\\WP-FHS-17",
+    "PYTHONHASHSEED": "0",
+    "PYTHONIOENCODING": "utf-8",
+    "PATH_sha256": "1c4029b2a8708ba4608831a0a7e3775305d01142de7c9af30112d667a0805446"
+  },
+  "started_at": "2026-10-31T21:22:50+0800"
+}

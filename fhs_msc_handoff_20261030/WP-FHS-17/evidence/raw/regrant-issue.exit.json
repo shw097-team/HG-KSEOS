@@ -1,0 +1,11 @@
+{
+  "op": "regrant-issue",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:51+0800",
+  "ended_at": "2026-10-31T21:22:51+0800",
+  "duration_s": 0.188,
+  "stdout_sha256": "0a70b2b4c8f6913388412884c0994955ab1660cce81c0a3e091ac5fa9494ed0f",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 303,
+  "stderr_bytes": 0
+}

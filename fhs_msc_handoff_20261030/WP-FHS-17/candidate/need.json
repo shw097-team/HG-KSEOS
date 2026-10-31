@@ -1,0 +1,142 @@
+{
+  "command": "python tools/build_evidence.py",
+  "need_id": "NEED-WP-FHS-17-CAP-BOOT-LOADED-ACK",
+  "wp": "WP-FHS-17",
+  "subject": "WP-FHS-17",
+  "subject_sha256": "4c12bde71577299da3344278bb106c10f082adf86c94ea93249f3d09888d8a76",
+  "source_sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+  "brief_sha256": "d008d6ec46badfbdbfdb3e024a2f9490b2483647809773cdd2a8bbc1ed0fc3ae",
+  "oracle_sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+  "candidate_sha256": "dc35d0fccbac0841a92413d8f44b4d72771b976e4ea86dc22cc15f16f1bd3ca1",
+  "package_index_sha256": "72e3e0adf6cf78fa3b808413befea6dcbdde530529fc8ebd9afb855689782308",
+  "scope": "CAP-BOOT host capability registry, local-win",
+  "policy_epoch": "34",
+  "operation": "install_occupant",
+  "host": {
+    "name": "local-win",
+    "cell": "CAP-BOOT",
+    "kind": "host-capability-registry"
+  },
+  "version": "1.0.0",
+  "occupant_id": "OCC-CAPBOOT-LOADED-ACK",
+  "entry_point": "occupant/capboot_attest.py",
+  "occupant_sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+  "occupant_bytes": 9557,
+  "manifest": "occupant/capboot_attest.manifest.json",
+  "manifest_sha256": "d96765655ef40486e6b97455c0d57218ce24aa266760fb3bf165201b355eaa9b",
+  "current_need": {
+    "status": "NOT_ADMITTED__ABSENT_AS_OBJECT_MODEL",
+    "admitted_current_need": null,
+    "search_file": "evidence/registry-before.json#current_need_search",
+    "db_sha256": "73e949f8cb5d260a86f9f2b0698dcfbdfd12370d544b13f2493a46d2f060e75b",
+    "search_conclusion": "ABSENT_AS_OBJECT_MODEL: no table or column can hold an admitted CurrentNeed / SourceSelectionID / OriginalDisposition; every text hit is inside a free-text document body",
+    "object_model": {
+      "tables_inspected": 36,
+      "columns_named_like_a_need_or_selection": [],
+      "prose_only_text_hits": true,
+      "prose_tables": [
+        "candidates",
+        "knowledge_docs",
+        "memory_records",
+        "source_units"
+      ],
+      "prose_table_rule": "candidates|knowledge_docs|source_units|memory_records|knowledge_fts*",
+      "non_prose_text_hits": [],
+      "provider_bindings_disposition_values": [
+        "ADAPTED",
+        "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "DEFERRED_BY_EVIDENCE",
+        "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "PREFERRED_DEFAULT"
+      ],
+      "note": "provider_bindings.disposition is the provider enum dimension; it is not an OriginalDisposition for a need and is excluded from the object-model match."
+    },
+    "tables_inspected": 36,
+    "columns_named_like_a_need_or_selection": [],
+    "found": 0,
+    "why": "No table or column in the original SharedSpine database can hold an admitted CurrentNeed / SourceSelectionID / OriginalDisposition, and no requirement/acceptance row for WP-FHS-17 carries one. `python tools/registry_readback.py` re-derives this over every table's schema and every text column. A CurrentNeed object therefore cannot be *resolved* within this work package without inventing a registry, which the brief forbids. See EVIDENCE_GAP.md (REAL_CURRENT_NEED)."
+  },
+  "derived_need_source": {
+    "kind": "DERIVED_NOT_ADMITTED",
+    "from": [
+      "R18-WP-FHS-17 (FROZEN v1 P0)",
+      "ACC-WP-FHS-17 oracle + negative fixture",
+      "WP-FHS-17 card in 11_WORKPACKAGES_AND_DAG.md",
+      "consumer operation=install_occupant, scope=CAP-BOOT"
+    ],
+    "registry_binding": {
+      "requirement": {
+        "requirement_id": "R18-WP-FHS-17",
+        "project_id": "FHS-MSC-R18-20261029",
+        "source_locator": "知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2::03_TESTS_AND_READBACK/wp_graph.json#WP-FHS-17",
+        "wording": "CAP-BOOT Native Occupants [L3/HOST_OP] output=needed能力最小HostOccupant+loaded ACK",
+        "priority": "P0",
+        "state": "FROZEN",
+        "version": 1,
+        "acceptance_id": "ACC-WP-FHS-17",
+        "rollback_pointer": "RB-R18-WP-FHS-17",
+        "created_at": "2026-10-29T04:43:11.326258Z",
+        "updated_at": "2026-10-29T04:43:11.396896Z"
+      },
+      "acceptance": {
+        "acceptance_id": "ACC-WP-FHS-17",
+        "requirement_id": "R18-WP-FHS-17",
+        "oracle": "現有Issuer合法installer先建needed occupant再驗LoadedSHA",
+        "threshold": "HOST_INSTALL_IF_AUTHORIZED first_fail=WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION",
+        "negative_fixture": "依WP06才准WP17形成循環",
+        "verdict": "FAIL",
+        "evidence_ref": "REFUSAL-20261030-NO-HOST-CAPABILITY",
+        "updated_at": "2026-10-30T11:41:26.245104Z"
+      },
+      "work_queue": {
+        "wp_id": "WP-FHS-17",
+        "title": "CAP-BOOT Native Occupants",
+        "depends_on": "WP-FHS-00,WP-FHS-02,WP-FHS-03",
+        "effect_class": "HOST_OP",
+        "state": "NOT_RUN",
+        "evidence_ref": "OWNER-RULING:production Ed25519 grant via issue_grant.py replaces the conformance seam the officer refused",
+        "updated_at": "2026-10-31T11:17:07+00:00"
+      },
+      "taskspecs": [],
+      "row_digests": {
+        "requirement": "79cb6f5d1c34ba3e6f5c1ed99b9da6fc2fdb216e7020bd5c6320eff3b76499ee",
+        "acceptance": "7453dfe0ea644f7181673f1130b30157b3d778f6c37f4a6e4bda7a6b8fe58d5e",
+        "work_queue": "e62ff0d59feda53a6654c793d03e9c64f19176175c66f0aad3c1d254c766734f",
+        "taskspecs": null
+      }
+    },
+    "source_selection_id": "SS-WP-FHS-17-477e014ecaa8ffcd6d0c0348ca1408e9",
+    "source_selection_id_kind": "DERIVED: sha256 over requirement row + acceptance row + source card + brief + operation/scope/epoch; the registry holds no SourceSelectionID",
+    "original_disposition": "INSTALL",
+    "original_disposition_kind": "DERIVED from the WP card's output clause (needed能力最小HostOccupant+loaded ACK); the registry holds no OriginalDisposition column",
+    "ceiling": "This binds the need to the real, hashable registry rows and to the admitted consumer operation, but it is not an admitted CurrentNeed. An officer must not read it as one."
+  },
+  "needed_occupants": [
+    {
+      "occupant_id": "OCC-CAPBOOT-LOADED-ACK",
+      "version": "1.0.0",
+      "entry_point": "occupant/capboot_attest.py",
+      "sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+      "bytes": 9557,
+      "manifest": "occupant/capboot_attest.manifest.json",
+      "manifest_sha256": "d96765655ef40486e6b97455c0d57218ce24aa266760fb3bf165201b355eaa9b",
+      "dedup_key": "CAP-BOOT/loaded-ACK/minimal/python-stdlib/v1",
+      "disposition": "INSTALL",
+      "required_feature": "emit a loaded ACK whose loaded_sha256 is computed by the loaded process and whose functional_output binds subject/need/nonce/input"
+    }
+  ],
+  "finite_set": {
+    "size": 1,
+    "construction": "The card asks for the minimum needed HostOccupant plus loaded ACK. One occupant satisfies it. No Native20/Default30/485 enumeration is promoted to an install gate; DEFER/REJECT and reference-only entries do not become binaries.",
+    "deferred": [],
+    "rejected": []
+  },
+  "original_consumer": {
+    "name": "原 Host capability Registry/Consumer",
+    "available_locally": false,
+    "substitute": "candidate/package/consumer/wp17_consumer.py (bounded; ceiling stated)"
+  },
+  "draft_nonce": "G-135455ca00280c39-1793452966-dc6c2d20",
+  "ceiling": "Bounded WP-local chain. Without a ledger-issued grant the install is a PARK, not a HOST_OP.",
+  "admission_id": "ADM-135455ca00280c39-1793452966-3d50f4"
+}

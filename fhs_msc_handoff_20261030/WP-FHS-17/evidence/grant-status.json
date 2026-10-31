@@ -1,0 +1,13 @@
+{
+  "command": "python tools/build_evidence.py",
+  "grant_file": "evidence/grant.json",
+  "grant_sha256": "683432e43ca735573ad79d0f40fc8f980298a9b9ce33d7f5b59d63ed2be2126b",
+  "issue_exit": 0,
+  "issue_stderr_tail": "",
+  "nonce": "G-135455ca00280c39-1793452966-dc6c2d20",
+  "nonce_present_in_original_ledger": true,
+  "ledgered": true,
+  "assurance_level": "PRODUCTION_ISSUER_SOFTWARE",
+  "verdict": "LEDGERED_ADMISSION",
+  "reason": "the original Issuer nonce ledger is outside this work package and the workspace sandbox denies appending to it"
+}

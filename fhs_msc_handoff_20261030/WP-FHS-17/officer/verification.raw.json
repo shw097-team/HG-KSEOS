@@ -1,0 +1,290 @@
+{
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261030232608",
+  "started_at": "2026-10-31T11:41:09.218881+00:00",
+  "finished_at": "2026-10-31T11:41:09.296391+00:00",
+  "mode": "VERIFY_ONLY",
+  "runtime": "3.11.17 (main, Oct  3 2026, 01:03:09) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+  "cwd": "C:\\wg\\queue\\WP-FHS-17",
+  "fixed_inputs_before": [
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+      "state": "PRESENT",
+      "sha256": "d008d6ec46badfbdbfdb3e024a2f9490b2483647809773cdd2a8bbc1ed0fc3ae",
+      "size_bytes": 19763
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\oracle.json",
+      "state": "PRESENT",
+      "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+      "size_bytes": 861
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\need.json",
+      "state": "PRESENT",
+      "sha256": "1537cc8d6159a8444194784a35061796577bffc9237f3aeda9091785d734937a",
+      "size_bytes": 7706
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\source-pin.json",
+      "state": "PRESENT",
+      "sha256": "d0fd205e88ad160c031c9946e0a7cc8af612e03db1b32f8a2e2674ee3542d6d2",
+      "size_bytes": 1674
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\package-index.json",
+      "state": "PRESENT",
+      "sha256": "49a25fc6702a3d8485edaeca55c56bbddc6fe831ceb67ff178ac7e68048b4e80",
+      "size_bytes": 1398
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json",
+      "state": "PRESENT",
+      "sha256": "5686adf3ed0709825d02d6b3daa09839a35d7db3b4239ba8120311f8bc21dfb2",
+      "size_bytes": 1810
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-before.json",
+      "state": "PRESENT",
+      "sha256": "6e0aa09d4a11a72b580cf9de0cb4404c1f1a954b589c0a482ed151d7ca9c9892",
+      "size_bytes": 10279
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\admission.json",
+      "state": "PRESENT",
+      "sha256": "06f5dfe07d62a50495e87b7b8653da6a8f75cbff0f0166ed931f981aa86a48de",
+      "size_bytes": 1057
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install.json",
+      "state": "PRESENT",
+      "sha256": "77a10a12d8b22a921dc7cb0e7065ff30956c467787028e035dc397281dbb6400",
+      "size_bytes": 181
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\fresh-load.json",
+      "state": "PRESENT",
+      "sha256": "4aa3e36d71267411e8d825ab4a5f7edfe36a2faa68c732cb52b93d7d664720e1",
+      "size_bytes": 4199
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\invoke.json",
+      "state": "PRESENT",
+      "sha256": "6810deebca6425ab2969967a5a613b971ccd4573965b9f437a2dd05070930875",
+      "size_bytes": 1498
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\cap-boot-dependency-inversion.json",
+      "state": "PRESENT",
+      "sha256": "281789cc154dee73189cb37a9bc9a8b442d9a61513b8c3a4ab2d736d58a92871",
+      "size_bytes": 850
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\loaded-origin-mismatch.json",
+      "state": "PRESENT",
+      "sha256": "c54d549afd6c3d8b80dde75c978b4cf0727cb4888121bc0389b6c58cce14c82a",
+      "size_bytes": 1596
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\negative-results.json",
+      "state": "PRESENT",
+      "sha256": "2f03ddaf101b9f5ceeff7518b3a9576ae9af75cadb918f387e150ff0d41f3819",
+      "size_bytes": 13609
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\rollback-resume.json",
+      "state": "PRESENT",
+      "sha256": "52f3f25179b4b691178caf377075c539a331219b16374d3445316cddaeba8a00",
+      "size_bytes": 3555
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\tools\\reproduce.ps1",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\run-index.json",
+      "state": "PRESENT",
+      "sha256": "9d099c38a8a364f1b4da619f0c8142b968c28565afc497a1bf416e418178f912",
+      "size_bytes": 68011
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-after.json",
+      "state": "PRESENT",
+      "sha256": "aa59b13bd8e0d95a4b70eeff2bf6879a2a909d9223835ec2677aefd4e8d02288",
+      "size_bytes": 10278
+    }
+  ],
+  "fixed_inputs_after": [
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+      "state": "PRESENT",
+      "sha256": "d008d6ec46badfbdbfdb3e024a2f9490b2483647809773cdd2a8bbc1ed0fc3ae",
+      "size_bytes": 19763
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\oracle.json",
+      "state": "PRESENT",
+      "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+      "size_bytes": 861
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\need.json",
+      "state": "PRESENT",
+      "sha256": "1537cc8d6159a8444194784a35061796577bffc9237f3aeda9091785d734937a",
+      "size_bytes": 7706
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\source-pin.json",
+      "state": "PRESENT",
+      "sha256": "d0fd205e88ad160c031c9946e0a7cc8af612e03db1b32f8a2e2674ee3542d6d2",
+      "size_bytes": 1674
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\package-index.json",
+      "state": "PRESENT",
+      "sha256": "49a25fc6702a3d8485edaeca55c56bbddc6fe831ceb67ff178ac7e68048b4e80",
+      "size_bytes": 1398
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json",
+      "state": "PRESENT",
+      "sha256": "5686adf3ed0709825d02d6b3daa09839a35d7db3b4239ba8120311f8bc21dfb2",
+      "size_bytes": 1810
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-before.json",
+      "state": "PRESENT",
+      "sha256": "6e0aa09d4a11a72b580cf9de0cb4404c1f1a954b589c0a482ed151d7ca9c9892",
+      "size_bytes": 10279
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\admission.json",
+      "state": "PRESENT",
+      "sha256": "06f5dfe07d62a50495e87b7b8653da6a8f75cbff0f0166ed931f981aa86a48de",
+      "size_bytes": 1057
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install.json",
+      "state": "PRESENT",
+      "sha256": "77a10a12d8b22a921dc7cb0e7065ff30956c467787028e035dc397281dbb6400",
+      "size_bytes": 181
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\fresh-load.json",
+      "state": "PRESENT",
+      "sha256": "4aa3e36d71267411e8d825ab4a5f7edfe36a2faa68c732cb52b93d7d664720e1",
+      "size_bytes": 4199
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\invoke.json",
+      "state": "PRESENT",
+      "sha256": "6810deebca6425ab2969967a5a613b971ccd4573965b9f437a2dd05070930875",
+      "size_bytes": 1498
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\cap-boot-dependency-inversion.json",
+      "state": "PRESENT",
+      "sha256": "281789cc154dee73189cb37a9bc9a8b442d9a61513b8c3a4ab2d736d58a92871",
+      "size_bytes": 850
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\loaded-origin-mismatch.json",
+      "state": "PRESENT",
+      "sha256": "c54d549afd6c3d8b80dde75c978b4cf0727cb4888121bc0389b6c58cce14c82a",
+      "size_bytes": 1596
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\negative-results.json",
+      "state": "PRESENT",
+      "sha256": "2f03ddaf101b9f5ceeff7518b3a9576ae9af75cadb918f387e150ff0d41f3819",
+      "size_bytes": 13609
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\rollback-resume.json",
+      "state": "PRESENT",
+      "sha256": "52f3f25179b4b691178caf377075c539a331219b16374d3445316cddaeba8a00",
+      "size_bytes": 3555
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\tools\\reproduce.ps1",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\run-index.json",
+      "state": "PRESENT",
+      "sha256": "9d099c38a8a364f1b4da619f0c8142b968c28565afc497a1bf416e418178f912",
+      "size_bytes": 68011
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-after.json",
+      "state": "PRESENT",
+      "sha256": "aa59b13bd8e0d95a4b70eeff2bf6879a2a909d9223835ec2677aefd4e8d02288",
+      "size_bytes": 10278
+    }
+  ],
+  "checked_inputs_stable": true,
+  "missing_inputs": [
+    "tools/reproduce.ps1"
+  ],
+  "clause_results": [
+    {
+      "clause": "FROZEN_ORACLE_AND_SUBJECT",
+      "verdict": "INCONCLUSIVE",
+      "missing": [],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "FINITE_PACKAGE_AND_WRITESET",
+      "verdict": "INCONCLUSIVE",
+      "missing": [],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "ORIGINAL_OPS_ADMISSION",
+      "verdict": "INCONCLUSIVE",
+      "missing": [],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "ACTUAL_INSTALL_FRESH_LOAD_INVOKE",
+      "verdict": "INCONCLUSIVE",
+      "missing": [],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "SPECIFIC_NEGATIVES_AND_VALID_CONTROLS",
+      "verdict": "INCONCLUSIVE",
+      "missing": [],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "ROLLBACK_IDEMPOTENCY_RECONCILIATION",
+      "verdict": "INCONCLUSIVE",
+      "missing": [],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "REPRODUCIBLE_RAW_AND_CONSUMER_ACK",
+      "verdict": "INCONCLUSIVE",
+      "missing": [
+        "tools/reproduce.ps1"
+      ],
+      "native_execution": "NOT_RUN"
+    }
+  ],
+  "original_installer_loader_consumer_paths": "UNRESOLVED: no subject/package index supplied; provider and admission modules pinned only as known inputs",
+  "package_installed_loaded_hash_equality": "NOT_EVALUABLE",
+  "reproduction": {
+    "status": "NOT_RUN",
+    "reason": "No maker reproduce entry point, grant, target manifest, valid control, or native Raw supplied."
+  },
+  "raw_refs": [
+    "officer/raw/input-inventory.json",
+    "officer/raw/source-clauses.json",
+    "officer/raw/registry-observation.json"
+  ],
+  "officer_mutations": "Only officer/ files created; no Host dispatch, candidate repair, canonical state change or acceptance transition.",
+  "independence": "User-dispatched officer context; no maker summary consumed; external lane/model receipt not independently established here."
+}

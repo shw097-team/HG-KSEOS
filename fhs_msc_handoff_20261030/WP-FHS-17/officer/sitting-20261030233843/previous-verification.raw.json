@@ -1,0 +1,296 @@
+{
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261030232608",
+  "started_at": "2026-10-30T15:28:23.485234+00:00",
+  "finished_at": "2026-10-30T15:28:23.515287+00:00",
+  "mode": "VERIFY_ONLY",
+  "runtime": "3.11.17 (main, Oct  3 2026, 01:03:09) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+  "cwd": "C:\\wg\\queue\\WP-FHS-17",
+  "fixed_inputs_before": [
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+      "state": "PRESENT",
+      "sha256": "2a478c495a6d34afc35e4e95ca0ad0c1db434be98b84b5c213ec6bb39fedb2c1",
+      "size_bytes": 14962
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\oracle.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\need.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\source-pin.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\package-index.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-before.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\admission.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\fresh-load.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\invoke.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\cap-boot-dependency-inversion.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\loaded-origin-mismatch.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\negative-results.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\rollback-resume.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\tools\\reproduce.ps1",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\run-index.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-after.json",
+      "state": "MISSING",
+      "sha256": null
+    }
+  ],
+  "fixed_inputs_after": [
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+      "state": "PRESENT",
+      "sha256": "2a478c495a6d34afc35e4e95ca0ad0c1db434be98b84b5c213ec6bb39fedb2c1",
+      "size_bytes": 14962
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\oracle.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\need.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\source-pin.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\package-index.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-before.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\admission.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\fresh-load.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\invoke.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\cap-boot-dependency-inversion.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\loaded-origin-mismatch.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\negative-results.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\rollback-resume.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\tools\\reproduce.ps1",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\run-index.json",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-after.json",
+      "state": "MISSING",
+      "sha256": null
+    }
+  ],
+  "checked_inputs_stable": true,
+  "missing_inputs": [
+    "oracle.json",
+    "candidate/need.json",
+    "candidate/source-pin.json",
+    "candidate/package-index.json",
+    "candidate/write-set.json",
+    "evidence/registry-before.json",
+    "evidence/admission.json",
+    "evidence/install.json",
+    "evidence/fresh-load.json",
+    "evidence/invoke.json",
+    "fixtures/cap-boot-dependency-inversion.json",
+    "fixtures/loaded-origin-mismatch.json",
+    "evidence/negative-results.json",
+    "evidence/rollback-resume.json",
+    "tools/reproduce.ps1",
+    "evidence/run-index.json",
+    "evidence/registry-after.json"
+  ],
+  "clause_results": [
+    {
+      "clause": "FROZEN_ORACLE_AND_SUBJECT",
+      "verdict": "INCONCLUSIVE",
+      "missing": [
+        "oracle.json",
+        "candidate/need.json",
+        "candidate/source-pin.json"
+      ],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "FINITE_PACKAGE_AND_WRITESET",
+      "verdict": "INCONCLUSIVE",
+      "missing": [
+        "candidate/package-index.json",
+        "candidate/write-set.json"
+      ],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "ORIGINAL_OPS_ADMISSION",
+      "verdict": "INCONCLUSIVE",
+      "missing": [
+        "evidence/admission.json",
+        "evidence/registry-before.json"
+      ],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "ACTUAL_INSTALL_FRESH_LOAD_INVOKE",
+      "verdict": "INCONCLUSIVE",
+      "missing": [
+        "evidence/install.json",
+        "evidence/fresh-load.json",
+        "evidence/invoke.json"
+      ],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "SPECIFIC_NEGATIVES_AND_VALID_CONTROLS",
+      "verdict": "INCONCLUSIVE",
+      "missing": [
+        "fixtures/cap-boot-dependency-inversion.json",
+        "fixtures/loaded-origin-mismatch.json",
+        "evidence/negative-results.json"
+      ],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "ROLLBACK_IDEMPOTENCY_RECONCILIATION",
+      "verdict": "INCONCLUSIVE",
+      "missing": [
+        "evidence/rollback-resume.json"
+      ],
+      "native_execution": "NOT_RUN"
+    },
+    {
+      "clause": "REPRODUCIBLE_RAW_AND_CONSUMER_ACK",
+      "verdict": "INCONCLUSIVE",
+      "missing": [
+        "tools/reproduce.ps1",
+        "evidence/run-index.json",
+        "evidence/registry-after.json"
+      ],
+      "native_execution": "NOT_RUN"
+    }
+  ],
+  "original_installer_loader_consumer_paths": "UNRESOLVED: no subject/package index supplied; provider and admission modules pinned only as known inputs",
+  "package_installed_loaded_hash_equality": "NOT_EVALUABLE",
+  "reproduction": {
+    "status": "NOT_RUN",
+    "reason": "No maker reproduce entry point, grant, target manifest, valid control, or native Raw supplied."
+  },
+  "raw_refs": [
+    "officer/raw/input-inventory.json",
+    "officer/raw/source-clauses.json",
+    "officer/raw/registry-observation.json"
+  ],
+  "officer_mutations": "Only officer/ files created; no Host dispatch, candidate repair, canonical state change or acceptance transition.",
+  "independence": "User-dispatched officer context; no maker summary consumed; external lane/model receipt not independently established here."
+}

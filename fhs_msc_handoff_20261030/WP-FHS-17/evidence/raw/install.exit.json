@@ -1,0 +1,11 @@
+{
+  "op": "install",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:46+0800",
+  "ended_at": "2026-10-31T21:22:46+0800",
+  "duration_s": 0.252,
+  "stdout_sha256": "dd4ba4d276ea346e10ca9467cae62d994c379bfd1593908747a637268ccdd972",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 2883,
+  "stderr_bytes": 0
+}

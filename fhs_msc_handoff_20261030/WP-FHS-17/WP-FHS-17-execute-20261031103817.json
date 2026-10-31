@@ -1,0 +1,61 @@
+{
+  "schema": "HGK-LANE-RESOLUTION/1",
+  "lane": "EXECUTE",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261031103817",
+  "receipt_complete": false,
+  "note": "provisional: written where the attempt landed, overwritten by the final receipt",
+  "attempts": [
+    {
+      "rank": 1,
+      "provider": "opencode-go",
+      "model": "deepseek-v4.1-flash",
+      "transport_model": "opencode-go/deepseek-v4.1-flash",
+      "sandbox": "workspace-write",
+      "reasoning_effort": null,
+      "exit": "TIMEOUT",
+      "timed_out": true,
+      "seconds": 902.99,
+      "nonce_present": true,
+      "nonce_present_raw_stdout": true,
+      "nonce_present_anywhere": true,
+      "nonce_in_agent_message": true,
+      "producer": {
+        "script_sha256": "fbf64a569c5b8dda94977dd324abf2d5d0550085c6cb9f4171de4e702c139344",
+        "git_head": "c306d3a672c73e0f3b2ca912f345c7abf6008057",
+        "schema": "HGK-LANE-DISPATCH-PRODUCER/1"
+      },
+      "nonce_source": "item.completed/agent_message",
+      "usage_rows_after_offset": 786,
+      "usage_offset": 1437970,
+      "usage_provider": "opencode-go",
+      "usage_model": "deepseek-v4.1-flash",
+      "usage_status": 200,
+      "usage_receipt_ok": true,
+      "usage_receipt_reason": "",
+      "usage_ledger_rewritten": false,
+      "usage_rows_shape_invalid": 0,
+      "usage_rows_undecodable": 0,
+      "carrier_lines_undecodable": 0,
+      "carrier_lines_surrogate": 0,
+      "credential_posture": {
+        "verdict": "INCONCLUSIVE",
+        "decision": "WARN_CONTINUE",
+        "reason": "helper-only verdict (no child env asserted): helper_resolution_reset=PASS; helper_non_interactive=UNKNOWN",
+        "prompt_capable_helper": null,
+        "origin": null,
+        "git_terminal_prompt": "0"
+      },
+      "attempt_log_dir": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031103817.json.logs",
+      "stdout_byte_exact": true,
+      "stdout_path": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031103817.json.logs\\attempt-11856-1793414299-1-stdout.txt",
+      "stdout_bytes": 479270,
+      "stdout_sha256": "0a9eb24d21d817e68708bb0f7e763488fcec50b7b9274b3dc32430464e40d692",
+      "stderr_byte_exact": true,
+      "stderr_path": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031103817.json.logs\\attempt-11856-1793414299-1-stderr.txt",
+      "stderr_bytes": 170,
+      "stderr_sha256": "e548ed707dccd624216f2a96c31f7b86a9f3da118a7ac6027eed40a70001174c",
+      "stdout_tail": "ype\":\"command_execution\",\"command\":\"\\\"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Microsoft\\\\\\\\WindowsApps\\\\\\\\pwsh.exe\\\" -Command \\\"Get-ChildItem C:\\\\\\\\Projects\\\\\\\\Agent_Workspace -Directory -Recurse -Depth 2 -ErrorAction SilentlyContinue | Where-Object { \\\"'$_.Name -like '\\\"'*HANDOFF-PATCH-v1*' } | Select-Object -First 5 FullName\\\"\",\"aggregated_output\":\"\",\"exit_code\":null,\"status\":\"in_progress\"}}\n",
+      "stderr_tail": "Reading additional input from stdin...\n2026-10-31T02:38:22.872994Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Unknown\n"
+    }
+  ]
+}

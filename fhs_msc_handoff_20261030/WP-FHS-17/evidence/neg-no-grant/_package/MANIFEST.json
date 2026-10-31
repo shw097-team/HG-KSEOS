@@ -1,0 +1,18 @@
+{
+  "occupant_id": "NEG-no-grant",
+  "version": "0",
+  "host": "local",
+  "scope": "draft",
+  "feature": "noop",
+  "entry_point": "noop.py",
+  "payload": "noop.py",
+  "payload_sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+  "payload_bytes": 13,
+  "permissions": "execute",
+  "license": "internal-draft",
+  "uninstall": {
+    "remove": [
+      "noop.py"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "HGK-LANE-RESOLUTION/1",
+  "lane": "EXECUTE",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261031103833",
+  "receipt_complete": false,
+  "note": "provisional: written where the attempt landed, overwritten by the final receipt",
+  "attempts": [
+    {
+      "rank": 1,
+      "provider": "opencode-go",
+      "model": "deepseek-v4.1-flash",
+      "transport_model": "opencode-go/deepseek-v4.1-flash",
+      "sandbox": "workspace-write",
+      "reasoning_effort": null,
+      "exit": "TIMEOUT",
+      "timed_out": true,
+      "seconds": 903.19,
+      "nonce_present": true,
+      "nonce_present_raw_stdout": true,
+      "nonce_present_anywhere": true,
+      "nonce_in_agent_message": true,
+      "producer": {
+        "script_sha256": "fbf64a569c5b8dda94977dd324abf2d5d0550085c6cb9f4171de4e702c139344",
+        "git_head": "c306d3a672c73e0f3b2ca912f345c7abf6008057",
+        "schema": "HGK-LANE-DISPATCH-PRODUCER/1"
+      },
+      "nonce_source": "item.completed/agent_message",
+      "usage_rows_after_offset": 798,
+      "usage_offset": 1448682,
+      "usage_provider": "opencode-go",
+      "usage_model": "deepseek-v4.1-flash",
+      "usage_status": 200,
+      "usage_receipt_ok": true,
+      "usage_receipt_reason": "",
+      "usage_ledger_rewritten": false,
+      "usage_rows_shape_invalid": 0,
+      "usage_rows_undecodable": 0,
+      "carrier_lines_undecodable": 0,
+      "carrier_lines_surrogate": 0,
+      "credential_posture": {
+        "verdict": "INCONCLUSIVE",
+        "decision": "WARN_CONTINUE",
+        "reason": "helper-only verdict (no child env asserted): helper_resolution_reset=PASS; helper_non_interactive=UNKNOWN",
+        "prompt_capable_helper": null,
+        "origin": null,
+        "git_terminal_prompt": "0"
+      },
+      "attempt_log_dir": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031103833.json.logs",
+      "stdout_byte_exact": true,
+      "stdout_path": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031103833.json.logs\\attempt-15396-1793414317-1-stdout.txt",
+      "stdout_bytes": 942892,
+      "stdout_sha256": "d349ebc642a7b4e12b7e9c024fa109b613a0054288509f205145d44e693a5e7f",
+      "stderr_byte_exact": true,
+      "stderr_path": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031103833.json.logs\\attempt-15396-1793414317-1-stderr.txt",
+      "stderr_bytes": 408,
+      "stderr_sha256": "e66bf86c6fb50e970b2d17d4153bced861e6b07b4eb48443e34aeaae5357e07b",
+      "stdout_tail": "user\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Microsoft\\\\\\\\WindowsApps\\\\\\\\pwsh.exe\\\" -Command \\\"Get-Content -LiteralPath 'C:\\\\\\\\Users\\\\\\\\user\\\\\\\\.codex\\\\\\\\tmp\\\\\\\\arg0-windows\\\\\\\\codex-arg0YazPB8\\\\\\\\apply_patch.bat' -Raw\\\"\",\"aggregated_output\":\"@echo off\\n\\\"%~dp0..\\\\..\\\\..\\\\..\\\\AppData\\\\Local\\\\OpenAI\\\\Codex\\\\bin\\\\22cfb1d302613eae\\\\codex.exe\\\" --codex-run-as-apply-patch %*\\n\\r\\n\",\"exit_code\":0,\"status\":\"completed\"}}\n",
+      "stderr_tail": "ocket: failed to connect to Responses WebSocket stage=Unknown\n2026-10-31T02:47:55.524376Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out\n2026-10-31T02:52:30.543261Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out\n"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "op": "preimage-not-absent",
+  "exit": 3,
+  "started_at": "2026-10-31T21:22:50+0800",
+  "ended_at": "2026-10-31T21:22:50+0800",
+  "duration_s": 0.139,
+  "stdout_sha256": "dd85d3503d0d648c117131e3257f36fc40cebe06bbfb0e9164889fe6ecc9dccd",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 292,
+  "stderr_bytes": 0
+}

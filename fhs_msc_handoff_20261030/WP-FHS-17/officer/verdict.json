@@ -1,0 +1,44 @@
+{
+  "wp": "WP-FHS-17",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261030232608",
+  "author_role": "Independent Acceptance Officer",
+  "mode": "VERIFY_ONLY",
+  "verdict": "INCONCLUSIVE",
+  "accepted": false,
+  "native_status": "NOT_RUN",
+  "claim_ceiling": "Independent local absence/evidence review only; no native PASS or canonical acceptance",
+  "reason": "Missing frozen maker oracle, candidate subject, package/write-set indexes, admission and decisive install/load/invoke/negative/rollback Raw.",
+  "brief_sha256": "d008d6ec46badfbdbfdb3e024a2f9490b2483647809773cdd2a8bbc1ed0fc3ae",
+  "source_card_file_sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+  "body08_sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d",
+  "subject_sha256": null,
+  "manifest_sha256": null,
+  "oracle_sha256": null,
+  "officer_check_contract_sha256": "a242f397b6b9b85ec37e2795960e6f39d744d03b136c20c2b8225fc9fc1dc09f",
+  "verification_sha256": "1974675763f77cad16319b23de598135c600514670eda04fc0b9d051a9d8a956",
+  "failed_clauses": [],
+  "unverified_clauses": [
+    "FROZEN_ORACLE_AND_SUBJECT",
+    "FINITE_PACKAGE_AND_WRITESET",
+    "ORIGINAL_OPS_ADMISSION",
+    "ACTUAL_INSTALL_FRESH_LOAD_INVOKE",
+    "SPECIFIC_NEGATIVES_AND_VALID_CONTROLS",
+    "ROLLBACK_IDEMPOTENCY_RECONCILIATION",
+    "REPRODUCIBLE_RAW_AND_CONSUMER_ACK"
+  ],
+  "missing_inputs": [
+    "tools/reproduce.ps1"
+  ],
+  "hash_manifest": "officer/hash-manifest.json",
+  "host_effect_disposition": "PARK: original installer OPS grant, receiver-resolved WriteSet and same-subject consumer binding not supplied.",
+  "canonical_transcription": "NOT_PERFORMED; INCONCLUSIVE remains unaccepted; preserve historical refusal.",
+  "freshness_binding": {
+    "Subject": null,
+    "SourceSHA": null,
+    "CandidateSHA": null,
+    "Scope": null,
+    "PolicyEpoch": null,
+    "operation_identity": null
+  },
+  "completed_at": "2026-10-31T11:41:09.321912+00:00"
+}

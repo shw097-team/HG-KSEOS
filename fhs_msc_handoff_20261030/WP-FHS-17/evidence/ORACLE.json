@@ -1,0 +1,9 @@
+{
+  "frozen": true,
+  "predicate_pos": "現有Issuer合法installer先建needed occupant再驗LoadedSHA。",
+  "predicate_done": "現有Issuer合法installer先建needed occupant再驗LoadedSHA；同 Subject/SourceSHA/operation 證據由原 Consumer 讀回；沒有 Raw 記 NOT_RUN。",
+  "first_fail_code": "WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION",
+  "reader": "原 Host capability Registry/Consumer",
+  "freshness": "同 WP-FHS-17 original operation 的 command/environment/exit/stdout/stderr 或原 Host WorldRaw；freshness=same Subject+SourceSHA+CandidateSHA+Scope+PolicyEpoch；Reader=原 Host capability Registry/Consumer。",
+  "verdict_rule": "PASS iff POS holds with raw command/environment/exit/stdout evidence AND every negative is refused; FAIL if a negative is accepted or the loaded SHA differs; NOT_RUN if no raw exists."
+}

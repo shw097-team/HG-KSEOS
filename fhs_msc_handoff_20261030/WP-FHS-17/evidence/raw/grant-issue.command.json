@@ -1,0 +1,43 @@
+{
+  "op": "grant-issue",
+  "argv": [
+    "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+    "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\scripts\\issue_grant.py",
+    "issue",
+    "--principal",
+    "owner",
+    "--operation",
+    "install_occupant",
+    "--writeset",
+    "C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json",
+    "--subject",
+    "WP-FHS-17",
+    "--candidate-sha",
+    "dc35d0fccbac0841a92413d8f44b4d72771b976e4ea86dc22cc15f16f1bd3ca1",
+    "--admission",
+    "ADM-135455ca00280c39-1793452966-3d50f4",
+    "--scope",
+    "CAP-BOOT host capability registry, local-win",
+    "--epoch",
+    "34",
+    "--ttl",
+    "900",
+    "--out",
+    "C:\\wg\\queue\\WP-FHS-17\\evidence\\grant.json"
+  ],
+  "command": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe C:\\Projects\\Agent_Workspace\\HG-KSEOS\\scripts\\issue_grant.py issue --principal owner --operation install_occupant --writeset C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json --subject WP-FHS-17 --candidate-sha dc35d0fccbac0841a92413d8f44b4d72771b976e4ea86dc22cc15f16f1bd3ca1 --admission ADM-135455ca00280c39-1793452966-3d50f4 --scope \"CAP-BOOT host capability registry, local-win\" --epoch 34 --ttl 900 --out C:\\wg\\queue\\WP-FHS-17\\evidence\\grant.json",
+  "cwd": "C:\\wg\\queue\\WP-FHS-17",
+  "env": {
+    "python": "3.11.17",
+    "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "machine": "AMD64",
+    "username": "user",
+    "computername": "DESKTOP-57EO414",
+    "cwd": "C:\\wg\\queue\\WP-FHS-17",
+    "PYTHONHASHSEED": "0",
+    "PYTHONIOENCODING": "utf-8",
+    "PATH_sha256": "1c4029b2a8708ba4608831a0a7e3775305d01142de7c9af30112d667a0805446"
+  },
+  "started_at": "2026-10-31T21:22:46+0800"
+}

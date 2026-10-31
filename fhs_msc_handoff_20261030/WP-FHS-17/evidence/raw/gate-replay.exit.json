@@ -1,0 +1,11 @@
+{
+  "op": "gate-replay",
+  "exit": 3,
+  "started_at": "2026-10-31T21:22:52+0800",
+  "ended_at": "2026-10-31T21:22:52+0800",
+  "duration_s": 0.204,
+  "stdout_sha256": "3b5684943ce87d63c4cbdfe5851efca36c62abd97a62c93188c75a88ab2e58e0",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 1478,
+  "stderr_bytes": 0
+}

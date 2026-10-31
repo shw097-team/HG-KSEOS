@@ -1,0 +1,11 @@
+{
+  "op": "preimage-sha-mismatch",
+  "exit": 3,
+  "started_at": "2026-10-31T21:22:50+0800",
+  "ended_at": "2026-10-31T21:22:50+0800",
+  "duration_s": 0.141,
+  "stdout_sha256": "d4cc6fabe04d1a280dae13adde6fab6cacf7bd7bc7161b1ec1c1172e0cc8cf6e",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 377,
+  "stderr_bytes": 0
+}

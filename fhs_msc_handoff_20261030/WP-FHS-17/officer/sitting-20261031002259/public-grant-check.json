@@ -1,0 +1,18 @@
+{
+  "signature_valid_against_supplied_public_key": true,
+  "signature_error": null,
+  "key_id_matches": true,
+  "owner_hash_matches": true,
+  "ttl_live_at_check": true,
+  "issuance_ledger_rows": [
+    {
+      "nonce": "G-135455ca00280c39-1793377253-e5f44cfd",
+      "operation": "install_occupant",
+      "principal": "owner",
+      "at": 1793377253,
+      "grant": "C:\\wg\\grants\\wp17_grant.json"
+    }
+  ],
+  "admission_digest_matches": true,
+  "ceiling": "Valid signature does not prove original Issuer registration, receiver authorization, nonce spending or canonical target binding. No private key opened."
+}

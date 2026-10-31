@@ -1,0 +1,39 @@
+{
+  "role": "Independent Acceptance Officer",
+  "mode": "VERIFY_ONLY",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261030232608",
+  "registered_at": "2026-10-31T11:46:05.420774+00:00",
+  "source": {
+    "path": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+    "state": "PRESENT",
+    "sha256": "d008d6ec46badfbdbfdb3e024a2f9490b2483647809773cdd2a8bbc1ed0fc3ae",
+    "size_bytes": 19763
+  },
+  "maker_oracle": "oracle.json",
+  "expected_maker_inputs": [
+    "brief.md",
+    "oracle.json",
+    "candidate/need.json",
+    "candidate/source-pin.json",
+    "candidate/package-index.json",
+    "candidate/write-set.json",
+    "evidence/registry-before.json",
+    "evidence/admission.json",
+    "evidence/install.json",
+    "evidence/fresh-load.json",
+    "evidence/invoke.json",
+    "fixtures/cap-boot-dependency-inversion.json",
+    "fixtures/loaded-origin-mismatch.json",
+    "evidence/negative-results.json",
+    "evidence/rollback-resume.json",
+    "tools/reproduce.ps1",
+    "evidence/run-index.json",
+    "evidence/registry-after.json"
+  ],
+  "decision_rule": "Absent decisive Raw or frozen subject => INCONCLUSIVE and unaccepted; no native PASS from presence or registry colour.",
+  "positive": "Existing Issuer authorizes installer; needed occupant is built, installed, fresh-loaded and substantively invoked through original consumer with matching package/installed/LoadedSHA.",
+  "primary_negative": "Valid control with WP00/02/03 ready and WP06 incomplete allows WP17; sole added prerequisite WP06 causes WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION before dispatch, zero effects.",
+  "secondary_negative": "After valid control, foreign loaded bytes with claimed pin cause specific binding mismatch and no qualified ACK.",
+  "scope": "Officer outputs only; no repair, candidate creation, Host effect, registry mutation or release.",
+  "ceiling": "Independent local evidence review, not native execution or canonical acceptance"
+}

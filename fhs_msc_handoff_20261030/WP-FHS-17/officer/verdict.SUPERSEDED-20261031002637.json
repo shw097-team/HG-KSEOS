@@ -1,0 +1,35 @@
+{
+  "wp": "WP-FHS-17",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261031002259",
+  "author_role": "Independent Acceptance Officer",
+  "mode": "VERIFY_ONLY",
+  "verdict": "FAIL",
+  "accepted": false,
+  "reason": "Signed grant cryptographically verifies, but admission can be bypassed, canonical target and replay/preimage binding are missing, and probe/load/negative evidence does not satisfy native contract.",
+  "ceiling": "Independent byte review, public signature check, validation-only counterexample and standalone probe; no native acceptance.",
+  "subject_sha256": "a74a5be8d2262878d6087eaba0ee012f76905a51da98f942c3f9418238f6500f",
+  "oracle_sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+  "manifest_sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+  "package_index_sha256": "f209436217569c3a30cb5e8d53234dab8f4343a1d96ded8acb52b9fb0ebfcac1",
+  "write_set_sha256": "764bbc381e44810af212bd6204c05d3b3ad41f739667450857fbd8528e1764a9",
+  "brief_sha256": "4bf5b83bb20e8cdb0cdf22b337ea01e68381fb8a9b5503d8aed11fbe74b9d6fe",
+  "source_card_file_sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+  "body08_sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d",
+  "verification_sha256": "dd0c7be5bd07a765317ede5d4dbb603edf8db3a31d1b79d5a8c4801561cd8589",
+  "failed_clauses": [
+    "ORIGINAL_OPS_ADMISSION",
+    "NONCE_PREIMAGE_REPLAY",
+    "REAL_CURRENT_NEED",
+    "SOURCE_SUBJECT_BINDING",
+    "FRESH_LOAD_ORIGINAL_CONSUMER",
+    "LOADED_ORIGIN_MISMATCH_NEGATIVE"
+  ],
+  "unverified_clauses": [
+    "DAG_INVERSION_NEGATIVE",
+    "ROLLBACK_RESUME",
+    "REPRODUCIBLE_RAW_FRESHNESS"
+  ],
+  "host_effect_disposition": "PARK pending original receiver-bound valid OPS admission and complete maker evidence.",
+  "canonical_transcription": "NOT_PERFORMED; no successful verdict to transcribe; refusal history preserved.",
+  "completed_at": "2026-10-30T16:24:47.023324+00:00"
+}

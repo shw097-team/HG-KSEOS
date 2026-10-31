@@ -1,0 +1,35 @@
+{
+  "command": "python tools/build_evidence.py",
+  "fixture": "loaded-origin-mismatch",
+  "kind": "SECONDARY_DEDICATED_FIXTURE",
+  "otherwise_valid_operation": {
+    "root": "evidence/tamper-root",
+    "entry_point": "occupant/capboot_attest.py",
+    "pinned_sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+    "manifest_sha256": "d96765655ef40486e6b97455c0d57218ce24aa266760fb3bf165201b355eaa9b",
+    "input": "evidence/inputs/invoke-input.json",
+    "consumer": "candidate/package/consumer/wp17_consumer.py",
+    "control_result": "evidence/negatives/loaded-origin-control.json"
+  },
+  "injection": {
+    "when": "after the child loaded and started hashing, before it re-reads",
+    "where": "the resolved load origin (evidence/tamper-root/occupant/capboot_attest.py)",
+    "bytes_sha256": "49a0f4197a781c662158f640ab242714629b5f8d92b0175f6475733acfcc8af9",
+    "bytes": "# foreign bytes injected at the resolved load origin\nraise SystemExit('foreign occupant should never qualify')\n",
+    "claimed_pin_retained": true
+  },
+  "expected": {
+    "control": "LOADED_AND_INVOKED with consumer verdict CONSUMER_ACK",
+    "mutant_codes": [
+      "LOADED_CHANGED_DURING_INVOKE",
+      "LOADED_ORIGIN_MISMATCH"
+    ],
+    "consumer_ack": "withheld (no consumer_verdict on the refusal)",
+    "effects": 0
+  },
+  "not_a_valid_negative": [
+    "refused because a grant/admission field is unrelated-mismatched",
+    "refused because an import failed or an input file is missing",
+    "refused before the child ever hashed the origin"
+  ]
+}

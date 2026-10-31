@@ -1,0 +1,11 @@
+{
+  "op": "stage",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:46+0800",
+  "ended_at": "2026-10-31T21:22:46+0800",
+  "duration_s": 0.166,
+  "stdout_sha256": "5f6a2a76547ae1045bd2688af2db7b9faa337561df4b77d6323d457d4033d33a",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 1691,
+  "stderr_bytes": 0
+}

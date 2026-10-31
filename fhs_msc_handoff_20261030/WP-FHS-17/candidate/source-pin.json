@@ -1,0 +1,46 @@
+{
+  "command": "python tools/build_evidence.py",
+  "wp": "WP-FHS-17",
+  "official_source": {
+    "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\FHS\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+    "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+    "bytes": 46467,
+    "anchor": "current-b8c0abdfb9dc52ea4f52"
+  },
+  "brief": {
+    "file": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+    "sha256": "d008d6ec46badfbdbfdb3e024a2f9490b2483647809773cdd2a8bbc1ed0fc3ae"
+  },
+  "oracle": {
+    "file": "evidence/ORACLE.json",
+    "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465"
+  },
+  "package": {
+    "candidate_sha256": "dc35d0fccbac0841a92413d8f44b4d72771b976e4ea86dc22cc15f16f1bd3ca1",
+    "package_index_sha256": "72e3e0adf6cf78fa3b808413befea6dcbdde530529fc8ebd9afb855689782308"
+  },
+  "license": {
+    "file": "candidate/package/LICENSE",
+    "sha256": "dcb422f607e3973c50bc09efaf8b9e2e4217c225a179dde83b789545a669c4b9"
+  },
+  "notice": {
+    "file": "candidate/package/NOTICE",
+    "sha256": "ec12922f42d0ee49c9bc9d3841e01b151b8b4d8d4aaaaae8de3b8c1363d63be8"
+  },
+  "version": "1.0.0",
+  "dependencies": [
+    {
+      "name": "CPython",
+      "observed": "3.11.17",
+      "constraint": ">=3.10",
+      "third_party": false
+    }
+  ],
+  "third_party_components": [],
+  "provenance": {
+    "authored_in": "WP-FHS-17",
+    "network_fetch": false,
+    "vendored_binaries": false,
+    "source_bytes_pinned": true
+  }
+}

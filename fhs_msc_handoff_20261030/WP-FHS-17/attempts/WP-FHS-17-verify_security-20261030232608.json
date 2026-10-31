@@ -1,0 +1,13 @@
+{
+  "phase": "ATTEMPT_TERMINATED",
+  "lane": "VERIFY_SECURITY",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261030232608",
+  "pid": null,
+  "started_at": "2026-10-30T23:26:09",
+  "ok": false,
+  "receipt_complete": false,
+  "note": "written by continuation_driver before spawn; the dispatcher overwrites this on completion",
+  "detail": "dispatcher hung 12 min after the officer wrote its verdict; terminated by operator; verdict preserved",
+  "officer_verdict": "INCONCLUSIVE",
+  "terminated_at": "2026-10-30T23:38:38"
+}

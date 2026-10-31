@@ -1,0 +1,39 @@
+{
+  "operation": "install_occupant",
+  "principal": "owner",
+  "nonce": "G-135455ca00280c39-1793452966-dc6c2d20",
+  "issued_at": 1793452966,
+  "expires_at": 1793453866,
+  "policy_epoch": "34",
+  "writeset": [
+    {
+      "path": "occupant/capboot_attest.py",
+      "preimage": "ABSENT",
+      "resolved_preview": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install-root\\occupant\\capboot_attest.py",
+      "object_identity": {
+        "occupant_id": "OCC-CAPBOOT-LOADED-ACK",
+        "version": "1.0.0",
+        "sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5"
+      }
+    },
+    {
+      "path": "occupant/capboot_attest.manifest.json",
+      "preimage": "ABSENT",
+      "resolved_preview": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install-root\\occupant\\capboot_attest.manifest.json",
+      "object_identity": {
+        "occupant_id": "OCC-CAPBOOT-LOADED-ACK",
+        "version": "1.0.0",
+        "sha256": "d96765655ef40486e6b97455c0d57218ce24aa266760fb3bf165201b355eaa9b"
+      }
+    }
+  ],
+  "key_id": "135455ca00280c39",
+  "owner_authorization_sha256": "dd03f7b0b80531880ed897e4e831b2ab7bc4e59ec3cc8f10efd523ce3ea11bdf",
+  "scope": "CAP-BOOT host capability registry, local-win",
+  "subject": "WP-FHS-17",
+  "candidate_sha256": "dc35d0fccbac0841a92413d8f44b4d72771b976e4ea86dc22cc15f16f1bd3ca1",
+  "admission_id": "ADM-135455ca00280c39-1793452966-3d50f4",
+  "assurance_level": "PRODUCTION_ISSUER_SOFTWARE",
+  "signature_b64": "BSkjoBYauLyIepCEL9ITwKiLd2skQeR4BiwTK0iOxl+hWiWTdFuIukCz1/OZgKvRSrOg3UGLkYeGbhZ4kvpkDA==",
+  "signature_alg": "Ed25519"
+}

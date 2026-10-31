@@ -1,0 +1,18 @@
+{
+  "occupant_id": "NEED-WP17-OCCUPANT-PROBE",
+  "version": "1.0.0",
+  "host": "local-win",
+  "scope": "draft",
+  "feature": "probe",
+  "entry_point": "occupant_probe.py",
+  "payload": "occupant_probe.py",
+  "payload_sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+  "payload_bytes": 85,
+  "permissions": "execute",
+  "license": "internal-draft",
+  "uninstall": {
+    "remove": [
+      "occupant_probe.py"
+    ]
+  }
+}

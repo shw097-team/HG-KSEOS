@@ -1,0 +1,11 @@
+{
+  "op": "gate-regrant",
+  "exit": 3,
+  "started_at": "2026-10-31T21:22:51+0800",
+  "ended_at": "2026-10-31T21:22:51+0800",
+  "duration_s": 0.21,
+  "stdout_sha256": "71dee005e9b91f825f7fc1101bf160317f6504a74eb3adfb46f82c42d78a4d92",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 2050,
+  "stderr_bytes": 0
+}

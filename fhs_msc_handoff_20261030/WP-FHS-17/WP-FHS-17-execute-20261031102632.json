@@ -1,0 +1,42 @@
+{
+  "schema": "HGK-LANE-RESOLUTION/1",
+  "ok": false,
+  "lane": "EXECUTE",
+  "code": "ERR_DURABLE_GATE_NO_GO",
+  "detail": {
+    "schema": "IR-GATE-PREFLIGHT/1",
+    "verdict": "NO_GO",
+    "policy": {
+      "verdict": "POLICY_DIRTY",
+      "repo": "C:\\Projects\\Agent_Workspace\\HG-KSEOS",
+      "head": "b57d887",
+      "policy_files": [
+        "config/model-lane-assignment.json",
+        "config/lane-routing-registry.yaml",
+        "config/hermes-codex-lane.json",
+        "config/active-policy.json"
+      ],
+      "dirty": [
+        " M config/hermes-codex-lane.json"
+      ],
+      "rule": "IR-1: a receipt produced against uncommitted policy is not reproducible",
+      "fix": "commit the policy (or revert it) before starting the turn"
+    },
+    "subject": {
+      "verdict": "COMMITTED",
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\recurrence-ledger.json",
+      "repo": "C:/Projects/Agent_Workspace/HG-KSEOS",
+      "head": "b57d887",
+      "tracked_files": 1,
+      "dirty_entries": 0,
+      "rule": "IR-4: a round may only claim progress on a subject that has a commit",
+      "effect": "ok"
+    },
+    "meaning": "a turn started here would produce receipts that cannot be reproduced by a second party; fix the failing gate first"
+  },
+  "generated_utc": "2026-10-31T02:26:34.771629+00:00",
+  "say": "refused before spawn: the policy or the subject is not in the durable layer",
+  "gate": "NO_GO",
+  "codex_home": "C:\\Users\\user\\.codex",
+  "codex_home_is_declared_lane_home": false
+}

@@ -1,0 +1,21 @@
+{
+  "args": [
+    "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+    "-B",
+    "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py",
+    "real-input-20261030"
+  ],
+  "cwd": "C:\\wg\\queue\\WP-FHS-17",
+  "start": "2026-10-30T16:28:22.557925+00:00",
+  "runtime": "3.11.17 (main, Oct  3 2026, 01:03:09) [MSC v.1944 64 bit (AMD64)]",
+  "executable": {
+    "path": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+    "state": "PRESENT",
+    "sha256": "f55e7f8b8984200f556a332a9b4d66d300e58fbb0d5f774219ebe9969ee39421",
+    "bytes": 262144
+  },
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "ceiling": "Standalone echo probe, no original Host integration"
+}

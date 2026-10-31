@@ -1,0 +1,1 @@
+{"at": 1793452970.675228, "code": "ERR_PREIMAGE_MISMATCH", "observed": [{"path": "occupant/capboot_attest.py", "preimage_declared": "PRESENT", "preimage_observed": "PRESENT", "preimage_sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5", "resolved": "C:\\wg\\queue\\WP-FHS-17\\evidence\\stage-root\\occupant\\capboot_attest.py"}], "verdict": "REFUSED"}

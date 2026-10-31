@@ -1,0 +1,393 @@
+{
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261031002647",
+  "mode": "VERIFY_ONLY",
+  "registered_at": "2026-10-30T16:28:22.485798+00:00",
+  "maker_oracle": {
+    "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\ORACLE.json",
+    "state": "PRESENT",
+    "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+    "bytes": 861
+  },
+  "frozen_inputs": [
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+      "state": "PRESENT",
+      "sha256": "d008d6ec46badfbdbfdb3e024a2f9490b2483647809773cdd2a8bbc1ed0fc3ae",
+      "bytes": 19763
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\ADMISSION.json",
+      "state": "PRESENT",
+      "sha256": "06f5dfe07d62a50495e87b7b8653da6a8f75cbff0f0166ed931f981aa86a48de",
+      "bytes": 1057
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\GRANT_VERIFY.json",
+      "state": "PRESENT",
+      "sha256": "448a5eacef8a5a81d3606882d18800798c03688f041a339aa1960b97604a8aff",
+      "bytes": 90
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\LIFECYCLE.json",
+      "state": "PRESENT",
+      "sha256": "4321ffdede67589a27185476790729e0bee138de4a5aa28e5ab7d2fa81da814c",
+      "bytes": 1958
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-bypass\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-bypass\\_package\\occupant_probe.py",
+      "state": "PRESENT",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-no-grant\\_neg\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-no-grant\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "268d59ce42461aee2dcea677f64187a5a010bc0890b64ba87c16ed4577042029",
+      "bytes": 414
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-no-grant\\_package\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\_neg\\admission.json",
+      "state": "PRESENT",
+      "sha256": "a8fee80544bca74ecc479b280bce913bdeb0d4cb6c9cf5cb15d2d04fcb6701fd",
+      "bytes": 533
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\_neg\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "a74bb66a336e9d87ea880eca84baabc8c435c04b1dc5ccd768a40344d727c6cd",
+      "bytes": 414
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\_package\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\noop.py",
+      "state": "PRESENT",
+      "sha256": "83ddce78288193843d8a6727fb7f4ac0cf1a6c70cdaf5ccf864728a769e644a0",
+      "bytes": 19
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\noop.py.manifest.json",
+      "state": "PRESENT",
+      "sha256": "a74bb66a336e9d87ea880eca84baabc8c435c04b1dc5ccd768a40344d727c6cd",
+      "bytes": 414
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-traversal\\_neg\\admission.json",
+      "state": "PRESENT",
+      "sha256": "08c2bfa2062f97d0ed174caaae5fb4db95e3763cc70de348f3cdbbae8db6d3d0",
+      "bytes": 533
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-traversal\\_neg\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\NEGATIVES.json",
+      "state": "PRESENT",
+      "sha256": "b5d6b07970b9bfb5e4287e1250845b8a8a8c951fea551642be90010f95eef372",
+      "bytes": 1976
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\_package\\occupant_probe.py",
+      "state": "PRESENT",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py",
+      "state": "PRESENT",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py.manifest.json",
+      "state": "PRESENT",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root-bypass\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root-bypass\\_package\\occupant_probe.py",
+      "state": "PRESENT",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\ORACLE.json",
+      "state": "PRESENT",
+      "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+      "bytes": 861
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\PACKAGE_INDEX.json",
+      "state": "PRESENT",
+      "sha256": "f209436217569c3a30cb5e8d53234dab8f4343a1d96ded8acb52b9fb0ebfcac1",
+      "bytes": 777
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\ROLLBACK.json",
+      "state": "PRESENT",
+      "sha256": "29a3dfd7361a4692617ba859ac897a448ab7ff92c3508c4f2e88cb4d7dcefc87",
+      "bytes": 139
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\SUBJECT.json",
+      "state": "PRESENT",
+      "sha256": "a74a5be8d2262878d6087eaba0ee012f76905a51da98f942c3f9418238f6500f",
+      "bytes": 1957
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\WRITESET.json",
+      "state": "PRESENT",
+      "sha256": "764bbc381e44810af212bd6204c05d3b3ad41f739667450857fbd8528e1764a9",
+      "bytes": 430
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\oracle.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\need.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\source-pin.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\package-index.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-before.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\fresh-load.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\invoke.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\cap-boot-dependency-inversion.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\loaded-origin-mismatch.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\negative-results.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\rollback-resume.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\tools\\reproduce.ps1",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\run-index.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-after.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+      "state": "PRESENT",
+      "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+      "bytes": 46467
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+      "state": "PRESENT",
+      "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d",
+      "bytes": 1128554
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\scripts\\occupant_install.py",
+      "state": "PRESENT",
+      "sha256": "7fa7529b13d325cb1937a313ac36fc1c06468e7f607f510232b0b454164907b3",
+      "bytes": 18549
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\scripts\\issue_grant.py",
+      "state": "PRESENT",
+      "sha256": "d3f5b594b5cd02700a6bf6ffe39a74bb8344770aaeabcab413939cf5792eef94",
+      "bytes": 12937
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\providers.py",
+      "state": "PRESENT",
+      "sha256": "dd7909638590f9fd4cbdca729a47f2152e690006eefea4f300831ff24dd8cc2a",
+      "bytes": 6884
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\native_admission.py",
+      "state": "PRESENT",
+      "sha256": "314eeacd207c6808dfa7ddcf5ef12092861eeb2ff96b24ec5a216970fc889440",
+      "bytes": 32007
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\spine.py",
+      "state": "PRESENT",
+      "sha256": "f99a402123f39b8ceaad9372aeec0555628ba643950a5c99a4c917fd9e6d6dcd",
+      "bytes": 32194
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\cli.py",
+      "state": "PRESENT",
+      "sha256": "6d31382d601b5fe01c042c39cd17e93aa1f4f442ce0d59d44cc5e519a1414312",
+      "bytes": 12028
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\issuer\\issuer.pub",
+      "state": "PRESENT",
+      "sha256": "863835f83561a50c5d7ed3e0fb196f6b5f9035599b1fc0b3d020e08a8e801565",
+      "bytes": 46
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\issuer\\OWNER_AUTHORIZATION.json",
+      "state": "PRESENT",
+      "sha256": "a73a7d9660b9f9dd941361c7c341c0c778fad075e062947d53f416f5306574fd",
+      "bytes": 1314
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\issuer\\nonce-ledger.jsonl",
+      "state": "PRESENT",
+      "sha256": "79035b2dc1849a1f5d88c34763ff26f348a8e66d1a565daad3d494d6af5b55c9",
+      "bytes": 341
+    },
+    {
+      "path": "C:\\wg\\grants\\wp17_grant2.json",
+      "state": "PRESENT",
+      "sha256": "9fd30f4faf47b8d7002e72e31e3332061a584d82f1c2762215d752cb8707b3d6",
+      "bytes": 959
+    },
+    {
+      "path": "C:\\wg\\main-merge\\evidence\\r18\\WP0203_17_BINDINGS.json",
+      "state": "PRESENT",
+      "sha256": "c408f3e202c7486afa1370126673ad0211f32df8032c925509b53a55cbda77d5",
+      "bytes": 2074
+    },
+    {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-03-04-08-ADMISSION-CHAIN\\AO-verdict.json",
+      "state": "PRESENT",
+      "sha256": "2bd947d4e6cd309bc9c2d3b1b796df704157a59f4d4e10895b28b003615551da",
+      "bytes": 2964
+    },
+    {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-02-POLICY-LOADED-CONSUMER\\TRANSCRIPTION.json",
+      "state": "PRESENT",
+      "sha256": "e6a171aa60513d2bca78166f9f3f517585b1aa000c972987ff4bef70f1731e16",
+      "bytes": 1232
+    },
+    {
+      "path": "C:\\wg\\ao13\\ao_r28j.json",
+      "state": "PRESENT",
+      "sha256": "1109272c3496f95a1412b64e6e1681c54c2e51da70e600eeb9c5d6fecbc4fda8",
+      "bytes": 8613
+    },
+    {
+      "path": "C:\\wg\\grants\\wp17_admission.json",
+      "state": "PRESENT",
+      "sha256": "daf00f05e8af0e5fd430b1fcf1e36e89a26677095017e4b342018476b94a19ba",
+      "bytes": 618
+    }
+  ],
+  "rule": "PASS requires all native clauses, exact negatives and independent reproducibility. Demonstrated contradictions FAIL; missing Raw alone INCONCLUSIVE. Software signing without HSM is not itself a failed clause.",
+  "alias_interpretation": "Appended brief maps uppercase maker evidence for review; no rejection solely for relocation/case.",
+  "planned_read_only_probes": [
+    "public Ed25519 signature, key id, owner hash, TTL, issuance ledger",
+    "validate_grant only with unsigned seam downgrade and existing ABSENT target",
+    "standalone inspected print probe"
+  ],
+  "no_effect_boundary": "No installer dispatch, issue/init, private key access, canonical state mutation or candidate repair."
+}

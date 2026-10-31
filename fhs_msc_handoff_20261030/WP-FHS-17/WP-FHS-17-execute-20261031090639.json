@@ -1,0 +1,10 @@
+{
+  "phase": "PRE_ATTEMPT",
+  "lane": "EXECUTE",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261031090639",
+  "pid": null,
+  "started_at": "2026-10-31T09:06:39",
+  "ok": null,
+  "receipt_complete": false,
+  "note": "written by continuation_driver before spawn; the dispatcher overwrites this on completion"
+}

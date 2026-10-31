@@ -1,0 +1,11 @@
+{
+  "op": "dag-control",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:51+0800",
+  "ended_at": "2026-10-31T21:22:51+0800",
+  "duration_s": 0.139,
+  "stdout_sha256": "a63742ce931385235f7afe8c967d0a1c36f50a5ae38ee9c99910681d865c82f0",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 454,
+  "stderr_bytes": 0
+}

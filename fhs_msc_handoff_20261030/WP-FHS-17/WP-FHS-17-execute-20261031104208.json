@@ -1,0 +1,61 @@
+{
+  "schema": "HGK-LANE-RESOLUTION/1",
+  "lane": "EXECUTE",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261031104208",
+  "receipt_complete": false,
+  "note": "provisional: written where the attempt landed, overwritten by the final receipt",
+  "attempts": [
+    {
+      "rank": 1,
+      "provider": "opencode-go",
+      "model": "deepseek-v4.1-flash",
+      "transport_model": "opencode-go/deepseek-v4.1-flash",
+      "sandbox": "workspace-write",
+      "reasoning_effort": null,
+      "exit": "TIMEOUT",
+      "timed_out": true,
+      "seconds": 901.86,
+      "nonce_present": true,
+      "nonce_present_raw_stdout": true,
+      "nonce_present_anywhere": true,
+      "nonce_in_agent_message": true,
+      "producer": {
+        "script_sha256": "fbf64a569c5b8dda94977dd324abf2d5d0550085c6cb9f4171de4e702c139344",
+        "git_head": "c306d3a672c73e0f3b2ca912f345c7abf6008057",
+        "schema": "HGK-LANE-DISPATCH-PRODUCER/1"
+      },
+      "nonce_source": "item.completed/agent_message",
+      "usage_rows_after_offset": 880,
+      "usage_offset": 1693949,
+      "usage_provider": "opencode-go",
+      "usage_model": "deepseek-v4.1-flash",
+      "usage_status": 200,
+      "usage_receipt_ok": true,
+      "usage_receipt_reason": "",
+      "usage_ledger_rewritten": false,
+      "usage_rows_shape_invalid": 0,
+      "usage_rows_undecodable": 0,
+      "carrier_lines_undecodable": 0,
+      "carrier_lines_surrogate": 0,
+      "credential_posture": {
+        "verdict": "INCONCLUSIVE",
+        "decision": "WARN_CONTINUE",
+        "reason": "helper-only verdict (no child env asserted): helper_resolution_reset=PASS; helper_non_interactive=UNKNOWN",
+        "prompt_capable_helper": null,
+        "origin": null,
+        "git_terminal_prompt": "0"
+      },
+      "attempt_log_dir": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031104208.json.logs",
+      "stdout_byte_exact": true,
+      "stdout_path": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031104208.json.logs\\attempt-13160-1793414540-1-stdout.txt",
+      "stdout_bytes": 361065,
+      "stdout_sha256": "061aa9ed939a0de7a72c72165d35d16f5e6f44fd338db0656e5c18b81b1d78af",
+      "stderr_byte_exact": true,
+      "stderr_path": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031104208.json.logs\\attempt-13160-1793414540-1-stderr.txt",
+      "stderr_bytes": 170,
+      "stderr_sha256": "7000e90f122769c2eb6f29ceb283ce1836e4d09fd92dd7c1475a232bc1c97670",
+      "stdout_tail": ".started\",\"item\":{\"id\":\"item_62\",\"type\":\"command_execution\",\"command\":\"\\\"C:\\\\\\\\Users\\\\\\\\user\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Microsoft\\\\\\\\WindowsApps\\\\\\\\pwsh.exe\\\" -Command '$p='\\\"'C:\\\\\\\\Projects\\\\\\\\Agent_Workspace\\\\\\\\DOC'; Get-ChildItem -LiteralPath \\\"'$p -Directory -Force -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Name'\",\"aggregated_output\":\"\",\"exit_code\":null,\"status\":\"in_progress\"}}\n",
+      "stderr_tail": "Reading additional input from stdin...\n2026-10-31T02:42:28.991662Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Unknown\n"
+    }
+  ]
+}

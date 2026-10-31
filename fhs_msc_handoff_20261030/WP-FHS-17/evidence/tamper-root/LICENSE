@@ -1,0 +1,11 @@
+WP-FHS-17 bounded occupant package licence
+
+Copyright (c) 2026 the owner of this system. All rights reserved.
+
+This package is authored inside the WP-FHS-17 work package for the FHS-MSC
+PIPD handoff. It contains no third-party code, no vendored binaries and no
+network fetches. The occupant payload and the bounded consumer use the Python
+standard library only.
+
+No permission is granted to redistribute this package outside the delivery
+root it was produced for.

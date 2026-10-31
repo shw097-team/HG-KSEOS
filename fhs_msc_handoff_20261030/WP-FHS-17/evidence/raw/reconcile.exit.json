@@ -1,0 +1,11 @@
+{
+  "op": "reconcile",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:53+0800",
+  "ended_at": "2026-10-31T21:22:53+0800",
+  "duration_s": 0.153,
+  "stdout_sha256": "b3739b5b0bb717faf4fe8519dc89fdb3779aa09803296c24344b770dedd7d4cf",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 6634,
+  "stderr_bytes": 0
+}

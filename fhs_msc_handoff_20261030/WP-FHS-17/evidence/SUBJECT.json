@@ -1,0 +1,27 @@
+{
+  "wp": "WP-FHS-17",
+  "delivery": "FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1",
+  "source": {
+    "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+    "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+    "bytes": 46467
+  },
+  "brief": {
+    "file": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+    "sha256": "2a478c495a6d34afc35e4e95ca0ad0c1db434be98b84b5c213ec6bb39fedb2c1",
+    "bytes": 14962
+  },
+  "clauses": {
+    "Producer → ABI/Schema → Consumer": "原 Host Installer + HGK 原 Issuer → `CAP-BOOT 原 Host admission + manifest ABI` → 原 Host capability Registry/Consumer。",
+    "Output": "needed能力最小HostOccupant+loaded ACK。",
+    "POS": "現有Issuer合法installer先建needed occupant再驗LoadedSHA。",
+    "Done": "現有Issuer合法installer先建needed occupant再驗LoadedSHA；同 Subject/SourceSHA/operation 證據由原 Consumer 讀回；沒有 Raw 記 NOT_RUN。",
+    "NEG / FirstFail": "依WP06才准WP17形成循環 → `WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION`。",
+    "Rollback": "由原 原 Host Installer + HGK 原 Issuer 按 WP-FHS-17 原 receiver inverse/compensation 恢復 exact preimage；UNKNOWN 先 reconcile，保留原 journal/residue，不 reset 他人變更。",
+    "EvidenceExpectation": "同 WP-FHS-17 original operation 的 command/environment/exit/stdout/stderr 或原 Host WorldRaw；freshness=same Subject+SourceSHA+CandidateSHA+Scope+PolicyEpoch；Reader=原 Host capability Registry/Consumer。",
+    "EffectClass / Admission": "`HOST_OP`；OPS ECP + Host Owner/Issuer + nonce/TTL/epoch。"
+  },
+  "operation": "install_occupant",
+  "scope": "CAP-BOOT host capability registry, local-win",
+  "policy_epoch": "34"
+}

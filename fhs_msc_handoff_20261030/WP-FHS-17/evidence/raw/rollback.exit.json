@@ -1,0 +1,11 @@
+{
+  "op": "rollback",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:52+0800",
+  "ended_at": "2026-10-31T21:22:52+0800",
+  "duration_s": 0.138,
+  "stdout_sha256": "48070d7465c7ac7330ac75c93b42406463cd2dd416c0bfa0ef7ff316e41089bb",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 121,
+  "stderr_bytes": 0
+}

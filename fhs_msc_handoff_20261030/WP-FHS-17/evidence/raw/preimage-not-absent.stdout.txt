@@ -1,0 +1,1 @@
+{"at": 1793452970.8154612, "code": "ERR_PREIMAGE_NOT_ABSENT", "observed": [{"path": "occupant/capboot_attest.py", "preimage_declared": "ABSENT", "preimage_observed": "PRESENT", "resolved": "C:\\wg\\queue\\WP-FHS-17\\evidence\\stage-root\\occupant\\capboot_attest.py"}], "verdict": "REFUSED"}

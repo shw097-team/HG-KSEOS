@@ -1,0 +1,9 @@
+{
+  "command": "python tools/build_evidence.py",
+  "writeset": [
+    {
+      "path": "link/x.py",
+      "preimage": "ABSENT"
+    }
+  ]
+}

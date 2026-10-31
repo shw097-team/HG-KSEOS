@@ -105,7 +105,11 @@ def from_status(path: Path) -> tuple[dict, dict]:
         age = None
     return out, {"as_of": doc.get("as_of"), "age_seconds": age,
                  "stale_after_seconds": doc.get("stale_after_seconds"),
-                 "verdict": doc.get("verdict")}
+                 "verdict": doc.get("verdict"),
+                 # A liveness document names the packages that are RUNNING. Its verdict for a package that is
+                 # not live is a snapshot of a past sitting, not a claim about now -- so it is reported as
+                 # informational instead of as a divergence (see the loop below).
+                 "live_wps": sorted({str(r.get("wp")) for r in (doc.get("live") or []) if r.get("wp")})}
 
 
 def from_goal(path: Path) -> tuple[dict, dict]:
@@ -154,12 +158,28 @@ def main(argv=None) -> int:
     status, status_meta = from_status(queue / "STATUS.json")
     _goal_rows, goal_meta = from_goal(queue / "GOAL.json")
 
+    stale = False
+    age = (status_meta or {}).get("age_seconds")
+    window = (status_meta or {}).get("stale_after_seconds")
+    if age is not None and window:
+        stale = age > float(window)
+
     divergences = []
+    informational = []
+    # A stale liveness document cannot certify which packages are live: its `live` set describes a driver that
+    # stopped hours ago. Trust it only while it is fresh, otherwise every STATUS row is informational.
+    _live_wps = set((status_meta or {}).get("live_wps") or []) if not stale else set()
     for wp, state in sorted(auth.items()):
         if wp in todo and todo[wp] != state:
             divergences.append({"source": "TODO.md", "wp": wp, "says": todo[wp], "authority": state})
         if wp in status and status[wp] != state:
-            divergences.append({"source": "STATUS.json", "wp": wp, "says": status[wp], "authority": state})
+            if wp in _live_wps:
+                divergences.append({"source": "STATUS.json", "wp": wp, "says": status[wp], "authority": state})
+            else:
+                informational.append({"source": "STATUS.json", "wp": wp, "says": status[wp],
+                                      "authority": state,
+                                      "why": "not in STATUS.json's live set: a past sitting's verdict, not a "
+                                             "claim about now"})
     for src, rows in (("TODO.md", todo), ("STATUS.json", status)):
         for wp in sorted(set(rows) - set(auth)):
             divergences.append({"source": src, "wp": wp, "says": rows[wp], "authority": "ABSENT"})
@@ -171,12 +191,6 @@ def main(argv=None) -> int:
         if gk in goal_counts and goal_counts[gk] != auth_tally[ak]:
             goal_divergent[gk] = {"says": goal_counts[gk], "authority": auth_tally[ak]}
 
-    stale = False
-    age = (status_meta or {}).get("age_seconds")
-    window = (status_meta or {}).get("stale_after_seconds")
-    if age is not None and window:
-        stale = age > float(window)
-
     report = {
         "schema": "HGK-SCOREBOARD-CONSISTENCY/1",
         "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -187,6 +201,8 @@ def main(argv=None) -> int:
             "GOAL.json": goal_meta,
         },
         "divergences": divergences,
+        "informational": informational,
+        "liveness": ("STALE" if stale else "FRESH"),
         "goal_divergences": goal_divergent,
         "status_stale": stale,
     }
@@ -197,9 +213,6 @@ def main(argv=None) -> int:
     elif todo_err or (status_meta or {}).get("error"):
         report["verdict"] = "UNREADABLE"
         code = 2
-    elif stale:
-        report["verdict"] = "STALE"
-        code = 3
     else:
         report["verdict"] = "CONSISTENT"
         code = 0

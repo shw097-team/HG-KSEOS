@@ -1,0 +1,819 @@
+{
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261031002259",
+  "mode": "VERIFY_ONLY",
+  "started_at": "2026-10-30T16:24:46.729985+00:00",
+  "ended_at": "2026-10-30T16:24:47.010130+00:00",
+  "input_before": [
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+      "state": "PRESENT",
+      "sha256": "4bf5b83bb20e8cdb0cdf22b337ea01e68381fb8a9b5503d8aed11fbe74b9d6fe",
+      "bytes": 18267
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\ADMISSION.json",
+      "state": "PRESENT",
+      "sha256": "ee263c12e5b5eca66294e3e5e65b040da555ac591e14f31795730dfafae5dce6",
+      "bytes": 690
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\GRANT_VERIFY.json",
+      "state": "PRESENT",
+      "sha256": "9600ca3b2821135416035c55cb025840c99ed9ea31b4edec312626cfd59ee2b2",
+      "bytes": 100
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\LIFECYCLE.json",
+      "state": "PRESENT",
+      "sha256": "d3583e87eee605836133e791b75c1ea6c2118754cd24e74f41930f80028edea8",
+      "bytes": 1958
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-no-grant\\_neg\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-no-grant\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "268d59ce42461aee2dcea677f64187a5a010bc0890b64ba87c16ed4577042029",
+      "bytes": 414
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-no-grant\\_package\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\_neg\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "a74bb66a336e9d87ea880eca84baabc8c435c04b1dc5ccd768a40344d727c6cd",
+      "bytes": 414
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\_package\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\noop.py",
+      "state": "PRESENT",
+      "sha256": "83ddce78288193843d8a6727fb7f4ac0cf1a6c70cdaf5ccf864728a769e644a0",
+      "bytes": 19
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\noop.py.manifest.json",
+      "state": "PRESENT",
+      "sha256": "a74bb66a336e9d87ea880eca84baabc8c435c04b1dc5ccd768a40344d727c6cd",
+      "bytes": 414
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-traversal\\_neg\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\NEGATIVES.json",
+      "state": "PRESENT",
+      "sha256": "08ff49705d36416e84480003d5be5eb434f458f469d72ddff6ddaf0a3cd2bd92",
+      "bytes": 624
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\_package\\occupant_probe.py",
+      "state": "PRESENT",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py",
+      "state": "PRESENT",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py.manifest.json",
+      "state": "PRESENT",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\ORACLE.json",
+      "state": "PRESENT",
+      "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+      "bytes": 861
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\PACKAGE_INDEX.json",
+      "state": "PRESENT",
+      "sha256": "f209436217569c3a30cb5e8d53234dab8f4343a1d96ded8acb52b9fb0ebfcac1",
+      "bytes": 777
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\ROLLBACK.json",
+      "state": "PRESENT",
+      "sha256": "29a3dfd7361a4692617ba859ac897a448ab7ff92c3508c4f2e88cb4d7dcefc87",
+      "bytes": 139
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\SUBJECT.json",
+      "state": "PRESENT",
+      "sha256": "a74a5be8d2262878d6087eaba0ee012f76905a51da98f942c3f9418238f6500f",
+      "bytes": 1957
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\WRITESET.json",
+      "state": "PRESENT",
+      "sha256": "764bbc381e44810af212bd6204c05d3b3ad41f739667450857fbd8528e1764a9",
+      "bytes": 430
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\oracle.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\need.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\source-pin.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\package-index.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-before.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\fresh-load.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\invoke.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\cap-boot-dependency-inversion.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\loaded-origin-mismatch.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\negative-results.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\rollback-resume.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\tools\\reproduce.ps1",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\run-index.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-after.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+      "state": "PRESENT",
+      "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+      "bytes": 46467
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+      "state": "PRESENT",
+      "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d",
+      "bytes": 1128554
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\scripts\\occupant_install.py",
+      "state": "PRESENT",
+      "sha256": "d08aa14ec7554bb8f6af4cbcab5c3bbf34e5b23ba6168b3e0d371c35678b3b6c",
+      "bytes": 14431
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\scripts\\issue_grant.py",
+      "state": "PRESENT",
+      "sha256": "457c93d8827e574431c219e5c71ec75db5bd6d9bc180b2b8c4359056def87a18",
+      "bytes": 10199
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\providers.py",
+      "state": "PRESENT",
+      "sha256": "dd7909638590f9fd4cbdca729a47f2152e690006eefea4f300831ff24dd8cc2a",
+      "bytes": 6884
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\native_admission.py",
+      "state": "PRESENT",
+      "sha256": "314eeacd207c6808dfa7ddcf5ef12092861eeb2ff96b24ec5a216970fc889440",
+      "bytes": 32007
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\spine.py",
+      "state": "PRESENT",
+      "sha256": "f99a402123f39b8ceaad9372aeec0555628ba643950a5c99a4c917fd9e6d6dcd",
+      "bytes": 32194
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\cli.py",
+      "state": "PRESENT",
+      "sha256": "6d31382d601b5fe01c042c39cd17e93aa1f4f442ce0d59d44cc5e519a1414312",
+      "bytes": 12028
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\issuer\\issuer.pub",
+      "state": "PRESENT",
+      "sha256": "863835f83561a50c5d7ed3e0fb196f6b5f9035599b1fc0b3d020e08a8e801565",
+      "bytes": 46
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\issuer\\OWNER_AUTHORIZATION.json",
+      "state": "PRESENT",
+      "sha256": "a73a7d9660b9f9dd941361c7c341c0c778fad075e062947d53f416f5306574fd",
+      "bytes": 1314
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\issuer\\nonce-ledger.jsonl",
+      "state": "PRESENT",
+      "sha256": "ac670beec55964bcda96de479f2eeb13eee76c944765fdf9bb9f5f18680ef5b2",
+      "bytes": 170
+    },
+    {
+      "path": "C:\\wg\\grants\\wp17_grant.json",
+      "state": "PRESENT",
+      "sha256": "20c8f875e9bbc9b6d6d26a92b9c2dfdc0e511374ec7248444e03418ed100c9e1",
+      "bytes": 780
+    },
+    {
+      "path": "C:\\wg\\main-merge\\evidence\\r18\\WP0203_17_BINDINGS.json",
+      "state": "PRESENT",
+      "sha256": "c408f3e202c7486afa1370126673ad0211f32df8032c925509b53a55cbda77d5",
+      "bytes": 2074
+    },
+    {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-03-04-08-ADMISSION-CHAIN\\AO-verdict.json",
+      "state": "PRESENT",
+      "sha256": "2bd947d4e6cd309bc9c2d3b1b796df704157a59f4d4e10895b28b003615551da",
+      "bytes": 2964
+    },
+    {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-02-POLICY-LOADED-CONSUMER\\TRANSCRIPTION.json",
+      "state": "PRESENT",
+      "sha256": "e6a171aa60513d2bca78166f9f3f517585b1aa000c972987ff4bef70f1731e16",
+      "bytes": 1232
+    },
+    {
+      "path": "C:\\wg\\ao13\\ao_r28j.json",
+      "state": "PRESENT",
+      "sha256": "1109272c3496f95a1412b64e6e1681c54c2e51da70e600eeb9c5d6fecbc4fda8",
+      "bytes": 8613
+    }
+  ],
+  "input_after": [
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+      "state": "PRESENT",
+      "sha256": "4bf5b83bb20e8cdb0cdf22b337ea01e68381fb8a9b5503d8aed11fbe74b9d6fe",
+      "bytes": 18267
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\ADMISSION.json",
+      "state": "PRESENT",
+      "sha256": "ee263c12e5b5eca66294e3e5e65b040da555ac591e14f31795730dfafae5dce6",
+      "bytes": 690
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\GRANT_VERIFY.json",
+      "state": "PRESENT",
+      "sha256": "9600ca3b2821135416035c55cb025840c99ed9ea31b4edec312626cfd59ee2b2",
+      "bytes": 100
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\LIFECYCLE.json",
+      "state": "PRESENT",
+      "sha256": "d3583e87eee605836133e791b75c1ea6c2118754cd24e74f41930f80028edea8",
+      "bytes": 1958
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-no-grant\\_neg\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-no-grant\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "268d59ce42461aee2dcea677f64187a5a010bc0890b64ba87c16ed4577042029",
+      "bytes": 414
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-no-grant\\_package\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\_neg\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "a74bb66a336e9d87ea880eca84baabc8c435c04b1dc5ccd768a40344d727c6cd",
+      "bytes": 414
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\_package\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\noop.py",
+      "state": "PRESENT",
+      "sha256": "83ddce78288193843d8a6727fb7f4ac0cf1a6c70cdaf5ccf864728a769e644a0",
+      "bytes": 19
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-tampered\\noop.py.manifest.json",
+      "state": "PRESENT",
+      "sha256": "a74bb66a336e9d87ea880eca84baabc8c435c04b1dc5ccd768a40344d727c6cd",
+      "bytes": 414
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\neg-traversal\\_neg\\noop.py",
+      "state": "PRESENT",
+      "sha256": "9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109",
+      "bytes": 13
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\NEGATIVES.json",
+      "state": "PRESENT",
+      "sha256": "08ff49705d36416e84480003d5be5eb434f458f469d72ddff6ddaf0a3cd2bd92",
+      "bytes": 624
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\_package\\MANIFEST.json",
+      "state": "PRESENT",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\_package\\occupant_probe.py",
+      "state": "PRESENT",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py",
+      "state": "PRESENT",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py.manifest.json",
+      "state": "PRESENT",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\ORACLE.json",
+      "state": "PRESENT",
+      "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+      "bytes": 861
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\PACKAGE_INDEX.json",
+      "state": "PRESENT",
+      "sha256": "f209436217569c3a30cb5e8d53234dab8f4343a1d96ded8acb52b9fb0ebfcac1",
+      "bytes": 777
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\ROLLBACK.json",
+      "state": "PRESENT",
+      "sha256": "29a3dfd7361a4692617ba859ac897a448ab7ff92c3508c4f2e88cb4d7dcefc87",
+      "bytes": 139
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\SUBJECT.json",
+      "state": "PRESENT",
+      "sha256": "a74a5be8d2262878d6087eaba0ee012f76905a51da98f942c3f9418238f6500f",
+      "bytes": 1957
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\WRITESET.json",
+      "state": "PRESENT",
+      "sha256": "764bbc381e44810af212bd6204c05d3b3ad41f739667450857fbd8528e1764a9",
+      "bytes": 430
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\oracle.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\need.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\source-pin.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\package-index.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-before.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\fresh-load.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\invoke.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\cap-boot-dependency-inversion.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\loaded-origin-mismatch.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\negative-results.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\rollback-resume.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\tools\\reproduce.ps1",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\run-index.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-after.json",
+      "state": "MISSING",
+      "sha256": null,
+      "bytes": null
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+      "state": "PRESENT",
+      "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+      "bytes": 46467
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+      "state": "PRESENT",
+      "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d",
+      "bytes": 1128554
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\scripts\\occupant_install.py",
+      "state": "PRESENT",
+      "sha256": "d08aa14ec7554bb8f6af4cbcab5c3bbf34e5b23ba6168b3e0d371c35678b3b6c",
+      "bytes": 14431
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\scripts\\issue_grant.py",
+      "state": "PRESENT",
+      "sha256": "457c93d8827e574431c219e5c71ec75db5bd6d9bc180b2b8c4359056def87a18",
+      "bytes": 10199
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\providers.py",
+      "state": "PRESENT",
+      "sha256": "dd7909638590f9fd4cbdca729a47f2152e690006eefea4f300831ff24dd8cc2a",
+      "bytes": 6884
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\native_admission.py",
+      "state": "PRESENT",
+      "sha256": "314eeacd207c6808dfa7ddcf5ef12092861eeb2ff96b24ec5a216970fc889440",
+      "bytes": 32007
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\spine.py",
+      "state": "PRESENT",
+      "sha256": "f99a402123f39b8ceaad9372aeec0555628ba643950a5c99a4c917fd9e6d6dcd",
+      "bytes": 32194
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\cli.py",
+      "state": "PRESENT",
+      "sha256": "6d31382d601b5fe01c042c39cd17e93aa1f4f442ce0d59d44cc5e519a1414312",
+      "bytes": 12028
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\issuer\\issuer.pub",
+      "state": "PRESENT",
+      "sha256": "863835f83561a50c5d7ed3e0fb196f6b5f9035599b1fc0b3d020e08a8e801565",
+      "bytes": 46
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\issuer\\OWNER_AUTHORIZATION.json",
+      "state": "PRESENT",
+      "sha256": "a73a7d9660b9f9dd941361c7c341c0c778fad075e062947d53f416f5306574fd",
+      "bytes": 1314
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\config\\issuer\\nonce-ledger.jsonl",
+      "state": "PRESENT",
+      "sha256": "ac670beec55964bcda96de479f2eeb13eee76c944765fdf9bb9f5f18680ef5b2",
+      "bytes": 170
+    },
+    {
+      "path": "C:\\wg\\grants\\wp17_grant.json",
+      "state": "PRESENT",
+      "sha256": "20c8f875e9bbc9b6d6d26a92b9c2dfdc0e511374ec7248444e03418ed100c9e1",
+      "bytes": 780
+    },
+    {
+      "path": "C:\\wg\\main-merge\\evidence\\r18\\WP0203_17_BINDINGS.json",
+      "state": "PRESENT",
+      "sha256": "c408f3e202c7486afa1370126673ad0211f32df8032c925509b53a55cbda77d5",
+      "bytes": 2074
+    },
+    {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-03-04-08-ADMISSION-CHAIN\\AO-verdict.json",
+      "state": "PRESENT",
+      "sha256": "2bd947d4e6cd309bc9c2d3b1b796df704157a59f4d4e10895b28b003615551da",
+      "bytes": 2964
+    },
+    {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-02-POLICY-LOADED-CONSUMER\\TRANSCRIPTION.json",
+      "state": "PRESENT",
+      "sha256": "e6a171aa60513d2bca78166f9f3f517585b1aa000c972987ff4bef70f1731e16",
+      "bytes": 1232
+    },
+    {
+      "path": "C:\\wg\\ao13\\ao_r28j.json",
+      "state": "PRESENT",
+      "sha256": "1109272c3496f95a1412b64e6e1681c54c2e51da70e600eeb9c5d6fecbc4fda8",
+      "bytes": 8613
+    }
+  ],
+  "inputs_stable": true,
+  "package_checks": [
+    {
+      "declared": {
+        "path": "_package/MANIFEST.json",
+        "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+        "bytes": 465
+      },
+      "observed": {
+        "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\_package\\MANIFEST.json",
+        "state": "PRESENT",
+        "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+        "bytes": 465
+      },
+      "matches": true
+    },
+    {
+      "declared": {
+        "path": "_package/occupant_probe.py",
+        "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+        "bytes": 85
+      },
+      "observed": {
+        "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\_package\\occupant_probe.py",
+        "state": "PRESENT",
+        "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+        "bytes": 85
+      },
+      "matches": true
+    },
+    {
+      "declared": {
+        "path": "occupant_probe.py",
+        "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+        "bytes": 85
+      },
+      "observed": {
+        "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py",
+        "state": "PRESENT",
+        "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+        "bytes": 85
+      },
+      "matches": true
+    },
+    {
+      "declared": {
+        "path": "occupant_probe.py.manifest.json",
+        "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+        "bytes": 465
+      },
+      "observed": {
+        "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py.manifest.json",
+        "state": "PRESENT",
+        "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+        "bytes": 465
+      },
+      "matches": true
+    }
+  ],
+  "public_grant_check": {
+    "signature_valid_against_supplied_public_key": true,
+    "signature_error": null,
+    "key_id_matches": true,
+    "owner_hash_matches": true,
+    "ttl_live_at_check": true,
+    "issuance_ledger_rows": [
+      {
+        "nonce": "G-135455ca00280c39-1793377253-e5f44cfd",
+        "operation": "install_occupant",
+        "principal": "owner",
+        "at": 1793377253,
+        "grant": "C:\\wg\\grants\\wp17_grant.json"
+      }
+    ],
+    "admission_digest_matches": true,
+    "ceiling": "Valid signature does not prove original Issuer registration, receiver authorization, nonce spending or canonical target binding. No private key opened."
+  },
+  "validation_probe_accepted_invalid_control": true,
+  "standalone_probe_output_matches": true,
+  "clause_results": [
+    {
+      "clause": "PUBLIC_SIGNATURE",
+      "result": "PASS",
+      "finding": "Public Ed25519 verification only; software key/HSM ceiling alone does not decide native acceptance."
+    },
+    {
+      "clause": "ORIGINAL_OPS_ADMISSION",
+      "result": "FAIL",
+      "finding": "Validator accepts unsigned downgrade to CONFORMANCE_ONLY_TEST_SEAM. Signed writeset has relative names but no canonical root/object identities or candidate hash. No original Issuer/receiver ACK supplied."
+    },
+    {
+      "clause": "NONCE_PREIMAGE_REPLAY",
+      "result": "FAIL",
+      "finding": "Issuer verify checks nonce exists in issuance ledger, never consumes or rejects a spent nonce. ABSENT targets are not checked for existence; validation-only invalid control accepted with installed targets present."
+    },
+    {
+      "clause": "REAL_CURRENT_NEED",
+      "result": "FAIL",
+      "finding": "85-byte print probe with manifest scope draft, feature probe. No SourceSelectionID/OriginalDisposition, admitted consumer feature or official source/license/dependency pins."
+    },
+    {
+      "clause": "PACKAGE_BYTE_IDENTITY",
+      "result": "PASS",
+      "finding": "Every enumerated package and installed file independently hashed. This does not establish loaded-process identity."
+    },
+    {
+      "clause": "SOURCE_SUBJECT_BINDING",
+      "result": "FAIL",
+      "finding": "Current source and brief compared against SUBJECT byte pins."
+    },
+    {
+      "clause": "FRESH_LOAD_ORIGINAL_CONSUMER",
+      "result": "FAIL",
+      "finding": "Installer records HOST_LOADED after hashing file in parent before subprocess.run. No child PID/session, child-observed loaded origin or original Registry/Consumer ACK."
+    },
+    {
+      "clause": "DAG_INVERSION_NEGATIVE",
+      "result": "INCONCLUSIVE",
+      "finding": "Required otherwise-valid WP06-only mutant/control and exact FIRST_FAIL dispatch/effect trace absent. Installer has no dependency/admission graph check."
+    },
+    {
+      "clause": "LOADED_ORIGIN_MISMATCH_NEGATIVE",
+      "result": "FAIL",
+      "finding": "Tampered negative runs lifecycle to qualification first, then locally compares altered file hash and returns zero. No original loader/consumer rejection, mismatch event or withheld qualification ACK; submitted output truncated."
+    },
+    {
+      "clause": "ROLLBACK_RESUME",
+      "result": "INCONCLUSIVE",
+      "finding": "Uninstall summary lacks per-command Raw and exact preimage accounting; installed files currently exist without reinstall chronology. Same-key no-repeat and UNKNOWN reconciliation not shown. Historical uninstall not disproved."
+    },
+    {
+      "clause": "REPRODUCIBLE_RAW_FRESHNESS",
+      "result": "INCONCLUSIVE",
+      "finding": "Missing frozen run-index, original readbacks, command/environment/stdout/stderr/exit Raw and required dedicated fixture results. Maker frozen flag has no pre-run oracle registration receipt."
+    }
+  ],
+  "raw_refs": [
+    "officer\\sitting-20261031002259\\check-contract.json",
+    "officer\\sitting-20261031002259\\probe.command.json",
+    "officer\\sitting-20261031002259\\probe.exit.json",
+    "officer\\sitting-20261031002259\\probe.stderr.txt",
+    "officer\\sitting-20261031002259\\probe.stdout.txt",
+    "officer\\sitting-20261031002259\\public-grant-check.json",
+    "officer\\sitting-20261031002259\\registry-observation.json",
+    "officer\\sitting-20261031002259\\source-clauses.json",
+    "officer\\sitting-20261031002259\\validation-probes.json"
+  ],
+  "native_reproduction": "NOT_RUN; original bounded admission/consumer chain not established, officer cannot repair or self-accept.",
+  "independence": "Only officer outputs written; candidate stable; no installer dispatch or canonical state change."
+}

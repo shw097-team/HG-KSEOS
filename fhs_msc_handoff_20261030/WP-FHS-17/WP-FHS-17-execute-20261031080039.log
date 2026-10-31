@@ -1,0 +1,20 @@
+2026-10-31T08:00:40 launched, no redirection (child logs itself): C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes\hermes-agent\venv\Scripts\pythonw.exe C:\Projects\Agent_Workspace\HG-KSEOS\scripts\hgk-lane-dispatch.py --lane EXECUTE --prompt "NONCE-ECHO: NONCE-WP-FHS-17-AUTO-20261031080039
+
+You are the EXECUTE lane (bounded writer) answering the Independent Acceptance Officer's FAIL on WP-FHS-17.
+Your FIRST line must be exactly: NONCE-ECHO: NONCE-WP-FHS-17-AUTO-20261031080039
+
+Read the officer's verdict at C:\wg\queue\WP-FHS-17\officer\verdict.json and the brief at C:\wg\queue\WP-FHS-17/brief.md.
+The officer named these gaps:
+  - The capability probe is not the required CurrentNeed-bound native occupant; parent-side pre-execution file hashing does not prove fresh Host loaded origin; the tamper negative refuses on unrelated admission subject mismatch. Replay/preimage defects and incomplete native Raw remain. Signed admission gate improvements are acknowledged.
+
+Write the artefacts that close exactly those gaps, inside this work package only. Rules:
+  1. One work package. Do not touch other WP directories.
+  2. Every artefact you claim must be producible by a command that a checker can re-run; put the command in
+     the file's header. No hand-written results.
+  3. Do not change the acceptance standard, the oracle, or any prior verdict. If a gap cannot be closed,
+     say so plainly in EVIDENCE_GAP.md with what is missing -- that is a finding, not a failure to hide.
+  4. Write only under C:\wg\queue\WP-FHS-17. Report the files you created at the end, one per line.
+  5. Files from an earlier attempt may already exist in this directory; read them and finish them rather than
+     starting over. Say in the report what you kept and what you replaced.
+  6. Write `EXECUTE_REPORT.md` whose FIRST line is exactly `NONCE-ECHO: NONCE-WP-FHS-17-AUTO-20261031080039`, then the files you
+     created and the command that reproduces each. The line must be in the file, not only in your reply." --nonce NONCE-WP-FHS-17-AUTO-20261031080039 --codex-executable C:\Users\user\AppData\Local\OpenAI\Codex\bin\22cfb1d302613eae\codex.exe --codex-home C:/Users/user/.codex --allow-human-home-transport --relay-base https://chatgpt.com/backend-api/codex --identity-source codex-rollout --cwd C:\wg\queue\WP-FHS-17 --timeout 900 --sandbox workspace-write --allow-sandbox-escalation --guard-subject C:\wg\guard-snapshots\NONCE-WP-FHS-17-AUTO-20261031080039\scripts --require-durable-gates --durable-gates-subject C:\Projects\Agent_Workspace\HG-KSEOS\config\recurrence-ledger.json --json-out C:\wg\queue\WP-FHS-17\WP-FHS-17-execute-20261031080039.json

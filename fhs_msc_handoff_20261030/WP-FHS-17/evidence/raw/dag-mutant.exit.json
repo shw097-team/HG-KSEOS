@@ -1,0 +1,11 @@
+{
+  "op": "dag-mutant",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:51+0800",
+  "ended_at": "2026-10-31T21:22:51+0800",
+  "duration_s": 0.136,
+  "stdout_sha256": "b488dec224e0b9a020d46f9d00d7daeae46a5b1b97a9b9f622d8ea5aee5bff5a",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 577,
+  "stderr_bytes": 0
+}

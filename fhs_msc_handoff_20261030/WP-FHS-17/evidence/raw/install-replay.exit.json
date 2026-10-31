@@ -1,0 +1,11 @@
+{
+  "op": "install-replay",
+  "exit": 3,
+  "started_at": "2026-10-31T21:22:52+0800",
+  "ended_at": "2026-10-31T21:22:52+0800",
+  "duration_s": 0.196,
+  "stdout_sha256": "4e174899cd33a2fa8019c387b4d8471dc09c9da147fa43aaa360549e604aa578",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 1511,
+  "stderr_bytes": 0
+}

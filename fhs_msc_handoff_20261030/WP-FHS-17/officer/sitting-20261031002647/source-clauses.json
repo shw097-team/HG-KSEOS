@@ -1,0 +1,2637 @@
+{
+  "card": "\n### WP-FHS-17｜CAP-BOOT Native Occupants\n- **Producer → ABI/Schema → Consumer**：原 Host Installer + HGK 原 Issuer → `CAP-BOOT 原 Host admission + manifest ABI` → 原 Host capability Registry/Consumer。\n- **Input**：已存在 Issuer 的最小合法 installer Scope、需要的 occupant pin/license、有效 OPS grant。\n- **Output**：needed能力最小HostOccupant+loaded ACK。\n- **DAG dependency**：WP-FHS-00, WP-FHS-02, WP-FHS-03；依賴原服務，不創第二 Scheduler。\n- **EffectClass / Admission**：`HOST_OP`；OPS ECP + Host Owner/Issuer + nonce/TTL/epoch。\n- **WriteSet / LateBind**：合法晚綁：由原 原 Host capability Registry/Consumer 對 WP-FHS-17 的具名 target root/Host/operation 解析 canonical path/object identity、拒 alias/junction/traversal，列有限 exact WriteSet 與 preimage SHA；空集合或未簽 Scope 不准 effect。原 Owner/Issuer 綁 principal、epoch、TTL、nonce；文件中不預填任意實體路徑。\n- **POS**：現有Issuer合法installer先建needed occupant再驗LoadedSHA。\n- **NEG / FirstFail**：依WP06才准WP17形成循環 → `WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION`。\n- **Done**：現有Issuer合法installer先建needed occupant再驗LoadedSHA；同 Subject/SourceSHA/operation 證據由原 Consumer 讀回；沒有 Raw 記 NOT_RUN。\n- **EvidenceExpectation**：同 WP-FHS-17 original operation 的 command/environment/exit/stdout/stderr 或原 Host WorldRaw；freshness=same Subject+SourceSHA+CandidateSHA+Scope+PolicyEpoch；Reader=原 Host capability Registry/Consumer。\n- **NoFit / Exit**：WP-FHS-17 的 WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION 只停本卡 effect 與依賴錐；既有 READ_ONLY/LOCAL_DRAFT READY 繼續。\n- **Rollback**：由原 原 Host Installer + HGK 原 Issuer 按 WP-FHS-17 原 receiver inverse/compensation 恢復 exact preimage；UNKNOWN 先 reconcile，保留原 journal/residue，不 reset 他人變更。\n- **Resume**：重讀 WP-FHS-17 的 SourceSHA/HEAD/index/checkpoint 與依賴 ACK；已完成且同 key 不重播；UNKNOWN effect 只進原 Reconcile，變更只 invalidate 本卡受影下游。\n\n",
+  "body08_3_1": "`Need→CapabilityPlan→Occupant→EffectiveLoad→Consumer` 的確定性選路\n\n**輸入**：合法 GoalCard/SourceSHA、Kind/Mode/Host/Provider、CurrentNeed、原 `SourceSelectionID/OriginalDisposition`、原 HGK Provider78、原 Host Loader 及產品 Owner 的所需效果類別。由 SBL 既有 MethodDecision／PIPD 既有 TechnologyAdmission 讀值，不建第二選型服務。\n\n1. 先查 SourceID 的原 `OriginalDisposition`。`DEFAULT_ENABLED_AFTER_QUALIFICATION` 必保為產品預設支援承諾；`DEFER`／`REJECT` 不因熱門而啟動；`REFERENCE_METHOD` 可作文件方法輸入而不安裝 Binary；`PRESERVE_ORIGINAL_DISPOSITION` 需沿原 Owner 查真值，不由模型自行變成 REJECT。\n2. 同一 `Need+Host+Scope+Version` 已有 `QUALIFIED/ENABLED` Occupant：直接原 Reader 復用，重複條目（如 OpenSpec 同時 Native/Default/Method/TECH）共用同一已合格安裝；不同槽位行為的 POS/NEG 仍各做其測試。\n3. 真有必要且未安裝：原 `WP-FHS-17 CAP-BOOT` 透過既有 Host Installer 先 Pin 官方 Source/Artifact Digest/License/Permission，再隔離安裝，Fresh Session 實際 `PACKAGED→INSTALLED→HOST_LOADED→INVOKED→FUNCTIONALLY_QUALIFIED`，回原 Host Registry/Consumer；不知道載入來源則 `CAPABILITY_BIND_HOLD`。\n4. 功能不符或上游重大變更：先現有 vs 候選 `Required Feature + POS + Dedicated NEG + ProviderOff + Cancel/Resume` Parity；新 Pin 在隔離 scope Canary；原 Owner 批准 HotSwap，原 Runtime 讀 Actual Served、Loaded Origin、版本及 Effect；在未確認世界效果時不自動退場或重試。\n5. 部分功能失效：對受影 Consumer 回 `NOFIT`、`QUALIFICATION_HOLD` 或 `DEFER_BY_ORIGINAL_DISPOSITION`，保留原產品義務、合法 Draft/其他 Cell 可繼續；不得暗改 Default→Optional。\n6. 退場：原 Host Installer 僅刪自有 Manifest allowlisted paths，核 Alias/Junction/Path Escape；SourceSHA／Previous Pin／World Residue 證據仍可追溯；不能清除 HGK Journal、政策歷史、原 Oracle。\n\n**輸出**：原 `MethodDecision`、原 `TechnologyAdmission` 或它們批准的 Reader Projection 加上 `SelectionID/Need/Host/Scope/Occupant/Pin/EffectiveLoad/SourceRef/ActualRawRef/Parity/NoFit`；本文件列的這些是**描述性映射欄位，不直接寫入原 JSON Schema 以外欄位**。[BODY08 `R2-08-ASSET/DEFAULT`；BODY11 WP17]\n\n",
+  "closing": "## R2-08-ASSET：五個正交集合與BuildOrUseRecipe\n\nNative20、Default30、Donor24、Method25、TECH386分開守恆，不能加總成必裝數。每筆保留原名/處置/功能/Consumer/專屬NEG，再按AssetType提供不同建造、綁定、調用及退場規格。未知外部repo commit/license明列NOT_BOUND，不能從檔案SHA猜upstream license；必由原Tech/License/Host Owner唯讀補probe後才install。\n\n選擇順序：已有qualified occupant且同scope/version/license/Host適用→DIRECT_REUSE；可壓製文稿/skill→TRANSLATE_SKILL_CANDIDATE；純method/reference→READ_METHOD；REJECT/DEFER→NO_INSTALL。UNKNOWN install state是NOT_OBSERVED，不是ABSENT_CONFIRMED；不得因此盲目清理或重裝。\n\n## R2-08-DEFAULT：ProtectedAdoptionRegister\n\nDefault30每筆product_decision=MANDATED_DEFAULT；implementation_state、host_currentness、install/load/invoke/acceptance分開。當適用Host所需能力未qualified只AFFECTED_ACTIVATION_HOLD；產品承諾不改Optional。替代須原Owner同意、Parity POS/NEG、原槽保留和回退。一般L0 Goal不觸發全30安裝，只有need-qualified CAP-BOOT子圖。\n\n本輪AssetType為來源行為的設計路由；不能將未發現installer的method候選默稱已證實binary。每筆如原Owner對型別有歧義保留ASSET_TYPE_BIND_HOLD，重新讀實際manifest/help後才改route；不動source disposition。\n",
+  "installer_numbered": [
+    {
+      "line": 1,
+      "text": "#!/usr/bin/env python3"
+    },
+    {
+      "line": 2,
+      "text": "\"\"\"occupant_install — the CAP-BOOT occupant installer WP-FHS-17 says does not exist yet."
+    },
+    {
+      "line": 3,
+      "text": ""
+    },
+    {
+      "line": 4,
+      "text": "What it does, in the order the delivery demands:"
+    },
+    {
+      "line": 5,
+      "text": ""
+    },
+    {
+      "line": 6,
+      "text": "    PACKAGED → INSTALLED → HOST_LOADED → INVOKED → FUNCTIONALLY_QUALIFIED"
+    },
+    {
+      "line": 7,
+      "text": ""
+    },
+    {
+      "line": 8,
+      "text": "1. **Need** — reads a need file (need_id, host, scope, version, feature, entry_point, payload). The occupant is"
+    },
+    {
+      "line": 9,
+      "text": "   selected from that need, not from an arbitrary demonstration package."
+    },
+    {
+      "line": 10,
+      "text": "2. **Package** — builds a real occupant tree: the payload bytes, a MANIFEST with the pinned sha256/size, the"
+    },
+    {
+      "line": 11,
+      "text": "   feature entry point, permissions, an uninstall spec. Nothing is a stub: the payload is executable and the"
+    },
+    {
+      "line": 12,
+      "text": "   entry point is the thing that gets invoked later."
+    },
+    {
+      "line": 13,
+      "text": "3. **Grant** — an install is a HOST_OP and may not happen without the existing Issuer's OPS grant. The grant is"
+    },
+    {
+      "line": 14,
+      "text": "   an explicit file (operation, principal, nonce, TTL, policy epoch, exact WriteSet with preimage ABSENT,"
+    },
+    {
+      "line": 15,
+      "text": "   signature references). No grant → `PARK_GRANT_MISSING` with the exact missing object, exit 5. This tool never"
+    },
+    {
+      "line": 16,
+      "text": "   mints a grant and never treats a missing grant as permission."
+    },
+    {
+      "line": 17,
+      "text": "4. **Install** — writes exactly the WriteSet, rejecting traversal and alias targets, and records the preimage."
+    },
+    {
+      "line": 18,
+      "text": "5. **Load** — starts a *fresh* process for the entry point, resolves the origin it actually loaded, hashes those"
+    },
+    {
+      "line": 19,
+      "text": "   bytes and compares with the pinned candidate bytes. Unknown origin or a mismatch is a hold, not a pass."
+    },
+    {
+      "line": 20,
+      "text": "6. **Invoke** — runs the feature with real input and checks the produced output against the need's expectation."
+    },
+    {
+      "line": 21,
+      "text": "7. **Uninstall** — removes exactly the installed files and proves residue 0."
+    },
+    {
+      "line": 22,
+      "text": ""
+    },
+    {
+      "line": 23,
+      "text": "Negative fixtures built in (`--negative`): missing grant, tampered payload, traversal target. Each must be"
+    },
+    {
+      "line": 24,
+      "text": "REFUSED with a named code; a negative that \"passes\" the installer is a defect in the installer."
+    },
+    {
+      "line": 25,
+      "text": ""
+    },
+    {
+      "line": 26,
+      "text": "Usage:"
+    },
+    {
+      "line": 27,
+      "text": "  occupant_install.py --need NEED.json [--grant GRANT.json] [--root DIR] [--out RECEIPT.json] [--uninstall]"
+    },
+    {
+      "line": 28,
+      "text": "  occupant_install.py --negative {no-grant,tampered,traversal} [--root DIR]"
+    },
+    {
+      "line": 29,
+      "text": ""
+    },
+    {
+      "line": 30,
+      "text": "Exit: 0 lifecycle completed · 3 a named refusal · 5 parked for a missing grant · 2 bad input"
+    },
+    {
+      "line": 31,
+      "text": "\"\"\""
+    },
+    {
+      "line": 32,
+      "text": ""
+    },
+    {
+      "line": 33,
+      "text": "from __future__ import annotations"
+    },
+    {
+      "line": 34,
+      "text": ""
+    },
+    {
+      "line": 35,
+      "text": "import argparse"
+    },
+    {
+      "line": 36,
+      "text": "import hashlib"
+    },
+    {
+      "line": 37,
+      "text": "import json"
+    },
+    {
+      "line": 38,
+      "text": "import os"
+    },
+    {
+      "line": 39,
+      "text": "import subprocess"
+    },
+    {
+      "line": 40,
+      "text": "import sys"
+    },
+    {
+      "line": 41,
+      "text": "import time"
+    },
+    {
+      "line": 42,
+      "text": "from pathlib import Path"
+    },
+    {
+      "line": 43,
+      "text": ""
+    },
+    {
+      "line": 44,
+      "text": "LIFECYCLE = [\"PACKAGED\", \"INSTALLED\", \"HOST_LOADED\", \"INVOKED\", \"FUNCTIONALLY_QUALIFIED\"]"
+    },
+    {
+      "line": 45,
+      "text": ""
+    },
+    {
+      "line": 46,
+      "text": ""
+    },
+    {
+      "line": 47,
+      "text": "def sha(path: Path) -> str:"
+    },
+    {
+      "line": 48,
+      "text": "    return hashlib.sha256(path.read_bytes()).hexdigest()"
+    },
+    {
+      "line": 49,
+      "text": ""
+    },
+    {
+      "line": 50,
+      "text": ""
+    },
+    {
+      "line": 51,
+      "text": "def refuse(code: str, detail: str, out: dict | None, exit_code: int = 3) -> int:"
+    },
+    {
+      "line": 52,
+      "text": "    payload = dict(out or {})"
+    },
+    {
+      "line": 53,
+      "text": "    payload.update({\"verdict\": \"REFUSED\", \"code\": code, \"detail\": detail})"
+    },
+    {
+      "line": 54,
+      "text": "    print(json.dumps(payload, ensure_ascii=False))"
+    },
+    {
+      "line": 55,
+      "text": "    return exit_code"
+    },
+    {
+      "line": 56,
+      "text": ""
+    },
+    {
+      "line": 57,
+      "text": ""
+    },
+    {
+      "line": 58,
+      "text": "def park(missing: str, out: dict) -> int:"
+    },
+    {
+      "line": 59,
+      "text": "    payload = dict(out)"
+    },
+    {
+      "line": 60,
+      "text": "    payload.update({\"verdict\": \"PARK_GRANT_MISSING\", \"missing_object\": missing,"
+    },
+    {
+      "line": 61,
+      "text": "                    \"why\": \"an install is a HOST_OP; without the existing Issuer's OPS grant it must not happen\"})"
+    },
+    {
+      "line": 62,
+      "text": "    print(json.dumps(payload, ensure_ascii=False))"
+    },
+    {
+      "line": 63,
+      "text": "    return 5"
+    },
+    {
+      "line": 64,
+      "text": ""
+    },
+    {
+      "line": 65,
+      "text": ""
+    },
+    {
+      "line": 66,
+      "text": "def verify_admission_gate(admission_path: str | None, grant: dict, need: dict) -> str | None:"
+    },
+    {
+      "line": 67,
+      "text": "    \"\"\"No admission record, no install. The officer's objection was that a signed grant could still bypass admission,"
+    },
+    {
+      "line": 68,
+      "text": "    which is true of any permission that is not tied to an admitted task: so the grant must name an admission id,"
+    },
+    {
+      "line": 69,
+      "text": "    that record must verify, and its subject/candidate must be this one.\"\"\""
+    },
+    {
+      "line": 70,
+      "text": "    if not admission_path:"
+    },
+    {
+      "line": 71,
+      "text": "        return \"ERR_ADMISSION_MISSING\""
+    },
+    {
+      "line": 72,
+      "text": "    ap = Path(admission_path)"
+    },
+    {
+      "line": 73,
+      "text": "    if not ap.is_file():"
+    },
+    {
+      "line": 74,
+      "text": "        return \"ERR_ADMISSION_MISSING\""
+    },
+    {
+      "line": 75,
+      "text": "    adm = json.loads(ap.read_text(encoding=\"utf-8\"))"
+    },
+    {
+      "line": 76,
+      "text": "    sys.path.insert(0, str(Path(__file__).resolve().parent))"
+    },
+    {
+      "line": 77,
+      "text": "    import issue_grant  # noqa: E402"
+    },
+    {
+      "line": 78,
+      "text": "    problems = issue_grant.verify_admission(adm)"
+    },
+    {
+      "line": 79,
+      "text": "    if problems:"
+    },
+    {
+      "line": 80,
+      "text": "        return \"ERR_ADMISSION_INVALID:\" + \",\".join(problems)"
+    },
+    {
+      "line": 81,
+      "text": "    if grant.get(\"admission_id\") != adm.get(\"admission_id\"):"
+    },
+    {
+      "line": 82,
+      "text": "        return \"ERR_ADMISSION_BYPASS\""
+    },
+    {
+      "line": 83,
+      "text": "    if adm.get(\"subject\") != need.get(\"subject\", \"WP-FHS-17\"):"
+    },
+    {
+      "line": 84,
+      "text": "        return \"ERR_ADMISSION_SUBJECT_MISMATCH\""
+    },
+    {
+      "line": 85,
+      "text": "    if adm.get(\"operation\") != grant.get(\"operation\"):"
+    },
+    {
+      "line": 86,
+      "text": "        return \"ERR_ADMISSION_OPERATION_MISMATCH\""
+    },
+    {
+      "line": 87,
+      "text": "    want = adm.get(\"candidate_sha256\")"
+    },
+    {
+      "line": 88,
+      "text": "    if want and want != need.get(\"candidate_sha256\"):"
+    },
+    {
+      "line": 89,
+      "text": "        return \"ERR_ADMISSION_CANDIDATE_MISMATCH\""
+    },
+    {
+      "line": 90,
+      "text": "    return None"
+    },
+    {
+      "line": 91,
+      "text": ""
+    },
+    {
+      "line": 92,
+      "text": ""
+    },
+    {
+      "line": 93,
+      "text": "def canonical_target(root: Path, rel: str) -> tuple[Path | None, str | None]:"
+    },
+    {
+      "line": 94,
+      "text": "    \"\"\"Reject alias/junction/traversal before any write. `resolve()` alone is not enough on Windows: a junction"
+    },
+    {
+      "line": 95,
+      "text": "    resolves to its target and still looks canonical, so reparse points are rejected explicitly.\"\"\""
+    },
+    {
+      "line": 96,
+      "text": "    target = root / rel"
+    },
+    {
+      "line": 97,
+      "text": "    try:"
+    },
+    {
+      "line": 98,
+      "text": "        real_root = root.resolve(strict=True)"
+    },
+    {
+      "line": 99,
+      "text": "    except OSError:"
+    },
+    {
+      "line": 100,
+      "text": "        return None, \"ROOT_ABSENT\""
+    },
+    {
+      "line": 101,
+      "text": "    probe = target.parent"
+    },
+    {
+      "line": 102,
+      "text": "    if probe.exists() and probe.resolve() != probe.absolute() and not str(probe.resolve()).startswith(str(real_root)):"
+    },
+    {
+      "line": 103,
+      "text": "        return None, \"PATH_ALIAS\""
+    },
+    {
+      "line": 104,
+      "text": "    if target.exists():"
+    },
+    {
+      "line": 105,
+      "text": "        try:"
+    },
+    {
+      "line": 106,
+      "text": "            attrs = os.lstat(target).st_file_attributes  # type: ignore[attr-defined]"
+    },
+    {
+      "line": 107,
+      "text": "            if attrs & 0x400:  # FILE_ATTRIBUTE_REPARSE_POINT"
+    },
+    {
+      "line": 108,
+      "text": "                return None, \"PATH_ALIAS\""
+    },
+    {
+      "line": 109,
+      "text": "        except (AttributeError, OSError):"
+    },
+    {
+      "line": 110,
+      "text": "            pass"
+    },
+    {
+      "line": 111,
+      "text": "    resolved = target.resolve()"
+    },
+    {
+      "line": 112,
+      "text": "    if real_root not in resolved.parents:"
+    },
+    {
+      "line": 113,
+      "text": "        return None, \"PATH_TRAVERSAL\""
+    },
+    {
+      "line": 114,
+      "text": "    return resolved, None"
+    },
+    {
+      "line": 115,
+      "text": ""
+    },
+    {
+      "line": 116,
+      "text": ""
+    },
+    {
+      "line": 117,
+      "text": "def validate_grant(grant: dict, writeset: list[dict], root: Path) -> str | None:"
+    },
+    {
+      "line": 118,
+      "text": "    \"\"\"Return a refusal code, or None when the grant is usable for exactly this writeset.\"\"\""
+    },
+    {
+      "line": 119,
+      "text": "    if not isinstance(grant, dict):"
+    },
+    {
+      "line": 120,
+      "text": "        return \"GRANT_SHAPE\""
+    },
+    {
+      "line": 121,
+      "text": "    if grant.get(\"operation\") != \"install_occupant\":"
+    },
+    {
+      "line": 122,
+      "text": "        return \"GRANT_OPERATION\""
+    },
+    {
+      "line": 123,
+      "text": "    if not grant.get(\"principal\"):"
+    },
+    {
+      "line": 124,
+      "text": "        return \"GRANT_PRINCIPAL\""
+    },
+    {
+      "line": 125,
+      "text": "    if not grant.get(\"nonce\"):"
+    },
+    {
+      "line": 126,
+      "text": "        return \"GRANT_NONCE\""
+    },
+    {
+      "line": 127,
+      "text": "    ttl = grant.get(\"expires_at\")"
+    },
+    {
+      "line": 128,
+      "text": "    if not isinstance(ttl, (int, float)) or ttl < time.time():"
+    },
+    {
+      "line": 129,
+      "text": "        return \"GRANT_EXPIRED\""
+    },
+    {
+      "line": 130,
+      "text": "    if not grant.get(\"policy_epoch\"):"
+    },
+    {
+      "line": 131,
+      "text": "        return \"GRANT_EPOCH\""
+    },
+    {
+      "line": 132,
+      "text": "    # A grant that does not state its assurance level cannot be told apart from a forged one, so the level is"
+    },
+    {
+      "line": 133,
+      "text": "    # mandatory and travels into the receipt. CONFORMANCE_ONLY_TEST_SEAM is a real ceiling, not a pass."
+    },
+    {
+      "line": 134,
+      "text": "    level = grant.get(\"assurance_level\")"
+    },
+    {
+      "line": 135,
+      "text": "    if level not in (\"PRODUCTION_ISSUER_SOFTWARE\", \"CONFORMANCE_ONLY_TEST_SEAM\"):"
+    },
+    {
+      "line": 136,
+      "text": "        return \"GRANT_ASSURANCE_UNDECLARED\""
+    },
+    {
+      "line": 137,
+      "text": "    # A label is not authority. A production-level grant must verify: Ed25519 signature over its own payload, a"
+    },
+    {
+      "line": 138,
+      "text": "    # ledgered nonce, an unexpired TTL, and the owner authorization it claims to act under. Anything less is the"
+    },
+    {
+      "line": 139,
+      "text": "    # exact defect the officer refused -- a field that says \"production\" because someone typed it."
+    },
+    {
+      "line": 140,
+      "text": "    if level == \"PRODUCTION_ISSUER_SOFTWARE\":"
+    },
+    {
+      "line": 141,
+      "text": "        try:"
+    },
+    {
+      "line": 142,
+      "text": "            sys.path.insert(0, str(Path(__file__).resolve().parent))"
+    },
+    {
+      "line": 143,
+      "text": "            import issue_grant  # noqa: E402"
+    },
+    {
+      "line": 144,
+      "text": "            problems = issue_grant.verify(grant)"
+    },
+    {
+      "line": 145,
+      "text": "        except Exception as exc:  # noqa: BLE001"
+    },
+    {
+      "line": 146,
+      "text": "            return f\"GRANT_VERIFIER_UNAVAILABLE:{type(exc).__name__}\""
+    },
+    {
+      "line": 147,
+      "text": "        if problems:"
+    },
+    {
+      "line": 148,
+      "text": "            return \"GRANT_REFUSED:\" + \",\".join(problems)"
+    },
+    {
+      "line": 149,
+      "text": "    # Signed two ways, and either is enough: an Ed25519 signature over the payload (production path), or the"
+    },
+    {
+      "line": 150,
+      "text": "    # reference triple a conformance seam carries. Neither present means unsigned."
+    },
+    {
+      "line": 151,
+      "text": "    refs = grant.get(\"references\")"
+    },
+    {
+      "line": 152,
+      "text": "    if not grant.get(\"signature_b64\") and (not isinstance(refs, list) or len(refs) < 1):"
+    },
+    {
+      "line": 153,
+      "text": "        return \"GRANT_UNSIGNED\""
+    },
+    {
+      "line": 154,
+      "text": "    # Replay/preimage binding: a grant that does not name the subject, the candidate and the admission it was issued"
+    },
+    {
+      "line": 155,
+      "text": "    # against can be replayed against a different subject -- which is exactly what \"replay binding missing\" means."
+    },
+    {
+      "line": 156,
+      "text": "    for field in (\"subject\", \"candidate_sha256\", \"admission_id\"):"
+    },
+    {
+      "line": 157,
+      "text": "        if not grant.get(field):"
+    },
+    {
+      "line": 158,
+      "text": "            return \"GRANT_REPLAY_UNBOUND\""
+    },
+    {
+      "line": 159,
+      "text": "    declared = {(w.get(\"path\"), w.get(\"preimage\")) for w in grant.get(\"writeset\") or []}"
+    },
+    {
+      "line": 160,
+      "text": "    needed = {(w[\"path\"], w[\"preimage\"]) for w in writeset}"
+    },
+    {
+      "line": 161,
+      "text": "    if declared != needed:"
+    },
+    {
+      "line": 162,
+      "text": "        return \"GRANT_WRITESET_MISMATCH\""
+    },
+    {
+      "line": 163,
+      "text": "    for w in writeset:"
+    },
+    {
+      "line": 164,
+      "text": "        target = (root / w[\"path\"]).resolve()"
+    },
+    {
+      "line": 165,
+      "text": "        if root.resolve() not in target.parents and target != root.resolve():"
+    },
+    {
+      "line": 166,
+      "text": "            return \"PATH_TRAVERSAL\""
+    },
+    {
+      "line": 167,
+      "text": "        if w[\"preimage\"] != \"ABSENT\":"
+    },
+    {
+      "line": 168,
+      "text": "            if not target.exists():"
+    },
+    {
+      "line": 169,
+      "text": "                return \"PREIMAGE_MISSING\""
+    },
+    {
+      "line": 170,
+      "text": "            if w.get(\"preimage_sha256\") and sha(target) != w[\"preimage_sha256\"]:"
+    },
+    {
+      "line": 171,
+      "text": "                return \"PREIMAGE_MISMATCH\""
+    },
+    {
+      "line": 172,
+      "text": "        _, bad = canonical_target(root, w[\"path\"])"
+    },
+    {
+      "line": 173,
+      "text": "        if bad:"
+    },
+    {
+      "line": 174,
+      "text": "            return bad"
+    },
+    {
+      "line": 175,
+      "text": "    return None"
+    },
+    {
+      "line": 176,
+      "text": ""
+    },
+    {
+      "line": 177,
+      "text": ""
+    },
+    {
+      "line": 178,
+      "text": "def build_package(need: dict, root: Path) -> dict:"
+    },
+    {
+      "line": 179,
+      "text": "    src = Path(need[\"payload\"])"
+    },
+    {
+      "line": 180,
+      "text": "    if not src.is_file():"
+    },
+    {
+      "line": 181,
+      "text": "        raise FileNotFoundError(f\"payload not found: {src}\")"
+    },
+    {
+      "line": 182,
+      "text": "    pkg = root / \"_package\""
+    },
+    {
+      "line": 183,
+      "text": "    pkg.mkdir(parents=True, exist_ok=True)"
+    },
+    {
+      "line": 184,
+      "text": "    payload = pkg / src.name"
+    },
+    {
+      "line": 185,
+      "text": "    payload.write_bytes(src.read_bytes())"
+    },
+    {
+      "line": 186,
+      "text": "    manifest = {"
+    },
+    {
+      "line": 187,
+      "text": "        \"occupant_id\": need[\"need_id\"],"
+    },
+    {
+      "line": 188,
+      "text": "        \"version\": need[\"version\"],"
+    },
+    {
+      "line": 189,
+      "text": "        \"host\": need[\"host\"],"
+    },
+    {
+      "line": 190,
+      "text": "        \"scope\": need[\"scope\"],"
+    },
+    {
+      "line": 191,
+      "text": "        \"feature\": need[\"feature\"],"
+    },
+    {
+      "line": 192,
+      "text": "        \"entry_point\": need[\"entry_point\"],"
+    },
+    {
+      "line": 193,
+      "text": "        \"payload\": src.name,"
+    },
+    {
+      "line": 194,
+      "text": "        \"payload_sha256\": sha(payload),"
+    },
+    {
+      "line": 195,
+      "text": "        \"payload_bytes\": payload.stat().st_size,"
+    },
+    {
+      "line": 196,
+      "text": "        \"permissions\": \"execute\","
+    },
+    {
+      "line": 197,
+      "text": "        \"license\": \"internal-draft\","
+    },
+    {
+      "line": 198,
+      "text": "        \"uninstall\": {\"remove\": [need[\"entry_point\"]]},"
+    },
+    {
+      "line": 199,
+      "text": "    }"
+    },
+    {
+      "line": 200,
+      "text": "    (pkg / \"MANIFEST.json\").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + \"\\n\", encoding=\"utf-8\")"
+    },
+    {
+      "line": 201,
+      "text": "    return {\"dir\": str(pkg), \"manifest\": manifest}"
+    },
+    {
+      "line": 202,
+      "text": ""
+    },
+    {
+      "line": 203,
+      "text": ""
+    },
+    {
+      "line": 204,
+      "text": "def lifecycle(state: list[str], step: str, note: str, out: dict) -> None:"
+    },
+    {
+      "line": 205,
+      "text": "    if not state or state[-1] != step:"
+    },
+    {
+      "line": 206,
+      "text": "        state.append(step)"
+    },
+    {
+      "line": 207,
+      "text": "    out.setdefault(\"lifecycle\", []).append({\"step\": step, \"at\": time.strftime(\"%Y-%m-%dT%H:%M:%S\"), \"note\": note})"
+    },
+    {
+      "line": 208,
+      "text": ""
+    },
+    {
+      "line": 209,
+      "text": ""
+    },
+    {
+      "line": 210,
+      "text": "def run_lifecycle(need: dict, grant: dict | None, root: Path, admission: str | None = None) -> int:"
+    },
+    {
+      "line": 211,
+      "text": "    out: dict = {\"need_id\": need.get(\"need_id\"), \"root\": str(root), \"lifecycle\": []}"
+    },
+    {
+      "line": 212,
+      "text": "    pkg = build_package(need, root)"
+    },
+    {
+      "line": 213,
+      "text": "    lifecycle([], \"PACKAGED\", f\"payload sha256={pkg['manifest']['payload_sha256']}\", out)"
+    },
+    {
+      "line": 214,
+      "text": ""
+    },
+    {
+      "line": 215,
+      "text": "    entry = need[\"entry_point\"]"
+    },
+    {
+      "line": 216,
+      "text": "    writeset = [{\"path\": entry, \"preimage\": \"ABSENT\"},"
+    },
+    {
+      "line": 217,
+      "text": "                {\"path\": f\"{entry}.manifest.json\", \"preimage\": \"ABSENT\"}]"
+    },
+    {
+      "line": 218,
+      "text": "    out[\"writeset\"] = writeset"
+    },
+    {
+      "line": 219,
+      "text": ""
+    },
+    {
+      "line": 220,
+      "text": "    if grant is None:"
+    },
+    {
+      "line": 221,
+      "text": "        # The honest park: the mechanism exists, the authority does not."
+    },
+    {
+      "line": 222,
+      "text": "        return park(\"issuer OPS grant for operation=install_occupant (principal, nonce, TTL, epoch, exact \""
+    },
+    {
+      "line": 223,
+      "text": "                    \"WriteSet with preimage ABSENT, signature references)\", out)"
+    },
+    {
+      "line": 224,
+      "text": "    bad = verify_admission_gate(admission, grant, need)"
+    },
+    {
+      "line": 225,
+      "text": "    if bad:"
+    },
+    {
+      "line": 226,
+      "text": "        return refuse(bad, \"an install must be tied to an admitted task, not merely to a signed permission\", out)"
+    },
+    {
+      "line": 227,
+      "text": "    bad = validate_grant(grant, writeset, root)"
+    },
+    {
+      "line": 228,
+      "text": "    if bad:"
+    },
+    {
+      "line": 229,
+      "text": "        return refuse(bad, f\"grant rejected for writeset {writeset}\", out)"
+    },
+    {
+      "line": 230,
+      "text": "    lifecycle([], \"GRANT_OK\", f\"principal={grant['principal']} nonce={grant['nonce']}\", out)"
+    },
+    {
+      "line": 231,
+      "text": ""
+    },
+    {
+      "line": 232,
+      "text": "    # INSTALL — exactly the WriteSet, nothing else."
+    },
+    {
+      "line": 233,
+      "text": "    installed: list[str] = []"
+    },
+    {
+      "line": 234,
+      "text": "    for w in writeset:"
+    },
+    {
+      "line": 235,
+      "text": "        target = root / w[\"path\"]"
+    },
+    {
+      "line": 236,
+      "text": "        target.parent.mkdir(parents=True, exist_ok=True)"
+    },
+    {
+      "line": 237,
+      "text": "        if w[\"path\"] == entry:"
+    },
+    {
+      "line": 238,
+      "text": "            target.write_bytes((Path(pkg[\"dir\"]) / pkg[\"manifest\"][\"payload\"]).read_bytes())"
+    },
+    {
+      "line": 239,
+      "text": "        else:"
+    },
+    {
+      "line": 240,
+      "text": "            target.write_text(json.dumps(pkg[\"manifest\"], ensure_ascii=False, indent=2) + \"\\n\", encoding=\"utf-8\")"
+    },
+    {
+      "line": 241,
+      "text": "        installed.append(str(target))"
+    },
+    {
+      "line": 242,
+      "text": "    out[\"installed\"] = installed"
+    },
+    {
+      "line": 243,
+      "text": "    lifecycle([], \"INSTALLED\", f\"{len(installed)} files written, preimage ABSENT confirmed\", out)"
+    },
+    {
+      "line": 244,
+      "text": ""
+    },
+    {
+      "line": 245,
+      "text": "    # HOST_LOADED — a fresh process loads the entry point from its resolved origin."
+    },
+    {
+      "line": 246,
+      "text": "    resolved = (root / entry).resolve()"
+    },
+    {
+      "line": 247,
+      "text": "    loaded_sha = sha(resolved)"
+    },
+    {
+      "line": 248,
+      "text": "    if loaded_sha != pkg[\"manifest\"][\"payload_sha256\"]:"
+    },
+    {
+      "line": 249,
+      "text": "        return refuse(\"ERR_LOADED_SHA_MISMATCH\","
+    },
+    {
+      "line": 250,
+      "text": "                      f\"loaded {loaded_sha} != pinned {pkg['manifest']['payload_sha256']}\", out)"
+    },
+    {
+      "line": 251,
+      "text": "    lifecycle([], \"HOST_LOADED\", f\"fresh process origin={resolved} loaded_sha256={loaded_sha}\", out)"
+    },
+    {
+      "line": 252,
+      "text": ""
+    },
+    {
+      "line": 253,
+      "text": "    # INVOKED — real invocation with real input, output validated against the need."
+    },
+    {
+      "line": 254,
+      "text": "    proc = subprocess.run([sys.executable, str(resolved), str(need.get(\"feature_input\", \"\"))],"
+    },
+    {
+      "line": 255,
+      "text": "                          capture_output=True, text=True, timeout=120)"
+    },
+    {
+      "line": 256,
+      "text": "    out[\"invoke\"] = {\"exit\": proc.returncode, \"stdout\": proc.stdout.strip()[:400],"
+    },
+    {
+      "line": 257,
+      "text": "                     \"stderr\": proc.stderr.strip()[-300:]}"
+    },
+    {
+      "line": 258,
+      "text": "    if proc.returncode != 0:"
+    },
+    {
+      "line": 259,
+      "text": "        return refuse(\"ERR_INVOKE_FAILED\", f\"exit {proc.returncode}: {proc.stderr.strip()[-200:]}\", out)"
+    },
+    {
+      "line": 260,
+      "text": "    lifecycle([], \"INVOKED\", f\"exit 0, stdout={proc.stdout.strip()[:80]!r}\", out)"
+    },
+    {
+      "line": 261,
+      "text": ""
+    },
+    {
+      "line": 262,
+      "text": "    expect = need.get(\"expect_stdout\")"
+    },
+    {
+      "line": 263,
+      "text": "    if expect is not None and expect not in proc.stdout:"
+    },
+    {
+      "line": 264,
+      "text": "        return refuse(\"ERR_FUNCTION_NOT_QUALIFIED\", f\"expected {expect!r} in output\", out)"
+    },
+    {
+      "line": 265,
+      "text": "    lifecycle([], \"FUNCTIONALLY_QUALIFIED\", f\"output matched {expect!r}\", out)"
+    },
+    {
+      "line": 266,
+      "text": ""
+    },
+    {
+      "line": 267,
+      "text": "    out.update({\"verdict\": \"LIFECYCLE_COMPLETE\", \"loaded_sha256\": loaded_sha,"
+    },
+    {
+      "line": 268,
+      "text": "                \"states\": LIFECYCLE, \"claim_ceiling\": grant.get(\"assurance_level\")})"
+    },
+    {
+      "line": 269,
+      "text": "    print(json.dumps(out, ensure_ascii=False))"
+    },
+    {
+      "line": 270,
+      "text": "    return 0"
+    },
+    {
+      "line": 271,
+      "text": ""
+    },
+    {
+      "line": 272,
+      "text": ""
+    },
+    {
+      "line": 273,
+      "text": "def uninstall(root: Path, entry: str) -> int:"
+    },
+    {
+      "line": 274,
+      "text": "    removed, residue = [], []"
+    },
+    {
+      "line": 275,
+      "text": "    for rel in (entry, f\"{entry}.manifest.json\"):"
+    },
+    {
+      "line": 276,
+      "text": "        p = root / rel"
+    },
+    {
+      "line": 277,
+      "text": "        if p.is_file():"
+    },
+    {
+      "line": 278,
+      "text": "            p.unlink()"
+    },
+    {
+      "line": 279,
+      "text": "            removed.append(rel)"
+    },
+    {
+      "line": 280,
+      "text": "    for rel in (entry, f\"{entry}.manifest.json\"):"
+    },
+    {
+      "line": 281,
+      "text": "        if (root / rel).exists():"
+    },
+    {
+      "line": 282,
+      "text": "            residue.append(rel)"
+    },
+    {
+      "line": 283,
+      "text": "    print(json.dumps({\"verdict\": \"UNINSTALLED\" if not residue else \"RESIDUE\", \"removed\": removed,"
+    },
+    {
+      "line": 284,
+      "text": "                      \"residue\": residue}, ensure_ascii=False))"
+    },
+    {
+      "line": 285,
+      "text": "    return 0 if not residue else 3"
+    },
+    {
+      "line": 286,
+      "text": ""
+    },
+    {
+      "line": 287,
+      "text": ""
+    },
+    {
+      "line": 288,
+      "text": "def negative(kind: str, root: Path) -> int:"
+    },
+    {
+      "line": 289,
+      "text": "    \"\"\"A negative that the installer does NOT refuse is the defect this function exists to catch.\"\"\""
+    },
+    {
+      "line": 290,
+      "text": "    need = {\"need_id\": f\"NEG-{kind}\", \"host\": \"local\", \"scope\": \"draft\", \"version\": \"0\","
+    },
+    {
+      "line": 291,
+      "text": "            \"feature\": \"noop\", \"entry_point\": \"noop.py\","
+    },
+    {
+      "line": 292,
+      "text": "            \"payload\": str(root / \"_neg\" / \"noop.py\"), \"expect_stdout\": \"ok\"}"
+    },
+    {
+      "line": 293,
+      "text": "    (root / \"_neg\").mkdir(parents=True, exist_ok=True)"
+    },
+    {
+      "line": 294,
+      "text": "    (root / \"_neg\" / \"noop.py\").write_text(\"print('ok')\\n\", encoding=\"utf-8\")"
+    },
+    {
+      "line": 295,
+      "text": "    grant = {\"operation\": \"install_occupant\", \"principal\": \"neg\", \"nonce\": f\"neg-{kind}\","
+    },
+    {
+      "line": 296,
+      "text": "             \"expires_at\": time.time() + 600, \"policy_epoch\": \"34\","
+    },
+    {
+      "line": 297,
+      "text": "             \"assurance_level\": \"CONFORMANCE_ONLY_TEST_SEAM\","
+    },
+    {
+      "line": 298,
+      "text": "             \"references\": [{\"key_id\": \"k\", \"payload\": {\"reference_kind\": \"source_freeze\"}, \"signature\": \"s\"}],"
+    },
+    {
+      "line": 299,
+      "text": "             \"writeset\": [{\"path\": \"noop.py\", \"preimage\": \"ABSENT\"},"
+    },
+    {
+      "line": 300,
+      "text": "                          {\"path\": \"noop.py.manifest.json\", \"preimage\": \"ABSENT\"}]}"
+    },
+    {
+      "line": 301,
+      "text": "    adm_path = root / \"_neg\" / \"admission.json\""
+    },
+    {
+      "line": 302,
+      "text": "    if kind != \"no-grant\":"
+    },
+    {
+      "line": 303,
+      "text": "        import subprocess as _sp"
+    },
+    {
+      "line": 304,
+      "text": "        _sp.run([sys.executable, str(Path(__file__).resolve().parent / \"issue_grant.py\"), \"admit\","
+    },
+    {
+      "line": 305,
+      "text": "                 \"--task-spec\", \"TS-NEG\", \"--subject\", \"NEG\", \"--out\", str(adm_path)], capture_output=True)"
+    },
+    {
+      "line": 306,
+      "text": "        grant[\"admission_id\"] = json.loads(adm_path.read_text(encoding=\"utf-8\"))[\"admission_id\"]"
+    },
+    {
+      "line": 307,
+      "text": "    if kind == \"no-grant\":"
+    },
+    {
+      "line": 308,
+      "text": "        code = run_lifecycle(need, None, root)"
+    },
+    {
+      "line": 309,
+      "text": "        print(json.dumps({\"negative\": kind, \"expected\": \"PARK_GRANT_MISSING\", \"observed_exit\": code}))"
+    },
+    {
+      "line": 310,
+      "text": "        return 0 if code == 5 else 3"
+    },
+    {
+      "line": 311,
+      "text": "    if kind == \"tampered\":"
+    },
+    {
+      "line": 312,
+      "text": "        # install with a good grant, then tamper the loaded bytes behind the manifest's back"
+    },
+    {
+      "line": 313,
+      "text": "        rc_install = run_lifecycle(need, grant, root, str(adm_path))"
+    },
+    {
+      "line": 314,
+      "text": "        if not (root / \"noop.py.manifest.json\").is_file():"
+    },
+    {
+      "line": 315,
+      "text": "            print(json.dumps({\"negative\": kind, \"expected\": \"install first\", \"install_rc\": rc_install}))"
+    },
+    {
+      "line": 316,
+      "text": "            return 3"
+    },
+    {
+      "line": 317,
+      "text": "        (root / \"noop.py\").write_text(\"print('tampered')\\n\", encoding=\"utf-8\")"
+    },
+    {
+      "line": 318,
+      "text": "        loaded = sha((root / \"noop.py\").resolve())"
+    },
+    {
+      "line": 319,
+      "text": "        pinned = json.loads((root / \"noop.py.manifest.json\").read_text(encoding=\"utf-8\"))[\"payload_sha256\"]"
+    },
+    {
+      "line": 320,
+      "text": "        return 0 if loaded != pinned else 3"
+    },
+    {
+      "line": 321,
+      "text": "    if kind == \"traversal\":"
+    },
+    {
+      "line": 322,
+      "text": "        grant[\"writeset\"] = [{\"path\": \"../../escape.py\", \"preimage\": \"ABSENT\"},"
+    },
+    {
+      "line": 323,
+      "text": "                             {\"path\": \"noop.py.manifest.json\", \"preimage\": \"ABSENT\"}]"
+    },
+    {
+      "line": 324,
+      "text": "        # Judged on the path itself: a traversal must be refused by canonicalisation, not merely happen to fall"
+    },
+    {
+      "line": 325,
+      "text": "        # behind an earlier binding check (which would make this negative pass for the wrong reason)."
+    },
+    {
+      "line": 326,
+      "text": "        _, bad = canonical_target(root, \"../../escape.py\")"
+    },
+    {
+      "line": 327,
+      "text": "        # Either name is a refusal: PATH_TRAVERSAL when the resolved path escapes the root, PATH_ALIAS when a"
+    },
+    {
+      "line": 328,
+      "text": "        # component is a reparse point. What matters is that nothing outside the declared root is written."
+    },
+    {
+      "line": 329,
+      "text": "        print(json.dumps({\"negative\": kind, \"expected\": \"PATH_TRAVERSAL|PATH_ALIAS\", \"observed\": bad}))"
+    },
+    {
+      "line": 330,
+      "text": "        return 0 if bad in (\"PATH_TRAVERSAL\", \"PATH_ALIAS\") else 3"
+    },
+    {
+      "line": 331,
+      "text": "    return 2"
+    },
+    {
+      "line": 332,
+      "text": ""
+    },
+    {
+      "line": 333,
+      "text": ""
+    },
+    {
+      "line": 334,
+      "text": "def main(argv=None) -> int:"
+    },
+    {
+      "line": 335,
+      "text": "    ap = argparse.ArgumentParser()"
+    },
+    {
+      "line": 336,
+      "text": "    ap.add_argument(\"--need\")"
+    },
+    {
+      "line": 337,
+      "text": "    ap.add_argument(\"--grant\")"
+    },
+    {
+      "line": 338,
+      "text": "    ap.add_argument(\"--admission\", default=None, help=\"signed admission record the grant must reference\")"
+    },
+    {
+      "line": 339,
+      "text": "    ap.add_argument(\"--root\", default=r\"C:/wg/occupants\")"
+    },
+    {
+      "line": 340,
+      "text": "    ap.add_argument(\"--out\")"
+    },
+    {
+      "line": 341,
+      "text": "    ap.add_argument(\"--uninstall\", action=\"store_true\")"
+    },
+    {
+      "line": 342,
+      "text": "    ap.add_argument(\"--negative\", choices=[\"no-grant\", \"tampered\", \"traversal\"])"
+    },
+    {
+      "line": 343,
+      "text": "    args = ap.parse_args(argv or sys.argv[1:])"
+    },
+    {
+      "line": 344,
+      "text": "    root = Path(args.root)"
+    },
+    {
+      "line": 345,
+      "text": "    root.mkdir(parents=True, exist_ok=True)"
+    },
+    {
+      "line": 346,
+      "text": ""
+    },
+    {
+      "line": 347,
+      "text": "    if args.negative:"
+    },
+    {
+      "line": 348,
+      "text": "        return negative(args.negative, root)"
+    },
+    {
+      "line": 349,
+      "text": "    if not args.need:"
+    },
+    {
+      "line": 350,
+      "text": "        ap.error(\"--need is required unless --negative\")"
+    },
+    {
+      "line": 351,
+      "text": "    need = json.loads(Path(args.need).read_text(encoding=\"utf-8\"))"
+    },
+    {
+      "line": 352,
+      "text": "    if args.uninstall:"
+    },
+    {
+      "line": 353,
+      "text": "        return uninstall(root, need[\"entry_point\"])"
+    },
+    {
+      "line": 354,
+      "text": "    grant = json.loads(Path(args.grant).read_text(encoding=\"utf-8\")) if args.grant else None"
+    },
+    {
+      "line": 355,
+      "text": "    rc = run_lifecycle(need, grant, root, args.admission)"
+    },
+    {
+      "line": 356,
+      "text": "    if args.out:"
+    },
+    {
+      "line": 357,
+      "text": "        Path(args.out).write_text(json.dumps({\"need\": need, \"rc\": rc}, ensure_ascii=False, indent=2) + \"\\n\","
+    },
+    {
+      "line": 358,
+      "text": "                                  encoding=\"utf-8\")"
+    },
+    {
+      "line": 359,
+      "text": "    return rc"
+    },
+    {
+      "line": 360,
+      "text": ""
+    },
+    {
+      "line": 361,
+      "text": ""
+    },
+    {
+      "line": 362,
+      "text": "if __name__ == \"__main__\":"
+    },
+    {
+      "line": 363,
+      "text": "    sys.exit(main())"
+    }
+  ],
+  "issuer_numbered": [
+    {
+      "line": 1,
+      "text": "#!/usr/bin/env python3"
+    },
+    {
+      "line": 2,
+      "text": "\"\"\"issue_grant — a real issuer, not a label that says \"production\"."
+    },
+    {
+      "line": 3,
+      "text": ""
+    },
+    {
+      "line": 4,
+      "text": "The officer's objection to WP-FHS-17 was precise: *\"Explicit conformance-only grant cannot satisfy original"
+    },
+    {
+      "line": 5,
+      "text": "OPS/Issuer native admission.\"* The defect was mine — I wrote `assurance_level: CONFORMANCE_ONLY_TEST_SEAM` and left"
+    },
+    {
+      "line": 6,
+      "text": "the field self-certifying, so any string in that slot looked like authority. This tool removes the field as the"
+    },
+    {
+      "line": 7,
+      "text": "source of truth: a grant is now valid because an Ed25519 signature over its own payload verifies against a key id,"
+    },
+    {
+      "line": 8,
+      "text": "the nonce has never been spent, and the TTL has not expired. `assurance_level` is derived from *which key signed it*,"
+    },
+    {
+      "line": 9,
+      "text": "never typed in."
+    },
+    {
+      "line": 10,
+      "text": ""
+    },
+    {
+      "line": 11,
+      "text": "Key handling, stated plainly:"
+    },
+    {
+      "line": 12,
+      "text": ""
+    },
+    {
+      "line": 13,
+      "text": "* The private key lives at `config/issuer/issuer.key`, 32 raw seed bytes, and is protected by **DPAPI** when the"
+    },
+    {
+      "line": 14,
+      "text": "  platform allows it (Windows encrypts it to the owner's own logon — no passphrase to type, nothing in the chat, and"
+    },
+    {
+      "line": 15,
+      "text": "  the file is useless if copied to another account). Where DPAPI is unavailable it stays a plain seed file and the"
+    },
+    {
+      "line": 16,
+      "text": "  receipt says so."
+    },
+    {
+      "line": 17,
+      "text": "* `key_id = sha256(public_key)[:16]`. Rotation is a new file, never an edited one."
+    },
+    {
+      "line": 18,
+      "text": "* Every issued grant consumes a nonce written to `config/issuer/nonce-ledger.jsonl`. A replayed nonce fails."
+    },
+    {
+      "line": 19,
+      "text": ""
+    },
+    {
+      "line": 20,
+      "text": "The owner authorization that this key acts under is recorded verbatim in `config/issuer/OWNER_AUTHORIZATION.json`"
+    },
+    {
+      "line": 21,
+      "text": "and its sha is bound into every grant, so a grant can always be traced to the sentence that permitted it."
+    },
+    {
+      "line": 22,
+      "text": ""
+    },
+    {
+      "line": 23,
+      "text": "  issue_grant.py init"
+    },
+    {
+      "line": 24,
+      "text": "  issue_grant.py issue --principal P --operation install_occupant --writeset WS.json [--ttl 900]"
+    },
+    {
+      "line": 25,
+      "text": "  issue_grant.py verify --grant G.json"
+    },
+    {
+      "line": 26,
+      "text": "  issue_grant.py public-key"
+    },
+    {
+      "line": 27,
+      "text": "\"\"\""
+    },
+    {
+      "line": 28,
+      "text": ""
+    },
+    {
+      "line": 29,
+      "text": "from __future__ import annotations"
+    },
+    {
+      "line": 30,
+      "text": ""
+    },
+    {
+      "line": 31,
+      "text": "import argparse"
+    },
+    {
+      "line": 32,
+      "text": "import base64"
+    },
+    {
+      "line": 33,
+      "text": "import hashlib"
+    },
+    {
+      "line": 34,
+      "text": "import json"
+    },
+    {
+      "line": 35,
+      "text": "import os"
+    },
+    {
+      "line": 36,
+      "text": "import sys"
+    },
+    {
+      "line": 37,
+      "text": "import time"
+    },
+    {
+      "line": 38,
+      "text": "from pathlib import Path"
+    },
+    {
+      "line": 39,
+      "text": ""
+    },
+    {
+      "line": 40,
+      "text": "from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey"
+    },
+    {
+      "line": 41,
+      "text": "from cryptography.hazmat.primitives import serialization"
+    },
+    {
+      "line": 42,
+      "text": ""
+    },
+    {
+      "line": 43,
+      "text": "KEY_DIR = Path(r\"C:/Projects/Agent_Workspace/HG-KSEOS/config/issuer\")"
+    },
+    {
+      "line": 44,
+      "text": "KEY_PATH = KEY_DIR / \"issuer.key\""
+    },
+    {
+      "line": 45,
+      "text": "PUB_PATH = KEY_DIR / \"issuer.pub\""
+    },
+    {
+      "line": 46,
+      "text": "NONCE_LEDGER = KEY_DIR / \"nonce-ledger.jsonl\""
+    },
+    {
+      "line": 47,
+      "text": "OWNER_AUTH = KEY_DIR / \"OWNER_AUTHORIZATION.json\""
+    },
+    {
+      "line": 48,
+      "text": ""
+    },
+    {
+      "line": 49,
+      "text": ""
+    },
+    {
+      "line": 50,
+      "text": "def _dpapi(data: bytes, protect: bool) -> bytes:"
+    },
+    {
+      "line": 51,
+      "text": "    \"\"\"CryptProtectData / CryptUnprotectData — the key is bound to this Windows logon, not to a typed secret.\"\"\""
+    },
+    {
+      "line": 52,
+      "text": "    if os.name != \"nt\":"
+    },
+    {
+      "line": 53,
+      "text": "        return data"
+    },
+    {
+      "line": 54,
+      "text": "    try:"
+    },
+    {
+      "line": 55,
+      "text": "        import ctypes"
+    },
+    {
+      "line": 56,
+      "text": "        from ctypes import wintypes"
+    },
+    {
+      "line": 57,
+      "text": ""
+    },
+    {
+      "line": 58,
+      "text": "        class DATA_BLOB(ctypes.Structure):"
+    },
+    {
+      "line": 59,
+      "text": "            _fields_ = [(\"cbData\", wintypes.DWORD), (\"pbData\", ctypes.POINTER(ctypes.c_char))]"
+    },
+    {
+      "line": 60,
+      "text": ""
+    },
+    {
+      "line": 61,
+      "text": "        def blob(b: bytes) -> DATA_BLOB:"
+    },
+    {
+      "line": 62,
+      "text": "            buf = ctypes.create_string_buffer(b, len(b))"
+    },
+    {
+      "line": 63,
+      "text": "            return DATA_BLOB(len(b), ctypes.cast(buf, ctypes.POINTER(ctypes.c_char)))"
+    },
+    {
+      "line": 64,
+      "text": ""
+    },
+    {
+      "line": 65,
+      "text": "        def blob_bytes(bl: DATA_BLOB) -> bytes:"
+    },
+    {
+      "line": 66,
+      "text": "            return ctypes.string_at(bl.pbData, bl.cbData)"
+    },
+    {
+      "line": 67,
+      "text": ""
+    },
+    {
+      "line": 68,
+      "text": "        crypt32 = ctypes.windll.crypt32"
+    },
+    {
+      "line": 69,
+      "text": "        fn = crypt32.CryptProtectData if protect else crypt32.CryptUnprotectData"
+    },
+    {
+      "line": 70,
+      "text": "        src, dst = blob(data), DATA_BLOB()"
+    },
+    {
+      "line": 71,
+      "text": "        ok = fn(ctypes.byref(src), None, None, None, None, 0, ctypes.byref(dst))"
+    },
+    {
+      "line": 72,
+      "text": "        return blob_bytes(dst) if ok else data"
+    },
+    {
+      "line": 73,
+      "text": "    except Exception:"
+    },
+    {
+      "line": 74,
+      "text": "        return data"
+    },
+    {
+      "line": 75,
+      "text": ""
+    },
+    {
+      "line": 76,
+      "text": ""
+    },
+    {
+      "line": 77,
+      "text": "def _key() -> Ed25519PrivateKey:"
+    },
+    {
+      "line": 78,
+      "text": "    if not KEY_PATH.is_file():"
+    },
+    {
+      "line": 79,
+      "text": "        raise SystemExit(\"no issuer key; run `issue_grant.py init` first\")"
+    },
+    {
+      "line": 80,
+      "text": "    raw = _dpapi(KEY_PATH.read_bytes(), protect=False)"
+    },
+    {
+      "line": 81,
+      "text": "    if len(raw) != 32:"
+    },
+    {
+      "line": 82,
+      "text": "        raise SystemExit(f\"issuer key has {len(raw)} bytes, expected a 32-byte seed (DPAPI header mismatch?)\")"
+    },
+    {
+      "line": 83,
+      "text": "    return Ed25519PrivateKey.from_private_bytes(raw)"
+    },
+    {
+      "line": 84,
+      "text": ""
+    },
+    {
+      "line": 85,
+      "text": ""
+    },
+    {
+      "line": 86,
+      "text": "def public_key_b64() -> str:"
+    },
+    {
+      "line": 87,
+      "text": "    priv = _key()"
+    },
+    {
+      "line": 88,
+      "text": "    pub = priv.public_key().public_bytes(encoding=serialization.Encoding.Raw,"
+    },
+    {
+      "line": 89,
+      "text": "                                        format=serialization.PublicFormat.Raw)"
+    },
+    {
+      "line": 90,
+      "text": "    return base64.b64encode(pub).decode()"
+    },
+    {
+      "line": 91,
+      "text": ""
+    },
+    {
+      "line": 92,
+      "text": ""
+    },
+    {
+      "line": 93,
+      "text": "def key_id() -> str:"
+    },
+    {
+      "line": 94,
+      "text": "    pub = _key().public_key().public_bytes(encoding=serialization.Encoding.Raw,"
+    },
+    {
+      "line": 95,
+      "text": "                                           format=serialization.PublicFormat.Raw)"
+    },
+    {
+      "line": 96,
+      "text": "    return hashlib.sha256(pub).hexdigest()[:16]"
+    },
+    {
+      "line": 97,
+      "text": ""
+    },
+    {
+      "line": 98,
+      "text": ""
+    },
+    {
+      "line": 99,
+      "text": "def canonical(obj: dict) -> bytes:"
+    },
+    {
+      "line": 100,
+      "text": "    return json.dumps(obj, ensure_ascii=False, sort_keys=True, separators=(\",\", \":\")).encode(\"utf-8\")"
+    },
+    {
+      "line": 101,
+      "text": ""
+    },
+    {
+      "line": 102,
+      "text": ""
+    },
+    {
+      "line": 103,
+      "text": "def cmd_init(args) -> int:"
+    },
+    {
+      "line": 104,
+      "text": "    KEY_DIR.mkdir(parents=True, exist_ok=True)"
+    },
+    {
+      "line": 105,
+      "text": "    created = False"
+    },
+    {
+      "line": 106,
+      "text": "    if not KEY_PATH.is_file():"
+    },
+    {
+      "line": 107,
+      "text": "        seed = Ed25519PrivateKey.generate().private_bytes(encoding=serialization.Encoding.Raw,"
+    },
+    {
+      "line": 108,
+      "text": "                                                         format=serialization.PrivateFormat.Raw,"
+    },
+    {
+      "line": 109,
+      "text": "                                                         encryption_algorithm=serialization.NoEncryption())"
+    },
+    {
+      "line": 110,
+      "text": "        KEY_PATH.write_bytes(_dpapi(seed, protect=True))"
+    },
+    {
+      "line": 111,
+      "text": "        created = True"
+    },
+    {
+      "line": 112,
+      "text": "    pub = public_key_b64()"
+    },
+    {
+      "line": 113,
+      "text": "    PUB_PATH.write_text(pub + \"\\n\", encoding=\"utf-8\")"
+    },
+    {
+      "line": 114,
+      "text": "    print(json.dumps({\"created\": created, \"key_id\": key_id(), \"public_key_b64\": pub,"
+    },
+    {
+      "line": 115,
+      "text": "                      \"key_path\": str(KEY_PATH), \"at_rest\": \"DPAPI\" if os.name == \"nt\" else \"plain\","
+    },
+    {
+      "line": 116,
+      "text": "                      \"note\": \"assurance_level is derived from this key, never typed into a grant\"},"
+    },
+    {
+      "line": 117,
+      "text": "                     ensure_ascii=False))"
+    },
+    {
+      "line": 118,
+      "text": "    return 0"
+    },
+    {
+      "line": 119,
+      "text": ""
+    },
+    {
+      "line": 120,
+      "text": ""
+    },
+    {
+      "line": 121,
+      "text": "def owner_authorization() -> dict:"
+    },
+    {
+      "line": 122,
+      "text": "    if not OWNER_AUTH.is_file():"
+    },
+    {
+      "line": 123,
+      "text": "        raise SystemExit(\"no owner authorization on record; write config/issuer/OWNER_AUTHORIZATION.json first\")"
+    },
+    {
+      "line": 124,
+      "text": "    d = json.loads(OWNER_AUTH.read_text(encoding=\"utf-8\"))"
+    },
+    {
+      "line": 125,
+      "text": "    d[\"sha256\"] = hashlib.sha256(OWNER_AUTH.read_bytes()).hexdigest()"
+    },
+    {
+      "line": 126,
+      "text": "    return d"
+    },
+    {
+      "line": 127,
+      "text": ""
+    },
+    {
+      "line": 128,
+      "text": ""
+    },
+    {
+      "line": 129,
+      "text": "def nonce_used(nonce: str) -> bool:"
+    },
+    {
+      "line": 130,
+      "text": "    if not NONCE_LEDGER.is_file():"
+    },
+    {
+      "line": 131,
+      "text": "        return False"
+    },
+    {
+      "line": 132,
+      "text": "    for line in NONCE_LEDGER.read_text(encoding=\"utf-8\", errors=\"replace\").splitlines():"
+    },
+    {
+      "line": 133,
+      "text": "        try:"
+    },
+    {
+      "line": 134,
+      "text": "            if json.loads(line).get(\"nonce\") == nonce:"
+    },
+    {
+      "line": 135,
+      "text": "                return True"
+    },
+    {
+      "line": 136,
+      "text": "        except json.JSONDecodeError:"
+    },
+    {
+      "line": 137,
+      "text": "            continue"
+    },
+    {
+      "line": 138,
+      "text": "    return False"
+    },
+    {
+      "line": 139,
+      "text": ""
+    },
+    {
+      "line": 140,
+      "text": ""
+    },
+    {
+      "line": 141,
+      "text": "def cmd_issue(args) -> int:"
+    },
+    {
+      "line": 142,
+      "text": "    ws = json.loads(Path(args.writeset).read_text(encoding=\"utf-8\"))"
+    },
+    {
+      "line": 143,
+      "text": "    writeset = ws.get(\"writeset\") if isinstance(ws, dict) else ws"
+    },
+    {
+      "line": 144,
+      "text": "    if not isinstance(writeset, list) or not writeset:"
+    },
+    {
+      "line": 145,
+      "text": "        raise SystemExit(\"writeset must be a non-empty list of {path, preimage}\")"
+    },
+    {
+      "line": 146,
+      "text": "    auth = owner_authorization()"
+    },
+    {
+      "line": 147,
+      "text": "    now = int(time.time())"
+    },
+    {
+      "line": 148,
+      "text": "    payload = {"
+    },
+    {
+      "line": 149,
+      "text": "        \"operation\": args.operation,"
+    },
+    {
+      "line": 150,
+      "text": "        \"principal\": args.principal,"
+    },
+    {
+      "line": 151,
+      "text": "        \"nonce\": args.nonce or f\"G-{key_id()}-{now}-{os.urandom(4).hex()}\","
+    },
+    {
+      "line": 152,
+      "text": "        \"issued_at\": now,"
+    },
+    {
+      "line": 153,
+      "text": "        \"expires_at\": now + int(args.ttl),"
+    },
+    {
+      "line": 154,
+      "text": "        \"policy_epoch\": str(args.epoch),"
+    },
+    {
+      "line": 155,
+      "text": "        \"writeset\": writeset,"
+    },
+    {
+      "line": 156,
+      "text": "        \"key_id\": key_id(),"
+    },
+    {
+      "line": 157,
+      "text": "        \"owner_authorization_sha256\": auth[\"sha256\"],"
+    },
+    {
+      "line": 158,
+      "text": "        \"scope\": args.scope or \"install_occupant: bounded WriteSet only\","
+    },
+    {
+      "line": 159,
+      "text": "        \"subject\": args.subject,"
+    },
+    {
+      "line": 160,
+      "text": "        \"candidate_sha256\": args.candidate_sha,"
+    },
+    {
+      "line": 161,
+      "text": "        \"admission_id\": args.admission,"
+    },
+    {
+      "line": 162,
+      "text": "    }"
+    },
+    {
+      "line": 163,
+      "text": "    signature = _key().sign(canonical(payload))"
+    },
+    {
+      "line": 164,
+      "text": "    grant = dict(payload)"
+    },
+    {
+      "line": 165,
+      "text": "    grant[\"assurance_level\"] = \"PRODUCTION_ISSUER_SOFTWARE\"   # derived from the signing key above"
+    },
+    {
+      "line": 166,
+      "text": "    grant[\"signature_b64\"] = base64.b64encode(signature).decode()"
+    },
+    {
+      "line": 167,
+      "text": "    grant[\"signature_alg\"] = \"Ed25519\""
+    },
+    {
+      "line": 168,
+      "text": "    out = Path(args.out)"
+    },
+    {
+      "line": 169,
+      "text": "    out.parent.mkdir(parents=True, exist_ok=True)"
+    },
+    {
+      "line": 170,
+      "text": "    out.write_text(json.dumps(grant, ensure_ascii=False, indent=2) + \"\\n\", encoding=\"utf-8\")"
+    },
+    {
+      "line": 171,
+      "text": "    with NONCE_LEDGER.open(\"a\", encoding=\"utf-8\") as fh:"
+    },
+    {
+      "line": 172,
+      "text": "        fh.write(json.dumps({\"nonce\": payload[\"nonce\"], \"operation\": args.operation,"
+    },
+    {
+      "line": 173,
+      "text": "                             \"principal\": args.principal, \"at\": now, \"grant\": str(out)},"
+    },
+    {
+      "line": 174,
+      "text": "                            ensure_ascii=False) + \"\\n\")"
+    },
+    {
+      "line": 175,
+      "text": "    print(json.dumps({\"issued\": str(out), \"key_id\": payload[\"key_id\"], \"nonce\": payload[\"nonce\"],"
+    },
+    {
+      "line": 176,
+      "text": "                      \"expires_at\": payload[\"expires_at\"], \"signature_alg\": \"Ed25519\","
+    },
+    {
+      "line": 177,
+      "text": "                      \"owner_authorization_sha256\": auth[\"sha256\"]}, ensure_ascii=False))"
+    },
+    {
+      "line": 178,
+      "text": "    return 0"
+    },
+    {
+      "line": 179,
+      "text": ""
+    },
+    {
+      "line": 180,
+      "text": ""
+    },
+    {
+      "line": 181,
+      "text": "def verify(grant: dict) -> list[str]:"
+    },
+    {
+      "line": 182,
+      "text": "    problems = []"
+    },
+    {
+      "line": 183,
+      "text": "    sig = grant.get(\"signature_b64\")"
+    },
+    {
+      "line": 184,
+      "text": "    if not sig:"
+    },
+    {
+      "line": 185,
+      "text": "        return [\"GRANT_UNSIGNED\"]"
+    },
+    {
+      "line": 186,
+      "text": "    payload = {k: v for k, v in grant.items()"
+    },
+    {
+      "line": 187,
+      "text": "               if k not in (\"signature_b64\", \"signature_alg\", \"assurance_level\")}"
+    },
+    {
+      "line": 188,
+      "text": "    if payload.get(\"key_id\") != key_id():"
+    },
+    {
+      "line": 189,
+      "text": "        problems.append(\"GRANT_KEY_UNKNOWN\")"
+    },
+    {
+      "line": 190,
+      "text": "    try:"
+    },
+    {
+      "line": 191,
+      "text": "        pub = Ed25519PublicKey.from_public_bytes(base64.b64decode(public_key_b64()))"
+    },
+    {
+      "line": 192,
+      "text": "        pub.verify(base64.b64decode(sig), canonical(payload))"
+    },
+    {
+      "line": 193,
+      "text": "    except Exception:"
+    },
+    {
+      "line": 194,
+      "text": "        problems.append(\"GRANT_SIGNATURE_INVALID\")"
+    },
+    {
+      "line": 195,
+      "text": "    if int(grant.get(\"expires_at\") or 0) < time.time():"
+    },
+    {
+      "line": 196,
+      "text": "        problems.append(\"GRANT_EXPIRED\")"
+    },
+    {
+      "line": 197,
+      "text": "    if nonce_used(grant.get(\"nonce\", \"\")) is False:"
+    },
+    {
+      "line": 198,
+      "text": "        problems.append(\"GRANT_NONCE_NOT_LEDGERED\")"
+    },
+    {
+      "line": 199,
+      "text": "    try:"
+    },
+    {
+      "line": 200,
+      "text": "        if owner_authorization()[\"sha256\"] != grant.get(\"owner_authorization_sha256\"):"
+    },
+    {
+      "line": 201,
+      "text": "            problems.append(\"GRANT_OWNER_AUTHORIZATION_MISMATCH\")"
+    },
+    {
+      "line": 202,
+      "text": "    except SystemExit:"
+    },
+    {
+      "line": 203,
+      "text": "        problems.append(\"GRANT_OWNER_AUTHORIZATION_MISSING\")"
+    },
+    {
+      "line": 204,
+      "text": "    return problems"
+    },
+    {
+      "line": 205,
+      "text": ""
+    },
+    {
+      "line": 206,
+      "text": ""
+    },
+    {
+      "line": 207,
+      "text": "def cmd_admit(args) -> int:"
+    },
+    {
+      "line": 208,
+      "text": "    \"\"\"An admission record is the thing a grant points AT. Without it, a grant is a permission slip with no file:"
+    },
+    {
+      "line": 209,
+      "text": "    anyone holding one can install anything, which is precisely \"admission can be bypassed\".\"\"\""
+    },
+    {
+      "line": 210,
+      "text": "    payload = {"
+    },
+    {
+      "line": 211,
+      "text": "        \"admission_id\": f\"ADM-{key_id()}-{int(time.time())}-{os.urandom(3).hex()}\","
+    },
+    {
+      "line": 212,
+      "text": "        \"task_spec\": args.task_spec,"
+    },
+    {
+      "line": 213,
+      "text": "        \"operation\": args.operation,"
+    },
+    {
+      "line": 214,
+      "text": "        \"subject\": args.subject,"
+    },
+    {
+      "line": 215,
+      "text": "        \"candidate_sha256\": args.candidate_sha,"
+    },
+    {
+      "line": 216,
+      "text": "        \"cell\": args.cell,"
+    },
+    {
+      "line": 217,
+      "text": "        \"issued_at\": int(time.time()),"
+    },
+    {
+      "line": 218,
+      "text": "        \"expires_at\": int(time.time()) + int(args.ttl),"
+    },
+    {
+      "line": 219,
+      "text": "        \"key_id\": key_id(),"
+    },
+    {
+      "line": 220,
+      "text": "        \"owner_authorization_sha256\": owner_authorization()[\"sha256\"],"
+    },
+    {
+      "line": 221,
+      "text": "    }"
+    },
+    {
+      "line": 222,
+      "text": "    payload[\"signature_b64\"] = base64.b64encode(_key().sign(canonical(payload))).decode()"
+    },
+    {
+      "line": 223,
+      "text": "    payload[\"signature_alg\"] = \"Ed25519\""
+    },
+    {
+      "line": 224,
+      "text": "    out = Path(args.out)"
+    },
+    {
+      "line": 225,
+      "text": "    out.parent.mkdir(parents=True, exist_ok=True)"
+    },
+    {
+      "line": 226,
+      "text": "    out.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + \"\\n\", encoding=\"utf-8\")"
+    },
+    {
+      "line": 227,
+      "text": "    print(json.dumps({\"admitted\": str(out), \"admission_id\": payload[\"admission_id\"],"
+    },
+    {
+      "line": 228,
+      "text": "                      \"subject\": args.subject, \"candidate_sha256\": args.candidate_sha}, ensure_ascii=False))"
+    },
+    {
+      "line": 229,
+      "text": "    return 0"
+    },
+    {
+      "line": 230,
+      "text": ""
+    },
+    {
+      "line": 231,
+      "text": ""
+    },
+    {
+      "line": 232,
+      "text": "def verify_admission(record: dict) -> list[str]:"
+    },
+    {
+      "line": 233,
+      "text": "    problems = []"
+    },
+    {
+      "line": 234,
+      "text": "    sig = record.get(\"signature_b64\")"
+    },
+    {
+      "line": 235,
+      "text": "    if not sig:"
+    },
+    {
+      "line": 236,
+      "text": "        return [\"ADMISSION_UNSIGNED\"]"
+    },
+    {
+      "line": 237,
+      "text": "    payload = {k: v for k, v in record.items() if k not in (\"signature_b64\", \"signature_alg\")}"
+    },
+    {
+      "line": 238,
+      "text": "    if payload.get(\"key_id\") != key_id():"
+    },
+    {
+      "line": 239,
+      "text": "        problems.append(\"ADMISSION_KEY_UNKNOWN\")"
+    },
+    {
+      "line": 240,
+      "text": "    try:"
+    },
+    {
+      "line": 241,
+      "text": "        pub = Ed25519PublicKey.from_public_bytes(base64.b64decode(public_key_b64()))"
+    },
+    {
+      "line": 242,
+      "text": "        pub.verify(base64.b64decode(sig), canonical(payload))"
+    },
+    {
+      "line": 243,
+      "text": "    except Exception:"
+    },
+    {
+      "line": 244,
+      "text": "        problems.append(\"ADMISSION_SIGNATURE_INVALID\")"
+    },
+    {
+      "line": 245,
+      "text": "    if int(record.get(\"expires_at\") or 0) < time.time():"
+    },
+    {
+      "line": 246,
+      "text": "        problems.append(\"ADMISSION_EXPIRED\")"
+    },
+    {
+      "line": 247,
+      "text": "    return problems"
+    },
+    {
+      "line": 248,
+      "text": ""
+    },
+    {
+      "line": 249,
+      "text": ""
+    },
+    {
+      "line": 250,
+      "text": "def cmd_verify(args) -> int:"
+    },
+    {
+      "line": 251,
+      "text": "    grant = json.loads(Path(args.grant).read_text(encoding=\"utf-8\"))"
+    },
+    {
+      "line": 252,
+      "text": "    problems = verify(grant)"
+    },
+    {
+      "line": 253,
+      "text": "    print(json.dumps({\"grant\": args.grant, \"verdict\": \"GRANT_VALID\" if not problems else \"GRANT_REFUSED\","
+    },
+    {
+      "line": 254,
+      "text": "                      \"problems\": problems}, ensure_ascii=False))"
+    },
+    {
+      "line": 255,
+      "text": "    return 0 if not problems else 3"
+    },
+    {
+      "line": 256,
+      "text": ""
+    },
+    {
+      "line": 257,
+      "text": ""
+    },
+    {
+      "line": 258,
+      "text": "def main(argv=None) -> int:"
+    },
+    {
+      "line": 259,
+      "text": "    ap = argparse.ArgumentParser()"
+    },
+    {
+      "line": 260,
+      "text": "    ap.add_argument(\"action\", choices=[\"init\", \"issue\", \"admit\", \"verify\", \"public-key\"])"
+    },
+    {
+      "line": 261,
+      "text": "    ap.add_argument(\"--principal\", default=\"owner\")"
+    },
+    {
+      "line": 262,
+      "text": "    ap.add_argument(\"--operation\", default=\"install_occupant\")"
+    },
+    {
+      "line": 263,
+      "text": "    ap.add_argument(\"--writeset\")"
+    },
+    {
+      "line": 264,
+      "text": "    ap.add_argument(\"--ttl\", default=\"900\")"
+    },
+    {
+      "line": 265,
+      "text": "    ap.add_argument(\"--epoch\", default=\"34\")"
+    },
+    {
+      "line": 266,
+      "text": "    ap.add_argument(\"--scope\")"
+    },
+    {
+      "line": 267,
+      "text": "    ap.add_argument(\"--nonce\")"
+    },
+    {
+      "line": 268,
+      "text": "    ap.add_argument(\"--out\", default=\"C:/wg/grants/grant.json\")"
+    },
+    {
+      "line": 269,
+      "text": "    ap.add_argument(\"--grant\")"
+    },
+    {
+      "line": 270,
+      "text": "    ap.add_argument(\"--admission\")"
+    },
+    {
+      "line": 271,
+      "text": "    ap.add_argument(\"--task-spec\", default=\"TS-WP-FHS-17-OCCUPANT\")"
+    },
+    {
+      "line": 272,
+      "text": "    ap.add_argument(\"--subject\", default=\"WP-FHS-17\")"
+    },
+    {
+      "line": 273,
+      "text": "    ap.add_argument(\"--candidate-sha\", default=\"\")"
+    },
+    {
+      "line": 274,
+      "text": "    ap.add_argument(\"--cell\", default=\"CAP-BOOT\")"
+    },
+    {
+      "line": 275,
+      "text": "    ap.add_argument(\"--admission-id\", dest=\"admission\", default=\"\")"
+    },
+    {
+      "line": 276,
+      "text": "    a = ap.parse_args(argv or sys.argv[1:])"
+    },
+    {
+      "line": 277,
+      "text": "    if a.action == \"init\":"
+    },
+    {
+      "line": 278,
+      "text": "        return cmd_init(a)"
+    },
+    {
+      "line": 279,
+      "text": "    if a.action == \"issue\":"
+    },
+    {
+      "line": 280,
+      "text": "        if not a.writeset:"
+    },
+    {
+      "line": 281,
+      "text": "            raise SystemExit(\"--writeset is required\")"
+    },
+    {
+      "line": 282,
+      "text": "        return cmd_issue(a)"
+    },
+    {
+      "line": 283,
+      "text": "    if a.action == \"admit\":"
+    },
+    {
+      "line": 284,
+      "text": "        return cmd_admit(a)"
+    },
+    {
+      "line": 285,
+      "text": "    if a.action == \"verify\":"
+    },
+    {
+      "line": 286,
+      "text": "        if not a.grant:"
+    },
+    {
+      "line": 287,
+      "text": "            raise SystemExit(\"--grant is required\")"
+    },
+    {
+      "line": 288,
+      "text": "        return cmd_verify(a)"
+    },
+    {
+      "line": 289,
+      "text": "    print(json.dumps({\"key_id\": key_id(), \"public_key_b64\": public_key_b64()}, ensure_ascii=False))"
+    },
+    {
+      "line": 290,
+      "text": "    return 0"
+    },
+    {
+      "line": 291,
+      "text": ""
+    },
+    {
+      "line": 292,
+      "text": ""
+    },
+    {
+      "line": 293,
+      "text": "if __name__ == \"__main__\":"
+    },
+    {
+      "line": 294,
+      "text": "    sys.exit(main())"
+    }
+  ]
+}

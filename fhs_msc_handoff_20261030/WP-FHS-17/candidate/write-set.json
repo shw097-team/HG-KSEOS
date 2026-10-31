@@ -1,0 +1,46 @@
+{
+  "command": "python tools/build_evidence.py",
+  "wp": "WP-FHS-17",
+  "operation": "install_occupant",
+  "effect_class": "HOST_OP",
+  "root": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install-root",
+  "root_resolved": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install-root",
+  "root_kind": "DRAFT_TARGET_NOT_A_HOST_PATH: the brief grants no Host path, so the target root is late-bound. These resolved paths are what the receiver's own canonical_target() computes for this draft root; a Host install would resolve the same relative paths under the Host's target root.",
+  "writeset": [
+    {
+      "path": "occupant/capboot_attest.py",
+      "preimage": "ABSENT",
+      "resolved_preview": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install-root\\occupant\\capboot_attest.py",
+      "object_identity": {
+        "occupant_id": "OCC-CAPBOOT-LOADED-ACK",
+        "version": "1.0.0",
+        "sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5"
+      }
+    },
+    {
+      "path": "occupant/capboot_attest.manifest.json",
+      "preimage": "ABSENT",
+      "resolved_preview": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install-root\\occupant\\capboot_attest.manifest.json",
+      "object_identity": {
+        "occupant_id": "OCC-CAPBOOT-LOADED-ACK",
+        "version": "1.0.0",
+        "sha256": "d96765655ef40486e6b97455c0d57218ce24aa266760fb3bf165201b355eaa9b"
+      }
+    }
+  ],
+  "inverse": {
+    "file": "candidate/package/uninstall.json",
+    "mode": "remove_exact_allowlist"
+  },
+  "bounded": true,
+  "targets": [
+    "occupant/capboot_attest.py",
+    "occupant/capboot_attest.manifest.json"
+  ],
+  "forbidden": [
+    "recursive delete",
+    "delete outside the resolved root",
+    "delete any path not named above",
+    "touch another writer's files"
+  ]
+}

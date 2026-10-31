@@ -1,0 +1,65 @@
+{
+  "need_id": "NEED-WP17-OCCUPANT-PROBE",
+  "root": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root",
+  "lifecycle": [
+    {
+      "step": "PACKAGED",
+      "at": "2026-10-31T00:25:56",
+      "note": "payload sha256=22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08"
+    },
+    {
+      "step": "GRANT_OK",
+      "at": "2026-10-31T00:25:56",
+      "note": "principal=owner nonce=G-135455ca00280c39-1793377543-d44d4bbd"
+    },
+    {
+      "step": "INSTALLED",
+      "at": "2026-10-31T00:25:56",
+      "note": "2 files written, preimage ABSENT confirmed"
+    },
+    {
+      "step": "HOST_LOADED",
+      "at": "2026-10-31T00:25:56",
+      "note": "fresh process origin=C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py loaded_sha256=22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08"
+    },
+    {
+      "step": "INVOKED",
+      "at": "2026-10-31T00:25:56",
+      "note": "exit 0, stdout='occupant-ok:real-input-20261030'"
+    },
+    {
+      "step": "FUNCTIONALLY_QUALIFIED",
+      "at": "2026-10-31T00:25:56",
+      "note": "output matched 'occupant-ok:real-input-20261030'"
+    }
+  ],
+  "writeset": [
+    {
+      "path": "occupant_probe.py",
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "occupant_probe.py.manifest.json",
+      "preimage": "ABSENT"
+    }
+  ],
+  "installed": [
+    "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py",
+    "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py.manifest.json"
+  ],
+  "invoke": {
+    "exit": 0,
+    "stdout": "occupant-ok:real-input-20261030",
+    "stderr": ""
+  },
+  "verdict": "LIFECYCLE_COMPLETE",
+  "loaded_sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+  "states": [
+    "PACKAGED",
+    "INSTALLED",
+    "HOST_LOADED",
+    "INVOKED",
+    "FUNCTIONALLY_QUALIFIED"
+  ],
+  "claim_ceiling": "PRODUCTION_ISSUER_SOFTWARE"
+}

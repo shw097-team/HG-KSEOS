@@ -1,0 +1,28 @@
+{
+  "command": "python tools/build_evidence.py",
+  "note": "evidence/SUBJECT.json is the earlier subject and is preserved unchanged. Its brief sha predates the current brief; this record states the current hashes without rewriting history.",
+  "wp": "WP-FHS-17",
+  "brief": {
+    "file": "brief.md",
+    "sha256": "d008d6ec46badfbdbfdb3e024a2f9490b2483647809773cdd2a8bbc1ed0fc3ae"
+  },
+  "source_card": {
+    "file": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\FHS\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+    "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811"
+  },
+  "oracle": {
+    "file": "evidence/ORACLE.json",
+    "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465"
+  },
+  "candidate_sha256": "dc35d0fccbac0841a92413d8f44b4d72771b976e4ea86dc22cc15f16f1bd3ca1",
+  "subject_sha256": "4c12bde71577299da3344278bb106c10f082adf86c94ea93249f3d09888d8a76",
+  "old_subject_file": {
+    "file": "evidence/SUBJECT.json",
+    "sha256": "a74a5be8d2262878d6087eaba0ee012f76905a51da98f942c3f9418238f6500f"
+  },
+  "bindings": {
+    "scope": "CAP-BOOT host capability registry, local-win",
+    "policy_epoch": "34",
+    "operation": "install_occupant"
+  }
+}

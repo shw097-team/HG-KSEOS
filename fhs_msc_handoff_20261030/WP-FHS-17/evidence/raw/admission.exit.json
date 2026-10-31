@@ -1,0 +1,11 @@
+{
+  "op": "admission",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:46+0800",
+  "ended_at": "2026-10-31T21:22:46+0800",
+  "duration_s": 0.224,
+  "stdout_sha256": "cafa0ab5bd3d50f9738abddae0c0be4738161499d276f9743b66c9aa1df5572d",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 237,
+  "stderr_bytes": 0
+}

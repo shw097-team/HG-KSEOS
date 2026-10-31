@@ -1,0 +1,1 @@
+{"at": 1793452973.263831, "note": "reconcile must read this back, never replay it", "path": "occupant/capboot_attest.py", "resolved": "C:\\wg\\queue\\WP-FHS-17\\evidence\\reconcile-root\\occupant\\capboot_attest.py", "sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5", "verdict": "UNKNOWN_RECORDED"}

@@ -1,0 +1,418 @@
+{
+  "command": "python tools/build_evidence.py",
+  "wp": "WP-FHS-17",
+  "results": {
+    "no-grant-park": {
+      "file": "evidence/negatives/park-no-grant.json",
+      "verdict": "PARK_GRANT_MISSING",
+      "code": "ERR_GRANT_MISSING",
+      "stage": null,
+      "effects": 0,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": null,
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": "original-Issuer OPS grant for operation=install_occupant",
+      "raw": null
+    },
+    "nonce-regrant": {
+      "file": "evidence/negatives/nonce-regrant.json",
+      "verdict": "REFUSED",
+      "code": "ERR_NONCE_GRANT_MISMATCH",
+      "stage": "GATE",
+      "effects": null,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": null,
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null
+    },
+    "nonce-replay": {
+      "file": "evidence/negatives/nonce-replay.json",
+      "verdict": "REFUSED",
+      "code": "ERR_NONCE_REPLAY",
+      "stage": "GATE",
+      "effects": null,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": null,
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null
+    },
+    "install-replay": {
+      "file": "evidence/negatives/install-replay.json",
+      "verdict": "REFUSED",
+      "code": "ERR_NONCE_REPLAY",
+      "stage": "GATE",
+      "effects": 0,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": null,
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null
+    },
+    "gate-preimage": {
+      "file": "evidence/negatives/gate-preimage.json",
+      "verdict": "REFUSED",
+      "code": "ERR_PREIMAGE_NOT_ABSENT",
+      "stage": "GATE",
+      "effects": null,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": null,
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null
+    },
+    "preimage-sha-mismatch": {
+      "file": "evidence/negatives/preimage-sha-mismatch.json",
+      "verdict": "REFUSED",
+      "code": "ERR_PREIMAGE_MISMATCH",
+      "stage": null,
+      "effects": null,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": [
+        {
+          "path": "occupant/capboot_attest.py",
+          "preimage_declared": "PRESENT",
+          "preimage_observed": "PRESENT",
+          "preimage_sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+          "resolved": "C:\\wg\\queue\\WP-FHS-17\\evidence\\stage-root\\occupant\\capboot_attest.py"
+        }
+      ],
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null
+    },
+    "preimage-not-absent": {
+      "file": "evidence/negatives/preimage-not-absent.json",
+      "verdict": "REFUSED",
+      "code": "ERR_PREIMAGE_NOT_ABSENT",
+      "stage": null,
+      "effects": null,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": [
+        {
+          "path": "occupant/capboot_attest.py",
+          "preimage_declared": "ABSENT",
+          "preimage_observed": "PRESENT",
+          "resolved": "C:\\wg\\queue\\WP-FHS-17\\evidence\\stage-root\\occupant\\capboot_attest.py"
+        }
+      ],
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null
+    },
+    "traversal": {
+      "file": "evidence/negatives/traversal.json",
+      "verdict": "REFUSED",
+      "code": "PATH_TRAVERSAL",
+      "stage": null,
+      "effects": null,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": [],
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null
+    },
+    "alias": {
+      "file": "evidence/negatives/alias.json",
+      "verdict": "REFUSED",
+      "code": "PATH_ALIAS",
+      "stage": null,
+      "effects": null,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": [],
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null,
+      "available": true
+    },
+    "dag-control": {
+      "file": "evidence/negatives/dag-control.json",
+      "verdict": null,
+      "code": null,
+      "stage": null,
+      "effects": null,
+      "dispatch_allowed": true,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": null,
+      "edges_evaluated": [
+        [
+          "WP-FHS-00",
+          "WP-FHS-17"
+        ],
+        [
+          "WP-FHS-02",
+          "WP-FHS-17"
+        ],
+        [
+          "WP-FHS-03",
+          "WP-FHS-17"
+        ],
+        [
+          "WP-FHS-17",
+          "WP-FHS-06"
+        ]
+      ],
+      "dependency_cycle_through_wp17": false,
+      "missing_object": null,
+      "raw": null
+    },
+    "dag-mutant": {
+      "file": "evidence/negatives/dag-mutant.json",
+      "verdict": null,
+      "code": null,
+      "stage": null,
+      "effects": 0,
+      "dispatch_allowed": false,
+      "first_fail": "WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION",
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": null,
+      "edges_evaluated": [
+        [
+          "WP-FHS-00",
+          "WP-FHS-17"
+        ],
+        [
+          "WP-FHS-02",
+          "WP-FHS-17"
+        ],
+        [
+          "WP-FHS-03",
+          "WP-FHS-17"
+        ],
+        [
+          "WP-FHS-17",
+          "WP-FHS-06"
+        ],
+        [
+          "WP-FHS-06",
+          "WP-FHS-17"
+        ]
+      ],
+      "dependency_cycle_through_wp17": true,
+      "missing_object": null,
+      "raw": null
+    },
+    "loaded-origin-control": {
+      "file": "evidence/negatives/loaded-origin-control.json",
+      "verdict": "LOADED_AND_INVOKED",
+      "code": null,
+      "stage": null,
+      "effects": null,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": "CONSUMER_ACK",
+      "loaded_sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+      "resolved_origin": "C:\\wg\\queue\\WP-FHS-17\\evidence\\tamper-root\\occupant\\capboot_attest.py",
+      "child_pid": 21744,
+      "observed": null,
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null
+    },
+    "loaded-origin-mismatch": {
+      "file": "evidence/negatives/loaded-origin-mismatch.json",
+      "verdict": "REFUSED",
+      "code": "LOADED_CHANGED_DURING_INVOKE",
+      "stage": "LOAD",
+      "effects": null,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": [
+        "child_end_sha_is_pinned",
+        "parent_post_sha_is_pinned",
+        "child_sha_stable_during_invoke"
+      ],
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": "C:\\wg\\queue\\WP-FHS-17\\evidence\\tamper-root\\occupant\\capboot_attest.py",
+      "child_pid": 8668,
+      "observed": {
+        "child_end": "49a0f4197a781c662158f640ab242714629b5f8d92b0175f6475733acfcc8af9",
+        "child_start": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+        "parent_post": "49a0f4197a781c662158f640ab242714629b5f8d92b0175f6475733acfcc8af9",
+        "pinned": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5"
+      },
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null
+    },
+    "rollback-repeat": {
+      "file": "evidence/negatives/rollback-repeat.json",
+      "verdict": "ALREADY_ROLLED_BACK",
+      "code": null,
+      "stage": null,
+      "effects": null,
+      "dispatch_allowed": null,
+      "first_fail": null,
+      "failed_checks": null,
+      "consumer_verdict": null,
+      "loaded_sha256": null,
+      "resolved_origin": null,
+      "child_pid": null,
+      "observed": null,
+      "edges_evaluated": null,
+      "dependency_cycle_through_wp17": null,
+      "missing_object": null,
+      "raw": null
+    }
+  },
+  "all_refused_except_control": true,
+  "checks": {
+    "no_grant_parked": true,
+    "regrant_refused_before_effect": true,
+    "replay_refused": true,
+    "replay_refused_through_install": true,
+    "replay_install_zero_effects": true,
+    "gate_preimage_refused": true,
+    "preimage_sha_refused": true,
+    "traversal_refused": true,
+    "dag_control_allows": true,
+    "dag_mutant_first_fail": true,
+    "dag_mutant_zero_effect": true,
+    "loaded_origin_control_qualified": true,
+    "tamper_refused_at_load": true,
+    "tamper_withheld_consumer_ack": true,
+    "alias_refused": true
+  },
+  "fixtures": {
+    "primary": {
+      "file": "fixtures/cap-boot-dependency-inversion.json",
+      "control": {
+        "file": "evidence/negatives/dag-control.json",
+        "dispatch_allowed": true,
+        "effects": null
+      },
+      "mutant": {
+        "file": "evidence/negatives/dag-mutant.json",
+        "first_fail": "WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION",
+        "effects": 0,
+        "edges_evaluated": [
+          [
+            "WP-FHS-00",
+            "WP-FHS-17"
+          ],
+          [
+            "WP-FHS-02",
+            "WP-FHS-17"
+          ],
+          [
+            "WP-FHS-03",
+            "WP-FHS-17"
+          ],
+          [
+            "WP-FHS-17",
+            "WP-FHS-06"
+          ],
+          [
+            "WP-FHS-06",
+            "WP-FHS-17"
+          ]
+        ],
+        "dependency_cycle_through_wp17": true
+      }
+    },
+    "secondary": {
+      "file": "fixtures/loaded-origin-mismatch.json",
+      "control": {
+        "file": "evidence/negatives/loaded-origin-control.json",
+        "verdict": "LOADED_AND_INVOKED",
+        "consumer_verdict": "CONSUMER_ACK",
+        "loaded_sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+        "child_pid": 21744
+      },
+      "mutant": {
+        "file": "evidence/negatives/loaded-origin-mismatch.json",
+        "code": "LOADED_CHANGED_DURING_INVOKE",
+        "failed_checks": [
+          "child_end_sha_is_pinned",
+          "parent_post_sha_is_pinned",
+          "child_sha_stable_during_invoke"
+        ],
+        "consumer_verdict": null,
+        "observed": {
+          "child_end": "49a0f4197a781c662158f640ab242714629b5f8d92b0175f6475733acfcc8af9",
+          "child_start": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+          "parent_post": "49a0f4197a781c662158f640ab242714629b5f8d92b0175f6475733acfcc8af9",
+          "pinned": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5"
+        }
+      },
+      "sequence": "control qualified first on evidence/tamper-root; only then were foreign bytes written at the resolved origin and the same operation re-run. The refusal is therefore attributable to the loaded bytes, not to a grant/admission/import/input defect."
+    }
+  }
+}

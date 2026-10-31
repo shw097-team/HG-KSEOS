@@ -1,0 +1,11 @@
+{
+  "op": "load",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:46+0800",
+  "ended_at": "2026-10-31T21:22:47+0800",
+  "duration_s": 0.357,
+  "stdout_sha256": "8cf7d52bfe69569baa0a290561d2a00f90cf3e11c920d390b24f1a572f29a2ed",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 6142,
+  "stderr_bytes": 0
+}

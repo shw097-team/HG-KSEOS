@@ -1,0 +1,11 @@
+{
+  "op": "registry-before",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:37+0800",
+  "ended_at": "2026-10-31T21:22:45+0800",
+  "duration_s": 8.266,
+  "stdout_sha256": "741672b38906d95632adb8fd028cb19c4dd6fc1e813f259d1f8a4be6e22111f1",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 341,
+  "stderr_bytes": 0
+}

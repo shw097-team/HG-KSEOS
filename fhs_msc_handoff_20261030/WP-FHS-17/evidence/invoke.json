@@ -1,0 +1,73 @@
+{
+  "command": "python tools/build_evidence.py",
+  "wp": "WP-FHS-17",
+  "subject_sha256": "4c12bde71577299da3344278bb106c10f082adf86c94ea93249f3d09888d8a76",
+  "candidate_sha256": "dc35d0fccbac0841a92413d8f44b4d72771b976e4ea86dc22cc15f16f1bd3ca1",
+  "input": {
+    "need_id": "NEED-WP-FHS-17-CAP-BOOT-LOADED-ACK",
+    "subject_sha256": "4c12bde71577299da3344278bb106c10f082adf86c94ea93249f3d09888d8a76",
+    "nonce": "G-135455ca00280c39-1793452966-dc6c2d20",
+    "payload": {
+      "operation": "invoke_needed_feature",
+      "wp": "WP-FHS-17",
+      "request": "emit CAP-BOOT loaded ACK for the current subject",
+      "input_value": 20261031
+    }
+  },
+  "input_file": "evidence/inputs/invoke-input.json",
+  "served_occupant": "OCC-CAPBOOT-LOADED-ACK",
+  "served_pid": 6556,
+  "resolved_origin": "C:\\wg\\queue\\WP-FHS-17\\evidence\\stage-root\\occupant\\capboot_attest.py",
+  "loaded_sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+  "manifest_sha256": "d96765655ef40486e6b97455c0d57218ce24aa266760fb3bf165201b355eaa9b",
+  "functional_output": "844d51d5cec2cae958200ad32f4a9ec27e7df685432e2bf752c7b594544f1d2f",
+  "consumer_verdict": "CONSUMER_ACK",
+  "consumer": {
+    "ack_functional_output": "844d51d5cec2cae958200ad32f4a9ec27e7df685432e2bf752c7b594544f1d2f",
+    "ceiling": "bounded WP-local consumer; not the original Host capability Registry/Consumer",
+    "checks": {
+      "ack_digest_rederived": true,
+      "child_pid_distinct": true,
+      "child_verdict_attested": true,
+      "driver_agrees": true,
+      "functional_output_rederived": true,
+      "input_digest_matches_real_input": true,
+      "live_origin_is_pinned": true,
+      "loaded_sha_is_pinned": true,
+      "manifest_bound": true,
+      "manifest_sha_is_pinned": true,
+      "origin_is_canonical": true,
+      "run_token_matches": true,
+      "sha_stable_during_invoke": true,
+      "subject_is_bound": true
+    },
+    "consumer_pid": 18972,
+    "derived_ack_digest": "deddd0501bd9bd12ca1e4f0d3e27c6c3fffd2000f08cf3e7961c2da9a5784093",
+    "derived_functional_output": "844d51d5cec2cae958200ad32f4a9ec27e7df685432e2bf752c7b594544f1d2f",
+    "failed_checks": [],
+    "input_sha256": "2199599ba8dd6190ab3beb08477b402ea06b160a80289b8417cf5c27ffc68104",
+    "need_id": "NEED-WP-FHS-17-CAP-BOOT-LOADED-ACK",
+    "nonce": "G-135455ca00280c39-1793452966-dc6c2d20",
+    "observed_live_sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+    "observed_origin": "C:\\wg\\queue\\WP-FHS-17\\evidence\\stage-root\\occupant\\capboot_attest.py",
+    "pinned_manifest_sha256": "d96765655ef40486e6b97455c0d57218ce24aa266760fb3bf165201b355eaa9b",
+    "pinned_sha256": "c90cd91ec8c6b9c2de5348dfe7967cb5bac2861d2397db1ce25bb702ddfecfb5",
+    "record": "wp17.bounded_consumer",
+    "served_pid": 12200,
+    "subject_sha256": "4c12bde71577299da3344278bb106c10f082adf86c94ea93249f3d09888d8a76",
+    "verdict": "CONSUMER_ACK"
+  },
+  "states": [
+    "HOST_LOADED",
+    "INVOKED",
+    "FUNCTIONALLY_QUALIFIED"
+  ],
+  "result": "LOADED_AND_INVOKED",
+  "raw": {
+    "command": "evidence/raw/load.command.json",
+    "stdout": "evidence/raw/load.stdout.txt",
+    "stderr": "evidence/raw/load.stderr.txt",
+    "exit": "evidence/raw/load.exit.json"
+  },
+  "ceiling": "fresh child process, but the serving root is a LOCAL_DRAFT_STAGE root, not a Host-installed target"
+}

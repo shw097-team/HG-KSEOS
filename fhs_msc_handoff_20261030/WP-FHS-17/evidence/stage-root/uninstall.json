@@ -1,0 +1,14 @@
+{
+  "inverse": "remove_exact_allowlist",
+  "allow": [
+    "occupant/capboot_attest.py",
+    "occupant/capboot_attest.manifest.json"
+  ],
+  "forbid": [
+    "recursive delete",
+    "delete outside the resolved install root",
+    "delete any path not named above",
+    "delete source, journal, policy or another writer's files"
+  ],
+  "residue_expectation": "empty; only the two allowlisted paths may be touched"
+}

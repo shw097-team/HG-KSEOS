@@ -1,0 +1,11 @@
+{
+  "op": "park-no-grant",
+  "exit": 5,
+  "started_at": "2026-10-31T21:22:51+0800",
+  "ended_at": "2026-10-31T21:22:51+0800",
+  "duration_s": 0.134,
+  "stdout_sha256": "dc996380fc7c32dc669d253f6df7d4582e40b5aa3034b821f553d769c53ef2ed",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 181,
+  "stderr_bytes": 0
+}

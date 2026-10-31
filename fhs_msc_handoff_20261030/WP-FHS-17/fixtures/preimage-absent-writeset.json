@@ -1,0 +1,9 @@
+{
+  "command": "python tools/build_evidence.py",
+  "writeset": [
+    {
+      "path": "occupant/capboot_attest.py",
+      "preimage": "ABSENT"
+    }
+  ]
+}

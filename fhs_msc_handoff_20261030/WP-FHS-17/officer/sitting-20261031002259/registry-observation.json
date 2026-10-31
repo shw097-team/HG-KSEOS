@@ -1,0 +1,1209 @@
+{
+  "original_service_readback": "NOT_PERFORMED",
+  "reason": "Original SharedSpine._open uses writable sqlite3.connect and PRAGMA journal_mode=WAL outside authorized write root. No relevant connected service tool available.",
+  "ceiling": "Supplemental read-only SQLite observation; immutable main file is not live/WAL guaranteed.",
+  "attempts": [
+    {
+      "mode": "?mode=ro",
+      "error": "unable to open database file"
+    },
+    {
+      "mode": "?mode=ro&immutable=1",
+      "result": "READABLE"
+    }
+  ],
+  "rows": {
+    "requirements": [
+      {
+        "requirement_id": "R18-WP-FHS-00",
+        "project_id": "FHS-MSC-R18-20261029",
+        "source_locator": "知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2::03_TESTS_AND_READBACK/wp_graph.json#WP-FHS-00",
+        "wording": "Source/Host Discovery [L1/SOURCE_READ] output=SourceManifest+RepoContext",
+        "priority": "P0",
+        "state": "FROZEN",
+        "version": 1,
+        "acceptance_id": "ACC-WP-FHS-00",
+        "rollback_pointer": "RB-R18-WP-FHS-00",
+        "created_at": "2026-10-29T04:43:09.687491Z",
+        "updated_at": "2026-10-29T04:43:09.732560Z"
+      },
+      {
+        "requirement_id": "R18-WP-FHS-02",
+        "project_id": "FHS-MSC-R18-20261029",
+        "source_locator": "知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2::03_TESTS_AND_READBACK/wp_graph.json#WP-FHS-02",
+        "wording": "Fabric Policy Consumer [L3/HOST_OP] output=PolicyLoadedConsumerACK",
+        "priority": "P0",
+        "state": "FROZEN",
+        "version": 1,
+        "acceptance_id": "ACC-WP-FHS-02",
+        "rollback_pointer": "RB-R18-WP-FHS-02",
+        "created_at": "2026-10-29T04:43:09.835771Z",
+        "updated_at": "2026-10-29T04:43:09.879882Z"
+      },
+      {
+        "requirement_id": "R18-WP-FHS-03",
+        "project_id": "FHS-MSC-R18-20261029",
+        "source_locator": "知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2::03_TESTS_AND_READBACK/wp_graph.json#WP-FHS-03",
+        "wording": "HGK Registry/Issuer [L3/HOST_OP] output=IssuerReceiverBinding",
+        "priority": "P0",
+        "state": "FROZEN",
+        "version": 1,
+        "acceptance_id": "ACC-WP-FHS-03",
+        "rollback_pointer": "RB-R18-WP-FHS-03",
+        "created_at": "2026-10-29T04:43:09.920932Z",
+        "updated_at": "2026-10-29T04:43:09.969536Z"
+      },
+      {
+        "requirement_id": "R18-WP-FHS-06",
+        "project_id": "FHS-MSC-R18-20261029",
+        "source_locator": "知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2::03_TESTS_AND_READBACK/wp_graph.json#WP-FHS-06",
+        "wording": "Legal First Reversible Slice [L2/REPO_WRITE] output=最小可逆Repo diff+Raw",
+        "priority": "P0",
+        "state": "FROZEN",
+        "version": 1,
+        "acceptance_id": "ACC-WP-FHS-06",
+        "rollback_pointer": "RB-R18-WP-FHS-06",
+        "created_at": "2026-10-29T04:43:10.203156Z",
+        "updated_at": "2026-10-29T04:43:10.252245Z"
+      },
+      {
+        "requirement_id": "R18-WP-FHS-17",
+        "project_id": "FHS-MSC-R18-20261029",
+        "source_locator": "知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE/FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2::03_TESTS_AND_READBACK/wp_graph.json#WP-FHS-17",
+        "wording": "CAP-BOOT Native Occupants [L3/HOST_OP] output=needed能力最小HostOccupant+loaded ACK",
+        "priority": "P0",
+        "state": "FROZEN",
+        "version": 1,
+        "acceptance_id": "ACC-WP-FHS-17",
+        "rollback_pointer": "RB-R18-WP-FHS-17",
+        "created_at": "2026-10-29T04:43:11.326258Z",
+        "updated_at": "2026-10-29T04:43:11.396896Z"
+      },
+      {
+        "requirement_id": "REQ-WP-FHS-03-ADMISSION-V2",
+        "project_id": "HGK-P0",
+        "source_locator": "delivery:FHS-MSC-HANDOFF-PATCH-v1/WP-FHS-03",
+        "wording": "WP-FHS-03: the admission chain is proven end to end and independently accepted under the stated ceiling",
+        "priority": "P0",
+        "state": "CANDIDATE",
+        "version": 0,
+        "acceptance_id": "ACC-WP-FHS-03-V2",
+        "rollback_pointer": "RB-REQ-WP-FHS-03-ADMISSION-V2",
+        "created_at": "2026-10-30T13:28:07.854957Z",
+        "updated_at": "2026-10-30T13:28:07.854957Z"
+      }
+    ],
+    "acceptances": [
+      {
+        "acceptance_id": "ACC-WP-FHS-00",
+        "requirement_id": "R18-WP-FHS-00",
+        "oracle": "根路徑/HEAD/index/untracked/bytes SHA當期可讀",
+        "threshold": "DESIGN_OR_BIND first_fail=WP-FHS-00.FIRST_FAIL:ROOT_CURRENTNESS_NOT_PROVEN",
+        "negative_fixture": "README或junction別名冒真root",
+        "verdict": "PASS",
+        "evidence_ref": "EV-WP-FHS-00-20261030",
+        "updated_at": "2026-10-30T11:40:57.328660Z"
+      },
+      {
+        "acceptance_id": "ACC-WP-FHS-02",
+        "requirement_id": "R18-WP-FHS-02",
+        "oracle": "Source/Stage/Approve/Active/Loaded/Consumer各自hash同scope",
+        "threshold": "DESIGN_OR_BIND first_fail=WP-FHS-02.FIRST_FAIL:POLICY_NOT_LOADED",
+        "negative_fixture": "Stage文件冒Loaded ACK",
+        "verdict": "FAIL",
+        "evidence_ref": "REFUSAL-20261030-NO-HOST-CAPABILITY",
+        "updated_at": "2026-10-30T11:41:25.930633Z"
+      },
+      {
+        "acceptance_id": "ACC-WP-FHS-03",
+        "requirement_id": "R18-WP-FHS-03",
+        "oracle": "原Receiver/Issuer registry同epoch與scope",
+        "threshold": "DESIGN_OR_BIND first_fail=WP-FHS-03.FIRST_FAIL:ISSUER_BINDING_INVALID",
+        "negative_fixture": "候選ECP冒Permit",
+        "verdict": "FAIL",
+        "evidence_ref": "REFUSAL-20261030-NO-HOST-CAPABILITY",
+        "updated_at": "2026-10-30T11:41:25.974185Z"
+      },
+      {
+        "acceptance_id": "ACC-WP-FHS-06",
+        "requirement_id": "R18-WP-FHS-06",
+        "oracle": "needed capability qualified後在exact Repo scope取得可逆diff/Raw",
+        "threshold": "FIRST_EFFECT first_fail=WP-FHS-06.FIRST_FAIL:FIRST_EFFECT_CAPABILITY_MISSING",
+        "negative_fixture": "WP17尚未具能力就發首effect",
+        "verdict": "PASS",
+        "evidence_ref": "EV-WP-FHS-06-20261030",
+        "updated_at": "2026-10-30T11:40:57.459376Z"
+      },
+      {
+        "acceptance_id": "ACC-WP-FHS-17",
+        "requirement_id": "R18-WP-FHS-17",
+        "oracle": "現有Issuer合法installer先建needed occupant再驗LoadedSHA",
+        "threshold": "HOST_INSTALL_IF_AUTHORIZED first_fail=WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION",
+        "negative_fixture": "依WP06才准WP17形成循環",
+        "verdict": "FAIL",
+        "evidence_ref": "REFUSAL-20261030-NO-HOST-CAPABILITY",
+        "updated_at": "2026-10-30T11:41:26.245104Z"
+      },
+      {
+        "acceptance_id": "ACC-WP-FHS-03-V2",
+        "requirement_id": "REQ-WP-FHS-03-ADMISSION-V2",
+        "oracle": "oracle ORACLE-WP-FHS-03-04-08-CONFORMANCE-20261030 (O1..O6)",
+        "threshold": "independent officer returns overall=PASS with zero convictions",
+        "negative_fixture": "a check refused for the wrong reason, or a verdict that survives a forced failure",
+        "verdict": "PASS",
+        "evidence_ref": "EV-WP-FHS-03-04-08-ADMISSION-CHAIN-AO-R28C",
+        "updated_at": "2026-10-30T13:28:43.825495Z"
+      },
+      {
+        "acceptance_id": "ACC-WP-FHS-04-V2",
+        "requirement_id": "REQ-WP-FHS-04-ADMISSION-V2",
+        "oracle": "oracle ORACLE-WP-FHS-03-04-08-CONFORMANCE-20261030 (O1..O6)",
+        "threshold": "independent officer returns overall=PASS with zero convictions",
+        "negative_fixture": "a check refused for the wrong reason, or a verdict that survives a forced failure",
+        "verdict": "PASS",
+        "evidence_ref": "EV-WP-FHS-03-04-08-ADMISSION-CHAIN-AO-R28C",
+        "updated_at": "2026-10-30T13:28:43.857597Z"
+      },
+      {
+        "acceptance_id": "ACC-WP-FHS-08-V2",
+        "requirement_id": "REQ-WP-FHS-08-ADMISSION-V2",
+        "oracle": "oracle ORACLE-WP-FHS-03-04-08-CONFORMANCE-20261030 (O1..O6)",
+        "threshold": "independent officer returns overall=PASS with zero convictions",
+        "negative_fixture": "a check refused for the wrong reason, or a verdict that survives a forced failure",
+        "verdict": "PASS",
+        "evidence_ref": "EV-WP-FHS-03-04-08-ADMISSION-CHAIN-AO-R28C",
+        "updated_at": "2026-10-30T13:28:43.883215Z"
+      },
+      {
+        "acceptance_id": "ACC-WP-FHS-02-V2",
+        "requirement_id": "R18-WP-FHS-02",
+        "oracle": "…各自hash同scope；证据由原Consumer读回（officer 第十坐实测）",
+        "threshold": "DESIGN_OR_BIND first_fail=WP-FHS-02.FIRST_FAIL:POLICY_NOT_LOADED",
+        "negative_fixture": "Stage文件冒Loaded ACK（stage 现由 staging 作业产出，可重导，digest 绑定 receipt）",
+        "verdict": "PASS",
+        "evidence_ref": "EV-WP-FHS-02-SIX-LAYER-AO-R28J",
+        "updated_at": "2026-10-30T14:33:26.449239Z"
+      },
+      {
+        "acceptance_id": "ACC-WP-FHS-17-V3",
+        "requirement_id": "WP-FHS-17",
+        "oracle": "owner ruling: the officer refused a labelled conformance seam; issue_grant.py now produces an Ed25519-signed grant (key_id 135455ca00280c39) whose signature, nonce ledger, TTL and owner-authorization sha are all verified before any install",
+        "threshold": "PASS only if the install/load/invoke/negative/rollback raw is produced under a verified grant",
+        "negative_fixture": "no grant -> PARK_GRANT_MISSING; tampered payload -> mismatch; traversal -> PATH_TRAVERSAL",
+        "verdict": "NOT_RUN",
+        "evidence_ref": null,
+        "updated_at": "2026-10-31T00:22:22"
+      }
+    ],
+    "work_queue": [
+      {
+        "wp_id": "WP-FHS-00",
+        "title": "Source/Host Discovery",
+        "depends_on": "",
+        "effect_class": "SOURCE_READ",
+        "state": "PASS",
+        "evidence_ref": null,
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      },
+      {
+        "wp_id": "WP-FHS-01",
+        "title": "Authority/Oracle/Profile",
+        "depends_on": "WP-FHS-00",
+        "effect_class": "SOURCE_READ",
+        "state": "PASS",
+        "evidence_ref": null,
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      },
+      {
+        "wp_id": "WP-FHS-02",
+        "title": "Fabric Policy Consumer",
+        "depends_on": "WP-FHS-01",
+        "effect_class": "HOST_OP",
+        "state": "PASS",
+        "evidence_ref": null,
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      },
+      {
+        "wp_id": "WP-FHS-03",
+        "title": "HGK Registry/Issuer",
+        "depends_on": "WP-FHS-01",
+        "effect_class": "HOST_OP",
+        "state": "PASS",
+        "evidence_ref": null,
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      },
+      {
+        "wp_id": "WP-FHS-04",
+        "title": "Hermes Durable Runtime",
+        "depends_on": "WP-FHS-00",
+        "effect_class": "HOST_OP",
+        "state": "PASS",
+        "evidence_ref": null,
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      },
+      {
+        "wp_id": "WP-FHS-06",
+        "title": "Legal First Reversible Slice",
+        "depends_on": "WP-FHS-02,WP-FHS-03,WP-FHS-04,WP-FHS-05,WP-FHS-17",
+        "effect_class": "REPO_WRITE",
+        "state": "PASS",
+        "evidence_ref": null,
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      },
+      {
+        "wp_id": "WP-FHS-08",
+        "title": "FHS Execute Worker",
+        "depends_on": "WP-FHS-06,WP-FHS-07",
+        "effect_class": "HOST_OP",
+        "state": "PASS",
+        "evidence_ref": null,
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      },
+      {
+        "wp_id": "WP-FHS-13",
+        "title": "CAP On-Demand + HotSwap",
+        "depends_on": "WP-FHS-16,WP-FHS-17",
+        "effect_class": "HOST_OP",
+        "state": "FAIL",
+        "evidence_ref": null,
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      },
+      {
+        "wp_id": "WP-FHS-16",
+        "title": "Donor/Method Slot Translation",
+        "depends_on": "WP-FHS-00",
+        "effect_class": "LOCAL_DRAFT_WRITE",
+        "state": "PASS",
+        "evidence_ref": null,
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      },
+      {
+        "wp_id": "WP-FHS-17",
+        "title": "CAP-BOOT Native Occupants",
+        "depends_on": "WP-FHS-00,WP-FHS-02,WP-FHS-03",
+        "effect_class": "HOST_OP",
+        "state": "NOT_RUN",
+        "evidence_ref": "OWNER-RULING:production Ed25519 grant via issue_grant.py replaces the conformance seam the officer refused",
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      },
+      {
+        "wp_id": "WP-FHS-19",
+        "title": "CI/Supply Chain & Requal",
+        "depends_on": "WP-FHS-00",
+        "effect_class": "SOURCE_READ",
+        "state": "PASS",
+        "evidence_ref": null,
+        "updated_at": "2026-10-30T16:24:18+00:00"
+      }
+    ],
+    "provider_bindings": [
+      {
+        "provider_id": "P0-TOOL-001",
+        "slot": "Hermes Agent",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-001",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-002",
+        "slot": "SDLC_PRW",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-002",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-003",
+        "slot": "SRU Kernel",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-003",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-004",
+        "slot": "DocETL",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-004",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-005",
+        "slot": "Codex",
+        "xor_group": "XOR-CODING-PROVIDER",
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-005",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-006",
+        "slot": "OpenCode",
+        "xor_group": "XOR-CODING-PROVIDER",
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-006",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-007",
+        "slot": "Obsidian",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-007",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-008",
+        "slot": "LLM Wiki",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-008",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-009",
+        "slot": "Typed Knowledge Graph",
+        "xor_group": null,
+        "disposition": "ADAPTED",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-009",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-010",
+        "slot": "Spec Kit",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-010",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-011",
+        "slot": "OpenSpec",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-011",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-012",
+        "slot": "GSD Core",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-012",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-013",
+        "slot": "GSD Pi",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-013",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-014",
+        "slot": "get-shit-done",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-014",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-015",
+        "slot": "gsd-2",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-015",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-016",
+        "slot": "mattpocock-skills v1.1",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-016",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-017",
+        "slot": "Grill Me",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-017",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-018",
+        "slot": "grill-with-docs",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-018",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-019",
+        "slot": "planning-with-files",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-019",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-020",
+        "slot": "Superpowers",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-020",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-021",
+        "slot": "gstack",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-021",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-022",
+        "slot": "Nature Skills",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-022",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-023",
+        "slot": "Zotero",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-023",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-024",
+        "slot": "Agent Skills",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-024",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-025",
+        "slot": "Model Context Protocol",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-025",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-026",
+        "slot": "AGENTS.md",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-026",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-027",
+        "slot": "CLAUDE.md",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-027",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-028",
+        "slot": "DESIGN.md",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-028",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-029",
+        "slot": "AutoResearch",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-029",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-030",
+        "slot": "Loop Engineering",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-030",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-031",
+        "slot": "Harness Engineering",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-031",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-032",
+        "slot": "Multi-Agent",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-032",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-033",
+        "slot": "Agent Swarm",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-033",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-034",
+        "slot": "Sub-Agent",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-034",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-035",
+        "slot": "OpenHands / Agent Canvas",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-035",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-036",
+        "slot": "Microsoft Agent Framework",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-036",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-037",
+        "slot": "AutoGen",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-037",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-038",
+        "slot": "Semantic Kernel",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-038",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-039",
+        "slot": "LangGraph",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-039",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-040",
+        "slot": "CrewAI",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-040",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-041",
+        "slot": "n8n",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-041",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-042",
+        "slot": "Dify",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-042",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-043",
+        "slot": "RAGFlow",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-043",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-044",
+        "slot": "WeKnora",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-044",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-045",
+        "slot": "LightRAG",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-045",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-046",
+        "slot": "GraphRAG",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-046",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-047",
+        "slot": "Qdrant",
+        "xor_group": "XOR-RETRIEVAL",
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-047",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-048",
+        "slot": "pgvector",
+        "xor_group": "XOR-RETRIEVAL",
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-048",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-049",
+        "slot": "Milvus",
+        "xor_group": "XOR-RETRIEVAL",
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-049",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-050",
+        "slot": "Chroma",
+        "xor_group": "XOR-RETRIEVAL",
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-050",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-051",
+        "slot": "Neo4j",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-051",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-052",
+        "slot": "Temporal",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-052",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-053",
+        "slot": "OpenTelemetry",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-053",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-054",
+        "slot": "Sentry",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-054",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-055",
+        "slot": "SWE-bench",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-055",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-056",
+        "slot": "OSWorld",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-056",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-057",
+        "slot": "Terminal-Bench",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-057",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-058",
+        "slot": "Promptfoo",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-058",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-059",
+        "slot": "Semgrep",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-059",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-060",
+        "slot": "CodeQL",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-060",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-061",
+        "slot": "Trivy",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-061",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-062",
+        "slot": "GitHub Actions",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-062",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-063",
+        "slot": "OpenSSF Scorecard",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-063",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-064",
+        "slot": "SBOM",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-064",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-065",
+        "slot": "Artifact Attestation",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-065",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-066",
+        "slot": "SLSA",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-066",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-067",
+        "slot": "Sigstore",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-067",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-068",
+        "slot": "OSV",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-068",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-069",
+        "slot": "Docker",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-069",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-070",
+        "slot": "Kubernetes",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-070",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-071",
+        "slot": "Nix",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-071",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-072",
+        "slot": "SQLite",
+        "xor_group": null,
+        "disposition": "DEFAULT_ENABLED_AFTER_QUALIFICATION",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-072",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-073",
+        "slot": "PostgreSQL",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-073",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-074",
+        "slot": "gbrain",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-074",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-075",
+        "slot": "hindsight",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-075",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-076",
+        "slot": "graphiti",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-076",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-077",
+        "slot": "cognee",
+        "xor_group": null,
+        "disposition": "DEFERRED_BY_EVIDENCE",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-077",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "P0-TOOL-078",
+        "slot": "codegraph_exact_provider",
+        "xor_group": null,
+        "disposition": "MERGED_ALIAS_WITH_CANONICAL_ID",
+        "pin": null,
+        "state": "DISCOVERED",
+        "doctor_evidence": null,
+        "rollback_pointer": "RB-P0-TOOL-078",
+        "updated_at": "2026-08-08T02:24:38.605067Z"
+      },
+      {
+        "provider_id": "HGK-PROVIDER-FTS5",
+        "slot": "semantic-retrieval",
+        "xor_group": "XOR-RETRIEVAL",
+        "disposition": "PREFERRED_DEFAULT",
+        "pin": "3.50.4",
+        "state": "ENABLED",
+        "doctor_evidence": "builtin SQLite FTS5 probe",
+        "rollback_pointer": "RB-FTS5",
+        "updated_at": "2026-08-08T02:24:38.615581Z"
+      }
+    ],
+    "evidence_refs": [
+      {
+        "evidence_id": "EV-WP-FHS-00-20261030",
+        "kind": "work_package_artefact",
+        "locator": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-00-SOURCE-MANIFEST\\SourceManifest.json",
+        "sha256": "9aa82eb8ef81656f20843e9dffc4425fcb4336433283c759596548f11a123609",
+        "producer": "FAR-FHS-MSC-ALLPASS-20261030",
+        "checker": null,
+        "created_at": "2026-10-30T11:40:57.286105Z"
+      },
+      {
+        "evidence_id": "EV-WP-FHS-06-20261030",
+        "kind": "work_package_artefact",
+        "locator": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-06-REVERSIBLE-SLICE\\REVERSIBLE_DIFF.json",
+        "sha256": "d8b40b860de37a9a127659a3c0f842702c53a5c18f4a61aeb36a1f1bd480199d",
+        "producer": "FAR-FHS-MSC-ALLPASS-20261030",
+        "checker": null,
+        "created_at": "2026-10-30T11:40:57.429299Z"
+      },
+      {
+        "evidence_id": "EV-WP-FHS-03-04-08-ADMISSION-CHAIN-AO-R28C",
+        "kind": "wp_acceptance",
+        "locator": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-03-04-08-ADMISSION-CHAIN\\AO-verdict.json",
+        "sha256": "2bd947d4e6cd309bc9c2d3b1b796df704157a59f4d4e10895b28b003615551da",
+        "producer": "Independent Acceptance Officer, sitting 3",
+        "checker": null,
+        "created_at": "2026-10-30T13:28:15.979858Z"
+      },
+      {
+        "evidence_id": "EV-WP-FHS-02-SIX-LAYER-AO-R28J",
+        "kind": "wp_evidence",
+        "locator": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-02-POLICY-LOADED-CONSUMER\\TRANSCRIPTION.json",
+        "sha256": "e6a171aa60513d2bca78166f9f3f517585b1aa000c972987ff4bef70f1731e16",
+        "producer": "R28 tenth sitting",
+        "checker": null,
+        "created_at": "2026-10-30T14:33:07.626492Z"
+      }
+    ]
+  }
+}

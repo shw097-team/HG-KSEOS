@@ -1,0 +1,11 @@
+{
+  "op": "load-tampered",
+  "exit": 3,
+  "started_at": "2026-10-31T21:22:48+0800",
+  "ended_at": "2026-10-31T21:22:50+0800",
+  "duration_s": 2.062,
+  "stdout_sha256": "fc0ccbcca2fdc2de9e150d3fb8beeb9aee675f3618a75c163ea86230e395e803",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 5107,
+  "stderr_bytes": 0
+}

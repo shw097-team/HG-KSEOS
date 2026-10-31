@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-31T00:26:46",
+  "actor": "owner (authorized this round)",
+  "why": "three sittings each failed for a different, stated reason (seam -> production Ed25519 grant -> admission binding, canonical target and preimage/replay binding). A repeat-block counter exists to stop identical retries; these were not identical.",
+  "archived": [
+    "WP-FHS-17-verify_security-20261030232608.json",
+    "WP-FHS-17-verify_security-20261030233843.json",
+    "WP-FHS-17-verify_security-20261030233843.json.attempts.ndjson",
+    "WP-FHS-17-verify_security-20261030233843.json.logs",
+    "WP-FHS-17-verify_security-20261031002259.json",
+    "WP-FHS-17-verify_security-20261031002259.json.attempts.ndjson",
+    "WP-FHS-17-verify_security-20261031002259.json.logs"
+  ],
+  "new_phase_count": 0
+}

@@ -1,0 +1,113 @@
+{
+  "at": "2026-10-31T11:46:05.432773+00:00",
+  "files": [
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+      "state": "PRESENT",
+      "sha256": "d008d6ec46badfbdbfdb3e024a2f9490b2483647809773cdd2a8bbc1ed0fc3ae",
+      "size_bytes": 19763
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\oracle.json",
+      "state": "PRESENT",
+      "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+      "size_bytes": 861
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\need.json",
+      "state": "PRESENT",
+      "sha256": "f89985b5d89ca33048ef240a78def2f441b16c326d33c5c5a7d6f75e459286f6",
+      "size_bytes": 7730
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\source-pin.json",
+      "state": "PRESENT",
+      "sha256": "38ba40ec5ec22fefd568ce313234bff6480fd88f4ffcbb4d6d9356dc7944ce2f",
+      "size_bytes": 1669
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\package-index.json",
+      "state": "PRESENT",
+      "sha256": "72e3e0adf6cf78fa3b808413befea6dcbdde530529fc8ebd9afb855689782308",
+      "size_bytes": 1398
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json",
+      "state": "PRESENT",
+      "sha256": "1881f3a2611f916bc53fd65e546e634ad830c09962711d8047ecbe32a31e5014",
+      "size_bytes": 1810
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-before.json",
+      "state": "PRESENT",
+      "sha256": "39033a0dbeca554ce1d230bc29b4f5b960c82b9e97e391918ba235575cb5733b",
+      "size_bytes": 10793
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\admission.json",
+      "state": "PRESENT",
+      "sha256": "4d210e395b5c72493efc06bad1ba4738359267d2349d6ac0ee95fdc10c540048",
+      "size_bytes": 618
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install.json",
+      "state": "PRESENT",
+      "sha256": "77a10a12d8b22a921dc7cb0e7065ff30956c467787028e035dc397281dbb6400",
+      "size_bytes": 181
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\fresh-load.json",
+      "state": "PRESENT",
+      "sha256": "224c8ce3aaefb92a7433efd2183dfbd1fa6814918ac8ad6fd48b21443d2fc79c",
+      "size_bytes": 6138
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\invoke.json",
+      "state": "PRESENT",
+      "sha256": "7396357ca9acfc002400e0d2cf01ef308453fa45c228d3ee0a0abf01d8185642",
+      "size_bytes": 3440
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\cap-boot-dependency-inversion.json",
+      "state": "PRESENT",
+      "sha256": "281789cc154dee73189cb37a9bc9a8b442d9a61513b8c3a4ab2d736d58a92871",
+      "size_bytes": 850
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\loaded-origin-mismatch.json",
+      "state": "PRESENT",
+      "sha256": "9476429a83beddf249d7f6432558b04543a6c136033c5b4466df3c661d2ffc6b",
+      "size_bytes": 1596
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\negative-results.json",
+      "state": "PRESENT",
+      "sha256": "f93ab175df29273612dc14517e5f93947ae41b796a516fd345625d33335dfdff",
+      "size_bytes": 13022
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\rollback-resume.json",
+      "state": "PRESENT",
+      "sha256": "04330506473621e50c89773e571e2d9281bccac472104f6b124878e9d86b890a",
+      "size_bytes": 6119
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\tools\\reproduce.ps1",
+      "state": "PRESENT",
+      "sha256": "c7f84f9a20ae49f1133038dad017b1a8a1006d5407eca06619a4742a48974464",
+      "size_bytes": 3392
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\run-index.json",
+      "state": "PRESENT",
+      "sha256": "fd53837d5f8b155e76956c5bbba272b09dae1b984fa488c610e5d3b83d39425d",
+      "size_bytes": 68187
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-after.json",
+      "state": "PRESENT",
+      "sha256": "79a2b90e980176fcf120af4d51e8f0dc0687548c0089a0040b745d9ca6ab9ac4",
+      "size_bytes": 10814
+    }
+  ]
+}

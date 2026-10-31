@@ -1,0 +1,11 @@
+{
+  "op": "replay-seed",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:52+0800",
+  "ended_at": "2026-10-31T21:22:52+0800",
+  "duration_s": 0.145,
+  "stdout_sha256": "42117d8e8bf960415d5e627f1040141a87a2932541de08187eacf5fd5d4f372b",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 499,
+  "stderr_bytes": 0
+}

@@ -208,6 +208,56 @@ def cmd_unsettle(args) -> int:
     return 0
 
 
+def cmd_render(args) -> int:
+    """Render the projections from the authority.
+
+    Measured defect (R-7): four scoreboards disagreed because three of them were hand-maintained. A projection
+    that is edited by hand is a second authority; this command makes the projections derived, so a divergence
+    can only come from a stale render and never from an opinion.
+
+    STATUS.json is deliberately NOT rendered here: it is a liveness document (running pids, in-flight nonces),
+    not a scoreboard. Rendering it from the queue would erase the only record of what is actually running.
+    """
+    con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
+    con.row_factory = sqlite3.Row
+    try:
+        rows = con.execute("SELECT wp_id, state, effect_class FROM work_queue ORDER BY wp_id").fetchall()
+    finally:
+        con.close()
+    tally = {"total": len(rows)}
+    for _wp, state, _ec in rows:
+        tally[state] = tally.get(state, 0) + 1
+    base = Path(args.queue)
+    base.mkdir(parents=True, exist_ok=True)
+
+    todo = ["# Todo (derived from the control plane, not from a session)", ""]
+    for wp, state, effect in rows:
+        mark = "x" if state == "PASS" else " "
+        todo.append(f"- [{mark}] {wp} {state}")
+    (base / "TODO.md").write_text("\n".join(todo) + "\n", encoding="utf-8", newline="")
+
+    snap = (f"total={tally['total']} pass={tally.get('PASS', 0)} fail={tally.get('FAIL', 0)} "
+            f"pending={tally.get('NOT_RUN', 0)}")
+    goal_path = base / "GOAL.json"
+    goal = {}
+    if goal_path.is_file():
+        try:
+            goal = json.loads(goal_path.read_text(encoding="utf-8"))
+        except ValueError:
+            goal = {}
+    goal["queue_snapshot"] = snap
+    if isinstance(goal.get("counts"), dict):
+        goal["counts"].update({"total": tally["total"], "pass": tally.get("PASS", 0),
+                               "fail": tally.get("FAIL", 0), "pending": tally.get("NOT_RUN", 0)})
+    goal["projection_reconciled_at"] = datetime.now(timezone.utc).astimezone().isoformat(timespec="seconds")
+    goal["projection_reconciled_by"] = "work_queue.py render (authority = work_queue)"
+    goal_path.write_text(json.dumps(goal, ensure_ascii=False, indent=1), encoding="utf-8", newline="")
+
+    print(json.dumps({"ok": True, "rendered": [str(base / "TODO.md"), str(goal_path)],
+                      "snapshot": snap, "tally": tally}, ensure_ascii=False))
+    return 0
+
+
 def cmd_show(_args) -> int:
     con = connect()
     refresh(con)
@@ -259,6 +309,7 @@ def main(argv=None) -> int:
     s.add_argument("--evidence", default=None); s.set_defaults(fn=cmd_settle)
     u = sub.add_parser("unsettle"); u.add_argument("--wp", required=True)
     u.add_argument("--reason", required=True); u.set_defaults(fn=cmd_unsettle)
+    r = sub.add_parser("render"); r.add_argument("--queue", default=r"C:/wg/queue"); r.set_defaults(fn=cmd_render)
     sub.add_parser("show").set_defaults(fn=cmd_show)
     pn = sub.add_parser("next"); pn.add_argument("--wp", default=None); pn.set_defaults(fn=cmd_next)
     args = ap.parse_args(argv)

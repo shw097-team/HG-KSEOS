@@ -1,0 +1,11 @@
+{
+  "op": "occupant-selftest",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:45+0800",
+  "ended_at": "2026-10-31T21:22:46+0800",
+  "duration_s": 0.129,
+  "stdout_sha256": "acce03e14db5ecba6a417fb4c2bbbd296726d88838eb4edd45369c85e30c1515",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 2605,
+  "stderr_bytes": 0
+}

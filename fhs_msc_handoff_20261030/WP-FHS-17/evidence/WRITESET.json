@@ -1,0 +1,17 @@
+{
+  "writeset": [
+    {
+      "path": "occupant_probe.py",
+      "preimage": "ABSENT"
+    },
+    {
+      "path": "occupant_probe.py.manifest.json",
+      "preimage": "ABSENT"
+    }
+  ],
+  "preimage": "ABSENT for every path",
+  "installed": [
+    "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py",
+    "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root\\occupant_probe.py.manifest.json"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "command": "python tools/build_evidence.py",
+  "source": "evidence/ORACLE.json",
+  "mirror": "oracle.json",
+  "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+  "byte_identical": true
+}

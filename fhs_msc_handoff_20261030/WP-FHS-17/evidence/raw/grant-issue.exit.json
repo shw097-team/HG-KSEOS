@@ -1,0 +1,11 @@
+{
+  "op": "grant-issue",
+  "exit": 0,
+  "started_at": "2026-10-31T21:22:46+0800",
+  "ended_at": "2026-10-31T21:22:46+0800",
+  "duration_s": 0.191,
+  "stdout_sha256": "fd67e4bd8f89fdc7fc9efc4d9639ce2d87466d170f6d8aa7eb7dfe623e26e159",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 294,
+  "stderr_bytes": 0
+}

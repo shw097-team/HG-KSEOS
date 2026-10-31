@@ -1,0 +1,22 @@
+{
+  "no-grant": {
+    "exit": 0,
+    "out": "{\"negative\": \"no-grant\", \"expected\": \"PARK_GRANT_MISSING\", \"observed_exit\": 5}",
+    "expectation": "exit 0 = the harness confirmed PARK_GRANT_MISSING"
+  },
+  "tampered": {
+    "exit": 0,
+    "out": "{\"need_id\": \"NEG-tampered\", \"root\": \"C:\\\\wg\\\\queue\\\\WP-FHS-17\\\\evidence\\\\neg-tampered\", \"lifecycle\": [{\"step\": \"PACKAGED\", \"at\": \"2026-10-31T00:26:18\", \"note\": \"payload sha256=9eb2bb9e30ed5ba2b05fc03affa96b95591183d24f9a2b4d8d52b1bb7e23e109\"}], \"writeset\": [{\"path\": \"noop.py\", \"preimage\": \"ABSENT\"}, {\"path\": \"noop.py.manifest.json\", \"preimage\": \"ABSENT\"}], \"verdict\": \"REFUSED\", \"code\": \"ERR_ADMISSION_SUBJECT_MISMATCH\", \"detail\": \"an install must be tied to an admitted task, not merely to a signed permission\"}",
+    "expectation": "exit 0 = the harness confirmed the tampered payload no longer matches the pinned sha"
+  },
+  "traversal": {
+    "exit": 0,
+    "out": "{\"negative\": \"traversal\", \"expected\": \"PATH_TRAVERSAL|PATH_ALIAS\", \"observed\": \"PATH_ALIAS\"}",
+    "expectation": "exit 0 = the harness confirmed PATH_ALIAS / PATH_TRAVERSAL"
+  },
+  "admission-bypass": {
+    "exit": 3,
+    "out": "{\"need_id\": \"NEED-WP17-OCCUPANT-PROBE\", \"root\": \"C:\\\\wg\\\\queue\\\\WP-FHS-17\\\\evidence\\\\neg-bypass\", \"lifecycle\": [{\"step\": \"PACKAGED\", \"at\": \"2026-10-31T00:26:19\", \"note\": \"payload sha256=22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08\"}], \"writeset\": [{\"path\": \"occupant_probe.py\", \"preimage\": \"ABSENT\"}, {\"path\": \"occupant_probe.py.manifest.json\", \"preimage\": \"ABSENT\"}], \"verdict\": \"REFUSED\", \"code\": \"ERR_ADMISSION_MISSING\", \"detail\": \"an install must be tied to an admitted task, not merely to a signed permission\"}",
+    "expectation": "exit 3 = the installer itself refused with ERR_ADMISSION_MISSING (this is the desired outcome)"
+  }
+}

@@ -1956,6 +1956,13 @@ def main() -> int:
                     help="selection-time strictness: only arms named in config/model-lane-assignment.json "
                          "for this lane may serve; if none is available the run refuses with "
                          "ERR_NO_ASSIGNED_ARM instead of falling back to an unassigned pool arm")
+    ap.add_argument("--round-seed", default=None,
+                    help="round identifier every sitting of this round shares (R-4: one seed per round, one "
+                         "derived nonce per sitting; an oracle that demands one nonce across lanes cannot be "
+                         "satisfied by lanes that each carry their own)")
+    ap.add_argument("--sitting", default=None,
+                    help="sitting label inside the round (e.g. C); recorded so a verdict can be tied to the "
+                         "exact nonce it echoed")
     ap.add_argument("--guard-subject", action="append", default=None,
                     help="file/dir whose digest must not change during the turn (repeatable). removed/changed "
                          "=> the verdict is VOID; this is what makes an escalated-sandbox checker safe")
@@ -2538,6 +2545,24 @@ def main() -> int:
 
     # ---- non-mutation guard (makes an escalated-sandbox checker safe) --------------------------
     guard_roots = list(args.guard_subject or [])
+    # R-9: --guard-subject is a DIGEST ANCHOR, not a write grant. workspace-write's root is always the dispatched
+    # repository, so a checker pointed at a subject outside it can read and hash the tree but cannot run anything
+    # that writes there -- and it then answers "outside the sandbox's writable roots", which the dispatcher
+    # classified as ERR_NO_ARM_EMITTED_NONCE (the arm blamed for a write-root fact). Measured three times this
+    # round. Warn at setup so the operator sees it before spending a sitting.
+    _outside_repo = []
+    for _g in guard_roots:
+        try:
+            Path(_g).resolve().relative_to(ROOT.resolve())
+        except (ValueError, OSError):
+            _outside_repo.append(str(_g))
+    if _outside_repo:
+        print(json.dumps({"warn": "WARN_GUARD_SUBJECT_OUTSIDE_REPO",
+                          "subjects": _outside_repo,
+                          "note": ("workspace-write's root is the dispatched repository; a subject outside it "
+                                   "can be read and hashed but not written by the child. Copy the subject into "
+                                   "the repo if the checker must execute it.")}, ensure_ascii=False),
+              file=sys.stderr)
     # A checker reads the subject while the maker may still be working. Three rounds in a row lost a
     # checker verdict to `ERR_CHECKER_MUTATED_SUBJECT` because the maker committed into the guarded tree
     # mid-turn. The guard was right; the maker should not have been able to commit. Hold a review lock for
@@ -3095,6 +3120,13 @@ def main() -> int:
             "detail": {k: _g.get("detail", {}).get(k) for k in ("ir1", "ir4", "reason")
                        if isinstance(_g.get("detail"), dict) and k in _g.get("detail", {})},
         }
+    if _outside_repo:
+        receipt["guard_subject_outside_repo"] = _outside_repo
+        receipt.setdefault("warnings", []).append("WARN_GUARD_SUBJECT_OUTSIDE_REPO")
+    if getattr(args, "round_seed", None) or getattr(args, "sitting", None):
+        receipt["round_seed"] = getattr(args, "round_seed", None)
+        receipt["sitting"] = getattr(args, "sitting", None)
+        receipt["nonce_contract"] = "one round seed, one derived nonce per sitting (R-4)"
     receipt["completion_evidence"] = completion_evidence
     # I3 (pass-5): surface the USAGE MEASUREMENT at the top level too, taken from the serving attempt
     # (or the first attempt that answered when none served). A wrong-shaped CARRIER is a statement

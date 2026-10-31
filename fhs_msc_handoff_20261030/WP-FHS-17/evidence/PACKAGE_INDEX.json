@@ -1,0 +1,28 @@
+{
+  "root": "C:\\wg\\queue\\WP-FHS-17\\evidence\\occupant-root",
+  "files": [
+    {
+      "path": "_package/MANIFEST.json",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    },
+    {
+      "path": "_package/occupant_probe.py",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "occupant_probe.py",
+      "sha256": "22991e801ba7a6f36a5d6e2cfe8c2c26e8736ba2f6b14727ec1d63787c0bea08",
+      "bytes": 85
+    },
+    {
+      "path": "occupant_probe.py.manifest.json",
+      "sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+      "bytes": 465
+    }
+  ],
+  "excluded": [
+    "_package"
+  ]
+}

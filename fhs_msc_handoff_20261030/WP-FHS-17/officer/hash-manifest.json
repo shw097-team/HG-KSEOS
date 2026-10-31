@@ -1,0 +1,222 @@
+{
+  "algorithm": "SHA256",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261030232608",
+  "generated_at": "2026-10-31T11:41:09.323916+00:00",
+  "entries": [
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\brief.md",
+      "state": "PRESENT",
+      "sha256": "d008d6ec46badfbdbfdb3e024a2f9490b2483647809773cdd2a8bbc1ed0fc3ae",
+      "size_bytes": 19763
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\oracle.json",
+      "state": "PRESENT",
+      "sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+      "size_bytes": 861
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\need.json",
+      "state": "PRESENT",
+      "sha256": "1537cc8d6159a8444194784a35061796577bffc9237f3aeda9091785d734937a",
+      "size_bytes": 7706
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\source-pin.json",
+      "state": "PRESENT",
+      "sha256": "d0fd205e88ad160c031c9946e0a7cc8af612e03db1b32f8a2e2674ee3542d6d2",
+      "size_bytes": 1674
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\package-index.json",
+      "state": "PRESENT",
+      "sha256": "49a25fc6702a3d8485edaeca55c56bbddc6fe831ceb67ff178ac7e68048b4e80",
+      "size_bytes": 1398
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\candidate\\write-set.json",
+      "state": "PRESENT",
+      "sha256": "5686adf3ed0709825d02d6b3daa09839a35d7db3b4239ba8120311f8bc21dfb2",
+      "size_bytes": 1810
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-before.json",
+      "state": "PRESENT",
+      "sha256": "6e0aa09d4a11a72b580cf9de0cb4404c1f1a954b589c0a482ed151d7ca9c9892",
+      "size_bytes": 10279
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\admission.json",
+      "state": "PRESENT",
+      "sha256": "06f5dfe07d62a50495e87b7b8653da6a8f75cbff0f0166ed931f981aa86a48de",
+      "size_bytes": 1057
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\install.json",
+      "state": "PRESENT",
+      "sha256": "77a10a12d8b22a921dc7cb0e7065ff30956c467787028e035dc397281dbb6400",
+      "size_bytes": 181
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\fresh-load.json",
+      "state": "PRESENT",
+      "sha256": "4aa3e36d71267411e8d825ab4a5f7edfe36a2faa68c732cb52b93d7d664720e1",
+      "size_bytes": 4199
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\invoke.json",
+      "state": "PRESENT",
+      "sha256": "6810deebca6425ab2969967a5a613b971ccd4573965b9f437a2dd05070930875",
+      "size_bytes": 1498
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\cap-boot-dependency-inversion.json",
+      "state": "PRESENT",
+      "sha256": "281789cc154dee73189cb37a9bc9a8b442d9a61513b8c3a4ab2d736d58a92871",
+      "size_bytes": 850
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\fixtures\\loaded-origin-mismatch.json",
+      "state": "PRESENT",
+      "sha256": "c54d549afd6c3d8b80dde75c978b4cf0727cb4888121bc0389b6c58cce14c82a",
+      "size_bytes": 1596
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\negative-results.json",
+      "state": "PRESENT",
+      "sha256": "2f03ddaf101b9f5ceeff7518b3a9576ae9af75cadb918f387e150ff0d41f3819",
+      "size_bytes": 13609
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\rollback-resume.json",
+      "state": "PRESENT",
+      "sha256": "52f3f25179b4b691178caf377075c539a331219b16374d3445316cddaeba8a00",
+      "size_bytes": 3555
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\tools\\reproduce.ps1",
+      "state": "MISSING",
+      "sha256": null
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\run-index.json",
+      "state": "PRESENT",
+      "sha256": "9d099c38a8a364f1b4da619f0c8142b968c28565afc497a1bf416e418178f912",
+      "size_bytes": 68011
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\evidence\\registry-after.json",
+      "state": "PRESENT",
+      "sha256": "aa59b13bd8e0d95a4b70eeff2bf6879a2a909d9223835ec2677aefd4e8d02288",
+      "size_bytes": 10278
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\officer\\verify.py",
+      "state": "PRESENT",
+      "sha256": "5f1cea19ae3368852fea638b58ddc7e3ba02039850e38321876613e0a2283772",
+      "size_bytes": 14068
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\officer\\check-contract.json",
+      "state": "PRESENT",
+      "sha256": "a242f397b6b9b85ec37e2795960e6f39d744d03b136c20c2b8225fc9fc1dc09f",
+      "size_bytes": 1964
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\officer\\raw\\input-inventory.json",
+      "state": "PRESENT",
+      "sha256": "812c11a2708e0d1c48ccbcefe337bde7654f30289e550edfec7dd0556abb7eca",
+      "size_bytes": 4002
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\officer\\raw\\source-clauses.json",
+      "state": "PRESENT",
+      "sha256": "c788e5b1ce8b3fb4fd130d0553275ade2a107162c402f11eb626eb92e86a323c",
+      "size_bytes": 9058
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\officer\\raw\\registry-observation.json",
+      "state": "PRESENT",
+      "sha256": "b9d7e7e25605831a886ada8b70a895c91cb57d51d6bdbc035c44de9e117bf2e2",
+      "size_bytes": 42977
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\officer\\verification.raw.json",
+      "state": "PRESENT",
+      "sha256": "1974675763f77cad16319b23de598135c600514670eda04fc0b9d051a9d8a956",
+      "size_bytes": 10489
+    },
+    {
+      "path": "C:\\wg\\queue\\WP-FHS-17\\officer\\verdict.json",
+      "state": "PRESENT",
+      "sha256": "854d67effa94e049b5b97c250a5fd5662d5f6bfe4b125f187f6fb52aedc4aade",
+      "size_bytes": 1987
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\FHS\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+      "state": "PRESENT",
+      "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+      "size_bytes": 46467
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\FHS\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+      "state": "PRESENT",
+      "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d",
+      "size_bytes": 1128554
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\spine.py",
+      "state": "PRESENT",
+      "sha256": "f99a402123f39b8ceaad9372aeec0555628ba643950a5c99a4c917fd9e6d6dcd",
+      "size_bytes": 32194
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\providers.py",
+      "state": "PRESENT",
+      "sha256": "dd7909638590f9fd4cbdca729a47f2152e690006eefea4f300831ff24dd8cc2a",
+      "size_bytes": 6884
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\native_admission.py",
+      "state": "PRESENT",
+      "sha256": "314eeacd207c6808dfa7ddcf5ef12092861eeb2ff96b24ec5a216970fc889440",
+      "size_bytes": 32007
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\cli.py",
+      "state": "PRESENT",
+      "sha256": "6d31382d601b5fe01c042c39cd17e93aa1f4f442ce0d59d44cc5e519a1414312",
+      "size_bytes": 12028
+    },
+    {
+      "path": "C:\\wg\\main-merge\\evidence\\r18\\WP0203_17_BINDINGS.json",
+      "state": "PRESENT",
+      "sha256": "c408f3e202c7486afa1370126673ad0211f32df8032c925509b53a55cbda77d5",
+      "size_bytes": 2074
+    },
+    {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-03-04-08-ADMISSION-CHAIN\\AO-verdict.json",
+      "state": "PRESENT",
+      "sha256": "2bd947d4e6cd309bc9c2d3b1b796df704157a59f4d4e10895b28b003615551da",
+      "size_bytes": 2964
+    },
+    {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-02-POLICY-LOADED-CONSUMER\\TRANSCRIPTION.json",
+      "state": "PRESENT",
+      "sha256": "e6a171aa60513d2bca78166f9f3f517585b1aa000c972987ff4bef70f1731e16",
+      "size_bytes": 1232
+    },
+    {
+      "path": "C:\\wg\\ao13\\ao_r28j.json",
+      "state": "PRESENT",
+      "sha256": "1109272c3496f95a1412b64e6e1681c54c2e51da70e600eeb9c5d6fecbc4fda8",
+      "size_bytes": 8613
+    }
+  ],
+  "expansion_status": "UNACCEPTED_MISSING_PACKAGE_RUN_AND_WRITESET_INDEXES",
+  "installed_loaded_payloads": "UNRESOLVED: no canonical target/loaded origin supplied; no presence-based substitution",
+  "omitted_by_construction": [
+    "officer/hash-manifest.json",
+    "officer/hash-manifest.receipt.json"
+  ]
+}

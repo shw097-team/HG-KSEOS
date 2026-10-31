@@ -1,0 +1,69 @@
+{
+  "inputs": [
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\FHS\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+      "state": "PRESENT",
+      "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+      "size_bytes": 46467
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\FHS\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\08_TECHNOLOGY_DEFAULT_HOTSWAP.md",
+      "state": "PRESENT",
+      "sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d",
+      "size_bytes": 1128554
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\spine.py",
+      "state": "PRESENT",
+      "sha256": "f99a402123f39b8ceaad9372aeec0555628ba643950a5c99a4c917fd9e6d6dcd",
+      "size_bytes": 32194
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\providers.py",
+      "state": "PRESENT",
+      "sha256": "dd7909638590f9fd4cbdca729a47f2152e690006eefea4f300831ff24dd8cc2a",
+      "size_bytes": 6884
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\native_admission.py",
+      "state": "PRESENT",
+      "sha256": "314eeacd207c6808dfa7ddcf5ef12092861eeb2ff96b24ec5a216970fc889440",
+      "size_bytes": 32007
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\src\\hg_kseos\\cli.py",
+      "state": "PRESENT",
+      "sha256": "6d31382d601b5fe01c042c39cd17e93aa1f4f442ce0d59d44cc5e519a1414312",
+      "size_bytes": 12028
+    },
+    {
+      "path": "C:\\wg\\main-merge\\evidence\\r18\\WP0203_17_BINDINGS.json",
+      "state": "PRESENT",
+      "sha256": "c408f3e202c7486afa1370126673ad0211f32df8032c925509b53a55cbda77d5",
+      "size_bytes": 2074
+    },
+    {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-03-04-08-ADMISSION-CHAIN\\AO-verdict.json",
+      "state": "PRESENT",
+      "sha256": "2bd947d4e6cd309bc9c2d3b1b796df704157a59f4d4e10895b28b003615551da",
+      "size_bytes": 2964
+    },
+    {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-02-POLICY-LOADED-CONSUMER\\TRANSCRIPTION.json",
+      "state": "PRESENT",
+      "sha256": "e6a171aa60513d2bca78166f9f3f517585b1aa000c972987ff4bef70f1731e16",
+      "size_bytes": 1232
+    },
+    {
+      "path": "C:\\wg\\ao13\\ao_r28j.json",
+      "state": "PRESENT",
+      "sha256": "1109272c3496f95a1412b64e6e1681c54c2e51da70e600eeb9c5d6fecbc4fda8",
+      "size_bytes": 8613
+    }
+  ],
+  "wp17_anchor": "<a id=\"current-b8c0abdfb9dc52ea4f52\"></a>",
+  "card_text": "\n### WP-FHS-17｜CAP-BOOT Native Occupants\n- **Producer → ABI/Schema → Consumer**：原 Host Installer + HGK 原 Issuer → `CAP-BOOT 原 Host admission + manifest ABI` → 原 Host capability Registry/Consumer。\n- **Input**：已存在 Issuer 的最小合法 installer Scope、需要的 occupant pin/license、有效 OPS grant。\n- **Output**：needed能力最小HostOccupant+loaded ACK。\n- **DAG dependency**：WP-FHS-00, WP-FHS-02, WP-FHS-03；依賴原服務，不創第二 Scheduler。\n- **EffectClass / Admission**：`HOST_OP`；OPS ECP + Host Owner/Issuer + nonce/TTL/epoch。\n- **WriteSet / LateBind**：合法晚綁：由原 原 Host capability Registry/Consumer 對 WP-FHS-17 的具名 target root/Host/operation 解析 canonical path/object identity、拒 alias/junction/traversal，列有限 exact WriteSet 與 preimage SHA；空集合或未簽 Scope 不准 effect。原 Owner/Issuer 綁 principal、epoch、TTL、nonce；文件中不預填任意實體路徑。\n- **POS**：現有Issuer合法installer先建needed occupant再驗LoadedSHA。\n- **NEG / FirstFail**：依WP06才准WP17形成循環 → `WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION`。\n- **Done**：現有Issuer合法installer先建needed occupant再驗LoadedSHA；同 Subject/SourceSHA/operation 證據由原 Consumer 讀回；沒有 Raw 記 NOT_RUN。\n- **EvidenceExpectation**：同 WP-FHS-17 original operation 的 command/environment/exit/stdout/stderr 或原 Host WorldRaw；freshness=same Subject+SourceSHA+CandidateSHA+Scope+PolicyEpoch；Reader=原 Host capability Registry/Consumer。\n- **NoFit / Exit**：WP-FHS-17 的 WP-FHS-17.FIRST_FAIL:CAP_BOOT_DEPENDENCY_INVERSION 只停本卡 effect 與依賴錐；既有 READ_ONLY/LOCAL_DRAFT READY 繼續。\n- **Rollback**：由原 原 Host Installer + HGK 原 Issuer 按 WP-FHS-17 原 receiver inverse/compensation 恢復 exact preimage；UNKNOWN 先 reconcile，保留原 journal/residue，不 reset 他人變更。\n- **Resume**：重讀 WP-FHS-17 的 SourceSHA/HEAD/index/checkpoint 與依賴 ACK；已完成且同 key 不重播；UNKNOWN effect 只進原 Reconcile，變更只 invalidate 本卡受影下游。\n\n",
+  "card_hash_note": "Whole original file byte SHA pinned; excerpt is a reading aid, not reserialized source hash.",
+  "body08_section_3_1": "`Need→CapabilityPlan→Occupant→EffectiveLoad→Consumer` 的確定性選路\n\n**輸入**：合法 GoalCard/SourceSHA、Kind/Mode/Host/Provider、CurrentNeed、原 `SourceSelectionID/OriginalDisposition`、原 HGK Provider78、原 Host Loader 及產品 Owner 的所需效果類別。由 SBL 既有 MethodDecision／PIPD 既有 TechnologyAdmission 讀值，不建第二選型服務。\n\n1. 先查 SourceID 的原 `OriginalDisposition`。`DEFAULT_ENABLED_AFTER_QUALIFICATION` 必保為產品預設支援承諾；`DEFER`／`REJECT` 不因熱門而啟動；`REFERENCE_METHOD` 可作文件方法輸入而不安裝 Binary；`PRESERVE_ORIGINAL_DISPOSITION` 需沿原 Owner 查真值，不由模型自行變成 REJECT。\n2. 同一 `Need+Host+Scope+Version` 已有 `QUALIFIED/ENABLED` Occupant：直接原 Reader 復用，重複條目（如 OpenSpec 同時 Native/Default/Method/TECH）共用同一已合格安裝；不同槽位行為的 POS/NEG 仍各做其測試。\n3. 真有必要且未安裝：原 `WP-FHS-17 CAP-BOOT` 透過既有 Host Installer 先 Pin 官方 Source/Artifact Digest/License/Permission，再隔離安裝，Fresh Session 實際 `PACKAGED→INSTALLED→HOST_LOADED→INVOKED→FUNCTIONALLY_QUALIFIED`，回原 Host Registry/Consumer；不知道載入來源則 `CAPABILITY_BIND_HOLD`。\n4. 功能不符或上游重大變更：先現有 vs 候選 `Required Feature + POS + Dedicated NEG + ProviderOff + Cancel/Resume` Parity；新 Pin 在隔離 scope Canary；原 Owner 批准 HotSwap，原 Runtime 讀 Actual Served、Loaded Origin、版本及 Effect；在未確認世界效果時不自動退場或重試。\n5. 部分功能失效：對受影 Consumer 回 `NOFIT`、`QUALIFICATION_HOLD` 或 `DEFER_BY_ORIGINAL_DISPOSITION`，保留原產品義務、合法 Draft/其他 Cell 可繼續；不得暗改 Default→Optional。\n6. 退場：原 Host Installer 僅刪自有 Manifest allowlisted paths，核 Alias/Junction/Path Escape；SourceSHA／Previous Pin／World Residue 證據仍可追溯；不能清除 HGK Journal、政策歷史、原 Oracle。\n\n**輸出**：原 `MethodDecision`、原 `TechnologyAdmission` 或它們批准的 Reader Projection 加上 `SelectionID/Need/Host/Scope/Occupant/Pin/EffectiveLoad/SourceRef/ActualRawRef/Parity/NoFit`；本文件列的這些是**描述性映射欄位，不直接寫入原 JSON Schema 以外欄位**。[BODY08 `R2-08-ASSET/DEFAULT`；BODY11 WP17]\n\n",
+  "body08_closing_disposition": "## R2-08-ASSET：五個正交集合與BuildOrUseRecipe\n\nNative20、Default30、Donor24、Method25、TECH386分開守恆，不能加總成必裝數。每筆保留原名/處置/功能/Consumer/專屬NEG，再按AssetType提供不同建造、綁定、調用及退場規格。未知外部repo commit/license明列NOT_BOUND，不能從檔案SHA猜upstream license；必由原Tech/License/Host Owner唯讀補probe後才install。\n\n選擇順序：已有qualified occupant且同scope/version/license/Host適用→DIRECT_REUSE；可壓製文稿/skill→TRANSLATE_SKILL_CANDIDATE；純method/reference→READ_METHOD；REJECT/DEFER→NO_INSTALL。UNKNOWN install state是NOT_OBSERVED，不是ABSENT_CONFIRMED；不得因此盲目清理或重裝。\n\n## R2-08-DEFAULT：ProtectedAdoptionRegister\n\nDefault30每筆product_decision=MANDATED_DEFAULT；implementation_state、host_currentness、install/load/invoke/acceptance分開。當適用Host所需能力未qualified只AFFECTED_ACTIVATION_HOLD；產品承諾不改Optional。替代須原Owner同意、Parity POS/NEG、原槽保留和回退。一般L0 Goal不觸發全30安裝，只有need-qualified CAP-BOOT子圖。\n\n本輪AssetType為來源行為的設計路由；不能將未發現installer的method候選默稱已證實binary。每筆如原Owner對型別有歧義保留ASSET_TYPE_BIND_HOLD，重新讀實際manifest/help後才改route；不動source disposition。\n"
+}

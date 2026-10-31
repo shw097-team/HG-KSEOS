@@ -1,0 +1,7 @@
+{
+  "command": "python tools/build_evidence.py",
+  "wp": "WP-FHS-17",
+  "effect_class": "LOCAL_DRAFT_STAGE",
+  "authorized_by_sha256": "dd03f7b0b80531880ed897e4e831b2ab7bc4e59ec3cc8f10efd523ce3ea11bdf",
+  "note": "draft staging inside the work package only; no Host target"
+}

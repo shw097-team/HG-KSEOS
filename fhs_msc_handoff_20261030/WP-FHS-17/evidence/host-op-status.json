@@ -1,0 +1,16 @@
+{
+  "command": "python tools/build_evidence.py",
+  "wp": "WP-FHS-17",
+  "effect_class": "HOST_OP",
+  "operation": "install_occupant",
+  "disposition": "INSTALLED",
+  "missing_object": null,
+  "install_verdict": "INSTALLED",
+  "install_code": null,
+  "install_evidence": "evidence/install.json",
+  "effects": 0,
+  "host_paths_touched": [],
+  "why": "The original Issuer appends the nonce to its own ledger as part of issuing. That ledger lives outside this work package and the workspace sandbox denies the append, so the signed grant produced here is NOT an admission and the receiver parks instead of installing. Nothing under a Host path is written.",
+  "issuer_append_error_tail": "",
+  "reproduce_attempt": "python tools/wp17_receiver.py install --need candidate/need.json --grant evidence/grant.json --admission evidence/admission.json --writeset candidate/write-set.json --package candidate/package --root evidence/install-root --ledger evidence/nonce-consumed.jsonl --journal evidence/journal.jsonl --out evidence/install.json"
+}

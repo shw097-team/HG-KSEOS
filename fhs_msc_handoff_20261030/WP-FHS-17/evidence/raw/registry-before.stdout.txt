@@ -1,0 +1,1 @@
+{"wrote": "evidence\\registry-before.json", "db_sha256": "73e949f8cb5d260a86f9f2b0698dcfbdfd12370d544b13f2493a46d2f060e75b", "wp17_state": ["NOT_RUN"], "current_need": "ABSENT_AS_OBJECT_MODEL: no table or column can hold an admitted CurrentNeed / SourceSelectionID / OriginalDisposition; every text hit is inside a free-text document body"}

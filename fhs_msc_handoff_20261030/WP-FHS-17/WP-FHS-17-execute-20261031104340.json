@@ -1,0 +1,61 @@
+{
+  "schema": "HGK-LANE-RESOLUTION/1",
+  "lane": "EXECUTE",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261031104340",
+  "receipt_complete": false,
+  "note": "provisional: written where the attempt landed, overwritten by the final receipt",
+  "attempts": [
+    {
+      "rank": 1,
+      "provider": "opencode-go",
+      "model": "deepseek-v4.1-flash",
+      "transport_model": "opencode-go/deepseek-v4.1-flash",
+      "sandbox": "workspace-write",
+      "reasoning_effort": null,
+      "exit": "TIMEOUT",
+      "timed_out": true,
+      "seconds": 901.34,
+      "nonce_present": true,
+      "nonce_present_raw_stdout": true,
+      "nonce_present_anywhere": true,
+      "nonce_in_agent_message": true,
+      "producer": {
+        "script_sha256": "fbf64a569c5b8dda94977dd324abf2d5d0550085c6cb9f4171de4e702c139344",
+        "git_head": "c306d3a672c73e0f3b2ca912f345c7abf6008057",
+        "schema": "HGK-LANE-DISPATCH-PRODUCER/1"
+      },
+      "nonce_source": "item.completed/agent_message",
+      "usage_rows_after_offset": 948,
+      "usage_offset": 1826850,
+      "usage_provider": "opencode-go",
+      "usage_model": "deepseek-v4.1-flash",
+      "usage_status": 200,
+      "usage_receipt_ok": true,
+      "usage_receipt_reason": "",
+      "usage_ledger_rewritten": false,
+      "usage_rows_shape_invalid": 0,
+      "usage_rows_undecodable": 0,
+      "carrier_lines_undecodable": 0,
+      "carrier_lines_surrogate": 0,
+      "credential_posture": {
+        "verdict": "INCONCLUSIVE",
+        "decision": "WARN_CONTINUE",
+        "reason": "helper-only verdict (no child env asserted): helper_resolution_reset=PASS; helper_non_interactive=UNKNOWN",
+        "prompt_capable_helper": null,
+        "origin": null,
+        "git_terminal_prompt": "0"
+      },
+      "attempt_log_dir": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031104340.json.logs",
+      "stdout_byte_exact": true,
+      "stdout_path": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031104340.json.logs\\attempt-25672-1793414646-1-stdout.txt",
+      "stdout_bytes": 463414,
+      "stdout_sha256": "c04e622014ac255975ff618061e46552678071916e748aced99349cb262b84be",
+      "stderr_byte_exact": true,
+      "stderr_path": "C:\\wg\\queue\\WP-FHS-17\\WP-FHS-17-execute-20261031104340.json.logs\\attempt-25672-1793414646-1-stderr.txt",
+      "stderr_bytes": 408,
+      "stderr_sha256": "debf9e01cc96475a7d835d1be1965fc5ffee4b3b25294d7d036e050b79ce9872",
+      "stdout_tail": "RANT_MISSING\\\", \\\"effects\\\": 0, \\\"missing_object\\\": \\\"original-Issuer OPS grant for operation=install_occupant\\\", \\\"verdict\\\": \\\"PARK_GRANT_MISSING\\\"}\\r\\n\\r\\n\\n=== _bindtest ===\\n\\r\\n{\\\"at\\\": 1793382270.2571409, \\\"code\\\": \\\"ERR_GRANT_NEED_CANDIDATE_MISMATCH\\\", \\\"verdict\\\": \\\"REFUSED\\\"}\\r\\n\\r\\n\\n=== consumer exists? ===\\n\\r\\nTrue\\r\\n\\n=== nonce-consumed ===\\n\\r\\n\",\"exit_code\":1,\"status\":\"failed\"}}\n",
+      "stderr_tail": "ed to refresh available models: request timed out\n2026-10-31T02:44:29.922867Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Unknown\n2026-10-31T02:53:33.800304Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out\n"
+    }
+  ]
+}

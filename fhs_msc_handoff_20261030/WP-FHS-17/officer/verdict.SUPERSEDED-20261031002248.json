@@ -1,0 +1,41 @@
+{
+  "wp": "WP-FHS-17",
+  "nonce": "NONCE-WP-FHS-17-AUTO-20261030233843",
+  "author_role": "Independent Acceptance Officer",
+  "mode": "VERIFY_ONLY",
+  "verdict": "FAIL",
+  "accepted": false,
+  "reason": "Explicit conformance-only grant cannot satisfy original OPS/Issuer native admission; additional contract violations recorded.",
+  "claim_ceiling": "Independent file evidence review and standalone probe reproduction only; no native acceptance.",
+  "subject_sha256": "a74a5be8d2262878d6087eaba0ee012f76905a51da98f942c3f9418238f6500f",
+  "oracle_sha256": "b16638d33737c2a6d9353c98e7b18402ca90c19b38ed2132e3e685bfd6ebd465",
+  "manifest_sha256": "712b64c8b662bd557b2626bba35a80245af78485a0e460085c6f3b47afee0aaf",
+  "package_index_sha256": "f209436217569c3a30cb5e8d53234dab8f4343a1d96ded8acb52b9fb0ebfcac1",
+  "brief_sha256": "a1ccedb41b159a035da09eb569441c3e4821e08ce272666fe375d1a9a1aae09b",
+  "source_card_file_sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+  "body08_sha256": "1df04680319796aa253256c5da9c8adea47a5601abfe17086f3598d4f0470f8d",
+  "verification_sha256": "1d3c6f6e6f7f67da3abdfea600b616b0d2f4846b2951c9998b312a463fac2b70",
+  "failed_clauses": [
+    "ORIGINAL_OPS_ADMISSION",
+    "REAL_CURRENT_NEED",
+    "SOURCE_SUBJECT_BINDING",
+    "FRESH_HOST_LOAD_AND_ORIGINAL_CONSUMER",
+    "LOADED_ORIGIN_MISMATCH_NEGATIVE",
+    "OTHER_SUBMITTED_NEGATIVES",
+    "ROLLBACK_RESUME"
+  ],
+  "unverified_clauses": [
+    "DAG_INVERSION_NEGATIVE",
+    "REPRODUCIBLE_RAW_AND_FRESHNESS"
+  ],
+  "host_effect_disposition": "PARK pending valid original OPS grant and bounded receiver manifest.",
+  "canonical_transcription": "NOT_PERFORMED; no successful verdict to transcribe. Historical refusal preserved.",
+  "freshness": {
+    "subject_scope": "CAP-BOOT host capability registry, local-win",
+    "package_scope": "draft",
+    "policy_epoch_claim": "34",
+    "operation": "install_occupant",
+    "binding_verified": false
+  },
+  "completed_at": "2026-10-30T15:41:02.320438+00:00"
+}

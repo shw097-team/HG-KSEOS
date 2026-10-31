@@ -1,0 +1,12 @@
+NOTICE — WP-FHS-17 CAP-BOOT occupant
+
+Files:
+  occupant/capboot_attest.py   the minimal HostOccupant payload (loaded-ACK emitter)
+  consumer/wp17_consumer.py    bounded loaded-ACK consumer
+  MANIFEST.json                generated occupant manifest (pinned digests)
+  uninstall.json               inverse: exact allowlisted relative paths only
+
+Third-party components: none.
+Dependencies: CPython standard library (hashlib, json, os, sys, time, argparse).
+Runtime requirement: Python >= 3.10 on the declared local-win host.
+Permissions: read/execute of the installed payload; no network, no elevation.

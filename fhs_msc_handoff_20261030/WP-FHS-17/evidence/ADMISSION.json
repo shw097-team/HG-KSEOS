@@ -1,0 +1,14 @@
+{
+  "admission_id": "ADM-135455ca00280c39-1793452966-3d50f4",
+  "task_spec": "TS-WP-FHS-17-OCCUPANT",
+  "operation": "install_occupant",
+  "subject": "WP-FHS-17",
+  "candidate_sha256": "dc35d0fccbac0841a92413d8f44b4d72771b976e4ea86dc22cc15f16f1bd3ca1",
+  "cell": "CAP-BOOT",
+  "issued_at": 1793452966,
+  "expires_at": 1793453866,
+  "key_id": "135455ca00280c39",
+  "owner_authorization_sha256": "dd03f7b0b80531880ed897e4e831b2ab7bc4e59ec3cc8f10efd523ce3ea11bdf",
+  "signature_b64": "LnFyJr9FeE7YyvkAJcNQaY4Pi+R2Pi5Q1CjQ4zQltA9uPRfEf7iNVCXAbGcld7Q4qGQkXE+fuPgw6L8gapOuAA==",
+  "signature_alg": "Ed25519"
+}
