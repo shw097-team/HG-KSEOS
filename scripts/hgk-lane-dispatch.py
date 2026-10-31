@@ -2871,6 +2871,23 @@ def main() -> int:
                 say="refusing before any spawn: the declared codex executable+digest pin does not match "
                     "the actually installed binary; refresh the pin by owner-approved config change"))
 
+    # D-16, REVISED AFTER MEASUREMENT. The transport is a property of the ARM's provider, not a global flag.
+    # Measured this round: `EXECUTE --require-arm opencode-go/deepseek-v4.1-flash` returns ok:true in 2.7 s
+    # against the default loopback relay, and the same pinned run fails in 2.8 s with "model is not supported
+    # when using Codex with a ChatGPT account" when it carries --relay-base https://chatgpt.com/backend-api/codex.
+    # Pinning was never the defect; pointing a provider-specific arm at the OAuth upstream was. Refuse the
+    # combination by name, so a 3-second mystery cannot read as a dead arm again.
+    _first_provider = str((entries[0] or {}).get("provider") or "") if entries else ""
+    if (_first_provider and _first_provider != "openai-codex"
+            and OAUTH_RELAY_MARKER in str(args.relay_base or "").lower()):
+        return emit_refusal(args, refusal_body(args.lane, "ERR_RELAY_BASE_INCOMPATIBLE_WITH_ARM",
+            f"arm {_first_provider}/{entries[0].get('model')} cannot be served from --relay-base "
+            f"{args.relay_base}: that endpoint is the OAuth upstream, which refuses a non-OpenAI model "
+            f"under a ChatGPT account (measured: exit 1 in ~2.8 s, no nonce)",
+            arm_provider=_first_provider, relay_base=str(args.relay_base),
+            next_command=f"drop --relay-base; the default {DEFAULT_RELAY} is the relay that owns this arm",
+            say="refusing before any spawn: the arm's provider and the relay base disagree"))
+
     for i, e in enumerate(entries):
         if args.inject_429_first and i == 0:
             att = {"rank": e["rank"], "model": e["model"], "exit": "ERR_429_INJECTED", "injected": True,
@@ -3053,9 +3070,11 @@ def main() -> int:
     _blob = " ".join(((a.get("stdout_tail") or "") + " " + (a.get("stderr_tail") or "")) for a in _atts).lower()
     _answered = any(a.get("exit") == 0 and (a.get("stdout_tail") or a.get("stdout")) for a in _atts)
     if "is not supported when using codex with a chatgpt account" in _blob:
-        _diag = ("ERR_ARM_PIN_UNROUTABLE",
-                 "the pinned arm's qualified model id was handed to the Codex CLI, which refuses it under a "
-                 "ChatGPT account; the relay that owns that arm was bypassed. The same arm unpinned serves.")
+        # Measured: this signature means the run was sent to the OAuth upstream with a non-OpenAI arm, NOT
+        # that the arm is down and NOT that pinning broke it. The same arm serves in 2.7 s on the default relay.
+        _diag = ("ERR_RELAY_BASE_INCOMPATIBLE_WITH_ARM",
+                 "the arm's provider is not openai-codex but --relay-base pointed at the OAuth upstream, which "
+                 "refuses a non-OpenAI model under a ChatGPT account; the relay that owns the arm was bypassed")
     elif "outside the sandbox" in _blob and "writable roots" in _blob:
         _diag = ("ERR_SANDBOX_WRITE_ROOT_REFUSED",
                  "the child refused to write: the target is outside workspace-write's root, which is always the "
