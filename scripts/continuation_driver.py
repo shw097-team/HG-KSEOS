@@ -40,6 +40,7 @@ import hashlib
 
 
 import argparse
+import atexit
 import json
 from subprocess import Popen
 import sqlite3
@@ -482,6 +483,8 @@ def chain_next(reason: str) -> None:
     process that just finished a unit starts the next one, and it was itself created with CREATE_NO_WINDOW.
     """
     depth = int(os.environ.get("HGK_CHAIN_DEPTH", "0"))
+    # The successor needs the lock; this tick is finished with its unit, so hand it over explicitly.
+    (K / "var" / "driver.lock").unlink(missing_ok=True)
     if depth >= 12:
         return
     try:
@@ -500,6 +503,37 @@ def chain_next(reason: str) -> None:
     log({"action": "chain_next", "trigger": reason, "depth": depth + 1, "next": item.get("wp")})
 
 
+def _acquire_driver_lock() -> bool:
+    """A pid file with a liveness check -- not a promise, a measurement."""
+    lock = K / "var" / "driver.lock"
+    lock.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        if lock.exists():
+            old = int((lock.read_text(encoding="utf-8", errors="replace") or "0").strip() or 0)
+            if old and _pid_alive(old):
+                return False
+    except (ValueError, OSError):
+        pass
+    lock.write_text(str(os.getpid()), encoding="utf-8")
+    atexit.register(lambda: lock.unlink(missing_ok=True))
+    return True
+
+
+def _pid_alive(pid: int) -> bool:
+    if os.name != "nt":
+        try:
+            os.kill(pid, 0)
+            return True
+        except OSError:
+            return False
+    try:
+        out = subprocess.run(["tasklist", "/FI", f"PID eq {pid}", "/NH"], capture_output=True, text=True,
+                             timeout=20, creationflags=0x08000000).stdout or ""
+        return str(pid) in out
+    except Exception:  # noqa: BLE001
+        return False
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--once", action="store_true", help="run one step (the cron body)")
@@ -510,6 +544,16 @@ def main(argv=None) -> int:
     ap.add_argument("--auto-record", action="store_true",
                     help="transcribe the officer's PASS/FAIL into the registry (verdict_author stays the officer)")
     args = ap.parse_args(argv or sys.argv[1:])
+
+    # One tick at a time, by construction. Measured 2026-10-31: a finished unit's `chain_next` started another tick,
+    # which started a sub-driver per unit, each of which chained again -- ten live dispatches from one command, and the
+    # owner sees exactly that as "windows popping in a loop". The lock is the ceiling: a second tick exits instead of
+    # fanning out, and a tick started for a single unit never chains.
+    if not args.dry_run and not _acquire_driver_lock():
+        log({"action": "tick_refused", "why": "another tick owns the driver lock"})
+        print(json.dumps({"verdict": "TICK_ALREADY_RUNNING"}))
+        return 0
+    args._chained = True
 
     if args.parallel > 1 and not args.wp:
         return parallel_tick(args.parallel, args.dry_run)

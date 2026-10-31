@@ -158,18 +158,51 @@ def _holder_alive(lock: dict) -> bool | None:
     PowerShell (already proven reliable for the driver) and treats any failure as ALIVE. Refusing to reap is the
     safe direction: a stale lock costs a manual release, a wrongly reaped one costs a voided verdict.
     """
+    # The nonce is the decisive evidence, not the pid: Windows recycles pids within minutes, so a dead holder's pid
+    # is routinely worn by an unrelated live process and the lock looked alive for ever (measured 2026-10-31: 40 locks,
+    # every holder dead, every pid "ALIVE"). A dispatch that is really reading the subject carries its nonce in its
+    # command line; nothing else does.
+    nonce = lock.get("nonce")
+    if nonce:
+        if _nonce_running(nonce):
+            return True
+        pid = lock.get("pid")
+        if isinstance(pid, int):
+            cmd = "if (Get-Process -Id %d -ErrorAction SilentlyContinue) { 'ALIVE' } else { 'DEAD' }" % pid
+            try:
+                done = subprocess.run(["powershell", "-NoProfile", "-Command", cmd], capture_output=True, timeout=45)
+                text = done.stdout.decode("utf-8", errors="replace") if isinstance(done.stdout, bytes) else str(done.stdout)
+                return "ALIVE" in text and _nonce_running(nonce)
+            except Exception:  # noqa: BLE001
+                return True
+        return False
     pid = lock.get("pid")
     if not isinstance(pid, int):
-        return None
+        return False
     cmd = "if (Get-Process -Id %d -ErrorAction SilentlyContinue) { 'ALIVE' } else { 'DEAD' }" % pid
     try:
         done = subprocess.run(["powershell", "-NoProfile", "-Command", cmd], capture_output=True, timeout=45)
         text = done.stdout.decode("utf-8", errors="replace") if isinstance(done.stdout, bytes) else str(done.stdout)
-        if "ALIVE" in text:
-            return True
-        if "DEAD" in text:
-            return False
+        return "ALIVE" in text
+    except Exception:  # noqa: BLE001
         return True
+
+
+def _nonce_running(nonce: str | None) -> bool:
+    """True only if some live process still carries this nonce. A killed attempt leaves nothing to find."""
+    if not nonce:
+        return False
+    # The query's own command line contains the nonce, so a naive `-like` filter matches the PowerShell process that
+    # is doing the asking: every dead holder then looked alive for ever. Exclude the asker, and every shell, because a
+    # shell's command line is the query itself.
+    cmd = ("$n='%s'; if ((Get-CimInstance Win32_Process | Where-Object { $_.ProcessId -ne $PID -and "
+           "$_.Name -notmatch '^(powershell|pwsh|WmiPrvSE|conhost|WindowsTerminal)\\.exe$' -and "
+           "$_.CommandLine -like ('*' + $n + '*') } | Measure-Object).Count -gt 0) { 'ALIVE' } else { 'DEAD' }"
+           % nonce.replace("'", "''"))
+    try:
+        done = subprocess.run(["powershell", "-NoProfile", "-Command", cmd], capture_output=True, timeout=60)
+        text = done.stdout.decode("utf-8", errors="replace") if isinstance(done.stdout, bytes) else str(done.stdout)
+        return "ALIVE" in text
     except Exception:  # noqa: BLE001
         return True
 

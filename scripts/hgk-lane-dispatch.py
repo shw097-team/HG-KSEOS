@@ -105,6 +105,30 @@ ERR_ROLE_BINDING_RANK_MISMATCH = "ERR_ROLE_BINDING_RANK_MISMATCH"
 ERR_ROLE_BINDING_LANE_UNDECLARED = "ERR_ROLE_BINDING_LANE_UNDECLARED"
 ERR_ROLE_BINDING_WORKORDER_REQUIRED = "ERR_ROLE_BINDING_WORKORDER_REQUIRED"
 
+def _tee_crash_log() -> None:
+    """Every dispatch writes its own stderr next to its receipt.
+
+    Measured 2026-10-31: a dispatch started through Win32_Process.Create (no console, no inherited handles) died at
+    ~50 s having written only its PRE_ATTEMPT receipt. `pythonw` with no stderr means a traceback goes nowhere, so the
+    run was indistinguishable from a run that never happened -- the fifth time in this session that the missing thing
+    was a log. Cheap fix: bind stderr to a file before anything else can fail.
+    """
+    try:
+        out = None
+        for i, a in enumerate(sys.argv):
+            if a == "--json-out" and i + 1 < len(sys.argv):
+                out = Path(sys.argv[i + 1] + ".log")
+        if out is None:
+            return
+        out.parent.mkdir(parents=True, exist_ok=True)
+        fh = out.open("a", encoding="utf-8", errors="replace", buffering=1)
+        sys.stderr = fh
+        sys.stdout = fh
+        fh.write(f"\n=== dispatch start {time.strftime('%Y-%m-%dT%H:%M:%S')} pid={os.getpid()} argv={sys.argv[:3]}\n")
+    except Exception:  # noqa: BLE001 - logging must never be the reason a dispatch fails
+        pass
+
+
 SCHEMA = "HGK-LANE-RESOLUTION/1"
 DEFAULT_POOL = ROOT / "config/lane-route-slots.candidate.json"
 SPINE_DB = ROOT / "var" / "shared-spine" / "hg-kseos.db"
@@ -1511,8 +1535,20 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
         # --timeout 180 was still alive at 300 s, wrote no receipt, and the loop read that silence as a spent round
         # until it halted all three open units (TT-LANE-DISPATCH-EXCEEDS-TIMEOUT-001). So: Popen, kill the tree,
         # then drain whatever the child already wrote.
+        # One hidden console for the whole tree. CREATE_NO_WINDOW leaves the child with no console at all, so the
+        # grandchildren *it* starts (codex -> node -> git) each allocate a NEW console, and a new console is a
+        # Windows Terminal window on the owner's desktop. Measured 2026-10-31: 14 `git.EXE` windows in one tick, none
+        # of them started by us. A console created hidden and inherited is the only shape where nothing downstream
+        # can pop: every descendant shares the one invisible console.
+        _si = None
+        _flags = 0
+        if os.name == "nt":
+            _si = subprocess.STARTUPINFO()
+            _si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            _si.wShowWindow = 0                      # SW_HIDE
+            _flags = subprocess.CREATE_NEW_CONSOLE
         p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                             stdin=subprocess.DEVNULL, env=env)
+                             stdin=subprocess.DEVNULL, env=env, startupinfo=_si, creationflags=_flags)
         try:
             out_b, err_b = p.communicate(timeout=args.timeout)
             rc = p.returncode
@@ -1800,6 +1836,7 @@ def durable_gate_preflight(args) -> dict:
 
 
 def main() -> int:
+    _tee_crash_log()
     ap = argparse.ArgumentParser(prog="hgk-lane-dispatch.py")
     ap.add_argument("--lane", required=True, help="PLAN | EXECUTE | VERIFY_SECURITY (validated in-contract)")
     ap.add_argument("--prompt", required=True)
