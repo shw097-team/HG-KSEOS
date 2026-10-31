@@ -43,14 +43,26 @@ CARRY_KEYS = ("auth", "oauth", "reasoning_effort", "transport_vocabulary_note",
               "probe_note", "provenance", "canonical_identity")
 
 
+def transport_for(provider: str, model: str) -> str:
+    """The transport token follows the provider's declared vocabulary, never a remembered string.
+
+    Measured defect: after the epoch-40 rebind the VERIFY_SECURITY route still carried the epoch-39
+    `transport_model: opencode-go/mimo-v2.6-flash` while provider/model said openai-codex/gpt-6.1-sol. The
+    projection copied it faithfully, so the slot pool DECLARED gpt-6.1-sol and would have SENT MiMo -- the exact
+    "sends one arm, declares another" class this file exists to prevent. Deriving the token from the provider
+    (openai-codex takes a bare model id; everything else is provider/model) makes a stale field unable to lie.
+    """
+    return model if provider == "openai-codex" else f"{provider}/{model}"
+
+
 def arms_of(registry: dict) -> dict[str, list[dict]]:
     out: dict[str, list[dict]] = {}
     for route in registry["routes"]:
         lane = route["lane"]
         chain = [{"provider": route["provider"], "model": route["model"],
-                  "transport_model": route.get("transport_model", route["model"])}]
+                  "transport_model": transport_for(route["provider"], route["model"])}]
         chain += [{"provider": f["provider"], "model": f["model"],
-                   "transport_model": f.get("transport_model", f["model"])}
+                   "transport_model": transport_for(f["provider"], f["model"])}
                   for f in route.get("fallbacks", [])]
         out[lane] = chain
     return out

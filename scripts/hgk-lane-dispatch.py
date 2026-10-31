@@ -1496,7 +1496,7 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
     # --ephemeral SUPPRESSES the rollout, and the rollout is the only record of which arm an OAuth-direct turn served.
     # So the two are mutually exclusive by construction: asking for rollout-based identity turns ephemeral off.
     _exec_flags = ["exec", "--skip-git-repo-check", "--json"]
-    if getattr(args, "identity_source", "relay-usage") != "codex-rollout":
+    if getattr(args, "identity_source", "codex-rollout") != "codex-rollout":
         _exec_flags.insert(2, "--ephemeral")
     cmd += _exec_flags + [args.prompt]
 
@@ -1933,7 +1933,7 @@ def main() -> int:
     ap.add_argument("--codex-arg", action="append", default=None,
                     help="extra raw argv tokens appended verbatim to the codex invocation (repeatable; "
                          "for bounded experiments such as -c prefer_websockets=false)")
-    ap.add_argument("--identity-source", choices=("relay-usage", "codex-rollout"), default="relay-usage",
+    ap.add_argument("--identity-source", choices=("relay-usage", "codex-rollout"), default="codex-rollout",
                     help="where a served arm's identity is read from. 'relay-usage' (default) requires the relay's own "
                          "usage row, which is why an OAuth-direct run has no identity and cannot be green: the owner's "
                          "ChatGPT backend writes no relay ledger. 'codex-rollout' reads the model + provider that the "
@@ -2916,7 +2916,7 @@ def main() -> int:
                                indent=2, ensure_ascii=False, default=str), encoding="utf-8")
             except Exception as _exc:  # noqa: BLE001
                 print(f"WARN_RECEIPT_PARTIAL_NOT_WRITTEN: {type(_exc).__name__}: {_exc}", file=sys.stderr)
-        if att.get("exit") == 0 and getattr(args, "identity_source", "relay-usage") == "codex-rollout":
+        if att.get("exit") == 0 and getattr(args, "identity_source", "codex-rollout") == "codex-rollout":
             # The relay writes no ledger on an OAuth-direct turn, so read the served arm from the codex client's own
             # rollout. This is not a relaxation: the provider AND model must resolve, and the existing
             # ERR_REQUIRED_ARM_NOT_SERVED guard below still fails the run when they contradict --require-arm.
@@ -3039,7 +3039,20 @@ def main() -> int:
         "claim_ceiling": "a pass here proves the Codex-CLI lane served this turn through the relay with a matching usage receipt; it is not an acceptance of any subject",
     }
     receipt["ok"] = used is not None
-    receipt["identity_source"] = getattr(args, "identity_source", "relay-usage")
+    receipt["identity_source"] = getattr(args, "identity_source", "codex-rollout")
+    # The frozen C1 classification is not touched: a run with no acceptable turn still reports
+    # ERR_LANE_ALL_ROUTES_EXHAUSTED. What is added is a DIAGNOSTIC, because the exhausted code alone cannot
+    # distinguish "no arm answered" from "an arm answered and the identity source could not see it" -- and
+    # measured on this host, `relay-usage` can never obtain a usage row for an OAuth-direct turn, so that
+    # confusion reads as a dead lane. Two flags, same lane, same arm: one exhausted, one ok.
+    if (receipt.get("code") == "ERR_LANE_ALL_ROUTES_EXHAUSTED"
+            and getattr(args, "identity_source", "codex-rollout") == "relay-usage"
+            and any(a.get("exit") == 0 and (a.get("stdout_tail") or a.get("stdout"))
+                    for a in (receipt.get("attempts") or []))):
+        receipt["diagnostic"] = "ERR_IDENTITY_SOURCE_NO_USAGE_ROW"
+        receipt["diagnostic_note"] = ("an attempt exited 0 and produced output, but identity_source=relay-usage "
+                                      "found no usage row for it; re-run with --identity-source codex-rollout "
+                                      "before concluding the arm is unavailable")
     receipt["completion_evidence"] = completion_evidence
     # I3 (pass-5): surface the USAGE MEASUREMENT at the top level too, taken from the serving attempt
     # (or the first attempt that answered when none served). A wrong-shaped CARRIER is a statement

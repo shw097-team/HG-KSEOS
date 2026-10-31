@@ -1,7 +1,7 @@
 {
  "artifact": "MODEL_LANE_ASSIGNMENT",
  "schema": "HGK-MODEL-LANE-ASSIGNMENT/1",
- "revision": 40,
+ "revision": 41,
  "declared_at_utc": "2026-10-21T17:26:33.375499Z",
  "declared_by": "Owner order 2026-10-23 (R15): PLAN = SBL-Commander/PLAN, EXECUTE = SBL-EXECUTE/Codex bounded writer, VERIFY = Acceptance Challenge/Independent Acceptance Officer/SECURITY all bind opencode-go/deepseek-v4.1-flash. The deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410) is deleted and MiMo-V2.6-Flash takes the fallback-1 slot it vacated.",
  "authority_note": "Operator-declared routing policy. Not an authority source; the runtime wiring named in `effective_wiring` is the machine truth. The current revision is the top-level \"revision\" field; earlier revisions are recorded in the revision_*_reason fields and in this file's history sections.",
@@ -493,7 +493,7 @@
    {
     "provider": "openai-codex",
     "model": "gpt-6.1-sol",
-    "transport_model": "opencode-go/mimo-v2.6-flash",
+    "transport_model": "gpt-6.1-sol",
     "arm": "A",
     "role": "primary",
     "default": true,
@@ -799,8 +799,8 @@
  "lane_chains_projected_from": {
   "source": "config/lane-routing-registry.yaml",
   "epoch": 40,
-  "sha256": "314604dad48c0d95eb94255fbc3cca3de359b9472fa77234788524c0620f402e",
-  "projected_at_utc": "2026-10-31T12:51:03+00:00",
+  "sha256": "e68c5143bce3c65a0a2f31e1001f68427abec909ad41f36f75addb21fd367fe7",
+  "projected_at_utc": "2026-10-31T13:13:10+00:00",
   "rule": "lane_chains and the slot pool are projections; edit the registry, then re-run this tool"
  }
 }
