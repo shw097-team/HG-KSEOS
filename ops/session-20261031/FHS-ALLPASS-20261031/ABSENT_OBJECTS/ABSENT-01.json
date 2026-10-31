@@ -1,0 +1,14 @@
+{
+ "id": "ABSENT-01",
+ "wp": "WP-FHS-11",
+ "effect_class": "HOST_OP",
+ "cited_text": "WP-FHS-11｜Portable Host Dogfood — Producer → ABI/Schema → Consumer：原 Portable SP packager/Host Loader → 原各 Host install/load/invoke/remove manifest → 各 Host 原 Skill Reader。",
+ "absent_object": "原 Portable SP packager / Host Loader",
+ "reproduction": "grep -rliE \"host[_ -]?loader|host[_ -]?reader\" HG-KSEOS SBL PIPD-LS-SP --include=*.py → 0 implementations (hits are documents, corpus and site-packages)",
+ "falsifier": "A program in one of the four repos that accepts a Portable SP pack and emits an install/load/invoke/remove manifest, and answers once on this host.",
+ "expiry": "2026-11-30",
+ "verdict": "NOT_CLOSABLE_ON_THIS_HOST",
+ "scope_note": "This is not a claim that building is impossible, and not a PASS. It is a named absence that can be withdrawn the moment the falsifier holds.",
+ "recorded_at": "2026-10-31T22:03:08+0800",
+ "recorded_by": "FAR-20261031-033 R-2, owner-authorized this round"
+}

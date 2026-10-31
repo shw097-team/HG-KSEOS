@@ -1,0 +1,7 @@
+{
+ "gate": "scripts/refusal_gate.py",
+ "verdict": "REFUSALS_FALSIFIABLE",
+ "checked": 4,
+ "failures": [],
+ "at": "2026-10-31"
+}

@@ -1,0 +1,14 @@
+{
+ "id": "ABSENT-03",
+ "wp": "WP-FHS-13",
+ "effect_class": "HOST_OP",
+ "cited_text": "WP-FHS-13｜CAP On-Demand + HotSwap — Producer → ABI/Schema → Consumer：原 TechnologyAdmission/Host capability Owner → 原 Need/Occupant/HotSwap admission ABI → 原有 Consumer 與 Host Loader。",
+ "absent_object": "原 TechnologyAdmission / Host capability Owner + 原 Host Loader（HotSwap）",
+ "reproduction": "grep -rliE \"technologyadmission\" HG-KSEOS SBL PIPD-LS-SP --include=*.py → 0 implementations",
+ "falsifier": "A program that issues an OriginalDisposition for a Need+Host+Scope+version and performs a HotSwap with parity POS/NEG on a named target root.",
+ "expiry": "2026-11-30",
+ "verdict": "NOT_CLOSABLE_ON_THIS_HOST",
+ "scope_note": "This is not a claim that building is impossible, and not a PASS. It is a named absence that can be withdrawn the moment the falsifier holds.",
+ "recorded_at": "2026-10-31T22:03:08+0800",
+ "recorded_by": "FAR-20261031-033 R-2, owner-authorized this round"
+}

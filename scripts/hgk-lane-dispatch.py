@@ -1956,6 +1956,10 @@ def main() -> int:
                     help="selection-time strictness: only arms named in config/model-lane-assignment.json "
                          "for this lane may serve; if none is available the run refuses with "
                          "ERR_NO_ASSIGNED_ARM instead of falling back to an unassigned pool arm")
+    ap.add_argument("--require-rollout-binding", action="store_true",
+                    help="require the rollout that supplies the served identity to be bound to THIS spawn "
+                         "(REQ-SEC-ROLLOUT-BINDING). Refuses today: the binding is not implemented, and asking "
+                         "for a guarantee that does not exist must fail loudly instead of silently passing")
     ap.add_argument("--round-seed", default=None,
                     help="round identifier every sitting of this round shares (R-4: one seed per round, one "
                          "derived nonce per sitting; an oracle that demands one nonce across lanes cannot be "
@@ -2902,6 +2906,15 @@ def main() -> int:
     # when using Codex with a ChatGPT account" when it carries --relay-base https://chatgpt.com/backend-api/codex.
     # Pinning was never the defect; pointing a provider-specific arm at the OAuth upstream was. Refuse the
     # combination by name, so a 3-second mystery cannot read as a dead arm again.
+    if getattr(args, "require_rollout_binding", False):
+        return emit_refusal(args, refusal_body(args.lane, "ERR_ROLLOUT_BINDING_UNIMPLEMENTED",
+            "REQ-SEC-ROLLOUT-BINDING: --identity-source codex-rollout resolves the newest rollout in the lane "
+            "home without binding it to this spawn, so a rollout from an unrelated turn in the same directory "
+            "can supply the served identity (measured by the officer's sitting-C probe: same cwd accepted, "
+            "different cwd refused)",
+            requirement="REQ-SEC-ROLLOUT-BINDING",
+            next_command="omit --require-rollout-binding to accept the unbound identity source for this run",
+            say="refusing before any spawn: the requested guarantee does not exist yet; it is not silently waived"))
     _first_provider = str((entries[0] or {}).get("provider") or "") if entries else ""
     if (_first_provider and _first_provider != "openai-codex"
             and OAUTH_RELAY_MARKER in str(args.relay_base or "").lower()):
