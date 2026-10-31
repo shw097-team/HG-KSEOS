@@ -1,63 +1,20 @@
 {
  "schema": "HGK-REFUSAL-RECORD/1",
  "round": "FHS-ALLPASS-20261031",
- "why": "R-2 of FAR-20261031-033: the four HOST_OP packages name Producer/Consumer services that exist in no repo on this host. A named absence that can be withdrawn, not a capability claim.",
+ "why": "ABSENT-03 rewritten after re-measurement: the admission engine exists; HotSwap does not.",
  "refusals": [
-  {
-   "id": "ABSENT-01",
-   "wp": "WP-FHS-11",
-   "effect_class": "HOST_OP",
-   "cited_text": "WP-FHS-11｜Portable Host Dogfood — Producer → ABI/Schema → Consumer：原 Portable SP packager/Host Loader → 原各 Host install/load/invoke/remove manifest → 各 Host 原 Skill Reader。",
-   "absent_object": "原 Portable SP packager / Host Loader",
-   "reproduction": "grep -rliE \"host[_ -]?loader|host[_ -]?reader\" HG-KSEOS SBL PIPD-LS-SP --include=*.py → 0 implementations (hits are documents, corpus and site-packages)",
-   "falsifier": "A program in one of the four repos that accepts a Portable SP pack and emits an install/load/invoke/remove manifest, and answers once on this host.",
-   "expiry": "2026-11-30",
-   "verdict": "NOT_CLOSABLE_ON_THIS_HOST",
-   "scope_note": "This is not a claim that building is impossible, and not a PASS. It is a named absence that can be withdrawn the moment the falsifier holds.",
-   "recorded_at": "2026-10-31T22:03:08+0800",
-   "recorded_by": "FAR-20261031-033 R-2, owner-authorized this round"
-  },
-  {
-   "id": "ABSENT-02",
-   "wp": "WP-FHS-12",
-   "effect_class": "HOST_OP",
-   "cited_text": "WP-FHS-12｜W18 Normal Mode — Producer → ABI/Schema → Consumer：原 Hermes normal-entry Owner → W18 ordinary Goal/E33–E42 原 ABI → 原 normal Profile/ToolAutoSelect Reader。",
-   "absent_object": "原 Hermes normal-entry Owner / normal Profile 與 ToolAutoSelect Reader",
-   "reproduction": "grep -rliE \"toolautoselect|normal profile\" HG-KSEOS SBL PIPD-LS-SP --include=*.py → 0 implementations",
-   "falsifier": "A program that, given a fresh PID and an ordinary Goal, resolves the live Profile/ToolSelection and returns the E33–E42 raw for that PID.",
-   "expiry": "2026-11-30",
-   "verdict": "NOT_CLOSABLE_ON_THIS_HOST",
-   "scope_note": "This is not a claim that building is impossible, and not a PASS. It is a named absence that can be withdrawn the moment the falsifier holds.",
-   "recorded_at": "2026-10-31T22:03:08+0800",
-   "recorded_by": "FAR-20261031-033 R-2, owner-authorized this round"
-  },
   {
    "id": "ABSENT-03",
    "wp": "WP-FHS-13",
    "effect_class": "HOST_OP",
-   "cited_text": "WP-FHS-13｜CAP On-Demand + HotSwap — Producer → ABI/Schema → Consumer：原 TechnologyAdmission/Host capability Owner → 原 Need/Occupant/HotSwap admission ABI → 原有 Consumer 與 Host Loader。",
-   "absent_object": "原 TechnologyAdmission / Host capability Owner + 原 Host Loader（HotSwap）",
-   "reproduction": "grep -rliE \"technologyadmission\" HG-KSEOS SBL PIPD-LS-SP --include=*.py → 0 implementations",
-   "falsifier": "A program that issues an OriginalDisposition for a Need+Host+Scope+version and performs a HotSwap with parity POS/NEG on a named target root.",
+   "cited_text": "WP-FHS-13｜CAP On-Demand + HotSwap — 原 TechnologyAdmission/Host capability Owner → 原 Need/Occupant/HotSwap admission ABI → 原有 Consumer 與 Host Loader。熱替代 Issuer 或以選型當 invoke → CAPABILITY_PARITY_NOT_PROVEN。",
+   "absent_object": "HotSwap implementation (the hot-replacement path itself, with POS/NEG parity on a named target root)",
+   "reproduction": "rg -l -i 'hotswap|hot_swap' --iglob '*.py' --iglob '*.ts' --iglob '*.js' --iglob '*.ps1' C:/Projects/Agent_Workspace -> 20 hits, all of them QA repair tools and officer verify scripts that MENTION the word; zero implementations. The spec 08_TECHNOLOGY_DEFAULT_HOTSWAP.md carries 81 mentions, so this is specified-but-unimplemented, not unspecified.",
+   "falsifier": "A program that takes a live occupant and a replacement candidate, performs the swap on a named target root, and demonstrates POS (new occupant serves) plus NEG (old occupant no longer serves) with parity evidence.",
    "expiry": "2026-11-30",
-   "verdict": "NOT_CLOSABLE_ON_THIS_HOST",
-   "scope_note": "This is not a claim that building is impossible, and not a PASS. It is a named absence that can be withdrawn the moment the falsifier holds.",
-   "recorded_at": "2026-10-31T22:03:08+0800",
-   "recorded_by": "FAR-20261031-033 R-2, owner-authorized this round"
-  },
-  {
-   "id": "ABSENT-04",
-   "wp": "WP-FHS-20",
-   "effect_class": "HOST_OP",
-   "cited_text": "WP-FHS-20｜CLI/Agent/Host Kind Matrix — Producer → ABI/Schema → Consumer：原 Product/Host matrix Owner → 原八 Kind×三 Mode×四 Host×Provider token Cell ABI → 每個原 Cell 的原 Host Reader。",
-   "absent_object": "原四 Host Reader（每 Cell 的原 Host Reader）",
-   "reproduction": "grep -rliE \"host[_ -]?reader\" HG-KSEOS SBL PIPD-LS-SP --include=*.py → 0 implementations; WP-FHS-20/EVIDENCE_GAP.md records Original Host Readers available 0 of 4",
-   "falsifier": "Four original Host Readers that each resolve one Cell and return its own raw (not a --version probe).",
-   "expiry": "2026-11-30",
-   "verdict": "NOT_CLOSABLE_ON_THIS_HOST",
-   "scope_note": "This is not a claim that building is impossible, and not a PASS. It is a named absence that can be withdrawn the moment the falsifier holds.",
-   "recorded_at": "2026-10-31T22:03:08+0800",
-   "recorded_by": "FAR-20261031-033 R-2, owner-authorized this round"
+   "verdict": "NOT_IMPLEMENTED_ON_THIS_HOST",
+   "note": "TechnologyAdmission itself EXISTS (PIPD/tools/admit_technologies.py, 22 rows); only the hot-replacement path is missing.",
+   "recorded_at": "2026-10-31T22:41:32+0800"
   }
  ]
 }
