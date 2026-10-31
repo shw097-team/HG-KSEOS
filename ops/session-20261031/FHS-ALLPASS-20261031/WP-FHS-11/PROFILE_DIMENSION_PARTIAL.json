@@ -1,0 +1,24 @@
+{
+ "schema": "SBL-GAP-RECORD/1",
+ "id": "WP11-GAP-PROFILE-CONTENT",
+ "recorded_at": "2026-10-31T23:33:45+0800",
+ "what_was_built": "`pipd export --profile LITE|STANDARD|ASSURED` now exists and ENFORCES the assurance floor: the requested profile's required capabilities are checked against ASSURANCE.json, and a shortfall is a PROFILE_VETO with nothing written. 8/8 tests.",
+ "measured": {
+  "LITE": {
+   "file_count": 79,
+   "archive_sha256_prefix": "a6b3c8b3bbdf",
+   "profile": "LITE"
+  },
+  "STANDARD": {
+   "file_count": 79,
+   "archive_sha256_prefix": "a6b3c8b3bbdf",
+   "profile": "STANDARD"
+  },
+  "ASSURED": "refused: profile ASSURED requires assurance ['adversarial','independent_checker'] that this tree does not declare in ASSURANCE.json"
+ },
+ "finding": "LITE and STANDARD produced the SAME archive digest and the SAME file count. The profile dimension is now admission control, not artefact differentiation: the label is checked, but the content does not vary by profile.",
+ "why_this_matters": "Installing the same bytes twice under two labels and calling them two SP cells would be a label without a load -- the exact failure this project keeps finding elsewhere. So the 6 remaining WP-11 cells are NOT claimed on the strength of these two bundles.",
+ "what_the_profiles_say_should_differ": "profiles.py: LITE artifact_depth L1_SCHEMA_CONTRACT / target_resolution package; STANDARD L3_INTEGRATION_RUNTIME / integration; ASSURED L4_FAILURE_RECOVERY / runtime. None of that is implemented in the member set.",
+ "next": "implement artifact_depth and target_resolution so the member set actually changes per profile, then re-measure; only then do the 6 cells mean anything.",
+ "wp11_status": "2 of 9 cells PASS (Codex, Claude Code, one SP); Hermes PARTIAL; 6 cells blocked on content differentiation, not on hosts."
+}
