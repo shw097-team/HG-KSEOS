@@ -39,9 +39,9 @@
    "evidence_ref": "C:\\wg\\queue\\WP-FHS-20\\output\\officer\\verdict.json",
    "updated_at": "2026-10-31T15:57:50+00:00",
    "blocker_code": "CELLS_NOT_MEASURED",
-   "blocker_cause": "host set resolved from the delivery itself: 09B's 48 PROPOSAL-CHATGPT entries each name DeepSeek Harness as source identity, state they are not yet Original 192 Cells, and exit under MIGRATION_HOLD without overwriting the CellID -- so Original 192 = Hermes/Codex/Claude Code/DeepSeek Harness and D-A's 144 was wrong. Registry regenerated (192 cells, all NOT_MEASURED)",
-   "blocker_unblock": "measure the 192 cells in batches, Hermes/Codex/Claude Code first (real loaders), DeepSeek Harness separately (no local runner)",
-   "blocked_at": "2026-11-01T00:41:36+0800"
+   "blocker_cause": "18 of 192 cells PASS with real evidence (AGENT_SKILL x LITE/STANDARD/ASSURED x Hermes/Codex/Claude Code x PROVIDER_ON/OFF, each with a negative that removes the artefact and gets no badge); the remaining 168 report NO_HOST_SURFACE because only AGENT_SKILL/PLUGIN/PROFILE have a host-installable surface, and DeepSeek Harness 6 have no local runner",
+   "blocker_unblock": "rule whether NO_HOST_SURFACE is an accepted cell state for the other seven Kinds, or scope WP-20 to the Kind that has a host surface",
+   "blocked_at": "2026-11-01T00:58:06+0800"
   }
  ]
 }
