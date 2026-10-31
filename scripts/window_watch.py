@@ -47,6 +47,12 @@ SUSPECT_EXES = {"python.exe", "pythonw.exe", "powershell.exe", "pwsh.exe", "cmd.
                 "codex.exe", "node.exe", "bun.exe", "ocx.exe", "git.exe", "icacls.exe", "taskkill.exe"}
 
 
+try:  # every child of this process must be consoleless; the wrapper covers calls added later too
+    import winproc as _winproc  # noqa: E402
+    _winproc.install()
+except Exception:
+    _winproc = None
+
 def exe_name(pid: int) -> str:
     h = k32.OpenProcess(0x1000, False, pid)
     if not h:
@@ -163,18 +169,18 @@ def loop(seconds: float = 0) -> int:
 
 
 def alive() -> int:
-    if not PIDF.exists():
-        return 0
-    try:
-        pid = int(PIDF.read_text(encoding="utf-8").strip() or 0)
-    except ValueError:
-        return 0
-    if not pid:
-        return 0
+    """Find the watcher by what it is running, not by a pid file it may not have written.
+
+    Measured 2026-10-31 07:47: two watchers were live while `--status` answered "not running", because the pid file
+    still held a dead pid from an earlier launcher. An instrument that names itself wrongly is worse than none: it
+    reports "no windows" from a process that is not the one measuring.
+    """
     r = subprocess.run(["powershell", "-NoProfile", "-Command",
-                        f"if (Get-Process -Id {pid} -ErrorAction SilentlyContinue) {{ 1 }} else {{ 0 }}"],
-                       capture_output=True, text=True, timeout=60)
-    return pid if r.stdout.strip().endswith("1") else 0
+                        "(Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*window_watch.py*' "
+                        "} | Select-Object -First 1 -ExpandProperty ProcessId)"],
+                       capture_output=True, text=True, timeout=90, creationflags=CREATE_NO_WINDOW)
+    digits = "".join(ch for ch in (r.stdout or "") if ch.isdigit())
+    return int(digits or 0)
 
 
 def main(argv=None) -> int:
@@ -198,7 +204,7 @@ def main(argv=None) -> int:
     if cmd == "--stop":
         pid = alive()
         if pid:
-            subprocess.run(["taskkill", "/PID", str(pid), "/F"], capture_output=True, timeout=60)
+            subprocess.run(["taskkill", "/PID", str(pid), "/F"], capture_output=True, timeout=60, creationflags=CREATE_NO_WINDOW)
         print(json.dumps({"window_watch": "stopped" if pid else "was not running"}, ensure_ascii=False))
         return 0
     if cmd == "--report":

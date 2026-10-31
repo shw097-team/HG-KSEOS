@@ -2,11 +2,6 @@
 """continuation_driver -- keeps the round moving when no turn is running.
 
 
-try:  # keep every console child off the owner's desktop (see scripts/winproc.py)
-    import winproc as _winproc  # noqa: E402  (same directory)
-    _winproc.install()
-except Exception:  # a missing helper must not stop a lane
-    pass
 The problem this solves, measured: the owner's standing order is "do not stop to report or ask". The assistant's
 only output is a message, and a turn ends when it stops calling tools, so no gate, hook or event is ever invoked
 at that moment. Nothing in this deployment resumed work afterwards -- `hermes cron list` was empty, the queue of
@@ -30,7 +25,19 @@ Usage:
 Exit 0 = did nothing or dispatching; 3 = driver could not proceed (queue/db unreadable).
 """
 
+
 from __future__ import annotations
+
+try:  # every child of this process must be consoleless (see scripts/winproc.py)
+    import winproc as _winproc  # noqa: E402
+    _winproc.install()
+except Exception:  # a missing helper must not stop a lane
+    pass
+
+import hashlib
+
+
+
 
 import argparse
 import json
@@ -74,6 +81,17 @@ def sp_run(argv, **kw):
 def sp_popen(argv, **kw):
     kw["creationflags"] = int(kw.get("creationflags") or 0) | CREATE_NO_WINDOW
     return subprocess.Popen(argv, **kw)
+
+
+def _detach_child(argv: list, log_path: Path, env: dict | None = None) -> dict:
+    """Spawn outside the job tree. Every child of this driver must use it, or the turn takes the tree down with it.
+
+    Measured 2026-10-31 07:42: a parallel tick reported three dispatched pids and, eleven seconds later, no lane was
+    alive -- the tick had spawned its children with subprocess.Popen, so they died with the cell that started the tick.
+    """
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import detach as _detach
+    return _detach.launch(argv, out=log_path, cwd=str(K))
 
 
 def log(event: dict) -> None:
@@ -197,11 +215,20 @@ def launch(lane: str, prompt: str, nonce: str, cwd: Path, json_out: Path, timeou
         "note": "written by continuation_driver before spawn; the dispatcher overwrites this on completion",
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     log_path = cwd / f"{json_out.stem}.log"
-    with log_path.open("wb") as fh:
-        proc = sp_popen(argv, cwd=str(K), stdout=fh, stderr=subprocess.STDOUT,
-                                creationflags=flags, close_fds=True)
-    log({"action": "spawned", "pid": proc.pid, "log": str(log_path)})
-    return proc.pid
+    # Measured 2026-10-31 02:18 -> 07:39: three dispatches wrote their PRE_ATTEMPT and then vanished with the turn,
+    # because CREATE_BREAKAWAY_FROM_JOB does not break away from a nested job object. Ask the service host for the
+    # process instead: Win32_Process.Create has no parent job to be killed with.
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        import detach as _detach
+        res = _detach.launch(argv, out=log_path, cwd=str(K))
+    except Exception as exc:  # noqa: BLE001 - a launcher that cannot launch must not look like a launch
+        res = {"ok": False, "pid": 0, "error": f"{type(exc).__name__}: {exc}"}
+    if not res.get("ok"):
+        log({"action": "spawn_failed", "error": res.get("error")})
+        raise RuntimeError(f"DETACH_FAILED: {res.get('error')}")
+    log({"action": "spawned", "pid": res["pid"], "log": str(log_path), "method": "Win32_Process.Create"})
+    return int(res["pid"])
 
 
 def plan_prompt(wp: str, title: str, queue_dir: Path, nonce: str) -> str:
@@ -277,8 +304,70 @@ def execute_prompt(wp: str, queue_dir: Path, nonce: str, verdict: dict) -> str:
     )
 
 
+def subject_digest(queue_dir: Path) -> str:
+    """A digest of what the unit is *being asked to do*: its brief and its own input artefacts.
+
+    Receipts, verdicts and logs are excluded on purpose -- they change on every dispatch, so including them would
+    make every subject look new.
+    """
+    h = hashlib.sha256()
+    cands = [queue_dir / "brief.md"]
+    out = queue_dir / "output"
+    if out.exists():
+        for f in out.rglob("*"):
+            if not f.is_file():
+                continue
+            rel = f.relative_to(queue_dir).as_posix()
+            if rel.startswith("output/officer/") or "/sittings/" in rel:
+                continue          # the officer's own history is not part of the ask
+            if f.suffix.lower() not in (".md", ".json", ".py", ".yaml", ".yml", ".txt"):
+                continue
+            if f.stat().st_size > 4_000_000:
+                continue
+            cands.append(f)
+    for f in sorted(set(cands)):
+        if f.exists():
+            h.update(f.name.encode("utf-8"))
+            h.update(f.read_bytes())
+    return h.hexdigest()
+
+
+def note_subject(queue_dir: Path) -> None:
+    """Reset the retry budget when the ask itself changed, and say so in the log.
+
+    A cap exists to stop a loop on the *same* problem. Measured 2026-10-31 07:43: WP-FHS-11, -17 and -20 were all
+    parked at their caps while the actual cause of the earlier failures had already been fixed (48 false NoFits
+    withdrawn, the 192 raws produced, the officer's VOID answered). Counting rounds across a changed subject turns a
+    repaired unit into a permanently blocked one, which reads as a stall and is one.
+    """
+    st = queue_dir / "BUDGET.json"
+    cur = subject_digest(queue_dir)
+    old = None
+    if st.exists():
+        try:
+            old = json.loads(st.read_text(encoding="utf-8", errors="replace"))
+        except json.JSONDecodeError:
+            old = None
+    if old is None or old.get("subject") != cur:
+        rounds = len([p for p in queue_dir.glob("*-execute-*.json")])
+        st.write_text(json.dumps({"subject": cur, "rounds_at_reset": rounds,
+                                  "reset_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+                                  "why": "the brief or the unit's own inputs changed since the last budget"},
+                                 ensure_ascii=False, indent=2), encoding="utf-8")
+        log({"action": "budget_reset", "wp": queue_dir.name, "subject": cur[:16], "rounds_at_reset": rounds})
+
+
 def execute_rounds(queue_dir: Path) -> int:
-    return len(list(queue_dir.glob("*-execute-*.json")))
+    """Rounds spent on the current ask. A budget reset (subject changed) starts the count over, on the record."""
+    total = len(list(queue_dir.glob("*-execute-*.json")))
+    st = queue_dir / "BUDGET.json"
+    if st.exists():
+        try:
+            base = int(json.loads(st.read_text(encoding="utf-8", errors="replace")).get("rounds_at_reset") or 0)
+        except (json.JSONDecodeError, OSError, TypeError, ValueError):
+            base = 0
+        return max(0, total - base)
+    return total
 
 
 def record_officer_verdict(wp: str, queue_dir: Path) -> dict:
@@ -355,10 +444,8 @@ def parallel_tick(n: int, dry_run: bool) -> int:
             continue
         flags = 0x08000000 | 0x01000000   # CREATE_NO_WINDOW | DETACHED | BREAKAWAY_FROM_JOB
         logf = QUEUE / f"{wp}.tick.log"
-        with logf.open("a", encoding="utf-8") as fh:
-            proc = sp_popen([PY, str(Path(__file__).resolve()), "--once", "--auto-record", "--wp", wp],
-                                    cwd=str(K), stdout=fh, stderr=subprocess.STDOUT,
-                                    creationflags=flags, close_fds=True)
+        _res = _detach_child([PY, str(Path(__file__).resolve()), "--once", "--auto-record", "--wp", wp], logf)
+        proc = type("P", (), {"pid": _res.get("pid") or 0})()
         started.append({"wp": wp, "phase": item.get("phase"), "pid": proc.pid})
         log({"action": "parallel_dispatch", "wp": wp, "phase": item.get("phase"), "pid": proc.pid})
         time.sleep(1.0)
@@ -390,9 +477,8 @@ def chain_next(reason: str) -> None:
         return
     flags = 0x08000000 | 0x01000000
     env = dict(os.environ, HGK_CHAIN_DEPTH=str(depth + 1))
-    Popen([PY, str(Path(__file__).resolve()), "--parallel", "3", "--auto-record"],
-          cwd=str(K), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
-          creationflags=flags, close_fds=True, env=env)
+    _detach_child([PY, str(Path(__file__).resolve()), "--parallel", "3", "--auto-record"],
+                  QUEUE / "chain.log", env=env)
     log({"action": "chain_next", "trigger": reason, "depth": depth + 1, "next": item.get("wp")})
 
 
@@ -424,6 +510,7 @@ def main(argv=None) -> int:
 
     wp, phase = item["wp"], item["phase"]
     queue_dir = Path(item["queue_dir"])
+    note_subject(queue_dir)
     if dispatch_alive(wp):
         refresh_status()
         print(json.dumps({"verdict": "DISPATCH_IN_FLIGHT", "wp": wp}))
@@ -537,6 +624,23 @@ def main(argv=None) -> int:
         # moving look like a unit that was looping.
         receipts = [r for r in receipts if r.stat().st_mtime > vpath.stat().st_mtime]
     same_phase = [r for r in receipts if f"-{lane.lower()}-" in r.name.lower() or f"-{lane.lower().replace('_','-')}-" in r.name.lower()]
+
+    def _completed(r: Path) -> bool:
+        """A dead PRE_ATTEMPT is a process that never started, not a round that was tried.
+
+        Measured 2026-10-31: WP-FHS-17 hit HALTED_REPEAT with "receipts: 3" while every one of those three was a
+        PRE_ATTEMPT written before a spawn that then died with the turn. Counting them as attempts converted an
+        infrastructure fault into an agent-behaviour verdict and parked the unit for five hours.
+        """
+        try:
+            d = json.loads(r.read_text(encoding="utf-8", errors="replace"))
+        except (OSError, json.JSONDecodeError):
+            return False
+        if d.get("phase") == "PRE_ATTEMPT" and not d.get("attempts"):
+            return False
+        return bool(d.get("attempts") or d.get("receipt_complete"))
+
+    same_phase = [r for r in same_phase if _completed(r)]
     if len(same_phase) >= MAX_PHASE_ATTEMPTS:
         log({"action": "halted_repeat", "wp": wp, "lane": lane, "receipts": len(same_phase)})
         print(json.dumps({"verdict": "HALTED_REPEAT", "wp": wp, "lane": lane, "receipts": len(same_phase),

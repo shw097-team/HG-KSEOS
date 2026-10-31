@@ -26,6 +26,14 @@ repository forever -- but a live lock refuses the commit, which is the point.
 
 from __future__ import annotations
 
+
+try:  # every child of this process must be consoleless; see scripts/winproc.py and console_guard_gate.py
+    import winproc as _winproc  # noqa: E402  (same directory)
+    _winproc.install()
+except Exception:  # a missing helper must not stop the tool
+    pass
+
+
 import argparse
 import json
 import os
