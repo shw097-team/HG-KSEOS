@@ -43,7 +43,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 QUEUE = Path(r"C:/wg/queue")
-CRON_NAME = "hgk-continuation"
+CRON_NAME = "hgk-continuation-supervisor"   # the real job name; "hgk-continuation" matched nothing,
+                                            # so the monitor halted the loop while the cron kept firing
 MAX_MINUTES = 10
 MAX_REPEATS = 4
 DEFAULT_WINDOW_MIN = 60   # repeats are judged inside the live window, never across the whole archive
@@ -119,14 +120,27 @@ def repeated_blocks(extra_roots: list[Path] | None = None, window_min: int = DEF
     spawns: dict[str, list[str]] = {}
     log = QUEUE / "driver.log"
     if log.is_file():
+        # MEASURED 2026-10-31: the receipt loop above windows by mtime, but this log scan read EVERY line ever
+        # written. At 23:51 it counted 47 spawns from 10:39-10:44 and halted the loop as REPEATED_SPAWN -- thirteen
+        # hours of history treated as a live repeat, which is the exact pitfall of counting the archive: a monitor
+        # that does this pauses the loop permanently on its first run and reads as normal in the log.
+        cutoff = time.time() - window_min * 60
         for line in log.read_text(encoding="utf-8", errors="replace").splitlines():
             try:
                 ev = json.loads(line)
             except json.JSONDecodeError:
                 continue
-            if ev.get("action") in ("spawn", "spawned") and ev.get("wp") or ev.get("action") == "spawn":
-                key = ev.get("wp") or (re.search(r"(WP-FHS-\d\d)", str(ev.get("nonce"))) or [None, "UNKNOWN"])[1]
-                spawns.setdefault(str(key), []).append(ev.get("at", ""))
+            if not (ev.get("action") in ("spawn", "spawned") or ev.get("action") == "spawn"):
+                continue
+            at = str(ev.get("at") or "")
+            try:
+                when = datetime.strptime(at, "%Y-%m-%dT%H:%M:%S").timestamp()
+            except ValueError:
+                continue          # an unparseable stamp is not evidence of a recent spawn
+            if when < cutoff:
+                continue          # outside the live window: history, not a repeat
+            key = ev.get("wp") or (re.search(r"(WP-FHS-\d\d)", str(ev.get("nonce"))) or [None, "UNKNOWN"])[1]
+            spawns.setdefault(str(key), []).append(at)
 
     findings = [{"kind": "REPEATED_BLOCK", "key": k, "count": len(v), "examples": v[:5]}
                 for k, v in codes.items() if len(v) >= MAX_REPEATS and k != "OK"]

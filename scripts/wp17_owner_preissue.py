@@ -22,6 +22,14 @@ import argparse
 import json
 import os
 import subprocess
+
+# Module-level, executed (not described in the docstring): the console gate reads the AST, because a guard that is
+# text inside a docstring never runs. winproc keeps every descendant of this process on one hidden console.
+try:
+    import winproc as _winproc
+    _winproc.install()
+except Exception:  # non-Windows, or the helper is absent: the per-call CREATE_NO_WINDOW above still applies
+    _winproc = None
 import sys
 from pathlib import Path
 
@@ -29,8 +37,14 @@ from pathlib import Path
 def run(cmd: list[str], cwd: Path, env_extra: dict | None = None) -> subprocess.CompletedProcess:
     env = dict(os.environ)
     env.update(env_extra or {})
+    # Same window rule as everywhere else on this host: a console child of a console-less parent gets a NEW
+    # console, and a new console is a visible window. This script runs one-shot from the owner side, but it was
+    # the only subject the console gate still flagged, so it gets the flag like the rest of the tree.
+    kw = {}
+    if os.name == "nt":
+        kw["creationflags"] = 0x08000000  # CREATE_NO_WINDOW
     return subprocess.run(cmd, cwd=str(cwd), capture_output=True, text=True, encoding="utf-8",
-                          errors="replace", env=env, timeout=600)
+                          errors="replace", env=env, timeout=600, **kw)
 
 
 def main(argv=None) -> int:

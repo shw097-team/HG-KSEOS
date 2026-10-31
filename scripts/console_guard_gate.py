@@ -29,6 +29,7 @@ Exit 0 = every named file executes its guard; 3 = at least one does not (prints 
 from __future__ import annotations
 
 import argparse
+import os
 import ast
 import json
 import sys
@@ -142,6 +143,53 @@ def _detached_process_use(path: Path) -> dict | None:
     return None
 
 
+def profile_script_dirs() -> list[Path]:
+    """Every profile's scripts dir. MEASURED 2026-10-31: the cron tick body lives HERE, not in HG-KSEOS/scripts,
+    and this gate only ever scanned HG-KSEOS/scripts -- so it reported 32/33 OK while the file that actually runs
+    every three minutes spawned a console child per call and popped a window per tick."""
+    base = Path(os.path.expandvars(r"%LOCALAPPDATA%\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes"))
+    return sorted({p for p in base.glob("profiles/*/scripts") if p.is_dir()})
+
+
+def spawn_sites_without_flags(path: Path) -> list[dict]:
+    """Every subprocess.run/Popen call site that cannot show it hides its console.
+
+    A whole-file token search is not enough: the supervisor carried `creationflags` on its own pythonw re-exec and
+    nowhere else, so a file-level grep said "guarded" while every actual child got a fresh console. The check is
+    per call site, and `**kwargs` counts as guarded only when the file mentions creationflags at all.
+    """
+    import ast
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"))
+    except SyntaxError as exc:
+        return [{"file": str(path), "line": 0, "state": "UNPARSEABLE", "detail": str(exc)}]
+    mentions = "creationflags" in path.read_text(encoding="utf-8", errors="replace")
+    hits = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        fn = node.func
+        name = ""
+        if isinstance(fn, ast.Attribute):
+            name = fn.attr                      # subprocess.run / subprocess.Popen
+        elif isinstance(fn, ast.Name) and fn.id in ("Popen", "check_call", "check_output", "call"):
+            name = fn.id                        # from subprocess import Popen
+        else:
+            # A bare `run(...)` is far more often the module's own helper than subprocess.run. Flagging it would
+            # report the wrapper that already passes the flag, which is how a gate earns the right to be ignored.
+            continue
+        if name not in ("run", "Popen", "call", "check_call", "check_output"):
+            continue
+        kw = {k.arg for k in node.keywords}
+        if "creationflags" in kw:
+            continue
+        if None in kw and mentions:
+            continue
+        hits.append({"file": path.name, "line": node.lineno, "state": "SPAWN_WITHOUT_CREATIONFLAGS",
+                     "detail": f"{name}() at line {node.lineno} passes no creationflags"})
+    return hits
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--all", action="store_true")
@@ -167,7 +215,16 @@ def main(argv: list[str] | None = None) -> int:
         hit = _detached_process_use(p)
         if hit:
             results.append(hit)
-    bad = [r for r in results if r["state"] != "GUARD_EXECUTES"]
+    # The tick body lives in a profile, not here. Scan it as a subject in its own right.
+    for d in profile_script_dirs():
+        for p in sorted(d.glob("*.py")):
+            body = p.read_text(encoding="utf-8", errors="replace")
+            if "subprocess." not in body and "Popen(" not in body:
+                continue
+            for hit in spawn_sites_without_flags(p):
+                hit["file"] = str(p)
+                results.append(hit)
+    bad = [r for r in results if r["state"] not in ("GUARD_EXECUTES", "HIDES_ONE_LEVEL_ONLY")]
     # F6 (FAR-20261031-028): CREATE_NO_WINDOW hides ONE level and leaves the child console-less, so its own
     # console children get a fresh visible console. That shape is not a ban (it is still better than nothing)
     # but it must never again be mistaken for a tree-wide fix, so every site using it is named.
