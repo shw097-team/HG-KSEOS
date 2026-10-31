@@ -71,6 +71,9 @@ QUEUE = Path(r"C:/wg/queue")
 MAX_PHASE_ATTEMPTS = 3
 # A FAIL is a specification, but not an infinite one: after this many EXECUTE rounds the unit needs a ruling.
 MAX_EXECUTE_ROUNDS = 6
+# The EXECUTE lane's wall budget, in seconds. One definition: the launch timeout below and the
+# "is this PRE_ATTEMPT still a live attempt or an orphan" question must not drift apart.
+EXEC_LANE_TIMEOUT = 1800
 # Measured 2026-10-31: an EXECUTE attempt was cut at 900.09s while still writing files, so its receipt could not
 # be cited. A writer that needs to finish is not the same budget as a reader.
 LANE_TIMEOUTS = {"PLAN": 900, "VERIFY_SECURITY": 900, "EXECUTE": 1800}   # two failures are a flake; the third is a defect and stops the loop
@@ -390,7 +393,21 @@ def execute_rounds(queue_dir: Path) -> int:
         except (json.JSONDecodeError, OSError):
             continue
         code = str(d.get("code") or "")
-        spawned = bool(d.get("attempts")) or d.get("phase") == "PRE_ATTEMPT" or d.get("pid")
+        attempts = d.get("attempts") or []
+        served = any(a.get("nonce_present") or a.get("exit") is not None for a in attempts)
+        # A PRE_ATTEMPT with no attempts is a launch marker, not a model turn. Counted unconditionally it
+        # became a round: measured 2026-10-31, all three open units sat at `halted_execute rounds: 6`
+        # while every one of those six receipts was a 310-byte PRE_ATTEMPT written before a spawn that
+        # died with the turn -- the maker never ran a single turn. It counts only while it could still
+        # be running (younger than the writer budget); an orphan is a dead attempt, not a spent round.
+        if d.get("phase") == "PRE_ATTEMPT" and not attempts:
+            try:
+                age = time.time() - p.stat().st_mtime
+            except OSError:
+                age = 0.0
+            if age > EXEC_LANE_TIMEOUT:
+                continue
+        spawned = bool(attempts) or d.get("pid")
         if code and not spawned:          # a typed refusal before spawn: the harness said no, the maker never ran
             continue
         total += 1
@@ -465,6 +482,7 @@ def parallel_tick(n: int, dry_run: bool) -> int:
     con.close()
 
     started = []
+    halted = []
     for wp in wps:
         if len(started) >= n:
             break
@@ -472,6 +490,12 @@ def parallel_tick(n: int, dry_run: bool) -> int:
             continue                     # this unit already owns a lane; never two dispatches of one unit
         item = next_item(wp)             # the DAG projection decides whether it is ready, not this loop
         if item.get("wp") != wp:
+            continue
+        # Measured 2026-10-31: the fan-out topped up a unit whose child immediately refused with
+        # HALTED_EXECUTE, so the loop relaunched it every ~10 s forever and logged nothing but churn.
+        # A halted unit is not "not in flight"; it is decided, and topping it up is a loop.
+        if execute_rounds(Path(item["queue_dir"])) >= MAX_EXECUTE_ROUNDS:
+            halted.append({"wp": wp, "why": "execute budget spent", "rounds": MAX_EXECUTE_ROUNDS})
             continue
         if dry_run:
             started.append({"wp": wp, "phase": item.get("phase"), "dry_run": True})
@@ -484,7 +508,8 @@ def parallel_tick(n: int, dry_run: bool) -> int:
         log({"action": "parallel_dispatch", "wp": wp, "phase": item.get("phase"), "pid": proc.pid})
         time.sleep(1.0)
     refresh_status()
-    print(json.dumps({"verdict": "PARALLEL_TICK", "dispatched": started}, ensure_ascii=False))
+    print(json.dumps({"verdict": "PARALLEL_TICK", "dispatched": started, "halted": halted},
+                     ensure_ascii=False))
     return 0
 
 
