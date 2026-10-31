@@ -34,11 +34,26 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 DB = Path(r"C:/Projects/Agent_Workspace/HG-KSEOS/var/shared-spine/hg-kseos.db")
-DELIVERY = Path(
-    r"C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/"
-    r"FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1/"
-    r"01_FHS-MSC_PIPD-LS-PKG_BODY/11_WORKPACKAGES_AND_DAG.md"
-)
+
+
+def _delivery() -> Path:
+    """Resolve the DAG inside the delivered package, by measurement rather than by a remembered path.
+
+    Measured defect: this constant named the `SBL_PIPD/` segment, which does not exist; the package lives under
+    `FHS/`. `work_queue.py init` therefore could not read the DAG at all, and the failure looked like a missing
+    file rather than a stale path. Candidates are tried in order and the miss is named, not guessed.
+    """
+    base = Path("C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric")
+    tail = Path("FHS-MSC/FHS-MSC_PIPD-LS-PKG/FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1"
+                "/01_FHS-MSC_PIPD-LS-PKG_BODY/11_WORKPACKAGES_AND_DAG.md")
+    for head in ("FHS", "SBL_PIPD"):
+        cand = base / head / tail
+        if cand.is_file():
+            return cand
+    raise SystemExit(f"DELIVERY_NOT_FOUND: tried FHS/ and SBL_PIPD/ under {base}")
+
+
+DELIVERY = _delivery()
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS work_queue (

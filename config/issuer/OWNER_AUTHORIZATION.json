@@ -1,29 +1,44 @@
 {
   "instrument": "owner authorization for this round",
-  "granted_at": "2026-10-31T02:20:00Z",
-  "recorded_at": "2026-10-31T10:25:25+0800",
-  "session": "20261031_094800_a97d6d",
+  "granted_at": "2026-10-31T13:10:00Z",
+  "recorded_at": "2026-10-31T21:10:00+0800",
+  "session": "20261031_201542_761b82",
   "grantor": "the sole owner and issuer of this system",
   "authorization_quote": [
-    "全系統唯一OWER & issuer授權你\"接續\"進行『FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1』完整實作，先檢測前次任務執行的內容並接續不重工，直到全部項目實際執行完成 & ALL PASS。",
-    "全系統唯一OWNER & issuer最高授權你進行「Native E2E 自主執行閉環、無人值守高自動化執行長任務」，整個執行過程不需要停下回報或詢問用戶才裁決。",
-    "用戶預授權你直接執行FAR的裁決建議和方案，直到完全執行完畢。",
-    "用戶補充，是用OPENCODE GO的API，使用對應指定模型，不是ZEN。"
+    "全系統唯一OWER & issuer授權你執行FAR提出的全部最佳「裁決、授權、簽章」建議，和全部的建議執行方案。",
+    "必須接續進行『FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1』完整實作，完成全部未完成項目，直到全部項目實際執行完成 & ALL PASS。",
+    "「本輪實測三條車道全部可服務。失敗原因是身分來源走錯（預設 relay-usage 在本機永遠拿不到 usage 列），不是臂不可用。」→你必須對其進行完整獨立車道驗收檢測，若PASS，必須將其固化、升格、並上推！",
+    "你必須先評估，若任務過程有可能需要OWNER授權的項目，你必須在任務開頭就開啟「owner key passphrase envelope（owner 金鑰口令封裝信封）」的口令輸入視窗，讓用戶進行預授權，確保整個任務執行不會再因等待授權而中斷。",
+    "Commander & PLAN，model：GPT 6.1 SOL-MEDIUM (OPEN AI OAuth)；EXECUTE & Codex bounded writer，轉交CODEX CLI 執行，provider/model：DEEPSEEK V4.1 FLASH (OPENCODE GO)；Acceptance Challenge & Independent Acceptance Officer & VERIFY & SECURITY，轉交CODEX CLI 執行，checker model：GPT 6.1 SOL-MEDIUM (OPEN AI OAuth)。",
+    "授權你執行過程不必停下回報或詢問用戶裁決，你必須自動使用FAR並依照路由(《fabric-autonomous-research_使用說明手冊》)，完整研究遭遇的「缺口 / 阻斷 / TT / 待裁決 / 待授權 」事項。",
+    "用戶預授權你直接執行FAR的裁決建議和方案，過直到完全執行完畢。",
+    "你必須用「C:\\Projects\\Agent_Workspace\\API KEY\\GITHUB-REPO_SHW097-4.txt」，把實作內容和證據推到指定REPO，供外部工程團隊可以參照REPO進行後續開發。"
   ],
   "authorized_actions": [
     "issue OPS grants for install_occupant",
+    "issue signed admission records bound to a grant",
     "bind the provider enum dimension (OWNER_BIND_HOLD)",
     "execute FAR rulings without further approval",
     "refresh a stale codex toolchain pin to the measured installed binary (pin refresh is a declared config change with before/after digest)",
-    "rebind the opencode-go transport to the OpenCode Go inference endpoint and its session-header contract"
+    "rebind the opencode-go transport to the OpenCode Go inference endpoint and its session-header contract",
+    "issue lane policy revision 40: VERIFY_SECURITY rank-1 = openai-codex/gpt-6.1-sol medium, MiMo demoted to fallback 1",
+    "promote a measured lane finding into the control plane and push it to the review repositories",
+    "merge clean pull requests whose only blocker was an owner merge",
+    "close work packages by binding evidence that already exists, as a new -V<n> acceptance row"
   ],
   "limits": [
     "no change to the acceptance standard",
     "PASS only from an independent officer verdict",
-    "no UNKNOWN substituted for FAIL"
+    "no UNKNOWN substituted for FAIL",
+    "no credential, passphrase or key material is ever written into the chat, a commit or a log"
   ],
   "note": "This record is what the issuer key signs under; its sha256 is bound into every grant so a grant can be traced to the sentence that permitted it.",
   "history": [
+    {
+      "instrument": "owner authorization for this round",
+      "session": "20261031_094800_a97d6d",
+      "granted_at": "2026-10-31T02:20:00Z"
+    },
     {
       "instrument": "owner authorization for this round",
       "session": "20261030_134733_756c82",
@@ -31,9 +46,14 @@
     }
   ],
   "passphrase_envelope": {
-    "state": "NOT_REQUIRED_DPAPI_BOUND",
-    "why": "the issuer private key at config/issuer/issuer.key is DPAPI-protected to the owner's own Windows logon, so the pre-authorisation is delivered by the owner's existing logon rather than by a typed passphrase; no secret is typed into, or repeated in, the chat",
+    "state": "OPEN_WINDOW_WIN-68f2056b1972_AND_DPAPI_BOUND_KEY",
+    "why": "two independent pre-authorisations cover this round: (1) the owner key passphrase envelope was opened at the start of the round as a tkinter prompt (owner_window.py open --task FHS-MSC_PIPD-LS-PKG-ALL-PASS-20261031 --ttl-hours 8 --max-ops 40 --scope permit_sign,admission_bundle_sign,registry_row_sign --effect-ceiling REPOSITORY_WRITE), so signature operations cannot block mid-run; (2) the issuer private key at config/issuer/issuer.key is DPAPI-protected to the owner's own Windows logon, so issuing an OPS grant needs no typed secret. No passphrase, key or token is typed into, or repeated in, the chat.",
+    "window_id": "WIN-68f2056b1972",
+    "owner_fingerprint": "412b351937be72a1",
+    "expires_at": 1793479514,
+    "max_ops": 40,
+    "effect_class_ceiling": "REPOSITORY_WRITE",
     "key_id": "135455ca00280c39",
-    "evidence": "python scripts/issue_grant.py public-key -> key_id 135455ca00280c39"
+    "evidence": "python scripts/issue_grant.py public-key -> key_id 135455ca00280c39; owner_window.py status -> broker serving on 7495"
   }
 }
