@@ -1,0 +1,82 @@
+{
+ "schema": "HGK-WP11-NINE-CELLS/2",
+ "measured_at": "2026-11-01T01:59:39+0800",
+ "denominator": 9,
+ "pass": 5,
+ "loader_capped": 3,
+ "fail": 1,
+ "cells": [
+  {
+   "host": "codex",
+   "sp": "LITE",
+   "verdict": "PASS",
+   "digest": true,
+   "badge": true,
+   "negative_clean": true,
+   "archive_prefix": "e3e993b0e079"
+  },
+  {
+   "host": "codex",
+   "sp": "STANDARD",
+   "verdict": "PASS",
+   "digest": true,
+   "badge": true,
+   "negative_clean": true,
+   "archive_prefix": "52712b6316fb"
+  },
+  {
+   "host": "codex",
+   "sp": "ASSURED",
+   "verdict": "FAIL",
+   "digest": false,
+   "badge": true,
+   "negative_clean": true,
+   "archive_prefix": "5624006aa2f7"
+  },
+  {
+   "host": "claude",
+   "sp": "LITE",
+   "verdict": "PASS",
+   "digest": true,
+   "badge": true,
+   "negative_clean": true,
+   "archive_prefix": "e3e993b0e079"
+  },
+  {
+   "host": "claude",
+   "sp": "STANDARD",
+   "verdict": "PASS",
+   "digest": true,
+   "badge": true,
+   "negative_clean": true,
+   "archive_prefix": "52712b6316fb"
+  },
+  {
+   "host": "claude",
+   "sp": "ASSURED",
+   "verdict": "PASS",
+   "digest": true,
+   "badge": true,
+   "negative_clean": true,
+   "archive_prefix": "5624006aa2f7"
+  },
+  {
+   "host": "hermes",
+   "sp": "LITE",
+   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED",
+   "note": "skill_view available + badge served + not-found after removal; model half needs hermes -z"
+  },
+  {
+   "host": "hermes",
+   "sp": "STANDARD",
+   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED",
+   "note": "skill_view available + badge served + not-found after removal; model half needs hermes -z"
+  },
+  {
+   "host": "hermes",
+   "sp": "ASSURED",
+   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED",
+   "note": "skill_view available + badge served + not-found after removal; model half needs hermes -z"
+  }
+ ]
+}

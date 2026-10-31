@@ -12,10 +12,10 @@
    "state": "FAIL",
    "evidence_ref": "OWNER-RULING:new capability, not a new standard: at 23:04 this unit failed HOST_SP_MATRIX_INCOMPLETE because no writer existed for the nine Host SP lifecycle cells. The continuation graph now carries an EXECUTE actuator (first measured use 00:51:27, lane EXECUTE pid 11032); the acceptance text is untouched.",
    "updated_at": "2026-10-31T15:57:50+00:00",
-   "blocker_code": "AO_OVERALL_FAIL_ON_HARNESS",
-   "blocker_cause": "AO sitting 2 (VERIFY_SECURITY gpt-6.1-sol rank1 nonce PIPD-AO2-741767A0) returned ALL FIVE clauses PASS -- including the repaired symlink/dir/hardlink/fifo/char/block/unknown-type refusal and the re-measured LITE 16 6dadaf36a9ec / STANDARD 56 9ef70b690d01 subset+distinct -- but overall FAIL because our tests need a writable temp dir and the checker ran read-only (7 passes, 14 setup errors)",
-   "blocker_unblock": "make the suite runnable read-only (skip when no writable temp, or relocate scratch), then re-dispatch; only then may independent_checker be declared",
-   "blocked_at": "2026-11-01T01:38:18+0800"
+   "blocker_code": "CODEX_ASSURED_DIGEST_HALF",
+   "blocker_cause": "independent_checker declared (AO sitting 3: 5/5 clauses PASS, overall PASS, nonce PIPD-AO3-6CDAD257) and ASSURED now exports (83 files, 5624006aa2f7); 9-cell table is 5 PASS + 3 loader-capped + 1 FAIL, the FAIL being Codex x ASSURED which answered the host badge but not the archive digest, so only one of the two facts arrived",
+   "blocker_unblock": "re-run Codex x ASSURED asking for the digest explicitly as a separate question, or accept the cell as FAIL with the reason recorded",
+   "blocked_at": "2026-11-01T01:59:48+0800"
   },
   {
    "wp_id": "WP-FHS-12",
