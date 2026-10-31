@@ -124,3 +124,9 @@ de953d5 the console guard was text inside a docstring, so it never ran
 b5dde8c four ways the loop judged the wrong thing
 c016235 the frozen snapshot is created before it is copied into
 ```
+
+## 8. Durability note for the next session
+
+`var/shared-spine/hg-kseos.db` is **git-ignored**, so the TT rows written this session (two closed, two opened) exist
+only on this disk. The authoritative copy of that reasoning is `HANDOFF-20261031-LANE-OPS.md` §3 and §5 — if the database
+is ever rebuilt, re-insert from here rather than trusting the schema.
