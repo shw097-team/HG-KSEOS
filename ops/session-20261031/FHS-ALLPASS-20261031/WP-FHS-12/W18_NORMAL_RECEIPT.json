@@ -11,5 +11,13 @@
  "verdict": "W18_NORMAL_HOLD",
  "auto_ready_claimed": false,
  "why_hold": "the spec says any of Default Profile / Skills / Served not truly read back is a HOLD; Served was never reached",
- "unblock": "upgrade the bundled openai package in D:/Hermes-Recovery/h22, then re-run the same two commands unchanged"
+ "unblock": "upgrade the bundled openai package in D:/Hermes-Recovery/h22, then re-run the same two commands unchanged",
+ "d_j_investigation": {
+  "at": "2026-10-31T23:28:57+0800",
+  "question": "can the bundled openai package be upgraded to unblock this?",
+  "method": "searched for a site-packages copy under D:/Hermes-Recovery (depth 6) and inspected the launcher",
+  "finding": "no site-packages/openai exists there at all. `D:/Hermes-Recovery/live22/bin/hermes` is a 114,995-byte frozen launcher, and the traceback path D:/Hermes-Recovery/h22/agent/agent_init.py is the build-time source path recorded inside the frozen binary, not a live package tree.",
+  "conclusion": "D-J as I proposed it (pip upgrade) is not executable: there is nothing to pip-install into. The fix is a Hermes CLI distribution upgrade or rebuild, which is outside this task's authority and would replace the very runtime this session runs on.",
+  "effect_on_wp12": "W18_NORMAL_HOLD stands. It is a genuine environment block, not an unexamined one."
+ }
 }
