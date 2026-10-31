@@ -1,0 +1,54 @@
+{
+ "schema": "HGK-WP12-RUNTIME-ISOLATION/1",
+ "wp": "WP-FHS-12",
+ "measured_at": "2026-11-01T00:45:27+0800",
+ "question": "which openai does the failing process resolve, and is the distribution really frozen?",
+ "measured": {
+  "hermes_on_path": {
+   "path": "D:/Hermes-Recovery/live22/bin/hermes",
+   "size": 114995,
+   "kind": "PE launcher (MZ header) referencing h22 and python.exe; ignores PYTHONPATH -- a sitecustomize injected that way never ran, so no sys.path dump was obtainable"
+  },
+  "venv_python": {
+   "path": ".../hermes-agent/venv/Scripts/python.exe",
+   "note": "this shim re-execs .hermes-runtime/python/cpython-3.11.17/python.exe but keeps the venv's site-packages: openai 2.24.0 imports, and the missing symbol imports cleanly",
+   "openai_version": "2.24.0",
+   "symbol": "OK"
+  },
+  "runtime_python": {
+   "path": ".../.hermes-runtime/python/cpython-3.11.17-windows-x86_64-none/python.exe",
+   "site_packages": [
+    "pip",
+    "setuptools"
+   ],
+   "openai": "absent"
+  },
+  "direct_entry_attempts": [
+   {
+    "cmd": "venv-python D:/Hermes-Recovery/h22/cli.py --version",
+    "result": "Error: invalid_params"
+   },
+   {
+    "cmd": "venv-python D:/Hermes-Recovery/h22/cli.py -z <prompt>",
+    "result": "Error: invalid_params"
+   },
+   {
+    "cmd": "venv-python D:/Hermes-Recovery/h22/hermes_bootstrap.py -z <prompt>",
+    "result": "no output"
+   },
+   {
+    "cmd": "PYTHONPATH=<venv site-packages> hermes -z <prompt>",
+    "result": "ModuleNotFoundError gone, gateway still raised the same RuntimeError"
+   }
+  ]
+ },
+ "conclusion": "Two facts that looked contradictory are both true: the venv has a working openai 2.24.0, and the `hermes` on PATH is a frozen launcher with its own runtime that has no openai at all. My earlier 'no site-packages/openai exists' was wrong (I looked at the install dir, not the profile venv); my earlier 'only a rebuild can fix it' does not follow, because a non-frozen entry may exist -- but the two candidate entries I tried either reject `-z` with invalid_params or produce no output, so I have not found it.",
+ "status": "RUNTIME_PATH_UNRESOLVED",
+ "unblock": "locate the entry the frozen launcher invokes (or run the TUI gateway directly) and point it at the venv's openai; fallback: measure the Hermes cells through the skill loader and label them loader cells",
+ "loader_fallback_used": {
+  "cell": "hermes x LITE",
+  "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED",
+  "evidence": "var/FHS-ALLPASS-20261031/wp11/HERMES_LOADER_CELL.json",
+  "why": "skill_view returned readiness_status=available with the badge and digest served, and reported not-found after removal -- that is the loader contract, not the -z model path"
+ }
+}

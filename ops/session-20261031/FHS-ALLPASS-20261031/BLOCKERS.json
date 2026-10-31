@@ -12,10 +12,10 @@
    "state": "FAIL",
    "evidence_ref": "OWNER-RULING:new capability, not a new standard: at 23:04 this unit failed HOST_SP_MATRIX_INCOMPLETE because no writer existed for the nine Host SP lifecycle cells. The continuation graph now carries an EXECUTE actuator (first measured use 00:51:27, lane EXECUTE pid 11032); the acceptance text is untouched.",
    "updated_at": "2026-10-31T15:57:50+00:00",
-   "blocker_code": "HERMES_RUNTIME_FROZEN",
-   "blocker_cause": "4 of 9 host cells now PASS with real evidence (Codex x LITE/STANDARD, Claude Code x LITE/STANDARD: digest read from the unpacked SP in a clean cwd, badge from the host loader, negative clean); the remaining Hermes cells cannot run because the Hermes CLI fails to start (same root cause as WP-12)",
-   "blocker_unblock": "rebuild the Hermes CLI distribution (shared with WP-12), then run the three Hermes SP cells",
-   "blocked_at": "2026-11-01T00:33:48+0800"
+   "blocker_code": "HERMES_MODEL_HALF_UNMEASURED",
+   "blocker_cause": "4 of 9 cells PASS (Codex x LITE/STANDARD, Claude x LITE/STANDARD); Hermes LITE measured as a LOADER cell (skill_view readiness=available, badge served, not-found after removal) but the model half needs hermes -z which cannot start (same root as WP-12); Hermes STANDARD/ASSURED not run",
+   "blocker_unblock": "resolve WP-12's runtime path, then run the three Hermes cells through -z so the model half is measured",
+   "blocked_at": "2026-11-01T00:45:28+0800"
   },
   {
    "wp_id": "WP-FHS-12",
@@ -26,9 +26,9 @@
    "evidence_ref": null,
    "updated_at": "2026-10-31T15:57:50+00:00",
    "blocker_code": "RUNTIME_PATH_UNRESOLVED",
-   "blocker_cause": "the venv holds openai 2.24.0 and openai.types.responses.response_computer_tool_call_output_screenshot_param imports cleanly there, yet the D:/Hermes-Recovery/h22 process reports it missing; PYTHONPATH to the venv removed the ModuleNotFoundError but the gateway still raised the same RuntimeError, so it is a resolution problem in that process, not a frozen distribution",
-   "blocker_unblock": "print sys.path / openai.__file__ / __version__ inside the CLI process and pin the venv's openai; rebuilding the distribution is withdrawn as a conclusion",
-   "blocked_at": "2026-11-01T00:41:36+0800"
+   "blocker_cause": "the venv holds openai 2.24.0 and the missing symbol imports cleanly there, while the hermes on PATH is a frozen PE launcher whose runtime has no openai; PYTHONPATH does not reach it (sitecustomize never ran) and the two direct entries I tried answer invalid_params or nothing",
+   "blocker_unblock": "find the entry the launcher invokes or run the TUI gateway directly against the venv's openai; loader cells are the labelled fallback",
+   "blocked_at": "2026-11-01T00:45:27+0800"
   },
   {
    "wp_id": "WP-FHS-20",

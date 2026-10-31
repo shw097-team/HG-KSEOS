@@ -1,0 +1,18 @@
+{
+ "host": "hermes",
+ "sp": "LITE",
+ "badge": "SP-BADGE-HERMES-LITE-63D62DDB",
+ "installed_at": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\skills\\fhs-sp-probe\\SKILL.md",
+ "archive_prefix": "e3e993b0e079",
+ "positive": {
+  "skills_list_has_it": true,
+  "skill_view_readiness": "available",
+  "setup_needed": false,
+  "badge_served": true,
+  "digest_prefix_served": "e3e993b0e079"
+ },
+ "negative": "skill removed; skill_view must report not found",
+ "limit": "this measures the Hermes LOADER contract (profiles/<p>/skills/<n>/SKILL.md served with readiness=available), not the -z model path: hermes -z cannot start on this host, so the 'model answers through that loader' half is unmeasured and must not be claimed",
+ "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED",
+ "removed": true
+}
