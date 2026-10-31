@@ -1,0 +1,42 @@
+{
+ "schema": "PIPD-HOTSWAP-RECEIPT/1",
+ "root": "C:\\Projects\\Agent_Workspace\\var\\FHS-ALLPASS-20261031\\wp13\\target",
+ "entry": "C:\\Projects\\Agent_Workspace\\var\\FHS-ALLPASS-20261031\\wp13\\target\\occupant.py",
+ "candidate": "C:\\Projects\\Agent_Workspace\\var\\FHS-ALLPASS-20261031\\wp13\\candidate.py",
+ "started_at": "2026-10-31T23:08:39+0800",
+ "steps": [
+  "swapped"
+ ],
+ "preimage": {
+  "files": 2,
+  "digest": "70b270988293a8a431cdcc80228a036aaaa679dcbc4738c4e83ceb6f2a605a2f"
+ },
+ "before": {
+  "served": true,
+  "identity": "cap-attest-v1",
+  "exit": 0,
+  "stderr_tail": ""
+ },
+ "candidate_sha256": "42de6dca2f65ee71f78b83565ab355b96456043ddf4cb5dfa68e00e8642ba455",
+ "pos": {
+  "served": true,
+  "identity": "cap-attest-v2",
+  "exit": 0,
+  "stderr_tail": ""
+ },
+ "neg": {
+  "identity": "cap-attest-v2",
+  "served": true,
+  "question": "does the target still serve the old capability?"
+ },
+ "control": {
+  "identity": "cap-attest-v1",
+  "served": true,
+  "question": "did the target serve the old capability BEFORE the swap? (control)"
+ },
+ "rollback": "not needed",
+ "code": null,
+ "ok": true,
+ "why": "POS: new occupant serves as cap-attest-v2; NEG: the old occupant no longer serves cap-attest-v1",
+ "finished_at": "2026-10-31T23:08:39+0800"
+}
