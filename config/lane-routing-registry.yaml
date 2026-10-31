@@ -1,14 +1,15 @@
 schema: HGK-LANE-ROUTING-REGISTRY/1
 status: IN_FORCE
-epoch: 39
+epoch: 40
 contract_epoch: 34
 authorization_basis: 'Owner order 2026-10-23 (R15): the main model is opencode-go/deepseek-v4.1-flash; the deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410 ModelDeprecated, measured 2026-10-23) is DELETED from every lane pool, and MiMo-V2.6-Flash takes the main-model fallback-1 position in the Hermes deployment plane. Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied.'
 owner_order_20261024_s205_od01: 'Owner order 2026-10-24 (R17 S2-05 OD-01): PLAN and VERIFY/SECURITY bind openai-codex/gpt-6.1-sol (medium, codex-native-oauth); EXECUTE stays opencode-go/deepseek-v4.1-flash. rev33 held all three lanes on deepseek as an owner-ordered SOD006-C7 arrangement, so every lane declared a model it was not required to serve. This revision restores the declared model to the owner-required model. Recorded consequence: until the ChatGPT OAuth credential is provisioned, PLAN/VERIFY fail closed instead of silently substituting another model. Applied at the authority file and projected by scripts/lane_assignment_resync.py; this registry carries no cryptographic signature, so the change is REPO_BOUND owner-order provenance, not NATIVE_SIGNED.'
 owner_order_20261031_verify_checker_mimo: 'Owner order 2026-10-31 (this round, epoch 39): 把本次 Acceptance Challenge & Independent Acceptance Officer & VERIFY & SECURITY 車道的 checker model 轉用 MiMo-V2.6-Flash (OPENCODE GO)。 mimo-v2.6-flash is a BUILT arm already declared in this registry (EXECUTE arm B) and in the pool; this order BINDS that existing arm as the VERIFY_SECURITY rank-1 instead of inventing a new one. openai-codex/gpt-6.1-sol is retained as arm 2 and stays reachable. MEASURED before the rebind: opencode-go/mimo-v2.6-flash answered MIMO_OK through the loopback relay on the OpenCode Go inference endpoint. Consequence recorded, not hidden: PLAN (openai-codex/gpt-6.1-sol) and VERIFY (opencode-go/mimo-v2.6-flash) are now distinct on provider AND model, so the SOD006-C4 shared-identity note does not describe the live binding; EXECUTE vs VERIFY stays distinct on the model axis (deepseek-v4.1-flash != mimo-v2.6-flash) with provider separation not required by invariants.'
+owner_order_20261031_allpass_verify_sol: 'Owner order 2026-10-31 (epoch 40, round FHS-MSC-PIPD-LS-PKG-ALL-PASS-20261031): the Acceptance Challenge & Independent Acceptance Officer & VERIFY & SECURITY lane binds openai-codex/gpt-6.1-sol (medium, OpenAI OAuth) again, superseding the epoch-39 MiMo binding. MEASURED before the rebind, on this host, through the loopback relay: openai-codex/gpt-6.1-sol answered on the VERIFY_SECURITY lane by rank 2 in 6.75 s and echoed the round nonce verbatim; it was refused only by --require-arm, because revision 39 listed MiMo alone and declared alternates_are_operator_selectable: false. The refusal was governance, not capability, so the owner order is carried into the registry instead of dropping the guard. mimo-v2.6-flash is demoted to fallback 1 and stays reachable. Recorded consequence, not hidden: PLAN and VERIFY_SECURITY again share gpt-6.1-sol, so SOD006-C4 describes the live binding again; EXECUTE stays opencode-go/deepseek-v4.1-flash, and model-axis separation between writer and checker HOLDS. What remains is process, lane and evidence-path independence plus the no-self-acceptance rule; shared-model correlation is an accepted deviation under this order, not a satisfied invariant. REPO_BOUND owner-order provenance; this registry carries no cryptographic signature.'
 source_of_routes:
   path: config/model-lane-assignment.json
-  revision: 39
-  sha256: 7914a4c28dffcb94048bbe4bfc0605d14d1ccf9793f7bcc91917f1c5e7388f4a
+  revision: 40
+  sha256: 9a2def656d7cf03e8df3f6dac32b9b30052d2236df7a7f889ddc6e84feec52aa
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
@@ -48,7 +49,7 @@ owner_in_force:
   lane_rank1:
     PLAN: {provider: openai-codex, model: gpt-6.1-sol, transport_model: gpt-6.1-sol, reasoning_effort: medium}
     EXECUTE: {provider: opencode-go, model: deepseek-v4.1-flash, transport_model: opencode-go/deepseek-v4.1-flash}
-    VERIFY_SECURITY: {provider: opencode-go, model: mimo-v2.6-flash, transport_model: opencode-go/mimo-v2.6-flash}
+    VERIFY_SECURITY: {provider: openai-codex, model: gpt-6.1-sol, transport_model: gpt-6.1-sol, reasoning_effort: medium}
   authority:
     primary:
       doc: FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2/01_BODY/04_FABRIC_HGK_CONTROL.md
@@ -206,23 +207,23 @@ routes:
   - SECURITY REVIEW
   - VERIFY
   engine: codex-cli
-  provider: opencode-go
-  model: mimo-v2.6-flash
-  canonical_identity: mimo-v2.6-flash
-  auth: env_ref:OPENCODE_GO_API_KEY
-  oauth: false
-  selection_authority: owner-order-20261031-verify-checker-mimo-v26-flash
+  provider: openai-codex
+  model: gpt-6.1-sol
+  canonical_identity: gpt-6.1-sol
+  auth: codex-native-oauth
+  oauth: true
+  selection_authority: owner-order-20261031-allpass-verify-sol
   selected_arm: primary
-  selected_arm_identity: mimo-v2.6-flash
+  selected_arm_identity: gpt-6.1-sol
   arms:
-  - provider: opencode-go
-    model: mimo-v2.6-flash
-    transport_model: opencode-go/mimo-v2.6-flash
-    automatic_selection: true
   - provider: openai-codex
     model: gpt-6.1-sol
     transport_model: gpt-6.1-sol
     reasoning_effort: medium
+    automatic_selection: true
+  - provider: opencode-go
+    model: mimo-v2.6-flash
+    transport_model: opencode-go/mimo-v2.6-flash
     automatic_selection: false
   - provider: opencode-go
     model: deepseek-v4.1-flash
@@ -237,10 +238,9 @@ routes:
     transport_model: nvidia/deepseek-ai/deepseek-v4.1-flash
     automatic_selection: false
   fallbacks:
-  - provider: openai-codex
-    model: gpt-6.1-sol
-    transport_model: gpt-6.1-sol
-    reasoning_effort: medium
+  - provider: opencode-go
+    model: mimo-v2.6-flash
+    transport_model: opencode-go/mimo-v2.6-flash
     automatic_selection: false
   - provider: opencode-go
     model: deepseek-v4.1-flash
