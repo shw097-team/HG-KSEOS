@@ -2055,6 +2055,7 @@ def main() -> int:
     # IR-1/IR-4: refuse a turn whose receipts could not be reproduced by a second party.
     if getattr(args, "require_durable_gates", False):
         gate = durable_gate_preflight(args)
+        args._durable_gate = gate  # a GO must leave a trace; "no refusal" is not evidence that a gate ran
         if gate["verdict"] != "GO":
             return emit_refusal(args, refusal_body(
                 args.lane, ERR_DURABLE_GATE_NO_GO, gate["detail"],
@@ -3045,14 +3046,36 @@ def main() -> int:
     # distinguish "no arm answered" from "an arm answered and the identity source could not see it" -- and
     # measured on this host, `relay-usage` can never obtain a usage row for an OAuth-direct turn, so that
     # confusion reads as a dead lane. Two flags, same lane, same arm: one exhausted, one ok.
-    if (receipt.get("code") == "ERR_LANE_ALL_ROUTES_EXHAUSTED"
-            and getattr(args, "identity_source", "codex-rollout") == "relay-usage"
-            and any(a.get("exit") == 0 and (a.get("stdout_tail") or a.get("stdout"))
-                    for a in (receipt.get("attempts") or []))):
-        receipt["diagnostic"] = "ERR_IDENTITY_SOURCE_NO_USAGE_ROW"
-        receipt["diagnostic_note"] = ("an attempt exited 0 and produced output, but identity_source=relay-usage "
-                                      "found no usage row for it; re-run with --identity-source codex-rollout "
-                                      "before concluding the arm is unavailable")
+    # Each branch below was measured on this host, and each one is a case where the frozen code names the
+    # wrong object: the arm answered, and something outside the arm failed.
+    _diag = None
+    _atts = receipt.get("attempts") or []
+    _blob = " ".join(((a.get("stdout_tail") or "") + " " + (a.get("stderr_tail") or "")) for a in _atts).lower()
+    _answered = any(a.get("exit") == 0 and (a.get("stdout_tail") or a.get("stdout")) for a in _atts)
+    if "is not supported when using codex with a chatgpt account" in _blob:
+        _diag = ("ERR_ARM_PIN_UNROUTABLE",
+                 "the pinned arm's qualified model id was handed to the Codex CLI, which refuses it under a "
+                 "ChatGPT account; the relay that owns that arm was bypassed. The same arm unpinned serves.")
+    elif "outside the sandbox" in _blob and "writable roots" in _blob:
+        _diag = ("ERR_SANDBOX_WRITE_ROOT_REFUSED",
+                 "the child refused to write: the target is outside workspace-write's root, which is always the "
+                 "dispatched repository. --guard-subject is a digest anchor, not a write grant.")
+    elif (receipt.get("code") == "ERR_LANE_ALL_ROUTES_EXHAUSTED"
+            and getattr(args, "identity_source", "codex-rollout") == "relay-usage" and _answered):
+        _diag = ("ERR_IDENTITY_SOURCE_NO_USAGE_ROW",
+                 "an attempt exited 0 and produced output, but identity_source=relay-usage found no usage row "
+                 "for it; re-run with --identity-source codex-rollout before concluding the arm is unavailable")
+    if _diag:
+        receipt["diagnostic"], receipt["diagnostic_note"] = _diag
+    if getattr(args, "_durable_gate", None):
+        _g = args._durable_gate
+        receipt["durable_gates"] = {
+            "verdict": _g.get("verdict"),
+            "subject": getattr(args, "durable_gates_subject", None),
+            "tool": str(Path(getattr(args, "durable_gates_dir", None) or (ROOT / "scripts")) / "ir_gate.py"),
+            "detail": {k: _g.get("detail", {}).get(k) for k in ("ir1", "ir4", "reason")
+                       if isinstance(_g.get("detail"), dict) and k in _g.get("detail", {})},
+        }
     receipt["completion_evidence"] = completion_evidence
     # I3 (pass-5): surface the USAGE MEASUREMENT at the top level too, taken from the serving attempt
     # (or the first attempt that answered when none served). A wrong-shaped CARRIER is a statement
@@ -3074,6 +3097,13 @@ def main() -> int:
         # but none emitted the nonce reads differently from a run where every attempt timed out, and
         # only those fall back to the generic exhausted code.
         receipt.update(failure_disposition(attempts))
+    if args.require_arm and "required_arm" not in receipt:
+        # A pinned dispatch that never used an arm must still state the pin: otherwise a failed pinned run
+        # proves neither the pin nor the service, and an officer reading it cannot tell whether the receipt
+        # is about the requested arm at all (officer C1, D-16).
+        receipt["required_arm"] = str(args.require_arm)
+        receipt["required_arm_satisfied"] = False
+        receipt["required_arm_note"] = "no arm served; the pin is recorded, not satisfied"
     if used is not None and args.require_arm:
         # Always record the pair positively, so a passing receipt also states WHICH arm served.
         receipt["required_arm"] = str(args.require_arm)
@@ -3094,6 +3124,8 @@ def main() -> int:
             # ok:true (hostile-review F11).
             receipt["ok"] = False
             receipt["code"] = "ERR_REQUIRED_ARM_NOT_SERVED"
+    if args.require_arm:
+        receipt["required_arm_satisfied"] = bool(receipt.get("ok"))
     # Tranche B: a BOUND round records the binding digest + session/round/subject on the invocation
     # receipt, and the SERVED identity must match the binding's role arm -- an outer check that
     # demanded arm A must never be satisfied by a turn that actually served arm B.
