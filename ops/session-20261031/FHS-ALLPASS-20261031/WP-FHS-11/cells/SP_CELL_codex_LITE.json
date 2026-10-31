@@ -1,0 +1,13 @@
+{
+ "host": "codex",
+ "sp": "LITE",
+ "archive_prefix": "e3e993b0e079",
+ "token": "SP-BADGE-LITE-B86C9EBA",
+ "cwd": "C:\\Users\\user\\AppData\\Local\\Temp\\fhs-sp-4rKAhx",
+ "trigger_has_digest": true,
+ "trigger_has_token": true,
+ "nontrigger_has_token": false,
+ "verdict": "PASS",
+ "trigger_tail": "(2) SP-BADGE-LITE-B86C9EBA",
+ "nontrigger_tail": "(2) Unavailable: no SP-BADGE environment variable was found."
+}

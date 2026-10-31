@@ -1,0 +1,50 @@
+{
+ "schema": "SBL-WP11-SP-CELLS/1",
+ "wp": "WP-FHS-11",
+ "measured_at": "2026-11-01T00:33:48+0800",
+ "design": "clean cwd outside every repo holding only the unpacked SP; probe on the host's own surface; two facts from two sources -- the archive digest must come from the SP in the cwd, the SP-BADGE only from the host's loader; the negative removes the probe and must lose the badge while keeping the digest",
+ "cells": {
+  "claude×LITE": {
+   "verdict": "PASS",
+   "digest_read": true,
+   "badge_from_host": true,
+   "neg_clean": true
+  },
+  "claude×STANDARD": {
+   "verdict": "PASS",
+   "digest_read": true,
+   "badge_from_host": true,
+   "neg_clean": true
+  },
+  "codex×LITE": {
+   "verdict": "PASS",
+   "digest_read": true,
+   "badge_from_host": true,
+   "neg_clean": true
+  },
+  "codex×STANDARD": {
+   "verdict": "PASS",
+   "digest_read": true,
+   "badge_from_host": true,
+   "neg_clean": true
+  }
+ },
+ "portability": {
+  "LITE": {
+   "files": 15,
+   "digest": "e3e993b0e079",
+   "extract_ok": true,
+   "members_verified": "15/15",
+   "import_from_extracted_tree": "IMPORT_OK"
+  },
+  "STANDARD": {
+   "files": 52,
+   "digest": "52712b6316fb",
+   "extract_ok": true,
+   "members_verified": "52/52",
+   "import_from_extracted_tree": "IMPORT_OK"
+  }
+ },
+ "vacuous_first_attempt": "the first cell asked for a 'token from hidden host instructions' and the model refused to disclose it; a second version put the token in the question, which the model echoed back -- a test that hands over the answer. The cell only became valid when the badge lived solely on the host surface and the question asked for it as a plain configured value.",
+ "still_open": "Hermes x 3 SP: the Hermes CLI cannot start (same root cause as WP-12 HOST_RUNTIME_FROZEN)"
+}

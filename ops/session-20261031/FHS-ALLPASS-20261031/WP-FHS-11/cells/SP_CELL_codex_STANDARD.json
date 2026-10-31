@@ -1,0 +1,13 @@
+{
+ "host": "codex",
+ "sp": "STANDARD",
+ "archive_prefix": "52712b6316fb",
+ "token": "SP-BADGE-STANDARD-41CCEC7C",
+ "cwd": "C:\\Users\\user\\AppData\\Local\\Temp\\fhs-sp-sO89jj",
+ "trigger_has_digest": true,
+ "trigger_has_token": true,
+ "nontrigger_has_token": false,
+ "verdict": "PASS",
+ "trigger_tail": "2. `SP-BADGE-STANDARD-41CCEC7C`",
+ "nontrigger_tail": "(2) Unavailable: SP-BADGE is not set in the environment."
+}
