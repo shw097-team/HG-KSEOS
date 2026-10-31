@@ -130,3 +130,13 @@ c016235 the frozen snapshot is created before it is copied into
 `var/shared-spine/hg-kseos.db` is **git-ignored**, so the TT rows written this session (two closed, two opened) exist
 only on this disk. The authoritative copy of that reasoning is `HANDOFF-20261031-LANE-OPS.md` §3 and §5 — if the database
 is ever rebuilt, re-insert from here rather than trusting the schema.
+
+## 9. Addendum measured at close-out (09:56)
+
+A PLAN probe was dispatched through the codex client to the relay (`--relay-base http://127.0.0.1:10101`,
+`--timeout 150`): **TIMEOUT, `nonce_present: false`**, while a direct `curl` of the same model on the same relay
+answered in **3.5 s**. So the relay is not the only gap — the **codex client path itself** does not deliver a turn,
+even for `gpt-6.1-sol`. Treat "gpt-6.1-sol works" as *the relay serves it*, not *the PLAN lane works*; the lane still
+has to be proven end to end with a receipt that carries the nonce.
+
+All probe processes were stopped, `var/driver.lock` removed, `review_lock reap` clean, queue tree clean.
