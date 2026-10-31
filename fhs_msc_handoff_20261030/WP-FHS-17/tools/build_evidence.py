@@ -69,11 +69,11 @@ PREPARE_ONLY = os.environ.get("WP17_PREPARE_ONLY") == "1"
 
 
 def issue_via_owner(op: str, argv: list, out_path: Path) -> dict:
-    if PREISSUED:
-        src = PREISSUED / f"{op}.json"
-        if not src.is_file():
-            return {"op": op, "exit": 4, "stdout": "",
-                    "stderr": f"pre-issued {op} missing: {src}"}
+    # Order matters: a PARTIAL pre-issued set must keep requesting the next object, not fail on it. The first
+    # version checked "PREISSUED but missing" before "PREPARE_ONLY", so the prepare loop converged after one
+    # object and reported success while grant-issue and regrant-issue had never been requested at all.
+    src = (PREISSUED / f"{op}.json") if PREISSUED else None
+    if src is not None and src.is_file():
         out_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(src, out_path)
         return {"op": op, "exit": 0, "stdout": f"consumed pre-issued {op} from {src}", "stderr": "",
@@ -95,6 +95,8 @@ def issue_via_owner(op: str, argv: list, out_path: Path) -> dict:
                             encoding="utf-8")
         print(f"PREPARE-ONLY: requested {op}; stopping so the owner can sign it")
         raise SystemExit(0)
+    if src is not None:
+        return {"op": op, "exit": 4, "stdout": "", "stderr": f"pre-issued {op} missing: {src}"}
     return run_op(op, argv)
 def _resolve_source():
     import os
