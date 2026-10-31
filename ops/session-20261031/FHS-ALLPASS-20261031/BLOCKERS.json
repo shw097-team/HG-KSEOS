@@ -1,0 +1,39 @@
+{
+ "schema": "HGK-BLOCKER-LEDGER/1",
+ "exported_at": "2026-10-31T23:45:52+0800",
+ "note": "a unit may stay open at round close only with code + cause + unblock; this is the ledger the gate reads",
+ "blockers": [
+  {
+   "wp_id": "WP-FHS-11",
+   "state": "FAIL",
+   "code": "BLOCKED_PROFILE_CONTENT",
+   "cause": "LITE and STANDARD export byte-identical (79 files, archive a6b3c8b3bbdf); profiles.py artifact_depth/target_resolution never reach the member set",
+   "unblock": "implement artifact_depth + target_resolution so the member set changes per SP, then run the clean-cwd cell script per SP",
+   "blocked_at": "2026-10-31T23:45:41+0800"
+  },
+  {
+   "wp_id": "WP-FHS-12",
+   "state": "FAIL",
+   "code": "HOST_RUNTIME_FROZEN",
+   "cause": "hermes -z cannot start: openai.types.responses.response_computer_tool_call_output_screenshot_param missing; no site-packages/openai exists under D:/Hermes-Recovery, launcher is a frozen binary",
+   "unblock": "upgrade or rebuild the Hermes CLI distribution, then re-run the two W18 commands unchanged",
+   "blocked_at": "2026-10-31T23:45:41+0800"
+  },
+  {
+   "wp_id": "WP-FHS-13",
+   "state": "FAIL",
+   "code": "ABI_CONSUMER_MISSING",
+   "cause": "HotSwap mechanism done (tools/hotswap.py, 5/5) but the Need/Occupant ABI and the original Consumer are absent",
+   "unblock": "implement the Need/Occupant ABI and wire the original Consumer, then re-run parity",
+   "blocked_at": "2026-10-31T23:45:41+0800"
+  },
+  {
+   "wp_id": "WP-FHS-20",
+   "state": "FAIL",
+   "code": "KIND_ENUM_UNREAD",
+   "cause": "8 Kind authoritative enumeration not yet extracted; KB copy is 415/909 rows and unusable, pristine copy is /c/wg/pkg",
+   "unblock": "read the 8 Kind list from /c/wg/pkg (909/909), generate the 144 admitted cells, then measure",
+   "blocked_at": "2026-10-31T23:45:42+0800"
+  }
+ ]
+}
