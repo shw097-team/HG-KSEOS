@@ -1,0 +1,12 @@
+{
+  "schema": "HGK-ACCEPTANCE-FIXTURE/1",
+  "case_id": "TST-054",
+  "type": "fault",
+  "fixture": "Uninstall leaves PATH/config/service/secret behind",
+  "preconditions": "authority/source/version/permission frozen",
+  "oracle": "IG-08 FAIL；cleanup required",
+  "expected": "IG-08 FAIL；cleanup required",
+  "reject_code": "TST-054-REJECT",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L978",
+  "frozen_baseline_sha256": "1564bbf7a8cd4baeabc1704586dc50ebe1e30dd6c1d09c84a7ad629a2b8d8176"
+}

@@ -10,7 +10,7 @@ Read this first. It states what is真, what is broken, and the exact next comman
 | FAIL | WP-FHS-10, WP-FHS-12, WP-FHS-13 |
 | NOT_RUN | WP-FHS-11, WP-FHS-17, WP-FHS-20 |
 | ALL PASS | **not reached** — do not report otherwise |
-| HG-KSEOS HEAD | `dcba557` → this handoff commit (branch `candidate/r18-fhs-skeleton-spine-20261029`, **not** main) |
+| HG-KSEOS HEAD | `fb29382` (branch `candidate/r18-fhs-skeleton-spine-20261029`, **not** main) — handoff commit follows |
 
 WP-20 evidence is the strongest of the three open units: 192/192 cells RAW
 (`probe-all {"RAW":192}`, per host Hermes 48 · Codex 48 · Claude Code 48 · DeepSeek 48, `verify ALL_CELLS_EVIDENCED`),

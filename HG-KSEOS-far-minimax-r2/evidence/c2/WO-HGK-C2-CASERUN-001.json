@@ -1,0 +1,44 @@
+{
+  "workorder_id": "WO-HGK-C2-CASERUN-001",
+  "gate": "C2",
+  "created_at": "2026-08-08T09:20:00+08:00",
+  "orchestrator": "Hermes Agent v0.18.2 (opencode-go/deepseek-v4-flash)",
+  "executor": "Codex CLI codex-cli 0.147.0-alpha.6.5",
+  "transport": "OpenCodex @bitkyc08/opencodex 2.11.0",
+  "provider": "OpenCode Go https://opencode.ai/zen/go/v1",
+  "model": "deepseek-v4-flash",
+  "worktree": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\worktrees\\g4-opencodex-pilot",
+  "branch": "codex/hgk-g4-opencodex-pilot",
+  "base_head": "201530fda688766dc8d7b8ebdbf4f90c65b2bff4",
+  "source": {
+    "locator": "eval/FROZEN_ACCEPTANCE_CASES.csv rerun_command column (Group-07 derived)",
+    "group07_ref": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L925",
+    "contract": "rerun_command = case.run --id TST-XXX",
+    "gap": "No `case run` subcommand exists in src/hg_kseos/cli.py; the frozen rerun contract is not executable via the documented command."
+  },
+  "requirement": "Add `case run` subcommand to the hg-kseos CLI: `hg-kseos case run --id TST-037 [--root <path>]` that executes the frozen single-case acceptance runner (tools/run_acceptance.py) for exactly the selected case and exits with its exit code.",
+  "acceptance": [
+    "R1: `hg-kseos case run --id TST-037` runs the frozen runner with --case-id TST-037 and exits 0",
+    "R2: unknown --id (e.g. TST-999) exits non-zero with a clear error",
+    "R3: missing --id exits non-zero (argparse required)",
+    "R4: focused pytest tests/test_c2_case_run.py passes (contract + negative + boundary)",
+    "R5: no changes outside src/hg_kseos/cli.py, src/hg_kseos/__main__.py (if needed), tests/test_c2_case_run.py"
+  ],
+  "evidence": {
+    "envelope": "worktrees/g4-opencodex-pilot/evidence/c2/EvidenceEnvelope.json",
+    "requires": ["git diff", "pytest output", "exit codes", "route readback", "hashes"]
+  },
+  "rollback": {
+    "method": "git revert/clean the maker commit in worktree g4-opencodex-pilot only",
+    "restore_target": "branch codex/hgk-g4-opencodex-pilot back to base_head 201530f with empty status",
+    "scope": "worktree-local only; canonical root untouched"
+  },
+  "permission": {
+    "write_scope": ["worktrees/g4-opencodex-pilot"],
+    "read_scope": ["C:\\Projects\\Agent_Workspace\\HG-KSEOS"],
+    "network": "loopback 127.0.0.1:10100 only (OpenCodex transport)"
+  },
+  "checker": "Hermes independent checker (fresh read-only context), separate from maker",
+  "one_writer_per_worktree": true,
+  "status": "ADMITTED"
+}

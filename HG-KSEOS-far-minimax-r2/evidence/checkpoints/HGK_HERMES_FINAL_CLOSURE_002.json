@@ -1,0 +1,40 @@
+{
+  "checkpoint_id": "HGK_HERMES_FINAL_CLOSURE_002",
+  "updated_at": "2026-08-08T09:45:00+08:00",
+  "exact_head": "201530fda688766dc8d7b8ebdbf4f90c65b2bff4",
+  "branch": "codex/hgk-final-closure-002",
+  "dirty_files": ["evidence/wave-04/HLPE_QUALIFICATION_REPORT.json"],
+  "gate": "C2",
+  "gate_status": "PASS",
+  "certifications": {
+    "Codex CLI": "PRIMARY_EXECUTOR_CERTIFIED",
+    "OpenCodex": "MODEL_TRANSPORT_CERTIFIED",
+    "OpenCode Go": "ACTIVE_PROVIDER_CERTIFIED",
+    "DeepSeek V4 Flash": "ACTIVE_MODEL_CERTIFIED",
+    "Hermes_Codex_closed_loop": "PASS"
+  },
+  "c2_workorder": {
+    "id": "WO-HGK-C2-CASERUN-001",
+    "source": "eval/FROZEN_ACCEPTANCE_CASES.csv rerun_command (Group-07 L925)",
+    "gap": "case.run CLI entry point missing",
+    "maker": "Codex CLI 0.147.0-alpha.6.5 via OpenCodex 2.11.0 -> OpenCode Go -> deepseek-v4-flash",
+    "maker_exit": 0,
+    "diff": "src/hg_kseos/cli.py +22/-1; tests/test_c2_case_run.py new (137 lines)",
+    "checker_focused": "6 tests OK",
+    "checker_full_suite": "76 tests OK in 6.224s",
+    "evidence_envelope": "evidence/c2/EvidenceEnvelope.json sha256 82875313a7b19ea75d7f7fbb27edcb57051ed18a14e6650205273153898e9673",
+    "rollback": "worktree restored to base_head 201530f, status clean (evidence preserved)",
+    "one_writer_per_worktree": true,
+    "maker_ne_checker": true
+  },
+  "pass_evidence_hashes": {
+    "P1_nonce": "5f2c9a71",
+    "P2_shell_nonce": "1786176906",
+    "P6_focused_test": "9 passed in 1.61s",
+    "P10_route_nonce": "HGK_P10_ROUTE_SEAL e41b77cd"
+  },
+  "p10_route_seal": "PASS - 52/52 opencode-go/deepseek-v4-flash HTTP 200, 0 other routes, openai disabled, 0 combos, env-ref credential",
+  "transport_finding_426": "NON_BLOCKING_TRANSPORT_LIMITATION",
+  "open_tt": [],
+  "next_action": "C3 canonical materialization + lineage + TST-092"
+}

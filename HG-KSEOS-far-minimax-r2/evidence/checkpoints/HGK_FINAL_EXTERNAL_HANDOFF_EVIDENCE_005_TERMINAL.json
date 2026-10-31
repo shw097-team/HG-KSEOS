@@ -1,0 +1,43 @@
+{
+ "checkpoint_id": "HGK_FINAL_EXTERNAL_HANDOFF_EVIDENCE_005_TERMINAL",
+ "task_id": "HGK-FINAL-EXTERNAL-HANDOFF-EVIDENCE-005",
+ "phase": "FINAL_EVIDENCE_CROSS_ARTIFACT_CONSISTENCY_FIX_ONLY (terminal)",
+ "updated_at": "2026-08-09T03:10:00+08:00",
+ "current_head": "bb67fcc301ee78987c3bd7a866e0f4cda1ad798e",
+ "branch": "codex/hgk-final-closure-002",
+ "git_status": "CLEAN (evidence MD + readback are gitignored sidecars)",
+ "product_resealed": "NO - evidence-sidecar-only",
+ "package": {
+  "path": "var/releases/HG-KSEOS_LOCAL_CANDIDATE.zip",
+  "bytes": 26535867,
+  "package_sha256": "8b31992c4dab793c173d67c28e569857a3d7e62d18bb9817f68b8005b612aa08",
+  "payload_files": 295,
+  "exact_set": true,
+  "source": "evidence/wave-18/LOCAL_PACKAGE_READBACK.json (authoritative maker readback)"
+ },
+ "tst092": {
+  "receipt": "evidence/wave-18/TST-092_HANDOFF2_INDEPENDENT_READBACK.json",
+  "verdict": "INDEPENDENT_CASE_PASS",
+  "head": "bb67fcc301ee78987c3bd7a866e0f4cda1ad798e",
+  "package_sha256": "8b31992c4dab793c173d67c28e569857a3d7e62d18bb9817f68b8005b612aa08",
+  "same_head_as_maker": true,
+  "same_package_bytes_as_maker": true,
+  "expected_payload_count": 295,
+  "manifest_row_count": 295
+ },
+ "cross_artifact_fixes": {
+  "FIX1_section_A": "RESOLVED - Section A now reads authoritative LOCAL_PACKAGE_READBACK.json + TST-092_HANDOFF2 receipt: HEAD bb67fcc, bytes 26535867, SHA 8b31992c, payload 295; no stale b427316/3e0eb262/294 in current proof",
+  "FIX2_lineage": "RESOLVED - b427316/3e0eb262/294 appear only under Lineage/superseded; historical_current_mix = 0",
+  "FIX3_agents_denominator": "RESOLVED - agents_total_discovered=40 (excl. .git+worktrees, matches D0 agents_md=40), agents_active_set=7 (root + 5 nested control/ per PACK manifest F-S1-005/010), agents_inactive/deferred/superseded=33 (工程基座 archives, var/opencodex-backup stubs, 資料庫/HLPE surface); MD Section P carries the breakdown",
+  "FIX4_validator_cross_artifact": "RESOLVED - validator now enforces md_head/bytes/sha/payload == package_readback; tst092 head/sha/same-maker/payload/manifest == package_readback; section A==Q identity; historical_current_mix=0; 57 checks",
+  "FIX5_terminal_checkpoint": "RESOLVED - this checkpoint; historical checkpoints preserved"
+ },
+ "final_evidence_md": {
+  "path": "evidence/review/HG-KSEOS_FINAL_EVIDENCE_FOR_REVIEW.md",
+  "bytes": 38884,
+  "sha256": "c80c6dd093be1c40b8f8905678cdeea2ffe69add95a4a3195b7b86962707c4df",
+  "note": "bytes/SHA computed at final validation below",
+  "handoff_validator": "PASS (57/57)"
+ },
+ "status": "FINAL_EXTERNAL_HANDOFF_EVIDENCE_PASS"
+}

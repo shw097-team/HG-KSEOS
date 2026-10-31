@@ -1,0 +1,34 @@
+{
+  "checkpoint_id": "HGK_HERMES_DOMAIN_REAUDIT_004",
+  "task_id": "HGK-HERMES-DOMAIN-REAUDIT-CLOSURE-004",
+  "updated_at": "2026-08-09T02:10:00+08:00",
+  "current_head": "9c1b4bb938da9c4de0644195901e27b5d73de7e7",
+  "branch": "codex/hgk-final-closure-002",
+  "git_status": "D1 artifacts uncommitted at last update; now committing",
+  "prior_decision": {
+    "id": "REL-0cf3901062b56729",
+    "verdict": "HG-KSEOS_LOCAL_DELIVERY_PASS",
+    "status_now": "HISTORICAL_PRIOR_CANDIDATE (superseded by 004 re-audit; tracked mutations invalidate old seal)"
+  },
+  "prior_package": {
+    "path": "var/releases/HG-KSEOS_LOCAL_CANDIDATE.zip",
+    "sha256": "9e9ae4fe749d56d7ea0acd0e0f9e668e6ecebac70c24dac026a9c0e5a0c69dc8",
+    "status_now": "HISTORICAL_PRIOR_CANDIDATE"
+  },
+  "gates": {
+    "D0": {"status": "PASS", "domains": 30, "denominator": 499, "orphans": 0,
+            "evidence": "evidence/review/HG-KSEOS_DOMAIN_COVERAGE_RECONCILIATION.json"},
+    "D1": {"status": "PASS", "maker": "92/92", "independent": "92/92",
+            "depth_calibrated": "92/92", "gaps": [],
+            "evidence": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+            "depth_executors": "tools/case_executors_depth.py",
+            "runner_wiring": "tools/run_acceptance.py"}
+  },
+  "current_gate": "D2",
+  "open_domain_gaps": ["D2 Memory lifecycle/expiry/permission", "D3 KnowledgeFactory/KP 20/20 retrieval",
+                       "D4 RAG grounding/abstention", "D5 KG/GraphRAG/Storage disposition",
+                       "D6 knowledge security negatives", "D7 30-domain final status",
+                       "D8 User Guide", "D9 reducer v2", "D10 repair", "D11 final evidence MD"],
+  "open_tt": ["TT-A3-HERMES-RUNTIME (TEMP_CLOSED_CORE)"],
+  "next_atomic_work": "D2: Memory domain closure — runtime lifecycle + negatives from PRE-19/DOC-10/11 owner"
+}

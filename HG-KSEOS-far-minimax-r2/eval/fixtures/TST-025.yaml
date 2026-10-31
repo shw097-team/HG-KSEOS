@@ -1,0 +1,12 @@
+{
+  "schema": "HGK-ACCEPTANCE-FIXTURE/1",
+  "case_id": "TST-025",
+  "type": "positive",
+  "fixture": "Global→root→nested instruction discovery",
+  "preconditions": "authority/source/version/permission frozen",
+  "oracle": "Loaded-source order matches expected",
+  "expected": "Loaded-source order matches expected",
+  "reject_code": "TST-025-REJECT",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L949",
+  "frozen_baseline_sha256": "1564bbf7a8cd4baeabc1704586dc50ebe1e30dd6c1d09c84a7ad629a2b8d8176"
+}

@@ -1,0 +1,224 @@
+{
+ "schema": "HGK-USER-GUIDE-VALIDATOR/2",
+ "task_id": "HGK-TASK014-FINAL-EXTERNAL-EVIDENCE-COHERENCE-UNIQUE-DENOMINATOR-RECEIPT-LINEAGE-015",
+ "captured_at_utc": "2026-08-10T08:18:14.958429+00:00",
+ "checks": {
+  "current_canonical_root_present": {
+   "check": "current_canonical_root_present",
+   "verdict": "PASS",
+   "detail": "canonical root",
+   "actual": true
+  },
+  "hermes_v020_current": {
+   "check": "hermes_v020_current",
+   "verdict": "PASS",
+   "detail": "Hermes v0.20 identity",
+   "actual": true
+  },
+  "provider_model_current": {
+   "check": "provider_model_current",
+   "verdict": "PASS",
+   "detail": "provider/model",
+   "actual": true
+  },
+  "autonomous_lifecycle_documented": {
+   "check": "autonomous_lifecycle_documented",
+   "verdict": "PASS",
+   "detail": "lifecycle",
+   "actual": true
+  },
+  "governed_evolution_documented": {
+   "check": "governed_evolution_documented",
+   "verdict": "PASS",
+   "detail": "evolution",
+   "actual": true
+  },
+  "kanban_goal_ownership_documented": {
+   "check": "kanban_goal_ownership_documented",
+   "verdict": "PASS",
+   "detail": "kanban/goal",
+   "actual": true
+  },
+  "openspec_current_state": {
+   "check": "openspec_current_state",
+   "verdict": "PASS",
+   "detail": "openspec",
+   "actual": true
+  },
+  "gstack_current_state": {
+   "check": "gstack_current_state",
+   "verdict": "PASS",
+   "detail": "gstack",
+   "actual": true
+  },
+  "named_method_router_documented": {
+   "check": "named_method_router_documented",
+   "verdict": "PASS",
+   "detail": "router",
+   "actual": true
+  },
+  "fallback_rollback_documented": {
+   "check": "fallback_rollback_documented",
+   "verdict": "PASS",
+   "detail": "fallback",
+   "actual": true
+  },
+  "denominator_unique_id_semantics": {
+   "check": "denominator_unique_id_semantics",
+   "verdict": "PASS",
+   "detail": "denominator",
+   "actual": true
+  },
+  "production_not_claimed": {
+   "check": "production_not_claimed",
+   "verdict": "PASS",
+   "detail": "production",
+   "actual": true
+  },
+  "no_stale_task_as_current": {
+   "check": "no_stale_task_as_current",
+   "verdict": "PASS",
+   "detail": "no stale current",
+   "actual": true
+  },
+  "no_companion_current_architecture": {
+   "check": "no_companion_current_architecture",
+   "verdict": "PASS",
+   "detail": "no companion in current sections",
+   "actual": true
+  },
+  "no_v0182_as_canonical_current": {
+   "check": "no_v0182_as_canonical_current",
+   "verdict": "PASS",
+   "detail": "",
+   "actual": true
+  },
+  "user_guide_stale_current_claim_count": {
+   "check": "user_guide_stale_current_claim_count",
+   "verdict": "PASS",
+   "detail": "stale_count=0",
+   "actual": 0
+  },
+  "user_guide_no_stale_current_claims": {
+   "check": "user_guide_no_stale_current_claims",
+   "verdict": "PASS",
+   "detail": "stale claims in current sections: 0",
+   "actual": true
+  },
+  "current_operational_maker_root_occurrences": {
+   "check": "current_operational_maker_root_occurrences",
+   "verdict": "PASS",
+   "detail": "count=0",
+   "actual": 0
+  },
+  "historical_maker_root_occurrences": {
+   "check": "historical_maker_root_occurrences",
+   "verdict": "PASS",
+   "detail": "count=1",
+   "actual": 1
+  },
+  "maker_root_current_zero": {
+   "check": "maker_root_current_zero",
+   "verdict": "PASS",
+   "detail": "current=0 historical=1",
+   "actual": true
+  },
+  "no_low_auto_promotion": {
+   "check": "no_low_auto_promotion",
+   "verdict": "PASS",
+   "detail": "no affirmative auto-promotion tiering",
+   "actual": true
+  },
+  "command_exists:project_start": {
+   "check": "command_exists:project_start",
+   "verdict": "PASS",
+   "detail": "python -m hg_kseos.cli project start",
+   "actual": true
+  },
+  "command_exists:project_status": {
+   "check": "command_exists:project_status",
+   "verdict": "PASS",
+   "detail": "python -m hg_kseos.cli project status",
+   "actual": true
+  },
+  "command_exists:project_resume": {
+   "check": "command_exists:project_resume",
+   "verdict": "PASS",
+   "detail": "python -m hg_kseos.cli project resume",
+   "actual": true
+  },
+  "command_exists:project_checkpoint": {
+   "check": "command_exists:project_checkpoint",
+   "verdict": "PASS",
+   "detail": "python -m hg_kseos.cli project checkpoint",
+   "actual": true
+  },
+  "command_exists:evolution_status": {
+   "check": "command_exists:evolution_status",
+   "verdict": "PASS",
+   "detail": "python -m hg_kseos.cli evolution status",
+   "actual": true
+  },
+  "command_exists:hg_kseos.cli_doctor": {
+   "check": "command_exists:hg_kseos.cli_doctor",
+   "verdict": "PASS",
+   "detail": "python -m hg_kseos.cli doctor",
+   "actual": true
+  },
+  "script_exists:doctor.ps1": {
+   "check": "script_exists:doctor.ps1",
+   "verdict": "PASS",
+   "detail": "doctor.ps1",
+   "actual": true
+  },
+  "script_exists:hermes-core.ps1": {
+   "check": "script_exists:hermes-core.ps1",
+   "verdict": "PASS",
+   "detail": "hermes-core.ps1",
+   "actual": true
+  },
+  "script_exists:acceptance.ps1": {
+   "check": "script_exists:acceptance.ps1",
+   "verdict": "PASS",
+   "detail": "acceptance.ps1",
+   "actual": true
+  },
+  "script_exists:sbom.ps1": {
+   "check": "script_exists:sbom.ps1",
+   "verdict": "PASS",
+   "detail": "sbom.ps1",
+   "actual": true
+  },
+  "script_exists:test.ps1": {
+   "check": "script_exists:test.ps1",
+   "verdict": "PASS",
+   "detail": "test.ps1",
+   "actual": true
+  },
+  "script_exists:backup.ps1": {
+   "check": "script_exists:backup.ps1",
+   "verdict": "PASS",
+   "detail": "backup.ps1",
+   "actual": true
+  },
+  "script_exists:restore-drill.ps1": {
+   "check": "script_exists:restore-drill.ps1",
+   "verdict": "PASS",
+   "detail": "restore-drill.ps1",
+   "actual": true
+  },
+  "script_exists:reconcile-tt.ps1": {
+   "check": "script_exists:reconcile-tt.ps1",
+   "verdict": "PASS",
+   "detail": "reconcile-tt.ps1",
+   "actual": true
+  },
+  "script_exists:package.ps1": {
+   "check": "script_exists:package.ps1",
+   "verdict": "PASS",
+   "detail": "package.ps1",
+   "actual": true
+  }
+ },
+ "verdict": "PASS"
+}

@@ -1,0 +1,30 @@
+{
+ "candidate": {
+  "version": "0.20.0",
+  "tag": "v2026.8.3",
+  "commit": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb"
+ },
+ "baseline_v0182": {
+  "version": "0.18.2",
+  "tag": "v2026.7.7.2",
+  "commit": "9de9c25f620ff7f1ce0fd5457d596052d5159596"
+ },
+ "verifications": {
+  "git_rev_parse_head": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb",
+  "git_tag_points_at_head": "v2026.8.3",
+  "git_describe_exact_match": "v2026.8.3",
+  "pyproject_version_at_commit": "0.20.0",
+  "release_commit_subject": "chore: release v0.20.0 (2026.8.3)",
+  "runtime_hermes_version": "Hermes Agent v0.20.0 (2026.8.3)",
+  "runtime_python": "3.11.9",
+  "install_directory": "C:\\Users\\user\\AppData\\Local\\Temp\\hgk-hermes-v020-qual\\repo",
+  "install_method": "git (exact-tag checkout 3c27eb62, editable venv install)",
+  "floating_main_used": false,
+  "hermes_update_used_for_promotion": false,
+  "tag_commit_version_aligned": true
+ },
+ "verdict": "PASS",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:54:54.698224+00:00"
+}

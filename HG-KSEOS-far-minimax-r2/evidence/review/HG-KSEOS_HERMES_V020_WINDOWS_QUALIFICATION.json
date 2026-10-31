@@ -1,0 +1,151 @@
+{
+ "host": {
+  "os": "Windows 10 (10.0.26200)",
+  "python_system": "3.11.9",
+  "node": "present",
+  "git": "present"
+ },
+ "install": {
+  "method": "exact-tag git checkout (3c27eb62) + isolated venv (system Python 3.11.9) + editable install",
+  "qualification_root": "C:\\Users\\user\\AppData\\Local\\Temp\\hgk-hermes-v020-qual",
+  "hermes_home_isolated": "C:\\Users\\user\\AppData\\Local\\Temp\\hgk-hermes-v020-qual\\home",
+  "v0182_preserved": true,
+  "user_path_unintended_mutation": 0,
+  "production_hermes_home_untouched": true,
+  "kanban_db_isolated": true,
+  "secret_in_evidence": 0,
+  "note_windows": "qual venv hermes.exe console-script file handle was held by an external process; identical entry point hermes_cli.main:main used via python -c launcher — documented environment quirk, not a v0.20 defect"
+ },
+ "q01_identity": {
+  "result": "PASS",
+  "tag": "v2026.8.3",
+  "commit": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb",
+  "version": "0.20.0",
+  "aligned": true
+ },
+ "q02_doctor": {
+  "result": "PASS",
+  "exit_code": 0,
+  "blocking": [],
+  "opencode_go_key": "configured (env-ref)",
+  "config_version": 33
+ },
+ "q03_windows_native": {
+  "result": "PASS",
+  "notes": "paths/encoding/subprocess/git/venv exercised in every probe; CRLF/LF normalized in fixtures; MSYS path-mangling documented and worked around"
+ },
+ "q04_provider": {
+  "result": "PASS",
+  "probe": "HGK_V020_PROVIDER_PING_OK",
+  "roundtrip_seconds": 13
+ },
+ "q05_workorder_route": {
+  "result": "PASS",
+  "direct": "codex exec -m opencode-go/deepseek-v4-flash -> diff + 3/3 tests",
+  "orchestrated": "Hermes v0.20 chat session drove codex route (6 tool calls) -> farewell() + 2/2 tests",
+  "independent_recheck": "PASS"
+ },
+ "q06_kanban_basic": {
+  "result": "PASS",
+  "flow": "create->ready->claim(running)->complete(done)"
+ },
+ "q07_kanban_dependency": {
+  "result": "PASS",
+  "flow": "child todo until parent done; claim blocked while parent pending"
+ },
+ "q08_kanban_block": {
+  "result": "PASS",
+  "reason_preserved": true,
+  "typed_kind": "needs_input"
+ },
+ "q09_kanban_retry": {
+  "result": "PASS",
+  "max_retries_stored": 1,
+  "run_ledger": "claim/reclaim cycles recorded as runs 4/5"
+ },
+ "q10_kanban_heartbeat_reclaim": {
+  "result": "PASS",
+  "heartbeat_recorded": true,
+  "second_writer_zero": true,
+  "second_claim_error": "cannot claim: status=running lock=DESKTOP-57EO414:10696"
+ },
+ "q11_kanban_worktree": {
+  "result": "PASS",
+  "worktree": "fixtures/wq-001/.worktrees/t_6dfa25dc (branch wt/t_6dfa25dc)"
+ },
+ "q12_goal": {
+  "result": "PASS",
+  "goal_set": true,
+  "persisted": true
+ },
+ "q13_goal_contract": {
+  "result": "PASS",
+  "fields": [
+   "outcome",
+   "verification",
+   "constraints",
+   "boundaries",
+   "stop_when"
+  ],
+  "judge": "real inference; verdict=continue with evidence-based reason; transport_failed=False"
+ },
+ "q14_goal_resume": {
+  "result": "PASS",
+  "fresh_process_reload": true,
+  "status_line": "Goal (active, 0/5 turns, 1 subgoal, contract)"
+ },
+ "q15_tool_recovery": {
+  "result": "PASS",
+  "write_verify": true,
+  "readback": true,
+  "patch_reapply": true,
+  "long_output_tail": true,
+  "approval_gated_script_execution": "observed (python -c blocked; .py file path worked)"
+ },
+ "q16_compression": {
+  "result": "PASS",
+  "config": "enabled=true threshold=0.5 target_ratio=0.2 explicit",
+  "upstream_tests": "test_cli_manual_compress + test_trajectory_compressor green",
+  "note": "in-session auto-trigger not observable at default threshold in short sessions (progress notices off by design); mechanism qualified via upstream suite + config"
+ },
+ "q17_approvals": {
+  "result": "PASS",
+  "mode": "manual (explicit, fail-closed)",
+  "classifier": "safe=pass, rm -rf=flagged, git reset --hard=flagged, hardline rm -rf /=blocked",
+  "runtime": "rm -rf -> status=pending_approval; agent refused bypass",
+  "observation": "Windows-native `del /f /q` not in default POSIX patterns; HGK Windows path guards retained"
+ },
+ "q18_deepseek_cache": {
+  "result": "PASS",
+  "gateway_metadata": "prompt_cache_hit_tokens / prompt_cache_miss_tokens exposed",
+  "probe": "9092-token repeated prefix: first=hit 0/miss 9092; repeat=hit 9088/miss 4",
+  "functional_equivalence": true,
+  "no_invented_savings": true
+ },
+ "q19_skill_mechanism": {
+  "result": "PASS",
+  "hgk_skill_loaded": "windows-bootstrap-doctor (preflight/dry-run/install plan/doctor/rollback)",
+  "curator": "archive-only, never promotes; created_by=agent scope; HGK COV-11-06 gate sole promotion path"
+ },
+ "q20_rollback": {
+  "result": "PASS",
+  "v0182_runnable": true,
+  "v0182_inference": "V0182_ROLLBACK_OK",
+  "v0182_home_preserved": true
+ },
+ "upstream_suite": {
+  "files": [
+   "tests/hermes_cli/test_goals.py",
+   "tests/hermes_cli/test_approvals_command.py",
+   "tests/hermes_cli/test_kanban_cli.py",
+   "tests/hermes_cli/test_kanban_block_kinds.py",
+   "tests/test_cli_manual_compress.py",
+   "tests/test_trajectory_compressor.py"
+  ],
+  "result": "66 passed in 11.64s"
+ },
+ "verdict": "PASS",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:54:54.698224+00:00"
+}

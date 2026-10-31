@@ -1,0 +1,14 @@
+{
+  "finding": "PRIOR_MAKER_90_92_CLAIM_DECOMPOSED",
+  "prior_repo": "C:/Users/user/OneDrive/Documents/HLPE/work/HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001",
+  "prior_commit": "27396f7b306b485ad138ee624c5b7e231f99cb92",
+  "prior_report": "evidence/wave-15/MAKER_ACCEPTANCE_REPORT.json",
+  "prior_counts": {"MAKER_CASE_PASS": 1, "MAKER_PROXY_PASS": 89, "BLOCKED": 2, "FAIL": 0},
+  "prior_verdict": "TEMP_CLOSED",
+  "prior_baseline_sha256": "1564bbf7a8cd4baeabc1704586dc50ebe1e30dd6c1d09c84a7ad629a2b8d8176",
+  "canonical_current": {"MAKER_CASE_PASS": 1, "BLOCKED": 91, "FAIL": 0, "executors": ["TST-037"]},
+  "interpretation": "The reported '90/92 maker PASS' decomposes to 1 real case-specific PASS + 89 MAKER_PROXY_PASS. Per C5, MAKER_PROXY_PASS cannot close a case; the canonical fail-closed runner therefore reports 1 PASS + 91 BLOCKED. Prior maker evidence is preserved as maker evidence only and is NOT upgraded to independent acceptance.",
+  "case_specific_executors": ["TST-037"],
+  "blocking_tt_refs": ["TT-HERMES-UNINSTALL (TST-054)", "TT-FINAL-PACKAGE-READBACK (TST-092)"],
+  "recorded_at": "2026-08-08T10:15:00+08:00"
+}

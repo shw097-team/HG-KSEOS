@@ -1,0 +1,233 @@
+{
+ "schema": "HGK-UECX-RAW-INDEPENDENT-EVIDENCE-INDEX/1",
+ "captured_at_utc": "2026-08-09T06:03:34.659853+00:00",
+ "p0_runtime_pass_journeys": 13,
+ "p0_runtime_pass_raw_evidence_missing": 0,
+ "p0_runtime_pass_independent_evidence_missing": 0,
+ "journeys": {
+  "UEX-001": {
+   "uex_id": "UEX-001",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-001/raw/raw.json",
+     "sha256": "4224d09d3e983d97d1a9720e3546d2b745231d1f0023d5de2bd2d07359c8605e"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-001/independent/independent.json",
+     "sha256": "659ae9a4633c8ac10fc05c4b80daa5ca9defa6a247b374e8f3c4b674b0095b30"
+    }
+   ]
+  },
+  "UEX-002": {
+   "uex_id": "UEX-002",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-002/raw/raw.json",
+     "sha256": "a752308b3297d465e3a0790483105e37cbc2ae3674f3f928fde7999d15569cf4"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-002/independent/independent.json",
+     "sha256": "5cf57d717bbf0652043a4995e5fbd8e72dad0239ad0ad9605613024b42786035"
+    }
+   ]
+  },
+  "UEX-003": {
+   "uex_id": "UEX-003",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-003/raw/raw.json",
+     "sha256": "038fb1ec8266e9db9f62e3a32a771e60ae441251089c8f09a686d7e10a2980b2"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-003/independent/independent.json",
+     "sha256": "c6d797f1b99c72aa6e42e0b4775960e340abc800b132448ee81e1bf3c02ce9d7"
+    }
+   ]
+  },
+  "UEX-004": {
+   "uex_id": "UEX-004",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-004/raw/raw.json",
+     "sha256": "b26095d1811a07a90992f8566b9eb5f6d8655a0173f27d7e9e69167cebbf6dee"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-004/independent/independent.json",
+     "sha256": "a5ca7480c816eb22495d7b55db9d1638a20cb7528bc518a5f80bb6c5e93b15d0"
+    }
+   ]
+  },
+  "UEX-005": {
+   "uex_id": "UEX-005",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-005/raw/raw.json",
+     "sha256": "36e29ffc9eb6af82cc4893724f5a3623b7de1bd5d1e2d64c43617d3e87793f07"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-005/independent/independent.json",
+     "sha256": "8e3d2b211a8e046c206865f1f1d674e65bb229ca907da79ed77ab984dd6ef804"
+    }
+   ]
+  },
+  "UEX-006": {
+   "uex_id": "UEX-006",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-006/raw/raw.json",
+     "sha256": "01f6ff7f9610cfa1f8c8aeddba25dc981b4a79c88cb2df4f9f99e64cce4ae114"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-006/independent/independent.json",
+     "sha256": "5d3d480e2b5e13e5c26a1e3a8446f6b81762a0594ddb89d3bd20866d66f8d021"
+    }
+   ]
+  },
+  "UEX-007": {
+   "uex_id": "UEX-007",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-007/raw/raw.json",
+     "sha256": "3b7d4ac1d115da66429d090315ea35a0e1909933e6d1592c068500dc4c34d878"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-007/independent/independent.json",
+     "sha256": "53eed70674c6647e4d2f2542592baf87c733a164e72806c658e8bfbe0a4f5172"
+    }
+   ]
+  },
+  "UEX-008": {
+   "uex_id": "UEX-008",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-008/raw/raw.json",
+     "sha256": "1836178e7ada4b1b8b2e1fc943e7e286b2e5f0b2355791de5a341bac5e006070"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-008/independent/independent.json",
+     "sha256": "477fec6492c5a4d27c65ec2dd9207ebf66212b99cf362407bbe079d56f8c3413"
+    }
+   ]
+  },
+  "UEX-009": {
+   "uex_id": "UEX-009",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-009/raw/raw.json",
+     "sha256": "55e6cafdd2acd070de9a100151b094157f36c324558069f2df7067ec3b3a92f6"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-009/independent/independent.json",
+     "sha256": "bee474241fcdf04ba74486a1e917dc3943bec7f26f466f6974147dc0c2e7d370"
+    }
+   ]
+  },
+  "UEX-010": {
+   "uex_id": "UEX-010",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-010/raw/raw.json",
+     "sha256": "7aed8bb6ede13bebb87c52c2b15e0597431a6811056f8b57d25c182ed00e0801"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-010/independent/independent.json",
+     "sha256": "4b6352f0214480a183ca6731a878994ecc574076d8c4a530aebc006a22050249"
+    }
+   ]
+  },
+  "UEX-011": {
+   "uex_id": "UEX-011",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-011/raw/raw.json",
+     "sha256": "daed2e47a14f5aaf8ae120f928eb9102fad2d38306229df90226d9f85803e409"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-011/independent/independent.json",
+     "sha256": "9d443d76c5c4e8826cabe0192e1c4c9968756ffa17e6ba61e962aad9f6867e62"
+    }
+   ]
+  },
+  "UEX-012": {
+   "uex_id": "UEX-012",
+   "terminal_status": "DEFERRED_SOURCE_BACKED",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "source_backed": true
+  },
+  "UEX-013": {
+   "uex_id": "UEX-013",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-013/raw/raw.json",
+     "sha256": "2bae3a85d49f852538a249549507af58916a407b927ab95cc337d2759c0f7249"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-013/independent/independent.json",
+     "sha256": "b2ea04077eb2992cc71edee8d0f44f20966d161f41f5d552c253bbfd03da0191"
+    }
+   ]
+  },
+  "UEX-014": {
+   "uex_id": "UEX-014",
+   "terminal_status": "OPTIONAL_NOT_ACTIVE_SOURCE_BACKED",
+   "raw_evidence": [],
+   "independent_evidence": [],
+   "source_backed": true
+  },
+  "UEX-015": {
+   "uex_id": "UEX-015",
+   "terminal_status": "E2E_RUNTIME_PASS",
+   "raw_evidence": [
+    {
+     "path": "evidence/uecx/UEX-015/raw/raw.json",
+     "sha256": "3f5cedb10459a41aa57a657145f75af48721b768bc7cf5ea42ed33614a4a6971"
+    }
+   ],
+   "independent_evidence": [
+    {
+     "path": "evidence/uecx/UEX-015/independent/independent.json",
+     "sha256": "3b50981bdea01a41619be1e299e0a6d0754b9147810eb55e3d878f7ba88731fd"
+    }
+   ]
+  }
+ },
+ "verdict": "PASS",
+ "fail_closed_errors": []
+}

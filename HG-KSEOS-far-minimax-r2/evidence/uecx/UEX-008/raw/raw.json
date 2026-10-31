@@ -1,0 +1,12 @@
+{
+ "uex_id": "UEX-008",
+ "kind": "raw",
+ "fixture": "var/uecx/vs08",
+ "command": "python var/u4_vertical_slices.py::VS-08",
+ "router_trace": {
+  "edge": "EDGE-50aa4327100cf7106cb4"
+ },
+ "raw_output": "relationship question bound to KG edge; plain lookup does not traverse KG",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:34.167529+00:00"
+}

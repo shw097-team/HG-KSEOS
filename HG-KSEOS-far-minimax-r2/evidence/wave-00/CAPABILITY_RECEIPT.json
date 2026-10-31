@@ -1,0 +1,23 @@
+{
+  "receipt_id": "CR-HGK-20260807-001",
+  "captured_at": "2026-08-07T20:02:16.2377164+08:00",
+  "capabilities": [
+    {"identity": "Windows PowerShell", "version": "5.1.26100.8875", "state": "QUALIFIED_FOR_PREFLIGHT"},
+    {"identity": "Git", "version": "2.53.0.windows.1", "state": "QUALIFIED_FOR_LOCAL_GIT"},
+    {"identity": "Codex bundled Python", "version": "3.12.13", "state": "AVAILABLE_FOR_BOOTSTRAP_ONLY_NOT_YET_PROJECT_BOUND"},
+    {"identity": "Codex bundled Node.js", "version": "24.14.0", "state": "AVAILABLE_NOT_REQUIRED_YET"},
+    {"identity": "Python project runtime", "version": null, "state": "NOT_INSTALLED_OR_BOUND"},
+    {"identity": "uv", "version": null, "state": "NOT_INSTALLED_OR_BOUND"},
+    {"identity": "SQLite CLI", "version": null, "state": "NOT_INSTALLED_OR_BOUND"},
+    {"identity": "Hermes Agent", "version": null, "state": "NOT_INSPECTED"}
+  ],
+  "canary": {
+    "powershell_spawn": "PASS",
+    "git_probe": "PASS_TOOL_EXECUTION_ROOT_NOT_REPO",
+    "workspace_write_read": "PASS_BY_SOURCE_INVENTORY_CREATION_AND_READBACK",
+    "python_uv_probe": "PARTIAL_BUNDLED_PYTHON_ONLY",
+    "sandbox_denial": "PASS_SOURCE_BOUND_READ_ONLY_BY_TASKSPEC",
+    "network_policy": "RESTRICTED_NOT_PROBED_EXTERNALLY"
+  }
+}
+

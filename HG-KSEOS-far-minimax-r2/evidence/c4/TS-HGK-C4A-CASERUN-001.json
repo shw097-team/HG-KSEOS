@@ -1,0 +1,38 @@
+{
+  "taskspec_id": "TS-HGK-C4A-CASERUN-001",
+  "gate": "C4-A",
+  "created_at": "2026-08-08T11:20:00+08:00",
+  "normative_source": {
+    "locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L925",
+    "contract": "eval/FROZEN_ACCEPTANCE_CASES.csv rerun_command = case.run --id TST-XXX (all 92 cases)",
+    "required": "YES - normative execution contract for frozen acceptance corpus"
+  },
+  "basis": {
+    "c2_workorder": "WO-HGK-C2-CASERUN-001",
+    "c2_evidence": "evidence/c2/EvidenceEnvelope.json (SHA 82875313...)",
+    "c2_validation": "focused 6/6 PASS, full suite 76 PASS at C2 time",
+    "c2_rollback": "patch rolled back from worktree; canonical HEAD lacks capability"
+  },
+  "defect": "hg-kseos CLI has no 'case run' subcommand; the frozen rerun_command contract is not executable via the documented command",
+  "implementation": {
+    "target_files": ["src/hg_kseos/cli.py", "tests/test_c2_case_run.py"],
+    "behavior": "hg-kseos case run --id TST-XXX [--root <path>] invokes tools/run_acceptance.py main with --root and --case-id, propagating exit code",
+    "executor": "Codex CLI via OpenCodex -> OpenCode Go -> deepseek-v4-flash",
+    "worktree": "worktrees/g4-opencodex-pilot (isolated)"
+  },
+  "acceptance": [
+    "R1: case run --id TST-037 exits 0",
+    "R2: unknown id exits non-zero",
+    "R3: missing id is parse error",
+    "R4: tests/test_c2_case_run.py passes",
+    "R5: only allowed files changed"
+  ],
+  "verification": {
+    "focused": "python -m unittest tests.test_c2_case_run -v",
+    "full_suite": "python -m unittest discover -s tests -t .",
+    "checker": "INDEPENDENT (fresh read-only context, not the writer)",
+    "route_readback": "live request log must show opencode-go/deepseek-v4-flash only"
+  },
+  "rollback": "revert the materialization commit; restore prior HEAD",
+  "status": "ADMITTED"
+}

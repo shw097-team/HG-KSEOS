@@ -1,0 +1,21 @@
+{
+ "drill": "v0.20 candidate active (qual venv + isolated home) -> v0.18.2 rollback route -> project state preserved -> v0.20 continues qualification",
+ "v0182_executable": {
+  "version": "Hermes Agent v0.18.2 (2026.7.7.2)",
+  "project": "C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent",
+  "runnable": true
+ },
+ "v0182_inference": {
+  "reply": "V0182_ROLLBACK_OK",
+  "route": "opencode-go/deepseek-v4-flash"
+ },
+ "v0182_home_preserved": true,
+ "v0182_config_preserved": true,
+ "v0182_provider_route_preserved": true,
+ "production_path_unchanged": true,
+ "rollback_procedure": "keep v0.18.2 binary/config/home untouched until final acceptance; remove/disqualify v0.20 by deleting the disposable qual root (venv+home); no system PATH or HERMES_HOME mutation was performed",
+ "verdict": "PASS",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:55:39.741780+00:00"
+}

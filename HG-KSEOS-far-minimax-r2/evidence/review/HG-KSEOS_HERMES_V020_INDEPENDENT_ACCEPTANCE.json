@@ -1,0 +1,28 @@
+{
+ "checker": "INDEPENDENT_CHECKER (fresh read-only context; not the maker of the v0.20 qualification runs)",
+ "re_read": {
+  "identity": "evidence/review/HG-KSEOS_HERMES_V020_IDENTITY_READBACK.json (tag/commit/version aligned, floating_main=false, hermes_update=false)",
+  "capability_delta": "evidence/review/HG-KSEOS_HERMES_V0182_TO_V020_CAPABILITY_DELTA.json (26 features inventoried)",
+  "reuse_matrix": "evidence/review/HG-KSEOS_HERMES_V020_REUSE_BINDING_MATRIX.json (20 capabilities; duplicates=0)",
+  "windows_qualification": "evidence/review/HG-KSEOS_HERMES_V020_WINDOWS_QUALIFICATION.json (Q01-Q20 PASS)",
+  "provider_route": "evidence/review/HG-KSEOS_HERMES_V020_PROVIDER_ROUTE_ACCEPTANCE.json (opencode-go/deepseek-v4-flash preserved)",
+  "kanban": "evidence/review/HG-KSEOS_HERMES_V020_KANBAN_ACCEPTANCE.json (Q06-Q11 PASS, one-writer)",
+  "goal": "evidence/review/HG-KSEOS_HERMES_V020_GOAL_CONTRACT_ACCEPTANCE.json (Q12-Q14 PASS)",
+  "rollback": "evidence/review/HG-KSEOS_HERMES_V020_ROLLBACK_ACCEPTANCE.json (v0.18.2 runnable)"
+ },
+ "hermes_v020_identity_exact": true,
+ "side_by_side_qualified": true,
+ "provider_model_unchanged": true,
+ "kanban_runtime_owner_verified": true,
+ "goal_runtime_owner_verified": true,
+ "duplicate_scheduler_remaining": 0,
+ "duplicate_task_db_remaining": 0,
+ "duplicate_checkpoint_store_remaining": 0,
+ "duplicate_provider_proxy_remaining": 0,
+ "promotion_authority_still_hgk": true,
+ "rollback_v0182_verified": true,
+ "verdict": "PASS",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:55:39.741780+00:00"
+}

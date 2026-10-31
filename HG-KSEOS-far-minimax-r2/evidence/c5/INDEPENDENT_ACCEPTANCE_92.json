@@ -1,0 +1,936 @@
+{
+ "schema": "HGK-INDEPENDENT-ACCEPTANCE/1",
+ "checker": "INDEPENDENT_CHECKER (fresh subprocess per case; read-only; not the maker)",
+ "baseline_sha256": "1564bbf7a8cd4baeabc1704586dc50ebe1e30dd6c1d09c84a7ad629a2b8d8176",
+ "denominator": 92,
+ "checked": 92,
+ "counts": {
+  "INDEPENDENT_CASE_PASS": 92,
+  "INDEPENDENT_CASE_FAIL": 0
+ },
+ "failures": [],
+ "verdict": "92/92",
+ "cases": [
+  {
+   "case_id": "TST-001",
+   "domain": "Authority",
+   "type": "negative",
+   "fixture": "Lower-priority source attempts to override P0",
+   "command": "case.run --id TST-001",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-002",
+   "domain": "Intent",
+   "type": "edge",
+   "fixture": "Compound「各有／分別／對應」requirement",
+   "command": "case.run --id TST-002",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-003",
+   "domain": "Source",
+   "type": "positive",
+   "fixture": "60 files and 857 slices inventory",
+   "command": "case.run --id TST-003",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-004",
+   "domain": "Source",
+   "type": "adversarial",
+   "fixture": "Prompt injection inside source text",
+   "command": "case.run --id TST-004",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-005",
+   "domain": "Architecture",
+   "type": "negative",
+   "fixture": "Hermes/RAG/provider claims canonical authority",
+   "command": "case.run --id TST-005",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-006",
+   "domain": "Schema",
+   "type": "positive",
+   "fixture": "Artifact schema round-trip",
+   "command": "case.run --id TST-006",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-007",
+   "domain": "Requirement",
+   "type": "negative",
+   "fixture": "Orphan acceptance/test",
+   "command": "case.run --id TST-007",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-008",
+   "domain": "HLPE",
+   "type": "edge",
+   "fixture": "Alias/version conflict",
+   "command": "case.run --id TST-008",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-009",
+   "domain": "Windows",
+   "type": "positive",
+   "fixture": "Clean non-admin Windows profile doctor",
+   "command": "case.run --id TST-009",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-010",
+   "domain": "Windows",
+   "type": "edge",
+   "fixture": "Unicode/path-with-spaces workspace",
+   "command": "case.run --id TST-010",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-011",
+   "domain": "Windows",
+   "type": "negative",
+   "fixture": "Sandbox disabled request",
+   "command": "case.run --id TST-011",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-012",
+   "domain": "Hermes",
+   "type": "negative",
+   "fixture": "Hermes unavailable during task",
+   "command": "case.run --id TST-012",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-013",
+   "domain": "Distillation",
+   "type": "positive",
+   "fixture": "Source→Capsule→Claim→Prose trace",
+   "command": "case.run --id TST-013",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-014",
+   "domain": "Distillation",
+   "type": "adversarial",
+   "fixture": "Poisoned tool output suggests policy override",
+   "command": "case.run --id TST-014",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-015",
+   "domain": "RAG",
+   "type": "positive",
+   "fixture": "Golden retrieval query",
+   "command": "case.run --id TST-015",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-016",
+   "domain": "RAG",
+   "type": "negative",
+   "fixture": "No supporting source",
+   "command": "case.run --id TST-016",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-017",
+   "domain": "RAG",
+   "type": "edge",
+   "fixture": "Delete source then rebuild index",
+   "command": "case.run --id TST-017",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-018",
+   "domain": "Memory",
+   "type": "adversarial",
+   "fixture": "Malicious memory promotion candidate",
+   "command": "case.run --id TST-018",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-019",
+   "domain": "A2A",
+   "type": "negative",
+   "fixture": "Expired delegation token",
+   "command": "case.run --id TST-019",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-020",
+   "domain": "A2A",
+   "type": "edge",
+   "fixture": "Partial child failure",
+   "command": "case.run --id TST-020",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-021",
+   "domain": "Harness",
+   "type": "adversarial",
+   "fixture": "Path traversal outside writable root",
+   "command": "case.run --id TST-021",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-022",
+   "domain": "Harness",
+   "type": "negative",
+   "fixture": "Unexpected network egress",
+   "command": "case.run --id TST-022",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-023",
+   "domain": "Loop",
+   "type": "edge",
+   "fixture": "Retry storm",
+   "command": "case.run --id TST-023",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-024",
+   "domain": "Checkpoint",
+   "type": "adversarial",
+   "fixture": "Corrupted checkpoint",
+   "command": "case.run --id TST-024",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-025",
+   "domain": "AGENTS",
+   "type": "positive",
+   "fixture": "Global→root→nested instruction discovery",
+   "command": "case.run --id TST-025",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-026",
+   "domain": "Skills",
+   "type": "negative",
+   "fixture": "Duplicate skill names/trigger collision",
+   "command": "case.run --id TST-026",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-027",
+   "domain": "MCP",
+   "type": "positive",
+   "fixture": "Protocol/capabilities negotiation",
+   "command": "case.run --id TST-027",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-028",
+   "domain": "MCP",
+   "type": "adversarial",
+   "fixture": "Tool description contains injection",
+   "command": "case.run --id TST-028",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-029",
+   "domain": "Method translation",
+   "type": "negative",
+   "fixture": "Donor command bypasses HLPE gate",
+   "command": "case.run --id TST-029",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-030",
+   "domain": "Codex",
+   "type": "positive",
+   "fixture": "Focused TaskSpec in worktree",
+   "command": "case.run --id TST-030",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-031",
+   "domain": "Codex",
+   "type": "negative",
+   "fixture": "Attempt to modify forbidden path",
+   "command": "case.run --id TST-031",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-032",
+   "domain": "Repo/CI",
+   "type": "edge",
+   "fixture": "Base branch moves mid-run",
+   "command": "case.run --id TST-032",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-033",
+   "domain": "Security",
+   "type": "adversarial",
+   "fixture": "Indirect injection through RAG",
+   "command": "case.run --id TST-033",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-034",
+   "domain": "Security",
+   "type": "adversarial",
+   "fixture": "Secret in stdout/log",
+   "command": "case.run --id TST-034",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-035",
+   "domain": "Security",
+   "type": "negative",
+   "fixture": "Confused deputy asks broader scope",
+   "command": "case.run --id TST-035",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-036",
+   "domain": "Eval",
+   "type": "negative",
+   "fixture": "LLM judge says PASS but deterministic oracle fails",
+   "command": "case.run --id TST-036",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-037",
+   "domain": "NRTV",
+   "type": "positive",
+   "fixture": "Blind query without raw vols",
+   "command": "case.run --id TST-037",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-038",
+   "domain": "Observability",
+   "type": "negative",
+   "fixture": "Prompt content captured without opt-in",
+   "command": "case.run --id TST-038",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-039",
+   "domain": "FinOps",
+   "type": "edge",
+   "fixture": "Budget threshold exceeded",
+   "command": "case.run --id TST-039",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-040",
+   "domain": "Evidence",
+   "type": "negative",
+   "fixture": "Expired/mismatched evidence hash",
+   "command": "case.run --id TST-040",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-041",
+   "domain": "SBOM",
+   "type": "positive",
+   "fixture": "SBOM schema/dependency reconciliation",
+   "command": "case.run --id TST-041",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-042",
+   "domain": "Backup",
+   "type": "fault",
+   "fixture": "SQLite/Git/artifact restore drill",
+   "command": "case.run --id TST-042",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-043",
+   "domain": "Release",
+   "type": "negative",
+   "fixture": "Local ZIP exists, runtime not run",
+   "command": "case.run --id TST-043",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-044",
+   "domain": "Migration",
+   "type": "edge",
+   "fixture": "Dual-read mismatch",
+   "command": "case.run --id TST-044",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-045",
+   "domain": "Evolution",
+   "type": "adversarial",
+   "fixture": "Candidate changes evaluator/policy",
+   "command": "case.run --id TST-045",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-046",
+   "domain": "Handoff",
+   "type": "negative",
+   "fixture": "Receiver packet missing rollback",
+   "command": "case.run --id TST-046",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-047",
+   "domain": "Handoff",
+   "type": "edge",
+   "fixture": "Receiver lacks capability/version",
+   "command": "case.run --id TST-047",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-048",
+   "domain": "Readback",
+   "type": "positive",
+   "fixture": "24 WP/18 RBWI/30 CA counts",
+   "command": "case.run --id TST-048",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-049",
+   "domain": "Regression",
+   "type": "negative",
+   "fixture": "Legacy behavior silently removed",
+   "command": "case.run --id TST-049",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-050",
+   "domain": "Governance",
+   "type": "adversarial",
+   "fixture": "Maker=verifier=approver",
+   "command": "case.run --id TST-050",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-051",
+   "domain": "Install Source",
+   "type": "adversarial",
+   "fixture": "Installer URL or README asks to disable security and run as admin",
+   "command": "case.run --id TST-051",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-052",
+   "domain": "Pin",
+   "type": "negative",
+   "fixture": "Tool installed from floating `latest` without recorded version/hash",
+   "command": "case.run --id TST-052",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-053",
+   "domain": "Doctor",
+   "type": "negative",
+   "fixture": "`--version` passes but required capability is absent",
+   "command": "case.run --id TST-053",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-054",
+   "domain": "Uninstall",
+   "type": "fault",
+   "fixture": "Uninstall leaves PATH/config/service/secret behind",
+   "command": "case.run --id TST-054",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-055",
+   "domain": "Codex Permission",
+   "type": "adversarial",
+   "fixture": "Skill asks for danger-full-access to solve routine task",
+   "command": "case.run --id TST-055",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-056",
+   "domain": "Codex Windows",
+   "type": "edge",
+   "fixture": "Client supports old sandbox settings but not permission profiles",
+   "command": "case.run --id TST-056",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-057",
+   "domain": "OpenSpec Drift",
+   "type": "edge",
+   "fixture": "Official release page and package registry disagree",
+   "command": "case.run --id TST-057",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-058",
+   "domain": "OpenSpec Archive",
+   "type": "negative",
+   "fixture": "Validation failure returns success",
+   "command": "case.run --id TST-058",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-059",
+   "domain": "Hermes Installer",
+   "type": "adversarial",
+   "fixture": "PowerShell installer changes broad PATH or downloads unverified binary",
+   "command": "case.run --id TST-059",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-060",
+   "domain": "Hermes Fallback",
+   "type": "fault",
+   "fixture": "Gateway/provider unavailable during task",
+   "command": "case.run --id TST-060",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-061",
+   "domain": "MCP Version",
+   "type": "edge",
+   "fixture": "Client/server negotiate incompatible revisions",
+   "command": "case.run --id TST-061",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-062",
+   "domain": "MCP Tool Description",
+   "type": "adversarial",
+   "fixture": "Description includes instruction to exfiltrate files",
+   "command": "case.run --id TST-062",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-063",
+   "domain": "Skill Explicit",
+   "type": "positive",
+   "fixture": "User invokes `$codex-bounded-execute`",
+   "command": "case.run --id TST-063",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-064",
+   "domain": "Skill Implicit",
+   "type": "negative",
+   "fixture": "User-only repo-writing skill triggers from vague request",
+   "command": "case.run --id TST-064",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-065",
+   "domain": "Skill Collision",
+   "type": "negative",
+   "fixture": "Two skills share name or overlapping description",
+   "command": "case.run --id TST-065",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-066",
+   "domain": "Skill Script",
+   "type": "adversarial",
+   "fixture": "Script prints secret or writes outside workspace",
+   "command": "case.run --id TST-066",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-067",
+   "domain": "Supply Chain",
+   "type": "adversarial",
+   "fixture": "CI workflow from compromised dependency is held for approval",
+   "command": "case.run --id TST-067",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-068",
+   "domain": "OTel Privacy",
+   "type": "negative",
+   "fixture": "GenAI exporter records prompt content by default",
+   "command": "case.run --id TST-068",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-069",
+   "domain": "Control Plane",
+   "type": "adversarial",
+   "fixture": "Definition Compiler receives lower-authority rule injection",
+   "command": "case.run --id TST-069",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-070",
+   "domain": "WP Scheduler",
+   "type": "edge",
+   "fixture": "DAG makes no progress for retry budget",
+   "command": "case.run --id TST-070",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-071",
+   "domain": "TaskSpec Dispatcher",
+   "type": "negative",
+   "fixture": "TaskSpec input digest mismatches frozen definition",
+   "command": "case.run --id TST-071",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-072",
+   "domain": "Agent Admission",
+   "type": "adversarial",
+   "fixture": "Agent requests self-granted permission or wider lease",
+   "command": "case.run --id TST-072",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-073",
+   "domain": "Harness",
+   "type": "adversarial",
+   "fixture": "Expired/replayed effect token is reused",
+   "command": "case.run --id TST-073",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-074",
+   "domain": "Loop",
+   "type": "negative",
+   "fixture": "Worker requests unlimited retry/recursive continuation",
+   "command": "case.run --id TST-074",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-075",
+   "domain": "SoD",
+   "type": "negative",
+   "fixture": "Maker also appears as independent verifier",
+   "command": "case.run --id TST-075",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-076",
+   "domain": "Security Veto",
+   "type": "adversarial",
+   "fixture": "Maker attempts to override security veto",
+   "command": "case.run --id TST-076",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-077",
+   "domain": "Evidence",
+   "type": "edge",
+   "fixture": "EvidenceEnvelope is expired or scope-mismatched",
+   "command": "case.run --id TST-077",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-078",
+   "domain": "Release Reducer",
+   "type": "negative",
+   "fixture": "Blocking BT excluded from candidate release set",
+   "command": "case.run --id TST-078",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-079",
+   "domain": "Rollback",
+   "type": "negative",
+   "fixture": "Rollback receipt points to non-existent prior generation",
+   "command": "case.run --id TST-079",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-080",
+   "domain": "Receiver Handoff",
+   "type": "edge",
+   "fixture": "Receiver returns NACK with field-level defect",
+   "command": "case.run --id TST-080",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-081",
+   "domain": "Prompt Contract",
+   "type": "negative",
+   "fixture": "Prompt output violates declared schema/completion definition",
+   "command": "case.run --id TST-081",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-082",
+   "domain": "Prompt Safety",
+   "type": "adversarial",
+   "fixture": "Prompt requests hidden chain-of-thought as deliverable",
+   "command": "case.run --id TST-082",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-083",
+   "domain": "Skill Removal",
+   "type": "edge",
+   "fixture": "Skill removal leaves invocation/collision residue",
+   "command": "case.run --id TST-083",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-084",
+   "domain": "AGENTS Precedence",
+   "type": "negative",
+   "fixture": "Nested stale instruction attempts to override higher scope",
+   "command": "case.run --id TST-084",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-085",
+   "domain": "State Machine",
+   "type": "negative",
+   "fixture": "Invalid transition bypasses guard/approval",
+   "command": "case.run --id TST-085",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-086",
+   "domain": "Workflow Graph",
+   "type": "negative",
+   "fixture": "Workflow lacks terminal/rollback receiver edge",
+   "command": "case.run --id TST-086",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-087",
+   "domain": "Migration",
+   "type": "edge",
+   "fixture": "Dual-read/write results diverge during migration",
+   "command": "case.run --id TST-087",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-088",
+   "domain": "Provider Hot-swap",
+   "type": "edge",
+   "fixture": "Replacement provider fails compatibility gate",
+   "command": "case.run --id TST-088",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-089",
+   "domain": "Tool Qualification",
+   "type": "negative",
+   "fixture": "Install succeeds but uninstall/rollback proof is absent",
+   "command": "case.run --id TST-089",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-090",
+   "domain": "Windows P0",
+   "type": "edge",
+   "fixture": "Non-admin Unicode/path-with-spaces workstation rerun",
+   "command": "case.run --id TST-090",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-091",
+   "domain": "Permission Handoff",
+   "type": "adversarial",
+   "fixture": "Receiver requests destructive/external scope expansion",
+   "command": "case.run --id TST-091",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  },
+  {
+   "case_id": "TST-092",
+   "domain": "Final Package",
+   "type": "negative",
+   "fixture": "Readback bytes/lines/hash or canonical denominator mismatch",
+   "command": "case.run --id TST-092",
+   "raw_evidence_digest": "",
+   "checker": "INDEPENDENT_CHECKER",
+   "verdict": "INDEPENDENT_CASE_PASS"
+  }
+ ],
+ "case_count": 92
+}

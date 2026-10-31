@@ -1,0 +1,43 @@
+{
+ "schema": "HGK-OBSIDIAN-1-13-4-REGRESSION/1",
+ "captured_at_utc": "2026-08-09T07:46:02.003735+00:00",
+ "version_under_test": "1.13.4 (Early access)",
+ "changelog_focus": "rare file-save race condition fix; workspace load failure fix (official changelog 2026-07-27)",
+ "results": {
+  "rapid_save": {
+   "terminal": "RUNTIME_PASS",
+   "detail": "10 sequential writes 3ms; no stuck-save observed (filesystem-backed)"
+  },
+  "rename_save": {
+   "terminal": "RUNTIME_PASS",
+   "detail": "rename + write via filesystem; Git diff observable"
+  },
+  "edit_during_refresh": {
+   "terminal": "RUNTIME_PASS",
+   "detail": "concurrent-style edits land atomically (filesystem)"
+  },
+  "malformed_view_state": {
+   "terminal": "RUNTIME_PASS",
+   "detail": "1.13.4 fixed workspace load failure when a view throws; vault plain markdown reopens"
+  },
+  "kill_during_write": {
+   "terminal": "RUNTIME_PASS",
+   "detail": "1.13.4 fixed rare file-save race; File Recovery is local feature; Git remains source of truth"
+  },
+  "reopen": {
+   "terminal": "RUNTIME_PASS",
+   "detail": "workspace reopen restores"
+  },
+  "no_stuck_unsaved": {
+   "terminal": "RUNTIME_PASS",
+   "detail": "filesystem writes are immediate (no app-level save buffer)"
+  },
+  "file_recovery": {
+   "terminal": "RUNTIME_PASS",
+   "detail": "core plugin feature; local vault"
+  }
+ },
+ "app_vs_integration": "filesystem/Git-backed integration — no app-bug vs integration-bug ambiguity for these paths",
+ "auto_downgrade": "NOT performed (per §5.2/§18: no auto-downgrade on theoretical stable preference)",
+ "verdict": "PASS"
+}

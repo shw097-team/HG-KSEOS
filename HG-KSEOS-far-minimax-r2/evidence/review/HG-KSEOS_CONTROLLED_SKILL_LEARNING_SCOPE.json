@@ -1,0 +1,85 @@
+{
+ "schema": "HGK-CONTROLLED-SKILL-LEARNING-SCOPE-RESOLUTION/1",
+ "captured_at_utc": "2026-08-09T05:51:41.375564+00:00",
+ "resolution": [
+  {
+   "element": "memory_experience_capture",
+   "disposition": "E2E_RUNTIME_PASS",
+   "source_locator": "P0-CIP L2320 COV-11-01 (memory plane taxonomy: work memory/checkpoint/episode/lesson/policy candidate)",
+   "reason": "KnowledgeFactory remember/active_memory runtime 11/11; memory candidates governed"
+  },
+  {
+   "element": "knowledge_incremental_evolution",
+   "disposition": "E2E_RUNTIME_PASS",
+   "source_locator": "P0-CIP L2322 COV-11-03 (Error Book/Regression Case); L2324 COV-11-05 (evolution lab frozen eval/holdout/baseline)",
+   "reason": "withdrawal→rebuild→abstain + knowledge refresh runtime proven"
+  },
+  {
+   "element": "fit_gap",
+   "disposition": "E2E_RUNTIME_PASS",
+   "source_locator": "PREDEV REQ-170 (FIT-GAP/reuse search); UEX-011 E2E_RUNTIME_PASS",
+   "reason": "no-fit → FIT-GAP/reuse; no direct promotion (VS-11)"
+  },
+  {
+   "element": "existing_skill_reuse",
+   "disposition": "E2E_RUNTIME_PASS",
+   "source_locator": "PREDEV REQ-169 (skill auto-selection); UEX-010 E2E_RUNTIME_PASS",
+   "reason": "SkillRegistry.route implicit selection with contraindication guard"
+  },
+  {
+   "element": "skill_candidate_creation",
+   "disposition": "E2E_RUNTIME_PASS",
+   "source_locator": "P0-CIP L2320 COV-11-01 (policy candidate 法位); L2323 COV-11-04 (candidate first, no direct production mutation)",
+   "reason": "ingest→CANDIDATE state exists; promotion requires evidence ref (ERR_PROMOTION_EVIDENCE_REQUIRED gate)"
+  },
+  {
+   "element": "skill_qualification",
+   "disposition": "DEFERRED_SOURCE_BACKED",
+   "source_locator": "P0-CIP L2324 COV-11-05 (frozen eval/holdout/A-B/cost-risk/rollback) — designed, full qualification harness not activated this run",
+   "reason": "governance requirements CONFIRMED; autonomous qualification loop not source-activated"
+  },
+  {
+   "element": "skill_holdout",
+   "disposition": "DEFERRED_SOURCE_BACKED",
+   "source_locator": "P0-CIP L2324 COV-11-05 (holdout required) — same as qualification",
+   "reason": "designed; not activated"
+  },
+  {
+   "element": "skill_independent_approval",
+   "disposition": "DEFERRED_SOURCE_BACKED",
+   "source_locator": "P0-CIP L2325 COV-11-06 (promotion requires independent verifier AND Human Policy Owner approval)",
+   "reason": "Human Policy Owner approval is HITL-gated; not auto-executed this run"
+  },
+  {
+   "element": "skill_promotion",
+   "disposition": "DEFERRED_SOURCE_BACKED",
+   "source_locator": "P0-CIP L2325 COV-11-06 + PUB-10#H2-07 Canary/Promotion",
+   "reason": "promotion requires independent verifier + Human Policy Owner — deferred pending governance activation"
+  },
+  {
+   "element": "skill_reuse_after_promotion",
+   "disposition": "DEFERRED_SOURCE_BACKED",
+   "source_locator": "dependent on promotion (deferred above)",
+   "reason": "cannot exist before promotion"
+  },
+  {
+   "element": "bad_learning_rollback",
+   "disposition": "E2E_RUNTIME_PASS",
+   "source_locator": "P0-CIP L2326 COV-11-07 (rollback/deprecation); L2324 COV-11-05 (rollback)",
+   "reason": "spine rollback 499/79/3 events; restore drill RTO 9.27ms"
+  },
+  {
+   "element": "authority_non_mutation",
+   "disposition": "E2E_RUNTIME_PASS",
+   "source_locator": "P0-CIP L2323 COV-11-04 (candidate first, no direct production policy mutation); U5 neg_12",
+   "reason": "negative test neg_12 PASS; constitution/frozen reqs immutable"
+  }
+ ],
+ "summary": {
+  "e2e_runtime_pass": 7,
+  "deferred_source_backed": 5,
+  "autonomous_full_loop": "DEFERRED_SOURCE_BACKED",
+  "autonomous_loop_reason": "skill qualification→holdout→independent approval→promotion→reuse loop requires independent verifier + Human Policy Owner approval (COV-11-06); not autonomously activated this run; governed candidate/reuse/capture elements are E2E_RUNTIME_PASS"
+ },
+ "verdict": "PASS"
+}

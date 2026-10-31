@@ -1,0 +1,36 @@
+{
+ "schema": "HGK-TASK011-EXTERNAL-ACCEPTANCE-SEMANTIC-CLOSURE-CHECKPOINT/1",
+ "task_id": "HGK-TASK011-AUTONOMY-EVOLUTION-EXTERNAL-ACCEPTANCE-SEMANTIC-CLOSURE-012",
+ "status": "PAUSED_USER_REQUEST",
+ "captured_at_utc": "2026-08-09T16:00:42.492763+00:00",
+ "sealed_baseline": {
+  "head": "8164e142990fa876c6407913ec811c7ddc15d833",
+  "tree_dirty_entries": 11,
+  "note": "HEAD 8164e142 is the task-011 seal; task-012 work is UNCOMMITTED (in-progress)"
+ },
+ "completed_items": {
+  "F7_APL05_real_runtime": "PASS — Codex CLI -> OpenCodex -> OpenCodeGo -> deepseek-v4-flash real execution; receipt evidence/review/HG-KSEOS_TASK011_APL05_RUNTIME_RECEIPT.json (final_verdict=PASS, no OpenAI fallback, 3/3 tests, independent recompute PASS)",
+  "F12_promotion_policy_source_resolved": "DONE — src/hg_kseos/evolution.py now requires Human Policy Owner (P0-CIP COV-11-06) for ALL risk levels; no implementation-invented auto-promotion; source_locator added to policy",
+  "F11_GE11_terminal": "DONE — var/e11_self_acceptance.py GE-10/GE-11 now emit PROMOTION_READY_HITL_SOURCE_REQUIRED / NOT_APPLICABLE_UNTIL_APPROVED; GE acceptance 14/14 + negatives 16/16 PASS",
+  "F16_user_guide_currentness": "DONE — docs/ stale companion wording fixed (sections 7/33/1); audit evidence/review/HG-KSEOS_USER_GUIDE_CURRENTNESS_AUDIT.json verdict=PASS (current_stale=0, task011+task012 identity present)",
+  "F1_F2_schema3_predicates": "IN_PROGRESS — EVAL_SPECS/hard_check_evaluations block + report renderer rewritten in var/e09_acceptance.py; generator currently FAILS on KeyError 'baseline_lineage_preserved' (old checks dict lacks key); acceptance JSON still schema /2 until fixed+rerun",
+  "F3_current_identity": "IN_PROGRESS — acceptance_context dict written in generator but JSON not yet regenerated",
+  "F13_F14_md_sections": "DONE — var/d12_handoff_evidence.py Section U currentness + reseal reason + Section Y appended (patch applied, generator not yet rerun)",
+  "F28_regression_tests": "WRITTEN — tests/test_task012_semantic_closure.py (12 tests); currently 4 FAIL + 4 ERROR because acceptance JSON is still schema /2 (generator mid-refactor)"
+ },
+ "not_started": [
+  "F4/F18/F19 — independent checkers (e09_independent, e10_independent_md) predicate/currentness validation",
+  "F6/F10 — APL 11/11 + GE 14/14 row-by-row external readbacks",
+  "F20 — fail-closed decision logic final wiring",
+  "commit + reseal (new HEAD/package/TST-092) if tracked changes",
+  "full suite + reducers + Final MD regen + external acceptance + tree clean"
+ ],
+ "next_actions": [
+  "Fix e09_acceptance.py KeyError: add baseline_lineage_preserved (and other new keys) to the checks dict before EVAL_SPECS",
+  "Rerun var/e09_acceptance.py -> schema /3 JSON + report",
+  "Rerun var/d12_handoff_evidence.py -> Final MD sections U/V/W/X/Y",
+  "Rerun tests/test_task012_semantic_closure.py (expect 12/12)",
+  "Update e09_independent/e10_independent_md for predicate semantics + task-011 currentness",
+  "Full suite, reducers, package, TST-092, Final MD readback, external acceptance, tree clean"
+ ]
+}

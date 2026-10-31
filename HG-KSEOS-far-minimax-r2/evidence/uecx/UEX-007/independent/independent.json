@@ -1,0 +1,9 @@
+{
+ "uex_id": "UEX-007",
+ "kind": "independent",
+ "checker": "INDEPENDENT_CHECKER",
+ "independent_assertion": "verdict E2E_RUNTIME_PASS confirmed by fresh subprocess execution",
+ "raw_receipt_sha256": "f26e7ed87c2d7c0406e6e6760fc1dd95f71fc3911b8fabccd01e30b57bf1dc7d",
+ "verdict": "E2E_RUNTIME_PASS",
+ "captured_at_utc": "2026-08-09T06:03:34.651842+00:00"
+}

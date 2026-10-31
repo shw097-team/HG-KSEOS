@@ -1,0 +1,47 @@
+{
+ "schema": "HGK-TASK011-APL05-RUNTIME-RECEIPT/1",
+ "captured_at_utc": "2026-08-09T15:04:28.877012+00:00",
+ "project_id": "HGK-PRJ-APL05",
+ "workorder_id": "WO-APL05-01",
+ "taskspec_id": "TS-APL05-01",
+ "executor": "codex-cli",
+ "transport": "opencodex-shim",
+ "provider": "opencode-go",
+ "model": "deepseek-v4-flash",
+ "openai_fallback": false,
+ "base_head": "e3092064366ce3b01b25e2229f470b9df884ad57",
+ "exit_code": 0,
+ "execution_ok": true,
+ "test_ok": true,
+ "test_output_tail": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n",
+ "diff_stat": " calculator.py            |  6 ++++++\n tests/test_calculator.py | 24 ++++++++++++++++++++++++\n 2 files changed, 30 insertions(+)\n",
+ "changed_files": [
+  "__pycache__\\calculator.cpython-312.pyc",
+  "calculator.py",
+  "tests\\__init__.py",
+  "tests\\__pycache__\\__init__.cpython-312.pyc",
+  "tests\\__pycache__\\test_calculator.cpython-312.pyc",
+  "tests\\test_calculator.py"
+ ],
+ "new_test_files": [
+  "tests\\__pycache__\\__init__.cpython-312.pyc",
+  "tests\\__pycache__\\test_calculator.cpython-312.pyc",
+  "tests\\test_calculator.py"
+ ],
+ "codex_output_tail": "alculator.py b/calculator.py\nindex 608f9481b86087c717855b2f427ffd14677f2d93..2686c3257fb618948a97f76974645194a74ac0b6\n--- a/calculator.py\n+++ b/calculator.py\n@@ -1,2 +1,8 @@\n-def add(a, b):\n-    return a + b\n+def add(a, b):\n+    return a + b\n+\n+def sub(a, b):\n+    return a - b\n+\n+def multiply(a, b):\n+    return a * b\ndiff --git a/tests/test_calculator.py b/tests/test_calculator.py\nindex e69de29bb2d1d6434b8b29ae775ad8c2e48c5391..49f12fe3a3c95737f2bf2c676e86f73296adbbbc\n--- a/tests/test_calculator.py\n+++ b/tests/test_calculator.py\n@@ -0,0 +1,24 @@\n+import unittest\n+\n+from calculator import add, sub, multiply\n+\n+\n+class TestCalculator(unittest.TestCase):\n+    def test_add(self):\n+        self.assertEqual(add(1, 2), 3)\n+        self.assertEqual(add(-1, 1), 0)\n+        self.assertEqual(add(0, 0), 0)\n+\n+    def test_sub(self):\n+        self.assertEqual(sub(5, 3), 2)\n+        self.assertEqual(sub(0, 5), -5)\n+        self.assertEqual(sub(-1, -1), 0)\n+\n+    def test_multiply(self):\n+        self.assertEqual(multiply(3, 4), 12)\n+        self.assertEqual(multiply(-2, 3), -6)\n+        self.assertEqual(multiply(0, 100), 0)\n+\n+\n+if __name__ == \"__main__\":\n+    unittest.main()\n\ntokens used\n9,912\n",
+ "raw_evidence_path": "evidence/review/HG-KSEOS_TASK011_APL05_RUNTIME_RECEIPT.json",
+ "verdict": "PASS",
+ "independent": {
+  "checker": "INDEPENDENT_CHECKER",
+  "fresh_test_ok": true,
+  "has_sub": true,
+  "has_multiply": true,
+  "recomputed_verdict": "PASS"
+ },
+ "final_verdict": "PASS",
+ "rollback": {
+  "pointer": "RB-WO-APL05-01",
+  "base_head": "e3092064366ce3b01b25e2229f470b9df884ad57",
+  "action": "git checkout base_head + delete worktree"
+ }
+}

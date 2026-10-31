@@ -1,0 +1,12 @@
+{
+ "uex_id": "UEX-002",
+ "kind": "raw",
+ "fixture": "var/uecx/vs02",
+ "command": "python var/u4_vertical_slices.py::VS-02",
+ "router_trace": {
+  "workorder_admission": "ACK"
+ },
+ "raw_output": "coding task admitted via WorkOrder contract (rollback declared); Codex as admitted writer; maker!=checker",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:33.508488+00:00"
+}

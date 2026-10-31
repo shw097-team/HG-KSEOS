@@ -1,0 +1,50 @@
+{
+  "receipt_id": "MB-HGK-20260807-001",
+  "captured_at": "2026-08-07T20:02:16.2377164+08:00",
+  "machine": "DESKTOP-57EO414",
+  "os": "Microsoft Windows NT 10.0.26200.0",
+  "architecture": "x64",
+  "culture": "zh-TW",
+  "powershell": {
+    "available": true,
+    "edition": "Desktop",
+    "version": "5.1.26100.8875",
+    "pwsh_7_on_path": false
+  },
+  "git": {
+    "available": true,
+    "version": "2.53.0.windows.1",
+    "path": "C:\\Program Files\\Git\\cmd\\git.exe"
+  },
+  "codex_bundled_runtime": {
+    "bundle_version": "26.805.11740",
+    "python": {
+      "path": "C:\\Users\\user\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "version": "3.12.13"
+    },
+    "node": {
+      "path": "C:\\Users\\user\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "version": "24.14.0"
+    }
+  },
+  "path_probes": {
+    "python": "MISSING",
+    "uv": "MISSING",
+    "sqlite3": "MISSING",
+    "node": "MISSING",
+    "py_launcher": "PRESENT_WITH_NO_INSTALLED_PYTHONS"
+  },
+  "model_runtime": {
+    "preferred": "GPT-5.6-SOL",
+    "observed": "GPT-5-family Codex; exact model/build identifier is not exposed to the agent",
+    "reasoning_mode": "NOT_EXPOSED",
+    "status": "MODEL_RUNTIME_DRIFT_RECORDED_CONTINUE"
+  },
+  "sandbox": {
+    "mode": "workspace-write",
+    "network": "restricted",
+    "source_root_effective_mode": "read-only by TaskSpec",
+    "maker_root_effective_mode": "writable"
+  }
+}
+

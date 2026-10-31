@@ -1,0 +1,10 @@
+{
+ "schema": "HGK-UECX-EXPECTATION-DENOMINATOR-READBACK/1",
+ "expectations_total": 17,
+ "by_disposition": {
+  "ACTIVE_REQUIRED": 15,
+  "OPTIONAL": 2
+ },
+ "sum_matches_total": true,
+ "runtime_required_now": 15
+}

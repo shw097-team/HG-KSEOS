@@ -1,0 +1,31 @@
+{
+ "skill_loaded": {
+  "name": "windows-bootstrap-doctor",
+  "source": "HG-KSEOS control/skills (normative fixture)",
+  "purpose_reported": "preflight、dry-run、install plan、doctor、rollback"
+ },
+ "skill_mechanism_owner": "HERMES (skill file loading/invocation)",
+ "curator_boundary": {
+  "never_promotes": true,
+  "max_destructive_action": "archive (recoverable)",
+  "scope": "created_by=agent only",
+  "bundled_hgk_skills_unaffected": true
+ },
+ "hgk_governance_retained": [
+  "candidate admission",
+  "FIT-GAP",
+  "sandbox",
+  "negative/security",
+  "holdout",
+  "NRTV",
+  "independent checker",
+  "promotion policy",
+  "COV-11-06 Human Policy Owner gate",
+  "rollback acceptance"
+ ],
+ "authority_escape": false,
+ "verdict": "PASS",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:55:39.741780+00:00"
+}

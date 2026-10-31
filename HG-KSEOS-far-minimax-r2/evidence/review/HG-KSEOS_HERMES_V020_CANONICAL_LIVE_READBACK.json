@@ -1,0 +1,48 @@
+{
+ "schema": "HGK-HERMES-V020-CANONICAL-LIVE-READBACK/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T04:10:47.639467+00:00",
+ "resolved": {
+  "executable": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-v020\\venv\\Scripts\\hermes.exe",
+  "executable_exists": true,
+  "version_line": "Hermes Agent v0.20.0 (2026.8.3)",
+  "version": "0.20.0",
+  "tag": "v2026.8.3",
+  "commit": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb",
+  "hermes_core_ps1_pass": true,
+  "hermes_home": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-v020\\home",
+  "hermes_home_exists": true,
+  "config_path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-v020\\home\\config.yaml",
+  "config_exists": true,
+  "provider": "opencode-go",
+  "model": "deepseek-v4-flash",
+  "base_url": "https://opencode.ai/zen/go/v1",
+  "approvals_mode": "manual",
+  "kanban_db": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\hermes-v020\\home\\kanban.db",
+  "kanban_db_exists": true
+ },
+ "smokes": {
+  "project_provider_smoke": {
+   "prompt": "Reply with exactly: CANONICAL_V020_SMOKE_OK",
+   "reply_exact": true,
+   "verdict": "PASS"
+  },
+  "kanban_smoke": {
+   "flow": "create->claim->complete",
+   "task": "t_e52f058b",
+   "board": "var/hermes-v020/home/kanban.db (isolated)",
+   "verdict": "PASS"
+  },
+  "codex_route_smoke": {
+   "executor": "Codex CLI 0.147.0-alpha.6.5",
+   "transport": "OpenCodex loopback 127.0.0.1:10100",
+   "fixture": "%TEMP%/hgk-nm-qual/canonical-route-fixture",
+   "diff": "util.py triple() added",
+   "tests": "2/2 PASS",
+   "verdict": "PASS"
+  }
+ },
+ "canonical_identity_aligned": true,
+ "desktop_surface_note": "canonical product path resolves v0.20; the desktop interactive surface remains the user-managed v0.18.2 install — switching it is a separate user action (User Guide §40.8), not required for the canonical HG-KSEOS launch path",
+ "verdict": "PASS"
+}

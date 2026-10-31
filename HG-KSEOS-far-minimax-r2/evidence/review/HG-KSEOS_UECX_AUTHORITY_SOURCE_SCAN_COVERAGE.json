@@ -1,0 +1,474 @@
+{
+ "schema": "HGK-UECX-AUTHORITY-SOURCE-SCAN-COVERAGE/1",
+ "captured_at_utc": "2026-08-09T05:43:26.805918+00:00",
+ "source_families_required": 23,
+ "source_families_reviewed": 23,
+ "unreviewed_source_family": 0,
+ "source_file_missing": 0,
+ "missing_families": [],
+ "total_files_scanned": 80,
+ "families": [
+  {
+   "source_family": "P0-CIP",
+   "files": [
+    "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md"
+   ],
+   "file_hashes": [
+    "68b62b9ee2bb2b3ae5d172ccbb5a4182b20727dda8197e19e4a46905b518d911"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [
+    "UXR-001",
+    "UXR-002",
+    "UXR-003"
+   ],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "PREDEV",
+   "files": [
+    "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md"
+   ],
+   "file_hashes": [
+    "7e287444c99112978ec1740adaaa848511dbc49737bb3419790f3efd4241e76f"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [
+    "UXR-003",
+    "UXR-004",
+    "UXR-005",
+    "UXR-006",
+    "UXR-007",
+    "UXR-008",
+    "UXR-009"
+   ],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "Manifest",
+   "files": [
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\README_OR_PACKAGE_INDEX_MANIFEST.md"
+   ],
+   "file_hashes": [
+    "a187c845915cc802acc0df34dfd3f6a647e20fa6f1bd6f51a63b61d7c9555e14"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "Group-01",
+   "files": [
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-01_Authority_Source_Requirements.md"
+   ],
+   "file_hashes": [
+    "218fa5014b994af7ed397ce3bd634fba18b6445cd0f0cf59423050fb969095fe"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "Group-02",
+   "files": [
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-02_HLPE_Windows_Hermes_Distillation.md"
+   ],
+   "file_hashes": [
+    "1930deb7be33fdcbe28d81e68cc7b85c92ad33b8516153e27df5da62eb838153"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "Group-03",
+   "files": [
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-03_Context_Memory_RAG_Agents_Harness_Loops.md"
+   ],
+   "file_hashes": [
+    "d3f3c6cab95e8866f9f55b33d8f8c761a54320514cb5d294bc4e00c79828b0dc"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "Group-04",
+   "files": [
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-04_ControlPlane_Providers_ToolTranslation.md"
+   ],
+   "file_hashes": [
+    "bdf2e1f8c5b6f08f26ed9cb5b2e19429fe4b7ad8d859937c205e7486e0f58b25"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "Group-05",
+   "files": [
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-05_Coding_Security_Verification_SRE.md"
+   ],
+   "file_hashes": [
+    "a6dd3b01eff638e0a2afa1bca41fd1587fc7ee1197db7f1dd5e78ba6d429e3c7"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "Group-06",
+   "files": [
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-06_Evidence_DR_Evolution_Handoff_Release.md"
+   ],
+   "file_hashes": [
+    "a89a9fa6e1e0cfb8413d6fa0b647c3329791d7cf1c3cd88192689949aff57c87"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "Group-07",
+   "files": [
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md"
+   ],
+   "file_hashes": [
+    "8a30cb146a3be4ade7d5bee3bf17174d4c1b50452f3e23e5638d7568ac9f16e2"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [
+    "UXR-001"
+   ],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "Hermes DOC (01-20)",
+   "files": [
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-01_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-02_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-03_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-04_2026-07-16_r3.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-05_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-06_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-07_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-08_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-09_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-10_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-11_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-12_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-13_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-14_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-15_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-16_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-17_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-18_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-19_2026-07-16_r2.md",
+    "資料庫\\【2】Hermes_Agent_OS_專業技術文檔\\Hermes_Agent_OS_專業技術文檔_DOC-20_r2.md"
+   ],
+   "file_hashes": [
+    "4e2da5806390e538ea74424cd71d2f8800c96a2e9d49d56c4d6a0d7cd716b207",
+    "20263b81fea2852d83e6f4defc3aed75a0b3e9e8e0bfa42d26c57c41751c377c",
+    "a02c6ef87ea6b7591d71d0137c05d1e4f5c17f75d56a431773cee1d76970aa5b",
+    "d1fabca8fdf28c3643731d3cc3874029bba2ad982dc5906df6941246f2af4c6c",
+    "49fa532c1bee5420d21bd36726bc004d19e005b512c3a853fd73aca5e1472d0b",
+    "d90878c79c039b99c881044dd2a74c423a5bd08113efb75f5118da16d2020daa",
+    "3b0b2b92fbb0ca5d8ecdeaa6c6e2d63ec89d1f899b5907a3bfd837721e5085e3",
+    "d9e96a2cf93b538cf583e8013c594d7899cf61f3d8db6dde1f0ba392a38fbbe3",
+    "d4864d005d70c54284e6b5a70c996f04cbf98f66fe3f600303fe9d05dd042965",
+    "ab9ed125edf2d2e73ca736f408f07787dd3455286e268289d88cee2b87617b6e",
+    "d78c47f7971bb5adb4206eeb732f42075caa8ef7c65b5b105ac033e29521c112",
+    "af3ea05a6297c73dca5f54d82735c9ca9f46d6aedccb8a88e47bdb9b73439635",
+    "bc49c801eedbb737b456df01e803693352584b3c244232ebdf2f6739a661a078",
+    "4eda7b628dab0e488d1fe9f5450ee81947344e2186545140e7ed373cf3ca3d0f",
+    "1f35f34c780ec332116b5ca6b73c410f71afe00c92539593a39be8fa07ca64b4",
+    "8cc8dae830e046fbe373bdd1390ff3dc9b1b91fb807470384a9c7b719742fbfb",
+    "8475b423c1a03fdc48e2645538415210d9ef1fa5058e532798a3469faa00d19f",
+    "dceaf24b3036b4f5adf7a12fec8753865ec9f1a5d7cb73681b827ecc8f4143c2",
+    "3dc699bb1288e090a5b3f9ee7fed8f21113704381a3b7bfd37fa65e3340135f0",
+    "d5d259c5b08ed20df90485e5c1581a3a457f52f95187cfea099bebc5a2fd116c"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "active AGENTS",
+   "files": [
+    "AGENTS.md",
+    "control\\AGENTS.md",
+    "control\\docs\\AGENTS.md",
+    "control\\knowledge\\AGENTS.md",
+    "control\\release\\AGENTS.md",
+    "control\\runtime\\AGENTS.md",
+    "control\\tooling\\AGENTS.md",
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\control\\AGENTS.md",
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\control\\docs\\AGENTS.md",
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\control\\knowledge\\AGENTS.md",
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\control\\release\\AGENTS.md",
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\control\\runtime\\AGENTS.md",
+    "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2\\control\\tooling\\AGENTS.md",
+    "var\\opencodex-backup\\pre-install\\.codex\\.chatgpt-projects\\g-p-6a5986ae56b48191bfa3f1c78ad311c5\\AGENTS.md",
+    "var\\opencodex-backup\\pre-install\\.codex\\.chatgpt-projects\\g-p-6a5df799f420819185dbbbac8b62decb\\AGENTS.md",
+    "var\\opencodex-backup\\pre-install\\.codex\\.tmp\\bundled-marketplaces\\openai-bundled\\plugins\\sites\\AGENTS.md",
+    "var\\opencodex-backup\\pre-install\\.codex\\.tmp\\plugins\\plugins\\build-web-apps\\skills\\react-best-practices\\AGENTS.md",
+    "var\\opencodex-backup\\pre-install\\.codex\\.tmp\\plugins\\plugins\\build-web-apps\\skills\\supabase-best-practices\\AGENTS.md",
+    "var\\opencodex-backup\\pre-install\\.codex\\AGENTS.md",
+    "工程基座\\sdlc-prw-hlpe-formal\\AGENTS.md"
+   ],
+   "file_hashes": [
+    "ebb401ee08ebe10417b5ee1ebc80ebc2ab1ecd086fb330ba3ed9bab63b44fd62",
+    "f38bce5bc72253439ab754e4d60f12cd45bfee771eda7c4c2d74a6b74ae672f6",
+    "dc206b538b3cef0dc12b464c82d6b79811d5f0b25b55ea16631c2d2b59f78344",
+    "d5c1a86a4661964665eded0c2306d9fe211644918e96465eb0d32bbc8a48ed83",
+    "cf6b32855b266a45cb995880a712dd206ab9fd8b9fa1e77f5695e93497110202",
+    "cf3973d024b75ec5116e4a887248d181d366efe6c94670c37692533cc71bdfa5",
+    "a7681aa40a40f27ef28580f51b8f70c3ef211242ba0fbe65140eadc831addc19",
+    "f38bce5bc72253439ab754e4d60f12cd45bfee771eda7c4c2d74a6b74ae672f6",
+    "dc206b538b3cef0dc12b464c82d6b79811d5f0b25b55ea16631c2d2b59f78344",
+    "d5c1a86a4661964665eded0c2306d9fe211644918e96465eb0d32bbc8a48ed83",
+    "cf6b32855b266a45cb995880a712dd206ab9fd8b9fa1e77f5695e93497110202",
+    "cf3973d024b75ec5116e4a887248d181d366efe6c94670c37692533cc71bdfa5",
+    "a7681aa40a40f27ef28580f51b8f70c3ef211242ba0fbe65140eadc831addc19",
+    "be8a8c746a0dd0889bd55a7fcbbc25b0cb17c4c58d251dd7fe8c67a679109714",
+    "6849100d06b88a1670a93c1c12f4ca1dbcfd978b6a5d5ef920ef666ce8d425ac",
+    "1948b53b13790189e85281254c899005ca22c86f4eb7b664fffdc0b52d9b10ea",
+    "924b5c33d0f671769467ac8b10ed98c9708d6db3e5465cc3dec368454ff059d0",
+    "f3336d9942583a30df20e4bad03adeb48d1f246583999979e5cceb215bda55e9",
+    "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cb874d620855fbc1f47243e52d6ad7d8185f9f49183e61c75e2fc242d9f0fd34"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "active SKILLS",
+   "files": [
+    "control\\skills\\agents-skill-prompt-compile\\SKILL.md",
+    "control\\skills\\architecture-adr-compile\\SKILL.md",
+    "control\\skills\\authority-intent-freeze\\SKILL.md",
+    "control\\skills\\codex-bounded-execute\\SKILL.md",
+    "control\\skills\\controlled-evolution\\SKILL.md",
+    "control\\skills\\eval-nrtv-repair\\SKILL.md",
+    "control\\skills\\harness-preflight-effect-control\\SKILL.md",
+    "control\\skills\\hlpe-baseline-qualify\\SKILL.md",
+    "control\\skills\\loop-checkpoint-recover\\SKILL.md",
+    "control\\skills\\method-tool-translation\\SKILL.md",
+    "control\\skills\\provider-mcp-qualify\\SKILL.md",
+    "control\\skills\\release-routeout-handoff\\SKILL.md",
+    "control\\skills\\requirement-acceptance-compile\\SKILL.md",
+    "control\\skills\\rollback-restore-incident\\SKILL.md",
+    "control\\skills\\security-evidence-readback\\SKILL.md",
+    "control\\skills\\source-mount-freeze\\SKILL.md",
+    "control\\skills\\windows-bootstrap-doctor\\SKILL.md",
+    "control\\skills\\wp-task-route\\SKILL.md"
+   ],
+   "file_hashes": [
+    "876f560733c92762f4b163a8b696bfb9997aaffc3fbb8441c9018e8cf7729d32",
+    "e64801171610a557dca31b17b16126a08551c351a9259745bf76208d568f4858",
+    "9a4ba060c66b2219bc337eb8adba251e3c05c2fdb908273e08f768a2f9daa4e5",
+    "8e0182f5135404ec7b4825a675fa98b333d665d027ac5a7cf7ea670e189356e6",
+    "fcbfbb3492767ba52b1dce51f0b50bbe1790336fe0cb14f1cf440a31900201d4",
+    "c6bbe8454d41ba80676ea8f32ba031dc32c9ed5eaff6c611228237ee053a97e2",
+    "c3e927f46a9ceae05ac28945a202e820af1473d98606a432e5755bb9cb3b91d3",
+    "7c30e5d265044ca6cd04aeb4dd16fe615ee6dc7bd89f5c5df27efb979bd5a623",
+    "5c4b3644a752cb11c6536d3c806ea58cde1198ee648d42747a9352e0e0a58f32",
+    "7ff1ee6034ea4a652b258674f56a2ca2db2ccb34d2a9b46ba9b5e497393d0aa4",
+    "9832dcdd947790b0fe0dd8960b47b5e8c2fc6782b5e4c8fb41df775f0f7a2ce0",
+    "d113ed53f3807ad6445c687b41ba514c1107cee70f117d1e3d1ea142accff658",
+    "04c84ee75db935eea3f9b4af23a87f14d6b3a8da2e63ff5162aafa529cc44102",
+    "5d8b0b06fecab589b77bd5e8a356ac385f962efa2190213939e09f3e1afe6898",
+    "12d08aa5676ede21a37eb35a11d21afb5161158f3197a6491ce524b7f01196e9",
+    "db2aec0b25b30651d00a37d83e6407ece9b0bbadc0bb00c686f67438aa48f740",
+    "9557238d4aa791982acad254bbc3db7e930447e231c1f99579ef99f00e688170",
+    "4f99125d8c4014d0f253af0b8639ca566413e716e81cceb3a844858dc95b7a74"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "User Guide",
+   "files": [
+    "docs\\HG-KSEOS使用說明文檔.md"
+   ],
+   "file_hashes": [
+    "b41116cce9bc135ec09e0467193c4c56a1ecc9a233b83262a511f6ca5b99b451"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "D0 canonical reconciliation",
+   "files": [
+    "evidence\\review\\HG-KSEOS_DOMAIN_COVERAGE_RECONCILIATION.json"
+   ],
+   "file_hashes": [
+    "91a7bfaf782ef6b3701ef7f4204e408cd195a0a936cca4b5723da838f4132f2f"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "D1 depth audit",
+   "files": [
+    "evidence\\review\\HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json"
+   ],
+   "file_hashes": [
+    "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "D7 domain status",
+   "files": [
+    "evidence\\review\\HG-KSEOS_30_DOMAIN_FINAL_STATUS.json"
+   ],
+   "file_hashes": [
+    "c9a1f809816f1ca83f1b11968ba904751c4fecae96e04b55d705149ed8b88ce0"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "UECX source ledger",
+   "files": [
+    "evidence\\review\\HG-KSEOS_USER_EXPECTED_CAPABILITY_SOURCE_LEDGER.json"
+   ],
+   "file_hashes": [
+    "e480d01e776a19257650172e0b171c38b3e89df42dac62836e57ce8fad0cce0c"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [
+    "UXR-001",
+    "UXR-002",
+    "UXR-003",
+    "UXR-004",
+    "UXR-005",
+    "UXR-006",
+    "UXR-007",
+    "UXR-008",
+    "UXR-009",
+    "UXR-010",
+    "UXR-011",
+    "UXR-012",
+    "UXR-013",
+    "UXR-014",
+    "UXR-015",
+    "UXR-016"
+   ],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "UECX matrix",
+   "files": [
+    "evidence\\review\\HG-KSEOS_USER_EXPECTED_CAPABILITY_EXPERIENCE_MATRIX.json"
+   ],
+   "file_hashes": [
+    "b3901ff760ef3a29c4025ebb1d3d8f93388db82268c1f7eb5196d68d8d384d75"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [
+    "UXR-001",
+    "UXR-002",
+    "UXR-003",
+    "UXR-004",
+    "UXR-005",
+    "UXR-006",
+    "UXR-007",
+    "UXR-008",
+    "UXR-009",
+    "UXR-010",
+    "UXR-011",
+    "UXR-012",
+    "UXR-013",
+    "UXR-014",
+    "UXR-015",
+    "UXR-016"
+   ],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "HG-KSEOS master blueprint",
+   "files": [
+    "資料庫\\【1】HG-KSEOS\\【1】藍圖\\HG-KSEOS_藍圖_r2.md"
+   ],
+   "file_hashes": [
+    "1fb99c9809aa2a299c7b717254aef2357162ef7ff432bf26b7642689f1a7c2be"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "local multi-agent blueprint",
+   "files": [
+    "資料庫\\【1】HG-KSEOS\\【1】藍圖\\HG-KSEOS_多智能體協作系統_本地部屬藍圖_r2.md"
+   ],
+   "file_hashes": [
+    "b69aba2fbc6f2b63b71f311ff29a142e1079a8674cc9cac4469dc331ac7a4280"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "Hermes+DocETL blueprint",
+   "files": [
+    "資料庫\\【1】HG-KSEOS\\【1】藍圖\\Hermes＋DocETL_知識蒸餾工廠_整合藍圖_v2.0.0.md"
+   ],
+   "file_hashes": [
+    "5ff7af1d0fbe3d61a427cb70979391962a810eebc42c7bc035f821dff35e25f0"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  },
+  {
+   "source_family": "SDLC_PRW_HLPE engineering base",
+   "files": [
+    "工程基座\\sdlc-prw-hlpe-formal\\AGENTS.md",
+    "工程基座\\sdlc-prw-hlpe-formal\\src\\AGENTS.md",
+    "evidence\\wave-04\\HLPE_QUALIFICATION_REPORT.json"
+   ],
+   "file_hashes": [
+    "cb874d620855fbc1f47243e52d6ad7d8185f9f49183e61c75e2fc242d9f0fd34",
+    "33807ad9c6f21502701ac46bb9b26ffe3f3014c1dcabf22df8846c21f450ef5c",
+    "dc16123b1013e4cc81707bdf886bb7ab3f74bb91e5f69858f0bd5c61b9c14979"
+   ],
+   "reviewed": true,
+   "new_unique_expectations_found": 0,
+   "expectation_ids": [],
+   "reviewed_no_new_unique_expectation": true
+  }
+ ],
+ "verdict": "PASS"
+}

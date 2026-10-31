@@ -1,0 +1,14 @@
+{
+ "schema": "HGK-USER-GUIDE-CURRENTNESS-AUDIT/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T03:23:33.161456+00:00",
+ "companion_occurrences_total": 1,
+ "historical_ok": 1,
+ "current_stale": 0,
+ "maker_root_current_stale": 0,
+ "old_task_current_stale": 0,
+ "current_candidate_identity_present": true,
+ "task011_historical_only": true,
+ "task012_historical_only": true,
+ "verdict": "PASS"
+}

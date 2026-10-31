@@ -1,0 +1,29 @@
+{
+  "checkpoint_id": "HGK_UECX_REAUDIT_AUTONOMOUS_CLOSURE_006",
+  "task_id": "HGK-UECX-REAUDIT-AUTONOMOUS-CLOSURE-006",
+  "updated_at": "2026-08-09T04:00:00+08:00",
+  "phase": "STARTED - baseline verified",
+  "current_head": "bb67fcc301ee78987c3bd7a866e0f4cda1ad798e",
+  "branch": "codex/hgk-final-closure-002",
+  "git_status": "CLEAN (1 untracked: 005_TERMINAL checkpoint sidecar)",
+  "package": {
+    "path": "var/releases/HG-KSEOS_LOCAL_CANDIDATE.zip",
+    "bytes": 26535867,
+    "sha256": "8b31992c4dab793c173d67c28e569857a3d7e62d18bb9817f68b8005b612aa08",
+    "payload_files": 295,
+    "tst092": "INDEPENDENT_CASE_PASS (same HEAD + same package)"
+  },
+  "baseline": {
+    "status": "PRIOR_CORE_PASS_BASELINE_REUSE_CANDIDATE",
+    "coverage_reducer_v2": "PASS exit 0 (REL-0da75b493fa5d0e4)",
+    "final_evidence_md": "evidence/review/HG-KSEOS_FINAL_EVIDENCE_FOR_REVIEW.md (sidecar)"
+  },
+  "reopen_scope": "USER_EXPECTED_CAPABILITY_AND_EXPERIENCE_ONLY",
+  "plan": [
+    "U0 source ledger", "U1 UECX matrix", "U1A minimum inventory", "U2 bind implementation",
+    "U3 FIT-GAP", "U4 15 vertical slices", "U5 negative op-intel tests", "U6 repair loop (only real gaps)",
+    "U7 op-intel E2E gate", "U8 controlled learning gate", "U9 workbench/Obsidian gate", "U10 min-manual UX gate",
+    "UserExperienceReducer v1", "dual-gate local delivery", "Final Evidence MD Section R", "UECX final readback"
+  ],
+  "next_atomic_action": "U0: reconstruct user/product intent from authority sources -> source ledger JSON"
+}

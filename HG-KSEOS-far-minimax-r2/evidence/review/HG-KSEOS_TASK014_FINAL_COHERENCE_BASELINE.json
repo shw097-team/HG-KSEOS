@@ -1,0 +1,31 @@
+{
+ "schema": "HGK-TASK014-FINAL-COHERENCE-BASELINE/1",
+ "task_id": "HGK-TASK014-FINAL-EXTERNAL-EVIDENCE-COHERENCE-UNIQUE-DENOMINATOR-RECEIPT-LINEAGE-015",
+ "captured_at_utc": "2026-08-10T07:14:43.436581+00:00",
+ "head": "3118771c93739d0bc86ba085a3cac57ecccdbb88",
+ "tree_clean": false,
+ "package_sha256": "6ffb7bd2b7cd1dcfbd9f7c263aa75da15a79e167041e11d426c1d7d939cf3507",
+ "package_bytes": 26712141,
+ "payload_files": null,
+ "test_denominator_path": "evidence/review/HG-KSEOS_CURRENT_TEST_DENOMINATOR.json",
+ "test_denominator_sha256": "cb760509c850b8ca8d75b5970321341a8464dc7b78b56a4e5cd17b19acb065a3",
+ "coverage_reducer_path": "evidence/review/HG-KSEOS_COVERAGE_REDUCER_TASK013_DECISION.json",
+ "coverage_reducer_sha256": "4308542dbb5c95fb3e61d0ebb2a657ebb443d1355355572fd792e46a3dca8b59",
+ "ux_reducer_path": "evidence/review/HG-KSEOS_USER_EXPERIENCE_REDUCER_TASK013_DECISION.json",
+ "ux_reducer_sha256": "4b6201a903eea0e6ac3b75c994f9cfd0c08f4e8a37512f240472fd6874eb038b",
+ "tst092_path": "evidence/wave-18/TST-092_TASK013_INDEPENDENT_READBACK.json",
+ "tst092_sha256": "ece1da101037b3592d99102a57df2b922b65ab801b69294bcaf31aca23c6409c",
+ "final_md_path": "evidence/review/HG-KSEOS_FINAL_EVIDENCE_FOR_REVIEW.md",
+ "final_md_bytes": 61702,
+ "final_md_sha256": "e45ab60cddd7a7397ae3c73e79c5618857777432d6f7a6a461e0ae9b3a2c27f0",
+ "external_acceptance_path": "evidence/review/HG-KSEOS_EXTERNAL_FINAL_ACCEPTANCE.json",
+ "external_acceptance_sha256": "f410f94744c02607c33c594f61407659ac03323645554f0d8022679dac3d9780",
+ "known_coherence_gaps": [
+  "G1 final-md stale acceptance status (157/158 residue)",
+  "G2 denominator task_id stale (Task-013 id)",
+  "G3 hard-check duplicate IDs (158 rows / 153 unique)",
+  "G4 TST-092 receipt lineage ambiguity + historical overwrite",
+  "G5 acceptance input SHA binding missing",
+  "G6 cross-artifact semantic checker missing"
+ ]
+}

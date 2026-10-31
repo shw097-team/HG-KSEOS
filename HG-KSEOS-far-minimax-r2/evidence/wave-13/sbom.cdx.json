@@ -1,0 +1,1294 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:019fdc13-7efa-7342-b5c4-bcf8657624e3",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-08-09T06:06:28.012146+00:00",
+    "component": {
+      "type": "application",
+      "name": "HG-KSEOS-local-companion",
+      "version": "0.1.0"
+    },
+    "properties": [
+      {
+        "name": "hgk:claim-ceiling",
+        "value": "local dependency inventory; no vulnerability/production certification"
+      },
+      {
+        "name": "hgk:hermes-manifest-sha256",
+        "value": "5db4b8b0251df055a1a748c15f652b7f602dd513c03514aba25542a04831e1fa"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "pip",
+      "version": "25.0.1",
+      "bom-ref": "pkg:pypi/pip@25.0.1?scope=hg-kseos-project",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hg-kseos-project"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "agent-client-protocol",
+      "version": "0.9.0",
+      "bom-ref": "pkg:pypi/agent-client-protocol@0.9.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "aiohappyeyeballs",
+      "version": "2.6.1",
+      "bom-ref": "pkg:pypi/aiohappyeyeballs@2.6.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "aiohttp",
+      "version": "3.14.1",
+      "bom-ref": "pkg:pypi/aiohttp@3.14.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "aiosignal",
+      "version": "1.4.0",
+      "bom-ref": "pkg:pypi/aiosignal@1.4.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "annotated-doc",
+      "version": "0.0.4",
+      "bom-ref": "pkg:pypi/annotated-doc@0.0.4?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "annotated-types",
+      "version": "0.7.0",
+      "bom-ref": "pkg:pypi/annotated-types@0.7.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "anyio",
+      "version": "4.12.1",
+      "bom-ref": "pkg:pypi/anyio@4.12.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "attrs",
+      "version": "25.4.0",
+      "bom-ref": "pkg:pypi/attrs@25.4.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "certifi",
+      "version": "2026.5.20",
+      "bom-ref": "pkg:pypi/certifi@2026.5.20?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "cffi",
+      "version": "2.0.0",
+      "bom-ref": "pkg:pypi/cffi@2.0.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "charset-normalizer",
+      "version": "3.4.4",
+      "bom-ref": "pkg:pypi/charset-normalizer@3.4.4?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "click",
+      "version": "8.3.1",
+      "bom-ref": "pkg:pypi/click@8.3.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "colorama",
+      "version": "0.4.6",
+      "bom-ref": "pkg:pypi/colorama@0.4.6?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "concurrent-log-handler",
+      "version": "0.9.29",
+      "bom-ref": "pkg:pypi/concurrent-log-handler@0.9.29?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "croniter",
+      "version": "6.0.0",
+      "bom-ref": "pkg:pypi/croniter@6.0.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "cryptography",
+      "version": "46.0.7",
+      "bom-ref": "pkg:pypi/cryptography@46.0.7?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "defusedxml",
+      "version": "0.7.1",
+      "bom-ref": "pkg:pypi/defusedxml@0.7.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "distro",
+      "version": "1.9.0",
+      "bom-ref": "pkg:pypi/distro@1.9.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "fastapi",
+      "version": "0.133.1",
+      "bom-ref": "pkg:pypi/fastapi@0.133.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "fire",
+      "version": "0.7.1",
+      "bom-ref": "pkg:pypi/fire@0.7.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "frozenlist",
+      "version": "1.8.0",
+      "bom-ref": "pkg:pypi/frozenlist@1.8.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "google-api-core",
+      "version": "2.30.3",
+      "bom-ref": "pkg:pypi/google-api-core@2.30.3?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "google-api-python-client",
+      "version": "2.194.0",
+      "bom-ref": "pkg:pypi/google-api-python-client@2.194.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "google-auth",
+      "version": "2.55.1",
+      "bom-ref": "pkg:pypi/google-auth@2.55.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "google-auth-httplib2",
+      "version": "0.3.1",
+      "bom-ref": "pkg:pypi/google-auth-httplib2@0.3.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "google-auth-oauthlib",
+      "version": "1.3.1",
+      "bom-ref": "pkg:pypi/google-auth-oauthlib@1.3.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "googleapis-common-protos",
+      "version": "1.73.0",
+      "bom-ref": "pkg:pypi/googleapis-common-protos@1.73.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "h11",
+      "version": "0.16.0",
+      "bom-ref": "pkg:pypi/h11@0.16.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "hermes-agent",
+      "version": "0.20.0",
+      "bom-ref": "pkg:pypi/hermes-agent@0.20.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        },
+        {
+          "name": "hgk:release.tag",
+          "value": "v2026.8.3"
+        },
+        {
+          "name": "hgk:release.commit",
+          "value": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb"
+        },
+        {
+          "name": "hgk:rollback_baseline",
+          "value": "0.18.2/v2026.7.7.2/9de9c25f620ff7f1ce0fd5457d596052d5159596"
+        },
+        {
+          "name": "hgk:certification",
+          "value": "ACTIVE_SELECTED_CERTIFIED (Task-013 side-by-side qualification)"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "httpcore",
+      "version": "1.0.9",
+      "bom-ref": "pkg:pypi/httpcore@1.0.9?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "httplib2",
+      "version": "0.31.2",
+      "bom-ref": "pkg:pypi/httplib2@0.31.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "httptools",
+      "version": "0.7.1",
+      "bom-ref": "pkg:pypi/httptools@0.7.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "httpx",
+      "version": "0.28.1",
+      "bom-ref": "pkg:pypi/httpx@0.28.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "httpx-sse",
+      "version": "0.4.3",
+      "bom-ref": "pkg:pypi/httpx-sse@0.4.3?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "idna",
+      "version": "3.15",
+      "bom-ref": "pkg:pypi/idna@3.15?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jinja2",
+      "version": "3.1.6",
+      "bom-ref": "pkg:pypi/jinja2@3.1.6?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jiter",
+      "version": "0.13.0",
+      "bom-ref": "pkg:pypi/jiter@0.13.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jsonschema",
+      "version": "4.26.0",
+      "bom-ref": "pkg:pypi/jsonschema@4.26.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "bom-ref": "pkg:pypi/jsonschema-specifications@2025.9.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "markdown",
+      "version": "3.10.2",
+      "bom-ref": "pkg:pypi/markdown@3.10.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "markdown-it-py",
+      "version": "4.0.0",
+      "bom-ref": "pkg:pypi/markdown-it-py@4.0.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "markupsafe",
+      "version": "3.0.3",
+      "bom-ref": "pkg:pypi/markupsafe@3.0.3?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "mcp",
+      "version": "1.26.0",
+      "bom-ref": "pkg:pypi/mcp@1.26.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "mdurl",
+      "version": "0.1.2",
+      "bom-ref": "pkg:pypi/mdurl@0.1.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "multidict",
+      "version": "6.7.1",
+      "bom-ref": "pkg:pypi/multidict@6.7.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "oauthlib",
+      "version": "3.3.1",
+      "bom-ref": "pkg:pypi/oauthlib@3.3.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "openai",
+      "version": "2.24.0",
+      "bom-ref": "pkg:pypi/openai@2.24.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "packaging",
+      "version": "26.0",
+      "bom-ref": "pkg:pypi/packaging@26.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pathspec",
+      "version": "1.1.1",
+      "bom-ref": "pkg:pypi/pathspec@1.1.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pillow",
+      "version": "12.2.0",
+      "bom-ref": "pkg:pypi/pillow@12.2.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "portalocker",
+      "version": "3.2.0",
+      "bom-ref": "pkg:pypi/portalocker@3.2.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "prompt-toolkit",
+      "version": "3.0.52",
+      "bom-ref": "pkg:pypi/prompt-toolkit@3.0.52?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "propcache",
+      "version": "0.4.1",
+      "bom-ref": "pkg:pypi/propcache@0.4.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "proto-plus",
+      "version": "1.27.2",
+      "bom-ref": "pkg:pypi/proto-plus@1.27.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "protobuf",
+      "version": "6.33.5",
+      "bom-ref": "pkg:pypi/protobuf@6.33.5?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "psutil",
+      "version": "7.2.2",
+      "bom-ref": "pkg:pypi/psutil@7.2.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pyasn1",
+      "version": "0.6.3",
+      "bom-ref": "pkg:pypi/pyasn1@0.6.3?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pyasn1-modules",
+      "version": "0.4.2",
+      "bom-ref": "pkg:pypi/pyasn1-modules@0.4.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pycparser",
+      "version": "3.0",
+      "bom-ref": "pkg:pypi/pycparser@3.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pydantic",
+      "version": "2.13.4",
+      "bom-ref": "pkg:pypi/pydantic@2.13.4?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pydantic-core",
+      "version": "2.46.4",
+      "bom-ref": "pkg:pypi/pydantic-core@2.46.4?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pydantic-settings",
+      "version": "2.13.1",
+      "bom-ref": "pkg:pypi/pydantic-settings@2.13.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pygments",
+      "version": "2.19.2",
+      "bom-ref": "pkg:pypi/pygments@2.19.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pyjwt",
+      "version": "2.13.0",
+      "bom-ref": "pkg:pypi/pyjwt@2.13.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pyparsing",
+      "version": "3.3.2",
+      "bom-ref": "pkg:pypi/pyparsing@3.3.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "bom-ref": "pkg:pypi/python-dateutil@2.9.0.post0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "python-dotenv",
+      "version": "1.2.2",
+      "bom-ref": "pkg:pypi/python-dotenv@1.2.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "python-multipart",
+      "version": "0.0.27",
+      "bom-ref": "pkg:pypi/python-multipart@0.0.27?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pytz",
+      "version": "2025.2",
+      "bom-ref": "pkg:pypi/pytz@2025.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pywin32",
+      "version": "311",
+      "bom-ref": "pkg:pypi/pywin32@311?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pywinpty",
+      "version": "2.0.15",
+      "bom-ref": "pkg:pypi/pywinpty@2.0.15?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "pyyaml",
+      "version": "6.0.3",
+      "bom-ref": "pkg:pypi/pyyaml@6.0.3?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "referencing",
+      "version": "0.37.0",
+      "bom-ref": "pkg:pypi/referencing@0.37.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "requests",
+      "version": "2.33.0",
+      "bom-ref": "pkg:pypi/requests@2.33.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "requests-oauthlib",
+      "version": "2.0.0",
+      "bom-ref": "pkg:pypi/requests-oauthlib@2.0.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "rich",
+      "version": "14.3.3",
+      "bom-ref": "pkg:pypi/rich@14.3.3?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "rpds-py",
+      "version": "0.30.0",
+      "bom-ref": "pkg:pypi/rpds-py@0.30.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "ruamel-yaml",
+      "version": "0.18.17",
+      "bom-ref": "pkg:pypi/ruamel-yaml@0.18.17?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "ruamel-yaml-clib",
+      "version": "0.2.15",
+      "bom-ref": "pkg:pypi/ruamel-yaml-clib@0.2.15?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "simple-term-menu",
+      "version": "1.6.6",
+      "bom-ref": "pkg:pypi/simple-term-menu@1.6.6?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "six",
+      "version": "1.17.0",
+      "bom-ref": "pkg:pypi/six@1.17.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "sniffio",
+      "version": "1.3.1",
+      "bom-ref": "pkg:pypi/sniffio@1.3.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "socksio",
+      "version": "1.0.0",
+      "bom-ref": "pkg:pypi/socksio@1.0.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "sse-starlette",
+      "version": "3.3.2",
+      "bom-ref": "pkg:pypi/sse-starlette@3.3.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "starlette",
+      "version": "1.0.1",
+      "bom-ref": "pkg:pypi/starlette@1.0.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tenacity",
+      "version": "9.1.4",
+      "bom-ref": "pkg:pypi/tenacity@9.1.4?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "termcolor",
+      "version": "3.3.0",
+      "bom-ref": "pkg:pypi/termcolor@3.3.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tqdm",
+      "version": "4.67.3",
+      "bom-ref": "pkg:pypi/tqdm@4.67.3?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "typing-extensions",
+      "version": "4.15.0",
+      "bom-ref": "pkg:pypi/typing-extensions@4.15.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "typing-inspection",
+      "version": "0.4.2",
+      "bom-ref": "pkg:pypi/typing-inspection@0.4.2?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "tzdata",
+      "version": "2025.3",
+      "bom-ref": "pkg:pypi/tzdata@2025.3?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "uritemplate",
+      "version": "4.2.0",
+      "bom-ref": "pkg:pypi/uritemplate@4.2.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "urllib3",
+      "version": "2.7.0",
+      "bom-ref": "pkg:pypi/urllib3@2.7.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "uvicorn",
+      "version": "0.41.0",
+      "bom-ref": "pkg:pypi/uvicorn@0.41.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "watchfiles",
+      "version": "1.1.1",
+      "bom-ref": "pkg:pypi/watchfiles@1.1.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "wcwidth",
+      "version": "0.6.0",
+      "bom-ref": "pkg:pypi/wcwidth@0.6.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "websockets",
+      "version": "15.0.1",
+      "bom-ref": "pkg:pypi/websockets@15.0.1?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "yarl",
+      "version": "1.22.0",
+      "bom-ref": "pkg:pypi/yarl@1.22.0?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "name": "youtube-transcript-api",
+      "version": "1.2.4",
+      "bom-ref": "pkg:pypi/youtube-transcript-api@1.2.4?scope=hermes-pinned-runtime",
+      "properties": [
+        {
+          "name": "hgk:scope",
+          "value": "hermes-pinned-runtime"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "name": "@fission-ai/openspec",
+      "version": "1.8.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "scope",
+          "value": "named-method-qualified-external"
+        },
+        {
+          "name": "pin",
+          "value": "v1.8.0 / d57889664cab4f2f061d236ec3ff82a5578701bb"
+        },
+        {
+          "name": "role",
+          "value": "brownfield-spec-projection-adapter"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "name": "gstack",
+      "version": "1.61.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "name": "scope",
+          "value": "named-method-qualified-external"
+        },
+        {
+          "name": "pin",
+          "value": "94993f74012782fd94416dd44b8314f6363a13a4 (EXACT_COMMIT_PLUS_VERSION)"
+        },
+        {
+          "name": "role",
+          "value": "advisory-review-qa-security-method-adapter"
+        }
+      ]
+    }
+  ]
+}

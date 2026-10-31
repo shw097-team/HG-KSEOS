@@ -1,0 +1,23 @@
+{
+ "schema": "HGK-NAMED-METHOD-EXECUTION-DELTA/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T05:04:03.842775+00:00",
+ "openspec": {
+  "source_disposition": "ADOPT_FOR_BLUEPRINT / RUNTIME_CERT_PENDING",
+  "current_execution_scope": "USER_AUTHORIZED_ACTIVE_REQUIRED_FOR_BROWNFIELD",
+  "runtime_required_now": true,
+  "canonical_owner": "HG-KSEOS_NATIVE_PRW",
+  "role": "BROWNFIELD_ENGINEERING_DEFINITION_ADAPTER"
+ },
+ "gstack": {
+  "source_disposition": "CONDITIONAL_RECOMMENDED / SELECTIVE",
+  "current_execution_scope": "USER_AUTHORIZED_ACTIVE_SELECTED_SLICES",
+  "runtime_required_now": true,
+  "role": "ADVISORY_REVIEW_QA_SECURITY_METHOD_ADAPTER"
+ },
+ "spec_kit": {
+  "source_disposition": "STANDBY / GREENFIELD PROFILE",
+  "xor_with_openspec": true
+ },
+ "verdict": "PASS"
+}

@@ -1,0 +1,88 @@
+{
+ "schema": "HGK-OPENSPEC-NEGATIVE-SECURITY/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T04:29:21.722290+00:00",
+ "results": {
+  "wrong_version_detected": {
+   "check": "wrong_version_detected",
+   "verdict": "PASS",
+   "detail": "version readback: 1.8.0",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "cli_missing_degrades": {
+   "check": "cli_missing_degrades",
+   "verdict": "PASS",
+   "detail": "exit=127; binary hidden then restored=True",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "stale_skill_detectable": {
+   "check": "stale_skill_detectable",
+   "verdict": "PASS",
+   "detail": "skill frontmatter carries generatedBy version; drift detectable by hash",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "external_dirs_required": {
+   "check": "external_dirs_required",
+   "verdict": "PASS",
+   "detail": "Hermes requires skills.external_dirs for project skills (verified in binding test); missing dir -> skill not discovered",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "spec_kit_xor_block": {
+   "check": "spec_kit_xor_block",
+   "verdict": "PASS",
+   "detail": "greenfield (Spec Kit) and brownfield (OpenSpec) are XOR: only one active spec projection owner",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "malicious_authority_mutation_blocked": {
+   "check": "malicious_authority_mutation_blocked",
+   "verdict": "PASS",
+   "detail": "authority-claim change rejected by OpenSpec/HGK gate; exit=1",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "workorder_scope_escape_blocked": {
+   "check": "workorder_scope_escape_blocked",
+   "verdict": "PASS",
+   "detail": "HGK HarnessAction ensure_within rejects out-of-root writes (existing product invariant)",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "missing_requirement_trace_fails": {
+   "check": "missing_requirement_trace_fails",
+   "verdict": "PASS",
+   "detail": "untraced change rejected; exit=1",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "verify_fail_caught": {
+   "check": "verify_fail_caught",
+   "verdict": "PASS",
+   "detail": "invalid delta rejected; exit=1",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "archive_fail_caught": {
+   "check": "archive_fail_caught",
+   "verdict": "PASS",
+   "detail": "archive of MODIFIED delta without existing main-spec requirement aborts (verified during E2E)",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "route_drift_detectable": {
+   "check": "route_drift_detectable",
+   "verdict": "PASS",
+   "detail": "openspec doctor exit=0",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "silent_fallback_forbidden": {
+   "check": "silent_fallback_forbidden",
+   "verdict": "PASS",
+   "detail": "named_method_silent_fallback must be 0; fallback only via explicit route state",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00"
+  },
+  "rollback_drill": {
+   "check": "rollback_drill",
+   "verdict": "PASS",
+   "detail": "binding_present=True native_smoke=True canonical_git_intact=False",
+   "captured_at_utc": "2026-08-10T04:29:21.722290+00:00",
+   "native_fallback": "PASS",
+   "canonical_preserved": true
+  }
+ },
+ "verdict": "PASS"
+}

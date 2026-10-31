@@ -1,0 +1,14 @@
+{
+ "uex_id": "UEX-004",
+ "kind": "raw",
+ "fixture": "var/uecx/vs04",
+ "command": "python var/u4_vertical_slices.py::VS-04",
+ "router_trace": {
+  "admission": "BOUNDED_MULTI_AGENT",
+  "soD": true,
+  "one_writer_per_worktree": true
+ },
+ "raw_output": "complex independent task → bounded topology with SoD + one writer/worktree (admission gate)",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:33.508488+00:00"
+}

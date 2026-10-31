@@ -1,0 +1,94 @@
+{
+ "schema": "HGK-NAMED-METHOD-ROUTING/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T05:04:03.842775+00:00",
+ "router": "deterministic registry lookup (no LLM guessing)",
+ "traces": {
+  "brownfield login refactor": {
+   "flow": "brownfield login refactor",
+   "provider": "openspec",
+   "state": "CERTIFIED_ACTIVE_BROWNFIELD",
+   "fallback": "hgk_native_prw",
+   "final_authority": true,
+   "route": "OPENSPEC"
+  },
+  "greenfield new service": {
+   "flow": "greenfield new service",
+   "provider": null,
+   "state": "XOR_GREENFIELD",
+   "fallback": null,
+   "final_authority": true,
+   "route": "NATIVE"
+  },
+  "plan ready": {
+   "flow": "plan ready",
+   "provider": "gstack.plan-eng-review",
+   "state": "CERTIFIED",
+   "fallback": "hgk_native_plan_review",
+   "final_authority": true,
+   "route": "GSTACK"
+  },
+  "review implementation": {
+   "flow": "review implementation",
+   "provider": "gstack.review",
+   "state": "CERTIFIED",
+   "fallback": "hgk_native_review",
+   "final_authority": true,
+   "route": "GSTACK"
+  },
+  "qa required": {
+   "flow": "qa required",
+   "provider": "gstack.qa",
+   "state": "CERTIFIED",
+   "fallback": "hgk_native_qa",
+   "final_authority": true,
+   "route": "GSTACK"
+  },
+  "security sensitive": {
+   "flow": "security sensitive",
+   "provider": "gstack.cso",
+   "state": "CERTIFIED",
+   "fallback": "hgk_native_security",
+   "final_authority": true,
+   "route": "GSTACK"
+  },
+  "release readiness": {
+   "flow": "release readiness",
+   "provider": "gstack.ship",
+   "state": "CERTIFIED",
+   "fallback": "hgk_native_release_checklist",
+   "final_authority": false,
+   "route": "GSTACK"
+  },
+  "high-impact ambiguity": {
+   "flow": "high-impact ambiguity",
+   "provider": "gstack.office-hours",
+   "state": "CERTIFIED",
+   "fallback": "hgk_native_prw",
+   "final_authority": true,
+   "route": "GSTACK"
+  },
+  "retro after iteration": {
+   "flow": "retro after iteration",
+   "provider": "gstack.retro",
+   "state": "CERTIFIED",
+   "fallback": "hgk_native_retro",
+   "final_authority": true,
+   "route": "GSTACK"
+  },
+  "plain task": {
+   "flow": "plain task",
+   "provider": null,
+   "state": null,
+   "fallback": null,
+   "final_authority": true,
+   "route": "NATIVE"
+  }
+ },
+ "fake_invocation": 0,
+ "silent_fallback": 0,
+ "dual_spec_owner": 0,
+ "second_orchestrator": 0,
+ "release_authority_escape": 0,
+ "verdict": "PASS"
+}

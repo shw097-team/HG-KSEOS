@@ -1,0 +1,76 @@
+{
+ "schema": "HGK-AUTONOMOUS-PROJECT-LIFECYCLE-ACCEPTANCE/1",
+ "captured_at_utc": "2026-08-09T15:38:43.507957+00:00",
+ "checks_total": 11,
+ "checks_pass": 11,
+ "results": {
+  "APL-01_natural_start": {
+   "check": "APL-01_natural_start",
+   "verdict": "PASS",
+   "detail": "project=HGK-PRJ-APL",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  },
+  "APL-02_authority_intent": {
+   "check": "APL-02_authority_intent",
+   "verdict": "PASS",
+   "detail": "sources=1",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  },
+  "APL-03_plan": {
+   "check": "APL-03_plan",
+   "verdict": "PASS",
+   "detail": "tasks=4",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  },
+  "APL-04_workorders": {
+   "check": "APL-04_workorders",
+   "verdict": "PASS",
+   "detail": "workorders=4",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  },
+  "APL-05_real_execution": {
+   "check": "APL-05_real_execution",
+   "verdict": "PASS",
+   "detail": "preflight=ADMITTED",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  },
+  "APL-06_auto_repair": {
+   "check": "APL-06_auto_repair",
+   "verdict": "PASS",
+   "detail": "auto-repair entered, no user prompt",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  },
+  "APL-07_checkpoint_resume": {
+   "check": "APL-07_checkpoint_resume",
+   "verdict": "PASS",
+   "detail": "checkpoint+resume OK",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  },
+  "APL-08_independent_acceptance": {
+   "check": "APL-08_independent_acceptance",
+   "verdict": "PASS",
+   "detail": "harness evidence log is separate from maker worktree (checker read-only)",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  },
+  "APL-09_release_delivery": {
+   "check": "APL-09_release_delivery",
+   "verdict": "PASS",
+   "detail": "state=DELIVERED",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  },
+  "APL-10_minimal_hitl": {
+   "check": "APL-10_minimal_hitl",
+   "verdict": "PASS",
+   "detail": "unnecessary_hitl=0",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00"
+  },
+  "NO_BRAIN_FULL_CANARY": {
+   "check": "NO_BRAIN_FULL_CANARY",
+   "verdict": "PASS",
+   "detail": "goal->intake->plan->workorders->execute->verify->checkpoint->deliver (state=DELIVERED)",
+   "captured_at_utc": "2026-08-09T15:38:43.507957+00:00",
+   "manual_intervention": 0
+  }
+ },
+ "verdict": "PASS"
+}

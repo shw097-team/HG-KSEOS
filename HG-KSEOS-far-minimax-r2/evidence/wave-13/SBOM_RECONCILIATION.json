@@ -1,0 +1,11 @@
+{
+  "schema": "HGK-SBOM-RECONCILIATION/1",
+  "status": "PASS",
+  "sbom": "evidence/wave-13/sbom.cdx.json",
+  "sbom_sha256": "4e177ff3a555e1db4ceb4148d34af8502f04dc77c9febfa50f5e61678f94c8eb",
+  "project_components": 1,
+  "hermes_components": 99,
+  "total_components": 100,
+  "unexplained_dependencies": [],
+  "claim_ceiling": "Exact local installed-package reconciliation only; vulnerability scanning remains separate."
+}

@@ -1,0 +1,22 @@
+{
+ "schema": "HGK-OPERATIONAL-INTELLIGENCE-E2E/1",
+ "captured_at_utc": "2026-08-09T05:13:21.138771+00:00",
+ "natural_task_auto_route": "E2E_RUNTIME_PASS",
+ "owner_auto_route": "PASS",
+ "agent_auto_route": "PASS",
+ "skill_auto_route": "E2E_RUNTIME_PASS",
+ "single_agent_default": "E2E_RUNTIME_PASS",
+ "bounded_multi_agent_admission": "E2E_RUNTIME_PASS",
+ "memory_auto_recall_when_needed": "E2E_RUNTIME_PASS",
+ "memory_no_recall_when_irrelevant": "E2E_RUNTIME_PASS",
+ "rag_auto_route": "E2E_RUNTIME_PASS",
+ "kg_auto_route": "E2E_RUNTIME_PASS",
+ "kg_no_overuse": "PASS",
+ "provider_tool_auto_route": "PASS",
+ "unnecessary_hitl_count": 0,
+ "unnecessary_tool_activation_count": 0,
+ "unnecessary_multi_agent_count": 0,
+ "negative_tests_total": 12,
+ "negative_tests_pass": 12,
+ "verdict": "PASS"
+}

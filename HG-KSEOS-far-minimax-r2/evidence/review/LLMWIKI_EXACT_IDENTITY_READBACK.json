@@ -1,0 +1,21 @@
+{
+ "schema": "HGK-LLMWIKI-EXACT-IDENTITY-READBACK/1",
+ "captured_at_utc": "2026-08-09T07:44:23.148320+00:00",
+ "installed_repo": "atomicstrata/llm-wiki-compiler",
+ "package": "llm-wiki-compiler",
+ "version": "1.1.0",
+ "npm_dist_tag_latest": "1.1.0",
+ "license": "MIT",
+ "entrypoint": "dist/cli.js",
+ "bin": "llmwiki",
+ "install_root": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\workbench\\llm-wiki\\node_modules\\llm-wiki-compiler",
+ "install_mechanism": "npm install --prefix var/workbench/llm-wiki llm-wiki-compiler@1.1.0 (isolated prefix, no global)",
+ "integrity": "sha512-LJslVmSt8tng8n3t0tw1QEqZJKKD0ualJ/WupdZMCtCzmCNarkP999k6hiNIg5ezvE8B/JQ1C1bUi6eY88Q79A==",
+ "resolved": "https://registry.npmjs.org/llm-wiki-compiler/-/llm-wiki-compiler-1.1.0.tgz",
+ "description": "A knowledge compiler CLI — raw sources in, interlinked wiki out",
+ "runtime_files": [
+  "dist/cli.js"
+ ],
+ "note": "installed identity is NOT one of the task-seed candidates (nvk/jackwener/Pratiyush/nashsu); per §11 RETAIN WORKING TOOL FIRST with FIT-GAP documented in drift research",
+ "verdict": "PASS"
+}

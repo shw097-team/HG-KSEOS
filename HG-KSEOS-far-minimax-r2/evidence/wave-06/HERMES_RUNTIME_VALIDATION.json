@@ -1,0 +1,101 @@
+{
+  "schema": "HGK-HERMES-RUNTIME-VALIDATION/1",
+  "captured_at_utc": "2026-08-07T16:40:27.478893+00:00",
+  "claim_ceiling": "Local no-credential validation only; provider-bound positive pilot and independent NRTV remain open.",
+  "secret_handling": "Known API/token variables removed from child process environment; no values inspected or recorded.",
+  "version": {
+    "returncode": 0,
+    "output": "Hermes Agent v0.18.2 (2026.7.7.2)\nProject: C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent\nPython: 3.11.9\nOpenAI SDK: 2.24.0"
+  },
+  "status": {
+    "returncode": 0,
+    "no_env_file": true,
+    "no_model": true,
+    "no_provider_login": true,
+    "gateway_stopped": true,
+    "raw_output": "┌─────────────────────────────────────────────────────────┐\n│                 ⚕ Hermes Agent Status                  │\n└─────────────────────────────────────────────────────────┘\n\n◆ Environment\n  Project:      C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent\n  Python:       3.11.9\n  .env file:    ✗ not found\n  Model:        (not set)\n  Provider:     Auto\n\n◆ API Keys\n  OpenRouter    ✗ (not set)\n  OpenAI        ✗ (not set)\n  Google / Gemini  ✗ (not set)\n  DeepSeek      ✗ (not set)\n  xAI / Grok    ✗ (not set)\n  NVIDIA NIM    ✗ (not set)\n  Z.AI / GLM    ✗ (not set)\n  Kimi          ✗ (not set)\n  StepFun Step Plan  ✗ (not set)\n  MiniMax       ✗ (not set)\n  MiniMax-CN    ✗ (not set)\n  Firecrawl     ✗ (not set)\n  Tavily        ✗ (not set)\n  Browser Use   ✗ (not set)\n  Browserbase   ✗ (not set)\n  FAL           ✗ (not set)\n  ElevenLabs    ✗ (not set)\n  GitHub        ✗ (not set)\n  Anthropic     ✗ (not set)\n\n◆ Auth Providers\n  Nous Portal   ✗ not logged in (run: hermes portal)\n  OpenAI Codex  ✗ not logged in (run: hermes model)\n    Auth file:  C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\status\\auth.json\n    Error:      No Codex credentials stored. Run `hermes auth` to authenticate.\n  Qwen OAuth    ✗ not logged in (run: qwen auth qwen-oauth)\n    Auth file:  C:\\Users\\user\\.qwen\\oauth_creds.json\n    Error:      Qwen CLI credentials not found. Run 'qwen auth qwen-oauth' first.\n  MiniMax OAuth  ✗ not logged in (run: hermes auth add minimax-oauth)\n  xAI OAuth     ✗ not logged in (run: hermes auth add xai-oauth)\n    Auth file:  C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\status\\auth.json\n    Error:      No xAI OAuth credentials stored. Select xAI Grok OAuth (SuperGrok / Premium+) in `hermes model`.\n\n◆ API-Key Providers\n  Z.AI / GLM       ✗ not configured (run: hermes model)\n  Kimi / Moonshot  ✗ not configured (run: hermes model)\n  StepFun Step Plan ✗ not configured (run: hermes model)\n  MiniMax          ✗ not configured (run: hermes model)\n  MiniMax (China)  ✗ not configured (run: hermes model)\n\n◆ Terminal Backend\n  Backend:      local\n  Sudo:         ✗ disabled\n\n◆ Messaging Platforms\n  Telegram      ✗ not configured\n  Discord       ✗ not configured\n  WhatsApp      ✗ not configured\n  Signal        ✗ not configured\n  Slack         ✗ not configured\n  Email         ✗ not configured\n  SMS           ✗ not configured\n  DingTalk      ✗ not configured\n  Feishu        ✗ not configured\n  WeCom         ✗ not configured\n  WeCom Callback  ✗ not configured\n  Weixin        ✗ not configured\n  BlueBubbles   ✗ not configured\n  QQBot         ✗ not configured\n  Yuanbao       ✗ not configured\n\n◆ Gateway Service\n  Status:       ✗ stopped\n  Manager:      manual process\n\n◆ Scheduled Jobs\n  Jobs:         0\n\n◆ Sessions\n  Active:       0\n\n────────────────────────────────────────────────────────────\n  Run 'hermes doctor' for detailed diagnostics\n  Run 'hermes setup' to configure"
+  },
+  "negative_provider_pilot": {
+    "expected": "non-zero and fail-closed before provider call because no provider credentials/config exist",
+    "returncode": 1,
+    "passed": true,
+    "raw_output": "hermes -z: agent failed: No LLM provider configured. Run `hermes model` to select a provider, or run `hermes setup` for first-time configuration."
+  },
+  "rollback_dry_run": {
+    "returncode": 0,
+    "passed": true,
+    "raw_output": "Dry run: no files, services, or environment entries will be changed.\n\nWould inspect/remove:\n  • Gateway services and standalone gateway processes\n  • Hermes PATH entries from shell configs / Windows User PATH\n  • Hermes wrapper scripts and Hermes-managed node/npm/npx symlinks\n  • Desktop Chat GUI artifacts\n  • Code checkout: C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent\n  • Hermes config/data: C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\rollback"
+  },
+  "doctor": {
+    "returncode": 0,
+    "local_core_checks_passed": true,
+    "missing_credentials_reported": true,
+    "claim": "PARTIAL_EXPECTED_NO_CREDENTIALS",
+    "raw_output": "┌─────────────────────────────────────────────────────────┐\n│                 🩺 Hermes Doctor                        │\n└─────────────────────────────────────────────────────────┘\n\n◆ Security Advisories\n  ✓ No active security advisories\n\n◆ MCP Server Security\n  ✓ No suspicious MCP stdio commands\n\n◆ Python Environment\n  ✓ Python 3.11.9\n  ✓ Virtual environment active\n  ✓ Version files consistent (0.18.2)\n\n◆ SSL / CA Certificates\n  ✓ SSL CA certificate bundle is valid\n\n◆ Required Packages\n  ✓ OpenAI SDK\n  ✓ Rich (terminal UI)\n  ✓ python-dotenv\n  ✓ PyYAML\n  ✓ HTTPX\n  ✓ Croniter (cron expressions) (optional)\n  ⚠ python-telegram-bot (optional, not installed)\n  ⚠ discord.py (optional, not installed)\n\n◆ Configuration Files\n  ✗ ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor/.env file missing\n    → Run 'hermes setup' to create one\n  ⚠ config.yaml not found (using defaults)\n\n◆ xAI Model Retirement (May 15, 2026)\n  ✓ No retired xAI models in config\n\n◆ Auth Providers\n  ⚠ Nous Portal auth (not logged in)\n  ⚠ OpenAI Codex auth (not logged in)\n    → No Codex credentials stored. Run `hermes auth` to authenticate.\n  ⚠ MiniMax OAuth (not logged in)\n  ⚠ xAI OAuth (not logged in)\n    → No xAI OAuth credentials stored. Select xAI Grok OAuth (SuperGrok / Premium+) in `hermes model`.\n\n◆ Directory Structure\n  ✓ ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor directory exists\n  ✓ ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor/cron/ exists\n  ✓ ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor/sessions/ exists\n  ✓ ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor/logs/ exists\n  ✓ ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor/skills/ exists\n  ✓ ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor/memories/ exists\n  ✓ ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor/SOUL.md exists (persona configured)\n  ✓ ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor/memories/ directory exists\n    → MEMORY.md not created yet (will be created when the agent first writes a memory)\n    → USER.md not created yet (will be created when the agent first writes a memory)\n    → ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor/state.db not created yet (will be created on first session)\n\n◆ External Tools\n  ✓ git\n  ✓ ripgrep (rg) (faster file search)\n  ✓ docker (optional)\n  ⚠ Node.js not found (optional, needed for browser tools)\n\n◆ API Connectivity\n  Running 26 connectivity checks in parallel…\n                                                                      \n  ⚠ OpenRouter API (not configured)\n\n◆ Tool Availability\n  ✓ clarify\n  ✓ code_execution\n  ✓ cronjob\n  ✓ delegation\n  ✓ file\n  ✓ memory\n  ✓ project\n  ✓ session_search\n  ✓ skills\n  ✓ terminal\n  ✓ todo\n  ✓ tts\n  ✓ kanban (runtime-gated; loaded only for dispatcher-spawned workers)\n  ⚠ browser (system dependency not met)\n  ⚠ browser-cdp (system dependency not met)\n  ⚠ computer_use (system dependency not met)\n  ⚠ discord (missing DISCORD_BOT_TOKEN)\n  ⚠ discord_admin (missing DISCORD_BOT_TOKEN)\n  ⚠ feishu_doc (system dependency not met)\n  ⚠ feishu_drive (system dependency not met)\n  ⚠ hermes-yuanbao (system dependency not met)\n  ⚠ homeassistant (system dependency not met)\n  ⚠ image_gen (system dependency not met)\n  ⚠ video (system dependency not met)\n  ⚠ video_gen (system dependency not met)\n  ⚠ vision (system dependency not met)\n  ⚠ web (missing EXA_API_KEY, PARALLEL_API_KEY, TAVILY_API_KEY, FIRECRAWL_API_KEY, FIRECRAWL_API_URL, FIRECRAWL_GATEWAY_URL, TOOL_GATEWAY_DOMAIN, TOOL_GATEWAY_SCHEME, TOOL_GATEWAY_USER_TOKEN)\n  ⚠ x_search (missing XAI_API_KEY)\n\n◆ Skills Hub\n  ⚠ Skills Hub directory not initialized (run: hermes skills list)\n  ⚠ No GITHUB_TOKEN (60 req/hr rate limit — set in ~/OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\worktrees\\hermes-pilot\\captured\\doctor/.env for better rates)\n\n◆ Memory Provider\n  ✓ Built-in memory active (no external provider configured — this is fine)\n\n────────────────────────────────────────────────────────────\n  Found 2 issue(s) to address:\n\n  1. Run 'hermes setup' to create .env\n  2. Run 'hermes setup' to configure missing API keys for full tool access\n\n  Tip: run 'hermes doctor --fix' to auto-fix what's possible."
+  },
+  "windows_copy_fallback_probe": {
+    "returncode": 1,
+    "expected_test_assertion_failure": true,
+    "safe_copy_fallback_observed": true,
+    "raw_output": "\u001b[32m✓ Worktree created:\u001b[0m C:\\Users\\user\\AppData\\Local\\Temp\\pytest-of-user\\pytest-1\\test_allows_valid_directory_in0\\test-repo\\.worktrees\\hermes-43f7c27a\n  Branch: hermes/hermes-43f7c27a\n  Base:   HEAD (local — could not reach remote)\nF\n================================== FAILURES ===================================\n_______ TestWorktreeIncludeSecurity.test_allows_valid_directory_include _______\n\nself = <tests.cli.test_worktree_security.TestWorktreeIncludeSecurity object at 0x000002B52C766790>\ngit_repo = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-1/test_allows_valid_directory_in0/test-repo')\n\n    def test_allows_valid_directory_include(self, git_repo):\n        import cli as cli_mod\n    \n        assets_dir = git_repo / \".venv\" / \"lib\"\n        assets_dir.mkdir(parents=True)\n        (assets_dir / \"marker.txt\").write_text(\"venv marker\")\n        (git_repo / \".worktreeinclude\").write_text(\".venv\\n\")\n    \n        info = None\n        try:\n            info = cli_mod._setup_worktree(str(git_repo))\n            assert info is not None\n    \n            linked_dir = Path(info[\"path\"]) / \".venv\"\n>           assert linked_dir.is_symlink()\nE           AssertionError: assert False\nE            +  where False = is_symlink()\nE            +    where is_symlink = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-1/test_allows_valid_directory_in0/test-repo/.worktrees/hermes-43f7c27a/.venv').is_symlink\n\ntests\\cli\\test_worktree_security.py:127: AssertionError\n------------------------------ Captured log call ------------------------------\nINFO     cli:cli.py:1530 .worktreeinclude: symlink failed ([WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-1\\\\test_allows_valid_directory_in0\\\\test-repo\\\\.venv' -> 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-1\\\\test_allows_valid_directory_in0\\\\test-repo\\\\.worktrees\\\\hermes-43f7c27a\\\\.venv') — falling back to copytree on Windows.\n=========================== short test summary info ===========================\nFAILED tests/cli/test_worktree_security.py::TestWorktreeIncludeSecurity::test_allows_valid_directory_include\n1 failed in 1.47s"
+  },
+  "official_security_rollback_tests": {
+    "tests": 57,
+    "passed": 50,
+    "failures": 7,
+    "errors": 0,
+    "skipped": 0,
+    "all_observed_failures_are_windows_symlink_privilege_blocks": true,
+    "failure_details": [
+      {
+        "classname": "tests.cli.test_worktree_security.TestWorktreeIncludeSecurity",
+        "name": "test_rejects_symlink_that_resolves_outside_repo",
+        "message": "OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_rejects_symlink_that_reso0\\\\linked-secret.txt' -> 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_rejects_symlink_that_reso0\\\\test-repo\\\\leak.txt'",
+        "windows_symlink_privilege_block": true
+      },
+      {
+        "classname": "tests.cli.test_worktree_security.TestWorktreeIncludeSecurity",
+        "name": "test_allows_valid_directory_include",
+        "message": "AssertionError: assert False\n +  where False = is_symlink()\n +    where is_symlink = WindowsPath('C:/Users/user/AppData/Local/Temp/pytest-of-user/pytest-0/test_allows_valid_directory_in0/test-repo/.worktrees/hermes-ad2dc4be/.venv').is_symlink",
+        "windows_symlink_privilege_block": true
+      },
+      {
+        "classname": "tests.hermes_cli.test_uninstall_node_symlinks",
+        "name": "test_removes_symlinks_pointing_into_hermes_node",
+        "message": "OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_removes_symlinks_pointing0\\\\home\\\\.hermes\\\\node\\\\bin\\\\node' -> 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_removes_symlinks_pointing0\\\\home\\\\.local\\\\bin\\\\node'",
+        "windows_symlink_privilege_block": true
+      },
+      {
+        "classname": "tests.hermes_cli.test_uninstall_node_symlinks",
+        "name": "test_leaves_unrelated_symlinks_untouched",
+        "message": "OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_leaves_unrelated_symlinks0\\\\home\\\\.nvm\\\\versions\\\\node\\\\v20.0.0\\\\bin\\\\node' -> 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_leaves_unrelated_symlinks0\\\\home\\\\.local\\\\bin\\\\node'",
+        "windows_symlink_privilege_block": true
+      },
+      {
+        "classname": "tests.hermes_cli.test_uninstall_node_symlinks",
+        "name": "test_removes_dangling_symlink_into_hermes_node",
+        "message": "OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_removes_dangling_symlink_0\\\\home\\\\.hermes\\\\node\\\\bin\\\\node' -> 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_removes_dangling_symlink_0\\\\home\\\\.local\\\\bin\\\\node'",
+        "windows_symlink_privilege_block": true
+      },
+      {
+        "classname": "tests.hermes_cli.test_uninstall_node_symlinks",
+        "name": "test_only_some_links_present",
+        "message": "OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_only_some_links_present0\\\\home\\\\.hermes\\\\node\\\\bin\\\\npm' -> 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_only_some_links_present0\\\\home\\\\.local\\\\bin\\\\npm'",
+        "windows_symlink_privilege_block": true
+      },
+      {
+        "classname": "tests.hermes_cli.test_uninstall_node_symlinks",
+        "name": "test_removes_fhs_symlinks_in_usr_local_bin",
+        "message": "OSError: [WinError 1314] 用戶端沒有這項特殊權限。: 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_removes_fhs_symlinks_in_u0\\\\home\\\\.hermes\\\\node\\\\bin\\\\node' -> 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-user\\\\pytest-0\\\\test_removes_fhs_symlinks_in_u0\\\\usr_local_bin\\\\node'",
+        "windows_symlink_privilege_block": true
+      }
+    ],
+    "junit_sha256": "d23751ba2e7e9be371b378d97d25e1c77d58725d570f9f058770ca3c0060e3f4"
+  },
+  "overall": "TEMP_CLOSED_CORE_WITH_WINDOWS_SYMLINK_EXCEPTIONS_AND_PROVIDER_HITL",
+  "blocking_next_steps": [
+    "Human supplies or completes one approved OAuth/API-key provider binding.",
+    "Run a provider-bound positive pilot without exposing credentials.",
+    "Run independent NRTV; do not waive Windows symlink exception without privileged rerun or explicit exclusion disposition."
+  ]
+}

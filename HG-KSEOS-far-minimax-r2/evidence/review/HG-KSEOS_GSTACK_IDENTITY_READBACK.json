@@ -1,0 +1,17 @@
+{
+ "schema": "HGK-GSTACK-IDENTITY/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T05:04:03.842775+00:00",
+ "repo": "garrytan/gstack",
+ "expected_version": "1.61.0.0",
+ "expected_commit": "94993f74012782fd94416dd44b8314f6363a13a4",
+ "expected_license": "MIT",
+ "pin_method": "EXACT_COMMIT_PLUS_VERSION_READBACK",
+ "readback_version": "1.61.0.0",
+ "readback_commit": "94993f74012782fd94416dd44b8314f6363a13a4",
+ "readback_license": "MIT License",
+ "bun_version": "1.3.14",
+ "release_object": "NONE",
+ "identity_exact": true,
+ "verdict": "PASS"
+}

@@ -1,0 +1,26 @@
+{
+ "schema": "HGK-OPENSPEC-BROWNFIELD-E2E/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T05:04:03.842775+00:00",
+ "user_request": "修改既有登入流程：加入失敗鎖定；不要改既有API contract",
+ "router_selected": "openspec (automatic, user did not name the tool)",
+ "cycle": [
+  "explore/propose",
+  "spec delta (auth capability)",
+  "design",
+  "tasks",
+  "Codex implementation (real diff)",
+  "10/10 tests",
+  "validate PASS",
+  "archive -> main spec auth requirements 2->3"
+ ],
+ "openspec_cli_invoked": true,
+ "hermes_skill_loaded": true,
+ "intent_preserved": true,
+ "non_goal_preserved": true,
+ "openspec_not_root_ssot": true,
+ "openspec_not_release_owner": true,
+ "codex_remains_writer": true,
+ "fixture": "hgk-nm-qual/openspec-fixture (disposable brownfield login flow)",
+ "verdict": "PASS"
+}

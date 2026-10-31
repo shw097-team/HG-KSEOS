@@ -1,0 +1,10 @@
+identity,current,predecessor,resolution,status
+P0-CIP,v2026.08.05-r2,rFINAL,"r2 substantive replacement; predecessor retained for regression/provenance",CURRENT
+PREDEV,v2026.08.06-r2,r1,"r2 full-body author-side preimplementation baseline",CURRENT
+HG-KSEOS blueprint,v2026.07.14-r2,r1,"local r2 replaces r1",CURRENT
+Bounded multi-agent blueprint,v2026.08.01-r2,r1,"full-body r2 replacement",CURRENT_RUNTIME_NOT_RUN
+Hermes+DocETL blueprint,v2.0.0,v1.0.0,"replacement document exists but declares FAIL_REPLACEMENT pending pilot/NRTV/permission evidence",CANDIDATE_FAIL_REPLACEMENT
+Execution Control Pack,v2026.08.07-FINAL-r2,v2026.08.07-rFINAL,"FINAL_r2 current body; predecessor provenance/regression only",CURRENT
+Hermes DOC-04,v2026.07.16-r3,v2026.07.16-r2,"r3 body replaces r2",CURRENT
+HLPE integrated delivery,R2,R1,"R2 active immutable delivery; R1 historical superseded",CURRENT
+

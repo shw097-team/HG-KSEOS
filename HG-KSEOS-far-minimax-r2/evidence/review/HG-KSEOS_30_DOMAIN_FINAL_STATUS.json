@@ -1,0 +1,806 @@
+{
+ "schema": "HGK-30-DOMAIN-FINAL-STATUS/3",
+ "captured_at_utc": "2026-08-09T02:04:10.760087+00:00",
+ "canonical_domains_total": 30,
+ "canonical_domains_terminal": 30,
+ "subcapabilities_total": 2,
+ "subcapabilities_terminal": 2,
+ "rows_total": 32,
+ "terminal_status_counts": {
+  "DEFERRED_SOURCE_BACKED": 4,
+  "RUNTIME_PASS": 28
+ },
+ "blocking_domain_gaps": [],
+ "unexplained_active_deferred_contradiction": 0,
+ "missing_evidence_refs": 0,
+ "unknown_count": 0,
+ "missing_evidence_count": 0,
+ "open_blocking_tt_count": 0,
+ "domains": [
+  {
+   "domain": "COV-01",
+   "name": "Product Identity / Authority",
+   "owner": "PRE-01",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-02",
+   "name": "Intent Preservation",
+   "owner": "PRE-02",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-03",
+   "name": "Roles / Human Authority",
+   "owner": "PRE-03",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-04",
+   "name": "Source Inventory / Coverage",
+   "owner": "PRE-04",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-05",
+   "name": "Architecture",
+   "owner": "PRE-05",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-06",
+   "name": "Windows Local P0",
+   "owner": "PRE-06",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-07",
+   "name": "Hermes / Provider",
+   "owner": "PRE-07",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-08",
+   "name": "Knowledge Distillation",
+   "owner": "PRE-08",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/domains/knowledge/KNOWLEDGE_FACTORY_ACCEPTANCE.json",
+     "sha256": "5c5bfd9d19af4f0c9aba469247cd8c42cf1a24ef6ec355e232c04a5bed964089"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-09",
+   "name": "Knowledge Pack / Anchor",
+   "owner": "PRE-09",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/domains/knowledge/KNOWLEDGE_FACTORY_ACCEPTANCE.json",
+     "sha256": "5c5bfd9d19af4f0c9aba469247cd8c42cf1a24ef6ec355e232c04a5bed964089"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-10",
+   "name": "RAG / Retrieval",
+   "owner": "PRE-10",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/domains/retrieval/RAG_KB_RUNTIME_ACCEPTANCE.json",
+     "sha256": "ef5ee258c99f8a112a0fe13c5468967e84852310d11f6bf2385d762f05ac3a8a"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-11",
+   "name": "Knowledge Graph / GraphRAG",
+   "owner": "PRE-11",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/domains/graph/KG_GRAPHRAG_RUNTIME_ACCEPTANCE.json",
+     "sha256": "2867bb5ebdf810087ded2d5a99312bd0158fea18bc43be35f5028232e8921944"
+    }
+   ],
+   "active_subcapabilities": [
+    "ACTIVE_REQUIRED"
+   ],
+   "deferred_subcapabilities": [
+    {
+     "name": "deferred subset",
+     "count": 8,
+     "defer_source_locator": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md#COV-11 (LATER-priority subset; P0 subset ACTIVE_REQUIRED)",
+     "defer_reason": "source marks subset LATER/DEFERRED; P0 subset implemented",
+     "preserved_interface": "contract preserved for deferred subset"
+    }
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-12",
+   "name": "Memory",
+   "owner": "PRE-12",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/domains/memory/MEMORY_RUNTIME_ACCEPTANCE.json",
+     "sha256": "d946038040dcc3c833b1a26add0d08a95a6c8d20e7bba718a877b768c148cc90"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-13",
+   "name": "Agents / A2A",
+   "owner": "PRE-13",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-14",
+   "name": "Harness / Loop",
+   "owner": "PRE-14",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [
+    "ACTIVE_REQUIRED"
+   ],
+   "deferred_subcapabilities": [
+    {
+     "name": "deferred subset",
+     "count": 8,
+     "defer_source_locator": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md#COV-14 (LATER-priority subset; P0 subset ACTIVE_REQUIRED)",
+     "defer_reason": "source marks subset LATER/DEFERRED; P0 subset implemented",
+     "preserved_interface": "contract preserved for deferred subset"
+    }
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-15",
+   "name": "Control Plane / Providers",
+   "owner": "PRE-15",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-16",
+   "name": "Coding / Codex",
+   "owner": "PRE-16",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-17",
+   "name": "Security",
+   "owner": "PRE-17",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/domains/security/KNOWLEDGE_MEMORY_SECURITY_NRTV.json",
+     "sha256": "61426f1a502d3326ca2fdc2ec70846b5df9bc51c18fee16ac6291e9fc36f0e90"
+    },
+    {
+     "path": "evidence/c6/SECURITY_NRTV_REPORT.json",
+     "sha256": "c5ec3eb3e20b79b9d9e9e982aa5fe2e25043faff47bd219be6e6c00c3416d695"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-18",
+   "name": "Verification / Eval / NRTV",
+   "owner": "PRE-18",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3+L4",
+   "actual_depth": "L4",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    },
+    {
+     "path": "evidence/c6/SECURITY_NRTV_REPORT.json",
+     "sha256": "c5ec3eb3e20b79b9d9e9e982aa5fe2e25043faff47bd219be6e6c00c3416d695"
+    },
+    {
+     "path": "evidence/domains/security/KNOWLEDGE_MEMORY_SECURITY_NRTV.json",
+     "sha256": "61426f1a502d3326ca2fdc2ec70846b5df9bc51c18fee16ac6291e9fc36f0e90"
+    }
+   ],
+   "active_subcapabilities": [
+    "ACTIVE_REQUIRED"
+   ],
+   "deferred_subcapabilities": [
+    {
+     "name": "deferred subset",
+     "count": 8,
+     "defer_source_locator": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md#COV-18 (LATER-priority subset; P0 subset ACTIVE_REQUIRED)",
+     "defer_reason": "source marks subset LATER/DEFERRED; P0 subset implemented",
+     "preserved_interface": "contract preserved for deferred subset"
+    }
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-19",
+   "name": "Evidence / Release",
+   "owner": "PRE-19",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-20",
+   "name": "Backup / Restore / Rollback",
+   "owner": "PRE-20",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/wave-16/RESTORE_DRILL_REPORT.json",
+     "sha256": "4bdaaa0f43e17efc506e45ca27a4f3edbc92dd506b51ea4b3bc7c41e5de3694c"
+    }
+   ],
+   "active_subcapabilities": [
+    "ACTIVE_REQUIRED"
+   ],
+   "deferred_subcapabilities": [
+    {
+     "name": "deferred subset",
+     "count": 8,
+     "defer_source_locator": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md#COV-20 (LATER-priority subset; P0 subset ACTIVE_REQUIRED)",
+     "defer_reason": "source marks subset LATER/DEFERRED; P0 subset implemented",
+     "preserved_interface": "contract preserved for deferred subset"
+    }
+   ],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-21",
+   "name": "Package / Handoff",
+   "owner": "PRE-21",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-22",
+   "name": "Governance / Evolution",
+   "owner": "PRE-22",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-23",
+   "name": "Acceptance Sets / Fixture Matrix",
+   "owner": "PRE-23",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-24",
+   "name": "Evidence Schema / Claims",
+   "owner": "PRE-24",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-25",
+   "name": "Observability / SLI-SLO / FinOps",
+   "owner": "PRE-25",
+   "p0_disposition": "DEFERRED_SOURCE_BACKED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": false,
+   "negative_evidence": false,
+   "recovery_rollback": false,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "DEFERRED_SOURCE_BACKED"
+  },
+  {
+   "domain": "COV-26",
+   "name": "Base Preservation / Migration",
+   "owner": "PRE-26",
+   "p0_disposition": "DEFERRED_SOURCE_BACKED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": false,
+   "negative_evidence": false,
+   "recovery_rollback": false,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "DEFERRED_SOURCE_BACKED"
+  },
+  {
+   "domain": "COV-27",
+   "name": "Route-out / Implementation Pack",
+   "owner": "PRE-27",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-28",
+   "name": "Reader Contract / Manual Packs",
+   "owner": "PRE-28",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-29",
+   "name": "Capability Reuse / FIT-GAP",
+   "owner": "PRE-29",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-30",
+   "name": "Status Reducer / Claim Grammar",
+   "owner": "PRE-30",
+   "p0_disposition": "ACTIVE_REQUIRED",
+   "canonical_domain": true,
+   "required_runtime_depth": "L3",
+   "actual_depth": "L3",
+   "runtime_evidence": true,
+   "negative_evidence": true,
+   "recovery_rollback": true,
+   "tst_coverage": [],
+   "evidence_refs": [
+    {
+     "path": "evidence/review/HG-KSEOS_ACCEPTANCE_SEMANTIC_DEPTH_AUDIT.json",
+     "sha256": "a8c7a021390fd43c5c992191098a49ed3a2aaf63483d5c2742971e0e8974448f"
+    }
+   ],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "RUNTIME_PASS"
+  },
+  {
+   "domain": "COV-11-GraphRAG",
+   "name": "GraphRAG",
+   "owner": "COV-11",
+   "p0_disposition": "DEFERRED_SOURCE_BACKED",
+   "canonical_domain": false,
+   "required_runtime_depth": "N/A",
+   "actual_depth": "N/A",
+   "runtime_evidence": false,
+   "negative_evidence": false,
+   "recovery_rollback": false,
+   "tst_coverage": [],
+   "evidence_refs": [],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "DEFERRED_SOURCE_BACKED",
+   "defer_source_locator": "HG-KSEOS_多智能體協作系統_本地部屬藍圖_r2.md#L1641",
+   "defer_reason": "graphrag deferred_method; keep OFF; ADR+benchmark required before promotion",
+   "preserved_interface": "GraphRAG provider slot via providers registry (no runtime route)"
+  },
+  {
+   "domain": "COV-11-VectorBackend",
+   "name": "Vector Backend",
+   "owner": "COV-11",
+   "p0_disposition": "DEFERRED_SOURCE_BACKED",
+   "canonical_domain": false,
+   "required_runtime_depth": "N/A",
+   "actual_depth": "N/A",
+   "runtime_evidence": false,
+   "negative_evidence": false,
+   "recovery_rollback": false,
+   "tst_coverage": [],
+   "evidence_refs": [],
+   "active_subcapabilities": [],
+   "deferred_subcapabilities": [],
+   "checker": "INDEPENDENT_CHECKER",
+   "terminal_status": "DEFERRED_SOURCE_BACKED",
+   "defer_source_locator": "HG-KSEOS_多智能體協作系統_本地部屬藍圖_r2.md#L1675",
+   "defer_reason": "Qdrant/pgvector/graphiti P1 CANDIDATE/PILOT; SQLite FTS is P0 profile",
+   "preserved_interface": "vector adapter slot via providers registry (P1)"
+  }
+ ],
+ "verdict": "PASS"
+}

@@ -1,0 +1,15 @@
+{
+ "uex_id": "UEX-003",
+ "kind": "raw",
+ "fixture": "var/uecx/vs03",
+ "command": "python var/u4_vertical_slices.py::VS-03",
+ "router_trace": {
+  "complexity_gate": "single",
+  "delegation": 0,
+  "voting": 0,
+  "multi_agent": false
+ },
+ "raw_output": "simple task stays single-agent (no fan-out/voting)",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:33.508488+00:00"
+}

@@ -1,0 +1,6 @@
+conflict_id,subject,resolution,status,reopen_condition
+CONFLICT-HGK-001,"Hermes described as unique control plane in an A3 blueprint","Hermes is only a bounded provider/orchestrator under HG-KSEOS; Shared Spine remains the only canonical write path",CLOSED_BY_HIGHER_AUTHORITY,"A0/A1 product constitution changes"
+CONFLICT-HGK-002,"Hermes source materials mention v0.20.0 while current official release discovery returned v0.18.2","Use current official signed release/tag evidence for install; retain source version mention as drifted design-time evidence",OPEN_RUNTIME_DRIFT,"Pinned official release and installer hash are frozen"
+CONFLICT-HGK-003,"HLPE integrated target is r1/project 2026.7.22.1 while r3 is immutable control engineering base","Bind them as distinct identities: integrated code seed versus r3 control authority; never merge labels",CLOSED_BY_IDENTITY_SPLIT,"Upstream publishes an explicit replacement relation"
+CONFLICT-HGK-004,"Current Codex workspace maker root differs from requested HG-KSEOS execution root","Build only in create-new companion root; deployment to execution root requires a workspace/path authorization gate",OPEN_HITL,"Exact HG-KSEOS root becomes writable under applicable workspace instructions"
+

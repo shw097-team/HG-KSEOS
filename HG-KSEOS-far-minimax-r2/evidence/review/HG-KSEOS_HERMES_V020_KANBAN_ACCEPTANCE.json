@@ -1,0 +1,55 @@
+{
+ "board_db": "C:\\Users\\user\\AppData\\Local\\Temp\\hgk-hermes-v020-qual\\home\\kanban.db",
+ "board_isolated": true,
+ "production_kanban_preserved": true,
+ "q06_basic": {
+  "task": "t_777acae9",
+  "flow": "create->ready->claim(running)->complete(done)",
+  "pass": true
+ },
+ "q07_dependency": {
+  "parent": "t_2469f6d3",
+  "child": "t_0c6555f9",
+  "child_gated_until_parent_done": true,
+  "pass": true
+ },
+ "q08_block": {
+  "task": "t_d0f184a8",
+  "status": "blocked",
+  "reason_preserved": "HITL authority gate: human policy owner required",
+  "pass": true
+ },
+ "q09_retry": {
+  "task": "t_1c58b27e",
+  "max_retries": 1,
+  "runs_recorded": [
+   4,
+   5
+  ],
+  "pass": true
+ },
+ "q10_heartbeat": {
+  "task": "t_5701f18e",
+  "heartbeat_event": "[run 6] heartbeat {'note': 'worker alive, qual run'}",
+  "second_writer_zero": true,
+  "pass": true
+ },
+ "q11_worktree": {
+  "task": "t_6dfa25dc",
+  "workspace": "worktree @ fixtures/wq-001/.worktrees/t_6dfa25dc (branch wt/t_6dfa25dc)",
+  "pass": true
+ },
+ "final_board_state": {
+  "done": 7,
+  "blocked": 1,
+  "ready": 0,
+  "running": 0
+ },
+ "runtime_owner": "HERMES",
+ "normative_owner": "HG-KSEOS",
+ "hgk_binding": "Shared Spine stores WorkOrder IDs + normative state only; no kanban mirror",
+ "verdict": "PASS",
+ "schema": "HGK-HERMES-V020-QUALIFICATION/1",
+ "task_id": "HGK-HERMES-V020-NATIVE-RUNTIME-REUSE-CONVERGENCE-QUALIFICATION-013",
+ "captured_at_utc": "2026-08-10T02:55:39.741780+00:00"
+}

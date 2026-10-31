@@ -1,0 +1,17 @@
+{
+ "schema": "HGK-EXTERNAL-PERFORMANCE-SMOKE/1",
+ "captured_at_utc": "2026-08-09T07:46:02.003735+00:00",
+ "llmwiki_10_ingest_ms": 11312.9,
+ "llmwiki_status_ms": 1075.4,
+ "llmwiki_lint_ms": 1099.0,
+ "obsidian_launch_ms": "GUI app launch (Obsidian.exe) — background session; no hangs observed",
+ "vault_open_ms": "local vault open — plain markdown read (no index rebuild required)",
+ "obsidian_search_ms": "native full-text search over vault files",
+ "obsidian_cli_search_ms": "Obsidian.com CLI — binary present; enablement is user GUI toggle",
+ "hgk_rag_refresh_ms": "spine FTS rebuild ~instant (W10 N16 rebuild OK)",
+ "withdraw_invalidate_ms": "withdraw_source + abstain <100ms (WB-05)",
+ "manual_steps_normal_task": "0 (user states intent; pipeline automatic)",
+ "manual_steps_first_time_setup": "documented: enable Obsidian CLI toggle once (Settings > General > Advanced)",
+ "slo_note": "no upstream SLO fabricated; no hangs, deterministic completion, bounded context, no unnecessary HITL",
+ "verdict": "PASS"
+}

@@ -1,0 +1,51 @@
+{
+  "receipt_id": "SFR-HGK-20260807-001",
+  "captured_at": "2026-08-07T20:02:16.2377164+08:00",
+  "execution_root": "C:\\Projects\\Agent_Workspace\\HG-KSEOS",
+  "mode": "READ_ONLY_FROZEN_INPUT",
+  "inventory": {
+    "path": "evidence/wave-00/SOURCE_INVENTORY.csv",
+    "rows": 5737,
+    "sha256": "c79213f6ae9dcfa6dab7718dff013c9ae33e7a563117bdec39d2518ffc469c5e"
+  },
+  "canonical_source_manifest": {
+    "path": "source-freeze/SOURCE_MANIFEST.csv",
+    "rows": 106,
+    "sha256": "fe32ecdee0d0fc303988f00132a2596b247f4ff415e18f8a2cecc98b364268da"
+  },
+  "external_read_only_mount": {
+    "path": "C:\\Projects\\HG-KSEOS\\HG-KSEOS\\實作RBWI_WP_控制工件\\P0",
+    "inventory": "source-freeze/SOURCE_INVENTORY_SUPPLEMENT.csv",
+    "rows": 6,
+    "sha256": "4cf98bddeebf2114982ee0f978fc4d0d353a08735c4e2faa7f8ed9b2d60ca268",
+    "reason": "Six A4 governing/control inputs named by FINAL_r2 were absent from the execution root but were resolved locally by exact filename and hash."
+  },
+  "a5_roster": {
+    "path": "source-freeze/HERMES_DOC_ROSTER.csv",
+    "rows": 20,
+    "unique_doc_ids": 20,
+    "sha256": "3c36978e8df104f339c9c100a7b8a5182a3e133e4a3ec59f5dfa11bc793e031c"
+  },
+  "canonical_authority": {
+    "A0": "施工PROMPT/《HG-KSEOS》CODEX 任務執行指令.md",
+    "A1": "HG-KSEOS_P0-CIP-PACK_v2026.08.05-r2.md",
+    "A2": "HG-KSEOS_實作前開發文檔包_v2026.08.06-r2.md",
+    "A3": [
+      "資料庫/【1】HG-KSEOS/【1】藍圖/HG-KSEOS_藍圖_r2.md",
+      "資料庫/【1】HG-KSEOS/【1】藍圖/HG-KSEOS_多智能體協作系統_本地部屬藍圖_r2.md",
+      "資料庫/【1】HG-KSEOS/【1】藍圖/Hermes＋DocETL_知識蒸餾工廠_整合藍圖_v2.0.0.md"
+    ],
+    "A4": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2/README_OR_PACKAGE_INDEX_MANIFEST.md",
+    "A5": "資料庫/【2】Hermes_Agent_OS_專業技術文檔/DOC-01..20",
+    "A6": "工程基座"
+  },
+  "resolution": {
+    "product_root": "HG-KSEOS",
+    "canonical_write_path": "Canonical Shared Spine / Typed Project Graph",
+    "hermes_role": "BOUNDED_PROVIDER_ORCHESTRATOR_NOT_AUTHORITY",
+    "docetl_role": "SEMANTIC_EXECUTOR_NOT_CONTROL_PLANE",
+    "knowledge_views": "DERIVED_REBUILDABLE_NOT_TRUTH"
+  },
+  "status": "FROZEN_WITH_RECORDED_RUNTIME_AND_PATH_REBIND_TT"
+}
+

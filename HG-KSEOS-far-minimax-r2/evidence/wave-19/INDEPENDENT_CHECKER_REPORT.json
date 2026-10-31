@@ -1,0 +1,44 @@
+{
+  "schema": "HGK-INDEPENDENT-CHECKER/1",
+  "checker": "INDEPENDENT_READ_ONLY_SUBAGENT",
+  "initial_review_commit": "066a8f100d5d00fa9a550ec180533ddea196459c",
+  "incremental_review_commit": "6f4064b",
+  "overall_verdict": "TEMP_CLOSED",
+  "tst_037": {
+    "verdict": "INDEPENDENT_PASS",
+    "raw_source_volumes_read": false,
+    "verified_answer": {
+      "predev_requirements": 240,
+      "p0_requirements": 259,
+      "requirement_trace_rows": 499
+    },
+    "arithmetic_check": "240+259=499",
+    "locator_count": 3,
+    "scope": "TST-037 only"
+  },
+  "independent_readbacks": {
+    "product_tests": "60/60 PASS",
+    "hlpe_tests": "51/51 PASS",
+    "doctor": "PASS_WITH_4_OPEN_BLOCKING_TT",
+    "package": "352 entries / 351 payload rows / exact-set-order-hash PASS",
+    "git": "reviewed commits clean"
+  },
+  "accepted_claim_ceiling": "Clean local companion candidate with local unit/HLPE/doctor/SBOM/backup/package evidence and TST-037 independent pass only.",
+  "prohibited_claims": [
+    "92-case independent acceptance",
+    "89 maker proxy checks as full case-specific acceptance",
+    "Hermes full/provider acceptance",
+    "78 protected provider runtime acceptance",
+    "canonical target deployment",
+    "remote CI",
+    "production pass"
+  ],
+  "remaining_blocked_cases": ["TST-054", "TST-092"],
+  "finding_disposition": {
+    "maker_pass_overclaim": "FIXED_BY_MAKER_PROXY_PASS_LABEL",
+    "tst_037_missing_query": "FIXED_AND_INDEPENDENTLY_VERIFIED",
+    "tst_037_runner_locator_guard": "FIXED_AFTER_CHECKER_RECOMMENDATION_NOT_INDEPENDENTLY_RERUN",
+    "hermes_uninstall": "OPEN",
+    "canonical_write_readback": "OPEN"
+  }
+}

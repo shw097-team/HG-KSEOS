@@ -1,0 +1,17 @@
+{
+  "receipt_id": "BRR-HGK-20260807-001",
+  "captured_at": "2026-08-07T20:02:16.2377164+08:00",
+  "source_backup": "NOT_CREATED",
+  "source_backup_reason": "The source root is immutable input and no source mutation is authorized or planned.",
+  "pre_state": {
+    "source_inventory": "evidence/wave-00/SOURCE_INVENTORY.csv",
+    "sha256": "c79213f6ae9dcfa6dab7718dff013c9ae33e7a563117bdec39d2518ffc469c5e",
+    "rows": 5737,
+    "readback": "PASS"
+  },
+  "maker_root": "C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001",
+  "maker_root_preexisted": false,
+  "rollback_pointer": "RB-HGK-ROOT-001",
+  "rollback_scope": "Only the create-new maker root; never the source root.",
+  "rollback_test_state": "DEFERRED_UNTIL_CHECKPOINT_COPY_EXISTS"
+}

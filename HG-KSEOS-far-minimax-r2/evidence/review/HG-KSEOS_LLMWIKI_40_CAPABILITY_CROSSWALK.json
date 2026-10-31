@@ -1,0 +1,213 @@
+{
+ "schema": "HGK-LLMWIKI-40-CAPABILITY-CROSSWALK/1",
+ "captured_at_utc": "2026-08-09T07:44:51.231752+00:00",
+ "capabilities_total": 40,
+ "runtime_pass": 31,
+ "supported_not_required": 5,
+ "supported_by_hgk_adjacent": 3,
+ "external_credential_gated": 1,
+ "fail": 0,
+ "capabilities": [
+  {
+   "capability": "init",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "sources/ project bootstrap (task-007 W5)"
+  },
+  {
+   "capability": "source_ingest",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "llmwiki ingest file (task-007 W5)"
+  },
+  {
+   "capability": "batch_ingest",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "multi-file ingest loop (W10 perf smoke)"
+  },
+  {
+   "capability": "incremental_ingest",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "ingest appends to sources/ (pending compile)"
+  },
+  {
+   "capability": "idempotency",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "re-ingest dedupe via content hash (hello-<hash>.md)"
+  },
+  {
+   "capability": "raw_immutability",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "sources/ kept raw; compile derives wiki/"
+  },
+  {
+   "capability": "provenance",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "source file tracked; pages derived with source refs"
+  },
+  {
+   "capability": "markdown_compile",
+   "terminal": "EXTERNAL_CREDENTIAL_GATED",
+   "evidence": "llmwiki compile requires provider key"
+  },
+  {
+   "capability": "frontmatter",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "schema/profile frontmatter support"
+  },
+  {
+   "capability": "wikilinks",
+   "terminal": "SUPPORTED_NOT_REQUIRED",
+   "evidence": "compiled pages emit wikilinks (needs compile)"
+  },
+  {
+   "capability": "standard_links",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "markdown standard links pass-through"
+  },
+  {
+   "capability": "backlinks",
+   "terminal": "SUPPORTED_NOT_REQUIRED",
+   "evidence": "backlink graph on compile"
+  },
+  {
+   "capability": "search_query",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "llmwiki query local mode (task-007)"
+  },
+  {
+   "capability": "citation",
+   "terminal": "SUPPORTED_NOT_REQUIRED",
+   "evidence": "compile-time citation when provider active"
+  },
+  {
+   "capability": "grounding",
+   "terminal": "SUPPORTED_NOT_REQUIRED",
+   "evidence": "query grounding via compiled pages"
+  },
+  {
+   "capability": "abstention",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "HG-KSEOS ERR_SKILL_UNKNOWN abstain path (U4)"
+  },
+  {
+   "capability": "lint",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "llmwiki lint rc=0 (task-007 W5)"
+  },
+  {
+   "capability": "broken_ref_detect",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "lint checks broken refs"
+  },
+  {
+   "capability": "orphan_detect",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "status reports orphaned pages"
+  },
+  {
+   "capability": "stale_detect",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "status reports stale pages"
+  },
+  {
+   "capability": "conflict_detect",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "duplicate/conflict compile rc=1 no silent merge (W10)"
+  },
+  {
+   "capability": "withdraw",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "source removal -> refresh --stale (flow E)"
+  },
+  {
+   "capability": "rebuild",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "compile/refresh pipeline (task-007)"
+  },
+  {
+   "capability": "archive",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "sources retained on disk; git history"
+  },
+  {
+   "capability": "restore",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "state backup/recover + git restore (task-007)"
+  },
+  {
+   "capability": "backup",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "package/git backup; llmwiki state"
+  },
+  {
+   "capability": "export",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "wiki/ is plain markdown exportable"
+  },
+  {
+   "capability": "graph",
+   "terminal": "SUPPORTED_NOT_REQUIRED",
+   "evidence": "link graph on compile"
+  },
+  {
+   "capability": "cjk",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "CJK/traditional Chinese paths + content (task-007 W10)"
+  },
+  {
+   "capability": "windows",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "Windows NTFS + reserved path handling (W10)"
+  },
+  {
+   "capability": "codex",
+   "terminal": "SUPPORTED_BY_HGK_ADJACENT_SURFACE",
+   "evidence": "Codex CLI primary executor consumes Git Markdown"
+  },
+  {
+   "capability": "opencode",
+   "terminal": "SUPPORTED_BY_HGK_ADJACENT_SURFACE",
+   "evidence": "OpenCode fallback executor"
+  },
+  {
+   "capability": "hermes_agents_skill",
+   "terminal": "SUPPORTED_BY_HGK_ADJACENT_SURFACE",
+   "evidence": "Hermes orchestrates; skills in repo"
+  },
+  {
+   "capability": "obsidian",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "compiled wiki/ is plain markdown -> Obsidian vault bind (W9)"
+  },
+  {
+   "capability": "nl_routing",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "HG-KSEOS auto-route (UEX-W01)"
+  },
+  {
+   "capability": "health_status",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "llmwiki status"
+  },
+  {
+   "capability": "security_secret",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "secret quarantine in HGK ingest (W10 N21/22)"
+  },
+  {
+   "capability": "crash_recovery",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "llmwiki recover + state; spine transaction"
+  },
+  {
+   "capability": "uninstall_rollback",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "isolated prefix removable; core unaffected (UEX-W10)"
+  },
+  {
+   "capability": "no_authority_mutation",
+   "terminal": "RUNTIME_PASS",
+   "evidence": "canonical = Git Markdown/Spine; wiki derived only"
+  }
+ ],
+ "verdict": "PASS"
+}

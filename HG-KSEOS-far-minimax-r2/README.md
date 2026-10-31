@@ -1,0 +1,130 @@
+# HG-KSEOS（冷啟動入口 / Landing Page）
+
+> **現行路由政策快照（registry epoch 24 / assignment revision 24，2026-10-21 owner order）**：
+> PLAN = `openai-codex/gpt-6.1-sol`（medium, OAuth, Hermes-internal）｜EXECUTE = `opencode-go/deepseek-v4.1-flash`（Codex CLI）｜
+> VERIFY_SECURITY = `openai-codex/gpt-6.1-sol`（medium, OAuth, Codex CLI）。PLAN 與 VERIFY 的 **model-axis 獨立性缺席**
+> （記為 `SOD006-C4 OPEN_OWNER_ORDERED`，僅程序分離）。下方依日期排列的段落為**當時紀錄**，不代表現況；
+> 工具鏈 pin 已於 round `FAR-REMEDIATION-20261021` 修復為實機 `0.163.0-alpha.10.2`。
+
+> 本文件是新 Hermes / GPT / operator session 的冷啟動入口頁，不是 normative authority。
+> 治理規則、權威來源與施工細節以 `AGENTS.md`、`docs\HG-KSEOS使用說明文檔.md`（User Guide）與 `control\` 工件為準。
+> **Current claim**: `HG-KSEOS_LOCAL_DELIVERY_PASS — EXTERNAL FINAL ACCEPTED`（保留，不重寫）。
+> **A-3 delta claim ceiling**: `HGK_SQS_A3_OPERABILITY_STEERING_READY`（never production / live / remote）。
+> **FAR-AO-INDEPENDENCE-20261010（2026-10-10）**: 無人窗口 `gpt-6.1-sol` **實測通過**（E12：`required_arm == served_arm == openai-codex/gpt-6.1-sol`、`usage 200`）；`REQ-AO-INDEP-012` **ACCEPTED** / `ACC-AO-INDEP-012` **PASS**（判決由獨立 checker lane 產生）。**Ceiling**：local verification ＋ owner-approved promotion ＋ **process-only independence**（三條 lane 同模型，依 owner D-3 裁決）。證據：`evidence/FAR-AO-INDEPENDENCE-20261010/`。
+> **HGK-SOLUTION-APPLY-20261012（2026-10-12/13）— **PARTIAL**，不是 PASS**: owner 裁決的 lane 重綁 ＋ W3 解決方案落地。PLAN 重綁為 `opencode-go/deepseek-v4.1-flash`（registry `epoch 17`）；SoD 嚴格對 `EXECUTE/PLAN` 依 owner 語意改為**記錄**而非拒絕（附具名補償控制）；W3 工具鏈已落地且 suite **39/39**；獨立 checker lane 判決 **`PARTIAL`**（R8：rollback 過期）；F18 宣告-實況漂移已修。**Ceiling**：`CANDIDATE_ONLY`、**owner acceptance `NOT_RUN`**、本回合不宣稱 PASS。詳見 §2d。
+
+> **FAR-LANE-ROUTE-REBIND-20261015（2026-10-15）— 實作完成（local verified），canonical acceptance 走獨立 checker 判決**: owner 三鏈重線之 lane rebind：**PLAN/VERIFY 默認 `openai-codex/gpt-6.1-sol`（medium，OAuth）、後備 GLM(GO) 再 DS(GO)；EXECUTE 默認 `opencode-go/deepseek-v4.1-flash`、後備 GPT-6-luna(OAuth) 再 NVIDIA DS**（registry `epoch 18`；前輪 gpt exclusion 資料式失效）。Per-turn 可調性機制化：mandate `chain[]` 欄 ＋ `runtime_role_binding_assert.py` fail-closed gate ＋ dispatcher `--require-arm/--force-rank`（receipt 綁 `require_arm==served_arm`）。測試 **158/158 OK**；真實車道 E2E 兩跑 receipts 全綠（EXECUTE 22.7s；VERIFY per-turn 備1 GLM 24.7s guard CLEAN）。**Ceiling**：`CANDIDATE_ONLY`；canonical binary pin、NVIDIA provider 激活、gpt-6-luna live admission 三項 owner-gated 待決（見 `evidence/FAR-LANE-ROUTE-REBIND-20261015/`）。SOD006-C2（PLAN=VERIFY 同 arm）以 `OPEN_OWNER_ORDERED` 記錄。
+
+## 1. 這是什麼
+
+HG-KSEOS 是受治理的多閘門本機交付系統（governed multi-gate local delivery system）：把「使用者目標 → 來源 → 需求 → 設計 → 計畫 → WorkOrder → 實作 → 測試 → 修補 → 獨立驗收 → reducers → local delivery」整條鏈路自動化，並以 immutable evidence、independent checker 與 fail-closed 閘門維持可稽核性。所有 canonical mutation 都必須走 typed Shared Spine API 並發出 immutable event 與 evidence / rollback reference。
+
+## 2. 角色與控制面
+
+- **HGK（HG-KSEOS）= 唯一 governance / normative / WorkOrder / evidence / release control plane**：authority、admission、checker、reducers、release 都由 HGK 擁有。
+- **Hermes = governed runtime / orchestration plane**：Kanban、`/goal`、SessionDB、checkpoint、tool recovery、compression、approvals。
+- **Codex CLI = primary bounded executor**：tracked implementation 的 bounded writer，只寫 admitted writable root。
+- **SQS-THC = financial domain stack**（`C:\Projects\Agent_Workspace\SQS-THC`）：在 HGK governance 之下運作，不建立第二 control plane。
+
+## 2a. 控制平面能力（current，engineering-base 已實作）
+
+以下兩項為受治理的 engineering-base ChangeSet，已實作、測試並經獨立驗收：
+
+### 2a.1 Canonical acceptance resolver（`HGK-EBC-ACCEPTANCE-RESOLUTION-001`）
+
+- `SharedSpine.resolve_acceptance(...)` ＋ `TRANSITIONS['acceptance']`：acceptance 的 canonical transition 由 **SharedSpine / domain owner** 執行。
+- 保留 canonical event / audit trace；`subject` / `evidence` binding **fail-closed**；stale / conflicting 一律拒絕；identical replay **idempotent**；transaction **atomic**。
+- **禁止 consumer 以直接 SQL bypass domain API**（spine 自身的 repository / transaction 實作仍可依既有架構使用內部 persistence SQL）。
+- 測試：`tests/test_acceptance_resolution.py`。
+
+### 2a.2 Ordering oracle（`HGK-EBC-ORDERING-ORACLE-001`）
+
+- **排序一律用隱式 `rowid`（單調插入序），不得用 wall-clock `created_at`。** `created_at` 只有秒級精度，同一秒的兩列會讓排序決策變成任意。
+- 已修正的四處：`lifecycle.py` checkpoint 的 current-workorder 選擇（＝ admission 序，最關鍵）、`lifecycle.py` 近期 transitions、`knowledge.py` memory 記錄、`evidence_graph.py` 的 qualified 形式。
+- Guard：`tests/test_ordering_oracle.py`（含 source 掃描 + 分歧證明）。
+- 前例：`evidence_graph.py` 既有的 `ORDER BY rowid`。
+
+## 2b. 獨立 Checker 升級（advisory，candidate）
+
+> `NEW_R2`: `hgk-checker-upgrade-adapter v2026.10.09-r2`　|　`OLD_BASELINE_DIGEST`: `77afad7edce341c7779bee9920bd0e1b90e963d5496da654269e64b3b2e58bed`（source ZIP）　|　`ROLLBACK_POINTER`: `docs/checker-upgrade-20261009/ROLLBACK.md`
+
+- **能力**：HG-KSEOS 可派送一條獨立 checker lane（Codex CLI → loopback bridge → 與 maker 不同的模型），其輸出**僅為 advisory verdict**。
+- **Advisory ceiling（不可越界）**：checker verdict **永遠不是 OracleReceipt**，也不是 canonical acceptance status；runtime 只能經由帶明確 ceiling 的 named method 消費它，且**不得**由它產生任何 canonical token（`PASS` / `PARTIAL` / `FAIL` / `TEMP_CLOSED` / `INDEPENDENT_PASS` / `RELEASED` / `PRODUCTION_VERIFIED`）。
+- **fail-closed 行為（已測）**：拒絕聲稱 canonical token 的 binding、拒絕非 candidate binding、拒絕逸出 advisory enum 的 verdict、拒絕 digest 與 intake 不一致的 verdict；watchdog 的暫停一律是 advisory request（`WATCHDOG_ADVISORY_ONLY`），恢復 canonical 狀態一律需 operator 決定。
+- **落點**：`src/hg_kseos/checker_bridge/`（含 runtime 接線 `integration.py` + named method + CLI 子命令）；套件測試 `tests/checker_bridge/`（113 tests, OK, skipped=1）。
+- **實作整理與上限揭露**：`evidence/checker-upgrade-20261009/IMPLEMENTATION_SUMMARY.md`。
+- **狀態（誠實）**：cutover gate 為 `TEMP_CLOSED/UNVERIFIED`，**非** accepted/released；`hgk_canonical_acceptance: NOT_PERFORMED`。
+- **延後項（§9.3）**：本升級的**兩份 User Guide currentness 編輯**依規格在 cutover 正式接受後才進行，並附 `NEW_R2` 與 rollback pointer；本節不宣稱 cutover 已完成。
+
+## 2c. AO lane 獨立性與 required-arm（已實作、已獨立驗收）
+
+> Round `FAR-AO-INDEPENDENCE-20261010`（2026-10-10）　|　`REQ-AO-INDEP-012` → `ACCEPTED`（v4）　|　`ACC-AO-INDEP-012` → `PASS`
+
+- **核心能力**：AO / VERIFY / SECURITY lane 可在**無人窗口**下被證明地獨立查核——被點名的 arm（例：`openai-codex/gpt-6.1-sol`）**必須實際服務**該回合，否則 fail-closed 並具名拒絕。
+- **閘門語意 = 驗證後放行**（不是排除）：OAuth arm **留在** pool 內；spawn **之前**驗證其憑證可 refresh。不健康 → `ERR_RELAY_OAUTH_NEEDS_REAUTH`（exit 4）且**不 spawn**、**不**靜默改跑別的 arm。
+- **`--require-arm` = required ＝ served**：檢查在 gate 分支**之外**、以 **pre-gate 候選集**判定；閘門放行卻由別的 arm 服務 → `ERR_REQUIRED_ARM_NOT_SERVED`（exit 3）。**要確保用到某模型，必須同時釘 rank**（`--force-rank <n>`）。
+- **非變異守衛為條件必備**：升權 lane 須帶 `--guard-subject`；根無法解析 → `ERR_GUARD_ROOT_MISSING`（0 attempts）；根含 harness 自身輸出 → `ERR_GUARD_ROOT_CONTAINS_HARNESS_OUTPUT`；`removed/changed` → 該回合 verdict **自我作廢**（`added` 記錄但不致命）。
+- **位元組保真**：回合原始 stdout/stderr 以 bytes 落檔，receipt 記 `stdout_bytes` / `stdout_byte_exact`，第三方可獨立重算（checker 已示範 `MATCH_ALL=True`）。
+- **確定性（無模型）負測**：`--codex-executable` 接縫可把 checked child 換成 `tests/fixtures/stub_lane_child.py`，讓守衛的作廢路徑在**不耗模型額度**的情況下端到端驅動（E11a–E11e）。
+- **實測（E12，core goal）**：`required_arm == served_arm == openai-codex/gpt-6.1-sol`、`exit 0`、`usage 200`、`nonce` present；lane home **無 `auth.json`**、`--ask-for-approval never`、經 relay URL 取得 arm。
+- **測試**：`tests/test_lane_dispatch_ao_guard.py` **34/34**；全量 holdout 失敗 ID 集合與基線**完全相同**（0 引入）。
+- **上限**：**process-only 獨立性**（三條 lane 同模型，owner D-3 裁決）；守衛是**偵測非阻止**；瞬時改寫／還原偵測不到；守衛根以外未量測；AO verdict 一律 **ADVISORY**。
+- **完整證據**：`evidence/FAR-AO-INDEPENDENCE-20261010/`（EVIDENCE ＋ IMPLEMENTATION_SUMMARY）。
+
+## 2d. Lane 重綁 + W3 落地（round `HGK-SOLUTION-APPLY-20261012`，**PARTIAL**）
+
+> Round `HGK-SOLUTION-APPLY-20261012`（2026-10-12/13）　|　admission：4 requirements FROZEN　|　independent checker → **`PARTIAL`**　|　owner acceptance → **`NOT_RUN`**
+
+- **已生效（W1／W2）**：PLAN 由 `openai-codex/gpt-6.1-sol` 重綁為 `opencode-go/deepseek-v4.1-flash`（原 arm 降為 `fallback_1`）；四檔投影與候選**逐位元相同**；三閘門綠（`check_drift()` 0 findings、`tests/test_lane_policy.py` **3 passed / 90 subtests**、每一宣告 SoD 對 `SOD_OK`）。
+- **SoD 編碼對齊（改編碼，不改模型）**：移除未對齊的嚴格對（`maker EXECUTE / checker PLAN / distinct_required`）；重疊**保留為紀錄**（`SOD-APPLY-01` OPEN ＋ `reconciliation` ＋ 具名補償控制），與 owner 2026-10-10 的 `selection_semantics.sod`（overlaps recorded, not enforced）一致。
+- **W3 落地**：`scripts/hgk-lane-toolchain.py`、`scripts/hgk-lane-preflight.py`、`scripts/lane_launcher.sh` ＋ `tests/w3_solution/**`（13 檔）；suite **39/39**（兩種合法呼叫皆通過）；openspec change `lane-toolchain-identity-and-failure-classification` **18/27** 勾選（逐項附證據，未勾者附理由）。
+- **F18 已修（2026-10-13，registry `epoch 16→17`）**：`wiring_feasibility.projection_drops_dual_arms.state` 由「候選已修、尚未套用至 live src」更正為 `CLOSED_FIX_APPLIED_TO_LIVE_SRC`——因為 live `src/hg_kseos/lane_policy.py` 的 `_compact_route()` **確實**已攜帶 `arms[]`（2 臂）＋`selection_authority`；擾動後 `check_drift()` 恰報 1 筆 `DRIFT_VALUE`，證明該 pin 咬得住（非空泛）。
+- **上限（不可略讀）**：**owner acceptance `NOT_RUN`**、本回合**不宣稱 PASS**；本回合 checker 與 maker/executor **同模型**（owner 授權之 task-scoped 偏離；補償控制＝車道／角色／harness 分離）→ **不得**宣稱模型多樣性；rollback 尚未以最終收據重新鍵結（checker R8 FAIL）；9 項 openspec tasks 未勾；回合證據位於 `var/`（**本機未版控**，`.gitignore` 依設計排除）。
+- **證據位置**：`var/hgk-solution-apply-20261012/evidence/OPTION1_CLOSURE_REPORT.md`、`CHECKER_OPTION1_VERDICT.json`、`APPLIED_W3_RECEIPT_V3.json`；文件更新研究 `var/far-doc-update-20261013/`。
+- **併發漂移 F26（2026-10-13 發現，非本回合所為）**：`scripts/lane_launcher.sh` 的**位元已被並行工作流加法擴充**（新增 step 2.5 credential-posture gate，+128 行；mtime `12:56:47`），因此落地的「**位元精確**」主張**不再綁定該路徑**（本回合自己的 T6.3 規則：*verdict binds bytes*）；W3 套件對**現行位元**重跑仍 **39 passed**，故**功能面**主張存活、**位元綁定**主張不存活。另：git index 於 13:12:11 被**外部**程序 staged 7 檔（含本檔與 `scripts/gcm-containment/*`，本 agent 未執行、未 commit）。詳見 `var/hgk-solution-apply-20261012/evidence/OPTION1_RUN_FINDINGS.md` F26。
+
+## 3. Canonical Root 與檔案位置
+
+- **Canonical root**: `C:\Projects\Agent_Workspace\HG-KSEOS`（HG-KSEOS 的 canonical product/control root）。其他 root（如 SQS / Fabric）可由 WorkOrder 另行 admitted；不代表整個系統只有一個 writable filesystem root。
+- **`docs\HG-KSEOS使用說明文檔.md`** = full User Guide（Part I-VIII，含 §31c A-3 Operability Delta）。
+- **`AGENTS.md`** = repository 級指令（governed execution 規則）。
+- **`control\`** = governance artifacts（RBWI/WP 控制工件）。
+- **SSOT packs**（P0-CIP / 實作前開發文檔包）目前位於 `C:\Projects\Agent_Workspace\知識庫\HG-KSEOS_SSOT`（source-resolved；以 fresh-read 為準）。
+- **construction-acceptance-prompt-compiler**（compiler skill 套件：SKILL.md + steering profiles + tests）目前位於 `C:\Projects\Agent_Workspace\知識庫\實作相關DOC\HG-KSEOS\construction-acceptance-prompt-compiler`（source-resolved；以 fresh-read 為準）。
+
+## 4. 如何驗證 canonical Hermes 綁定
+
+```text
+'C:\Users\user\AppData\Local\hermes\hermes-agent\venv\Scripts\hermes.exe' --version
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\hermes-core.ps1 -Action Verify
+```
+
+預期：`Hermes Agent v0.20.0 (2026.8.3)`，commit `3c27eb6234bf91b8ceee9e9071591b31e9b148cb`（`config/hermes.json` `HGK-HERMES-BINDING/2`）。
+
+## 5. Doctor / 健康檢查
+
+```text
+PYTHONPATH=C:\Projects\Agent_Workspace\HG-KSEOS\src '.venv\Scripts\python.exe' -m hg_kseos --root 'C:\Projects\Agent_Workspace\HG-KSEOS' doctor
+```
+
+健康 = `blocking` 為空且 `verdict` 為 `PASS`。
+
+## 6. 普通任務入口
+
+普通任務（含 SQS）一律走 SharedSpine typed admission：register requirement → freeze → taskspec → workorder（`writer=codex`）。精確 API 序列見 User Guide §31c（A-3 Operability Delta）。不允許 bypass WorkOrder 直接實作。
+
+## 7. 自動路由概念
+
+HGK router 依任務形狀做 deterministic 分類（不手動強迫）：
+
+- **Direct** = small atomic task（bounded execution，不強迫 card）。
+- **Kanban** = durable / cross-role / restart-surviving（Hermes Kanban，thin adapter）。
+- **Swarm** = 獨立平行 lane（同一 control plane 下 admission）。
+- **Codex** = tracked 實作（bounded executor；每個 admitted writable root 只有一個 writer）。
+
+## 8. 邊界
+
+- **RP-002**（`HGK-REFERENCE-PROJECT-002`）= 目前 state `SELF_HOSTING_CUTOVER` / `FROZEN_PRESERVED`：有 prior historical execution / partial self-hosting history；不得 mutate。勿從本 README 推斷下一個 executable gate；任何 RP-002 執行前，fresh-read 目前 RP-002_v2.0 blueprint/handoff 與 current state。本 README 不宣稱 RP-002 PASS。
+- **Knowledge K1 / KG1 治理** = `DEFERRED_TO_RP002`。
+- **Production** = `NOT_CLAIMED`（local delivery PASS ≠ production authorized）。
+- **SQS live trading** = `NOT_AUTHORIZED`（LOCAL / PAPER / NO-LIVE-WRITE default）。

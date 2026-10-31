@@ -1,0 +1,12 @@
+{
+  "schema": "HGK-ACCEPTANCE-FIXTURE/1",
+  "case_id": "TST-092",
+  "type": "negative",
+  "fixture": "Readback bytes/lines/hash or canonical denominator mismatch",
+  "preconditions": "authority/source/version/permission frozen",
+  "oracle": "LOCAL_FINAL_PACKAGE_READBACK_PASS withheld",
+  "expected": "LOCAL_FINAL_PACKAGE_READBACK_PASS withheld",
+  "reject_code": "TST-092-REJECT",
+  "source_locator": "HG-KSEOS_實作RBWI_WP_控制工件_PACK_FINAL_r2_Group-07_CrossPack_Registries_Executable_Control_Contracts.md#L15266",
+  "frozen_baseline_sha256": "1564bbf7a8cd4baeabc1704586dc50ebe1e30dd6c1d09c84a7ad629a2b8d8176"
+}

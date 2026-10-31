@@ -1,0 +1,12 @@
+{
+ "uex_id": "UEX-006",
+ "kind": "raw",
+ "fixture": "var/uecx/vs06",
+ "command": "python var/u4_vertical_slices.py::VS-06",
+ "router_trace": {
+  "irrelevant_memory_injected": 0
+ },
+ "raw_output": "unrelated scope: no memory injected",
+ "maker": "hermes-orchestrated-runtime",
+ "captured_at_utc": "2026-08-09T06:03:33.800420+00:00"
+}

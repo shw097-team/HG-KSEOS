@@ -1,0 +1,54 @@
+{
+  "schema": "HGK-HERMES-INSTALL-RECEIPT/1",
+  "captured_at_utc": "2026-08-07T16:31:06.363493+00:00",
+  "result": "PASS_LOCAL_CORE_NO_PROVIDER",
+  "claim_ceiling": "Pinned local native-Windows core install and import smoke test only; no provider, OAuth, API key, gateway, remote CI, deploy, production, or independent acceptance claim.",
+  "install_root": "C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent",
+  "release": {
+    "product_version": "Hermes Agent v0.18.2 (2026.7.7.2)",
+    "tag": "v2026.7.7.2",
+    "commit": "9de9c25f620ff7f1ce0fd5457d596052d5159596",
+    "repository_clean": true,
+    "source": "https://github.com/NousResearch/hermes-agent.git"
+  },
+  "installer": {
+    "path": "C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\evidence\\wave-06\\downloads\\install.ps1",
+    "sha256": "b4998d3b5fc9426f9fe2da1479424db0e840a5e67838a9f2bd14f7d52391cc81",
+    "executed_modes": [
+      "MANIFEST_ONLY"
+    ],
+    "full_installer_executed": false,
+    "reason": "Manual staged install avoided floating fallback and installer global-Git mutation."
+  },
+  "uv": {
+    "path": "C:\\Users\\user\\AppData\\Local\\hermes\\bin\\uv.exe",
+    "sha256": "6d40479cd1d0d5db7fc0fe68ad703fc8acbd84bba50d864bb97461f6af9d9561",
+    "archive_path": "C:\\Users\\user\\OneDrive\\Documents\\HLPE\\work\\HGK-CONSTRUCTION-AUTONOMOUS-BOOTSTRAP-001\\evidence\\wave-06\\downloads\\uv-0.11.29-x86_64-pc-windows-msvc.zip",
+    "archive_sha256": "a047d55651bc3e0ca24595b25ec4cfcb10f9dca9fb56514e661269b37d4fae68",
+    "sync_command": "uv sync --extra all --locked",
+    "unlocked_fallback_used": false
+  },
+  "locks": {
+    "uv_lock_sha256": "3c713791f30a660463d1b674c2760375b7c702687e1488b094535b0ed1375a61",
+    "pyproject_sha256": "004344ec34d7eba58c0d674403bba71ccd9442751e42c9d4801cd6581b3efdb8"
+  },
+  "runtime": {
+    "python": "Python 3.11.9",
+    "imports": "IMPORTS_OK",
+    "installed_package_count": 99,
+    "package_manifest": "HERMES_INSTALLED_PACKAGES.json",
+    "package_manifest_sha256": "5db4b8b0251df055a1a748c15f652b7f602dd513c03514aba25542a04831e1fa"
+  },
+  "mutations": {
+    "user_path_modified": false,
+    "global_git_config_modified": false,
+    "config_template_installed": false,
+    "gateway_installed": false,
+    "provider_credentials_configured": false
+  },
+  "open_next_steps": [
+    "Run permission-negative and rollback tests in an isolated test home.",
+    "Provider setup requires explicit human OAuth/API-key input.",
+    "Run independent NRTV after provider-bound pilot evidence exists."
+  ]
+}

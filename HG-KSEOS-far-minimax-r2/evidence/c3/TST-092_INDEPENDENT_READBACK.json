@@ -1,0 +1,22 @@
+{
+  "schema": "HGK-TST-092-INDEPENDENT-READBACK/1",
+  "checker": "INDEPENDENT_CHECKER (fresh read-only context; not the packager maker)",
+  "captured_at_utc": "2026-08-08T11:51:36.512844+00:00",
+  "head": "a68e116308cc11b943226b3c6c0d9f880544f7ec",
+  "branch": "codex/hgk-final-closure-002",
+  "git_status_clean": true,
+  "package": "var/releases/HG-KSEOS_LOCAL_CANDIDATE.zip",
+  "package_sha256": "789507b4116629fa65708bace32fbd66403b05aeffde3154fc0e540e2276b30a",
+  "maker_receipt": "evidence/wave-18/LOCAL_PACKAGE_READBACK.json",
+  "maker_verdict": "LOCAL_PACKAGE_READBACK_PASS_WITH_TT",
+  "same_head_as_maker": true,
+  "same_package_bytes_as_maker": true,
+  "expected_payload_count": 275,
+  "manifest_row_count": 275,
+  "manifest_count_matches": true,
+  "archive_exact_set": true,
+  "hash_mismatches": [],
+  "manifest_fieldnames_ok": true,
+  "verdict": "INDEPENDENT_CASE_PASS",
+  "claim_ceiling": "TST-092 independent case verdict only; not a release claim."
+}

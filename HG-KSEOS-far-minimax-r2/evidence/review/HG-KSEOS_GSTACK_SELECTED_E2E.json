@@ -1,0 +1,20 @@
+{
+ "schema": "HGK-GSTACK-SELECTED-E2E/1",
+ "task_id": "HGK-SELF-BOOTSTRAP-NAMED-METHOD-RUNTIME-READINESS-TASK013-FINAL-CLOSURE-014",
+ "captured_at_utc": "2026-08-10T04:51:40.946988+00:00",
+ "flow": "user feature request -> Hermes -> OpenSpec propose -> Codex implementation -> gstack review -> ship advisory -> HGK checker/reducer final",
+ "invoked_slices": [
+  "review (real advisory)",
+  "ship (advisory-only)"
+ ],
+ "effective_load_slices": [
+  "office-hours",
+  "plan-eng-review",
+  "review",
+  "qa",
+  "cso",
+  "ship",
+  "retro"
+ ],
+ "verdict": "PASS"
+}

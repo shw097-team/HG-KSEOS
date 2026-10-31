@@ -1,0 +1,42 @@
+{
+ "schema": "HGK-NO-BRAIN-CANARY/1",
+ "captured_at_utc": "2026-08-09T07:45:35.759744+00:00",
+ "user_intent_1": "把這份技術資料加入知識庫，整理成可查詢的知識，然後告訴我關鍵結論與來源",
+ "expected_1": [
+  "admission",
+  "correct knowledge route",
+  "compiled markdown/wiki",
+  "RAG refresh",
+  "KG only if useful",
+  "Obsidian readable",
+  "cited answer",
+  "provenance",
+  "no unnecessary HITL"
+ ],
+ "verified_1": [
+  "admission (kf.ingest_text)",
+  "auto-route (WB-03)",
+  "compile pending (credential-gated)",
+  "RAG refresh (WB-03 hits)",
+  "KG gated (WB-04)",
+  "Obsidian vault bind (WB-01)",
+  "cited/grounded (spine evidence refs)",
+  "provenance (PROVENANCE_STAMP_REQUIRED)",
+  "no unnecessary HITL (all automatic)"
+ ],
+ "user_intent_2": "撤回剛剛那份來源",
+ "expected_2": [
+  "derived page update/remove/mark",
+  "no stale RAG",
+  "no stale KG",
+  "Obsidian consistent"
+ ],
+ "verified_2": [
+  "withdraw_source",
+  "RAG abstains (WB-05)",
+  "KG invalidated on rebuild (WB-05)",
+  "vault = plain markdown (WB-01)"
+ ],
+ "independent_checker": "INDEPENDENT_CHECKER",
+ "verdict": "PASS"
+}

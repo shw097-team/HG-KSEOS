@@ -1,0 +1,21 @@
+{
+  "schema": "HGK-TOOL-LOCK/1",
+  "generated_at_utc": "2026-08-07T16:31:06.363493+00:00",
+  "tools": [
+    {
+      "id": "HERMES_AGENT",
+      "version": "0.18.2",
+      "tag": "v2026.7.7.2",
+      "commit": "9de9c25f620ff7f1ce0fd5457d596052d5159596",
+      "install_root": "C:\\Users\\user\\AppData\\Local\\hermes\\hermes-agent",
+      "uv_lock_sha256": "3c713791f30a660463d1b674c2760375b7c702687e1488b094535b0ed1375a61"
+    },
+    {
+      "id": "UV",
+      "version": "0.11.29",
+      "executable": "C:\\Users\\user\\AppData\\Local\\hermes\\bin\\uv.exe",
+      "sha256": "6d40479cd1d0d5db7fc0fe68ad703fc8acbd84bba50d864bb97461f6af9d9561",
+      "archive_sha256": "a047d55651bc3e0ca24595b25ec4cfcb10f9dca9fb56514e661269b37d4fae68"
+    }
+  ]
+}

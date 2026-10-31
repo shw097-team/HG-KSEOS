@@ -1,0 +1,62 @@
+{
+  "binding": "Intent -> Requirement -> Plan IR -> TaskSpec -> WorkOrder -> Evidence requirement",
+  "canonical_frozen_input_mount": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\worktrees\\evidence\\A05-A11",
+  "captured_at": "2026-08-08T03:19:15.649759Z",
+  "expected_head": "ee30dc034a3d4fd0e24a6bfdf77ad8aae273b400",
+  "fresh_upstream_tests": {
+    "exit_code": 0,
+    "failed": 0,
+    "passed": 51
+  },
+  "frozen_input_files": {
+    "ACCEPTANCE_GRAPH.json": "8ba04fa51655df36f74be88bce48133c12e2c22eb17536e36f6663b728e9a6a8",
+    "APPROVED_PLANPACK.json": "54942b6252a396af0fa06627cc32d1076abc41e48baaf99e67bc6b595c82faad",
+    "BOOTSTRAP_PACK.json": "5f88c5f47de8362cbf816bb3e73584b650f53a81deb4089f416b4d216ad00b4e",
+    "CANONICAL_PLAN_IR.json": "59162f2e2a2dfd93dfa29247b2d48295b649f3227ae089c38e546f1b16acab09",
+    "FREEZE_TOKEN.json": "75063b74b1b8430997d6062042629edee3c996df0e7678387f8c6fb7661a4d60",
+    "GPW_COMPOSITE_REPLAY.json": "ea0fbd730b2444686575d5b800c5379d8cf11c390657a1d3c580031d26330b57",
+    "LAUNCH_GATE_REPORT.json": "a11df07b4074827cce72950c459101c4d945303be96538ad49ab982b88bad232",
+    "LAUNCH_TOKEN.json": "fddedb723f7f0cd8e879fe2ac5fdfdba2dc83228b86bdf0c337b2d7a1078b835",
+    "NAMED_OBJECT_LEDGER.json": "97f5b71b95e6362e1320163ca3705c6b19873523f7e562c4d5c3d586fea92ae6",
+    "OUTPUT_CONTRACT.json": "684a7d7d3ced2c53253c9c54342576057e11e23ecf168e63d55da4604adec95a",
+    "PERMISSION_CONTRACT.json": "5af415e660edfb1eba82ede1388196743a1de6e0551422e96ea9568a47d4843c",
+    "PLAN_APPROVAL_TOKEN.json": "cd6fc47fd60657f796b6486bdbe09782f9b4bafa80136ff02364750c1569a360",
+    "REQUIREMENT_GRAPH.json": "c4a2bba81846e41cd15138bf5c56227b03f9b45380761c8a38c8597a64b61c4f",
+    "TRACE_MATRIX.tsv": "632cd8a7948bf28485c51b1329bf94e3d46422a1a5dab2c97b7ef853ed963974"
+  },
+  "initial_failed_attempt": "missing canonical A05-A11 frozen-input mount in isolated test topology",
+  "integrated_target": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\工程基座\\sdlc-prw-hlpe-formal",
+  "isolated_clone": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\worktrees\\hlpe-qualification",
+  "negative_and_fallback": "PASS",
+  "qualification_sequence": [
+    "DISCOVER",
+    "HASH",
+    "READBACK",
+    "IDENTIFY_IR_COMPILER_CONTRACTS",
+    "SCHEMA_VALIDATE",
+    "ROUND_TRIP",
+    "NEGATIVE_TEST",
+    "FALLBACK_TEST",
+    "QUALIFY",
+    "BIND"
+  ],
+  "r3_control_base": {
+    "checksum_file_sha256": "d3e4032e142e3318930597457186b0d41a8ce6b455fa915b86c8a328f9257192",
+    "checksummed_files": 304,
+    "exact_set_readback": "PASS",
+    "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\工程基座\\SDLC_PRW_HLPE\\_HLPE_BASE\\HLPE_MAIN_PLATFORM_3DOMAINS_v2026.07.22-r3",
+    "physical_files": 305,
+    "version": "2026.07.22-r3"
+  },
+  "repair": "mounted exact frozen-input artifacts from _HLPE_CONTROL without changing integrated source",
+  "round_trip_fields": [
+    "requirement_identity",
+    "source_locator",
+    "acceptance",
+    "non_goals",
+    "security",
+    "rollback",
+    "evidence_hooks"
+  ],
+  "verdict": "QUALIFIED_AND_BOUND_LOCAL_SCOPE"
+}
