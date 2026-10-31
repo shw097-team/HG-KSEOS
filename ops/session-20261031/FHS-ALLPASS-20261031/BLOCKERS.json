@@ -12,10 +12,10 @@
    "state": "FAIL",
    "evidence_ref": "OWNER-RULING:new capability, not a new standard: at 23:04 this unit failed HOST_SP_MATRIX_INCOMPLETE because no writer existed for the nine Host SP lifecycle cells. The continuation graph now carries an EXECUTE actuator (first measured use 00:51:27, lane EXECUTE pid 11032); the acceptance text is untouched.",
    "updated_at": "2026-10-31T15:57:50+00:00",
-   "blocker_code": "ASSURED_NO_ARTEFACT",
-   "blocker_cause": "all 9 cells carry a state: 4 PASS (Codex/Claude x LITE/STANDARD), 3 LOADER_PASS_MODEL_HALF_UNMEASURED (Hermes x 3 SP), 2 NO_ARTEFACT_PROFILE_VETO (Codex/Claude x ASSURED -- the packager refuses ASSURED because this tree declares no adversarial/independent checker, so no artefact exists to install)",
-   "blocker_unblock": "declare an adversarial + independent_checker assurance in PIPD, or accept NO_ARTEFACT_PROFILE_VETO as the cell state under the new vocabulary",
-   "blocked_at": "2026-11-01T01:07:22+0800"
+   "blocker_code": "AO_FOUND_FAIL",
+   "blocker_cause": "independent checker (VERIFY_SECURITY gpt-6.1-sol rank1 nonce PIPD-AO-E167D692) returned overall FAIL: clause 2 found _verify_members accepting unlisted symlink/dir/hardlink members (now fixed, 9/9 tests), clause 4 found my quoted digests stale (re-measured LITE 16/6dadaf36a9ec, STANDARD 56/9ef70b690d01); the checker must re-run before independent_checker can be declared",
+   "blocker_unblock": "re-dispatch VERIFY_SECURITY on the fixed tree; if it passes, declare independent_checker and export ASSURED",
+   "blocked_at": "2026-11-01T01:25:33+0800"
   },
   {
    "wp_id": "WP-FHS-12",
