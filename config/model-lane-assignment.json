@@ -1,7 +1,7 @@
 {
  "artifact": "MODEL_LANE_ASSIGNMENT",
  "schema": "HGK-MODEL-LANE-ASSIGNMENT/1",
- "revision": 38,
+ "revision": 39,
  "declared_at_utc": "2026-10-21T17:26:33.375499Z",
  "declared_by": "Owner order 2026-10-23 (R15): PLAN = SBL-Commander/PLAN, EXECUTE = SBL-EXECUTE/Codex bounded writer, VERIFY = Acceptance Challenge/Independent Acceptance Officer/SECURITY all bind opencode-go/deepseek-v4.1-flash. The deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410) is deleted and MiMo-V2.6-Flash takes the fallback-1 slot it vacated.",
  "authority_note": "Operator-declared routing policy. Not an authority source; the runtime wiring named in `effective_wiring` is the machine truth. The current revision is the top-level \"revision\" field; earlier revisions are recorded in the revision_*_reason fields and in this file's history sections.",
@@ -174,48 +174,53 @@
   },
   {
    "role": "VERIFY_SECURITY",
-   "assigned_provider": "openai-codex",
-   "assigned_model": "gpt-6.1-sol",
-   "transport_model": "gpt-6.1-sol",
-   "authority": "owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek",
+   "assigned_provider": "opencode-go",
+   "assigned_model": "mimo-v2.6-flash",
+   "transport_model": "opencode-go/mimo-v2.6-flash",
+   "authority": "owner-order-20261031-verify-checker-mimo-v26-flash",
    "supply_selector": {
     "arms": [
      {
       "provider": "opencode-go",
-      "model": "deepseek-v4.1-flash",
-      "transport_model": "opencode-go/deepseek-v4.1-flash",
-      "role": null,
-      "default": null,
-      "automatic_selection": false
+      "model": "mimo-v2.6-flash",
+      "transport_model": "opencode-go/mimo-v2.6-flash",
+      "role": "primary",
+      "default": true,
+      "automatic_selection": true
      },
      {
       "provider": "openai-codex",
       "model": "gpt-6.1-sol",
       "transport_model": "gpt-6.1-sol",
-      "role": null,
-      "default": null,
-      "automatic_selection": true
+      "role": "fallback1",
+      "default": false,
+      "automatic_selection": false
+     },
+     {
+      "provider": "opencode-go",
+      "model": "deepseek-v4.1-flash",
+      "transport_model": "opencode-go/deepseek-v4.1-flash",
+      "role": "fallback2",
+      "default": false,
+      "automatic_selection": false
      },
      {
       "provider": "opencode-go",
       "model": "glm-5.3-flash",
       "transport_model": "opencode-go/glm-5.3-flash",
-      "role": null,
-      "default": null,
+      "role": "fallback3",
+      "default": false,
       "automatic_selection": false
      },
      {
       "provider": "nvidia",
       "model": "deepseek-ai/deepseek-v4.1-flash",
       "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
-      "role": null,
-      "default": null,
+      "role": "fallback4",
+      "default": false,
       "automatic_selection": false
      }
-    ],
-    "unspecified_default": {
-     "provider": "openai-codex"
-    }
+    ]
    },
    "additional_routes": [
     {
@@ -240,7 +245,8 @@
      "default": false
     }
    ],
-   "reasoning_effort": "medium"
+   "reasoning_effort": "medium",
+   "note": "owner order 2026-10-31: checker arm switched to the built opencode-go/mimo-v2.6-flash; gpt-6.1-sol retained as fallback 1"
   }
  ],
  "effective_wiring": {
@@ -477,19 +483,19 @@
   ],
   "VERIFY_SECURITY": [
    {
-    "provider": "openai-codex",
-    "model": "gpt-6.1-sol",
-    "transport_model": "gpt-6.1-sol",
+    "provider": "opencode-go",
+    "model": "mimo-v2.6-flash",
+    "transport_model": "opencode-go/mimo-v2.6-flash",
     "arm": "A",
     "role": "primary",
     "default": true,
     "automatic_selection": true,
-    "reasoning_effort": "medium"
+    "reasoning_effort": null
    },
    {
-    "provider": "opencode-go",
-    "model": "deepseek-v4.1-flash",
-    "transport_model": "opencode-go/deepseek-v4.1-flash",
+    "provider": "openai-codex",
+    "model": "gpt-6.1-sol",
+    "transport_model": "gpt-6.1-sol",
     "arm": "B",
     "role": "fallback1",
     "default": false,
@@ -498,10 +504,20 @@
    },
    {
     "provider": "opencode-go",
-    "model": "glm-5.3-flash",
-    "transport_model": "opencode-go/glm-5.3-flash",
+    "model": "deepseek-v4.1-flash",
+    "transport_model": "opencode-go/deepseek-v4.1-flash",
     "arm": "C",
     "role": "fallback2",
+    "default": false,
+    "automatic_selection": false,
+    "reasoning_effort": null
+   },
+   {
+    "provider": "opencode-go",
+    "model": "glm-5.3-flash",
+    "transport_model": "opencode-go/glm-5.3-flash",
+    "arm": "D",
+    "role": "fallback3",
     "default": false,
     "automatic_selection": false,
     "reasoning_effort": null
@@ -510,8 +526,8 @@
     "provider": "nvidia",
     "model": "deepseek-ai/deepseek-v4.1-flash",
     "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
-    "arm": "D",
-    "role": "fallback3",
+    "arm": "E",
+    "role": "fallback4",
     "default": false,
     "automatic_selection": false,
     "reasoning_effort": null
@@ -774,9 +790,9 @@
  "revision_27_reason": "Re-derived from config/lane-routing-registry.yaml after measurement found the assignment restating the wiring incorrectly: PLAN declared gpt-6.1-sol with a MiniMax transport, EXECUTE's auto-selected entry was the deepseek arm with a MiniMax transport, and VERIFY_SECURITY auto-selected MiniMax. The registry already matched the owner order, so the assignment is now a projection of it rather than a second copy of it.",
  "lane_chains_projected_from": {
   "source": "config/lane-routing-registry.yaml",
-  "epoch": 38,
-  "sha256": "269ea8b968d36d84749ccca930848bcbc1e684d90ca80ec0cdaf5b8a9872c4c7",
-  "projected_at_utc": "2026-10-30T10:28:22+00:00",
+  "epoch": 39,
+  "sha256": "c5605be0cf038e4766b31f9df22ed1ec4ca3280b8888183cbfab152f0d486358",
+  "projected_at_utc": "2026-10-31T02:34:30+00:00",
   "rule": "lane_chains and the slot pool are projections; edit the registry, then re-run this tool"
  }
 }

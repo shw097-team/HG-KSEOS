@@ -1420,6 +1420,16 @@ def run_candidate(entry: dict, args, codex: str, lane_home: Path, attempt_log_di
     launcher = [sys.executable, str(codex)] if str(codex).endswith(".py") else [codex]
     cmd = launcher + ["--model", str(entry["transport_model"]),
            "--sandbox", sandbox, "--ask-for-approval", "never",
+           # MEASURED 2026-10-31: codex 0.166 reports `provider: desktop_router` from the human home's
+           # config.toml, and desktop_router is a loopback router on 127.0.0.1:10102 that is NOT running.
+           # Every lane turn therefore ended in "Reconnecting... waiting for network" and timed out with no
+           # nonce — which was recorded as "the codex client path does not deliver a turn". It is not the
+           # relay and not the model: `-c openai_base_url=` alone does not move a child whose
+           # model_provider is desktop_router, because that key configures the built-in openai provider.
+           # Declaring the provider explicitly makes the relay the transport for EVERY lane:
+           #   gpt-6.1-sol            -> PROBE_B_OK (3.5 s turn, 7,404 tokens)
+           #   deepseek-v4.1-flash    -> PROBE_C_OK (10,163 tokens)
+           "-c", "model_provider=openai",
            "-c", f"openai_base_url={args.relay_base}",
            "--cd", str(args.cwd or ROOT)]
     if entry.get("reasoning_effort"):

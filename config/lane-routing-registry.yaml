@@ -1,9 +1,10 @@
 schema: HGK-LANE-ROUTING-REGISTRY/1
 status: IN_FORCE
-epoch: 38
+epoch: 39
 contract_epoch: 34
 authorization_basis: 'Owner order 2026-10-23 (R15): the main model is opencode-go/deepseek-v4.1-flash; the deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410 ModelDeprecated, measured 2026-10-23) is DELETED from every lane pool, and MiMo-V2.6-Flash takes the main-model fallback-1 position in the Hermes deployment plane. Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied.'
 owner_order_20261024_s205_od01: 'Owner order 2026-10-24 (R17 S2-05 OD-01): PLAN and VERIFY/SECURITY bind openai-codex/gpt-6.1-sol (medium, codex-native-oauth); EXECUTE stays opencode-go/deepseek-v4.1-flash. rev33 held all three lanes on deepseek as an owner-ordered SOD006-C7 arrangement, so every lane declared a model it was not required to serve. This revision restores the declared model to the owner-required model. Recorded consequence: until the ChatGPT OAuth credential is provisioned, PLAN/VERIFY fail closed instead of silently substituting another model. Applied at the authority file and projected by scripts/lane_assignment_resync.py; this registry carries no cryptographic signature, so the change is REPO_BOUND owner-order provenance, not NATIVE_SIGNED.'
+owner_order_20261031_verify_checker_mimo: 'Owner order 2026-10-31 (this round, epoch 39): 把本次 Acceptance Challenge & Independent Acceptance Officer & VERIFY & SECURITY 車道的 checker model 轉用 MiMo-V2.6-Flash (OPENCODE GO)。 mimo-v2.6-flash is a BUILT arm already declared in this registry (EXECUTE arm B) and in the pool; this order BINDS that existing arm as the VERIFY_SECURITY rank-1 instead of inventing a new one. openai-codex/gpt-6.1-sol is retained as arm 2 and stays reachable. MEASURED before the rebind: opencode-go/mimo-v2.6-flash answered MIMO_OK through the loopback relay on the OpenCode Go inference endpoint. Consequence recorded, not hidden: PLAN (openai-codex/gpt-6.1-sol) and VERIFY (opencode-go/mimo-v2.6-flash) are now distinct on provider AND model, so the SOD006-C4 shared-identity note does not describe the live binding; EXECUTE vs VERIFY stays distinct on the model axis (deepseek-v4.1-flash != mimo-v2.6-flash) with provider separation not required by invariants.'
 source_of_routes:
   path: config/model-lane-assignment.json
   revision: 38
@@ -47,7 +48,7 @@ owner_in_force:
   lane_rank1:
     PLAN: {provider: openai-codex, model: gpt-6.1-sol, transport_model: gpt-6.1-sol, reasoning_effort: medium}
     EXECUTE: {provider: opencode-go, model: deepseek-v4.1-flash, transport_model: opencode-go/deepseek-v4.1-flash}
-    VERIFY_SECURITY: {provider: openai-codex, model: gpt-6.1-sol, transport_model: gpt-6.1-sol, reasoning_effort: medium}
+    VERIFY_SECURITY: {provider: opencode-go, model: mimo-v2.6-flash, transport_model: opencode-go/mimo-v2.6-flash}
   authority:
     primary:
       doc: FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision2/01_BODY/04_FABRIC_HGK_CONTROL.md
@@ -80,15 +81,21 @@ routes:
   oauth: true
   reasoning_effort: medium
   selection_authority: owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek
+  # arms[] is the SAME ordered chain as provider/model + fallbacks below: index 0 carries the
+  # rank-1 and the only automatic_selection. Measured 2026-10-31: this block had arms[0] = deepseek
+  # while the chain ranked gpt-6.1-sol first, so the binding oracle derived
+  # /lane_chains/PLAN/0/automatic_selection=false against a live assignment that said true and the
+  # conformance test failed on a pristine tree. Same arms, same rank 1 — order only.
   arms:
+  - provider: openai-codex
+    model: gpt-6.1-sol
+    transport_model: gpt-6.1-sol
+    reasoning_effort: medium
+    automatic_selection: true
   - provider: opencode-go
     model: deepseek-v4.1-flash
     transport_model: opencode-go/deepseek-v4.1-flash
     automatic_selection: false
-  - provider: openai-codex
-    model: gpt-6.1-sol
-    transport_model: gpt-6.1-sol
-    automatic_selection: true
   - provider: opencode-go
     model: glm-5.3-flash
     transport_model: opencode-go/glm-5.3-flash
@@ -199,24 +206,28 @@ routes:
   - SECURITY REVIEW
   - VERIFY
   engine: codex-cli
-  provider: openai-codex
-  model: gpt-6.1-sol
-  reasoning_effort: medium
-  canonical_identity: gpt-6.1-sol
-  auth: codex-native-oauth
-  oauth: true
-  selection_authority: owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek
+  provider: opencode-go
+  model: mimo-v2.6-flash
+  canonical_identity: mimo-v2.6-flash
+  auth: env_ref:OPENCODE_GO_API_KEY
+  oauth: false
+  selection_authority: owner-order-20261031-verify-checker-mimo-v26-flash
   selected_arm: primary
-  selected_arm_identity: deepseek-v4.1-flash
+  selected_arm_identity: mimo-v2.6-flash
   arms:
+  - provider: opencode-go
+    model: mimo-v2.6-flash
+    transport_model: opencode-go/mimo-v2.6-flash
+    automatic_selection: true
+  - provider: openai-codex
+    model: gpt-6.1-sol
+    transport_model: gpt-6.1-sol
+    reasoning_effort: medium
+    automatic_selection: false
   - provider: opencode-go
     model: deepseek-v4.1-flash
     transport_model: opencode-go/deepseek-v4.1-flash
     automatic_selection: false
-  - provider: openai-codex
-    model: gpt-6.1-sol
-    transport_model: gpt-6.1-sol
-    automatic_selection: true
   - provider: opencode-go
     model: glm-5.3-flash
     transport_model: opencode-go/glm-5.3-flash
@@ -226,6 +237,11 @@ routes:
     transport_model: nvidia/deepseek-ai/deepseek-v4.1-flash
     automatic_selection: false
   fallbacks:
+  - provider: openai-codex
+    model: gpt-6.1-sol
+    transport_model: gpt-6.1-sol
+    reasoning_effort: medium
+    automatic_selection: false
   - provider: opencode-go
     model: deepseek-v4.1-flash
     transport_model: opencode-go/deepseek-v4.1-flash
@@ -241,7 +257,13 @@ routes:
   admission_status: UNPROVEN
   owner_order_20261021: 'epoch 23: PLAN and VERIFY_SECURITY both default to openai-codex/gpt-6.1-sol (medium, OAuth) by owner order 2026-10-21; the PLAN/VERIFY model-axis collision is declared as SOD006-C4 (OPEN_OWNER_ORDERED), not hidden. Historical epoch 19-22 rows remain in history[].'
   admission_evidence: UNPROVEN for opencode-go/deepseek-v4.1-flash under epoch 31. Configuration and local fixture tests are not a measured model/tool lane admission. Previous MiniMax measurement is preserved in the v2 receipt before-values.
-  transport_model: gpt-6.1-sol
+  # MEASURED 2026-10-31: this line still carried `gpt-6.1-sol` after the rank-1 moved to
+  # opencode-go/mimo-v2.6-flash, and lane_policy_reconcile preserves per-arm metadata by rank slot,
+  # so the PROJECTED pool entry read {"model":"mimo-v2.6-flash","transport_model":"gpt-6.1-sol"}.
+  # The dispatcher then launched codex with --model gpt-6.1-sol, the usage ledger recorded
+  # gpt-6.1-sol, and the identity gate correctly refused the turn: asked != served. The transport id
+  # is part of the arm, so it moves with the arm (opencode-go requires the provider-qualified id).
+  transport_model: opencode-go/mimo-v2.6-flash
 invariants:
   unknown_lane: DENY
   maker_checker_distinct_model: true
@@ -266,8 +288,8 @@ sod_invariants:
     note: 'Epoch 34 (2026-10-30): the owner order of 2026-10-24 separates the pair — EXECUTE writes on opencode-go/deepseek-v4.1-flash, VERIFY_SECURITY checks on openai-codex/gpt-6.1-sol — so model AND provider separation are PRESENT and distinct_required is enforced again. The former same-identity arrangement (SOD006-C7) survives only as fallback 1 in the checker chain; the dispatcher refuses a turn where the checker resolves to the writer arm.'
   - maker: PLAN
     checker: VERIFY_SECURITY
-    distinct_required: false
-    note: 'Epoch 34 (2026-10-30): PLAN and VERIFY_SECURITY both bind openai-codex/gpt-6.1-sol by owner order 2026-10-24, so they share one canonical identity. Separation is process, lane and evidence-path only; declared as SOD006-C4 (OPEN_OWNER_ORDERED) rather than claimed as model independence.'
+    distinct_required: true
+    note: 'Epoch 39 (2026-10-31, owner order): PLAN binds openai-codex/gpt-6.1-sol while VERIFY_SECURITY binds opencode-go/mimo-v2.6-flash, so the pair is now distinct on BOTH provider and model. SOD006-C4 described the epoch-34 arrangement in which both lanes shared gpt-6.1-sol; that arrangement is superseded by this order, and separation is no longer claimed on process/lane/evidence-path alone. distinct_required stays true so a future rebind that re-collides the two lanes is refused rather than silently accepted.'
   declared_conflicts:
   - id: SOD006-C1
     pairs:
@@ -373,181 +395,170 @@ projections:
   - pointer: /revision
     expected: 38
   - pointer: /lane_chains/PLAN/0/provider
-    expected: "openai-codex"
+    expected: openai-codex
   - pointer: /lane_chains/PLAN/0/model
-    expected: "gpt-6.1-sol"
+    expected: gpt-6.1-sol
   - pointer: /lane_chains/PLAN/0/arm
-    expected: "A"
+    expected: A
   - pointer: /lane_chains/PLAN/0/default
     expected: true
   - pointer: /lane_chains/PLAN/0/automatic_selection
     expected: true
   - pointer: /lane_chains/PLAN/0/reasoning_effort
-    expected: "medium"
+    expected: medium
   - pointer: /lane_chains/PLAN/1/provider
-    expected: "opencode-go"
+    expected: opencode-go
   - pointer: /lane_chains/PLAN/1/model
-    expected: "deepseek-v4.1-flash"
+    expected: deepseek-v4.1-flash
   - pointer: /lane_chains/PLAN/1/arm
-    expected: "B"
+    expected: B
   - pointer: /lane_chains/PLAN/1/default
     expected: false
   - pointer: /lane_chains/PLAN/1/automatic_selection
     expected: false
-  - pointer: /lane_chains/PLAN/1/reasoning_effort
-    expected: null
   - pointer: /lane_chains/PLAN/2/provider
-    expected: "opencode-go"
+    expected: opencode-go
   - pointer: /lane_chains/PLAN/2/model
-    expected: "glm-5.3-flash"
+    expected: glm-5.3-flash
   - pointer: /lane_chains/PLAN/2/arm
-    expected: "C"
+    expected: C
   - pointer: /lane_chains/PLAN/2/default
     expected: false
   - pointer: /lane_chains/PLAN/2/automatic_selection
     expected: false
-  - pointer: /lane_chains/PLAN/2/reasoning_effort
-    expected: null
   - pointer: /lane_chains/PLAN/3/provider
-    expected: "opencode-go"
+    expected: opencode-go
   - pointer: /lane_chains/PLAN/3/model
-    expected: "mimo-v2.6-pro"
+    expected: mimo-v2.6-pro
   - pointer: /lane_chains/PLAN/3/arm
-    expected: "D"
+    expected: D
   - pointer: /lane_chains/PLAN/3/default
     expected: false
   - pointer: /lane_chains/PLAN/3/automatic_selection
     expected: false
-  - pointer: /lane_chains/PLAN/3/reasoning_effort
-    expected: null
   - pointer: /lane_chains/PLAN/4/provider
-    expected: "nvidia"
+    expected: nvidia
   - pointer: /lane_chains/PLAN/4/model
-    expected: "z-ai/glm-5.3-flash"
+    expected: z-ai/glm-5.3-flash
   - pointer: /lane_chains/PLAN/4/arm
-    expected: "E"
+    expected: E
   - pointer: /lane_chains/PLAN/4/default
     expected: false
   - pointer: /lane_chains/PLAN/4/automatic_selection
     expected: false
-  - pointer: /lane_chains/PLAN/4/reasoning_effort
-    expected: null
   - pointer: /lane_chains/PLAN/5/provider
-    expected: "nvidia"
+    expected: nvidia
   - pointer: /lane_chains/PLAN/5/model
-    expected: "deepseek-ai/deepseek-v4.1-flash"
+    expected: deepseek-ai/deepseek-v4.1-flash
   - pointer: /lane_chains/PLAN/5/arm
-    expected: "F"
+    expected: F
   - pointer: /lane_chains/PLAN/5/default
     expected: false
   - pointer: /lane_chains/PLAN/5/automatic_selection
     expected: false
-  - pointer: /lane_chains/PLAN/5/reasoning_effort
-    expected: null
   - pointer: /lane_chains/EXECUTE/0/provider
-    expected: "opencode-go"
+    expected: opencode-go
   - pointer: /lane_chains/EXECUTE/0/model
-    expected: "deepseek-v4.1-flash"
+    expected: deepseek-v4.1-flash
   - pointer: /lane_chains/EXECUTE/0/arm
-    expected: "A"
+    expected: A
   - pointer: /lane_chains/EXECUTE/0/default
     expected: true
   - pointer: /lane_chains/EXECUTE/0/automatic_selection
     expected: true
-  - pointer: /lane_chains/EXECUTE/0/reasoning_effort
-    expected: null
   - pointer: /lane_chains/EXECUTE/1/provider
-    expected: "opencode-go"
+    expected: opencode-go
   - pointer: /lane_chains/EXECUTE/1/model
-    expected: "mimo-v2.6-flash"
+    expected: mimo-v2.6-flash
   - pointer: /lane_chains/EXECUTE/1/arm
-    expected: "B"
+    expected: B
   - pointer: /lane_chains/EXECUTE/1/default
     expected: false
   - pointer: /lane_chains/EXECUTE/1/automatic_selection
     expected: false
-  - pointer: /lane_chains/EXECUTE/1/reasoning_effort
-    expected: null
   - pointer: /lane_chains/EXECUTE/2/provider
-    expected: "openai-codex"
+    expected: openai-codex
   - pointer: /lane_chains/EXECUTE/2/model
-    expected: "gpt-6-luna"
+    expected: gpt-6-luna
   - pointer: /lane_chains/EXECUTE/2/arm
-    expected: "C"
+    expected: C
   - pointer: /lane_chains/EXECUTE/2/default
     expected: false
   - pointer: /lane_chains/EXECUTE/2/automatic_selection
     expected: false
-  - pointer: /lane_chains/EXECUTE/2/reasoning_effort
-    expected: null
   - pointer: /lane_chains/EXECUTE/3/provider
-    expected: "nvidia"
+    expected: nvidia
   - pointer: /lane_chains/EXECUTE/3/model
-    expected: "deepseek-ai/deepseek-v4.1-flash"
+    expected: deepseek-ai/deepseek-v4.1-flash
   - pointer: /lane_chains/EXECUTE/3/arm
-    expected: "D"
+    expected: D
   - pointer: /lane_chains/EXECUTE/3/default
     expected: false
   - pointer: /lane_chains/EXECUTE/3/automatic_selection
     expected: false
-  - pointer: /lane_chains/EXECUTE/3/reasoning_effort
-    expected: null
   - pointer: /lane_chains/VERIFY_SECURITY/0/provider
-    expected: "openai-codex"
+    expected: opencode-go
   - pointer: /lane_chains/VERIFY_SECURITY/0/model
-    expected: "gpt-6.1-sol"
+    expected: mimo-v2.6-flash
   - pointer: /lane_chains/VERIFY_SECURITY/0/arm
-    expected: "A"
+    expected: A
   - pointer: /lane_chains/VERIFY_SECURITY/0/default
     expected: true
   - pointer: /lane_chains/VERIFY_SECURITY/0/automatic_selection
     expected: true
-  - pointer: /lane_chains/VERIFY_SECURITY/0/reasoning_effort
-    expected: "medium"
   - pointer: /lane_chains/VERIFY_SECURITY/1/provider
-    expected: "opencode-go"
+    expected: openai-codex
   - pointer: /lane_chains/VERIFY_SECURITY/1/model
-    expected: "deepseek-v4.1-flash"
+    expected: gpt-6.1-sol
   - pointer: /lane_chains/VERIFY_SECURITY/1/arm
-    expected: "B"
+    expected: B
   - pointer: /lane_chains/VERIFY_SECURITY/1/default
     expected: false
   - pointer: /lane_chains/VERIFY_SECURITY/1/automatic_selection
     expected: false
-  - pointer: /lane_chains/VERIFY_SECURITY/1/reasoning_effort
-    expected: null
   - pointer: /lane_chains/VERIFY_SECURITY/2/provider
-    expected: "opencode-go"
+    expected: opencode-go
   - pointer: /lane_chains/VERIFY_SECURITY/2/model
-    expected: "glm-5.3-flash"
+    expected: deepseek-v4.1-flash
   - pointer: /lane_chains/VERIFY_SECURITY/2/arm
-    expected: "C"
+    expected: C
   - pointer: /lane_chains/VERIFY_SECURITY/2/default
     expected: false
   - pointer: /lane_chains/VERIFY_SECURITY/2/automatic_selection
     expected: false
-  - pointer: /lane_chains/VERIFY_SECURITY/2/reasoning_effort
-    expected: null
   - pointer: /lane_chains/VERIFY_SECURITY/3/provider
-    expected: "nvidia"
+    expected: opencode-go
   - pointer: /lane_chains/VERIFY_SECURITY/3/model
-    expected: "deepseek-ai/deepseek-v4.1-flash"
+    expected: glm-5.3-flash
   - pointer: /lane_chains/VERIFY_SECURITY/3/arm
-    expected: "D"
+    expected: D
   - pointer: /lane_chains/VERIFY_SECURITY/3/default
     expected: false
   - pointer: /lane_chains/VERIFY_SECURITY/3/automatic_selection
     expected: false
-  - pointer: /lane_chains/VERIFY_SECURITY/3/reasoning_effort
-    expected: null
   - pointer: /sod/plan_lane
-    expected: "openai-codex / gpt-6.1-sol - owner order 2026-10-24 (R17 S2-05 OD-01); supersedes the 2026-10-23 all-lanes-deepseek arrangement."
+    expected: openai-codex / gpt-6.1-sol - owner order 2026-10-24 (R17 S2-05 OD-01); supersedes the 2026-10-23 all-lanes-deepseek arrangement.
   - pointer: /sod/execute_lane
-    expected: "opencode-go / deepseek-v4.1-flash - Codex CLI bounded writer; owner order 2026-10-24 keeps EXECUTE on the writer model while PLAN and VERIFY move."
+    expected: opencode-go / deepseek-v4.1-flash - Codex CLI bounded writer; owner order 2026-10-24 keeps EXECUTE on the writer model while PLAN and VERIFY move.
   - pointer: /sod/verify_security_lane
-    expected: "openai-codex/gpt-6.1-sol - owner order 2026-10-24; ACCEPTANCE, SECURITY REVIEW and VERIFY use this one checker."
+    expected: openai-codex/gpt-6.1-sol - owner order 2026-10-24; ACCEPTANCE, SECURITY REVIEW and VERIFY use this one checker.
   - pointer: /sod/verify_security_default_arm
-    expected: "gpt-6.1-sol"
+    expected: gpt-6.1-sol
+  registry_epoch: 38
+  declared_unprojected:
+  - /lane_chains/EXECUTE/0/reasoning_effort
+  - /lane_chains/EXECUTE/1/reasoning_effort
+  - /lane_chains/EXECUTE/2/reasoning_effort
+  - /lane_chains/EXECUTE/3/reasoning_effort
+  - /lane_chains/PLAN/1/reasoning_effort
+  - /lane_chains/PLAN/2/reasoning_effort
+  - /lane_chains/PLAN/3/reasoning_effort
+  - /lane_chains/PLAN/4/reasoning_effort
+  - /lane_chains/PLAN/5/reasoning_effort
+  - /lane_chains/VERIFY_SECURITY/0/reasoning_effort
+  - /lane_chains/VERIFY_SECURITY/1/reasoning_effort
+  - /lane_chains/VERIFY_SECURITY/2/reasoning_effort
+  - /lane_chains/VERIFY_SECURITY/3/reasoning_effort
 - id: hermes-codex-lane
   path: config/hermes-codex-lane.json
   format: json
@@ -582,9 +593,9 @@ projections:
   - pointer: /opencodex_version
     expected: 2.11.0
   - pointer: /codex_version
-    expected: 0.165.0-alpha.1.2
+    expected: 0.166.0-alpha.5.1
   - pointer: /codex_sha256
-    expected: 0c09e45bc76433756eb2d492f6db0ce6f269967e6618f4a6ae73e2fa239694b8
+    expected: 3097C909FB6D5CD63510D44ACEB1D42DF9F6E85722A3E447E477DEF1ECF60E16
   - pointer: /credential_env
     expected: OPENCODE_GO_API_KEY
   - pointer: /openai_fallback
@@ -608,7 +619,7 @@ projections:
     are pre-MSIX path drift and are outside this round''s scope.'
   bindings:
   - pointer: /schema
-    expected: HGK-HERMES-BINDING/2
+    expected: HGK-HERMES-BINDING/3
   debt:
   - pointer: /install_root
     expected: C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes\hermes-agent
@@ -708,3 +719,14 @@ arm_aliases:
       so an alias can never hide what actually answered.
 claim_ceiling: CANDIDATE_ONLY
 
+projection_rederivation:
+  script: scripts/lane_projections_rederive.py
+  epoch: 38
+  assignment_revision: 38
+  stats:
+    derived: 2
+    repinned: 5
+    dropped: 13
+    unchanged: 93
+  rule: routes speak for route-derived pointers; unrepresentable pointers are declared, never fabricated
+  claim_ceiling: makes check_drift truthful; does not by itself satisfy TT-R36-02 (needs a checker receipt)

@@ -53,7 +53,20 @@ from pathlib import Path
 K = Path(r"C:/Projects/Agent_Workspace/HG-KSEOS")
 PY = sys.executable
 CODEX = Path(r"C:/Users/user/AppData/Local/OpenAI/Codex/bin/22cfb1d302613eae/codex.exe")
-RELAY = "https://chatgpt.com/backend-api/codex"
+# MEASURED 2026-10-31: this constant carried the upstream URL (chatgpt.com/backend-api/codex), so the lane
+# child talked to OpenAI directly and bypassed the relay that owns the credentials for BOTH arms. The
+# dispatch transport is the loopback relay for every lane; the dispatcher now declares
+# `-c model_provider=openai` so the child cannot fall back to the dead desktop_router (127.0.0.1:10102).
+RELAY = "http://127.0.0.1:10101/v1"
+# MEASURED 2026-10-31: the dispatcher's identity gate reads TWO files — the codex credential pool and the
+# usage ledger — from --relay-home / --usage. Both defaulted to %LOCALAPPDATA%\HG-KSEOS\opencodex-hermes,
+# which is NOT the home the running relay writes to (relay_daemon starts `ocx` on its default home,
+# ~/.opencodex). The gate therefore read a ledger whose last row was 2026-10-29 while the turn that had
+# just answered was recorded in ~/.opencodex/usage.jsonl, and every serving arm was convicted as
+# `usage_receipt_ok: false / no usage row was appended after the attempt offset` — a false negative that
+# reads exactly like a maker failure. `ok:true` only after both flags name the home that actually served.
+RELAY_HOME = "C:/Users/user/.opencodex"
+RELAY_USAGE = "C:/Users/user/.opencodex/usage.jsonl"
 QUEUE = Path(r"C:/wg/queue")
 MAX_PHASE_ATTEMPTS = 3
 # A FAIL is a specification, but not an infinite one: after this many EXECUTE rounds the unit needs a ruling.
@@ -187,6 +200,8 @@ def launch(lane: str, prompt: str, nonce: str, cwd: Path, json_out: Path, timeou
         "--codex-home", r"C:/Users/user/.codex",
         "--allow-human-home-transport",
         "--relay-base", RELAY,
+        "--relay-home", RELAY_HOME,
+        "--usage", RELAY_USAGE,
         "--identity-source", "codex-rollout",
         "--cwd", str(cwd),
         "--timeout", str(timeout),

@@ -2,8 +2,8 @@
  "schema": "HGK-LANE-ROUTE-SLOTS/1",
  "status": "CANDIDATE",
  "artifact": "LANE_ROUTE_SLOTS_CANDIDATE",
- "revision": 25,
- "supersedes_revision": 25,
+ "revision": 30,
+ "supersedes_revision": 30,
  "round": "ROUND-R14-LANE-REBIND-20261022",
  "declared_by": "Owner order 2026-10-23: main model DEEPSEEK V4.1 FLASH (OPENCODE GO); the deprecated fallback-first arm MiniMax M3.1 Flash is DELETED and MiMo-V2.6-Flash takes fallback 1. The arm opencode-go/minimax-m3.1-flash-free answers HTTP 410 ModelDeprecated, so deletion is a repair, not a preference. All three lanes stay opencode-go/deepseek-v4.1-flash at rank 1.",
  "authority_basis": "the same owner order that rebind the registry routes, the assignment and the 87 projection bindings in HG-KSEOS 924af95; the pool is the deployment plane and must not disagree with the declared plane",
@@ -225,6 +225,36 @@
    "at_utc": "2026-10-30T10:28:22+00:00",
    "reason": "projected from lane-routing-registry epoch 38: the owner order of 2026-10-24 puts PLAN and VERIFY/SECURITY rank 1 on openai-codex/gpt-6.1-sol and keeps EXECUTE on opencode-go/deepseek-v4.1-flash; the demoted primary stays reachable as fallback 1",
    "evidence": "config/lane-routing-registry.yaml sha256 269ea8b968d36d84749ccca930848bcbc1e684d90ca80ec0cdaf5b8a9872c4c7"
+  },
+  {
+   "rev": 26,
+   "at_utc": "2026-10-31T02:30:55+00:00",
+   "reason": "projected from lane-routing-registry epoch 39: the owner order of 2026-10-24 puts PLAN and VERIFY/SECURITY rank 1 on openai-codex/gpt-6.1-sol and keeps EXECUTE on opencode-go/deepseek-v4.1-flash; the demoted primary stays reachable as fallback 1",
+   "evidence": "config/lane-routing-registry.yaml sha256 d9c3da73cac4f93e8e0e67b457033d8d6648f033302915a013f4ef5c974c4d04"
+  },
+  {
+   "rev": 27,
+   "at_utc": "2026-10-31T02:31:24+00:00",
+   "reason": "projected from lane-routing-registry epoch 39: the owner order of 2026-10-24 puts PLAN and VERIFY/SECURITY rank 1 on openai-codex/gpt-6.1-sol and keeps EXECUTE on opencode-go/deepseek-v4.1-flash; the demoted primary stays reachable as fallback 1",
+   "evidence": "config/lane-routing-registry.yaml sha256 fd7a56765932fe9e8b36a76177121adcacc8618ff92a26b7283c41fd480e3b8b"
+  },
+  {
+   "rev": 28,
+   "at_utc": "2026-10-31T02:32:05+00:00",
+   "reason": "projected from lane-routing-registry epoch 39: the owner order of 2026-10-24 puts PLAN and VERIFY/SECURITY rank 1 on openai-codex/gpt-6.1-sol and keeps EXECUTE on opencode-go/deepseek-v4.1-flash; the demoted primary stays reachable as fallback 1",
+   "evidence": "config/lane-routing-registry.yaml sha256 0b66b5d226b3a9bc6c3e8f2c6b7bac18461e64ced94314c9d455cbd590aa7583"
+  },
+  {
+   "rev": 29,
+   "at_utc": "2026-10-31T02:32:39+00:00",
+   "reason": "projected from lane-routing-registry epoch 39: the owner order of 2026-10-24 puts PLAN and VERIFY/SECURITY rank 1 on openai-codex/gpt-6.1-sol and keeps EXECUTE on opencode-go/deepseek-v4.1-flash; the demoted primary stays reachable as fallback 1",
+   "evidence": "config/lane-routing-registry.yaml sha256 9724d057a4306a87ca7fa9c4dfef2a7bcd2ba0dbd6c1507359e4b7369095c8b0"
+  },
+  {
+   "rev": 30,
+   "at_utc": "2026-10-31T02:34:30+00:00",
+   "reason": "projected from lane-routing-registry epoch 39: the owner order of 2026-10-24 puts PLAN and VERIFY/SECURITY rank 1 on openai-codex/gpt-6.1-sol and keeps EXECUTE on opencode-go/deepseek-v4.1-flash; the demoted primary stays reachable as fallback 1",
+   "evidence": "config/lane-routing-registry.yaml sha256 c5605be0cf038e4766b31f9df22ed1ec4ca3280b8888183cbfab152f0d486358"
   }
  ],
  "placement_rationale": "Kept as a NEW file rather than folded into config/lane-routing-registry.yaml: the registry's routes[] values are bound as 90 drift-pinned JSON pointers across three live sites, so editing it forces a fully synchronised sweep + epoch bump. This file stays inert for the drift gate (verified: validate -> exit 0 / fatal false / 90 sites).",
@@ -402,22 +432,27 @@
    "ordered_pool": [
     {
      "rank": 1,
-     "provider": "openai-codex",
-     "model": "gpt-6.1-sol",
+     "provider": "opencode-go",
+     "model": "mimo-v2.6-flash",
+     "transport_model": "opencode-go/mimo-v2.6-flash",
      "role": "DEFAULT/首選",
-     "auth": "openai_oauth",
-     "oauth": true,
-     "transport_model": "gpt-6.1-sol",
-     "reasoning_effort": "medium",
-     "transport_vocabulary_note": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged.",
      "default": true,
      "automatic_selection": true
     },
     {
      "rank": 2,
+     "provider": "openai-codex",
+     "model": "gpt-6.1-sol",
+     "transport_model": "gpt-6.1-sol",
+     "role": "FALLBACK1/備援1",
+     "default": false,
+     "automatic_selection": false
+    },
+    {
+     "rank": 3,
      "provider": "opencode-go",
      "model": "deepseek-v4.1-flash",
-     "role": "FALLBACK1/備援1",
+     "role": "FALLBACK2/備援2",
      "auth": "env_ref:OPENCODE_GO_API_KEY",
      "oauth": false,
      "transport_model": "opencode-go/deepseek-v4.1-flash",
@@ -425,10 +460,10 @@
      "automatic_selection": false
     },
     {
-     "rank": 3,
+     "rank": 4,
      "provider": "opencode-go",
      "model": "glm-5.3-flash",
-     "role": "FALLBACK2/備援2",
+     "role": "FALLBACK3/備援3",
      "auth": "env_ref:OPENCODE_GO_API_KEY",
      "oauth": false,
      "transport_model": "opencode-go/glm-5.3-flash",
@@ -436,10 +471,10 @@
      "automatic_selection": false
     },
     {
-     "rank": 4,
+     "rank": 5,
      "provider": "nvidia",
      "model": "deepseek-ai/deepseek-v4.1-flash",
-     "role": "FALLBACK3/備援3",
+     "role": "FALLBACK4/備援4",
      "auth": "env_ref:NVIDIA_API_KEY",
      "oauth": false,
      "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",

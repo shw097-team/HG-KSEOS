@@ -6,9 +6,9 @@
  "human_codex_config": "C:\\Users\\user\\.codex\\config.toml",
  "hermes_codex_home": "%LOCALAPPDATA%\\HG-KSEOS\\codex-hermes",
  "hermes_opencodex_home": "%LOCALAPPDATA%\\HG-KSEOS\\opencodex-hermes",
- "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\0ab0e7a8f3779036\\codex.exe",
- "codex_version": "0.165.0-alpha.1.2",
- "codex_sha256": "0c09e45bc76433756eb2d492f6db0ce6f269967e6618f4a6ae73e2fa239694b8",
+ "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\22cfb1d302613eae\\codex.exe",
+ "codex_version": "0.166.0-alpha.5.1",
+ "codex_sha256": "3097C909FB6D5CD63510D44ACEB1D42DF9F6E85722A3E447E477DEF1ECF60E16",
  "opencodex_root": "%LOCALAPPDATA%\\HG-KSEOS\\runtime\\opencodex-2.11.0",
  "opencodex_version": "2.11.0",
  "opencodex_port": 10101,
@@ -224,6 +224,23 @@
     "sha256": "0c09e45bc76433756eb2d492f6db0ce6f269967e6618f4a6ae73e2fa239694b8"
    },
    "why": "the declared binary no longer existed on disk; every lane dispatch refused before spawn"
+  },
+  {
+   "at": "2026-10-31T10:15+08:00",
+   "round": "HANDOFF-PATCH-V1-CONTINUATION-20261031",
+   "why": "the declared pin named a binary that no longer exists (bin/0ab0e7a8f3779036); the lane gate refused before spawn with ERR_LANE_TOOLCHAIN_BINARY_MISSING, which had been mis-read as a maker failure",
+   "before": {
+    "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\0ab0e7a8f3779036\\codex.exe",
+    "codex_version": "0.165.0-alpha.1.2",
+    "codex_sha256": "0c09e45bc76433756eb2d492f6db0ce6f269967e6618f4a6ae73e2fa239694b8"
+   },
+   "after": {
+    "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\22cfb1d302613eae\\codex.exe",
+    "codex_version": "0.166.0-alpha.5.1",
+    "codex_sha256": "3097C909FB6D5CD63510D44ACEB1D42DF9F6E85722A3E447E477DEF1ECF60E16"
+   },
+   "measured": "codex.exe --version -> codex-cli 0.166.0-alpha.5.1 ; sha256 recomputed over 368,970,544 bytes",
+   "backup": "hermes-codex-lane.json.bak-pinrefresh-20261031101338"
   }
  ],
  "round_rebinding_note_20261021": "Round R8-EXECUTE-MINIMAX-20261021: the sealed EXECUTE lane binding moved from deepseek-v4.1-flash to minimax-m3.1-flash-free under the owner mandate quoted in config/lane-routing-registry.yaml. /model_routing_change is a HISTORICAL record of the 2026-10-02 change and was deliberately NOT rewritten (previous_model deepseek-v4-flash -> new_model deepseek-v4.1-flash at that time). The codex toolchain pin (codex_executable / codex_version / codex_sha256) is a separate concern and was not touched by a lane-model mandate.",
