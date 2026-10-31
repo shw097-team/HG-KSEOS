@@ -53,6 +53,49 @@ REGREAD = ROOT / "tools" / "registry_readback.py"
 ISSUER = Path(r"C:/Projects/Agent_Workspace/HG-KSEOS/scripts/issue_grant.py")
 OWNER_AUTH = Path(r"C:/Projects/Agent_Workspace/HG-KSEOS/config/issuer/OWNER_AUTHORIZATION.json")
 NONCE_LEDGER = Path(r"C:/Projects/Agent_Workspace/HG-KSEOS/config/issuer/nonce-ledger.jsonl")
+
+# --------------------------------------------------------------------------------------- owner-side issuance
+# MEASURED 2026-10-31 (officer sitting F): inside the codex sandbox `issue_grant.py admit|issue` exits 1 with
+# "issuer key has 262 bytes, expected a 32-byte seed (DPAPI header mismatch?)" -- the DPAPI unwrap of the owner's
+# private key is unavailable to the sandboxed child, and the loader then falls back to a raw-seed path that cannot
+# match. The same command succeeds in the owner's own shell.
+#
+# The fix is not to expose the key to the checker. It is to make the direction of trust explicit: the subject
+# REQUESTS, the owner SIGNS outside the sandbox, the subject CONSUMES.
+#   WP17_PREPARE_ONLY=1  -> write the exact argv this run needs and stop (evidence/preissue-request.json)
+#   WP17_PREISSUED=<dir> -> consume <dir>/<op>.json instead of minting it here
+PREISSUED = Path(os.environ["WP17_PREISSUED"]) if os.environ.get("WP17_PREISSUED") else None
+PREPARE_ONLY = os.environ.get("WP17_PREPARE_ONLY") == "1"
+
+
+def issue_via_owner(op: str, argv: list, out_path: Path) -> dict:
+    if PREISSUED:
+        src = PREISSUED / f"{op}.json"
+        if not src.is_file():
+            return {"op": op, "exit": 4, "stdout": "",
+                    "stderr": f"pre-issued {op} missing: {src}"}
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(src, out_path)
+        return {"op": op, "exit": 0, "stdout": f"consumed pre-issued {op} from {src}", "stderr": "",
+                "source": "pre-issued-by-owner"}
+    if PREPARE_ONLY:
+        req = {"op": op, "argv": [str(a) for a in argv], "out": str(out_path)}
+        req_path = ROOT / "evidence" / "preissue-request.json"
+        req_path.parent.mkdir(parents=True, exist_ok=True)
+        prior = []
+        if req_path.is_file():
+            try:
+                prior = json.loads(req_path.read_text(encoding="utf-8")).get("requests") or []
+            except ValueError:
+                prior = []
+        req_path.write_text(json.dumps({"schema": "WP17-PREISSUE-REQUEST/1",
+                                        "why": "the owner's key is DPAPI-wrapped and unavailable inside the "
+                                               "sandbox; the subject requests, the owner signs outside it",
+                                        "requests": prior + [req]}, ensure_ascii=False, indent=1),
+                            encoding="utf-8")
+        print(f"PREPARE-ONLY: requested {op}; stopping so the owner can sign it")
+        raise SystemExit(0)
+    return run_op(op, argv)
 def _resolve_source():
     import os
     import pathlib
@@ -476,19 +519,19 @@ def main() -> int:
 
     # ---------------------------------------------------------------- admission + grant
     admission_out = EV / "admission.json"
-    adm_res = run_op("admission", [PY, str(ISSUER), "admit",
+    adm_res = issue_via_owner("admission", [PY, str(ISSUER), "admit",
                                    "--task-spec", "TS-WP-FHS-17-OCCUPANT",
                                    "--subject", WP,
                                    "--candidate-sha", pkg["candidate_sha256"],
                                    "--operation", OPERATION,
                                    "--cell", "CAP-BOOT",
-                                   "--out", str(admission_out)])
+                                   "--out", str(admission_out)], admission_out)
     adm = json.loads(admission_out.read_text(encoding="utf-8"))
     need["admission_id"] = adm["admission_id"]
     wj(CAND / "need.json", need)
 
     grant_out = EV / "grant.json"
-    grant_res = run_op("grant-issue", [PY, str(ISSUER), "issue",
+    grant_res = issue_via_owner("grant-issue", [PY, str(ISSUER), "issue",
                                        "--principal", "owner",
                                        "--operation", OPERATION,
                                        "--writeset", str(CAND / "write-set.json"),
@@ -497,7 +540,7 @@ def main() -> int:
                                        "--admission", adm["admission_id"],
                                        "--scope", SCOPE,
                                        "--epoch", EPOCH, "--ttl", "900",
-                                       "--out", str(grant_out)])
+                                       "--out", str(grant_out)], grant_out)
     grant_ledgered = grant_res["exit"] == 0
     grant = json.loads(grant_out.read_text(encoding="utf-8")) if grant_out.is_file() else {}
     if grant.get("nonce"):
@@ -804,7 +847,7 @@ def main() -> int:
                 if row.get("nonce") and row["nonce"] != grant.get("nonce"):
                     hist_nonce = row["nonce"]
     regrant = FIX / "replay-regrant.json"
-    regrant_res = run_op("regrant-issue", [PY, str(ISSUER), "issue",
+    regrant_res = issue_via_owner("regrant-issue", [PY, str(ISSUER), "issue",
                                            "--principal", "owner",
                                            "--operation", OPERATION,
                                            "--writeset", str(CAND / "write-set.json"),
@@ -814,7 +857,7 @@ def main() -> int:
                                            "--scope", SCOPE,
                                            "--epoch", EPOCH, "--ttl", "900",
                                            "--nonce", hist_nonce or "NONE",
-                                           "--out", str(regrant)])
+                                           "--out", str(regrant)], regrant)
     run_op("gate-regrant", [PY, str(RECEIVER), "gate",
                             "--need", "candidate/need.json",
                             "--grant", "fixtures/replay-regrant.json",
