@@ -1,0 +1,29 @@
+{
+ "schema": "HGK-AO-SITTING/2",
+ "wp": "WP-FHS-11",
+ "sitting": 2,
+ "recorded_at": "2026-11-01T01:32:08+0800",
+ "lane": "VERIFY_SECURITY",
+ "model": "gpt-6.1-sol",
+ "rank": 1,
+ "nonce": "PIPD-AO2-741767A0",
+ "nonce_present": true,
+ "usage_receipt_ok": true,
+ "exit": 0,
+ "seconds": 140.32,
+ "clauses": {
+  "2": "PASS",
+  "4": "PASS"
+ },
+ "reconfirmed": {
+  "1": "PASS",
+  "3": "PASS",
+  "5": "PASS"
+ },
+ "overall": "FAIL",
+ "why_overall_fails": "the checker says the named suite produced 7 passes and 14 temporary-directory setup errors under enforced read-only execution. That is the CHECKER'S environment, not the tree: every clause it was asked to decide came back PASS, and it verified the symlink/dir/hardlink/fifo/char/block/unknown member types are all refused.",
+ "finding": "our tests require a writable temp directory, so they cannot run under a read-only sandbox -- a portability defect in the suite that matters for unattended checking",
+ "decision": "do NOT declare independent_checker on this sitting. The AO's own overall verdict is FAIL; taking the five PASS clauses and ignoring the overall is exactly the substitution this system forbids.",
+ "next": "make the suite runnable read-only (skip or relocate temp use), then re-dispatch; or re-dispatch with a sandbox that permits scratch files",
+ "raw_verdict": "NONCE-ECHO: PIPD-AO2-741767A0\n\nBoth repaired clauses pass independent checks against the running code. The subject was unchanged.\n\nOverall remains **FAIL because verification is incomplete**: the named suite produced 7 passes and 14 temporary-directory setup errors under enforced read-only execution. No canonical acceptance was performed.\n\n```json\n{\n  \"nonce\": \"PIPD-AO2-741767A0\",\n  \"clauses\": [\n    {\n      \"id\": 2,\n      \"verdict\": \"PASS\",\n      \"evidence\": \"Regular-file control accepted. Listed and unlisted symlinks, directories, hardlinks, FIFOs, character devices, block devices and unknown member types all refused with EXPORT_VERIFY_FAILED. A listed symlink alone was also refused.\"\n    },\n    {\n      \"id\": 4,\n      \"verdict\": \"PASS\",\n      \"evidence\": \"Built and reopened archives in memory: LITE=16 members; STANDARD=56; LITE is a strict subset, with 40 additional STANDARD members. Measured archive SHA256: LITE=6dadaf36a9ecd4e1452955aa1fdf7cb955782e8f524f62158b39c170a7d62d1b; STANDARD=9ef70b690d01f7d71b9b2d3bb8c3ca07934157b151cc79c1413320d0bde2844f. Digests differ; repeated builds matched.\"\n    }\n  ],\n  \"reconfirmed\": [\n    {\n      \"id\": 1,\n      \"verdict\": \"PASS\",\n      \"evidence\": \"Existing traversal include ../PIPD/pyproject.toml refused with EXPORT_MEMBER_UNSAFE.\"\n    },\n    {\n      \"id\": 3,\n      \"verdict\": \"PASS\",\n      \"evidence\": \"Valid regular-file archive accepted; changing only its expected digest caused EXPORT_VERIFY_FAILED for SHA256 mismatch.\"\n    },\n    {\n      \"id\": 5,\n      \"verdict\": \"PASS\",\n      \"evidence\": \"ASSURED refused through write_bundle and CLI with PROFILE_VETO explicitly naming independent_checker; CLI exited 2 and created no output directory.\"\n    }\n  ],\n  \"overall\": \"FAIL\"\n}\n```"
+}
