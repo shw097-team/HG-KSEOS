@@ -1,39 +1,60 @@
 {
- "schema": "HGK-BLOCKER-LEDGER/1",
- "exported_at": "2026-10-31T23:45:52+0800",
- "note": "a unit may stay open at round close only with code + cause + unblock; this is the ledger the gate reads",
+ "schema": "HGK-BLOCKERS/2",
+ "generated_from": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\var\\shared-spine\\hg-kseos.db",
+ "count": 4,
+ "note": "derived: the work_queue table is authoritative, this file is a convenience copy",
  "blockers": [
   {
    "wp_id": "WP-FHS-11",
+   "title": "Portable Host Dogfood",
+   "depends_on": "WP-FHS-05,WP-FHS-16",
+   "effect_class": "HOST_OP",
    "state": "FAIL",
-   "code": "BLOCKED_PROFILE_CONTENT",
-   "cause": "LITE and STANDARD export byte-identical (79 files, archive a6b3c8b3bbdf); profiles.py artifact_depth/target_resolution never reach the member set",
-   "unblock": "implement artifact_depth + target_resolution so the member set changes per SP, then run the clean-cwd cell script per SP",
-   "blocked_at": "2026-10-31T23:45:41+0800"
+   "evidence_ref": "OWNER-RULING:new capability, not a new standard: at 23:04 this unit failed HOST_SP_MATRIX_INCOMPLETE because no writer existed for the nine Host SP lifecycle cells. The continuation graph now carries an EXECUTE actuator (first measured use 00:51:27, lane EXECUTE pid 11032); the acceptance text is untouched.",
+   "updated_at": "2026-10-31T15:57:50+00:00",
+   "blocker_code": "HOST_CELLS_UNMEASURED",
+   "blocker_cause": "profile axis now changes bytes (LITE 15 files e3e993b0e079 vs STANDARD 52 files 52712b6316fb) but the 6 host cells (3 hosts x 2 SP) have not been run against both SPs; BLOCKED_PROFILE_CONTENT is closed",
+   "blocker_unblock": "run clean-cwd cell per host per SP (install bundle, load, trigger, unload) and record each verdict",
+   "blocked_at": "2026-11-01T00:16:15+0800"
   },
   {
    "wp_id": "WP-FHS-12",
+   "title": "W18 Normal Mode",
+   "depends_on": "WP-FHS-10,WP-FHS-11",
+   "effect_class": "HOST_OP",
    "state": "FAIL",
-   "code": "HOST_RUNTIME_FROZEN",
-   "cause": "hermes -z cannot start: openai.types.responses.response_computer_tool_call_output_screenshot_param missing; no site-packages/openai exists under D:/Hermes-Recovery, launcher is a frozen binary",
-   "unblock": "upgrade or rebuild the Hermes CLI distribution, then re-run the two W18 commands unchanged",
+   "evidence_ref": null,
+   "updated_at": "2026-10-31T15:57:50+00:00",
+   "blocker_code": "HOST_RUNTIME_FROZEN",
+   "blocker_cause": "hermes -z cannot start: openai.types.responses.response_computer_tool_call_output_screenshot_param missing; no site-packages/openai exists under D:/Hermes-Recovery, launcher is a frozen binary",
+   "blocker_unblock": "upgrade or rebuild the Hermes CLI distribution, then re-run the two W18 commands unchanged",
    "blocked_at": "2026-10-31T23:45:41+0800"
   },
   {
    "wp_id": "WP-FHS-13",
+   "title": "CAP On-Demand + HotSwap",
+   "depends_on": "WP-FHS-16,WP-FHS-17",
+   "effect_class": "HOST_OP",
    "state": "FAIL",
-   "code": "ABI_CONSUMER_MISSING",
-   "cause": "HotSwap mechanism done (tools/hotswap.py, 5/5) but the Need/Occupant ABI and the original Consumer are absent",
-   "unblock": "implement the Need/Occupant ABI and wire the original Consumer, then re-run parity",
+   "evidence_ref": null,
+   "updated_at": "2026-10-31T15:57:50+00:00",
+   "blocker_code": "ABI_CONSUMER_MISSING",
+   "blocker_cause": "HotSwap mechanism done (tools/hotswap.py, 5/5) but the Need/Occupant ABI and the original Consumer are absent",
+   "blocker_unblock": "implement the Need/Occupant ABI and wire the original Consumer, then re-run parity",
    "blocked_at": "2026-10-31T23:45:41+0800"
   },
   {
    "wp_id": "WP-FHS-20",
+   "title": "CLI/Agent/Host Kind Matrix",
+   "depends_on": "WP-FHS-05,WP-FHS-16",
+   "effect_class": "HOST_OP",
    "state": "FAIL",
-   "code": "KIND_ENUM_UNREAD",
-   "cause": "8 Kind authoritative enumeration not yet extracted; KB copy is 415/909 rows and unusable, pristine copy is /c/wg/pkg",
-   "unblock": "read the 8 Kind list from /c/wg/pkg (909/909), generate the 144 admitted cells, then measure",
-   "blocked_at": "2026-10-31T23:45:42+0800"
+   "evidence_ref": "C:\\wg\\queue\\WP-FHS-20\\output\\officer\\verdict.json",
+   "updated_at": "2026-10-31T15:57:50+00:00",
+   "blocker_code": "HOST_SET_CONFLICT",
+   "blocker_cause": "8 ProductKind found (CLI_TOOL, AI_SYSTEM, GENIE, SIMPLE_AGENT, PROFILE, PLUGIN, AGENT_SKILL, AGENT_OS) and both 192-cell registries generated, but the delivery carries two host enumerations: 09A_SPINE says Hermes/Codex/Claude Code/ChatGPT while the R2 order says Hermes/Codex/Claude Code/DeepSeek Harness. Which 48-cell slice is conflicted is undecided, so no cell may be excluded.",
+   "blocker_unblock": "owner rules on the host set (D-A2); then measure the 48 cells of the non-conflicted hosts first and record the conflicted slice as its own state",
+   "blocked_at": "2026-11-01T00:05:48+0800"
   }
  ]
 }

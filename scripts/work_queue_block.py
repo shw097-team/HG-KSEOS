@@ -32,6 +32,26 @@ def ensure_columns(con: sqlite3.Connection) -> list[str]:
     return added
 
 
+
+def export_json(con: sqlite3.Connection) -> Path:
+    """Refresh BLOCKERS.json from the database after every write.
+
+    Measured 2026-10-31: the JSON was written once by hand and then went stale while the DB moved on -- it still said
+    BLOCKED_PROFILE_CONTENT and KIND_ENUM_UNREAD after both had been replaced. Two surfaces describing one fact will
+    disagree the moment either changes, so the export is regenerated here instead of being maintained beside the DB.
+    """
+    out = Path(r"C:/Projects/Agent_Workspace/HG-KSEOS/ops/session-20261031/FHS-ALLPASS-20261031/BLOCKERS.json")
+    cur = con.execute("select * from work_queue where blocker_code is not null order by wp_id")
+    cols = [c[0] for c in cur.description]
+    rows = [dict(zip(cols, r)) for r in cur.fetchall()]
+    payload = {"schema": "HGK-BLOCKERS/2", "generated_from": str(DB), "count": len(rows),
+               "note": "derived: the work_queue table is authoritative, this file is a convenience copy",
+               "blockers": rows}
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(payload, ensure_ascii=False, indent=1), encoding="utf-8", newline="")
+    return out
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="record a named blocker on a work unit")
     ap.add_argument("--wp", required=True)
@@ -61,6 +81,12 @@ def main(argv=None) -> int:
         con.commit()
         row = con.execute("select wp_id, state, blocker_code, blocker_unblock from work_queue where wp_id=?",
                           (args.wp,)).fetchone()
+    finally:
+        con.close()
+    # The derived copy is refreshed on every write, so it can never describe a blocker the DB no longer holds.
+    con = sqlite3.connect(DB)
+    try:
+        export_json(con)
     finally:
         con.close()
     out = {"ok": bool(row), "columns_added": added, "row": row}
