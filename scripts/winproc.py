@@ -5,7 +5,15 @@ Why windows appear at all: when a process has **no console** (a GUI app, or a pr
 DETACHED_PROCESS), Windows gives any console-subsystem child it launches a **brand new console**, and a new console
 means a visible window. So a headless driver that spawns `powershell.exe`, `codex.exe`, `taskkill.exe` or another
 `python.exe` produces a pop-up for each one -- even though the driver itself is invisible. Passing
-CREATE_NO_WINDOW to the child is the only way to keep it hidden.
+Passing CREATE_NO_WINDOW to the child is the only way to keep it hidden.
+
+MEASURED 2026-10-31 (var/console-window-events.jsonl, 170 events / 01:58-09:00): the recorded owners were
+WindowsTerminal.exe 121, python.exe 15, cmd.exe 14, powershell.exe 7, bun.exe 2, with titles
+powershell.exe 26, git.EXE 24, cmd.exe 16 -- i.e. the *grandchildren* of a consoleless parent. Hiding one
+level does not hide the tree: CREATE_NO_WINDOW gives the child NO console, so the next process it starts
+(codex -> node -> git, cmd -> git, python -> pwsh) is a console program with no console and Windows gives
+it a brand new visible one. The rule is therefore: the child gets ONE console, created hidden
+(CREATE_NEW_CONSOLE + STARTF_USESHOWWINDOW, wShowWindow = 0), which every descendant inherits.
 
 `install()` wraps `subprocess.run` / `subprocess.Popen` for the whole process (children inherit the intent, so it
 only has to be done once per process tree root) and ORs in CREATE_NO_WINDOW. Nothing else changes: same arguments,
@@ -22,6 +30,7 @@ import subprocess
 import sys
 
 CREATE_NO_WINDOW = 0x08000000
+CREATE_NEW_CONSOLE = 0x00000010
 DETACHED_PROCESS = 0x00000008
 CREATE_NEW_PROCESS_GROUP = 0x00000200
 
@@ -29,9 +38,17 @@ _INSTALLED = False
 _HIDDEN = {"run": 0, "popen": 0}
 
 
+def hidden_startupinfo():
+    """A STARTUPINFO that hides the console the child is about to be given."""
+    si = subprocess.STARTUPINFO()
+    si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    si.wShowWindow = 0                              # SW_HIDE
+    return si
+
+
 def hidden_flags(base: int = 0) -> int:
-    """Flags that keep a child off the desktop without detaching it from our handle."""
-    return base | CREATE_NO_WINDOW
+    """Give a child ONE hidden console (inherited by its whole tree) instead of no console at all."""
+    return int(base or 0) | CREATE_NEW_CONSOLE
 
 
 def install() -> bool:
@@ -42,7 +59,15 @@ def install() -> bool:
     run, popen = subprocess.run, subprocess.Popen
 
     def _apply(kw: dict) -> dict:
-        kw["creationflags"] = int(kw.get("creationflags") or 0) | CREATE_NO_WINDOW
+        flags = int(kw.get("creationflags") or 0)
+        if flags & DETACHED_PROCESS:                 # mutually exclusive with CREATE_NEW_CONSOLE
+            return kw
+        # CREATE_NO_WINDOW and CREATE_NEW_CONSOLE are contradictory: the first says "no console at all", the
+        # second says "one console, hidden". Leaving both set is an invalid combination, so the narrow one is
+        # dropped rather than OR-ed on top of.
+        flags &= ~CREATE_NO_WINDOW
+        kw["creationflags"] = flags | CREATE_NEW_CONSOLE
+        kw.setdefault("startupinfo", hidden_startupinfo())
         return kw
 
     def run_hidden(*args, **kwargs):

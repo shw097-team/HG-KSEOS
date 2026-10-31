@@ -168,9 +168,22 @@ def main(argv: list[str] | None = None) -> int:
         if hit:
             results.append(hit)
     bad = [r for r in results if r["state"] != "GUARD_EXECUTES"]
+    # F6 (FAR-20261031-028): CREATE_NO_WINDOW hides ONE level and leaves the child console-less, so its own
+    # console children get a fresh visible console. That shape is not a ban (it is still better than nothing)
+    # but it must never again be mistaken for a tree-wide fix, so every site using it is named.
+    one_level = []
+    for p in sorted(SCRIPTS.glob("*.py")):
+        body = p.read_text(encoding="utf-8", errors="replace")
+        if "CREATE_NO_WINDOW" not in body or "winproc" in body:
+            continue
+        one_level.append({"file": p.name, "state": "HIDES_ONE_LEVEL_ONLY",
+                          "why": "CREATE_NO_WINDOW without winproc: the grandchildren of this spawn are console-less",
+                          "fix": "winproc.install() + winproc.hidden_flags()/hidden_startupinfo()"})
     print(json.dumps({"checked": len(results), "ok": len(results) - len(bad), "bad": bad,
+                      "hides_one_level_only": one_level,
                       "note": "a guard that is text inside a docstring is not a guard; "
-                              "DETACHED_PROCESS is a window factory, not a hiding flag"},
+                              "DETACHED_PROCESS is a window factory, not a hiding flag; "
+                              "CREATE_NO_WINDOW alone hides one level of a tree"},
                      ensure_ascii=False, indent=2))
     return 0 if not bad else 3
 

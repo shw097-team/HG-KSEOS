@@ -236,20 +236,36 @@ def launch(lane: str, prompt: str, nonce: str, cwd: Path, json_out: Path, timeou
         "note": "written by continuation_driver before spawn; the dispatcher overwrites this on completion",
     }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     log_path = cwd / f"{json_out.stem}.log"
-    # Measured 2026-10-31 02:18 -> 07:39: three dispatches wrote their PRE_ATTEMPT and then vanished with the turn,
-    # because CREATE_BREAKAWAY_FROM_JOB does not break away from a nested job object. Ask the service host for the
-    # process instead: Win32_Process.Create has no parent job to be killed with.
+    # MEASURED 2026-10-31 (after the lock repair): every dispatch handed to detach.launch wrote its
+    # 310-byte PRE_ATTEMPT and then vanished mid-gate -- 30 of them on WP-FHS-17 alone, each leaving
+    # exactly the two credential-posture WARN lines and nothing else, with no codex process ever
+    # created. The SAME argv run from an interactive shell completes and writes a full receipt. A
+    # launcher that returns a pid the tick can no longer see is not a launcher: the tick now owns the
+    # child for its whole life, so a vanished run is recorded as an exit rather than as silence.
+    flags = 0x08000000 if os.name == "nt" else 0   # CREATE_NO_WINDOW: the tree stays hidden, no new console
     try:
-        sys.path.insert(0, str(Path(__file__).resolve().parent))
-        import detach as _detach
-        res = _detach.launch(argv, out=log_path, cwd=str(K))
-    except Exception as exc:  # noqa: BLE001 - a launcher that cannot launch must not look like a launch
-        res = {"ok": False, "pid": 0, "error": f"{type(exc).__name__}: {exc}"}
-    if not res.get("ok"):
-        log({"action": "spawn_failed", "error": res.get("error")})
-        raise RuntimeError(f"DETACH_FAILED: {res.get('error')}")
-    log({"action": "spawned", "pid": res["pid"], "log": str(log_path), "method": "Win32_Process.Create"})
-    return int(res["pid"])
+        proc = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=str(K),
+                                env=dict(os.environ), creationflags=flags)
+    except OSError as exc:  # noqa: BLE001 - a launcher that cannot launch must not look like a launch
+        log({"action": "spawn_failed", "error": f"{type(exc).__name__}: {exc}"})
+        raise RuntimeError(f"SPAWN_FAILED: {exc}")
+    log({"action": "spawned", "pid": proc.pid, "log": str(log_path), "method": "Popen(owner)"})
+    try:
+        out, _ = proc.communicate(timeout=EXEC_LANE_TIMEOUT + 300)
+        rc = proc.returncode
+    except subprocess.TimeoutExpired:
+        subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"], capture_output=True, creationflags=flags)
+        out, _ = proc.communicate()
+        rc = 124
+        log({"action": "dispatch_timeout", "pid": proc.pid})
+    text = out.decode("utf-8", "replace") if isinstance(out, (bytes, bytearray)) else (out or "")
+    try:
+        with open(log_path, "a", encoding="utf-8", errors="replace") as fh:
+            fh.write(text)
+    except OSError:
+        pass
+    log({"action": "dispatch_exit", "pid": proc.pid, "exit": rc, "bytes": len(text)})
+    return int(proc.pid)
 
 
 def plan_prompt(wp: str, title: str, queue_dir: Path, nonce: str) -> str:

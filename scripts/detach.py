@@ -72,6 +72,48 @@ def create(cmdline: str, cwd: str) -> tuple[int, str]:
     return int(pid.strip()), ""
 
 
+def _prove_alive(pid: int, expect_image: str, budget_s: float = 1.5) -> tuple[bool, str]:
+    """Is that pid alive, and is it the program we asked for?
+
+    MEASURED 2026-10-31: Win32_Process.Create returns `ok: true` with a pid for children that die in the same
+    second -- 30 vanished dispatch attempts on one work package read as "dispatched" and produced no receipt at
+    all. A launcher that cannot see its child is not a launcher: success must mean alive AND the expected image.
+    """
+    import ctypes
+    import ctypes.wintypes as wt
+    k32 = ctypes.windll.kernel32
+    STILL_ACTIVE = 259
+    PROCESS_QUERY_LIMITED_INFORMATION = 0x1000
+    deadline = time.time() + budget_s
+    last = "not sampled"
+    while time.time() < deadline:
+        h = k32.OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, False, int(pid))
+        if not h:
+            last = "pid not found"
+            time.sleep(0.05)
+            continue
+        try:
+            code = wt.DWORD()
+            if not k32.GetExitCodeProcess(h, ctypes.byref(code)) or code.value != STILL_ACTIVE:
+                last = f"exited with {code.value}"
+                return False, last
+            buf = ctypes.create_unicode_buffer(1024)
+            size = wt.DWORD(1024)
+            image = ""
+            if k32.QueryFullProcessImageNameW(h, 0, buf, ctypes.byref(size)):
+                image = Path(buf.value).name.lower()
+            if image and expect_image:
+                want = Path(expect_image).name.lower()
+                # python.exe is swapped for pythonw.exe on purpose, so accept the windowless twin
+                if image not in (want, want.replace(".exe", "w.exe")):
+                    return False, f"image is {image}, expected {want}"
+            return True, image or "alive"
+        finally:
+            k32.CloseHandle(h)
+        time.sleep(0.05)
+    return False, f"never observed alive ({last})"
+
+
 def launch(argv: list[str], out: Path | None = None, cwd: str | None = None) -> dict:
     """Run argv outside the job tree. A log file is redirected by wrapping in cmd.exe when one is asked for."""
     cwd = cwd or str(Path.cwd())
@@ -89,7 +131,14 @@ def launch(argv: list[str], out: Path | None = None, cwd: str | None = None) -> 
         except OSError:
             pass       # a note that cannot be written must not stop a launch
     pid, err = create(inner, cwd)
-    return {"ok": bool(pid), "pid": pid, "cmdline": inner, "error": err}
+    if not pid:
+        return {"ok": False, "pid": 0, "cmdline": inner, "error": err}
+    alive, why = _prove_alive(pid, argv[0] if argv else "")
+    if not alive:
+        # Not a warning: a pid that is already gone means the caller must NOT record this as a dispatch.
+        return {"ok": False, "pid": pid, "cmdline": inner,
+                "error": f"CHILD_NOT_ALIVE_AFTER_LAUNCH: {why}"}
+    return {"ok": True, "pid": pid, "cmdline": inner, "error": "", "liveness": why}
 
 
 def main(argv: list[str] | None = None) -> int:
