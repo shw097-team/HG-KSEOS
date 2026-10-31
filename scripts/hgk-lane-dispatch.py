@@ -1956,6 +1956,11 @@ def main() -> int:
                     help="selection-time strictness: only arms named in config/model-lane-assignment.json "
                          "for this lane may serve; if none is available the run refuses with "
                          "ERR_NO_ASSIGNED_ARM instead of falling back to an unassigned pool arm")
+    ap.add_argument("--guard-record", action="append", default=None,
+                    help="a subject of RECORD whose digest must not change, when the checker executes a COPY. "
+                         "The copy (--guard-subject) is the sandbox anchor and may be mutated by the run; the "
+                         "record must stay byte-identical, and the copy must equal the record before the "
+                         "sitting starts")
     ap.add_argument("--require-rollout-binding", action="store_true",
                     help="require the rollout that supplies the served identity to be bound to THIS spawn "
                          "(REQ-SEC-ROLLOUT-BINDING). Refuses today: the binding is not implemented, and asking "
@@ -2602,6 +2607,36 @@ def main() -> int:
         print(json.dumps(refusal, indent=2, ensure_ascii=False))
         return 4
     subject_before = snapshot_subject(guard_roots)
+    # A checker that must EXECUTE the subject cannot execute it in place: the chain writes install roots, load
+    # receipts and negatives into the tree it is judging, which is exactly what ERR_CHECKER_MUTATED_SUBJECT
+    # refuses -- and it refused a real 257-second sitting this round. The answer is not to weaken the guard but
+    # to separate the two roles: --guard-subject is the workspace the checker may write (a copy), --guard-record
+    # is the subject of record, which must stay byte-identical. The copy is checked against the record BEFORE
+    # the sitting, so a pre-tampered copy cannot pass as a faithful one.
+    record_roots = list(getattr(args, "guard_record", None) or [])
+    record_before = snapshot_subject(record_roots) if record_roots else {}
+
+    def _relative(roots) -> dict[str, str]:
+        """Same tree, path-relative keys: two roots with equal content must compare equal even though their
+        absolute paths differ. Comparing the absolute snapshots directly would refuse every legitimate copy."""
+        out: dict[str, str] = {}
+        for root in roots or []:
+            base = str(Path(root).resolve()).replace(chr(92), "/").rstrip("/")
+            for k, v in snapshot_subject([root]).items():
+                out[k[len(base):].lstrip("/") if k.startswith(base) else k] = v
+        return out
+
+    if record_roots:
+        _copy_rel, _record_rel = _relative(guard_roots), _relative(record_roots)
+        if _copy_rel != _record_rel:
+            _diff = sorted(set(_copy_rel.items()) ^ set(_record_rel.items()))
+            return emit_refusal(args, refusal_body(args.lane, "ERR_SUBJECT_COPY_DIVERGES",
+                f"the workspace the checker would run ({guard_roots[0]}) is not identical to the subject of "
+                f"record ({record_roots[0]}): {len(_diff)} differing entries",
+                guard_subject=str(guard_roots[0]), guard_record=str(record_roots[0]),
+                differing_entries=[d[0] for d in _diff][:20],
+                next_command="re-copy the subject of record into the workspace before the sitting",
+                say="refusing before any spawn: a checker that runs a different tree has judged a different tree"))
     # G3/H4: a guard root that RESOLVES but yields a ZERO-FILE snapshot guards NOTHING. Reporting
     # `mutated: false` (both evidence digests being the hash of []) over an empty snapshot is the
     # vacuous-pass class this round closes, so it must refuse PRE-SPAWN with its own typed code.
@@ -3210,6 +3245,13 @@ def main() -> int:
             receipt["verdict_void_reason"] = (
                 f"the served identity {served} does not match the bound role arm "
                 f"{binding_fields.get('role_binding_arm')}; the role obligation is NOT fulfilled")
+    if record_roots:
+        record_after = snapshot_subject(record_roots)
+        record_mutation = diff_subject(record_before, record_after)
+        receipt["guard_record"] = {"roots": record_roots, "mutation": record_mutation}
+        # The copy is EXPECTED to change: the chain installs into it. Report, do not fail.
+        receipt["scratch_mutation"] = mutation
+        mutation = record_mutation
     if mutation.get("mutated"):
         # A checker that changed the subject has voided its own verdict, whatever it concluded --
         # this is what lets the checker run with a writable sandbox without trusting it.
