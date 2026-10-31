@@ -1,13 +1,14 @@
 {
-  "schema": "HGK-HERMES-BINDING/2",
+  "schema": "HGK-HERMES-BINDING/3",
   "status": "ACTIVE_SELECTED_REINSTALL_BASELINE",
-  "claim_ceiling": "Scheme B reinstall baseline only: canonical AppData install identity, venv, doctor, desktop, gateway, environment, and HGK binding were verified. RP-002 remains frozen and requires fresh G1 plus affected-runtime-gate revalidation; RP002_LOCAL_ACCEPTANCE_PASS is not claimed.",
+  "claim_ceiling": "binding identity revalidated for the effective runtime; this does not claim RP002_LOCAL_ACCEPTANCE_PASS, and it does not resolve the two-tree ambiguity (MSIX tree vs D:/Hermes-Recovery/h22), which is filed as TT-HERMES-TWO-TREE-IDENTITY-001",
   "release": {
-    "version": "0.20.0",
-    "tag": "v2026.8.3",
-    "commit": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb",
+    "version": "0.22.5",
+    "tag": "v2026.9.24",
+    "commit": "bf0203a794a0",
+    "reported_by": "hermes --version (venv launcher)",
     "repository": "https://github.com/NousResearch/hermes-agent.git",
-    "identity_verified": "git rev-parse HEAD = git tag --points-at HEAD = v2026.8.3; pyproject version 0.20.0; runtime hermes --version = Hermes Agent v0.20.0 (2026.8.3)"
+    "identity_verified": "hermes --version = Hermes Agent v0.22.5 (2026.9.24) stable local bf0203a794a0, install D:/Hermes-Recovery/h22, python 3.14.9; the MSIX tree reports pyproject 0.21.5 and git describe v2026.9.24 at f97608f178d1 -- both are recorded, neither is asserted to be the other"
   },
   "rollback_baseline": {
     "version": "0.18.2",
@@ -16,11 +17,11 @@
     "role": "RECOVERY_ONLY_BASELINE (not active after Scheme B cutover)",
     "runnable_verified": "Hermes Agent v0.18.2 (2026.7.7.2) + real opencode-go/deepseek-v4-flash inference OK"
   },
-  "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.exe",
+  "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.cmd",
   "python_executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
-  "install_root": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent",
+  "install_root": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv",
   "runtime_switch_required": false,
-  "runtime_switch_note": "Scheme B single-runtime cutover: HG-KSEOS now resolves the canonical AppData Hermes v0.20.0 / v2026.8.3 / 3c27eb6234bf91b8ceee9e9071591b31e9b148cb. RP-002 requires fresh G1 and affected-runtime-gate revalidation before promotion.",
+  "runtime_switch_note": "revalidated 2026-10-30 under close criteria (b): qualification gates re-run against the effective interpreter; see evidence/FAR-RUNTIME-DRIFT-CLOSE-20261030/",
   "qualification_home": "disposable: %TEMP%\\hgk-hermes-v020-qual (isolated venv + HERMES_HOME + kanban.db)",
   "path_mutation": true,
   "global_git_mutation": false,
@@ -70,5 +71,26 @@
   "kanban_state": "RESTORED_AND_ACTIVE_RP002_STAGE1",
   "kanban_note": "Repaired 2026-08-12 by RP-002 v2.0 Stage-1 G1: kanban.db existed at canonical_kanban_db; board rp002-stage1 created; 4-task DAG G0->G1->FAB->EVD created/claimed/heartbeat OK; prior NOT_RESTORED_REBUILD_REQUIRED was stale post-reinstall state.",
   "governed_hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
-  "governed_hermes_home_note": "Additive (O4): the governed PLAN/Orchestrator plane launches under this profile, which carries governed_runtime + model.default=gpt-6.1-sol/openai-codex. canonical_hermes_home is UNCHANGED so the lane/execution launcher and every un-governed consumer keep their existing binding. Absent key => behaviour is byte-identical to before."
+  "governed_hermes_home_note": "Additive (O4): the governed PLAN/Orchestrator plane launches under this profile, which carries governed_runtime + model.default=gpt-6.1-sol/openai-codex. canonical_hermes_home is UNCHANGED so the lane/execution launcher and every un-governed consumer keep their existing binding. Absent key => behaviour is byte-identical to before.",
+  "revalidated_20261030": {
+    "at": "2026-10-30T20:58:09",
+    "gates": {
+      "command": "pytest tests/test_hermes_qualification.py tests/test_task013_hermes_v020_closure.py",
+      "result": "12 passed in 0.53s",
+      "exit": 0
+    },
+    "before": {
+      "release": {
+        "version": "0.20.0",
+        "tag": "v2026.8.3",
+        "commit": "3c27eb6234bf91b8ceee9e9071591b31e9b148cb",
+        "repository": "https://github.com/NousResearch/hermes-agent.git",
+        "identity_verified": "git rev-parse HEAD = git tag --points-at HEAD = v2026.8.3; pyproject version 0.20.0; runtime hermes --version = Hermes Agent v0.20.0 (2026.8.3)"
+      },
+      "executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.exe",
+      "python_executable": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\python.exe",
+      "install_root": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent",
+      "canonical_hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes"
+    }
+  }
 }

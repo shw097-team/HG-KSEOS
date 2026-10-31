@@ -6,9 +6,9 @@
  "human_codex_config": "C:\\Users\\user\\.codex\\config.toml",
  "hermes_codex_home": "%LOCALAPPDATA%\\HG-KSEOS\\codex-hermes",
  "hermes_opencodex_home": "%LOCALAPPDATA%\\HG-KSEOS\\opencodex-hermes",
- "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\0ab0e7a8f3779036\\codex.exe",
- "codex_version": "0.165.0-alpha.1.2",
- "codex_sha256": "0c09e45bc76433756eb2d492f6db0ce6f269967e6618f4a6ae73e2fa239694b8",
+ "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\22cfb1d302613eae\\codex.exe",
+ "codex_version": "0.166.0-alpha.5.1",
+ "codex_sha256": "3097C909FB6D5CD63510D44ACEB1D42DF9F6E85722A3E447E477DEF1ECF60E16",
  "opencodex_root": "%LOCALAPPDATA%\\HG-KSEOS\\runtime\\opencodex-2.11.0",
  "opencodex_version": "2.11.0",
  "opencodex_port": 10101,
@@ -156,6 +156,28 @@
  "toolchain_pin_note": "Pin refreshed 2026-10-21 to the INSTALLED build. The Codex CLI was upgraded in place: the previously declared binary (C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\896a0166b774037a\\codex.exe, 0.163.0-alpha.10.2) no longer exists, and every lane dispatch was failing BEFORE SPAWNING with ERR_LANE_PIN_IDENTITY_INVALID / ERR_LANE_TOOLCHAIN_BINARY_MISSING, which stopped the SBL EXECUTE and VERIFY lanes entirely. The new path was DISCOVERED under C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin, the version comes from `codex.exe --version`, and the digest is computed over the installed file. The prior value was C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\896a0166b774037a\\codex.exe / 0.163.0-alpha.10.2 / sha256 f6dbf48cb70f62649c645f26c87dc9bf84cc36986202dfad8e12fb5b8ca70312. Probe receipts under evidence/ are NOT rewritten: they record what the lane actually served on 2026-10-21 with the OLD build and remain true as history.",
  "pin_refresh_history": [
   {
+   "at_utc": "2026-10-29T05:13:38.284742+00:00",
+   "round": "R18-FHS-SKELETON-SPINE-20261029",
+   "reason": "codex CLI auto-updated in place again; the declared binary no longer existed, so every lane dispatch refused before spawn with ERR_LANE_PIN_IDENTITY_INVALID / ERR_LANE_TOOLCHAIN_BINARY_MISSING",
+   "from": {
+    "path": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\2993767bd1dfb009\\codex.exe",
+    "version": "0.164.0-alpha.11.1",
+    "sha256": "1103e9e09c71fa2cd0afd6d8f3b9a2d63174fe8efd7cb5bd09f1cb14ef58a098"
+   },
+   "to": {
+    "path": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\08d187884f2330d1\\codex.exe",
+    "version": "0.165.0-alpha.1.2",
+    "sha256": "5c1b55966bf9f757dcbf00065c9a6cb862ead55d34b015f1be1939ff18e43943"
+   },
+   "sidecars_present": {
+    "codex.exe": true,
+    "codex-code-mode-host.exe": true,
+    "codex-command-runner.exe": true,
+    "codex-windows-sandbox-setup.exe": true
+   },
+   "authorization": "owner blanket repair authorization for this round; agent-executed, not signed"
+  },
+  {
    "at_utc": "2026-10-21T10:45:44.133227+00:00",
    "round": "R7-RESUME-20261021",
    "reason": "codex CLI upgraded in place; the declared binary no longer existed",
@@ -170,6 +192,55 @@
     "sha256": "00c0f1e4099246fddcd67ec620ca8ed50827c7d70e113b7224f7a2933cf2d67c"
    },
    "failure_it_fixed": "ERR_LANE_PIN_IDENTITY_INVALID / ERR_LANE_TOOLCHAIN_BINARY_MISSING"
+  },
+  {
+   "at_utc": "2026-10-28T03:55:00+00:00",
+   "round": "B1-CONT-20261028",
+   "reason": "codex CLI upgraded in place again; the binary declared by the 2026-10-21 refresh (bin/6257d9e8f63c0f2b, 0.163.0-alpha.11) no longer exists on disk",
+   "from": {
+    "path": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\6257d9e8f63c0f2b\\codex.exe",
+    "version": "0.163.0-alpha.11",
+    "sha256": "00c0f1e4099246fddcd67ec620ca8ed50827c7d70e113b7224f7a2933cf2d67c"
+   },
+   "to": {
+    "path": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\2993767bd1dfb009\\codex.exe",
+    "version": "0.164.0-alpha.11.1",
+    "sha256": "1103e9e09c71fa2cd0afd6d8f3b9a2d63174fe8efd7cb5bd09f1cb14ef58a098"
+   },
+   "discovered_by": "python scripts/hgk-lane-dispatch.py --lane VERIFY_SECURITY -> ok=false code=ERR_LANE_PIN_IDENTITY_INVALID detail=ERR_LANE_TOOLCHAIN_BINARY_MISSING (refused before any spawn)",
+   "failure_it_fixed": "ERR_LANE_PIN_IDENTITY_INVALID / ERR_LANE_TOOLCHAIN_BINARY_MISSING"
+  },
+  {
+   "refreshed_utc": "2026-10-29T11:46:35Z",
+   "round": "R19-FHS-20261029",
+   "from": {
+    "path": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\08d187884f2330d1\\codex.exe",
+    "version": "0.165.0-alpha.1.2",
+    "sha256": "5c1b55966bf9f757dcbf00065c9a6cb862ead55d34b015f1be1939ff18e43943"
+   },
+   "to": {
+    "path": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\0ab0e7a8f3779036\\codex.exe",
+    "version": "0.165.0-alpha.1.2",
+    "sha256": "0c09e45bc76433756eb2d492f6db0ce6f269967e6618f4a6ae73e2fa239694b8"
+   },
+   "why": "the declared binary no longer existed on disk; every lane dispatch refused before spawn"
+  },
+  {
+   "at": "2026-10-31T10:15+08:00",
+   "round": "HANDOFF-PATCH-V1-CONTINUATION-20261031",
+   "why": "the declared pin named a binary that no longer exists (bin/0ab0e7a8f3779036); the lane gate refused before spawn with ERR_LANE_TOOLCHAIN_BINARY_MISSING, which had been mis-read as a maker failure",
+   "before": {
+    "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\0ab0e7a8f3779036\\codex.exe",
+    "codex_version": "0.165.0-alpha.1.2",
+    "codex_sha256": "0c09e45bc76433756eb2d492f6db0ce6f269967e6618f4a6ae73e2fa239694b8"
+   },
+   "after": {
+    "codex_executable": "C:\\Users\\user\\AppData\\Local\\OpenAI\\Codex\\bin\\22cfb1d302613eae\\codex.exe",
+    "codex_version": "0.166.0-alpha.5.1",
+    "codex_sha256": "3097C909FB6D5CD63510D44ACEB1D42DF9F6E85722A3E447E477DEF1ECF60E16"
+   },
+   "measured": "codex.exe --version -> codex-cli 0.166.0-alpha.5.1 ; sha256 recomputed over 368,970,544 bytes",
+   "backup": "hermes-codex-lane.json.bak-pinrefresh-20261031101338"
   }
  ],
  "round_rebinding_note_20261021": "Round R8-EXECUTE-MINIMAX-20261021: the sealed EXECUTE lane binding moved from deepseek-v4.1-flash to minimax-m3.1-flash-free under the owner mandate quoted in config/lane-routing-registry.yaml. /model_routing_change is a HISTORICAL record of the 2026-10-02 change and was deliberately NOT rewritten (previous_model deepseek-v4-flash -> new_model deepseek-v4.1-flash at that time). The codex toolchain pin (codex_executable / codex_version / codex_sha256) is a separate concern and was not touched by a lane-model mandate.",
