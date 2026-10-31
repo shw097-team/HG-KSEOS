@@ -1,0 +1,10 @@
+{
+ "host": "codex",
+ "cwd": "C:\\Users\\user\\AppData\\Local\\Temp\\fhs-cx-2WrwJV",
+ "token": "WP11-CLEAN-A1182405A2",
+ "design": "token lives only in the host skill file; the cwd is empty, outside every repo, and given to the native binary as a Windows path",
+ "trigger_has_token": true,
+ "nontrigger_has_token": false,
+ "trigger_tail": "TRIGGER_TOKEN: WP11-CLEAN-A1182405A2",
+ "nontrigger_tail": "I can’t determine the WP-11 host cell token from the accessible sources."
+}

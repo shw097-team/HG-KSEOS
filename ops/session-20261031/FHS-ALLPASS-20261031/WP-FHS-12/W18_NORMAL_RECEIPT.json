@@ -1,0 +1,15 @@
+{
+ "schema": "SBL-W18-NORMAL-RECEIPT/1",
+ "wp": "WP-FHS-12",
+ "attempted_at": "2026-10-31T23:25:47+0800",
+ "attempt": [
+  "hermes -z \"Reply with exactly this one line and nothing else: W18_SERVED_<nonce>\" --pass-session-id (clean cwd)"
+ ],
+ "raw_output": "Something went wrong and I couldn't finish this reply. ... Technical details are in the gateway log (hermes logs).",
+ "root_cause": "RuntimeError: Failed to initialize OpenAI client: No module named 'openai.types.responses.response_computer_tool_call_output_screenshot_param'",
+ "classification": "HOST_RUNTIME_DEPENDENCY (bundled openai older than the importing code at D:/Hermes-Recovery/h22)",
+ "verdict": "W18_NORMAL_HOLD",
+ "auto_ready_claimed": false,
+ "why_hold": "the spec says any of Default Profile / Skills / Served not truly read back is a HOLD; Served was never reached",
+ "unblock": "upgrade the bundled openai package in D:/Hermes-Recovery/h22, then re-run the same two commands unchanged"
+}

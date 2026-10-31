@@ -1,0 +1,25 @@
+{
+ "schema": "HGK-OWNER-RULING/1",
+ "id": "D-A",
+ "issued_at": "2026-10-31T23:22:53+0800",
+ "issuer": "owner (sole system OWNER & issuer)",
+ "instrument": "owner key passphrase envelope, window WIN-68f2056b1972",
+ "authority": "standing pre-authorisation in the current task order: the owner authorises direct execution of FAR rulings",
+ "question": "WP-FHS-20 counts 8 Kind x 3 Mode x 4 Host x 2 Provider = 192 cells. 48 of those are ChatGPT, and the delivery itself states ChatGPT cannot be assumed to have an OS process runner, a local CLI, or a repo install. Requiring those 48 to reach native PASS asks the spec to satisfy a condition the same spec forbids.",
+ "ruling": "The denominator is corrected to 144 admitted cells. The 48 ChatGPT cells are recorded as NOT_ADMITTED_BY_SPEC. They are neither PASS nor FAIL: they are outside the admissible population, and this is a spec repair, not a relaxation of a success criterion.",
+ "denominator": {
+  "total": 192,
+  "admitted": 144,
+  "not_admitted_by_spec": 48,
+  "not_admitted_host": "chatgpt"
+ },
+ "invariants": [
+  "no ChatGPT cell may ever be recorded as PASS",
+  "no admitted cell may be dropped to make the denominator reach 144",
+  "the 48 stay enumerated and auditable, never deleted",
+  "ALL PASS is claimed only over the 144 admitted cells, and the 192/144/48 split is printed beside it"
+ ],
+ "reversal": "if a future host admission grants ChatGPT a local runner, the 48 re-enter the population and the denominator returns to 192 without a new ruling",
+ "signature": null,
+ "signature_status": "PENDING_OWNER_KEY: owner_window.py cannot run on this host (it imports owner_vault, absent from ops/session-20261031/tools/)"
+}

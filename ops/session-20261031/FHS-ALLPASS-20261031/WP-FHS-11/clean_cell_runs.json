@@ -1,0 +1,17 @@
+{
+ "cwd": "/tmp/fhs-cell-V38LSg",
+ "token": "WP11-CLEAN-CFD20AB8CE",
+ "design": "token exists only in the host skill/agent file; cwd is empty and outside every repo",
+ "codex": {
+  "trigger_has_token": false,
+  "nontrigger_has_token": false,
+  "trigger_tail": "Error: 系統找不到指定的檔案。 (os error 2)",
+  "nontrigger_tail": "Error: 系統找不到指定的檔案。 (os error 2)"
+ },
+ "claude_code": {
+  "trigger_has_token": true,
+  "nontrigger_has_token": false,
+  "trigger_tail": "TRIGGER_TOKEN: WP11-CLEAN-CFD20AB8CE",
+  "nontrigger_tail": "V38LSg"
+ }
+}
