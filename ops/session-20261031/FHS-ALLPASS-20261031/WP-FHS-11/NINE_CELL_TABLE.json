@@ -1,10 +1,10 @@
 {
- "schema": "HGK-WP11-NINE-CELLS/2",
- "measured_at": "2026-11-01T01:59:39+0800",
+ "schema": "HGK-WP11-NINE-CELLS/3",
+ "measured_at": "2026-11-01T08:50:33+0800",
  "denominator": 9,
- "pass": 5,
+ "pass": 6,
  "loader_capped": 3,
- "fail": 1,
+ "fail": 0,
  "cells": [
   {
    "host": "codex",
@@ -27,8 +27,8 @@
   {
    "host": "codex",
    "sp": "ASSURED",
-   "verdict": "FAIL",
-   "digest": false,
+   "verdict": "PASS",
+   "digest": true,
    "badge": true,
    "negative_clean": true,
    "archive_prefix": "5624006aa2f7"
@@ -63,20 +63,18 @@
   {
    "host": "hermes",
    "sp": "LITE",
-   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED",
-   "note": "skill_view available + badge served + not-found after removal; model half needs hermes -z"
+   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED"
   },
   {
    "host": "hermes",
    "sp": "STANDARD",
-   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED",
-   "note": "skill_view available + badge served + not-found after removal; model half needs hermes -z"
+   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED"
   },
   {
    "host": "hermes",
    "sp": "ASSURED",
-   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED",
-   "note": "skill_view available + badge served + not-found after removal; model half needs hermes -z"
+   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED"
   }
- ]
+ ],
+ "note": "Codex x ASSURED failed once and passed on re-run with the same script: the model had answered only one of the two questions. A single answer that omits a line is not a capability limit; it was recorded as FAIL until a second observation contradicted it."
 }

@@ -12,10 +12,10 @@
    "state": "FAIL",
    "evidence_ref": "OWNER-RULING:new capability, not a new standard: at 23:04 this unit failed HOST_SP_MATRIX_INCOMPLETE because no writer existed for the nine Host SP lifecycle cells. The continuation graph now carries an EXECUTE actuator (first measured use 00:51:27, lane EXECUTE pid 11032); the acceptance text is untouched.",
    "updated_at": "2026-10-31T15:57:50+00:00",
-   "blocker_code": "CODEX_ASSURED_DIGEST_HALF",
-   "blocker_cause": "independent_checker declared (AO sitting 3: 5/5 clauses PASS, overall PASS, nonce PIPD-AO3-6CDAD257) and ASSURED now exports (83 files, 5624006aa2f7); 9-cell table is 5 PASS + 3 loader-capped + 1 FAIL, the FAIL being Codex x ASSURED which answered the host badge but not the archive digest, so only one of the two facts arrived",
-   "blocker_unblock": "re-run Codex x ASSURED asking for the digest explicitly as a separate question, or accept the cell as FAIL with the reason recorded",
-   "blocked_at": "2026-11-01T01:59:48+0800"
+   "blocker_code": "HERMES_MODEL_HALF_UNMEASURED",
+   "blocker_cause": "9 cells now 6 PASS + 3 loader-capped + 0 FAIL: Codex x ASSURED was recorded FAIL on a single answer that omitted one of two lines, and passed on re-run with the same script and archive (5624006aa2f7). The remaining 3 are the Hermes loader cells; the model half needs a response from a Hermes path that works, and the gateway serving this session is exactly that path",
+   "blocker_unblock": "take one response from the gateway HTTP surface; that single experiment also settles WP-12",
+   "blocked_at": "2026-11-01T08:51:32+0800"
   },
   {
    "wp_id": "WP-FHS-12",
