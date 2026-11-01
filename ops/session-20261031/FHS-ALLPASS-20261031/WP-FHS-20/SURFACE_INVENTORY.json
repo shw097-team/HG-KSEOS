@@ -1,0 +1,2069 @@
+{
+ "schema": "HGK-WP20-SURFACE-INVENTORY/1",
+ "measured_at": "2026-11-01T11:47:11+0800",
+ "denominator": 192,
+ "axes": {
+  "kinds": [
+   "CLI_TOOL",
+   "AI_SYSTEM",
+   "GENIE",
+   "SIMPLE_AGENT",
+   "PROFILE",
+   "PLUGIN",
+   "AGENT_SKILL",
+   "AGENT_OS"
+  ],
+  "modes": [
+   "LITE",
+   "STANDARD",
+   "ASSURED"
+  ],
+  "hosts": [
+   "HERMES",
+   "CODEX",
+   "CLAUDE_CODE",
+   "DEEPSEEK_HARNESS"
+  ],
+  "providers": [
+   "PROVIDER_ON",
+   "PROVIDER_OFF"
+  ]
+ },
+ "states": [
+  "MEASURED_PASS",
+  "SURFACE_EXISTS_NOT_RUN",
+  "NOT_RUN_NO_RUNNER",
+  "NOFIT_NAMED"
+ ],
+ "rule": "a cell is PASS only with a receipt; a cell with no surface on its host carries the absent object by name; a cell whose surface exists but was not exercised says so and names the runner",
+ "counts": {
+  "NOFIT_NAMED": 114,
+  "NOT_RUN_NO_RUNNER": 48,
+  "SURFACE_EXISTS_NOT_RUN": 12,
+  "MEASURED_PASS": 18
+ },
+ "per_kind": {
+  "CLI_TOOL": {
+   "MEASURED_PASS": 0,
+   "NOFIT_NAMED": 18,
+   "NOT_RUN_NO_RUNNER": 6,
+   "SURFACE_EXISTS_NOT_RUN": 0
+  },
+  "AI_SYSTEM": {
+   "MEASURED_PASS": 0,
+   "NOFIT_NAMED": 18,
+   "NOT_RUN_NO_RUNNER": 6,
+   "SURFACE_EXISTS_NOT_RUN": 0
+  },
+  "GENIE": {
+   "MEASURED_PASS": 0,
+   "NOFIT_NAMED": 18,
+   "NOT_RUN_NO_RUNNER": 6,
+   "SURFACE_EXISTS_NOT_RUN": 0
+  },
+  "SIMPLE_AGENT": {
+   "MEASURED_PASS": 0,
+   "NOFIT_NAMED": 18,
+   "NOT_RUN_NO_RUNNER": 6,
+   "SURFACE_EXISTS_NOT_RUN": 0
+  },
+  "PROFILE": {
+   "MEASURED_PASS": 0,
+   "NOFIT_NAMED": 12,
+   "NOT_RUN_NO_RUNNER": 6,
+   "SURFACE_EXISTS_NOT_RUN": 6
+  },
+  "PLUGIN": {
+   "MEASURED_PASS": 0,
+   "NOFIT_NAMED": 12,
+   "NOT_RUN_NO_RUNNER": 6,
+   "SURFACE_EXISTS_NOT_RUN": 6
+  },
+  "AGENT_SKILL": {
+   "MEASURED_PASS": 18,
+   "NOFIT_NAMED": 0,
+   "NOT_RUN_NO_RUNNER": 6,
+   "SURFACE_EXISTS_NOT_RUN": 0
+  },
+  "AGENT_OS": {
+   "MEASURED_PASS": 0,
+   "NOFIT_NAMED": 18,
+   "NOT_RUN_NO_RUNNER": 6,
+   "SURFACE_EXISTS_NOT_RUN": 0
+  }
+ },
+ "surfaces_found": {
+  "HERMES/PROFILE": {
+   "exists": true,
+   "where": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed"
+  },
+  "HERMES/PLUGIN": {
+   "exists": true,
+   "where": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins"
+  },
+  "HERMES/AGENT_SKILL": {
+   "exists": true,
+   "where": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\skills"
+  },
+  "CODEX/AGENT_SKILL": {
+   "exists": true,
+   "where": "C:\\Users\\user\\.codex\\skills"
+  },
+  "CLAUDE_CODE/AGENT_SKILL": {
+   "exists": true,
+   "where": "C:\\Users\\user\\.claude\\agents"
+  }
+ },
+ "cells": [
+  {
+   "cell_id": "WP20.CLI_TOOL.LITE.HERMES.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no CLI_TOOL surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.LITE.HERMES.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no CLI_TOOL surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.LITE.CODEX.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no CLI_TOOL surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.LITE.CODEX.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no CLI_TOOL surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.LITE.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no CLI_TOOL surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.LITE.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no CLI_TOOL surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.LITE.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.LITE.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.STANDARD.HERMES.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no CLI_TOOL surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.STANDARD.HERMES.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no CLI_TOOL surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.STANDARD.CODEX.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no CLI_TOOL surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.STANDARD.CODEX.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no CLI_TOOL surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.STANDARD.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no CLI_TOOL surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.STANDARD.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no CLI_TOOL surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.STANDARD.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.STANDARD.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.ASSURED.HERMES.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no CLI_TOOL surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.ASSURED.HERMES.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no CLI_TOOL surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.ASSURED.CODEX.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no CLI_TOOL surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.ASSURED.CODEX.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no CLI_TOOL surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.ASSURED.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no CLI_TOOL surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.ASSURED.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no CLI_TOOL surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.ASSURED.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "CLI_TOOL",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.CLI_TOOL.ASSURED.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "CLI_TOOL",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side CLI-tool install surface: a directory the host scans for tool descriptors plus a version/ABI manifest, which no host on this machine exposes"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.LITE.HERMES.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no AI_SYSTEM surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.LITE.HERMES.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AI_SYSTEM surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.LITE.CODEX.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no AI_SYSTEM surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.LITE.CODEX.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AI_SYSTEM surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.LITE.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no AI_SYSTEM surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.LITE.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AI_SYSTEM surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.LITE.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.LITE.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.STANDARD.HERMES.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no AI_SYSTEM surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.STANDARD.HERMES.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AI_SYSTEM surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.STANDARD.CODEX.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no AI_SYSTEM surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.STANDARD.CODEX.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AI_SYSTEM surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.STANDARD.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no AI_SYSTEM surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.STANDARD.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AI_SYSTEM surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.STANDARD.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.STANDARD.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.ASSURED.HERMES.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no AI_SYSTEM surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.ASSURED.HERMES.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AI_SYSTEM surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.ASSURED.CODEX.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no AI_SYSTEM surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.ASSURED.CODEX.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AI_SYSTEM surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.ASSURED.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no AI_SYSTEM surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.ASSURED.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AI_SYSTEM surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.ASSURED.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "AI_SYSTEM",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.AI_SYSTEM.ASSURED.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "AI_SYSTEM",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a host-side AI-system descriptor loader: a registry the host reads to bind a whole AI system (model, tools, prompts) as one installable unit; the hosts here bind profiles and skills only"
+  },
+  {
+   "cell_id": "WP20.GENIE.LITE.HERMES.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no GENIE surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.LITE.HERMES.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no GENIE surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.LITE.CODEX.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no GENIE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.LITE.CODEX.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no GENIE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.LITE.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no GENIE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.LITE.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no GENIE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.LITE.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.LITE.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.STANDARD.HERMES.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no GENIE surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.STANDARD.HERMES.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no GENIE surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.STANDARD.CODEX.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no GENIE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.STANDARD.CODEX.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no GENIE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.STANDARD.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no GENIE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.STANDARD.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no GENIE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.STANDARD.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.STANDARD.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.ASSURED.HERMES.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no GENIE surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.ASSURED.HERMES.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no GENIE surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.ASSURED.CODEX.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no GENIE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.ASSURED.CODEX.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no GENIE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.ASSURED.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no GENIE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.ASSURED.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no GENIE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.ASSURED.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "GENIE",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.GENIE.ASSURED.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "GENIE",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a `genie` runtime on this host: no binary on PATH and no configuration key that names one"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.LITE.HERMES.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no SIMPLE_AGENT surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.LITE.HERMES.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no SIMPLE_AGENT surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.LITE.CODEX.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no SIMPLE_AGENT surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.LITE.CODEX.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no SIMPLE_AGENT surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.LITE.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no SIMPLE_AGENT surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.LITE.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no SIMPLE_AGENT surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.LITE.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.LITE.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.STANDARD.HERMES.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no SIMPLE_AGENT surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.STANDARD.HERMES.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no SIMPLE_AGENT surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.STANDARD.CODEX.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no SIMPLE_AGENT surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.STANDARD.CODEX.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no SIMPLE_AGENT surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.STANDARD.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no SIMPLE_AGENT surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.STANDARD.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no SIMPLE_AGENT surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.STANDARD.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.STANDARD.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.ASSURED.HERMES.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no SIMPLE_AGENT surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.ASSURED.HERMES.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no SIMPLE_AGENT surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.ASSURED.CODEX.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no SIMPLE_AGENT surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.ASSURED.CODEX.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no SIMPLE_AGENT surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.ASSURED.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no SIMPLE_AGENT surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.ASSURED.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no SIMPLE_AGENT surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.ASSURED.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "SIMPLE_AGENT",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.SIMPLE_AGENT.ASSURED.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "SIMPLE_AGENT",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a simple-agent manifest loader: no host here reads an agent manifest as an installable unit (Codex and Claude Code take agents as markdown skill files, which is the AGENT_SKILL Kind)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.LITE.HERMES.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed; the PROFILE-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PROFILE.LITE.HERMES.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed; the PROFILE-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PROFILE.LITE.CODEX.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no PROFILE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.LITE.CODEX.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PROFILE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.LITE.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no PROFILE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.LITE.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PROFILE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.LITE.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.LITE.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.STANDARD.HERMES.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed; the PROFILE-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PROFILE.STANDARD.HERMES.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed; the PROFILE-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PROFILE.STANDARD.CODEX.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no PROFILE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.STANDARD.CODEX.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PROFILE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.STANDARD.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no PROFILE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.STANDARD.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PROFILE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.STANDARD.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.STANDARD.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.ASSURED.HERMES.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed; the PROFILE-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PROFILE.ASSURED.HERMES.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed; the PROFILE-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PROFILE.ASSURED.CODEX.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no PROFILE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.ASSURED.CODEX.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PROFILE surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.ASSURED.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no PROFILE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.ASSURED.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PROFILE surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.ASSURED.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "PROFILE",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PROFILE.ASSURED.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "PROFILE",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a profile loader on this host (Hermes has one; Codex, Claude Code and DeepSeek Harness do not)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.LITE.HERMES.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins; the PLUGIN-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.LITE.HERMES.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins; the PLUGIN-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.LITE.CODEX.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no PLUGIN surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.LITE.CODEX.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PLUGIN surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.LITE.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no PLUGIN surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.LITE.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PLUGIN surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.LITE.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.LITE.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.STANDARD.HERMES.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins; the PLUGIN-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.STANDARD.HERMES.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins; the PLUGIN-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.STANDARD.CODEX.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no PLUGIN surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.STANDARD.CODEX.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PLUGIN surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.STANDARD.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no PLUGIN surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.STANDARD.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PLUGIN surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.STANDARD.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.STANDARD.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.ASSURED.HERMES.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins; the PLUGIN-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.ASSURED.HERMES.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins",
+   "state": "SURFACE_EXISTS_NOT_RUN",
+   "why": "the surface exists at C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\plugins; the PLUGIN-shaped artefact was not installed this round",
+   "runner": "scripts/wp11_hermes_cells.py (skill), scripts/wp20_cell_runner.py"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.ASSURED.CODEX.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no PLUGIN surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.ASSURED.CODEX.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PLUGIN surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.ASSURED.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no PLUGIN surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.ASSURED.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no PLUGIN surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.ASSURED.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "PLUGIN",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.PLUGIN.ASSURED.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "PLUGIN",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a plugin loader on this host (Hermes has one; the other three load skills/agents only)"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.LITE.HERMES.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/hermes-cells/"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.LITE.HERMES.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/hermes-cells/"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.LITE.CODEX.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\.codex\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CODEX_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.LITE.CODEX.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\.codex\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CODEX_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.LITE.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\.claude\\agents",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CLAUDE_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.LITE.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\.claude\\agents",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CLAUDE_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.LITE.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a skill loader on this host (DeepSeek Harness has no local runner here)"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.LITE.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a skill loader on this host (DeepSeek Harness has no local runner here)"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.STANDARD.HERMES.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/hermes-cells/"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.STANDARD.HERMES.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/hermes-cells/"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.STANDARD.CODEX.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\.codex\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CODEX_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.STANDARD.CODEX.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\.codex\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CODEX_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.STANDARD.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\.claude\\agents",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CLAUDE_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.STANDARD.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\.claude\\agents",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CLAUDE_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.STANDARD.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a skill loader on this host (DeepSeek Harness has no local runner here)"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.STANDARD.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a skill loader on this host (DeepSeek Harness has no local runner here)"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.ASSURED.HERMES.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/hermes-cells/"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.ASSURED.HERMES.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/hermes-cells/"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.ASSURED.CODEX.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\.codex\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CODEX_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.ASSURED.CODEX.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\.codex\\skills",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CODEX_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.ASSURED.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "C:\\Users\\user\\.claude\\agents",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CLAUDE_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.ASSURED.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "C:\\Users\\user\\.claude\\agents",
+   "state": "MEASURED_PASS",
+   "why": "measured in this round",
+   "receipt": "ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/CLAUDE_CELL_RECEIPT.json"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.ASSURED.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "AGENT_SKILL",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a skill loader on this host (DeepSeek Harness has no local runner here)"
+  },
+  {
+   "cell_id": "WP20.AGENT_SKILL.ASSURED.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "AGENT_SKILL",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "a skill loader on this host (DeepSeek Harness has no local runner here)"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.LITE.HERMES.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no AGENT_OS surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.LITE.HERMES.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "LITE",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AGENT_OS surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.LITE.CODEX.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no AGENT_OS surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.LITE.CODEX.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "LITE",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AGENT_OS surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.LITE.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no AGENT_OS surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.LITE.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "LITE",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AGENT_OS surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.LITE.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.LITE.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "LITE",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.STANDARD.HERMES.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no AGENT_OS surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.STANDARD.HERMES.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "STANDARD",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AGENT_OS surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.STANDARD.CODEX.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no AGENT_OS surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.STANDARD.CODEX.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "STANDARD",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AGENT_OS surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.STANDARD.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no AGENT_OS surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.STANDARD.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "STANDARD",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AGENT_OS surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.STANDARD.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.STANDARD.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "STANDARD",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.ASSURED.HERMES.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_ON",
+   "probe": "no AGENT_OS surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.ASSURED.HERMES.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "ASSURED",
+   "host": "HERMES",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AGENT_OS surface in the Hermes profile tree",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.ASSURED.CODEX.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_ON",
+   "probe": "no AGENT_OS surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.ASSURED.CODEX.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "ASSURED",
+   "host": "CODEX",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AGENT_OS surface under ~/.codex",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.ASSURED.CLAUDE_CODE.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_ON",
+   "probe": "no AGENT_OS surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.ASSURED.CLAUDE_CODE.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "ASSURED",
+   "host": "CLAUDE_CODE",
+   "provider": "PROVIDER_OFF",
+   "probe": "no AGENT_OS surface under ~/.claude",
+   "state": "NOFIT_NAMED",
+   "why": "ABSENT_OBJECT: an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.ASSURED.DEEPSEEK_HARNESS.PROVIDER_ON",
+   "kind": "AGENT_OS",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_ON",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "an agent-OS image loader: no host here installs an operating-system-level agent image"
+  },
+  {
+   "cell_id": "WP20.AGENT_OS.ASSURED.DEEPSEEK_HARNESS.PROVIDER_OFF",
+   "kind": "AGENT_OS",
+   "mode": "ASSURED",
+   "host": "DEEPSEEK_HARNESS",
+   "provider": "PROVIDER_OFF",
+   "probe": "DeepSeek Harness has no local runner or install surface on this machine",
+   "state": "NOT_RUN_NO_RUNNER",
+   "why": "an agent-OS image loader: no host here installs an operating-system-level agent image"
+  }
+ ]
+}

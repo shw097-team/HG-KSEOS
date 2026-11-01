@@ -1,0 +1,89 @@
+{
+ "schema": "HGK-WP12-MAXPATH-REPRO/2",
+ "measured_at": "2026-11-01T11:42:34+0800",
+ "interpreter": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\.hermes-runtime\\python\\cpython-3.11.17-windows-x86_64-none\\python.exe",
+ "hypothesis": "the module is unreachable because its full path is 260 characters, not because it is absent",
+ "payload": {
+  "source": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\installs\\3b763fa5cf79ba4a\\environments\\37e51176b4164db5b4a5f8af5558c52d\\venv\\Lib\\site-packages\\openai",
+  "py_files": 1048,
+  "digest": "b97edb3453f982d5ca1b5a3f7e3600534cec1654faf510051a98059864e38945",
+  "short_copy_digest": "b97edb3453f982d5ca1b5a3f7e3600534cec1654faf510051a98059864e38945"
+ },
+ "b_short_root": {
+  "label": "B_SHORT_ROOT",
+  "sys_path0": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-maxpath\\s",
+  "root_exists": true,
+  "payload_init": true,
+  "ok": true,
+  "openai_file": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-maxpath\\s\\openai\\__init__.py",
+  "version": "2.24.0",
+  "came_from_payload": true,
+  "duration_s": 4.32,
+  "exit": 0,
+  "measured_target_len": 125
+ },
+ "c_boundary": [
+  {
+   "label": "C_TARGET_LEN_259",
+   "sys_path0": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-maxpath\\pad\\ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp",
+   "root_exists": true,
+   "payload_init": true,
+   "ok": true,
+   "openai_file": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-maxpath\\pad\\ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp\\openai\\__init__.py",
+   "version": "2.24.0",
+   "came_from_payload": true,
+   "duration_s": 3.49,
+   "exit": 0,
+   "measured_target_len": 259,
+   "payload_matches_source": true
+  },
+  {
+   "label": "C_TARGET_LEN_260",
+   "sys_path0": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-maxpath\\pad\\pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp",
+   "root_exists": true,
+   "payload_init": true,
+   "ok": false,
+   "error": "ModuleNotFoundError: No module named 'openai.types.responses.response_computer_tool_call_output_screenshot_param'",
+   "duration_s": 2.12,
+   "exit": 0,
+   "measured_target_len": 260,
+   "payload_matches_source": true
+  }
+ ],
+ "a_as_installed": {
+  "label": "A_AS_INSTALLED",
+  "sys_path0": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\installs\\3b763fa5cf79ba4a\\environments\\37e51176b4164db5b4a5f8af5558c52d\\venv\\Lib\\site-packages",
+  "root_exists": true,
+  "payload_init": true,
+  "ok": false,
+  "error": "ModuleNotFoundError: No module named 'pydantic_core._pydantic_core'",
+  "duration_s": 0.13,
+  "exit": 0,
+  "openai_root": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\installs\\3b763fa5cf79ba4a\\environments\\37e51176b4164db5b4a5f8af5558c52d\\venv\\Lib\\site-packages",
+  "measured_target_len": 260,
+  "foreign_abi": {
+   "foreign_extension_modules": [
+    "_cffi_backend.cp314-win_amd64.pyd",
+    "_http_parser.cp314-win_amd64.pyd",
+    "_http_writer.cp314-win_amd64.pyd",
+    "_pillow_heif.cp314-win_amd64.pyd",
+    "_ruamel_yaml.cp314-win_amd64.pyd",
+    "cd.cp314-win_amd64.pyd",
+    "jiter.cp314-win_amd64.pyd",
+    "mask.cp314-win_amd64.pyd"
+   ],
+   "count": 10
+  }
+ },
+ "separate_finding_not_part_of_the_test": "the installed environment also ships extension modules built for another CPython, so it cannot be imported from this 3.11 runtime even at a short path; that is why the repair is a rebuild at a short root with the matching interpreter, not a move",
+ "max_path_limit": 259,
+ "checks": {
+  "copies_are_the_same_payload": true,
+  "short_root_imports": true,
+  "at_259_imports": true,
+  "at_260_fails_on_the_module_under_test": true
+ },
+ "verdict": "PASS",
+ "verdict_why": "identical .py payload imports at 259 characters and fails at 260 with the production error, so the path is the cause and the package is complete",
+ "falsifier": "the same payload fails at 259, or imports at 260, or the 260 failure names something other than the module under test"
+}

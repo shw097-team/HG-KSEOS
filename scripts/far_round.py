@@ -204,9 +204,17 @@ def run_lane(
             if it.get("type") == "agent_message":
                 said.append(it.get("text") or "")
         (run_dir / "lane_output").mkdir(exist_ok=True)
-        (run_dir / "lane_output" / f"{kind}.md").write_text("\n".join(said), encoding="utf-8", newline="")
+        # Never write the transcript where the lane may have put its deliverable: FAR-054 lost a 9.7 kB work
+        # package that way (the EXECUTE lane wrote lane_output/execute.md, this capture overwrote it with a
+        # 1.9 kB transcript, and the VERIFY lane convicted the resulting artifact -- correctly).
+        (run_dir / "lane_output" / f"{kind}_reply.md").write_text("\n".join(said), encoding="utf-8", newline="")
     except Exception as exc:
         receipt["output_capture_error"] = f"{exc.__class__.__name__}: {exc}"
+    deliverable = run_dir / "lane_output" / "WORKPACKAGE.md"
+    if deliverable.is_file():
+        receipt["deliverable"] = deliverable.relative_to(run_dir).as_posix()
+        receipt["deliverable_sha256"] = sha256_file(deliverable)
+        receipt["deliverable_bytes"] = deliverable.stat().st_size
     return receipt
 
 
@@ -247,14 +255,21 @@ def main(argv: list[str] | None = None) -> int:
         if kind != "plan":
             prev = receipts.get("plan" if kind == "execute" else "execute", {})
             prev_text = ""
-            prev_file = work / f"{'plan' if kind == 'execute' else 'execute'}.md"
+            prev_kind = "plan" if kind == "execute" else "execute"
+            prev_file = work / f"{prev_kind}_reply.md"
+            if not prev_file.exists():
+                prev_file = work / f"{prev_kind}.md"
             if prev_file.exists():
                 prev_text = prev_file.read_text(encoding="utf-8", errors="replace")[:2000]
             brief = work / f"_brief_{kind}.md"
-            role = ("Build exactly one work package from the plan. Do NOT read the repository and do not go looking for "
-                    "governance files -- everything you need is in this brief; measured, a build brief that "
-                    "sends the arm into the repo stalls past 600s, the same brief kept self-contained "
-                    "finishes in 14s. Report what you produced." if kind == "execute" else
+            role = (f"Answer the question as the executing lane and WRITE THE ANSWER TO THIS EXACT FILE: "
+                    f"{work / 'WORKPACKAGE.md'}. Make the decision the question asks for, compare the candidates "
+                    "against the evidence stated in the brief, and name what would falsify your choice. A document "
+                    "that tells a future executor to decide, or that lists criteria without applying them, does not "
+                    "answer the question and will be failed by the checker. Do NOT read the repository: everything "
+                    "you need is in this brief (measured: a build brief that sends the arm into the repo stalls past "
+                    "600s; the same brief kept self-contained finishes in under a minute). Then report what you "
+                    "produced and that file's sha256." if kind == "execute" else
                     "Check the work against the question, not against the writer's summary. Decide PASS or FAIL and "
                     "name what you relied on.")
             brief.write_text(f"# {kind.upper()} brief\n\nQuestion:\n{args.question}\n\n"
