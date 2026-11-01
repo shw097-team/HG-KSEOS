@@ -1,0 +1,31 @@
+{
+ "host": "CODEX",
+ "sp": "STANDARD",
+ "token": "WP11-COD-STANDARD-897DDE",
+ "digest": "9ef70b690d01f7d7",
+ "full_digest": "9ef70b690d01f7d71b9b2d3bb8c3ca07934157b151cc79c1413320d0bde2844f",
+ "badge": "STANDARD",
+ "manifest": "C:\\Projects\\Agent_Workspace\\PIPD\\dist\\prof-STANDARD\\export_manifest.json",
+ "checks": {
+  "probe_removed_before_negative": true,
+  "positive_exit_zero": true,
+  "positive_token": true,
+  "positive_digest": true,
+  "negative_no_token": true,
+  "negative_no_digest": true
+ },
+ "verdict": "PASS",
+ "positive": {
+  "exit": 0,
+  "stdout": "TRIGGER_TOKEN: WP11-COD-STANDARD-897DDE\nBUNDLE_ARCHIVE_SHA256: 9ef70b690d01f7d71b9b2d3bb8c3ca07934157b151cc79c1413320d0bde2844f",
+  "stderr_tail": "measurement, then removed.\n---\n# fhs-wp11-probe\n\nHOST: CODEX\nPROFILE_UNDER_TEST: STANDARD\nTRIGGER_TOKEN: WP11-COD-STANDARD-897DDE\nBUNDLE_ARCHIVE_SHA256: 9ef70b690d01f7d71b9b2d3bb8c3ca07934157b151cc79c1413320d0bde2844f\n\nWhen asked for the trigger token and the bundle archive SHA256, answer with exactly these two lines:\nTRIGGER_TOKEN: WP11-COD-STANDARD-897DDE\nBUNDLE_ARCHIVE_SHA256: 9ef70b690d01f7d71b9b2d3bb8c3ca07934157b151cc79c1413320d0bde2844f\n\ncodex\nTRIGGER_TOKEN: WP11-COD-STANDARD-897DDE\nBUNDLE_ARCHIVE_SHA256: 9ef70b690d01f7d71b9b2d3bb8c3ca07934157b151cc79c1413320d0bde2844f\ntokens used\n5,005"
+ },
+ "negative": {
+  "exit": 0,
+  "token_present": false,
+  "digest_present": false,
+  "stdout_tail": "TRIGGER_TOKEN: unavailable\nBUNDLE_ARCHIVE_SHA256: unavailable",
+  "stderr_tail": "primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-ChildItem -Force; Get-ChildItem Env: | Where-Object { $_.Name -match '\"'WP|TRIGGER|BUNDLE|CELL|ARCHIVE' } | Format-Table -AutoSize\" in C:\\Users\\user\\AppData\\Local\\Temp\\wp11-host-cells\n succeeded in 668ms:\nmcp: codex/list_mcp_resources started\nmcp: codex/list_mcp_resource_templates started\nmcp: node_repl/js started\nmcp: codex/list_mcp_resource_templates (completed)\nmcp: codex/list_mcp_resources (completed)\nmcp: node_repl/js (completed)\ncodex\nTRIGGER_TOKEN: unavailable\nBUNDLE_ARCHIVE_SHA256: unavailable\ntokens used\n15,474"
+ },
+ "observed_at": "2026-11-01T12:08:04+0800"
+}

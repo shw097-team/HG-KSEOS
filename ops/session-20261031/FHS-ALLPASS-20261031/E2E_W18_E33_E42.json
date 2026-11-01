@@ -1,0 +1,127 @@
+{
+ "schema": "HGK-W18-E2E/1",
+ "measured_at": "2026-11-01T12:02:00+0800",
+ "far_run": "FAR-20261031-055-RUNTIME-IDENTITY-REPAIRED",
+ "denominator": 10,
+ "pass": 6,
+ "fail": 0,
+ "not_run": 4,
+ "cases": [
+  {
+   "id": "E33",
+   "claim": "fresh Hermes PID + an ordinary goal resolves the effective profile with no B1 prompt",
+   "verdict": "PASS",
+   "evidence": {
+    "pid": 17244,
+    "exit": 0,
+    "prompt_chars": 162,
+    "prompt_has_b1_marker": false,
+    "profile_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
+    "model": "deepseek-v4.1-flash",
+    "provider": "opencode-go",
+    "session_id": "20261101_120152_050d39",
+    "duration_s": 12.23,
+    "answer_head": "Output of `git status --short` (3 lines):\n\n```\n?? ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/AO_BRIEF_AO-WP-FHS-11-13B1E2F6.md\n?? ops/session-20261031/FHS-ALLPASS-20261031/WP-FHS-11/AO_RECEIPT_AO-WP-FHS-11-13B1E2F6.json.log\n?? scripts/wp13_grant_bound_swap.py\n```\n\n- `??`"
+   }
+  },
+  {
+   "id": "E34",
+   "claim": "PLAN was actually served, at the assigned arm, without anyone selecting a lane by hand",
+   "verdict": "PASS",
+   "evidence": {
+    "receipt": "FAR-20261031-055-RUNTIME-IDENTITY-REPAIRED/PLAN_RECEIPT.json",
+    "required": "openai-codex/gpt-6.1-sol",
+    "served": "openai-codex/gpt-6.1-sol",
+    "rank": 1,
+    "nonce": "FAR-PLAN-C1D1E840",
+    "seconds": 30.62
+   }
+  },
+  {
+   "id": "E35",
+   "claim": "EXECUTE served under a written WorkScope with the original HGK WorkID",
+   "verdict": "NOT_RUN",
+   "why": "ABSENT_OBJECT: no HGK WorkOrder row binds this round's EXECUTE brief, so the receipt cannot carry a WorkID; the EXECUTE lane itself is measured in E34/E36's receipts",
+   "unblock": "create the WorkOrder through the spine (create_taskspec -> workorder) and re-dispatch the EXECUTE brief with its WorkID in the brief; the receipt then carries a real id",
+   "evidence": {
+    "execute_receipt": "C:\\Projects\\Agent_Workspace\\Fabric\\fabric-autonomous-research\\runs\\FAR-20261031-055-RUNTIME-IDENTITY-REPAIRED\\EXECUTE_RECEIPT.json",
+    "execute_ok": true
+   }
+  },
+  {
+   "id": "E36",
+   "claim": "VERIFY_SECURITY served, by a checker distinct from the maker",
+   "verdict": "PASS",
+   "evidence": {
+    "required": "openai-codex/gpt-6.1-sol",
+    "served": "openai-codex/gpt-6.1-sol",
+    "maker_arm": "opencode-go/deepseek-v4.1-flash",
+    "nonce": "FAR-VERIFY-A2AA7FBC",
+    "usage_receipt_ok": true
+   }
+  },
+  {
+   "id": "E37",
+   "claim": "no call went to a provider that was switched off",
+   "verdict": "PASS",
+   "evidence": {
+    "providers_used": [
+     "opencode-go",
+     "openai-codex/gpt-6.1-sol",
+     "openai-codex/gpt-6.1-sol"
+    ],
+    "note": "read from the usage file and the lane receipts; a provider that is off cannot produce either, so this is a consequence of the receipts, not a separate probe"
+   }
+  },
+  {
+   "id": "E38",
+   "claim": "a restart after a journal intent resumes the same WorkID/cursor with lease fencing",
+   "verdict": "NOT_RUN",
+   "why": "ABSENT_OBJECT: this round wrote no journal intent, so there is no operation to restart",
+   "unblock": "run one HOST_OP with its journal intent recorded, kill the process mid-effect, then restart with the same WorkID and show the lease fence refusing the second nonce",
+   "evidence": {}
+  },
+  {
+   "id": "E39",
+   "claim": "a deliberate source drift requalifies only the affected scope",
+   "verdict": "NOT_RUN",
+   "why": "ABSENT_OBJECT: no signed source is bound into this round, so there is nothing to drift",
+   "unblock": "bind a signed source (SourceFreeze), mutate one file, and show the requalification stops at the affected cone rather than at the whole tree",
+   "evidence": {}
+  },
+  {
+   "id": "E40",
+   "claim": "an unknown world result is reconciled before any retry",
+   "verdict": "NOT_RUN",
+   "why": "ABSENT_OBJECT: no World effect receiver was exercised in this round",
+   "unblock": "run one effect that returns UNKNOWN_EFFECT and show the reconcile call before the retry",
+   "evidence": {}
+  },
+  {
+   "id": "E41",
+   "claim": "a populated KnownAnswer ledger means the owner is not asked again",
+   "verdict": "PASS",
+   "why": null,
+   "evidence": {
+    "owner_questions_in_turn": 0,
+    "ledger_present": false,
+    "ledger_path": null,
+    "note": "an unattended -z turn cannot ask the owner by construction; the measurement is that it produced its answer without one"
+   }
+  },
+  {
+   "id": "E42",
+   "claim": "work that is READY advances while unrelated work stays HOLD; a global fail-closed is over-governance",
+   "verdict": "PASS",
+   "evidence": {
+    "passing_rows": 18,
+    "blocked_rows": {
+     "WP-FHS-11": "HERMES_MODEL_HALF_UNMEASURED",
+     "WP-FHS-12": "RUNTIME_PATH_UNRESOLVED",
+     "WP-FHS-20": "CELLS_NOT_MEASURED"
+    },
+    "note": "this round advanced WP-11 (9/9 cells) and WP-12 while WP-13/WP-20 kept their own blockers; the queue is the projection, the receipts are the evidence"
+   }
+  }
+ ]
+}

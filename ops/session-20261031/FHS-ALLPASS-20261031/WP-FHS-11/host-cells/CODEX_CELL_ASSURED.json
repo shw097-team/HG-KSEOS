@@ -1,0 +1,31 @@
+{
+ "host": "CODEX",
+ "sp": "ASSURED",
+ "token": "WP11-COD-ASSURED-7B09DF",
+ "digest": "5624006aa2f7bde5",
+ "full_digest": "5624006aa2f7bde5c0d43de22964edf8f70e86c2f8e03b2e582befed836251e0",
+ "badge": "ASSURED",
+ "manifest": "C:\\Projects\\Agent_Workspace\\PIPD\\dist\\prof-ASSURED\\export_manifest.json",
+ "checks": {
+  "probe_removed_before_negative": true,
+  "positive_exit_zero": true,
+  "positive_token": true,
+  "positive_digest": true,
+  "negative_no_token": true,
+  "negative_no_digest": true
+ },
+ "verdict": "PASS",
+ "positive": {
+  "exit": 0,
+  "stdout": "TRIGGER_TOKEN: WP11-COD-ASSURED-7B09DF\nBUNDLE_ARCHIVE_SHA256: 5624006aa2f7bde5c0d43de22964edf8f70e86c2f8e03b2e582befed836251e0",
+  "stderr_tail": "one measurement, then removed.\n---\n# fhs-wp11-probe\n\nHOST: CODEX\nPROFILE_UNDER_TEST: ASSURED\nTRIGGER_TOKEN: WP11-COD-ASSURED-7B09DF\nBUNDLE_ARCHIVE_SHA256: 5624006aa2f7bde5c0d43de22964edf8f70e86c2f8e03b2e582befed836251e0\n\nWhen asked for the trigger token and the bundle archive SHA256, answer with exactly these two lines:\nTRIGGER_TOKEN: WP11-COD-ASSURED-7B09DF\nBUNDLE_ARCHIVE_SHA256: 5624006aa2f7bde5c0d43de22964edf8f70e86c2f8e03b2e582befed836251e0\n\ncodex\nTRIGGER_TOKEN: WP11-COD-ASSURED-7B09DF\nBUNDLE_ARCHIVE_SHA256: 5624006aa2f7bde5c0d43de22964edf8f70e86c2f8e03b2e582befed836251e0\ntokens used\n3,352"
+ },
+ "negative": {
+  "exit": 0,
+  "token_present": false,
+  "digest_present": false,
+  "stdout_tail": "TRIGGER_TOKEN: unavailable\nBUNDLE_ARCHIVE_SHA256: unavailable",
+  "stderr_tail": ":\nexec\n\"C:\\\\Users\\\\user\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-ChildItem -Force; Get-ChildItem Env: | Where-Object { $_.Name -match '\"'TRIGGER|BUNDLE|WP.?11|HOST.?CELL' } | Format-Table -AutoSize\" in C:\\Users\\user\\AppData\\Local\\Temp\\wp11-host-cells\n succeeded in 676ms:\nmcp: codex/list_mcp_resources started\nmcp: codex/list_mcp_resources (completed)\nmcp: codex/list_mcp_resource_templates started\nmcp: codex/list_mcp_resource_templates (completed)\ncodex\nTRIGGER_TOKEN: unavailable\nBUNDLE_ARCHIVE_SHA256: unavailable\ntokens used\n5,321"
+ },
+ "observed_at": "2026-11-01T12:08:34+0800"
+}

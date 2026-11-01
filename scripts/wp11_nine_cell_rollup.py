@@ -63,6 +63,30 @@ def main() -> int:
 
     # --- carried rows: counted only when their receipts are on disk and still say PASS ---
     for host in ("codex", "claude"):
+        hc_dir = wp11 / "host-cells"
+        tag = "CODEX" if host == "codex" else "CLAUDE_CODE"
+        remeasured = []
+        for sp in PROFILES:
+            f = hc_dir / f"{tag}_CELL_{sp}.json"
+            r = load(f)
+            if r:
+                remeasured.append((sp, f, r))
+        if remeasured:
+            # This round re-measured the host against the CURRENT manifests; those receipts win, and the carried
+            # rows are dropped entirely rather than mixed in. Mixing was the original sin: it let a stale pass
+            # (prefix from a superseded build) sit beside a fresh measurement and read as current.
+            for sp, f, r in remeasured:
+                served = r.get("badge")
+                cells.append({
+                    "host": host, "sp": sp, "verdict": r.get("verdict"),
+                    "digest": (r.get("full_digest") or "")[:16], "badge": served,
+                    "negative_clean": bool((r.get("negative") or {}).get("token_present")) is False,
+                    "archive_prefix": (r.get("full_digest") or "")[:12],
+                    "evidence_state": "MEASURED_THIS_ROUND",
+                    "receipt": str(f.relative_to(wp11)), "receipt_sha256": sha(f),
+                })
+                sources.append(str(f))
+            continue
         files = [wp11 / f for f in PRIOR_RECEIPTS[host]]
         present = [f for f in files if f.is_file()]
         receipts_ok = bool(present)

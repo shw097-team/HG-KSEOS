@@ -1,0 +1,31 @@
+{
+ "host": "CLAUDE_CODE",
+ "sp": "STANDARD",
+ "token": "WP11-CLA-STANDARD-DB9ACC",
+ "digest": "9ef70b690d01f7d7",
+ "full_digest": "9ef70b690d01f7d71b9b2d3bb8c3ca07934157b151cc79c1413320d0bde2844f",
+ "badge": "STANDARD",
+ "manifest": "C:\\Projects\\Agent_Workspace\\PIPD\\dist\\prof-STANDARD\\export_manifest.json",
+ "checks": {
+  "probe_removed_before_negative": true,
+  "positive_exit_zero": true,
+  "positive_token": true,
+  "positive_digest": true,
+  "negative_no_token": true,
+  "negative_no_digest": true
+ },
+ "verdict": "PASS",
+ "positive": {
+  "exit": 0,
+  "stdout": "TRIGGER_TOKEN: WP11-CLA-STANDARD-DB9ACC\nBUNDLE_ARCHIVE_SHA256: 9ef70b690d01f7d71b9b2d3bb8c3ca07934157b151cc79c1413320d0bde2844f",
+  "stderr_tail": "Claude Code doesn't recognize the model \"gpt-5.6-sol\", so it assumes a context window of 200k tokens. Update Claude Code, or see https://code.claude.com/docs/en/model-config#correct-the-window-for-a-gateway-or-custom-model-id to set the window.\n[claude-code:unrecognized_model] {\"model\":\"gpt-5.6-sol\",\"query_source\":\"sdk\"}"
+ },
+ "negative": {
+  "exit": 1,
+  "token_present": false,
+  "digest_present": false,
+  "stdout_tail": "",
+  "stderr_tail": "--agent 'fhs-wp11-probe' not found. Available agents: claude, Explore, general-purpose, ocx-gpt-5-4-mini, ocx-gpt-5-5, ocx-gpt-5-6-luna, ocx-gpt-5-6-sol, ocx-gpt-5-6-terra, Plan, statusline-setup"
+ },
+ "observed_at": "2026-11-01T12:16:44+0800"
+}

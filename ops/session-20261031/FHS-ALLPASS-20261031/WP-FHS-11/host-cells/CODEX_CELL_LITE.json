@@ -1,0 +1,31 @@
+{
+ "host": "CODEX",
+ "sp": "LITE",
+ "token": "WP11-COD-LITE-F84D6B",
+ "digest": "6dadaf36a9ecd4e1",
+ "full_digest": "6dadaf36a9ecd4e1452955aa1fdf7cb955782e8f524f62158b39c170a7d62d1b",
+ "badge": "LITE",
+ "manifest": "C:\\Projects\\Agent_Workspace\\PIPD\\dist\\prof-LITE\\export_manifest.json",
+ "checks": {
+  "probe_removed_before_negative": true,
+  "positive_exit_zero": true,
+  "positive_token": true,
+  "positive_digest": true,
+  "negative_no_token": true,
+  "negative_no_digest": true
+ },
+ "verdict": "PASS",
+ "positive": {
+  "exit": 0,
+  "stdout": "TRIGGER_TOKEN: WP11-COD-LITE-F84D6B\nBUNDLE_ARCHIVE_SHA256: 6dadaf36a9ecd4e1452955aa1fdf7cb955782e8f524f62158b39c170a7d62d1b",
+  "stderr_tail": "stalled for one measurement, then removed.\n---\n# fhs-wp11-probe\n\nHOST: CODEX\nPROFILE_UNDER_TEST: LITE\nTRIGGER_TOKEN: WP11-COD-LITE-F84D6B\nBUNDLE_ARCHIVE_SHA256: 6dadaf36a9ecd4e1452955aa1fdf7cb955782e8f524f62158b39c170a7d62d1b\n\nWhen asked for the trigger token and the bundle archive SHA256, answer with exactly these two lines:\nTRIGGER_TOKEN: WP11-COD-LITE-F84D6B\nBUNDLE_ARCHIVE_SHA256: 6dadaf36a9ecd4e1452955aa1fdf7cb955782e8f524f62158b39c170a7d62d1b\n\ncodex\nTRIGGER_TOKEN: WP11-COD-LITE-F84D6B\nBUNDLE_ARCHIVE_SHA256: 6dadaf36a9ecd4e1452955aa1fdf7cb955782e8f524f62158b39c170a7d62d1b\ntokens used\n5,092"
+ },
+ "negative": {
+  "exit": 0,
+  "token_present": false,
+  "digest_present": false,
+  "stdout_tail": "TRIGGER_TOKEN: unavailable\nBUNDLE_ARCHIVE_SHA256: unavailable",
+  "stderr_tail": "onTimeUtc     : 2026/10/16 上午 05:05:37\nLastAccessTime      : 2026/11/1 上午 02:49:00\nLastAccessTimeUtc   : 2026/10/31 下午 06:49:00\nLastWriteTime       : 2026/10/24 上午 02:11:45\nLastWriteTimeUtc    : 2026/10/23 下午 06:11:45\nLinkTarget          : \nUnixFileMode        : -1\nAttributes          : Directory\nMode                : d----\nModeWithoutHardLink : d----\nBaseName            : hgk-lhr-z6o3nnee\nResolvedTarget      : C:\\Users\\user\\AppData\\Local\\Temp\\hgk-lhr-z6o3nnee\nTarget              : \nLinkType            : \n\n\n\ncodex\nTRIGGER_TOKEN: unavailable\nBUNDLE_ARCHIVE_SHA256: unavailable\ntokens used\n16,672"
+ },
+ "observed_at": "2026-11-01T12:07:31+0800"
+}

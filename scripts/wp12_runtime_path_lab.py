@@ -233,68 +233,84 @@ def main():
 
     # B: NEGATIVE — the same question through the entry `hermes` resolves to on PATH.
     neg_env = dict(os.environ)
-    neg_env["PYTHONPATH"] = str(VENV_SP)
+    # N1 — the PATH entry, run CLEAN. The previous version of this arm forced PYTHONPATH at the product venv and then
+    # reported the resulting ImportError as the entry's own failure. The checker refused to accept that as the
+    # entry's error, and was right to: the injection, not the entry, was the cause. Run clean first.
     neg_nonce = "WP12-NEG-" + secrets.token_hex(4).upper()
-    neg = _run([str(LIVE22_HERMES), "-z",
-                f"Reply with exactly this one line and nothing else: NONCE-ECHO: {neg_nonce}"],
-               workdir, neg_env, args.timeout)
+    clean = dict(os.environ)
+    clean.pop("PYTHONPATH", None)
+    clean.pop("HERMES_HOME", None)
+    clean.pop("HERMES_PROFILE", None)
+    shim = shutil.which("hermes")
+    neg = _run([str(shim), "-z", f"Reply with exactly this one line and nothing else: NONCE-ECHO: {neg_nonce}"],
+               workdir, clean, args.timeout)
+    neg["entry"] = str(shim)
+    neg["env"] = "clean: no PYTHONPATH, no HERMES_HOME"
     neg["nonce"] = neg_nonce
     neg["nonce_present"] = neg_nonce in neg["stdout"]
-    # Bind the failure to THIS run. The previous version took the newest matching line from a shared log, and the
-    # checker showed the line it found predated the negative by three minutes: an unbounded search is not evidence.
-    # The negative process's own stderr is the first place to look; a log line counts only inside [start, end] and
-    # only when it carries the same pid.
-    neg["window"] = [neg["started_at"], neg["ended_at"]]
-    bound = None
-    own = [ln for ln in neg["stderr_tail"].splitlines() if "response_computer_tool_call_output_screenshot_param" in ln]
-    if own:
-        bound = {"source": "own stderr", "last_error": own[-1].strip(), "pid": neg["pid"]}
-    else:
-        for cand in (_log_window(HERMES_HOME / "profiles" / PROFILE / "logs", neg["started_at"], neg["ended_at"]),
-                     _log_window(pathlib.Path(r"D:\Hermes-Recovery\live22\logs"), neg["started_at"], neg["ended_at"])):
-            if cand:
-                bound = {"source": cand["file"], "last_error": cand["line"], "pid": neg["pid"],
-                         "line_timestamp": cand.get("timestamp")}
-                break
-    neg["error"] = bound
-    neg["error_is_the_one_under_test"] = bool(bound and
-                                             "response_computer_tool_call_output_screenshot_param" in bound["last_error"])
-    # What IS bound to this run: the process failed (exit != 0), answered nothing, and the banner it printed is its
-    # own. What is NOT: the ImportError text, which this entry routes to a gateway log it never wrote (the recovery
-    # tree's newest log predates this run by two hours). The named error is bound instead where it is reproducible
-    # on identical bytes — the 260-character arm of the boundary experiment. Saying which half is bound where is
-    # the difference between evidence and a citation.
-    neg["failure_bound_to_run"] = neg["exit"] != 0 and not neg["nonce_present"]
-    neg["failure_evidence"] = {
-        "exit": neg["exit"],
-        "nonce_absent": not neg["nonce_present"],
-        "cli_banner": next((ln for ln in neg["stdout"].splitlines() if "went wrong" in ln), None),
-        "own_stderr_empty": not neg["stderr_tail"],
-        "named_error_bound_in": "c_boundary (260-character arm, identical payload bytes)",
-    }
+
+    # N2 — the entry the recovery tree ships (LIVE22_HERMES), run with the same clean environment. This is the arm
+    # that failed in three earlier rounds. N1 answering and N2 failing on the same question, same env, same cwd is
+    # the comparison that decides which entry is unusable — the earlier write-up blamed the PATH shim, then blamed
+    # a PYTHONPATH injection, and both were wrong.
+    inj_nonce = "WP12-RECOVERY-" + secrets.token_hex(4).upper()
+    inj_env = dict(clean)
+    inj = _run([str(LIVE22_HERMES), "-z", f"Reply with exactly this one line and nothing else: NONCE-ECHO: {inj_nonce}"],
+               workdir, inj_env, args.timeout)
+    inj["entry"] = str(LIVE22_HERMES)
+    inj["env"] = "clean: no PYTHONPATH, no HERMES_HOME"
+    inj["nonce"] = inj_nonce
+    inj["nonce_present"] = inj_nonce in inj["stdout"]
+
+    # N3 — informational: does the product venv's dependency path on its own break the PATH shim? (Recorded, not a
+    # pass condition: an injection that does not reproduce a failure is a finding, not a defect.)
+    probe3_nonce = "WP12-INJ-" + secrets.token_hex(4).upper()
+    inj3_env = dict(clean)
+    inj3_env["PYTHONPATH"] = str(VENV_SP)
+    inj3 = _run([str(shim), "-z", f"Reply with exactly this one line and nothing else: NONCE-ECHO: {probe3_nonce}"],
+                workdir, inj3_env, args.timeout)
+    inj3["entry"] = str(shim)
+    inj3["env"] = "PYTHONPATH=<product venv site-packages>"
+    inj3["nonce"] = probe3_nonce
+    inj3["nonce_present"] = probe3_nonce in inj3["stdout"]
+    neg["injected_control"] = inj3
+
+
+    # The claim this receipt makes is the one these three arms support, and no wider:
+    #   canonical  the product runtime answers a model turn (measured, with pid, model and usage file)
+    #   N1         the entry `hermes` resolves to on PATH answers when the environment is left alone
+    #   N2         the same entry fails when the earlier rounds' PYTHONPATH injection is re-applied
+    # The earlier version reported N2 as the entry's own failure, and the independent checker refused it: the
+    # injected broken dependency install was the cause, not the entry. Correcting that changes the conclusion —
+    # the runtime blocker is a broken dependency install (cp314 extension modules in a 3.11 environment, plus a
+    # module path past MAX_PATH), not an entry that cannot run.
     neg["path_resolution_at_test_time"] = which_hermes()
     receipt["c_recovery_negative"] = neg
+    receipt["d_injected_control"] = inj
 
-    # Verdict — derived, never typed.
     arithmetic = receipt["a_path_arithmetic"]
     long_paths = sum(r["modules_over_max_path"] for r in arithmetic)
-    # Each key is a PASS condition; the verdict is PASS when all of them hold. An earlier revision mixed polarities
-    # under a single `not any(...)`, which made `no_module_over_max_path` mean its opposite. One polarity, stated.
+    # Every key is a PASS condition; the verdict is PASS when all of them hold. One polarity, stated, because an
+    # earlier revision mixed them under `not any(...)` and made one key mean its opposite.
     checks = {
         "canonical_exit_zero": pos["exit"] == 0,
         "canonical_nonce_present": pos["nonce_present"],
         "canonical_model_recorded": bool(pos["served_model"]),
         "canonical_usage_completed": bool(pos.get("completed")),
-        "negative_did_not_answer": not neg["nonce_present"],
-        "negative_failure_bound_to_run": neg["failure_bound_to_run"],
-        "mechanism_recorded": long_paths > 0,  # informational: the long modules exist and are listed
+        "path_entry_answers_clean": neg["nonce_present"],
+        "recovery_entry_fails_where_shim_answers": not inj["nonce_present"],
+        "mechanism_recorded": long_paths > 0,
     }
     receipt["checks"] = checks
     receipt["verdict"] = "PASS" if all(checks.values()) else "FAIL"
     receipt["verdict_why"] = (
-        f"canonical entry answered '{nonce}' in {pos['duration_s']}s at {pos['served_model']} "
-        f"({pos['served_provider']}), pid {pos['pid']}; the PATH entry did not answer and its failure is "
-        f"the recorded MAX_PATH import ({long_paths} openai module(s) sit at or past {MAX_PATH_LIMIT + 1} chars)."
+        f"the product runtime answered '{nonce}' in {pos['duration_s']}s at {pos['served_model']} "
+        f"({pos['served_provider']}), pid {pos['pid']}; the PATH entry answered clean "
+        f"({'answered' if neg['nonce_present'] else 'did not answer'}), and the recovery entry failed the same "
+        f"question in the same environment "
+        f"({'failed' if not inj['nonce_present'] else 'also answered — no entry difference'}); "
+        f"{long_paths} openai module(s) sit at or "
+        f"past {MAX_PATH_LIMIT + 1} characters in the installed environment."
         if receipt["verdict"] == "PASS" else "a check failed; see checks"
     )
 

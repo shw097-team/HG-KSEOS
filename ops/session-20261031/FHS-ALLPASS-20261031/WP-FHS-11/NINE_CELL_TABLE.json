@@ -2,21 +2,23 @@
  "schema": "HGK-WP11-NINE-CELLS/5",
  "denominator": 9,
  "counts": {
-  "measured_this_round": 3,
-  "measured_pass": 3,
-  "carried_prior_round": 6,
-  "carried_pass": 6,
+  "measured_this_round": 9,
+  "measured_pass": 9,
+  "carried_prior_round": 0,
+  "carried_pass": 0,
   "unmeasured": 0
  },
- "headline": "3 cells measured in this round (3 PASS); 6 carried from the prior round with their receipts present; 0 unmeasured",
+ "headline": "9 cells measured in this round (9 PASS); 0 carried from the prior round with their receipts present; 0 unmeasured",
  "derived_from": [
-  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\CLAUDE_CELL_RECEIPT.json",
-  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\CODEX_CELL_RECEIPT.json",
-  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\clean_cell_runs.json",
-  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\clean_codex_cell.json",
   "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_ASSURED.json",
   "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_LITE.json",
-  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_STANDARD.json"
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_STANDARD.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CLAUDE_CODE_CELL_ASSURED.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CLAUDE_CODE_CELL_LITE.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CLAUDE_CODE_CELL_STANDARD.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CODEX_CELL_ASSURED.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CODEX_CELL_LITE.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CODEX_CELL_STANDARD.json"
  ],
  "rule": "MEASURED_THIS_ROUND comes from a receipt written now; CARRIED_PRIOR_ROUND is counted only when the prior receipts are present and still PASS, and is reported apart from the measured cells; anything else is UNMEASURED and the script exits non-zero",
  "note": "Hermes cells: the loader half is the skill index entry (the body is fetched on demand by the host's own skill_view), so the model half is measured as 'load the body with the host loader and report the two facts', with the same skill removed for the negative.",
@@ -25,88 +27,73 @@
    "host": "codex",
    "sp": "LITE",
    "verdict": "PASS",
-   "digest": true,
-   "badge": true,
+   "digest": "6dadaf36a9ecd4e1",
+   "badge": "LITE",
    "negative_clean": true,
-   "archive_prefix": "e3e993b0e079",
-   "evidence": [
-    "CODEX_CELL_RECEIPT.json",
-    "clean_codex_cell.json",
-    "clean_cell_runs.json"
-   ],
-   "evidence_state": "CARRIED_PRIOR_ROUND"
+   "archive_prefix": "6dadaf36a9ec",
+   "evidence_state": "MEASURED_THIS_ROUND",
+   "receipt": "host-cells\\CODEX_CELL_LITE.json",
+   "receipt_sha256": "7e3030db2852813c52a792dc29a5bdf6e129831cff3d97c2a28963bf475f5b5a"
   },
   {
    "host": "codex",
    "sp": "STANDARD",
    "verdict": "PASS",
-   "digest": true,
-   "badge": true,
+   "digest": "9ef70b690d01f7d7",
+   "badge": "STANDARD",
    "negative_clean": true,
-   "archive_prefix": "52712b6316fb",
-   "evidence": [
-    "CODEX_CELL_RECEIPT.json",
-    "clean_codex_cell.json",
-    "clean_cell_runs.json"
-   ],
-   "evidence_state": "CARRIED_PRIOR_ROUND"
+   "archive_prefix": "9ef70b690d01",
+   "evidence_state": "MEASURED_THIS_ROUND",
+   "receipt": "host-cells\\CODEX_CELL_STANDARD.json",
+   "receipt_sha256": "4e64c14f493838288e390344eeaccc1377a29426f472f59d66a28e998665a68d"
   },
   {
    "host": "codex",
    "sp": "ASSURED",
    "verdict": "PASS",
-   "digest": true,
-   "badge": true,
+   "digest": "5624006aa2f7bde5",
+   "badge": "ASSURED",
    "negative_clean": true,
    "archive_prefix": "5624006aa2f7",
-   "evidence": [
-    "CODEX_CELL_RECEIPT.json",
-    "clean_codex_cell.json",
-    "clean_cell_runs.json"
-   ],
-   "evidence_state": "CARRIED_PRIOR_ROUND"
+   "evidence_state": "MEASURED_THIS_ROUND",
+   "receipt": "host-cells\\CODEX_CELL_ASSURED.json",
+   "receipt_sha256": "2f9f7303e597fec7be054e6e2f4572005d2d513e413deecc088e78f7d50ca625"
   },
   {
    "host": "claude",
    "sp": "LITE",
    "verdict": "PASS",
-   "digest": true,
-   "badge": true,
+   "digest": "6dadaf36a9ecd4e1",
+   "badge": "LITE",
    "negative_clean": true,
-   "archive_prefix": "e3e993b0e079",
-   "evidence": [
-    "CLAUDE_CELL_RECEIPT.json",
-    "clean_cell_runs.json"
-   ],
-   "evidence_state": "CARRIED_PRIOR_ROUND"
+   "archive_prefix": "6dadaf36a9ec",
+   "evidence_state": "MEASURED_THIS_ROUND",
+   "receipt": "host-cells\\CLAUDE_CODE_CELL_LITE.json",
+   "receipt_sha256": "ed3bcd661b01a7352130ec4df475403f04508c685a0b21f69d1abc12509e9653"
   },
   {
    "host": "claude",
    "sp": "STANDARD",
    "verdict": "PASS",
-   "digest": true,
-   "badge": true,
+   "digest": "9ef70b690d01f7d7",
+   "badge": "STANDARD",
    "negative_clean": true,
-   "archive_prefix": "52712b6316fb",
-   "evidence": [
-    "CLAUDE_CELL_RECEIPT.json",
-    "clean_cell_runs.json"
-   ],
-   "evidence_state": "CARRIED_PRIOR_ROUND"
+   "archive_prefix": "9ef70b690d01",
+   "evidence_state": "MEASURED_THIS_ROUND",
+   "receipt": "host-cells\\CLAUDE_CODE_CELL_STANDARD.json",
+   "receipt_sha256": "f0a420062b4c63721f784183c95b16129d613ab64cbd590c1663c4d4ff24e27a"
   },
   {
    "host": "claude",
    "sp": "ASSURED",
    "verdict": "PASS",
-   "digest": true,
-   "badge": true,
+   "digest": "5624006aa2f7bde5",
+   "badge": "ASSURED",
    "negative_clean": true,
    "archive_prefix": "5624006aa2f7",
-   "evidence": [
-    "CLAUDE_CELL_RECEIPT.json",
-    "clean_cell_runs.json"
-   ],
-   "evidence_state": "CARRIED_PRIOR_ROUND"
+   "evidence_state": "MEASURED_THIS_ROUND",
+   "receipt": "host-cells\\CLAUDE_CODE_CELL_ASSURED.json",
+   "receipt_sha256": "9c738288dc8eeb0c269b72c12e2478370d535e2a89a2b668a375a26421fa6fe0"
   },
   {
    "host": "hermes",
