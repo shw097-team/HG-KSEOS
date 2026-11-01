@@ -51,8 +51,8 @@ RUNS = pathlib.Path(r"C:\Projects\Agent_Workspace\Fabric\fabric-autonomous-resea
 LANES = [
     # (kind, lane flag, require-arm, timeout seconds)
     ("plan", "PLAN", "openai-codex/gpt-6.1-sol", 300),
-    ("execute", "EXECUTE", "opencode-go/deepseek-v4.1-flash", 420),
-    ("verify", "VERIFY_SECURITY", "openai-codex/gpt-6.1-sol", 420),
+    ("execute", "EXECUTE", "opencode-go/deepseek-v4.1-flash", 600),
+    ("verify", "VERIFY_SECURITY", "openai-codex/gpt-6.1-sol", 600),
 ]
 
 # Transport is a property of the arm's provider, not a global flag. Measured in hgk-lane-dispatch.py's own notes:
@@ -72,7 +72,7 @@ def run_lane(kind: str, lane: str, arm: str, timeout: int, brief: pathlib.Path, 
     brief.write_text(f"NONCE-ECHO: {nonce}\n\n{text}", encoding="utf-8", newline="")
     out = run_dir / f"_{kind}_dispatch.json"
     cmd = [sys.executable, str(DISPATCH), "--lane", lane, "--require-arm", arm,
-           "--prompt", str(brief), "--nonce", nonce, "--timeout", str(timeout // 2),
+           "--prompt", str(brief), "--nonce", nonce, "--timeout", str(timeout),
            "--json-out", str(out)] + TRANSPORT[arm]
     started = time.time()
     subprocess.run(cmd, cwd=str(K), capture_output=True, text=True, timeout=timeout + 60)
@@ -118,6 +118,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--run", required=True, help="FAR run id, e.g. FAR-20261031-047-EXAMPLE")
     ap.add_argument("--question", required=True, help="the research question, in full")
     ap.add_argument("--lanes", default="plan,execute,verify")
+    ap.add_argument("--carry-chars", type=int, default=2000,
+                    help="how much of the previous lane output to carry forward; measured: 6000 chars made "
+                         "EXECUTE fail usage reconciliation at 212s, 2000 keeps the turn short")
     args = ap.parse_args(argv)
     wanted = {x.strip().lower() for x in args.lanes.split(",") if x.strip()}
 
@@ -140,7 +143,7 @@ def main(argv: list[str] | None = None) -> int:
             prev_text = ""
             prev_file = work / f"{'plan' if kind == 'execute' else 'execute'}.md"
             if prev_file.exists():
-                prev_text = prev_file.read_text(encoding="utf-8", errors="replace")[:6000]
+                prev_text = prev_file.read_text(encoding="utf-8", errors="replace")[:2000]
             brief = work / f"_brief_{kind}.md"
             role = ("Build exactly one work package from the plan. Keep it small enough to finish. Report what you "
                     "changed and why." if kind == "execute" else
