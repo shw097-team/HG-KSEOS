@@ -1,0 +1,4 @@
+Board 'far-20261031-050-first-routed-study' created.
+  Display name: FAR 050 First Routed Study
+  DB path:      D:\Hermes-Recovery\live22\kanban\boards\far-20261031-050-first-routed-study\kanban.db
+  Use `hermes kanban boards switch far-20261031-050-first-routed-study` to make it current.

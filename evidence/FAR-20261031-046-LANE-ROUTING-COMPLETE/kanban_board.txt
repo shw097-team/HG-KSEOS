@@ -1,0 +1,4 @@
+Board 'far-20261031-046-lane-routing-complete' created.
+  Display name: FAR 046 Lane Routing Complete
+  DB path:      D:\Hermes-Recovery\live22\kanban\boards\far-20261031-046-lane-routing-complete\kanban.db
+  Use `hermes kanban boards switch far-20261031-046-lane-routing-complete` to make it current.
