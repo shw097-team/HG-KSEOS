@@ -15,8 +15,9 @@ THREE commands with flags that each have a failure mode (sealed home + OAuth rel
 id, one work package per brief). Under any time pressure the cheap path wins, and the cheap path leaves prose that
 looks identical to the routed path.
 
-So the fix is not another gate -- gates only refuse after the fact. The fix is to make the compliant path the cheapest
-path: one command, three lanes, receipts written where the gate looks for them.
+The lifecycle makes the compliant path the cheapest path: one command dispatches all three lanes and writes typed
+indexes over the raw dispatcher receipts. Closure is decided later by the gate, which resolves every index back to
+the unchanged raw receipt, so successful dispatch alone cannot claim a publishable study.
 
   python scripts/far_round.py --run FAR-20261031-047-EXAMPLE --question "the question, in full"
 
@@ -28,8 +29,8 @@ It dispatches PLAN, then EXECUTE, then VERIFY_SECURITY, each against the previou
   runs/<run>/lane_output/<lane>.md
   runs/<run>/STATE.json
 
-It does not write the synthesis. The synthesis is the author's job -- but it can no longer be produced without the
-three receipts sitting next to it, because producing them is now one command.
+It does not write the synthesis. The synthesis is the author's job, but ``scripts/far_lane_gate.py`` will not accept
+it unless all three indexed raw receipts still prove their lane claims.
 
 Exit codes: 0 all three lanes served and receipts written; 3 a lane refused (named); 4 a lane timed out.
 """
@@ -37,6 +38,7 @@ Exit codes: 0 all three lanes served and receipts written; 3 a lane refused (nam
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import pathlib
 import secrets
@@ -55,6 +57,9 @@ LANES = [
     ("verify", "VERIFY_SECURITY", "openai-codex/gpt-6.1-sol", 600),
 ]
 
+REQUIRED_KINDS = {"plan", "execute", "verify"}
+LANE_IDS = {"PLAN", "EXECUTE", "VERIFY_SECURITY"}
+
 # Transport is a property of the arm's provider, not a global flag. Measured in hgk-lane-dispatch.py's own notes:
 # an opencode-go arm pointed at the chatgpt.com OAuth upstream answers "model is not supported"; the loopback serves it.
 TRANSPORT = {
@@ -66,7 +71,98 @@ TRANSPORT = {
 }
 
 
-def run_lane(kind: str, lane: str, arm: str, timeout: int, brief: pathlib.Path, run_dir: pathlib.Path) -> dict:
+def sha256_file(path: pathlib.Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def sha256_question(question: str) -> str:
+    return hashlib.sha256(question.encode("utf-8")).hexdigest()
+
+
+def valid_run_id(value: str) -> bool:
+    """Accept one FAR directory name, never a path expression."""
+    return (
+        value.startswith("FAR-")
+        and pathlib.PurePath(value).name == value
+        and all(char.isalnum() or char in "-_." for char in value)
+    )
+
+
+def summarize_dispatch(
+    run_id: str,
+    lane: str,
+    arm: str,
+    nonce: str,
+    question_digest: str,
+    raw_path: pathlib.Path,
+    run_dir: pathlib.Path,
+    dispatch: dict | None = None,
+) -> dict:
+    """Bind one lane summary to its immutable raw dispatcher receipt.
+
+    The raw file remains authoritative. This summary is only a typed index into it, and records
+    the raw bytes' digest so a later gate can reject post-hoc replacement.
+    """
+    summary = {
+        "schema": "HGK-FAR-LANE-SUMMARY/2",
+        "run": run_id,
+        "lane": lane,
+        "nonce": nonce,
+        "required_arm": arm,
+        "question_sha256": question_digest,
+        "dispatch_receipt": raw_path.relative_to(run_dir).as_posix(),
+    }
+    if not raw_path.is_file():
+        summary.update({"ok": False, "code": "NO_DISPATCH_RECEIPT", "served_arm": None})
+        return summary
+
+    summary["dispatch_receipt_sha256"] = sha256_file(raw_path)
+    try:
+        d = dispatch if dispatch is not None else json.loads(raw_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        summary.update({
+            "ok": False,
+            "code": "UNREADABLE_DISPATCH_RECEIPT",
+            "served_arm": None,
+            "detail": f"{exc.__class__.__name__}: {exc}",
+        })
+        return summary
+
+    if not isinstance(d, dict):
+        summary.update({
+            "ok": False,
+            "code": "INVALID_DISPATCH_RECEIPT",
+            "served_arm": None,
+            "detail": "JSON root is not an object",
+        })
+        return summary
+
+    attempts = d.get("attempts") if isinstance(d.get("attempts"), list) else []
+    attempt = attempts[-1] if attempts and isinstance(attempts[-1], dict) else {}
+    provider = attempt.get("provider")
+    model = attempt.get("model")
+    served_arm = f"{provider}/{model}" if provider and model else model
+    summary.update({
+        "ok": bool(d.get("ok")),
+        "code": d.get("code"),
+        "served_arm": served_arm,
+        "rank": attempt.get("rank"),
+        "exit": attempt.get("exit"),
+        "usage_receipt_ok": bool(d.get("usage_receipt_ok")),
+    })
+    return summary
+
+
+def run_lane(
+    kind: str,
+    lane: str,
+    arm: str,
+    timeout: int,
+    brief: pathlib.Path,
+    run_dir: pathlib.Path,
+    run_id: str,
+    question_digest: str,
+) -> dict:
     nonce = f"FAR-{kind.upper()}-{secrets.token_hex(4).upper()}"
     text = brief.read_text(encoding="utf-8")
     brief.write_text(f"NONCE-ECHO: {nonce}\n\n{text}", encoding="utf-8", newline="")
@@ -76,21 +172,22 @@ def run_lane(kind: str, lane: str, arm: str, timeout: int, brief: pathlib.Path, 
            "--json-out", str(out)] + TRANSPORT[arm]
     started = time.time()
     subprocess.run(cmd, cwd=str(K), capture_output=True, text=True, timeout=timeout + 60)
-    receipt: dict = {"lane": lane, "required_arm": arm, "served_arm": arm, "nonce": nonce,
-                     "attempted_at": time.strftime("%Y-%m-%dT%H:%M:%S%z")}
-    if not out.exists():
-        receipt.update({"ok": False, "code": "NO_DISPATCH_RECEIPT"})
+    receipt = summarize_dispatch(run_id, lane, arm, nonce, question_digest, out, run_dir)
+    receipt["attempted_at"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
+    receipt["seconds"] = round(time.time() - started, 2)
+    if receipt.get("code") in {"NO_DISPATCH_RECEIPT", "UNREADABLE_DISPATCH_RECEIPT",
+                               "INVALID_DISPATCH_RECEIPT"}:
         return receipt
-    d = json.loads(out.read_text(encoding="utf-8"))
-    a = (d.get("attempts") or [{}])[0]
-    receipt.update({
-        "ok": bool(d.get("ok")), "code": d.get("code"),
-        "model": a.get("model"), "rank": a.get("rank"), "exit": a.get("exit"),
-        "nonce_present": bool(a.get("nonce_present")),
-        "usage_receipt_ok": bool(d.get("usage_receipt_ok")),
-        "seconds": round(time.time() - started, 2),
-        "dispatch_receipt": str(out),
-    })
+    try:
+        d = json.loads(out.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        receipt.update({
+            "ok": False,
+            "code": "UNREADABLE_DISPATCH_RECEIPT",
+            "detail": f"{exc.__class__.__name__}: {exc}",
+        })
+        return receipt
+    a = (d.get("attempts") or [{}])[-1]
     # the lane's own words, kept as an artefact so the synthesis can be checked against it
     try:
         p = pathlib.Path(a["stdout_path"])
@@ -118,16 +215,25 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--run", required=True, help="FAR run id, e.g. FAR-20261031-047-EXAMPLE")
     ap.add_argument("--question", required=True, help="the research question, in full")
     ap.add_argument("--lanes", default="plan,execute,verify")
-    ap.add_argument("--carry-chars", type=int, default=2000,
+    ap.add_argument("--no-repo-read", action="store_true",
+                    help="default on for EXECUTE: forbid repository reading in the brief")
+    ap.add_argument("--carry-chars", type=int, default=400,
                     help="how much of the previous lane output to carry forward; measured: 6000 chars made "
                          "EXECUTE fail usage reconciliation at 212s, 2000 keeps the turn short")
     args = ap.parse_args(argv)
     wanted = {x.strip().lower() for x in args.lanes.split(",") if x.strip()}
+    if wanted != REQUIRED_KINDS:
+        ap.error("the authoritative FAR round requires exactly PLAN, EXECUTE, and VERIFY")
+    if not args.question.strip():
+        ap.error("--question must not be empty")
+    if not valid_run_id(args.run):
+        ap.error("--run must be one safe FAR directory name")
 
     run_dir = RUNS / args.run
     (run_dir / "lane_output").mkdir(parents=True, exist_ok=True)
     work = run_dir / "lane_output"
     receipts: dict[str, dict] = {}
+    question_digest = sha256_question(args.question)
 
     brief = work / "_brief_plan.md"
     brief.write_text(f"# PLAN brief\n\n{args.question}\n\n"
@@ -145,31 +251,37 @@ def main(argv: list[str] | None = None) -> int:
             if prev_file.exists():
                 prev_text = prev_file.read_text(encoding="utf-8", errors="replace")[:2000]
             brief = work / f"_brief_{kind}.md"
-            role = ("Build exactly one work package from the plan. Keep it small enough to finish. Report what you "
-                    "changed and why." if kind == "execute" else
+            role = ("Build exactly one work package from the plan. Do NOT read the repository and do not go looking for "
+                    "governance files -- everything you need is in this brief; measured, a build brief that "
+                    "sends the arm into the repo stalls past 600s, the same brief kept self-contained "
+                    "finishes in 14s. Report what you produced." if kind == "execute" else
                     "Check the work against the question, not against the writer's summary. Decide PASS or FAIL and "
                     "name what you relied on.")
             brief.write_text(f"# {kind.upper()} brief\n\nQuestion:\n{args.question}\n\n"
                              f"PLAN output:\n{prev_text}\n\n{role}\n\n"
                              "Begin your reply with the nonce line exactly as given above, verbatim.\n", encoding="utf-8", newline="")
-        r = run_lane(kind, lane, arm, timeout, brief, run_dir)
+        r = run_lane(kind, lane, arm, timeout, brief, run_dir, args.run, question_digest)
         receipts[kind] = r
         (run_dir / f"{kind.upper()}_RECEIPT.json").write_text(
             json.dumps(r, ensure_ascii=False, indent=1), encoding="utf-8", newline="")
-        print(f"{kind:8} ok={r.get('ok')} code={r.get('code')} model={r.get('model')} "
-              f"nonce={r.get('nonce_present')} usage={r.get('usage_receipt_ok')} {r.get('seconds')}s")
+        print(f"{kind:8} ok={r.get('ok')} lane={r.get('lane')} code={r.get('code')} "
+              f"served={r.get('served_arm')} usage={r.get('usage_receipt_ok')} "
+              f"{r.get('seconds')}s")
         if not r.get("ok"):
-            state = {"schema": "HGK-FAR-STATE/1", "run": args.run, "publication_status": "UNPUBLISHED",
+            state = {"schema": "HGK-FAR-STATE/2", "run": args.run,
+                     "question_sha256": question_digest, "publication_status": "UNPUBLISHED",
                      "stopped_at": kind, "receipts": receipts}
             (run_dir / "STATE.json").write_text(json.dumps(state, ensure_ascii=False, indent=1),
                                                 encoding="utf-8", newline="")
             return 4 if r.get("exit") == "TIMEOUT" else 3
 
-    state = {"schema": "HGK-FAR-STATE/1", "run": args.run,
-             "publication_status": "LANES_SERVED" if len(receipts) == len(wanted) else "UNPUBLISHED",
+    state = {"schema": "HGK-FAR-STATE/2", "run": args.run,
+             "question_sha256": question_digest,
+             "publication_status": "LANE_DISPATCH_COMPLETE",
              "lanes_required": sorted(wanted), "lanes_served": sorted(receipts),
              "receipts": receipts, "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-             "next": "write ResearchSynthesis.md; scripts/far_lane_gate.py decides whether it may be called published"}
+             "next": "write ResearchSynthesis.md with a Lane evidence line; scripts/far_lane_gate.py "
+                     "decides whether the run is publishable"}
     (run_dir / "STATE.json").write_text(json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8", newline="")
     print(f"\nSTATE: {state['publication_status']} -> {run_dir}")
     return 0
