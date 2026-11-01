@@ -1,0 +1,18 @@
+{
+ "window_id": "WIN-7d092fd95ffc",
+ "task_id": "R20-FHS-CLOSURE",
+ "state": "OPEN",
+ "scope": [
+  "registry_row_sign",
+  "merkle_root_sign"
+ ],
+ "max_ops": 24,
+ "ops_used": 2,
+ "effect_class_ceiling": "REPOSITORY_WRITE",
+ "expires_at": 1793314427,
+ "owner_fingerprint": "412b351937be72a1",
+ "ui_impl": "tkinter",
+ "remaining_s": 23274,
+ "broker_alive": true,
+ "usable": true
+}
