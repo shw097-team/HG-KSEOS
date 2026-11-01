@@ -1,7 +1,7 @@
 {
  "schema": "HGK-WP12-RUNTIME-PATH-LAB/1",
- "measured_at": "2026-11-01T12:11:43+0800",
- "nonce": "WP12-RUNTIME-A4952616",
+ "measured_at": "2026-11-01T12:27:56+0800",
+ "nonce": "WP12-RUNTIME-8F391DBC",
  "blocker_under_test": "RUNTIME_PATH_UNRESOLVED",
  "canonical_entry": {
   "interpreter": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\.hermes-runtime\\python\\cpython-3.11.17-windows-x86_64-none\\python.exe",
@@ -49,63 +49,63 @@
    "-m",
    "hermes_cli.main",
    "-z",
-   "Reply with exactly this one line and nothing else: NONCE-ECHO: WP12-RUNTIME-A4952616",
+   "Reply with exactly this one line and nothing else: NONCE-ECHO: WP12-RUNTIME-8F391DBC",
    "--usage-file",
-   "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-WP12-RUNTIME-A4952616\\usage.json"
+   "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-WP12-RUNTIME-8F391DBC\\usage.json"
   ],
   "cwd": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent",
-  "pid": 24604,
+  "pid": 2060,
   "exit": 0,
   "timed_out": false,
-  "started_at": "2026-11-01T12:11:43",
-  "ended_at": "2026-11-01T12:11:53",
-  "duration_s": 10.0,
-  "stdout": "NONCE-ECHO: WP12-RUNTIME-A4952616",
+  "started_at": "2026-11-01T12:27:56",
+  "ended_at": "2026-11-01T12:28:38",
+  "duration_s": 42.3,
+  "stdout": "NONCE-ECHO: WP12-RUNTIME-8F391DBC",
   "stderr_tail": "",
   "nonce_present": true,
   "served_model": "deepseek-v4.1-flash",
   "served_provider": "opencode-go",
   "completed": true,
-  "session_id": "20261101_121147_1d8778",
+  "session_id": "20261101_122806_caecb3",
   "api_calls": 1
  },
  "c_recovery_negative": {
   "cmd": [
    "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.CMD",
    "-z",
-   "Reply with exactly this one line and nothing else: NONCE-ECHO: WP12-NEG-BBD4E2EF"
+   "Reply with exactly this one line and nothing else: NONCE-ECHO: WP12-NEG-CD4D448F"
   ],
-  "cwd": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-WP12-RUNTIME-A4952616",
-  "pid": 26876,
+  "cwd": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-WP12-RUNTIME-8F391DBC",
+  "pid": 21248,
   "exit": 0,
   "timed_out": false,
-  "started_at": "2026-11-01T12:11:53",
-  "ended_at": "2026-11-01T12:12:02",
-  "duration_s": 9.21,
-  "stdout": "NONCE-ECHO: WP12-NEG-BBD4E2EF",
+  "started_at": "2026-11-01T12:28:38",
+  "ended_at": "2026-11-01T12:29:00",
+  "duration_s": 21.91,
+  "stdout": "NONCE-ECHO: WP12-NEG-CD4D448F",
   "stderr_tail": "",
   "entry": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.CMD",
   "env": "clean: no PYTHONPATH, no HERMES_HOME",
-  "nonce": "WP12-NEG-BBD4E2EF",
+  "nonce": "WP12-NEG-CD4D448F",
   "nonce_present": true,
   "injected_control": {
    "cmd": [
     "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.CMD",
     "-z",
-    "Reply with exactly this one line and nothing else: NONCE-ECHO: WP12-INJ-B2D047EB"
+    "Reply with exactly this one line and nothing else: NONCE-ECHO: WP12-INJ-00FC3B15"
    ],
-   "cwd": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-WP12-RUNTIME-A4952616",
-   "pid": 1108,
+   "cwd": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-WP12-RUNTIME-8F391DBC",
+   "pid": 9840,
    "exit": 0,
    "timed_out": false,
-   "started_at": "2026-11-01T12:16:02",
-   "ended_at": "2026-11-01T12:16:12",
-   "duration_s": 9.76,
-   "stdout": "NONCE-ECHO: WP12-INJ-B2D047EB",
-   "stderr_tail": "",
+   "started_at": "2026-11-01T12:30:50",
+   "ended_at": "2026-11-01T12:32:50",
+   "duration_s": 120.36,
+   "stdout": "NONCE-ECHO: WP12-INJ-00FC3B15",
+   "stderr_tail": "hermes: preparing dependencies for this data root (the checkout's updates belong to C:\\Users\\user\\AppData\\Local\\hermes)...\nPreparing the isolated Hermes runtime…\n  → Installing Python dependencies…\n  ✓ Installing Python dependencies",
    "entry": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Scripts\\hermes.CMD",
    "env": "PYTHONPATH=<product venv site-packages>",
-   "nonce": "WP12-INJ-B2D047EB",
+   "nonce": "WP12-INJ-00FC3B15",
    "nonce_present": true
   },
   "path_resolution_at_test_time": {
@@ -121,20 +121,20 @@
   "cmd": [
    "D:\\Hermes-Recovery\\live22\\bin\\hermes",
    "-z",
-   "Reply with exactly this one line and nothing else: NONCE-ECHO: WP12-RECOVERY-6E4FAA54"
+   "Reply with exactly this one line and nothing else: NONCE-ECHO: WP12-RECOVERY-DB242412"
   ],
-  "cwd": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-WP12-RUNTIME-A4952616",
-  "pid": 9556,
-  "exit": 1,
-  "timed_out": true,
-  "started_at": "2026-11-01T12:12:02",
-  "ended_at": "2026-11-01T12:16:02",
-  "duration_s": 240.33,
-  "stdout": "",
-  "stderr_tail": "hermes: completing source-update dependencies...\nhermes: preparing dependencies for this update...\nPreparing the isolated Hermes runtime…\n  → Installing Python dependencies…\n  ✓ Installing Python dependencies\n  → Installing Python dependencies…",
+  "cwd": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-WP12-RUNTIME-8F391DBC",
+  "pid": 31576,
+  "exit": 2,
+  "timed_out": false,
+  "started_at": "2026-11-01T12:29:00",
+  "ended_at": "2026-11-01T12:30:50",
+  "duration_s": 109.99,
+  "stdout": "⚠️ Hermes is not connected to any AI provider yet. Run `hermes model` to pick one, type `/login` in chat, or add a key with `hermes auth add <provider>`. (Advanced: put an API key such as OPENROUTER_API_KEY in ~/AppData/Local/hermes/.env.)\n\nYour request was not processed. Send it again if you still want me to carry it out.",
+  "stderr_tail": "hermes: completing source-update dependencies...\nhermes: preparing dependencies for this update...\n  → Installing Python dependencies…\n  ✓ Installing Python dependencies",
   "entry": "D:\\Hermes-Recovery\\live22\\bin\\hermes",
   "env": "clean: no PYTHONPATH, no HERMES_HOME",
-  "nonce": "WP12-RECOVERY-6E4FAA54",
+  "nonce": "WP12-RECOVERY-DB242412",
   "nonce_present": false
  },
  "checks": {
@@ -143,9 +143,9 @@
   "canonical_model_recorded": true,
   "canonical_usage_completed": true,
   "path_entry_answers_clean": true,
-  "recovery_entry_fails_where_shim_answers": true,
+  "recovery_entry_fails_cleanly_where_shim_answers": true,
   "mechanism_recorded": true
  },
  "verdict": "PASS",
- "verdict_why": "the product runtime answered 'WP12-RUNTIME-A4952616' in 10.0s at deepseek-v4.1-flash (opencode-go), pid 24604; the PATH entry answered clean (answered), and the recovery entry failed the same question in the same environment (failed); 10 openai module(s) sit at or past 260 characters in the installed environment."
+ "verdict_why": "the product runtime answered 'WP12-RUNTIME-8F391DBC' in 42.3s at deepseek-v4.1-flash (opencode-go), pid 2060; the PATH entry answered clean (answered), and the recovery entry failed the same question in the same environment (failed); 10 openai module(s) sit at or past 260 characters in the installed environment."
 }

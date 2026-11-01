@@ -1,0 +1,257 @@
+{
+ "schema": "HGK-EVIDENCE-INDEX/1",
+ "at": "2026-11-01T12:34:56+0800",
+ "repo": "C:\\Projects\\Agent_Workspace\\HG-KSEOS",
+ "items": [
+  {
+   "wp": "WP-FHS-11",
+   "kind": "table",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\NINE_CELL_TABLE.json",
+   "bytes": 5869,
+   "sha256": "ff883ff9af24089980da6e674295ce11a475393b9ebfe55bd0bf808d08eb0bce",
+   "what_it_decides": "nine cells, three states, fail-closed",
+   "denominator": 9,
+   "counts": {
+    "measured_this_round": 9,
+    "measured_pass": 9,
+    "carried_prior_round": 0,
+    "carried_pass": 0,
+    "unmeasured": 0
+   },
+   "headline": "9 cells measured in this round (9 PASS); 0 carried from the prior round with their receipts present; 0 unmeasured",
+   "cells": 9
+  },
+  {
+   "wp": "WP-FHS-11",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_LITE.json",
+   "bytes": 2959,
+   "sha256": "94bfc3c20767a1401a2becf3277f218aa8b2371f5db0928b37a1f6d2b739dffc",
+   "what_it_decides": "Hermes LITE, model half",
+   "verdict": "PASS",
+   "checks_true": 8,
+   "checks_total": 8
+  },
+  {
+   "wp": "WP-FHS-11",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_STANDARD.json",
+   "bytes": 3004,
+   "sha256": "1af5a15aad05ba0e718595f2ec382a39273f5a43bf5ddd739f5c87b5149eb5ad",
+   "what_it_decides": "Hermes STANDARD",
+   "verdict": "PASS",
+   "checks_true": 8,
+   "checks_total": 8
+  },
+  {
+   "wp": "WP-FHS-11",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_ASSURED.json",
+   "bytes": 3044,
+   "sha256": "a37e5b206a1beba647abe5ba83d41575bfcf599f1ffb8839b302c1d23fdb47c9",
+   "what_it_decides": "Hermes ASSURED",
+   "verdict": "PASS",
+   "checks_true": 8,
+   "checks_total": 8
+  },
+  {
+   "wp": "WP-FHS-11",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CODEX_CELL_LITE.json",
+   "bytes": 2230,
+   "sha256": "7e3030db2852813c52a792dc29a5bdf6e129831cff3d97c2a28963bf475f5b5a",
+   "what_it_decides": "Codex LITE, current manifest",
+   "verdict": "PASS",
+   "checks_true": 6,
+   "checks_total": 6
+  },
+  {
+   "wp": "WP-FHS-11",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CODEX_CELL_STANDARD.json",
+   "bytes": 2232,
+   "sha256": "4e64c14f493838288e390344eeaccc1377a29426f472f59d66a28e998665a68d",
+   "what_it_decides": "Codex STANDARD",
+   "verdict": "PASS",
+   "checks_true": 6,
+   "checks_total": 6
+  },
+  {
+   "wp": "WP-FHS-11",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CODEX_CELL_ASSURED.json",
+   "bytes": 2238,
+   "sha256": "2f9f7303e597fec7be054e6e2f4572005d2d513e413deecc088e78f7d50ca625",
+   "what_it_decides": "Codex ASSURED",
+   "verdict": "PASS",
+   "checks_true": 6,
+   "checks_total": 6
+  },
+  {
+   "wp": "WP-FHS-11",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CLAUDE_CODE_CELL_LITE.json",
+   "bytes": 1438,
+   "sha256": "ed3bcd661b01a7352130ec4df475403f04508c685a0b21f69d1abc12509e9653",
+   "what_it_decides": "Claude Code LITE",
+   "verdict": "PASS",
+   "checks_true": 6,
+   "checks_total": 6
+  },
+  {
+   "wp": "WP-FHS-11",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CLAUDE_CODE_CELL_STANDARD.json",
+   "bytes": 1458,
+   "sha256": "f0a420062b4c63721f784183c95b16129d613ab64cbd590c1663c4d4ff24e27a",
+   "what_it_decides": "Claude Code STANDARD",
+   "verdict": "PASS",
+   "checks_true": 6,
+   "checks_total": 6
+  },
+  {
+   "wp": "WP-FHS-11",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\host-cells\\CLAUDE_CODE_CELL_ASSURED.json",
+   "bytes": 1453,
+   "sha256": "9c738288dc8eeb0c269b72c12e2478370d535e2a89a2b668a375a26421fa6fe0",
+   "what_it_decides": "Claude Code ASSURED",
+   "verdict": "PASS",
+   "checks_true": 6,
+   "checks_total": 6
+  },
+  {
+   "wp": "WP-FHS-12",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\RUNTIME_PATH_LAB.json",
+   "bytes": 8597,
+   "sha256": "c959dd8c6d93aa55e3febfe16cb53cdd03760a1d454d6f9b399c51c9897a5559",
+   "what_it_decides": "three arms: product runtime, PATH shim, recovery entry",
+   "verdict": "PASS",
+   "checks_true": 7,
+   "checks_total": 7
+  },
+  {
+   "wp": "WP-FHS-12",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\MAXPATH_CONTROLLED_REPRO.json",
+   "bytes": 4448,
+   "sha256": "5fd26268811068881e1be827f6ea69bd7deef575b104572f54ef23a105eb891a",
+   "what_it_decides": "identical bytes, 259 vs 260 characters",
+   "verdict": "PASS",
+   "checks_true": 4,
+   "checks_total": 4
+  },
+  {
+   "wp": "WP-FHS-13",
+   "kind": "oracle",
+   "path": "C:\\Projects\\Agent_Workspace\\var\\FHS-ALLPASS-20261031\\wp13\\ORACLE_WP13.json",
+   "bytes": 751,
+   "sha256": "cbbe4d4a71e4c5029cda9fd71991d1b99b7328fc42f508dcff5f099fd1a17536",
+   "what_it_decides": "the five clauses, registered before the check"
+  },
+  {
+   "wp": "WP-FHS-13",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\var\\FHS-ALLPASS-20261031\\wp13\\HOTSWAP_ABI_RECEIPT.json",
+   "bytes": 1525,
+   "sha256": "3e95f0d3d79279a2ab4580b767abab445271f7c4c88111807a5114a2413951d7",
+   "what_it_decides": "the historical ABI swap (C5 not covered)",
+   "ok": true,
+   "code": null
+  },
+  {
+   "wp": "WP-FHS-13",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\var\\FHS-ALLPASS-20261031\\wp13\\HOTSWAP_GRANT_BOUND_RECEIPT.json",
+   "bytes": 2452,
+   "sha256": "7207aa234be5b9b10d0aa31154144b71e8966c6e9d7a056abe5dd6b2ff322210",
+   "what_it_decides": "swap bound to a covering grant, ten checks",
+   "ok": true,
+   "code": null
+  },
+  {
+   "wp": "WP-FHS-13",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\var\\FHS-ALLPASS-20261031\\wp13\\HOTSWAP_REFUSED_NONCOVERING_GRANT.json",
+   "bytes": 1957,
+   "sha256": "440efb94a3d8029900dc7856150294e2d27ac635a48813c5643e2af59b501c80",
+   "what_it_decides": "refusal: the old grant covers nothing here",
+   "ok": false,
+   "code": "ERR_GRANT_NOT_BOUND"
+  },
+  {
+   "wp": "WP-FHS-20",
+   "kind": "table",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-20\\SURFACE_INVENTORY.json",
+   "bytes": 86446,
+   "sha256": "02556f166c85b9359ac558c483122726277128bfc1213983c59a261cf190647f",
+   "what_it_decides": "192 cells, named reasons, no anonymous bucket",
+   "denominator": 192,
+   "counts": {
+    "NOFIT_NAMED": 114,
+    "NOT_RUN_NO_RUNNER": 48,
+    "SURFACE_EXISTS_NOT_RUN": 12,
+    "MEASURED_PASS": 18
+   },
+   "cells": 192
+  },
+  {
+   "wp": "E2E",
+   "kind": "receipt",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\E2E_W18_E33_E42.json",
+   "bytes": 5163,
+   "sha256": "e569568f7ca457842b9a2cf08b66ec34a0f28d47ea34148d292c58291ba57b15",
+   "what_it_decides": "six cases measured, four refused by name",
+   "denominator": 10
+  },
+  {
+   "wp": "O-1",
+   "kind": "table",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\O1_MAIN_ONLY_CLASSIFICATION.json",
+   "bytes": 179160,
+   "sha256": "7c7629d442f7d734167c1b4ca2a94bc4c15548e4642c9aa4793d798a3dc97336",
+   "what_it_decides": "516 main-only files, content-first",
+   "counts": {
+    "ADOPT": 492,
+    "RETIRE": 24
+   }
+  },
+  {
+   "wp": "report",
+   "kind": "document",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\FINAL_ENGINEERING_REPORT.md",
+   "bytes": 10653,
+   "sha256": "cc01d9c8587ac3c5674793e5e33410126d5a15d4bcbdfab6d61ee010ef14c0ef",
+   "what_it_decides": "this round, with its refusals"
+  },
+  {
+   "wp": "report",
+   "kind": "document",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\RESUME_CHECKPOINT.md",
+   "bytes": 5604,
+   "sha256": "e04c9dbfbd2a9db4549ba87b114003fd0e4ab90102014f431459d5e6744387b9",
+   "what_it_decides": "the opening instruction and the traps"
+  },
+  {
+   "wp": "FAR",
+   "kind": "run",
+   "path": "C:\\Projects\\Agent_Workspace\\Fabric\\fabric-autonomous-research\\runs\\FAR-20261031-054-RUNTIME-IDENTITY-AND-MAXPATH\\PLAN_RECEIPT.json",
+   "bytes": 604,
+   "sha256": "06ceb4abc5b1b838853bbee7a87d09afb3ed904db661ef70919d917d534c5fc2",
+   "what_it_decides": "PLAN lane, first attempt",
+   "ok": true,
+   "code": null
+  },
+  {
+   "wp": "FAR",
+   "kind": "run",
+   "path": "C:\\Projects\\Agent_Workspace\\Fabric\\fabric-autonomous-research\\runs\\FAR-20261031-056-RUNTIME-DECISION\\lane_output\\WORKPACKAGE.md",
+   "bytes": 8148,
+   "sha256": "0818f9fb81679a37f69778d96774c314f7818bae3f64d3c27092352819b9cfd5",
+   "what_it_decides": "the decision document"
+  }
+ ],
+ "missing": [],
+ "rule": "every claim in FINAL_ENGINEERING_REPORT.md names one of these rows; a row without its file is listed under `missing` and the claim it supports is not made"
+}

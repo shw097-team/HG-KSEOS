@@ -1,62 +1,14 @@
 {
  "schema": "HGK-AO-BATCH/1",
- "at": "2026-11-01T12:07:46+0800",
+ "at": "2026-11-01T12:24:22+0800",
  "results": [
   {
-   "wp": "WP-FHS-11",
-   "nonce": "AO-WP-FHS-11-13B1E2F6",
-   "brief": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\AO_BRIEF_WP11_HERMES.md",
-   "brief_sha256": "0aa136dede3c3808ec9f8d919f7cc0f2c4f06d6ec57f0cdc03ef21d184f3303f",
-   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\AO_RECEIPT_AO-WP-FHS-11-13B1E2F6.json",
-   "seconds": 176.14,
-   "dispatch_exit": 0,
-   "stderr_tail": "",
-   "ok": true,
-   "code": null,
-   "served_arm": "openai-codex/gpt-6.1-sol",
-   "rank": 1,
-   "exit": 0,
-   "usage_receipt_ok": true,
-   "nonce_present": true,
-   "verdict_block": {
-    "requirement": "WP-FHS-11",
-    "clauses": [
-     {
-      "id": 1,
-      "verdict": "PASS",
-      "evidence": "HERMES_CELL_{LITE,STANDARD,ASSURED}.json.trigger_raw_result contains respectively WP11-HERMES-LITE-88211EA6, WP11-HERMES-STANDARD-013532D2, WP11-HERMES-ASSURED-49EF3B5A. Each matches its own skill_view response body in Hermes state.db messages 13361, 13382, 13395. Each full digest matches its corresponding PIPD export_manifest.json archive.sha256; independently hashing all three archives and manifests also matched the receipt bindings. Persisted final-answer tokens are masked, consistent with agent/redact.py; the receipts retain full stdout."
-     },
-     {
-      "id": 2,
-      "verdict": "PASS",
-      "evidence": "wp11_hermes_cells.py cell() removes the probe in finally and records its absence before calling the negative run. All three checks.skill_removed_before_negative are true. Independently inspected negative sessions 20261101_115854_6a75e6, 20261101_115925_af770f, 20261101_115955_414834: skill_view tool messages 13373, 13389, 13399 return success=false and Skill not found. Full final answers 13378, 13392, 13400 contain neither their cell token nor digest; all negative usage files report completed=true and failed=false."
-     },
-     {
-      "id": 3,
-      "verdict": "PASS",
-      "evidence": "Opened each served.usage_file directly. Positive sessions 20261101_115844_9ed225, 20261101_115913_70f3de, 20261101_115943_56cd5d each report model=deepseek-v4.1-flash, provider=opencode-go, completed=true, api_calls=2. These fields and session_id match each receipt.served. run_once() obtains them from the Hermes --usage-file output rather than assigning model/provider literals."
-     },
-     {
-      "id": 4,
-      "verdict": "FAIL",
-      "evidence": "NINE_CELL_TABLE.json has denominator=9 and nine unique cells; counts correctly total 3 measured plus 6 carried. However, the six carried rows reuse generic CODEX_CELL_RECEIPT.json/CLAUDE_CELL_RECEIPT.json and token-only clean-run files, without per-profile digest/badge measurements. Codex and Claude LITE archive_prefix=e3e993b0e079 differs from current PIPD 6dadaf36a9ec; both STANDARD prefixes=52712b6316fb differ from current 9ef70b690d01. In-memory execution of wp11_nine_cell_rollup.py reproduced fail-open behavior: retaining only generic host receipts still yields carried_pass=6 and exit=0; replacing prior receipt data with verdict=VOID also yields carried_pass=6; replacing one Hermes receipt with only verdict=PASS yields measured_pass=3 despite null measured fields. Removing all prior receipts correctly yields six UNMEASURED and exit=1, but that boundary check does not establish cell-specific evidence."
-     },
-     {
-      "id": 5,
-      "verdict": "PASS",
-      "evidence": "Independently inspected stored system prompts: all positive sessions contain the probe index entry but neither token nor archive digest; negative prompts omit that entry. Positive tool messages 13361, 13382, 13395 show successful native skill_view calls returning each probe body. This supports NINE_CELL_TABLE.json.note describing index-first, body-on-demand loading. Measurement scope is an explicitly requested synthetic probe containing copied profile facts; it does not establish installation or execution of the PIPD archive itself."
-     }
-    ],
-    "overall": "FAIL"
-   }
-  },
-  {
    "wp": "WP-FHS-12",
-   "nonce": "AO-WP-FHS-12-8EF0703C",
+   "nonce": "AO-WP-FHS-12-6F7F3D0D",
    "brief": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\AO_BRIEF_WP12_RUNTIME.md",
-   "brief_sha256": "efa94e2bcbe28cc08266e8dea2c4725baefc7feea477183230ba0408ebc94243",
-   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\AO_RECEIPT_AO-WP-FHS-12-8EF0703C.json",
-   "seconds": 117.35,
+   "brief_sha256": "e0a9bb3d239ecc6506c7e00532483390f1fab0f1df161a8c9b7302c89d6bff54",
+   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\AO_RECEIPT_AO-WP-FHS-12-6F7F3D0D.json",
+   "seconds": 127.41,
    "dispatch_exit": 0,
    "stderr_tail": "",
    "ok": true,
@@ -72,81 +24,29 @@
      {
       "id": 1,
       "verdict": "PASS",
-      "evidence": "RUNTIME_PATH_LAB.json b_canonical_positive.stdout contains NONCE-ECHO: WP12-RUNTIME-206ACC91 verbatim; exit=0. The command supplies a nonce-specific --usage-file, which the script reads after process completion. That raw usage.json exists and confirms model=deepseek-v4.1-flash, provider=opencode-go, completed=true, api_calls=1, and matching session_id=20261101_115826_b5939c."
+      "evidence": "RUNTIME_PATH_LAB.b_canonical_positive records pid 24604, exit=0 and stdout='NONCE-ECHO: WP12-RUNTIME-A4952616'. Its command supplies the nonce-specific --usage-file. That file exists, was written within the recorded process interval, and matches session_id=20261101_121147_1d8778, model=deepseek-v4.1-flash, provider=opencode-go, completed=true and api_calls=1. The launcher script reads these fields from that file; Hermes oneshot.py writes it from the turn result."
      },
      {
       "id": 2,
       "verdict": "FAIL",
-      "evidence": "c_recovery_negative records exit=2 and nonce_present=false, but error=null, stderr_tail is empty, and error_is_the_one_under_test=false. failure_evidence.named_error_bound_in points to the separate boundary experiment; it does not establish this process's error. The script's PASS checks omit error_is_the_one_under_test. Additionally, PATH resolves to a CMD forwarder invoking hermes.exe, whereas the recorded command directly invokes the extensionless recovery entry; equivalence is not established."
+      "evidence": "c_recovery_negative.path_resolution_at_test_time.which identifies the product venv's hermes.CMD. That arm returned exit=0, stdout='NONCE-ECHO: WP12-NEG-BBD4E2EF', nonce_present=true and empty stderr_tail. The separate d_injected_control recovery entry timed_out=true after 240.33 seconds; its stderr reports dependency preparation, not response_computer_tool_call_output_screenshot_param. Neither arm supplies the required negative."
      },
      {
       "id": 3,
       "verdict": "PASS",
-      "evidence": "Independent read-only inspection of the installed source and all three copied payloads found 1048 .py files each, no unreadable files, and the same digest b97edb3453f982d5ca1b5a3f7e3600534cec1654faf510051a98059864e38945. wp12_maxpath_controlled_repro.py uses the same RUNTIME_PY, import code, dependency path, and scrubbed environment for each copied-root comparison, varying the payload root length."
+      "evidence": "Independent reads confirmed 1048 .py files at the installed source, short copy and both boundary roots, with no read errors and identical receipt-algorithm digest b97edb3453f982d5ca1b5a3f7e3600534cec1654faf510051a98059864e38945. wp12_maxpath_controlled_repro.try_import uses the same RUNTIME_PY, scrubbed environment and dependency root for each copy; the experimental variable is the payload root length."
      },
      {
       "id": 4,
       "verdict": "PASS",
-      "evidence": "MAXPATH_CONTROLLED_REPRO.json c_boundary records measured_target_len=259 with ok=true and came_from_payload=true; measured_target_len=260 has ok=false and ModuleNotFoundError naming openai.types.responses.response_computer_tool_call_output_screenshot_param. Independent inspection confirms both lengths and identical target bytes. The recorded exit=0 reflects caught exceptions; the import verdict comes from ok/error. This establishes the controlled boundary result, not the cause of the separate PATH turn."
+      "evidence": "c_boundary records measured_target_len=259 with ok=true and came_from_payload=true; length=260 has ok=false and ModuleNotFoundError naming openai.types.responses.response_computer_tool_call_output_screenshot_param. Independent fresh-process checks using the recorded CPython 3.11.17 interpreter and -B reproduced both outcomes. This establishes the boundary defect, not its causation of the current recovery timeout."
      },
      {
       "id": 5,
       "verdict": "PASS",
-      "evidence": "a_as_installed separately records failure on pydantic_core._pydantic_core. separate_finding_not_part_of_the_test explicitly distinguishes the ABI defect and explains why relocation alone is insufficient for the 3.11 runtime. Independent inspection confirms CPython 3.14 extension modules, including pydantic_core/_pydantic_core.cp314-win_amd64.pyd. The scan found 34 cp314 files; the receipt's count=10 is partial."
+      "evidence": "a_as_installed separately records failure on pydantic_core._pydantic_core, while separate_finding_not_part_of_the_test explicitly distinguishes the ABI defect from the path comparison. Independent inspection found _pydantic_core.cp314-win_amd64.pyd, and a fresh 3.11 import reproduced that failure. Moving the unchanged environment would retain this incompatibility."
      }
     ],
-    "overall": "FAIL"
-   }
-  },
-  {
-   "wp": "WP-FHS-13",
-   "nonce": "AO-WP-FHS-13-62CCAC70",
-   "brief": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-13\\AO_BRIEF_WP13_HOTSWAP.md",
-   "brief_sha256": "f59883d2155cc38a896f363424abeddc6a8b5f55e385926657af9abf2396298c",
-   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-13\\AO_RECEIPT_AO-WP-FHS-13-62CCAC70.json",
-   "seconds": 152.76,
-   "dispatch_exit": 0,
-   "stderr_tail": "",
-   "ok": true,
-   "code": null,
-   "served_arm": "openai-codex/gpt-6.1-sol",
-   "rank": 1,
-   "exit": 0,
-   "usage_receipt_ok": true,
-   "nonce_present": true,
-   "verdict_block": {
-    "requirement": "WP-FHS-13",
-    "clauses": [
-     {
-      "id": "C1",
-      "verdict": "PASS",
-      "evidence": "PIPD/src/pipd_ls_sp/abi.py defines ABI_VERSION=1, Need, Occupant, and Consumer.__call__ resolving through Registry on every call. Read-only checks confirmed the same Consumer observes registry replacement and rejects missing needs, version mismatches, missing methods, and duplicate bindings."
-     },
-     {
-      "id": "C2",
-      "verdict": "PASS",
-      "evidence": "HOTSWAP_ABI_RECEIPT.json: before.identity and control.identity are cap-attest-v1; both have served=true; before.via=abi-consumer."
-     },
-     {
-      "id": "C3",
-      "verdict": "PASS",
-      "evidence": "HOTSWAP_ABI_RECEIPT.json: pos.identity=cap-attest-v2, served=true, via=abi-consumer, origin=abi-run/occupant.py. Read-only Consumer invocation returned cap-attest-v2; candidate and installed target digests match the receipt."
-     },
-     {
-      "id": "C4",
-      "verdict": "PASS",
-      "evidence": "HOTSWAP_ABI_RECEIPT.json: neg.identity=cap-attest-v2, distinct from control.identity=cap-attest-v1. For this identity fixture, the target no longer returns the old identity. NEG reuses the POS observation rather than recording a separate invocation."
-     },
-     {
-      "id": "C5",
-      "verdict": "FAIL",
-      "evidence": "Neither named HOTSWAP receipt contains a grant binding. PROBE-WP13-A1 was issued 100 seconds after the ABI swap and covers abi.py/hotswap.py rather than its target/candidate. The later HOTSWAP_GRANT_BOUND_RECEIPT.json has a valid signature, matching grant digest, and valid historical time window, but concerns target_grant/occupant.py and candidate_grant.py, a different swap."
-     }
-    ],
-    "independence": {
-     "distinct_checker_evidenced": true,
-     "note": "A separate checker attempt appears in AO_RECEIPT_AO-WP-FHS-13-9CB0D7AA.json, but its ok=false and lane gate returns LANE_CLAIM_UNSUPPORTED. Qualified independence is therefore unestablished. Original receipts do not identify candidate-author and swap-runner actors. The later wp13_grant_bound_swap.py uses one maker workflow to write the candidate and run the swap; it provides no actor separation. Independence limits assurance separately from C1-C5."
-    },
     "overall": "FAIL"
    }
   }

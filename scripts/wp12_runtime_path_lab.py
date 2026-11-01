@@ -298,7 +298,7 @@ def main():
         "canonical_model_recorded": bool(pos["served_model"]),
         "canonical_usage_completed": bool(pos.get("completed")),
         "path_entry_answers_clean": neg["nonce_present"],
-        "recovery_entry_fails_where_shim_answers": not inj["nonce_present"],
+        "recovery_entry_fails_cleanly_where_shim_answers": (not inj["nonce_present"]) and not inj["timed_out"],
         "mechanism_recorded": long_paths > 0,
     }
     receipt["checks"] = checks
@@ -308,7 +308,7 @@ def main():
         f"({pos['served_provider']}), pid {pos['pid']}; the PATH entry answered clean "
         f"({'answered' if neg['nonce_present'] else 'did not answer'}), and the recovery entry failed the same "
         f"question in the same environment "
-        f"({'failed' if not inj['nonce_present'] else 'also answered — no entry difference'}); "
+        f"({'failed' if (not inj['nonce_present'] and not inj['timed_out']) else ('timed out' if inj['timed_out'] else 'also answered — no entry difference')}); "
         f"{long_paths} openai module(s) sit at or "
         f"past {MAX_PATH_LIMIT + 1} characters in the installed environment."
         if receipt["verdict"] == "PASS" else "a check failed; see checks"
