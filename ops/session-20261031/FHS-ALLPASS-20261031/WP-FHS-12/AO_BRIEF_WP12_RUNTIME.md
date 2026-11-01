@@ -1,5 +1,12 @@
 # VERIFY brief — WP-FHS-12, the Hermes runtime path (one work package)
 
+> Third sitting. The first returned clause 2 VOID (the negative's error line was scraped from a shared log and
+> predated the run) plus an arithmetic error. The second returned clause 2 FAIL and, more usefully, refused the
+> equivalence between the recorded command and the entry `hermes` actually resolves to. Both were acted on: the
+> experiment now runs three arms in one clean environment — the product runtime, the PATH shim, and the recovery
+> entry `D:\Hermes-Recovery\live22in\hermes` — and reports which entry answers. The claim was narrowed to what
+> those arms support. Judge the file as it is now, and say if the narrowing is still too wide.
+
 You are the independent checker. The maker claims the blocker `RUNTIME_PATH_UNRESOLVED` is closed, and that the
 cause of the PATH entry's failure is a 260-character module path rather than a missing package. Decide whether
 the evidence supports that, clause by clause, from the artefacts only.

@@ -1,4 +1,10 @@
-# VERIFY brief — WP-FHS-11, the three Hermes cells (one work package)
+# VERIFY brief — WP-FHS-11, the NINE cells (one work package)
+
+> Third sitting. The first said clause 3 and 4 FAIL (the receipt dropped `completed`; the roll-up counted six
+> carried rows without opening their receipts). The second said clause 4 still FAIL, with the reason that matters:
+> four of the six carried `archive_prefix` values no longer match `PIPD/dist/prof-*/export_manifest.json`. Both
+> findings were acted on. All nine cells are now re-measured against today's manifests — there are no carried rows
+> left to argue about. Judge what is in the files now.
 
 You are the independent checker. The maker produced receipts; your job is to decide whether the CLAIMS survive
 an independent read of the artefacts. Do not take the maker's summary as evidence, and do not accept a receipt
