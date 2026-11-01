@@ -39,6 +39,7 @@ K = Path(__file__).resolve().parent.parent
 GATE = K / "scripts" / "lane_evidence_gate.py"
 CASES = {
     "PLAN": ("PLAN_RECEIPT.json", "openai-codex/gpt-6.1-sol"),
+    "EXECUTE": ("EXECUTE_RECEIPT.json", "opencode-go/deepseek-v4.1-flash"),
     "VERIFY_SECURITY": ("VERIFY_RECEIPT.json", "openai-codex/gpt-6.1-sol"),
 }
 

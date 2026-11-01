@@ -91,6 +91,10 @@ def main() -> int:
     ap.add_argument("--lane-receipt", action="append", default=[],
                     help="LANE=path (repeatable), e.g. PLAN=C:/wg/plan1/plan_receipt.json")
     ap.add_argument("--nonce", default=None, help="round nonce expected in every lane receipt")
+    ap.add_argument("--require-lanes", default="PLAN,EXECUTE,VERIFY_SECURITY",
+                    help="lanes the mandate names; derived from the mandate, NOT from what the caller supplied")
+    ap.add_argument("--allow-missing-lane", action="append", default=[],
+                    help="lane knowingly not dispatched this round (repeatable; recorded, never silent)")
     ap.add_argument("--claim-ledger", default=None)
     ap.add_argument("--allow-open-tt", action="append", default=[],
                     help="TT id that is knowingly carried into this round (repeatable)")
@@ -98,6 +102,11 @@ def main() -> int:
     args = ap.parse_args()
 
     problems: list[str] = []
+    supplied = {r.split("=", 1)[0].upper() for r in args.lane_receipt if "=" in r}
+    for lane in [x.strip().upper() for x in args.require_lanes.split(",") if x.strip()]:
+        if lane not in supplied and lane not in [x.upper() for x in args.allow_missing_lane]:
+            # "every supplied receipt passes" does not establish "every required lane ran".
+            problems.append(f"NO_LANE_RECEIPT:{lane}")
     blocks: list[dict] = []
 
     db = pathlib.Path(args.db)
