@@ -1,6 +1,6 @@
 {
  "schema": "HGK-EVIDENCE-INDEX/1",
- "at": "2026-11-01T12:37:52+0800",
+ "at": "2026-11-01T12:38:38+0800",
  "repo": "C:\\Projects\\Agent_Workspace\\HG-KSEOS",
  "items": [
   {
@@ -229,8 +229,8 @@
    "wp": "report",
    "kind": "document",
    "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\FINAL_ENGINEERING_REPORT.md",
-   "bytes": 10653,
-   "sha256": "cc01d9c8587ac3c5674793e5e33410126d5a15d4bcbdfab6d61ee010ef14c0ef",
+   "bytes": 11374,
+   "sha256": "d7c095f5f3e31b52935fed9adc46820f6a9240d5c1bdd61be03034625e9f69d4",
    "what_it_decides": "this round, with its refusals"
   },
   {
