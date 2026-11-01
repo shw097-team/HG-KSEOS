@@ -141,10 +141,15 @@ def main() -> int:
                           "nonce_present": r.get("nonce_present"), "seconds": r.get("seconds"),
                           "checker_overall": vb.get("overall")}, ensure_ascii=False), flush=True)
 
-    summary = {"schema": "HGK-AO-BATCH/1", "at": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "results": results}
-    p = OPS / "AO_BATCH.json"
+    summary = {"schema": "HGK-AO-BATCH/2", "at": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "results": results}
+    # One file per run, never a shared name: three overlapping batches all wrote AO_BATCH.json and the last one to
+    # finish (a single-WP re-sit) replaced the file that held another WP's PASS sitting. The per-sitting replies and
+    # receipts are immutable, and scripts/ao_verdict_index.py rebuilds the whole sequence from them.
+    p = OPS / f"AO_BATCH_{time.strftime('%Y%m%dT%H%M%S')}.json"
     p.write_text(json.dumps(summary, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({"summary": str(p), "sittings": len(results)}, ensure_ascii=False))
+    subprocess.run([sys.executable, str(K / "scripts" / "ao_verdict_index.py")], cwd=str(K),
+                   capture_output=True, text=True)
     return 0
 
 

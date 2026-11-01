@@ -41,6 +41,7 @@ ITEMS = [
     ("WP-FHS-13", "receipt", VAR / "wp13" / "HOTSWAP_REFUSED_NONCOVERING_GRANT.json", "refusal: the old grant covers nothing here"),
     ("WP-FHS-20", "table", SESSION / "WP-FHS-20" / "SURFACE_INVENTORY.json", "192 cells, named reasons, no anonymous bucket"),
     ("E2E", "receipt", SESSION / "E2E_W18_E33_E42.json", "six cases measured, four refused by name"),
+    ("AO", "index", SESSION / "AO_VERDICTS.json", "every sitting in order: WP-11 FAIL,FAIL,PASS"),
     ("O-1", "table", SESSION / "O1_MAIN_ONLY_CLASSIFICATION.json", "516 main-only files, content-first"),
     ("report", "document", SESSION / "FINAL_ENGINEERING_REPORT.md", "this round, with its refusals"),
     ("report", "document", SESSION / "RESUME_CHECKPOINT.md", "the opening instruction and the traps"),

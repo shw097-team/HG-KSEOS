@@ -57,6 +57,12 @@ only when the positive answer carries both facts and the negative carries neithe
 Independent acceptance: AO sitting 3, nonce `AO-WP-FHS-11-74EF001B`, served `openai-codex/gpt-6.1-sol` (rank 1,
 usage receipt ok), **5/5 clauses PASS**.
 
+The sequence is kept, not just the last number: `AO_VERDICTS.json` records WP-11 as **FAIL, FAIL, PASS** (sittings
+1 and 2 are quoted in §2 with the defects they found). A single aggregate file could not be trusted for this — three
+overlapping batches wrote the same `AO_BATCH.json` and the last to finish replaced the file that held this sitting's
+PASS, while the sitting's own reply and receipt sat untouched beside it. The index is now rebuilt from the
+per-sitting artefacts and written to a path no dispatch touches; batches write `AO_BATCH_<timestamp>.json`.
+
 ## 4. WP-13 — the swap that could not have been authorised
 
 C1–C4 PASS in two independent sittings: the ABI consumer resolves per call, CONTROL shows v1 before, POS shows v2

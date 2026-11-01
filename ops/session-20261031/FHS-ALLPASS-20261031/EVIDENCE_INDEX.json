@@ -1,6 +1,6 @@
 {
  "schema": "HGK-EVIDENCE-INDEX/1",
- "at": "2026-11-01T12:34:56+0800",
+ "at": "2026-11-01T12:37:52+0800",
  "repo": "C:\\Projects\\Agent_Workspace\\HG-KSEOS",
  "items": [
   {
@@ -204,6 +204,14 @@
    "sha256": "e569568f7ca457842b9a2cf08b66ec34a0f28d47ea34148d292c58291ba57b15",
    "what_it_decides": "six cases measured, four refused by name",
    "denominator": 10
+  },
+  {
+   "wp": "AO",
+   "kind": "index",
+   "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\AO_VERDICTS.json",
+   "bytes": 8692,
+   "sha256": "a2e9dc7a191560493559bcfde41bb8c12596208d5b96606a26eecaf217250a92",
+   "what_it_decides": "every sitting in order: WP-11 FAIL,FAIL,PASS"
   },
   {
    "wp": "O-1",

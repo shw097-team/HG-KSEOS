@@ -1,0 +1,329 @@
+{
+ "schema": "HGK-AO-VERDICTS/1",
+ "at": "2026-11-01T12:37:42+0800",
+ "rule": "built only from per-sitting reply and receipt files; a later batch cannot overwrite it because no dispatch writes this path. The sequence is kept so a PASS cannot hide the sittings that refused before it",
+ "summary": {
+  "WP-FHS-11": {
+   "sittings": 3,
+   "sequence": [
+    "FAIL",
+    "FAIL",
+    "PASS"
+   ],
+   "latest": "PASS",
+   "latest_nonce": "AO-WP-FHS-11-74EF001B",
+   "distinct_principal_from_maker": true
+  },
+  "WP-FHS-12": {
+   "sittings": 3,
+   "sequence": [
+    "FAIL",
+    "FAIL",
+    "FAIL"
+   ],
+   "latest": "FAIL",
+   "latest_nonce": "AO-WP-FHS-12-6F7F3D0D",
+   "distinct_principal_from_maker": true
+  },
+  "WP-FHS-13": {
+   "sittings": 2,
+   "sequence": [
+    "FAIL",
+    "FAIL"
+   ],
+   "latest": "FAIL",
+   "latest_nonce": "AO-WP-FHS-13-62CCAC70",
+   "distinct_principal_from_maker": true
+  }
+ },
+ "sittings": [
+  {
+   "wp": "WP-FHS-11",
+   "nonce": "AO-WP-FHS-11-6E0005C1",
+   "reply": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\AO_REPLY_AO-WP-FHS-11-6E0005C1.md",
+   "reply_sha256": "c955306e4aeac6491af3af3ffbd29066936c4857e17ceefbf7842def74d465b8",
+   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\AO_RECEIPT_AO-WP-FHS-11-6E0005C1.json",
+   "mtime": "2026-11-01T11:52:52",
+   "dispatch_ok": false,
+   "served_arm": "openai-codex/gpt-6.1-sol",
+   "rank": 1,
+   "nonce_present": false,
+   "usage_receipt_ok": true,
+   "checker_overall": "FAIL",
+   "clauses": [
+    {
+     "id": 1,
+     "verdict": "PASS"
+    },
+    {
+     "id": 2,
+     "verdict": "PASS"
+    },
+    {
+     "id": 3,
+     "verdict": "FAIL"
+    },
+    {
+     "id": 4,
+     "verdict": "FAIL"
+    },
+    {
+     "id": 5,
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "wp": "WP-FHS-11",
+   "nonce": "AO-WP-FHS-11-13B1E2F6",
+   "reply": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\AO_REPLY_AO-WP-FHS-11-13B1E2F6.md",
+   "reply_sha256": "b9f9693dce90739495dc228be51d39e6f75dd8e7a250752cd95d59e9c60ad523",
+   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\AO_RECEIPT_AO-WP-FHS-11-13B1E2F6.json",
+   "mtime": "2026-11-01T12:03:16",
+   "dispatch_ok": true,
+   "served_arm": "openai-codex/gpt-6.1-sol",
+   "rank": 1,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "checker_overall": "FAIL",
+   "clauses": [
+    {
+     "id": 1,
+     "verdict": "PASS"
+    },
+    {
+     "id": 2,
+     "verdict": "PASS"
+    },
+    {
+     "id": 3,
+     "verdict": "PASS"
+    },
+    {
+     "id": 4,
+     "verdict": "FAIL"
+    },
+    {
+     "id": 5,
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "wp": "WP-FHS-11",
+   "nonce": "AO-WP-FHS-11-74EF001B",
+   "reply": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\AO_REPLY_AO-WP-FHS-11-74EF001B.md",
+   "reply_sha256": "8e483634e0f6ebb9241a05b12b76c304ed210206c2cd3aeb8d7c31c538a24211",
+   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\AO_RECEIPT_AO-WP-FHS-11-74EF001B.json",
+   "mtime": "2026-11-01T12:22:14",
+   "dispatch_ok": true,
+   "served_arm": "openai-codex/gpt-6.1-sol",
+   "rank": 1,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "checker_overall": "PASS",
+   "clauses": [
+    {
+     "id": 1,
+     "verdict": "PASS"
+    },
+    {
+     "id": 2,
+     "verdict": "PASS"
+    },
+    {
+     "id": 3,
+     "verdict": "PASS"
+    },
+    {
+     "id": 4,
+     "verdict": "PASS"
+    },
+    {
+     "id": 5,
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "wp": "WP-FHS-12",
+   "nonce": "AO-WP-FHS-12-70452504",
+   "reply": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\AO_REPLY_AO-WP-FHS-12-70452504.md",
+   "reply_sha256": "a5eab65e872090102ffcb05829cbb70ca52065059e978a47d978cf698290f20d",
+   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\AO_RECEIPT_AO-WP-FHS-12-70452504.json",
+   "mtime": "2026-11-01T11:55:20",
+   "dispatch_ok": false,
+   "served_arm": "openai-codex/gpt-6.1-sol",
+   "rank": 1,
+   "nonce_present": false,
+   "usage_receipt_ok": true,
+   "checker_overall": "FAIL",
+   "clauses": [
+    {
+     "id": 1,
+     "verdict": "PASS"
+    },
+    {
+     "id": 2,
+     "verdict": "VOID"
+    },
+    {
+     "id": 3,
+     "verdict": "PASS"
+    },
+    {
+     "id": 4,
+     "verdict": "PASS"
+    },
+    {
+     "id": 5,
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "wp": "WP-FHS-12",
+   "nonce": "AO-WP-FHS-12-8EF0703C",
+   "reply": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\AO_REPLY_AO-WP-FHS-12-8EF0703C.md",
+   "reply_sha256": "941d9e25adf3921dfec5a9a1a19a40f988b46196ee66c90a365884f70d1a3a98",
+   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\AO_RECEIPT_AO-WP-FHS-12-8EF0703C.json",
+   "mtime": "2026-11-01T12:05:14",
+   "dispatch_ok": true,
+   "served_arm": "openai-codex/gpt-6.1-sol",
+   "rank": 1,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "checker_overall": "FAIL",
+   "clauses": [
+    {
+     "id": 1,
+     "verdict": "PASS"
+    },
+    {
+     "id": 2,
+     "verdict": "FAIL"
+    },
+    {
+     "id": 3,
+     "verdict": "PASS"
+    },
+    {
+     "id": 4,
+     "verdict": "PASS"
+    },
+    {
+     "id": 5,
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "wp": "WP-FHS-12",
+   "nonce": "AO-WP-FHS-12-6F7F3D0D",
+   "reply": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\AO_REPLY_AO-WP-FHS-12-6F7F3D0D.md",
+   "reply_sha256": "2bfd45528eafcc67e401e2a5dfd85d754960b84f9c74e002ca44e2a3258edec9",
+   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-12\\AO_RECEIPT_AO-WP-FHS-12-6F7F3D0D.json",
+   "mtime": "2026-11-01T12:24:22",
+   "dispatch_ok": true,
+   "served_arm": "openai-codex/gpt-6.1-sol",
+   "rank": 1,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "checker_overall": "FAIL",
+   "clauses": [
+    {
+     "id": 1,
+     "verdict": "PASS"
+    },
+    {
+     "id": 2,
+     "verdict": "FAIL"
+    },
+    {
+     "id": 3,
+     "verdict": "PASS"
+    },
+    {
+     "id": 4,
+     "verdict": "PASS"
+    },
+    {
+     "id": 5,
+     "verdict": "PASS"
+    }
+   ]
+  },
+  {
+   "wp": "WP-FHS-13",
+   "nonce": "AO-WP-FHS-13-9CB0D7AA",
+   "reply": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-13\\AO_REPLY_AO-WP-FHS-13-9CB0D7AA.md",
+   "reply_sha256": "28137f2dedefbc276142db70d7b511701412b29a1f3fb120c597b7f86d2543c3",
+   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-13\\AO_RECEIPT_AO-WP-FHS-13-9CB0D7AA.json",
+   "mtime": "2026-11-01T11:57:51",
+   "dispatch_ok": false,
+   "served_arm": "openai-codex/gpt-6.1-sol",
+   "rank": 1,
+   "nonce_present": false,
+   "usage_receipt_ok": true,
+   "checker_overall": "FAIL",
+   "clauses": [
+    {
+     "id": "C1",
+     "verdict": "PASS"
+    },
+    {
+     "id": "C2",
+     "verdict": "PASS"
+    },
+    {
+     "id": "C3",
+     "verdict": "PASS"
+    },
+    {
+     "id": "C4",
+     "verdict": "PASS"
+    },
+    {
+     "id": "C5",
+     "verdict": "FAIL"
+    }
+   ]
+  },
+  {
+   "wp": "WP-FHS-13",
+   "nonce": "AO-WP-FHS-13-62CCAC70",
+   "reply": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-13\\AO_REPLY_AO-WP-FHS-13-62CCAC70.md",
+   "reply_sha256": "47ab081cc25c7a0ffe01d61f9e9f71c7e1115784f5b987173e9a2393560e8825",
+   "receipt": "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-13\\AO_RECEIPT_AO-WP-FHS-13-62CCAC70.json",
+   "mtime": "2026-11-01T12:07:46",
+   "dispatch_ok": true,
+   "served_arm": "openai-codex/gpt-6.1-sol",
+   "rank": 1,
+   "nonce_present": true,
+   "usage_receipt_ok": true,
+   "checker_overall": "FAIL",
+   "clauses": [
+    {
+     "id": "C1",
+     "verdict": "PASS"
+    },
+    {
+     "id": "C2",
+     "verdict": "PASS"
+    },
+    {
+     "id": "C3",
+     "verdict": "PASS"
+    },
+    {
+     "id": "C4",
+     "verdict": "PASS"
+    },
+    {
+     "id": "C5",
+     "verdict": "FAIL"
+    }
+   ]
+  }
+ ]
+}
