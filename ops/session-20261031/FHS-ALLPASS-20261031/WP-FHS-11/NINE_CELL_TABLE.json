@@ -1,18 +1,25 @@
 {
- "schema": "HGK-WP11-NINE-CELLS/4",
+ "schema": "HGK-WP11-NINE-CELLS/5",
  "denominator": 9,
- "pass": 9,
- "fail": 0,
- "unmeasured": 0,
+ "counts": {
+  "measured_this_round": 3,
+  "measured_pass": 3,
+  "carried_prior_round": 6,
+  "carried_pass": 6,
+  "unmeasured": 0
+ },
+ "headline": "3 cells measured in this round (3 PASS); 6 carried from the prior round with their receipts present; 0 unmeasured",
  "derived_from": [
   "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\CLAUDE_CELL_RECEIPT.json",
   "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\CODEX_CELL_RECEIPT.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\clean_cell_runs.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\clean_codex_cell.json",
   "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_ASSURED.json",
   "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_LITE.json",
   "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_STANDARD.json"
  ],
- "rule": "each cell is a receipt with its own measured fields; totals are arithmetic over those cells",
- "note": "Hermes cells: the loader half is the skill index entry (the body is fetched on demand by the host's own skill_view), so the model half is measured as 'retrieve the body with the host loader and report the two facts', with the same skill removed for the negative.",
+ "rule": "MEASURED_THIS_ROUND comes from a receipt written now; CARRIED_PRIOR_ROUND is counted only when the prior receipts are present and still PASS, and is reported apart from the measured cells; anything else is UNMEASURED and the script exits non-zero",
+ "note": "Hermes cells: the loader half is the skill index entry (the body is fetched on demand by the host's own skill_view), so the model half is measured as 'load the body with the host loader and report the two facts', with the same skill removed for the negative.",
  "cells": [
   {
    "host": "codex",
@@ -22,7 +29,12 @@
    "badge": true,
    "negative_clean": true,
    "archive_prefix": "e3e993b0e079",
-   "evidence": "recorded in the previous round; see CODEX_CELL_RECEIPT.json"
+   "evidence": [
+    "CODEX_CELL_RECEIPT.json",
+    "clean_codex_cell.json",
+    "clean_cell_runs.json"
+   ],
+   "evidence_state": "CARRIED_PRIOR_ROUND"
   },
   {
    "host": "codex",
@@ -32,7 +44,12 @@
    "badge": true,
    "negative_clean": true,
    "archive_prefix": "52712b6316fb",
-   "evidence": "recorded in the previous round; see CODEX_CELL_RECEIPT.json"
+   "evidence": [
+    "CODEX_CELL_RECEIPT.json",
+    "clean_codex_cell.json",
+    "clean_cell_runs.json"
+   ],
+   "evidence_state": "CARRIED_PRIOR_ROUND"
   },
   {
    "host": "codex",
@@ -42,7 +59,12 @@
    "badge": true,
    "negative_clean": true,
    "archive_prefix": "5624006aa2f7",
-   "evidence": "recorded in the previous round; see CODEX_CELL_RECEIPT.json"
+   "evidence": [
+    "CODEX_CELL_RECEIPT.json",
+    "clean_codex_cell.json",
+    "clean_cell_runs.json"
+   ],
+   "evidence_state": "CARRIED_PRIOR_ROUND"
   },
   {
    "host": "claude",
@@ -52,7 +74,11 @@
    "badge": true,
    "negative_clean": true,
    "archive_prefix": "e3e993b0e079",
-   "evidence": "recorded in the previous round; see CLAUDE_CELL_RECEIPT.json"
+   "evidence": [
+    "CLAUDE_CELL_RECEIPT.json",
+    "clean_cell_runs.json"
+   ],
+   "evidence_state": "CARRIED_PRIOR_ROUND"
   },
   {
    "host": "claude",
@@ -62,7 +88,11 @@
    "badge": true,
    "negative_clean": true,
    "archive_prefix": "52712b6316fb",
-   "evidence": "recorded in the previous round; see CLAUDE_CELL_RECEIPT.json"
+   "evidence": [
+    "CLAUDE_CELL_RECEIPT.json",
+    "clean_cell_runs.json"
+   ],
+   "evidence_state": "CARRIED_PRIOR_ROUND"
   },
   {
    "host": "claude",
@@ -72,7 +102,11 @@
    "badge": true,
    "negative_clean": true,
    "archive_prefix": "5624006aa2f7",
-   "evidence": "recorded in the previous round; see CLAUDE_CELL_RECEIPT.json"
+   "evidence": [
+    "CLAUDE_CELL_RECEIPT.json",
+    "clean_cell_runs.json"
+   ],
+   "evidence_state": "CARRIED_PRIOR_ROUND"
   },
   {
    "host": "hermes",
@@ -83,8 +117,11 @@
    "negative_clean": true,
    "archive_prefix": "6dadaf36a9ec",
    "served": "deepseek-v4.1-flash",
+   "served_completed": true,
+   "served_api_calls": 2,
+   "evidence_state": "MEASURED_THIS_ROUND",
    "receipt": "HERMES_CELL_LITE.json",
-   "receipt_sha256": "905f8773b3b284bdca90c2c9bd8e878ed7f7111969e10c860d137396b1748e00"
+   "receipt_sha256": "94bfc3c20767a1401a2becf3277f218aa8b2371f5db0928b37a1f6d2b739dffc"
   },
   {
    "host": "hermes",
@@ -95,8 +132,11 @@
    "negative_clean": true,
    "archive_prefix": "9ef70b690d01",
    "served": "deepseek-v4.1-flash",
+   "served_completed": true,
+   "served_api_calls": 2,
+   "evidence_state": "MEASURED_THIS_ROUND",
    "receipt": "HERMES_CELL_STANDARD.json",
-   "receipt_sha256": "0fa274668bf7abf3c49be48338bc1e7424e9a4d765bd60e692b18c1d8823befc"
+   "receipt_sha256": "1af5a15aad05ba0e718595f2ec382a39273f5a43bf5ddd739f5c87b5149eb5ad"
   },
   {
    "host": "hermes",
@@ -107,8 +147,11 @@
    "negative_clean": true,
    "archive_prefix": "5624006aa2f7",
    "served": "deepseek-v4.1-flash",
+   "served_completed": true,
+   "served_api_calls": 2,
+   "evidence_state": "MEASURED_THIS_ROUND",
    "receipt": "HERMES_CELL_ASSURED.json",
-   "receipt_sha256": "1480925ece2bdd7ef4ef100a91e1640453b81c84d8c22b5e6418e18f35cbc85a"
+   "receipt_sha256": "a37e5b206a1beba647abe5ba83d41575bfcf599f1ffb8839b302c1d23fdb47c9"
   }
  ]
 }

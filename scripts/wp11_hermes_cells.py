@@ -112,7 +112,9 @@ def run_once(question, workdir, timeout, usage_file):
         "served_model": usage.get("model"),
         "served_provider": usage.get("provider"),
         "completed": usage.get("completed"),
+        "api_calls": usage.get("api_calls"),
         "session_id": usage.get("session_id"),
+        "usage_file": str(usage_file),
     }
 
 
@@ -183,7 +185,11 @@ def cell(profile, timeout, out_dir):
             "cwd_entries_at_start": cwd_entries,
         },
         "served": {"model": pos["served_model"], "provider": pos["served_provider"],
-                   "session_id": pos["session_id"], "pid": pos["pid"], "duration_s": pos["duration_s"]},
+                   "session_id": pos["session_id"], "pid": pos["pid"], "duration_s": pos["duration_s"],
+                   # The checker's clause 3 asked for these two by name: run_once already read them, and the
+                   # receipt dropped them, which made "the usage file says completed" an unverifiable claim.
+                   "completed": pos["completed"], "api_calls": pos["api_calls"],
+                   "usage_file": str(pos.get("usage_file", ""))},
         "loader_half": "PASS (the existing nine-cell record; this receipt measures the model half)",
         "checks": checks,
         "observed_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),

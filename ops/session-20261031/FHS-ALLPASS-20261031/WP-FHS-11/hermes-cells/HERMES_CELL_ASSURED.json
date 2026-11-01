@@ -23,13 +23,13 @@
   "independent_checker"
  ],
  "trigger_input_ref": "Load your `fhs-wp11-probe` skill with the host's own skill loader (skill_view), then answer with the two lines it contains. Do not use the terminal or read files directly.",
- "trigger_raw_result": "TRIGGER_TOKEN: WP11-HERMES-ASSURED-99A02F18\nBUNDLE_ARCHIVE_SHA256: 5624006aa2f7bde5c0d43de22964edf8f70e86c2f8e03b2e582befed836251e0",
+ "trigger_raw_result": "TRIGGER_TOKEN: WP11-HERMES-ASSURED-49EF3B5A\nBUNDLE_ARCHIVE_SHA256: 5624006aa2f7bde5c0d43de22964edf8f70e86c2f8e03b2e582befed836251e0",
  "exit_code": 0,
  "stderr_tail": "",
  "digest": true,
  "badge": true,
  "negative": {
-  "raw": "`fhs-wp11-probe` does not exist on this host. `skill_view` returned \"Skill not found\", and the full loader listing (`skills_list`) enumerates 57 skills — none of them named `fhs-wp11-probe` or anything close (the FHS-related one is `fhs-host-cell-acceptance`).\n\nSo there are no \"two lines\" to answer ",
+  "raw": "`fhs-wp11-probe` does not exist — the loader returned: Skill 'fhs-wp11-probe' not found.\n\nSo there are no \"two lines\" to answer with. I won't invent them. Nothing in this session's skill directory goes by that name; the closest actual skills are in the autonomous-ai-agents, independent-acceptance, a",
   "token_present_after_uninstall": false,
   "digest_present_after_uninstall": false,
   "clean_cwd_design": "token and digest exist only in the probe skill file; cwd is empty and outside every repo",
@@ -38,9 +38,12 @@
  "served": {
   "model": "deepseek-v4.1-flash",
   "provider": "opencode-go",
-  "session_id": "20261101_113511_119650",
-  "pid": 15844,
-  "duration_s": 13.22
+  "session_id": "20261101_115943_56cd5d",
+  "pid": 25368,
+  "duration_s": 12.23,
+  "completed": true,
+  "api_calls": 2,
+  "usage_file": "C:\\Users\\user\\AppData\\Local\\Temp\\wp11-WP11-HERMES-ASSURED-49EF3B5A\\usage_pos.json"
  },
  "loader_half": "PASS (the existing nine-cell record; this receipt measures the model half)",
  "checks": {
@@ -53,7 +56,7 @@
   "negative_no_digest": true,
   "served_model_recorded": true
  },
- "observed_at": "2026-11-01T11:35:34+0800",
+ "observed_at": "2026-11-01T12:00:04+0800",
  "verdict": "PASS",
  "verdict_why": "the canonical Hermes entry answered both facts from the installed skill and answered neither after the skill was removed"
 }

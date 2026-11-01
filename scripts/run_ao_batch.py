@@ -71,9 +71,16 @@ def verdict_block(text: str) -> dict | None:
 
 def run(wp: str, brief: pathlib.Path, timeout: int) -> dict:
     nonce = f"AO-{wp}-{secrets.token_hex(4).upper()}"
+    # The nonce has to be in the prompt. The first batch was dispatched without it, so every receipt came back
+    # ok=false with nonce_present=false even though the checker had done the work — a receipt defect I authored,
+    # not a checker failure.
+    staged = OPS / wp / f"AO_BRIEF_{nonce}.md"
+    staged.write_text(brief.read_text(encoding="utf-8")
+                      + f"\n\n---\n\nBefore you finish, echo this nonce verbatim on its own line: NONCE-ECHO: {nonce}\n",
+                      encoding="utf-8")
     out = OPS / wp / f"AO_RECEIPT_{nonce}.json"
     cmd = [sys.executable, str(DISPATCH), "--lane", "VERIFY_SECURITY", "--require-arm", ARM,
-           "--prompt", str(brief), "--nonce", nonce, "--timeout", str(timeout),
+           "--prompt", str(staged), "--nonce", nonce, "--timeout", str(timeout),
            "--json-out", str(out),
            "--require-durable-gates", "--durable-gates-subject", str(brief)] + TRANSPORT
     started = time.time()

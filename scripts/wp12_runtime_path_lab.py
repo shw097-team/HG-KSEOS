@@ -35,6 +35,7 @@ import os
 import pathlib
 import re
 import secrets
+import shutil
 import subprocess
 import sys
 import time
@@ -71,8 +72,11 @@ def measure_path_arithmetic():
                 real = full[4:] if full.startswith("\\\\?\\") else full
                 if len(real) >= 260:
                     over.append({"path": real, "len": len(real)})
-        target = pkg.parent.parent.parent.parent.parent  # venv/Lib/site-packages/openai -> venv
-        target_path = str(target / "Lib" / "site-packages" / TARGET_MODULE)
+        # `pkg` is <venv>/Lib/site-packages/openai, so parents[2] is <venv>. The previous expression walked up one
+        # level too many and dropped the environment id, which is why the receipt reported 222 characters for a
+        # module the boundary experiment places at 260 — the checker caught the arithmetic, not the mechanism.
+        venv = pkg.parents[2]
+        target_path = str(venv / "Lib" / "site-packages" / TARGET_MODULE)
         rows.append({
             "openai_package": str(pkg),
             "py_modules": total,
@@ -113,10 +117,58 @@ def _run(cmd, cwd, env, timeout):
         "pid": proc.pid,
         "exit": proc.returncode,
         "timed_out": timed_out,
+        "started_at": time.strftime("%Y-%m-%dT%H:%M:%S", time.localtime(started)),
+        "ended_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "duration_s": round(time.time() - started, 2),
         "stdout": (out or "").strip(),
         "stderr_tail": (err or "").strip()[-1200:],
     }
+
+
+def which_hermes():
+    """What `hermes` resolved to at the moment of the test, and what that file says."""
+    exe = shutil.which("hermes")
+    doc = {"which": exe}
+    if exe:
+        try:
+            text = pathlib.Path(exe).read_text(encoding="utf-8", errors="replace")
+            doc["head"] = "\n".join(text.splitlines()[:12])
+            doc["sha256"] = hashlib.sha256(pathlib.Path(exe).read_bytes()).hexdigest()
+            doc["sets_HERMES_HOME"] = [ln.strip() for ln in text.splitlines() if "HERMES_HOME" in ln][:3]
+        except OSError as exc:
+            doc["read_error"] = str(exc)
+    return doc
+
+
+def _log_window(logs_dir, start_iso, end_iso, pattern=r"RuntimeError: [^\r\n]*"):
+    """The newest matching line whose own timestamp falls inside the run's window.
+
+    A shared log is only usable with both bounds: the checker showed the unbounded version quoting an error three
+    minutes older than the process it was supposed to explain.
+    """
+    try:
+        files = sorted(pathlib.Path(logs_dir).glob("*.log"), key=lambda p: p.stat().st_mtime, reverse=True)
+    except OSError:
+        return None
+    rx = re.compile(r"(\d{4}-\d\d-\d\d[ T]\d\d:\d\d:\d\d)")
+    for f in files[:3]:
+        try:
+            lines = f.read_text(encoding="utf-8", errors="replace").splitlines()
+        except OSError:
+            continue
+        hit = None
+        for line in lines:
+            if not re.search(pattern, line):
+                continue
+            m = rx.search(line)
+            if not m:
+                continue
+            ts = m.group(1).replace("T", " ")
+            if start_iso <= ts <= end_iso:
+                hit = {"file": f.name, "timestamp": ts, "line": line.strip()[-400:]}
+        if hit:
+            return hit
+    return None
 
 
 def _last_error_line(logs_dir, pattern):
@@ -188,26 +240,57 @@ def main():
                workdir, neg_env, args.timeout)
     neg["nonce"] = neg_nonce
     neg["nonce_present"] = neg_nonce in neg["stdout"]
-    neg["error"] = _last_error_line(HERMES_HOME / "profiles" / PROFILE / "logs",
-                                    r"RuntimeError: [^\r\n]+") or _last_error_line(
-        pathlib.Path(r"D:\Hermes-Recovery\live22\logs"), r"RuntimeError: [^\r\n]+")
-    neg["error_is_the_one_under_test"] = bool(neg["error"] and
-                                             "response_computer_tool_call_output_screenshot_param" in neg["error"]["last_error"])
+    # Bind the failure to THIS run. The previous version took the newest matching line from a shared log, and the
+    # checker showed the line it found predated the negative by three minutes: an unbounded search is not evidence.
+    # The negative process's own stderr is the first place to look; a log line counts only inside [start, end] and
+    # only when it carries the same pid.
+    neg["window"] = [neg["started_at"], neg["ended_at"]]
+    bound = None
+    own = [ln for ln in neg["stderr_tail"].splitlines() if "response_computer_tool_call_output_screenshot_param" in ln]
+    if own:
+        bound = {"source": "own stderr", "last_error": own[-1].strip(), "pid": neg["pid"]}
+    else:
+        for cand in (_log_window(HERMES_HOME / "profiles" / PROFILE / "logs", neg["started_at"], neg["ended_at"]),
+                     _log_window(pathlib.Path(r"D:\Hermes-Recovery\live22\logs"), neg["started_at"], neg["ended_at"])):
+            if cand:
+                bound = {"source": cand["file"], "last_error": cand["line"], "pid": neg["pid"],
+                         "line_timestamp": cand.get("timestamp")}
+                break
+    neg["error"] = bound
+    neg["error_is_the_one_under_test"] = bool(bound and
+                                             "response_computer_tool_call_output_screenshot_param" in bound["last_error"])
+    # What IS bound to this run: the process failed (exit != 0), answered nothing, and the banner it printed is its
+    # own. What is NOT: the ImportError text, which this entry routes to a gateway log it never wrote (the recovery
+    # tree's newest log predates this run by two hours). The named error is bound instead where it is reproducible
+    # on identical bytes — the 260-character arm of the boundary experiment. Saying which half is bound where is
+    # the difference between evidence and a citation.
+    neg["failure_bound_to_run"] = neg["exit"] != 0 and not neg["nonce_present"]
+    neg["failure_evidence"] = {
+        "exit": neg["exit"],
+        "nonce_absent": not neg["nonce_present"],
+        "cli_banner": next((ln for ln in neg["stdout"].splitlines() if "went wrong" in ln), None),
+        "own_stderr_empty": not neg["stderr_tail"],
+        "named_error_bound_in": "c_boundary (260-character arm, identical payload bytes)",
+    }
+    neg["path_resolution_at_test_time"] = which_hermes()
     receipt["c_recovery_negative"] = neg
 
     # Verdict — derived, never typed.
     arithmetic = receipt["a_path_arithmetic"]
     long_paths = sum(r["modules_over_max_path"] for r in arithmetic)
+    # Each key is a PASS condition; the verdict is PASS when all of them hold. An earlier revision mixed polarities
+    # under a single `not any(...)`, which made `no_module_over_max_path` mean its opposite. One polarity, stated.
     checks = {
-        "canonical_nonzero_exit": pos["exit"] != 0,
-        "canonical_nonce_absent": not pos["nonce_present"],
-        "canonical_model_unrecorded": not pos["served_model"],
-        "negative_answered": neg["nonce_present"],
-        "negative_error_not_the_one_under_test": not neg["error_is_the_one_under_test"],
-        "no_module_over_max_path": long_paths == 0,
+        "canonical_exit_zero": pos["exit"] == 0,
+        "canonical_nonce_present": pos["nonce_present"],
+        "canonical_model_recorded": bool(pos["served_model"]),
+        "canonical_usage_completed": bool(pos.get("completed")),
+        "negative_did_not_answer": not neg["nonce_present"],
+        "negative_failure_bound_to_run": neg["failure_bound_to_run"],
+        "mechanism_recorded": long_paths > 0,  # informational: the long modules exist and are listed
     }
     receipt["checks"] = checks
-    receipt["verdict"] = "PASS" if not any(checks.values()) else "FAIL"
+    receipt["verdict"] = "PASS" if all(checks.values()) else "FAIL"
     receipt["verdict_why"] = (
         f"canonical entry answered '{nonce}' in {pos['duration_s']}s at {pos['served_model']} "
         f"({pos['served_provider']}), pid {pos['pid']}; the PATH entry did not answer and its failure is "
