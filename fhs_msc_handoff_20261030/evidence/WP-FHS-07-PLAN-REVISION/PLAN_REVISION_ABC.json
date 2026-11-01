@@ -1,0 +1,305 @@
+{
+  "artifact_kind": "DESIGN_ARTIFACT_NOT_A_NATIVE_STAGE",
+  "choice": {
+    "chosen_count": 1,
+    "chosen_id": "B",
+    "reason": "B is the only revision that both reaches a real Writer acknowledgement through CAS(base_revision, proposal_hash) and confines every effect to an isolated draft directory that is withdrawn on exit. A reaches no Writer; C advances nothing. Admission remains with the original PLAN Producer/Owner.",
+    "scope": "design recommendation; not an admission, not a native stage",
+    "source": [
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:45",
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:49"
+    ],
+    "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+  },
+  "claim_ceiling": "AUTHOR_STATIC_ONLY",
+  "first_fail_vocabulary": [
+    {
+      "code": "PLAN_CAS_NACK",
+      "meaning": "proposal base_revision does not match the current revision; the write is refused",
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:49",
+      "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+    },
+    {
+      "code": "BOOTSTRAP_DEPENDENCY_INVERSION",
+      "meaning": "a WorkOrder permit demanded before the first WorkOrder exists",
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:49",
+      "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+    },
+    {
+      "code": "COMMANDER_ABI_HOLD",
+      "meaning": "no original enum/adapter bound; no new issuer may be created",
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:31",
+      "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+    }
+  ],
+  "generated_at": "2026-10-30T19:32:29+08:00",
+  "goal": {
+    "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json:23",
+    "source_sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066",
+    "text": "為普通 Goal 產生有來源與可判 POS/NEG 的 Product、Architecture、Program SPEC，交原 PIPD，再交 Hermes 於原權限下續工"
+  },
+  "handoff_goal": {
+    "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:16",
+    "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5",
+    "text": "依 WP-FHS-15 讀既有來源和已知答案，於允許隔離草稿區產生三 SPEC；ProviderOff=true；只作 SOURCE_READ/LOCAL_DRAFT。"
+  },
+  "inputs": {
+    "files": [
+      {
+        "bytes": 6726,
+        "hash_command": "Get-FileHash -LiteralPath '<path>' -Algorithm SHA256",
+        "lines": 59,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+        "role": "commander guide / native PLAN A-B-C",
+        "sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5",
+        "work_packages": [
+          "WP-FHS-07"
+        ]
+      },
+      {
+        "bytes": 211405,
+        "hash_command": "Get-FileHash -LiteralPath '<path>' -Algorithm SHA256",
+        "lines": 1370,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md",
+        "role": "acceptance challenge, 15 edges, 96 oracles, 12 H4, 11 SEAM",
+        "sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741",
+        "work_packages": [
+          "WP-FHS-09",
+          "WP-FHS-21"
+        ]
+      },
+      {
+        "bytes": 474159,
+        "hash_command": "Get-FileHash -LiteralPath '<path>' -Algorithm SHA256",
+        "lines": 3050,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\09B_KIND_MODE_HOST_192.md",
+        "role": "192 kind x mode x host x provider cells",
+        "sha256": "aed2234821768307d81991aa56d5ff3a98fc9b884ff79e2930f2b9c4ae8e441d",
+        "work_packages": [
+          "WP-FHS-21"
+        ]
+      },
+      {
+        "bytes": 12352,
+        "hash_command": "Get-FileHash -LiteralPath '<path>' -Algorithm SHA256",
+        "lines": 301,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json",
+        "role": "ProgramSPEC draft (goal, non-goals, acceptance, DAG, work packages)",
+        "sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066",
+        "work_packages": [
+          "WP-FHS-07",
+          "WP-FHS-09"
+        ]
+      }
+    ],
+    "nonce": "NONCE-WPC-20261030",
+    "nonce_position": "inputs.nonce",
+    "read_only": true
+  },
+  "missing": [],
+  "native_status": "NATIVE_NOT_RUN",
+  "native_status_source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:1",
+  "non_goals": {
+    "items": [
+      "Native admission",
+      "install/build",
+      "world effect",
+      "independent acceptance",
+      "release"
+    ],
+    "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json:24-30",
+    "source_sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066"
+  },
+  "not_a_native_stage": {
+    "source": [
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:29",
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:31"
+    ],
+    "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5",
+    "statement": "None of A/B/C is a native stage: without a real Registry/Permit the native plan must not claim Native Stage Done, and where no original enum/adapter exists the Commander holds at COMMANDER_ABI_HOLD instead of minting an issuer."
+  },
+  "revisions": [
+    {
+      "chosen": false,
+      "effect_class": "READ_ONLY",
+      "id": "A",
+      "limitation": "Proposal only. The goal is not advanced past analysis, because the original Writer never acknowledges anything.",
+      "name": "READONLY",
+      "reversibility_basis": "A performs no write: it reads the frozen SPEC/PI/PD/ECP/TQAEP and the original CurrentRevisionReader and returns a proposal to its caller; it cannot write the target repo.",
+      "reversible": true,
+      "source": {
+        "lines": [
+          45,
+          47,
+          49,
+          59
+        ],
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+        "sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+      },
+      "steps": [
+        {
+          "action": "Read the frozen SPEC/PI/PD/ECP/TQAEP and the original CurrentRevisionReader; return a PlanRevisionProposal to the caller.",
+          "index": 1,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:45",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "Do not depend on a WorkOrder that does not exist yet; A is the entry that runs before any WorkOrder exists.",
+          "index": 2,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:45",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "Probe in the order the guide fixes: Host skill manifest + trigger/non-trigger, then the loaded SHA (a file on disk is not a loaded skill), then the Native PLAN schema/revision/reducer, then the same Subject.",
+          "index": 3,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:47",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "Submit a proposal only where the original Producer's capability and permission already exist.",
+          "index": 4,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:47",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "Do not write the target repo: the commander profile denies candidate write, AcceptanceReceipt, promotion and release.",
+          "index": 5,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:59",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "POS: with no effect permission a read-only plan is still produced. NEG: asking for the same WorkOrder's permit before the first WorkOrder exists is BOOTSTRAP_DEPENDENCY_INVERSION.",
+          "index": 6,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:49",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        }
+      ],
+      "why_this_revision": "A is the only revision that needs neither a WorkOrder nor an effect permission, so it is always runnable and cannot invert the bootstrap. It is also the weakest: nothing it emits reaches the original PLAN Writer, so no r+1 acknowledgement can exist and no revision can be read back by the original Consumer; the guide requires the original PLAN Role/Revision CAS before a real PlanRevision exists."
+    },
+    {
+      "choice_reason": "Chosen because it is the only one of the three that can produce an acknowledgement the original PLAN Consumer can read (a real Writer acknowledgement after CAS(base_revision, proposal_hash), and the r -> r+1 positive case) while confining every effect to an isolated draft directory that is withdrawn on exit. A cannot reach the Writer at all; C makes no progress. This is a design recommendation: admission or refusal belongs to the original PLAN Producer/Owner, and none of these revisions is a native stage.",
+      "chosen": true,
+      "effect_class": "LOCAL_DRAFT_WRITE",
+      "id": "B",
+      "name": "ADVISORY_LOCAL_WRITE",
+      "reversibility_basis": "Every effect stays inside this round's isolated advice directory and the exit path withdraws only this round's proposal; the original PLAN state is not modified.",
+      "reversible": true,
+      "source": {
+        "lines": [
+          45,
+          47,
+          49,
+          59
+        ],
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+        "sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+      },
+      "steps": [
+        {
+          "action": "Run the same probe order as A: manifest + trigger/non-trigger, loaded SHA, Native PLAN schema/revision/reducer, same Subject.",
+          "index": 1,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:47",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "Record the proposal and its diff only inside this round's isolated advice directory; effect=LOCAL_DRAFT_WRITE.",
+          "index": 2,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:45",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "Hand the proposal to the original non-legacy Native PLAN Producer and submit CAS(base_revision, proposal_hash); a real Writer acknowledgement is mandatory.",
+          "index": 3,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:45",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "POS: the Reader holds revision r, the proposal carries base=r, and the original Writer acknowledges r+1.",
+          "index": 4,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:49",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "NEG: base=r-1 yields PLAN_CAS_NACK; another writer's revision is never overwritten.",
+          "index": 5,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:49",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "On exit withdraw only this round's proposal; the original PLAN state is unchanged.",
+          "index": 6,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:49",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "Do not claim a Native stage from a local draft: without a real Registry/Permit there is no Native Stage Done.",
+          "index": 7,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:29",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "A local draft is not an AcceptanceReceipt, not promotion and not release; the commander profile denies all three.",
+          "index": 8,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:59",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        }
+      ],
+      "why_this_revision": "B is the only revision that reaches the original Writer's CAS while every effect it makes is confined to an isolated directory: the effect class is LOCAL_DRAFT_WRITE, the acknowledgement is the original Writer's r+1, and the exit path withdraws only this round's proposal. Its negative case is concrete rather than hypothetical: base=r-1 must produce PLAN_CAS_NACK instead of a silent overwrite."
+    },
+    {
+      "chosen": false,
+      "effect_class": "NONE",
+      "id": "C",
+      "limitation": "No progress by construction; it is the correct answer only when the permission or the loader is genuinely absent.",
+      "name": "PARK",
+      "reversibility_basis": "PARK makes no effect at all; it keeps source/ref/first_fail and stops the affected write, so there is nothing to undo.",
+      "reversible": true,
+      "source": {
+        "lines": [
+          31,
+          45,
+          59
+        ],
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+        "sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+      },
+      "steps": [
+        {
+          "action": "If A or B lacks permission or a loader, park the affected write and keep source/ref/first_fail.",
+          "index": 1,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:45",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "Do not call the retired sbl-commander-sp as a fallback.",
+          "index": 2,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:45",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "With no original enum/adapter the Commander stops at COMMANDER_ABI_HOLD and does not fabricate a new issuer.",
+          "index": 3,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:31",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        },
+        {
+          "action": "Park only the affected effect and its dependency cone; unrelated READ_ONLY / LOCAL_DRAFT work that is READY continues.",
+          "index": 4,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json:222",
+          "source_sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066"
+        },
+        {
+          "action": "Emit no target-repo write and no receipt; a park is not a stage.",
+          "index": 5,
+          "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:59",
+          "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+        }
+      ],
+      "why_this_revision": "C is the honest stop: it writes nothing, preserves first_fail for the original Owner, and cannot invert the bootstrap because it never asks for a permit it does not hold. Its cost is that the goal is not advanced: no proposal reaches the original Producer's CAS, so the r+1 acknowledgement the guide defines as the positive outcome cannot exist."
+    }
+  ],
+  "schema": "PLAN-REVISION-ABC/1",
+  "status": "COMPLETE_INPUT",
+  "work_package": "WP-FHS-07"
+}

@@ -1,0 +1,12 @@
+schema: LOGICAL_FAR_RESEARCH_REQUEST_V1
+workorder_ref: {id: "R18-FAR-13", digest: "subject=5a06d8ddfcfaeefdda4430a0fcd0677e5ca036ac9e10072b5f00e141824f430d"}
+decision_question: "For a single owner who is also the package author, which of source_freeze / task_kind / oracle_ratification, policy_epoch and CAP-BOOT can be satisfied locally, and which are authorisation gaps rather than definition gaps?"
+owner: "single owner (fp 412b3519...), also the package author"
+task_class: RESEARCH_GENERAL
+source_requirements:
+  - "HG-KSEOS/src/hg_kseos/native_admission.py (KINDS, authorize contract, normalize_user_registry)"
+  - "HG-KSEOS/config/active-policy.json"
+  - "round receipts: ISSUER_PATH_PROBE, TERMINAL_STATE"
+freshness_requirement: "measured this session"
+budget_ref: "local reads only"
+security_boundary: "source-as-data"

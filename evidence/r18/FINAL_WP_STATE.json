@@ -1,0 +1,226 @@
+{
+ "schema": "R18.FINAL_WP_STATE/1",
+ "wps": [
+  {
+   "wp": "WP-FHS-00",
+   "effect_class": "SOURCE_READ",
+   "status": "DONE",
+   "acceptance": "LOCAL_ORACLE",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "-"
+  },
+  {
+   "wp": "WP-FHS-01",
+   "effect_class": "SOURCE_READ",
+   "status": "DONE",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "-"
+  },
+  {
+   "wp": "WP-FHS-02",
+   "effect_class": "HOST_OP",
+   "status": "PARTIAL",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-03",
+   "effect_class": "HOST_OP",
+   "status": "PARTIAL",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-04",
+   "effect_class": "HOST_OP",
+   "status": "PARTIAL",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-05",
+   "effect_class": "LOCAL_DRAFT_WRITE",
+   "status": "HOLD",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "PIPD Writer ACK"
+  },
+  {
+   "wp": "WP-FHS-06",
+   "effect_class": "REPO_WRITE",
+   "status": "DONE",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "-"
+  },
+  {
+   "wp": "WP-FHS-07",
+   "effect_class": "LOCAL_DRAFT_WRITE",
+   "status": "PARTIAL",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "-"
+  },
+  {
+   "wp": "WP-FHS-08",
+   "effect_class": "HOST_OP",
+   "status": "PARKED",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": false,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-09",
+   "effect_class": "SOURCE_READ",
+   "status": "PARTIAL",
+   "acceptance": "INDEPENDENT_HOLD",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "native execution evidence (verdict is HOLD)"
+  },
+  {
+   "wp": "WP-FHS-10",
+   "effect_class": "HOST_OP",
+   "status": "PARKED",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": false,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-11",
+   "effect_class": "HOST_OP",
+   "status": "PARKED",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": false,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-12",
+   "effect_class": "HOST_OP",
+   "status": "PARKED",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": false,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-13",
+   "effect_class": "HOST_OP",
+   "status": "PARKED",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": false,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-14",
+   "effect_class": "RELEASE",
+   "status": "PARKED",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": false,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-15",
+   "effect_class": "LOCAL_DRAFT_WRITE",
+   "status": "PARTIAL",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "-"
+  },
+  {
+   "wp": "WP-FHS-16",
+   "effect_class": "LOCAL_DRAFT_WRITE",
+   "status": "PARTIAL",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "-"
+  },
+  {
+   "wp": "WP-FHS-17",
+   "effect_class": "HOST_OP",
+   "status": "PARTIAL",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-18",
+   "effect_class": "REPO_WRITE",
+   "status": "DONE",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "-"
+  },
+  {
+   "wp": "WP-FHS-19",
+   "effect_class": "SOURCE_READ",
+   "status": "DONE",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "-"
+  },
+  {
+   "wp": "WP-FHS-20",
+   "effect_class": "HOST_OP",
+   "status": "PARKED",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": false,
+   "blocked_on": "Issuer PERMIT (owner-signed bundle)"
+  },
+  {
+   "wp": "WP-FHS-21",
+   "effect_class": "SOURCE_READ",
+   "status": "PARTIAL",
+   "acceptance": "NOT_RUN",
+   "receipts": 1,
+   "receipts_exist": true,
+   "blocked_on": "-"
+  }
+ ],
+ "counts": {
+  "PARTIAL": 9,
+  "PARKED": 7,
+  "DONE": 5,
+  "HOLD": 1
+ },
+ "defensible": {
+  "done_with_receipts": 5,
+  "gated_on_other_principal": 13,
+  "measured_but_not_closable_locally": 4
+ },
+ "claim_ceiling": "state of this round's own receipts; not an acceptance, not a release",
+ "scope_note": "wps[] covers the 22 WP rows only. The ledger has 26 rows; the other four are round-level (R18-ADMIT, R18-MVS, R18-DELIVER, R18-HANDOFF) and are reported separately in receipts/SWARM_RESULTS.json. Never quote 5/9/7/1 as the ledger's totals.",
+ "round_rows": {
+  "R18-ADMIT": "DONE",
+  "R18-HANDOFF": "DONE",
+  "R18-MVS": "PARTIAL",
+  "R18-DELIVER": "PARTIAL"
+ },
+ "withdrawn_claims": [
+  "2789/0 on the pristine copy (measured 2788/1)",
+  "WP-FHS-06/18/19 DONE (downgraded to PARTIAL by SWARM)"
+ ]
+}

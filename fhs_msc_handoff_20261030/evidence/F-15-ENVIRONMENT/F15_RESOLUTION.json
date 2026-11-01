@@ -1,0 +1,85 @@
+{
+  "conclusion": "F-15 was a path-root defect in the harness, not an environment fault and not a missing dependency. The preflight is still worth keeping: it stops a missing dependency from producing a verdict at all.",
+  "durable_fix": "a preflight that refuses to run without jsonschema is still correct, but it does not close F-15; the failing case itself must be repaired",
+  "finding": "F-15: first-work harness reported 34/1 as shipped and validation failures under a repaired loader",
+  "generated_at": "2026-10-30T19:15:26",
+  "interpreter_pin": {
+    "jsonschema": "4.26.0",
+    "path": "C:/Users/user/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/hermes/hermes-agent/venv/Scripts/python",
+    "python": "3.11.17"
+  },
+  "measurements": [
+    {
+      "command": "<venv>/python check_first_work_shipped.py",
+      "exit": 0,
+      "result": "{\"pass\": 35, \"fail\": 0, \"failures\": []}",
+      "run": "as-shipped harness, pinned interpreter"
+    },
+    {
+      "command": "<venv>/python check_first_work_pinned.py",
+      "exit": 0,
+      "result": "{\"pass\": 35, \"fail\": 0, \"failures\": []}",
+      "run": "r4 harness with preflight, pinned interpreter"
+    },
+    {
+      "command": ".hermes-runtime python check_first_work_pinned.py",
+      "exit": 1,
+      "result": "PREFLIGHT_FAIL: jsonschema not importable under <runtime python> (ModuleNotFoundError)",
+      "run": "r4 harness with preflight, runtime interpreter"
+    }
+  ],
+  "measurements_in_place": [
+    {
+      "result": "pass=34 fail=1 EXISTING_5_AFFECTED_TESTS",
+      "run": "package harness, unmodified, package tree, pinned interpreter"
+    },
+    {
+      "result": "pass=35 fail=0",
+      "run": "package harness + the one-line path root, same tree, same interpreter"
+    },
+    {
+      "result": "pass=29 fail=6 — a different fault, masked as validation errors",
+      "run": "package harness under the runtime interpreter (no jsonschema)"
+    }
+  ],
+  "officer_measurements": [
+    {
+      "result": "pass=34 fail=1 (EXISTING_5_AFFECTED_TESTS)",
+      "run": "package harness (02_FIRST_WORK/tools/check_first_work.py) under the pinned interpreter"
+    },
+    {
+      "result": "pass=29 fail=6",
+      "run": "package harness under the runtime interpreter"
+    },
+    {
+      "result": "pass=30 fail=5",
+      "run": "brief-supplied copy under the runtime interpreter"
+    },
+    {
+      "result": "refuses with PREFLIGHT_FAIL (no verdict)",
+      "run": "preflight variant under the runtime interpreter"
+    }
+  ],
+  "repair": {
+    "file": "03_HANDOFF_EVIDENCE/QA_TOOLS/check_first_work.py (and the r4 copy in this repository)",
+    "one_line": "sys.path.insert(0, plain(E/'READERS/PIPD'))",
+    "why": "`tests` is a sibling of `src`, not a child of it"
+  },
+  "root_cause": "the harness put READERS/PIPD/src on sys.path, but the tests package lives at READERS/PIPD/tests — one level above src. loadTestsFromNames therefore raised, wasSuccessful() returned False, and the case EXISTING_5_AFFECTED_TESTS failed. Nothing to do with jsonschema.",
+  "schema": "F15-RESOLUTION/1",
+  "status": "CLOSED — repaired, measured in place",
+  "tooling_in_repo": {
+    "carries": [
+      "the one-line path root",
+      "a jsonschema preflight that refuses instead of degrading"
+    ],
+    "path": "fhs_msc_handoff_20261030/r4/tools/check_first_work.py",
+    "sha256": "42cf42e923bd91e01c6f87cfd001655a2253f47b39ea10425ad30fc0cb6fc293"
+  },
+  "updated_at": "2026-10-30T19:37:52",
+  "withdrawn_claim": {
+    "claim": "F-15 was an environment fault only, and the shipped harness returns 35/0 under the pinned interpreter",
+    "convicted_by": "independent officer, nonce NONCE-AO-20261030-E, overall FAIL on claim O2",
+    "why_withdrawn": "the measurement was taken from a scratch copy of the harness running against a scratch copy of the tree (C:/wg/adv2/SHIP_FIX), not from the package harness running against the package. A copy that differs from the subject is not the subject."
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "finding": "the delivery tree is not under version control; its durable form is the manifest in fhs_msc_handoff_20261030/deliveries plus the release assets",
+  "generated_at": "2026-10-30T19:13:20",
+  "roots": [
+    {
+      "name": "delivery_package",
+      "note": "no .git anywhere above the delivery tree",
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1",
+      "tracked": false
+    },
+    {
+      "branch": "candidate/r18-fhs-skeleton-spine-20261029",
+      "head": "51dd8b6bf806221fad514a0321ee1846ee97ca37",
+      "name": "HG-KSEOS",
+      "path": "C:\\Projects\\Agent_Workspace\\HG-KSEOS"
+    },
+    {
+      "branch": "pub/far-minimax-mandate-20261021",
+      "head": "fffcb98bf8063e04f3fad2c726eb43fd70336d04",
+      "name": "Fabric",
+      "path": "C:\\Projects\\Agent_Workspace\\Fabric"
+    },
+    {
+      "branch": "fhs-msc-handoff-patch-v1-exec-20261030",
+      "head": "4cf7d1ae960988a0404ba715ab98fe477f41422d",
+      "name": "delivery_mirror",
+      "path": "C:\\wg\\repo"
+    }
+  ],
+  "schema": "REPO-CONTEXT/1",
+  "work_package": "WP-FHS-00"
+}

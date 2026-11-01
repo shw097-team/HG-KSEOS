@@ -1,0 +1,82 @@
+{
+ "at": "2026-10-29T08:04:47Z",
+ "state": {
+  "applied": true,
+  "status": "active",
+  "audit_rc": 0
+ },
+ "lane": {
+  "lane_receipts": [
+   {
+    "file": "VERIFY2_R18.json",
+    "served": null,
+    "mtime": "2026-10-29T05:40:19Z"
+   },
+   {
+    "file": "VERIFY3_R18.json",
+    "served": null,
+    "mtime": "2026-10-29T05:48:15Z"
+   },
+   {
+    "file": "VERIFY4_R18.json",
+    "served": null,
+    "mtime": "2026-10-29T05:42:12Z"
+   },
+   {
+    "file": "VERIFY5_R18.json",
+    "served": null,
+    "mtime": "2026-10-29T05:47:49Z"
+   },
+   {
+    "file": "VERIFY6_R18.json",
+    "served": null,
+    "mtime": "2026-10-29T05:58:31Z"
+   },
+   {
+    "file": "VERIFY_R18.json",
+    "served": null,
+    "mtime": "2026-10-29T05:41:47Z"
+   },
+   {
+    "file": "EXECUTE_WP21.json",
+    "served": null,
+    "mtime": "2026-10-29T05:11:35Z"
+   },
+   {
+    "file": "EXECUTE_WP21_attempt2.json",
+    "served": null,
+    "mtime": "2026-10-29T05:25:09Z"
+   },
+   {
+    "file": "EXECUTE_WP21_attempt3.json",
+    "served": null,
+    "mtime": "2026-10-29T05:28:40Z"
+   },
+   {
+    "file": "EXECUTE_WP21_attempt4.json",
+    "served": null,
+    "mtime": "2026-10-29T05:37:47Z"
+   },
+   {
+    "file": "PLAN_R18.json",
+    "served": null,
+    "mtime": "2026-10-29T05:37:32Z"
+   }
+  ],
+  "verdicts": [
+   "VERDICT_ADMISSIBLE_HOLD.md",
+   "VERDICT_FINAL.md",
+   "VERDICT_FORCE_RANK2.md",
+   "VERDICT_TEXT.md"
+  ],
+  "violation": false,
+  "rule": "a VERDICT without a lane receipt is agent prose, not a verdict"
+ },
+ "stop": {
+  "defensible": 22,
+  "non_defensible": [],
+  "actionable_rows": 0,
+  "may_stop": true,
+  "rule": "stop only when every WP is defensible and the driver reports no actionable work"
+ }
+}

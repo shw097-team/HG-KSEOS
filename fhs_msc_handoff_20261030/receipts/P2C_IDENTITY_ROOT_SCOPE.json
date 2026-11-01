@@ -1,0 +1,30 @@
+{
+ "control_absolute_path": [
+  {
+   "subject_id": "PI-38f4b1c3dec30c88",
+   "content_hash": "38f4b1c3dec30c88193469a55f6fe39ea84229bdbe96f0826984f1c89a13d75a",
+   "atoms": 24
+  },
+  {
+   "subject_id": "PI-a4351c0311389c8a",
+   "content_hash": "a4351c0311389c8a73ac94f528c898c27176f603f639419122edf65807036745",
+   "atoms": 24
+  }
+ ],
+ "control_identical": false,
+ "repair_relative_path": [
+  {
+   "subject_id": "PI-d0974c55d63bc021",
+   "content_hash": "d0974c55d63bc021a41c556dcaab9a6a05df48dbd1f66ea3e4f5ff28748fceab",
+   "atoms": 24
+  },
+  {
+   "subject_id": "PI-d0974c55d63bc021",
+   "content_hash": "d0974c55d63bc021a41c556dcaab9a6a05df48dbd1f66ea3e4f5ff28748fceab",
+   "atoms": 24
+  }
+ ],
+ "repair_identical": true,
+ "reading": "absolute-path intake makes identity a function of the physical draft root; root-relative intake makes it a function of the source bytes",
+ "writer_modified": false
+}

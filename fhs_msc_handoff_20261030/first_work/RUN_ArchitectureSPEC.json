@@ -1,0 +1,219 @@
+{
+  "schema": "SBL.ArchitectureSPECDraft@1",
+  "status": "DESIGN_CANDIDATE",
+  "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+  "source_refs": [
+    {
+      "source_id": "SBL-04",
+      "sha256": "ee90cb1c86f6f7350c11c9c962233a89b035ca41ff82c8968f7968608fc6f6e0",
+      "line_from": 500,
+      "line_to": 527
+    },
+    {
+      "source_id": "SBL-00",
+      "sha256": "bd9c1a85ea0cae68fa8cde617e5592fca6123f72b4caf1a9d2894167d9a82e01",
+      "line_from": 60,
+      "line_to": 78
+    },
+    {
+      "wp": "WP-FHS-15",
+      "source_sha256": "8f06076a129a2a8e3f460e7dd066561fe58aa42e3a8cabc1c28e74d20b280c00"
+    }
+  ],
+  "goal": "為普通 Goal 產生有來源與可判 POS/NEG 的 Product、Architecture、Program SPEC，交原 PIPD，再交 Hermes 於原權限下續工",
+  "non_goals": [
+    "Native admission",
+    "install/build",
+    "world effect",
+    "independent acceptance",
+    "release"
+  ],
+  "acceptance": [
+    {
+      "requirement": "Goal intake",
+      "positive": "nonempty goal preserved",
+      "negative": "empty goal refused",
+      "oracle_ref": "SBL-04:PM:T0"
+    },
+    {
+      "requirement": "Corpus identities",
+      "positive": "24 source identities read",
+      "negative": "missing source identity refused",
+      "oracle_ref": "SBL-04:K0"
+    },
+    {
+      "requirement": "Source integrity",
+      "positive": "same bytes admitted",
+      "negative": "modified source bytes refused",
+      "oracle_ref": "SBL-04:K0"
+    },
+    {
+      "requirement": "Bounded source read",
+      "positive": "admitted relative path read",
+      "negative": "parent traversal refused",
+      "oracle_ref": "SBL-04:K3"
+    },
+    {
+      "requirement": "Known answers",
+      "positive": "same key returns ask false",
+      "negative": "changed source hash requires a fresh answer",
+      "oracle_ref": "SBL-04:PM:T0"
+    },
+    {
+      "requirement": "Product persona",
+      "positive": "persona in emitted draft",
+      "negative": "missing persona refused",
+      "oracle_ref": "SBL-04:PM:T3"
+    },
+    {
+      "requirement": "Product job",
+      "positive": "jtbd in emitted draft",
+      "negative": "missing jtbd refused",
+      "oracle_ref": "SBL-04:PM:T3"
+    },
+    {
+      "requirement": "Useful output",
+      "positive": "three output references present",
+      "negative": "abstract outcome without output refused",
+      "oracle_ref": "SBL-04:PM:T2"
+    },
+    {
+      "requirement": "Product acceptance",
+      "positive": "each acceptance has own POS NEG",
+      "negative": "acceptance without negative refused",
+      "oracle_ref": "SBL-04:PM:T4"
+    },
+    {
+      "requirement": "Architecture authority",
+      "positive": "one writer per seam",
+      "negative": "two writers for a seam refused",
+      "oracle_ref": "SBL-04:SE:T3"
+    },
+    {
+      "requirement": "Architecture interface",
+      "positive": "schema version pinned",
+      "negative": "unknown extra record key refused",
+      "oracle_ref": "SBL-04:SE:T3"
+    },
+    {
+      "requirement": "Program dependencies",
+      "positive": "WP00 WP01 WP15 closure sorted",
+      "negative": "cycle refused",
+      "oracle_ref": "SBL-04:TPgM:T2"
+    },
+    {
+      "requirement": "Program ownership",
+      "positive": "owner for every node",
+      "negative": "missing node owner refused",
+      "oracle_ref": "SBL-04:TPgM:T3"
+    },
+    {
+      "requirement": "Local draft scope",
+      "positive": "three paths inside draft scope",
+      "negative": "path outside admitted draft root refused",
+      "oracle_ref": "WP-FHS-15"
+    },
+    {
+      "requirement": "Source drift recovery",
+      "positive": "affected descendants blocked",
+      "negative": "unrelated ready source reader remains available",
+      "oracle_ref": "WP-FHS-00"
+    },
+    {
+      "requirement": "No receipt inversion",
+      "positive": "no live receipt predecessor",
+      "negative": "future receipt as prerequisite refused",
+      "oracle_ref": "WP-FHS-15"
+    },
+    {
+      "requirement": "Provider off",
+      "positive": "zero network calls during positive run",
+      "negative": "provider connection attempt refused",
+      "oracle_ref": "WP-FHS-15 and BODY09B"
+    },
+    {
+      "requirement": "PI trace",
+      "positive": "all atom traces resolve",
+      "negative": "tampered atom or trace refused",
+      "oracle_ref": "PIPD RequirementAtom"
+    },
+    {
+      "requirement": "Late bound PD",
+      "positive": "real measured context",
+      "negative": "missing root or spoofed freshness refused",
+      "oracle_ref": "PIPD PD-PKG"
+    },
+    {
+      "requirement": "Effect permissions",
+      "positive": "read and draft continue",
+      "negative": "missing OPS permission parks only affected host effect",
+      "oracle_ref": "BODY03 R2-03-EFFECT"
+    },
+    {
+      "requirement": "Lease fence",
+      "positive": "current lease accepted in memory fixture",
+      "negative": "expired lease refused",
+      "oracle_ref": "HGK SharedSpine"
+    },
+    {
+      "requirement": "Unknown effect",
+      "positive": "UNKNOWN routes to reconcile",
+      "negative": "blind retry of UNKNOWN is not dispatched",
+      "oracle_ref": "BODY06"
+    },
+    {
+      "requirement": "No second queue",
+      "positive": "existing WorkID reused on resume",
+      "negative": "new queue or replacement issuer forbidden",
+      "oracle_ref": "BODY06"
+    },
+    {
+      "requirement": "Distinct checker",
+      "positive": "request names original checker",
+      "negative": "maker output never becomes independent acceptance",
+      "oracle_ref": "BODY07"
+    }
+  ],
+  "adr": [
+    "PI Writer=PIPD；原 Canonical admission=HGK；policy=Fabric；queue/lease/journal=Hermes",
+    "source read及local draft不索 Native Permit；Canonical WorkOrder建立由原 HGK 自行准入",
+    "ProviderOff由本輪明確 true 決定，不從 legacy ON/OFF 猜映射"
+  ],
+  "ownership_seams": [
+    {
+      "name": "source and PI",
+      "writers": [
+        "PIPD original compiler"
+      ]
+    },
+    {
+      "name": "policy",
+      "writers": [
+        "Fabric original policy owner"
+      ]
+    },
+    {
+      "name": "Canonical WorkOrder",
+      "writers": [
+        "HGK SharedSpine"
+      ]
+    },
+    {
+      "name": "queue lease journal",
+      "writers": [
+        "original Hermes runtime"
+      ]
+    },
+    {
+      "name": "acceptance",
+      "writers": [
+        "original Protected Checker"
+      ]
+    }
+  ],
+  "abi_version": "PIPD S0 19-contract Registry/1",
+  "risk": [
+    "Runtime owner and permission required only at actual effect",
+    "DOC07 oracle meaning versus serialized legacy DOC03 remains isolated to live ratification"
+  ]
+}

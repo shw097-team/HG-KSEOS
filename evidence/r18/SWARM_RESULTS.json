@@ -1,0 +1,57 @@
+{
+ "schema": "R18.SWARM_RESULTS/1",
+ "batch": "deleg_20715b47",
+ "children": [
+  {
+   "id": "sa-0-e8ba9660",
+   "scope": "ledger DONE-row evidence audit",
+   "verdict": "HOLD",
+   "findings": [
+    "WP-FHS-18 evidence pointer wrong: WP_CONTRACT_RESULTS.json is a contract harness whose ceiling is CONTRACT_LEVEL_NOT_NATIVE_CASE; the actual repair receipt WP18_D_R18_01_REPAIR.json was not cited",
+    "D-R18-02 (108/108 plus fail-able negative control) has no receipt anywhere",
+    "WP-FHS-06 evidence proves the gate only; no diff or raw tied to the row",
+    "WP-FHS-19 SBOM no longer recomputes: 5/85 entries mismatch and bytes_scanned drifted",
+    "FINAL_WP_STATE.json omits R18-ADMIT, R18-HANDOFF, R18-MVS, R18-DELIVER"
+   ],
+   "accepted": true
+  },
+  {
+   "id": "sa-1-0744fff6",
+   "scope": "delegation gate enforcement + signature",
+   "verdict": "PASS",
+   "findings": [
+    "7/7 cases returned the expected decision",
+    "signature_valid true over canonical bytes, sha256 6a83997a",
+    "subject digest 5a06d8dd reproduced from 83 pairs",
+    "retired second key refused by code path, rc 9 REFUSED_NONCANONICAL_OWNER",
+    "caveat: canonical check compares a self-declared fingerprint prefix; no external pin",
+    "caveat: governance/revoked_delegations.json absent, so revocation works by file absence"
+   ],
+   "accepted": true
+  },
+  {
+   "id": "sa-2-454e0f91",
+   "scope": "83/83 integrity, validate, 96-cell oracle",
+   "verdict": "HOLD",
+   "findings": [
+    "83/83 match, 0 drift, 0 missing, re-verified after runs",
+    "oracle 50 PASS_LOCAL_ORACLE / 46 HOLD / 0 DENY reproduced independently, 679/0 internal",
+    "validate.py: 2788 passed / 1 failed of 2789; the failure is SOURCE-BYTES-UNCHANGED",
+    "cause: 29 external sources relocated post-freeze into .../OLD/, 26 byte-identical, 3 unlocated"
+   ],
+   "accepted": true
+  }
+ ],
+ "claims_withdrawn": [
+  "2789 PASS / 0 FAIL is NOT reproducible on the pristine copy; the delivered candidate is 2788/1",
+  "WP-FHS-18 DONE (downgraded: evidence pointer wrong, repair lives in an isolated copy)",
+  "WP-FHS-06 DONE (downgraded: gate permit is not a candidate write receipt)",
+  "WP-FHS-19 DONE (downgraded: SBOM captured a transient tree state)"
+ ],
+ "claims_upheld": [
+  "96-cell oracle 50/46/0",
+  "83/83 byte integrity",
+  "delegation signature + scope enforcement",
+  "retired key refusal"
+ ]
+}

@@ -1,0 +1,26 @@
+{
+  "subject_id": "EH-d099c29161dd52bd",
+  "version": "1",
+  "content_hash": "d099c29161dd52bd1fb186d11aa73451f32f2fb74483756a9c0fdbd777d771ab",
+  "schema_version": "ExecutionHandoff@1",
+  "receiver": "original HGK SharedSpine TaskSpec/WorkOrder admission then original Hermes",
+  "abi_version": "PIPD-S0-CONTRACT-REGISTRY/1",
+  "payload_refs": [
+    {
+      "contract": "PI-PKG",
+      "subject_id": "PI-4298cad2300fb52f",
+      "content_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb"
+    },
+    {
+      "contract": "TaskSpecSeed",
+      "subject_id": "TSS-c8c7132522a53fda",
+      "content_hash": "c8c7132522a53fdacac9879fae435c3f686058e6cc5ba64ce1bc6125449a96ff"
+    },
+    {
+      "contract": "WorkOrderCandidate",
+      "subject_id": "WOC-6897ef2d907a7dc2",
+      "content_hash": "6897ef2d907a7dc2a82d9eb47cc24b8c32d1bcc1d40281d365af3a66007796b6"
+    }
+  ],
+  "ack_nack_state": "AUTHOR_STATIC_READER_ACCEPTED_NOT_NATIVE_SUBMITTED"
+}

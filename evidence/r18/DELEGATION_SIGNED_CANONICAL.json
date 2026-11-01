@@ -1,0 +1,24 @@
+{
+ "schema": "R18.DELEGATION.SIGNED_CANONICAL/1",
+ "signed_utc": "2026-10-29T07:22:05Z",
+ "delegation_id": "R18-CANON-6733b6bb",
+ "owner_identity": "CANONICAL_HGK_OWNER (~/.hgk-owner/owner.key.enc)",
+ "owner_fingerprint": "412b351937be72a1",
+ "signature_verifies": true,
+ "signing_window_id": "WIN-796b69117680",
+ "signing_window_max_ops": 40,
+ "ops_used_after": 1,
+ "payload_sha256": "6a83997ab25af350068d69c385ff0100218dd36ee076705a6b512e07bbd2e716",
+ "subject_digest_sha256": "5a06d8ddfcfaeefdda4430a0fcd0677e5ca036ac9e10072b5f00e141824f430d",
+ "wp_allowlist": [
+  "WP-FHS-00",
+  "WP-FHS-01",
+  "WP-FHS-09",
+  "WP-FHS-19",
+  "WP-FHS-21",
+  "WP-FHS-06",
+  "WP-FHS-18"
+ ],
+ "not_after": "2026-11-28T07:22:05+00:00",
+ "private_key_exposure": "none: the key stayed in the broker process; the agent only received a signature"
+}

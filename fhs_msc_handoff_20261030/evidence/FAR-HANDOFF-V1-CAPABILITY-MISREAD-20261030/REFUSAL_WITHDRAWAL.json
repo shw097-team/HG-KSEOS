@@ -1,0 +1,55 @@
+{
+  "corrected_classification": {
+    "closable_after_decisions": [
+      "11",
+      "20"
+    ],
+    "closable_heavy": [
+      "10",
+      "12",
+      "13",
+      "17"
+    ],
+    "closable_now": [
+      "02",
+      "03",
+      "04",
+      "08"
+    ]
+  },
+  "delivery_defects": [
+    {
+      "id": "D-1",
+      "text": "WP-FHS-02 Done requires an Active-layer hash; Fabric has no policy epoch object (nearest object: HGK_STACK_MANIFEST.yaml)"
+    },
+    {
+      "id": "D-2",
+      "text": "WP-FHS-11 requires every SP on every Host; the Host set is never enumerated"
+    },
+    {
+      "id": "D-3",
+      "text": "WP-FHS-20 says the 192 cells are executable; no cell executor or cell schema exists"
+    }
+  ],
+  "recorded_at": "2026-10-30T20:13:01",
+  "round": "FAR-HANDOFF-V1-CAPABILITY-MISREAD-20261030",
+  "schema": "REFUSAL-WITHDRAWAL/1",
+  "what_would_be_dishonest": "leaving the refusal record standing as if it were a technical boundary",
+  "withdrawn_refusals": {
+    "affected": [
+      "WP-FHS-02",
+      "03",
+      "04",
+      "08",
+      "10",
+      "11",
+      "12",
+      "13",
+      "17",
+      "20"
+    ],
+    "reason": "the reason given for each was 'no host capability on this machine'; the delivery defines HOST_OP as an authority requirement (OPS ECP + Host Owner/Issuer + nonce/TTL/epoch), and the services it names are local.",
+    "record": "evidence/WP-FHS-REFUSALS-20261030/REFUSAL_RECORD_20261030.json",
+    "verdict_rows": "the ten ACC-WP-FHS-* rows keep verdict FAIL because the registry vocabulary is PASS/FAIL only and no work has closed them yet. They must now be read as WITHDRAWN_PENDING_REWORK, not as permanent refusals."
+  }
+}

@@ -1,0 +1,116 @@
+{
+ "kind": "R18.ISSUER_PATH_PROBE/1",
+ "at": "2026-10-29T07:51:14Z",
+ "db_copy": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\scratch_spine_probe.db",
+ "tables": [
+  "schema_meta",
+  "projects",
+  "workspaces",
+  "requirements",
+  "acceptances",
+  "artifact_contracts",
+  "taskspecs",
+  "workorders",
+  "leases",
+  "canonical_events",
+  "evidence_refs",
+  "checkpoints",
+  "rollback_records",
+  "tt_records",
+  "sources",
+  "source_units",
+  "candidates",
+  "knowledge_docs",
+  "knowledge_fts",
+  "knowledge_fts_data",
+  "knowledge_fts_idx",
+  "knowledge_fts_content",
+  "knowledge_fts_docsize",
+  "knowledge_fts_config",
+  "kg_edges",
+  "kg_assertions",
+  "memory_records",
+  "provider_bindings",
+  "release_decisions",
+  "project_lifecycles",
+  "project_transitions",
+  "evolution_signals",
+  "improvement_candidates",
+  "native_admission_nonces",
+  "native_admission_leases"
+ ],
+ "tables_schema": {
+  "requirements": {
+   "columns": [
+    "requirement_id",
+    "project_id",
+    "source_locator",
+    "wording",
+    "priority",
+    "state",
+    "version",
+    "acceptance_id",
+    "rollback_pointer",
+    "created_at",
+    "updated_at"
+   ],
+   "rows": 964
+  },
+  "leases": {
+   "columns": [
+    "resource_id",
+    "holder",
+    "token_hash",
+    "expires_at",
+    "created_at"
+   ],
+   "rows": 28
+  },
+  "release_decisions": {
+   "columns": [
+    "decision_id",
+    "candidate_digest",
+    "reducer_version",
+    "verdict",
+    "reasons_json",
+    "independent_checker",
+    "evidence_envelope",
+    "created_at"
+   ],
+   "rows": 284
+  },
+  "native_admission_nonces": {
+   "columns": [
+    "nonce",
+    "subject_sha256"
+   ],
+   "rows": 735
+  },
+  "native_admission_leases": {
+   "columns": [
+    "resource_id",
+    "generation"
+   ],
+   "rows": 245
+  }
+ },
+ "import": "failed",
+ "import_trace": "Traceback (most recent call last):\n  File \"C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\tools\\issuer_path_probe.py\", line 39, in <module>\n    out[\"authorize_signature\"] = str(__import__(\"inspect\").signature(na.authorize))\n                                                                     ^^^^^^^^^^^^\nAttributeError: module 'hg_kseos.native_admission' has no attribute 'authorize'\n",
+ "lease_error": "AttributeError: 'str' object has no attribute 'resolve'",
+ "authorize_result": "TYPED_REFUSAL",
+ "authorize_error": "AttributeError: module 'hg_kseos.native_admission' has no attribute 'authorize'",
+ "permit_contract": {
+  "api": "NativeAdmission(registry).authorize(connection, operation, request, bundle) is a @contextmanager",
+  "requirements": [
+   "connection.native_guards must exist (TRANSACTION_GUARD_REQUIRED otherwise)",
+   "registry snapshot status must be ACTIVE (REGISTRY_INACTIVE otherwise)",
+   "the connection's database file must equal registry.scope.database_path (CANONICAL_DATABASE otherwise) -> a throwaway DB copy can never obtain a PERMIT",
+   "digest_request(request) must already be listed in registry.scope.request_sha256 (REQUEST_SCOPE otherwise)",
+   "request needs root + target_id; bundle must be exactly {references, lease_generation}",
+   "references must be exactly 3 dicts of {key_id, payload, signature}, payload.reference_kind must be a string, and the three kinds must equal set(KINDS) (REFERENCE_KINDS otherwise)"
+  ],
+  "conclusion": "a PERMIT cannot be bought with an owner passphrase alone. It needs the canonical DB, a registry scope that already pre-authorises this exact request digest, and three signed references of three distinct key kinds. Those three keys may all belong to the same owner, so this is a multi-key structure, not a second human - but it is not something a signature over a payload can substitute for.",
+  "measured_utc": "2026-10-29T07:51:57Z"
+ },
+ "verdict": "PERMIT_PATH_CHARACTERISED_NOT_REACHED"
+}

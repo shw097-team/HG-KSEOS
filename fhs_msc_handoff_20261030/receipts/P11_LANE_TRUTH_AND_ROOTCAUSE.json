@@ -1,0 +1,122 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-LANE-TRUTH-AND-ROOTCAUSE/1",
+ "round": "FAR-CLOSURE-PROMOTION-20261030",
+ "supersedes": "P10_LANE_AVAILABILITY.json (arm-liveness conclusions only)",
+ "measured_at": "2026-10-30T15:20..15:42+08:00",
+ "correction": "P10 concluded 'no independent arm exists / supply gap'. That conclusion was WRONG. The arm is serviceable; the transport was down and the probe used the wrong plane.",
+ "facts": [
+  {
+   "id": "F1",
+   "fact": "ocx relay on 127.0.0.1:10101 was NOT running at 15:20 (ocx status: 'Proxy: not running', healthz unreachable; 'Restart safety: AT RISK', 'Codex autostart: disabled', 'Service: not installed').",
+   "effect": "every relay-routed arm dead regardless of config"
+  },
+  {
+   "id": "F2",
+   "fact": "port 10102 is C:/Users/user/.codex/desktop-model-router/router.ts (bun.exe PID 15520) - the DESKTOP/session plane, not the lane relay.",
+   "effect": "P5C '401' was the session plane answering for a lane request: plane confusion"
+  },
+  {
+   "id": "F3",
+   "fact": "relay 10101 started 15:37 (ocx 2.11.0, healthz ok, pid 23140).",
+   "effect": "documented topology restored"
+  },
+  {
+   "id": "F4",
+   "fact": "gpt-6.1-sol served OK: exit 0, 6.19 s, nonce echoed, usage tokens recorded, with --codex-home C:/Users/user/.codex --allow-human-home-transport --relay-base https://chatgpt.com/backend-api/codex.",
+   "effect": "the arm is alive; P10 verdict withdrawn"
+  },
+  {
+   "id": "F5",
+   "fact": "sealed home + relay 10101 for gpt-6.1-sol still fails in 6.48 s (no auth.json in sealed home; relay does not carry that arm's OAuth).",
+   "effect": "the documented 'sealed home, no auth.json' path is NOT provisioned for openai-codex on this relay"
+  },
+  {
+   "id": "F6",
+   "fact": "long VERIFY run on gpt-6.1-sol died at 121.65 s with upstream 'Selected model is at capacity. Please try a different model.' after doing real work (read files, computed source_sha256).",
+   "effect": "failure mode is capacity, not authentication; no capacity-aware retry exists in the lane"
+  }
+ ],
+ "unused_existing_tooling": [
+  "scripts/hgk-lane-preflight.py (T2 pre-lane identity preflight with typed failure codes) - never run",
+  "evidence/FAR-LANE-HEALTH-REPAIR-20261011, FAR-LANE-ROUTE-REBIND-20261015, FAR-AO-INDEPENDENCE-20261010 - never opened",
+  "config/hermes-codex-lane.json:69 relay_service_note ('ocx start --port 10101' required) - never read",
+  "HG-KSEOS manual 28c.2 (exit 4 ERR_RELAY_OAUTH_NEEDS_REAUTH before spawn) - never read",
+  "hgk-lane-dispatch.py own refusal text ERR_SEALED_HOME_OAUTH_TRANSPORT with next_command - not read"
+ ],
+ "root_causes": [
+  {
+   "id": "RC-1",
+   "class": "SYSTEMIC/TRANSPORT",
+   "text": "Lane routes were built as code, but relay lifetime was never supervised. Autostart disabled + no service + manual start = every reboot silently degrades to 'one model alive'.",
+   "evidence": "F1"
+  },
+  {
+   "id": "RC-2",
+   "class": "OPERATOR/PLANE",
+   "text": "Probed the desktop router (10102) as if it were the lane relay (10101/10100). This is the exact session-plane vs lane-plane confusion the owner instruction warns about.",
+   "evidence": "F2"
+  },
+  {
+   "id": "RC-3",
+   "class": "OPERATOR/METHOD",
+   "text": "Read the assignment table, not the measured chain; skipped the preflight that exists for exactly this purpose; treated one red receipt as a capability verdict.",
+   "evidence": "F6+F1+unused tooling list"
+  },
+  {
+   "id": "RC-4",
+   "class": "CONFIG",
+   "text": "config/model-lane-assignment.json states four different lane assignments (assignment rows / lane_chains / declared_by / user_instruction_revision_2). --require-assigned-arms therefore selected the dead arm instead of the live chain primary.",
+   "evidence": "config read 15:12"
+  }
+ ],
+ "prior_round_gaps": [
+  {
+   "id": "PR-1",
+   "text": "Transport supervision never built (RC-1) - the 2026-10-11 success was a live process, not a durable capability."
+  },
+  {
+   "id": "PR-2",
+   "text": "Owner-gated items logged but never closed: binary pin refresh, NVIDIA provider activation on relay, gpt-6-luna live admission (manual 28). These are exactly today's F-06 and the missing fallbacks."
+  },
+  {
+   "id": "PR-3",
+   "text": "Every round closed at T1 and deferred T2/T3; no round was ever chartered to build an acceptor, so native stays 0/22 by construction, not by bad luck."
+  },
+  {
+   "id": "PR-4",
+   "text": "Six PRs opened, none merged: main is not the source of truth, so each new round re-inherits the same gaps."
+  }
+ ],
+ "fixes": [
+  {
+   "id": "FIX-1",
+   "action": "Run scripts/hgk-lane-preflight.py before ANY lane turn; block if it does not return LANE_OK.",
+   "effort": "S",
+   "owner": "none"
+  },
+  {
+   "id": "FIX-2",
+   "action": "Idempotent relay start + healthz assert inside the preflight (ocx start --port 10101 if healthz fails); optional ocx service install for survival across reboot.",
+   "effort": "S",
+   "owner": "none"
+  },
+  {
+   "id": "FIX-3",
+   "action": "Pin lane base_url to 10100 (front door) -> 10101 (relay). 10102 is the desktop plane and must never appear in a lane invocation.",
+   "effort": "S",
+   "owner": "none"
+  },
+  {
+   "id": "FIX-4",
+   "action": "Reconcile config/model-lane-assignment.json to one measured truth (chain), derive assignment rows, add drift check to CI.",
+   "effort": "M",
+   "owner": "none"
+  },
+  {
+   "id": "FIX-5",
+   "action": "Capacity-aware retry for OAuth arms (retry once after 90 s, typed ERR_LANE_ARM_AT_CAPACITY instead of ALL_ROUTES_EXHAUSTED).",
+   "effort": "S",
+   "owner": "none"
+  }
+ ]
+}

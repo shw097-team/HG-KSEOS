@@ -1,0 +1,144 @@
+{
+ "schema": "R18.DELEGATION_GATE_MATRIX/2",
+ "delegation": "governance/delegation_R18_canonical.json",
+ "delegation_id": "R18-CANON-6733b6bb",
+ "owner_fingerprint": "412b351937be72a1",
+ "pos_cases": 7,
+ "pos_permitted": 7,
+ "neg_cases": 6,
+ "neg_refused": 6,
+ "all_cases_expected": true,
+ "rows": [
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-00",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-01",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-09",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-19",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-21",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-06",
+   "effect_class": "REPO_WRITE_TO_CANDIDATE_BRANCH",
+   "target": "candidate/r18-openspec-only",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "POS",
+   "wp": "WP-FHS-18",
+   "effect_class": "REPO_WRITE_TO_CANDIDATE_BRANCH",
+   "target": "candidate/r18-openspec-only",
+   "rc": 0,
+   "decision": "PERMIT_DERIVED",
+   "recorded": true,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-02",
+   "effect_class": "HOST_OP",
+   "target": "",
+   "rc": 7,
+   "decision": "REFUSED_CLASS_NOT_ALLOWLISTED",
+   "recorded": false,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-14",
+   "effect_class": "RELEASE",
+   "target": "",
+   "rc": 7,
+   "decision": "REFUSED_CLASS_DENIED",
+   "recorded": false,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-05",
+   "effect_class": "LOCAL_DRAFT_WRITE",
+   "target": "",
+   "rc": 7,
+   "decision": "REFUSED_CLASS_DENIED",
+   "recorded": false,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-06",
+   "effect_class": "REPO_WRITE_TO_CANDIDATE_BRANCH",
+   "target": "main",
+   "rc": 7,
+   "decision": "REFUSED_TARGET_NOT_CANDIDATE",
+   "recorded": false,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-00",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "rc": 7,
+   "decision": "REFUSED_EXPIRED_OR_NOT_YET_VALID",
+   "recorded": false,
+   "owner_fingerprint": "412b351937be72a1"
+  },
+  {
+   "kind": "NEG",
+   "wp": "WP-FHS-16",
+   "effect_class": "SOURCE_READ",
+   "target": "",
+   "rc": 7,
+   "decision": "REFUSED_WP_NOT_ALLOWLISTED",
+   "recorded": false,
+   "owner_fingerprint": "412b351937be72a1"
+  }
+ ],
+ "claim_ceiling": "LOCAL_DERIVATION_NOT_NATIVE_BUNDLE: enforces the canonical owner's signed scope; issues no native PERMIT and performs no HOST_OP or release"
+}

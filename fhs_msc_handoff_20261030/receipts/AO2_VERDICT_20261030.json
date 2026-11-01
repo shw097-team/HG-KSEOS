@@ -1,0 +1,33 @@
+{
+  "nonce": "NONCE-AO-20261030-D",
+  "overall": "PASS",
+  "claims": [
+    {
+      "id": "O1-neg",
+      "verdict": "PASS",
+      "evidence": "python C:/Projects/Agent_Workspace/HG-KSEOS/scripts/ir1_policy_gate.py --repo C:/wg/ao2/scratch --json: POLICY_DIRTY, exit 2; after committing edit: POLICY_COMMITTED, exit 0."
+    },
+    {
+      "id": "O6-neg",
+      "verdict": "PASS",
+      "evidence": "python C:/wg/ao2/recurrence_gate_probe.py --all: blocked=[RC-AO-MISSING-TEST], regression_test file missing, exit 2. Copy differs only in ROOT and LEDGER constants. python C:/Projects/Agent_Workspace/HG-KSEOS/scripts/recurrence_gate.py --all: blocked=[], exit 0."
+    },
+    {
+      "id": "O7",
+      "verdict": "PASS",
+      "evidence": "From candidate root, PYTHONDONTWRITEBYTECODE=1 HGK_LANE_SCRATCH=C:/wg/ao2/test_scratch TEMP/TMP/TMPDIR=C:/wg/ao2/test_scratch python -m pytest tests/test_durable_gates.py tests/test_lane_policy.py -q -p no:cacheprovider --basetemp C:/wg/ao2/pytest_tmp: 12 passed, 116 subtests passed in 15.41s; 0 failed, 0 skipped; exit 0."
+    }
+  ],
+  "convictions": [],
+  "writes_outside_scratch": [
+    "No officer/test writes observed. Concurrent commit 51dd8b6 at 18:50:30, before checks began at 18:52:32, changed C:/Projects/Agent_Workspace/HG-KSEOS/config/recurrence-ledger.json and nine .git paths; exact paths in C:/wg/ao2/write_audit.json."
+  ],
+  "limitations": [
+    "Full-tree write audit incomplete: 138952 scan errors from inaccessible/missing paths. Five bound subject files retained identical SHA-256 hashes throughout checks."
+  ],
+  "evidence_files": [
+    "C:/wg/ao2/raw_evidence.json",
+    "C:/wg/ao2/subject_binding.json",
+    "C:/wg/ao2/write_audit.json"
+  ]
+}

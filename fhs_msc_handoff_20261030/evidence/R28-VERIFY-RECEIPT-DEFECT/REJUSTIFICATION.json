@@ -1,0 +1,60 @@
+{
+  "schema": "EVIDENCE-REJUSTIFICATION/1",
+  "rows": [
+    "ACC-WP-FHS-03-V2",
+    "ACC-WP-FHS-04-V2",
+    "ACC-WP-FHS-08-V2"
+  ],
+  "original_citation": "EV-WP-FHS-03-04-08-ADMISSION-CHAIN-AO-R28C -- VOIDED (ERR_CHECKER_MUTATED_SUBJECT)",
+  "now_supported_by": {
+    "nonce": "NONCE-AO-R28-H-20261030",
+    "receipt": "C:/wg/ao11/ao_r28h.json",
+    "gate": "LANE_SERVED_AS_CLAIMED",
+    "receipt_complete": true,
+    "asked": "gpt-6.1-sol",
+    "served": "gpt-6.1-sol",
+    "rank": 1,
+    "officer_verdict": "PASS 6/6, 0 convictions",
+    "checks": [
+      "O1",
+      "O2",
+      "O3",
+      "O4",
+      "O5",
+      "O6"
+    ]
+  },
+  "what_changed_in_the_world": "nothing in the candidate: the judgement is the same and now rests on a receipt that proves which arm served and that the turn finished",
+  "read_this_first": "TRANSCRIPTION_CORRECTION.json (the honest record that the first citation was void)",
+  "round_closure": {
+    "schema": "ROUND-CLOSURE/1",
+    "round": "FHS-MSC-ALLPASS-R28-20261030",
+    "verdict": "ROUND_MAY_CLOSE",
+    "closed_at_utc": "2026-10-30T14:11:47+00:00",
+    "lanes_used": [
+      {
+        "lane": "PLAN",
+        "receipt": "C:/wg/plan1/plan_receipt.json",
+        "gate": "LANE_SERVED_AS_CLAIMED",
+        "asked": "gpt-6.1-sol",
+        "served": "gpt-6.1-sol",
+        "rank": 1,
+        "seconds": 55.51
+      },
+      {
+        "lane": "VERIFY_SECURITY",
+        "receipt": "C:/wg/ao11/ao_r28h.json",
+        "gate": "LANE_SERVED_AS_CLAIMED",
+        "asked": "gpt-6.1-sol",
+        "served": "gpt-6.1-sol",
+        "rank": 1,
+        "seconds": 163.65
+      }
+    ],
+    "blocking_tts_open": [],
+    "claims_checked": 0,
+    "problems": [],
+    "rule": "a round may not close while it owes a blocking TT, a claimed lane has no receipt, or a MEASURED claim rests on a derived artefact"
+  },
+  "recorded_at": "2026-10-30T22:11:55"
+}

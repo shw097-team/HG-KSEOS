@@ -1,0 +1,59 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-LANE-AVAILABILITY/1",
+ "round": "FAR-CLOSURE-PROMOTION-20261030",
+ "question": "which lane arms can actually serve right now, and can any of them be independent of EXECUTE?",
+ "assignments_artifact": "config/model-lane-assignment.json revision 38",
+ "probes": [
+  {
+   "lane": "VERIFY_SECURITY",
+   "force_rank": 1,
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "ok": true,
+   "seconds": 3.21,
+   "nonce": true,
+   "independence": "NOT_INDEPENDENT \u2014 same canonical model as EXECUTE"
+  },
+  {
+   "lane": "VERIFY_SECURITY",
+   "force_rank": 3,
+   "arm": "opencode-go/glm-5.3-flash",
+   "ok": false,
+   "seconds": 0.71,
+   "code": "ERR_LANE_ALL_ROUTES_EXHAUSTED",
+   "independence": "unavailable"
+  },
+  {
+   "lane": "PLAN",
+   "force_rank": 1,
+   "arm": "opencode-go/deepseek-v4.1-flash",
+   "ok": true,
+   "seconds": 2.33,
+   "nonce": true,
+   "independence": "NOT_INDEPENDENT \u2014 and PLAN is not a Codex-CLI lane anyway (gate_scope)"
+  },
+  {
+   "lane": "VERIFY_SECURITY",
+   "force_rank": 2,
+   "arm": "openai-codex/gpt-6.1-sol",
+   "ok": false,
+   "code": "ERR_LANE_ALL_ROUTES_EXHAUSTED",
+   "detail": "upstream 401 (see P5C)",
+   "independence": "would be independent, but unserviceable"
+  }
+ ],
+ "conclusion": "exactly one model answers on this host (opencode-go/deepseek-v4.1-flash) and it is the EXECUTE arm; therefore no serving arm is independent of the executor",
+ "consequence": "INDEPENDENT_ACCEPTED cannot be achieved today by any lane configuration; any VERIFY run on deepseek must be labelled RECOMPUTE_BY_EXECUTOR, never acceptance",
+ "recommended_gate": {
+  "name": "independence_requirement",
+  "rule": "served_model_must_differ_from_execute",
+  "error": "ERR_VERIFIER_NOT_INDEPENDENT",
+  "why": "makes self-verification impossible at the machine layer instead of relying on operator memory"
+ },
+ "config_inconsistency": {
+  "assignment_rows": "PLAN/VERIFY = openai-codex/gpt-6.1-sol",
+  "lane_chains_rank1": "both = opencode-go/deepseek-v4.1-flash",
+  "declared_by": "all three lanes = deepseek (owner order 2026-10-23)",
+  "user_instruction_revision_2": "VERIFY = GLM-5.3 (NVIDIA primary, OPENCODE GO fallback)",
+  "reading": "three incompatible statements in one artefact; the dispatcher obeys different keys for different questions, which is why --require-assigned-arms skipped the working primary and landed on the 401 arm"
+ }
+}

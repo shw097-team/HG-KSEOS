@@ -1,0 +1,18 @@
+{
+  "declared_dependency_manifests": [],
+  "file_inventory_by_extension": {
+    ".json": 579,
+    ".md": 197,
+    ".py": 93,
+    ".sql": 1,
+    ".txt": 39,
+    ".yaml": 2
+  },
+  "finding": "no license/NOTICE file and no dependency manifest ship inside the package; the tools are stdlib-only python, so there is nothing to license-scan until the deliverable grows dependencies",
+  "generated_at": "2026-10-30T19:13:20",
+  "license_files_found": [],
+  "schema": "SBOM/1",
+  "subject": "FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1",
+  "supply_chain_claim": "SUPPLY_CHAIN_UNVERIFIED — absence of a manifest is not a clean SBOM",
+  "work_package": "WP-FHS-19"
+}

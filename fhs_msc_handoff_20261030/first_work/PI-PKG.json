@@ -1,0 +1,1216 @@
+{
+  "subject_id": "PI-4298cad2300fb52f",
+  "version": "1",
+  "content_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+  "schema_version": "PI-PKG@1",
+  "stable_semantic_contract": {
+    "contract": "stable",
+    "profile_binding": {
+      "subject_id": "PB-8d704cfd3de058e1",
+      "version": "1",
+      "content_hash": "8d704cfd3de058e1264097d35db0005bc9c488b9b920b7f58d5a49ae69028c5f",
+      "schema_version": "ProfileBinding@1",
+      "profile": "STANDARD",
+      "axes": [
+        "intent",
+        "knowledge",
+        "release",
+        "trust_boundary",
+        "verification"
+      ],
+      "vetoes": [],
+      "artifact_depth": "L3_INTEGRATION_RUNTIME",
+      "assurance": [
+        "deterministic_validator",
+        "negative_security"
+      ]
+    },
+    "atoms": [
+      {
+        "subject_id": "ATOM-190e7909878ec830",
+        "version": "1",
+        "content_hash": "190e7909878ec830ec08f1f5568124d97013970cdd55ed356cbeb16d8ac2b14a",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-8ca31c3b63e9d8413f79",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-0-68",
+          "span": [
+            0,
+            68
+          ],
+          "child": 0,
+          "text": "The first work must accept an ordinary nonempty Goal from its caller",
+          "source_ref": "SRC-19e062f852f001b88078"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The first work must accept an ordinary nonempty Goal from its caller",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-8ca31c3b63e9d8413f79",
+            "predicate": "The first work must accept an ordinary nonempty Goal from its caller",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-8ca31c3b63e9d8413f79/negative",
+          "failure_condition": "violate MUST: The first work must accept an ordinary nonempty Goal from its caller"
+        }
+      },
+      {
+        "subject_id": "ATOM-64dc86cf1f51f5d6",
+        "version": "1",
+        "content_hash": "64dc86cf1f51f5d6ac02ae2e7b65d17444ed5d06e1f681410f5810f4a35bef83",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-fb32edfab84f37c859d3",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-70-165",
+          "span": [
+            70,
+            165
+          ],
+          "child": 0,
+          "text": "The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents",
+          "source_ref": "SRC-9a2b5e5f43164e1ac1f3"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-fb32edfab84f37c859d3",
+            "predicate": "The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-fb32edfab84f37c859d3/negative",
+          "failure_condition": "violate MUST: The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents"
+        }
+      },
+      {
+        "subject_id": "ATOM-0d5fdf8c5c7b18c5",
+        "version": "1",
+        "content_hash": "0d5fdf8c5c7b18c510a388c405839baefaaae97fbfacc6ac4283aa37a646ad0d",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-65751e46474c1c7285c5",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-167-250",
+          "span": [
+            167,
+            250
+          ],
+          "child": 0,
+          "text": "The source reader must compare every admitted corpus file against its frozen SHA256",
+          "source_ref": "SRC-7d5d74cebfec0424e7b5"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The source reader must compare every admitted corpus file against its frozen SHA256",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-65751e46474c1c7285c5",
+            "predicate": "The source reader must compare every admitted corpus file against its frozen SHA256",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-65751e46474c1c7285c5/negative",
+          "failure_condition": "violate MUST: The source reader must compare every admitted corpus file against its frozen SHA256"
+        }
+      },
+      {
+        "subject_id": "ATOM-414506b90f2eb856",
+        "version": "1",
+        "content_hash": "414506b90f2eb856ef4866870be8eb80b6e2040f14b2586691923a09ce41583b",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-d880316cfcf6864c306f",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-252-325",
+          "span": [
+            252,
+            325
+          ],
+          "child": 0,
+          "text": "The source reader must reject a locator escaping its admitted corpus root",
+          "source_ref": "SRC-3be49e5c8cd7cff87173"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The source reader must reject a locator escaping its admitted corpus root",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-d880316cfcf6864c306f",
+            "predicate": "The source reader must reject a locator escaping its admitted corpus root",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-d880316cfcf6864c306f/negative",
+          "failure_condition": "violate MUST: The source reader must reject a locator escaping its admitted corpus root"
+        }
+      },
+      {
+        "subject_id": "ATOM-6787c3acc31c4324",
+        "version": "1",
+        "content_hash": "6787c3acc31c4324113c3b94526c3c697685a5af953de66a95471ed44842a9a7",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-fd4ebdda798ab51a503e",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-327-433",
+          "span": [
+            327,
+            433
+          ],
+          "child": 0,
+          "text": "The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key",
+          "source_ref": "SRC-e9acd8b24c82a902cfc4"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-fd4ebdda798ab51a503e",
+            "predicate": "The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-fd4ebdda798ab51a503e/negative",
+          "failure_condition": "violate MUST: The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key"
+        }
+      },
+      {
+        "subject_id": "ATOM-3f4b9c0ad9baa184",
+        "version": "1",
+        "content_hash": "3f4b9c0ad9baa1841fe8050a1b56af8c08b92d0ef2e8a62e672559ff74bf30e8",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-9a3917c3e7c727825c13",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-435-494",
+          "span": [
+            435,
+            494
+          ],
+          "child": 0,
+          "text": "The ProductSPEC must identify the actual first work persona",
+          "source_ref": "SRC-db95afb92dc3ff4ae1d7"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The ProductSPEC must identify the actual first work persona",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-9a3917c3e7c727825c13",
+            "predicate": "The ProductSPEC must identify the actual first work persona",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-9a3917c3e7c727825c13/negative",
+          "failure_condition": "violate MUST: The ProductSPEC must identify the actual first work persona"
+        }
+      },
+      {
+        "subject_id": "ATOM-ac49e1109bafa4c4",
+        "version": "1",
+        "content_hash": "ac49e1109bafa4c44de7731596babbd8a884a557b1bb99798077cc12d3e1cb01",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-3d10ca454fa1adf5bbef",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-496-601",
+          "span": [
+            496,
+            601
+          ],
+          "child": 0,
+          "text": "The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal",
+          "source_ref": "SRC-f63008b1f8efa5811688"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-3d10ca454fa1adf5bbef",
+            "predicate": "The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-3d10ca454fa1adf5bbef/negative",
+          "failure_condition": "violate MUST: The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal"
+        }
+      },
+      {
+        "subject_id": "ATOM-e82524573d75bbf1",
+        "version": "1",
+        "content_hash": "e82524573d75bbf13d544b17bc36438d643a16b3de8f353f8aa56db084d6a528",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-ddf075f96bb5b78cfa7c",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-603-687",
+          "span": [
+            603,
+            687
+          ],
+          "child": 0,
+          "text": "The ProductSPEC must define a readable three SPEC output as the first useful outcome",
+          "source_ref": "SRC-92bc05841b2fc9a5ad61"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The ProductSPEC must define a readable three SPEC output as the first useful outcome",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-ddf075f96bb5b78cfa7c",
+            "predicate": "The ProductSPEC must define a readable three SPEC output as the first useful outcome",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-ddf075f96bb5b78cfa7c/negative",
+          "failure_condition": "violate MUST: The ProductSPEC must define a readable three SPEC output as the first useful outcome"
+        }
+      },
+      {
+        "subject_id": "ATOM-645a4bb71a960a62",
+        "version": "1",
+        "content_hash": "645a4bb71a960a6286f08eac7aa5a93ab4e30f240740c8ff6d4dd70e2b2bc9f0",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-9b72cb316849a211287f",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-689-798",
+          "span": [
+            689,
+            798
+          ],
+          "child": 0,
+          "text": "The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement",
+          "source_ref": "SRC-b2f1951e96a0404c3089"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-9b72cb316849a211287f",
+            "predicate": "The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-9b72cb316849a211287f/negative",
+          "failure_condition": "violate MUST: The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement"
+        }
+      },
+      {
+        "subject_id": "ATOM-2e12f987e5f2d55f",
+        "version": "1",
+        "content_hash": "2e12f987e5f2d55f964b210c259f53811b80e916c38f2f55661382177ba795a4",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-77415e64e678a32ade72",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-800-875",
+          "span": [
+            800,
+            875
+          ],
+          "child": 0,
+          "text": "The ArchitectureSPEC must name one original writer for every interface seam",
+          "source_ref": "SRC-b6a1be2c9e4b175425a8"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The ArchitectureSPEC must name one original writer for every interface seam",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-77415e64e678a32ade72",
+            "predicate": "The ArchitectureSPEC must name one original writer for every interface seam",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-77415e64e678a32ade72/negative",
+          "failure_condition": "violate MUST: The ArchitectureSPEC must name one original writer for every interface seam"
+        }
+      },
+      {
+        "subject_id": "ATOM-29fce09b4aa479f4",
+        "version": "1",
+        "content_hash": "29fce09b4aa479f4cfc912a31c0a0890c7c9714b7324abc030ffa5746948afee",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-5c8089f128e1c7978a42",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-877-964",
+          "span": [
+            877,
+            964
+          ],
+          "child": 0,
+          "text": "The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload",
+          "source_ref": "SRC-213fac8a3975c82dc4bb"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-5c8089f128e1c7978a42",
+            "predicate": "The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-5c8089f128e1c7978a42/negative",
+          "failure_condition": "violate MUST: The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload"
+        }
+      },
+      {
+        "subject_id": "ATOM-3ad573df5fedc81f",
+        "version": "1",
+        "content_hash": "3ad573df5fedc81f222d7599aff0d339479c1dfbb61887822634bef6cc55fa53",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-f0e34fe35adb4e26de4f",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-966-1042",
+          "span": [
+            966,
+            1042
+          ],
+          "child": 0,
+          "text": "The ProgramSPEC must retain an acyclic dependency closure for the first work",
+          "source_ref": "SRC-1625a99af870827c5380"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The ProgramSPEC must retain an acyclic dependency closure for the first work",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-f0e34fe35adb4e26de4f",
+            "predicate": "The ProgramSPEC must retain an acyclic dependency closure for the first work",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-f0e34fe35adb4e26de4f/negative",
+          "failure_condition": "violate MUST: The ProgramSPEC must retain an acyclic dependency closure for the first work"
+        }
+      },
+      {
+        "subject_id": "ATOM-8d049d5ed5691247",
+        "version": "1",
+        "content_hash": "8d049d5ed56912473cf801ab50c8460c6cf4ed74af64a7d37a4fa24066867f64",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-c0b6a4ab1021e82f4146",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-1044-1109",
+          "span": [
+            1044,
+            1109
+          ],
+          "child": 0,
+          "text": "The ProgramSPEC must bind each prerequisite to its original owner",
+          "source_ref": "SRC-2be5498066f4cf472a51"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The ProgramSPEC must bind each prerequisite to its original owner",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-c0b6a4ab1021e82f4146",
+            "predicate": "The ProgramSPEC must bind each prerequisite to its original owner",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-c0b6a4ab1021e82f4146/negative",
+          "failure_condition": "violate MUST: The ProgramSPEC must bind each prerequisite to its original owner"
+        }
+      },
+      {
+        "subject_id": "ATOM-0bbed7316b47bf9e",
+        "version": "1",
+        "content_hash": "0bbed7316b47bf9ee29cd259a8bb5586a33fa14acd463c9881ff62973ab13802",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-65dbc76056e227804d00",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-1111-1208",
+          "span": [
+            1111,
+            1208
+          ],
+          "child": 0,
+          "text": "The first work must write its three SPEC drafts only inside the admitted isolated draft directory",
+          "source_ref": "SRC-81081a5dbca62a952c1f"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The first work must write its three SPEC drafts only inside the admitted isolated draft directory",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-65dbc76056e227804d00",
+            "predicate": "The first work must write its three SPEC drafts only inside the admitted isolated draft directory",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-65dbc76056e227804d00/negative",
+          "failure_condition": "violate MUST: The first work must write its three SPEC drafts only inside the admitted isolated draft directory"
+        }
+      },
+      {
+        "subject_id": "ATOM-b14ab8706059ef92",
+        "version": "1",
+        "content_hash": "b14ab8706059ef9210c05f15d1245bec3fb62508559b4ea6b9f9a4a396e611e4",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-37af4ad25a3ef8cacbde",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-1210-1290",
+          "span": [
+            1210,
+            1290
+          ],
+          "child": 0,
+          "text": "The receiver must invalidate only the outputs dependent on a changed source hash",
+          "source_ref": "SRC-4cd383c1adaf0b89f1a4"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The receiver must invalidate only the outputs dependent on a changed source hash",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-37af4ad25a3ef8cacbde",
+            "predicate": "The receiver must invalidate only the outputs dependent on a changed source hash",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-37af4ad25a3ef8cacbde/negative",
+          "failure_condition": "violate MUST: The receiver must invalidate only the outputs dependent on a changed source hash"
+        }
+      },
+      {
+        "subject_id": "ATOM-74fa6a670888909c",
+        "version": "1",
+        "content_hash": "74fa6a670888909ca232fc338b09c5c6f6610e4f36a58136ac9f71c3953fc393",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-d2b33c0e476af2c957be",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-1292-1387",
+          "span": [
+            1292,
+            1387
+          ],
+          "child": 0,
+          "text": "The first work must start source reading plus local drafting without a future execution receipt",
+          "source_ref": "SRC-21d09fa5df8ad0471c69"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The first work must start source reading plus local drafting without a future execution receipt",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-d2b33c0e476af2c957be",
+            "predicate": "The first work must start source reading plus local drafting without a future execution receipt",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-d2b33c0e476af2c957be/negative",
+          "failure_condition": "violate MUST: The first work must start source reading plus local drafting without a future execution receipt"
+        }
+      },
+      {
+        "subject_id": "ATOM-19a4aeeae832df24",
+        "version": "1",
+        "content_hash": "19a4aeeae832df2427d768c1fc128dcc49d08e029882986cea7d4cf285d3df9e",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-d437fde8c62b1cf9d431",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-1389-1507",
+          "span": [
+            1389,
+            1507
+          ],
+          "child": 0,
+          "text": "The first work must complete its deterministic source reading plus draft materialization with provider access disabled",
+          "source_ref": "SRC-2679e450038a57dcc0be"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The first work must complete its deterministic source reading plus draft materialization with provider access disabled",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-d437fde8c62b1cf9d431",
+            "predicate": "The first work must complete its deterministic source reading plus draft materialization with provider access disabled",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-d437fde8c62b1cf9d431/negative",
+          "failure_condition": "violate MUST: The first work must complete its deterministic source reading plus draft materialization with provider access disabled"
+        }
+      },
+      {
+        "subject_id": "ATOM-4732a8ca4dc704ac",
+        "version": "1",
+        "content_hash": "4732a8ca4dc704acaf28a710638883c68d7efe08c0ab600b033e6466520265be",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-668f3d2c96af876c51b3",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-1509-1634",
+          "span": [
+            1509,
+            1634
+          ],
+          "child": 0,
+          "text": "The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases",
+          "source_ref": "SRC-50c847d7cb64a4e72885"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-668f3d2c96af876c51b3",
+            "predicate": "The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-668f3d2c96af876c51b3/negative",
+          "failure_condition": "violate MUST: The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases"
+        }
+      },
+      {
+        "subject_id": "ATOM-663a1038ed255aaa",
+        "version": "1",
+        "content_hash": "663a1038ed255aaaf7374f2772a35dd44598d112ae1ac0f6a5667ca8776060de",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-44d6c0127d4f89f133d7",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-1636-1730",
+          "span": [
+            1636,
+            1730
+          ],
+          "child": 0,
+          "text": "The receiver must derive the actual RepoContext immediately before any PD construction binding",
+          "source_ref": "SRC-49d89deb7d8f73b0a7b7"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The receiver must derive the actual RepoContext immediately before any PD construction binding",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-44d6c0127d4f89f133d7",
+            "predicate": "The receiver must derive the actual RepoContext immediately before any PD construction binding",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-44d6c0127d4f89f133d7/negative",
+          "failure_condition": "violate MUST: The receiver must derive the actual RepoContext immediately before any PD construction binding"
+        }
+      },
+      {
+        "subject_id": "ATOM-6d8b23700a850dc4",
+        "version": "1",
+        "content_hash": "6d8b23700a850dc4c8ee03366086df440153079ca6b85becf3c38ec5081ab416",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-ce6ff8a699d0cafa931b",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-1732-1861",
+          "span": [
+            1732,
+            1861
+          ],
+          "child": 0,
+          "text": "The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation",
+          "source_ref": "SRC-d6684be663d5253993bf"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-ce6ff8a699d0cafa931b",
+            "predicate": "The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-ce6ff8a699d0cafa931b/negative",
+          "failure_condition": "violate MUST: The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation"
+        }
+      },
+      {
+        "subject_id": "ATOM-e4e2a740fd82947f",
+        "version": "1",
+        "content_hash": "e4e2a740fd82947f6fb1d205b67ad70208a14bfde3054de3a1f1f0de2c57cd44",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-5d6191c7f95d61645dc6",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-1863-1947",
+          "span": [
+            1863,
+            1947
+          ],
+          "child": 0,
+          "text": "The worker receiver must reject an expired lease before continuing a governed effect",
+          "source_ref": "SRC-224682e398695d09aea7"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The worker receiver must reject an expired lease before continuing a governed effect",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-5d6191c7f95d61645dc6",
+            "predicate": "The worker receiver must reject an expired lease before continuing a governed effect",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-5d6191c7f95d61645dc6/negative",
+          "failure_condition": "violate MUST: The worker receiver must reject an expired lease before continuing a governed effect"
+        }
+      },
+      {
+        "subject_id": "ATOM-7b4b8fc1efa6d374",
+        "version": "1",
+        "content_hash": "7b4b8fc1efa6d3741b7bb1a1aa41e670f9794688d10d99a0efa62a35b7dbec85",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-f022bfea4a4affc17e79",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-1949-2024",
+          "span": [
+            1949,
+            2024
+          ],
+          "child": 0,
+          "text": "The resume receiver must reconcile an unknown world effect before any retry",
+          "source_ref": "SRC-b1ebf9e242ac407076b0"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The resume receiver must reconcile an unknown world effect before any retry",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-f022bfea4a4affc17e79",
+            "predicate": "The resume receiver must reconcile an unknown world effect before any retry",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-f022bfea4a4affc17e79/negative",
+          "failure_condition": "violate MUST: The resume receiver must reconcile an unknown world effect before any retry"
+        }
+      },
+      {
+        "subject_id": "ATOM-d180223323c2b1f5",
+        "version": "1",
+        "content_hash": "d180223323c2b1f5b5965d27f0bd7f0968dac3a969f86fad6849fcf224ccd622",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-2cf8ea9fa834f3a15857",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-2026-2111",
+          "span": [
+            2026,
+            2111
+          ],
+          "child": 0,
+          "text": "The handoff must retain the original Hermes WorkID queue lease plus journal ownership",
+          "source_ref": "SRC-f3abedde3d75c6480e70"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The handoff must retain the original Hermes WorkID queue lease plus journal ownership",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-2cf8ea9fa834f3a15857",
+            "predicate": "The handoff must retain the original Hermes WorkID queue lease plus journal ownership",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-2cf8ea9fa834f3a15857/negative",
+          "failure_condition": "violate MUST: The handoff must retain the original Hermes WorkID queue lease plus journal ownership"
+        }
+      },
+      {
+        "subject_id": "ATOM-eb7caa00ea3f5930",
+        "version": "1",
+        "content_hash": "eb7caa00ea3f5930de00d66e10caa2335a75996f20701d59986f4c3c22b8ba6b",
+        "schema_version": "RequirementAtom@1",
+        "req_id": "REQ-e24889f23fdcda5f543f",
+        "source_clause": {
+          "file": "C:\\wg\\repro\\02_FIRST_WORK\\FIRST_WORK_FUNCTIONAL_SOURCE.md",
+          "kind": "file",
+          "clause_id": "clause-2113-2199",
+          "span": [
+            2113,
+            2199
+          ],
+          "child": 0,
+          "text": "The delivery receiver must request the original protected checker after world readback",
+          "source_ref": "SRC-894d135f03d80a3dddc2"
+        },
+        "owner": "PIPD-EC",
+        "acceptance_cue": "MUST: The delivery receiver must request the original protected checker after world readback",
+        "risk_guard": {
+          "polarity": "MUST",
+          "oracle": {
+            "id": "ORACLE-REQ-e24889f23fdcda5f543f",
+            "predicate": "The delivery receiver must request the original protected checker after world readback",
+            "expected": "required"
+          },
+          "negative_fixture": "fixtures/REQ-e24889f23fdcda5f543f/negative",
+          "failure_condition": "violate MUST: The delivery receiver must request the original protected checker after world readback"
+        }
+      }
+    ],
+    "goal": "為普通 Goal 產生有來源與可判 POS/NEG 的 Product、Architecture、Program SPEC，交原 PIPD，再交 Hermes 於原權限下續工",
+    "sources": [
+      {
+        "source_id": "SRC-19e062f852f001b88078",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The first work must accept an ordinary nonempty Goal from its caller"
+      },
+      {
+        "source_id": "SRC-9a2b5e5f43164e1ac1f3",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents"
+      },
+      {
+        "source_id": "SRC-7d5d74cebfec0424e7b5",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The source reader must compare every admitted corpus file against its frozen SHA256"
+      },
+      {
+        "source_id": "SRC-3be49e5c8cd7cff87173",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The source reader must reject a locator escaping its admitted corpus root"
+      },
+      {
+        "source_id": "SRC-e9acd8b24c82a902cfc4",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key"
+      },
+      {
+        "source_id": "SRC-db95afb92dc3ff4ae1d7",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The ProductSPEC must identify the actual first work persona"
+      },
+      {
+        "source_id": "SRC-f63008b1f8efa5811688",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal"
+      },
+      {
+        "source_id": "SRC-92bc05841b2fc9a5ad61",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The ProductSPEC must define a readable three SPEC output as the first useful outcome"
+      },
+      {
+        "source_id": "SRC-b2f1951e96a0404c3089",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement"
+      },
+      {
+        "source_id": "SRC-b6a1be2c9e4b175425a8",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The ArchitectureSPEC must name one original writer for every interface seam"
+      },
+      {
+        "source_id": "SRC-213fac8a3975c82dc4bb",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload"
+      },
+      {
+        "source_id": "SRC-1625a99af870827c5380",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The ProgramSPEC must retain an acyclic dependency closure for the first work"
+      },
+      {
+        "source_id": "SRC-2be5498066f4cf472a51",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The ProgramSPEC must bind each prerequisite to its original owner"
+      },
+      {
+        "source_id": "SRC-81081a5dbca62a952c1f",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The first work must write its three SPEC drafts only inside the admitted isolated draft directory"
+      },
+      {
+        "source_id": "SRC-4cd383c1adaf0b89f1a4",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The receiver must invalidate only the outputs dependent on a changed source hash"
+      },
+      {
+        "source_id": "SRC-21d09fa5df8ad0471c69",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The first work must start source reading plus local drafting without a future execution receipt"
+      },
+      {
+        "source_id": "SRC-2679e450038a57dcc0be",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The first work must complete its deterministic source reading plus draft materialization with provider access disabled"
+      },
+      {
+        "source_id": "SRC-50c847d7cb64a4e72885",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases"
+      },
+      {
+        "source_id": "SRC-49d89deb7d8f73b0a7b7",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The receiver must derive the actual RepoContext immediately before any PD construction binding"
+      },
+      {
+        "source_id": "SRC-d6684be663d5253993bf",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation"
+      },
+      {
+        "source_id": "SRC-224682e398695d09aea7",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The worker receiver must reject an expired lease before continuing a governed effect"
+      },
+      {
+        "source_id": "SRC-b1ebf9e242ac407076b0",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The resume receiver must reconcile an unknown world effect before any retry"
+      },
+      {
+        "source_id": "SRC-f3abedde3d75c6480e70",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The handoff must retain the original Hermes WorkID queue lease plus journal ownership"
+      },
+      {
+        "source_id": "SRC-894d135f03d80a3dddc2",
+        "sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+        "text": "The delivery receiver must request the original protected checker after world readback"
+      }
+    ]
+  },
+  "acceptance": {
+    "mode": "bound",
+    "oracle_source": "DOC-03 DOMAIN_ORACLES"
+  },
+  "trace": [
+    {
+      "subject_id": "TL-f90ef8390878d4b9",
+      "version": "1",
+      "content_hash": "f90ef8390878d4b91b7b448daeb0cb469b4411cda2e2795db3ebe0eb27f39a90",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-190e7909878ec830",
+      "to_hash": "190e7909878ec830ec08f1f5568124d97013970cdd55ed356cbeb16d8ac2b14a",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-15d0a573159c9fb9",
+      "version": "1",
+      "content_hash": "15d0a573159c9fb9d204166c772096679e0dd018a4b11f6d9aa3e2a43cf4afd6",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-64dc86cf1f51f5d6",
+      "to_hash": "64dc86cf1f51f5d6ac02ae2e7b65d17444ed5d06e1f681410f5810f4a35bef83",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-539182adfd98aad1",
+      "version": "1",
+      "content_hash": "539182adfd98aad1390d7e4e1a952f9f81f1cb0c527a3bc49a6ed3f5c4894538",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-0d5fdf8c5c7b18c5",
+      "to_hash": "0d5fdf8c5c7b18c510a388c405839baefaaae97fbfacc6ac4283aa37a646ad0d",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-06764d745d3a8cd6",
+      "version": "1",
+      "content_hash": "06764d745d3a8cd6264e86ce259a17a0228f275b432d8e62100db382bba4ab7f",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-414506b90f2eb856",
+      "to_hash": "414506b90f2eb856ef4866870be8eb80b6e2040f14b2586691923a09ce41583b",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-702c2423318b0e2d",
+      "version": "1",
+      "content_hash": "702c2423318b0e2ddebacc961ed50b9e154eb0b128c58d6e1cc7fa93b79ee8d3",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-6787c3acc31c4324",
+      "to_hash": "6787c3acc31c4324113c3b94526c3c697685a5af953de66a95471ed44842a9a7",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-115ffff95d104f32",
+      "version": "1",
+      "content_hash": "115ffff95d104f3274bbb6276c1f1f730ab5bded4a7ee58502324553467a44fc",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-3f4b9c0ad9baa184",
+      "to_hash": "3f4b9c0ad9baa1841fe8050a1b56af8c08b92d0ef2e8a62e672559ff74bf30e8",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-87eeff9f7e844af1",
+      "version": "1",
+      "content_hash": "87eeff9f7e844af117ff0fed8039e852425efcf5e489de062278d777f27157ed",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-ac49e1109bafa4c4",
+      "to_hash": "ac49e1109bafa4c44de7731596babbd8a884a557b1bb99798077cc12d3e1cb01",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-7e5354251cf70790",
+      "version": "1",
+      "content_hash": "7e5354251cf707903e052ddb39031486b0abcb531dc6d3b88d4e2de9e6d4b836",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-e82524573d75bbf1",
+      "to_hash": "e82524573d75bbf13d544b17bc36438d643a16b3de8f353f8aa56db084d6a528",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-f0a75ce935d174a2",
+      "version": "1",
+      "content_hash": "f0a75ce935d174a2a0e369e8a6fe27224f6d83c51239139c3e63cd733e561697",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-645a4bb71a960a62",
+      "to_hash": "645a4bb71a960a6286f08eac7aa5a93ab4e30f240740c8ff6d4dd70e2b2bc9f0",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-0f33d66e077618c6",
+      "version": "1",
+      "content_hash": "0f33d66e077618c6295e4532e49e25b5397cee15b1d02a55893597d2510ba7bc",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-2e12f987e5f2d55f",
+      "to_hash": "2e12f987e5f2d55f964b210c259f53811b80e916c38f2f55661382177ba795a4",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-26fe68d4a6673e58",
+      "version": "1",
+      "content_hash": "26fe68d4a6673e58579c15e964276a1006972905f9c1a757fe4fc3ef3d23688e",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-29fce09b4aa479f4",
+      "to_hash": "29fce09b4aa479f4cfc912a31c0a0890c7c9714b7324abc030ffa5746948afee",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-b3a01489df6b2461",
+      "version": "1",
+      "content_hash": "b3a01489df6b2461b7315c284fa6c807d7cd70f0996a20b98f04c00724128a12",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-3ad573df5fedc81f",
+      "to_hash": "3ad573df5fedc81f222d7599aff0d339479c1dfbb61887822634bef6cc55fa53",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-b9cff42e66d6444c",
+      "version": "1",
+      "content_hash": "b9cff42e66d6444cb87724e72d25e32b526449df72a3b38914947733f61c330d",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-8d049d5ed5691247",
+      "to_hash": "8d049d5ed56912473cf801ab50c8460c6cf4ed74af64a7d37a4fa24066867f64",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-ede15804afe2a3ee",
+      "version": "1",
+      "content_hash": "ede15804afe2a3eec4ecf5c79c1ad541837e0d5be16c30731b5c1e4bef617afc",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-0bbed7316b47bf9e",
+      "to_hash": "0bbed7316b47bf9ee29cd259a8bb5586a33fa14acd463c9881ff62973ab13802",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-c861fd3864401c3d",
+      "version": "1",
+      "content_hash": "c861fd3864401c3d2fc32d8fd905e43f5bb504218005efffd793c1211f304294",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-b14ab8706059ef92",
+      "to_hash": "b14ab8706059ef9210c05f15d1245bec3fb62508559b4ea6b9f9a4a396e611e4",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-074870e2543937a5",
+      "version": "1",
+      "content_hash": "074870e2543937a5ae7350d0a5d3b7c8ce7e4c5cc1941234c177aa1cf437eb4d",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-74fa6a670888909c",
+      "to_hash": "74fa6a670888909ca232fc338b09c5c6f6610e4f36a58136ac9f71c3953fc393",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-4a10a84961e7b5b0",
+      "version": "1",
+      "content_hash": "4a10a84961e7b5b0ccc620eefbd4aa6c29a06c8126c1ab55b7e4a2231297148d",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-19a4aeeae832df24",
+      "to_hash": "19a4aeeae832df2427d768c1fc128dcc49d08e029882986cea7d4cf285d3df9e",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-8912606da7df7fa1",
+      "version": "1",
+      "content_hash": "8912606da7df7fa12c00c9a0eb3b7c0d564769d1fe349378625931b5842b0713",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-4732a8ca4dc704ac",
+      "to_hash": "4732a8ca4dc704acaf28a710638883c68d7efe08c0ab600b033e6466520265be",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-bc82ccd254c7bfb3",
+      "version": "1",
+      "content_hash": "bc82ccd254c7bfb3d51473a583d70b99a3fca3493d4d1c30e77dd3758dca6472",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-663a1038ed255aaa",
+      "to_hash": "663a1038ed255aaaf7374f2772a35dd44598d112ae1ac0f6a5667ca8776060de",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-8c79dc67e810a440",
+      "version": "1",
+      "content_hash": "8c79dc67e810a440310cd78b6595c6eed73811c3dc4a256cbaca811de3c98f4b",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-6d8b23700a850dc4",
+      "to_hash": "6d8b23700a850dc4c8ee03366086df440153079ca6b85becf3c38ec5081ab416",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-d3ebd629aae071db",
+      "version": "1",
+      "content_hash": "d3ebd629aae071db67a9896bc2dcef130a559f2d3db228492abde07b23e61deb",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-e4e2a740fd82947f",
+      "to_hash": "e4e2a740fd82947f6fb1d205b67ad70208a14bfde3054de3a1f1f0de2c57cd44",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-26d9a2cf95f907f8",
+      "version": "1",
+      "content_hash": "26d9a2cf95f907f8eb1ba655816a0fad4d765abe1cab53d165e57cd216430a58",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-7b4b8fc1efa6d374",
+      "to_hash": "7b4b8fc1efa6d3741b7bb1a1aa41e670f9794688d10d99a0efa62a35b7dbec85",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-ab995bdfbe52ba4d",
+      "version": "1",
+      "content_hash": "ab995bdfbe52ba4df2d955f9586c20e37666de9965103be5b8a708d4e9887a62",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-d180223323c2b1f5",
+      "to_hash": "d180223323c2b1f5b5965d27f0bd7f0968dac3a969f86fad6849fcf224ccd622",
+      "rationale": "PI derives this atom from the frozen intent"
+    },
+    {
+      "subject_id": "TL-b5a31bca13620621",
+      "version": "1",
+      "content_hash": "b5a31bca13620621aa32117158906862d6de88afa5d8161027649142fcdef833",
+      "schema_version": "TraceLink@1",
+      "from_type": "PI-PKG",
+      "from_id": "PI-4298cad2300fb52f",
+      "from_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb",
+      "to_type": "RequirementAtom",
+      "to_id": "ATOM-eb7caa00ea3f5930",
+      "to_hash": "eb7caa00ea3f5930de00d66e10caa2335a75996f20701d59986f4c3c22b8ba6b",
+      "rationale": "PI derives this atom from the frozen intent"
+    }
+  ]
+}

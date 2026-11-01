@@ -1,0 +1,44 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-OWNER-WINDOW/1",
+ "window_id": "WIN-3620f58069b1",
+ "task_id": "FHS-MSC-HANDOFF-PATCH-v1-EXEC-20261030",
+ "opened_at": "2026-10-30T13:54:16",
+ "expires_at": 1793368456,
+ "effect_class_ceiling": "REPOSITORY_WRITE",
+ "scope": [
+  "registry_row_sign",
+  "merkle_root_sign"
+ ],
+ "max_ops": 40,
+ "owner_fingerprint": "412b351937be72a1",
+ "alg": "ed25519",
+ "owner_signature_present": true,
+ "owner_signature_sha256": "3403a62375cc2bf265739f751d3db814c28d203464a02f9a7302b14bac73979d",
+ "policy_epoch_at_open": 10,
+ "enrollments_sha256_at_open": "89121f26c29d7da85123042aa7928f6986ea3213b85b91fb6d6b5358ae0b10a6",
+ "events": [
+  {
+   "ts": "2026-10-30T13:54:16",
+   "op": "WINDOW_OPEN",
+   "decision": "ALLOW",
+   "ops_used": null
+  },
+  {
+   "ts": "2026-10-30T14:54:01",
+   "op": "WINDOW_CLOSE",
+   "decision": "CLOSED",
+   "ops_used": 0
+  }
+ ],
+ "closed_at": "2026-10-30T14:54:01",
+ "ops_used": 0,
+ "refusals": 0,
+ "broker": {
+  "port": 5032,
+  "state_after_close": "not listening",
+  "process_after_close": "exited"
+ },
+ "passphrase_handling": "entered only into the window's own prompt at open; never written to the agent context, a file, or this receipt",
+ "reading": "a single signing window was opened before any work so no later step could block on a prompt. The round's ceiling (REPOSITORY_WRITE) required no signature, so ops_used is 0 and no OR-style decision was taken on the owner's behalf. Window closed at the end by the same process that opened it.",
+ "source": "var/B1-PIPD-PKG-20261027/artifacts/{OWNER_WINDOW.json,SIGNING_LOG.jsonl}"
+}

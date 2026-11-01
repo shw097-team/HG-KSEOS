@@ -1,0 +1,16 @@
+schema: LOGICAL_FAR_RESEARCH_PLAN_V1
+subquestions:
+  - {id: SQ1, text: "what are the three reference kinds?", claim_class: ISSUER_CONTRACT}
+  - {id: SQ2, text: "can one owner hold all three?", claim_class: AUTHORISATION}
+  - {id: SQ3, text: "is policy_epoch creatable locally?", claim_class: CONFIG}
+  - {id: SQ4, text: "does CAP-BOOT exist anywhere with a contract?", claim_class: DEFINITION}
+  - {id: SQ5, text: "may the author declare ACCEPTANCE edges?", claim_class: SELF_ACCEPTANCE}
+claim_classes: [ISSUER_CONTRACT, AUTHORISATION, CONFIG, DEFINITION, SELF_ACCEPTANCE]
+source_classes: [SOURCE_CODE, CONFIG, RECEIPT]
+query_strategy: ["grep KINDS", "read normalize_user_registry", "grep CAP-BOOT across src/config", "read active-policy.json keys"]
+candidate_methods_providers: [FAR_ROUTE_NATIVE_DEFAULT]
+challenge_trigger: ["any claim that a signature can substitute for independent appraisal"]
+experiment_trigger: ["re-run authorize() on a canonical-scoped connection when the registry exists"]
+stop_criteria: ["each subquestion resolved to SATISFIABLE / GAP(kind)"]
+abstain_criteria: ["CAP-BOOT semantics absent from every source"]
+budget_allocation: {retrieval_passes: 1, model_calls: 0}

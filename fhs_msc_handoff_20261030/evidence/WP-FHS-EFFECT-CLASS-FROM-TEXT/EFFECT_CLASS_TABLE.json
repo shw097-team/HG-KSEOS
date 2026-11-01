@@ -1,0 +1,154 @@
+{
+  "schema": "EFFECT-CLASS-FROM-TEXT/1",
+  "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+  "source_sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811",
+  "rule": "the delivery's own line is the only source; no assistant-made tier table is cited",
+  "work_packages": [
+    {
+      "wp": "WP-FHS-00",
+      "effect_class": "SOURCE_READ",
+      "admission_text": "原唯讀 ACL/read scope",
+      "line": 24
+    },
+    {
+      "wp": "WP-FHS-01",
+      "effect_class": "SOURCE_READ",
+      "admission_text": "原唯讀 ACL/read scope",
+      "line": 40
+    },
+    {
+      "wp": "WP-FHS-02",
+      "effect_class": "HOST_OP",
+      "admission_text": "OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+      "line": 56
+    },
+    {
+      "wp": "WP-FHS-03",
+      "effect_class": "HOST_OP",
+      "admission_text": "OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+      "line": 72
+    },
+    {
+      "wp": "WP-FHS-04",
+      "effect_class": "HOST_OP",
+      "admission_text": "OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+      "line": 88
+    },
+    {
+      "wp": "WP-FHS-05",
+      "effect_class": "LOCAL_DRAFT_WRITE",
+      "admission_text": "明列隔離 output root 的使用者授權",
+      "line": 104
+    },
+    {
+      "wp": "WP-FHS-06",
+      "effect_class": "REPO_WRITE",
+      "admission_text": "DEV ECP + exact WriteSet + 原 HGK admission",
+      "line": 120
+    },
+    {
+      "wp": "WP-FHS-07",
+      "effect_class": "LOCAL_DRAFT_WRITE",
+      "admission_text": "明列隔離 output root 的使用者授權",
+      "line": 136
+    },
+    {
+      "wp": "WP-FHS-08",
+      "effect_class": "HOST_OP",
+      "admission_text": "OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+      "line": 152
+    },
+    {
+      "wp": "WP-FHS-09",
+      "effect_class": "SOURCE_READ",
+      "admission_text": "原唯讀 ACL/read scope",
+      "line": 168
+    },
+    {
+      "wp": "WP-FHS-10",
+      "effect_class": "HOST_OP",
+      "admission_text": "OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+      "line": 184
+    },
+    {
+      "wp": "WP-FHS-11",
+      "effect_class": "HOST_OP",
+      "admission_text": "OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+      "line": 200
+    },
+    {
+      "wp": "WP-FHS-12",
+      "effect_class": "HOST_OP",
+      "admission_text": "OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+      "line": 216
+    },
+    {
+      "wp": "WP-FHS-13",
+      "effect_class": "HOST_OP",
+      "admission_text": "OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+      "line": 232
+    },
+    {
+      "wp": "WP-FHS-14",
+      "effect_class": "RELEASE",
+      "admission_text": "原 Publisher/GHP-02 + 受保護 Checker",
+      "line": 248
+    },
+    {
+      "wp": "WP-FHS-15",
+      "effect_class": "LOCAL_DRAFT_WRITE",
+      "admission_text": "明列隔離 output root 的使用者授權",
+      "line": 276
+    },
+    {
+      "wp": "WP-FHS-16",
+      "effect_class": "LOCAL_DRAFT_WRITE",
+      "admission_text": "明列隔離 output root 的使用者授權",
+      "line": 292
+    },
+    {
+      "wp": "WP-FHS-17",
+      "effect_class": "HOST_OP",
+      "admission_text": "OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+      "line": 308
+    },
+    {
+      "wp": "WP-FHS-18",
+      "effect_class": "REPO_WRITE",
+      "admission_text": "DEV ECP + exact WriteSet + 原 HGK admission",
+      "line": 324
+    },
+    {
+      "wp": "WP-FHS-19",
+      "effect_class": "SOURCE_READ",
+      "admission_text": "原唯讀 ACL/read scope",
+      "line": 340
+    },
+    {
+      "wp": "WP-FHS-20",
+      "effect_class": "HOST_OP",
+      "admission_text": "OPS ECP + Host Owner/Issuer + nonce/TTL/epoch",
+      "line": 356
+    },
+    {
+      "wp": "WP-FHS-21",
+      "effect_class": "SOURCE_READ",
+      "admission_text": "原唯讀 ACL/read scope",
+      "line": 372
+    }
+  ],
+  "host_op": [
+    "WP-FHS-02",
+    "WP-FHS-03",
+    "WP-FHS-04",
+    "WP-FHS-08",
+    "WP-FHS-10",
+    "WP-FHS-11",
+    "WP-FHS-12",
+    "WP-FHS-13",
+    "WP-FHS-17",
+    "WP-FHS-20"
+  ],
+  "conflicts": {},
+  "recorded_at": "2026-10-30T21:20:45"
+}

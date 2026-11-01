@@ -1,0 +1,148 @@
+{
+ "schema": "P18/1",
+ "round": "FAR-DURABILITY-20261030",
+ "hgk_head": "51dd8b6bf806221fad514a0321ee1846ee97ca37",
+ "control_plane": {
+  "epoch": 34,
+  "registry_status": "IN_FORCE",
+  "policy": {
+   "PLAN": [
+    "openai-codex",
+    "gpt-6.1-sol"
+   ],
+   "EXECUTE": [
+    "opencode-go",
+    "deepseek-v4.1-flash"
+   ],
+   "VERIFY_SECURITY": [
+    "openai-codex",
+    "gpt-6.1-sol"
+   ]
+  },
+  "single_authority": "config/lane-routing-registry.yaml",
+  "projections": "scripts/lane_policy_reconcile.py --write",
+  "self_contradiction_repaired": "registry rank-1 was repeated as its own first fallback and the demoted primary was dropped; fixed before promotion"
+ },
+ "gates": {
+  "ir1": {
+   "exit": 0,
+   "out": "{\"verdict\": \"POLICY_COMMITTED\", \"repo\": \"C:/Projects/Agent_Workspace/HG-KSEOS\", \"head\": \"2285193\", \"policy_files\": [\"con"
+  },
+  "ir4_no_repo": {
+   "exit": 3,
+   "out": "{\"verdict\": \"NO_REPO\", \"path\": \"C:/wg/ao2\", \"detail\": \"not inside any git worktree: no lineage, no diff, no rollback\", \""
+  },
+  "reconcile": {
+   "exit": 0,
+   "out": "{\n \"verdict\": \"CONSISTENT\",\n \"dirty\": {},\n \"registry_epoch\": 38,\n \"registry_sha256\": \"d7a1bfd1abc43c162aae954e0ec9233d9d"
+  },
+  "relay": {
+   "exit": 0,
+   "out": "{\"verdict\": \"RELAY_ALIVE\", \"url\": \"http://127.0.0.1:10101/healthz\", \"status\": 200, \"body\": \"{\\\"status\\\":\\\"ok\\\",\\\"service"
+  },
+  "recurrence": {
+   "exit": 0,
+   "out": "{\n \"schema\": \"RECURRENCE-GATE/1\",\n \"verdict\": \"OPEN\",\n \"checked\": [\n  {\n   \"class_id\": \"RC-POLICY-DRIFT\",\n   \"occurrence"
+  },
+  "acceptance_no_terminal": {
+   "exit": 2,
+   "out": "{\"verdict\": \"NOT_ALLOWED\", \"detail\": \"no oracle+verdict and no named refusal: NOT_RUN is not a terminal state\", \"fix\": \""
+  },
+  "pytest": {
+   "exit": 0,
+   "out": "............                 [100%]\n12 passed, 116 subtests passed in 15.36s"
+  }
+ },
+ "ledger": {
+  "file": "config/recurrence-ledger.json",
+  "classes": 6,
+  "third_occurrence_recorded": "RC-VACUOUS-PASS 2026-10-30 (recurrence_gate failed open; convicted by the AO)"
+ },
+ "lanes": {
+  "EXECUTE": {
+   "rank": 1,
+   "provider": "opencode-go",
+   "model": "deepseek-v4.1-flash",
+   "nonce_echo": true,
+   "artifact": "evidence/FAR-DURABILITY-20261030/EXECUTE_BOUNDED_WRITE.md"
+  },
+  "VERIFY_ao1": {
+   "rank": 1,
+   "model": "gpt-6.1-sol",
+   "seconds": 132.97,
+   "overall": "INCONCLUSIVE",
+   "conviction": "recurrence_gate fail-open"
+  },
+  "VERIFY_ao2": {
+   "rank": 1,
+   "model": "gpt-6.1-sol",
+   "seconds": 404.74,
+   "overall": "PASS",
+   "claims": {
+    "O1-neg": "PASS",
+    "O6-neg": "PASS",
+    "O7": "PASS"
+   },
+   "convictions": [],
+   "limitation": "Full-tree write audit incomplete: 138952 scan errors from inaccessible/missing paths. Five bound subject files retained identical SHA-256 hashes throughout chec"
+  }
+ },
+ "acceptance": {
+  "schema": "ACCEPTANCE-DEFAULT/1",
+  "round": "FAR-DURABILITY-20261030",
+  "requirement": "REQ-DURABILITY-ROUND-20261030",
+  "state": "GRANTED",
+  "decided_at_utc": "2026-10-30T10:56:24+00:00",
+  "detail": {
+   "oracle_sha256": "e507d1cdd0b6f9f2aa4b789f524c8ede1cf2677d30ca4e3f6960dad60c052028",
+   "verdict_sha256": "747bcdbcc9bd9167b50c1d353367c3b96269b0f9b6dfc06d8913a0a6f72cdd49",
+   "verdict_document": {
+    "nonce": "NONCE-AO-20261030-D",
+    "overall": "PASS",
+    "claims": [
+     {
+      "id": "O1-neg",
+      "verdict": "PASS",
+      "evidence": "python C:/Projects/Agent_Workspace/HG-KSEOS/scripts/ir1_policy_gate.py --repo C:/wg/ao2/scratch --json: POLICY_DIRTY, exit 2; after committing edit: POLICY_COMMITTED, exit 0."
+     },
+     {
+      "id": "O6-neg",
+      "verdict": "PASS",
+      "evidence": "python C:/wg/ao2/recurrence_gate_probe.py --all: blocked=[RC-AO-MISSING-TEST], regression_test file missing, exit 2. Copy differs only in ROOT and LEDGER constants. python C:/Projects/Agent_Workspace/HG-KSEOS/scripts/recurrence_gate.py --all: blocked=[], exit 0."
+     },
+     {
+      "id": "O7",
+      "verdict": "PASS",
+      "evidence": "From candidate root, PYTHONDONTWRITEBYTECODE=1 HGK_LANE_SCRATCH=C:/wg/ao2/test_scratch TEMP/TMP/TMPDIR=C:/wg/ao2/test_scratch python -m pytest tests/test_durable_gates.py tests/test_lane_policy.py -q -p no:cacheprovider --basetemp C:/wg/ao2/pytest_tmp: 12 passed, 116 subtests passed in 15.41s; 0 failed, 0 skipped; exit 0."
+     }
+    ],
+    "convictions": [],
+    "writes_outside_scratch": [
+     "No officer/test writes observed. Concurrent commit 51dd8b6 at 18:50:30, before checks began at 18:52:32, changed C:/Projects/Agent_Workspace/HG-KSEOS/config/recurrence-ledger.json and nine .git paths; exact paths in C:/wg/ao2/write_audit.json."
+    ],
+    "limitations": [
+     "Full-tree write audit incomplete: 138952 scan errors from inaccessible/missing paths. Five bound subject files retained identical SHA-256 hashes throughout checks."
+    ],
+    "evidence_files": [
+     "C:/wg/ao2/raw_evidence.json",
+     "C:/wg/ao2/subject_binding.json",
+     "C:/wg/ao2/write_audit.json"
+    ]
+   }
+  },
+  "rule": "a round closes GRANTED or REFUSED_NAMED; NOT_RUN is not a terminal state"
+ },
+ "registry_rows": {
+  "ACC-DURABILITY-B1-20261030": "PASS",
+  "ACC-DURABILITY-SKELETON-20261030": "FAIL (pre-publication state, superseded)",
+  "ACC-DURABILITY-HANDOFF-20261030": "FAIL (pre-publication state, superseded)",
+  "ACC-DURABILITY-SKELETON-V2-20261030": "PASS",
+  "ACC-DURABILITY-HANDOFF-V2-20261030": "PASS"
+ },
+ "residuals": [
+  "ocx service install needs UAC; login-survival provided instead (Startup entry), recorded as REFUSED_NAMED-equivalent",
+  "22-WP closure mismatch {00,01,15} vs typed {00,15} still needs a review decision",
+  "factual-lib (Fabric/PIPD) untouched: 13/231 pre-existing dirty files remain"
+ ],
+ "note": "Every claim above was produced by a command in this round; the AO verdict is its own file, quoted not paraphrased."
+}

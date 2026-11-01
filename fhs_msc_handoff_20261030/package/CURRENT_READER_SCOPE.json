@@ -1,0 +1,7 @@
+{
+  "current_map": "03_HANDOFF_EVIDENCE/CURRENT_READER_MAP.json",
+  "effective_patch": "HANDOFF-v1 blocks inside existing 17 current books",
+  "current_first_work": "02_FIRST_WORK/TaskSpecSeed.json",
+  "historical_evidence": "02_EVIDENCE_AUDIT_APPENDICES is preserved STATIC-REPAIR-v1 baseline; its SHA maps/claim states are not this round Reader map",
+  "native_claims": "NONE"
+}

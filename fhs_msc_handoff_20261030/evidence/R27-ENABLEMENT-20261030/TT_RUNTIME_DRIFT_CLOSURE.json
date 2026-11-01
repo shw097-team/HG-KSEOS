@@ -1,0 +1,26 @@
+{
+  "close_criteria_used": "(b) fresh qualification revalidation for the effective runtime + identity/path update with a signed receipt",
+  "closed_at": "2026-10-30T20:58:19",
+  "config_after": {
+    "schema": "HGK-HERMES-BINDING/3",
+    "sha256": "f1bf75662d3d5eec8941ceed8eba32e292c300f1f4e12920b7ce0d7acb575b9f"
+  },
+  "effective_runtime": {
+    "install_dir": "D:/Hermes-Recovery/h22",
+    "msix_tree": {
+      "git_describe": "v2026.9.24",
+      "head": "f97608f178d1",
+      "pyproject_version": "0.21.5"
+    },
+    "python": "3.14.9 (launcher); 3.11.17 venv used for the gates",
+    "reported": "Hermes Agent v0.22.5 (2026.9.24) stable local bf0203a794a0"
+  },
+  "gates": {
+    "command": "pytest tests/test_hermes_qualification.py tests/test_task013_hermes_v020_closure.py",
+    "exit": 0,
+    "result": "12 passed in 0.53s"
+  },
+  "schema": "TT-CLOSURE/1",
+  "tt_id": "TT-RUNTIME-VERSION-DRIFT-001",
+  "two_tree_ambiguity": "the launcher reports an install under D:/Hermes-Recovery/h22 while the MSIX tree carries its own version; neither is asserted to be the other, and the ambiguity is filed as TT-HERMES-TWO-TREE-IDENTITY-001"
+}

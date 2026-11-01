@@ -1,0 +1,35 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-IR1-GATE/1",
+ "round": "FAR-RECURRENCE-ROOTCAUSE-20261030",
+ "gate": "fhs_msc_handoff_20261030/tools/ir1_policy_gate.py",
+ "target_repo": "C:/Projects/Agent_Workspace/HG-KSEOS",
+ "head": "190df33",
+ "verdict": "POLICY_DIRTY",
+ "exit": 2,
+ "dirty": [
+  "M config/active-policy.json",
+  "M config/hermes-codex-lane.json",
+  "M config/lane-routing-registry.yaml",
+  "M config/model-lane-assignment.json"
+ ],
+ "policy_state": {
+  "head_revision": 33,
+  "disk_revision": 38,
+  "revisions_ahead": 5,
+  "schema_changed": true,
+  "head_key": "lane_group",
+  "disk_key": "role",
+  "head_plan_verify": "opencode-go/deepseek-v4.1-flash",
+  "disk_plan_verify": "openai-codex/gpt-6.1-sol",
+  "last_config_commit": "2026-10-23 ce5bcb4",
+  "days_uncommitted": 7
+ },
+ "recurrence_evidence": {
+  "far_rounds": 5,
+  "acceptances_not_run": 5,
+  "prior_diagnosis": "session 20261021_114959_487f64 (FAR-LANE-VERSION-MIX-20261021) already named: multiple authorities, plane mixing, dead toolchain pin, partial drift gate, repairs stopping at local rebinding",
+  "days_between_diagnosis_and_recurrence": 9
+ },
+ "conclusion": "the governing policy is a dirty working copy 5 revisions ahead of HEAD; no receipt is reproducible off-machine and a reader on the old schema resolves nothing",
+ "effect_if_adopted": "the round fails closed at start instead of rediscovering the defect at the end"
+}

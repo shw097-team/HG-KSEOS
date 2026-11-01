@@ -1,0 +1,16 @@
+{
+ "schema": "R18.BRANCH_RECONCILE/1",
+ "delivery_tip": {
+  "branch": "candidate/r18-openspec-only",
+  "sha": "b2159b094dc21ced8fcf3fe877adb913eaa3d295"
+ },
+ "other": {
+  "branch": "candidate/r18-fhs-skeleton-spine-20261029",
+  "sha": "190df334532ac5a9c4df7e20155a165098625069"
+ },
+ "actions": [],
+ "other_is_ancestor_of_delivery": false,
+ "delivery_is_ancestor_of_other": false,
+ "verdict": "DIVERGED_NEEDS_OWNER_CHOICE",
+ "keeper": "candidate/r18-openspec-only"
+}

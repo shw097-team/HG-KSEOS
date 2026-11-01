@@ -1,0 +1,19 @@
+{
+  "schema": "ROUND-CLOSURE-REFUSAL/1",
+  "round": "FHS-MSC-ALLPASS-R28-20261030",
+  "gate": "scripts/round_close_gate.py",
+  "verdict": "ROUND_MAY_NOT_CLOSE",
+  "problems": [
+    "lane_receipt_missing: VERIFY_SECURITY C:/wg/ao6/ao_r28c.json"
+  ],
+  "why_this_is_correct": "the VERIFY dispatch exited 0 and produced a verdict, but the dispatcher did not persist its receipt file; without a receipt the lane claim is unproven",
+  "surviving_evidence": {
+    "attempt_ndjson": "C:/wg/ao6/ao_r28c.json.attempts.ndjson (rank 1, openai-codex/gpt-6.1-sol, 158.08 s, exit 0)",
+    "verdict": "C:/wg/ao6/verdict.json (overall PASS, 6/6, 0 convictions)"
+  },
+  "blocking_tts": [],
+  "lanes_checked": {
+    "PLAN": "PLAN receipt passes (asked==served==gpt-6.1-sol, rank 1, 55.51 s)"
+  },
+  "recorded_at": "2026-10-30T21:31:25"
+}

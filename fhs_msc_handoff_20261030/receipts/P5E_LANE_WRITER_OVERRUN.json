@@ -1,0 +1,38 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-LANE/1",
+ "lane": "EXECUTE",
+ "turn": "bounded writer, five narrative documents",
+ "verdict": "OVERRUN_TERMINATED",
+ "ok": false,
+ "code": "ERR_LANE_ALL_ROUTES_EXHAUSTED",
+ "assigned_arm": "opencode-go/deepseek-v4.1-flash",
+ "transport_model": "opencode-go/deepseek-v4.1-flash",
+ "attempts": [
+  {
+   "exit": 4294967295,
+   "seconds": 565.57,
+   "nonce_present": false,
+   "stdout_tail_len": 400,
+   "stderr_tail": "Reading additional input from stdin...\n2026-10-30T06:20:30.951731Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Unknown\n"
+  }
+ ],
+ "timeline": {
+  "started": "14:20:30 (codex rollout \u2026T14-20-30-01a18b77-\u2026jsonl)",
+  "terminated_by_operator": "14:29",
+  "wall_clock": "~8.5 min"
+ },
+ "reading": "the turn read, diffed and cross-checked the package for eight and a half minutes and wrote no file; the operator killed it with no side effects. The exit code the dispatcher records (4294967295 = -1) and its ERR_LANE_ALL_ROUTES_EXHAUSTED label are artefacts of that kill, not evidence that every route failed - a stale-process reaping quirk worth knowing before anyone reads this code as a routing verdict.",
+ "side_effects": {
+  "files_written": 0,
+  "repo_dirty": false,
+  "note": "verified after termination: git status clean besides staging"
+ },
+ "follow_up": {
+  "same_lane_single_exact_write": {
+   "ok": true,
+   "seconds": 27.99,
+   "receipt": "P5B_LANE_EXECUTE_WRITER.json"
+  },
+  "lesson": "a bounded writer works when the artefact is one file and exactly specified; open-ended authoring does not"
+ }
+}

@@ -1,0 +1,52 @@
+{
+  "nonce": "NONCE-AO-20261030-E",
+  "overall": "FAIL",
+  "claims": [
+    {
+      "id": "O1",
+      "verdict": "PASS",
+      "evidence": "python -B C:/wg/ao3/audit.py: recomputed SHA-256 at package-root-relative paths with Windows extended paths; 24 documents, 14 sbl + 10 pipd, 24/24 digests match. Details: audit_details.json/O1."
+    },
+    {
+      "id": "O2",
+      "verdict": "FAIL",
+      "evidence": "python -B C:/wg/ao3/run_harness.py package_pin check_first_work_package.py: actual package harness yields pass=34 fail=1 (EXISTING_5_AFFECTED_TESTS), exit 1; runtime equivalent yields 29/6, exit 1, still a verdict. Brief-specified check_first_work_shipped.py yields pinned 35/0 and runtime 30/5; it differs from the package by moving sys.path.insert before test discovery. Preflight variant yields pinned 35/0 and runtime PREFLIGHT_FAIL. See package_pin.log, package_runtime.log, shipped_pin.log, shipped_runtime.log, preflight_pin.log, preflight_runtime.log and harness_diff.txt."
+    },
+    {
+      "id": "O3",
+      "verdict": "PASS",
+      "evidence": "python -B C:/wg/ao3/final_checks.py: recursively inventoried all 911 package files using extended paths; no license/NOTICE or dependency manifest. Extension counts exactly match SBOM.json. SBOM declares empty license/dependency lists and supply_chain_claim=\"SUPPLY_CHAIN_UNVERIFIED — absence of a manifest is not a clean SBOM\"."
+    },
+    {
+      "id": "O4",
+      "verdict": "PASS",
+      "evidence": "python -B -m pytest C:/wg/repo/tests/test_delivery_manifest_counts.py -q -p no:cacheprovider --basetemp=C:/wg/ao3/pytest-temp: 3 passed in 0.15s, exit 0. git diff f9c8566^ f9c8566 -- tests/test_delivery_manifest_counts.py: one added 55-line file. git apply --reverse C:/wg/ao3/slice.patch in scratch removes exactly that file, exit 0. PASS applies to the brief-defined one-file slice, not a whole-commit revert; the containing commit changes 17 files."
+    },
+    {
+      "id": "O5",
+      "verdict": "PASS",
+      "evidence": "python -B C:/wg/ao3/final_checks.py: reviewed 13 JSON artefacts across 12 WP directories; 754 path citations resolve after separating :line/range suffixes and package/repository roots; zero missing paths or unparsed source strings. Release manifests exist; bounded-repair commit d02f8b2 exists in cited HG-KSEOS repository; SBOM inventory remeasured. All PASS/approved word hits are source quotations, required conditions, negations, or names; none is an artefact-owned acceptance verdict. See final_checks.json and resolved_sources.json."
+    },
+    {
+      "id": "O6",
+      "verdict": "PASS",
+      "evidence": "python -B C:/wg/ao3/snapshot.py and final_checks.py: recounted authority items 13/conflicts 5/single-source 0; candidates PI 56/PD 31/DEV-OPS 13; source table and plan 18 stages; slots 24/methods 25; corpus 24; inventory 911. Independently counted source headings: 192 cells, 96 oracles, 12 H4 gates + 11 seams = 311 GAP rows. Current coverage snapshot explicitly distinguishes 96 Raw refs fields, 88 nonempty and 8 empty; explicitly declines reconciling 96 and 192 populations. Corpus scalar-hash nonreproduction is explicitly noted. No silent count reconciliation found in captured artefacts."
+    }
+  ],
+  "convictions": [
+    {
+      "claim": "O2",
+      "artefact": "C:/wg/repo/fhs_msc_handoff_20261030/evidence/F-15-ENVIRONMENT/F15_RESOLUTION.json",
+      "problem": "Its assertion that the shipped harness is correct and the sys.path movement is unnecessary is contradicted by executing the actual package harness: pinned 34/1 versus 35/0 for the altered brief-specified copy. Runtime still produces a verdict (actual package 29/6; supplied copy 30/5). Only the preflight variant refuses."
+    }
+  ],
+  "writes_outside_scratch": [],
+  "limitations": [
+    "Harnesses ran unchanged from byte-identical scratch copies with prepare.E/A redirected to scratch copies of package inputs; Python audit hooks rejected filesystem writes outside C:/wg/ao3 and bytecode writes were disabled. No subject artefact was repaired.",
+    "The subject was live: COVERAGE_MATRIX.json changed during initial inspection. Verdicts O5/O6 apply to the 13 artefacts captured in subject_snapshot; hashes are in snapshot_index.json and all remained unchanged at the final stability check. Three WP directories were untracked both before and after review.",
+    "O4 passes the requested remove-one-file slice check. A literal git revert of its aggregate commit f9c8566 would affect 17 files, so that broader rollback is not accepted as a one-file rollback.",
+    "O3 establishes the specified inventory and unverified supply-chain statement. The SBOM stdlib-only rationale is inaccurate: execution demonstrated an undeclared jsonschema dependency."
+  ],
+  "oracle_sha256": "b066eb609f62d4c85385187114e07c4718bb47d9aef68e0ddd6b179829075eb7",
+  "oracle_quote": "{\n \"schema\": \"ORACLE/1\",\n \"round\": \"FHS-MSC-ALLPASS-20261030\",\n \"registered_by\": \"commander (PLAN)\",\n \"registered_before_check\": true,\n \"subject\": \"C:/wg/repo @ branch fhs-msc-handoff-patch-v1-exec-20261030\",\n \"claims\": [\n  {\n   \"id\": \"O1\",\n   \"claim\": \"SOURCE-MANIFEST lists 24 corpus documents and every listed sha256 equals the file at the listed path\",\n   \"check\": \"recompute sha256 for each entry\",\n   \"falsifier\": \"any digest mismatch, or a count other than 24 (14 sbl + 10 pipd)\"\n  },\n  {\n   \"id\": \"O2\",\n   \"claim\": \"F-15 closed as an environment fault: the as-shipped harness returns pass=35 fail=0 under the pinned interpreter and refuses to produce a verdict under the runtime interpreter\",\n   \"check\": \"run both; compare\",\n   \"falsifier\": \"shipped harness under pinned interpreter reports any failure, or the runtime interpreter still yields a verdict\"\n  },\n  {\n   \"id\": \"O3\",\n   \"claim\": \"the package ships no license/NOTICE file and no dependency manifest, and SBOM.json says exactly that\",\n   \"check\": \"search the package; read SBOM.json\",\n   \"falsifier\": \"a license/notice file exists, or SBOM claims a clean supply chain\"\n  },\n  {\n   \"id\": \"O4\",\n   \"claim\": \"the added test passes and reverting it touches one file only\",\n   \"check\": \"pytest the file; inspect git\",\n   \"falsifier\": \"test fails, or the diff touches any other file\"\n  },\n  {\n   \"id\": \"O5\",\n   \"claim\": \"each EXECUTE-produced work-package artefact cites a source that exists, and none of them asserts PASS/approved\",\n   \"check\": \"resolve every `source` string to an existing path; grep for verdict words\",\n   \"falsifier\": \"a cited path does not exist, or an artefact carries a PASS verdict\"\n  },\n  {\n   \"id\": \"O6\",\n   \"claim\": \"no artefact reconciles a declared count with a measured count silently\",\n   \"check\": \"look for declared vs measured fields and explicit discrepancy notes\",\n   \"falsifier\": \"a declared number differs from the enumerated number with no note\"\n  }\n ],\n \"note\": \"registered before the officer runs; a claim accepted by quoting this file is void\"\n}\n"
+}

@@ -1,0 +1,14 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-LAYOUT-PREFIX/1",
+ "round": "FAR-CLOSURE-PROMOTION-20261030",
+ "purpose": "evidence the 31-row layout claim that O5 convicted as unsupported",
+ "root": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1",
+ "long_path_prefix": true,
+ "method": "for every payload-manifest row, test existence (1) as declared and (2) with 01_SUBSTANTIVE_BODY -> 01_FHS-MSC_PIPD-LS-PKG_BODY",
+ "rows_declared": 909,
+ "rows_with_substantive_body_prefix": 31,
+ "resolve_as_declared": 0,
+ "resolve_via_directory_alias": 31,
+ "verdict": "the 31 rows do not resolve as declared; all 31 resolve after the directory alias",
+ "note": "a naive exists() on this absolute root also reports 14 of the 31 as missing purely because of the Win32 260-char limit (F-02b); with the \\\\?\\ prefix all 31 resolve. The first pass without the prefix is what produced the earlier, wrong '14 absent' reading."
+}

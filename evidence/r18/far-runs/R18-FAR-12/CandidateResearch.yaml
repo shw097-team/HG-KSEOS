@@ -1,0 +1,10 @@
+schema: LOGICAL_FAR_CANDIDATE_RESEARCH_V1
+run_ref: R18-FAR-12
+decision_question: "Which of this round's own failures were routing violations rather than environment limits, and what minimal mechanism prevents each from recurring?"
+disposition: RESEARCH_PASS_CANDIDATE
+evidence_digests:
+  - "2e7a55e0dd19267e ClaimLedger.tsv"
+confidence: 0.9
+limits: "behavioural claims rest on this session's own transcript, not on an independent observer"
+owner_action_required: "approve the four remediations, or reject and name which violation is acceptable"
+status: CANDIDATE_ONLY

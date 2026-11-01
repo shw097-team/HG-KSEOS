@@ -1,0 +1,242 @@
+[
+  {
+    "local_clause": 1,
+    "source_text": "The first work must accept an ordinary nonempty Goal from its caller",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:PM:T0",
+    "consumer": "TPM intake",
+    "POS": "nonempty goal preserved",
+    "NEG": "empty goal refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 2,
+    "source_text": "The source reader must validate the exact set of fourteen SBL documents plus ten PIPD documents",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:K0",
+    "consumer": "core.corpus_manifest",
+    "POS": "24 source identities read",
+    "NEG": "missing source identity refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 3,
+    "source_text": "The source reader must compare every admitted corpus file against its frozen SHA256",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:K0",
+    "consumer": "core.read_clause",
+    "POS": "same bytes admitted",
+    "NEG": "modified source bytes refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 4,
+    "source_text": "The source reader must reject a locator escaping its admitted corpus root",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:K3",
+    "consumer": "core.read_contained",
+    "POS": "admitted relative path read",
+    "NEG": "parent traversal refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 5,
+    "source_text": "The question reader must reuse a live KnownAnswer for the same subject scope source hash plus question key",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:PM:T0",
+    "consumer": "core.QuestionLedger.inspect",
+    "POS": "same key returns ask false",
+    "NEG": "changed source hash requires a fresh answer",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 6,
+    "source_text": "The ProductSPEC must identify the actual first work persona",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:PM:T3",
+    "consumer": "core.plan_spec Product",
+    "POS": "persona in emitted draft",
+    "NEG": "missing persona refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 7,
+    "source_text": "The ProductSPEC must state the user job to obtain three source bound specifications from an ordinary Goal",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:PM:T3",
+    "consumer": "core.plan_spec Product",
+    "POS": "jtbd in emitted draft",
+    "NEG": "missing jtbd refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 8,
+    "source_text": "The ProductSPEC must define a readable three SPEC output as the first useful outcome",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:PM:T2",
+    "consumer": "core.plan_spec Product",
+    "POS": "three output references present",
+    "NEG": "abstract outcome without output refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 9,
+    "source_text": "The ProductSPEC must retain dedicated positive plus negative acceptance cases for each first work requirement",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:PM:T4",
+    "consumer": "core.plan_spec Product",
+    "POS": "each acceptance has own POS NEG",
+    "NEG": "acceptance without negative refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 10,
+    "source_text": "The ArchitectureSPEC must name one original writer for every interface seam",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:SE:T3",
+    "consumer": "core.plan_spec Architecture",
+    "POS": "one writer per seam",
+    "NEG": "two writers for a seam refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 11,
+    "source_text": "The ArchitectureSPEC must pin the original PIPD schema version for its receiver payload",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:SE:T3",
+    "consumer": "PIPD validate_pi",
+    "POS": "schema version pinned",
+    "NEG": "unknown extra record key refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 12,
+    "source_text": "The ProgramSPEC must retain an acyclic dependency closure for the first work",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:TPgM:T2",
+    "consumer": "core.affected_work",
+    "POS": "WP00 WP01 WP15 closure sorted",
+    "NEG": "cycle refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 13,
+    "source_text": "The ProgramSPEC must bind each prerequisite to its original owner",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "SBL-04:TPgM:T3",
+    "consumer": "core.plan_spec Program",
+    "POS": "owner for every node",
+    "NEG": "missing node owner refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 14,
+    "source_text": "The first work must write its three SPEC drafts only inside the admitted isolated draft directory",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "WP-FHS-15",
+    "consumer": "TaskSpecSeed receiver adapter",
+    "POS": "three paths inside draft scope",
+    "NEG": "path outside admitted draft root refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 15,
+    "source_text": "The receiver must invalidate only the outputs dependent on a changed source hash",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "WP-FHS-00",
+    "consumer": "core.affected_work",
+    "POS": "affected descendants blocked",
+    "NEG": "unrelated ready source reader remains available",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 16,
+    "source_text": "The first work must start source reading plus local drafting without a future execution receipt",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "WP-FHS-15",
+    "consumer": "ProgramSPEC reader",
+    "POS": "no live receipt predecessor",
+    "NEG": "future receipt as prerequisite refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 17,
+    "source_text": "The first work must complete its deterministic source reading plus draft materialization with provider access disabled",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "WP-FHS-15 and BODY09B",
+    "consumer": "offline adapter",
+    "POS": "zero network calls during positive run",
+    "NEG": "provider connection attempt refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 18,
+    "source_text": "The PIPD compiler must bind every first work functional atom to its own source clause plus original consumer acceptance cases",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "PIPD RequirementAtom",
+    "consumer": "pipeline.validate_pi",
+    "POS": "all atom traces resolve",
+    "NEG": "tampered atom or trace refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 19,
+    "source_text": "The receiver must derive the actual RepoContext immediately before any PD construction binding",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "PIPD PD-PKG",
+    "consumer": "pipeline.bind_pd",
+    "POS": "real measured context",
+    "NEG": "missing root or spoofed freshness refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 20,
+    "source_text": "The receiver must obtain the matching original effect admission before a repository or host or user or remote or release mutation",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "BODY03 R2-03-EFFECT",
+    "consumer": "original HGK native admission",
+    "POS": "read and draft continue",
+    "NEG": "missing OPS permission parks only affected host effect",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 21,
+    "source_text": "The worker receiver must reject an expired lease before continuing a governed effect",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "HGK SharedSpine",
+    "consumer": "SharedSpine._assert_lease",
+    "POS": "current lease accepted in memory fixture",
+    "NEG": "expired lease refused",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 22,
+    "source_text": "The resume receiver must reconcile an unknown world effect before any retry",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "BODY06",
+    "consumer": "core.effect_route and original Hermes receiver",
+    "POS": "UNKNOWN routes to reconcile",
+    "NEG": "blind retry of UNKNOWN is not dispatched",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 23,
+    "source_text": "The handoff must retain the original Hermes WorkID queue lease plus journal ownership",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "BODY06",
+    "consumer": "original Hermes runtime",
+    "POS": "existing WorkID reused on resume",
+    "NEG": "new queue or replacement issuer forbidden",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  },
+  {
+    "local_clause": 24,
+    "source_text": "The delivery receiver must request the original protected checker after world readback",
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "original_locator": "BODY07",
+    "consumer": "original protected checker",
+    "POS": "request names original checker",
+    "NEG": "maker output never becomes independent acceptance",
+    "requirement_kind": "FUNCTIONAL_OBLIGATION_NOT_ID_PROJECTION"
+  }
+]

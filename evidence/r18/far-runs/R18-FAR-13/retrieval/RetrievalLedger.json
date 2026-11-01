@@ -1,0 +1,198 @@
+{
+  "schema": "FAR-RETRIEVAL-LEDGER/1",
+  "workorder_ref": {
+    "id": "R18-FAR-13",
+    "digest": "subject=5a06d8ddfcfaeefdda4430a0fcd0677e5ca036ac9e10072b5f00e141824f430d"
+  },
+  "question": "For a single owner who is also the package author, which of source_freeze / task_kind / oracle_ratification, policy_epoch and CAP-BOOT can be satisfied locally, and which are authorisation gaps rather than definition gaps?",
+  "timestamp_utc": "2026-10-29T11:06:17.956599+00:00",
+  "channels": {
+    "knowledge_base": [
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/B1/FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.source",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/B1/FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.source",
+        "sha256": "1e09126f0c8e92fcd6e8531072a3f1f3033d82a671c2b4bb62c9916e675b7127",
+        "score": 18,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/B1/FHS-MSC_B1_Bootstrap_Repair/B1_DOC_REPAIR_DELIVERY_2026-10-27/BASELINE/FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.source",
+        "origin_artifact_digest": "1e09126f0c8e92fcd6e8531072a3f1f3033d82a671c2b4bb62c9916e675b7127",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/B1/FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/B1/FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.md",
+        "sha256": "1e09126f0c8e92fcd6e8531072a3f1f3033d82a671c2b4bb62c9916e675b7127",
+        "score": 18,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SBL_PIPD/FHS-MSC/B1/FHS-MSC_B1_Bootstrap_Repair/FHS_MSC_B1_PIPD_LS_PKG/FHS_MSC_B1_PIPD_LS_PKG_05_DOC_B1_TQAEP.md",
+        "origin_artifact_digest": "1e09126f0c8e92fcd6e8531072a3f1f3033d82a671c2b4bb62c9916e675b7127",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-00/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-00_DOC-00_2026-09-19_r1_FULL_SUBSTANTIVE_BODY.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-00/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-00_DOC-00_2026-09-19_r1_FULL_SUBSTANTIVE_BODY.md",
+        "sha256": "c0f3338497ae494756ad2c07e130c65b46450f41a192a1194b1330bf5544ba48",
+        "score": 18,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-00/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-00_DOC-00_2026-09-19_r1_FULL_SUBSTANTIVE_BODY.md",
+        "origin_artifact_digest": "c0f3338497ae494756ad2c07e130c65b46450f41a192a1194b1330bf5544ba48",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-09/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-09_DOC-05_2026-09-23_r1_FULL_SUBSTANTIVE_BODY.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-09/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-09_DOC-05_2026-09-23_r1_FULL_SUBSTANTIVE_BODY.md",
+        "sha256": "61db7a206fdd4b97613ae5f9f0e3c3acef7afe912af1b62eb293b2f5f9c8ae3b",
+        "score": 18,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-09/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-09_DOC-05_2026-09-23_r1_FULL_SUBSTANTIVE_BODY.md",
+        "origin_artifact_digest": "61db7a206fdd4b97613ae5f9f0e3c3acef7afe912af1b62eb293b2f5f9c8ae3b",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-00/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-00_DOC-01_2026-09-19_r1_FULL_SUBSTANTIVE_BODY.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-00/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-00_DOC-01_2026-09-19_r1_FULL_SUBSTANTIVE_BODY.md",
+        "sha256": "10c051d2e3306643bc2bc4fb5c7d68e68737d5c62ac4db43ee51541a6dfc0eea",
+        "score": 17,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-00/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-00_DOC-01_2026-09-19_r1_FULL_SUBSTANTIVE_BODY.md",
+        "origin_artifact_digest": "10c051d2e3306643bc2bc4fb5c7d68e68737d5c62ac4db43ee51541a6dfc0eea",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-00/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-00_DOC-06_2026-09-19_r1_FULL_SUBSTANTIVE_BODY.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-00/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-00_DOC-06_2026-09-19_r1_FULL_SUBSTANTIVE_BODY.md",
+        "sha256": "5cb4118f02aaaf59dd1af378b17fb77302940af7757d477f79c601ee5bee9ce9",
+        "score": 17,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-00/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-00_DOC-06_2026-09-19_r1_FULL_SUBSTANTIVE_BODY.md",
+        "origin_artifact_digest": "5cb4118f02aaaf59dd1af378b17fb77302940af7757d477f79c601ee5bee9ce9",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-09/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-09_DOC-06_2026-09-23_r1_FULL_SUBSTANTIVE_BODY.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-09/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-09_DOC-06_2026-09-23_r1_FULL_SUBSTANTIVE_BODY.md",
+        "sha256": "343086c2622cde65acf8685e4a44c8a0abd13a588eda84705848a84bad16fd97",
+        "score": 17,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC/PD-PKG_DOC-09/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-09_DOC-06_2026-09-23_r1_FULL_SUBSTANTIVE_BODY.md",
+        "origin_artifact_digest": "343086c2622cde65acf8685e4a44c8a0abd13a588eda84705848a84bad16fd97",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      },
+      {
+        "source_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC藍圖/PD-PKG_DOC-01_藍圖/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-01_DOC-00_藍圖&skeleton_2026-09-19_r1.md",
+        "path": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC藍圖/PD-PKG_DOC-01_藍圖/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-01_DOC-00_藍圖&skeleton_2026-09-19_r1.md",
+        "sha256": "b7380f8f07b6bbde9f324dacfd109e97ba7680b193f145c4bdffa946425ee492",
+        "score": 17,
+        "role": "LOCAL_GOVERNED_CORPUS",
+        "origin_artifact_id": "C:/Projects/Agent_Workspace/知識庫/實作相關DOC/Fabric vNext/Semantic World OS Fabric/SWOF-F_SWOF-GENIE_All-IW_Pre-Dev_Multi-Packages/PD-PKG/PD-PKG_DOC藍圖/PD-PKG_DOC-01_藍圖/SWOF-F_SWOF-GENIE_All-IW_PD-PKG-01_DOC-00_藍圖&skeleton_2026-09-19_r1.md",
+        "origin_artifact_digest": "b7380f8f07b6bbde9f324dacfd109e97ba7680b193f145c4bdffa946425ee492",
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "CANONICAL"
+      }
+    ],
+    "memory": [
+      {
+        "source_id": "DOC-4822c68acb5258a1aa4d",
+        "title": "技術資料庫\\專業技術文檔\\Spartoi_專業技術文檔_v2.0\\Spartoi_專業技術文檔_v2.0_DOC-10_2026-07-26_r1.md",
+        "snippet": "---\ntitle: Spartoi_專業技術文檔_v2.0_DOC-10\nversion: 2026-07-26_r1\ngenerated_at: '2026-07-26T16:59:57+08:00'\ntimezone: Asia/Taipei\nrequested_model_label: GPT-5.6 Sol\nactual_model_label: GPT-5.6 Thinking\nrea",
+        "score": 14,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-4822c68acb5258a1aa4d",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-574187028a60cb362c82",
+        "title": "技術資料庫\\SQS-THC_工程開發文檔\\SQS-THC_工程開發文檔_DOC-05_2026-08-04_r2.md",
+        "snippet": "---\ntitle: \"SQS-THC_工程開發文檔_DOC-05\"\nversion: \"2026-08-04_r2\"\ngenerated_at: \"2026-08-04T15:46:00+08:00\"\ntimezone: \"Asia/Taipei\"\nartifact_type: \"S2_PATCHED_S5_DOC_BODY_FULL_SUBSTANTIVE_REPLACEMENT_SINGLE",
+        "score": 14,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-574187028a60cb362c82",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-827964abb1c1a87aad72",
+        "title": "技術資料庫\\SQS-THC_工程開發文檔\\SQS-THC_工程開發文檔_DOC-06_2026-08-04_r2.md",
+        "snippet": "---\ntitle: SQS-THC_工程開發文檔_DOC-06\nversion: 2026-08-04_r2\ngenerated_at: '2026-08-04T15:43:00+08:00'\ntimezone: Asia/Taipei\nartifact_type: S2_PATCHED_S5_DOC_BODY_FULL_SUBSTANTIVE_REPLACEMENT_SINGLE_MD\ntas",
+        "score": 14,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-827964abb1c1a87aad72",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-e5162f1c70b9377ae57b",
+        "title": "技術資料庫\\專業技術文檔\\Spartoi_專業技術文檔_v2.0\\Spartoi_專業技術文檔_v2.0_DOC-11_2026-07-26_r1.md",
+        "snippet": "---\ntitle: Spartoi_專業技術文檔_v2.0_DOC-11\nversion: 2026-07-26_r1\ngenerated_at: 2026-07-26T20:03:45+08:00\ntimezone: Asia/Taipei\nrequested_model_label: GPT-5.6 Sol\nactual_model_label: GPT-5.6 Thinking\nreaso",
+        "score": 14,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-e5162f1c70b9377ae57b",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-00e11cf0e9177e7b46cc",
+        "title": "技術資料庫\\專業技術文檔\\塔勒布思想_專業技術文檔\\塔勒布思想_專業技術文檔_DOC-11_r2.md",
+        "snippet": "---\ntitle: 塔勒布思想_專業技術文檔_DOC-11\nversion: 2026-07-28_r2\ngenerated_at: 2026-07-28T15:59:25+08:00\nartifact_type: S2_PATCHED_S5_DOC_BODY_BODY_ONLY\nroute: PATCH / S2_UPGRADE_REBUILD / S5_DOC_BODY / S7_SINGL",
+        "score": 13,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-00e11cf0e9177e7b46cc",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-1b9fff04ed6d18412aef",
+        "title": "技術資料庫\\專業技術文檔\\AQT_v3.0_專業技術文檔\\AQT_v3.0_專業技術文檔_DOC-18_2026-07-24_r1.md",
+        "snippet": "# 《AQT_v3.0_專業技術文檔_DOC-18》\n\n> **Python 軟體工程、DevOps 與雲端自動化｜Python Software Engineering, DevOps and Cloud Automation**\n> **AQT-DOC18-SDS｜Software Delivery Standard｜CH-26｜2026-07-24_r1**\n\n| field | value",
+        "score": 13,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-1b9fff04ed6d18412aef",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-1c00cf185209aff41e14",
+        "title": "技術資料庫\\SQS-THC_工程開發文檔\\SQS-THC_工程開發文檔_DOC-01_2026-08-04_r2.md",
+        "snippet": "---\ntitle: \"SQS-THC_工程開發文檔_DOC-01\"\nversion: \"2026-08-04_r2\"\ngenerated_at: \"2026-08-04T15:40:00+08:00\"\ntimezone: \"Asia/Taipei\"\nartifact_type: \"S2_PATCHED_S5_DOC_BODY_FULL_SUBSTANTIVE_REMATERIALIZATION_",
+        "score": 13,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-1c00cf185209aff41e14",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      },
+      {
+        "source_id": "DOC-2279ef71e4c547f5b64f",
+        "title": "技術資料庫\\專業技術文檔\\Spartoi_專業技術文檔_v2.0\\Spartoi_專業技術文檔_v2.0_DOC-07_2026-07-26_r1.md",
+        "snippet": "---\ntitle: Spartoi_專業技術文檔_v2.0_DOC-07\nversion: 2026-07-26_r1\ngenerated_at: '2026-07-26T16:48:46+08:00'\ntimezone: Asia/Taipei\nexecution_model_readback: GPT-5.6 Thinking\nartifact_type: S5_SINGLE_DOC_PRO",
+        "score": 13,
+        "role": "MEMORY",
+        "origin_artifact_id": "DOC-2279ef71e4c547f5b64f",
+        "origin_artifact_digest": null,
+        "source_family": "FABRIC_HGK_KNOWLEDGE",
+        "derivation_kind": "FTS_INDEX"
+      }
+    ],
+    "web": []
+  },
+  "web_status": "WEB_RETRIEVAL_SKIPPED_NO_ROOTS",
+  "cross_reference_count": 64,
+  "files": {
+    "ledger": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\far-runs\\R18-FAR-13\\retrieval\\RetrievalLedger.json",
+    "cross_reference": "C:\\Projects\\Agent_Workspace\\var\\R18-FHS-SKELETON-SPINE-20261029\\far-runs\\R18-FAR-13\\retrieval\\CrossReferenceLedger.tsv"
+  }
+}

@@ -1,0 +1,57 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-DURABILITY/1",
+ "round": "FAR-DURABILITY-20261030",
+ "stale_process_reconciliation": {
+  "procs": [
+   "proc_e8533fee389e",
+   "proc_a60862c15fba"
+  ],
+  "their_output": {
+   "handoff": {
+    "files": 95,
+    "bytes": 26186077,
+    "rollup": "2d0f7eb43102a616b69e4f86621758abbcd704d6089952eaa91161a474949aec"
+   },
+   "skeleton": {
+    "files": 83,
+    "bytes": 20330950,
+    "rollup": "949bb22a8b224df8314ef4af87af712d99720660220ff154cb40346ecf448d71"
+   }
+  },
+  "committed_truth": {
+   "handoff": {
+    "files": 911,
+    "bytes": 236157841,
+    "rollup": "6ca537df72ab14d39dffb8c65e2b0061dd209778a262998799a195a9a39877f3"
+   },
+   "skeleton": {
+    "files": 86,
+    "bytes": 33659771,
+    "rollup": "8f498aeb5cc283202afa4a2a9bdc208b9b96eddc5b8711464b1dabe5a85fecfe"
+   },
+   "b1": {
+    "files": 141,
+    "bytes": 17669675,
+    "rollup": "6287198b818c9a01b639ef65b2191f1fb2f2bbb3349292d00229cde228b3f96c"
+   }
+  },
+  "disk_equals_head": true,
+  "contamination": "none"
+ },
+ "vacuous_pass_self_observed": {
+  "tool": "durable_import.py",
+  "before": "95 files with walk_errors=0 for a 911-file tree",
+  "mechanism": "os.scandir without the extended-length prefix -> WinError 3 on a deep directory",
+  "guards": [
+   "WALK_INCOMPLETE exit 5",
+   "FILE_COUNT_MISMATCH exit 6",
+   "EMPTY exit 7"
+  ],
+  "verified": {
+   "positive": "--assert-files 911 -> 911, rollup 6ca537df (byte-identical)",
+   "negative": "--assert-files 9110 -> exit 6"
+  }
+ },
+ "report": "FAR_DURABILITY_ROOTCAUSE_20261030.md",
+ "ts": "2026-10-30T00:00:00Z"
+}

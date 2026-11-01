@@ -1,0 +1,103 @@
+{
+ "schema": "ADMISSION-CONFORMANCE/1",
+ "verdict": "CHAIN_ADMITS",
+ "assurance_level": "CONFORMANCE_ONLY_TEST_SEAM",
+ "ceiling": "principal separation on the OS axis is NOT APPLICABLE on this single-account host (AGENTS.md rule 8); this run proves the mechanism under the module's own injected registry seam and no canonical acceptance token may be derived from it",
+ "workspace": "C:\\wg\\ao6\\ws",
+ "heads": {
+  "base": "57323788a5994f08456363cf4196d8c6b7725e7f",
+  "after_write": "cbc08c65b6c046bfd9e06cb15e726f1748103bbc"
+ },
+ "checks": [
+  {
+   "check": "requirement_frozen",
+   "outcome": "PASS"
+  },
+  {
+   "check": "taskspec_admitted",
+   "outcome": "PASS"
+  },
+  {
+   "check": "wrong_subject_refused",
+   "outcome": "REFUSED_AS_DESIGNED",
+   "code": "ERR_NATIVE_REQUEST_SCOPE"
+  },
+  {
+   "check": "workorder_admitted",
+   "outcome": "PASS"
+  },
+  {
+   "check": "second_taskspec_admitted",
+   "outcome": "PASS"
+  },
+  {
+   "check": "bundle_bound_to_subject",
+   "outcome": "REFUSED_AS_DESIGNED",
+   "code": "ERR_NATIVE_REQUEST_SCOPE"
+  },
+  {
+   "check": "workorder_result_recorded",
+   "outcome": "PASS"
+  }
+ ],
+ "aggregation": {
+  "derived_from_all_checks": true,
+  "allowed_outcomes": [
+   "PASS",
+   "REFUSED_AS_DESIGNED"
+  ],
+  "failing": [],
+  "steps": {
+   "requirement": true,
+   "taskspec": true,
+   "workorder": true,
+   "result": true,
+   "second_taskspec": true,
+   "reuse_negative": true,
+   "wrong_subject_negative": true
+  }
+ },
+ "readback": {
+  "requirement": [
+   {
+    "requirement_id": "REQ-CONFORMANCE-ADMISSION",
+    "state": "FROZEN",
+    "version": 1
+   }
+  ],
+  "taskspec": [
+   {
+    "taskspec_id": "TS-CONF-d8ce0b7c",
+    "state": "ADMITTED",
+    "requirement_id": "REQ-CONFORMANCE-ADMISSION"
+   }
+  ],
+  "workorder": [
+   {
+    "workorder_id": "WO-CONF-e37c88d6",
+    "state": "VERIFIED",
+    "writer": "codex",
+    "result_json": "{\"checker\":\"ao\",\"evidence_refs\":[\"EV-CONF-BOUNDED-WRITE\"],\"verdict\":\"PASS\"}"
+   }
+  ],
+  "nonces": 9,
+  "lease_rows": [
+   {
+    "resource_id": "TS-CONF-d8ce0b7c",
+    "generation": 1
+   },
+   {
+    "resource_id": "WO-CONF-e37c88d6",
+    "generation": 1
+   },
+   {
+    "resource_id": "TS-CONF-B-4f9c6f",
+    "generation": 1
+   }
+  ]
+ },
+ "result": {
+  "verdict": "PASS"
+ },
+ "recorded_at": "2026-10-30T13:26:55+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "corpus_source_sha": "d2b5bfbd3489771ddf90897255cc416a0048fc6109e47be4c6e658f2cb3ab761",
+  "documents": 24,
+  "bound_clauses": [
+    {
+      "source_id": "SBL-04",
+      "sha256": "ee90cb1c86f6f7350c11c9c962233a89b035ca41ff82c8968f7968608fc6f6e0",
+      "line_from": 500,
+      "line_to": 527
+    },
+    {
+      "source_id": "SBL-00",
+      "sha256": "bd9c1a85ea0cae68fa8cde617e5592fca6123f72b4caf1a9d2894167d9a82e01",
+      "line_from": 60,
+      "line_to": 78
+    }
+  ],
+  "source_files_mutated": 0
+}

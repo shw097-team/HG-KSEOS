@@ -1,0 +1,10 @@
+test_every_atom_traces_orphan_free (tests.test_atomic_requirements.ClauseBoundCompiler.test_every_atom_traces_orphan_free) ... ok
+test_normative_claim_without_source_is_refused (tests.test_atomic_requirements.ClauseBoundCompiler.test_normative_claim_without_source_is_refused) ... ok
+test_semantic_collapse_is_refused (tests.test_atomic_requirements.ClauseBoundCompiler.test_semantic_collapse_is_refused) ... ok
+test_workorder_candidate_must_be_candidate_only (tests.test_negative_and_rollback.TestNegative.test_workorder_candidate_must_be_candidate_only) ... ok
+test_execution_binding_ack_requires_receiver_binding (tests.test_negative_and_rollback.TestNegative.test_execution_binding_ack_requires_receiver_binding) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.005s
+
+OK

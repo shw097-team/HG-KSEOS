@@ -1,0 +1,46 @@
+{
+ "schema": "ORACLE/1",
+ "round": "FHS-MSC-ALLPASS-20261030",
+ "registered_by": "commander (PLAN)",
+ "registered_before_check": true,
+ "subject": "C:/wg/repo @ branch fhs-msc-handoff-patch-v1-exec-20261030",
+ "claims": [
+  {
+   "id": "O1",
+   "claim": "SOURCE-MANIFEST lists 24 corpus documents and every listed sha256 equals the file at the listed path",
+   "check": "recompute sha256 for each entry",
+   "falsifier": "any digest mismatch, or a count other than 24 (14 sbl + 10 pipd)"
+  },
+  {
+   "id": "O2",
+   "claim": "F-15 closed as an environment fault: the as-shipped harness returns pass=35 fail=0 under the pinned interpreter and refuses to produce a verdict under the runtime interpreter",
+   "check": "run both; compare",
+   "falsifier": "shipped harness under pinned interpreter reports any failure, or the runtime interpreter still yields a verdict"
+  },
+  {
+   "id": "O3",
+   "claim": "the package ships no license/NOTICE file and no dependency manifest, and SBOM.json says exactly that",
+   "check": "search the package; read SBOM.json",
+   "falsifier": "a license/notice file exists, or SBOM claims a clean supply chain"
+  },
+  {
+   "id": "O4",
+   "claim": "the added test passes and reverting it touches one file only",
+   "check": "pytest the file; inspect git",
+   "falsifier": "test fails, or the diff touches any other file"
+  },
+  {
+   "id": "O5",
+   "claim": "each EXECUTE-produced work-package artefact cites a source that exists, and none of them asserts PASS/approved",
+   "check": "resolve every `source` string to an existing path; grep for verdict words",
+   "falsifier": "a cited path does not exist, or an artefact carries a PASS verdict"
+  },
+  {
+   "id": "O6",
+   "claim": "no artefact reconciles a declared count with a measured count silently",
+   "check": "look for declared vs measured fields and explicit discrepancy notes",
+   "falsifier": "a declared number differs from the enumerated number with no note"
+  }
+ ],
+ "note": "registered before the officer runs; a claim accepted by quoting this file is void"
+}

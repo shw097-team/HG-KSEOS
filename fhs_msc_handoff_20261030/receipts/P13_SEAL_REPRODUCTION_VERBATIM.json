@@ -1,0 +1,27 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-SEAL-REPRODUCTION/1",
+ "round": "FAR-CLOSURE-PROMOTION-20261030",
+ "method": "re-implemented the shipped QA_TOOLS/package.py partition + zip recipe verbatim (manifest exclusions, utf-8 filter, sorted names, fixed date_time 2026-10-30T00:00:00, deflate level 9, external_attr 0o100644<<16)",
+ "results": [
+  {
+   "kind": "BODY",
+   "entries": 114,
+   "bytes": 4007065,
+   "sha256": "5e722cfbf200efc17de246fb5bfe877c5509b5d4d3849d42921ab56b9a86af5b",
+   "declared_match": true
+  },
+  {
+   "kind": "EVIDENCE",
+   "entries": 801,
+   "bytes": 25914281,
+   "sha256": "0e7763b8856f38ad32f9714d7415bb19c215903c72576f9b2f433790c2e70a6d",
+   "declared_match": true
+  }
+ ],
+ "verdict": "BOTH archives byte-exact reproducible from the tree",
+ "supersedes": [
+  "P7_SEAL_AND_PARTITION.json (EVIDENCE shortfall finding)",
+  "FINDINGS F-01c"
+ ],
+ "residual": "PACKAGE_READBACK.json is genuinely absent; regenerable by running the shipped package.py"
+}

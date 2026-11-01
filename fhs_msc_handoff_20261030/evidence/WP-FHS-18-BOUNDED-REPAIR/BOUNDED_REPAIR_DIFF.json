@@ -1,0 +1,17 @@
+{
+  "class": "RC-VACUOUS-PASS / MAX_PATH walk",
+  "commit": "d02f8b2cb3b40549fbc88375a63ad2463d09ccbf",
+  "effect_class": "REPO_WRITE",
+  "files": [
+    "scripts/hgk-lane-dispatch.py"
+  ],
+  "fix": "rglob -> os.walk over the \\\\?\\ extended-length prefix; unreadable entries skipped by name",
+  "generated_at": "2026-10-30T19:14:12",
+  "incident": "guard-subject snapshot raised WinError 3 on a path over MAX_PATH and aborted a dispatch after the pre-spawn gates had passed",
+  "measured_after": "the same directory digests 130 files in 0.09 s",
+  "measured_before": "FileNotFoundError [WinError 3] at var/hgk-solution-apply-20261012/.../references",
+  "regression_test": "not yet in the repo — added to the recurrence ledger as the next obligation for this class",
+  "schema": "BOUNDED-REPAIR-DIFF/1",
+  "status": "REPAIRED_AND_MEASURED; regression test outstanding",
+  "work_package": "WP-FHS-18"
+}

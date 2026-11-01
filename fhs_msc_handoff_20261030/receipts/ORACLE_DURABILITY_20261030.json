@@ -1,0 +1,22 @@
+{
+ "schema": "ORACLE/1",
+ "round": "FAR-DURABILITY-20261030",
+ "registered_by": "commander (PLAN)",
+ "registered_before_check": true,
+ "note": "Registered BEFORE the checker runs. A claim is accepted only if the checker re-derives the command output itself; quoting this file is not evidence.",
+ "claims": [
+  {"id": "O1", "title": "IR-1 refuses uncommitted policy and passes committed policy", "command": "python scripts/ir1_policy_gate.py --repo C:/Projects/Agent_Workspace/HG-KSEOS --json", "expect": {"verdict": "POLICY_COMMITTED", "head_matches": "git rev-parse --short HEAD"}},
+  {"id": "O2", "title": "IR-4 refuses a directory with no repo", "command": "python scripts/ir4_subject_gate.py --path <dir outside any git worktree> --json", "expect": {"verdict": "NO_REPO", "exit": 3}},
+  {"id": "O3", "title": "IR-2 the transport is alive and survives login", "command": "python scripts/relay_preflight.py --json", "expect": {"verdict": "RELAY_ALIVE"}, "also": "a startup entry exists at %APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\ocx-relay-start.cmd"},
+  {"id": "O4", "title": "one policy authority; the copies are projections", "command": "python scripts/lane_policy_reconcile.py --check", "expect": {"verdict": "CONSISTENT"}, "also": "registry status IN_FORCE, contract_epoch 34, PLAN rank-1 = openai-codex/gpt-6.1-sol, EXECUTE rank-1 = opencode-go/deepseek-v4.1-flash, and no lane repeats its rank-1 inside its own fallbacks"},
+  {"id": "O5", "title": "acceptance cannot end NOT_RUN", "command": "python scripts/acceptance_default.py --round X --requirement Y", "expect": {"exit": 2, "stdout_contains": "NOT_RUN"}},
+  {"id": "O6", "title": "every twice-recurred class names a test that mentions it", "command": "python scripts/recurrence_gate.py --all", "expect": {"verdict": "OPEN", "blocked": []}},
+  {"id": "O7", "title": "the regression tests pass", "command": "python -m pytest tests/test_durable_gates.py tests/test_lane_policy.py -q", "expect": {"exit": 0}},
+  {"id": "O8", "title": "the three implementations have manifests, and B1 is sealed", "command": "read fhs_msc_handoff_20261030/deliveries/manifest.*.json in PR branch fhs-msc-handoff-patch-v1-exec-20261030", "expect": {"handoff-patch-v1": {"files": 911, "rollup_prefix": "6ca537df"}, "b1-implementation": {"files": 141, "rollup_prefix": "6287198b"}, "skeleton-spine-r2-revision2": {"files": 86, "rollup_prefix": "8f498aeb"}}}
+ ],
+ "falsifiers": [
+  "any claim whose command the checker cannot run itself is recorded INCONCLUSIVE, not PASS",
+  "a pass that only quotes this file is void",
+  "if the policy is uncommitted at check time, O1 and O4 are FAIL regardless of their output"
+ ]
+}

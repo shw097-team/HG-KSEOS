@@ -1,0 +1,1 @@
+{"pass": 34, "fail": 1, "failures": [{"case": "EXISTING_5_AFFECTED_TESTS", "status": "FAIL", "actual": "AssertionError:expected True; actual False", "scope": "AUTHOR_STATIC_ORIGINAL_READER_ONLY"}]}

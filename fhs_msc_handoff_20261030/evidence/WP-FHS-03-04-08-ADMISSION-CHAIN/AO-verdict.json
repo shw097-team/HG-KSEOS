@@ -1,0 +1,83 @@
+{
+  "officer": "Independent Acceptance Officer",
+  "sitting": 3,
+  "nonce": "NONCE-AO-R28-C-20261030",
+  "oracle_path": "C:\\wg\\r28\\oracle\\ORACLE-WP-03-04-08.json",
+  "checks": {
+    "O1": "PASS",
+    "O2": "PASS",
+    "O3": "PASS",
+    "O4": "PASS",
+    "O5": "PASS",
+    "O6": "PASS"
+  },
+  "overall": "PASS",
+  "convictions": [],
+  "your_run": {
+    "path": "C:\\wg\\ao6\\your_run.json",
+    "verdict": "CHAIN_ADMITS",
+    "exit_code": 0,
+    "outcomes": {
+      "requirement_frozen": "PASS",
+      "taskspec_admitted": "PASS",
+      "wrong_subject_refused": "REFUSED_AS_DESIGNED",
+      "workorder_admitted": "PASS",
+      "second_taskspec_admitted": "PASS",
+      "bundle_bound_to_subject": "REFUSED_AS_DESIGNED",
+      "workorder_result_recorded": "PASS"
+    }
+  },
+  "attack": {
+    "reproducer": "C:\\wg\\ao6\\independent_acceptance.py",
+    "path": "C:\\wg\\ao6\\api_attack\\run.json",
+    "verdict_after_injection": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "injected_check": {
+      "check": "wrong_subject_refused",
+      "outcome": "REFUSED_FOR_WRONG_REASON",
+      "code": "ERR_NATIVE_ROOT_HEAD",
+      "expected_any_of": [
+        "REQUEST_SCOPE",
+        "SAME_SUBJECT_BINDING"
+      ]
+    },
+    "matrix_path": "C:\\wg\\ao6\\outcome_matrix.json",
+    "matrix_cases": 32,
+    "matrix_passed": 32
+  },
+  "second_run": {
+    "path": "C:\\wg\\ao6\\second_run.json",
+    "verdict": "CHAIN_ADMITS",
+    "exit_code": 0,
+    "still_chain_admits": true,
+    "same_workspace_as_first": true
+  },
+  "evidence": {
+    "missing_bundle": "C:\\wg\\ao6\\missing_bundle_probe.json",
+    "candidate_script_sha256": "3d23bc9527fbef0b5b8948d413eb0f7a16932ac699daa5578ccdf649fcfe0be1",
+    "evidence_script_matches_candidate": true,
+    "oracle_sha256": "dca0d0bc96fc4cee3cc4c9929589e37530c3619aa75412ddb3c2d049e085682a",
+    "candidate_inputs_unchanged": true,
+    "ceiling": {
+      "level": "CONFORMANCE_ONLY_TEST_SEAM",
+      "why": "the receiver requires three distinct OS principals; this host has one Windows account, and AGENTS.md rule 8 makes that axis NOT APPLICABLE rather than faked",
+      "what_the_seam_does_not_prove": [
+        "OS principal separation",
+        "DPAPI or CNG key custody on the production anchor"
+      ],
+      "no_canonical_token": "no acceptance token may be derived from this receipt"
+    },
+    "binding_check_order": [
+      "requirement_frozen",
+      "taskspec_admitted",
+      "wrong_subject_refused",
+      "workorder_admitted",
+      "second_taskspec_admitted",
+      "bundle_bound_to_subject",
+      "workorder_result_recorded"
+    ],
+    "reproduce_command": "python -B C:/wg/ao6/independent_acceptance.py"
+  },
+  "scope": "Independent conformance acceptance only. No canonical acceptance token, production principal separation, or production key custody proved. Candidate read only; all outputs in C:/wg/ao6.",
+  "recomputed": true
+}

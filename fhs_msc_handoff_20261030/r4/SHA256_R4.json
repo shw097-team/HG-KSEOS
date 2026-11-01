@@ -1,0 +1,8 @@
+{
+ "kind": "R4_SELF_EXCLUDED",
+ "files": {
+  "r4/R4_PROVENANCE.md": "c834d289999e7680903114280fb5cd95c1837bf1c4fac6c303ada26056e12526",
+  "r4/RECEIVER_READBACK.json": "84d2c95fe9b34cfc632962d67e6442fa8245d45196b8ed020fa6296be8470c0d",
+  "r4/tools/check_first_work.py": "5b1a606fe8ca97f2701413c2b6c11e231ae87251cf392296dce39199e68261bc"
+ }
+}

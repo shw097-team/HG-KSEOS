@@ -1,0 +1,16 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-CHECK35/1",
+ "mode": "AFTER_ONE_LINE_ORDERING_REPAIR",
+ "command": "python check_first_work.py (patched: sys.path insert moved before loadTestsFromNames)",
+ "result": {
+  "pass": 35,
+  "fail": 0,
+  "failures": []
+ },
+ "repair": {
+  "file": "03_HANDOFF_EVIDENCE/QA_TOOLS/check_first_work.py",
+  "lines_changed": 2,
+  "semantics_changed": false
+ },
+ "log": "C:\\Projects\\Agent_Workspace\\var\\FHS-HANDOFF-EXEC-20261030\\logs\\check_first_work_patched.out"
+}

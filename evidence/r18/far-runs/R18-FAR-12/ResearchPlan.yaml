@@ -1,0 +1,18 @@
+schema: LOGICAL_FAR_RESEARCH_PLAN_V1
+subquestions:
+  - {id: SQ1, text: "Was the goal/todo state a tool fault or a state-machine fault?", claim_class: LOCAL_STATE}
+  - {id: SQ2, text: "Did this round route judgement work through the lanes?", claim_class: ROUTING}
+  - {id: SQ3, text: "Are the six FAR_R18_*.md files FAR products?", claim_class: PRODUCT_CONFORMANCE}
+  - {id: SQ4, text: "Why did the round end at milestones?", claim_class: BEHAVIOUR}
+  - {id: SQ5, text: "Was 'blocked on another principal' measurable or assumed?", claim_class: ISSUER_CONTRACT}
+  - {id: SQ6, text: "What remains open in the frozen package?", claim_class: PACKAGE_COMPLETENESS}
+  - {id: SQ7, text: "Is the delivery branch mergable into the repository lineage?", claim_class: GIT_TOPOLOGY}
+claim_classes: [LOCAL_STATE, ROUTING, PRODUCT_CONFORMANCE, BEHAVIOUR, ISSUER_CONTRACT, PACKAGE_COMPLETENESS, GIT_TOPOLOGY]
+source_classes: [LOCAL_RECEIPT, TOOL_OUTPUT, GOVERNING_DOC, GIT_METADATA]
+query_strategy: ["read receipts", "read governing manual", "git rev-list", "python import + signature inspection"]
+candidate_methods_providers: [FAR_ROUTE_NATIVE_DEFAULT]
+challenge_trigger: ["any claim whose only support is the agent's own prose"]
+experiment_trigger: ["any claim about behaviour that can be measured instead"]
+stop_criteria: ["every subquestion has a SUPPORTED_WITH_LIMIT or MISSING row with a source"]
+abstain_criteria: ["a claim needing a second principal's assertion and no artefact"]
+budget_allocation: {retrieval_passes: 1, model_calls: 0}

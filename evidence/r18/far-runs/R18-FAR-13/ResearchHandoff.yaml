@@ -1,0 +1,11 @@
+schema: LOGICAL_FAR_RESEARCH_HANDOFF_V1
+run_ref: R18-FAR-13
+terminal: RESEARCH_PASS_CANDIDATE
+owner: "single owner fp 412b3519..."
+next_actions:
+  - "build bundle {references: [source_freeze, task_kind, oracle_ratification], lease_generation: N} with owner-held keys"
+  - "write policy_epoch into the user-scope sidecar so normalize_user_registry passes"
+  - "ask the author what CAP-BOOT means; do not invent it"
+durable_change_route: "OpenSpec change + Codex writer"
+open_questions: ["CAP-BOOT semantics", "key ids per kind in the live registry"]
+nonclaims: "not an acceptance; not native; not a release"

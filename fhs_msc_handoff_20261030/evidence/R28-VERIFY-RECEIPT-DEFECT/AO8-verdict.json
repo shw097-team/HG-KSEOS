@@ -1,0 +1,62 @@
+{
+  "officer": "Independent Acceptance Officer",
+  "sitting": 8,
+  "nonce": "NONCE-AO-R28-H-20261030",
+  "oracle_path": "C:/wg/r28/oracle/ORACLE-WP-03-04-08.json",
+  "checks": {
+    "O1": "PASS",
+    "O2": "PASS",
+    "O3": "PASS",
+    "O4": "PASS",
+    "O5": "PASS",
+    "O6": "PASS"
+  },
+  "overall": "PASS",
+  "convictions": [],
+  "your_run": {
+    "path": "C:/wg/ao11/your_run.json",
+    "verdict": "CHAIN_ADMITS",
+    "exit_code": 0,
+    "outcomes": "requirement_frozen=PASS; taskspec_admitted=PASS; wrong_subject_refused=REFUSED_AS_DESIGNED/ERR_NATIVE_REQUEST_SCOPE; workorder_admitted=PASS; second_taskspec_admitted=PASS; bundle_bound_to_subject=REFUSED_AS_DESIGNED/ERR_NATIVE_REQUEST_SCOPE; workorder_result_recorded=PASS",
+    "sha256": "dd04a56fa9b90f6cf9b67f7f132c8d4e9fcfd98e57ae41fd79c7f7a785bf9ce7"
+  },
+  "attack": {
+    "reproducer": "C:/wg/ao11/acceptance_probe.py",
+    "command": "python -B C:/wg/ao11/acceptance_probe.py",
+    "verdict_after_injection": "CHAIN_REFUSED",
+    "exit_code": 2,
+    "summary": "C:/wg/ao11/attack_summary.json",
+    "api_boundary_cases": 4,
+    "recorded_outcome_cases": 32,
+    "details": "Sitting 2 reproduced: bad-subject create_taskspec raises ERR_NATIVE_ROOT_HEAD. Also tested REFUSED, ERROR and VACUOUS_PASS at the API boundary. Immediately before the unchanged aggregation, forced each of seven recorded checks and one newly appended check through all four disallowed outcomes; all 36 executions refused with exit 2."
+  },
+  "second_run": {
+    "path": "C:/wg/ao11/second_run.json",
+    "verdict": "CHAIN_ADMITS",
+    "exit_code": 0,
+    "still_chain_admits": true,
+    "same_workspace": true
+  },
+  "evidence": {
+    "O1": "o1_probe.json: explicit admission_bundle=None against the FROZEN requirement in an officer-run database.",
+    "O2": "your_run.json: seven checks, five PASS and two REFUSED_AS_DESIGNED; zero VACUOUS_PASS. Recomputed every outcome and compared the failing list, verdict and process exit.",
+    "O3": "your_run.json: second_taskspec_admitted PASS at index 4 precedes bundle_bound_to_subject at index 5, refused with ERR_NATIVE_REQUEST_SCOPE.",
+    "O4": {
+      "path": "C:\\wg\\repo\\fhs_msc_handoff_20261030\\evidence\\WP-FHS-03-04-08-ADMISSION-CHAIN\\WP_03_04_08_EVIDENCE.json",
+      "ceiling": {
+        "level": "CONFORMANCE_ONLY_TEST_SEAM",
+        "why": "the receiver requires three distinct OS principals; this host has one Windows account, and AGENTS.md rule 8 makes that axis NOT APPLICABLE rather than faked",
+        "what_the_seam_does_not_prove": [
+          "OS principal separation",
+          "DPAPI or CNG key custody on the production anchor"
+        ],
+        "no_canonical_token": "no acceptance token may be derived from this receipt"
+      }
+    },
+    "O5": "api_refused_for_wrong_reason.json records ERR_NATIVE_ROOT_HEAD as REFUSED_FOR_WRONG_REASON; api_refused.json also records the downstream ERR_WORKORDER_REQUIRES_DRAFT_TASKSPEC as REFUSED_FOR_WRONG_REASON. Both refuse the chain.",
+    "O6": "attack_summary.json contains commands, exit codes, receipt hashes and all outcomes. All 36 independently recomputed receipts are CHAIN_REFUSED, exit 2."
+  },
+  "hash_manifest": "C:\\wg\\ao11\\evidence_hashes.json",
+  "assurance_level": "CONFORMANCE_ONLY_TEST_SEAM",
+  "recomputed": true
+}

@@ -1,0 +1,87 @@
+{
+ "root": "C:\\wg\\repro",
+ "checks": {
+  "D1_dag": {
+   "verdict": "PASS",
+   "nodes": 22,
+   "edges": 36,
+   "dangling_edges": [],
+   "acyclic": true,
+   "topological_len": 22
+  },
+  "D2_wp15_closure": {
+   "verdict": "REVIEW",
+   "edge_derived_closure": [
+    "WP-FHS-00",
+    "WP-FHS-15"
+   ],
+   "declared_in_seed": [
+    "WP-FHS-00",
+    "WP-FHS-01",
+    "WP-FHS-15"
+   ],
+   "declared_equals_edge_derived": false,
+   "wp01_is_ancestor_of_wp15": false,
+   "wp01_edge": [
+    "WP-FHS-00"
+   ],
+   "operational_inputs_present": {
+    "WP-FHS-00_source": true,
+    "WP-FHS-01_profile": true
+   },
+   "note": "declared dependency_closure is not derivable from typed edges; the first work still holds because both required inputs exist as artifacts, but the graph and the declaration disagree and only the original owner may re-type the edge"
+  },
+  "D3_no_future_receipt": {
+   "verdict": "PASS",
+   "unexpected_predecessors": [],
+   "rule": "compiler service consumes present draft SPEC; no dependency on future WP15 native receipt"
+  },
+  "D4_pi_atoms": {
+   "verdict": "PASS",
+   "atoms": 24,
+   "incomplete": []
+  },
+  "D5_fuo_ten_fields": {
+   "verdict": "PASS",
+   "keys_present": [
+    "persona",
+    "clean_start",
+    "source_sha",
+    "selected_path",
+    "first_useful_output",
+    "elapsed_ms",
+    "questions_reasked",
+    "error_count",
+    "provider_off",
+    "consumer_acceptance"
+   ],
+   "missing": []
+  },
+  "D6_three_specs": {
+   "verdict": "PASS",
+   "specs": {
+    "ProductSPEC": {
+     "bytes": 5833,
+     "acceptance": 24,
+     "orphan_negatives": 0
+    },
+    "ArchitectureSPEC": {
+     "bytes": 6658,
+     "acceptance": 24,
+     "orphan_negatives": 0
+    },
+    "ProgramSPEC": {
+     "bytes": 12352,
+     "acceptance": 24,
+     "orphan_negatives": 0
+    }
+   }
+  },
+  "D7_current_reader_map": {
+   "verdict": "PASS",
+   "locators": 2221,
+   "unique": 2221
+  }
+ },
+ "overall": "REVIEW"
+}

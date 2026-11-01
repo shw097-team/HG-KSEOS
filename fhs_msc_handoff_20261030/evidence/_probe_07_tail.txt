@@ -1,0 +1,90 @@
+ 130| <a id="current-f8a2f08cdbf3cf7d0b3d"></a>
+ 131| #### AC-E12｜原AO Receiver ACK → 原Protected Checker
+ 132| - **來源**：`BODY-07:124`
+ 133| - trigger/input：當此邊的上游產物ready，接收ProtectedCheckerRun；required=checker_request, oracle_refs, actual_raw_refs, maker_principal, checker_binding。
+ 134| - transform/output：原Checker讀Raw執Oracle；signature可由protected Reader驗 → ProtectedVerdictReceipt；只有原Protected Checker可出ACK(payload_hash,consumer_identity,原schema_version)；NACK含first_fail/affected_scope/resume。
+ 135| - effect/permission：PROTECTED_CHECKER_EFFECT；真不同credential＋原Checker權。
+ 136| - POS：原Checker讀Raw執Oracle；signature可由protected Reader驗。NEG：LeaseCAS object冒verdict或Maker自簽 → NACK_WRONG_DOMAIN_SCHEMA/SELF_ACCEPTANCE_DENY。
+ 137| - rollback/exit/resume：保留原Raw，原Checker出invalidated/supersedes receipt；缺原schema或Receiver就只此邊ABI_BIND_HOLD；原Owner讀回binding後再准入。
+ 138| - source：SRC-L-001:L677；SHA `0af1fd914a2bbb1f3221c4959facc6d0bbb4b43d4a6d385ed57f9cde8f8eab99`。
+ 139| 
+ 140| <a id="current-3cbd3f6fef786c550224"></a>
+ 141| #### AC-E13｜Protected AO Checker → 原HGK Reducer
+ 142| - **來源**：`BODY-07:133`
+ 143| - trigger/input：當此邊的上游產物ready，接收VerdictReduce；required=protected_verdict_ref, signature_ref, expected_revision, subject。
+ 144| - transform/output：有效signature/Oracle/candidate與CAS同revision → ReducedStateACK；只有原HGK Reducer可出ACK(payload_hash,consumer_identity,原schema_version)；NACK含first_fail/affected_scope/resume。
+ 145| - effect/permission：HOST_OP；原Reducer Writer＋Checker驗簽。
+ 146| - POS：有效signature/Oracle/candidate與CAS同revision。NEG：advisory字串PASS當protected verdict → VERDICT_AUTHORITY_DENY。
+ 147| - rollback/exit/resume：原Reducer合法逆轉/新事件；原journal保留；缺原schema或Receiver就只此邊ABI_BIND_HOLD；原Owner讀回binding後再准入。
+ 148| - source：SRC-L-001:L678；SHA `0af1fd914a2bbb1f3221c4959facc6d0bbb4b43d4a6d385ed57f9cde8f8eab99`。
+ 149| 
+ 150| <a id="current-c891a64a005eee60d8a8"></a>
+ 151| #### AC-E14｜原Reducer/Native Commander → 原Maker/Authorized Dev
+ 152| - **來源**：`BODY-07:142`
+ 153| - trigger/input：當此邊的上游產物ready，接收RepairConeDispatch；required=first_fail, affected_paths, preimage_sha, budget, ecp_ref。
+ 154| - transform/output：原Oracle下RED→bounded patch→GREEN與新candidate → NewCandidate+RedGreenRaw；只有原Maker/Authorized Dev可出ACK(payload_hash,consumer_identity,原schema_version)；NACK含first_fail/affected_scope/resume。
+ 155| - effect/permission：REPO_WRITE；L2 DEV ECP/exact cone。
+ 156| - POS：原Oracle下RED→bounded patch→GREEN與新candidate。NEG：改Oracle/擴WriteSet/覆蓋舊Evidence → REPAIR_SCOPE_DENY。
+ 157| - rollback/exit/resume：原preimage inverse patch；residue與版本留存；缺原schema或Receiver就只此邊ABI_BIND_HOLD；原Owner讀回binding後再准入。
+ 158| - source：SRC-L-001:L679；SHA `0af1fd914a2bbb1f3221c4959facc6d0bbb4b43d4a6d385ed57f9cde8f8eab99`。
+ 159| 
+ 160| <a id="current-8f9d0bcfa3d7eba4d0c5"></a>
+ 161| #### AC-E15｜Closed B1 Evidence → 原W18 NormalMode Owner
+ 162| - **來源**：`BODY-07:151`
+ 163| - trigger/input：當此邊的上游產物ready，接收NormalModeQualification；required=b1_evidence_refs, fresh_pid, default_profile_sha, ordinary_goal, test_only_removed。
+ 164| - transform/output：新PID零B1長Prompt且正式profile自動路由/真served → NM01-03/E33-E42 Raw；只有原W18 NormalMode Owner可出ACK(payload_hash,consumer_identity,原schema_version)；NACK含first_fail/affected_scope/resume。
+ 165| - effect/permission：HOST_OP；原Host OPS/User scope；不是Release。
+ 166| - POS：新PID零B1長Prompt且正式profile自動路由/真served。NEG：test-only profile或手選lane冒常態 → NORMAL_MODE_NOT_QUALIFIED。
+ 167| - rollback/exit/resume：原Host restore profile；B1收據保留，不重播effect；缺原schema或Receiver就只此邊ABI_BIND_HOLD；原Owner讀回binding後再准入。
+ 168| - source：SRC-L-001:L680；SHA `0af1fd914a2bbb1f3221c4959facc6d0bbb4b43d4a6d385ed57f9cde8f8eab99`。
+ 169| 
+ 170| ### 8.2 96 個原異構 Oracle 專屬處理
+ 171| <a id="current-31d3fe0a459635a2b9a7"></a>
+ 172| #### AC-C39-POS-DETERMINISTIC
+ 173| 
+ 174| - **原 NEG 本版有效保留**：去掉必要輸出或接受錯誤輸出；observed_value改成非expected
+ 175| - **Source** `BODY-07:165`，原 Oracle `AC-C39-POS-DETERMINISTIC`；只能由該原 protected checker 讀其適用 Raw/Oracle，不由作者推論 PASS。
+ 176| - trigger/input：本TestClass domain=POS，Oracle=DETERMINISTIC；同Subject/scope/source。實際私有CLI Raw refs=['CLI-POS-ADD', 'CLI-POS-LIST-FRESH-PID']；無Raw不可假裝已跑Native。
+=====
+1329| ## 本版未受影條文（完整沿用、當期生效）
+1330| 
+1331| ## R2-07-AC：15 條異構Edge與三種Challenge效果
+1332| 
+1333| A READONLY只讀Frozen Readset；B ADVISORY_LOCAL_WRITE只寫隔離建議；C CHECKER_INBOX_EFFECT寫原受保護inbox必走原OPS/ACL。Protected Checker與Challenge是不同principal，Maker無權簽Independent PASS。每邊先核特定payload type，再核required、source/candidate/receiver與domain；不能使用同一SourceRef/RawRef袋子代替全部ABI。
+1334| 
+1335| 以下type_tag是作者端Reader投影辨識符，並非新Native `$id`。PIPD原型別用BODY-02的真Registry `$id`；Queue/Wake/Checker等需原Host Reader回schema/version/hash，不存在時ABI_BIND_HOLD。設計測試只能驗拒收形狀及scope；正式ACK必由列出的原Receiver產生。
+1336| ## R2-07-H4-SEAM：12 H4與11 SEAM保持原Oracle
+1337| 
+1338| | 原Gate/Source | 原業務契約 | 原POS/NEG/退出 |
+1339| |---|---|---|
+1340| | H4-01 Fresh Context / SRC-01:L202 | 原 checker_principal, loaded_history_ids, write_cap → fresh-context-proof；Consumer/Owner Checker Registry；換真獨立 context／re-run；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS checker≠maker、無重疊私有歷史、無受審檔寫權；NEG 看過 Maker private notes 或可寫候選 → CHECKER_CONTEXT_TAINTED；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1341| | H4-02 Frozen Binding / SRC-01:L203 | 原 subject sha, source manifest, raw refs → exact-hash-binding；Consumer/Owner Source Owner；重凍結後重測；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS 每個 SourceLocator 可讀且 sha 與 frozen 一致；NEG source[3] 漂移 → FROZEN_BINDING_MISMATCH；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1342| | H4-03 A∪B∪C / SRC-01:L204 | 原 stable A/B/C IDs, waiver → attack union ledger；Consumer/Owner Challenge Owner；補原攻擊而非改分母；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS A={x,y}, B={y,z}, C={w} 得唯一 4 件且都有 disposition；NEG count=3 或藏未測 → ATTACK_DENOMINATOR_UNDERCOUNT；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1343| | H4-04 Anti-Correlation / SRC-01:L205 | 原 high-risk flags, challenge origin/principal → independence matrix；Consumer/Owner Protected Checker；獨立再生案例；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS 高風險有至少一條非 Maker 派生的攻擊與新 context；NEG tests 全取同一 Maker Memo → CORRELATED_BLIND_SPOT；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1344| | H4-05 11 Seams / SRC-01:L206 | 原 seam_case_ids[11]，tamper fields → SeamTestLedger；Consumer/Owner Security/Native Owners；逐 Seam 真測；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS 11 個不同故障面各一正一負且對應不同 FirstFail；NEG 11 個僅改標題、未實測 → SEAM_UNTESTED；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1345| | H4-06 Next-Wave / SRC-01:L207 | 原 current+next-wave consumer, policy → under-enforcement check；Consumer/Owner Policy Owner；保持拒收；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS 當前沒消費但 next-wave 仍必拒過期權；NEG no current reader 竟豁免 → NEXT_WAVE_UNDERENFORCED；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1346| | H4-07 Regression Retention / SRC-01:L208 | 原 previous F IDs, new SHA, change cone → regression matrix；Consumer/Owner Regression Owner；舊判決保留；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS 過往 F17 仍在新 SHA 重測集，除非受權變更；NEG 靜默刪 prior rejection → REGRESSION_SILENT_DROP；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1347| | H4-08 Two-Pass Blind / SRC-01:L209 | 原 PassA seal time/SHA, PassB open time → order proof；Consumer/Owner Checker Owner；新 Session 重新盲審；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS A immutable frozen 後才開 B，能重算 timestamp；NEG B 先開或封印被改 → BLIND_REVIEW_INVALID；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1348| | H4-09 Dual Axis / SRC-01:L210 | 原 candidate truth, reviewer process qualified → two-axis result；Consumer/Owner AO；分軸判斷不可平均；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS candidate=FAIL、process=PASS 時全案仍 HOLD；NEG reviewer 合格便宣稱 candidate PASS → DUAL_AXIS_COLLAPSE；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1349| | H4-10 Native Receipt / SRC-01:L211 | 原 issuer/subject/raw digest/sig → trusted binding；Consumer/Owner HGK Native Owner；驗真 key/ACL；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS sig+scope+raw 同 Subject 有效；NEG S2 收據重播給 S1 → NATIVE_RECEIPT_SUBJECT_MISMATCH；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1350| | H4-11 RepairCone / SRC-01:L212 | 原 first failing invariant, DAG, legal writeset → minimal repair cone；Consumer/Owner Maker/Repair Owner；用受限 L2 ECP；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS 只修依賴受影最小集合，重測對應案；NEG 擴寫無關 Source/Oracle → REPAIR_SCOPE_OVERREACH；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1351| | H4-12 PRE-W3 / SRC-01:L213 | 原 first W3 packet, SWOF Gate, dispatch raw → non-dispatch proof；Consumer/Owner SWOF Owner；正式 Gate 前只 shadow；本版只產 H4CaseProposal，Reader=Protected AO/適用 Reviewer。 | POS 沒正式 Gate 時 NOT_DISPATCHED 可驗；NEG 無 Gate 卻寫 W3 → PREW3_GATE_BYPASS；FirstFail 受影 H4 停止，原 Checker Owner 證明退出／重測，不影響無關案。 |
+1352| | SEAM-01 Activation / SRC-01:L221 | host_loader.trigger_route 必註冊；受影 Domain Reader=Host Operator。 | 合法 Skill 真觸發；不存在 route 卻稱 Active → HOST_NOT_EFFECTIVE；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1353| | SEAM-02 Pre-gate bypass / SRC-01:L222 | gate.receipt_ref 在 dispatch 前驗；受影 Domain Reader=HGK Issuer/Receiver。 | 有權 Gate 先於 effect；dispatch_at<admit_at → PRE_GATE_BYPASS；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1354| | SEAM-03 Input downgrade / SRC-01:L223 | schema_version/security attributes 不降；受影 Domain Reader=Schema/PIPD Owner。 | 不變欄被保留；v1 threat fields 被刪成 v0 → SCHEMA_DOWNGRADE_DENIED；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1355| | SEAM-04 Internal Oracle / SRC-01:L224 | oracle.principal_id != maker；受影 Domain Reader=Oracle/Checker Owners。 | 有權 Checker 真分離；Maker 上白名單 → TQ_SOD；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1356| | SEAM-05 Canonical Owner / SRC-01:L225 | pi.writer_namespace 唯 PIPD；受影 Domain Reader=PIPD Owner。 | 正式 PI Writer 正確；SBL 假 PI → SECOND_CANONICAL_WRITER；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1357| | SEAM-06 Fallback compatibility / SRC-01:L226 | provider-off 必保持 Required FUO；受影 Domain Reader=Product/Host Owner。 | fallback 有同等 FUO；缺 delete 仍稱 parity → PROVIDER_OFF_FUO_LOSS；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1358| | SEAM-07 Alternate route / SRC-01:L227 | 每條 route 保持 issuer authority；受影 Domain Reader=HGK/SWOF Owners。 | 本地與連線 Route 不換權威；secondary local grant → WRONG_AUTHORITY_GRANT；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1359| | SEAM-08 Post-gate effect / SRC-01:L228 | Dispatch 實時 nonce/expiry valid；受影 Domain Reader=HGK Receiver。 | 當下可驗效期；plan 後過期仍動手 → POST_GATE_PERMISSION_EXPIRED；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1360| | SEAM-09 Replay/stale / SRC-01:L229 | nonce/op_id at-most-once；受影 Domain Reader=Hermes/Issuer。 | Unknown 先 readback；timeout blind retry → EFFECT_REPLAY_DENIED；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1361| | SEAM-10 TOCTOU / SRC-01:L230 | repo_context.head_sha 鎖 preimage；受影 Domain Reader=L2 Repo Owner。 | 写前 HEAD 同凍結版；中途漂移 → TOCTOU_REPO_HEAD；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1362| | SEAM-11 Exact evidence / SRC-01:L231 | raw_receipt.subject_sha 同候選；受影 Domain Reader=Evidence/Checker Owner。 | candidate/raw/manifest exact match；舊 SHA Raw 冒用 → RAW_SUBJECT_MISMATCH；FirstFail 停受影 Receiver；原 Owner 更正/驗原 Raw 後才可重入。 |
+1363| 
+1364| ## R2-07-ACTUAL-ACCEPTANCE：原Spine Reader的證據邊界
+1365| 
+1366| 原`C:\Projects\Agent_Workspace\HG-KSEOS\src\hg_kseos\spine.py:460` SHA `f99a402123f39b8ceaad9372aeec0555628ba643950a5c99a4c917fd9e6d6dcd` 的`resolve_acceptance`有requirement_id、registered evidence ref、lease actor/token、expected_version、idempotency_key與NOT_RUN→PASS/FAIL單次transaction限制。這不是Maker許可；原Checker權責仍在原Host。
+1367| 
+1368| 該原函式docstring明示：evidence_refs沒有subject/requirement欄，目前只能證明evidence_ref已註冊，不能證明evidence確屬本subject。本候選對foreign-evidence的拒收要求不能冒稱原Native現已實現；必由原HGK Evidence/Checker Owner綁subject-bound registry或原兼容Reader，並以foreign evidence NEG驗實後才給Native PASS。本輪作者guard只驗拒收設計，不修改schema.sql或原DB，不新增Checker。
+1369| 
+1370| NEG：註冊但來自另一subject的evidence_ref不得僅因exists就接受。受影scope為AC-E09/12/13及欲借該Raw結案的B1 Case；其他來源/設計Reader繼續。Next legal action：原Owner對同candidate/requirement的evidence binding做兼容遷移與原Checker回歸，保留舊journal和history。

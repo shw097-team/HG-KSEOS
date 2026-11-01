@@ -1,0 +1,10 @@
+{
+  "ask": false,
+  "row": {
+    "key": "ordinary_goal",
+    "subject": "PI-4298cad2300fb52f",
+    "scope": "WP-FHS-15",
+    "source_sha": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "answer": "為普通 Goal 產生有來源與可判 POS/NEG 的 Product、Architecture、Program SPEC，交原 PIPD，再交 Hermes 於原權限下續工"
+  }
+}

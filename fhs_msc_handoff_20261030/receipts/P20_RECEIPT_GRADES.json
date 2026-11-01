@@ -1,0 +1,62 @@
+{
+  "counts": {
+    "A": 5,
+    "B": 7,
+    "total": 12
+  },
+  "definition": {
+    "A": "the artefact is backed by a clean producer receipt or by a recomputation independent of the producer",
+    "B": "the artefact is correct only because an officer re-derived it from sources; the producing dispatch timed out or was served by a different model than requested"
+  },
+  "grade_A": {
+    "00": {
+      "basis": "clean receipt or mechanical recomputation"
+    },
+    "06": {
+      "basis": "clean receipt or mechanical recomputation"
+    },
+    "14": {
+      "basis": "clean receipt or mechanical recomputation"
+    },
+    "18": {
+      "basis": "clean receipt or mechanical recomputation"
+    },
+    "19": {
+      "basis": "clean receipt or mechanical recomputation"
+    }
+  },
+  "grade_B": {
+    "01": {
+      "basis": "officer re-derivation",
+      "dispatch": "B: exit 0, requested deepseek-v4.1-flash, attempt reported mimo-v2.6-flash"
+    },
+    "05": {
+      "basis": "officer re-derivation",
+      "dispatch": "B: exit 0, requested deepseek-v4.1-flash, attempt reported mimo-v2.6-flash"
+    },
+    "07": {
+      "basis": "officer re-derivation",
+      "dispatch": "C: exit 124 no receipt"
+    },
+    "09": {
+      "basis": "officer re-derivation",
+      "dispatch": "C: exit 124 no receipt"
+    },
+    "15": {
+      "basis": "officer re-derivation",
+      "dispatch": "A: exit 124 no receipt"
+    },
+    "16": {
+      "basis": "officer re-derivation",
+      "dispatch": "A: exit 124 no receipt"
+    },
+    "21": {
+      "basis": "officer re-derivation",
+      "dispatch": "C: exit 124 no receipt"
+    }
+  },
+  "recorded_at": "2026-10-30T19:58:06",
+  "round": "FHS-MSC-ALLPASS-20261030",
+  "rule_this_creates": "a grant inherits the weakest evidence in its chain, and the grade is stored beside the verdict rather than averaged into a single number",
+  "schema": "RECEIPT-GRADES/1"
+}

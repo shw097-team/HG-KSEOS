@@ -1,0 +1,77 @@
+{
+ "schema": "HGK-AO-ACCEPTANCE/1",
+ "round": "AO-ACCEPTANCE-20261030",
+ "subject": {
+  "repo": "C:/wg/repo",
+  "branch": "fhs-msc-handoff-patch-v1-exec-20261030",
+  "commit": "bb37523"
+ },
+ "oracle": {
+  "path": "C:/wg/ao/ORACLE_20261030.json",
+  "sha256": "68cfb99839cd86770d16cc925f9c1c2ab31c126a95789e0410330d72e524635d",
+  "registered_before_check": true
+ },
+ "lane": {
+  "name": "VERIFY_SECURITY",
+  "served_arm": "openai-codex/gpt-6.1-sol",
+  "independence": "process_only",
+  "model_diversity": "PRESENT_VS_EXECUTE(deepseek)"
+ },
+ "verdict_author": {
+  "actor": "AO_LANE",
+  "nonce": "NONCE-AO-20261030-B",
+  "seconds": 102.83,
+  "rollout": "C:/Users/user/.codex/sessions/2026/10/30/rollout-2026-10-30T15-45-06-01a18bc5-0245-7ed2-a736-eff81b692b3e.jsonl",
+  "transcript": "C:/wg/ao/AO_VERDICT_2.txt"
+ },
+ "transcriber": {
+  "actor": "EXECUTE_SESSION",
+  "rule": "fail-closed mechanical transcription; no re-judgement"
+ },
+ "claims": {
+  "O1": {
+   "verdict": "PASS",
+   "basis": "909 declared / 909 matched / 0 mismatched"
+  },
+  "O2": {
+   "verdict": "PASS",
+   "basis": "BODY 114 entries / 4,007,065 B / 5e722cfb… byte-exact"
+  },
+  "O3": {
+   "verdict": "PASS",
+   "basis": "EVIDENCE 801 entries / 25,914,281 B / 0e7763b8… byte-exact"
+  },
+  "O4": {
+   "verdict": "PASS",
+   "basis": "22 nodes / 36 edges / acyclic; closure {00,15} vs {00,01,15} disclosed"
+  },
+  "O5": {
+   "verdict": "PASS",
+   "basis": "after P14 was added and F-02's citation corrected",
+   "prior": "FAIL at 34b40ef"
+  },
+  "O6": {
+   "verdict": "PASS",
+   "basis": "no acceptance/certification/release/native assertion in 28 documents"
+  },
+  "O7": {
+   "verdict": "PASS",
+   "basis": "shipped 34/1 and repaired 35/0 reported as distinct, repair documented"
+  },
+  "O8": {
+   "verdict": "PASS",
+   "basis": "withdrawal consistent with P11/P12/P13"
+  }
+ },
+ "overall": "ACCEPTED",
+ "rule_applied": "zero FAIL and zero INCONCLUSIVE",
+ "ceiling": {
+  "accepted": "the registered oracle only",
+  "not_accepted": [
+   "native verification",
+   "release",
+   "22-WP per-workpackage acceptance",
+   "claim ceiling above handoff-ready"
+  ]
+ }
+}

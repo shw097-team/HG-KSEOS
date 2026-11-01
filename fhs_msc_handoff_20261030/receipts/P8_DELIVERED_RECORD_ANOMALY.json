@@ -1,0 +1,20 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-DELIVERED-RECORD/1",
+ "subject": "the delivery's own post-fix record for the 35 minimal checks",
+ "files": {
+  "03_HANDOFF_EVIDENCE/MINIMAL_STATIC_TESTS.json": {
+   "pass": 35,
+   "fail": 0,
+   "elapsed_seconds": 1.0183297000003222
+  },
+  "03_HANDOFF_EVIDENCE/MINIMAL_STATIC_TESTS_INITIAL.json": {
+   "pass": 34,
+   "fail": 1,
+   "elapsed_seconds": 1.0183297000003222
+  }
+ },
+ "finding": "the post-fix record carries elapsed_seconds identical to the pre-fix record to 16 significant digits (1.0183297000003222). Re-running the harness cannot reproduce a timing value to that precision: this round's own two runs measured 6.103504499998962 s and 5.454677300000185 s.",
+ "verdict": "ANOMALY",
+ "reading": "the 35/0 record appears to be the 34/1 record with the counts edited, not an independent re-execution. The 35/35 count itself did reproduce in this round under the delivered READERS snapshot, so the count is not in doubt; the delivery's evidence for it is.",
+ "scope_note": "this is a defect of the delivered package, not of this round's re-execution"
+}

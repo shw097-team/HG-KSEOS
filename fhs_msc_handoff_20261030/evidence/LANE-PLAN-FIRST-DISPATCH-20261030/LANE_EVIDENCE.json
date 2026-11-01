@@ -1,0 +1,19 @@
+{
+  "schema": "LANE-EVIDENCE/1",
+  "round": "FAR-HANDOFF-V1-LANE-USAGE-AUDIT-20261030",
+  "lane": "PLAN",
+  "first_dispatch": true,
+  "why_this_artefact_exists": "across every prior round the PLAN lane was invoked zero times; the research was written by the session model, whose provider/model is the EXECUTE lane's",
+  "gate": "scripts/lane_evidence_gate.py",
+  "gate_verdict": "LANE_SERVED_AS_CLAIMED",
+  "asked": "gpt-6.1-sol",
+  "served": "gpt-6.1-sol",
+  "rank": 1,
+  "seconds": 55.51,
+  "counter_example": {
+    "receipt": "batch B EXECUTE",
+    "gate_verdict": "LANE_CLAIM_UNSUPPORTED",
+    "problem": "silent_substitution: asked opencode-go/deepseek-v4.1-flash, served opencode-go/mimo-v2.6-flash"
+  },
+  "recorded_at": "2026-10-30T20:35:11"
+}

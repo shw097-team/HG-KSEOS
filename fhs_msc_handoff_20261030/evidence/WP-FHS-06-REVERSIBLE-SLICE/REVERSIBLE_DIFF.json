@@ -1,0 +1,23 @@
+{
+  "effect_class": "REPO_WRITE",
+  "files_added": [
+    {
+      "bytes": 2156,
+      "path": "tests/test_delivery_manifest_counts.py",
+      "sha256": "583ba8e71a6c06ae82e262b1a7754f3d563c026b605bba448de5030bd36c7611"
+    }
+  ],
+  "files_deleted": [],
+  "files_modified": [],
+  "generated_at": "2026-10-30T19:14:12",
+  "purpose": "pin the delivery's own counts and release digests so a future round cannot shrink the payload and still call it delivered",
+  "raw_run": {
+    "command": "python -m pytest tests/test_delivery_manifest_counts.py -q -p no:cacheprovider",
+    "exit": 0,
+    "raw": "/c/wg/r26_wp06_pytest.txt (3 passed in 0.16s)"
+  },
+  "reversible": true,
+  "revert": "git revert <commit> or: git rm tests/test_delivery_manifest_counts.py — nothing else depends on it",
+  "schema": "REVERSIBLE-DIFF/1",
+  "work_package": "WP-FHS-06"
+}

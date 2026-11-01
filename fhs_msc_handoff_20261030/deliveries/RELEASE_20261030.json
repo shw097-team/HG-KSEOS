@@ -1,0 +1,45 @@
+{
+ "schema": "RELEASE-ASSETS/1",
+ "round": "FAR-DURABILITY-20261030",
+ "release": "https://github.com/shw097-team/HG-KSEOS/releases/tag/fhs-msc-deliveries-20261030",
+ "release_id": 428911476,
+ "tag": "fhs-msc-deliveries-20261030",
+ "target": "candidate/r18-fhs-skeleton-spine-20261029",
+ "assets": [
+  {
+   "name": "B1_implementation.zip",
+   "entries": 141,
+   "bytes": 8326893,
+   "sha256": "2d388b91f64ab04fb39fe7b0d212ec7190b090c37ffb30138e89531637ec7ca3",
+   "manifest": "manifest.b1-implementation.json"
+  },
+  {
+   "name": "SKELETON_SPINE_r2_revision2.zip",
+   "entries": 86,
+   "bytes": 15620407,
+   "sha256": "c344edaf54979dfcbf513287521fa2528ebffb6e195482d419b95be52a6871ec",
+   "manifest": "manifest.skeleton-spine-r2-revision2.json"
+  },
+  {
+   "name": "HANDOFF_PATCH_v1.zip",
+   "entries": 911,
+   "bytes": 29867503,
+   "sha256": "af054950f38eb64175d909d4f07f7072ffd34370f020b5ef1237972d0b670527",
+   "manifest": "manifest.handoff-patch-v1.json"
+  }
+ ],
+ "readback": "each asset downloaded from the release URL and re-hashed on 2026-10-30; all three matched",
+ "build": {
+  "timestamps": "fixed 1980-01-01",
+  "order": "sorted by path",
+  "method": "zipfile DEFLATED",
+  "entry_set_equals_manifest": true
+ },
+ "registry": {
+  "ACC-DURABILITY-B1-20261030": "PASS",
+  "ACC-DURABILITY-SKELETON-V2-20261030": "PASS",
+  "ACC-DURABILITY-HANDOFF-V2-20261030": "PASS",
+  "ACC-DURABILITY-SKELETON-20261030": "FAIL (superseded: manifest only, recorded before publication)",
+  "ACC-DURABILITY-HANDOFF-20261030": "FAIL (superseded: manifest only, recorded before publication)"
+ }
+}

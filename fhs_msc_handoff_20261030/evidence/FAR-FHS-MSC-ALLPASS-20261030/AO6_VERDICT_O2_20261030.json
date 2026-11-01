@@ -1,0 +1,12 @@
+{
+  "nonce": "NONCE-AO-20261030-F",
+  "claim": "O2",
+  "verdict": "PASS",
+  "measurements": {
+    "unmodified": "pass=34 fail=1",
+    "with_one_line": "pass=35 fail=0"
+  },
+  "record_matches": true,
+  "root_cause_correct": true,
+  "notes": "Pinned Python 3.11.17; exit codes 1 and 0. Used package QA_TOOLS/check_first_work.py and ready check_first_work.pathfix.py, verified to differ only by the specified insertion before test loading. Both ran from package QA_TOOLS against package readers and inputs in fresh processes. Legacy prepare E/A locators were rebound to this package; generated fixtures/reports alone were redirected to C:/wg/ao3, with an audit hook denying writes elsewhere and bytecode disabled. Windows extended-length paths were required for package corpus reads. Unmodified raw output shows five ModuleNotFoundError: tests errors, causing EXISTING_5_AFFECTED_TESTS to fail; repaired raw output shows all five tests pass. READERS/PIPD/tests is beside src; the original root insertion occurs after loadTestsFromNames and is too late. F15_RESOLUTION.json measurements_in_place and corrected root cause match; earlier scratch-copy 35/0 figures are contextualized by withdrawn_claim. Evidence: C:/wg/ao3/o2_recheck_F and o2_*_F.log. PASS concerns O2 truthfulness only, not delivery acceptance."
+}

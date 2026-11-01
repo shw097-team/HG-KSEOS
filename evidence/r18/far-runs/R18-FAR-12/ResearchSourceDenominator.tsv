@@ -1,0 +1,8 @@
+source_id	path	class	sha256	exists
+S01	receipts/TERMINAL_STATE.json	local receipt	7cfe21c83458d02b	True
+S02	receipts/BRANCH_RECONCILE.json	local receipt	ab5c907d87cd0989	True
+S03	receipts/ISSUER_PATH_PROBE.json	local receipt	677c286cda55b80c	True
+S04	receipts/WP18_CAUSAL_REPAIR.json	local receipt	11784ca38091bab5	True
+S05	receipts/WP19_SBOM_RESCAN.json	local receipt	aa70f704f71937ca	True
+S06	CORRECTIONS.md	local receipt	cf95c4e974c55721	True
+S07	FAR_R18_12_SEVEN_QUESTIONS.md	research memo (NOT a FAR product)	8425c38752954a54	True

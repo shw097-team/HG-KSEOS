@@ -1,0 +1,25 @@
+{
+  "work_package": "WP-FHS-02",
+  "done_clause": "Source/Stage/Approve/Active/Loaded/Consumer each hash the same scope; readback by the original consumer",
+  "measured": {
+    "present": [
+      "source",
+      "approve",
+      "active",
+      "loaded",
+      "consumer"
+    ],
+    "absent": [
+      "stage"
+    ],
+    "consumer_readback": true,
+    "unknown_class_fails_closed": true,
+    "classes_declared_by_the_router": 9,
+    "policy_epoch": "34",
+    "policy_status": "IN_FORCE"
+  },
+  "why_stage_is_absent": "no staged copy of RP002_CHANGE_CLASS_ROUTER.yaml exists on this host; Fabric's pipeline stages other artefacts, not this one. Nothing was manufactured to fill the slot",
+  "what_this_is_not": "not a PASS: five of six layers exist, so WP-FHS-02 stays FAIL until a real staging step produces the sixth",
+  "class_name_correction": "the first run of this tool guessed CONFIG_ONLY/CODE_ONLY/CONTRACT_ONLY/POLICY_ONLY/CROSS_STACK and got five UNKNOWN_CHANGE_CLASS refusals; the router declares CONFIG_PREAPPROVED/CONSTITUTIONAL_CHANGE/DOMAIN_CHANGE/PIPELINE_CHANGE/PROFILE_CHANGE/PROVIDER_UPGRADE/RUNTIME_TRANSIENT/SKILL_CHANGE/STACK_CHANGE. Reading all nine now returns ROUTE_OK",
+  "active_layer_plane": "HG-KSEOS (Fabric has no policy-epoch object; 40 policy_epoch/IN_FORCE hits all sit inside evidence/)"
+}

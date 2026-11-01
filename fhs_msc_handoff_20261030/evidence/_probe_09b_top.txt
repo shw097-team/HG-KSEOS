@@ -1,0 +1,60 @@
+   1| <!-- artifact_version: 2026-10-30_CODEX-STATIC-REPAIR-v1.0_SOURCE_BOUND_HIGH_RETENTION; scope: FHS_DESIGN_READER; native: NATIVE_NOT_RUN; release: NOT_RUN -->
+   2| 
+   3| > **CURRENT FHS READER 2026-10-30_r2_HIGH_RETENTION_AUDIT_PATCHED_SOURCE_BOUND**；原 Domain Writer 不變；歷史 fenced block 不得作有效條位。
+   4| 
+   5| # 09B KIND MODE HOST 192｜FHS-MSC_PIPD-LS-PKG 2026-10-30 整合實質正文
+   6| 
+   7| > **FHS-MSC_PIPD-LS-PKG / 2026-10-30_r2_HIGH_RETENTION_AUDIT_PATCHED_SOURCE_BOUND / EFFECTIVE_DESIGN_READER**。本冊按同域來源整合 2026-10-29 BODY revision2 和 2026-10-30 r2 最新受影修補。R2 受影條款在本冊設計閱讀範圍優先於被修補之歷史片段；但不覆寫 SBL/PIPD/Fabric/HGK 原 Writer、已生效 Policy/ABI。全部 Native／Owner Ratification／IndependentChecker／Release 未在本沙盒執行。
+   8| >
+   9| > **ClaimCeiling** `SOURCE_BOUND_INTEGRATED_DESIGN_WITH_LOCAL_READBACK`；`REPO_SOURCE_REMOTE_OBSERVED` 不代表 `LOCAL_REPOCONTEXT_BOUND`，不得藉本檔取得原授權。本冊有效設計正文包含未受影條文；原 Domain Canonical Writer 不移轉。
+  10| 
+  11| 
+  12| ## 本輪同域受影修復：r2 §7 全量192 個Kind×Mode×Host×Provider
+  13| 
+  14| ## 7. SBL 192 個 Kind×Mode×Host×Provider Legacy Cell：逐 Cell 生效行為
+  15| 
+  16| `CELL-<id>` 都保留原 `Kind/Mode/Host/legacy=ON|OFF`，並由本節每筆 Source Clause 的 ModeGate、HostCaps、POS/NEG、NoFit/卸載綁定。**原來源 ON/OFF 欄位有標籤語義衝突**：BODY09B 候選提出 ON→provider_off=UNBOUND_OWNER_ACK_REQUIRED、OFF→true，但仍需原 Product/Host Owner 签；未決為 `OWNER_BIND_HOLD`，不得以名稱猜測正式 Provider Enum，更不得 Provider-off 外呼。SWOF_W2 Shadow 無可寫世界；合法本地產品 Build 是另一 Subject。[BODY09B `R2-09B-CELL`]
+  17| 
+  18| <a id="current-6d0937e8fcff7541bf52"></a>
+  19| ### CELL-d0cf30ffd7c1｜CLI_TOOL/STANDALONE｜Hermes Agent｜legacy=ON
+  20| - **原定位**：`BODY-09B:26`；真 Cell Id `CELL-d0cf30ffd7c1`（不得借其他 Host/Mode 之 receipt）。
+  21| - Trigger/input：此Kind需求在此Mode與此Host被要求；source v1:L29，SHA `41cdd5e5ab16bc2b44ab47155e6cd09e81eef98c56753ae7dd03d0484385a4cd`。
+  22| - route/HostCaps：原Hermes tool/skill loader與worker fresh PID；OS process runner，不要求Host skill loader。
+  23| - input→behavior→typed output：source-bound input→乾淨binary/script/wheel的entrypoint/help/JSON/nonzero/uninstall→CellOutcome(cell_id,host,session,capability,artifact_sha,actual_raw_sha,status)。
+  24| - effect/permission：STANDALONE_USER_CONSENT; no HGK dependency for local non-native outcome；provider_off=UNBOUND_OWNER_ACK_REQUIRED：需provider時驗本cell原Policy允許的served Raw；provider缺件→NOFIT，不私fallback。
+  25| - POS：Hermes Agent/CLI_TOOL/STANDALONE/ON：原Hermes tool/skill loader與worker fresh PID驗乾淨binary/script/wheel的entrypoint/help/JSON/nonzero/uninstall；provider_off=UNBOUND_OWNER_ACK_REQUIRED：需provider時驗本cell原Policy允許的served Raw；provider缺件→NOFIT，不私fallback；同cell/Host/session raw=journal cursor/lease_generation/worker_pid。
+  26| - NEG/first_fail：Hermes Agent此cell拒無entrypoint或退出碼未記錄；若raw.host不等於Hermes Agent或provider行為違ON原label對照則CELL_RECEIPT_SCOPE_NACK。
+  27| - NoFit：Hermes Agent若無OS process runner，不要求Host skill loader，由Hermes原Journal/Worker Owner回NO_FIT_WITH_REASON；不借其它Host收據。
+  28| - exit/resume：Hermes Agent依此Kind原loader卸載/撤Profile或停止受影runner；Reader無effect只丟快照，UNKNOWN先reconcile；重新probe本Host能力與原Owner provider label map後再測。NATIVE_NOT_RUN。
+  29| 
+  30| - **R2 生效隔離**：raw_token=`ON`；semantic_mapping_status=`UNBOUND_OWNER_CONFLICT`；host_provider_off_boolean=`null`；owner_ack_version=`null`；`runtime_effect_allowed=false`，不得使用同段舊 candidate 規則產生真正 Provider 呼叫；只能產 `d0cf30ffd7c1` 的唯讀 Cell 產品設計候選。
+  31| 
+  32| <a id="current-431987d350429a418602"></a>
+  33| ### CELL-e8a4077d37ad｜CLI_TOOL/STANDALONE｜Hermes Agent｜legacy=OFF
+  34| - **原定位**：`BODY-09B:37`；真 Cell Id `CELL-e8a4077d37ad`（不得借其他 Host/Mode 之 receipt）。
+  35| - Trigger/input：此Kind需求在此Mode與此Host被要求；source v1:L30，SHA `41cdd5e5ab16bc2b44ab47155e6cd09e81eef98c56753ae7dd03d0484385a4cd`。
+  36| - route/HostCaps：原Hermes tool/skill loader與worker fresh PID；OS process runner，不要求Host skill loader。
+  37| - input→behavior→typed output：source-bound input→乾淨binary/script/wheel的entrypoint/help/JSON/nonzero/uninstall→CellOutcome(cell_id,host,session,capability,artifact_sha,actual_raw_sha,status)。
+  38| - effect/permission：STANDALONE_USER_CONSENT; no HGK dependency for local non-native outcome；provider_off=UNBOUND_OWNER_ACK_REQUIRED：零provider網路呼叫；有離線實作才可完成，需模型但無離線runner→NOFIT，不換供應商。
+  39| - POS：Hermes Agent/CLI_TOOL/STANDALONE/OFF：原Hermes tool/skill loader與worker fresh PID驗乾淨binary/script/wheel的entrypoint/help/JSON/nonzero/uninstall；provider_off=UNBOUND_OWNER_ACK_REQUIRED：零provider網路呼叫；有離線實作才可完成，需模型但無離線runner→NOFIT，不換供應商；同cell/Host/session raw=journal cursor/lease_generation/worker_pid。
+  40| - NEG/first_fail：Hermes Agent此cell拒無entrypoint或退出碼未記錄；若raw.host不等於Hermes Agent或provider行為違OFF原label對照則CELL_RECEIPT_SCOPE_NACK。
+  41| - NoFit：Hermes Agent若無OS process runner，不要求Host skill loader，由Hermes原Journal/Worker Owner回NO_FIT_WITH_REASON；不借其它Host收據。
+  42| - exit/resume：Hermes Agent依此Kind原loader卸載/撤Profile或停止受影runner；Reader無effect只丟快照，UNKNOWN先reconcile；重新probe本Host能力與原Owner provider label map後再測。NATIVE_NOT_RUN。
+  43| 
+  44| - **R2 生效隔離**：raw_token=`OFF`；semantic_mapping_status=`UNBOUND_OWNER_CONFLICT`；host_provider_off_boolean=`null`；owner_ack_version=`null`；`runtime_effect_allowed=false`，不得使用同段舊 candidate 規則產生真正 Provider 呼叫；只能產 `e8a4077d37ad` 的唯讀 Cell 產品設計候選。
+  45| 
+  46| <a id="current-d6fd31c23abcda090c82"></a>
+  47| ### CELL-6582a70fd427｜CLI_TOOL/STANDALONE｜Codex｜legacy=ON
+  48| - **原定位**：`BODY-09B:48`；真 Cell Id `CELL-6582a70fd427`（不得借其他 Host/Mode 之 receipt）。
+  49| - Trigger/input：此Kind需求在此Mode與此Host被要求；source v1:L31，SHA `41cdd5e5ab16bc2b44ab47155e6cd09e81eef98c56753ae7dd03d0484385a4cd`。
+  50| - route/HostCaps：Codex Host skill/plugin discovery＋乾淨chat/CLI session；OS process runner，不要求Host skill loader。
+  51| - input→behavior→typed output：source-bound input→乾淨binary/script/wheel的entrypoint/help/JSON/nonzero/uninstall→CellOutcome(cell_id,host,session,capability,artifact_sha,actual_raw_sha,status)。
+  52| - effect/permission：STANDALONE_USER_CONSENT; no HGK dependency for local non-native outcome；provider_off=UNBOUND_OWNER_ACK_REQUIRED：需provider時驗本cell原Policy允許的served Raw；provider缺件→NOFIT，不私fallback。
+  53| - POS：Codex/CLI_TOOL/STANDALONE/ON：Codex Host skill/plugin discovery＋乾淨chat/CLI session驗乾淨binary/script/wheel的entrypoint/help/JSON/nonzero/uninstall；provider_off=UNBOUND_OWNER_ACK_REQUIRED：需provider時驗本cell原Policy允許的served Raw；provider缺件→NOFIT，不私fallback；同cell/Host/session raw=Host manifest/loaded SHA/trigger invocation。
+  54| - NEG/first_fail：Codex此cell拒無entrypoint或退出碼未記錄；若raw.host不等於Codex或provider行為違ON原label對照則CELL_RECEIPT_SCOPE_NACK。
+  55| - NoFit：Codex若無OS process runner，不要求Host skill loader，由Codex Host Owner回NO_FIT_WITH_REASON；不借其它Host收據。
+  56| - exit/resume：Codex依此Kind原loader卸載/撤Profile或停止受影runner；Reader無effect只丟快照，UNKNOWN先reconcile；重新probe本Host能力與原Owner provider label map後再測。NATIVE_NOT_RUN。
+  57| 
+  58| - **R2 生效隔離**：raw_token=`ON`；semantic_mapping_status=`UNBOUND_OWNER_CONFLICT`；host_provider_off_boolean=`null`；owner_ack_version=`null`；`runtime_effect_allowed=false`，不得使用同段舊 candidate 規則產生真正 Provider 呼叫；只能產 `6582a70fd427` 的唯讀 Cell 產品設計候選。
+  59| 
+  60| <a id="current-542b5ae2c4718ae27bbe"></a>

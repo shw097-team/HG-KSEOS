@@ -1,0 +1,248 @@
+{
+  "claim_basis": [
+    {
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:175",
+      "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741",
+      "statement": "Only the original protected checker for that oracle may read its applicable raw and oracle; the author does not infer a verdict."
+    },
+    {
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:1333",
+      "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741",
+      "statement": "The protected checker and the challenge are different principals; the maker has no authority to sign an independent verdict."
+    },
+    {
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json:171-174",
+      "source_sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066",
+      "statement": "The program requires a distinct checker: the request names the original checker and maker output never becomes independent acceptance."
+    },
+    {
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md:33",
+      "source_sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5",
+      "statement": "A maker cannot change the oracle or sign the verdict; a portable finding is not an independent verdict."
+    }
+  ],
+  "claim_ceiling": "AUTHOR_STATIC_ONLY",
+  "claim_id": "WP-FHS-09/AC-C39-POS-DETERMINISTIC",
+  "claim_text": "A verdict about this candidate is valid only when it is produced by the original protected checker -- a principal distinct from the maker -- executing the bound oracle against the oracle's applicable real raw, and never when the maker's own output is re-presented as independent acceptance.",
+  "evidence_paths": [
+    {
+      "bytes": 211405,
+      "cited_lines": [
+        136,
+        172,
+        175,
+        176,
+        178,
+        180,
+        1333,
+        1366,
+        1368,
+        1370
+      ],
+      "lines": 1370,
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md",
+      "read_only": true,
+      "role": "case, oracle row, negative column, H4/SEAM gates, evidence-boundary note",
+      "sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741"
+    },
+    {
+      "bytes": 12352,
+      "cited_lines": [
+        23,
+        24,
+        30,
+        81,
+        84,
+        171,
+        174
+      ],
+      "lines": 301,
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json",
+      "read_only": true,
+      "role": "program acceptance items and the distinct-checker requirement",
+      "sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066"
+    },
+    {
+      "bytes": 6726,
+      "cited_lines": [
+        33,
+        45,
+        49,
+        59
+      ],
+      "lines": 59,
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+      "read_only": true,
+      "role": "maker/checker separation and effect permissions",
+      "sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5"
+    }
+  ],
+  "generated_at": "2026-10-30T19:32:29+08:00",
+  "inputs": {
+    "files": [
+      {
+        "bytes": 6726,
+        "hash_command": "Get-FileHash -LiteralPath '<path>' -Algorithm SHA256",
+        "lines": 59,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\05_COMMANDER_GUIDE_AND_NATIVE_PLAN.md",
+        "role": "commander guide / native PLAN A-B-C",
+        "sha256": "ee47e07455767c063fd0700440b46d27592caea4638c39407b9af1309a2b44d5",
+        "work_packages": [
+          "WP-FHS-07"
+        ]
+      },
+      {
+        "bytes": 211405,
+        "hash_command": "Get-FileHash -LiteralPath '<path>' -Algorithm SHA256",
+        "lines": 1370,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md",
+        "role": "acceptance challenge, 15 edges, 96 oracles, 12 H4, 11 SEAM",
+        "sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741",
+        "work_packages": [
+          "WP-FHS-09",
+          "WP-FHS-21"
+        ]
+      },
+      {
+        "bytes": 474159,
+        "hash_command": "Get-FileHash -LiteralPath '<path>' -Algorithm SHA256",
+        "lines": 3050,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\09B_KIND_MODE_HOST_192.md",
+        "role": "192 kind x mode x host x provider cells",
+        "sha256": "aed2234821768307d81991aa56d5ff3a98fc9b884ff79e2930f2b9c4ae8e441d",
+        "work_packages": [
+          "WP-FHS-21"
+        ]
+      },
+      {
+        "bytes": 12352,
+        "hash_command": "Get-FileHash -LiteralPath '<path>' -Algorithm SHA256",
+        "lines": 301,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json",
+        "role": "ProgramSPEC draft (goal, non-goals, acceptance, DAG, work packages)",
+        "sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066",
+        "work_packages": [
+          "WP-FHS-07",
+          "WP-FHS-09"
+        ]
+      }
+    ],
+    "nonce": "NONCE-WPC-20261030",
+    "nonce_position": "inputs.nonce",
+    "read_only": true
+  },
+  "missing": [],
+  "negative_fixture": {
+    "derivation": "mutation and first_fail code are quoted from the negative column of the case row; the outcome label is this request's expectation, not a recorded run",
+    "expected_first_fail": "MISSING_POS_FUNCTION",
+    "expected_outcome": "REFUSED_WITH_FIRST_FAIL",
+    "fixture_id": "WP-FHS-09/NEG/missing-pos-function",
+    "mutation": "/outcome/pos/deterministic := __CORRUPT__001",
+    "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:178",
+    "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741"
+  },
+  "negative_fixture_secondary": {
+    "expected_first_fail": [
+      "NACK_WRONG_DOMAIN_SCHEMA",
+      "SELF_ACCEPTANCE_DENY"
+    ],
+    "expected_outcome": "REFUSED_WITH_FIRST_FAIL",
+    "fixture_id": "WP-FHS-09/NEG/maker-self-signature",
+    "mutation": "a lease CAS object posing as a verdict, or a verdict signed by the maker",
+    "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:136",
+    "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741"
+  },
+  "negative_fixture_tertiary": {
+    "derivation": "the source records that evidence_refs carry no subject/requirement field, so an existing reference alone cannot prove the evidence belongs to this subject; the source names no first_fail code for this case, so none is supplied here",
+    "expected_first_fail": null,
+    "expected_refusal": "the reference is refused unless the evidence is bound to this subject, not merely registered",
+    "fixture_id": "WP-FHS-09/NEG/foreign-subject-evidence",
+    "mutation": "an evidence_ref registered for a different subject presented for this subject",
+    "source": [
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:1368",
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:1370"
+    ],
+    "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741"
+  },
+  "not_asserted": [
+    {
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:176",
+      "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741",
+      "statement": "that any protected checker ran"
+    },
+    {
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:178",
+      "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741",
+      "statement": "that any verdict, receipt or acceptance exists for this candidate"
+    },
+    {
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:1368",
+      "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741",
+      "statement": "that the native evidence binding is implemented; the source records it as a boundary of the current reader"
+    }
+  ],
+  "oracle": {
+    "applies_when": "the feature is demanded and an acceptance predicate has been declared, and the deterministic inputs are bound to the original source",
+    "case_id": "AC-C39-POS-DETERMINISTIC",
+    "checker_principal": "the original protected checker bound by the original oracle; a principal distinct from the maker",
+    "domain": "POS",
+    "input_binding": "feature_invoked and acceptance_predicate_declared && DETERMINISTIC_inputs_bound",
+    "oracle_owner": "PIPD DOC07 / SBL Reader-Checker as recorded in the source row",
+    "oracle_type": "DETERMINISTIC",
+    "raw_refs": [
+      "CLI-POS-ADD",
+      "CLI-POS-LIST-FRESH-PID"
+    ],
+    "result_type": "AUTHOR.LocalOracleOutcome(case_id, verdict, first_fail, claim_ceiling), which the original protected checker receipt path consumes",
+    "source": [
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:172",
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:175-178",
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:180"
+    ],
+    "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741"
+  },
+  "schema": "PROTECTED-CHECKER-REQUEST/1",
+  "status": "COMPLETE_INPUT",
+  "threshold": {
+    "comparison": "exact_eq",
+    "expected_side": "expected_value bound to the original source rule cited in the case row",
+    "missing_raw_behaviour": "NOT_EXECUTED; a missing raw is never substituted, because without raw a native run must not be simulated",
+    "observed_side": "observed_value read from the real raw of CLI-POS-ADD and CLI-POS-LIST-FRESH-PID",
+    "per_requirement_obligation": "each acceptance item carries its own POS and NEG; one case outcome does not discharge another item",
+    "per_requirement_source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json:81-84",
+    "source": [
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:176",
+      "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:178"
+    ],
+    "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741",
+    "tolerance": "none; observed must equal the source-bound expected"
+  },
+  "what_would_falsify_it": [
+    {
+      "falsifier": "A verdict that is treated as acceptance while the raw it cites was never produced by CLI-POS-ADD or CLI-POS-LIST-FRESH-PID.",
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:176",
+      "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741"
+    },
+    {
+      "falsifier": "A verdict signed or re-presented by the maker, accepted as independent.",
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:136",
+      "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741"
+    },
+    {
+      "falsifier": "The case returning acceptance while the negative fixture /outcome/pos/deterministic := __CORRUPT__001 is applied.",
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:178",
+      "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741"
+    },
+    {
+      "falsifier": "A reducer accepting a verdict whose evidence_ref comes from another subject merely because the reference exists.",
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:1370",
+      "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741"
+    },
+    {
+      "falsifier": "A portable challenge finding, or an external review, standing in for the original protected checker's verdict.",
+      "source": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\07_ACCEPTANCE_CHALLENGE.md:16",
+      "source_sha256": "81a8c2f1cc4629f59829f11f87aebd14cd57f7c4dd0970d672880e90e2899741"
+    }
+  ],
+  "work_package": "WP-FHS-09"
+}

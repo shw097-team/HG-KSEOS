@@ -1,0 +1,708 @@
+{
+  "claim_ceiling": "LOCAL_DESIGN_ARTEFACT_ONLY; nothing here is executed, admitted, or accepted. NATIVE_NOT_RUN, CHECKER_NOT_RUN, RELEASE_NOT_RUN. Judgement belongs to a separate officer.",
+  "gap_analysis": {
+    "eighteen_stage_plan_pre_existing_in_any_spec": false,
+    "finding": "none of the three SPECs carried an 18-stage plan before this run. Each carries a flat 24-entry acceptance list whose oracle_ref values name SBL-04 stages (e.g. PM:T0, SE:T3) but never enumerate them; only ProgramSPEC carries a DAG, and it has three nodes.",
+    "key_checked": "\"dag\" at ProgramSPEC.json:177 and \"topological_order\" at ProgramSPEC.json:296; \"schema\" (line 2) and \"acceptance\" (line 31) in all three SPECs",
+    "quote_checked": "\"dag\": { \"WP-FHS-00\": [], \"WP-FHS-01\": [\"WP-FHS-00\"], \"WP-FHS-15\": [\"WP-FHS-00\"] }",
+    "specs": [
+      {
+        "acceptance_entries": 24,
+        "dag_key_line": null,
+        "dag_key_source": null,
+        "dag_node_count": 0,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProductSPEC.json",
+        "schema_value": "SBL.ProductSPECDraft@1",
+        "sha256": "cd62c55188680807b1b413dac1802601b3c1a2bea742728a45582d21e8fe7783",
+        "source": {
+          "line": 2,
+          "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProductSPEC.json",
+          "sha256": "cd62c55188680807b1b413dac1802601b3c1a2bea742728a45582d21e8fe7783"
+        },
+        "spec": "ProductSPEC.json",
+        "stage_keys_present": [],
+        "top_level_keys": [
+          "schema",
+          "status",
+          "source_sha256",
+          "source_refs",
+          "goal",
+          "non_goals",
+          "acceptance",
+          "persona",
+          "jtbd",
+          "fuo"
+        ]
+      },
+      {
+        "acceptance_entries": 24,
+        "dag_key_line": null,
+        "dag_key_source": null,
+        "dag_node_count": 0,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ArchitectureSPEC.json",
+        "schema_value": "SBL.ArchitectureSPECDraft@1",
+        "sha256": "d58fedb594be263568c8e188b807cfc38958550434fc324f660888fea55da468",
+        "source": {
+          "line": 2,
+          "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ArchitectureSPEC.json",
+          "sha256": "d58fedb594be263568c8e188b807cfc38958550434fc324f660888fea55da468"
+        },
+        "spec": "ArchitectureSPEC.json",
+        "stage_keys_present": [],
+        "top_level_keys": [
+          "schema",
+          "status",
+          "source_sha256",
+          "source_refs",
+          "goal",
+          "non_goals",
+          "acceptance",
+          "adr",
+          "ownership_seams",
+          "abi_version",
+          "risk"
+        ]
+      },
+      {
+        "acceptance_entries": 24,
+        "dag_edges": {
+          "WP-FHS-00": [],
+          "WP-FHS-01": [
+            "WP-FHS-00"
+          ],
+          "WP-FHS-15": [
+            "WP-FHS-00"
+          ]
+        },
+        "dag_key_line": 177,
+        "dag_key_source": {
+          "line": 177,
+          "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json",
+          "sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066"
+        },
+        "dag_node_count": 3,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json",
+        "schema_value": "SBL.ProgramSPECDraft@1",
+        "sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066",
+        "source": {
+          "line": 2,
+          "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json",
+          "sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066"
+        },
+        "spec": "ProgramSPEC.json",
+        "stage_keys_present": [],
+        "top_level_keys": [
+          "schema",
+          "status",
+          "source_sha256",
+          "source_refs",
+          "goal",
+          "non_goals",
+          "acceptance",
+          "dag",
+          "owners",
+          "work_packages",
+          "resume_predicate",
+          "topological_order"
+        ],
+        "topological_order": [
+          "WP-FHS-00",
+          "WP-FHS-01",
+          "WP-FHS-15"
+        ],
+        "topological_order_line": 296,
+        "topological_order_source": {
+          "line": 296,
+          "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json",
+          "sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066"
+        }
+      }
+    ],
+    "three_node_dag_claim": "CONFIRMED_FOR_PROGRAMSPEC_ONLY",
+    "three_node_dag_detail": "ProgramSPEC.json has exactly three dag keys and a three-entry topological_order; ProductSPEC.json and ArchitectureSPEC.json have no dag key at all."
+  },
+  "generated_at": "2026-10-30T19:21:35",
+  "inputs": [
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+      "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+      "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811"
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProductSPEC.json",
+      "sha256": "cd62c55188680807b1b413dac1802601b3c1a2bea742728a45582d21e8fe7783"
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ArchitectureSPEC.json",
+      "sha256": "d58fedb594be263568c8e188b807cfc38958550434fc324f660888fea55da468"
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\ProgramSPEC.json",
+      "sha256": "63fb5748fc8117396c416f3223ee2889eef571fcc938bc68759a056a8e9b9066"
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+      "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+    },
+    {
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\RUN\\SourceReadback.json",
+      "sha256": "974359ae9495147b71da2d233686da1e3fce28491f47165552897f5dcc6d29d5"
+    }
+  ],
+  "producer": "EXECUTE bounded writer, batch A, nonce NONCE-WPA-20261030",
+  "schema": "SPEC-18-STAGE/1",
+  "source_table": {
+    "columns": [
+      "Stage",
+      "原 Input",
+      "原操作 → Output／Consumer",
+      "Guard／FirstFail／退出"
+    ],
+    "first_row": 38,
+    "header_line": 36,
+    "last_row": 55,
+    "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+    "separator_line": 37,
+    "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2",
+    "stage_count": 18
+  },
+  "stage_plan": [
+    {
+      "consumer": "ProductOwner/PIPD Reader",
+      "evidence_required": {
+        "bound_atom_oracles": [
+          {
+            "neg": "empty goal refused",
+            "pos": "nonempty goal preserved",
+            "req_id": "REQ-a584e0b1de38016b7120",
+            "source": {
+              "line": 11,
+              "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+              "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+            }
+          },
+          {
+            "neg": "changed source hash requires a fresh answer",
+            "pos": "same key returns ask false",
+            "req_id": "REQ-9f77f15f40b73a74163c",
+            "source": {
+              "line": 163,
+              "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+              "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+            }
+          }
+        ],
+        "exit_token": "T1",
+        "expected_output_artifact": "ProductKnownState@1(goal_sha,missing_questions)",
+        "first_fail_codes": [
+          "KNOWN_ANSWER_REASK",
+          "ASK_NEW_ONLY"
+        ],
+        "guard_preconditions": "GoalCard+known_answer_refs; source_sha present"
+      },
+      "input": "goalcard, known_answer_refs, source_sha256",
+      "name": "segregate facts from user guesses; detect unanswered JTBD",
+      "output": "ProductKnownState@1(goal_sha,missing_questions)",
+      "role": "PM",
+      "source": {
+        "line": 38,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "PM:T0"
+    },
+    {
+      "consumer": "ProductOwner/PIPD Reader",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T2",
+        "expected_output_artifact": "QuestionPriority@1(qid,impact,source_ref)",
+        "first_fail_codes": [
+          "JTBD_UNBOUND",
+          "FUO_PATH_BOUND"
+        ],
+        "guard_preconditions": "Persona+PainLedger+JTBD; source_sha present"
+      },
+      "input": "persona, painledger, jtbd, source_sha256",
+      "name": "rank questions by user information gain",
+      "output": "QuestionPriority@1(qid,impact,source_ref)",
+      "role": "PM",
+      "source": {
+        "line": 39,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "PM:T1"
+    },
+    {
+      "consumer": "ProductOwner/PIPD Reader",
+      "evidence_required": {
+        "bound_atom_oracles": [
+          {
+            "neg": "abstract outcome without output refused",
+            "pos": "three output references present",
+            "req_id": "REQ-fd83cdbda7ab38d42434",
+            "source": {
+              "line": 277,
+              "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+              "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+            }
+          }
+        ],
+        "exit_token": "T3",
+        "expected_output_artifact": "ProductSuccess@1(FUO,exit_code,negative_cases)",
+        "first_fail_codes": [
+          "FUO_UNTESTABLE",
+          "USER_VALUE_MEASURABLE"
+        ],
+        "guard_preconditions": "FUO+UserOutcome+variants; source_sha present"
+      },
+      "input": "fuo, useroutcome, variants, source_sha256",
+      "name": "define observable CLI/add,list,delete or brownfield user result",
+      "output": "ProductSuccess@1(FUO,exit_code,negative_cases)",
+      "role": "PM",
+      "source": {
+        "line": 40,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "PM:T2"
+    },
+    {
+      "consumer": "ProductOwner/PIPD Reader",
+      "evidence_required": {
+        "bound_atom_oracles": [
+          {
+            "neg": "missing persona refused",
+            "pos": "persona in emitted draft",
+            "req_id": "REQ-ea8f7c8540d0e4604627",
+            "source": {
+              "line": 201,
+              "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+              "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+            }
+          },
+          {
+            "neg": "missing jtbd refused",
+            "pos": "jtbd in emitted draft",
+            "req_id": "REQ-2ab85ae7e2f1551e0fa3",
+            "source": {
+              "line": 239,
+              "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+              "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+            }
+          }
+        ],
+        "exit_token": "T4",
+        "expected_output_artifact": "ProductSPECDraft@1(journey_id,kind,acceptance_sha)",
+        "first_fail_codes": [
+          "KIND_ID_DRIFT",
+          "OWNER_REVIEW_REQUESTED"
+        ],
+        "guard_preconditions": "ProductSuccess+PrimaryKind; source_sha present"
+      },
+      "input": "productsuccess, primarykind, source_sha256",
+      "name": "compile ProductSPEC draft and acceptance cues",
+      "output": "ProductSPECDraft@1(journey_id,kind,acceptance_sha)",
+      "role": "PM",
+      "source": {
+        "line": 41,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "PM:T3"
+    },
+    {
+      "consumer": "ProductOwner/PIPD Reader",
+      "evidence_required": {
+        "bound_atom_oracles": [
+          {
+            "neg": "acceptance without negative refused",
+            "pos": "each acceptance has own POS NEG",
+            "req_id": "REQ-39836c9993f89955bb0c",
+            "source": {
+              "line": 315,
+              "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+              "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+            }
+          }
+        ],
+        "exit_token": "T5",
+        "expected_output_artifact": "ProductAcceptanceProposal@1(pos,neg,raw_expect)",
+        "first_fail_codes": [
+          "ACC_NOT_BOUND",
+          "PIPD_ACC_REF_AVAILABLE"
+        ],
+        "guard_preconditions": "ProductSPECDraft+ACC_NEG; source_sha present"
+      },
+      "input": "productspecdraft, acc_neg, source_sha256",
+      "name": "issue user-facing POS/NEG proposal, not Native verdict",
+      "output": "ProductAcceptanceProposal@1(pos,neg,raw_expect)",
+      "role": "PM",
+      "source": {
+        "line": 42,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "PM:T4"
+    },
+    {
+      "consumer": "ProductOwner/PIPD Reader",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T5 final review or affected T3/T4 rework",
+        "expected_output_artifact": "ProductReviewRequest@1(gap,affected_journeys)",
+        "first_fail_codes": [
+          "FUO_RAW_MISSING",
+          "REVIEW_WITH_RAW_OR_HOLD"
+        ],
+        "guard_preconditions": "FUO_raw_refs+feedback; source_sha present"
+      },
+      "input": "fuo_raw_refs, feedback, source_sha256",
+      "name": "compare observable use vs claimed outcome; create repair request",
+      "output": "ProductReviewRequest@1(gap,affected_journeys)",
+      "role": "PM",
+      "source": {
+        "line": 43,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "PM:T5"
+    },
+    {
+      "consumer": "ArchitectureOwner/HostReader",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T1",
+        "expected_output_artifact": "SystemReadset@1(owners,sha,scope)",
+        "first_fail_codes": [
+          "SYSTEM_SOURCE_GAP",
+          "SOURCE_BOUND"
+        ],
+        "guard_preconditions": "RepoBoundaries+SourceIndex; source_sha present"
+      },
+      "input": "repoboundaries, sourceindex, source_sha256",
+      "name": "enumerate source/destination trust seams",
+      "output": "SystemReadset@1(owners,sha,scope)",
+      "role": "SE",
+      "source": {
+        "line": 44,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "SE:T0"
+    },
+    {
+      "consumer": "ArchitectureOwner/HostReader",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T2",
+        "expected_output_artifact": "OwnershipSeamMap@1(writer,reader,forbidden_effect)",
+        "first_fail_codes": [
+          "SEAM_OWNER_CONFLICT",
+          "ONE_WRITER_PER_SEAM"
+        ],
+        "guard_preconditions": "SystemReadset+ADRRefs; source_sha present"
+      },
+      "input": "systemreadset, adrrefs, source_sha256",
+      "name": "assign every seam to exactly one writer",
+      "output": "OwnershipSeamMap@1(writer,reader,forbidden_effect)",
+      "role": "SE",
+      "source": {
+        "line": 45,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "SE:T1"
+    },
+    {
+      "consumer": "ArchitectureOwner/HostReader",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T3",
+        "expected_output_artifact": "ADRSet@1(option,tradeoff,security_guard)",
+        "first_fail_codes": [
+          "ARCHITECTURE_RISK_OPEN",
+          "ADR_OWNER_REVIEW"
+        ],
+        "guard_preconditions": "RiskInventory+HostCaps; source_sha present"
+      },
+      "input": "riskinventory, hostcaps, source_sha256",
+      "name": "trade off typed ABI and provider-off reliability",
+      "output": "ADRSet@1(option,tradeoff,security_guard)",
+      "role": "SE",
+      "source": {
+        "line": 46,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "SE:T2"
+    },
+    {
+      "consumer": "ArchitectureOwner/HostReader",
+      "evidence_required": {
+        "bound_atom_oracles": [
+          {
+            "neg": "two writers for a seam refused",
+            "pos": "one writer per seam",
+            "req_id": "REQ-35196e0dec18c3f97c56",
+            "source": {
+              "line": 353,
+              "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+              "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+            }
+          },
+          {
+            "neg": "unknown extra record key refused",
+            "pos": "schema version pinned",
+            "req_id": "REQ-74fa13d4c2ef6382c2a5",
+            "source": {
+              "line": 391,
+              "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+              "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+            }
+          }
+        ],
+        "exit_token": "T4",
+        "expected_output_artifact": "ArchitectureSPEC@1(abi,compat,host_matrix)",
+        "first_fail_codes": [
+          "ABI_SCHEMA_MISMATCH",
+          "SCHEMA_READER_BOUND"
+        ],
+        "guard_preconditions": "ADRSet+C4+ComponentCards; source_sha present"
+      },
+      "input": "adrset, c4, componentcards, source_sha256",
+      "name": "bind schemas and compatibility version",
+      "output": "ArchitectureSPEC@1(abi,compat,host_matrix)",
+      "role": "SE",
+      "source": {
+        "line": 47,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "SE:T3"
+    },
+    {
+      "consumer": "ArchitectureOwner/HostReader",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T5",
+        "expected_output_artifact": "ArchitectureNEGRequest@1(neg,oracle_source)",
+        "first_fail_codes": [
+          "PERMISSION_NEG_MISSING",
+          "NEG_PROPOSAL_READY"
+        ],
+        "guard_preconditions": "ArchitectureSPEC+BoundaryNEG; source_sha present"
+      },
+      "input": "architecturespec, boundaryneg, source_sha256",
+      "name": "test scope/token/provider-off/thin adapter semantics",
+      "output": "ArchitectureNEGRequest@1(neg,oracle_source)",
+      "role": "SE",
+      "source": {
+        "line": 48,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "SE:T4"
+    },
+    {
+      "consumer": "ArchitectureOwner/HostReader",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T5 final review or affected T3/T4 rework",
+        "expected_output_artifact": "ArchitectureReview@1(findings,repair_cone)",
+        "first_fail_codes": [
+          "HOST_RAW_MISSING",
+          "RAW_OR_HOLD"
+        ],
+        "guard_preconditions": "NativeRawRefs+IntegrationRisks; source_sha present"
+      },
+      "input": "nativerawrefs, integrationrisks, source_sha256",
+      "name": "re-evaluate actual host ABI and raw results",
+      "output": "ArchitectureReview@1(findings,repair_cone)",
+      "role": "SE",
+      "source": {
+        "line": 49,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "SE:T5"
+    },
+    {
+      "consumer": "ProgramOwner/NativeRouter",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T1",
+        "expected_output_artifact": "ProgramIntent@1(milestone,owner,risk)",
+        "first_fail_codes": [
+          "MILESTONE_OWNER_MISSING",
+          "OWNER_ROSTER_COMPLETE"
+        ],
+        "guard_preconditions": "OwnerRoster+CostTime; source_sha present"
+      },
+      "input": "ownerroster, costtime, source_sha256",
+      "name": "identify budget milestones without claiming approval",
+      "output": "ProgramIntent@1(milestone,owner,risk)",
+      "role": "TPgM",
+      "source": {
+        "line": 50,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "TPgM:T0"
+    },
+    {
+      "consumer": "ProgramOwner/NativeRouter",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T2",
+        "expected_output_artifact": "SchedulingAssumptions@1(edges,confidence)",
+        "first_fail_codes": [
+          "UNBOUNDED_WORK",
+          "DEPENDENCY_DISCLOSED"
+        ],
+        "guard_preconditions": "UnknownDependencies+ResourceCaps; source_sha present"
+      },
+      "input": "unknowndependencies, resourcecaps, source_sha256",
+      "name": "record sequencing constraints and blocking decisions",
+      "output": "SchedulingAssumptions@1(edges,confidence)",
+      "role": "TPgM",
+      "source": {
+        "line": 51,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "TPgM:T1"
+    },
+    {
+      "consumer": "ProgramOwner/NativeRouter",
+      "evidence_required": {
+        "bound_atom_oracles": [
+          {
+            "neg": "cycle refused",
+            "pos": "WP00 WP01 WP15 closure sorted",
+            "req_id": "REQ-4e2375181a0b3f485dd2",
+            "source": {
+              "line": 429,
+              "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+              "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+            }
+          }
+        ],
+        "exit_token": "T3",
+        "expected_output_artifact": "ProgramDAG@1(topo,locks,no_fit)",
+        "first_fail_codes": [
+          "DAG_CYCLE",
+          "ACYCLIC_AND_SCOPED"
+        ],
+        "guard_preconditions": "OwnerGates+DependencyEdges; source_sha present"
+      },
+      "input": "ownergates, dependencyedges, source_sha256",
+      "name": "toposort bounded DAG and cycle check",
+      "output": "ProgramDAG@1(topo,locks,no_fit)",
+      "role": "TPgM",
+      "source": {
+        "line": 52,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "TPgM:T2"
+    },
+    {
+      "consumer": "ProgramOwner/NativeRouter",
+      "evidence_required": {
+        "bound_atom_oracles": [
+          {
+            "neg": "missing node owner refused",
+            "pos": "owner for every node",
+            "req_id": "REQ-f8ac567139df4124980b",
+            "source": {
+              "line": 467,
+              "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\02_FIRST_WORK\\FUNCTIONAL_ATOMS_CONSUMERS_POS_NEG.json",
+              "sha256": "78b6408a0af448b2a4a99a6b42de0e424745e294fa90bbdfe2dafa3aa2398d38"
+            }
+          }
+        ],
+        "exit_token": "T4",
+        "expected_output_artifact": "ProgramSPEC@1(wp,effort,owner,stop)",
+        "first_fail_codes": [
+          "WP_SCOPE_UNKNOWN",
+          "WORK_PACKAGE_OWNER_REVIEW"
+        ],
+        "guard_preconditions": "ProgramDAG+ProductSPEC+ArchitectureSPEC; source_sha present"
+      },
+      "input": "programdag, productspec, architecturespec, source_sha256",
+      "name": "package work with traceable scope and approver",
+      "output": "ProgramSPEC@1(wp,effort,owner,stop)",
+      "role": "TPgM",
+      "source": {
+        "line": 53,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "TPgM:T3"
+    },
+    {
+      "consumer": "ProgramOwner/NativeRouter",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T5",
+        "expected_output_artifact": "HandoffReferral@1(expected_grants,oracle_conflict)",
+        "first_fail_codes": [
+          "CR_ORACLE_001",
+          "NATIVE_REF_NOT_SYNTHESIZED"
+        ],
+        "guard_preconditions": "PI_PD_refs+VerifierReferral; source_sha present"
+      },
+      "input": "pi_pd_refs, verifierreferral, source_sha256",
+      "name": "route to correct Native ECP/Oracle Owner",
+      "output": "HandoffReferral@1(expected_grants,oracle_conflict)",
+      "role": "TPgM",
+      "source": {
+        "line": 54,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "TPgM:T4"
+    },
+    {
+      "consumer": "ProgramOwner/NativeRouter",
+      "evidence_required": {
+        "bound_atom_oracles": [],
+        "exit_token": "T5 final review or affected T3/T4 rework",
+        "expected_output_artifact": "ProgramReview@1(blocked_waves,replan_cone)",
+        "first_fail_codes": [
+          "STALE_MILESTONE_EVIDENCE",
+          "REVIEW_OR_HOLD"
+        ],
+        "guard_preconditions": "MilestoneRaw+IssueLedger; source_sha present"
+      },
+      "input": "milestoneraw, issueledger, source_sha256",
+      "name": "review schedule with evidence status; refreeze affected only",
+      "output": "ProgramReview@1(blocked_waves,replan_cone)",
+      "role": "TPgM",
+      "source": {
+        "line": 55,
+        "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\02_PIPD_LIFECYCLE_AND_TPM.md",
+        "sha256": "c336d3d9d702834e84bc2e45037e21e6ac56fb99c7abcb3adea372d901824ea2"
+      },
+      "stage": "TPgM:T5"
+    }
+  ],
+  "stage_plan_note": "input/name/output/consumer/stage are copied verbatim from the four table columns; evidence_required is a mechanical projection of the Guard／FirstFail／退出 column plus the 24-atom file's POS/NEG for atoms whose original_locator names that stage. It is a requirement list, not an executed measurement.",
+  "status": "DRAFT_18_STAGE_PLAN_SOURCE_BOUND",
+  "work_package": "WP-FHS-15",
+  "work_package_contract": {
+    "effect_class": "LOCAL_DRAFT_WRITE",
+    "first_fail": "WP-FHS-15.FIRST_FAIL:TPM_SOURCE_STAGE_GUARD",
+    "output": "三SPEC+18stage trace",
+    "source": {
+      "line": 274,
+      "path": "C:\\Projects\\Agent_Workspace\\知識庫\\實作相關DOC\\Fabric vNext\\Semantic World OS Fabric\\SBL_PIPD\\FHS-MSC\\FHS-MSC_PIPD-LS-PKG\\FHS-MSC_PIPD-LS-PKG_2026-10-30_HANDOFF-PATCH-v1\\01_FHS-MSC_PIPD-LS-PKG_BODY\\11_WORKPACKAGES_AND_DAG.md",
+      "sha256": "6c526c991b5996c2d4f862f153fbf580d456f78b45d2a714abe11bcb9a9cc811"
+    }
+  }
+}

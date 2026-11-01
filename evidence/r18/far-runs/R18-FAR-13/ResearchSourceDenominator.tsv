@@ -1,0 +1,4 @@
+source_id	path	class	sha256	exists
+S01	C:\Projects\Agent_Workspace\HG-KSEOS\src\hg_kseos\native_admission.py	SOURCE_CODE	314eeacd207c6808	True
+S02	C:\Projects\Agent_Workspace\HG-KSEOS\config\active-policy.json	CONFIG	aed41d7bd6dcaec4	True
+S03	C:\Projects\Agent_Workspace\var\R18-FHS-SKELETON-SPINE-20261029\receipts\ISSUER_PATH_PROBE.json	RECEIPT	677c286cda55b80c	True

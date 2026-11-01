@@ -1,0 +1,193 @@
+{
+  "subject_id": "TSS-c8c7132522a53fda",
+  "version": "1",
+  "content_hash": "c8c7132522a53fdacac9879fae435c3f686058e6cc5ba64ce1bc6125449a96ff",
+  "schema_version": "TaskSpecSeed@1",
+  "goal": "為普通 Goal 產生有來源與可判 POS/NEG 的 Product、Architecture、Program SPEC，交原 PIPD，再交 Hermes 於原權限下續工",
+  "inputs": {
+    "goal": "ordinary caller Goal",
+    "KnownAnswer": "same subject/source/scope/question key",
+    "source_manifest": {
+      "sha256": "d2b5bfbd3489771ddf90897255cc416a0048fc6109e47be4c6e658f2cb3ab761",
+      "documents": 24
+    },
+    "PI": {
+      "subject_id": "PI-4298cad2300fb52f",
+      "content_hash": "4298cad2300fb52fd0355353f049bb2f67d80bc976fe13537c2bbf5e1b74b8bb"
+    }
+  },
+  "outputs": [
+    "ProductSPEC.json",
+    "ArchitectureSPEC.json",
+    "ProgramSPEC.json",
+    "SourceReadback.json",
+    "FUO.json"
+  ],
+  "constraints": {
+    "effects": [
+      "SOURCE_READ",
+      "LOCAL_DRAFT"
+    ],
+    "provider_off": true,
+    "source_roots_read_only": true,
+    "canonical_native_permission": "NONE_GRANTED_BY_THIS_RECORD",
+    "write_scope": "RECEIVER_AUTHORIZED_DRAFT_ROOT plus five exact output basenames"
+  },
+  "dependencies": [
+    "WP-FHS-00 source bytes present",
+    "WP-FHS-01 author profile/source decision present"
+  ],
+  "tests": [
+    {
+      "requirement": "REQ-8ca31c3b63e9d8413f79",
+      "consumer": "TPM intake",
+      "POS": "nonempty goal preserved",
+      "NEG": "empty goal refused"
+    },
+    {
+      "requirement": "REQ-fb32edfab84f37c859d3",
+      "consumer": "core.corpus_manifest",
+      "POS": "24 source identities read",
+      "NEG": "missing source identity refused"
+    },
+    {
+      "requirement": "REQ-65751e46474c1c7285c5",
+      "consumer": "core.read_clause",
+      "POS": "same bytes admitted",
+      "NEG": "modified source bytes refused"
+    },
+    {
+      "requirement": "REQ-d880316cfcf6864c306f",
+      "consumer": "core.read_contained",
+      "POS": "admitted relative path read",
+      "NEG": "parent traversal refused"
+    },
+    {
+      "requirement": "REQ-fd4ebdda798ab51a503e",
+      "consumer": "core.QuestionLedger.inspect",
+      "POS": "same key returns ask false",
+      "NEG": "changed source hash requires a fresh answer"
+    },
+    {
+      "requirement": "REQ-9a3917c3e7c727825c13",
+      "consumer": "core.plan_spec Product",
+      "POS": "persona in emitted draft",
+      "NEG": "missing persona refused"
+    },
+    {
+      "requirement": "REQ-3d10ca454fa1adf5bbef",
+      "consumer": "core.plan_spec Product",
+      "POS": "jtbd in emitted draft",
+      "NEG": "missing jtbd refused"
+    },
+    {
+      "requirement": "REQ-ddf075f96bb5b78cfa7c",
+      "consumer": "core.plan_spec Product",
+      "POS": "three output references present",
+      "NEG": "abstract outcome without output refused"
+    },
+    {
+      "requirement": "REQ-9b72cb316849a211287f",
+      "consumer": "core.plan_spec Product",
+      "POS": "each acceptance has own POS NEG",
+      "NEG": "acceptance without negative refused"
+    },
+    {
+      "requirement": "REQ-77415e64e678a32ade72",
+      "consumer": "core.plan_spec Architecture",
+      "POS": "one writer per seam",
+      "NEG": "two writers for a seam refused"
+    },
+    {
+      "requirement": "REQ-5c8089f128e1c7978a42",
+      "consumer": "PIPD validate_pi",
+      "POS": "schema version pinned",
+      "NEG": "unknown extra record key refused"
+    },
+    {
+      "requirement": "REQ-f0e34fe35adb4e26de4f",
+      "consumer": "core.affected_work",
+      "POS": "WP00 WP01 WP15 closure sorted",
+      "NEG": "cycle refused"
+    },
+    {
+      "requirement": "REQ-c0b6a4ab1021e82f4146",
+      "consumer": "core.plan_spec Program",
+      "POS": "owner for every node",
+      "NEG": "missing node owner refused"
+    },
+    {
+      "requirement": "REQ-65dbc76056e227804d00",
+      "consumer": "TaskSpecSeed receiver adapter",
+      "POS": "three paths inside draft scope",
+      "NEG": "path outside admitted draft root refused"
+    },
+    {
+      "requirement": "REQ-37af4ad25a3ef8cacbde",
+      "consumer": "core.affected_work",
+      "POS": "affected descendants blocked",
+      "NEG": "unrelated ready source reader remains available"
+    },
+    {
+      "requirement": "REQ-d2b33c0e476af2c957be",
+      "consumer": "ProgramSPEC reader",
+      "POS": "no live receipt predecessor",
+      "NEG": "future receipt as prerequisite refused"
+    },
+    {
+      "requirement": "REQ-d437fde8c62b1cf9d431",
+      "consumer": "offline adapter",
+      "POS": "zero network calls during positive run",
+      "NEG": "provider connection attempt refused"
+    },
+    {
+      "requirement": "REQ-668f3d2c96af876c51b3",
+      "consumer": "pipeline.validate_pi",
+      "POS": "all atom traces resolve",
+      "NEG": "tampered atom or trace refused"
+    },
+    {
+      "requirement": "REQ-44d6c0127d4f89f133d7",
+      "consumer": "pipeline.bind_pd",
+      "POS": "real measured context",
+      "NEG": "missing root or spoofed freshness refused"
+    },
+    {
+      "requirement": "REQ-ce6ff8a699d0cafa931b",
+      "consumer": "original HGK native admission",
+      "POS": "read and draft continue",
+      "NEG": "missing OPS permission parks only affected host effect"
+    },
+    {
+      "requirement": "REQ-5d6191c7f95d61645dc6",
+      "consumer": "SharedSpine._assert_lease",
+      "POS": "current lease accepted in memory fixture",
+      "NEG": "expired lease refused"
+    },
+    {
+      "requirement": "REQ-f022bfea4a4affc17e79",
+      "consumer": "core.effect_route and original Hermes receiver",
+      "POS": "UNKNOWN routes to reconcile",
+      "NEG": "blind retry of UNKNOWN is not dispatched"
+    },
+    {
+      "requirement": "REQ-2cf8ea9fa834f3a15857",
+      "consumer": "original Hermes runtime",
+      "POS": "existing WorkID reused on resume",
+      "NEG": "new queue or replacement issuer forbidden"
+    },
+    {
+      "requirement": "REQ-e24889f23fdcda5f543f",
+      "consumer": "original protected checker",
+      "POS": "request names original checker",
+      "NEG": "maker output never becomes independent acceptance"
+    }
+  ],
+  "rollback": "撤銷本 WorkID 本輪五個 draft preimages；不修改 source、既有 journal 或他人檔案",
+  "evidence": {
+    "source_sha256": "a5668b6be7a4b7b59fd1310614534172d35afdc1a7e4b27a2f9785e40452f6f3",
+    "PI_reader_ACK": "03_HANDOFF_EVIDENCE/PIPD_FUNCTIONAL_PI_READER_ACK.json",
+    "Native": "NATIVE_NOT_RUN",
+    "checker": "NOT_RUN"
+  }
+}

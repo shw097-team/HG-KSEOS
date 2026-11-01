@@ -1,0 +1,26 @@
+{
+ "schema": "FHS-HANDOFF-EXEC-LANE/1",
+ "lane": "VERIFY_SECURITY",
+ "turn": "independent acceptance dispatch",
+ "verdict": "BLOCKED",
+ "code": "ERR_LANE_ALL_ROUTES_EXHAUSTED",
+ "ok": false,
+ "assigned_arm": "openai-codex/gpt-6.1-sol (config/model-lane-assignment.json revision 38)",
+ "attempts": [
+  {
+   "rank": 2,
+   "transport_model": "gpt-6.1-sol",
+   "exit": 1,
+   "nonce_present": false,
+   "usage_receipt_ok": false,
+   "usage_receipt_reason": "no usage row was appended after the attempt offset",
+   "stderr_tail": "Reading additional input from stdin...\n2026-10-30T06:35:47.420874Z ERROR codex_api::endpoint::responses_websocket: failed to connect to Responses WebSocket stage=Unknown\n",
+   "stdout_tail": "nauthorized: {\\\"detail\\\":\\\"Unauthorized\\\"}, url: http://127.0.0.1:10102/v1/responses, cf-ray: a528671aedca80a0-TPE, request id: 003acd0e-6bd9-4044-a577-01b007019f08\"}\n{\"type\":\"turn.failed\",\"error\":{\"message\":\"unexpected status 401 Unauthorized: {\\\"detail\\\":\\\"Unauthorized\\\"}, url: http://127.0.0.1:10"
+  }
+ ],
+ "reading": "the assigned VERIFY arm returned an upstream 401 through the local relay; the assignment declares no fallback arm for this lane, so the dispatcher failed closed instead of substituting a model. Independent acceptance did NOT run; every artefact in this branch remains author-side.",
+ "not_a_verdict": true,
+ "what_did_run": [
+  "advisory audit by separate read-only processes (ADVISORY_AUDIT.md), explicitly not a lane verdict"
+ ]
+}

@@ -1,0 +1,4 @@
+query_id	channel	query	hits
+Q1	source	grep KINDS native_admission	1
+Q2	source	normalize_user_registry policy_epoch	1
+Q3	source	CAP-BOOT across src+config	0
