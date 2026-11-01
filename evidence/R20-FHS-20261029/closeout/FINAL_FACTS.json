@@ -1,0 +1,159 @@
+{
+ "schema": "R20.FINAL_FACTS/1",
+ "generated_utc": "2026-10-29T16:30:46Z",
+ "candidate": {
+  "branch": "candidate/r19-fhs-implementation",
+  "local_head": "eb194925dde9bfff05bd26ad6f1c58ac9f8b4493",
+  "remote_head": "eb194925dde9bfff05bd26ad6f1c58ac9f8b4493",
+  "url": "https://github.com/shw097-team/HG-KSEOS/pull/5"
+ },
+ "subset": {
+  "branch": "publish/r20-subset",
+  "local_head": "a5ce29b84c79c3c4bcc467da5bd0ea821f910626",
+  "remote_head": "a5ce29b84c79c3c4bcc467da5bd0ea821f910626",
+  "diff_vs_main_files": 371,
+  "url": "https://github.com/shw097-team/HG-KSEOS/pull/6"
+ },
+ "revision3": {
+  "zip": "FHS-MSC_PIPD-LS-PKG_SKELETON_SPINE_REPAIRED_2026-10-29_r2-revision3.zip",
+  "bytes": 13578117,
+  "sha256": "ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f",
+  "entries": 89,
+  "self_embedded": false,
+  "checksum_rows_verified": "88/88"
+ },
+ "machine_items": {
+  "A1": {
+   "ok": true,
+   "code": null,
+   "values": {
+    "item": "A1",
+    "claim": "a bare pytest collection of tests/ reports zero errors",
+    "ok": true,
+    "value": "815",
+    "evidence": "815 tests collected in 2.11s"
+   }
+  },
+  "A2": {
+   "ok": true,
+   "code": null,
+   "values": {
+    "item": "A2",
+    "claim": "a receipt without producer identity is refused for comparison (exit 4, typed code)",
+    "ok": true,
+    "value": null,
+    "evidence": "{\"schema\": \"R20.RECEIPT_COMPARE/1\", \"comparable\": false, \"code\": \"ERR_PRODUCER_UNKNOWN\", \"detail\": {\"a\": null, \"b\": null}, \"say\": \"a receipt without producer identity cannot be compared; re-issue it with the current dispatcher instead of interpreting the old fields\"}"
+   }
+  },
+  "A3": {
+   "ok": true,
+   "code": null,
+   "values": {
+    "item": "A3",
+    "claim": "host/branch assignment drift is emitted as data and never rewrites evidence",
+    "ok": true,
+    "value": 10,
+    "evidence": "{\n \"schema\": \"R20.CONFIG_DRIFT/1\",\n \"repo\": {\n  \"path\": \"config/model-lane-assignment.json\",\n  \"revision\": 35,\n  \"registry_epoch\": 34\n },\n \"host\": {\n  \"path\": \"C:\\\\Projects\\\\Agent_Workspace\\\\HG-KSEOS\\\\config\\\\model-lane-assignment.json\",\n  \"revision\": 38,\n  \"registry_epoch\": 38\n },\n \"same\": false,\n \"field_count\": 10,\n \"fields\": [\n  {\n   \"role\": \"EXECUTE\",\n   \"field\": \"additional_routes\",\n   \"repo\""
+   }
+  },
+  "A4": {
+   "ok": true,
+   "code": null,
+   "values": {
+    "item": "A4",
+    "claim": "a declared fallback chain is representable and never conflated with the primary arm",
+    "ok": true,
+    "value": "10",
+    "evidence": "10 passed in 0.41s"
+   }
+  },
+  "A6": {
+   "ok": true,
+   "code": null,
+   "values": {
+    "item": "A6",
+    "claim": "the 8 owner packets cover all 75 residues exactly once",
+    "ok": true,
+    "value": "75",
+    "evidence": "packets=8 ids_across_packets=75 cells=46 stages=18 holds=11"
+   }
+  },
+  "A7": {
+   "ok": true,
+   "code": null,
+   "values": {
+    "item": "A7",
+    "claim": "every number claimed by the evidence index is present in a receipt",
+    "ok": true,
+    "value": "0",
+    "evidence": "OK   archive sha256: ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f\nOK   archive bytes: 13578117\nOK   checksum rows verified: 88\nOK   archive entries: 89\nOK   validator passed: 2789\nOK   validator failed: 0\nOK   case count: 2789\nOK   hold rows: 46\nOK   stage rows: 18\nOK   oracle ce"
+   }
+  },
+  "A8": {
+   "ok": true,
+   "code": null,
+   "values": {
+    "item": "A8",
+    "claim": "a required arm constrains SELECTION (alias-equivalent) and never spends a call on another arm",
+    "ok": true,
+    "value": "11",
+    "evidence": "11 passed in 1.97s"
+   }
+  },
+  "SUITE": {
+   "ok": true,
+   "code": null,
+   "values": {
+    "item": "SUITE",
+    "claim": "no failure id in the full suite is new relative to the baseline at 6086908",
+    "ok": true,
+    "value": {
+     "failed": "74",
+     "passed": "734",
+     "errors": null,
+     "new_vs_baseline": [],
+     "fixed_vs_baseline": 14,
+     "baseline_size": 88
+    },
+    "evidence": "74 failed, 734 passed, 3 skipped, 4 xfailed, 28 subtests passed in 190.75s (0:03:10) | new_vs_baseline=0 | fixed_vs_baseline=14"
+   }
+  }
+ },
+ "verify_rounds": [
+  {
+   "nonce": null,
+   "seconds": 0,
+   "code": null,
+   "required_arm": null,
+   "served_arm": null,
+   "used_rank": null,
+   "summary": null
+  }
+ ],
+ "verify_rounds_count": 1,
+ "tests": {
+  "r2_pristine": "2788 passed / 1 failed",
+  "r3_fresh": "2789 passed / 0 failed",
+  "worktree_now": "74 failed / 734 passed / 0 errors",
+  "baseline_6086908": "88 failed / 686 passed / 2 collection errors",
+  "delta": "0 new failure ids, 14 fixed"
+ },
+ "prs": {
+  "5": {
+   "url": "https://github.com/shw097-team/HG-KSEOS/pull/5",
+   "head": "eb19492",
+   "base": "candidate/r18-fhs-skeleton-spine-20261029",
+   "files": 185,
+   "state": "open",
+   "draft": false
+  },
+  "6": {
+   "url": "https://github.com/shw097-team/HG-KSEOS/pull/6",
+   "head": "a5ce29b",
+   "base": "main",
+   "files": 371,
+   "state": "open",
+   "draft": false
+  }
+ }
+}
