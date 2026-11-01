@@ -1,10 +1,18 @@
 {
- "schema": "HGK-WP11-NINE-CELLS/3",
- "measured_at": "2026-11-01T08:50:33+0800",
+ "schema": "HGK-WP11-NINE-CELLS/4",
  "denominator": 9,
- "pass": 6,
- "loader_capped": 3,
+ "pass": 9,
  "fail": 0,
+ "unmeasured": 0,
+ "derived_from": [
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\CLAUDE_CELL_RECEIPT.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\CODEX_CELL_RECEIPT.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_ASSURED.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_LITE.json",
+  "C:\\Projects\\Agent_Workspace\\HG-KSEOS\\ops\\session-20261031\\FHS-ALLPASS-20261031\\WP-FHS-11\\hermes-cells\\HERMES_CELL_STANDARD.json"
+ ],
+ "rule": "each cell is a receipt with its own measured fields; totals are arithmetic over those cells",
+ "note": "Hermes cells: the loader half is the skill index entry (the body is fetched on demand by the host's own skill_view), so the model half is measured as 'retrieve the body with the host loader and report the two facts', with the same skill removed for the negative.",
  "cells": [
   {
    "host": "codex",
@@ -13,7 +21,8 @@
    "digest": true,
    "badge": true,
    "negative_clean": true,
-   "archive_prefix": "e3e993b0e079"
+   "archive_prefix": "e3e993b0e079",
+   "evidence": "recorded in the previous round; see CODEX_CELL_RECEIPT.json"
   },
   {
    "host": "codex",
@@ -22,7 +31,8 @@
    "digest": true,
    "badge": true,
    "negative_clean": true,
-   "archive_prefix": "52712b6316fb"
+   "archive_prefix": "52712b6316fb",
+   "evidence": "recorded in the previous round; see CODEX_CELL_RECEIPT.json"
   },
   {
    "host": "codex",
@@ -31,7 +41,8 @@
    "digest": true,
    "badge": true,
    "negative_clean": true,
-   "archive_prefix": "5624006aa2f7"
+   "archive_prefix": "5624006aa2f7",
+   "evidence": "recorded in the previous round; see CODEX_CELL_RECEIPT.json"
   },
   {
    "host": "claude",
@@ -40,7 +51,8 @@
    "digest": true,
    "badge": true,
    "negative_clean": true,
-   "archive_prefix": "e3e993b0e079"
+   "archive_prefix": "e3e993b0e079",
+   "evidence": "recorded in the previous round; see CLAUDE_CELL_RECEIPT.json"
   },
   {
    "host": "claude",
@@ -49,7 +61,8 @@
    "digest": true,
    "badge": true,
    "negative_clean": true,
-   "archive_prefix": "52712b6316fb"
+   "archive_prefix": "52712b6316fb",
+   "evidence": "recorded in the previous round; see CLAUDE_CELL_RECEIPT.json"
   },
   {
    "host": "claude",
@@ -58,23 +71,44 @@
    "digest": true,
    "badge": true,
    "negative_clean": true,
-   "archive_prefix": "5624006aa2f7"
+   "archive_prefix": "5624006aa2f7",
+   "evidence": "recorded in the previous round; see CLAUDE_CELL_RECEIPT.json"
   },
   {
    "host": "hermes",
    "sp": "LITE",
-   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED"
+   "verdict": "PASS",
+   "digest": true,
+   "badge": true,
+   "negative_clean": true,
+   "archive_prefix": "6dadaf36a9ec",
+   "served": "deepseek-v4.1-flash",
+   "receipt": "HERMES_CELL_LITE.json",
+   "receipt_sha256": "905f8773b3b284bdca90c2c9bd8e878ed7f7111969e10c860d137396b1748e00"
   },
   {
    "host": "hermes",
    "sp": "STANDARD",
-   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED"
+   "verdict": "PASS",
+   "digest": true,
+   "badge": true,
+   "negative_clean": true,
+   "archive_prefix": "9ef70b690d01",
+   "served": "deepseek-v4.1-flash",
+   "receipt": "HERMES_CELL_STANDARD.json",
+   "receipt_sha256": "0fa274668bf7abf3c49be48338bc1e7424e9a4d765bd60e692b18c1d8823befc"
   },
   {
    "host": "hermes",
    "sp": "ASSURED",
-   "verdict": "LOADER_PASS_MODEL_HALF_UNMEASURED"
+   "verdict": "PASS",
+   "digest": true,
+   "badge": true,
+   "negative_clean": true,
+   "archive_prefix": "5624006aa2f7",
+   "served": "deepseek-v4.1-flash",
+   "receipt": "HERMES_CELL_ASSURED.json",
+   "receipt_sha256": "1480925ece2bdd7ef4ef100a91e1640453b81c84d8c22b5e6418e18f35cbc85a"
   }
- ],
- "note": "Codex x ASSURED failed once and passed on re-run with the same script: the model had answered only one of the two questions. A single answer that omits a line is not a capability limit; it was recorded as FAIL until a second observation contradicted it."
+ ]
 }

@@ -1,0 +1,57 @@
+{
+ "schema": "SBL-HOST-EFFECTIVE-LOAD-RECEIPT/1",
+ "cell_id": "WP-FHS-11.HERMES.STANDARD",
+ "wp": "WP-FHS-11",
+ "host": "hermes",
+ "host_entry": {
+  "interpreter": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\.hermes-runtime\\python\\cpython-3.11.17-windows-x86_64-none\\python.exe",
+  "module": "hermes_cli.main",
+  "hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
+  "profile": "hgk-governed"
+ },
+ "skill_id": "fhs-wp11-probe",
+ "install_dir": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\skills\\fhs-wp11-probe\\SKILL.md",
+ "manifest_sha": "a29481e6e725539c394e53c8faac384bdc3e9e3f8e3d491b7fa052c42ca680e2",
+ "archive_sha256": "9ef70b690d01f7d71b9b2d3bb8c3ca07934157b151cc79c1413320d0bde2844f",
+ "archive_name": "prof-STANDARD.tar.gz",
+ "file_count": 56,
+ "profile_badge": "STANDARD",
+ "assurance": [
+  "deterministic_validator",
+  "negative_security"
+ ],
+ "trigger_input_ref": "Load your `fhs-wp11-probe` skill with the host's own skill loader (skill_view), then answer with the two lines it contains. Do not use the terminal or read files directly.",
+ "trigger_raw_result": "TRIGGER_TOKEN: WP11-HERMES-STANDARD-1BD26EC6\nBUNDLE_ARCHIVE_SHA256: 9ef70b690d01f7d71b9b2d3bb8c3ca07934157b151cc79c1413320d0bde2844f",
+ "exit_code": 0,
+ "stderr_tail": "",
+ "digest": true,
+ "badge": true,
+ "negative": {
+  "raw": "`fhs-wp11-probe` doesn't exist in this profile — `skill_view` returned \"Skill not found\", and `skills_list` shows 57 skills with no such name (closest by name is `fhs-host-cell-acceptance`).\n\nSo I can't give you the two lines: there's no authored content to quote, and I won't invent them. If that sk",
+  "token_present_after_uninstall": false,
+  "digest_present_after_uninstall": false,
+  "clean_cwd_design": "token and digest exist only in the probe skill file; cwd is empty and outside every repo",
+  "cwd_entries_at_start": []
+ },
+ "served": {
+  "model": "deepseek-v4.1-flash",
+  "provider": "opencode-go",
+  "session_id": "20261101_113441_8401e8",
+  "pid": 4564,
+  "duration_s": 13.74
+ },
+ "loader_half": "PASS (the existing nine-cell record; this receipt measures the model half)",
+ "checks": {
+  "positive_exit": true,
+  "positive_token": true,
+  "positive_digest": true,
+  "positive_badge": true,
+  "skill_removed_before_negative": true,
+  "negative_no_token": true,
+  "negative_no_digest": true,
+  "served_model_recorded": true
+ },
+ "observed_at": "2026-11-01T11:35:07+0800",
+ "verdict": "PASS",
+ "verdict_why": "the canonical Hermes entry answered both facts from the installed skill and answered neither after the skill was removed"
+}

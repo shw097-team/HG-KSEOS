@@ -1,0 +1,56 @@
+{
+ "schema": "SBL-HOST-EFFECTIVE-LOAD-RECEIPT/1",
+ "cell_id": "WP-FHS-11.HERMES.LITE",
+ "wp": "WP-FHS-11",
+ "host": "hermes",
+ "host_entry": {
+  "interpreter": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\.hermes-runtime\\python\\cpython-3.11.17-windows-x86_64-none\\python.exe",
+  "module": "hermes_cli.main",
+  "hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed",
+  "profile": "hgk-governed"
+ },
+ "skill_id": "fhs-wp11-probe",
+ "install_dir": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\skills\\fhs-wp11-probe\\SKILL.md",
+ "manifest_sha": "5c698ffca03f9e8c5b2abd78b2455763aebf4e654733f5c4773bb04730ef0b7b",
+ "archive_sha256": "6dadaf36a9ecd4e1452955aa1fdf7cb955782e8f524f62158b39c170a7d62d1b",
+ "archive_name": "prof-LITE.tar.gz",
+ "file_count": 16,
+ "profile_badge": "LITE",
+ "assurance": [
+  "deterministic_validator"
+ ],
+ "trigger_input_ref": "Load your `fhs-wp11-probe` skill with the host's own skill loader (skill_view), then answer with the two lines it contains. Do not use the terminal or read files directly.",
+ "trigger_raw_result": "TRIGGER_TOKEN: WP11-HERMES-LITE-F78FE3D3\nBUNDLE_ARCHIVE_SHA256: 6dadaf36a9ecd4e1452955aa1fdf7cb955782e8f524f62158b39c170a7d62d1b",
+ "exit_code": 0,
+ "stderr_tail": "",
+ "digest": true,
+ "badge": true,
+ "negative": {
+  "raw": "No such skill exists on this host.\n\n`skill_view(name='fhs-wp11-probe')` returned: `Skill 'fhs-wp11-probe' not found.` and `skills_list` confirms it — the full inventory is 57 skills, and `fhs-wp11-probe` is not among them. The closest FHS-related one is `fhs-host-cell-acceptance` (\"Measure an FHS ho",
+  "token_present_after_uninstall": false,
+  "digest_present_after_uninstall": false,
+  "clean_cwd_design": "token and digest exist only in the probe skill file; cwd is empty and outside every repo",
+  "cwd_entries_at_start": []
+ },
+ "served": {
+  "model": "deepseek-v4.1-flash",
+  "provider": "opencode-go",
+  "session_id": "20261101_113408_efd269",
+  "pid": 22548,
+  "duration_s": 13.99
+ },
+ "loader_half": "PASS (the existing nine-cell record; this receipt measures the model half)",
+ "checks": {
+  "positive_exit": true,
+  "positive_token": true,
+  "positive_digest": true,
+  "positive_badge": true,
+  "skill_removed_before_negative": true,
+  "negative_no_token": true,
+  "negative_no_digest": true,
+  "served_model_recorded": true
+ },
+ "observed_at": "2026-11-01T11:34:37+0800",
+ "verdict": "PASS",
+ "verdict_why": "the canonical Hermes entry answered both facts from the installed skill and answered neither after the skill was removed"
+}

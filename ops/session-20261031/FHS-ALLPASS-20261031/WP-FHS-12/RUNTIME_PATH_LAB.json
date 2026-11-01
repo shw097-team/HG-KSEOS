@@ -1,0 +1,101 @@
+{
+ "schema": "HGK-WP12-RUNTIME-PATH-LAB/1",
+ "measured_at": "2026-11-01T11:14:42+0800",
+ "nonce": "WP12-RUNTIME-D85B80FB",
+ "blocker_under_test": "RUNTIME_PATH_UNRESOLVED",
+ "canonical_entry": {
+  "interpreter": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\.hermes-runtime\\python\\cpython-3.11.17-windows-x86_64-none\\python.exe",
+  "module": "hermes_cli.main",
+  "hermes_home": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes",
+  "profile": "hgk-governed",
+  "pythonpath": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\venv\\Lib\\site-packages"
+ },
+ "a_path_arithmetic": [
+  {
+   "openai_package": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\installs\\3b763fa5cf79ba4a\\environments\\37e51176b4164db5b4a5f8af5558c52d\\venv\\Lib\\site-packages\\openai",
+   "py_modules": 1048,
+   "modules_over_max_path": 10,
+   "examples_over": [
+    {
+     "path": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\installs\\3b763fa5cf79ba4a\\environments\\37e51176b4164db5b4a5f8af5558c52d\\venv\\Lib\\site-packages\\openai\\types\\beta\\realtime\\conversation_item_input_audio_transcription_completed_event.py",
+     "len": 272
+    },
+    {
+     "path": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\installs\\3b763fa5cf79ba4a\\environments\\37e51176b4164db5b4a5f8af5558c52d\\venv\\Lib\\site-packages\\openai\\types\\beta\\realtime\\conversation_item_input_audio_transcription_delta_event.py",
+     "len": 268
+    },
+    {
+     "path": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\installs\\3b763fa5cf79ba4a\\environments\\37e51176b4164db5b4a5f8af5558c52d\\venv\\Lib\\site-packages\\openai\\types\\beta\\realtime\\conversation_item_input_audio_transcription_failed_event.py",
+     "len": 269
+    },
+    {
+     "path": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\installs\\3b763fa5cf79ba4a\\environments\\37e51176b4164db5b4a5f8af5558c52d\\venv\\Lib\\site-packages\\openai\\types\\realtime\\conversation_item_input_audio_transcription_completed_event.py",
+     "len": 267
+    },
+    {
+     "path": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\installs\\3b763fa5cf79ba4a\\environments\\37e51176b4164db5b4a5f8af5558c52d\\venv\\Lib\\site-packages\\openai\\types\\realtime\\conversation_item_input_audio_transcription_delta_event.py",
+     "len": 263
+    }
+   ],
+   "target_module": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\installs\\3b763fa5cf79ba4a\\environments\\Lib\\site-packages\\openai\\types\\responses\\response_computer_tool_call_output_screenshot_param.py",
+   "target_module_len": 222,
+   "exists_via_plain_open": false,
+   "readable_via_win32_prefix": false
+  }
+ ],
+ "b_canonical_positive": {
+  "cmd": [
+   "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent\\.hermes-runtime\\python\\cpython-3.11.17-windows-x86_64-none\\python.exe",
+   "-m",
+   "hermes_cli.main",
+   "-z",
+   "Reply with exactly this one line and nothing else: NONCE-ECHO: WP12-RUNTIME-D85B80FB",
+   "--usage-file",
+   "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-WP12-RUNTIME-D85B80FB\\usage.json"
+  ],
+  "cwd": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\hermes-agent",
+  "pid": 5092,
+  "exit": 0,
+  "timed_out": false,
+  "duration_s": 8.9,
+  "stdout": "NONCE-ECHO: WP12-RUNTIME-D85B80FB",
+  "stderr_tail": "",
+  "nonce_present": true,
+  "served_model": "deepseek-v4.1-flash",
+  "served_provider": "opencode-go",
+  "completed": true,
+  "session_id": "20261101_111445_24a713",
+  "api_calls": 1
+ },
+ "c_recovery_negative": {
+  "cmd": [
+   "D:\\Hermes-Recovery\\live22\\bin\\hermes",
+   "-z",
+   "Reply with exactly this one line and nothing else: NONCE-ECHO: WP12-NEG-FFCA5016"
+  ],
+  "cwd": "C:\\Users\\user\\AppData\\Local\\Temp\\wp12-WP12-RUNTIME-D85B80FB",
+  "pid": 22916,
+  "exit": 2,
+  "timed_out": false,
+  "duration_s": 4.49,
+  "stdout": "⚠️ 發生錯誤，我無法完成這則回覆。\n請使用 /retry 重試，或使用 /new 開始新的對話。技術細節請見閘道日誌（`hermes logs`）。\n\nThis turn did not complete. Some actions may already have run; verify their effects before resending.",
+  "stderr_tail": "",
+  "nonce": "WP12-NEG-FFCA5016",
+  "nonce_present": false,
+  "error": {
+   "file": "C:\\Users\\user\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\LocalCache\\Local\\hermes\\profiles\\hgk-governed\\logs\\agent.log",
+   "last_error": "RuntimeError: Failed to initialize OpenAI client: No module named 'openai.types.responses.response_computer_tool_call_output_screenshot_param'"
+  },
+  "error_is_the_one_under_test": true
+ },
+ "checks": {
+  "canonical_nonzero_exit": false,
+  "canonical_nonce_absent": false,
+  "canonical_model_unrecorded": false,
+  "negative_answered": false,
+  "negative_error_not_the_one_under_test": false,
+  "no_module_over_max_path": false
+ },
+ "verdict": "PASS",
+ "verdict_why": "canonical entry answered 'WP12-RUNTIME-D85B80FB' in 8.9s at deepseek-v4.1-flash (opencode-go), pid 5092; the PATH entry did not answer and its failure is the recorded MAX_PATH import (10 openai module(s) sit at or past 260 chars)."
+}
