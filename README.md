@@ -18,6 +18,8 @@ protected trust registration, actual policy/TaskKind/Oracle issuance, live
 effects and independent checker acceptance remain separate requirements.
 
 
+[FHS Engineering Entry — cross-repository navigation (non-authoritative)](https://github.com/shw097-team/Fabric/blob/main/INTEGRATION/FHS/README.md)
+
 ## B1 closure 2026-10-28
 
 `b1_closure_20261028/` is the evidence index for the FHS-MSC B1 bootstrap-repair round (PKG_00~08) on the HG-KSEOS side.
