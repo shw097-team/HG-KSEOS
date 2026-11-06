@@ -78,11 +78,25 @@ def probe_dist(name: str, host_site: Path | None = None) -> dict:
 
 
 def registry_index(reg: dict) -> tuple[dict, set]:
-    rows = {r.get("route_id"): r for r in (reg.get("runners") or [])}
+    """Index the SIGNED rows first.
+
+    `rows` is the owner-signed set (rev 10: 30 rows); `runners` is an older, narrower shape (12).
+    `not_registered` is a to-do list the ceremony consumes but never clears, so a route that already
+    has a signed row IS registered regardless of what that list still says. The previous precedence
+    (`not_registered` first, over `runners` only) reported two owner-signed routes as NOT_REGISTERED.
+    """
+    rows: dict = {}
+    for r in (reg.get("rows") or []):
+        if r.get("route_id"):
+            rows[r["route_id"]] = r
+    for r in (reg.get("runners") or []):
+        rows.setdefault(r.get("route_id"), r)
     missing = set()
     for entry in reg.get("not_registered") or []:
         # the list mixes plain route ids with typed entries {route_id, why}
-        missing.add(entry.get("route_id") if isinstance(entry, dict) else str(entry))
+        rid = entry.get("route_id") if isinstance(entry, dict) else str(entry)
+        if rid and rid not in rows:
+            missing.add(rid)
     return rows, missing
 
 
@@ -97,6 +111,14 @@ def qualify(need: str, route: str, probe: dict, rows: dict, missing: set,
     rec["windows_fit"] = platform.system() == "Windows" and platform.machine().lower() in (
         "amd64", "x86_64", "arm64")
     rec["occupant_state"] = "PRESENT"
+    if row is not None:
+        rec["registry"] = {"route_id": route, "state": row.get("status") or row.get("state"),
+                           "permission_scope": row.get("permission_scope"),
+                           "owner_signed": bool((row.get("owner_signature") or {}).get("value"))}
+        rec["route_state"] = "REGISTERED"
+        signed = rec["registry"]["owner_signed"]
+        rec["state"] = "QUALIFIED_WITH_ROUTE" if (signed and rec["windows_fit"]) else "QUALIFIED_LOCAL_ONLY"
+        return rec
     if route in missing:
         rec["state"] = "CAPABILITY_GAP_HOLD"
         rec["first_fail"] = "CAPABILITY_GAP_HOLD"
@@ -105,14 +127,6 @@ def qualify(need: str, route: str, probe: dict, rows: dict, missing: set,
         rec["owner"] = "Original HGK Issuer / Installer"
         rec["resume_predicate"] = ("an owner-signed route for this occupant exists in the registry and "
                                   "the host load is read back")
-        return rec
-    if row is not None:
-        rec["registry"] = {"route_id": route, "state": row.get("state"),
-                           "permission_scope": row.get("permission_scope"),
-                           "owner_signed": bool((row.get("owner_signature") or {}).get("value"))}
-        rec["route_state"] = "REGISTERED"
-        signed = rec["registry"]["owner_signed"]
-        rec["state"] = "QUALIFIED_WITH_ROUTE" if (signed and rec["windows_fit"]) else "QUALIFIED_LOCAL_ONLY"
         return rec
     rec["registry"] = "NO_ROUTE"
     rec["route_state"] = "NO_ROUTE"
