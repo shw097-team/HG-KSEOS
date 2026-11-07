@@ -1,0 +1,25 @@
+{
+ "schema": "FHS.W1.R2.ISSUER_BINDING_REQUEST/v1",
+ "changeset": "FHS-W1-R2-PREIMPL-20261105",
+ "subject": {
+  "subject_id": "FHS-PIPD-LS-PKG-W1-AUTHOR-FINAL-20261105-R2-AFFECTED-REPAIR",
+  "candidate_body_sha256": "e40df2999fbffdb96a32a2e35cddce228abdd82080d5a5bedd415dfc938669ce",
+  "scope": "FHS/PIPD-LS-PKG/W1/author-design"
+ },
+ "requested_from": "Original HGK Issuer / SharedSpine",
+ "requested_raw": [
+  "WorkID binding for the same subject",
+  "Lease/Nonce/CAS reply",
+  "WorldReader state for the candidate",
+  "Policy Loaded epoch"
+ ],
+ "not_requested": [
+  "permit issuance by the maker",
+  "second issuer",
+  "key material"
+ ],
+ "first_fail": "ISSUER_WORK_BINDING_NACK",
+ "resume_predicate": "same Subject/CandidateSHA/Scope with an original issuer reply",
+ "state": "EXPECTED_NOT_OBSERVED",
+ "claim_ceiling": "REQUEST_ONLY"
+}
