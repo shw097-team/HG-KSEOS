@@ -128,9 +128,28 @@ def propose(*, store: PlanStore, work_id: str, base_revision: int, goal: str,
 
 
 # ------------------------------------------------------------------ C: CAS accept
+CANDIDATE_REQUESTER = "LOCAL_CANDIDATE_REQUESTER"
+# The original identities are *process* identities held by the original writer/reader. A string
+# that merely spells one of them is a claim, not an identity; accepting it is how a maker-forged
+# ACK gets minted (same defect class as Fabric #31). The literal is therefore never emitted here.
+_SELF_CLAIMABLE_IDENTITIES = ("ORIGINAL_HGK_PLAN_WRITER", "ORIGINAL_HGK_PLAN_CAS_READER")
+
+
 def commit(*, store: PlanStore, proposal: dict[str, Any], expected_revision: int,
-           writer: str = "ORIGINAL_HGK_PLAN_WRITER", work_id: str | None = None) -> dict[str, Any]:
-    """Commander C. Compare-and-swap against the store's current revision."""
+           requester: str = CANDIDATE_REQUESTER, work_id: str | None = None,
+           reader: Any | None = None) -> dict[str, Any]:
+    """Commander C. Compare-and-swap against the store's current revision.
+
+    The candidate store can append a revision, but it can only return ``ACK`` when a caller-supplied
+    ``reader`` object produces a receipt that is *bound to this record's digest*. Without one, the
+    verdict is ``CANDIDATE_APPENDED_NO_ORIGINAL_READER`` — a candidate append is not an acceptance,
+    and no field of this function's output may claim the original reader's identity.
+    """
+    if str(requester).strip().upper() in _SELF_CLAIMABLE_IDENTITIES:
+        raise PlanRefusal(
+            f"{requester!r} is the original principal's identity spelled as a string: a caller cannot "
+            "claim it, and minting an ACK from it is the forged-reader defect",
+            code="PLAN_WRITER_SELF_CLAIM_DENY")
     target = str(work_id or proposal.get("work_id") or "")
     if work_id is not None and str(proposal.get("work_id")) != str(work_id):
         raise PlanRefusal(
@@ -155,15 +174,53 @@ def commit(*, store: PlanStore, proposal: dict[str, Any], expected_revision: int
         "base_revision": current,
         "proposal_id": proposal["proposal_id"],
         "sha256": proposal["sha256"],
-        "writer": writer,
+        "requester": requester,
         "cas": {"expected_revision": int(expected_revision), "matched": True},
         "claim_ceiling": "AUTHOR_DESIGN_ONLY",
+        "original_reader_ack": False,
         "note": "candidate revision in a file store; the original PLAN writer owns the real CAS",
     }
+    record_sha = _sha(record)
+
+    if reader is None:
+        store.append(work_id, record)
+        return {"verdict": "CANDIDATE_APPENDED_NO_ORIGINAL_READER", "role": "C",
+                "work_id": work_id, "revision": record["revision"],
+                "proposal_id": proposal["proposal_id"], "proposal_sha256": proposal["sha256"],
+                "reader": None, "original_reader_receipt": "ABSENT",
+                "claim_ceiling": "AUTHOR_DESIGN_ONLY", "appended": True,
+                "receipt_sha256": record_sha}
+
+    receipt = reader.verify(record)
+    if not isinstance(receipt, dict):
+        raise PlanRefusal("reader returned no receipt object", code="PLAN_READER_RECEIPT_UNBOUND")
+    if str(receipt.get("record_sha256") or "") != record_sha:
+        raise PlanRefusal(
+            "the reader receipt is not bound to this record's digest: a receipt for another record "
+            "cannot acknowledge this one", code="PLAN_READER_RECEIPT_UNBOUND")
+    identity = str(receipt.get("reader_identity") or "").strip()
+    if not identity:
+        raise PlanRefusal("the reader receipt names no reader identity",
+                          code="PLAN_READER_RECEIPT_UNBOUND")
+    verdict = str(receipt.get("verdict") or "").upper()
+    if verdict not in {"ACK", "NACK"}:
+        raise PlanRefusal(f"reader verdict {verdict!r} is outside ACK/NACK",
+                          code="PLAN_READER_RECEIPT_UNBOUND")
+    if verdict == "NACK":
+        return {"verdict": "NACK", "role": "C", "work_id": work_id,
+                "revision": record["revision"], "proposal_id": proposal["proposal_id"],
+                "proposal_sha256": proposal["sha256"], "reader": identity,
+                "original_reader_receipt": receipt, "claim_ceiling": "AUTHOR_DESIGN_ONLY",
+                "appended": False, "receipt_sha256": record_sha}
+
+    record["original_reader_ack"] = True
+    record["reader_receipt_sha256"] = _sha(receipt)
     store.append(work_id, record)
     return {"verdict": "ACK", "role": "C", "work_id": work_id, "revision": record["revision"],
             "proposal_id": proposal["proposal_id"], "proposal_sha256": proposal["sha256"],
-            "reader": "ORIGINAL_HGK_PLAN_CAS_READER", "receipt_sha256": _sha(record)}
+            "reader": identity, "original_reader_receipt": receipt,
+            "claim_ceiling": "AUTHOR_DESIGN_ONLY", "appended": True,
+            "receipt_sha256": _sha(record)}
 
 
 def rollback(*, store: PlanStore, work_id: str, to_revision: int) -> dict[str, Any]:
