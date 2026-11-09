@@ -411,7 +411,7 @@ projections:
   - pointer: /registry_epoch
     expected: 39
   - pointer: /revision
-    expected: 41
+    expected: 43
   - pointer: /lane_chains/PLAN/0/provider
     expected: openai-codex
   - pointer: /lane_chains/PLAN/0/model
@@ -447,7 +447,7 @@ projections:
   - pointer: /lane_chains/PLAN/3/provider
     expected: opencode-go
   - pointer: /lane_chains/PLAN/3/model
-    expected: mimo-v2.6-pro
+    expected: mimo-v2.6-flash
   - pointer: /lane_chains/PLAN/3/arm
     expected: D
   - pointer: /lane_chains/PLAN/3/default
