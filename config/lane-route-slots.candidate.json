@@ -354,13 +354,15 @@
     {
      "rank": 4,
      "provider": "opencode-go",
-     "model": "mimo-v2.6-pro",
+     "model": "mimo-v2.6-flash",
      "role": "FALLBACK3/備援3",
      "auth": "env_ref:OPENCODE_GO_API_KEY",
      "oauth": false,
-     "transport_model": "opencode-go/mimo-v2.6-pro",
+     "transport_model": "opencode-go/mimo-v2.6-flash",
      "default": false,
-     "automatic_selection": false
+     "automatic_selection": false,
+     "canonical_identity": "mimo-v2.6-flash",
+     "replaced": "opencode-go/mimo-v2.6-pro retired by owner order 2026-11-09"
     },
     {
      "rank": 5,
@@ -676,5 +678,15 @@
    "openai-codex/gpt-5.6-sol": 400,
    "gpt-6.1-sol-high": 400
   }
- }
+ },
+ "retired_arms": {
+  "opencode-go/mimo-v2.6-pro": {
+   "retired_epoch": 41,
+   "ordered_by": "OWNER",
+   "ordered_at": "2026-11-09",
+   "reason": "wrong model family for this lane set; never selectable",
+   "replacement": "opencode-go/mimo-v2.6-flash"
+  }
+ },
+ "epoch": 41
 }

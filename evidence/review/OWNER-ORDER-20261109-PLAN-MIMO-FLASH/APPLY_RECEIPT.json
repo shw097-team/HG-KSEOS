@@ -1,0 +1,64 @@
+{
+ "schema": "HGK.OwnerOrder.Apply/1",
+ "order": "OWNER 2026-11-09: PLAN/opt2 = opencode-go/mimo-v2.6-flash 必須加進 PLAN pool；opencode-go/mimo-v2.6-pro 是錯誤模型，必須從 pool 退役並防止誤用。",
+ "applied_at": "2026-11-09T19:59:14+08:00",
+ "epoch_before": 40,
+ "epoch_after": 41,
+ "changes": [
+  {
+   "file": "config/lane-routing-registry.yaml",
+   "what": "PLAN arms[3] and fallbacks[2]: opencode-go/mimo-v2.6-pro -> opencode-go/mimo-v2.6-flash; epoch 40 -> 41; retired_arms added"
+  },
+  {
+   "file": "config/lane-route-slots.candidate.json",
+   "what": "PLAN rank 4 -> mimo-v2.6-flash; retired_arms added; epoch 41"
+  },
+  {
+   "file": "config/model-lane-assignment.json",
+   "what": "projected by scripts/lane_assignment_resync.py; mimo-v2.6-pro removed from the executor arm universe, mimo-v2.6-flash added; revision 43"
+  },
+  {
+   "file": "scripts/lane_arm_retirement_check.py",
+   "what": "new fail-closed check: a retired arm that is live anywhere returns exit 4; a missing required admission returns exit 5"
+  }
+ ],
+ "measured": {
+  "plan_arms": [
+   "openai-codex/gpt-6.1-sol",
+   "opencode-go/deepseek-v4.1-flash",
+   "opencode-go/glm-5.3-flash",
+   "opencode-go/mimo-v2.6-flash",
+   "nvidia/z-ai/glm-5.3-flash",
+   "nvidia/deepseek-ai/deepseek-v4.1-flash"
+  ],
+  "plan_pool": [
+   "1:openai-codex/gpt-6.1-sol",
+   "2:opencode-go/deepseek-v4.1-flash",
+   "3:opencode-go/glm-5.3-flash",
+   "4:opencode-go/mimo-v2.6-flash",
+   "5:nvidia/z-ai/glm-5.3-flash",
+   "6:nvidia/deepseek-ai/deepseek-v4.1-flash"
+  ],
+  "retired": [
+   "opencode-go/mimo-v2.6-pro"
+  ],
+  "retirement_check": {
+   "schema": "HGK.LaneArmRetirement/1",
+   "epoch": 41,
+   "retired": [
+    "opencode-go/mimo-v2.6-pro"
+   ],
+   "live_arm_sites": 60,
+   "retired_still_live": [],
+   "required_missing": [],
+   "verdict": "PASS"
+  }
+ },
+ "not_claimed": [
+  "NATIVE_SIGNED",
+  "a live probe of mimo-v2.6-flash on the PLAN lane in this change",
+  "that any other lane changed rank-1"
+ ],
+ "rollback": "git revert this commit; the previous epoch 40 registry and pool are the parent commit's blobs",
+ "signing": "REPO_BOUND owner order; this record carries no cryptographic signature"
+}

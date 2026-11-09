@@ -1,7 +1,7 @@
 {
  "artifact": "MODEL_LANE_ASSIGNMENT",
  "schema": "HGK-MODEL-LANE-ASSIGNMENT/1",
- "revision": 41,
+ "revision": 43,
  "declared_at_utc": "2026-10-21T17:26:33.375499Z",
  "declared_by": "Owner order 2026-10-23 (R15): PLAN = SBL-Commander/PLAN, EXECUTE = SBL-EXECUTE/Codex bounded writer, VERIFY = Acceptance Challenge/Independent Acceptance Officer/SECURITY all bind opencode-go/deepseek-v4.1-flash. The deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410) is deleted and MiMo-V2.6-Flash takes the fallback-1 slot it vacated.",
  "authority_note": "Operator-declared routing policy. Not an authority source; the runtime wiring named in `effective_wiring` is the machine truth. The current revision is the top-level \"revision\" field; earlier revisions are recorded in the revision_*_reason fields and in this file's history sections.",
@@ -44,8 +44,8 @@
      },
      {
       "provider": "opencode-go",
-      "model": "mimo-v2.6-pro",
-      "transport_model": "opencode-go/mimo-v2.6-pro",
+      "model": "mimo-v2.6-flash",
+      "transport_model": "opencode-go/mimo-v2.6-flash",
       "role": null,
       "default": null,
       "automatic_selection": false
@@ -88,7 +88,7 @@
     },
     {
      "provider": "opencode-go",
-     "model": "mimo-v2.6-pro",
+     "model": "mimo-v2.6-flash",
      "transport": null,
      "automatic_selection": false,
      "default": false
@@ -418,8 +418,8 @@
    },
    {
     "provider": "opencode-go",
-    "model": "mimo-v2.6-pro",
-    "transport_model": "opencode-go/mimo-v2.6-pro",
+    "model": "mimo-v2.6-flash",
+    "transport_model": "opencode-go/mimo-v2.6-flash",
     "arm": "D",
     "role": "fallback3",
     "default": false,
@@ -549,7 +549,7 @@
    "glm-5.3-flash",
    "gpt-6-luna",
    "gpt-6.1-sol",
-   "mimo-v2.6-pro",
+   "mimo-v2.6-flash",
    "minimax-m3.1-flash-free",
    "z-ai/glm-5.3-flash"
   ],
@@ -565,7 +565,15 @@
   "new_cross_lane_coupling": "The sole checker identity is opencode-go/deepseek-v4.1-flash. Existing PLAN/EXECUTE fallback arms can share its model; process/lane/evidence-path separation and the no-self-acceptance rule remain required.",
   "note": "Adding fallbacks can only ever weaken separation, never strengthen it; every arm was checked rather than assuming the primary-arm result carries over.",
   "verify_flash_vs_plan_glm": "VERIFY_SECURITY uses DeepSeek, not GLM; PLAN fallback declarations are unchanged.",
-  "retired": false,
+  "retired": [
+   {
+    "arm": "opencode-go/mimo-v2.6-pro",
+    "epoch": 41,
+    "ordered_at": "2026-11-09",
+    "reason": "wrong model family; retired from every pool by owner order",
+    "replacement": "opencode-go/mimo-v2.6-flash"
+   }
+  ],
   "retired_note": "NOT retired: current VERIFY_SECURITY checker is opencode-go/deepseek-v4.1-flash by owner order 2026-10-22."
  },
  "wiring_feasibility": {
