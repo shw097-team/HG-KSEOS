@@ -1,7 +1,7 @@
 {
  "artifact": "MODEL_LANE_ASSIGNMENT",
  "schema": "HGK-MODEL-LANE-ASSIGNMENT/1",
- "revision": 43,
+ "revision": 44,
  "declared_at_utc": "2026-10-21T17:26:33.375499Z",
  "declared_by": "Owner order 2026-10-23 (R15): PLAN = SBL-Commander/PLAN, EXECUTE = SBL-EXECUTE/Codex bounded writer, VERIFY = Acceptance Challenge/Independent Acceptance Officer/SECURITY all bind opencode-go/deepseek-v4.1-flash. The deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410) is deleted and MiMo-V2.6-Flash takes the fallback-1 slot it vacated.",
  "authority_note": "Operator-declared routing policy. Not an authority source; the runtime wiring named in `effective_wiring` is the machine truth. The current revision is the top-level \"revision\" field; earlier revisions are recorded in the revision_*_reason fields and in this file's history sections.",
@@ -108,7 +108,45 @@
      "default": false
     }
    ],
-   "reasoning_effort": "medium"
+   "reasoning_effort": "medium",
+   "fallbacks": [
+    {
+     "provider": "opencode-go",
+     "model": "deepseek-v4.1-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[PLAN] (revision 43); the owner's own fallback order, not an operator choice"
+    },
+    {
+     "provider": "opencode-go",
+     "model": "glm-5.3-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[PLAN] (revision 43); the owner's own fallback order, not an operator choice"
+    },
+    {
+     "provider": "opencode-go",
+     "model": "mimo-v2.6-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[PLAN] (revision 43); the owner's own fallback order, not an operator choice"
+    },
+    {
+     "provider": "nvidia",
+     "model": "z-ai/glm-5.3-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[PLAN] (revision 43); the owner's own fallback order, not an operator choice"
+    },
+    {
+     "provider": "nvidia",
+     "model": "deepseek-ai/deepseek-v4.1-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[PLAN] (revision 43); the owner's own fallback order, not an operator choice"
+    }
+   ],
+   "fallbacks_declared": true,
+   "fallbacks_projected_from": {
+    "source": "lane_chains",
+    "revision": 43,
+    "rule": "copy the declared chain; no arm may enter by hand"
+   }
   },
   {
    "role": "EXECUTE",
@@ -170,7 +208,33 @@
      "automatic_selection": false,
      "default": false
     }
-   ]
+   ],
+   "fallbacks": [
+    {
+     "provider": "opencode-go",
+     "model": "mimo-v2.6-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[EXECUTE] (revision 43); the owner's own fallback order, not an operator choice"
+    },
+    {
+     "provider": "openai-codex",
+     "model": "gpt-6-luna",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[EXECUTE] (revision 43); the owner's own fallback order, not an operator choice"
+    },
+    {
+     "provider": "nvidia",
+     "model": "deepseek-ai/deepseek-v4.1-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[EXECUTE] (revision 43); the owner's own fallback order, not an operator choice"
+    }
+   ],
+   "fallbacks_declared": true,
+   "fallbacks_projected_from": {
+    "source": "lane_chains",
+    "revision": 43,
+    "rule": "copy the declared chain; no arm may enter by hand"
+   }
   },
   {
    "role": "VERIFY_SECURITY",
@@ -254,7 +318,39 @@
      "automatic_selection": false,
      "default": false
     }
-   ]
+   ],
+   "fallbacks": [
+    {
+     "provider": "opencode-go",
+     "model": "mimo-v2.6-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[VERIFY_SECURITY] (revision 43); the owner's own fallback order, not an operator choice"
+    },
+    {
+     "provider": "opencode-go",
+     "model": "deepseek-v4.1-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[VERIFY_SECURITY] (revision 43); the owner's own fallback order, not an operator choice"
+    },
+    {
+     "provider": "opencode-go",
+     "model": "glm-5.3-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[VERIFY_SECURITY] (revision 43); the owner's own fallback order, not an operator choice"
+    },
+    {
+     "provider": "nvidia",
+     "model": "deepseek-ai/deepseek-v4.1-flash",
+     "automatic_selection": false,
+     "authority": "projected from lane_chains[VERIFY_SECURITY] (revision 43); the owner's own fallback order, not an operator choice"
+    }
+   ],
+   "fallbacks_declared": true,
+   "fallbacks_projected_from": {
+    "source": "lane_chains",
+    "revision": 43,
+    "rule": "copy the declared chain; no arm may enter by hand"
+   }
   }
  ],
  "effective_wiring": {
@@ -810,5 +906,6 @@
   "sha256": "e68c5143bce3c65a0a2f31e1001f68427abec909ad41f36f75addb21fd367fe7",
   "projected_at_utc": "2026-10-31T13:13:10+00:00",
   "rule": "lane_chains and the slot pool are projections; edit the registry, then re-run this tool"
- }
+ },
+ "revision_r28_reason": "EC-R26-007 residue: lane_chains already declared each lane's fallback order, but the flat rows the dispatcher reads carried no `fallbacks`, so every lane resolved as primary-only at epoch 41. Projected one for one from lane_chains; no arm chosen by an operator; retired arms refused."
 }

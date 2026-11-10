@@ -129,7 +129,7 @@ class TestLanePolicyConformance(unittest.TestCase):
         # ERR_ARM_NOT_IN_ASSIGNMENT, i.e. the refusal was governance, not capability. PLAN and
         # EXECUTE are unchanged. This map moves with the declaration it checks.
         owner_chain = {
-            "PLAN": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "deepseek-v4.1-flash"), ("opencode-go", "glm-5.3-flash"), ("opencode-go", "mimo-v2.6-pro"), ("nvidia", "z-ai/glm-5.3-flash"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
+            "PLAN": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "deepseek-v4.1-flash"), ("opencode-go", "glm-5.3-flash"), ("opencode-go", "mimo-v2.6-flash"), ("nvidia", "z-ai/glm-5.3-flash"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
             "VERIFY_SECURITY": [("openai-codex", "gpt-6.1-sol"), ("opencode-go", "mimo-v2.6-flash"), ("opencode-go", "deepseek-v4.1-flash"), ("opencode-go", "glm-5.3-flash"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
             "EXECUTE": [("opencode-go", "deepseek-v4.1-flash"), ("opencode-go", "mimo-v2.6-flash"), ("openai-codex", "gpt-6-luna"), ("nvidia", "deepseek-ai/deepseek-v4.1-flash")],
         }

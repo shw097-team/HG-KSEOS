@@ -16,8 +16,8 @@ retired_arms:
     evidence: 'owner order 2026-11-09: PLAN/opt2 = opencode-go/mimo-v2.6-flash must be admitted to the PLAN pool, and mimo-v2.6-pro must be retired from the pool and prevented from misuse'
 source_of_routes:
   path: config/model-lane-assignment.json
-  revision: 43
-  sha256: 8ac813570f406f3a949ce736cff45b5ecdaee347b9538f7ececcb474ff48be63
+  revision: 44
+  sha256: 9e5e4ff939de08a74d421002d3739fb0eef6efc9723ee32dfe198274bdc60dba
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
@@ -411,7 +411,7 @@ projections:
   - pointer: /registry_epoch
     expected: 39
   - pointer: /revision
-    expected: 43
+    expected: 44
   - pointer: /lane_chains/PLAN/0/provider
     expected: openai-codex
   - pointer: /lane_chains/PLAN/0/model

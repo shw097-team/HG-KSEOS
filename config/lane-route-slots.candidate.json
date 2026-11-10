@@ -2,7 +2,7 @@
  "schema": "HGK-LANE-ROUTE-SLOTS/1",
  "status": "CANDIDATE",
  "artifact": "LANE_ROUTE_SLOTS_CANDIDATE",
- "revision": 36,
+ "revision": 37,
  "supersedes_revision": 36,
  "round": "ROUND-R14-LANE-REBIND-20261022",
  "declared_by": "Owner order 2026-10-23: main model DEEPSEEK V4.1 FLASH (OPENCODE GO); the deprecated fallback-first arm MiniMax M3.1 Flash is DELETED and MiMo-V2.6-Flash takes fallback 1. The arm opencode-go/minimax-m3.1-flash-free answers HTTP 410 ModelDeprecated, so deletion is a repair, not a preference. All three lanes stay opencode-go/deepseek-v4.1-flash at rank 1.",
@@ -291,6 +291,12 @@
    "at_utc": "2026-10-31T13:13:10+00:00",
    "reason": "projected from lane-routing-registry epoch 40: the owner order of 2026-10-24 puts PLAN and VERIFY/SECURITY rank 1 on openai-codex/gpt-6.1-sol and keeps EXECUTE on opencode-go/deepseek-v4.1-flash; the demoted primary stays reachable as fallback 1",
    "evidence": "config/lane-routing-registry.yaml sha256 e68c5143bce3c65a0a2f31e1001f68427abec909ad41f36f75addb21fd367fe7"
+  },
+  {
+   "rev": 37,
+   "at_utc": "2026-11-11T02:35:00Z",
+   "reason": "add reading_contract: pin the authority chain, the routes[]-only rule, the same-epoch rule, the no-hand-edit rule, the lane-plane vs session-pin separation and the no-SoD-failure rule at the menu's entry point, after a line-anchored registry read produced a false 'two authorities disagree' conclusion",
+   "evidence": "out/U1_3LM_INVESTIGATION.md; config/MODEL_MENU_READING_CONTRACT.md"
   }
  ],
  "placement_rationale": "Kept as a NEW file rather than folded into config/lane-routing-registry.yaml: the registry's routes[] values are bound as 90 drift-pinned JSON pointers across three live sites, so editing it forces a fully synchronised sweep + epoch bump. This file stays inert for the drift gate (verified: validate -> exit 0 / fatal false / 90 sites).",
@@ -688,5 +694,27 @@
    "replacement": "opencode-go/mimo-v2.6-flash"
   }
  },
- "epoch": 41
+ "epoch": 41,
+ "reading_contract": {
+  "version": "1",
+  "authority_chain": [
+   "config/lane-routing-registry.yaml = the lane -> arm AUTHORITY. Read routes[] where lane == <LANE>; nothing else in that file is authoritative.",
+   "config/lane-route-slots.candidate.json (THIS FILE) = the MODEL MENU: what may be selected per lane, in rank order, DEFAULT/首選 then FALLBACK1..5.",
+   "config/model-lane-assignment.json = an operator-declared PROJECTION that the dispatcher reads. It says of itself: 'Not an authority source'."
+  ],
+  "rule_no_line_anchor": "Never read the registry with a line-anchored grep. It carries historical blocks whose '- lane: PLAN' rows are NOT the authority; the authoritative row is routes[] where lane == PLAN. A line-anchored read is what produced the false claim that the registry put PLAN on deepseek.",
+  "rule_epoch": "This menu and the registry must report the SAME epoch (currently 41). A projection naming an older epoch is stale by definition. ERR_ARM_NOT_IN_ASSIGNMENT measured against an origin/main worktree (rev 35, registry_epoch 34) is a STALE-BASE error, not a control-plane defect.",
+  "rule_no_hand_edit": "Never add or remove an arm by hand here or in the assignment. Edit config/lane-routing-registry.yaml, then run the built projectors: scripts/lane_policy_reconcile.py (menu + assignment) or scripts/lane_assignment_resync.py (assignment only). A hand-picked fallback set is an operator lane decision and is refused as such.",
+  "rule_plane_separation": "The menu and the FHS-3L&M binding records are the LANE CONTROL PLANE. A desktop-app session pin is a conversation setting and binds no lane; only the binding record is read by fhs_3lm --assert.",
+  "rule_sod": "SoD is NOT enforced. PLAN rank 1 and VERIFY_SECURITY rank 1 are both openai-codex/gpt-6.1-sol by owner order (SOD006-C4, OPEN_OWNER_ORDERED). Same-arm lanes are RECORDED (same_arm_lanes, identity_overlaps_recorded_not_enforced) and never refused; a run must not be failed for it.",
+  "rule_selection": "Selection follows selection_semantics below: no session instruction -> rank 1; a session instruction replaces rank 1; an entry outside this pool -> ERR_SLOT_NOT_IN_POOL; a model failure advances in rank order.",
+  "entry_points": {
+   "menu": "tools/fhs_3lm.py --menu  (SBL payload; reads this file and the registry read-only)",
+   "bind": "tools/fhs_3lm.py --bind LANE SLOT",
+   "assert": "tools/fhs_3lm.py --assert <binding.json>",
+   "dispatch": "scripts/hgk-lane-dispatch.py  (reads the assignment projection, not this menu)"
+  },
+  "aligned_with": "FHS_PIPD-LS-PKG_W0_r26 section 25.7 - 'FHS-3L&M: 硬入口契約，不是第四套路由'",
+  "doc": "config/MODEL_MENU_READING_CONTRACT.md"
+ }
 }
