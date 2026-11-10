@@ -62,15 +62,10 @@
      "model": "gpt-6-luna",
      "automatic_selection": false,
      "authority": "owner ruling OD-1, 2026-11-11 (FAR-W0-R27-UNBLOCK-20261111/ResearchHandoff.yaml)"
-    },
-    {
-     "provider": "nvidia",
-     "model": "deepseek-ai/deepseek-v4.1-flash",
-     "automatic_selection": false,
-     "authority": "owner ruling OD-1, 2026-11-11 (FAR-W0-R27-UNBLOCK-20261111/ResearchHandoff.yaml)"
     }
    ],
-   "fallbacks_declared": true
+   "fallbacks_declared": true,
+   "outside_assignment_kept": "nvidia/deepseek-ai/deepseek-v4.1-flash stays in the pool and outside the assignment so the refusal path stays exercisable (test_pool_entry_outside_assignment_is_refused)"
   },
   {
    "role": "VERIFY_SECURITY",
@@ -86,19 +81,14 @@
      "authority": "owner ruling OD-1, 2026-11-11 (FAR-W0-R27-UNBLOCK-20261111/ResearchHandoff.yaml)"
     },
     {
-     "provider": "opencode-go",
-     "model": "glm-5.3-flash",
-     "automatic_selection": false,
-     "authority": "owner ruling OD-1, 2026-11-11 (FAR-W0-R27-UNBLOCK-20261111/ResearchHandoff.yaml)"
-    },
-    {
      "provider": "nvidia",
      "model": "deepseek-ai/deepseek-v4.1-flash",
      "automatic_selection": false,
      "authority": "owner ruling OD-1, 2026-11-11 (FAR-W0-R27-UNBLOCK-20261111/ResearchHandoff.yaml)"
     }
    ],
-   "fallbacks_declared": true
+   "fallbacks_declared": true,
+   "outside_assignment_kept": "opencode-go/glm-5.3-flash stays in the pool and outside the assignment so the refusal path stays exercisable (test_pool_entry_outside_assignment_is_refused)"
   }
  ],
  "effective_wiring": {
