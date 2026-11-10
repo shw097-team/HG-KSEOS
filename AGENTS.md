@@ -13,4 +13,15 @@ Conventions an agent must follow in this repository.
    every signature planned in that pass.
 7. **Rollback points.** Promotion is a merge commit plus a tag; never a rewrite of history.
 
+## Governed execution — lane entry is now MECHANICAL (non-authoritative note)
+
+This paragraph creates no authority and restates no policy; the mechanism is the code below, not this text.
+
+`scripts/hgk-lane-run.sh` is the entry point: it asserts the run's SessionBinding with
+`scripts/fhs_entry_guard.py`, mints a one-shot run-scoped capability, and only then calls
+`scripts/hgk-lane-dispatch.py` — which CONSUMES that capability before it creates any child. A fresh
+process with no binding is refused with `FHS_ENTRY_ASSERT_REQUIRED` (exit 20) and no child at all; a
+spent capability is refused with `FHS_ENTRY_TOKEN_CONSUMED` (exit 29). Calling the dispatcher directly
+is therefore not a shortcut past the entry, it is a refusal.
+
 B1 closure scope for this repository: HGK side: native admission kernel (D-16 ACL fix), lane arm aliases, B1 evidence index
