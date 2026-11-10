@@ -79,6 +79,20 @@ except Exception:  # noqa: BLE001
     _sp_identity = None
 ERR_SP_IDENTITY_MODULE_UNAVAILABLE = "ERR_SP_IDENTITY_MODULE_UNAVAILABLE"
 ERR_SP_IDENTITY_FLAG_WITHOUT_IDENTITY = "ERR_SP_IDENTITY_FLAG_WITHOUT_IDENTITY"
+# EC-R26-001 (R26-03): the FHS hard-entry gate. Loaded by path for the same reason as the SP helper
+# above, and in the SAME process: the gate must refuse BEFORE any child exists, so it may not itself be
+# a spawned subprocess on the refusal path. A missing helper is never a crash -- the gate refuses
+# typed (`FHS_ENTRY_GUARD_UNRESOLVED`, exit 27) instead of letting an unguarded spawn through.
+try:
+    import importlib.util as _fe_ilu  # noqa: E402 - local alias; the SP block's `_ilu` may be unbound
+    _fgs = _fe_ilu.spec_from_file_location("fhs_entry_guard", ROOT / "scripts" / "fhs_entry_guard.py")
+    _fgl = getattr(_fgs, "loader", None)
+    if _fgs is None or _fgl is None:
+        raise ImportError("scripts/fhs_entry_guard.py has no loader")
+    _fhs_entry_guard = _fe_ilu.module_from_spec(_fgs)
+    _fgl.exec_module(_fhs_entry_guard)
+except Exception:  # noqa: BLE001
+    _fhs_entry_guard = None
 # F2 belt (independent Challenge-SP, 2026-10-23): the resolver must return a typed result; if
 # anything escapes it anyway, this is the code the pre-spawn refusal carries instead of a traceback.
 ERR_SP_IDENTITY_INTERNAL = "ERR_SP_IDENTITY_INTERNAL"
@@ -682,8 +696,12 @@ def sha256_file(path) -> str:
     return h.hexdigest()
 
 
-def emit_refusal(args, rec: dict) -> int:
-    """Print a typed refusal and persist it. Exists so every refusal path returns the same shape."""
+def emit_refusal(args, rec: dict, exit_code: int = 4) -> int:
+    """Print a typed refusal and persist it. Exists so every refusal path returns the same shape.
+
+    `exit_code` defaults to the historical 4. The FHS hard-entry gate passes its OWN status (20-29) so
+    the operator and any wrapper see which entry condition refused, instead of one anonymous 4.
+    """
     # FIX 3 (C3): every refusal receipt records the resolved home and whether it is the declared
     # lane home. Injected here -- one code path -- so no emitter has to duplicate the pair by hand.
     rec = dict(rec)
@@ -693,7 +711,7 @@ def emit_refusal(args, rec: dict) -> int:
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(rec, indent=2, ensure_ascii=False), encoding="utf-8")
     print(json.dumps(rec, indent=2, ensure_ascii=False))
-    return 4
+    return exit_code
 
 
 def refusal_body(lane: str, code: str, detail, **extra) -> dict:
@@ -1710,6 +1728,36 @@ def _resolve_completion_evidence(att, binding, root=None):
                  "subject": (binding or {}).get("subject")})
 
 
+def fhs_entry_precheck(args, arm) -> tuple[int, dict]:
+    """EC-R26-001 / R26-03: the mechanical entry gate, run IN THIS PROCESS before any child exists.
+
+    Returns ``(0, record)`` only when a binding was re-verified AND this run's one-shot capability was
+    spent. Every other value carries the guard's own named code (FHS_ENTRY_*, exits 20-29) and is
+    turned into a refusal by the caller. The gate is executed here (not as a subprocess) precisely so
+    that the refusal path creates NO child at all -- that is the finding's falsifier, and a spawned
+    helper on the refusal path would weaken it.
+    """
+    if _fhs_entry_guard is None:
+        return 27, {"schema": "FHS-ENTRY-GUARD/1", "ok": False,
+                    "code": "FHS_ENTRY_GUARD_UNRESOLVED",
+                    "detail": "scripts/fhs_entry_guard.py could not be loaded, so no binding can be "
+                              "verified before a spawn; refusing instead of spawning unguarded",
+                    "lane": args.lane, "arm": arm}
+    code, gate = _fhs_entry_guard.gate_entry(
+        binding=args.fhs_binding, lane=args.lane, arm=arm,
+        hgk_root=args.fhs_hgk_root, reader=args.fhs_binding_reader)
+    if code:
+        return code, {"schema": "FHS-ENTRY-GUARD/1", "ok": False, "code": gate.get("code"),
+                      "detail": gate.get("detail"), "lane": args.lane, "arm": arm, "gate": gate}
+    token_code, token = _fhs_entry_guard.consume_capability(
+        run_id=args.fhs_entry_token, lane=args.lane, arm=arm,
+        entry_dir=args.fhs_entry_dir, binding_path=args.fhs_binding)
+    return token_code, {"schema": "FHS-ENTRY-GUARD/1", "ok": token_code == 0,
+                        "code": token.get("code"), "detail": token.get("detail"),
+                        "lane": args.lane, "arm": arm, "run_id": args.fhs_entry_token,
+                        "gate": gate, "token": token}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(prog="hgk-lane-dispatch.py")
     ap.add_argument("--lane", required=True, help="PLAN | EXECUTE | VERIFY_SECURITY (validated in-contract)")
@@ -1848,6 +1896,24 @@ def main() -> int:
     ap.add_argument("--sp-spine", default=None,
                     help="Shared Spine path used for the --sp-workorder join (default: "
                          "var/shared-spine/hg-kseos.db). Operator/test seam.")
+    # ---- EC-R26-001 / R26-03: FHS hard entry (mechanical; no binding + no capability => no spawn) --
+    ap.add_argument("--fhs-binding", default=None,
+                    help="path to the SBL SessionBinding for this run. REQUIRED: without it the "
+                         "dispatcher refuses FHS_ENTRY_ASSERT_REQUIRED (exit 20) before any child "
+                         "exists. Mint one with the FHS-3L&M contract (fhs_3lm.py --bind).")
+    ap.add_argument("--fhs-entry-token", default=None,
+                    help="run_id of the one-shot entry capability that scripts/fhs_entry_guard.py "
+                         "minted for THIS run. Consumed at the spawn boundary; absent, expired or "
+                         "already-spent => FHS_ENTRY_TOKEN_REQUIRED (28) / _CONSUMED (29).")
+    ap.add_argument("--fhs-entry-dir", default=None,
+                    help="directory holding the run-scoped capabilities (default: <repo>/var/fhs-entry)")
+    ap.add_argument("--fhs-binding-reader", default=None,
+                    help="path to the single-source SBL binding reader (fhs_3lm.py). Default: "
+                         "$FHS_3LM_PATH, then config/fhs-3lm-path.txt, then "
+                         "var/fhs-entry/binding-reader-path.txt.")
+    ap.add_argument("--fhs-hgk-root", default=None,
+                    help="HGK control-plane root holding config/lane-routing-registry.yaml and the "
+                         "pool. Default: $HGK_ROOT, then config/hgk-root.txt, then this repo.")
     args = ap.parse_args()
     # A2/TT-R20-9: identity of THIS source must ride on the receipt it produces. Defined here, in
     # main(), because the receipt assembly also lives here -- a module-level or attempt-scoped binding
@@ -2053,6 +2119,25 @@ def main() -> int:
         return 2
     if args.max_candidates:
         entries = entries[: args.max_candidates]
+
+    # ---- FHS hard entry (EC-R26-001 / R26-03): binding + one-shot capability, BEFORE any child ----
+    # The r26 external challenge's own falsifier is "a fresh process with no binding dispatches". Every
+    # child-creating step in this surface is BELOW this point (the pin probe starts a verifier process;
+    # run_candidate spawns codex), so the gate is placed here and refuses with zero spawns. Moving it
+    # later -- or making it conditional on a flag -- is what would turn the mechanical gate back into a
+    # prompt-level convention.
+    _entry_arm = (str(args.require_arm) if args.require_arm
+                  else (f"{entries[0]['provider']}/{entries[0]['model']}" if entries else None))
+    _fe_exit, _fe_rec = fhs_entry_precheck(args, _entry_arm)
+    args.fhs_entry_receipt = _fe_rec
+    if _fe_exit:
+        return emit_refusal(args, refusal_body(
+            args.lane, _fe_rec.get("code") or "FHS_ENTRY_BINDING_INVALID", _fe_rec.get("detail"),
+            fhs_entry=_fe_rec, attempts=[], zero_spawn=True,
+            stage="fhs_entry (before any child process)",
+            say="the FHS entry gate refused this dispatch before any child existed: an unbound "
+                "fresh process (or an unspent/absent capability) does not reach a spawn"),
+            exit_code=_fe_exit)
 
     codex = args.codex_executable or codex_executable()
     # FIX 4 (C3): resolve the lane home ONCE here -- the single point where it is read -- so both the
@@ -2383,7 +2468,9 @@ def main() -> int:
     bound = validated_binding is not None
     args._validated_binding = validated_binding
     run_started = int(time.time())
-    run_id = f"{os.getpid()}-{run_started}"
+    # EC-R26-001: when a run-scoped capability was spent, ITS run_id is this run's identity -- the token
+    # and the dispatcher must name the same run, or "a valid token for its own run_id" is meaningless.
+    run_id = args.fhs_entry_token or f"{os.getpid()}-{run_started}"
     trail = Path(f"{args.json_out}.attempts.ndjson") if args.json_out else None
     log_dir = args.attempt_log_dir or (f"{args.json_out}.logs" if args.json_out else None)
 
@@ -2769,6 +2856,7 @@ def main() -> int:
         "used_seconds": used["seconds"] if used else None,
         "generated_utc": datetime.now(UTC).isoformat(),
         "assignment_posture": assignment_selection,
+        "fhs_entry": getattr(args, "fhs_entry_receipt", None),
         "producer": _producer,
         "comparison_policy": ("compare two receipts ONLY when producer.script_sha256 is equal; "
                              "tools/compare_lane_receipts.py refuses otherwise (TT-R20-9)"),
