@@ -69,4 +69,4 @@ sha256sum config/lane-routing-registry.yaml config/lane-route-slots.candidate.js
 ```
 
 Reproduction was run on Windows with Python 3.11.9, in a workspace that imports these files
-byte-identically (`source_sha256 == target_sha256`, 480 files, 0 mismatches).
+byte-identically (`source_sha256 == target_sha256`, 433 files, 0 mismatches).
