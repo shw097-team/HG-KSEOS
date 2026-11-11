@@ -85,12 +85,19 @@ reason.
 `tools/gate_r20.py` (R20/GSTACK v6) executed in place against the R13 round:
 
 - selftest: every mutation **fired** (G10…G29) — the gate is not a rubber stamp;
-- full: **17/22 PASS, 3 blocking fail, 1 reporting open** (recorded 21/22 on 2026-11-09).
+- full, no sources: **17/22 PASS, 3 blocking fail, 1 reporting open**;
+- full, with the declared 31-document corpus passed in: **18/22 PASS, 2 blocking fail, 1 reporting open**
+  (recorded 21/22 on 2026-11-09).
 
-All three blocking fails are missing inputs, not logic: G13 needs the 31-document corpus (only 14 of
-that family exist in either mirror), G16a/G16b need `…/worktrees/r4-hgk/pyproject.toml` (worktree
-gone), G19 needs 24 of 25 declared copy roots that have been deleted. G22's OPEN row is a consequence
-of those three.
+**G11/G13 are recoverable, and the recovery is worth recording**: the gate re-hashes the round's own
+31 declared documents (`lanes/A/SOURCE_LOCK_V3.json`, `file` + `declared.sha256` each). Those 31 files
+exist on this host but split across two directories under different names (14 + 17), so a plain
+`--sources <dir>` can never satisfy it. Building a corpus **view** matched by declared sha256 only
+(31/31 matched, 0 substituted) lets G11 and G13 re-derive the totals from the documents themselves.
+
+The two remaining blocking fails are missing inputs, not logic: G16a/G16b need
+`…/worktrees/r4-hgk/pyproject.toml` (no such worktree exists anywhere on the host), and G19 needs 24
+of 25 declared copy roots that have been deleted. G22's OPEN row is a consequence of those.
 
 ## 4. One governance gap the second pass exposed
 
