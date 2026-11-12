@@ -8,11 +8,10 @@
 
 | item | value |
 |---|---|
-| lane control plane | epoch **41** (registry `epoch 41` / `contract_epoch 41`, assignment `revision 44` / `registry_epoch 41`, pool `revision 37` / `epoch 41`) |
+| lane control plane | epoch **41** (authoritative detail: `config/lane-routing-registry.yaml`, `config/model-lane-assignment.json`, `config/lane-route-slots.candidate.json`) |
 | OD-4 removal | `mimo-v2.6-pro`, `glm-5.3`, `glm-5.3-flash`, `z-ai/glm-5.3`, `z-ai/glm-5.3-flash`, `minimax-m3.1-flash-free` — absent from every selectable surface |
 | merges | PR #20 `e947cef0ea2b`, PR #21 `55b264752e8c`, PR #22 `5bc44ec05e28`, PR #19 `e5b4683c9263` |
 | tag | `fhs-w0-epoch41-20261112` |
-| routes | PLAN `gpt-6.1-sol` · EXECUTE `deepseek-v4.1-flash` · VERIFY_SECURITY `gpt-6.1-sol` (medium), arms == lane_chains == pool order |
 
 ## 1. How to reproduce the green
 
@@ -24,8 +23,9 @@ python scripts/hgk-lane-policy.py validate
 python scripts/hgk-lane-dispatch.py --lane VERIFY_SECURITY --prompt "echo TOKEN" --nonce TOKEN \
   --pool config/lane-route-slots.candidate.json
 
-# 3. tree-level checks (expect: selfcheck 16/16, G19 394/394)
-python ops/selfcheck.py
+# 3. tree-level checks live in the FHS_NEXT working tree, NOT in this repository:
+#    `ops/selfcheck.py` (expect 16/16) and the G19 re-read (expect 394/394) are run from that root.
+#    This repository exposes only the two commands above.
 ```
 
 A PASS is a file with a sha256 and a command that reproduces it. A model vote, a manifest entry or a digest match is
