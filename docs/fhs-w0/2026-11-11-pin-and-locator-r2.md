@@ -86,8 +86,9 @@ reason.
 
 - selftest: every mutation **fired** (G10…G29) — the gate is not a rubber stamp;
 - full, no sources: **17/22 PASS, 3 blocking fail, 1 reporting open**;
-- full, with the declared 31-document corpus passed in: **18/22 PASS, 2 blocking fail, 1 reporting open**
-  (recorded 21/22 on 2026-11-09).
+- full, with the declared 31-document corpus passed in: 18/22 PASS, 2 blocking fail, 1 reporting open;
+- full, with the corpus **and** the 26 deleted roots restored as junctions from the 2026-11-10 archive:
+  **19/22 PASS, 1 blocking fail, 2 reporting open** (recorded 21/22 on 2026-11-09).
 
 **G11/G13 are recoverable, and the recovery is worth recording**: the gate re-hashes the round's own
 31 declared documents (`lanes/A/SOURCE_LOCK_V3.json`, `file` + `declared.sha256` each). Those 31 files
@@ -95,9 +96,16 @@ exist on this host but split across two directories under different names (14 + 
 `--sources <dir>` can never satisfy it. Building a corpus **view** matched by declared sha256 only
 (31/31 matched, 0 substituted) lets G11 and G13 re-derive the totals from the documents themselves.
 
-The two remaining blocking fails are missing inputs, not logic: G16a/G16b need
-`…/worktrees/r4-hgk/pyproject.toml` (no such worktree exists anywhere on the host), and G19 needs 24
-of 25 declared copy roots that have been deleted. G22's OPEN row is a consequence of those.
+**And the deleted inputs were recoverable after all.** They sit in `G:\Projects\封存\FHS_封存_20261110_已分類可封存`:
+`worktrees/r4-hgk` with its `pyproject.toml`, the other 16 worktrees, six round directories, and
+`FHS_W1_Work_Final/…/sources`. Twenty-six junctions restored the declared absolute paths without copying a
+byte, after which **G16a passes by real re-derivation** and G19 advances from `ROOT_ABSENT` to
+`MEMBER_ABSENT` (308 of 437 declared copies).
+
+The 308 are all under `知識庫\實作相關DOC\Fabric vNext\…`, and neither `Fabric vNext` nor
+`Semantic World OS Fabric` exists anywhere on C: or G:. G16b stays OPEN for a different reason: its `hgk-main`
+subject records `scan_complete: false` because only three files were materialised at the pinned commit —
+a limitation of the subject, reported rather than passed. G22 mirrors those two rows.
 
 ## 4. One governance gap the second pass exposed
 
