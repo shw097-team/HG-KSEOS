@@ -6,7 +6,7 @@ authorization_basis: 'Owner order 2026-10-23 (R15): the main model is opencode-g
 source_of_routes:
   path: config/model-lane-assignment.json
   revision: 44
-  sha256: ddec031fbf7f5be11d976ae566e4e02ab8fd2013dbdc21bc91f85a1fcae99f48
+  sha256: 8cbb0d30af2c062ada2ab01ee5daa867460edf2550eaef8ab35cd72fc315a242
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
@@ -48,21 +48,25 @@ routes:
   - SYNTHESIS
   - EVOLUTION
   engine: hermes
-  provider: opencode-go
-  model: deepseek-v4.1-flash
-  canonical_identity: deepseek-v4.1-flash
+  provider: openai-codex
+  model: gpt-6.1-sol
+  canonical_identity: gpt-6.1-sol
   auth: env_ref:OPENCODE_GO_API_KEY
   oauth: false
   reasoning_effort: medium
   selection_authority: owner-order-20261022-r14-plan-gpt61sol-execute-minimax
   arms:
-  - provider: opencode-go
-    model: deepseek-v4.1-flash
-    transport_model: opencode-go/deepseek-v4.1-flash
-    automatic_selection: true
   - provider: openai-codex
     model: gpt-6.1-sol
     transport_model: gpt-6.1-sol
+    automatic_selection: true
+  - provider: opencode-go
+    model: deepseek-v4.1-flash
+    transport_model: opencode-go/deepseek-v4.1-flash
+    automatic_selection: false
+  - provider: opencode-go
+    model: mimo-v2.6-flash
+    transport_model: opencode-go/mimo-v2.6-flash
     automatic_selection: false
   - provider: nvidia
     model: deepseek-ai/deepseek-v4.1-flash
@@ -103,22 +107,18 @@ routes:
   - provider: opencode-go
     model: deepseek-v4.1-flash
     transport_model: opencode-go/deepseek-v4.1-flash
-    default: true
     automatic_selection: true
   - provider: opencode-go
     model: mimo-v2.6-flash
     transport_model: opencode-go/mimo-v2.6-flash
-    default: false
     automatic_selection: false
   - provider: openai-codex
     model: gpt-6-luna
     transport_model: gpt-6-luna
-    default: false
     automatic_selection: false
   - provider: nvidia
     model: deepseek-ai/deepseek-v4.1-flash
     transport_model: nvidia/deepseek-ai/deepseek-v4.1-flash
-    default: false
     automatic_selection: false
   fallbacks:
   - provider: opencode-go
@@ -150,23 +150,27 @@ routes:
   - SECURITY REVIEW
   - VERIFY
   engine: codex-cli
-  provider: opencode-go
-  model: deepseek-v4.1-flash
+  provider: openai-codex
+  model: gpt-6.1-sol
   reasoning_effort: medium
-  canonical_identity: deepseek-v4.1-flash
+  canonical_identity: gpt-6.1-sol
   auth: env_ref:OPENCODE_GO_API_KEY
   oauth: false
   selection_authority: owner-order-20261022-r14-verify-deepseek
   selected_arm: primary
   selected_arm_identity: deepseek-v4.1-flash
   arms:
-  - provider: opencode-go
-    model: deepseek-v4.1-flash
-    transport_model: opencode-go/deepseek-v4.1-flash
-    automatic_selection: true
   - provider: openai-codex
     model: gpt-6.1-sol
     transport_model: gpt-6.1-sol
+    automatic_selection: true
+  - provider: opencode-go
+    model: mimo-v2.6-flash
+    transport_model: opencode-go/mimo-v2.6-flash
+    automatic_selection: false
+  - provider: opencode-go
+    model: deepseek-v4.1-flash
+    transport_model: opencode-go/deepseek-v4.1-flash
     automatic_selection: false
   - provider: nvidia
     model: deepseek-ai/deepseek-v4.1-flash
@@ -433,7 +437,6 @@ projections:
     expected: openai-codex
   - pointer: /assignment/2/reasoning_effort
     expected: medium
-  debt: []
 - id: hermes-codex-lane
   path: config/hermes-codex-lane.json
   format: json
@@ -566,3 +569,119 @@ history:
   what: routes re-derived from pool rev22; deprecated minimax arm deleted; EXECUTE primary is opencode-go/deepseek-v4.1-flash; the EXECUTE fallback transport-id corruption was repaired
   why: HTTP 410 ModelDeprecated + owner order 2026-10-23
 claim_ceiling: CANDIDATE_ONLY
+od4_publication:
+  assignment_sha256: '8cbb0d30af2c062ada2ab01ee5daa867460edf2550eaef8ab35cd72fc315a242'
+  route_alignment:
+  - lane: VERIFY_SECURITY
+    field: provider
+    from: "opencode-go"
+    to: "openai-codex"
+  - lane: VERIFY_SECURITY
+    field: model
+    from: "deepseek-v4.1-flash"
+    to: "gpt-6.1-sol"
+  - lane: VERIFY_SECURITY
+    field: canonical_identity
+    from: "deepseek-v4.1-flash"
+    to: "gpt-6.1-sol"
+  - lane: VERIFY_SECURITY
+    field: arms
+    from: ["deepseek-v4.1-flash", "gpt-6.1-sol", "deepseek-ai/deepseek-v4.1-flash"]
+    to: ["gpt-6.1-sol", "mimo-v2.6-flash", "deepseek-v4.1-flash", "deepseek-ai/deepseek-v4.1-flash"]
+  - lane: PLAN
+    field: provider
+    from: "opencode-go"
+    to: "openai-codex"
+  - lane: PLAN
+    field: model
+    from: "deepseek-v4.1-flash"
+    to: "gpt-6.1-sol"
+  - lane: PLAN
+    field: canonical_identity
+    from: "deepseek-v4.1-flash"
+    to: "gpt-6.1-sol"
+  - lane: PLAN
+    field: arms
+    from: ["deepseek-v4.1-flash", "gpt-6.1-sol", "deepseek-ai/deepseek-v4.1-flash"]
+    to: ["gpt-6.1-sol", "deepseek-v4.1-flash", "mimo-v2.6-flash", "deepseek-ai/deepseek-v4.1-flash"]
+  superseded_prose:
+  - path: /declared_by
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /authorization_basis
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /assignment[1]/authority
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /effective_wiring/delegation_default_arm
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /effective_wiring/kanban_card_default_finding
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /effective_wiring/delegation._changed_utc
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /sod_across_all_arms/maker_checker_model_separation
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /sod_across_all_arms/retired_note
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /wiring_feasibility/projection_drops_dual_arms/closed_evidence
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /revision_6_reason
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /verify_flash_side_effect
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /revision_8_reason
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /operator_decisions[0]/options_offered[0]
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /accepted_risks[0]/measured
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /revision_9_reason
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /revision_10_reason
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /sod_conflicts[0]/coherent_clause
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /sod_conflicts[0]/required_control
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /sod_conflicts[2]/coherent_clause
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /sod_conflicts[2]/required_control
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /sod_conflicts[3]/note
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /round_authorization/mandate/VERIFY_SECURITY
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /round_model_exclusions/why
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /revision_19_reason
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /in_hermes_plan_orchestrator_plane/cross_surface_agreement_measured_this_round/registry_route_row
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /in_hermes_plan_orchestrator_plane/owner_order_2026_10_21_gpt_quota_restored/what
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /in_hermes_plan_orchestrator_plane/owner_order_2026_10_21_gpt_quota_restored/correction_20261023
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /owner_order
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /revision_25_reason
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /revision_26_reason
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /revision_33_reason
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /revision_27_reason
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /coherence_od4/removed_arms[1]
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /coherence_od4/removed_arms[4]
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /coherence_od4/runtime_defaults_repointed[0]/from
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /coherence_od4/runtime_defaults_repointed[1]/from
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /coherence_od4/arms_removed_after_merge[0]
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /coherence_od4/arms_removed_after_merge[1]
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /coherence_od4/removal_od4/stage_1_from_published/models[1]
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
+  - path: /coherence_od4/removal_od4/stage_1_from_published/models[4]
+    note: 'history kept as written; contradicted by the epoch-41 wiring'
