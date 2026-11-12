@@ -6,7 +6,7 @@ authorization_basis: 'Owner order 2026-10-23 (R15): the main model is opencode-g
 source_of_routes:
   path: config/model-lane-assignment.json
   revision: 44
-  sha256: 8cbb0d30af2c062ada2ab01ee5daa867460edf2550eaef8ab35cd72fc315a242
+  sha256: 5ad96f9c89dbbc0a7dcdb036117e17bba1ee8b5ca147ca4cd9a206ea2a3ec662
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
@@ -51,10 +51,10 @@ routes:
   provider: openai-codex
   model: gpt-6.1-sol
   canonical_identity: gpt-6.1-sol
-  auth: env_ref:OPENCODE_GO_API_KEY
-  oauth: false
+  auth: openai_oauth
+  oauth: true
   reasoning_effort: medium
-  selection_authority: owner-order-20261022-r14-plan-gpt61sol-execute-minimax
+  selection_authority: owner-order-20261112-od4-epoch41
   arms:
   - provider: openai-codex
     model: gpt-6.1-sol
@@ -81,11 +81,12 @@ routes:
     model: deepseek-ai/deepseek-v4.1-flash
     transport_model: nvidia/deepseek-ai/deepseek-v4.1-flash
     automatic_selection: false
-  admission_status: ADMITTED
+  admission_status: UNPROVEN
+  admission_status_reason: 'OD-4: the prior ADMITTED evidence names an arm the owner removed, so it does not transfer to the current primary'
   admission_evidence: 'MEASURED 2026-10-21 (HGK-LANE-ADMISSION/1, probe probe-615eab5898806728): served identity opencode-go/minimax-m3.1-flash-free; lane-shaped exercise completed (model calls=1, tools=1); dispatcher evidence: dispatcher ok=True required_arm=opencode-go/minimax-m3.1-flash-free served_arm=opencode-go/minimax-m3.1-flash-free used_rank=7 exit=0 nonce_ok=True tool_echo_ok=True receipt=var/FAR-MINIMAX-MANDATE-20261021/probes/PLAN_admit.json'
   admission_status_prior: 'UNPROVEN (epochs 19-20; no measured serving evidence had been recorded for this row). The status moved to ADMITTED on measurement, not on declaration: the arm answered a reply probe and a tool-executing probe, and served two VERIFY/SECURITY turns at required_arm == served_arm.'
   owner_order_20261021: 'epoch 25: all three lanes default to opencode-go/minimax-m3.1-flash-free (MiniMax M3.1 Flash, OPENCODE GO) by owner order 2026-10-21. The model axis is now identical across all three lanes; the PLAN/VERIFY collision (SOD006-C4) and the EXECUTE/VERIFY collision (SOD006-C5) are both OPEN_OWNER_ORDERED. What remains is process, lane and evidence-path separation plus the no-self-acceptance rule.'
-  transport_model: opencode-go/deepseek-v4.1-flash
+  transport_model: gpt-6.1-sol
 - lane: EXECUTE
   role_group: EXECUTE
   lanes:
@@ -102,7 +103,7 @@ routes:
   canonical_identity: deepseek-v4.1-flash
   auth: env_ref:OPENCODE_GO_API_KEY
   oauth: false
-  selection_authority: owner-order-20261022-r14-plan-gpt61sol-execute-minimax
+  selection_authority: owner-order-20261112-od4-epoch41
   arms:
   - provider: opencode-go
     model: deepseek-v4.1-flash
@@ -139,7 +140,8 @@ routes:
     role: fallback3_operator_selectable
     default: false
     automatic_selection: false
-  admission_status: ADMITTED
+  admission_status: UNPROVEN
+  admission_status_reason: 'OD-4: the prior ADMITTED evidence names an arm the owner removed, so it does not transfer to the current primary'
   admission_evidence: 'MEASURED 2026-10-21 (HGK-LANE-ADMISSION/1, probe probe-0e9d17f71c89755a): served identity opencode-go/minimax-m3.1-flash-free; lane-shaped exercise completed (model calls=1, tools=1); dispatcher evidence: dispatcher ok=True required_arm=opencode-go/minimax-m3.1-flash-free served_arm=opencode-go/minimax-m3.1-flash-free used_rank=4 exit=0 nonce_ok=True tool_echo_ok=True receipt=var/FAR-MINIMAX-MANDATE-20261021/probes/EXECUTE_admit.json'
   reasoning_effort: null
   transport_model: opencode-go/deepseek-v4.1-flash
@@ -154,11 +156,11 @@ routes:
   model: gpt-6.1-sol
   reasoning_effort: medium
   canonical_identity: gpt-6.1-sol
-  auth: env_ref:OPENCODE_GO_API_KEY
-  oauth: false
-  selection_authority: owner-order-20261022-r14-verify-deepseek
+  auth: openai_oauth
+  oauth: true
+  selection_authority: owner-order-20261112-od4-epoch41
   selected_arm: primary
-  selected_arm_identity: deepseek-v4.1-flash
+  selected_arm_identity: gpt-6.1-sol
   arms:
   - provider: openai-codex
     model: gpt-6.1-sol
@@ -188,7 +190,7 @@ routes:
   admission_status: UNPROVEN
   owner_order_20261021: 'epoch 23: PLAN and VERIFY_SECURITY both default to openai-codex/gpt-6.1-sol (medium, OAuth) by owner order 2026-10-21; the PLAN/VERIFY model-axis collision is declared as SOD006-C4 (OPEN_OWNER_ORDERED), not hidden. Historical epoch 19-22 rows remain in history[].'
   admission_evidence: UNPROVEN for opencode-go/deepseek-v4.1-flash under epoch 31. Configuration and local fixture tests are not a measured model/tool lane admission. Previous MiniMax measurement is preserved in the v2 receipt before-values.
-  transport_model: opencode-go/deepseek-v4.1-flash
+  transport_model: gpt-6.1-sol
 invariants:
   unknown_lane: DENY
   maker_checker_distinct_model: true

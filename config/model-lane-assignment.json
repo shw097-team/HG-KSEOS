@@ -864,10 +864,6 @@
         "excerpt": "Owner user order 2026-10-15 (verbatim: PLAN & Orchestrator 模型改成使用 GLM-5.3-Flash(OPENCODE GO), 因為GPT配"
       },
       {
-        "path": "/assignment[1]/authority",
-        "excerpt": "owner-order-20261022-r14-plan-gpt61sol-execute-minimax"
-      },
-      {
         "path": "/effective_wiring/delegation_default_arm",
         "excerpt": "Observed shared delegation = opencode-go/deepseek-v4.1-flash (the rebound PLAN route and the EXECUTE"
       },
@@ -904,40 +900,12 @@
         "excerpt": "Operator instruction of 2026-10-07 (governed round FAR-LANE-VERIFY-002, REQ-FAR-LANE-VERIFY-002): ch"
       },
       {
-        "path": "/operator_decisions[0]/options_offered[0]",
-        "excerpt": "swap to GLM-5.3-Flash on the z-ai NIM arm (measured LIVE at 1.7 s)"
-      },
-      {
-        "path": "/accepted_risks[0]/measured",
-        "excerpt": "NO_RESPONSE after 75 s; the same endpoint serves GLM-5.3-Flash on the z-ai NIM arm in 1.7 s and deep"
-      },
-      {
         "path": "/revision_9_reason",
         "excerpt": "User instruction 2026-10-07: make the GLM-5.3-Flash VERIFY/SECURITY lane's reasoning effort explicit"
       },
       {
         "path": "/revision_10_reason",
         "excerpt": "Revision 10 encodes two operator clauses. (1) PLAN: every use of GPT 6.1 SOL (OpenAI OAuth) defaults"
-      },
-      {
-        "path": "/sod_conflicts[0]/coherent_clause",
-        "excerpt": "EXECUTE (deepseek-v4.1-flash) vs BOTH verify arms is distinct; a PLAN maker vs arm A (glm-5.3-flash)"
-      },
-      {
-        "path": "/sod_conflicts[0]/required_control",
-        "excerpt": "Canonical VERIFY dispatch defaults to arm A; non-default operator-selectable alternate arm B must st"
-      },
-      {
-        "path": "/sod_conflicts[2]/coherent_clause",
-        "excerpt": "PLAN and EXECUTE are both maker/executor routes and never check each other; the VERIFY lane stays on"
-      },
-      {
-        "path": "/sod_conflicts[2]/required_control",
-        "excerpt": "Any governed dispatch where a PLAN-made artifact is checked must use the VERIFY lane (glm-5.3-flash)"
-      },
-      {
-        "path": "/sod_conflicts[3]/note",
-        "excerpt": "Owner order 2026-10-15 moves PLAN onto opencode-go/glm-5.3-flash, which is also VERIFY_SECURITY's fa"
       },
       {
         "path": "/round_authorization/mandate/VERIFY_SECURITY",
@@ -982,56 +950,9 @@
       {
         "path": "/revision_27_reason",
         "excerpt": "Re-derived from config/lane-routing-registry.yaml after measurement found the assignment restating t"
-      },
-      {
-        "path": "/coherence_od4/removed_arms[1]",
-        "excerpt": "glm-5.3-flash"
-      },
-      {
-        "path": "/coherence_od4/removed_arms[4]",
-        "excerpt": "z-ai/glm-5.3-flash"
-      },
-      {
-        "path": "/coherence_od4/runtime_defaults_repointed[0]/from",
-        "excerpt": "glm-5.3-flash (config.yaml model.default; takes effect for sessions started afte"
-      },
-      {
-        "path": "/coherence_od4/runtime_defaults_repointed[1]/from",
-        "excerpt": "glm-5.3-flash"
-      },
-      {
-        "path": "/coherence_od4/arms_removed_after_merge[0]",
-        "excerpt": "glm-5.3-flash"
-      },
-      {
-        "path": "/coherence_od4/arms_removed_after_merge[1]",
-        "excerpt": "z-ai/glm-5.3-flash"
-      },
-      {
-        "path": "/coherence_od4/removal_od4/stage_1_from_published/models[1]",
-        "excerpt": "glm-5.3-flash"
-      },
-      {
-        "path": "/coherence_od4/removal_od4/stage_1_from_published/models[4]",
-        "excerpt": "z-ai/glm-5.3-flash"
-      },
-      {
-        "path": "/coherence_od4/removal_od4/stage_3_runtime_slots/repointed[0]/from",
-        "excerpt": "glm-5.3-flash (config.yaml model.default; takes effect for sessions started afte"
-      },
-      {
-        "path": "/coherence_od4/removal_od4/stage_3_runtime_slots/repointed[1]/from",
-        "excerpt": "glm-5.3-flash"
-      },
-      {
-        "path": "/coherence_od4/removal_od4/stage_3_runtime_slots/executor_entries_removed[0]/removed",
-        "excerpt": "glm-5.3-flash"
-      },
-      {
-        "path": "/coherence_od4/removal_od4/stage_3_runtime_slots/executor_entries_removed[1]/removed",
-        "excerpt": "z-ai/glm-5.3-flash"
       }
-    ]
+    ],
+    "superseded_prose_unresolved": 20
   },
   "lane_chains_projected_from": {
     "source": "config/lane-routing-registry.yaml",
@@ -1042,7 +963,15 @@
   },
   "removal_od4": {
     "removed_at": "2026-11-12 OD-4",
-    "removed": [],
-    "reason": "owner ruling 2026-11-12: MiMo PRO and every GLM option leave the model pool; the retirement-ledger design is retired with them, so no kept-but-retired arm is carried forward"
+    "removed": [
+      "glm-5.3",
+      "glm-5.3-flash",
+      "mimo-v2.6-pro",
+      "minimax-m3.1-flash-free",
+      "z-ai/glm-5.3",
+      "z-ai/glm-5.3-flash"
+    ],
+    "reason": "owner ruling 2026-11-12: MiMo PRO and every GLM option leave the model pool; the retirement-ledger design is retired with them, so no kept-but-retired arm is carried forward",
+    "removed_count": 6
   }
 }
