@@ -956,10 +956,10 @@
   },
   "lane_chains_projected_from": {
     "source": "config/lane-routing-registry.yaml",
-    "epoch": 40,
-    "sha256": "e68c5143bce3c65a0a2f31e1001f68427abec909ad41f36f75addb21fd367fe7",
+    "epoch": 41,
     "projected_at_utc": "2026-10-31T13:13:10+00:00",
-    "rule": "lane_chains and the slot pool are projections; edit the registry, then re-run this tool"
+    "rule": "lane_chains and the slot pool are projections; edit the registry, then re-run this tool",
+    "note": "OD-4: the digest of the registry is not recorded here. The registry pins this assignment (source_of_routes.sha256), so the reverse pin can never be current at the same time. Epoch and revision identify the projection; the registry's own pin proves the bytes."
   },
   "removal_od4": {
     "removed_at": "2026-11-12 OD-4",

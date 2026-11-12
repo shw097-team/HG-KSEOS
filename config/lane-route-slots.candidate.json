@@ -239,17 +239,6 @@
       },
       "ordered_pool": [
         {
-          "rank": 1,
-          "provider": "opencode-go",
-          "model": "deepseek-v4.1-flash",
-          "role": "DEFAULT/首選",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "oauth": false,
-          "transport_model": "opencode-go/deepseek-v4.1-flash",
-          "default": true,
-          "automatic_selection": true
-        },
-        {
           "rank": 2,
           "provider": "openai-codex",
           "model": "gpt-6.1-sol",
@@ -260,6 +249,25 @@
           "reasoning_effort": "medium",
           "transport_vocabulary_note": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged.",
           "default": false,
+          "automatic_selection": true
+        },
+        {
+          "rank": 1,
+          "provider": "opencode-go",
+          "model": "deepseek-v4.1-flash",
+          "role": "DEFAULT/首選",
+          "auth": "env_ref:OPENCODE_GO_API_KEY",
+          "oauth": false,
+          "transport_model": "opencode-go/deepseek-v4.1-flash",
+          "default": true,
+          "automatic_selection": false
+        },
+        {
+          "provider": "opencode-go",
+          "model": "mimo-v2.6-flash",
+          "transport_model": "opencode-go/mimo-v2.6-flash",
+          "auth": null,
+          "oauth": null,
           "automatic_selection": false
         },
         {
@@ -356,17 +364,6 @@
       },
       "ordered_pool": [
         {
-          "rank": 1,
-          "provider": "opencode-go",
-          "model": "deepseek-v4.1-flash",
-          "role": "DEFAULT/首選",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "oauth": false,
-          "transport_model": "opencode-go/deepseek-v4.1-flash",
-          "default": true,
-          "automatic_selection": true
-        },
-        {
           "rank": 2,
           "provider": "openai-codex",
           "model": "gpt-6.1-sol",
@@ -377,6 +374,25 @@
           "reasoning_effort": "medium",
           "transport_vocabulary_note": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged.",
           "default": false,
+          "automatic_selection": true
+        },
+        {
+          "provider": "opencode-go",
+          "model": "mimo-v2.6-flash",
+          "transport_model": "opencode-go/mimo-v2.6-flash",
+          "auth": null,
+          "oauth": null,
+          "automatic_selection": false
+        },
+        {
+          "rank": 1,
+          "provider": "opencode-go",
+          "model": "deepseek-v4.1-flash",
+          "role": "DEFAULT/首選",
+          "auth": "env_ref:OPENCODE_GO_API_KEY",
+          "oauth": false,
+          "transport_model": "opencode-go/deepseek-v4.1-flash",
+          "default": true,
           "automatic_selection": false
         },
         {

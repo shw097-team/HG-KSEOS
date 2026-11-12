@@ -6,7 +6,7 @@ authorization_basis: 'Owner order 2026-10-23 (R15): the main model is opencode-g
 source_of_routes:
   path: config/model-lane-assignment.json
   revision: 44
-  sha256: 5ad96f9c89dbbc0a7dcdb036117e17bba1ee8b5ca147ca4cd9a206ea2a3ec662
+  sha256: 8184b9c344faff06787f1cb41afb7d4ced7ea10b2cf4cb26241ae1c4f044931b
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
@@ -38,6 +38,7 @@ correlation_contract:
   verified: E9 2026-10-10 — ledger row correlation_id 3e86af839cde421195fed70948a341e0 / upstream_conversation_id 548ef9e9d0996a690e0156e27a895dcd equals usage.jsonl requestId ocx-mv28ampx-57 conversationId (status 200, opencode-go/deepseek-v4.1-flash, 9871 tokens)
 routes:
 - lane: PLAN
+  selected_arm_identity: gpt-6.1-sol
   role_group: PLAN
   lanes:
   - ARCH
@@ -88,6 +89,7 @@ routes:
   owner_order_20261021: 'epoch 25: all three lanes default to opencode-go/minimax-m3.1-flash-free (MiniMax M3.1 Flash, OPENCODE GO) by owner order 2026-10-21. The model axis is now identical across all three lanes; the PLAN/VERIFY collision (SOD006-C4) and the EXECUTE/VERIFY collision (SOD006-C5) are both OPEN_OWNER_ORDERED. What remains is process, lane and evidence-path separation plus the no-self-acceptance rule.'
   transport_model: gpt-6.1-sol
 - lane: EXECUTE
+  selected_arm_identity: deepseek-v4.1-flash
   role_group: EXECUTE
   lanes:
   - BULK BUILD
@@ -572,7 +574,7 @@ history:
   why: HTTP 410 ModelDeprecated + owner order 2026-10-23
 claim_ceiling: CANDIDATE_ONLY
 od4_publication:
-  assignment_sha256: '8cbb0d30af2c062ada2ab01ee5daa867460edf2550eaef8ab35cd72fc315a242'
+  assignment_sha256: '8184b9c344faff06787f1cb41afb7d4ced7ea10b2cf4cb26241ae1c4f044931b'
   route_alignment:
   - lane: VERIFY_SECURITY
     field: provider
