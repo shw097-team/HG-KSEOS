@@ -29,7 +29,9 @@ duplicates to 76 subjects, of which **3 have no copy left** because the owner de
 first recorded as missing and then **located by the owner**: it hashes to the declared `9f9eb261c44f…` at
 `…/FHS/FHS_PIPD-LS-PKG/實作/W0/OLD/FHS_PIPD-LS-PKG_W0_r6.md`, so the shortfall is two contents, not three. Those three are
 kept in the register as `owner_deleted_groups` with `status: OWNER_DELETED_20261112` — the denominator
-shrank from 437 to 431 and the record says why, rather than quietly dropping rows.
+shrank from 437 to **394** and the record says why, rather than quietly dropping rows. (An earlier revision of
+this paragraph said 431; that number has no raw behind it — the register's own denominator and the re-read are
+both 394, and the correction is recorded in §7.)
 
 Groups that grew (16 → 18, 17 → 19) did so because archive junctions restored earlier make more copies
 visible; each group carries its own delta, so no number moves without a trace.
@@ -53,5 +55,18 @@ visible; each group carries its own delta, so no number moves without a trace.
 | where | G19 |
 |---|---|
 | R13 round | `MEMBER_ABSENT` (historical measurement, unchanged) |
-| `W0_R2_REREG_20261112` | **PASS**, 431/431 re-read at declared digests |
+| `W0_R2_REREG_20261112` | **PASS**, 394/394 re-read at declared digests |
 | blocking? | **no** — owner decision on deleted files and on the layout change |
+
+## 7. Corrections to this document (recorded 2026-11-12, later the same day)
+
+1. **431 → 394** (two places: the denominator sentence and the status table). Basis: the register's own
+   denominator is 73 groups / 394 copies, `G19_REREG_CHECK.json` re-read **394/394** with V1–V5 all zero, and
+   no raw in either file carries 431. The number was a transcription error in prose, not a second denominator.
+2. **The register no longer depends on archive junctions.** Under owner ruling OD-3 the 69 members that lived
+   outside the two allowed roots were copied into `FHS_NEXT\roots\legacy_declared\…` (34,095,871 bytes, every
+   file hashed against its declared sha256, 0 mismatches), the member paths and the two `roots_scanned`
+   entries were re-pointed, and only then were the junctions removed. The re-read after the move is
+   **394/394 PASS**. Group counts, copy counts and digests did not move.
+
+Both corrections are additions beside the original text, not rewrites of a past verdict.
