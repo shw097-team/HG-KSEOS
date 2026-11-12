@@ -1,11 +1,12 @@
 schema: HGK-LANE-ROUTING-REGISTRY/1
 status: CANDIDATE
-epoch: 33
+epoch: 41
+contract_epoch: 41
 authorization_basis: 'Owner order 2026-10-23 (R15): the main model is opencode-go/deepseek-v4.1-flash; the deprecated arm opencode-go/minimax-m3.1-flash-free (HTTP 410 ModelDeprecated, measured 2026-10-23) is DELETED from every lane pool, and MiMo-V2.6-Flash takes the main-model fallback-1 position in the Hermes deployment plane. Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied.'
 source_of_routes:
   path: config/model-lane-assignment.json
-  revision: 33
-  sha256: cfbff111c804e2aab7c97dec0c1b98792a731f007d962d92e54924325d62213e
+  revision: 44
+  sha256: 982c63e2cf49cd67e4258280b6b790aa09a2a0b35362b6ac995177eb9159f457
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
@@ -63,18 +64,6 @@ routes:
     model: gpt-6.1-sol
     transport_model: gpt-6.1-sol
     automatic_selection: false
-  - provider: opencode-go
-    model: glm-5.3-flash
-    transport_model: opencode-go/glm-5.3-flash
-    automatic_selection: false
-  - provider: opencode-go
-    model: mimo-v2.6-pro
-    transport_model: opencode-go/mimo-v2.6-pro
-    automatic_selection: false
-  - provider: nvidia
-    model: z-ai/glm-5.3-flash
-    transport_model: nvidia/z-ai/glm-5.3-flash
-    automatic_selection: false
   - provider: nvidia
     model: deepseek-ai/deepseek-v4.1-flash
     transport_model: nvidia/deepseek-ai/deepseek-v4.1-flash
@@ -83,18 +72,6 @@ routes:
   - provider: openai-codex
     model: gpt-6.1-sol
     transport_model: gpt-6.1-sol
-    automatic_selection: false
-  - provider: opencode-go
-    model: glm-5.3-flash
-    transport_model: opencode-go/glm-5.3-flash
-    automatic_selection: false
-  - provider: opencode-go
-    model: mimo-v2.6-pro
-    transport_model: opencode-go/mimo-v2.6-pro
-    automatic_selection: false
-  - provider: nvidia
-    model: z-ai/glm-5.3-flash
-    transport_model: nvidia/z-ai/glm-5.3-flash
     automatic_selection: false
   - provider: nvidia
     model: deepseek-ai/deepseek-v4.1-flash
@@ -191,10 +168,6 @@ routes:
     model: gpt-6.1-sol
     transport_model: gpt-6.1-sol
     automatic_selection: false
-  - provider: opencode-go
-    model: glm-5.3-flash
-    transport_model: opencode-go/glm-5.3-flash
-    automatic_selection: false
   - provider: nvidia
     model: deepseek-ai/deepseek-v4.1-flash
     transport_model: nvidia/deepseek-ai/deepseek-v4.1-flash
@@ -203,10 +176,6 @@ routes:
   - provider: openai-codex
     model: gpt-6.1-sol
     transport_model: gpt-6.1-sol
-    automatic_selection: false
-  - provider: opencode-go
-    model: glm-5.3-flash
-    transport_model: opencode-go/glm-5.3-flash
     automatic_selection: false
   - provider: nvidia
     model: deepseek-ai/deepseek-v4.1-flash
@@ -341,37 +310,21 @@ projections:
   note: 'Epoch 31 checker rebind: Owner instruction 2026-10-22: PLAN openai-codex/gpt-6.1-sol (medium, OpenAI OAuth); EXECUTE opencode-go/minimax-m3.1-flash-free; VERIFY_SECURITY (ACCEPTANCE, SECURITY REVIEW, VERIFY) opencode-go/deepseek-v4.1-flash. Checker slots retain their positions but all bind the same checker; no alternate checker identity or diversity is implied. Existing PLAN and EXECUTE projection values and registered lane-scope residue are intentionally unchanged.'
   bindings:
   - pointer: /registry_epoch
-    expected: 33
+    expected: 41
   - pointer: /revision
-    expected: 33
-  - pointer: /assignment/1/additional_routes/0/provider
-    expected: openai-codex
-  - pointer: /assignment/1/additional_routes/0/model
-    expected: gpt-6-luna
-  - pointer: /assignment/1/additional_routes/0/transport
-    expected: codex-native-oauth
-  - pointer: /assignment/1/additional_routes/0/automatic_selection
-    expected: false
-  - pointer: /assignment/1/additional_routes/0/default
-    expected: false
+    expected: 44
   - pointer: /lane_chains/EXECUTE/3/provider
     expected: nvidia
   - pointer: /lane_chains/EXECUTE/3/model
     expected: deepseek-ai/deepseek-v4.1-flash
   - pointer: /lane_chains/EXECUTE/3/automatic_selection
     expected: false
-  - pointer: /assignment/2/supply_selector/arms/1/role
-    expected: fallback1_operator_selectable
-  - pointer: /assignment/2/supply_selector/arms/1/default
-    expected: false
-  - pointer: /assignment/2/supply_selector/arms/1/automatic_selection
-    expected: false
   - pointer: /lane_chains/VERIFY_SECURITY/1/role
     expected: fallback1
   - pointer: /lane_chains/VERIFY_SECURITY/1/default
     expected: false
   - pointer: /lane_chains/VERIFY_SECURITY/1/automatic_selection
-    expected: false
+    expected: true
   - pointer: /sod/plan_lane
     expected: opencode-go / deepseek-v4.1-flash - owner order 2026-10-23 (R15); supersedes the 2026-10-22 binding (openai-codex/gpt-6.1-sol).
   - pointer: /sod/execute_lane
@@ -383,25 +336,17 @@ projections:
   - pointer: /sod/maker_self_acceptance
     expected: PREVENTED at dispatch on every arm (no call verifies its own output). EXECUTE, VERIFY_SECURITY and PLAN now share one model by owner order, so the remaining isolation is process/lane/evidence-path, not model identity and not OS-level principal isolation (owner order 2026-10-23, R15).
   - pointer: /assignment/0/assigned_model
-    expected: deepseek-v4.1-flash
+    expected: gpt-6.1-sol
   - pointer: /assignment/0/assigned_provider
-    expected: opencode-go
+    expected: openai-codex
   - pointer: /assignment/1/assigned_model
     expected: deepseek-v4.1-flash
   - pointer: /assignment/1/assigned_provider
     expected: opencode-go
   - pointer: /assignment/2/assigned_model
-    expected: deepseek-v4.1-flash
+    expected: gpt-6.1-sol
   - pointer: /assignment/2/assigned_provider
-    expected: opencode-go
-  - pointer: /assignment/0/reasoning_effort
-    expected: medium
-  - pointer: /assignment/2/supply_selector/unspecified_default/provider
-    expected: opencode-go
-  - pointer: /assignment/2/supply_selector/arms/0/provider
-    expected: opencode-go
-  - pointer: /assignment/2/supply_selector/arms/1/provider
-    expected: opencode-go
+    expected: openai-codex
   - pointer: /sod/verify_vs_plan_model_separation
     expected: 'ABSENT by owner order: PLAN and VERIFY_SECURITY are both opencode-go/deepseek-v4.1-flash (SOD006-C6; owner order 2026-10-23, R15). Separation is PROCESS, LANE and EVIDENCE-PATH only.'
   - pointer: /effective_wiring/default_execute_route
@@ -415,7 +360,7 @@ projections:
   - pointer: /effective_wiring/delegation.provider
     expected: opencode-go
   - pointer: /effective_wiring/delegation.model
-    expected: glm-5.3-flash
+    expected: opencode-go/deepseek-v4.1-flash
   - pointer: /lane_chains/PLAN/0/model
     expected: deepseek-v4.1-flash
   - pointer: /lane_chains/PLAN/0/provider
@@ -440,14 +385,8 @@ projections:
     expected: medium
   - pointer: /sod/verify_security_reasoning_effort
     expected: medium
-  - pointer: /assignment/2/reasoning_effort
-    expected: medium
   - pointer: /lane_chains/VERIFY_SECURITY/0/reasoning_effort
     expected: medium
-  - pointer: /lane_chains/VERIFY_SECURITY/1/reasoning_effort
-    expected: null
-  - pointer: /sod/plan_reasoning_effort
-    expected: null
   - pointer: /effective_wiring/plan_high/level
     expected: medium
   - pointer: /effective_wiring/auxiliary.kanban_decomposer/reasoning_effort
@@ -462,13 +401,60 @@ projections:
     expected: deepseek-v4.1-flash
   - pointer: /sod_across_all_arms/verifier_models/4
     expected: deepseek-v4.1-flash
-  - pointer: /lane_chains/EXECUTE/0/reasoning_effort
-    expected: null
   - pointer: /wiring_feasibility/projection_drops_dual_arms/state
     expected: CLOSED_FIX_APPLIED_TO_LIVE_SRC
+  debt:
+  - pointer: /assignment/1/additional_routes/0/provider
+    expected: openai-codex
+    reason: target removed by OD-4 (key additional_routes missing); recorded as debt, not deleted
+  - pointer: /assignment/1/additional_routes/0/model
+    expected: gpt-6-luna
+    reason: target removed by OD-4 (key additional_routes missing); recorded as debt, not deleted
+  - pointer: /assignment/1/additional_routes/0/transport
+    expected: codex-native-oauth
+    reason: target removed by OD-4 (key additional_routes missing); recorded as debt, not deleted
+  - pointer: /assignment/1/additional_routes/0/automatic_selection
+    expected: false
+    reason: target removed by OD-4 (key additional_routes missing); recorded as debt, not deleted
+  - pointer: /assignment/1/additional_routes/0/default
+    expected: false
+    reason: target removed by OD-4 (key additional_routes missing); recorded as debt, not deleted
+  - pointer: /assignment/2/supply_selector/arms/1/role
+    expected: fallback1_operator_selectable
+    reason: target removed by OD-4 (key supply_selector missing); recorded as debt, not deleted
+  - pointer: /assignment/2/supply_selector/arms/1/default
+    expected: false
+    reason: target removed by OD-4 (key supply_selector missing); recorded as debt, not deleted
+  - pointer: /assignment/2/supply_selector/arms/1/automatic_selection
+    expected: false
+    reason: target removed by OD-4 (key supply_selector missing); recorded as debt, not deleted
+  - pointer: /assignment/0/reasoning_effort
+    expected: medium
+    reason: target removed by OD-4 (key reasoning_effort missing); recorded as debt, not deleted
+  - pointer: /assignment/2/supply_selector/unspecified_default/provider
+    expected: opencode-go
+    reason: target removed by OD-4 (key supply_selector missing); recorded as debt, not deleted
+  - pointer: /assignment/2/supply_selector/arms/0/provider
+    expected: opencode-go
+    reason: target removed by OD-4 (key supply_selector missing); recorded as debt, not deleted
+  - pointer: /assignment/2/supply_selector/arms/1/provider
+    expected: opencode-go
+    reason: target removed by OD-4 (key supply_selector missing); recorded as debt, not deleted
+  - pointer: /assignment/2/reasoning_effort
+    expected: medium
+    reason: target removed by OD-4 (key reasoning_effort missing); recorded as debt, not deleted
+  - pointer: /lane_chains/VERIFY_SECURITY/1/reasoning_effort
+    expected: None
+    reason: target removed by OD-4 (); recorded as debt, not deleted
   - pointer: /sod/plan_reasoning_effort
-    expected: null
-  registry_epoch: 33
+    expected: None
+    reason: target removed by OD-4 (); recorded as debt, not deleted
+  - pointer: /lane_chains/EXECUTE/0/reasoning_effort
+    expected: None
+    reason: target removed by OD-4 (); recorded as debt, not deleted
+  - pointer: /sod/plan_reasoning_effort
+    expected: None
+    reason: target removed by OD-4 (); recorded as debt, not deleted
 - id: hermes-codex-lane
   path: config/hermes-codex-lane.json
   format: json
@@ -501,9 +487,9 @@ projections:
   - pointer: /opencodex_version
     expected: 2.11.0
   - pointer: /codex_version
-    expected: 0.163.0-alpha.11
+    expected: 0.167.0-alpha.3.2
   - pointer: /codex_sha256
-    expected: 00c0f1e4099246fddcd67ec620ca8ed50827c7d70e113b7224f7a2933cf2d67c
+    expected: 4f91ae86895ff124760d70ed1630e2354ca874765c9bb61ae524b600327efc17
   - pointer: /credential_env
     expected: OPENCODE_GO_API_KEY
   - pointer: /openai_fallback
@@ -518,7 +504,6 @@ projections:
     expected: minimax-m3.1-flash-free
   - pointer: /opencode_go_session_header/required_header
     expected: x-opencode-session
-  registry_epoch: 33
 - id: hermes-binding
   path: config/hermes.json
   format: json
@@ -528,10 +513,9 @@ projections:
     expected: HGK-HERMES-BINDING/2
   debt:
   - pointer: /install_root
-    expected: C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes\hermes-agent
+    expected: 'C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes\hermes-agent'
   - pointer: /canonical_hermes_home
-    expected: C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes
-  registry_epoch: 33
+    expected: 'C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes'
 observations:
 - id: hermes-live-config-yaml
   path: C:/Users/user/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/hermes/config.yaml

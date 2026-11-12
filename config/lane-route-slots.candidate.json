@@ -2,7 +2,7 @@
   "schema": "HGK-LANE-ROUTE-SLOTS/1",
   "status": "CANDIDATE",
   "artifact": "LANE_ROUTE_SLOTS_CANDIDATE",
-  "revision": 23,
+  "revision": 37,
   "supersedes_revision": 22,
   "round": "ROUND-R14-LANE-REBIND-20261022",
   "declared_by": "Owner order 2026-10-23: main model DEEPSEEK V4.1 FLASH (OPENCODE GO); the deprecated fallback-first arm MiniMax M3.1 Flash is DELETED and MiMo-V2.6-Flash takes fallback 1. The arm opencode-go/minimax-m3.1-flash-free answers HTTP 410 ModelDeprecated, so deletion is a repair, not a preference. All three lanes stay opencode-go/deepseek-v4.1-flash at rank 1.",
@@ -263,39 +263,6 @@
           "automatic_selection": false
         },
         {
-          "rank": 3,
-          "provider": "opencode-go",
-          "model": "glm-5.3-flash",
-          "role": "FALLBACK3/備援3",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "oauth": false,
-          "transport_model": "opencode-go/glm-5.3-flash",
-          "default": false,
-          "automatic_selection": false
-        },
-        {
-          "rank": 4,
-          "provider": "opencode-go",
-          "model": "mimo-v2.6-pro",
-          "role": "FALLBACK4/備援4",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "oauth": false,
-          "transport_model": "opencode-go/mimo-v2.6-pro",
-          "default": false,
-          "automatic_selection": false
-        },
-        {
-          "rank": 5,
-          "provider": "nvidia",
-          "model": "z-ai/glm-5.3-flash",
-          "role": "FALLBACK5/備援5",
-          "auth": "env_ref:NVIDIA_API_KEY",
-          "oauth": false,
-          "transport_model": "nvidia/z-ai/glm-5.3-flash",
-          "default": false,
-          "automatic_selection": false
-        },
-        {
           "rank": 6,
           "provider": "nvidia",
           "model": "deepseek-ai/deepseek-v4.1-flash",
@@ -409,17 +376,6 @@
           "transport_model": "gpt-6.1-sol",
           "reasoning_effort": "medium",
           "transport_vocabulary_note": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged.",
-          "default": false,
-          "automatic_selection": false
-        },
-        {
-          "rank": 3,
-          "provider": "opencode-go",
-          "model": "glm-5.3-flash",
-          "role": "FALLBACK3/備援3",
-          "auth": "env_ref:OPENCODE_GO_API_KEY",
-          "oauth": false,
-          "transport_model": "opencode-go/glm-5.3-flash",
           "default": false,
           "automatic_selection": false
         },
@@ -593,5 +549,6 @@
       "openai-codex/gpt-5.6-sol": 400,
       "gpt-6.1-sol-high": 400
     }
-  }
+  },
+  "epoch": 41
 }
