@@ -14,22 +14,202 @@
       "role": "PLAN",
       "assigned_provider": "openai-codex",
       "assigned_model": "gpt-6.1-sol",
-      "transport_model": "opencode-go/deepseek-v4.1-flash",
-      "authority": "owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek"
+      "transport_model": "gpt-6.1-sol",
+      "authority": "owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek",
+      "supply_selector": {
+        "arms": [
+          {
+            "provider": "openai-codex",
+            "model": "gpt-6.1-sol",
+            "transport_model": "gpt-6.1-sol",
+            "role": null,
+            "default": null,
+            "automatic_selection": true
+          },
+          {
+            "provider": "opencode-go",
+            "model": "deepseek-v4.1-flash",
+            "transport_model": "opencode-go/deepseek-v4.1-flash",
+            "role": null,
+            "default": null,
+            "automatic_selection": false
+          },
+          {
+            "provider": "opencode-go",
+            "model": "mimo-v2.6-flash",
+            "transport_model": "opencode-go/mimo-v2.6-flash",
+            "role": null,
+            "default": null,
+            "automatic_selection": false
+          },
+          {
+            "provider": "nvidia",
+            "model": "deepseek-ai/deepseek-v4.1-flash",
+            "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
+            "role": null,
+            "default": null,
+            "automatic_selection": false
+          }
+        ],
+        "unspecified_default": {
+          "provider": "openai-codex"
+        }
+      },
+      "additional_routes": [
+        {
+          "provider": "opencode-go",
+          "model": "deepseek-v4.1-flash",
+          "transport": null,
+          "automatic_selection": false,
+          "default": false
+        },
+        {
+          "provider": "opencode-go",
+          "model": "mimo-v2.6-flash",
+          "transport": null,
+          "automatic_selection": false,
+          "default": false
+        },
+        {
+          "provider": "nvidia",
+          "model": "deepseek-ai/deepseek-v4.1-flash",
+          "transport": null,
+          "automatic_selection": false,
+          "default": false
+        }
+      ],
+      "reasoning_effort": "medium"
     },
     {
       "role": "EXECUTE",
       "assigned_provider": "opencode-go",
       "assigned_model": "deepseek-v4.1-flash",
       "transport_model": "opencode-go/deepseek-v4.1-flash",
-      "authority": "owner-order-20261022-r14-plan-gpt61sol-execute-minimax"
+      "authority": "owner-order-20261022-r14-plan-gpt61sol-execute-minimax",
+      "supply_selector": {
+        "arms": [
+          {
+            "provider": "opencode-go",
+            "model": "deepseek-v4.1-flash",
+            "transport_model": "opencode-go/deepseek-v4.1-flash",
+            "role": null,
+            "default": true,
+            "automatic_selection": true
+          },
+          {
+            "provider": "opencode-go",
+            "model": "mimo-v2.6-flash",
+            "transport_model": "opencode-go/mimo-v2.6-flash",
+            "role": null,
+            "default": false,
+            "automatic_selection": false
+          },
+          {
+            "provider": "openai-codex",
+            "model": "gpt-6-luna",
+            "transport_model": "gpt-6-luna",
+            "role": null,
+            "default": false,
+            "automatic_selection": false
+          },
+          {
+            "provider": "nvidia",
+            "model": "deepseek-ai/deepseek-v4.1-flash",
+            "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
+            "role": null,
+            "default": false,
+            "automatic_selection": false
+          }
+        ],
+        "unspecified_default": {
+          "provider": "opencode-go"
+        }
+      },
+      "additional_routes": [
+        {
+          "provider": "openai-codex",
+          "model": "gpt-6-luna",
+          "transport": "codex-native-oauth",
+          "automatic_selection": false,
+          "default": false
+        },
+        {
+          "provider": "nvidia",
+          "model": "deepseek-ai/deepseek-v4.1-flash",
+          "transport": null,
+          "automatic_selection": false,
+          "default": false
+        }
+      ]
     },
     {
       "role": "VERIFY_SECURITY",
       "assigned_provider": "openai-codex",
       "assigned_model": "gpt-6.1-sol",
-      "transport_model": "opencode-go/deepseek-v4.1-flash",
-      "authority": "owner-order-20261024-s205-od01-plan-verify-gpt61sol-execute-deepseek"
+      "transport_model": "gpt-6.1-sol",
+      "authority": "owner-order-20261031-allpass-verify-sol",
+      "supply_selector": {
+        "arms": [
+          {
+            "provider": "openai-codex",
+            "model": "gpt-6.1-sol",
+            "transport_model": "gpt-6.1-sol",
+            "role": null,
+            "default": null,
+            "automatic_selection": true
+          },
+          {
+            "provider": "opencode-go",
+            "model": "mimo-v2.6-flash",
+            "transport_model": "opencode-go/mimo-v2.6-flash",
+            "role": null,
+            "default": null,
+            "automatic_selection": false
+          },
+          {
+            "provider": "opencode-go",
+            "model": "deepseek-v4.1-flash",
+            "transport_model": "opencode-go/deepseek-v4.1-flash",
+            "role": null,
+            "default": null,
+            "automatic_selection": false
+          },
+          {
+            "provider": "nvidia",
+            "model": "deepseek-ai/deepseek-v4.1-flash",
+            "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
+            "role": null,
+            "default": null,
+            "automatic_selection": false
+          }
+        ],
+        "unspecified_default": {
+          "provider": "openai-codex"
+        }
+      },
+      "additional_routes": [
+        {
+          "provider": "opencode-go",
+          "model": "mimo-v2.6-flash",
+          "transport": null,
+          "automatic_selection": false,
+          "default": false
+        },
+        {
+          "provider": "opencode-go",
+          "model": "deepseek-v4.1-flash",
+          "transport": null,
+          "automatic_selection": false,
+          "default": false
+        },
+        {
+          "provider": "nvidia",
+          "model": "deepseek-ai/deepseek-v4.1-flash",
+          "transport": null,
+          "automatic_selection": false,
+          "default": false
+        }
+      ]
     }
   ],
   "effective_wiring": {
@@ -43,11 +223,11 @@
       "model": "gpt-6.1-sol",
       "engine": "hermes native loop",
       "execute_handoff": "Codex CLI sealed lane (orchestration-layer dispatch)",
-      "config_default_model": "gpt-6.1-sol",
+      "config_default_model": "glm-5.3-flash (config.yaml model.default; takes effect for sessions started after the rebind)",
       "observed_live_session_model": "deepseek-v4.1-flash (session pinned at its 12:59 start; measured in agent.log)"
     },
     "delegation.provider": "opencode-go",
-    "delegation.model": "opencode-go/deepseek-v4.1-flash",
+    "delegation.model": "glm-5.3-flash",
     "delegation.applies_to": "EVERY ordinary delegate_task child, regardless of lane; the delegation block's provider/model/effort applies to ordinary PLAN and VERIFY children alike. Kanban card overrides are NOT read by delegate_task - they are read only by `hermes kanban dispatch`. This round's VERIFY lanes therefore inherited the orchestrator's effort rather than consuming their card pin.",
     "agent.reasoning_overrides": {
       "deepseek-v4.1-flash": "medium"
@@ -114,23 +294,24 @@
     }
   },
   "sod": {
-    "plan_lane": "opencode-go / deepseek-v4.1-flash - owner order 2026-10-23 (R15); supersedes the 2026-10-22 binding (openai-codex/gpt-6.1-sol).",
-    "execute_lane": "opencode-go / deepseek-v4.1-flash - Codex CLI bounded writer; owner order 2026-10-23 (R15); supersedes the 2026-10-22 binding (opencode-go/minimax-m3.1-flash-free, now deleted at the provider).",
-    "verify_security_lane": "opencode-go/deepseek-v4.1-flash - owner mandate 2026-10-22; ACCEPTANCE, SECURITY REVIEW and VERIFY use this one checker.",
-    "verify_security_arm_A": "opencode-go/deepseek-v4.1-flash (primary Codex CLI checker; owner order 2026-10-22)",
-    "verify_security_default_arm": "deepseek-v4.1-flash",
-    "verify_security_selection": "All retained checker slots use opencode-go/deepseek-v4.1-flash; rank 1 is the sole default/automatic selection.",
-    "verify_vs_execute_model_separation": "ABSENT by owner order: EXECUTE and VERIFY_SECURITY are both opencode-go/deepseek-v4.1-flash. Separation is PROCESS, LANE and EVIDENCE-PATH only; model separation is NOT claimed (SOD006-C7).",
-    "verify_vs_plan_model_separation": "ABSENT by owner order: PLAN and VERIFY_SECURITY are both opencode-go/deepseek-v4.1-flash (SOD006-C6; owner order 2026-10-23, R15). Separation is PROCESS, LANE and EVIDENCE-PATH only.",
-    "provider_separation": "ABSENT: all three lanes use opencode-go. No provider separation is claimed; separation is process/lane/evidence-path.",
-    "maker_self_acceptance": "PREVENTED at dispatch on every arm (no call verifies its own output). EXECUTE, VERIFY_SECURITY and PLAN now share one model by owner order, so the remaining isolation is process/lane/evidence-path, not model identity and not OS-level principal isolation (owner order 2026-10-23, R15).",
-    "lane_deviation_recorded": "Prior same-model checker deviations SOD006-C4 and SOD006-C5 are SUPERSEDED by the owner order 2026-10-22; both declared maker/checker pairs now require distinct models.",
+    "plan_lane": "openai-codex / gpt-6.1-sol - owner order 2026-10-24 (R17 S2-05 OD-01); supersedes the 2026-10-23 all-lanes-deepseek arrangement.",
+    "execute_lane": "opencode-go / deepseek-v4.1-flash - Codex CLI bounded writer; owner order 2026-10-24 keeps EXECUTE on the writer model while PLAN and VERIFY move.",
+    "verify_security_lane": "openai-codex/gpt-6.1-sol - owner order 2026-10-24; ACCEPTANCE, SECURITY REVIEW and VERIFY use this one checker.",
+    "verify_security_arm_A": "openai-codex/gpt-6.1-sol (primary Codex CLI checker; owner order 2026-10-24)",
+    "verify_security_default_arm": "gpt-6.1-sol",
+    "verify_security_selection": "PLAN and VERIFY/SECURITY rank 1 is openai-codex/gpt-6.1-sol (medium, codex-native-oauth); the demoted deepseek arm stays reachable as fallback 1 in both lanes.",
+    "verify_vs_execute_model_separation": "PRESENT from epoch 34: EXECUTE writes on opencode-go/deepseek-v4.1-flash, VERIFY_SECURITY checks on openai-codex/gpt-6.1-sol. SOD006-C7 is resolved by the owner order 2026-10-24.",
+    "verify_vs_plan_model_separation": "ABSENT and declared: PLAN and VERIFY_SECURITY share openai-codex/gpt-6.1-sol (SOD006-C4, OPEN_OWNER_ORDERED). Separation there is process, lane and evidence-path only.",
+    "provider_separation": "PRESENT between EXECUTE (opencode-go) and PLAN/VERIFY (openai-codex); absent between PLAN and VERIFY.",
+    "maker_self_acceptance": "PREVENTED at dispatch on every arm (no call verifies its own output). EXECUTE no longer shares a model with the checker, so the maker/checker pair is separated on both model and provider as of epoch 34.",
+    "lane_deviation_recorded": "SOD006-C4 (PLAN/VERIFY share gpt-6.1-sol) remains OPEN_OWNER_ORDERED; SOD006-C7 (EXECUTE/VERIFY share deepseek) is SUPERSEDED by the 2026-10-24 order and resolved.",
     "verify_security_reasoning_effort": "medium",
-    "plan_reasoning_effort": null,
-    "provider_separation_status": "ABSENT on both axes: same provider AND same default model across all three lanes (owner order 2026-10-23 R15). Recorded, not hidden.",
+    "plan_reasoning_effort": "medium",
+    "provider_separation_status": "PRESENT on the maker/checker axis (opencode-go writer vs openai-codex checker); ABSENT between PLAN and VERIFY.",
     "verify_security_arm_A_note": "Aligned to registry, dispatch pool and lane_chains.VERIFY_SECURITY for the owner order 2026-10-22.",
-    "verify_security_arm_A_prior_value": "openai-codex / gpt-6.1-sol (primary Codex CLI checker)",
-    "sod006_c7": "OPEN_OWNER_ORDERED: EXECUTE writer and VERIFY_SECURITY checker are the same canonical identity (opencode-go/deepseek-v4.1-flash) because the owner order mandates one model for all three roles. Independence rests on separate processes, separate lanes, separate evidence paths and an independent checker brief that is forbidden to trust the round's own summaries."
+    "verify_security_arm_A_prior_value": "opencode-go/deepseek-v4.1-flash (epoch 33; demoted to fallback 1, still reachable)",
+    "sod006_c7": "RESOLVED 2026-10-30: the writer (EXECUTE, deepseek) and the checker (VERIFY_SECURITY, gpt-6.1-sol) are now distinct on both provider and model. The earlier same-identity arrangement is retained as fallback 1, not as the default.",
+    "sod006_c4": "OPEN_OWNER_ORDERED: PLAN and VERIFY_SECURITY both bind openai-codex/gpt-6.1-sol because the same owner order names one reasoning model for both roles."
   },
   "claim_ceiling": "Owner-authorized canonical declarations applied; deterministic drift/route/SoD verification is not independent acceptance, promotion, production, or provider-liveness evidence. SOD006-C1 is resolved by owner adjudication; historical SOD006-C2 remains recorded. | Revision 19: an owner-ordered canonical declaration applied by agent orchestration under that order; it is not independent verification, not acceptance, and not model-liveness proof for the GLM arm.",
   "revision_4_reason": "Independent AO lane (deleg_dc8bcd60 task-1, verdict FAIL) found revision 3 overstated its own wiring: it declared model.openai_runtime=codex_app_server as effective for a provider where the source proves that key is a no-op, and it asserted provider separation that the declared fallback arm falsifies. Revision 4 states the mechanism that actually exists.",
@@ -162,34 +343,44 @@
   "lane_chains": {
     "PLAN": [
       {
-        "provider": "opencode-go",
-        "model": "deepseek-v4.1-flash",
-        "transport_model": "opencode-go/deepseek-v4.1-flash",
-        "canonical_identity": "deepseek-v4.1-flash",
-        "role": "primary",
-        "default": true,
-        "automatic_selection": false,
-        "reasoning_effort": "medium"
-      },
-      {
         "provider": "openai-codex",
         "model": "gpt-6.1-sol",
         "transport_model": "gpt-6.1-sol",
-        "canonical_identity": "gpt-6.1-sol",
-        "role": "fallback1",
-        "default": false,
+        "arm": "A",
+        "role": "primary",
+        "default": true,
         "automatic_selection": true,
         "reasoning_effort": "medium"
+      },
+      {
+        "provider": "opencode-go",
+        "model": "deepseek-v4.1-flash",
+        "transport_model": "opencode-go/deepseek-v4.1-flash",
+        "arm": "B",
+        "role": "fallback1",
+        "default": false,
+        "automatic_selection": false,
+        "reasoning_effort": null
+      },
+      {
+        "provider": "opencode-go",
+        "model": "mimo-v2.6-flash",
+        "transport_model": "opencode-go/mimo-v2.6-flash",
+        "arm": "D",
+        "role": "fallback3",
+        "default": false,
+        "automatic_selection": false,
+        "reasoning_effort": null
       },
       {
         "provider": "nvidia",
         "model": "deepseek-ai/deepseek-v4.1-flash",
         "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
-        "role": "fallback6",
+        "arm": "F",
+        "role": "fallback5",
         "default": false,
         "automatic_selection": false,
-        "reasoning_effort": null,
-        "canonical_identity": "deepseek-ai/deepseek-v4.1-flash"
+        "reasoning_effort": null
       }
     ],
     "EXECUTE": [
@@ -201,72 +392,83 @@
         "role": "primary",
         "default": true,
         "automatic_selection": true,
-        "reasoning_effort": null
+        "reasoning_effort": null,
+        "arm": "A"
       },
       {
         "provider": "opencode-go",
         "model": "mimo-v2.6-flash",
         "transport_model": "opencode-go/mimo-v2.6-flash",
         "canonical_identity": "mimo-v2.6-flash",
-        "role": "fallback1_operator_selectable",
+        "role": "fallback1",
         "default": false,
         "automatic_selection": false,
-        "reasoning_effort": null
+        "reasoning_effort": null,
+        "arm": "B"
       },
       {
         "provider": "openai-codex",
         "model": "gpt-6-luna",
         "transport_model": "gpt-6-luna",
         "canonical_identity": "gpt-6-luna",
-        "role": "fallback2_operator_selectable",
+        "role": "fallback2",
         "default": false,
         "automatic_selection": false,
-        "reasoning_effort": null
+        "reasoning_effort": null,
+        "arm": "C"
       },
       {
         "provider": "nvidia",
         "model": "deepseek-ai/deepseek-v4.1-flash",
         "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
         "canonical_identity": "deepseek-ai/deepseek-v4.1-flash",
-        "role": "fallback3_operator_selectable",
+        "role": "fallback3",
         "default": false,
         "automatic_selection": false,
-        "reasoning_effort": null
+        "reasoning_effort": null,
+        "arm": "D"
       }
     ],
     "VERIFY_SECURITY": [
       {
-        "provider": "opencode-go",
-        "model": "deepseek-v4.1-flash",
-        "transport_model": "opencode-go/deepseek-v4.1-flash",
-        "canonical_identity": "deepseek-v4.1-flash",
-        "role": "primary",
-        "default": true,
-        "automatic_selection": false,
-        "arm": "A",
-        "reasoning_effort": "medium"
-      },
-      {
         "provider": "openai-codex",
         "model": "gpt-6.1-sol",
         "transport_model": "gpt-6.1-sol",
+        "arm": "A",
+        "role": "primary",
+        "default": true,
+        "automatic_selection": true,
+        "reasoning_effort": null
+      },
+      {
+        "provider": "opencode-go",
+        "model": "mimo-v2.6-flash",
+        "transport_model": "opencode-go/mimo-v2.6-flash",
+        "arm": "B",
         "role": "fallback1",
         "default": false,
-        "automatic_selection": true,
-        "reasoning_effort": null,
-        "arm": "B",
-        "canonical_identity": "gpt-6.1-sol"
+        "automatic_selection": false,
+        "reasoning_effort": null
+      },
+      {
+        "provider": "opencode-go",
+        "model": "deepseek-v4.1-flash",
+        "transport_model": "opencode-go/deepseek-v4.1-flash",
+        "arm": "C",
+        "role": "fallback2",
+        "default": false,
+        "automatic_selection": false,
+        "reasoning_effort": null
       },
       {
         "provider": "nvidia",
         "model": "deepseek-ai/deepseek-v4.1-flash",
         "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
+        "arm": "E",
         "role": "fallback4",
         "default": false,
         "automatic_selection": false,
-        "reasoning_effort": null,
-        "arm": null,
-        "canonical_identity": "deepseek-ai/deepseek-v4.1-flash"
+        "reasoning_effort": null
       }
     ],
     "VERIFY_SECURITY_previous_revision_8": [],
@@ -299,7 +501,7 @@
       "glm-5.3-flash",
       "gpt-6-luna",
       "gpt-6.1-sol",
-      "mimo-v2.6-pro",
+      "mimo-v2.6-flash",
       "minimax-m3.1-flash-free",
       "z-ai/glm-5.3-flash"
     ],
@@ -315,7 +517,15 @@
     "new_cross_lane_coupling": "The sole checker identity is opencode-go/deepseek-v4.1-flash. Existing PLAN/EXECUTE fallback arms can share its model; process/lane/evidence-path separation and the no-self-acceptance rule remain required.",
     "note": "Adding fallbacks can only ever weaken separation, never strengthen it; every arm was checked rather than assuming the primary-arm result carries over.",
     "verify_flash_vs_plan_glm": "VERIFY_SECURITY uses DeepSeek, not GLM; PLAN fallback declarations are unchanged.",
-    "retired": false,
+    "retired": [
+      {
+        "arm": "opencode-go/mimo-v2.6-pro",
+        "epoch": 41,
+        "ordered_at": "2026-11-09",
+        "reason": "wrong model family; retired from every pool by owner order",
+        "replacement": "opencode-go/mimo-v2.6-flash"
+      }
+    ],
     "retired_note": "NOT retired: current VERIFY_SECURITY checker is opencode-go/deepseek-v4.1-flash by owner order 2026-10-22."
   },
   "wiring_feasibility": {
@@ -549,7 +759,7 @@
   "epoch": 41,
   "coherence_od4": {
     "published_at": "2026-11-12",
-    "why": "H1-A: one in-force epoch set. MiMo PRO and every GLM arm removed (OD-4); the retired-arm ledger retired with them; runtime-facing defaults that still named a removed arm were repointed to the lane arm.",
+    "why": "the registry's projections describe the live wiring (additional_routes / supply_selector / reasoning_effort); the published mirror never carried those keys, so publishing an epoch set means carrying them too, minus the arms OD-4 removed",
     "removed_arms": [
       "glm-5.3",
       "glm-5.3-flash",
@@ -571,6 +781,27 @@
     ],
     "epoch": 41,
     "registry_epoch": 41,
-    "revision": 44
+    "revision": 44,
+    "live_structures_merged": true,
+    "published_only_keys_kept": [
+      "coherence_od4",
+      "epoch"
+    ],
+    "arms_removed_after_merge": [
+      "glm-5.3-flash",
+      "z-ai/glm-5.3-flash"
+    ]
+  },
+  "lane_chains_projected_from": {
+    "source": "config/lane-routing-registry.yaml",
+    "epoch": 40,
+    "sha256": "e68c5143bce3c65a0a2f31e1001f68427abec909ad41f36f75addb21fd367fe7",
+    "projected_at_utc": "2026-10-31T13:13:10+00:00",
+    "rule": "lane_chains and the slot pool are projections; edit the registry, then re-run this tool"
+  },
+  "removal_od4": {
+    "removed_at": "2026-11-12 OD-4",
+    "removed": [],
+    "reason": "owner ruling 2026-11-12: MiMo PRO and every GLM option leave the model pool; the retirement-ledger design is retired with them, so no kept-but-retired arm is carried forward"
   }
 }
