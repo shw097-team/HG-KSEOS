@@ -220,7 +220,7 @@
     "hermes_model_codex_bin": "%LOCALAPPDATA%\\HG-KSEOS\\runtime\\codex-0.147.0-alpha.6.5\\codex.exe",
     "hermes_model_openai_runtime": "NOT SET — deliberate. model.openai_runtime=codex_app_server is gated to provider in {openai, openai-codex} (hermes_cli/runtime_provider.py:95,284); for provider=opencode-go it is a no-op, proven by an isolated smoke that produced the answer with 0 sealed-lane usage rows. Setting it would also break SoD and remove delegate_task if the provider were ever switched.",
     "main_agent": {
-      "provider": "opencode-go",
+      "provider": "openai-codex",
       "model": "gpt-6.1-sol",
       "engine": "hermes native loop",
       "execute_handoff": "Codex CLI sealed lane (orchestration-layer dispatch)",

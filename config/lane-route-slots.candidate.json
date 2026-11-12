@@ -239,7 +239,7 @@
       },
       "ordered_pool": [
         {
-          "rank": 2,
+          "rank": 1,
           "provider": "openai-codex",
           "model": "gpt-6.1-sol",
           "role": "FALLBACK1/備援1",
@@ -248,18 +248,18 @@
           "transport_model": "gpt-6.1-sol",
           "reasoning_effort": "medium",
           "transport_vocabulary_note": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged.",
-          "default": false,
+          "default": true,
           "automatic_selection": true
         },
         {
-          "rank": 1,
+          "rank": 2,
           "provider": "opencode-go",
           "model": "deepseek-v4.1-flash",
           "role": "DEFAULT/首選",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
           "transport_model": "opencode-go/deepseek-v4.1-flash",
-          "default": true,
+          "default": false,
           "automatic_selection": false
         },
         {
@@ -271,7 +271,7 @@
           "automatic_selection": false
         },
         {
-          "rank": 6,
+          "rank": 4,
           "provider": "nvidia",
           "model": "deepseek-ai/deepseek-v4.1-flash",
           "role": "FALLBACK6/備援6",
@@ -364,7 +364,7 @@
       },
       "ordered_pool": [
         {
-          "rank": 2,
+          "rank": 1,
           "provider": "openai-codex",
           "model": "gpt-6.1-sol",
           "role": "FALLBACK1/備援1",
@@ -373,7 +373,7 @@
           "transport_model": "gpt-6.1-sol",
           "reasoning_effort": "medium",
           "transport_vocabulary_note": "the openai arm requires the BARE id: a qualified 'openai-codex/<model>' is routed by the relay to the default provider and answers HTTP 400 'Model is unavailable' (measured 2026-10-21 on 127.0.0.1:10101; bare id -> 200). The governance identity provider=openai-codex / model=<id> is unchanged.",
-          "default": false,
+          "default": true,
           "automatic_selection": true
         },
         {
@@ -385,14 +385,14 @@
           "automatic_selection": false
         },
         {
-          "rank": 1,
+          "rank": 3,
           "provider": "opencode-go",
           "model": "deepseek-v4.1-flash",
           "role": "DEFAULT/首選",
           "auth": "env_ref:OPENCODE_GO_API_KEY",
           "oauth": false,
           "transport_model": "opencode-go/deepseek-v4.1-flash",
-          "default": true,
+          "default": false,
           "automatic_selection": false
         },
         {
