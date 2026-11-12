@@ -6,7 +6,7 @@ authorization_basis: 'Owner order 2026-10-23 (R15): the main model is opencode-g
 source_of_routes:
   path: config/model-lane-assignment.json
   revision: 44
-  sha256: 0c93690cb0493af07006809eb3f04c18a0b657a3c9877dec7ce8abe41fe30ae9
+  sha256: ddec031fbf7f5be11d976ae566e4e02ab8fd2013dbdc21bc91f85a1fcae99f48
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
@@ -360,7 +360,7 @@ projections:
   - pointer: /effective_wiring/delegation.provider
     expected: opencode-go
   - pointer: /effective_wiring/delegation.model
-    expected: glm-5.3-flash
+    expected: deepseek-v4.1-flash
   - pointer: /lane_chains/PLAN/0/model
     expected: gpt-6.1-sol
   - pointer: /lane_chains/PLAN/0/provider
@@ -431,10 +431,9 @@ projections:
     expected: openai-codex
   - pointer: /assignment/2/supply_selector/arms/0/provider
     expected: openai-codex
-  debt:
   - pointer: /assignment/2/reasoning_effort
     expected: medium
-    reason: target removed by OD-4 (key reasoning_effort missing); recorded as debt, not deleted
+  debt: []
 - id: hermes-codex-lane
   path: config/hermes-codex-lane.json
   format: json

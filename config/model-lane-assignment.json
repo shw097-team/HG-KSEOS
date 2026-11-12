@@ -209,7 +209,8 @@
           "automatic_selection": false,
           "default": false
         }
-      ]
+      ],
+      "reasoning_effort": "medium"
     }
   ],
   "effective_wiring": {
@@ -223,11 +224,11 @@
       "model": "gpt-6.1-sol",
       "engine": "hermes native loop",
       "execute_handoff": "Codex CLI sealed lane (orchestration-layer dispatch)",
-      "config_default_model": "glm-5.3-flash (config.yaml model.default; takes effect for sessions started after the rebind)",
+      "config_default_model": "gpt-6.1-sol",
       "observed_live_session_model": "deepseek-v4.1-flash (session pinned at its 12:59 start; measured in agent.log)"
     },
     "delegation.provider": "opencode-go",
-    "delegation.model": "glm-5.3-flash",
+    "delegation.model": "deepseek-v4.1-flash",
     "delegation.applies_to": "EVERY ordinary delegate_task child, regardless of lane; the delegation block's provider/model/effort applies to ordinary PLAN and VERIFY children alike. Kanban card overrides are NOT read by delegate_task - they are read only by `hermes kanban dispatch`. This round's VERIFY lanes therefore inherited the orchestrator's effort rather than consuming their card pin.",
     "agent.reasoning_overrides": {
       "deepseek-v4.1-flash": "medium"
@@ -498,12 +499,10 @@
     "executor_models": [
       "deepseek-ai/deepseek-v4.1-flash",
       "deepseek-v4.1-flash",
-      "glm-5.3-flash",
       "gpt-6-luna",
       "gpt-6.1-sol",
       "mimo-v2.6-flash",
-      "minimax-m3.1-flash-free",
-      "z-ai/glm-5.3-flash"
+      "minimax-m3.1-flash-free"
     ],
     "verifier_models": [
       "deepseek-v4.1-flash",
@@ -790,6 +789,65 @@
     "arms_removed_after_merge": [
       "glm-5.3-flash",
       "z-ai/glm-5.3-flash"
+    ],
+    "removal_od4": {
+      "owner_ruling": "OD-4 2026-11-12: MiMo PRO and every GLM option leave the model pool; the retirement ledger design is retired with them",
+      "stage_1_from_published": {
+        "assignment_entries": 10,
+        "pool_entries": 4,
+        "registry_entries": 8,
+        "models": [
+          "glm-5.3",
+          "glm-5.3-flash",
+          "mimo-v2.6-pro",
+          "z-ai/glm-5.3",
+          "z-ai/glm-5.3-flash"
+        ]
+      },
+      "stage_2_from_live_structures": {
+        "entries": 9,
+        "why": "the merge with config.live surfaced arms the published mirror never carried"
+      },
+      "stage_3_runtime_slots": {
+        "repointed": [
+          {
+            "path": "config_default_model",
+            "from": "glm-5.3-flash (config.yaml model.default; takes effect for sessions started afte",
+            "to": "gpt-6.1-sol",
+            "source": "lane_chains.PLAN[0].model (the PLAN lane's primary arm after OD-4)"
+          },
+          {
+            "path": "delegation.model",
+            "from": "glm-5.3-flash",
+            "to": "deepseek-v4.1-flash",
+            "source": "effective_wiring.delegation.model (nested, same slot)"
+          }
+        ],
+        "executor_entries_removed": [
+          {
+            "path": "sod_across_all_arms.executor_models",
+            "removed": "glm-5.3-flash",
+            "why": "the arm no longer exists (OD-4), so it cannot be an executor in a SoD comparison"
+          },
+          {
+            "path": "sod_across_all_arms.executor_models",
+            "removed": "z-ai/glm-5.3-flash",
+            "why": "the arm no longer exists (OD-4), so it cannot be an executor in a SoD comparison"
+          }
+        ]
+      },
+      "final_residue": {
+        "routes": 0,
+        "assignment_selectable_models": 0
+      }
+    },
+    "field_repairs": [
+      {
+        "path": "/assignment/2/reasoning_effort",
+        "value": "medium",
+        "source": "config/lane-routing-registry.yaml routes[VERIFY_SECURITY].reasoning_effort",
+        "corroborated_by": "the projection expectation /assignment/2/reasoning_effort = medium"
+      }
     ]
   },
   "lane_chains_projected_from": {
