@@ -102,11 +102,15 @@ exist on this host but split across two directories under different names (14 + 
 byte, after which **G16a passes by real re-derivation** and G19 advances from `ROOT_ABSENT` to
 `MEMBER_ABSENT` (308 of 437 declared copies).
 
-The 308 absent members are all under `知識庫\實作相關DOC\Fabric vNext\…`; that tree does exist, but
-reorganised, so the declared relative paths mostly do not survive: measured by sha256, 10 of the 308 sit at
-exactly the declared relative path and 6 more under the renamed `FHS_PIPD-LS-PKG`, with 0 digest drifts. The
-other 292 belong to staging subtrees (`定案/`, `回寫/W0 ~ W2/`, `藍圖&skeleton/`) that are not in the current
-tree. G16b stays OPEN for a different reason: its `hgk-main`
+The 308 absent members are all under the old `知識庫/實作相關DOC/Fabric vNext/…` layout. That tree still
+exists, reorganised, one level deeper (`…/FHS／FHS-MSC／SBL/Fabric/Fabric vNext`), and a digest scan of
+all 8,105 files under `…/FHS／FHS-MSC／SBL` found **302 of the 308 members (103 of 106 distinct contents)
+byte-identical**, living now under `FHS\FHS-MSC` (255), `Fabric\Fabric vNext` (43) and
+`FHS\FHS_PIPD-LS-PKG` (4). Only **6 members / 3 distinct contents** are genuinely gone:
+`FHS_PIPD-LS-PKG_W0_r4.md`, `FHS_PIPD-LS-PKG_W0_r6.md` and the `…HIGH_RETENTION…非規範性審計證據附錄.md`
+appendix. So G19's red is **path drift, not data loss** — and it still fails, correctly, because it asks
+whether the copy sits at its declared path. Mapping: `_local/W0_R2_G19_PATH_MAP.json`.
+G16b stays OPEN for a different reason: its `hgk-main`
 subject records `scan_complete: false` because only three files were materialised at the pinned commit —
 a limitation of the subject, reported rather than passed. G22 mirrors those two rows.
 
