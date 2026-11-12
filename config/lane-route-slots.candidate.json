@@ -268,7 +268,8 @@
           "transport_model": "opencode-go/mimo-v2.6-flash",
           "auth": null,
           "oauth": null,
-          "automatic_selection": false
+          "automatic_selection": false,
+          "rank": 3
         },
         {
           "rank": 4,
@@ -382,7 +383,8 @@
           "transport_model": "opencode-go/mimo-v2.6-flash",
           "auth": null,
           "oauth": null,
-          "automatic_selection": false
+          "automatic_selection": false,
+          "rank": 2
         },
         {
           "rank": 3,
