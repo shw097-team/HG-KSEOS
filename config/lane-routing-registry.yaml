@@ -387,6 +387,10 @@ projections:
     expected: medium
   - pointer: /lane_chains/VERIFY_SECURITY/0/reasoning_effort
     expected: medium
+  - pointer: /lane_chains/VERIFY_SECURITY/1/reasoning_effort
+    expected: null
+  - pointer: /sod/plan_reasoning_effort
+    expected: null
   - pointer: /effective_wiring/plan_high/level
     expected: medium
   - pointer: /effective_wiring/auxiliary.kanban_decomposer/reasoning_effort
@@ -399,8 +403,8 @@ projections:
     expected: 'ABSENT on both axes: same provider AND same default model across all three lanes (owner order 2026-10-23 R15). Recorded, not hidden.'
   - pointer: /sod_across_all_arms/verifier_models/4
     expected: deepseek-v4.1-flash
-  - pointer: /sod_across_all_arms/verifier_models/4
-    expected: deepseek-v4.1-flash
+  - pointer: /lane_chains/EXECUTE/0/reasoning_effort
+    expected: null
   - pointer: /wiring_feasibility/projection_drops_dual_arms/state
     expected: CLOSED_FIX_APPLIED_TO_LIVE_SRC
   debt:
@@ -443,18 +447,6 @@ projections:
   - pointer: /assignment/2/reasoning_effort
     expected: medium
     reason: target removed by OD-4 (key reasoning_effort missing); recorded as debt, not deleted
-  - pointer: /lane_chains/VERIFY_SECURITY/1/reasoning_effort
-    expected: None
-    reason: target removed by OD-4 (); recorded as debt, not deleted
-  - pointer: /sod/plan_reasoning_effort
-    expected: None
-    reason: target removed by OD-4 (); recorded as debt, not deleted
-  - pointer: /lane_chains/EXECUTE/0/reasoning_effort
-    expected: None
-    reason: target removed by OD-4 (); recorded as debt, not deleted
-  - pointer: /sod/plan_reasoning_effort
-    expected: None
-    reason: target removed by OD-4 (); recorded as debt, not deleted
 - id: hermes-codex-lane
   path: config/hermes-codex-lane.json
   format: json
@@ -511,11 +503,11 @@ projections:
   bindings:
   - pointer: /schema
     expected: HGK-HERMES-BINDING/2
-  debt:
   - pointer: /install_root
     expected: 'C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes\hermes-agent'
   - pointer: /canonical_hermes_home
     expected: 'C:\Users\user\AppData\Local\Packages\OpenAI.Codex_2p2nqsd0c76g0\LocalCache\Local\hermes'
+  debt: []
 observations:
 - id: hermes-live-config-yaml
   path: C:/Users/user/AppData/Local/Packages/OpenAI.Codex_2p2nqsd0c76g0/LocalCache/Local/hermes/config.yaml
