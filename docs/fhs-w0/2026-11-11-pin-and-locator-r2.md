@@ -102,8 +102,11 @@ exist on this host but split across two directories under different names (14 + 
 byte, after which **G16a passes by real re-derivation** and G19 advances from `ROOT_ABSENT` to
 `MEMBER_ABSENT` (308 of 437 declared copies).
 
-The 308 are all under `知識庫\實作相關DOC\Fabric vNext\…`, and neither `Fabric vNext` nor
-`Semantic World OS Fabric` exists anywhere on C: or G:. G16b stays OPEN for a different reason: its `hgk-main`
+The 308 absent members are all under `知識庫\實作相關DOC\Fabric vNext\…`; that tree does exist, but
+reorganised, so the declared relative paths mostly do not survive: measured by sha256, 10 of the 308 sit at
+exactly the declared relative path and 6 more under the renamed `FHS_PIPD-LS-PKG`, with 0 digest drifts. The
+other 292 belong to staging subtrees (`定案/`, `回寫/W0 ~ W2/`, `藍圖&skeleton/`) that are not in the current
+tree. G16b stays OPEN for a different reason: its `hgk-main`
 subject records `scan_complete: false` because only three files were materialised at the pinned commit —
 a limitation of the subject, reported rather than passed. G22 mirrors those two rows.
 
