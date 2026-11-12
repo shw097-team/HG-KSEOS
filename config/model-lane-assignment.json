@@ -952,7 +952,21 @@
         "excerpt": "Re-derived from config/lane-routing-registry.yaml after measurement found the assignment restating t"
       }
     ],
-    "superseded_prose_unresolved": 20
+    "superseded_prose_unresolved": 20,
+    "runtime_scalars_repointed": [
+      {
+        "path": "config_default_model",
+        "from": "glm-5.3-flash (config.yaml model.default; takes effect for sessions started afte",
+        "to": "gpt-6.1-sol",
+        "source": "lane_chains.PLAN[0].model (the PLAN lane's primary arm after OD-4)"
+      },
+      {
+        "path": "delegation.model",
+        "from": "glm-5.3-flash",
+        "to": "deepseek-v4.1-flash",
+        "source": "effective_wiring.delegation.model (nested, same slot)"
+      }
+    ]
   },
   "lane_chains_projected_from": {
     "source": "config/lane-routing-registry.yaml",
