@@ -6,7 +6,7 @@ authorization_basis: 'Owner order 2026-10-23 (R15): the main model is opencode-g
 source_of_routes:
   path: config/model-lane-assignment.json
   revision: 44
-  sha256: dbc42c0b6abc55947b5241c9bf4911f0b48987e31f8c8704eabfae7c767eedb7
+  sha256: 3a4e9b2ed4a20f304ef568ffb4600fb46ab48edbe0eaf06c03edc0f9b2a0fd9c
 transport_model_constraints:
   rule_source: measured 2026-10-10 (E4/E5b/E6/E7 + direct codex probes); evidence under evidence/review/
   metadata_lookup_key: catalog slug
@@ -574,7 +574,7 @@ history:
   why: HTTP 410 ModelDeprecated + owner order 2026-10-23
 claim_ceiling: CANDIDATE_ONLY
 od4_publication:
-  assignment_sha256: 'dbc42c0b6abc55947b5241c9bf4911f0b48987e31f8c8704eabfae7c767eedb7'
+  assignment_sha256: '3a4e9b2ed4a20f304ef568ffb4600fb46ab48edbe0eaf06c03edc0f9b2a0fd9c'
   route_alignment:
   - lane: VERIFY_SECURITY
     field: provider
