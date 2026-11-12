@@ -18,13 +18,16 @@ let a re-read produce a fresh verdict.
 
 | artefact | content |
 |---|---|
-| `COPY_REGISTER_CURRENT.json` | **73 groups / 431 copies**, every member with path + sha256 + bytes, plus a `lineage` block carrying `old_copies → new_copies → delta` per group |
+| `COPY_REGISTER_CURRENT.json` | **73 groups / 394 copies** (432 found, junctions deduped by real path), every member with path + sha256 + bytes, plus a `lineage` block carrying `old_copies → new_copies → delta` per group |
 | `ROUND_DECLARATION.json` | the round's own denominator, the two owner decisions (OD-1 deletion, OD-2 layout), and the verdict rule |
-| `G19_REREG_CHECK.json` | **431/431 members re-read; V1 absent 0, V2 digest/size drift 0, V3 count 0, V4 distinct-digest 0, V5 undeclared same-name 0 → PASS** (15.5 s) |
+| `G19_REREG_CHECK.json` | **394/394 members re-read; V1 absent 0, V2 digest/size drift 0, V3 count 0, V4 distinct-digest 0, V5 undeclared same-name 0 → PASS** (15.5 s) |
 | `OWNER_WAIVER_G19.md` | the ruling, its scope, and its limits |
 
 The previous register declared 90 group entries / 437 copies; grouping case-insensitively collapses the
-duplicates to 76 subjects, of which **3 have no copy left** because the owner deleted them. Those three are
+duplicates to 76 subjects, of which **3 have no copy left** because the owner deleted them
+(`W0_r4`, `W0_r7`, the non-normative audit appendix). One further document, `FHS_PIPD-LS-PKG_W0_r6.md`, was
+first recorded as missing and then **located by the owner**: it hashes to the declared `9f9eb261c44f…` at
+`…/FHS/FHS_PIPD-LS-PKG/實作/W0/OLD/FHS_PIPD-LS-PKG_W0_r6.md`, so the shortfall is two contents, not three. Those three are
 kept in the register as `owner_deleted_groups` with `status: OWNER_DELETED_20261112` — the denominator
 shrank from 437 to 431 and the record says why, rather than quietly dropping rows.
 
@@ -37,9 +40,10 @@ visible; each group carries its own delta, so no number moves without a trace.
    against the register as it then stood: 19/22 with G19 `MEMBER_ABSENT`. That number stands as the record of
    that round. Editing `lanes/D/COPY_REGISTER_ALL.json` or `gate_r20.py` to turn it green would be
    retro-fitting a verdict, which is the failure mode the gate was written to catch.
-2. **It is not a licence to substitute a different revision.** The archive holds a file named
+2. **It is not a licence to substitute a different revision.** The archive also holds a file named
    `FHS_PIPD-LS-PKG_W0_r6.md` whose digest is `69a08e7f…`; the declared subject is `9f9eb261…`. Same name is
-   not the same document, so it is not counted as a copy. This is the distinction a copy register exists to
+   not the same document, so that copy is not counted. (The declared revision itself was later found at the
+   owner's new path and does match — recorded as a correction, because my earlier "gone" reading was wrong.) This is the distinction a copy register exists to
    make.
 3. **It is not an acceptance.** The register answers "where do these documents live and what do they hash
    to", not "is their content correct".
