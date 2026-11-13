@@ -1,0 +1,52 @@
+{
+ "schema": "FHS.W0R6.Delivery/3",
+ "date": "20261114",
+ "round": "W0_R6_W1ENTRY_20261114",
+ "claim_ceiling": "SOURCE_READ + HOST_RAW + AUTHOR_DESIGN + LOCAL_CHECK + OWNER_SEMANTIC_ACCEPT(signed 2026-11-14); not ORIGINAL_ACK, not native, not independent, not release",
+ "owner_semantic_accept": {
+  "window_id": "WIN-4d8a83d39e8f",
+  "payload_sha256": "2afe1ad7b9e3a60dd2209157f56d3944d110e78e21ac9c8c4ce1a7d8229feb46",
+  "signature_verified": true,
+  "ops_used": 1,
+  "receipt": "SIGN_BODY_CANDIDATE.SIGNED.json"
+ },
+ "signed_files_unchanged": true,
+ "files": [
+  {
+   "name": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_實質正文.md",
+   "role": "實質正文（被簽）",
+   "bytes": 21791,
+   "sha256": "c4617197f47bb2c2437b9340b4cffda740369bf7c4796f1aba3a6166a8656d7f"
+  },
+  {
+   "name": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_證據型附錄.md",
+   "role": "證據型附錄（被簽）",
+   "bytes": 17289,
+   "sha256": "5de9a02a2f6f500fcb40a1fc9d107b70d72511dcd868eef70adaf64373f7843a"
+  },
+  {
+   "name": "OWNER_SEMANTIC_ACCEPT_REFERENCE.md",
+   "role": "業主語義接受回執參考（新增）",
+   "bytes": 3369,
+   "sha256": "dc47845b72e0ae013a00777cf86bd524774d3b8cced0e306fc32a4e82823b37d"
+  },
+  {
+   "name": "SIGN_BODY_CANDIDATE.json",
+   "role": "被簽 body",
+   "bytes": 4341,
+   "sha256": "2afe1ad7b9e3a60dd2209157f56d3944d110e78e21ac9c8c4ce1a7d8229feb46"
+  },
+  {
+   "name": "SIGN_BODY_CANDIDATE.SIGNED.json",
+   "role": "簽章回執",
+   "bytes": 943,
+   "sha256": "61cc68f9fea215809f7ee698dc22e2470b37be517e09ed626c3fb2c13524ce51"
+  },
+  {
+   "name": "CORRECTION_20261114.json",
+   "role": "更正紀錄",
+   "bytes": 1268,
+   "sha256": "c750d5c2f10a2bce19e2617e97beba73b0b2427bfb98c6198cc18c040101990a"
+  }
+ ]
+}

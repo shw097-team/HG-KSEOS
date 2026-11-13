@@ -1,0 +1,18 @@
+{
+ "schema": "FHS.W0R6.Correction/1",
+ "recorded_at": "2026-11-14T00:34:30+08:00",
+ "corrections": [
+  {
+   "subject": "owner_window open (proc_bbedbbca045f)",
+   "earlier_claim": "window opened and reported usable=true; broker unreachable",
+   "measured": "the `open` process exited 1: FileNotFoundError writing <ws>/artifacts/OWNER_WINDOW.json at owner_window.py:194. The state file ~/.hgk-owner/window.json was already written (opened_at 2026-11-14T00:13:39), which is why `status`/probe said OPEN/usable — but the broker never started, so no signature was ever possible.",
+   "effect": "owner pre-authorisation was STATE-ONLY, not a live signing capability. ops_used 0/2. Remedy: create <workspace>/artifacts/ before `open`."
+  },
+  {
+   "subject": "EXECUTE dispatch exit code",
+   "earlier_claim": "exit 0 (tool judged ok=false)",
+   "measured": "process exit code 3; receipt ok=false, code=ERR_LANE_ALL_ROUTES_EXHAUSTED, served_arm_assigned=null, usage_receipt_ok=false, completion_evidence.checked=false, assignment_posture.enforced=false, arms=[opencode-go/deepseek-v4.1-flash]",
+   "effect": "transport-level turn did happen (nonce echoed by the model, turn.completed usage present) but the origin identity gate did not count it; still NOT served."
+  }
+ ]
+}
