@@ -132,8 +132,9 @@ manifest 檔：`W0_R6_W1ENTRY_20261114/out/MANIFEST_SOURCES.json`（本節數值
 | scope | `owner_semantic_accept`（僅此一項） |
 | effect ceiling | `REPOSITORY_WRITE` |
 | max_ops／ops_used | 2／**0** |
-| 狀態 | `usable=true`、`broker_alive=true`（`owner_window_probe.py` 讀回），到期 `1794597219` |
-| 簽了什麼 | **尚未簽任何東西**。簽 `owner_semantic_accept` 需業主指示確切 body；maker 不自行組 body 代業主接受，否則即為自我驗收 |
+| 狀態 | 開啟期間 `usable=true`（`owner_window_probe.py` 讀回）；**2026-11-14T00:30:35 以 `close --force` 關閉**（`state=CLOSED`、ops 0/2、225 B 收據 `~/.hgk-owner/artifacts/WINDOW_CLOSE_FORCE_20261114T003035.json`） |
+| 為什麼關閉 | broker 在口令解鎖後不再常駐（`close` 回 `NO_WINDOW`，即無可簽服務），留著 `state=OPEN` 只會讓下一個讀者以為有活的能力。以 `--force` 關閉**只改狀態並寫收據，不簽任何東西** |
+| 簽了什麼 | **沒有簽任何東西**。簽 `owner_semantic_accept` 需業主指示確切 body；maker 不自行組 body 代業主接受，否則即為自我驗收 |
 
 **未開啟的兩類**（照合約拒絕）：`release`／`sourcefreeze` 需 dedicated path（TTL ≤1h、ops ≤4）且本回合無此需求；`policy_authority`／`trust_anchor`／`owner_enrollment` 為永久禁止 kind。
 
@@ -179,3 +180,16 @@ manifest 檔：`W0_R6_W1ENTRY_20261114/out/MANIFEST_SOURCES.json`（本節數值
 | 全部 Raw | `C:\Projects\Agent_Workspace\FHS_NEXT_Workspace\W0_R6_W1ENTRY_20261114\out\` |
 
 **不能主張**（重述）：原生准入、WorkID/Grant、Independent PASS、原域語義核簽、PLP 正式取代、W1 Repo 已建、任何 Release。
+
+---
+
+## 10. 對外推送（依 Fabric 分域規則，branch＋PR，未合併）
+
+| Repo | Branch | 內容 | Readback | PR |
+|---|---|---|---|---|
+| `shw097-team/HG-KSEOS` | `w0-r6-20261114` | `docs/w0-r6-20261114/`：README、實質正文、證據型附錄、DELIVERY.json | 四檔 remote size 與 local 一致；正文／附錄 remote `sha256` == local `sha256`（以 base64 原樣位元組上傳） | **#25 open, merged=false**, head `04a1a54fb248` → base `main` — <https://github.com/shw097-team/HG-KSEOS/pull/25> |
+| `shw097-team/SBL` | `w0-r6-20261114` | `docs/w0-r6-handoff-20261114/W0_R6_W1_HANDOFF.md` | remote `sha256` == local | **#68 open, merged=false**, head `35d5ee9cffee` → base `main` — <https://github.com/shw097-team/SBL/pull/68> |
+
+**未推 Fabric**：Fabric `INTEGRATION/FHS` 是 `NAVIGATION_ONLY`／`effect_permission=NONE`，本回合的成果屬狀態與工程交接，不屬導航鏡像；且 Fabric #57 已 `closed, unmerged`（歷史事實，不改寫）。
+
+**Token 處理**：僅從業主 `API KEY/GITHUB-REPO_SHW097-4.txt` 讀入記憶體並置於 Authorization header；未寫入 argv、URL、log、MD 或 commit，未落任何副本。
