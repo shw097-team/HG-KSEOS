@@ -1,0 +1,15 @@
+{
+ "schema": "FHS.OwnerSignature/1",
+ "kind": "owner_semantic_accept",
+ "window_id": "WIN-4d8a83d39e8f",
+ "owner_fingerprint": "412b351937be72a1",
+ "body_path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R6_OWNER_PREAUTH_20261114\\SIGN_BODY_CANDIDATE.json",
+ "body_bytes": 4341,
+ "payload_sha256": "2afe1ad7b9e3a60dd2209157f56d3944d110e78e21ac9c8c4ce1a7d8229feb46",
+ "signature_hex": "ed193e5ffae0b8cd0bf0c636b939156ba6bc27d34487169d8fb8c20f6476c3ad53d559964a333cdf1fd654377ae1e8abf3345a5a3c024f85d1f2276268886909",
+ "signature_verified": true,
+ "ops_used": 1,
+ "note": "OWNER_SEMANTIC_ACCEPT only. Not ORIGINAL_ACK, not native admission, not independent verdict, not release.",
+ "owner_public_hex": "d42c654cd1afba803ef78bee501aa3e2a3d33ff1305c52f914d3ff27bb9be379",
+ "verify_note": "ed25519 over SIGN_BODY_CANDIDATE.json's exact bytes; public key is the enrolled owner key (also in owner_envelope/design/OWNER_ENROLLMENT.json)"
+}
