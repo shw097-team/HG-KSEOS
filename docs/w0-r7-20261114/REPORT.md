@@ -130,6 +130,30 @@ admission_status=UNPROVEN  claim_ceiling=CANDIDATE_ONLY
 
 `P0-03` 的 74,127 B 重複計算是舊帳的算式缺陷（同一路徑被兩個 entry 計入），不是檔案損壞；本輪以 distinct path 重算，並在台帳裡指名那 10 個 entry。
 
+### 2.7 P0／P1 逐項判定（baseline §3 的驗收面）
+
+| ID | 判定 | 依據（本輪實測） |
+|---|---|---|
+| P0-01 | **DONE** | `_local/W0_AS_BUILT.md` 38,379 B／540 行／`b6f1dbb6…` 全文嵌入附錄 C |
+| P0-02 | **PASS** | `out/HOST_READBACK.json`：`blocked=[]`、relay healthz 200／2.11.0、codex bin 唯一、`lane_pin --check` exit 0 |
+| P0-03 | **PASS_WITH_CORRECTION** | 31/31；433 entries／423 distinct；74,127 B 重複計入定位到 10 個 entry；41/343 當期、73/394 已被取代 |
+| P0-04 | **SCOPED_HOLD（原域）** | guard `REFUSE`、`live_epoch=44` vs registry 41；patch 候選已在 PR #26 |
+| P0-05 | **PASS** | `out/LANE_PLAN.json`：`ok=true`、usage 1 列、nonce 回聲 |
+| P0-06 | **PASS_WRAPPER_SCOPED** | `ERR_MAKER_MISSING`(3)／`ERR_MAKER_NOT_IN_ASSIGNMENT`(4)／`ERR_LANE_SOD_VIOLATION`(2)；豁免案 `ERR_NO_ARM_EMITTED_NONCE`(6) |
+| P0-07 | **PASS_SCOPED** | 四退役臂 `ERR_LANE_REQUIRED_ARM_ABSENT`、attempts=0；殘留 `H-RETIREMENT-BOUNDARY`（relay 直呼） |
+| P0-08 | **PARTIAL** | `selfcheck` 15/16（POS-02 定位失敗）；`POS-02b` `PASS_PIN_ONLY`；`r1_tree_hygiene` exit 0 |
+| P0-09 | **PARTIAL** | `spec_identity` ok；FUO 在；六 WP **2/6 有 Done**（01/16/19/21 缺檔，逐項列名） |
+| P0-10 | **CANDIDATE_ONLY** | `out/SOURCEFREEZE_CANDIDATE.json`：31 檔、`aggregate 1dacbb5e…`、`authority_state=AUTHORITY_READER_NOT_CALLED` |
+| P0-11 | **DONE** | 本件即單份完整整合 MD；附錄 C 可對 SHA |
+| P1-01 | **HOLD** | 無 `hgk-main` 完整 checkout，`scan_complete` 不可能為 true |
+| P1-02 | **DONE** | 99 = 83 failed＋16 errors、`UNCLASSIFIED 0`、W0 受影 17 筆具名 |
+| P1-03 | **PASS** | venv311 有效、relay 以 lane home 起、codex 四件式 overlay、`lane_pin` 0 |
+| P1-04 | **PARTIAL** | 三張 PR（Fabric #58／HG-KSEOS #26／SBL #69）全 open 未合併；repo 未配置 required checks，故無 CI 收據 |
+| P1-05 | **NOT_STARTED（W1）** | 57 列手冊台帳屬 W1 主接線，本輪未動 |
+| P1-06 | **DONE（設計）** | 不建新 Repo；候選責任／依賴已記，未取得任何 Permit |
+
+`READY_TO_PROMOTE_UPSTREAM` 的判定：**不成立**。P0-04／P0-08／P0-09 未達真 PASS，依 baseline §3.1 只能停在 `READY_TO_DRAFT_L0_L1_L2_WITH_SCOPED_HOLDS`。
+
 ---
 
 ## 3｜W0 六個 Primary WP（L2 §04 的集合）
