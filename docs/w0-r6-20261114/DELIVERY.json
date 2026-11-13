@@ -1,0 +1,38 @@
+{
+ "schema": "FHS.W0R6.Delivery/1",
+ "date": "20261114",
+ "round": "W0_R6_W1ENTRY_20261114",
+ "claim_ceiling": "SOURCE_READ + HOST_RAW + AUTHOR_DESIGN + LOCAL_CHECK; not native, not independent, not release",
+ "files": [
+  {
+   "name": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_實質正文.md",
+   "abs_path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\deliverables\\FHS_vNEXT_W0\\FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_實質正文.md",
+   "bytes": 21570,
+   "sha256": "bf7d080db86bf5be61ec952b1e45212933258d489c3d53f4e076a077bf142797",
+   "utf8": true,
+   "crlf": 0,
+   "cr": 0,
+   "checks": {
+    "has_claim_ceiling": true,
+    "links_to_pair": true,
+    "no_placeholder_TODO": false,
+    "sections": 16
+   }
+  },
+  {
+   "name": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_證據型附錄.md",
+   "abs_path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\deliverables\\FHS_vNEXT_W0\\FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_證據型附錄.md",
+   "bytes": 13842,
+   "sha256": "e62e722d407657c0dd194d762f56130223525c72df40b7216aac731d787459c4",
+   "utf8": true,
+   "crlf": 0,
+   "cr": 0,
+   "checks": {
+    "has_claim_ceiling": true,
+    "links_to_pair": true,
+    "no_placeholder_TODO": true,
+    "sections": 9
+   }
+  }
+ ]
+}
