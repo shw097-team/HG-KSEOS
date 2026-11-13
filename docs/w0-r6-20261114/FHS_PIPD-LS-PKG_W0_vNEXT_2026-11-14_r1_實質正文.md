@@ -166,7 +166,7 @@ paired_appendix: FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_證據型附錄.md
 ### 10.2 實派（served 的真相）
 | 車道 | 結果 | 實測 |
 |---|---|---|
-| EXECUTE | `SERVED_TRANSPORT_ONLY` | rank1 = opencode-go/deepseek-v4.1-flash、exit 0、nonce 由模型回聲（`FHS-W0R6-EXEC-D1`）、`turn.completed` 帶 usage（input 8348）；但 `usage_rows_after_offset=0` → origin 判 `ERR_LANE_ALL_ROUTES_EXHAUSTED`、`ok=false` |
+| EXECUTE | `SERVED_TRANSPORT_ONLY` | rank1 = opencode-go/deepseek-v4.1-flash、attempt exit 0、nonce 由模型回聲（`FHS-W0R6-EXEC-D1`）、`turn.completed` 帶 usage（input 8348）；但 `usage_rows_after_offset=0` → origin 判 `ok=false`、`code=ERR_LANE_ALL_ROUTES_EXHAUSTED`、`served_arm_assigned=null`、`assignment_posture.enforced=false`，**程序 exit 3** |
 | PLAN | `REFUSED_ERR_ARM_NOT_IN_ASSIGNMENT`（exit 4） | deepseek 在 PLAN chain 為 rank 2，`--require-arm` 只認 assigned arm |
 | VERIFY_SECURITY | `REFUSED_ERR_ARM_NOT_IN_ASSIGNMENT`（exit 4） | 同上，deepseek 為 rank 3 |
 
@@ -193,7 +193,7 @@ paired_appendix: FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_證據型附錄.md
 2. **動作**：Fabric 導航（只讀）→ SBL/HGK 原 Reader → 六條 gate 重跑 → 車道 menu/bind/assert → 一次受界實派 → 寫兩份交付。
 3. **輸出**：本正文＋證據附錄＋`W0_R6_W1ENTRY_20261114/out/` 的 JSON 回執。
 4. **原 Consumer**：Fabric Policy Consumer／HGK Issuer／SBL PIPD Reader **本次皆未被呼叫**；因此這條 slice 的 claim 停在 `LOCAL_CHECK`，不宣稱 E2E 通過。
-5. **恢復**：所有中間物都在 `FHS_NEXT_Workspace/W0_R6_W1ENTRY_20261114/`，重跑六條命令即可重建判定；owner 視窗 `WIN-9a9fd4263977` 有效至 `1794597219`（約 3 小時）。
+5. **恢復**：所有中間物都在 `FHS_NEXT_Workspace/W0_R6_W1ENTRY_20261114/`，重跑六條命令即可重建判定。owner 視窗 `WIN-9a9fd4263977` **已關閉**（`close --force`，ops 0/2）；其 `open` 指令以 exit 1 結束（缺 `<ws>/artifacts/`），故自始不具簽章能力，見附錄 §6、§11。
 
 ---
 
