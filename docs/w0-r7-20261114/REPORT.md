@@ -121,14 +121,20 @@ admission_status=UNPROVEN  claim_ceiling=CANDIDATE_ONLY
 
 | 台帳 | 關鍵數字 | 檔案 |
 |---|---|---|
-| Host 讀回（P0-02／P1-03） | relay `healthz` 200／`opencodex 2.11.0`；codex 僅一個 bin 目錄 `9e1da79431da526b`；venv311 路徑有效；`lane_pin --check` exit 0；`blocked=[]`（無欄位取不到） | `out/HOST_READBACK.json`（21,542 B） |
-| 分母對帳（P0-03） | 31/31；ImportMap **433 entries／423 distinct paths／3,713,290 B**，其中 **74,127 B 重複計入、定位到 10 個具名 entry**；G19 當期 **41 groups／343 members PASS**；**73/394 已被取代、不可與 41/343 同時宣稱有效**；431 已定位 | `out/P0-03_COUNT_LEDGER.json`（37,473 B） |
-| 故障分帳（P1-02） | **99 events = 83 failed ＋ 16 errors**（分母吻合，無湊數）；`REAL_DEFECT 2／HISTORICAL 5／ENV 15／ORIGINAL_OWNER 55／W1_WIRING 22／UNCLASSIFIED 0`；受影波次 `W0 17／W1 32／W2 45／ORIGIN 5` | `out/P1-02_FAULT_LEDGER.json`（83,879 B）＋`.md` |
+| Host 讀回（P0-02／P1-03） | Hermes 主進程 **PID 3604**（唯一無 `--type=` 的 Hermes.exe，父 explorer 4292）、exe `2ed0bc89…`；`hermes --version` → **v0.23.1 (2026.9.24) local 3b4215785882**；python **3.11.9**（真 venv）；relay 200／`opencodex 2.11.0`／pid 7236；codex `9e1da79431da526b`／`83f5c2dd…`；`lane_pin --check` exit 0（`digest_match:true`）；`blocked=[]`。**drift_note**：`pyvenv.cfg` 記的建立路徑是已不存在的 `_local\venv`（venv 被搬移過），`Scripts/*.exe` shim 可能失效 | `out/HOST_READBACK.json`（21,542 B） |
+| 分母對帳（P0-03） | 31/31（重算 sha 31 等、0 不符）；ImportMap **433 entries／423 distinct／3,787,417→3,713,290 B**，重複的是 **entry 0–9 在 12–21 逐字重現**（同 commit `a6f1fa89`），加總 **74,127 B** 且 `3,787,417−74,127=3,713,290` 完全吻合；G19 當期 **41/343**，舊 **73/394 已作廢**（−51＝32 個 junction 變體群消失＋19 個存活群增減，因 `worktrees`／`FHS_W1_Work_Final` 兩根 `exists:false`）；**429 全庫 0 命中**；431＝`W0_R1_TREE_HYGIENE.forbidden_scan.files_scanned` 與「重宣告 run 1：76 groups／431 copies」，**不是 G19 分母** | `out/P0-03_COUNT_LEDGER.json`（38,025 B） |
+| 故障分帳（P1-02） | **99 events = 83 failed ＋ 16 errors、delta 0**；`REAL_DEFECT 2／HISTORICAL 5／ENV 15／ORIGINAL_OWNER 55／W1_WIRING 22／UNCLASSIFIED 0`；波次 `W0 17／W1 32／W2 45／ORIGIN 5`。**方法警示**：兩份 V5 JSON 不含 r4 逐案 ID（V5 是 r1 的 171/17，且四桶只合 153/188），逐案列舉取自 `_local/evidence/hgk_suite_r4_lines.txt`（69,708 B／`df451f92…`）的 83 FAILED＋16 ERROR 摘要行，與 runner 頁尾一致；FAILURES 區段被剝除標頭，採 1:1 位置配對，80 列 `MEASURED_MESSAGE_1TO1`、10 列 `MEASURED_BLOCK`、6 列 `SAME_SETUP_FIXTURE`、3 列 `INFERRED_EXIT2_FAMILY`。與 baseline §12 只列 33 筆之間有 **66 列差額**，已在台帳明寫 | `out/P1-02_FAULT_LEDGER.json`（83,879 B／`0dd54e26…`）＋`.md` |
 | L1 結構（§1 補證） | **50 章、五段齊全 50/50**；缺 s1/s2/s3/s4/s5、缺 POS、缺 NEG、缺 consumer、缺 resume **皆為 0** | `out/L1_CH_ALIGNMENT.json`（32,787 B） |
 
 `P1-02` 的 55 筆 `ORIGINAL_OWNER` 是本輪最重要的訊息：多數紅燈不是壞掉，而是**原域尚未裁決**。這正好對應 baseline P1-02 要求的「至少列出 W0/W1 受影未分類部分」——現在未分類是 0，且 W0 受影 17 筆已逐筆有名。
 
 `P0-03` 的 74,127 B 重複計算是舊帳的算式缺陷（同一路徑被兩個 entry 計入），不是檔案損壞；本輪以 distinct path 重算，並在台帳裡指名那 10 個 entry。
+
+### 2.6.1 三個新發現（本輪才浮出，必須進台帳）
+
+1. **L1 檢查器本身有 NEG**：對 L1 副本刪掉 `CH-10` 的 `## 4｜…` 並改寫其 `POS-CH-10`，結果 50→49、`missing_s4=["CH-10"]`、其餘 49 章不動。所以 50/50 不是空過，是會咬的檢查。
+2. **`H-FUO-ATOM-STALE`**：`W0_FIRST_FUO/MANIFEST.json` 的 `source_sha256=669670593fbbbe7f…` **只與它自己的 intent card 相符**，不等於它 `source_locator` 指名的 `SOURCE_IMPORT_MAP.json`（`1bae7892372ae63a…`）；更深一層，卡片 4,890 個 atom 全釘 `3b2ccbbedc97e059…`，該 digest 在 provenance/ 9 個檔中**不存在**，且卡片建於 16:09、map 現行版 19:03。→ FUO 的**檔案層完整（8/8）、atom 層來源已 stale**。
+3. **SPEC-C 兩處與來源不一致**：`WP-FHS-16` 的來源其實存在且 hash 對得上（`1df046803197…`／`64ea4977…`），SPEC-C §1 卻稱「not in the import set」；`WP-FHS-19` SPEC-C 標 DRAFT，但 r26 明令「無原 CI readback 時 `WP19_DONE=HOLD`」。兩者都以原 r26 為準，SPEC-C 需更正。
 
 ### 2.7 P0／P1 逐項判定（baseline §3 的驗收面）
 
@@ -142,7 +148,7 @@ admission_status=UNPROVEN  claim_ceiling=CANDIDATE_ONLY
 | P0-06 | **PASS_WRAPPER_SCOPED** | `ERR_MAKER_MISSING`(3)／`ERR_MAKER_NOT_IN_ASSIGNMENT`(4)／`ERR_LANE_SOD_VIOLATION`(2)；豁免案 `ERR_NO_ARM_EMITTED_NONCE`(6) |
 | P0-07 | **PASS_SCOPED** | 四退役臂 `ERR_LANE_REQUIRED_ARM_ABSENT`、attempts=0；殘留 `H-RETIREMENT-BOUNDARY`（relay 直呼） |
 | P0-08 | **PARTIAL** | `selfcheck` 15/16（POS-02 定位失敗）；`POS-02b` `PASS_PIN_ONLY`；`r1_tree_hygiene` exit 0 |
-| P0-09 | **PARTIAL** | `spec_identity` ok；FUO 在；六 WP **2/6 有 Done**（01/16/19/21 缺檔，逐項列名） |
+| P0-09 | **PARTIAL** | `spec_identity` ok（SPEC-A `e24251fc…`／B `aebcbeed…`／C `d8d1c286…`；共同 `SourceManifestSHA 1bae7892…`）；錯 manifest **exit 14** 證實；FUO 8/8 檔完整但 **atom 層 stale**（§2.6.1）；六 WP **2/6 有 Done**（00/15），01/16/19/21 缺檔逐項列名 |
 | P0-10 | **CANDIDATE_ONLY** | `out/SOURCEFREEZE_CANDIDATE.json`：31 檔、`aggregate 1dacbb5e…`、`authority_state=AUTHORITY_READER_NOT_CALLED` |
 | P0-11 | **DONE** | 本件即單份完整整合 MD；附錄 C 可對 SHA |
 | P1-01 | **HOLD** | 無 `hgk-main` 完整 checkout，`scan_complete` 不可能為 true |
@@ -205,6 +211,8 @@ W1 的入口不是「文件寫完」，而是這四條同時成立（L2 §04 W1�
 | `H-RETIREMENT-BOUNDARY` | 「退役臂在所有路徑都不可達」 | 派送層 4/4 拒，但 relay 直呼仍 200 | 原域封閉 relay 直呼邊界（身分或 ACL） | HG-KSEOS／relay Owner |
 | `H-G16B` | Full-scan Closure | 無 `hgk-main` 完整 checkout，`scan_complete` 無法為 true | 原 HGK pinned ref 完整 checkout 後重跑 | HGK 原 Owner |
 | `H-L1-OWNER-ACK` | 「L1 已可取代 31 冊」 | L1 50 章結構已存在，但 Owner 語義核簽未取得 | 原 Owner 逐 CH 核簽（U4） | 業主／原 Owner |
+| `H-FUO-ATOM-STALE` | FUO 的 atom 級來源效力 | 卡片 4,890 atom 釘的 `3b2ccbbe…` 在 provenance/ 9 檔中不存在；卡片 16:09、map 19:03 | 以現行 map 重建 intent card 並重算 atom digest，或由原 Reader 認可該 digest 為歷史快照 | 原 PIPD/Source Reader |
+| `H-SPECC-INCONSISTENT` | SPEC-C 的兩處陳述 | WP-16 來源存在卻稱不在 import set；WP-19 標 DRAFT 而 r26 要求 HOLD | 依 r26 更正 SPEC-C §1／§3，並保留舊文字為 lineage | 作者端可修，改後需重跑 spec_identity |
 | `H-CASES-09` | 96 Oracle／282 B1 的獨立驗收 | 未綁原 Runner | 原 Case Registry 綁 runner/oracle/Raw | 原 Case Owner |
 | `H-W18-10` | Normal Mode 資格 | 未以 fresh PID 跑 E33–E42 | 新 PID 普通 Goal 的 served Raw | Hermes Host |
 
