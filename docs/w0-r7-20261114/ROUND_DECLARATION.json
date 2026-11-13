@@ -1,0 +1,70 @@
+{
+ "schema": "FHS-ROUND-DECLARATION/1",
+ "round_id": "W0_R7_FULL_20261114",
+ "task": "FHS_vNEXT_W0_TRANSITION_BASELINE_AND_W1_ENTRY_20261112",
+ "executed_by": {"profile": "fhs_next", "model": "deepseek-v4.1-flash", "provider": "opencode-go"},
+ "executed_at_local": "2026-11-14T01:0x+08:00",
+ "claim_ceiling": [
+  "SOURCE_READ",
+  "HOST_RAW",
+  "AUTHOR_DESIGN",
+  "LOCAL_CHECK",
+  "LANE_SERVED",
+  "WRAPPER_SCOPED_SOD"
+ ],
+ "not_claimed": [
+  "ORIGINAL_ACK",
+  "NATIVE_PASS",
+  "INDEPENDENT_PASS",
+  "RELEASE"
+ ],
+ "inputs": {
+  "L0": {"path": "知識庫/實作相關DOC/FHS／FHS-MSC／SBL/FHS/FHS_NEXT/藍圖/FHS_vNEXT_總藍圖.md", "sha256": "33e49ca22872b135534e078661df32d6a2892058c8c0efae859540943731caf0", "version": "2026-11-13_r2"},
+  "L1": {"path": "知識庫/實作相關DOC/FHS／FHS-MSC／SBL/FHS/FHS_NEXT/藍圖/FHS_vNEXT_PLP_藍圖.md", "sha256": "bd2ab0b74f21da6b74cac2e1b1ffd2c8dcbde11daa6d22333a3c52d0675af060", "h1_count": 50, "lines": 34272},
+  "L2": {"path": "知識庫/實作相關DOC/FHS／FHS-MSC／SBL/FHS/FHS_NEXT/藍圖/FHS_vNEXT_PLP_全波次藍圖.md", "sha256": "a6077aa208aa9cbcb2d37572e13be73de14125cd3f5881b3fa6320e34814c39b", "lines": 16815, "macro_waves": "W0-W4 (n=4)"},
+  "thin_prompt": {"path": "FHS_vNEXT_W0_HERMES_FHS_THIN_PROMPT_2026-11-13_r1.md", "sha256": "82d3def56bfd1f1df98d9489a42a0f65d22cded8387a4ab801d54e3a89f8021c"},
+  "baseline": {"path": "FHS_NEXT/_local/FHS_vNEXT_W0_TRANSITION_BASELINE_AND_W1_ENTRY_20261112.md", "sha256": "f1ee542923e3725b8d87040a2ba63f6dc0018a5d7c945a2674d706e13ff62237"},
+  "w0_spec_current": {"path": "FHS_NEXT/spec/FHS_PIPD-LS-PKG_W0_20261112_r8.md", "bytes": 680998, "sha256": "42546311c3c62ae4c721403740ac675b748f3f66898157fca94c328af592ecc4"}
+ },
+ "workstation": {
+  "python": "C:/Users/user/AppData/Local/hermes/cache/scratch/fhs_next/venv311/Scripts/python.exe",
+  "relay": "opencodex 2.11.0 on 127.0.0.1:10101 with OPENCODEX_HOME=%LOCALAPPDATA%/HG-KSEOS/opencodex-hermes",
+  "codex": "C:/Users/user/AppData/Local/OpenAI/Codex/bin/9e1da79431da526b/codex.exe (0.167.0-alpha.4.1)"
+ },
+ "lanes": {
+  "policy": "search+use only: HG-KSEOS/scripts/hgk-lane-dispatch.py + ops/lanes/bindings/*.json; no tool was created or modified",
+  "served": {
+   "EXECUTE": {"rank": 1, "arm": "opencode-go/deepseek-v4.1-flash", "served_arm_assigned": true, "usage_rows": 1},
+   "PLAN": {"rank": 2, "arm": "opencode-go/deepseek-v4.1-flash", "served_arm_assigned": false, "usage_rows": 1},
+   "VERIFY_SECURITY": {"rank": 3, "arm": "opencode-go/deepseek-v4.1-flash", "served_arm_assigned": false, "usage_rows": 1}
+  },
+  "selection_note": "--force-rank selected arms already inside each lane's assignment chain; the receipts record served_arm_assigned=false for PLAN/VERIFY because those arms are not the assigned primary."
+ },
+ "orchestration": {
+  "kanban_board": "w0r7",
+  "kanban_tasks": ["t_5d1d1fc5", "t_f0a32914", "t_2a304dce", "t_d09856c2", "t_f6fe6293", "t_af045697"],
+  "swarm_root": "t_59006eec",
+  "swarm_workers": ["t_5a9fbed8", "t_8f160a86", "t_143cee7c"],
+  "swarm_verifier": "t_eba26cee",
+  "swarm_synthesizer": "t_8b3e8afe",
+  "subagents": 5,
+  "openspec": {"present": "1.8.0", "target": "2.0.0", "status": "VERSION_DRIFT_NOFIT_FOR_2_0_SEMANTICS"},
+  "gstack": {"present": false, "status": "ABSENT_NOFIT"}
+ },
+ "owner_envelope": {
+  "window_id": "WIN-d6bf4635c14b",
+  "scope": ["owner_semantic_accept", "original_reader_ack"],
+  "max_ops": 6,
+  "effect_ceiling": "REPOSITORY_WRITE",
+  "status_at_declaration": "OPEN_AWAITING_PASSPHRASE"
+ },
+ "deliverables": {
+  "main": "deliverables/FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_實質正文.md",
+  "appendix": "deliverables/FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_證據型附錄.md"
+ },
+ "pos": null,
+ "neg": null,
+ "pos_neg_note": "counts are per-gate and live in out/*.json; see P0/P1 verdict table in the main deliverable",
+ "first_fail": null,
+ "resume_predicate": null
+}
