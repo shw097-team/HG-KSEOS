@@ -29,6 +29,8 @@
 | lane_pin --check | exit 0 | out/LANE_PIN.json |
 | lane policy validate | exit 0 / CANDIDATE | out/LANE_POLICY.txt |
 | POS-02b control pin | ok=True / 2 檔 / PASS_PIN_ONLY | out/POS02B.json |
+| tree hygiene | exit 0 | out/TREE_HYGIENE.json |
+| SourceFreeze candidate | 31 檔 / agg 1dacbb5e83f53525 / CANDIDATE_ONLY_AUTHORITY_READER_NOT_CALLED | out/SOURCEFREEZE_CANDIDATE.json |
 
 ### B.1 POS-02 的失敗脈絡（定位，不是內容）
 
