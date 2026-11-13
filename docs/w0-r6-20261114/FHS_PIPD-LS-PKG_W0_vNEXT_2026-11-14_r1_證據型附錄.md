@@ -79,7 +79,7 @@ manifest 檔：`W0_R6_W1ENTRY_20261114/out/MANIFEST_SOURCES.json`（本節數值
 | 7 | `"$PY" ops/tools/fhs_3lm_hgk_local.py --menu` | 0 | `registry_sha256=3583f71b…`、pool `7a164911…` | `out/lane_plane/menu.json`（＋adapter 註記 `.adapter.txt`） |
 | 8 | `--bind PLAN opt1` / `--bind EXECUTE primary` / `--bind VERIFY opt1` | 0 / 0 / 0 | 三份 binding 寫入 `ops/lanes/bindings/` | `out/lane_plane/bind_*.json` |
 | 9 | `--assert <binding> --assert-arm opencode-go/deepseek-v4.1-flash` ×3 | 0 / 0 / 0 | 三次皆 `ok=true`、`arm=opencode-go/deepseek-v4.1-flash` | `out/lane_plane/assert_*.json` |
-| 10 | `hgk-lane-dispatch.py --lane EXECUTE … --require-arm opencode-go/deepseek-v4.1-flash --nonce FHS-W0R6-EXEC-D1` | 0（工具自身判 `ok=false`） | rank1 深seek、nonce 回聲、`turn.completed` usage input 8348；`usage_rows_after_offset=0` → `ERR_LANE_ALL_ROUTES_EXHAUSTED` | `out/EXECUTE_RECEIPT.json` |
+| 10 | `hgk-lane-dispatch.py --lane EXECUTE … --require-arm opencode-go/deepseek-v4.1-flash --nonce FHS-W0R6-EXEC-D1` | **3** | rank1 deepseek、nonce 由模型回聲、`turn.completed` 帶 usage（input 8348）；但 `usage_rows_after_offset=0` → `ok=false`、`code=ERR_LANE_ALL_ROUTES_EXHAUSTED`、`served_arm_assigned=null`、`usage_receipt_ok=false`、`completion_evidence.checked=false`、`assignment_posture.enforced=false` | `out/EXECUTE_RECEIPT.json` |
 | 11 | 同上 `--lane PLAN` | **4** | `ERR_ARM_NOT_IN_ASSIGNMENT`（deepseek 為 PLAN chain rank 2） | `out/PLAN_RECEIPT.json` |
 | 12 | 同上 `--lane VERIFY_SECURITY` | **4** | `ERR_ARM_NOT_IN_ASSIGNMENT`（rank 3） | `out/VERIFY_SECURITY_RECEIPT.json` |
 | 13 | `hgk-lane-guard.py --lane EXECUTE --maker-model deepseek… --target-model deepseek…` | **2** | `REFUSE`；`sod_distinct_model` 失敗 → 正確拒收 | `out/guard/neg_same_model.json` |
@@ -132,9 +132,10 @@ manifest 檔：`W0_R6_W1ENTRY_20261114/out/MANIFEST_SOURCES.json`（本節數值
 | scope | `owner_semantic_accept`（僅此一項） |
 | effect ceiling | `REPOSITORY_WRITE` |
 | max_ops／ops_used | 2／**0** |
-| 狀態 | 開啟期間 `usable=true`（`owner_window_probe.py` 讀回）；**2026-11-14T00:30:35 以 `close --force` 關閉**（`state=CLOSED`、ops 0/2、225 B 收據 `~/.hgk-owner/artifacts/WINDOW_CLOSE_FORCE_20261114T003035.json`） |
-| 為什麼關閉 | broker 在口令解鎖後不再常駐（`close` 回 `NO_WINDOW`，即無可簽服務），留著 `state=OPEN` 只會讓下一個讀者以為有活的能力。以 `--force` 關閉**只改狀態並寫收據，不簽任何東西** |
-| 簽了什麼 | **沒有簽任何東西**。簽 `owner_semantic_accept` 需業主指示確切 body；maker 不自行組 body 代業主接受，否則即為自我驗收 |
+| 狀態 | 開啟指令 **`owner_window.py open` 以 exit 1 結束**：`FileNotFoundError` 寫 `<ws>/artifacts/OWNER_WINDOW.json`（`owner_window.py:194`，新 workspace 沒有 `artifacts/` 子目錄）。`~/.hgk-owner/window.json` 已先寫入（`opened_at 2026-11-14T00:13:39`），所以 `status`／probe 回 `OPEN`／`usable=true`；**但 broker 從未啟動，任何簽章都不可能發生**。於 **00:30:35 以 `close --force` 收窗**（`state=CLOSED`、ops 0/2、收據 `~/.hgk-owner/artifacts/WINDOW_CLOSE_FORCE_20261114T003035.json`） |
+| 為什麼關閉 | 狀態是 OPEN 而服務不存在，留著只會讓下一個讀者以為有活的能力。`--force` **只改狀態並寫收據，不簽任何東西** |
+| 簽了什麼 | **沒有簽任何東西**，而且**這扇窗從頭到尾不具備簽章能力**（見上列 exit 1）。簽 `owner_semantic_accept` 需業主指示確切 body；maker 不自行組 body 代業主接受，否則即為自我驗收 |
+| 可重開的條件 | 先 `mkdir -p <workspace>/artifacts`，再 `open … --workspace <workspace>`；口令仍由業主在遮罩視窗自行輸入 |
 
 **未開啟的兩類**（照合約拒絕）：`release`／`sourcefreeze` 需 dedicated path（TTL ≤1h、ops ≤4）且本回合無此需求；`policy_authority`／`trust_anchor`／`owner_enrollment` 為永久禁止 kind。
 
@@ -193,3 +194,16 @@ manifest 檔：`W0_R6_W1ENTRY_20261114/out/MANIFEST_SOURCES.json`（本節數值
 **未推 Fabric**：Fabric `INTEGRATION/FHS` 是 `NAVIGATION_ONLY`／`effect_permission=NONE`，本回合的成果屬狀態與工程交接，不屬導航鏡像；且 Fabric #57 已 `closed, unmerged`（歷史事實，不改寫）。
 
 **Token 處理**：僅從業主 `API KEY/GITHUB-REPO_SHW097-4.txt` 讀入記憶體並置於 Authorization header；未寫入 argv、URL、log、MD 或 commit，未落任何副本。
+
+---
+
+## 11. 更正物件（保留先前的讀法，不改成一致）
+
+本節依「計數可以錯，軌跡不可以斷」處理：下列兩筆是**本附錄第一版已寫出、隨後被實測推翻**的敘述，原文保留在 §3／§6 的修訂前版本（Git 歷史可見），此處只並列更正。
+
+| 被更正的敘述 | 先前的讀法 | 實測 | 影響 |
+|---|---|---|---|
+| owner window 狀態 | 「開啟期間 `usable=true`、broker 直到 `close` 才不可達」 | `open` 程序 **exit 1**（`FileNotFoundError` 寫 `<ws>/artifacts/OWNER_WINDOW.json`，`owner_window.py:194`）。狀態檔先寫入，probe 因此報 `usable=true`；**broker 從未啟動**，簽章能力自始不存在 | 預授權是 **STATE_ONLY**，不是活的能力；不影響任何交付內容，但影響「視窗可用」這個說法 |
+| EXECUTE 派送 exit | 「exit 0，工具自身判 `ok=false`」 | 程序 **exit 3**；`ok=false`、`ERR_LANE_ALL_ROUTES_EXHAUSTED`、`served_arm_assigned=null`、`usage_receipt_ok=false`、`completion_evidence.checked=false`、`assignment_posture.enforced=false` | 結論不變（NOT served），但 exit code 與「enforced=false」是新的可稽核事實 |
+
+原始更正紀錄：`W0_R6_W1ENTRY_20261114/out/CORRECTION_20261114.json`（1,268 B）。
