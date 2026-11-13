@@ -8,8 +8,9 @@
 
 | 檔案 | 角色 | bytes | sha256 |
 |---|---|---:|---|
-| `FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_實質正文.md` | W0 vNEXT 實質正文（可續工） | 21570 | `bf7d080db86bf5be61ec952b1e45212933258d489c3d53f4e076a077bf142797` |
-| `FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_證據型附錄.md` | 證據型附錄（manifest／POS-NEG／HOLD／推送） | 15400 | `5b71249c4dfd91cba11c6bb8f5312b6666d0a2082a9248834239df557701b15a` |
+| `FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_實質正文.md` | W0 vNEXT 實質正文（可續工） | 21791 | `c4617197f47bb2c2437b9340b4cffda740369bf7c4796f1aba3a6166a8656d7f` |
+| `FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_證據型附錄.md` | 證據型附錄（manifest／POS-NEG／HOLD／推送／更正） | 17289 | `5de9a02a2f6f500fcb40a1fc9d107b70d72511dcd868eef70adaf64373f7843a` |
+| `CORRECTION_20261114.json`（在 round `out/`） | 兩筆更正的原始紀錄 | 1268 | 見 round `out/` |
 | `DELIVERY.json` | 兩檔 bytes／sha256 的單向 manifest | — | — |
 | `W0_R6_W1_HANDOFF_SBL.md`（在 SBL 分支） | SBL 側交接，不複製全文 | 3094 | — |
 
