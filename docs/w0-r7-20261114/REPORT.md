@@ -3,8 +3,9 @@
 > **版本**：`FHS-PIPD-LS-PKG-W0-vNEXT/2026-11-14-r2`（Asia/Taipei）
 > **內部簡稱**：W0 vNEXT 交付視圖 r2
 > **前版**：r1（`c4617197f47bb2c2437b9340b4cffda740369bf7c4796f1aba3a6166a8656d7f`，21,791 B）
-> **Claim ceiling**：`SOURCE_READ + HOST_RAW + AUTHOR_DESIGN + LOCAL_CHECK + LANE_SERVED + WRAPPER_SCOPED_SOD`
-> **不在本件的聲明**：`ORIGINAL_ACK`／`NATIVE_PASS`／`INDEPENDENT_PASS`／`RELEASE`
+> **Claim ceiling**：`SOURCE_READ + HOST_RAW + AUTHOR_DESIGN + LOCAL_CHECK + LANE_SERVED + WRAPPER_SCOPED_SOD + OWNER_SCOPED_ORIGINAL_ACK`
+> **不在本件的聲明**：`PIPD_COMPILER_REPARSE`／`NATIVE_PASS`／`INDEPENDENT_PASS`／`RELEASE`
+> **Owner 親簽**：`WIN-077bbb5500b1` 於 2026-11-14 簽出兩份（`owner_semantic_accept` ＋ `original_reader_ack`），見 §2.8
 > **配對證據**：`FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_證據型附錄.md`（同目錄）
 
 ---
@@ -169,6 +170,17 @@ admission_status=UNPROVEN  claim_ceiling=CANDIDATE_ONLY
 
 `READY_TO_PROMOTE_UPSTREAM` 的判定：**不成立**。P0-04／P0-08／P0-09 未達真 PASS，依 baseline §3.1 只能停在 `READY_TO_DRAFT_L0_L1_L2_WITH_SCOPED_HOLDS`。
 
+### 2.8 Owner 親簽（本次實際簽出，ed25519 已驗）
+
+| # | kind | 主體 | payload sha256 | 簽章驗證 | 回執 |
+|---|---|---|---|---|---|
+| 1 | `owner_semantic_accept` | `FHS-W0-R7-POS02-LOCATOR`（POS-02 判準；內含兩檔 sha＋map sha，作 `H-POS02-PAIR` 的 repo 外錨） | `6f4933269b7c9f7b6388cb4be76d30d3a53eacca78a28b6432bf1e326c79404b` | **true** | `out/SIGN_BODY_POS02.SIGNED.json` |
+| 2 | `original_reader_ack` | `FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2`（r8 綁定＋兩交付＋來源清冊；`FHS.W0.FhsOriginalAck/3` 六欄齊備） | `d0ab1b8ba53b19b35a786211f2eb166e818e2166ab050bcf1e48eccb98755180` | **true** | `out/SIGN_BODY_ORIGINAL_ACK.SIGNED.json` |
+
+金鑰來源：`WIN-077bbb5500b1`（`owner_fingerprint=412b351937be72a1`，broker 在 127.0.0.1:6351，ops 2/6）。簽章以 `owner_public_hex` 獨立重驗通過。**agent 全程未接觸口令或私鑰**。
+
+`original_reader_ack` 的 `not_claimed` 明確列出：`PIPD_COMPILER_REPARSE`、`PI_PD_ECP_TQAEP_CANONICAL_PROMOTION`、`NATIVE_ADMISSION_OR_WORKID`、`INDEPENDENT_PROTECTED_CHECKER_VERDICT`、`RELEASE`。也就是說：**ACK 成立在 owner scope，不是原 Compiler 重解析**；這條界線寫在簽章本體裡，不靠讀者推論。
+
 ---
 
 ## 3｜W0 六個 Primary WP（L2 §04 的集合）
@@ -212,11 +224,12 @@ W1 的入口不是「文件寫完」，而是這四條同時成立（L2 §04 W1�
 
 | HOLD | 只影響 | FirstFail（實測） | 解除條件（Resume） | 誰能解 |
 |---|---|---|---|---|
-| `H-READER` | 原 Canonical PI/PD/ECP/TQAEP 的正式接受 | `spec_identity` 只證作者端身分；原 Compiler 未載入 | 原 SBL PIPD Reader 對同 Subject/Source 回 ACK；可用 owner 信封的 `original_reader_ack` 簽 | 業主／SBL PIPD 原 Reader |
+| `H-READER` | 原 Canonical PI/PD/ECP/TQAEP 的正式接受 | **已由 owner 以 `original_reader_ack` 簽署（2026-11-14, `payload d0ab1b8b…`, `signature_verified=true`）**；但 SBL-hosted 原 Compiler 未載入 → 重解析仍 NOT_RUN | ACK 已達 owner scope；要升 PIPD canonical 仍須原 Compiler 重解析（`H-READER-PIPD`） | 業主（已簽）／SBL PIPD 原 Reader |
+| `H-READER-PIPD` | PI/PD/ECP/TQAEP 的 canonical 編譯 | 原 Compiler 未載入；`pipd` CLI 只跑 13 verbs 自檢 | 載入 `integrations/pipd` 並對同 Subject 重解析成功 | SBL PIPD Writer |
 | `H-H16` | Protected SoD 的「真獨立」聲明 | 三 NEG 會拒，但豁免路徑的 nonce 未成立 | 不同受保護憑證的 Checker 對同 Case/Raw 出 verdict | HGK Trust／Protected Checker |
 | `H-ENTRY` | Fabric NAV 當授權 | `effect_permission=NONE` | 原 Fabric Policy Consumer 的 ActiveEpoch＋LoadedDigest＋ACK | Fabric Policy Owner |
 | `H-POS02` | ~~`selfcheck` 16/16~~ **已解** | 定位失敗 → 以 pin 為判準、位元不符仍硬 FAIL；VERIFY 車道 `VERDICT: PASS`、`selfcheck` 16/16、NEG 成立 | 已達；正式錨＝owner 簽 `POS02_LOCATOR_CANDIDATE.md`（簽後免再議） | 已完成（VERIFY＋owner 預授權） |
-| `H-POS02-PAIR` | pin 與控制檔被「同時」改動的共謀風險 | VERIFY 明確指出：compromised pair 可冒充 pin-only | owner 簽署的 `POS02_LOCATOR_CANDIDATE.md`（內含兩檔 sha 與 map sha）作為獨立錨；未簽前 pin 與檔案同屬 repo | 業主簽（視窗已開） |
+| `H-POS02-PAIR` | pin 與控制檔被「同時」改動的共謀風險 | VERIFY 明確指出：compromised pair 可冒充 pin-only | **已錨定**：owner 於 2026-11-14 以 `owner_semantic_accept` 簽署 `SIGN_BODY_POS02.json`（`payload 6f493326…`、`signature_verified=true`），簽章內容含兩檔 sha 與 map sha，成為 repo 外的獨立錨 | 業主（已簽） |
 | `H-GUARD-EPOCH` | Guard 的 epoch 一致性 | `live_epoch=44` vs registry 41（欄位錯接） | 原域 merge 附錄 G 的 patch 後重跑 guard | HG-KSEOS 原 Owner |
 | `H-RETIREMENT-BOUNDARY` | 「退役臂在所有路徑都不可達」 | 派送層 4/4 拒，但 relay 直呼仍 200 | 原域封閉 relay 直呼邊界（身分或 ACL） | HG-KSEOS／relay Owner |
 | `H-G16B` | Full-scan Closure | 無 `hgk-main` 完整 checkout，`scan_complete` 無法為 true | 原 HGK pinned ref 完整 checkout 後重跑 | HGK 原 Owner |
