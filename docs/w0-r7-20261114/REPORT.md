@@ -277,7 +277,13 @@ W1 的入口不是「文件寫完」，而是這四條同時成立（L2 §04 W1�
 | D4 96 Oracle CasePlan | `out/WP21_ORACLE96_CASEPLAN.json`（59,993 B） | 96 = 12×8、runner=null、狀態 PLANNED | 96 cells、8 個 `NA_WITH_BASIS`、`runner_binding=null` |
 | FUO 重建 | `_local/W0_FIRST_FUO/`（9 檔） | atom digest 可解析回現行 map | 4,422 atoms；旧 `3b2ccbbe…` 消失；411/415 digest 可解析 |
 
-D2 由 **EXECUTE 車道（Codex bounded writer）** 從 BODY-08 原文產出，D1/D3/D4 由作者端決定性腳本產出，VERIFY 車道獨立挑戰（回執 `out/LANE_VERIFY_W0CLOSE.json`）。
+D2 由 **EXECUTE 車道（Codex bounded writer）** 從 BODY-08 原文產出，D1/D3/D4 由作者端決定性腳本產出，VERIFY 車道**兩輪**獨立挑戰：
+
+- **R1：`OVERALL: FAIL`** — D1 被判 `CURRENT_BY_LOCK` 讀起來像在宣告 currentness；D5 的 aggregate 演算法未寫在檔內、無法重算。兩者都成立，未爭辯。
+- **修補**：D1 改 `IDENTITY_MATCHES_LOCK` ＋ 每列新增 `currentness: NOT_DECIDED_BY_THIS_LEDGER`；D5 改寫成 v2，把 `aggregate_method` 寫進檔、另出 `G16B_MANIFEST.csv`，aggregate 改為 `sha256('\n'.join(f'{sha}  {path}')\n)`（依 path 排序），可由 manifest 單獨重算。
+- **R2：`OVERALL: PASS`** — 五項全 PASS（D5 判語：`Ordinal recomputation matches 8ab5d0cd`）。
+
+回執：`out/LANE_VERIFY_W0CLOSE.json`（R1）、`out/LANE_VERIFY_W0CLOSE_R2.json`（R2）。
 
 ### 7.3 非 W0 項目：合規移交（不是「未解」）
 
