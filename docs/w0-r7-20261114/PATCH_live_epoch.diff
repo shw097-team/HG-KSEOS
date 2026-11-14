@@ -1,0 +1,20 @@
+--- a/HG-KSEOS/scripts/hgk-lane-guard.py
++++ b/HG-KSEOS/scripts/hgk-lane-guard.py
+@@ _live_epoch @@
+     try:
+         doc = lp.load_site(source_path)
+     except Exception:
+         return None
+-    if isinstance(doc, dict) and "revision" in doc:
+-        return int(doc["revision"])
+-    return None
++    if not isinstance(doc, dict):
++        return None
++    # The assignment carries its own `revision` (44) and the epoch as `registry_epoch` (41).
++    # Reading `revision` as the epoch makes every guard call look stale.
++    for key in ("contract_epoch", "registry_epoch", "epoch"):
++        if key in doc:
++            return int(doc[key])
++    if "revision" in doc and "source_of_routes" in doc:
++        return int(doc["revision"])
++    return None

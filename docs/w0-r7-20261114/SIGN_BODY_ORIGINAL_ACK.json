@@ -1,0 +1,69 @@
+{
+ "schema": "FHS.W0.FhsOriginalAck/3",
+ "act": "ORIGINAL_READER_ACK",
+ "issued_by": "Human Owner (single, this host) acting as the original domain owner for this Subject",
+ "round": "W0_R7_FULL_20261114",
+ "act_date": "2026-11-14",
+ "subject": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2",
+ "subject_scope": "W0 交付視圖（實質正文＋證據型附錄）之來源綁定與判準，範圍限 W0 之 SOURCE_READ／LOCAL_DRAFT／LOCAL_CHECK；不含 PI/PD/ECP/TQAEP canonical 編譯、不含 Native 准入、不含獨立驗收、不含發行。",
+ "signed_subject": {
+  "artifact_id": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2",
+  "binding_spec": {
+   "path": "C:/Projects/Agent_Workspace/FHS_NEXT/spec/FHS_PIPD-LS-PKG_W0_20261112_r8.md",
+   "bytes": 680998,
+   "sha256": "42546311c3c62ae4c721403740ac675b748f3f66898157fca94c328af592ecc4"
+  },
+  "deliverables": {
+   "實質正文": {
+    "path": "C:/Projects/Agent_Workspace/FHS_NEXT_Workspace/W0_R7_FULL_20261114/deliverables/FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_實質正文.md",
+    "bytes": 23978,
+    "sha256": "c4a55dfbf872666d7552cffacec7dd5d"
+   },
+   "證據型附錄": {
+    "path": "C:/Projects/Agent_Workspace/FHS_NEXT_Workspace/W0_R7_FULL_20261114/deliverables/FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_證據型附錄.md",
+    "bytes": 47357,
+    "sha256": "37cde7c5f6e533f94229a374a94ab071"
+   }
+  },
+  "source_manifest": {
+   "path": "C:/Projects/Agent_Workspace/FHS_NEXT/provenance/SOURCE_IMPORT_MAP.json",
+   "bytes": 256666,
+   "sha256": "1bae7892372ae63a085ff432a430eff7"
+  }
+ },
+ "candidate_sha256": "c4a55dfbf872666d7552cffacec7dd5d",
+ "reader_key": {
+  "holder": "Human Owner (single, this host)",
+  "credential": "owner envelope ed25519 key, unlocked in WIN-077bbb5500b1",
+  "owner_fingerprint": "412b351937be72a1",
+  "principal_separation": "owner key is a distinct technical principal from the agent session that produced the candidate; the agent never held the passphrase or the private key"
+ },
+ "quorum": {
+  "required": 1,
+  "receipt_set": [
+   {
+    "receipt": "W0_R7_FULL_20261114/signing_window/artifacts/OWNER_WINDOW.json",
+    "window_id": "WIN-077bbb5500b1"
+   }
+  ]
+ },
+ "acknowledged": [
+  "r8 是本 Subject 的 current W0 規格，兩份 r2 交付是其交付視圖，不改寫 r8 任何條款",
+  "31/31 來源語料 gate 通過（declared 31 / matched 31 / missing 0）",
+  "三份 SPEC 同 Goal／SubjectRef／Scope／SourceManifestSHA 且四項相異（spec_identity exit 0；錯 manifest exit 14）",
+  "control/ 兩檔 bytes 等於 import map 宣佈的 target_sha256（POS-02 pin 判準，VERIFY 車道 PASS）",
+  "P0/P1 逐項判定與具名 HOLD 台帳為本輪真實現況，未升格任何未取得之收據"
+ ],
+ "not_claimed": [
+  "PIPD_COMPILER_REPARSE（SBL-hosted 原 Compiler 未載入，仍 NOT_RUN）",
+  "PI_PD_ECP_TQAEP_CANONICAL_PROMOTION",
+  "NATIVE_ADMISSION_OR_WORKID",
+  "INDEPENDENT_PROTECTED_CHECKER_VERDICT",
+  "RELEASE"
+ ],
+ "residual_holds": [
+  "H-READER-PIPD：owner-scope ACK 不等於原 Compiler 重解析",
+  "H-H16：無不同受保護憑證的 Checker verdict",
+  "H-POS02-PAIR：pin 與控制檔共謀風險（已由 POS02 簽章錨定）"
+ ]
+}

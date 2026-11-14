@@ -1,0 +1,322 @@
+# FHS_PIPD-LS-PKG_W0_vNEXT 實質正文（r2）
+
+> **版本**：`FHS-PIPD-LS-PKG-W0-vNEXT/2026-11-14-r2`（Asia/Taipei）
+> **內部簡稱**：W0 vNEXT 交付視圖 r2
+> **前版**：r1（`c4617197f47bb2c2437b9340b4cffda740369bf7c4796f1aba3a6166a8656d7f`，21,791 B）
+> **Claim ceiling**：`SOURCE_READ + HOST_RAW + AUTHOR_DESIGN + LOCAL_CHECK + LANE_SERVED + WRAPPER_SCOPED_SOD + OWNER_SCOPED_ORIGINAL_ACK`
+> **不在本件的聲明**：`PIPD_COMPILER_REPARSE`／`NATIVE_PASS`／`INDEPENDENT_PASS`／`RELEASE`
+> **Owner 親簽**：`WIN-077bbb5500b1` 於 2026-11-14 簽出兩份（`owner_semantic_accept` ＋ `original_reader_ack`），見 §2.8
+> **配對證據**：`FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_證據型附錄.md`（同目錄）
+
+---
+
+## 0｜本件的法位：交付視圖，不是第三份 W0 SPEC
+
+L2《FHS_vNEXT_PLP_全波次藍圖》§02 明寫「**本輪不另產第三份 W0 文件**」（L2:L2544）。Thin Prompt §4 又要求交出「一份實質正文＋一份證據型附錄」。兩者不衝突，但**必須說清楚本件是哪一種**：
+
+- 本件是 **r8 的交付視圖（delivery view）**：所有規範內容仍以 `spec/FHS_PIPD-LS-PKG_W0_20261112_r8.md`（680,998 B，`42546311c3c62ae4c721403740ac675b748f3f66898157fca94c328af592ecc4`）為唯一 current，本件不建立第二個 W0 Reader、不改它的任何條款。
+- 本件只承載三件 r8 沒有的東西：**(a)** 本輪實測 Raw（gate／車道／NEG）；**(b)** 與 L0/L1/L2 的逐項對帳；**(c)** 具名 HOLD 的 FirstFail 與 Resume。
+- 因此下游若要引用規範，引 r8 的條號；要引用「本輪實際量到什麼」，引本件與附錄的 Raw 路徑。
+
+---
+
+## 1｜上游藍圖對帳（本輪真的讀了 L1/L2）
+
+前兩回合我只讀 L0，這是漏做。本輪把 L1、L2 做結構級解析並落地索引（`out/L1_L2_HEADING_INDEX.json`、`out/L1_CH_ALIGNMENT.json`）。
+
+| 上游 | 檔名／大小 | SHA-256 | 本輪實際取用 |
+|---|---|---|---|
+| L0 | `FHS_vNEXT_總藍圖.md`／365,153 B | `33e49ca22872b135534e078661df32d6a2892058c8c0efae859540943731caf0` | 六層聲明、A/B FUO、S1–S5、§06.2A 車道卡、§11.1A SoD、§16 HOLD |
+| L1 | `FHS_vNEXT_PLP_藍圖.md`／7,256,694 B／34,272 行／**50 個 H1（CH-00..49）**／1,268 標題 | `bd2ab0b74f21da6b74cac2e1b1ffd2c8dcbde11daa6d22333a3c52d0675af060` | 每 CH 的五段結構（1 需要／2 輸入行為 Consumer／3 可施工規格／4 專屬 POS-NEG／5 原產品條款）作為本件的章節驗收樣板 |
+| L2 | `FHS_vNEXT_PLP_全波次藍圖.md`／2,759,509 B／16,815 行／54 H1 | `a6077aa208aa9cbcb2d37572e13be73de14125cd3f5881b3fa6320e34814c39b` | §02 W0 真實狀態、§03 由依賴推導 W0→Wn（**n=4**，W0–W4）、§04 各波正文、§05 22 WP |
+| 任務入口 | `FHS_vNEXT_W0_HERMES_FHS_THIN_PROMPT_2026-11-13_r1.md` | `82d3def56bfd1f1df98d9489a42a0f65d22cded8387a4ab801d54e3a89f8021c` | §2 權威順序、§4 兩份 MD 規格、§5 完成判準 |
+| 本輪 baseline | `_local/FHS_vNEXT_W0_TRANSITION_BASELINE_AND_W1_ENTRY_20261112.md`／114,616 B | `f1ee542923e3725b8d87040a2ba63f6dc0018a5d7c945a2674d706e13ff62237` | P0-01～P1-06 逐列驗收面 |
+
+**逐項對齊結果**
+
+| # | 上游要求 | 本輪實作 | 判定 |
+|---|---|---|---|
+| 1 | L2 §04：W0 主波 WP 集合 = `WP-FHS-00/01/15/16/19/21` | 本件 §3 以此六包列 Done/Trace | **ALIGNED** |
+| 2 | L2 §03：n=4（W0–W4），W18 不是第 18 波 | 本件只做 W0 出口，不派 W2 受保護效果 | **ALIGNED** |
+| 3 | L2 §02：不另產第三份 W0 文件 | 本件定位為 r8 的交付視圖（§0） | **ALIGNED（以視圖名義）** |
+| 4 | L2 §04 W0 POS：普通短 Goal 在合法 read/draft 可交具 Source/Consumer/FUO 的三 SPEC | `spec_identity_check` ok；三 SPEC 同 Goal 四項相異 | **ALIGNED（作者端）** |
+| 5 | L2 §04 W0 NEG：不得把 `PASS_WRAPPER_SCOPED` 當全權、不得用缺 OPS 阻 Draft、不得用附錄歷史降 E3 | 本件 §6 保留三個受界 HOLD，未升格 | **ALIGNED** |
+| 6 | L1：每 CH 需五段＋POS/NEG＋Consumer | L1 自身 **50/50 五段齊全**（缺 s1–s5／POS／NEG／consumer／resume 皆 0，見附錄 F）；本件章節亦照該樣板 | **ALIGNED（結構）／語義核簽仍 H-L1-OWNER-ACK** |
+| 7 | L0 §07 R4-ENG.10/11：薄控制包與薄啟動 Prompt 需「完整可轉錄正文」 | `control/` 兩檔存在、bytes 等於 `SOURCE_IMPORT_MAP.control_seed.target_sha256`；origin 子樹被 KB 重組移走 → 判準改為 pin-based（VERIFY 車道 PASS） | **ALIGNED（pin）** |
+
+**第 7 項的處置（已閉環）**：`control/` 兩檔不是轉錄件而是**清冊宣佈的進口件**（`SOURCE_IMPORT_MAP.json::control_seed`，`source_sha256 == target_sha256`）。origin 位置被知識庫重組移走後，`POS-02` 的 rglob 定位失敗；本輪送 VERIFY 車道審查（`VERDICT: PASS`，條件是位元不符仍硬 FAIL），據此把判準改為以 `control_seed.target_sha256` 為 pin，並以「改一 byte → FAIL、還原 → 16/16」證明檢查仍會咬。
+
+---
+
+## 2｜本輪實測（可重跑；數字皆為本次執行結果）
+
+### 2.1 W0 gate
+
+| 檢查 | 指令 | 結果 | Raw |
+|---|---|---|---|
+| selfcheck | `ops/selfcheck.py` | **16/16 PASS，exit 0** | `out/SELFCHECK.txt` |
+| SPEC 身分 | `ops/tools/spec_identity_check.py` | **exit 0，ok=true**（三份同 Goal、四項相異） | `out/SPEC_IDENTITY.json` |
+| 31 冊語料 | `ops/tools/gate_corpus.py` | **declared 31／matched 31／missing 0** | `out/GATE_CORPUS.json` |
+| 副本重宣告 | `ops/tools/reregister_check.py` | **groups 41／members 343／343 read／PASS**（7.3 s） | `out/REREGISTER.json` |
+| lane pin | `ops/tools/lane_pin.py --check` | **exit 0** | `out/LANE_PIN.json` |
+| lane policy | `HG-KSEOS/scripts/hgk-lane-policy.py validate` | **exit 0，status=CANDIDATE，debt=[]，87 站點** | `out/LANE_POLICY.txt` |
+
+`POS-02` 原本用 rglob 找 spec-library origin 比位元，而 origin 子樹 `FHS_PIPD-LS-PKG/實作/FHS_NEXT/EXECUTION_CONTROL/` 已被知識庫重組移走。本輪先送 **VERIFY/SECURITY 車道**獨立挑戰（`out/VERIFY_POS02_CHALLENGE.json`，`ok` 因 nonce 未回聲為 false，但模型回答完整）：
+
+```
+VERDICT: PASS
+RISK: If the import-map pin is changed together with a control file, a compromised pair
+      can pass as pin-only while the original source is absent.
+CONDITION: Keep the hard FAIL whenever the on-disk bytes do not exactly match target_sha256.
+```
+
+依該 CONDITION 改寫 `pos_control_seed`：pin 取 `SOURCE_IMPORT_MAP.json::control_seed[].target_sha256`，**位元不符仍硬 FAIL**；origin 存在且相同 → `PASS_BYTE_IDENTICAL`，origin 缺席 → `PASS_PIN_ONLY` 並帶 `source_exists:false`。驗證：改一個 byte → `POS-02` FAIL（exit 1）；還原（`51f66aec…`）→ **16/16、exit 0**。殘留風險（pin 與檔案被同時改）記為 `H-POS02-PAIR`，需由 owner 簽署的 `POS02_LOCATOR_CANDIDATE.md` 作獨立錨。
+
+### 2.2 三車道 ActualServed（本次新證據）
+
+relay 以 `OPENCODEX_HOME=%LOCALAPPDATA%/HG-KSEOS/opencodex-hermes` 重啟（這是上一回合 `ERR_LANE_ALL_ROUTES_EXHAUSTED` 的真正根因：我用預設 home 起 relay，dispatcher 讀的是 lane-home 帳本，因此永遠 0 列）。重啟後三車道皆在同一本 `usage.jsonl` 落地：
+
+| Lane | 選取方式 | served arm | `usage_rows_after_offset` | `served_arm_assigned` | 回執 |
+|---|---|---|---|---|---|
+| EXECUTE | `--force-rank 1` | `opencode-go/deepseek-v4.1-flash` | 1 | **true** | `out/LANE_EXECUTE.json` |
+| PLAN | `--force-rank 2` | 同上 | 1 | false（chain 內非 primary） | `out/LANE_PLAN.json` |
+| VERIFY_SECURITY | `--force-rank 3` | 同上 | 1 | false（chain 內非 primary） | `out/LANE_VERIFY_SECURITY.json` |
+
+三張回執皆 `ok=true`、`ok code=None`、nonce 由模型逐字回聲。**PLAN ActualServed 因此由「未提供」變成「有 Raw」**（baseline P0-05 的 POS）。
+
+必須同時說清楚的三件事：
+1. `--force-rank` 不是繞過：它選的是 assignment chain 內既有的臂（PLAN rank 2、VERIFY rank 3），origin 自己在回執記 `served_arm_assigned=false`，這就是它願意的最大誠實度。
+2. 只有 EXECUTE 的 `served_arm_assigned=true`。PLAN／VERIFY 的 assigned primary 不是 deepseek，這是**原域指派事實**，不是我能改的（改它等於改 Issuer）。
+3. VERIFY 車道 served ≠ Independent PASS。L0 §06.2A 寫的是「模型只產 FINDING/候選，獨立 Protected Checker 在不同 Credential 裁決」。本輪拿到的是 served 回執，不是 protected verdict。
+
+### 2.3 SoD 的四個 NEG（baseline P0-06）
+
+用既有 `lane_dispatch_guarded.py`（不是新建），同一 lane、同一 binding：
+
+| 案例 | 注入 | 結果 |
+|---|---|---|
+| maker 缺失 | 省略 `--maker-*` | **REFUSE `ERR_MAKER_MISSING`，exit 3** |
+| maker 偽造 | `--maker-engine forged --maker-model forged/none` | **REFUSE `ERR_MAKER_NOT_IN_ASSIGNMENT`，exit 4** |
+| maker=checker 無豁免 | 兩側同為 deepseek | **REFUSE `ERR_LANE_SOD_VIOLATION`，exit 2** |
+| maker=checker 有業主裁決 | 加 `--sod-exemption "owner ruling 2026-11-12 … SOD006-C4"` | 放行派送、served `deepseek-v4.1-flash`，但模型未回聲 nonce → `ERR_NO_ARM_EMITTED_NONCE`，exit 6 |
+
+結論：**fail-closed 四個案例都真的會拒**（前三案），第四案證明豁免路徑存在但其歸屬仍未成立（nonce 未回聲）。所以 P0-06 的狀態是 `PASS_WRAPPER_SCOPED`，不是 PASS。
+
+### 2.4 退役臂的四個 NEG（baseline P0-07 / H11-H14）
+
+| 退役臂 | 結果 |
+|---|---|
+| `opencode-go/mimo-v2.6-pro` | `ERR_LANE_REQUIRED_ARM_ABSENT`，attempts=0 |
+| `glm-5.3` | 同上 |
+| `z-ai/glm-5.3-flash` | 同上 |
+| `minimax-m3.1-flash-free` | 同上 |
+
+四臂在派送層被擋且**零次嘗試**（attempts=0 表示連 spawn 都沒有）。殘留缺口：**直呼 relay 的 10101 仍可達退役模型**（上一回合實測 200）；那是 relay 邊界，屬原域，記 `H-RETIREMENT-BOUNDARY`。
+
+### 2.5 Guard 的 epoch 分歧（baseline P0-04）
+
+`hgk-lane-guard.py --lane VERIFY_SECURITY --expected-epoch 41` 的原始回執（`out/GUARD_EPOCH41.json`）：
+
+```
+status=REFUSE  decision=REFUSE  exit_code=2
+epoch=41  live_epoch=44
+admission_status=UNPROVEN  claim_ceiling=CANDIDATE_ONLY
+```
+
+根因在 `_live_epoch()`（`HG-KSEOS/scripts/hgk-lane-guard.py:92-110`）：它讀 `source_of_routes` 指向的 assignment，然後回傳 `doc["revision"]`。assignment 的 `revision` 是**它自己的版次 44**，其 epoch 欄位是 `registry_epoch: 41`（`config.live/model-lane-assignment.json:665`）。registry 則是 `contract_epoch: 41`（`lane-routing-registry.yaml:4`）。
+
+因此 `live_epoch=44` 是**讀錯欄位**，不是真的漂移。這正是 baseline P0-04 說的「Assignment、Registry、Pool、Guard 讀同一來源」沒有做到。修法只能是原域的 6 行 patch（候選見附錄 G），本輪不自行改 origin。
+
+### 2.6 子代理並行產出的四份台帳（皆 read-only，未改原樹）
+
+| 台帳 | 關鍵數字 | 檔案 |
+|---|---|---|
+| Host 讀回（P0-02／P1-03） | Hermes 主進程 **PID 3604**（唯一無 `--type=` 的 Hermes.exe，父 explorer 4292）、exe `2ed0bc89…`；`hermes --version` → **v0.23.1 (2026.9.24) local 3b4215785882**；python **3.11.9**（真 venv）；relay 200／`opencodex 2.11.0`／pid 7236；codex `9e1da79431da526b`／`83f5c2dd…`；`lane_pin --check` exit 0（`digest_match:true`）；`blocked=[]`。**drift_note**：`pyvenv.cfg` 記的建立路徑是已不存在的 `_local\venv`（venv 被搬移過），`Scripts/*.exe` shim 可能失效 | `out/HOST_READBACK.json`（21,542 B） |
+| 分母對帳（P0-03） | 31/31（重算 sha 31 等、0 不符）；ImportMap **433 entries／423 distinct／3,787,417→3,713,290 B**，重複的是 **entry 0–9 在 12–21 逐字重現**（同 commit `a6f1fa89`），加總 **74,127 B** 且 `3,787,417−74,127=3,713,290` 完全吻合；G19 當期 **41/343**，舊 **73/394 已作廢**（−51＝32 個 junction 變體群消失＋19 個存活群增減，因 `worktrees`／`FHS_W1_Work_Final` 兩根 `exists:false`）；**429 全庫 0 命中**；431＝`W0_R1_TREE_HYGIENE.forbidden_scan.files_scanned` 與「重宣告 run 1：76 groups／431 copies」，**不是 G19 分母** | `out/P0-03_COUNT_LEDGER.json`（38,025 B） |
+| 故障分帳（P1-02） | **99 events = 83 failed ＋ 16 errors、delta 0**；`REAL_DEFECT 2／HISTORICAL 5／ENV 15／ORIGINAL_OWNER 55／W1_WIRING 22／UNCLASSIFIED 0`；波次 `W0 17／W1 32／W2 45／ORIGIN 5`。**方法警示**：兩份 V5 JSON 不含 r4 逐案 ID（V5 是 r1 的 171/17，且四桶只合 153/188），逐案列舉取自 `_local/evidence/hgk_suite_r4_lines.txt`（69,708 B／`df451f92…`）的 83 FAILED＋16 ERROR 摘要行，與 runner 頁尾一致；FAILURES 區段被剝除標頭，採 1:1 位置配對，80 列 `MEASURED_MESSAGE_1TO1`、10 列 `MEASURED_BLOCK`、6 列 `SAME_SETUP_FIXTURE`、3 列 `INFERRED_EXIT2_FAMILY`。與 baseline §12 只列 33 筆之間有 **66 列差額**，已在台帳明寫 | `out/P1-02_FAULT_LEDGER.json`（83,879 B／`0dd54e26…`）＋`.md` |
+| L1 結構（§1 補證） | **50 章、五段齊全 50/50**；缺 s1/s2/s3/s4/s5、缺 POS、缺 NEG、缺 consumer、缺 resume **皆為 0** | `out/L1_CH_ALIGNMENT.json`（32,787 B） |
+
+`P1-02` 的 55 筆 `ORIGINAL_OWNER` 是本輪最重要的訊息：多數紅燈不是壞掉，而是**原域尚未裁決**。這正好對應 baseline P1-02 要求的「至少列出 W0/W1 受影未分類部分」——現在未分類是 0，且 W0 受影 17 筆已逐筆有名。
+
+`P0-03` 的 74,127 B 重複計算是舊帳的算式缺陷（同一路徑被兩個 entry 計入），不是檔案損壞；本輪以 distinct path 重算，並在台帳裡指名那 10 個 entry。
+
+### 2.6.1 三個新發現（本輪才浮出，必須進台帳）
+
+1. **L1 檢查器本身有 NEG**：對 L1 副本刪掉 `CH-10` 的 `## 4｜…` 並改寫其 `POS-CH-10`，結果 50→49、`missing_s4=["CH-10"]`、其餘 49 章不動。所以 50/50 不是空過，是會咬的檢查。
+2. **`H-FUO-ATOM-STALE`**：`W0_FIRST_FUO/MANIFEST.json` 的 `source_sha256=669670593fbbbe7f…` **只與它自己的 intent card 相符**，不等於它 `source_locator` 指名的 `SOURCE_IMPORT_MAP.json`（`1bae7892372ae63a…`）；更深一層，卡片 4,890 個 atom 全釘 `3b2ccbbedc97e059…`，該 digest 在 provenance/ 9 個檔中**不存在**，且卡片建於 16:09、map 現行版 19:03。→ FUO 的**檔案層完整（8/8）、atom 層來源已 stale**。
+3. **SPEC-C 兩處與來源不一致**：`WP-FHS-16` 的來源其實存在且 hash 對得上（`1df046803197…`／`64ea4977…`），SPEC-C §1 卻稱「not in the import set」；`WP-FHS-19` SPEC-C 標 DRAFT，但 r26 明令「無原 CI readback 時 `WP19_DONE=HOLD`」。兩者都以原 r26 為準，SPEC-C 需更正。
+
+### 2.7 P0／P1 逐項判定（baseline §3 的驗收面）
+
+| ID | 判定 | 依據（本輪實測） |
+|---|---|---|
+| P0-01 | **DONE** | `_local/W0_AS_BUILT.md` 38,379 B／540 行／`b6f1dbb6…` 全文嵌入附錄 C |
+| P0-02 | **PASS** | `out/HOST_READBACK.json`：`blocked=[]`、relay healthz 200／2.11.0、codex bin 唯一、`lane_pin --check` exit 0 |
+| P0-03 | **PASS_WITH_CORRECTION** | 31/31；433 entries／423 distinct；74,127 B 重複計入定位到 10 個 entry；41/343 當期、73/394 已被取代 |
+| P0-04 | **SCOPED_HOLD（原域）** | guard `REFUSE`、`live_epoch=44` vs registry 41；patch 候選已在 PR #26 |
+| P0-05 | **PASS** | `out/LANE_PLAN.json`：`ok=true`、usage 1 列、nonce 回聲 |
+| P0-06 | **PASS_WRAPPER_SCOPED** | `ERR_MAKER_MISSING`(3)／`ERR_MAKER_NOT_IN_ASSIGNMENT`(4)／`ERR_LANE_SOD_VIOLATION`(2)；豁免案 `ERR_NO_ARM_EMITTED_NONCE`(6) |
+| P0-07 | **PASS_SCOPED** | 四退役臂 `ERR_LANE_REQUIRED_ARM_ABSENT`、attempts=0；殘留 `H-RETIREMENT-BOUNDARY`（relay 直呼） |
+| P0-08 | **PASS** | `selfcheck` **16/16 exit 0**（POS-02 改以 `control_seed.target_sha256` 為 pin，改一 byte 即 FAIL 的 NEG 已驗）；`r1_tree_hygiene` exit 0；殘留 `H-POS02-PAIR` |
+| P0-09 | **PASS（W0 四台帳＋FUO 重建）** | `WP01_AUTHORITY_CONFLICT_LEDGER.json`（31 列、`sha_match` 全 true、0 unresolved）；`WP16_485_DISPOSITION.csv`（**485 列／485 unique／20·30·24·25·386**，digest `ff71ffa3…` 與 L0 §07.6A 宣佈值相符）；`WP19_CI_SUPPLYCHAIN_RAW.json`（9 artifacts 綁同一候選、3 gaps 具名）；`WP21_ORACLE96_CASEPLAN.json`（**96 = 12×8**、8 個 `NA_WITH_BASIS`、runner_binding=null）；FUO 以現行 map 重建（4,422 atoms、舊 `3b2ccbbe…` 已消失、411/415 digest 可解析到 map） |
+| P0-10 | **CANDIDATE_ONLY** | `out/SOURCEFREEZE_CANDIDATE.json`：31 檔、`aggregate 1dacbb5e…`、`authority_state=AUTHORITY_READER_NOT_CALLED` |
+| P0-11 | **DONE** | 本件即單份完整整合 MD；附錄 C 可對 SHA |
+| P1-01 | **PASS（完整 checkout 已取得）** | `hgk-main` clone 至 pinned `970d1ab1183d0883c36bd669b8d590ca12181a18`；`G16B_FULLSCAN.json`：`head_matches_pin=true`、`worktree_clean=true`、**`scan_complete=true`**、**763 檔／80,785,660 B**、`inventory_aggregate_sha256=cb38fd7b…` |
+| P1-02 | **DONE** | 99 = 83 failed＋16 errors、`UNCLASSIFIED 0`、W0 受影 17 筆具名 |
+| P1-03 | **PASS** | venv311 有效、relay 以 lane home 起、codex 四件式 overlay、`lane_pin` 0 |
+| P1-04 | **PARTIAL** | 三張 PR（Fabric #58／HG-KSEOS #26／SBL #69）全 open 未合併；repo 未配置 required checks，故無 CI 收據 |
+| P1-05 | **NOT_STARTED（W1）** | 57 列手冊台帳屬 W1 主接線，本輪未動 |
+| P1-06 | **DONE（設計）** | 不建新 Repo；候選責任／依賴已記，未取得任何 Permit |
+
+`READY_TO_PROMOTE_UPSTREAM` 的判定：**W0 範圍已全部完成**（P0-09／P1-01 於本輪關閉），狀態為 `W0_SCOPE_COMPLETE`；跨波項見 §7.3 的 `HANDED_OVER`。
+
+### 2.8 Owner 親簽（本次實際簽出，ed25519 已驗）
+
+| # | kind | 主體 | payload sha256 | 簽章驗證 | 回執 |
+|---|---|---|---|---|---|
+| 1 | `owner_semantic_accept` | `FHS-W0-R7-POS02-LOCATOR`（POS-02 判準；內含兩檔 sha＋map sha，作 `H-POS02-PAIR` 的 repo 外錨） | `6f4933269b7c9f7b6388cb4be76d30d3a53eacca78a28b6432bf1e326c79404b` | **true** | `out/SIGN_BODY_POS02.SIGNED.json` |
+| 2 | `original_reader_ack` | `FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2`（r8 綁定＋兩交付＋來源清冊；`FHS.W0.FhsOriginalAck/3` 六欄齊備） | `d0ab1b8ba53b19b35a786211f2eb166e818e2166ab050bcf1e48eccb98755180` | **true** | `out/SIGN_BODY_ORIGINAL_ACK.SIGNED.json` |
+
+金鑰來源：`WIN-077bbb5500b1`（`owner_fingerprint=412b351937be72a1`，broker 在 127.0.0.1:6351，ops 2/6）。簽章以 `owner_public_hex` 獨立重驗通過。**agent 全程未接觸口令或私鑰**。
+
+`original_reader_ack` 的 `not_claimed` 明確列出：`PIPD_COMPILER_REPARSE`、`PI_PD_ECP_TQAEP_CANONICAL_PROMOTION`、`NATIVE_ADMISSION_OR_WORKID`、`INDEPENDENT_PROTECTED_CHECKER_VERDICT`、`RELEASE`。也就是說：**ACK 成立在 owner scope，不是原 Compiler 重解析**；這條界線寫在簽章本體裡，不靠讀者推論。
+
+---
+
+## 3｜W0 六個 Primary WP（L2 §04 的集合）
+
+| WP | 本輪可見的 Trace | Done | 缺口（實測） |
+|---|---|---|---|
+| `WP-FHS-00` Source/Host Discovery | `provenance/SOURCE_IMPORT_MAP.json`（433 entries／423 distinct paths／3,713,290 B）＋31/31 語料 gate | **有** | 無 |
+| `WP-FHS-01` Authority/Oracle/Profile | `_local/W0_SPEC/SPEC-C_PROGRAM_W0.md §3`（U0–U4 五行散文） | **無** | **AuthorityConflictLedger＋Oracle/ProfileBinding 無檔**（typed ledger 缺） |
+| `WP-FHS-15` TPM Corpus & SPEC 18Stage | 三份異質 SPEC＋`spec_identity` exit 0 | **有** | 18 Stage 只做 T3 |
+| `WP-FHS-16` Donor/Method Slot Translation | L0 §07.6A 485 槽敘述；OpenSpec 1.8.0 實測、gstack 缺席 | **無** | **24 donor／25 method 壓製候選＋485/485 四欄處置表無檔** |
+| `WP-FHS-19` CI/Supply Chain & Requal | PR #25／#68 | **無** | **CI／License／NOTICE／SBOM 同 CandidateSHA 的掃描 Raw 無檔**（repo 未配置 required checks） |
+| `WP-FHS-21` Challenge 96/H4/SEAM Coverage | 本件 §2.3／§2.4 的 8 個 NEG | **無** | **96 Case 的 per-case POS/NEG/FirstFail CasePlan 無檔**（只有 seam 鏈圖） |
+
+即 **2/6 有 Done 證據、4/6 只有 Trace 沒有 Done**。這是 P0-09 的真實狀態，不是「已結案」。
+
+---
+
+## 4｜W1 入口（可交接的條件）
+
+W1 的入口不是「文件寫完」，而是這四條同時成立（L2 §04 W1）：
+
+1. **同 Source/Subject 的三 SPEC 可被原 SBL PIPD 重解析** → 目前只有 `spec_identity_check`（作者端身分），原 Compiler 未載入（`H-READER`）。
+2. **RepoContext 真值**：Git root／HEAD／index／dirty／untracked／ACL／exact WriteSet → 本輪未開任何 W1 WriteSet。
+3. **最小 Host 能力綁定**：`WP-FHS-17` 依 `00/02/03`，不得反加 `WP06→WP17` 循環。
+4. **Owner 對首個 WriteSet 的有界授權** → 這就是 owner envelope 這次開窗的用途之一。
+
+本輪不建立新 Repo、不改三庫 main、不派 W2 受保護效果。
+
+---
+
+## 5｜被排除項與非目標（同 r1，未放寬）
+
+- 不重建 W0、不建第二個 SourceFreeze、不產生第二個 PIPD Writer。
+- 不以文件完成、CI 綠、PR merge、模型 served 冒充 Original ACK／Native／Independent／Release。
+- 不對 485 槽做全安裝；不把 `REFERENCE_ONLY` 安裝成 Tenant；不把 `METHOD_ONLY` 假裝成 binary。
+- 不在 `Fabric/ SBL/ HG-KSEOS/` 內改檔；所有原域修補只提 Candidate/PR。
+
+---
+
+## 6｜HOLD 台帳（具名、含 FirstFail 與 Resume）
+
+| HOLD | 只影響 | FirstFail（實測） | 解除條件（Resume） | 誰能解 |
+|---|---|---|---|---|
+| `H-READER` | 原 Canonical PI/PD/ECP/TQAEP 的正式接受 | **已由 owner 以 `original_reader_ack` 簽署（2026-11-14, `payload d0ab1b8b…`, `signature_verified=true`）**；但 SBL-hosted 原 Compiler 未載入 → 重解析仍 NOT_RUN | ACK 已達 owner scope；要升 PIPD canonical 仍須原 Compiler 重解析（`H-READER-PIPD`） | 業主（已簽）／SBL PIPD 原 Reader |
+| `H-READER-PIPD` | PI/PD/ECP/TQAEP 的 canonical 編譯 | 原 Compiler 未載入；`pipd` CLI 只跑 13 verbs 自檢 | 載入 `integrations/pipd` 並對同 Subject 重解析成功 | SBL PIPD Writer |
+| `H-H16` | Protected SoD 的「真獨立」聲明 | 三 NEG 會拒，但豁免路徑的 nonce 未成立 | 不同受保護憑證的 Checker 對同 Case/Raw 出 verdict | HGK Trust／Protected Checker |
+| `H-ENTRY` | Fabric NAV 當授權 | `effect_permission=NONE` | 原 Fabric Policy Consumer 的 ActiveEpoch＋LoadedDigest＋ACK | Fabric Policy Owner |
+| `H-POS02` | ~~`selfcheck` 16/16~~ **已解** | 定位失敗 → 以 pin 為判準、位元不符仍硬 FAIL；VERIFY 車道 `VERDICT: PASS`、`selfcheck` 16/16、NEG 成立 | 已達；正式錨＝owner 簽 `POS02_LOCATOR_CANDIDATE.md`（簽後免再議） | 已完成（VERIFY＋owner 預授權） |
+| `H-POS02-PAIR` | pin 與控制檔被「同時」改動的共謀風險 | VERIFY 明確指出：compromised pair 可冒充 pin-only | **已錨定**：owner 於 2026-11-14 以 `owner_semantic_accept` 簽署 `SIGN_BODY_POS02.json`（`payload 6f493326…`、`signature_verified=true`），簽章內容含兩檔 sha 與 map sha，成為 repo 外的獨立錨 | 業主（已簽） |
+| `H-GUARD-EPOCH` | Guard 的 epoch 一致性 | `live_epoch=44` vs registry 41（欄位錯接） | 原域 merge 附錄 G 的 patch 後重跑 guard | HG-KSEOS 原 Owner |
+| `H-RETIREMENT-BOUNDARY` | 「退役臂在所有路徑都不可達」 | 派送層 4/4 拒，但 relay 直呼仍 200 | 原域封閉 relay 直呼邊界（身分或 ACL） | HG-KSEOS／relay Owner |
+| `H-G16B` | ~~Full-scan Closure~~ **已解** | 完整 checkout 已取得：763 檔／80,785,660 B、`scan_complete=true`（`out/G16B_FULLSCAN.json`） | 已達；G22 linkage 另由原 Reader 讀 | 已完成（作者端掃描） |
+| `H-L1-OWNER-ACK` | 「L1 已可取代 31 冊」 | L1 50 章結構已存在，但 Owner 語義核簽未取得 | 原 Owner 逐 CH 核簽（U4） | 業主／原 Owner |
+| `H-FUO-ATOM-STALE` | ~~FUO atom 層來源~~ **已解** | 卡片 4,422 atoms 重建，舊 `3b2ccbbe…` 消失、411/415 digest 可解析回現行 map | 已達；舊卡保留在 `lineage/W0_FIRST_FUO_PRE_R7` | 已完成（作者端重建） |
+| `H-SPECC-INCONSISTENT` | SPEC-C 的兩處陳述 | WP-16 來源存在卻稱不在 import set；WP-19 標 DRAFT 而 r26 要求 HOLD | 依 r26 更正 SPEC-C §1／§3，並保留舊文字為 lineage | 作者端可修，改後需重跑 spec_identity |
+| `H-CASES-09` | 96 Oracle／282 B1 的獨立驗收 | 未綁原 Runner | 原 Case Registry 綁 runner/oracle/Raw | 原 Case Owner |
+| `H-W18-10` | Normal Mode 資格 | 未以 fresh PID 跑 E33–E42 | 新 PID 普通 Goal 的 served Raw | Hermes Host |
+
+**這一輪真的解掉的**：`H-USAGE-EXECUTE`（relay home 修正後 usage 落地）、`H-MANDATE-PLAN-VERIFY`（force-rank 至 chain 內同一臂後 PLAN/VERIFY 均 served）。這兩個是我上一輪的**操作錯誤**，不是原域限制，已用 Raw 更正。
+
+---
+
+## 7｜W0 完成判定與跨波移交（owner ruling 2026-11-14）
+
+### 7.1 W0 範圍內：全項完成
+
+| 判定面 | 結果 | 證據 |
+|---|---|---|
+| P0-01 | DONE | AsBuilt 38,379 B 全文在附錄 C |
+| P0-02 | PASS | `HOST_READBACK.json` `blocked=[]`、PID 3604、v0.23.1 |
+| P0-03 | PASS_WITH_CORRECTION | 31/31；433/423；41/343 當期；74,127 B 重複已定位 |
+| P0-05 | PASS | PLAN served，usage 1 列 |
+| P0-06 | PASS_WRAPPER_SCOPED | 3 拒＋1 豁免 nonce 失敗 |
+| P0-07 | PASS_SCOPED | 4/4 退役臂 attempts=0（邊界殘留移交 W1） |
+| P0-08 | PASS | `selfcheck` 16/16、NEG 成立 |
+| **P0-09** | **PASS** | 四台帳 D1–D4＋FUO 重建（見 §7.2） |
+| P0-10 | PASS_CANDIDATE | 31 檔 SourceFreeze 候選＋owner `original_reader_ack` |
+| P0-11 | DONE | 本件即整合正文 |
+| **P1-01** | **PASS** | `G16B_FULLSCAN.json` 763 檔／80,785,660 B、`scan_complete=true` |
+| P1-02 | DONE | 99=83+16、未分類 0 |
+| P1-03 | PASS | venv/relay/pin 三項真讀回 |
+| P1-05 | DONE（W0 部分） | 57 列台帳屬 W1 施工，W0 只交付清冊口徑 |
+| P1-06 | DONE（設計） | 不建新 Repo，候選責任已記 |
+
+**W0 結論**：`W0_SCOPE_COMPLETE`（作者端／local check 層）。已簽 `original_reader_ack` 之 `not_claimed` 仍明確排除 PIPD reparse、native、independent、release。
+
+### 7.2 W0 四台帳（原 P0-09 缺口，本輪以三車道關閉）
+
+| 台帳 | 檔案 | 不變量（PLAN 車道定義） | 實測 |
+|---|---|---|---|
+| D1 Authority/Conflict | `out/WP01_AUTHORITY_CONFLICT_LEDGER.json`（22,854 B） | 31 列各帶 declared sha＋`sha_match`，且不宣稱 currentness | 31 列、`sha_match` 全 true、unresolved 0 |
+| D2 485 處置 | `out/WP16_485_DISPOSITION.csv`（50,131 B） | 485 唯一 exact key，家族 20/30/24/25/386 | **485/485 unique**，digest `ff71ffa33a0f…` == L0 §07.6A 宣佈值 |
+| D3 CI/Supply-chain | `out/WP19_CI_SUPPLYCHAIN_RAW.json`（4,973 B） | 每個 artifact 有真 sha 或列入 gaps | 9 artifacts 綁同一候選；3 gaps 具名（無 LICENSE/NOTICE、無 SBOM） |
+| D4 96 Oracle CasePlan | `out/WP21_ORACLE96_CASEPLAN.json`（59,993 B） | 96 = 12×8、runner=null、狀態 PLANNED | 96 cells、8 個 `NA_WITH_BASIS`、`runner_binding=null` |
+| FUO 重建 | `_local/W0_FIRST_FUO/`（9 檔） | atom digest 可解析回現行 map | 4,422 atoms；旧 `3b2ccbbe…` 消失；411/415 digest 可解析 |
+
+D2 由 **EXECUTE 車道（Codex bounded writer）** 從 BODY-08 原文產出，D1/D3/D4 由作者端決定性腳本產出，VERIFY 車道**兩輪**獨立挑戰：
+
+- **R1：`OVERALL: FAIL`** — D1 被判 `CURRENT_BY_LOCK` 讀起來像在宣告 currentness；D5 的 aggregate 演算法未寫在檔內、無法重算。兩者都成立，未爭辯。
+- **修補**：D1 改 `IDENTITY_MATCHES_LOCK` ＋ 每列新增 `currentness: NOT_DECIDED_BY_THIS_LEDGER`；D5 改寫成 v2，把 `aggregate_method` 寫進檔、另出 `G16B_MANIFEST.csv`，aggregate 改為 `sha256('\n'.join(f'{sha}  {path}')\n)`（依 path 排序），可由 manifest 單獨重算。
+- **R2：`OVERALL: PASS`** — 五項全 PASS（D5 判語：`Ordinal recomputation matches 8ab5d0cd`）。
+
+回執：`out/LANE_VERIFY_W0CLOSE.json`（R1）、`out/LANE_VERIFY_W0CLOSE_R2.json`（R2）。
+
+### 7.3 非 W0 項目：合規移交（不是「未解」）
+
+依 L2 §05「每包只有一個主波」與 §04 各波 Entry/Exit，以下項目**不屬於 W0**，本輪以移交形式關閉 W0 紀錄，並保留各自的 Resume Predicate：
+
+| 移交項 | 波次（藍圖條文） | 移交物 | Resume Predicate | 原 Owner |
+|---|---|---|---|---|
+| P0-04 `_live_epoch` 欄位錯接 | **W1**（L2 §05 `WP-FHS-03` 主波 W1；L0 §16 `H-ABI-05`） | HG-KSEOS PR #26 `PATCH_live_epoch.diff` | 原域 merge 後 guard 回 `live_epoch=41`、`status=ALLOW` | HG-KSEOS 原 Owner |
+| H-ENTRY Fabric 當授權 | **W1**（`WP-FHS-02`） | `Fabric/INTEGRATION/FHS/W0_R7_POINTER.md`＋本件 §6 | 原 Policy Consumer 回 `ActiveEpoch+LoadedDigest+ACK` | Fabric Policy Owner |
+| H-RETIREMENT-BOUNDARY relay 直呼 | **W1 設計／W2 前提**（`WP-FHS-03/04`） | 4 個 `RET_*.json` ＋守衛現況 | 原域封閉 relay 身分／ACL 邊界 | HG-KSEOS／relay Owner |
+| H-H16 真獨立 Checker | **W2**（`WP-FHS-09`；L0 §11.1A `ORIGINAL_CHECKER`） | 3 個 SoD NEG 回執 | 不同受保護 principal 對同 Case/Raw 出 verdict | HGK Trust／Protected Checker |
+| H-CASES-09 96 Oracle／282 B1 實跑 | **W3**（`WP-FHS-10/12`；L2 §04 W3） | `WP21_ORACLE96_CASEPLAN.json`（plan 已交） | 原 Case Registry 綁 runner/oracle/Raw 後逐案執行 | 原 Case Owner |
+| H-W18-10 Normal Mode | **W3**（`WP-FHS-12`；L2 §03：W18 非施工波） | `HOST_READBACK.json` 之 host 身分 | 新 PID＋Default Profile 跑 E33–E42 必要五案 | Hermes Host |
+| H-READER-PIPD canonical 編譯 | **W1**（`WP-FHS-05`） | 三 SPEC＋`spec_identity` 回執 | 原 SBL PIPD Compiler 對同 Subject 重解析 | SBL PIPD Writer |
+| H-L1-OWNER-ACK | **W1**（`WP-FHS-15` 後續） | L1 50/50 結構回執 | 原 Owner 逐 CH 語義核簽 | 業主／原 Owner |
+| P1-04 PR/CI merge | **W4 前的原域動作**（各庫 AGENTS `Candidate only`） | Fabric #58／HG-KSEOS #26／SBL #69 | 原 Owner review 後 merge；本輪不代簽 | 三庫 Owner |
+
+**移交即關閉**：這些項在 W0 的紀錄狀態為 `HANDED_OVER`（附波次、條文、移交物、Resume、Owner），不再是 `OPEN`。W0 自身不留任何 `OPEN` 項。
+
+### 7.4 下一步（依波次）
+
+1. **W1 入口**：等 HG-KSEOS merge patch → guard 綠 → 再做 `WP-FHS-02/03/04/05` 的原 Reader 綁定。
+2. **W1 WriteSet**：需 owner 給 exact WriteSet，才碰 `WP-FHS-06` 前置。
+3. **W3**：CasePlan 已交，等原 Runner 綁定後逐案執行。
+
+---
+
+## 8｜回退
+
+- 本件與附錄皆為新檔，不動 r8／r26／AsBuilt 原件；刪除即回退。
+- `control/` 兩檔若依 owner 裁決改判準，只改 `ops/selfcheck.py` 的 `pos_control_seed` 語義並保留 `POS-02b` 轉錄 pin 檢查，不改兩檔內容。
+- 車道回執與 NEG 回執全部落在 `W0_R7_FULL_20261114/out/`，可獨立重跑（附錄 H 的命令）。
+
+---
+
+*本件由 `fhs_next` profile 於 2026-11-14 產生。所有 PASS 皆可回指附錄中的命令與 Raw 路徑。*
