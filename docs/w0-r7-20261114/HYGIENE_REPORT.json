@@ -1,0 +1,1042 @@
+{
+ "schema": "FHS-HYGIENE-REPORT/1",
+ "round": "W0_R7_FULL_20261114",
+ "generated_at": "2026-11-14T09:55:36",
+ "promotion": {
+  "target": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0",
+  "files": [
+   {
+    "name": "FHS_vNEXT_PLP_W0_2026-11-14_r9_交付版.md",
+    "bytes": 694517,
+    "sha256": "aeeab20df9b69257a8e4c9a82f282c4ac0230445bea2da7078723a4c15849f55"
+   },
+   {
+    "name": "FHS_vNEXT_PLP_W0_藍圖&skeleton.md",
+    "bytes": 3961,
+    "sha256": "6fc5723f7585244dc7c6f60a6b4724c9eb41c81202b760bdc3bd0e76264114f0"
+   },
+   {
+    "name": "FHS_vNEXT_PLP_W0_草案.md",
+    "bytes": 3067,
+    "sha256": "f83f4d8976a2816d9b3139f512f8da455236d5b0aacd4c25d91aab4ad57ad6aa"
+   },
+   {
+    "name": "FHS_vNEXT_PLP_W0_定案.md",
+    "bytes": 5749,
+    "sha256": "4ff2e04557af69ae01fe9a67fed1b77d742d6c8c7645a731d0f76d991b0ca62e"
+   },
+   {
+    "name": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_實質正文.md",
+    "bytes": 31526,
+    "sha256": "84707376b8db04858b98675cb9c1cfcd664431c56dd36ca5acbdf112d7410f94"
+   },
+   {
+    "name": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_證據型附錄.md",
+    "bytes": 50289,
+    "sha256": "5403baa4ace267fe8d07b6deb45ad89ebc30df4eddbc42541a1e9af3bf5c07be"
+   }
+  ],
+  "current_pointer": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\CURRENT.json"
+ },
+ "actions": [
+  {
+   "kind": "PROMOTE_COPY",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\deliverables\\FHS_vNEXT_PLP_W0_2026-11-14_r9_交付版.md",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\FHS_vNEXT_PLP_W0_2026-11-14_r9_交付版.md",
+   "reason": "owner ruling: passed items leave the candidate layer",
+   "at": "2026-11-14T09:55:35",
+   "sha256": "aeeab20df9b69257a8e4c9a82f282c4ac0230445bea2da7078723a4c15849f55"
+  },
+  {
+   "kind": "PROMOTE_COPY",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\deliverables\\FHS_vNEXT_PLP_W0_藍圖&skeleton.md",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\FHS_vNEXT_PLP_W0_藍圖&skeleton.md",
+   "reason": "owner ruling: passed items leave the candidate layer",
+   "at": "2026-11-14T09:55:35",
+   "sha256": "6fc5723f7585244dc7c6f60a6b4724c9eb41c81202b760bdc3bd0e76264114f0"
+  },
+  {
+   "kind": "PROMOTE_COPY",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\deliverables\\FHS_vNEXT_PLP_W0_草案.md",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\FHS_vNEXT_PLP_W0_草案.md",
+   "reason": "owner ruling: passed items leave the candidate layer",
+   "at": "2026-11-14T09:55:35",
+   "sha256": "f83f4d8976a2816d9b3139f512f8da455236d5b0aacd4c25d91aab4ad57ad6aa"
+  },
+  {
+   "kind": "PROMOTE_COPY",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\deliverables\\FHS_vNEXT_PLP_W0_定案.md",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\FHS_vNEXT_PLP_W0_定案.md",
+   "reason": "owner ruling: passed items leave the candidate layer",
+   "at": "2026-11-14T09:55:35",
+   "sha256": "4ff2e04557af69ae01fe9a67fed1b77d742d6c8c7645a731d0f76d991b0ca62e"
+  },
+  {
+   "kind": "PROMOTE_COPY",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\deliverables\\FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_實質正文.md",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_實質正文.md",
+   "reason": "owner ruling: passed items leave the candidate layer",
+   "at": "2026-11-14T09:55:35",
+   "sha256": "84707376b8db04858b98675cb9c1cfcd664431c56dd36ca5acbdf112d7410f94"
+  },
+  {
+   "kind": "PROMOTE_COPY",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\deliverables\\FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_證據型附錄.md",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_證據型附錄.md",
+   "reason": "owner ruling: passed items leave the candidate layer",
+   "at": "2026-11-14T09:55:35",
+   "sha256": "5403baa4ace267fe8d07b6deb45ad89ebc30df4eddbc42541a1e9af3bf5c07be"
+  },
+  {
+   "kind": "PROMOTE_COPY",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\MANIFEST_W0.json",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\MANIFEST_W0.json",
+   "reason": "manifest travels with the promoted set",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "WRITE",
+   "from": "None",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\CURRENT.json",
+   "reason": "current pointer for the promoted set",
+   "at": "2026-11-14T09:55:35",
+   "sha256": "0e4b65633ac992a3c5b1198037c4ea59afa70255aa2acfe1bc8e817f487177fb"
+  },
+  {
+   "kind": "MOVE_REPRODUCIBLE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\hgk-main",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1",
+   "reason": "174 MB reproducible checkout; inventory digest is the evidence, path recorded in out/G16B_LOCATION.json",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "WRITE",
+   "from": "None",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\G16B_LOCATION.json",
+   "reason": "pointer to the relocated checkout",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "MOVE_LINEAGE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\lineage\\W0_FIRST_FUO_PRE_R7",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\lineage\\W0_FIRST_FUO_PRE_R7_20261114",
+   "reason": "superseded FUO card kept as lineage, not as current",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "MOVE_SUPERSEDED",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\deliverables\\FHS_vNEXT_W0",
+   "to": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\lineage\\superseded\\FHS_vNEXT_W0_r1_20261114",
+   "reason": "r1 view-only pair superseded by r2/r9; kept for lineage",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\HG-KSEOS\\scripts\\__pycache__\\hgk_sp_identity.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\HG-KSEOS\\src\\hg_kseos\\__pycache__\\errors.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\HG-KSEOS\\src\\hg_kseos\\__pycache__\\lane_route_resolver.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\HG-KSEOS\\src\\hg_kseos\\__pycache__\\role_binding.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\HG-KSEOS\\src\\hg_kseos\\__pycache__\\util.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\HG-KSEOS\\src\\hg_kseos\\__pycache__\\__init__.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\ops\\tools\\__pycache__\\fhs_3lm.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\owner_envelope\\code\\__pycache__\\owner_prompt.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\owner_envelope\\code\\__pycache__\\owner_vault.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R3_PREUPGRADE_20261112\\tools\\__pycache__\\h16_maker_gate.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\scripts\\gcm-containment\\__pycache__\\authorization_claim.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\scripts\\gcm-containment\\__pycache__\\lane_output_dir.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\scripts\\__pycache__\\hgk-lane-dispatch.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\scripts\\__pycache__\\hgk-lane-guard.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\scripts\\__pycache__\\hgk_sp_identity.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\agents.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\assurance.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\bootstrap.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\capability_delta.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\cli.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\control_validation.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\doctor.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\errors.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\evolution.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\harness.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\hlpe.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\knowledge.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\lane_admission.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\lane_policy.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\lane_route_resolver.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\lifecycle.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\named_methods.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\observability.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\providers.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\recovery.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\release.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\repo_intelligence.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\role_binding.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\security.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\spine.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\util.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__\\__init__.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\w3_solution\\__pycache__\\conftest.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_acceptance_gate.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_acceptance_resolution.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_acceptance_runner.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_agents_providers.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_assurance.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_autonomy_evolution.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_bootstrap.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_c13_standing_scope_no_routine_hitl.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_c14_checkpoint_resume_no_repeat_effect.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_c15_evolution_holdout.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_c2_case_run.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_capability_delta.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_controls_observability_repo.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_coverage_reducer.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_cs_a_gate_repair.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_e2e_vertical_slice.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_evo004_dogfood.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_evo004_meta_gates.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_evo005_evidence_graph.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_evo005_graph_freeze.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_execute_luna_route.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_far_lane_fix_20261015.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_final_md_section_u_semantics.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_frontdoor_active_policy.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_g0_rbwi_source_bound.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_g0_wave3_controls.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_governed_runtime_controller.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_gstack_named_method_route.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_hermes_qualification.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_hlpe.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_knowledge.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_knowledge_memory_poison.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_knowledge_promotion_gate.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_lane_dispatch_ao_guard.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_lane_dispatch_r20_gates.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_lane_effort_enforcement.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_lane_guard.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_lane_identity_rollout.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_lane_policy.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_lane_scope_isolation.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_mandatory_tool_guard.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_matrix_d_full.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_matrix_m02_resume.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_matrix_m12_admission_no_deadlock.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_matrix_m18_rollback.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_named_methods.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_native_admission.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_native_boundaries.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_ordering_oracle.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_package_local.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_r13_repo_head_cwd.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_r6_artifact_scope.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_recovery_release.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_role_binding_enforcement.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_security_harness.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_semantic_oracle.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_source_repoint.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_spine.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_sp_identity_commander_plan.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_sp_identity_prespawn.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_task012_semantic_closure.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_task013_hermes_v020_closure.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_task014_named_method_closure.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_task015_coherence_closure.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_user_experience_reducer.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_user_trust.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\test_user_trust_receiver_wiring.cpython-311-pytest-9.1.1.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__\\__init__.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tools\\__pycache__\\case_executors.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tools\\__pycache__\\case_executors_depth.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tools\\__pycache__\\package_local.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tools\\__pycache__\\run_acceptance.cpython-311.pyc",
+   "to": null,
+   "reason": "compiled artefact, regenerated on demand",
+   "at": "2026-11-14T09:55:35"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\HG-KSEOS\\scripts\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\HG-KSEOS\\src\\hg_kseos\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\ops\\tools\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\owner_envelope\\code\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R3_PREUPGRADE_20261112\\tools\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\scripts\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\scripts\\gcm-containment\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\src\\hg_kseos\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tests\\w3_solution\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_BYTECODE_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\worktrees\\hgk-main@970d1ab1\\tools\\__pycache__",
+   "to": null,
+   "reason": "empty byte-code cache",
+   "at": "2026-11-14T09:55:36"
+  },
+  {
+   "kind": "DELETE_EMPTY_DIR",
+   "from": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\lineage",
+   "to": null,
+   "reason": "no content",
+   "at": "2026-11-14T09:55:36"
+  }
+ ],
+ "counts": {
+  "promoted_files": 6,
+  "moved": 3,
+  "deleted": 127,
+  "promoted_files_current": 6
+ },
+ "untouched": [
+  "Fabric/",
+  "SBL/",
+  "HG-KSEOS/",
+  "provenance/SOURCE_IMPORT_MAP.json",
+  "spec/*.md"
+ ],
+ "closeout": {
+  "session_closeout": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\_local\\SESSION_CLOSEOUT_20261114_W0.md",
+  "w1_handoff": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\_local\\HANDOFF_W1_20261114.md",
+  "current_pointer": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\CURRENT.json",
+  "verifier_verdict": "see verify_current.py output"
+ }
+}
