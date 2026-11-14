@@ -41,9 +41,9 @@ L2《FHS_vNEXT_PLP_全波次藍圖》§02 明寫「**本輪不另產第三份 W0
 | 4 | L2 §04 W0 POS：普通短 Goal 在合法 read/draft 可交具 Source/Consumer/FUO 的三 SPEC | `spec_identity_check` ok；三 SPEC 同 Goal 四項相異 | **ALIGNED（作者端）** |
 | 5 | L2 §04 W0 NEG：不得把 `PASS_WRAPPER_SCOPED` 當全權、不得用缺 OPS 阻 Draft、不得用附錄歷史降 E3 | 本件 §6 保留三個受界 HOLD，未升格 | **ALIGNED** |
 | 6 | L1：每 CH 需五段＋POS/NEG＋Consumer | L1 自身 **50/50 五段齊全**（缺 s1–s5／POS／NEG／consumer／resume 皆 0，見附錄 F）；本件章節亦照該樣板 | **ALIGNED（結構）／語義核簽仍 H-L1-OWNER-ACK** |
-| 7 | L0 §07 R4-ENG.10/11：薄控制包與薄啟動 Prompt 需「完整可轉錄正文」 | `control/` 兩檔存在且已 pin，但**非 byte-identical import**（見 H-POS02） | **DIVERGENT（已具名 HOLD）** |
+| 7 | L0 §07 R4-ENG.10/11：薄控制包與薄啟動 Prompt 需「完整可轉錄正文」 | `control/` 兩檔存在、bytes 等於 `SOURCE_IMPORT_MAP.control_seed.target_sha256`；origin 子樹被 KB 重組移走 → 判準改為 pin-based（VERIFY 車道 PASS） | **ALIGNED（pin）** |
 
-**DIVERGENT 的處置**：第 7 項不是本輪可以自行解決的——spec-library 端的 2026-11-11 原件在 `FHS_PIPD-LS-PKG/實作/FHS_NEXT/` 下**不存在**（該目錄本身不存在），336k 檔封存掃描 0 命中。因此 `control/` 兩檔只能是**轉錄件**（依 L0 §07 R4-ENG.10/11 的「完整可轉錄正文」要求）。這一點已寫成 `out/POS02_SCOPE_CHANGE_CANDIDATE.md` 交給 owner 裁決，不自行改 selfcheck 的判準。
+**第 7 項的處置（已閉環）**：`control/` 兩檔不是轉錄件而是**清冊宣佈的進口件**（`SOURCE_IMPORT_MAP.json::control_seed`，`source_sha256 == target_sha256`）。origin 位置被知識庫重組移走後，`POS-02` 的 rglob 定位失敗；本輪送 VERIFY 車道審查（`VERDICT: PASS`，條件是位元不符仍硬 FAIL），據此把判準改為以 `control_seed.target_sha256` 為 pin，並以「改一 byte → FAIL、還原 → 16/16」證明檢查仍會咬。
 
 ---
 
@@ -53,14 +53,23 @@ L2《FHS_vNEXT_PLP_全波次藍圖》§02 明寫「**本輪不另產第三份 W0
 
 | 檢查 | 指令 | 結果 | Raw |
 |---|---|---|---|
-| selfcheck | `ops/selfcheck.py` | **15/16 PASS，exit 1**；唯一 FAIL `POS-02`（origin 目錄不存在） | `out/SELFCHECK.txt` |
+| selfcheck | `ops/selfcheck.py` | **16/16 PASS，exit 0** | `out/SELFCHECK.txt` |
 | SPEC 身分 | `ops/tools/spec_identity_check.py` | **exit 0，ok=true**（三份同 Goal、四項相異） | `out/SPEC_IDENTITY.json` |
 | 31 冊語料 | `ops/tools/gate_corpus.py` | **declared 31／matched 31／missing 0** | `out/GATE_CORPUS.json` |
 | 副本重宣告 | `ops/tools/reregister_check.py` | **groups 41／members 343／343 read／PASS**（7.3 s） | `out/REREGISTER.json` |
 | lane pin | `ops/tools/lane_pin.py --check` | **exit 0** | `out/LANE_PIN.json` |
 | lane policy | `HG-KSEOS/scripts/hgk-lane-policy.py validate` | **exit 0，status=CANDIDATE，debt=[]，87 站點** | `out/LANE_POLICY.txt` |
 
-`POS-02` 的失敗是**定位失敗，不是內容失敗**：它用 rglob 在 spec-library 找檔名比位元，而 origin 子樹 `FHS_PIPD-LS-PKG/實作/FHS_NEXT/EXECUTION_CONTROL/` 已被知識庫重組移走（現有目錄是 `FHS_NEXT_升級`、`FHS-MSC_PIPD-LS-PKG_BODY`、`PIPD-LS-PKG`、`藍圖`）。`control/` 兩檔的 bytes 仍等於進口清冊宣佈的 `target_sha256`（`51f66aec…`／`66a414f4…`），本輪以新增的 `ops/tools/pos02b_control_pin.py` 驗證：**兩檔 pin 全對、`source_absent=true`、verdict `PASS_PIN_ONLY`**（`out/POS02B.json`，exit 0）。要把 `selfcheck` 改綠需 owner 裁定定位方式，候選見 `out/POS02_LOCATOR_CANDIDATE.md`。
+`POS-02` 原本用 rglob 找 spec-library origin 比位元，而 origin 子樹 `FHS_PIPD-LS-PKG/實作/FHS_NEXT/EXECUTION_CONTROL/` 已被知識庫重組移走。本輪先送 **VERIFY/SECURITY 車道**獨立挑戰（`out/VERIFY_POS02_CHALLENGE.json`，`ok` 因 nonce 未回聲為 false，但模型回答完整）：
+
+```
+VERDICT: PASS
+RISK: If the import-map pin is changed together with a control file, a compromised pair
+      can pass as pin-only while the original source is absent.
+CONDITION: Keep the hard FAIL whenever the on-disk bytes do not exactly match target_sha256.
+```
+
+依該 CONDITION 改寫 `pos_control_seed`：pin 取 `SOURCE_IMPORT_MAP.json::control_seed[].target_sha256`，**位元不符仍硬 FAIL**；origin 存在且相同 → `PASS_BYTE_IDENTICAL`，origin 缺席 → `PASS_PIN_ONLY` 並帶 `source_exists:false`。驗證：改一個 byte → `POS-02` FAIL（exit 1）；還原（`51f66aec…`）→ **16/16、exit 0**。殘留風險（pin 與檔案被同時改）記為 `H-POS02-PAIR`，需由 owner 簽署的 `POS02_LOCATOR_CANDIDATE.md` 作獨立錨。
 
 ### 2.2 三車道 ActualServed（本次新證據）
 
@@ -147,7 +156,7 @@ admission_status=UNPROVEN  claim_ceiling=CANDIDATE_ONLY
 | P0-05 | **PASS** | `out/LANE_PLAN.json`：`ok=true`、usage 1 列、nonce 回聲 |
 | P0-06 | **PASS_WRAPPER_SCOPED** | `ERR_MAKER_MISSING`(3)／`ERR_MAKER_NOT_IN_ASSIGNMENT`(4)／`ERR_LANE_SOD_VIOLATION`(2)；豁免案 `ERR_NO_ARM_EMITTED_NONCE`(6) |
 | P0-07 | **PASS_SCOPED** | 四退役臂 `ERR_LANE_REQUIRED_ARM_ABSENT`、attempts=0；殘留 `H-RETIREMENT-BOUNDARY`（relay 直呼） |
-| P0-08 | **PARTIAL** | `selfcheck` 15/16（POS-02 定位失敗）；`POS-02b` `PASS_PIN_ONLY`；`r1_tree_hygiene` exit 0 |
+| P0-08 | **PASS** | `selfcheck` **16/16 exit 0**（POS-02 改以 `control_seed.target_sha256` 為 pin，改一 byte 即 FAIL 的 NEG 已驗）；`r1_tree_hygiene` exit 0；殘留 `H-POS02-PAIR` |
 | P0-09 | **PARTIAL** | `spec_identity` ok（SPEC-A `e24251fc…`／B `aebcbeed…`／C `d8d1c286…`；共同 `SourceManifestSHA 1bae7892…`）；錯 manifest **exit 14** 證實；FUO 8/8 檔完整但 **atom 層 stale**（§2.6.1）；六 WP **2/6 有 Done**（00/15），01/16/19/21 缺檔逐項列名 |
 | P0-10 | **CANDIDATE_ONLY** | `out/SOURCEFREEZE_CANDIDATE.json`：31 檔、`aggregate 1dacbb5e…`、`authority_state=AUTHORITY_READER_NOT_CALLED` |
 | P0-11 | **DONE** | 本件即單份完整整合 MD；附錄 C 可對 SHA |
@@ -206,7 +215,8 @@ W1 的入口不是「文件寫完」，而是這四條同時成立（L2 §04 W1�
 | `H-READER` | 原 Canonical PI/PD/ECP/TQAEP 的正式接受 | `spec_identity` 只證作者端身分；原 Compiler 未載入 | 原 SBL PIPD Reader 對同 Subject/Source 回 ACK；可用 owner 信封的 `original_reader_ack` 簽 | 業主／SBL PIPD 原 Reader |
 | `H-H16` | Protected SoD 的「真獨立」聲明 | 三 NEG 會拒，但豁免路徑的 nonce 未成立 | 不同受保護憑證的 Checker 對同 Case/Raw 出 verdict | HGK Trust／Protected Checker |
 | `H-ENTRY` | Fabric NAV 當授權 | `effect_permission=NONE` | 原 Fabric Policy Consumer 的 ActiveEpoch＋LoadedDigest＋ACK | Fabric Policy Owner |
-| `H-POS02` | `selfcheck` 16/16 | origin 子樹被知識庫重組移走 → `POS-02` 定位失敗；但 `POS-02b` 證明兩檔 pin 全對（`PASS_PIN_ONLY`，`source_absent=true`） | owner 對 `POS02_LOCATOR_CANDIDATE.md` 裁定「以 `control_seed.target_sha256` 為 pin、source 缺席不判 FAIL」後改判準 | **業主（已備簽）** |
+| `H-POS02` | ~~`selfcheck` 16/16~~ **已解** | 定位失敗 → 以 pin 為判準、位元不符仍硬 FAIL；VERIFY 車道 `VERDICT: PASS`、`selfcheck` 16/16、NEG 成立 | 已達；正式錨＝owner 簽 `POS02_LOCATOR_CANDIDATE.md`（簽後免再議） | 已完成（VERIFY＋owner 預授權） |
+| `H-POS02-PAIR` | pin 與控制檔被「同時」改動的共謀風險 | VERIFY 明確指出：compromised pair 可冒充 pin-only | owner 簽署的 `POS02_LOCATOR_CANDIDATE.md`（內含兩檔 sha 與 map sha）作為獨立錨；未簽前 pin 與檔案同屬 repo | 業主簽（視窗已開） |
 | `H-GUARD-EPOCH` | Guard 的 epoch 一致性 | `live_epoch=44` vs registry 41（欄位錯接） | 原域 merge 附錄 G 的 patch 後重跑 guard | HG-KSEOS 原 Owner |
 | `H-RETIREMENT-BOUNDARY` | 「退役臂在所有路徑都不可達」 | 派送層 4/4 拒，但 relay 直呼仍 200 | 原域封閉 relay 直呼邊界（身分或 ACL） | HG-KSEOS／relay Owner |
 | `H-G16B` | Full-scan Closure | 無 `hgk-main` 完整 checkout，`scan_complete` 無法為 true | 原 HGK pinned ref 完整 checkout 後重跑 | HGK 原 Owner |
