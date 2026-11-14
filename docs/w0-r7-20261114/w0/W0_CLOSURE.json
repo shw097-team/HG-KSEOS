@@ -1,0 +1,56 @@
+{
+ "schema": "FHS-W0-CLOSURE/1",
+ "round": "W0_R7_FULL_20261114",
+ "w0_scope": "baseline P0-01..P0-11 + P1-01..P1-06 的 W0 部分",
+ "artifacts": {
+  "D1_authority_conflict_ledger": {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\WP01_AUTHORITY_CONFLICT_LEDGER.json",
+   "bytes": 22854,
+   "sha256": "746aa79537346113dee54ebb9ae6400d03e215e0ee5c7465db9bf23ffcc265a9"
+  },
+  "D2_485_disposition": {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\WP16_485_DISPOSITION.csv",
+   "bytes": 50131,
+   "sha256": "5e5de5bdcf20b899463dd7a6d0a0d5e5e3eff4615fed38ad7951203b55088dba"
+  },
+  "D3_ci_supplychain_raw": {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\WP19_CI_SUPPLYCHAIN_RAW.json",
+   "bytes": 4973,
+   "sha256": "663c5997437c34e1ab73fc7195e43102b53f13805023970e75f6e0506809959f"
+  },
+  "D4_oracle96_caseplan": {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\WP21_ORACLE96_CASEPLAN.json",
+   "bytes": 59993,
+   "sha256": "edc605e6f62c0f8dad696eeb95874e5db2cae09979f8f563ae79353123ec6a35"
+  },
+  "G16B_fullscan": {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\G16B_FULLSCAN.json",
+   "bytes": 136948,
+   "sha256": "eb1d0f78fbd337dad9c0fbf01869463b42c784d249d997d4d2faf84cb3bfeda2"
+  },
+  "FUO_manifest": {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\_local\\W0_FIRST_FUO\\MANIFEST.json",
+   "bytes": 4966,
+   "sha256": "51455626e40226b58f4e2cbd4793dcd9f9a57731a2ea89bd897deee6a47d3be9"
+  },
+  "FUO_intent_card": {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\_local\\W0_FIRST_FUO\\intent.card.json",
+   "bytes": 4755245,
+   "sha256": "e0bc7ce8fb50bb8aece54d6afd0629f438e1976cd33c497020aa2f50febd42e8"
+  },
+  "SELFCHECK": {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\SELFCHECK.txt",
+   "bytes": 1708,
+   "sha256": "3d4e6b637cab889d049410f72c9569487a72ab9e3735366994a8a76ce22c9ace"
+  }
+ },
+ "checks": {
+  "D2_key_count": 485,
+  "D2_recomputed_digest": "ff71ffa33a0f5a8ea85a47b37ffd5556e7a164d8e90e5fa523c2755f38195d66",
+  "D2_matches_L0_declared_digest": true,
+  "D1_rows": 31,
+  "D4_cells": 96,
+  "G16B_scan_complete": true
+ },
+ "w0_claim": "W0 範圍內項目全部完成於 LOCAL_CHECK/AUTHOR_DESIGN 層；不代表 ORIGINAL_ACK 之外的任何提升。"
+}
