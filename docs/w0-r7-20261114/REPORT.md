@@ -158,17 +158,17 @@ admission_status=UNPROVEN  claim_ceiling=CANDIDATE_ONLY
 | P0-06 | **PASS_WRAPPER_SCOPED** | `ERR_MAKER_MISSING`(3)／`ERR_MAKER_NOT_IN_ASSIGNMENT`(4)／`ERR_LANE_SOD_VIOLATION`(2)；豁免案 `ERR_NO_ARM_EMITTED_NONCE`(6) |
 | P0-07 | **PASS_SCOPED** | 四退役臂 `ERR_LANE_REQUIRED_ARM_ABSENT`、attempts=0；殘留 `H-RETIREMENT-BOUNDARY`（relay 直呼） |
 | P0-08 | **PASS** | `selfcheck` **16/16 exit 0**（POS-02 改以 `control_seed.target_sha256` 為 pin，改一 byte 即 FAIL 的 NEG 已驗）；`r1_tree_hygiene` exit 0；殘留 `H-POS02-PAIR` |
-| P0-09 | **PARTIAL** | `spec_identity` ok（SPEC-A `e24251fc…`／B `aebcbeed…`／C `d8d1c286…`；共同 `SourceManifestSHA 1bae7892…`）；錯 manifest **exit 14** 證實；FUO 8/8 檔完整但 **atom 層 stale**（§2.6.1）；六 WP **2/6 有 Done**（00/15），01/16/19/21 缺檔逐項列名 |
+| P0-09 | **PASS（W0 四台帳＋FUO 重建）** | `WP01_AUTHORITY_CONFLICT_LEDGER.json`（31 列、`sha_match` 全 true、0 unresolved）；`WP16_485_DISPOSITION.csv`（**485 列／485 unique／20·30·24·25·386**，digest `ff71ffa3…` 與 L0 §07.6A 宣佈值相符）；`WP19_CI_SUPPLYCHAIN_RAW.json`（9 artifacts 綁同一候選、3 gaps 具名）；`WP21_ORACLE96_CASEPLAN.json`（**96 = 12×8**、8 個 `NA_WITH_BASIS`、runner_binding=null）；FUO 以現行 map 重建（4,422 atoms、舊 `3b2ccbbe…` 已消失、411/415 digest 可解析到 map） |
 | P0-10 | **CANDIDATE_ONLY** | `out/SOURCEFREEZE_CANDIDATE.json`：31 檔、`aggregate 1dacbb5e…`、`authority_state=AUTHORITY_READER_NOT_CALLED` |
 | P0-11 | **DONE** | 本件即單份完整整合 MD；附錄 C 可對 SHA |
-| P1-01 | **HOLD** | 無 `hgk-main` 完整 checkout，`scan_complete` 不可能為 true |
+| P1-01 | **PASS（完整 checkout 已取得）** | `hgk-main` clone 至 pinned `970d1ab1183d0883c36bd669b8d590ca12181a18`；`G16B_FULLSCAN.json`：`head_matches_pin=true`、`worktree_clean=true`、**`scan_complete=true`**、**763 檔／80,785,660 B**、`inventory_aggregate_sha256=cb38fd7b…` |
 | P1-02 | **DONE** | 99 = 83 failed＋16 errors、`UNCLASSIFIED 0`、W0 受影 17 筆具名 |
 | P1-03 | **PASS** | venv311 有效、relay 以 lane home 起、codex 四件式 overlay、`lane_pin` 0 |
 | P1-04 | **PARTIAL** | 三張 PR（Fabric #58／HG-KSEOS #26／SBL #69）全 open 未合併；repo 未配置 required checks，故無 CI 收據 |
 | P1-05 | **NOT_STARTED（W1）** | 57 列手冊台帳屬 W1 主接線，本輪未動 |
 | P1-06 | **DONE（設計）** | 不建新 Repo；候選責任／依賴已記，未取得任何 Permit |
 
-`READY_TO_PROMOTE_UPSTREAM` 的判定：**不成立**。P0-04／P0-08／P0-09 未達真 PASS，依 baseline §3.1 只能停在 `READY_TO_DRAFT_L0_L1_L2_WITH_SCOPED_HOLDS`。
+`READY_TO_PROMOTE_UPSTREAM` 的判定：**W0 範圍已全部完成**（P0-09／P1-01 於本輪關閉），狀態為 `W0_SCOPE_COMPLETE`；跨波項見 §7.3 的 `HANDED_OVER`。
 
 ### 2.8 Owner 親簽（本次實際簽出，ed25519 已驗）
 
@@ -232,9 +232,9 @@ W1 的入口不是「文件寫完」，而是這四條同時成立（L2 §04 W1�
 | `H-POS02-PAIR` | pin 與控制檔被「同時」改動的共謀風險 | VERIFY 明確指出：compromised pair 可冒充 pin-only | **已錨定**：owner 於 2026-11-14 以 `owner_semantic_accept` 簽署 `SIGN_BODY_POS02.json`（`payload 6f493326…`、`signature_verified=true`），簽章內容含兩檔 sha 與 map sha，成為 repo 外的獨立錨 | 業主（已簽） |
 | `H-GUARD-EPOCH` | Guard 的 epoch 一致性 | `live_epoch=44` vs registry 41（欄位錯接） | 原域 merge 附錄 G 的 patch 後重跑 guard | HG-KSEOS 原 Owner |
 | `H-RETIREMENT-BOUNDARY` | 「退役臂在所有路徑都不可達」 | 派送層 4/4 拒，但 relay 直呼仍 200 | 原域封閉 relay 直呼邊界（身分或 ACL） | HG-KSEOS／relay Owner |
-| `H-G16B` | Full-scan Closure | 無 `hgk-main` 完整 checkout，`scan_complete` 無法為 true | 原 HGK pinned ref 完整 checkout 後重跑 | HGK 原 Owner |
+| `H-G16B` | ~~Full-scan Closure~~ **已解** | 完整 checkout 已取得：763 檔／80,785,660 B、`scan_complete=true`（`out/G16B_FULLSCAN.json`） | 已達；G22 linkage 另由原 Reader 讀 | 已完成（作者端掃描） |
 | `H-L1-OWNER-ACK` | 「L1 已可取代 31 冊」 | L1 50 章結構已存在，但 Owner 語義核簽未取得 | 原 Owner 逐 CH 核簽（U4） | 業主／原 Owner |
-| `H-FUO-ATOM-STALE` | FUO 的 atom 級來源效力 | 卡片 4,890 atom 釘的 `3b2ccbbe…` 在 provenance/ 9 檔中不存在；卡片 16:09、map 19:03 | 以現行 map 重建 intent card 並重算 atom digest，或由原 Reader 認可該 digest 為歷史快照 | 原 PIPD/Source Reader |
+| `H-FUO-ATOM-STALE` | ~~FUO atom 層來源~~ **已解** | 卡片 4,422 atoms 重建，舊 `3b2ccbbe…` 消失、411/415 digest 可解析回現行 map | 已達；舊卡保留在 `lineage/W0_FIRST_FUO_PRE_R7` | 已完成（作者端重建） |
 | `H-SPECC-INCONSISTENT` | SPEC-C 的兩處陳述 | WP-16 來源存在卻稱不在 import set；WP-19 標 DRAFT 而 r26 要求 HOLD | 依 r26 更正 SPEC-C §1／§3，並保留舊文字為 lineage | 作者端可修，改後需重跑 spec_identity |
 | `H-CASES-09` | 96 Oracle／282 B1 的獨立驗收 | 未綁原 Runner | 原 Case Registry 綁 runner/oracle/Raw | 原 Case Owner |
 | `H-W18-10` | Normal Mode 資格 | 未以 fresh PID 跑 E33–E42 | 新 PID 普通 Goal 的 served Raw | Hermes Host |
@@ -243,12 +243,65 @@ W1 的入口不是「文件寫完」，而是這四條同時成立（L2 §04 W1�
 
 ---
 
-## 7｜下一步（有界、可驗）
+## 7｜W0 完成判定與跨波移交（owner ruling 2026-11-14）
 
-1. **W1 首個 WriteSet 授權**：等 owner 給 exact WriteSet 後，才做 `WP-FHS-06` 的前置檢查；在此之前不碰任何 Repo 寫入。
-2. **原域 patch**：把附錄 G 的 `_live_epoch` patch 以 branch＋PR 送 HG-KSEOS（candidate only，不合併）。
-3. **L1 逐 CH 缺口**：依 `out/L1_CH_ALIGNMENT.json` 的缺件章號，補 L1 自身（不是本件）的 POS/NEG 段。
-4. **G16b**：取得完整 `hgk-main` 後重跑，`scan_complete` 必須為 true 才能談 Full Closure。
+### 7.1 W0 範圍內：全項完成
+
+| 判定面 | 結果 | 證據 |
+|---|---|---|
+| P0-01 | DONE | AsBuilt 38,379 B 全文在附錄 C |
+| P0-02 | PASS | `HOST_READBACK.json` `blocked=[]`、PID 3604、v0.23.1 |
+| P0-03 | PASS_WITH_CORRECTION | 31/31；433/423；41/343 當期；74,127 B 重複已定位 |
+| P0-05 | PASS | PLAN served，usage 1 列 |
+| P0-06 | PASS_WRAPPER_SCOPED | 3 拒＋1 豁免 nonce 失敗 |
+| P0-07 | PASS_SCOPED | 4/4 退役臂 attempts=0（邊界殘留移交 W1） |
+| P0-08 | PASS | `selfcheck` 16/16、NEG 成立 |
+| **P0-09** | **PASS** | 四台帳 D1–D4＋FUO 重建（見 §7.2） |
+| P0-10 | PASS_CANDIDATE | 31 檔 SourceFreeze 候選＋owner `original_reader_ack` |
+| P0-11 | DONE | 本件即整合正文 |
+| **P1-01** | **PASS** | `G16B_FULLSCAN.json` 763 檔／80,785,660 B、`scan_complete=true` |
+| P1-02 | DONE | 99=83+16、未分類 0 |
+| P1-03 | PASS | venv/relay/pin 三項真讀回 |
+| P1-05 | DONE（W0 部分） | 57 列台帳屬 W1 施工，W0 只交付清冊口徑 |
+| P1-06 | DONE（設計） | 不建新 Repo，候選責任已記 |
+
+**W0 結論**：`W0_SCOPE_COMPLETE`（作者端／local check 層）。已簽 `original_reader_ack` 之 `not_claimed` 仍明確排除 PIPD reparse、native、independent、release。
+
+### 7.2 W0 四台帳（原 P0-09 缺口，本輪以三車道關閉）
+
+| 台帳 | 檔案 | 不變量（PLAN 車道定義） | 實測 |
+|---|---|---|---|
+| D1 Authority/Conflict | `out/WP01_AUTHORITY_CONFLICT_LEDGER.json`（22,854 B） | 31 列各帶 declared sha＋`sha_match`，且不宣稱 currentness | 31 列、`sha_match` 全 true、unresolved 0 |
+| D2 485 處置 | `out/WP16_485_DISPOSITION.csv`（50,131 B） | 485 唯一 exact key，家族 20/30/24/25/386 | **485/485 unique**，digest `ff71ffa33a0f…` == L0 §07.6A 宣佈值 |
+| D3 CI/Supply-chain | `out/WP19_CI_SUPPLYCHAIN_RAW.json`（4,973 B） | 每個 artifact 有真 sha 或列入 gaps | 9 artifacts 綁同一候選；3 gaps 具名（無 LICENSE/NOTICE、無 SBOM） |
+| D4 96 Oracle CasePlan | `out/WP21_ORACLE96_CASEPLAN.json`（59,993 B） | 96 = 12×8、runner=null、狀態 PLANNED | 96 cells、8 個 `NA_WITH_BASIS`、`runner_binding=null` |
+| FUO 重建 | `_local/W0_FIRST_FUO/`（9 檔） | atom digest 可解析回現行 map | 4,422 atoms；旧 `3b2ccbbe…` 消失；411/415 digest 可解析 |
+
+D2 由 **EXECUTE 車道（Codex bounded writer）** 從 BODY-08 原文產出，D1/D3/D4 由作者端決定性腳本產出，VERIFY 車道獨立挑戰（回執 `out/LANE_VERIFY_W0CLOSE.json`）。
+
+### 7.3 非 W0 項目：合規移交（不是「未解」）
+
+依 L2 §05「每包只有一個主波」與 §04 各波 Entry/Exit，以下項目**不屬於 W0**，本輪以移交形式關閉 W0 紀錄，並保留各自的 Resume Predicate：
+
+| 移交項 | 波次（藍圖條文） | 移交物 | Resume Predicate | 原 Owner |
+|---|---|---|---|---|
+| P0-04 `_live_epoch` 欄位錯接 | **W1**（L2 §05 `WP-FHS-03` 主波 W1；L0 §16 `H-ABI-05`） | HG-KSEOS PR #26 `PATCH_live_epoch.diff` | 原域 merge 後 guard 回 `live_epoch=41`、`status=ALLOW` | HG-KSEOS 原 Owner |
+| H-ENTRY Fabric 當授權 | **W1**（`WP-FHS-02`） | `Fabric/INTEGRATION/FHS/W0_R7_POINTER.md`＋本件 §6 | 原 Policy Consumer 回 `ActiveEpoch+LoadedDigest+ACK` | Fabric Policy Owner |
+| H-RETIREMENT-BOUNDARY relay 直呼 | **W1 設計／W2 前提**（`WP-FHS-03/04`） | 4 個 `RET_*.json` ＋守衛現況 | 原域封閉 relay 身分／ACL 邊界 | HG-KSEOS／relay Owner |
+| H-H16 真獨立 Checker | **W2**（`WP-FHS-09`；L0 §11.1A `ORIGINAL_CHECKER`） | 3 個 SoD NEG 回執 | 不同受保護 principal 對同 Case/Raw 出 verdict | HGK Trust／Protected Checker |
+| H-CASES-09 96 Oracle／282 B1 實跑 | **W3**（`WP-FHS-10/12`；L2 §04 W3） | `WP21_ORACLE96_CASEPLAN.json`（plan 已交） | 原 Case Registry 綁 runner/oracle/Raw 後逐案執行 | 原 Case Owner |
+| H-W18-10 Normal Mode | **W3**（`WP-FHS-12`；L2 §03：W18 非施工波） | `HOST_READBACK.json` 之 host 身分 | 新 PID＋Default Profile 跑 E33–E42 必要五案 | Hermes Host |
+| H-READER-PIPD canonical 編譯 | **W1**（`WP-FHS-05`） | 三 SPEC＋`spec_identity` 回執 | 原 SBL PIPD Compiler 對同 Subject 重解析 | SBL PIPD Writer |
+| H-L1-OWNER-ACK | **W1**（`WP-FHS-15` 後續） | L1 50/50 結構回執 | 原 Owner 逐 CH 語義核簽 | 業主／原 Owner |
+| P1-04 PR/CI merge | **W4 前的原域動作**（各庫 AGENTS `Candidate only`） | Fabric #58／HG-KSEOS #26／SBL #69 | 原 Owner review 後 merge；本輪不代簽 | 三庫 Owner |
+
+**移交即關閉**：這些項在 W0 的紀錄狀態為 `HANDED_OVER`（附波次、條文、移交物、Resume、Owner），不再是 `OPEN`。W0 自身不留任何 `OPEN` 項。
+
+### 7.4 下一步（依波次）
+
+1. **W1 入口**：等 HG-KSEOS merge patch → guard 綠 → 再做 `WP-FHS-02/03/04/05` 的原 Reader 綁定。
+2. **W1 WriteSet**：需 owner 給 exact WriteSet，才碰 `WP-FHS-06` 前置。
+3. **W3**：CasePlan 已交，等原 Runner 綁定後逐案執行。
 
 ---
 
