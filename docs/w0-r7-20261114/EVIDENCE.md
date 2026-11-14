@@ -21,8 +21,7 @@
 
 | gate | 結果 | Raw |
 | --- | --- | --- |
-| selfcheck | 15 PASS / 1 FAIL | out/SELFCHECK.txt |
-|   └ FAIL | [FAIL] POS-02 — control/ seed is byte-identical to the spec-library origin | out/SELFCHECK.txt |
+| selfcheck | 16 PASS / 0 FAIL | out/SELFCHECK.txt |
 | gate_corpus | declared 31 / matched 31 / missing 0 | out/GATE_CORPUS.json |
 | reregister_check | groups 41 / members 343 / PASS / 7.3s | out/REREGISTER.json |
 | spec_identity | exit 0 (ok=true) | out/SPEC_IDENTITY.json |
@@ -32,9 +31,9 @@
 | tree hygiene | exit 0 | out/TREE_HYGIENE.json |
 | SourceFreeze candidate | 31 檔 / agg 1dacbb5e83f53525 / CANDIDATE_ONLY_AUTHORITY_READER_NOT_CALLED | out/SOURCEFREEZE_CANDIDATE.json |
 
-### B.1 POS-02 的失敗脈絡（定位，不是內容）
+### B.1 POS-02 的處理（定位失敗 → pin-based，已過 VERIFY 車道）
 
-`POS-02` 用 `SPEC_LIB_ROOT.rglob(檔名)` 定位 origin 再比位元。`SOURCE_IMPORT_MAP.json::control_seed` 宣佈的 `source_path` 是 `FHS_PIPD-LS-PKG/實作/FHS_NEXT/EXECUTION_CONTROL/…`，而 `實作/` 子樹在知識庫重組後已不存在（現有目錄：`FHS_NEXT_升級`、`FHS-MSC_PIPD-LS-PKG_BODY`、`PIPD-LS-PKG`、`藍圖`），深度 9 搜尋 0 命中。兩檔 on-disk bytes 仍等於 map 的 `target_sha256`，由 `ops/tools/pos02b_control_pin.py` 驗證為 `PASS_PIN_ONLY` / `source_absent=true`。判準更正候選：`out/POS02_LOCATOR_CANDIDATE.md`（待 owner 簽）。
+`POS-02` 原本用 `SPEC_LIB_ROOT.rglob(檔名)` 定位 origin 再比位元；`SOURCE_IMPORT_MAP.json::control_seed` 宣佈的 `source_path` 在知識庫重組後不存在（深度 9 搜尋 0 命中），於是定位失敗、內容卻仍正確。本輪先送 VERIFY/SECURITY 車道審查（`out/VERIFY_POS02_CHALLENGE.json`，模型回答：`VERDICT: PASS`／`RISK: pin 與控制檔被同時改`／`CONDITION: 位元不符仍須硬 FAIL`），據此改寫 `pos_control_seed`：pin 取 `control_seed[].target_sha256`，origin 存在且相同 → `PASS_BYTE_IDENTICAL`，origin 缺席 → `PASS_PIN_ONLY` 並帶 `source_exists:false`，位元不符 → `FAIL_PIN_MISMATCH`。NEG：對控制檔追加 1 byte → `POS-02` FAIL（exit 1）；還原 `51f66aec…` → `selfcheck` **16/16 exit 0**。殘留 `H-POS02-PAIR`（共謀風險）由 owner 簽署的 `out/POS02_LOCATOR_CANDIDATE.md` 作獨立錨。
 
 ## C｜W0 As-Built 全文（P0-01／P0-11 要求原文嵌入）
 
