@@ -717,6 +717,25 @@ L1 50 CH 五段齊全：**50/50**
 
 簽章本體（`SIGN_BODY_*.json`）已同時上傳，可離線以 `owner_public_hex` 重驗；簽章內容明確列出 `not_claimed`（PIPD reparse／canonical promotion／native／independent／release）。
 
+## K｜W0 關閉物件（P0-09／P1-01）
+
+| 物件 | bytes | sha256 |
+| --- | --- | --- |
+| D1_authority_conflict_ledger | 22854 | 746aa79537346113dee54ebb9ae6400d |
+| D2_485_disposition | 50131 | 5e5de5bdcf20b899463dd7a6d0a0d5e5 |
+| D3_ci_supplychain_raw | 4973 | 663c5997437c34e1ab73fc7195e43102 |
+| D4_oracle96_caseplan | 59993 | edc605e6f62c0f8dad696eeb95874e5d |
+| G16B_fullscan | 136948 | eb1d0f78fbd337dad9c0fbf01869463b |
+| FUO_manifest | 4966 | 51455626e40226b58f4e2cbd4793dcd9 |
+| FUO_intent_card | 4755245 | e0bc7ce8fb50bb8aece54d6afd0629f4 |
+| SELFCHECK | 1708 | 3d4e6b637cab889d049410f72c956948 |
+
+D2 key count=485；重算 digest=ff71ffa33a0f5a8ea85a47b3…；與 L0 §07.6A 宣佈值相符=True
+
+G16B scan_complete=True；D4 cells=96；D1 rows=31
+
+跨波項目（W1/W2/W3）不以「未解」列帳，改以 `HANDED_OVER` 移交；對照見正文 §7.3。
+
 ## H｜重現命令
 
 ```bash
