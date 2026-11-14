@@ -691,6 +691,32 @@ L1 50 CH 五段齊全：**50/50**
 `Host` 讀回：blocked=[]；relay=`{"status":"ok","service":"opencodex","version":"2.11.0","uptime":773.1112659,"pid":7236,"p`；codex found=1
 
 
+## J｜Owner 親簽回執（ed25519，已驗）
+
+| kind | owner_semantic_accept |
+| --- | --- |
+| window_id | WIN-077bbb5500b1 |
+| owner_fingerprint | 412b351937be72a1 |
+| subject | FHS-W0-R7-POS02-LOCATOR |
+| body_bytes | 2478 |
+| payload_sha256 | 6f4933269b7c9f7b6388cb4be76d30d3a53eacca78a28b6432bf1e326c79404b |
+| signature_verified | True |
+| ops_used | 1 |
+| receipt | out/SIGN_BODY_POS02.SIGNED.json |
+
+| kind | original_reader_ack |
+| --- | --- |
+| window_id | WIN-077bbb5500b1 |
+| owner_fingerprint | 412b351937be72a1 |
+| subject | FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2 |
+| body_bytes | 3173 |
+| payload_sha256 | d0ab1b8ba53b19b35a786211f2eb166e818e2166ab050bcf1e48eccb98755180 |
+| signature_verified | True |
+| ops_used | 2 |
+| receipt | out/SIGN_BODY_ORIGINAL_ACK.SIGNED.json |
+
+簽章本體（`SIGN_BODY_*.json`）已同時上傳，可離線以 `owner_public_hex` 重驗；簽章內容明確列出 `not_claimed`（PIPD reparse／canonical promotion／native／independent／release）。
+
 ## H｜重現命令
 
 ```bash
