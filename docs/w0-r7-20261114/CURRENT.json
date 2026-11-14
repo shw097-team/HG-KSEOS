@@ -1,0 +1,86 @@
+{
+ "schema": "FHS-W0-CURRENT/1",
+ "subject": "FHS_vNEXT_PLP_W0",
+ "state": "W0_SCOPE_COMPLETE",
+ "delivery_revision": "r9",
+ "current_document": {
+  "name": "FHS_vNEXT_PLP_W0_2026-11-14_r9_交付版.md",
+  "bytes": 694517,
+  "sha256": "aeeab20df9b69257a8e4c9a82f282c4ac0230445bea2da7078723a4c15849f55"
+ },
+ "base_document": {
+  "path": "spec/FHS_PIPD-LS-PKG_W0_20261112_r8.md",
+  "bytes": 680998,
+  "sha256": "42546311c3c62ae4c721403740ac675b748f3f66898157fca94c328af592ecc4",
+  "reuse_mode": "BYTE_IDENTICAL_EMBED_WITH_AMENDMENT_SHEET"
+ },
+ "supersedes": [
+  {
+   "name": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_實質正文.md",
+   "reason": "r1 was a view-only draft; r9 carries the amendments"
+  },
+  {
+   "name": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r1_證據型附錄.md",
+   "reason": "superseded by r2 appendix"
+  }
+ ],
+ "promoted_at": "2026-11-14T09:58:24",
+ "promotion_scope": "LOCAL_WORKING_CURRENT (not a release, not an origin merge)",
+ "origin_status": "HG-KSEOS PR #26 open, unmerged; SBL PR #69 open, unmerged; Fabric PR #58 open, unmerged",
+ "claim_ceiling": "SOURCE_READ + HOST_RAW + AUTHOR_DESIGN + LOCAL_CHECK + LANE_SERVED + WRAPPER_SCOPED_SOD + OWNER_SCOPED_ORIGINAL_ACK + W0_SCOPE_COMPLETE",
+ "not_claimed": [
+  "PIPD_COMPILER_REPARSE",
+  "NATIVE_PASS",
+  "INDEPENDENT_PASS",
+  "RELEASE"
+ ],
+ "documents": [
+  {
+   "name": "FHS_vNEXT_PLP_W0_2026-11-14_r9_交付版.md",
+   "bytes": 694517,
+   "sha256": "aeeab20df9b69257a8e4c9a82f282c4ac0230445bea2da7078723a4c15849f55"
+  },
+  {
+   "name": "FHS_vNEXT_PLP_W0_藍圖&skeleton.md",
+   "bytes": 3961,
+   "sha256": "6fc5723f7585244dc7c6f60a6b4724c9eb41c81202b760bdc3bd0e76264114f0"
+  },
+  {
+   "name": "FHS_vNEXT_PLP_W0_草案.md",
+   "bytes": 3067,
+   "sha256": "f83f4d8976a2816d9b3139f512f8da455236d5b0aacd4c25d91aab4ad57ad6aa"
+  },
+  {
+   "name": "FHS_vNEXT_PLP_W0_定案.md",
+   "bytes": 5749,
+   "sha256": "4ff2e04557af69ae01fe9a67fed1b77d742d6c8c7645a731d0f76d991b0ca62e"
+  },
+  {
+   "name": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_實質正文.md",
+   "bytes": 31526,
+   "sha256": "84707376b8db04858b98675cb9c1cfcd664431c56dd36ca5acbdf112d7410f94"
+  },
+  {
+   "name": "FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_證據型附錄.md",
+   "bytes": 50289,
+   "sha256": "5403baa4ace267fe8d07b6deb45ad89ebc30df4eddbc42541a1e9af3bf5c07be"
+  }
+ ],
+ "evidence_root": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114",
+ "handoff": {
+  "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\_local\\HANDOFF_W1_20261114.md",
+  "sha256": "2303bb5383aa30e144e66bfd3c244120ab27666b307dd4f4701298d36a36d6a4"
+ },
+ "session_closeout": {
+  "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\_local\\SESSION_CLOSEOUT_20261114_W0.md",
+  "sha256": "98a59c3f80dce383f508c9b17d03678fa4bd1bf3416b272f4877781cf191bd90"
+ },
+ "verifier": {
+  "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\deliverables\\FHS_vNEXT_PLP_W0\\verify_current.py",
+  "usage": "python deliverables/FHS_vNEXT_PLP_W0/verify_current.py"
+ },
+ "hygiene_report": {
+  "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\HYGIENE_REPORT.json",
+  "sha256": "a84bb240ddc60ee6305f4010cbc3fe1b8b5e5eeb53707f34ca589e3dee69591a"
+ }
+}
