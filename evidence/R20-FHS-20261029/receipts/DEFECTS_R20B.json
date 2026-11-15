@@ -1,0 +1,57 @@
+{
+ "schema": "R20.DEFECT_LEDGER/1",
+ "round": "R20 closure (owner-authorized execution of the FAR plan)",
+ "claim_ceiling": "AUTHOR_SIDE_LOCAL",
+ "entries": [
+  {
+   "id": "TT-R20-12",
+   "state": "REPAIRED",
+   "found_by": "closure VERIFY attempt 2 (dispatch_rc=4, no model call)",
+   "symptom": "ERR_LANE_PIN_IDENTITY_INVALID: declared binary does not exist: ...\\bin\\6257d9e8f63c0f2b\\codex.exe",
+   "root_cause": "the host Codex CLI upgraded to 0.165.0-alpha.1.2; the lane pin still named the removed 0.163.0-alpha.11 binary. The lane was not broken by our change -- it was pinned to a binary that had been deleted under it.",
+   "why_it_matters": "from the outside this is indistinguishable from a dead lane, and the natural next move (switch models) would have been wrong. The typed refusal is what made the real cause visible.",
+   "repair": "config/hermes-codex-lane.json (branch + live) repointed to 0ab0e7a8f3779036/codex.exe, version 0.165.0-alpha.1.2, sha256 0c09e45bc76433756eb2d492f6db0ce6f269967e6618f4a6ae73e2fa239694b8; previous triple recorded under codex_pin_repair",
+   "evidence": "commit 5ede729; ERR text quoted above",
+   "residual": "the pin is still a hard-coded path. A version-pinned lane will break on every upgrade; resolving by sha256 over a directory scan would remove the class, not the instance."
+  },
+  {
+   "id": "TT-R20-13",
+   "state": "REPAIRED",
+   "found_by": "full-suite run after adding the producer field (61 red in ao_guard + 7 elsewhere)",
+   "symptom": "NameError: name '_producer' is not defined -- raised while building the receipt in main()",
+   "root_cause": "_producer was bound inside run_attempt(); every path that never ran an attempt (pre-spawn refusals) referenced it at emit time",
+   "why_it_matters": "this is the exact defect class the round is about: a field added to the RECEIPT was never exercised on the refusal paths, and the two gate test files were green because they never hit a pre-spawn emit path",
+   "repair": "bound once at the top of main() (commit eb4b7ab), comment records why",
+   "evidence": "149 failed/651 passed before; 88 failed/712 passed after (88 = baseline set)",
+   "residual": "none known"
+  },
+  {
+   "id": "TT-R20-14",
+   "state": "REPAIRED",
+   "found_by": "p7 closure receipt run (A3 row red while the tool was green)",
+   "symptom": "the row asserted the literal 'identity_changed', a local variable inside config_drift.py, not a key in its JSON output",
+   "root_cause": "assertion written against the source rather than against the tool's contract",
+   "repair": "row now parses the JSON and checks affects_issued_evidence is false + counts fields",
+   "evidence": "config_drift rc=0, drift_fields=10, identity_changed=[] measured directly",
+   "residual": "none"
+  },
+  {
+   "id": "TT-R20-15",
+   "state": "OPEN",
+   "found_by": "subset replay (publish branch)",
+   "symptom": "233 changed paths under the delivery paths, of which 2 are deletions of files that exist on main (docs/MANIFEST.json, docs/FHS-B1_使用說明文檔.md)",
+   "root_cause": "the candidate lineage and main diverged before those docs existed; the deletion is real in the lineage but irrelevant to the delivery",
+   "handling": "deletions are deliberately not replayed; recorded in SUBSET_MANIFEST.json as deleted_not_applied",
+   "residual": "an owner decision: keep main's docs (current), or delete them in a separate reviewable change"
+  },
+  {
+   "id": "TT-R20-16",
+   "state": "OPEN",
+   "found_by": "full suite at eb4b7ab",
+   "symptom": "88 failures, identical id set at 6086908 (88 failed / 686 passed / 2 collection errors)",
+   "root_cause": "pre-existing repo-wide red; not caused by this round, and not fixed by it",
+   "handling": "attribution measured, not assumed: the failure id sets were diffed (new=0 after the producer fix)",
+   "residual": "88 red tests remain. Fixing them is a separate round and would dwarf the delivery." 
+  }
+ ]
+}

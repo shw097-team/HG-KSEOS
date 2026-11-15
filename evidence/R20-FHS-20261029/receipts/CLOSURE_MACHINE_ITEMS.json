@@ -1,0 +1,80 @@
+{
+ "schema": "R20.CLOSURE_MACHINE_ITEMS/1",
+ "generated_at_utc": "2026-10-29T16:06:13Z",
+ "repo_head": "3946ae4e95a4d3e72eb9cf8698a1a59f11c0983f",
+ "claim_ceiling": "AUTHOR_SIDE_LOCAL -- an author re-running its own tools is not an independent verification",
+ "all_items_green": true,
+ "rows": [
+  {
+   "item": "A1",
+   "claim": "a bare pytest collection of tests/ reports zero errors",
+   "command": "pytest tests -q --collect-only",
+   "ok": true,
+   "value": "815",
+   "evidence": "815 tests collected in 2.11s"
+  },
+  {
+   "item": "A2",
+   "claim": "a receipt without producer identity is refused for comparison (exit 4, typed code)",
+   "command": "compare_lane_receipts PASS2 far_verify2",
+   "ok": true,
+   "value": null,
+   "evidence": "{\"schema\": \"R20.RECEIPT_COMPARE/1\", \"comparable\": false, \"code\": \"ERR_PRODUCER_UNKNOWN\", \"detail\": {\"a\": null, \"b\": null}, \"say\": \"a receipt without producer identity cannot be compared; re-issue it with the current dispatcher instead of interpreting the old fields\"}"
+  },
+  {
+   "item": "A3",
+   "claim": "host/branch assignment drift is emitted as data and never rewrites evidence",
+   "command": "config_drift --repo --host",
+   "ok": true,
+   "value": 10,
+   "evidence": "{\n \"schema\": \"R20.CONFIG_DRIFT/1\",\n \"repo\": {\n  \"path\": \"config/model-lane-assignment.json\",\n  \"revision\": 35,\n  \"registry_epoch\": 34\n },\n \"host\": {\n  \"path\": \"C:\\\\Projects\\\\Agent_Workspace\\\\HG-KSEOS\\\\config\\\\model-lane-assignment.json\",\n  \"revision\": 38,\n  \"registry_epoch\": 38\n },\n \"same\": false,\n \"field_count\": 10,\n \"fields\": [\n  {\n   \"role\": \"EXECUTE\",\n   \"field\": \"additional_routes\",\n   \"repo\""
+  },
+  {
+   "item": "A4",
+   "claim": "a declared fallback chain is representable and never conflated with the primary arm",
+   "command": "pytest test_lane_assignment_fallbacks.py",
+   "ok": true,
+   "value": "10",
+   "evidence": "10 passed in 0.41s"
+  },
+  {
+   "item": "A6",
+   "claim": "the 8 owner packets cover all 75 residues exactly once",
+   "command": "render_owner_requests --check",
+   "ok": true,
+   "value": "75",
+   "evidence": "packets=8 ids_across_packets=75 cells=46 stages=18 holds=11"
+  },
+  {
+   "item": "A7",
+   "claim": "every number claimed by the evidence index is present in a receipt",
+   "command": "evidence_reconcile --receipts --doc",
+   "ok": true,
+   "value": "0",
+   "evidence": "OK   archive sha256: ee0091173c3a5df96b48c469eeb2294e500c7bd1122f46a696e166e9baa6081f\nOK   archive bytes: 13578117\nOK   checksum rows verified: 88\nOK   archive entries: 89\nOK   validator passed: 2789\nOK   validator failed: 0\nOK   case count: 2789\nOK   hold rows: 46\nOK   stage rows: 18\nOK   oracle ce"
+  },
+  {
+   "item": "A8",
+   "claim": "a required arm constrains SELECTION (alias-equivalent) and never spends a call on another arm",
+   "command": "pytest test_lane_dispatch_r20_gates.py",
+   "ok": true,
+   "value": "11",
+   "evidence": "11 passed in 1.97s"
+  },
+  {
+   "item": "SUITE",
+   "claim": "no failure id in the full suite is new relative to the baseline at 6086908",
+   "command": "pytest tests -q --tb=no -rf",
+   "ok": true,
+   "value": {
+    "failed": "74",
+    "passed": "734",
+    "errors": null,
+    "new_vs_baseline": [],
+    "fixed_vs_baseline": 14,
+    "baseline_size": 88
+   },
+   "evidence": "74 failed, 734 passed, 3 skipped, 4 xfailed, 28 subtests passed in 190.75s (0:03:10) | new_vs_baseline=0 | fixed_vs_baseline=14"
+  }
+ ]
+}

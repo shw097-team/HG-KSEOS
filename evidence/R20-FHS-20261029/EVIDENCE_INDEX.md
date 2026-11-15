@@ -263,3 +263,18 @@ merkle root `6062ce82…`, Ed25519 `892afb34…`, `ops_used=2`.
 It attests that the delivered bytes are the bytes described, and explicitly does **not** attest owner
 acceptance of the 75 residues, OR-6/OR-8, release, or any merge. Same verification path as §9: the file carries
 `body_json` + `owner_public_hex`, so sha256 and signature check without any key file.
+
+---
+
+## §10 Close-out (entry point for external readers)
+
+`closeout/CLOSEOUT_INDEX.md` is the single entry document: subject binding, audit path, reproduction
+commands with expected output, every ceiling (4 VERIFY HOLD · 74 pre-existing failures · 0/22 WP native),
+and the self-inflicted defects repaired this round. Companion files in the same directory:
+`FINAL_HANDOFF.md`, `FINAL_FACTS.json`, `CONFIG_FOUR_STATE.json` (live control-plane four-state sha256
+ledger), and the owner-window lifecycle receipts (`WINDOW_R20_STATUS_BEFORE_CLOSE` / `CLOSE_RECEIPT` /
+`STATUS_AFTER_CLOSE` — window `WIN-7d092fd95ffc`, `CLOSED`, ops 2/24, no OR filled or signed).
+
+Closed closure-round receipts now in-tree: `receipts/CLOSURE_MACHINE_ITEMS.json` (A1–A8 + suite),
+`receipts/BASELINE_FAILED_IDS_6086908.txt`, `receipts/VERIFY_LANE_R20_CLOSURE_R6.json`,
+`receipts/DEFECTS_R20B.json`, `lane/closure_verify_stdout.json(.attempts.ndjson)` (six attributable rounds).
