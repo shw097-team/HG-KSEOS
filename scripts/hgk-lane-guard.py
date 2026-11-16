@@ -105,8 +105,21 @@ def _live_epoch(args, registry: dict) -> int | None:
         doc = lp.load_site(source_path)
     except Exception:
         return None
-    if isinstance(doc, dict) and "revision" in doc:
-        return int(doc["revision"])
+    if isinstance(doc, dict):
+        # EPOCH-FIELD REPAIR (W0/W1 closeout, plan r4 §7.2): the assignment document carries
+        # the contract epoch in `registry_epoch` / `contract_epoch` / `epoch` (41) and its own
+        # edit counter in `revision` (44).  Reading `revision` as the epoch is what produced
+        # ERR_LANE_STALE_EPOCH on a correct tree.  The epoch fields are preferred; `revision`
+        # survives only as a compatibility fallback for a document that carries no epoch at
+        # all, and conflicting epoch fields are refused rather than guessed.
+        epochs = {k: doc[k] for k in ("registry_epoch", "contract_epoch", "epoch") if k in doc}
+        if len({int(v) for v in epochs.values()}) > 1:
+            return None
+        for key in ("registry_epoch", "contract_epoch", "epoch"):
+            if key in doc:
+                return int(doc[key])
+        if "revision" in doc:
+            return int(doc["revision"])
     return None
 
 

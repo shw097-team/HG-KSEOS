@@ -40,6 +40,80 @@ def evaluate(argv):
     return guard.evaluate(guard.build_parser().parse_args(argv))
 
 
+# ---------------------------------------------------------------------------- R2-02 fixtures
+def _assignment_row(role):
+    data = json.loads(dsp.ASSIGNMENT_FILE.read_text(encoding="utf-8"))
+    for row in data.get("assignment") or []:
+        if str(row.get("role") or row.get("lane_group") or "").upper() == role.upper():
+            return row
+    raise AssertionError(f"no assignment row for {role}")
+
+
+def _selector_classification(asg):
+    """(operator_only, auto_serviceable) under EITHER field naming.
+
+    This patch publishes supply_selector_operator_only / supply_selector_auto; the uncommitted live
+    repair publishes explicit_only_arms and no auto split. The contract is the classification, not the
+    spelling, so a test that pins one name would pass only against one of the two implementations.
+    """
+    op = asg.get("supply_selector_operator_only")
+    if op is None:
+        op = asg.get("explicit_only_arms")
+    op = set(op or ())
+    auto = asg.get("supply_selector_auto")
+    auto = set(auto) if auto is not None else set(asg["arms"]) - op
+    return op, auto
+
+
+def _mutated_assignment(*, drop_selector_arm=None, set_auto_false=None):
+    """A copy of the LIVE assignment with one owner declaration removed/retagged. Written to the
+    caller's temp dir; never edits config/model-lane-assignment.json."""
+    data = json.loads(dsp.ASSIGNMENT_FILE.read_text(encoding="utf-8"))
+    for row in data.get("assignment") or []:
+        sel = (row.get("supply_selector") or {}).get("arms") or []
+        if drop_selector_arm:
+            row["supply_selector"]["arms"] = [
+                a for a in sel
+                if (a.get("provider"), a.get("model")) != drop_selector_arm]
+        if set_auto_false:
+            for a in sel:
+                if (a.get("provider"), a.get("model")) == set_auto_false:
+                    a["automatic_selection"] = False
+    return data
+
+
+class _assignment_swapped:
+    """Point dsp.ASSIGNMENT_FILE at a temp copy for the duration of a `with` block."""
+
+    def __init__(self, data):
+        self.data = data
+        self.saved = None
+        self.path = None
+
+    def __enter__(self):
+        self.path = pathlib.Path(tempfile.mkdtemp()) / "model-lane-assignment.json"
+        self.path.write_text(json.dumps(self.data), encoding="utf-8")
+        self.saved = dsp.ASSIGNMENT_FILE
+        dsp.ASSIGNMENT_FILE = self.path
+        return self.path
+
+    def __exit__(self, *exc):
+        dsp.ASSIGNMENT_FILE = self.saved
+        shutil.rmtree(self.path.parent, ignore_errors=True)
+        return False
+
+
+def _dispatch_module():
+    spec = importlib.util.spec_from_file_location(
+        "hgk_lane_dispatch", ROOT / "scripts" / "hgk-lane-dispatch.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+dsp = _dispatch_module()
+
+
 def _registry_with_pair(tmp, *, status, distinct_required):
     """Copy the live registry, force the EXECUTE/VERIFY_SECURITY declaration, re-pin the source
     digest so only the SoD surface (not source_digest) is under test."""
@@ -197,7 +271,81 @@ class TestLaneGuard(unittest.TestCase):
         assertion = [c for c in v["checks"] if c["id"] == "expected_epoch_assertion"]
         self.assertEqual(len(assertion), 1)
         self.assertFalse(assertion[0]["ok"])
-        self.assertEqual(v["live_epoch"], lp.load_site(ROOT / "config" / "model-lane-assignment.json")["revision"])
+        # R2-02: live_epoch is the routing CONTRACT epoch (registry_epoch/epoch), never the document's
+        # own revision counter. Asserting `revision` here ENCODED the defect: the guard read 44 while
+        # the registry's epoch was 41, so every ADMIT path refused ERR_LANE_STALE_EPOCH and this test
+        # stayed green while test_admit_with_receipt_evidence went red. The discriminating assertion
+        # below makes the fixture's own shape part of the test, so the old reader cannot pass it again
+        # even if the document later happens to carry revision == registry_epoch.
+        assignment = lp.load_site(ROOT / "config" / "model-lane-assignment.json")
+        self.assertNotEqual(assignment["revision"], assignment["registry_epoch"],
+                            "fixture cannot discriminate: revision == registry_epoch, so a reader "
+                            "that returns the revision would also pass")
+        self.assertEqual(v["live_epoch"], assignment["registry_epoch"])
+
+    # ---------------------------------------------------------------- R2-02 additions
+    def test_r2_epoch_is_contract_epoch_41_not_revision_44(self):
+        """POS: the live epoch a pristine tree reports is 41, the value both epoch keys carry, and the
+        value the registry itself declares -- not the document's 44th revision."""
+        assignment = lp.load_site(ROOT / "config" / "model-lane-assignment.json")
+        live = guard._live_epoch(guard.build_parser().parse_args(
+            PLAN_ARM + ["--admission", self.plan_fix]), lp.load_registry())
+        self.assertEqual(live, 41)
+        self.assertEqual(live, assignment["registry_epoch"])
+        self.assertEqual(live, assignment["epoch"])
+        self.assertNotEqual(live, assignment["revision"])
+        v = evaluate(PLAN_ARM + ["--admission", self.plan_fix])
+        self.assertEqual(v["exit_code"], 0, v["errors"])
+        self.assertEqual(v["live_epoch"], 41)
+
+    def test_r2_selector_arms_are_visible_and_operator_only(self):
+        """POS: every arm the owner declares under `supply_selector.arms` is READ (so --require-arm can
+        name it), and every arm the owner marks automatic_selection:false is classified operator-only
+        -- none of them is promoted to auto-serviceable.
+
+        Field-name agnostic on purpose: this implementation publishes `supply_selector_operator_only`,
+        the uncommitted live repair publishes `explicit_only_arms`. Both must satisfy the contract, so
+        the test discovers the classification instead of pinning a private spelling."""
+        for role in ("PLAN", "EXECUTE", "VERIFY_SECURITY"):
+            asg = dsp.lane_assigned_arms(role)
+            self.assertTrue(asg["ok"], asg.get("detail"))
+            declared = {(a.get("provider"), a.get("model"))
+                        for a in _assignment_row(role).get("supply_selector", {}).get("arms", [])}
+            visible = set(asg["arms"])
+            for prov, model in declared:
+                self.assertIn(f"{prov}/{model}", visible,
+                              f"{role}: owner-declared selector arm {prov}/{model} is invisible")
+            operator_only, auto = _selector_classification(asg)
+            expected_operator_only = {
+                f"{a['provider']}/{a['model']}"
+                for a in _assignment_row(role)["supply_selector"]["arms"]
+                if a.get("automatic_selection") is not True
+                and f"{a['provider']}/{a['model']}" not in set(asg["primary_arms"])}
+            self.assertEqual(operator_only, expected_operator_only,
+                             f"{role}: operator-only set does not match the owner's automatic_selection")
+            self.assertFalse(operator_only & auto, f"{role}: an arm is both operator-only and auto")
+            for prov, model in declared:
+                arm = f"{prov}/{model}"
+                sel = [a for a in _assignment_row(role)["supply_selector"]["arms"]
+                       if f"{a.get('provider')}/{a.get('model')}" == arm][0]
+                if sel.get("automatic_selection") is True:
+                    self.assertIn(arm, auto)
+                else:
+                    self.assertIn(arm, operator_only)
+                    self.assertNotIn(arm, auto)
+
+    def test_r2_undeclared_arm_is_still_refused(self):
+        """NEG: widening the READ did not widen ACCEPTANCE. An arm in no declared shape -- and the
+        bare-model and transport-alias forms of a declared arm -- are still not in the assignment."""
+        asg = dsp.lane_assigned_arms("PLAN")
+        for bogus in ("opencode-go/gpt-9-imaginary", "deepseek-v4.1-flash",
+                      "unlisted-provider/gpt-6.1-sol"):
+            self.assertNotIn(bogus, asg["arms"])
+        mutated = _mutated_assignment(drop_selector_arm=("opencode-go", "mimo-v2.6-flash"))
+        with _assignment_swapped(mutated):
+            after = dsp.lane_assigned_arms("PLAN")
+        self.assertNotIn("opencode-go/mimo-v2.6-flash", after["arms"],
+                         "an arm removed from the owner's selector pool must stop being assigned")
 
     def test_v5_reasoning_effort_survives_projection(self):
         policy = lp.project_policy(lp.load_registry())

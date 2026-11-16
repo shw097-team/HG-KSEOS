@@ -1192,6 +1192,37 @@ def lane_assigned_arms(role: str) -> dict:
                               else (fb.strip() if isinstance(fb, str) else None)
                               for fb in (row.get("fallbacks") or [])]
         declared_fallbacks = [f for f in declared_fallbacks if f]
+        # R2-02: a THIRD declared shape exists on this host -- the same row carries part of its pool
+        # under `supply_selector.arms` ({provider, model, transport_model, automatic_selection}).
+        # A reader that consumes only `non_default_alternates` / `fallbacks` makes an owner-declared
+        # arm invisible and then refuses it with ERR_ARM_NOT_IN_ASSIGNMENT: right verdict, wrong
+        # reason.  Measured on revision 44: PLAN/EXECUTE/VERIFY_SECURITY each declare 4 pool arms and
+        # only the assigned pair was readable, so 9 of 12 pool arms were unreachable by --require-arm.
+        # These arms are READ in the `provider/model` form only -- the same form the other two shapes
+        # are read in -- so the patch widens what is READ, not what is ACCEPTED (no transport alias,
+        # no bare id).  They are added to the SELECTABLE set, never to `fallback`: an arm the owner
+        # marks `automatic_selection: false` is not a degradation target, and putting it in `fallback`
+        # would also let the primary/fallback overlap invariant fire on the owner's own primary.
+        selector_arms: list[str] = []
+        selector_auto: list[str] = []
+        selector_operator_only: list[str] = []
+        _selector_block = row.get("supply_selector")
+        _selector_list = (_selector_block.get("arms")
+                          if isinstance(_selector_block, dict) else None) or []
+        for sel in _selector_list:
+            if not isinstance(sel, dict):
+                continue
+            sp = str(sel.get("provider") or "").strip()
+            sm = str(sel.get("model") or "").strip()
+            if not (sp and sm):
+                continue
+            arm = f"{sp}/{sm}"
+            selector_arms.append(arm)
+            if sel.get("automatic_selection") is True:
+                selector_auto.append(arm)
+            else:
+                selector_operator_only.append(arm)
+        arms.extend(selector_arms)
         # C4/TT-R20-19: the independent VERIFY lane showed my "primary excludes fallbacks" TEST was a
         # tautology -- it passed identically for the composed code and for a contaminating mutant, because
         # the old snapshot happened to be taken before the append. A property nothing can violate is not
@@ -1213,7 +1244,16 @@ def lane_assigned_arms(role: str) -> dict:
                 "fallback_arms": sorted(set(fallback)),
                 "declared_fallbacks": sorted(set(declared_fallbacks)),
                 "fallbacks_declared": bool(declared_fallbacks),
-                "alternates_are_operator_selectable": bool(row.get("non_default_alternates") or declared_fallbacks)}
+                # R2-02: what the selector shape contributes, split by WHO may choose it. An arm in
+                # `supply_selector_operator_only` is declared (so --require-arm may name it) and must
+                # never be auto-selected; `supply_selector_auto` is the subset a selector may pick
+                # with no operator present.
+                "supply_selector_arms": sorted(set(selector_arms)),
+                "supply_selector_auto": sorted(set(selector_auto)),
+                "supply_selector_operator_only": sorted(set(selector_operator_only)),
+                "alternates_are_operator_selectable": bool(row.get("non_default_alternates")
+                                                          or declared_fallbacks
+                                                          or selector_operator_only)}
     return {"ok": False, "arms": [], "revision": data.get("revision"),
             "detail": f"no assignment row for role {role!r} in {ASSIGNMENT_FILE}"}
 
@@ -2031,6 +2071,25 @@ def main() -> int:
             reason = _skip_reason(e, declared_not_dispatchable=e.get("dispatchable") is False)
             skipped.append({"rank": e["rank"], "arm": f"{e['provider']}/{e['model']}",
                             "reason": reason})
+
+    # R2-02: `automatic_selection: false` is a standing prohibition, not a hint. Now that the selector
+    # shape is READ, its operator-only arms are inside `lane_assigned_arms(...)["arms"]` -- and
+    # `--require-assigned-arms` uses exactly that list as its allow-list, so making those arms VISIBLE
+    # would also have made them AUTO-SERVICEABLE. With no --require-arm an operator-only arm is
+    # therefore removed from the walk entirely (recorded in `skipped`, never silent); naming it with
+    # --require-arm re-admits it through the rank filter, which is the only lawful way to reach it.
+    _operator_only = sorted(set(lane_assigned_arms(args.lane).get("supply_selector_operator_only") or []))
+    if _operator_only and not args.require_arm:
+        _keep = []
+        for e in entries:
+            _tok = f"{e['provider']}/{e['model']}"
+            if any(arm_served_equivalent(_tok, x) for x in _operator_only):
+                skipped.append({"rank": e["rank"], "arm": _tok,
+                                "reason": "automatic_selection=false: operator-only, reachable only by an "
+                                          "explicit --require-arm"})
+            else:
+                _keep.append(e)
+        entries = _keep
 
     if args.force_rank is not None:
         # An explicit --force-rank naming a skipped rank must still REACH it: the measurement is
