@@ -22,6 +22,9 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
+from unittest import mock
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 _spec = importlib.util.spec_from_file_location("hgk_lane_dispatch", ROOT / "scripts" / "hgk-lane-dispatch.py")
@@ -2161,6 +2164,170 @@ class ForceRankOperatorOnlyAuthorisation(unittest.TestCase):
                       "the forced rank must still be RECORDED as the declared-dead rank it is")
         self.assertIn("automatic_selection=false", skipped[1],
                       "and the operator-only arm must stay skipped in the same walk")
+
+
+class PinnedOperatorOnlyProhibition(unittest.TestCase):
+    """AA-01b: the operator-only prohibition, pinned so it CANNOT skip.
+
+    `ForceRankOperatorOnlyAuthorisation` above reads the arms it exercises from the LIVE assignment
+    artifact, so an owner rebind makes it `skipTest` -- and a skipped negative control is
+    indistinguishable from a passing one in a summary line. This class is the same prohibition with
+    both inputs FIXED:
+
+      * `tests/fixtures/lane_assignment_pinned_operator_only.json` marks `pinned-operator-only`
+        `automatic_selection: false` and `pinned-auto` `automatic_selection: true`;
+      * `tests/fixtures/lane_route_slots_pinned_operator_only.json` puts the first at rank 1
+        (`feasibility: DISPATCHABLE`, no `dispatchable: false`, so ONLY the authorisation rule can
+        refuse it) and the second at rank 2.
+
+    The fixture assignment is bound onto the module global the entry point reads and restored
+    afterwards, so no run here touches `config/model-lane-assignment.json`. There is no `skipTest`
+    path: if either side of the pin drifts, this class FAILS with a message naming what moved.
+
+    Three cases, and the third is the one that makes the other two load-bearing:
+      (a) a bare `--force-rank` onto the operator-only rank is `ERR_FORCE_RANK_OPERATOR_ONLY` and
+          spawns nothing;
+      (b) naming the ARM is the lawful route onto the same rank (so the rule is not a blanket
+          refusal);
+      (c) with the SAME fixed pool and the operator-only mark removed from a copy of the fixed
+          assignment, the bare `--force-rank` DOES dispatch that arm -- which is exactly the mutant
+          that would make (a) fail. A prohibition nothing can violate is not pinned.
+    """
+
+    POOL = ROOT / "tests" / "fixtures" / "lane_route_slots_pinned_operator_only.json"
+    ASSIGNMENT = ROOT / "tests" / "fixtures" / "lane_assignment_pinned_operator_only.json"
+    OPERATOR_ONLY = "fixture-vendor/pinned-operator-only"
+    AUTO = "fixture-vendor/pinned-auto"
+    NONCE = "HGK_AA01B_NONCE"
+
+    def _stub_env(self, tmp):
+        return mock.patch.dict(os.environ, {
+            "HGK_STUB_MODE": "clean",
+            "HGK_STUB_USAGE": str(pathlib.Path(tmp) / "usage.jsonl"),
+            "HGK_STUB_EMIT_NONCE": self.NONCE,
+            "HGK_STUB_USAGE_LINE": json.dumps({"provider": "fixture-vendor",
+                                               "model": "pinned-operator-only", "status": 200}),
+        })
+
+    def _dispatch(self, tmp, extra, assignment=None):
+        """Call the REAL entry point in-process with the pinned assignment bound.
+
+        In-process, not a subprocess, because `ASSIGNMENT_FILE` is a module global and the script
+        exposes no CLI flag for it: a subprocess would read the live artifact and reintroduce the
+        dependency this class exists to remove.
+        """
+        tmp = pathlib.Path(tmp)
+        (tmp / "usage.jsonl").write_bytes(b"")
+        out = tmp / ("receipt-%d.json" % len(list(tmp.glob("receipt-*.json"))))
+        argv = ["hgk-lane-dispatch.py", "--lane", "VERIFY_SECURITY", "--pool", str(self.POOL),
+                "--json-out", str(out), "--codex-executable", str(ROOT / "tests" / "fixtures"
+                                                                  / "stub_lane_child.py"),
+                "--usage", str(tmp / "usage.jsonl"), "--attempt-log-dir", str(tmp / "logs"),
+                "--timeout", "60", "--prompt", "x", "--nonce", self.NONCE,
+                "--relay-home", str(tmp / "no-such-relay-home")] + list(extra)
+        original_assignment, original_argv = disp.ASSIGNMENT_FILE, sys.argv
+        disp.ASSIGNMENT_FILE = pathlib.Path(assignment) if assignment else self.ASSIGNMENT
+        sys.argv = argv
+        buf = StringIO()
+        try:
+            with redirect_stdout(buf):
+                rc = disp.main()
+        finally:
+            disp.ASSIGNMENT_FILE, sys.argv = original_assignment, original_argv
+        receipt = json.loads(out.read_text(encoding="utf-8")) if out.is_file() else None
+        return rc, buf.getvalue(), receipt
+
+    @staticmethod
+    def _refusal(stdout):
+        """The last JSON object the entry point printed, or None (a run that never refused)."""
+        for line in reversed(stdout.strip().splitlines()):
+            line = line.strip()
+            if line.startswith("{"):
+                try:
+                    return json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+        return None
+
+    def test_the_pinned_assignment_is_the_one_being_read(self):
+        """Precondition, asserted rather than skipped: the pin resolves to the fixture's own revision."""
+        original = disp.ASSIGNMENT_FILE
+        disp.ASSIGNMENT_FILE = self.ASSIGNMENT
+        try:
+            posture = disp.lane_assigned_arms("VERIFY_SECURITY")
+        finally:
+            disp.ASSIGNMENT_FILE = original
+        self.assertTrue(posture["ok"], posture)
+        self.assertEqual(posture["revision"], 9001,
+                         "the pinned assignment fixture changed revision; the pin moved")
+        self.assertEqual(posture["supply_selector_operator_only"], [self.OPERATOR_ONLY])
+        self.assertEqual(posture["supply_selector_auto"], [self.AUTO])
+
+    def test_force_rank_onto_the_operator_only_rank_is_refused_by_name(self):
+        with tempfile.TemporaryDirectory(prefix="hgk-aa01b-a-") as td:
+            tmp = pathlib.Path(td)
+            with self._stub_env(tmp):
+                rc, stdout, receipt = self._dispatch(tmp, ["--force-rank", "1"])
+            self.assertEqual(rc, 2, stdout)
+            refusal = self._refusal(stdout)
+            self.assertIsNotNone(refusal, f"no JSON refusal on stdout: {stdout[-1500:]}")
+            self.assertIs(refusal["ok"], False)
+            self.assertEqual(refusal["code"], "ERR_FORCE_RANK_OPERATOR_ONLY", refusal)
+            self.assertNotEqual(refusal["code"], "ERR_SLOT_POOL_RANK_GAP",
+                                "the pool is complete; the authorisation is what refused")
+            self.assertEqual(refusal["operator_only_arms"], [self.OPERATOR_ONLY], refusal)
+            self.assertEqual(refusal["required_authorisation"], "--require-arm", refusal)
+            self.assertIsNone(receipt, "a refusal must not write a receipt as if the run had proceeded")
+            self.assertEqual(sorted(p.name for p in (tmp / "logs").glob("attempt-*"))
+                             if (tmp / "logs").is_dir() else [], [],
+                             "an operator-only refusal must spawn nothing")
+
+    def test_naming_the_arm_is_the_lawful_route_onto_that_rank(self):
+        with tempfile.TemporaryDirectory(prefix="hgk-aa01b-b-") as td:
+            tmp = pathlib.Path(td)
+            with self._stub_env(tmp):
+                rc, stdout, receipt = self._dispatch(
+                    tmp, ["--force-rank", "1", "--require-arm", self.OPERATOR_ONLY])
+            self.assertEqual(rc, 0, stdout[-2000:])
+            self.assertIsNotNone(receipt, stdout[-2000:])
+            self.assertIs(receipt["ok"], True)
+            self.assertEqual(receipt["used_rank"], 1)
+            self.assertEqual([a["rank"] for a in receipt["attempts"]], [1])
+            self.assertEqual(receipt["used_transport_model"], self.OPERATOR_ONLY)
+            self.assertNotIn("ERR_FORCE_RANK_OPERATOR_ONLY", stdout)
+
+    def test_the_prohibition_is_load_bearing(self):
+        """Mutant: drop the `automatic_selection: false` mark and the SAME call dispatches the arm.
+
+        This is the case that proves the two above can fail: it reproduces, inside the suite, the
+        config drift (or emitter regression) that would make (a) a lie. If this one ever fails while
+        (a) passes, the refusal at (a) is being produced by something other than the operator-only
+        rule.
+        """
+        with tempfile.TemporaryDirectory(prefix="hgk-aa01b-c-") as td:
+            tmp = pathlib.Path(td)
+            mutated = json.loads(self.ASSIGNMENT.read_text(encoding="utf-8"))
+            flipped = 0
+            for row in mutated.get("assignment") or []:
+                for arm in ((row.get("supply_selector") or {}).get("arms") or []):
+                    if arm.get("model") == "pinned-operator-only" and \
+                            arm.get("automatic_selection") is False:
+                        arm["automatic_selection"] = True
+                        flipped += 1
+            self.assertEqual(flipped, 1, "the fixture no longer carries the mark this mutant removes")
+            mutant = tmp / "assignment-mutant.json"
+            mutant.write_text(json.dumps(mutated, ensure_ascii=False), encoding="utf-8")
+            with self._stub_env(tmp):
+                rc, stdout, receipt = self._dispatch(tmp, ["--force-rank", "1"], assignment=mutant)
+            refusal = self._refusal(stdout)
+            self.assertNotEqual((refusal or {}).get("code"), "ERR_FORCE_RANK_OPERATOR_ONLY",
+                                "with the mark removed the rule must NOT refuse -- otherwise the "
+                                f"refusal is coming from somewhere else: {stdout[-1500:]}")
+            self.assertEqual(rc, 0, stdout[-2000:])
+            self.assertIsNotNone(receipt, stdout[-2000:])
+            self.assertEqual(receipt["used_rank"], 1)
+            self.assertEqual(receipt["used_transport_model"], self.OPERATOR_ONLY,
+                             "the mutant must actually DISPATCH the arm the prohibition protects")
 
 
 if __name__ == "__main__":
