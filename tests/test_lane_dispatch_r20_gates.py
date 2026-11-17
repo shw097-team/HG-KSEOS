@@ -139,20 +139,42 @@ def test_lane_group_shape_and_alternates_are_accepted():
     assert asg["alternates_are_operator_selectable"] is True
 
 
+FIXED_UNASSIGNED_POOL = ROOT / "tests" / "fixtures" / "lane_route_slots_fixed_unassigned_arm.json"
+
+
 def test_require_assigned_arms_filters_the_pool():
-    """Strict mode: the serving arm must come from the assignment, and the filtered ones are recorded."""
-    rc, rec, body = _run_with_stub(["--lane", "EXECUTE", "--require-assigned-arms"])
+    """Strict mode: the serving arm must come from the assignment, and the filtered ones are recorded.
+
+    The pool is a FIXED fixture (`tests/fixtures/lane_route_slots_fixed_unassigned_arm.json`), not the
+    deployment pool. Measured before this fix: every EXECUTE arm in `config/lane-route-slots.candidate.json`
+    is DECLARED by the assignment revision 44 (the R2-02 widening reads `supply_selector.arms`, whose
+    members carry `automatic_selection: false`), so `arms_outside_assignment` was `[]` and this case
+    asserted `filtered_out` non-empty against a pool that could never produce one -- it failed on the
+    real tree and would have passed vacuously the moment the assertion was softened to match. The
+    fixture pins one assigned arm (EXECUTE's rank-1 primary) and one arm no row of the assignment
+    names, so the filter has exactly one thing to remove and its record is asserted by VALUE.
+    """
+    rc, rec, body = _run_with_stub(["--pool", str(FIXED_UNASSIGNED_POOL),
+                                    "--lane", "EXECUTE", "--require-assigned-arms"])
     assert rc == 0, body[-1500:]
     assert rec["ok"] is True, body[-1500:]
     posture = rec["assignment_posture"]
     assert posture["enforced"] is True
-    assert posture["filtered_out"], "EXECUTE's pool does contain arms outside the assignment"
+    assert posture["filtered_out"] == ["fixture-vendor/never-assigned-arm"], \
+        "EXECUTE's pool does contain arms outside the assignment (the fixed fixture guarantees one)"
+    assert posture["arms_outside_assignment"] == posture["filtered_out"]
     assert rec["served_arm_assigned"] is True, rec.get("served_arm")
+    assert [a["rank"] for a in rec["attempts"]] == [1], body[-1500:]
+    assert rec["attempts"][0]["model"] == "deepseek-v4.1-flash", \
+        "the ASSIGNED arm is the one that must serve under strict mode"
 
 
 def test_unassigned_arm_serving_is_warned_not_silent():
     """Default mode keeps fallbacks, but an unassigned serving arm must be visible on receipt + stderr."""
-    rc, rec, body = _run_with_stub(["--lane", "EXECUTE", "--force-rank", "2"])
+    # DEF-01: EXECUTE rank 2 is opencode-go/mimo-v2.6-flash, which rev-44 declares automatic_selection:false.
+    # The rank alone no longer authorises the spawn, so the arm under test is named explicitly.
+    rc, rec, body = _run_with_stub(["--lane", "EXECUTE", "--force-rank", "2",
+                                   "--require-arm", "opencode-go/mimo-v2.6-flash"])
     assert rc == 0, body[-1500:]
     if rec.get("served_arm_assigned") is False:
         assert "WARN_LANE_SERVED_UNASSIGNED_ARM" in body

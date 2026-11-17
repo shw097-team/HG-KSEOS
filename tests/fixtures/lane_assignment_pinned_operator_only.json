@@ -1,0 +1,39 @@
+{
+  "artifact": "LANE_ASSIGNMENT_TEST_FIXTURE",
+  "schema": "HGK-MODEL-LANE-ASSIGNMENT/1",
+  "revision": 9001,
+  "declared_at_utc": "2026-11-17T00:00:00+00:00",
+  "declared_by": "AM-HGK-FIXTURE lane: a FIXED assignment for tests/test_lane_dispatch_ao_guard.py::PinnedOperatorOnlyProhibition",
+  "claim_ceiling": "FIXTURE_ONLY. It is NEVER the file the dispatcher reads on a real run: the test binds it onto the module global `ASSIGNMENT_FILE` for the duration of one call and restores it. Its purpose is to make the operator-only NEG independent of the live assignment (revision 44) so that the case cannot silently skip when the owner rebinds.",
+  "authority_note": "the two arms below are fixture identities; they do not exist in the deployment pool and are never dispatched outside the stub.",
+  "assignment": [
+    {
+      "role": "VERIFY_SECURITY",
+      "assigned_provider": "fixture-vendor",
+      "assigned_model": "pinned-auto",
+      "transport_model": "fixture-vendor/pinned-auto",
+      "authority": "fixture",
+      "supply_selector": {
+        "arms": [
+          {
+            "provider": "fixture-vendor",
+            "model": "pinned-auto",
+            "transport_model": "fixture-vendor/pinned-auto",
+            "default": true,
+            "automatic_selection": true
+          },
+          {
+            "provider": "fixture-vendor",
+            "model": "pinned-operator-only",
+            "transport_model": "fixture-vendor/pinned-operator-only",
+            "default": false,
+            "automatic_selection": false
+          }
+        ],
+        "unspecified_default": {
+          "provider": "fixture-vendor"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "HGK-LANE-ROUTE-SLOTS/1",
+  "status": "CANDIDATE",
+  "artifact": "LANE_ROUTE_SLOTS_TEST_FIXTURE",
+  "revision": 1,
+  "round": "HGK-MERGE-READY-FIXTURE-20261117",
+  "declared_by": "AM-HGK-FIXTURE lane: a FIXED pool for tests/test_lane_dispatch_r20_gates.py::test_require_assigned_arms_filters_the_pool",
+  "claim_ceiling": "FIXTURE_ONLY. Never promoted, never read by a dispatcher run that matters; it exists so strict-mode filtering has at least one arm the assignment does NOT name.",
+  "lanes": [
+    {
+      "lane": "EXECUTE",
+      "engine": "codex",
+      "transport": "relay",
+      "selection_note": "FIXED fixture, not the deployment pool. rank 1 is the arm the OWNER assigns to EXECUTE (opencode-go/deepseek-v4.1-flash, see config/model-lane-assignment.json revision 44); rank 2 is deliberately an arm that appears NOWHERE in that assignment, so --require-assigned-arms has exactly one real thing to filter out. Before this fixture existed the case read the deployment pool, whose every EXECUTE arm is declared by the assignment (rev 44 widened lane_assigned_arms to read supply_selector.arms), so `filtered_out` was empty and the assertion was vacuous.",
+      "ordered_pool": [
+        {
+          "rank": 1,
+          "provider": "opencode-go",
+          "model": "deepseek-v4.1-flash",
+          "transport_model": "opencode-go/deepseek-v4.1-flash",
+          "feasibility": "DISPATCHABLE",
+          "identity_requirement": "none",
+          "fixture_role": "ASSIGNED: the owner's EXECUTE primary (assignment revision 44)"
+        },
+        {
+          "rank": 2,
+          "provider": "fixture-vendor",
+          "model": "never-assigned-arm",
+          "transport_model": "fixture-vendor/never-assigned-arm",
+          "feasibility": "DISPATCHABLE",
+          "identity_requirement": "none",
+          "fixture_role": "UNASSIGNED: this token is in no row of config/model-lane-assignment.json, so it is the arm strict mode must filter and record"
+        }
+      ]
+    }
+  ]
+}

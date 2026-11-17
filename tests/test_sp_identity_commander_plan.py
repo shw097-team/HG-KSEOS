@@ -213,7 +213,8 @@ class PlanPreHandoffEndToEnd(unittest.TestCase):
         skills = _skills_root(tmp)
         spine = _spine(tmp)
         inv = spid.new_invocation_id("commander")
-        cmd = _cmd(tmp, invocation=inv, nonce=inv, skills=skills, spine=spine, workorder=WO, **kw)
+        cmd = _cmd(tmp, invocation=inv, nonce=inv, skills=skills, spine=spine, workorder=WO,
+                   extra=("--require-arm", "opencode-go/deepseek-v4.1-flash",), **kw)
         return _run(cmd, tmp=tmp), inv, skills, pathlib.Path(tmp)
 
     def _refusal(self, *, expect_code, **kw):
@@ -286,7 +287,7 @@ class PlanPreHandoffEndToEnd(unittest.TestCase):
         spine = _spine(tmp)
         inv = spid.new_invocation_id("commander")
         cmd = _cmd(tmp, invocation=inv, nonce=inv, skills=skills, spine=spine, workorder=WO,
-                   stub=STUB_PLAIN)
+                   stub=STUB_PLAIN, extra=("--require-arm", "opencode-go/deepseek-v4.1-flash",))
         p, rec, _ = _run(cmd, tmp=tmp)
         self.assertNotEqual(p.returncode, 0, p.stdout + p.stderr)
         self.assertFalse(rec["ok"])
@@ -304,7 +305,7 @@ class PlanPreHandoffEndToEnd(unittest.TestCase):
     def test_P5_legacy_plan_dispatch_reports_no_identity_at_all(self):
         tmp = tempfile.mkdtemp(prefix="hgk-sp-plan-legacy-")
         cmd = _cmd(tmp, sp=None, invocation=None, nonce=None, skills=None, spine=None,
-                   workorder=None, stub=STUB_PLAIN)
+                   workorder=None, stub=STUB_PLAIN, extra=("--require-arm", "opencode-go/deepseek-v4.1-flash",))
         p, rec, _ = _run(cmd, tmp=tmp)
         self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
         self.assertTrue(rec["ok"], rec.get("code"))

@@ -22,6 +22,9 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+from io import StringIO
+from unittest import mock
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 _spec = importlib.util.spec_from_file_location("hgk_lane_dispatch", ROOT / "scripts" / "hgk-lane-dispatch.py")
@@ -207,7 +210,8 @@ class GateEndToEndRefusal(unittest.TestCase):
     def test_guard_root_that_does_not_resolve_is_refused(self):
         """MEASURED (probe E5b): an unresolvable guard root produced a zero-file snapshot and the
         receipt still read 'mutated: false'. A vacuous guard must refuse, never bless."""
-        p, json_out, tmp = self._run(["--guard-subject", str(tmp := pathlib.Path(tempfile.mkdtemp()) / "absent-dir")])
+        p, json_out, tmp = self._run(["--require-arm", "opencode-go/deepseek-v4.1-flash",
+                                       "--guard-subject", str(tmp := pathlib.Path(tempfile.mkdtemp()) / "absent-dir")])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         r = json.loads(json_out.read_text(encoding="utf-8"))
         self.assertEqual(r["code"], "ERR_GUARD_ROOT_MISSING")
@@ -288,7 +292,7 @@ class HostileReviewRegression(unittest.TestCase):
         was decorative and the gate only ever used the provider heuristic."""
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-hr-"))
         pool = self._pool_with_verify_arm(tmp, lambda e: e.update(identity_requirement="cli_login"))
-        p, json_out, _ = self._dispatch(["--pool", str(pool)])
+        p, json_out, _ = self._dispatch(["--require-arm", "opencode-go/deepseek-v4.1-flash", "--pool", str(pool)])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertEqual(json.loads(json_out.read_text(encoding="utf-8"))["code"],
                          disp.ERR_IDENTITY_NOT_PREAUTHORIZED)
@@ -296,7 +300,7 @@ class HostileReviewRegression(unittest.TestCase):
     def test_F2_a_misspelled_requirement_is_refused_end_to_end(self):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-hr-"))
         pool = self._pool_with_verify_arm(tmp, lambda e: e.update(identity_requirement="relay_pool "))
-        p, json_out, _ = self._dispatch(["--pool", str(pool)])
+        p, json_out, _ = self._dispatch(["--require-arm", "opencode-go/deepseek-v4.1-flash", "--pool", str(pool)])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertEqual(json.loads(json_out.read_text(encoding="utf-8"))["code"], "ERR_LANE_IDENTITY_UNKNOWN")
 
@@ -311,14 +315,15 @@ class HostileReviewRegression(unittest.TestCase):
     def test_F4_an_escalated_lane_without_a_guard_is_refused(self):
         """danger-full-access has no sandbox root, so an unguarded escalated checker was unbounded
         while the receipt still reported ok:true."""
-        p, json_out, _ = self._dispatch(["--sandbox", "danger-full-access", "--allow-sandbox-escalation"])
+        p, json_out, _ = self._dispatch(["--require-arm", "opencode-go/deepseek-v4.1-flash",
+                                        "--sandbox", "danger-full-access", "--allow-sandbox-escalation"])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertEqual(json.loads(json_out.read_text(encoding="utf-8"))["code"],
                          "ERR_GUARD_REQUIRED_FOR_ESCALATED_CHECKER")
 
     def test_F6_a_guard_root_containing_harness_output_is_refused(self):
         """If the harness's own writes land inside a guard root they register as subject changes."""
-        p, json_out, _ = self._dispatch([], guard_own_tmp=True)
+        p, json_out, _ = self._dispatch(["--require-arm", "opencode-go/deepseek-v4.1-flash",], guard_own_tmp=True)
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertEqual(json.loads(json_out.read_text(encoding="utf-8"))["code"],
                          "ERR_GUARD_ROOT_CONTAINS_HARNESS_OUTPUT")
@@ -583,6 +588,10 @@ class C1FailureDisposition(unittest.TestCase):
         env = _stub_env(tmp)
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool),
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / "tests/fixtures/stub_lane_child.py"),
                "--nonce", "A-NONCE-THE-STUB-WILL-NOT-EMIT",
                "--usage", str(tmp / "usage.jsonl"), "--timeout", "30", "--prompt", "x"]
@@ -619,7 +628,7 @@ class C2DispatchableConsumer(unittest.TestCase):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-lhr-c2-"))
         pool = _lane_pool(tmp, "VERIFY_SECURITY", [self.GOOD, self.DEAD])
         logs = tmp / "logs"
-        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool),
+        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool), "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / "tests/fixtures/stub_lane_child.py"),
                "--attempt-log-dir", str(logs), "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -645,7 +654,7 @@ class C2DispatchableConsumer(unittest.TestCase):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-lhr-c2n-"))
         good = dict(self.GOOD, dispatchable=True)
         pool = _lane_pool(tmp, "VERIFY_SECURITY", [good])
-        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool),
+        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool), "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / "tests/fixtures/stub_lane_child.py"),
                "--usage", str(tmp / "usage.jsonl"), "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -699,6 +708,10 @@ class C3LaneHomeIsolation(unittest.TestCase):
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--codex-home", str(home), "--prompt", "x",
                "--allow-human-home-transport", "--pool", str(pool), "--force-rank", "1",
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / "tests/fixtures/stub_lane_child.py"),
                "--usage", str(tmp / "usage.jsonl"), "--timeout", "30"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -729,7 +742,7 @@ class R2Repair(unittest.TestCase):
                 "dispatchable": False, "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
                 "identity_requirement": "none"}
         pool = _lane_pool(tmp, "VERIFY_SECURITY", [good, dead])
-        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool),
+        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool), "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / self.STUB), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -754,6 +767,7 @@ class R2Repair(unittest.TestCase):
     def test_guard_refusal_receipt_also_carries_both_home_fields(self):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-r2-home-"))
         p, rec, _ = _run_dispatch(["--lane", "VERIFY_SECURITY", "--prompt", "x",
+                                   "--require-arm", "opencode-go/deepseek-v4.1-flash",
                                    "--guard-subject", str(tmp / "absent-dir")])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertEqual(rec["code"], "ERR_GUARD_ROOT_MISSING")
@@ -822,6 +836,10 @@ class R2Repair(unittest.TestCase):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-r2-ok-"))
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool), "--nonce", "A-REAL-NONCE",
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / self.STUB),
                "--usage", str(tmp / "usage.jsonl"), "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -881,6 +899,10 @@ class R3Repair(unittest.TestCase):
         env["HGK_STUB_TARGET"] = str(target)
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool),
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--guard-subject", str(guarded),
                "--codex-executable", str(ROOT / self.STUB),
                "--usage", str(tmp / "usage.jsonl"), "--timeout", "30", "--prompt", "x"]
@@ -913,6 +935,10 @@ class R3Repair(unittest.TestCase):
             tmp, '{"type": "item.completed", "item": {"type": "agent_message", "text": null}}')
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool), "--nonce", "None",
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(stub), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -928,6 +954,10 @@ class R3Repair(unittest.TestCase):
             tmp, '{"type": "item.completed", "item": {"type": "agent_message", "text": {"a": 1}}}')
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool), "--nonce", "None",
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(stub), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -938,6 +968,10 @@ class R3Repair(unittest.TestCase):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-r3-g1a-"))
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool), "--nonce", "HGK_LANE_NONCE_OK",
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / self.STUB), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -977,7 +1011,10 @@ class R3Repair(unittest.TestCase):
         empty = tmp / "empty-subject"
         empty.mkdir()
         pool = _hermetic_verify_pool(tmp)
+        # DEF-01: the fixture's rank 1, opencode-go/deepseek-v4.1-flash, is automatic_selection:false in rev-44 --
+        # operator-only -- so the arm this case means to reach must be NAMED, not selected by rank.
         p, rec, _ = _run_dispatch(["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool),
+                                   "--require-arm", "opencode-go/deepseek-v4.1-flash",
                                    "--guard-subject", str(empty), "--prompt", "x"])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertFalse(rec["ok"])
@@ -1195,7 +1232,10 @@ class R4Repair(unittest.TestCase):
         nonempty = tmp / "nonempty.txt"
         nonempty.write_text("x", encoding="utf-8")
         pool = _hermetic_verify_pool(tmp)
+        # DEF-01: the fixture's rank 1, opencode-go/deepseek-v4.1-flash, is automatic_selection:false in rev-44 --
+        # operator-only -- so the arm this case means to reach must be NAMED, not selected by rank.
         p, rec, _ = _run_dispatch(["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool),
+                                   "--require-arm", "opencode-go/deepseek-v4.1-flash",
                                    "--guard-subject", str(empty), "--guard-subject", str(nonempty),
                                    "--prompt", "x"])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
@@ -1210,7 +1250,10 @@ class R4Repair(unittest.TestCase):
         a.write_text("1", encoding="utf-8")
         b.write_text("2", encoding="utf-8")
         pool = _hermetic_verify_pool(tmp)
+        # DEF-01: the fixture's rank 1, opencode-go/deepseek-v4.1-flash, is automatic_selection:false in rev-44 --
+        # operator-only -- so the arm this case means to reach must be NAMED, not selected by rank.
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool),
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--guard-subject", str(a), "--guard-subject", str(b),
                "--codex-executable", str(ROOT / self.STUB), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
@@ -2013,6 +2056,281 @@ class R8StrictDeclarationPass2(unittest.TestCase):
             self.assertTrue(rec["ok"], f"{label}: {p.stdout + p.stderr}")
             self.assertEqual(rec["attempts"][0]["carrier_lines_surrogate"], 0)
             self.assertEqual(rec["attempts"][0]["carrier_lines_undecodable"], 0)
+
+
+# ---------------------------------------------------------------------------------------------
+# DEF-01 / AA-01: `--force-rank` names a POSITION, not an arm.
+# `automatic_selection: false` is a standing prohibition: an operator-only arm may be reached by
+# an explicit `--require-arm` and by nothing else. #29 enforced that on the unattended walk AND on
+# the `--force-rank` re-admission, but `ERR_FORCE_RANK_OPERATOR_ONLY` had ZERO references anywhere
+# under tests/ -- the prohibition could have been deleted and the whole suite would have stayed
+# green. This case pins it end to end, with the stub child in the loop (no model turn, no relay,
+# no network).
+# ---------------------------------------------------------------------------------------------
+
+
+class ForceRankOperatorOnlyAuthorisation(unittest.TestCase):
+    """AA-01: a rank argument must not re-admit an operator-only arm.
+
+    Four properties, one case:
+      (a) `--force-rank <operator-only rank>` with no `--require-arm` is the NAMED refusal
+          `ERR_FORCE_RANK_OPERATOR_ONLY`, never a spawn and never the generic rank-gap code;
+      (b) that refusal spawns nothing;
+      (c) the same rank IS reachable when the caller names the ARM it means (`--require-arm`);
+      (d) the boundary is not over-tightened: a rank the artifact merely declares
+          `dispatchable: false` is still force-able with a bare `--force-rank`.
+
+    The arms are READ from the assignment artifact, so an owner rebind skips the case instead of
+    silently turning it into a false red or a vacuous green.
+    """
+
+    STUB = "tests/fixtures/stub_lane_child.py"
+
+    @staticmethod
+    def _split(token):
+        provider, model = token.split("/", 1)
+        return provider, model
+
+    def _pool(self, tmp, operator_only_arm, dispatchable_false_arm):
+        op, om = self._split(operator_only_arm)
+        dp, dm = self._split(dispatchable_false_arm)
+        entries = [
+            # rank 1: the operator-only arm, declared perfectly dispatchable -- so the ONLY thing
+            # that can refuse a bare --force-rank 1 here is the authorisation rule itself.
+            {"rank": 1, "provider": op, "model": om, "feasibility": "DISPATCHABLE",
+             "transport_model": f"{op}/{om}", "identity_requirement": "none"},
+            # rank 2: NOT operator-only, explicitly declared non-dispatchable -- the older, still
+            # lawful re-admission path that (d) pins.
+            {"rank": 2, "provider": dp, "model": dm, "dispatchable": False,
+             "transport_model": f"{dp}/{dm}", "identity_requirement": "none"},
+        ]
+        return _lane_pool(tmp, "VERIFY_SECURITY", entries), op, om
+
+    def _run(self, tmp, pool, logs, extra):
+        json_out = tmp / (logs.name + "-receipt.json")
+        env = _stub_env(tmp, provider="opencode-go", model="deepseek-v4.1-flash")
+        cmd = [sys.executable, str(ROOT / "scripts" / "hgk-lane-dispatch.py"),
+               "--lane", "VERIFY_SECURITY", "--pool", str(pool), "--json-out", str(json_out),
+               "--codex-executable", str(ROOT / self.STUB), "--usage", str(tmp / "usage.jsonl"),
+               "--attempt-log-dir", str(logs), "--timeout", "30", "--prompt", "x",
+               "--relay-home", str(tmp / "no-such-relay-home")] + list(extra)
+        p = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", stdin=subprocess.DEVNULL, timeout=120,
+                           cwd=str(ROOT), env=env)
+        rec = json.loads(json_out.read_text(encoding="utf-8")) if json_out.is_file() else None
+        return p, rec, json_out
+
+    @staticmethod
+    def _spawned(logs):
+        return sorted(f.name for f in logs.glob("attempt-*")) if logs.is_dir() else []
+
+    def test_force_rank_onto_an_operator_only_arm_needs_the_arm_to_be_named(self):
+        asg = disp.lane_assigned_arms("VERIFY_SECURITY")
+        operator_only = asg.get("supply_selector_operator_only") or []
+        automatic = asg.get("supply_selector_auto") or []
+        if not operator_only or not automatic:
+            self.skipTest("the assignment artifact declares no operator-only arm for "
+                          f"VERIFY_SECURITY (rev {asg.get('revision')}); case not exercised")
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-aa01-"))
+        pool, op, om = self._pool(tmp, operator_only[0], automatic[0])
+
+        # (a) + (b) a bare --force-rank onto the operator-only rank refuses BY NAME, spawns nothing
+        p, rec, _ = self._run(tmp, pool, tmp / "logs-a", ["--force-rank", "1"])
+        self.assertEqual(p.returncode, 2, p.stdout + p.stderr)
+        refusal = json.loads(p.stdout.strip().splitlines()[-1])
+        self.assertFalse(refusal["ok"])
+        self.assertEqual(refusal["code"], "ERR_FORCE_RANK_OPERATOR_ONLY")
+        self.assertEqual(refusal["operator_only_arms"], [f"{op}/{om}"])
+        self.assertEqual(refusal["required_authorisation"], "--require-arm")
+        self.assertIsNone(rec, "a refusal must not write a receipt as if the run had proceeded")
+        self.assertEqual(self._spawned(tmp / "logs-a"), [],
+                         "an operator-only refusal must spawn nothing")
+
+        # (c) naming the ARM is the lawful route to the same rank
+        p, rec, _ = self._run(tmp, pool, tmp / "logs-c",
+                              ["--force-rank", "1", "--require-arm", f"{op}/{om}"])
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertEqual(rec["used_rank"], 1)
+        self.assertEqual([a["rank"] for a in rec["attempts"]], [1], p.stdout + p.stderr)
+        self.assertTrue(self._spawned(tmp / "logs-c"), "--require-arm must reach the spawn")
+        self.assertNotIn("ERR_FORCE_RANK_OPERATOR_ONLY", p.stdout + p.stderr)
+
+        # (d) a rank the artifact merely declares non-dispatchable is STILL force-able
+        p, rec, _ = self._run(tmp, pool, tmp / "logs-d", ["--force-rank", "2"])
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertEqual(rec["used_rank"], 2)
+        self.assertEqual([a["rank"] for a in rec["attempts"]], [2], p.stdout + p.stderr)
+        self.assertTrue(self._spawned(tmp / "logs-d"),
+                        "--force-rank must still reach a declared non-dispatchable rank")
+        skipped = {s["rank"]: s["reason"] for s in rec["skipped_arms"]}
+        self.assertIn("not dispatchable", skipped[2],
+                      "the forced rank must still be RECORDED as the declared-dead rank it is")
+        self.assertIn("automatic_selection=false", skipped[1],
+                      "and the operator-only arm must stay skipped in the same walk")
+
+
+class PinnedOperatorOnlyProhibition(unittest.TestCase):
+    """AA-01b: the operator-only prohibition, pinned so it CANNOT skip.
+
+    `ForceRankOperatorOnlyAuthorisation` above reads the arms it exercises from the LIVE assignment
+    artifact, so an owner rebind makes it `skipTest` -- and a skipped negative control is
+    indistinguishable from a passing one in a summary line. This class is the same prohibition with
+    both inputs FIXED:
+
+      * `tests/fixtures/lane_assignment_pinned_operator_only.json` marks `pinned-operator-only`
+        `automatic_selection: false` and `pinned-auto` `automatic_selection: true`;
+      * `tests/fixtures/lane_route_slots_pinned_operator_only.json` puts the first at rank 1
+        (`feasibility: DISPATCHABLE`, no `dispatchable: false`, so ONLY the authorisation rule can
+        refuse it) and the second at rank 2.
+
+    The fixture assignment is bound onto the module global the entry point reads and restored
+    afterwards, so no run here touches `config/model-lane-assignment.json`. There is no `skipTest`
+    path: if either side of the pin drifts, this class FAILS with a message naming what moved.
+
+    Three cases, and the third is the one that makes the other two load-bearing:
+      (a) a bare `--force-rank` onto the operator-only rank is `ERR_FORCE_RANK_OPERATOR_ONLY` and
+          spawns nothing;
+      (b) naming the ARM is the lawful route onto the same rank (so the rule is not a blanket
+          refusal);
+      (c) with the SAME fixed pool and the operator-only mark removed from a copy of the fixed
+          assignment, the bare `--force-rank` DOES dispatch that arm -- which is exactly the mutant
+          that would make (a) fail. A prohibition nothing can violate is not pinned.
+    """
+
+    POOL = ROOT / "tests" / "fixtures" / "lane_route_slots_pinned_operator_only.json"
+    ASSIGNMENT = ROOT / "tests" / "fixtures" / "lane_assignment_pinned_operator_only.json"
+    OPERATOR_ONLY = "fixture-vendor/pinned-operator-only"
+    AUTO = "fixture-vendor/pinned-auto"
+    NONCE = "HGK_AA01B_NONCE"
+
+    def _stub_env(self, tmp):
+        return mock.patch.dict(os.environ, {
+            "HGK_STUB_MODE": "clean",
+            "HGK_STUB_USAGE": str(pathlib.Path(tmp) / "usage.jsonl"),
+            "HGK_STUB_EMIT_NONCE": self.NONCE,
+            "HGK_STUB_USAGE_LINE": json.dumps({"provider": "fixture-vendor",
+                                               "model": "pinned-operator-only", "status": 200}),
+        })
+
+    def _dispatch(self, tmp, extra, assignment=None):
+        """Call the REAL entry point in-process with the pinned assignment bound.
+
+        In-process, not a subprocess, because `ASSIGNMENT_FILE` is a module global and the script
+        exposes no CLI flag for it: a subprocess would read the live artifact and reintroduce the
+        dependency this class exists to remove.
+        """
+        tmp = pathlib.Path(tmp)
+        (tmp / "usage.jsonl").write_bytes(b"")
+        out = tmp / ("receipt-%d.json" % len(list(tmp.glob("receipt-*.json"))))
+        argv = ["hgk-lane-dispatch.py", "--lane", "VERIFY_SECURITY", "--pool", str(self.POOL),
+                "--json-out", str(out), "--codex-executable", str(ROOT / "tests" / "fixtures"
+                                                                  / "stub_lane_child.py"),
+                "--usage", str(tmp / "usage.jsonl"), "--attempt-log-dir", str(tmp / "logs"),
+                "--timeout", "60", "--prompt", "x", "--nonce", self.NONCE,
+                "--relay-home", str(tmp / "no-such-relay-home")] + list(extra)
+        original_assignment, original_argv = disp.ASSIGNMENT_FILE, sys.argv
+        disp.ASSIGNMENT_FILE = pathlib.Path(assignment) if assignment else self.ASSIGNMENT
+        sys.argv = argv
+        buf = StringIO()
+        try:
+            with redirect_stdout(buf):
+                rc = disp.main()
+        finally:
+            disp.ASSIGNMENT_FILE, sys.argv = original_assignment, original_argv
+        receipt = json.loads(out.read_text(encoding="utf-8")) if out.is_file() else None
+        return rc, buf.getvalue(), receipt
+
+    @staticmethod
+    def _refusal(stdout):
+        """The last JSON object the entry point printed, or None (a run that never refused)."""
+        for line in reversed(stdout.strip().splitlines()):
+            line = line.strip()
+            if line.startswith("{"):
+                try:
+                    return json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+        return None
+
+    def test_the_pinned_assignment_is_the_one_being_read(self):
+        """Precondition, asserted rather than skipped: the pin resolves to the fixture's own revision."""
+        original = disp.ASSIGNMENT_FILE
+        disp.ASSIGNMENT_FILE = self.ASSIGNMENT
+        try:
+            posture = disp.lane_assigned_arms("VERIFY_SECURITY")
+        finally:
+            disp.ASSIGNMENT_FILE = original
+        self.assertTrue(posture["ok"], posture)
+        self.assertEqual(posture["revision"], 9001,
+                         "the pinned assignment fixture changed revision; the pin moved")
+        self.assertEqual(posture["supply_selector_operator_only"], [self.OPERATOR_ONLY])
+        self.assertEqual(posture["supply_selector_auto"], [self.AUTO])
+
+    def test_force_rank_onto_the_operator_only_rank_is_refused_by_name(self):
+        with tempfile.TemporaryDirectory(prefix="hgk-aa01b-a-") as td:
+            tmp = pathlib.Path(td)
+            with self._stub_env(tmp):
+                rc, stdout, receipt = self._dispatch(tmp, ["--force-rank", "1"])
+            self.assertEqual(rc, 2, stdout)
+            refusal = self._refusal(stdout)
+            self.assertIsNotNone(refusal, f"no JSON refusal on stdout: {stdout[-1500:]}")
+            self.assertIs(refusal["ok"], False)
+            self.assertEqual(refusal["code"], "ERR_FORCE_RANK_OPERATOR_ONLY", refusal)
+            self.assertNotEqual(refusal["code"], "ERR_SLOT_POOL_RANK_GAP",
+                                "the pool is complete; the authorisation is what refused")
+            self.assertEqual(refusal["operator_only_arms"], [self.OPERATOR_ONLY], refusal)
+            self.assertEqual(refusal["required_authorisation"], "--require-arm", refusal)
+            self.assertIsNone(receipt, "a refusal must not write a receipt as if the run had proceeded")
+            self.assertEqual(sorted(p.name for p in (tmp / "logs").glob("attempt-*"))
+                             if (tmp / "logs").is_dir() else [], [],
+                             "an operator-only refusal must spawn nothing")
+
+    def test_naming_the_arm_is_the_lawful_route_onto_that_rank(self):
+        with tempfile.TemporaryDirectory(prefix="hgk-aa01b-b-") as td:
+            tmp = pathlib.Path(td)
+            with self._stub_env(tmp):
+                rc, stdout, receipt = self._dispatch(
+                    tmp, ["--force-rank", "1", "--require-arm", self.OPERATOR_ONLY])
+            self.assertEqual(rc, 0, stdout[-2000:])
+            self.assertIsNotNone(receipt, stdout[-2000:])
+            self.assertIs(receipt["ok"], True)
+            self.assertEqual(receipt["used_rank"], 1)
+            self.assertEqual([a["rank"] for a in receipt["attempts"]], [1])
+            self.assertEqual(receipt["used_transport_model"], self.OPERATOR_ONLY)
+            self.assertNotIn("ERR_FORCE_RANK_OPERATOR_ONLY", stdout)
+
+    def test_the_prohibition_is_load_bearing(self):
+        """Mutant: drop the `automatic_selection: false` mark and the SAME call dispatches the arm.
+
+        This is the case that proves the two above can fail: it reproduces, inside the suite, the
+        config drift (or emitter regression) that would make (a) a lie. If this one ever fails while
+        (a) passes, the refusal at (a) is being produced by something other than the operator-only
+        rule.
+        """
+        with tempfile.TemporaryDirectory(prefix="hgk-aa01b-c-") as td:
+            tmp = pathlib.Path(td)
+            mutated = json.loads(self.ASSIGNMENT.read_text(encoding="utf-8"))
+            flipped = 0
+            for row in mutated.get("assignment") or []:
+                for arm in ((row.get("supply_selector") or {}).get("arms") or []):
+                    if arm.get("model") == "pinned-operator-only" and \
+                            arm.get("automatic_selection") is False:
+                        arm["automatic_selection"] = True
+                        flipped += 1
+            self.assertEqual(flipped, 1, "the fixture no longer carries the mark this mutant removes")
+            mutant = tmp / "assignment-mutant.json"
+            mutant.write_text(json.dumps(mutated, ensure_ascii=False), encoding="utf-8")
+            with self._stub_env(tmp):
+                rc, stdout, receipt = self._dispatch(tmp, ["--force-rank", "1"], assignment=mutant)
+            refusal = self._refusal(stdout)
+            self.assertNotEqual((refusal or {}).get("code"), "ERR_FORCE_RANK_OPERATOR_ONLY",
+                                "with the mark removed the rule must NOT refuse -- otherwise the "
+                                f"refusal is coming from somewhere else: {stdout[-1500:]}")
+            self.assertEqual(rc, 0, stdout[-2000:])
+            self.assertIsNotNone(receipt, stdout[-2000:])
+            self.assertEqual(receipt["used_rank"], 1)
+            self.assertEqual(receipt["used_transport_model"], self.OPERATOR_ONLY,
+                             "the mutant must actually DISPATCH the arm the prohibition protects")
 
 
 if __name__ == "__main__":

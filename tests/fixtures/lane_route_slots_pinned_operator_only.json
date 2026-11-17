@@ -1,0 +1,43 @@
+{
+  "schema": "HGK-LANE-ROUTE-SLOTS/1",
+  "status": "CANDIDATE",
+  "artifact": "LANE_ROUTE_SLOTS_TEST_FIXTURE",
+  "revision": 1,
+  "round": "HGK-MERGE-READY-FIXTURE-20261117",
+  "declared_by": "AM-HGK-FIXTURE lane: a FIXED pool for tests/test_lane_dispatch_ao_guard.py::PinnedOperatorOnlyProhibition",
+  "claim_ceiling": "FIXTURE_ONLY. Never promoted. Its rank 1 arm is the SAME token the pinned assignment fixture marks `automatic_selection: false`, and its rank 2 arm is the one that fixture marks automatic. Nothing here is read from the deployment plane, so the case cannot skip when the owner rebinds.",
+  "lanes": [
+    {
+      "lane": "VERIFY_SECURITY",
+      "engine": "codex",
+      "transport": "relay",
+      "codex_home_config": {
+        "windows_sandbox": "elevated",
+        "required_for_modes": ["read-only", "workspace-write"],
+        "declared_by": "AM-HGK-FIXTURE lane: copied verbatim from config/lane-route-slots.candidate.json so the fixture cannot be refused by ERR_LANE_SANDBOX_LEVEL_ABSENT, which would make the NEG pass or fail for a reason that has nothing to do with the operator-only rule",
+        "note": "without this declaration a read-only lane is refused before any spawn; measured in results/PROBE_FIXTURE2.txt as the first attempt at a positive control"
+      },
+      "selection_note": "FIXED fixture. rank 1 is declared perfectly dispatchable -- `feasibility: DISPATCHABLE`, no `dispatchable: false` -- so the ONLY thing that can refuse a bare `--force-rank 1` is the operator-only authorisation rule itself. rank 2 is the automatic arm, which the `--require-arm` positive control reaches.",
+      "ordered_pool": [
+        {
+          "rank": 1,
+          "provider": "fixture-vendor",
+          "model": "pinned-operator-only",
+          "transport_model": "fixture-vendor/pinned-operator-only",
+          "feasibility": "DISPATCHABLE",
+          "identity_requirement": "none",
+          "fixture_role": "OPERATOR_ONLY: the pinned assignment declares automatic_selection=false for this token"
+        },
+        {
+          "rank": 2,
+          "provider": "fixture-vendor",
+          "model": "pinned-auto",
+          "transport_model": "fixture-vendor/pinned-auto",
+          "feasibility": "DISPATCHABLE",
+          "identity_requirement": "none",
+          "fixture_role": "AUTOMATIC: the pinned assignment declares automatic_selection=true for this token"
+        }
+      ]
+    }
+  ]
+}
