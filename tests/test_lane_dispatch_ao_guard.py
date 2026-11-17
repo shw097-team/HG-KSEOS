@@ -583,6 +583,10 @@ class C1FailureDisposition(unittest.TestCase):
         env = _stub_env(tmp)
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool),
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / "tests/fixtures/stub_lane_child.py"),
                "--nonce", "A-NONCE-THE-STUB-WILL-NOT-EMIT",
                "--usage", str(tmp / "usage.jsonl"), "--timeout", "30", "--prompt", "x"]
@@ -699,6 +703,10 @@ class C3LaneHomeIsolation(unittest.TestCase):
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--codex-home", str(home), "--prompt", "x",
                "--allow-human-home-transport", "--pool", str(pool), "--force-rank", "1",
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / "tests/fixtures/stub_lane_child.py"),
                "--usage", str(tmp / "usage.jsonl"), "--timeout", "30"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -822,6 +830,10 @@ class R2Repair(unittest.TestCase):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-r2-ok-"))
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool), "--nonce", "A-REAL-NONCE",
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / self.STUB),
                "--usage", str(tmp / "usage.jsonl"), "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -881,6 +893,10 @@ class R3Repair(unittest.TestCase):
         env["HGK_STUB_TARGET"] = str(target)
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool),
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--guard-subject", str(guarded),
                "--codex-executable", str(ROOT / self.STUB),
                "--usage", str(tmp / "usage.jsonl"), "--timeout", "30", "--prompt", "x"]
@@ -913,6 +929,10 @@ class R3Repair(unittest.TestCase):
             tmp, '{"type": "item.completed", "item": {"type": "agent_message", "text": null}}')
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool), "--nonce", "None",
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(stub), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -928,6 +948,10 @@ class R3Repair(unittest.TestCase):
             tmp, '{"type": "item.completed", "item": {"type": "agent_message", "text": {"a": 1}}}')
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool), "--nonce", "None",
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(stub), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -938,6 +962,10 @@ class R3Repair(unittest.TestCase):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-r3-g1a-"))
         pool = _hermetic_verify_pool(tmp)
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool), "--nonce", "HGK_LANE_NONCE_OK",
+               # DEF-01: rank 1 of this fixture is opencode-go/deepseek-v4.1-flash, which rev-44 declares automatic_selection:false --
+# an operator-only arm. A rank names a POSITION, not an arm, so it no longer authorises an
+# unattended spawn: the arm the test means to exercise must be named.
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / self.STUB), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -977,7 +1005,10 @@ class R3Repair(unittest.TestCase):
         empty = tmp / "empty-subject"
         empty.mkdir()
         pool = _hermetic_verify_pool(tmp)
+        # DEF-01: the fixture's rank 1, opencode-go/deepseek-v4.1-flash, is automatic_selection:false in rev-44 --
+        # operator-only -- so the arm this case means to reach must be NAMED, not selected by rank.
         p, rec, _ = _run_dispatch(["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool),
+                                   "--require-arm", "opencode-go/deepseek-v4.1-flash",
                                    "--guard-subject", str(empty), "--prompt", "x"])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertFalse(rec["ok"])
@@ -1195,7 +1226,10 @@ class R4Repair(unittest.TestCase):
         nonempty = tmp / "nonempty.txt"
         nonempty.write_text("x", encoding="utf-8")
         pool = _hermetic_verify_pool(tmp)
+        # DEF-01: the fixture's rank 1, opencode-go/deepseek-v4.1-flash, is automatic_selection:false in rev-44 --
+        # operator-only -- so the arm this case means to reach must be NAMED, not selected by rank.
         p, rec, _ = _run_dispatch(["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool),
+                                   "--require-arm", "opencode-go/deepseek-v4.1-flash",
                                    "--guard-subject", str(empty), "--guard-subject", str(nonempty),
                                    "--prompt", "x"])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
@@ -1210,7 +1244,10 @@ class R4Repair(unittest.TestCase):
         a.write_text("1", encoding="utf-8")
         b.write_text("2", encoding="utf-8")
         pool = _hermetic_verify_pool(tmp)
+        # DEF-01: the fixture's rank 1, opencode-go/deepseek-v4.1-flash, is automatic_selection:false in rev-44 --
+        # operator-only -- so the arm this case means to reach must be NAMED, not selected by rank.
         cmd = ["--lane", "VERIFY_SECURITY", "--force-rank", "1", "--pool", str(pool),
+               "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--guard-subject", str(a), "--guard-subject", str(b),
                "--codex-executable", str(ROOT / self.STUB), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]

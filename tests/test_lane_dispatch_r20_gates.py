@@ -152,7 +152,10 @@ def test_require_assigned_arms_filters_the_pool():
 
 def test_unassigned_arm_serving_is_warned_not_silent():
     """Default mode keeps fallbacks, but an unassigned serving arm must be visible on receipt + stderr."""
-    rc, rec, body = _run_with_stub(["--lane", "EXECUTE", "--force-rank", "2"])
+    # DEF-01: EXECUTE rank 2 is opencode-go/mimo-v2.6-flash, which rev-44 declares automatic_selection:false.
+    # The rank alone no longer authorises the spawn, so the arm under test is named explicitly.
+    rc, rec, body = _run_with_stub(["--lane", "EXECUTE", "--force-rank", "2",
+                                   "--require-arm", "opencode-go/mimo-v2.6-flash"])
     assert rc == 0, body[-1500:]
     if rec.get("served_arm_assigned") is False:
         assert "WARN_LANE_SERVED_UNASSIGNED_ARM" in body
