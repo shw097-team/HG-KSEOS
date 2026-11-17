@@ -44,6 +44,48 @@ PROFILES = (MACHINE_PROFILE, USER_PROFILE)
 USER_REGISTRY_SCHEMA = 'HGK-USER-TRUST-REGISTRY/1'
 USER_SCOPE_FILENAME = 'scope.json'
 
+# ------------------------------------------------- mission-scoped machine root selection (WP06)
+# A B1 registry file admits exactly ONE mission (`registry['mission_id']` is compared against every
+# reference at :478). The user profile says which mission via its scope sidecar; the machine profile
+# had no such channel, so the single ProgramData constant was also the only mission it could admit.
+# The OWNER's answer is SELECTION, not a second trust root and not a re-scoped anchor: the only thing
+# that may vary is WHICH already-OS-protected registry file the receiver reads.
+#
+# The request can never choose its own root. `mission_selector()` takes no argument and reads one
+# config value the host supervisor sets for the process; `authorize()` separately refuses, by name,
+# any request key that names a registry, a profile or a mission.
+MISSION_SELECTOR_ENV = 'HGK_MISSION_ID'
+MACHINE_MISSIONS_DIRNAME = 'missions'
+MISSION_ID_PATTERN = re.compile(r'[A-Za-z0-9][A-Za-z0-9._-]{0,63}\Z')
+REQUEST_ROOT_KEYS = ('registry', 'registry_path', 'registry_file', 'trust_root', 'trust_profile',
+                     'trust_store', 'scope_path', 'mission_id', 'mission_selector')
+
+
+def mission_selector():
+    """The mission this process was pinned to, from CONFIG only - never from a request.
+
+    Deliberately takes no argument: no request dict, bundle or argv line can reach it. An unknown or
+    malformed value is refused by name; it is never stripped, joined or resolved into a path.
+    """
+    raw = (os.environ.get(MISSION_SELECTOR_ENV) or '').strip()
+    if not raw:
+        return None
+    if (not MISSION_ID_PATTERN.match(raw) or '..' in raw or raw.endswith('.')
+            or any(c in raw for c in ('/', '\\', ':'))):
+        refuse('MISSION_SELECTOR_SHAPE')
+    return raw
+
+
+def machine_registry_path(mission=None):
+    """Fixed layout under the one protected base dir: <base>/missions/<mission>/registry.json.
+
+    Only a validated mission id varies; the level and the file name are literals, so the result can
+    neither escape `REGISTRY.parent` nor be a caller-supplied path.
+    """
+    if mission is None:
+        return REGISTRY
+    return REGISTRY.parent / MACHINE_MISSIONS_DIRNAME / mission / REGISTRY.name
+
 
 def trust_profile():
     raw = (os.environ.get('HGK_TRUST_PROFILE') or MACHINE_PROFILE).strip().lower()
@@ -58,8 +100,16 @@ def user_registry_path():
 
 
 def registry_path(profile=None):
-    """The one place that decides which root backs the receiver."""
-    return REGISTRY if (profile or trust_profile()) == MACHINE_PROFILE else user_registry_path()
+    """The one place that decides which root backs the receiver.
+
+    Machine-profile order, fixed and complete: (1) no mission selector -> the ProgramData constant,
+    exactly as before; (2) a mission selector -> that mission's registry under the same protected
+    base. There is no third step and no fallback: if the selected mission's file is absent the
+    receiver refuses, because falling back to (1) would silently admit a DIFFERENT mission.
+    """
+    if (profile or trust_profile()) != MACHINE_PROFILE:
+        return user_registry_path()
+    return machine_registry_path(mission_selector())
 
 
 def refuse(code):
@@ -241,6 +291,18 @@ def assert_user_protected(path):
     if r.returncode or r.stdout.strip()!='PROTECTED':refuse('USER_TRUST_ACL_UNPROTECTED')
 
 class ProtectedRegistry:
+    def __init__(self,path=None):
+        # The mission is pinned ONCE, at host construction, from config; it is never re-read per
+        # request, so the root cannot change between the guard snapshot and the transaction.
+        # `path` is a code-side injection seam (same rule as NativeAdmission(registry=...)); no
+        # request value ever reaches it.
+        self.path=path
+        self.mission=mission_selector()
+
+    def _registry_path(self):
+        if self.path is not None:return absolute_root(self.path)
+        return machine_registry_path(self.mission)
+
     @contextmanager
     def hold_snapshot(self):
         """Keep the protected file and its ancestry pinned through SQL commit.
@@ -248,12 +310,15 @@ class ProtectedRegistry:
         A concurrent Owner revoke/replace must retry after an admitted transaction
         releases this read handle; it cannot invalidate half a transaction.
         """
-        if not REGISTRY.is_file():refuse('TRUST_BOOTSTRAP_REQUIRED')
-        with held_root(REGISTRY.parent):
-            assert_protected(REGISTRY)
-            with pinned_file(REGISTRY) as stream:
+        path=self._registry_path()
+        if not path.is_file():
+            # Never downgrade a pinned mission to the un-scoped constant: absence is a refusal.
+            refuse('MISSION_REGISTRY_ABSENT' if self.mission else 'TRUST_BOOTSTRAP_REQUIRED')
+        with held_root(path.parent):
+            assert_protected(path)
+            with pinned_file(path) as stream:
                 raw=stream.read()
-                assert_protected(REGISTRY)
+                assert_protected(path)
                 data=strict_json(raw)
                 if not isinstance(data,dict):refuse('REGISTRY_SCHEMA')
                 if data.get('schema')!='HGK-NATIVE-REGISTRY/1' or data.get('canonical_profile')!=PROFILE:refuse('REGISTRY_SCHEMA')
@@ -261,6 +326,9 @@ class ProtectedRegistry:
                 if data['owner_os_sid']==data['checker_os_sid'] or data.get('maker_os_sid') in {data['owner_os_sid'],data['checker_os_sid']}:refuse('PRINCIPAL_SEPARATION')
                 if not data.get('maker_os_sid') or not isinstance(data.get('approved_files'),list) or not data['approved_files']:refuse('SOURCE_PINS_REQUIRED')
                 absolute_root(data.get('root'))
+                # One file admits exactly one mission. Selection chose a file; the file now has to
+                # agree with the selection, otherwise this is a mis-selection and not a choice.
+                if self.mission is not None and data.get('mission_id')!=self.mission:refuse('MISSION_REGISTRY_MISMATCH')
                 yield data
 
     def snapshot(self):
@@ -445,6 +513,10 @@ class NativeAdmission:
     def authorize(self,connection,operation,request,bundle):
         if not isinstance(bundle,dict) or set(bundle)!={'references','lease_generation'}:refuse('BUNDLE_REQUIRED')
         if operation not in PURPOSES:refuse('OPERATION')
+        # The trust root is never request-selected. Name the refusal instead of letting a stray key
+        # surface as an opaque request-digest mismatch; refuse the mission too, because the config
+        # side owns that decision and a request may not even name it.
+        if not isinstance(request,dict) or any(key in request for key in REQUEST_ROOT_KEYS):refuse('REQUEST_SELECTED_ROOT')
         if not hasattr(connection,'native_guards'):refuse('TRANSACTION_GUARD_REQUIRED')
         if isinstance(self.registry,(ProtectedRegistry,UserProfileRegistry)):
             registry=connection.native_guards.enter_context(self.registry.hold_snapshot())
