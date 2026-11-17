@@ -7,6 +7,12 @@ the guard refuses a dispatch unless:
   (b) the target arm is ADMITTED by a lane-shaped probe                  -> exit 3 (not admitted)
   (c) the policy epoch is current (not stale)                            -> exit 4 (stale epoch)
 
+Epoch refusal note (OWNER ruling 2026-11-17): the live epoch is read from the contract-epoch
+fields only (`registry_epoch` / `contract_epoch` / `epoch`). `revision` is the document's own edit
+counter and is never read as an epoch. An epoch that is absent, malformed, or carried by
+conflicting fields is refused under the SAME code as a stale epoch -- ERR_LANE_STALE_EPOCH, exit 4
+-- because the refusal class is "the epoch is not established/current"; no new code is added.
+
 Precedence follows the enumeration (a) -> (b) -> (c). Exit 0 means ADMIT. A machine-readable
 verdict is always printed; with --receipt PATH the same verdict is written to PATH.
 
@@ -89,25 +95,86 @@ def _load_admission(path_or_status: str | None) -> tuple[str, dict | None]:
     return path_or_status.strip().upper(), None
 
 
-def _live_epoch(args, registry: dict) -> int | None:
-    """Read the epoch from the live canonical source.
+# The document fields that carry the CONTRACT epoch. `revision` is the document's own edit
+# counter and is deliberately NOT in this tuple: it is a different plane (44 vs 41) and reading
+# it as the epoch is the defect this guard repairs.
+_EPOCH_FIELDS = ("registry_epoch", "contract_epoch", "epoch")
+
+# Defect tags carried in the verdict detail. They are diagnostic labels, not new ABI codes:
+# every one of them is refused under the existing stale/mismatched-epoch code
+# ERR_LANE_STALE_EPOCH / exit 4 (see EPOCH_REFUSAL_NOTE in the guard's docstring).
+EPOCH_ABSENT = "EPOCH_ABSENT"
+EPOCH_MALFORMED = "EPOCH_MALFORMED"
+EPOCH_CONFLICT = "EPOCH_CONFLICT"
+
+
+def _parse_epoch(value) -> int | None:
+    """Strict epoch parse: a non-bool int, or a signed decimal string. Anything else is malformed."""
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        return value
+    if isinstance(value, str):
+        token = value.strip()
+        if token[:1] in "+-" and token[1:].isdigit():
+            return int(token)
+        if token.isdigit():
+            return int(token)
+    return None
+
+
+def _read_epoch(args, registry: dict) -> dict:
+    """Classify the live epoch claim: {"epoch": int|None, "defect": str|None, "detail": str}.
 
     V6: --expected-epoch is an assertion, never an override. The live value is always read from
     disk, so a caller who controls argv cannot force epoch_ok.
+
+    EPOCH-FIELD REPAIR (W0/W1 closeout, plan r4 §7.2; OWNER ruling 2026-11-17): the assignment
+    document carries the contract epoch in `registry_epoch` / `contract_epoch` / `epoch` (41) and
+    its own edit counter in `revision` (44). Reading `revision` as the epoch is what produced
+    ERR_LANE_STALE_EPOCH on a correct tree, so the epoch fields are read and `revision` is never
+    consulted. An epoch the guard cannot establish -- absent, malformed, or self-contradictory --
+    is NOT an admission: it is refused as ERR_LANE_STALE_EPOCH (exit 4), the same
+    stale/mismatched-epoch family the guard already uses. A missing epoch must never be read as
+    "no claim, therefore current".
     """
     source = registry.get("source_of_routes", {}).get("path")
     if not source:
-        return None
+        return {"epoch": None, "defect": EPOCH_ABSENT,
+                "detail": "no source_of_routes.path pinned in the registry"}
     source_path = (Path(args.root) / source) if args.root else (_ROOT / source)
     if not source_path.exists():
-        return None
+        return {"epoch": None, "defect": EPOCH_ABSENT,
+                "detail": f"epoch source not readable: {source_path}"}
     try:
         doc = lp.load_site(source_path)
-    except Exception:
-        return None
-    if isinstance(doc, dict) and "revision" in doc:
-        return int(doc["revision"])
-    return None
+    except Exception as exc:
+        return {"epoch": None, "defect": EPOCH_ABSENT,
+                "detail": f"epoch source unparsable: {type(exc).__name__}"}
+    if not isinstance(doc, dict):
+        return {"epoch": None, "defect": EPOCH_ABSENT, "detail": "epoch source is not an object"}
+    present = {key: doc[key] for key in _EPOCH_FIELDS if key in doc}
+    if not present:
+        return {"epoch": None, "defect": EPOCH_ABSENT,
+                "detail": f"no epoch field present (looked for {list(_EPOCH_FIELDS)}; "
+                          f"`revision` is not an epoch and is not a substitute)"}
+    parsed: dict[str, int] = {}
+    for key, raw in present.items():
+        value = _parse_epoch(raw)
+        if value is None:
+            return {"epoch": None, "defect": EPOCH_MALFORMED,
+                    "detail": f"{key}={raw!r} is not an integer epoch"}
+        parsed[key] = value
+    if len(set(parsed.values())) > 1:
+        return {"epoch": None, "defect": EPOCH_CONFLICT,
+                "detail": f"conflicting epoch fields {parsed}"}
+    value = next(iter(parsed.values()))
+    return {"epoch": value, "defect": None, "detail": f"epoch={value} from {sorted(parsed)}"}
+
+
+def _live_epoch(args, registry: dict) -> int | None:
+    """The live epoch integer, or None when it cannot be established (the defect is in _read_epoch)."""
+    return _read_epoch(args, registry)["epoch"]
 
 
 def _infer_maker_lane(registry: dict, maker_model: str | None) -> str | None:
@@ -238,17 +305,25 @@ def evaluate(args) -> dict:
 
     # (c) epoch current. --expected-epoch, when supplied, is an additional assertion and never a
     # replacement for the live read (V6).
-    live_epoch = _live_epoch(args, registry)
-    epoch_ok = (live_epoch is None) or (int(live_epoch) == int(epoch))
+    epoch_read = _read_epoch(args, registry)
+    live_epoch = epoch_read["epoch"]
+    # An epoch the guard cannot establish (absent / malformed / conflicting fields) is refused, not
+    # waved through: "no readable epoch" must never be read as "epoch current". Same family code as
+    # a stale epoch -- ERR_LANE_STALE_EPOCH / exit 4 -- because the refusal class is identical.
+    epoch_ok = (epoch_read["defect"] is None) and (live_epoch is not None) \
+        and (int(live_epoch) == int(epoch))
     if args.expected_epoch is not None:
         expect_ok = (live_epoch is not None) and int(live_epoch) == int(args.expected_epoch)
         checks.append({"id": "expected_epoch_assertion", "ok": expect_ok,
                        "code": None if expect_ok else "ERR_LANE_STALE_EPOCH",
                        "detail": f"--expected-epoch={args.expected_epoch} live_epoch={live_epoch}"})
         epoch_ok = epoch_ok and expect_ok
+    epoch_detail = f"registry_epoch={epoch} live_epoch={live_epoch}"
+    if epoch_read["defect"]:
+        epoch_detail += f" epoch_defect={epoch_read['defect']} ({epoch_read['detail']})"
     checks.append({"id": "epoch_current", "ok": epoch_ok,
                    "code": None if epoch_ok else "ERR_LANE_STALE_EPOCH",
-                   "detail": f"registry_epoch={epoch} live_epoch={live_epoch}"})
+                   "detail": epoch_detail})
     if not epoch_ok and exit_code == EXIT_ADMIT:
         errors.append("ERR_LANE_STALE_EPOCH")
         exit_code = EXIT_STALE_EPOCH
