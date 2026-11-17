@@ -8,11 +8,14 @@ Four claims, each with a real run:
      selector string can name a file outside <base>/missions/<id>/;
   3. symlink / reparse: a junction standing in for the mission directory is refused by held_root,
      not followed to whatever registry it points at;
-  4. ACL preservation: the mission registry is checked by the SAME `assert_protected` rule as the
-     unscoped ProgramData constant - selection did not lower it.
+  4. ACL preservation: a mission registry is NOT checked by the unscoped boolean - the receiver
+     re-measures it with `assert_mission_protected` (machine rule + explicit DACL + ancestor chain +
+     the declared checker SID's read reach), so selection did not lower the rule.
 
-Only the ACL check is patched in tests 1 and 3, because an OS-protected ProgramData root is a host
-prerequisite; test 4 runs the real ACL check.
+The ACL gate is patched only where a mission root has to exist under %TEMP% (tests 1, 3 and 5). Those
+runs are STAND_IN_NOT_ORIGINAL_DOMAIN: they prove the SELECTION logic, not that Windows protection
+holds. The real Windows rule is measured in `test_mission_acl_original_domain`, and test 4 here still
+calls the real `assert_protected` on the mission path.
 """
 import base64
 import hashlib
@@ -32,6 +35,7 @@ from hg_kseos.spine import SharedSpine
 MISSION_SELECTED = 'M2'
 MISSION_OTHER = 'M1'
 PIN = b'pin-bytes\n'
+STAND_IN_NOT_ORIGINAL_DOMAIN = 'patched ACL gate: stand-in roots, not original-domain evidence'
 
 
 def _git(root):
@@ -125,6 +129,7 @@ class MissionSecurityTests(unittest.TestCase):
         doc['scope']['request_sha256'] = [n.digest_request(request)]
         self.write(self.mission_file, doc)
         with patch.object(n, 'REGISTRY', self.legacy), patch.object(n, 'assert_protected'), \
+                patch.object(n, 'assert_mission_protected'), \
                 patch.object(n, 'verify_signature', return_value=None):
             service = n.NativeAdmission(n.ProtectedRegistry())      # pinned to M2 by config
             self.assertEqual(service.registry.snapshot()['mission_id'], MISSION_SELECTED)
@@ -185,7 +190,8 @@ class MissionSecurityTests(unittest.TestCase):
                         + str(elsewhere) + "' | Out-Null"], check=True, capture_output=True)
         try:
             os.environ[n.MISSION_SELECTOR_ENV] = MISSION_SELECTED
-            with patch.object(n, 'REGISTRY', self.legacy), patch.object(n, 'assert_protected'):
+            with patch.object(n, 'REGISTRY', self.legacy), patch.object(n, 'assert_protected'), \
+                    patch.object(n, 'assert_mission_protected'):
                 with self.assertRaisesRegex(InvariantViolation, '^ERR_NATIVE_(ROOT|REGISTRY)_REPARSE$'):
                     n.ProtectedRegistry().snapshot()
         finally:
@@ -201,14 +207,22 @@ class MissionSecurityTests(unittest.TestCase):
         with self.assertRaisesRegex(InvariantViolation, '^ERR_NATIVE_TRUST_ACL_UNPROTECTED$'):
             n.assert_protected(path)
 
-    def test_mission_registry_is_still_checked_by_assert_protected(self):
+    def test_mission_registry_is_checked_by_the_mission_rule(self):
+        # A mission root is NOT checked by the unscoped boolean: the receiver re-measures it with
+        # assert_mission_protected twice, and a third time once the document names its checker SID.
         self.write(self.mission_file, self.document(MISSION_SELECTED))
         os.environ[n.MISSION_SELECTOR_ENV] = MISSION_SELECTED
         seen = []
         with patch.object(n, 'REGISTRY', self.legacy), \
-                patch.object(n, 'assert_protected', side_effect=lambda p: seen.append(Path(p))):
+                patch.object(n, 'assert_mission_protected',
+                             side_effect=lambda p, checker=None: seen.append((Path(p), checker))):
             n.ProtectedRegistry().snapshot()
-        self.assertEqual(seen, [self.mission_file, self.mission_file])
+        self.assertEqual([path for path, _ in seen], [self.mission_file] * 3)
+        self.assertEqual([checker for _, checker in seen],
+                         [None, None, self.document(MISSION_SELECTED)['checker_os_sid']])
+
+    def test_stand_in_runs_are_labelled(self):
+        self.assertIn('not original-domain', STAND_IN_NOT_ORIGINAL_DOMAIN)
 
 
 if __name__ == '__main__':

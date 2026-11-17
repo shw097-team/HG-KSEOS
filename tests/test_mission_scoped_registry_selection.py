@@ -7,7 +7,11 @@ These tests lock the three properties the candidate claims:
   * a wrong file -> a NAMED refusal, never a silent choice between two present registries.
 
 ACL checking is patched out in the selection tests only: an OS-protected ProgramData root is a host
-prerequisite, and `test_mission_scoped_registry_security` exercises the real ACL path separately.
+prerequisite, and `test_mission_acl_original_domain` measures the real Windows path separately.
+
+LABEL: every run in this module is STAND_IN_NOT_ORIGINAL_DOMAIN - the roots live under %TEMP% and are
+owned by the invoking user, so the real DACL rule would refuse them all. A pass here says the
+SELECTION logic is right and says nothing about Windows protection.
 """
 import json
 import os
@@ -23,6 +27,7 @@ from hg_kseos.errors import InvariantViolation
 
 PIN = b'pin-bytes\n'
 PIN_SHA = __import__('hashlib').sha256(PIN).hexdigest()
+STAND_IN_NOT_ORIGINAL_DOMAIN = 'patched ACL gate: stand-in roots, not original-domain evidence'
 
 
 def registry_doc(mission_id, root):
@@ -60,7 +65,9 @@ class SelectionTests(unittest.TestCase):
 
     @contextmanager
     def patched(self):
-        with patch.object(n, 'REGISTRY', self.legacy), patch.object(n, 'assert_protected'):
+        # STAND_IN_NOT_ORIGINAL_DOMAIN: both gates are patched, so a mission root under %TEMP% can be
+        # exercised at all. The real gate is measured in test_mission_acl_original_domain.
+        with patch.object(n, 'REGISTRY', self.legacy), patch.object(n, 'assert_protected'),                 patch.object(n, 'assert_mission_protected'):
             yield
 
     def snapshot(self):
@@ -100,14 +107,22 @@ class SelectionTests(unittest.TestCase):
             self.assertEqual(n.registry_path(), self.base / 'missions' / 'M1' / 'registry.json')
         self.assertEqual(self.snapshot()['mission_id'], 'M1')
 
-    def test_selector_is_pinned_at_construction_not_re_read_per_request(self):
+    def test_selector_is_pinned_at_construction_and_a_later_change_is_refused(self):
+        # Pinning alone would make a mid-flight change harmless but invisible; the candidate refuses
+        # it by name instead, so a worker cannot quietly re-point the receiver.
         self.write(self.missions / 'M1' / 'registry.json', registry_doc('M1', self.root))
         self.write(self.missions / 'M2' / 'registry.json', registry_doc('M2', self.root))
         self.select('M1')
         with self.patched():
             receiver = n.ProtectedRegistry()
-            os.environ[n.MISSION_SELECTOR_ENV] = 'M2'   # a later env change cannot re-point it
             self.assertEqual(receiver.snapshot()['mission_id'], 'M1')
+            os.environ[n.MISSION_SELECTOR_ENV] = 'M2'
+            with self.assertRaisesRegex(InvariantViolation,
+                                        '^ERR_NATIVE_MISSION_SELECTOR_WORKER_RESELECT$'):
+                receiver.snapshot()
+
+    def test_stand_in_runs_are_labelled(self):
+        self.assertIn('not original-domain', STAND_IN_NOT_ORIGINAL_DOMAIN)
 
     # -- (c) a file whose mission_id differs is refused by name ----------------------------------
     def test_registry_declaring_another_mission_is_refused_by_name(self):

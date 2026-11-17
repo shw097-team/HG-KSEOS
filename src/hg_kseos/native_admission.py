@@ -17,6 +17,7 @@ import subprocess
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import NoReturn
 
 from .errors import InvariantViolation
 
@@ -55,25 +56,138 @@ USER_SCOPE_FILENAME = 'scope.json'
 # config value the host supervisor sets for the process; `authorize()` separately refuses, by name,
 # any request key that names a registry, a profile or a mission.
 MISSION_SELECTOR_ENV = 'HGK_MISSION_ID'
+TRUST_PROFILE_ENV = 'HGK_TRUST_PROFILE'
 MACHINE_MISSIONS_DIRNAME = 'missions'
 MISSION_ID_PATTERN = re.compile(r'[A-Za-z0-9][A-Za-z0-9._-]{0,63}\Z')
 REQUEST_ROOT_KEYS = ('registry', 'registry_path', 'registry_file', 'trust_root', 'trust_profile',
                      'trust_store', 'scope_path', 'mission_id', 'mission_selector')
 
+# ------------------------------------------------- supervisor-bound scope (WP06 r2)
+# HGK_MISSION_ID and HGK_TRUST_PROFILE are ordinary environment variables, so ANY process can set
+# them - including the worker that is about to be admitted. An environment variable is therefore not
+# a binding: on its own it moves which registry is read, which is exactly the redirection this seam
+# exists to prevent. The supervisor records its decision ONCE, in a file that carries the same OS
+# protection as the registry, and the worker may only CONFIRM that record - never choose it, never
+# blank it, never weaken the profile it fixes.
+#
+# Honest ceiling: this is a mechanism, not a principal proof. The record's authority is the OS DACL
+# on <base>/supervisor/ (measured by `assert_protected`), so a worker running as the SAME user that
+# can write that directory can write the record too - which is why the record must live in the
+# protected base and why `SUPERVISOR_BINDING_UNPROTECTED` refuses instead of trusting it. Proving a
+# DIFFERENT, higher-privileged supervisor principal needs HOST_OPERATIONS; nothing here asserts it.
+SUPERVISOR_DIRNAME = 'supervisor'
+SUPERVISOR_BINDING_FILENAME = 'scope.json'
+SUPERVISOR_BINDING_SCHEMA = 'HGK-SUPERVISOR-SCOPE/1'
+
+
+def _mission_id_ok(raw):
+    return (bool(MISSION_ID_PATTERN.match(raw)) and '..' not in raw and not raw.endswith('.')
+            and not any(c in raw for c in ('/', '\\', ':')))
+
+
+def _binding_dir():
+    return REGISTRY.parent / SUPERVISOR_DIRNAME
+
+
+def _binding_path(path=None):
+    return absolute_root(path) if path is not None else _binding_dir() / SUPERVISOR_BINDING_FILENAME
+
+
+def _binding_document(raw):
+    """Parse the supervisor's decision. Unknown fields are ignored, a wrong shape is refused."""
+    doc = strict_json(raw)
+    if not isinstance(doc, dict) or doc.get('schema') != SUPERVISOR_BINDING_SCHEMA:
+        refuse('SUPERVISOR_BINDING_SHAPE')
+    profile = doc.get('trust_profile')
+    if profile not in PROFILES:
+        refuse('SUPERVISOR_BINDING_SHAPE')
+    mission = doc.get('mission_id')
+    if mission is not None and (not isinstance(mission, str) or not _mission_id_ok(mission)):
+        refuse('SUPERVISOR_BINDING_SHAPE')
+    return {'schema': SUPERVISOR_BINDING_SCHEMA, 'mission_id': mission, 'trust_profile': profile,
+            'bound_at': doc.get('bound_at'), 'bound_by_pid': doc.get('bound_by_pid')}
+
+
+def supervisor_binding(path=None):
+    """The supervisor's recorded scope decision, or None when this host was never bound.
+
+    Read fresh on every call (no cache): a memo keyed on stat() would let a same-size rewrite hide
+    behind an unchanged timestamp, and this value decides which trust root is read.
+    """
+    p = _binding_path(path)
+    if not p.is_file():
+        return None
+    try:
+        assert_protected(p)
+    except InvariantViolation:
+        # A record the worker can rewrite is not a supervisor decision; refuse rather than obey it.
+        refuse('SUPERVISOR_BINDING_UNPROTECTED')
+    with pinned_file(p) as stream:
+        return _binding_document(stream.read())
+
+
+def bind_supervisor_scope(mission_id=None, profile=MACHINE_PROFILE, path=None, bound_at=None):
+    """Supervisor-side, ONE writer: record the scope this host may operate under.
+
+    `mission_id=None` is a decision too - it pins the unscoped ProgramData constant - so it is
+    recorded rather than left implicit. The call is immutable: a second, different binding is
+    refused, because a re-bindable decision is not a decision. The host must apply the protected
+    DACL to <base>/supervisor/ after this returns; until it does, `supervisor_binding()` refuses
+    the record as unprotected.
+    """
+    if profile not in PROFILES:
+        refuse('TRUST_PROFILE')
+    if mission_id is not None:
+        if not isinstance(mission_id, str) or not _mission_id_ok(mission_id):
+            refuse('MISSION_SELECTOR_SHAPE')
+    p = _binding_path(path)
+    if p.is_file():
+        with pinned_file(p) as stream:
+            existing = _binding_document(stream.read())
+        if (existing['mission_id'], existing['trust_profile']) != (mission_id, profile):
+            refuse('SUPERVISOR_BINDING_IMMUTABLE')
+        return existing
+    doc = {'schema': SUPERVISOR_BINDING_SCHEMA, 'mission_id': mission_id, 'trust_profile': profile,
+           'bound_at': bound_at or datetime.now(timezone.utc).isoformat(),
+           'bound_by_pid': os.getpid()}
+    p.parent.mkdir(parents=True, exist_ok=True)
+    tmp = p.with_name(p.name + '.tmp')
+    tmp.write_text(json.dumps(doc, sort_keys=True), encoding='utf-8')
+    os.replace(tmp, p)
+    return doc
+
 
 def mission_selector():
     """The mission this process was pinned to, from CONFIG only - never from a request.
 
-    Deliberately takes no argument: no request dict, bundle or argv line can reach it. An unknown or
-    malformed value is refused by name; it is never stripped, joined or resolved into a path.
+    Deliberately takes no argument: no request dict, bundle or argv line can reach it. Four
+    mutations are refused by name instead of resolved: a malformed id, a selector that disagrees
+    with the supervisor record (worker reselection), a blank selector while a record exists (the
+    silent fallback to B1's unscoped constant), and any selection at all on a host where scoping is
+    installed but the record is missing (an unprotected environment override).
+
+    Unbound hosts keep B1 exactly as it was: no selector means the ProgramData constant.
     """
+    raw_present = MISSION_SELECTOR_ENV in os.environ
     raw = (os.environ.get(MISSION_SELECTOR_ENV) or '').strip()
-    if not raw:
-        return None
-    if (not MISSION_ID_PATTERN.match(raw) or '..' in raw or raw.endswith('.')
-            or any(c in raw for c in ('/', '\\', ':'))):
+    if raw and not _mission_id_ok(raw):
         refuse('MISSION_SELECTOR_SHAPE')
-    return raw
+    bound = supervisor_binding()
+    if bound is None:
+        if raw and _binding_dir().exists():
+            # `missions/`-style scoping is installed on this host (the supervisor dir exists) but
+            # no decision was recorded: the value can only have come from the worker's own
+            # environment, which is not a binding.
+            refuse('SUPERVISOR_BINDING_ABSENT')
+        return raw or None
+    if raw_present and not raw:
+        refuse('MISSION_SELECTOR_BLANK')
+    if raw:
+        if bound['mission_id'] is None or raw != bound['mission_id']:
+            refuse('MISSION_SELECTOR_WORKER_RESELECT')
+        return raw
+    # Absent is not a fallback: the record alone decides, and it may legitimately decide "unscoped".
+    return bound['mission_id']
 
 
 def machine_registry_path(mission=None):
@@ -88,10 +202,30 @@ def machine_registry_path(mission=None):
 
 
 def trust_profile():
-    raw = (os.environ.get('HGK_TRUST_PROFILE') or MACHINE_PROFILE).strip().lower()
-    if raw not in PROFILES:
-        refuse('TRUST_PROFILE')
-    return raw
+    """machine|user, with the supervisor record as the pin when this host is bound.
+
+    Legacy (no record): the value of HGK_TRUST_PROFILE, defaulting to machine - today's behaviour,
+    unchanged. Bound: the record fixes the profile, and the environment may only repeat it. A worker
+    that asks for `user` while the supervisor fixed `machine` is refused as a DOWNGRADE by name -
+    silently honouring it would let the worker swap an Administrator-only root for a DPAPI-user one.
+    """
+    bound = supervisor_binding()
+    raw_present = TRUST_PROFILE_ENV in os.environ
+    raw = (os.environ.get(TRUST_PROFILE_ENV) or '').strip().lower()
+    if bound is None:
+        if not raw:
+            raw = MACHINE_PROFILE
+        if raw not in PROFILES:
+            refuse('TRUST_PROFILE')
+        return raw
+    pinned = bound['trust_profile']
+    if raw_present and not raw:
+        refuse('TRUST_PROFILE_BLANK')
+    if raw and raw != pinned:
+        if pinned == MACHINE_PROFILE and raw == USER_PROFILE:
+            refuse('TRUST_PROFILE_DOWNGRADE')
+        refuse('TRUST_PROFILE_CONFLICT')
+    return pinned
 
 
 def user_registry_path():
@@ -112,7 +246,324 @@ def registry_path(profile=None):
     return machine_registry_path(mission_selector())
 
 
-def refuse(code):
+# ------------------------------------------------- real Windows ACL / SID measurement (WP06 r2)
+# `assert_protected` above answers "is this registry protected" with one boolean, and it answers it
+# for the unscoped constant. A mission registry is a DIFFERENT file at a DEEPER path, so the same
+# rule has to be re-measured there plus three facts a bare boolean cannot carry: which DACL entries
+# exist, whether the declared checker SID can actually READ the file, and whether the ancestor chain
+# that leads to it is itself steerable (reparse) or writable by a world principal.
+#
+# Every number below comes from the OS through GetNamedSecurityInfo/Authz-style APIs in this process;
+# none of it is inferred from the registry's own JSON, and no PowerShell module is required.
+FILE_READ_DATA = 0x1
+FILE_WRITE_DATA = 0x2
+FILE_APPEND_DATA = 0x4
+FILE_WRITE_EA = 0x10
+FILE_DELETE_CHILD = 0x40
+FILE_READ_ATTRIBUTES = 0x80
+FILE_WRITE_ATTRIBUTES = 0x100
+DELETE = 0x10000
+READ_CONTROL = 0x20000
+WRITE_DAC = 0x40000
+WRITE_OWNER = 0x80000
+SYNCHRONIZE = 0x100000
+CHECKER_MIN_MASK = FILE_READ_DATA | FILE_READ_ATTRIBUTES | READ_CONTROL
+# The same mask assert_protected band-tests, kept identical on purpose: the mission path must not be
+# a relaxed copy of the machine rule.
+PROTECTED_WRITE_MASK = 0x000D0156
+# An ancestor that grants only "create a new child" cannot change an EXISTING child; one that grants
+# delete-child / delete / WRITE_DAC / WRITE_OWNER can replace it, so those are the fatal bits.
+ANCESTOR_FATAL_MASK = DELETE | FILE_DELETE_CHILD | WRITE_DAC | WRITE_OWNER
+WORLD_SIDS = ('S-1-1-0', 'S-1-5-7', 'S-1-5-11', 'S-1-5-32-545', 'S-1-5-4', 'S-1-5-32-546')
+SYSTEM_OWNER_SIDS = ('S-1-5-18', 'S-1-5-32-544')
+
+_WIN = {}
+
+
+def _win():
+    """ctypes bindings for the ACL APIs, built once. No PowerShell, no module path, no policy."""
+    if _WIN:
+        return _WIN
+    import ctypes
+    from ctypes import wintypes as w
+
+    class ACE_HEADER(ctypes.Structure):
+        _fields_ = [('AceType', ctypes.c_ubyte), ('AceFlags', ctypes.c_ubyte),
+                    ('AceSize', ctypes.c_ushort)]
+
+    class ACE_ACCESS(ctypes.Structure):
+        _fields_ = [('Header', ACE_HEADER), ('Mask', ctypes.c_uint32), ('SidStart', ctypes.c_uint32)]
+
+    class ACE_OBJECT(ctypes.Structure):
+        _fields_ = [('Header', ACE_HEADER), ('Mask', ctypes.c_uint32), ('Flags', ctypes.c_uint32)]
+
+    class ACL_SIZE(ctypes.Structure):
+        _fields_ = [('AceCount', ctypes.c_uint32), ('AclBytesInUse', ctypes.c_uint32),
+                    ('AclBytesFree', ctypes.c_uint32)]
+
+    class TRUSTEE(ctypes.Structure):
+        _fields_ = [('pMultipleTrustee', ctypes.c_void_p), ('MultipleTrusteeOperation', ctypes.c_uint32),
+                    ('TrusteeForm', ctypes.c_uint32), ('TrusteeType', ctypes.c_uint32),
+                    ('ptstrName', ctypes.c_void_p)]
+
+    adv = ctypes.WinDLL('advapi32', use_last_error=True)
+    kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+    P = ctypes.POINTER
+    adv.GetNamedSecurityInfoW.argtypes = [w.LPWSTR, ctypes.c_int, ctypes.c_uint32, P(ctypes.c_void_p),
+                                          P(ctypes.c_void_p), P(ctypes.c_void_p), P(ctypes.c_void_p),
+                                          P(ctypes.c_void_p)]
+    adv.GetNamedSecurityInfoW.restype = ctypes.c_uint32
+    adv.GetAclInformation.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_uint32, ctypes.c_int]
+    adv.GetAce.argtypes = [ctypes.c_void_p, ctypes.c_uint32, P(ctypes.c_void_p)]
+    adv.GetSecurityDescriptorControl.argtypes = [ctypes.c_void_p, P(ctypes.c_uint16), P(ctypes.c_uint32)]
+    adv.ConvertSidToStringSidW.argtypes = [ctypes.c_void_p, P(w.LPWSTR)]
+    adv.ConvertStringSidToSidW.argtypes = [w.LPCWSTR, P(ctypes.c_void_p)]
+    adv.GetEffectiveRightsFromAclW.argtypes = [ctypes.c_void_p, P(TRUSTEE), P(ctypes.c_uint32)]
+    adv.GetEffectiveRightsFromAclW.restype = ctypes.c_uint32
+    adv.ConvertSecurityDescriptorToStringSecurityDescriptorW.argtypes = [
+        ctypes.c_void_p, ctypes.c_uint32, ctypes.c_uint32, P(w.LPWSTR), P(ctypes.c_uint32)]
+    adv.ConvertSecurityDescriptorToStringSecurityDescriptorW.restype = ctypes.c_int
+    adv.LookupAccountSidW.argtypes = [w.LPCWSTR, ctypes.c_void_p, w.LPWSTR, P(ctypes.c_uint32),
+                                      w.LPWSTR, P(ctypes.c_uint32), P(ctypes.c_int)]
+    kernel.LocalFree.argtypes = [ctypes.c_void_p]
+    kernel.LocalFree.restype = ctypes.c_void_p
+    _WIN.update(locals())
+    return _WIN
+
+
+def _sid_to_string(sid_ptr):
+    api = _win()
+    import ctypes
+    out = ctypes.c_wchar_p()
+    if not api['adv'].ConvertSidToStringSidW(sid_ptr, ctypes.byref(out)):
+        refuse('TRUST_ACL_QUERY')
+    try:
+        return out.value
+    finally:
+        api['kernel'].LocalFree(ctypes.cast(out, ctypes.c_void_p))
+
+
+def _sid_from_string(text):
+    api = _win()
+    import ctypes
+    out = ctypes.c_void_p()
+    if not api['adv'].ConvertStringSidToSidW(text, ctypes.byref(out)):
+        refuse('TRUST_ACL_QUERY')
+    return out
+
+
+def _named_security(path):
+    """Owner, group, DACL, protection flag and SDDL for one real path."""
+    api = _win()
+    import ctypes
+    owner = ctypes.c_void_p(); group = ctypes.c_void_p()
+    dacl = ctypes.c_void_p(); sacl = ctypes.c_void_p(); sd = ctypes.c_void_p()
+    rc = api['adv'].GetNamedSecurityInfoW(str(path), 1, 0x7, ctypes.byref(owner), ctypes.byref(group),
+                                          ctypes.byref(dacl), ctypes.byref(sacl), ctypes.byref(sd))
+    if rc:
+        return None
+    control = ctypes.c_uint16(); revision = ctypes.c_uint32()
+    api['adv'].GetSecurityDescriptorControl(sd, ctypes.byref(control), ctypes.byref(revision))
+    sddl = ''
+    out = ctypes.c_wchar_p()
+    if api['adv'].ConvertSecurityDescriptorToStringSecurityDescriptorW(sd, 1, 0x7,
+                                                                       ctypes.byref(out), None):
+        sddl = out.value or ''
+        api['kernel'].LocalFree(ctypes.cast(out, ctypes.c_void_p))
+    return {'sd': sd, 'owner': owner, 'group': group, 'dacl': dacl,
+            'protected': bool(control.value & 0x1000), 'sddl': sddl}
+
+
+def acl_facts(path):
+    """The measured DACL of one path: owner SID, every ACE, and whether inheritance is closed."""
+    if os.name != 'nt':
+        refuse('PROTECTED_WINDOWS_READER_REQUIRED')
+    api = _win()
+    import ctypes
+    sec = _named_security(path)
+    if sec is None:
+        return {'path': str(path), 'exists': False, 'error': 'GetNamedSecurityInfo'}
+    entries = []
+    count = api['ACL_SIZE']()
+    if sec['dacl'].value and api['adv'].GetAclInformation(sec['dacl'], ctypes.byref(count),
+                                                          ctypes.sizeof(count), 2):
+        for i in range(count.AceCount):
+            ptr = ctypes.c_void_p()
+            if not api['adv'].GetAce(sec['dacl'], i, ctypes.byref(ptr)):
+                refuse('TRUST_ACL_QUERY')
+            hdr = ctypes.cast(ptr, ctypes.POINTER(api['ACE_HEADER'])).contents
+            entry = {'index': i, 'type': int(hdr.AceType), 'flags': int(hdr.AceFlags),
+                     'inherited': bool(hdr.AceFlags & 0x10), 'mask': 0, 'sid': None}
+            if hdr.AceType in (0, 1, 2, 3):
+                entry['mask'] = int(ctypes.cast(ptr, ctypes.POINTER(api['ACE_ACCESS'])).contents.Mask)
+                entry['sid'] = _sid_to_string(ctypes.c_void_p(ptr.value + 8))
+            elif hdr.AceType in (5, 6):
+                obj = ctypes.cast(ptr, ctypes.POINTER(api['ACE_OBJECT'])).contents
+                entry['mask'] = int(obj.Mask)
+                offset = 12 + (16 if obj.Flags & 0x1 else 0) + (16 if obj.Flags & 0x2 else 0)
+                entry['sid'] = _sid_to_string(ctypes.c_void_p(ptr.value + offset))
+            else:
+                entry['shape'] = 'unsupported'
+            entries.append(entry)
+    facts = {'path': str(path), 'exists': True,
+             'owner': _sid_to_string(sec['owner']) if sec['owner'].value else None,
+             'group': _sid_to_string(sec['group']) if sec['group'].value else None,
+             'dacl_protected': sec['protected'], 'sddl': sec['sddl'], 'aces': entries}
+    api['kernel'].LocalFree(ctypes.cast(sec['sd'], ctypes.c_void_p))
+    return facts
+
+
+def effective_rights(path, sid):
+    """What the file's DACL grants to exactly that SID (GetEffectiveRightsFromAcl)."""
+    if os.name != 'nt':
+        refuse('PROTECTED_WINDOWS_READER_REQUIRED')
+    api = _win()
+    import ctypes
+    sec = _named_security(path)
+    if sec is None:
+        return None
+    sidbuf = _sid_from_string(sid)
+    try:
+        trustee = api['TRUSTEE']()
+        trustee.TrusteeForm = 0        # TRUSTEE_IS_SID
+        trustee.TrusteeType = 0        # TRUSTEE_IS_UNKNOWN
+        trustee.ptstrName = sidbuf
+        mask = ctypes.c_uint32(0)
+        rc = api['adv'].GetEffectiveRightsFromAclW(sec['dacl'], ctypes.byref(trustee),
+                                                   ctypes.byref(mask))
+        return None if rc else int(mask.value)
+    finally:
+        api['kernel'].LocalFree(sidbuf)
+        api['kernel'].LocalFree(ctypes.cast(sec['sd'], ctypes.c_void_p))
+
+
+def sid_account(sid):
+    """Does this SID resolve to a real account on this host, and to which name?"""
+    api = _win()
+    import ctypes
+    sidbuf = _sid_from_string(sid)
+    try:
+        name = ctypes.create_unicode_buffer(256); domain = ctypes.create_unicode_buffer(256)
+        nlen = ctypes.c_uint32(256); dlen = ctypes.c_uint32(256); use = ctypes.c_int(0)
+        ok = api['adv'].LookupAccountSidW(None, sidbuf, name, ctypes.byref(nlen), domain,
+                                          ctypes.byref(dlen), ctypes.byref(use))
+        if not ok:
+            return {'sid': sid, 'resolved': False, 'error': ctypes.get_last_error()}
+        return {'sid': sid, 'resolved': True, 'name': name.value, 'domain': domain.value}
+    finally:
+        api['kernel'].LocalFree(sidbuf)
+
+
+def ancestor_chain(path):
+    """Every existing directory from `path` up to the drive root, nearest first."""
+    path = absolute_root(path)
+    out = []
+    for candidate in [path] + list(path.parents):
+        if candidate.is_dir():
+            out.append(candidate)
+    return out
+
+
+def mission_root_report(path, checker_sid=None, base=None):
+    """Measure one mission registry and its ancestry. Facts only - `assert_mission_protected` decides."""
+    path = absolute_root(path)
+    base = absolute_root(base) if base is not None else REGISTRY.parent
+    report = {'path': str(path), 'base': str(base), 'exists': path.is_file(),
+              'leaf': acl_facts(path) if path.exists() else None,
+              'ancestors': [], 'checker': None, 'verdicts': {}, 'failures': []}
+
+    def verdict(name, ok, detail=None):
+        report['verdicts'][name] = bool(ok)
+        if detail is not None:
+            report['verdicts'][name + '_detail'] = detail
+        if not ok:
+            report['failures'].append(name)
+
+    leaf = report['leaf'] or {}
+    verdict('owner_is_system_or_admin', leaf.get('owner') in SYSTEM_OWNER_SIDS, leaf.get('owner'))
+    verdict('dacl_explicit', leaf.get('dacl_protected') is True)
+    foreign_write = [a for a in leaf.get('aces', [])
+                     if a.get('type') == 0 and (a['mask'] & PROTECTED_WRITE_MASK)
+                     and a.get('sid') not in SYSTEM_OWNER_SIDS]
+    verdict('no_foreign_write_ace', not foreign_write,
+            [f"{a.get('sid')}:{a['mask']:08x}" for a in foreign_write])
+    inherited_write = [a for a in leaf.get('aces', [])
+                       if a.get('type') == 0 and a.get('inherited') and (a['mask'] & PROTECTED_WRITE_MASK)]
+    verdict('no_inherited_write_exposure', not inherited_write,
+            [f"{a.get('sid')}:{a['mask']:08x}" for a in inherited_write])
+
+    reparse = []
+    fatal_ancestors = []
+    for ancestor in ancestor_chain(path):
+        facts = acl_facts(ancestor)
+        here = str(ancestor).lower().rstrip('\\')
+        strict = here == str(base).lower().rstrip('\\') or \
+            here.startswith(str(base).lower().rstrip('\\') + os.sep)
+        # Mapped rights, not raw ACE masks: C:\ carries a legacy Authenticated-Users ACE of
+        # 0xE0010000 whose SPECIFIC bits read as DELETE but whose mapped grant is only append/create.
+        # Testing the raw mask there would refuse the real ProgramData chain for a bit the OS does
+        # not actually grant - so the ancestor verdict is computed with GetEffectiveRightsFromAcl.
+        world = []
+        for sid in WORLD_SIDS:
+            rights = effective_rights(ancestor, sid)
+            if not rights:
+                continue
+            bits = rights & (PROTECTED_WRITE_MASK if strict else ANCESTOR_FATAL_MASK)
+            if bits:
+                world.append({'sid': sid, 'rights': f'{rights:08x}', 'matched': f'{bits:08x}',
+                              'strict': strict})
+        if os.path.islink(ancestor) or getattr(ancestor.lstat(), 'st_file_attributes', 0) & 0x400:
+            reparse.append(str(ancestor))
+        if world:
+            fatal_ancestors.append({'path': str(ancestor), 'world_write': world})
+        report['ancestors'].append({'path': str(ancestor), 'strict': strict,
+                                    'owner': facts.get('owner'),
+                                    'dacl_protected': facts.get('dacl_protected'),
+                                    'world_write': world})
+    verdict('ancestors_no_reparse', not reparse, reparse)
+    verdict('ancestors_no_world_write', not fatal_ancestors, fatal_ancestors)
+
+    if checker_sid:
+        rights = effective_rights(path, checker_sid)
+        account = sid_account(checker_sid)
+        report['checker'] = {'sid': checker_sid, 'effective_mask': rights,
+                             'account': account,
+                             'can_read': bool(rights is not None
+                                              and rights & FILE_READ_DATA
+                                              and rights & READ_CONTROL)}
+        verdict('checker_sid_can_read', report['checker']['can_read'],
+                None if rights is None else f'{rights:08x}')
+    return report
+
+
+def assert_mission_protected(path, checker_sid=None):
+    """The machine rule, re-measured on a mission path, plus the facts a boolean cannot carry.
+
+    Refuses by name so the failure is attributable: a mission root protected like the constant but
+    unreachable to its own checker is not a usable root, and one under a writable or steered ancestor
+    is not a protected one.
+    """
+    if os.name != 'nt':
+        refuse('PROTECTED_WINDOWS_READER_REQUIRED')
+    report = mission_root_report(path, checker_sid)
+    if not report['exists']:
+        refuse('MISSION_REGISTRY_ABSENT' if REGISTRY.parent else 'TRUST_BOOTSTRAP_REQUIRED')
+    v = report['verdicts']
+    if not v.get('ancestors_no_reparse'):
+        refuse('ROOT_REPARSE')
+    if not v.get('owner_is_system_or_admin'):
+        refuse('TRUST_ACL_UNPROTECTED')
+    if not v.get('dacl_explicit') or not v.get('no_foreign_write_ace') \
+            or not v.get('no_inherited_write_exposure'):
+        refuse('TRUST_ACL_UNPROTECTED')
+    if not v.get('ancestors_no_world_write'):
+        refuse('TRUST_ANCESTOR_WORLD_WRITABLE')
+    if checker_sid and not v.get('checker_sid_can_read'):
+        refuse('TRUST_CHECKER_UNREACHABLE')
+    return report
+
+
+def refuse(code)->NoReturn:
     raise InvariantViolation('ERR_NATIVE_'+code)
 
 def absolute_root(value):
@@ -298,8 +749,18 @@ class ProtectedRegistry:
         # request value ever reaches it.
         self.path=path
         self.mission=mission_selector()
+        self._selector_raw=(os.environ.get(MISSION_SELECTOR_ENV) or '').strip() or None
+        self._bound_mission=(supervisor_binding() or {}).get('mission_id')
 
     def _registry_path(self):
+        # The pin above makes a later env change harmless; these two checks make it VISIBLE. A worker
+        # that reselects, or that rewrites the supervisor record where the DACL (or a stand-in)
+        # allows it, is refused by name instead of being silently ignored.
+        current=(os.environ.get(MISSION_SELECTOR_ENV) or '').strip() or None
+        if current!=self._selector_raw:
+            refuse('MISSION_SELECTOR_WORKER_RESELECT')
+        if (supervisor_binding() or {}).get('mission_id')!=self._bound_mission:
+            refuse('SUPERVISOR_BINDING_CHANGED')
         if self.path is not None:return absolute_root(self.path)
         return machine_registry_path(self.mission)
 
@@ -314,11 +775,15 @@ class ProtectedRegistry:
         if not path.is_file():
             # Never downgrade a pinned mission to the un-scoped constant: absence is a refusal.
             refuse('MISSION_REGISTRY_ABSENT' if self.mission else 'TRUST_BOOTSTRAP_REQUIRED')
+        # A mission root is a different file, so it is re-measured rather than assumed: the machine
+        # rule, the explicit DACL, the ancestor chain and (once the document is readable) the
+        # declared checker SID's read reach. Unscoped B1 keeps `assert_protected` untouched.
+        protect=assert_mission_protected if self.mission else assert_protected
         with held_root(path.parent):
-            assert_protected(path)
+            protect(path)
             with pinned_file(path) as stream:
                 raw=stream.read()
-                assert_protected(path)
+                protect(path)
                 data=strict_json(raw)
                 if not isinstance(data,dict):refuse('REGISTRY_SCHEMA')
                 if data.get('schema')!='HGK-NATIVE-REGISTRY/1' or data.get('canonical_profile')!=PROFILE:refuse('REGISTRY_SCHEMA')
@@ -329,7 +794,13 @@ class ProtectedRegistry:
                 # One file admits exactly one mission. Selection chose a file; the file now has to
                 # agree with the selection, otherwise this is a mis-selection and not a choice.
                 if self.mission is not None and data.get('mission_id')!=self.mission:refuse('MISSION_REGISTRY_MISMATCH')
+                # Last: the file's own declared checker must be able to read it, measured on the
+                # same path under the same pin.
+                if self.mission is not None:
+                    assert_mission_protected(path,data['checker_os_sid'])
                 yield data
+
+    _checker=None
 
     def snapshot(self):
         with self.hold_snapshot() as data:
