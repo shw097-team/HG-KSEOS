@@ -265,7 +265,7 @@ class PreSpawnGateEndToEnd(unittest.TestCase):
         spine = _spine(tmp)
         inv = spid.new_invocation_id(sp)
         cmd = _cmd(tmp, sp=sp, invocation=inv, nonce=inv, skills=skills, spine=spine,
-                   workorder="WO-TEST-01", **kw)
+                   workorder="WO-TEST-01", extra=("--require-arm", "opencode-go/deepseek-v4.1-flash",), **kw)
         return _run(cmd, tmp=tmp), inv, skills, spine, pathlib.Path(tmp)
 
     def _refusal(self, *, expect_code, **kw):
@@ -350,7 +350,7 @@ class PreSpawnGateEndToEnd(unittest.TestCase):
         spine = _spine(tmp)
         inv = spid.new_invocation_id("challenge")
         cmd = _cmd(tmp, sp="challenge", invocation=inv, nonce=inv, skills=skills, spine=spine,
-                   workorder="WO-TEST-01", stub=STUB_PLAIN)
+                   workorder="WO-TEST-01", stub=STUB_PLAIN, extra=("--require-arm", "opencode-go/deepseek-v4.1-flash",))
         p, rec, _ = _run(cmd, tmp=tmp)
         self.assertNotEqual(p.returncode, 0, p.stdout + p.stderr)
         self.assertFalse(rec["ok"])
@@ -362,7 +362,7 @@ class PreSpawnGateEndToEnd(unittest.TestCase):
         """No SP flags -> no identity field at all, so a pre-existing receipt shape is untouched."""
         tmp = tempfile.mkdtemp(prefix="hgk-sp-legacy-")
         cmd = _cmd(tmp, sp=None, invocation=None, nonce=None, skills=None, spine=None,
-                   workorder=None, stub=STUB_PLAIN)
+                   workorder=None, stub=STUB_PLAIN, extra=("--require-arm", "opencode-go/deepseek-v4.1-flash",))
         # the plain nonce default is what a legacy caller gets
         p, rec, _ = _run(cmd, tmp=tmp)
         self.assertEqual(p.returncode, 0, p.stdout + p.stderr)

@@ -210,7 +210,8 @@ class GateEndToEndRefusal(unittest.TestCase):
     def test_guard_root_that_does_not_resolve_is_refused(self):
         """MEASURED (probe E5b): an unresolvable guard root produced a zero-file snapshot and the
         receipt still read 'mutated: false'. A vacuous guard must refuse, never bless."""
-        p, json_out, tmp = self._run(["--guard-subject", str(tmp := pathlib.Path(tempfile.mkdtemp()) / "absent-dir")])
+        p, json_out, tmp = self._run(["--require-arm", "opencode-go/deepseek-v4.1-flash",
+                                       "--guard-subject", str(tmp := pathlib.Path(tempfile.mkdtemp()) / "absent-dir")])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         r = json.loads(json_out.read_text(encoding="utf-8"))
         self.assertEqual(r["code"], "ERR_GUARD_ROOT_MISSING")
@@ -291,7 +292,7 @@ class HostileReviewRegression(unittest.TestCase):
         was decorative and the gate only ever used the provider heuristic."""
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-hr-"))
         pool = self._pool_with_verify_arm(tmp, lambda e: e.update(identity_requirement="cli_login"))
-        p, json_out, _ = self._dispatch(["--pool", str(pool)])
+        p, json_out, _ = self._dispatch(["--require-arm", "opencode-go/deepseek-v4.1-flash", "--pool", str(pool)])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertEqual(json.loads(json_out.read_text(encoding="utf-8"))["code"],
                          disp.ERR_IDENTITY_NOT_PREAUTHORIZED)
@@ -299,7 +300,7 @@ class HostileReviewRegression(unittest.TestCase):
     def test_F2_a_misspelled_requirement_is_refused_end_to_end(self):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-hr-"))
         pool = self._pool_with_verify_arm(tmp, lambda e: e.update(identity_requirement="relay_pool "))
-        p, json_out, _ = self._dispatch(["--pool", str(pool)])
+        p, json_out, _ = self._dispatch(["--require-arm", "opencode-go/deepseek-v4.1-flash", "--pool", str(pool)])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertEqual(json.loads(json_out.read_text(encoding="utf-8"))["code"], "ERR_LANE_IDENTITY_UNKNOWN")
 
@@ -314,14 +315,15 @@ class HostileReviewRegression(unittest.TestCase):
     def test_F4_an_escalated_lane_without_a_guard_is_refused(self):
         """danger-full-access has no sandbox root, so an unguarded escalated checker was unbounded
         while the receipt still reported ok:true."""
-        p, json_out, _ = self._dispatch(["--sandbox", "danger-full-access", "--allow-sandbox-escalation"])
+        p, json_out, _ = self._dispatch(["--require-arm", "opencode-go/deepseek-v4.1-flash",
+                                        "--sandbox", "danger-full-access", "--allow-sandbox-escalation"])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertEqual(json.loads(json_out.read_text(encoding="utf-8"))["code"],
                          "ERR_GUARD_REQUIRED_FOR_ESCALATED_CHECKER")
 
     def test_F6_a_guard_root_containing_harness_output_is_refused(self):
         """If the harness's own writes land inside a guard root they register as subject changes."""
-        p, json_out, _ = self._dispatch([], guard_own_tmp=True)
+        p, json_out, _ = self._dispatch(["--require-arm", "opencode-go/deepseek-v4.1-flash",], guard_own_tmp=True)
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertEqual(json.loads(json_out.read_text(encoding="utf-8"))["code"],
                          "ERR_GUARD_ROOT_CONTAINS_HARNESS_OUTPUT")
@@ -626,7 +628,7 @@ class C2DispatchableConsumer(unittest.TestCase):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-lhr-c2-"))
         pool = _lane_pool(tmp, "VERIFY_SECURITY", [self.GOOD, self.DEAD])
         logs = tmp / "logs"
-        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool),
+        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool), "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / "tests/fixtures/stub_lane_child.py"),
                "--attempt-log-dir", str(logs), "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -652,7 +654,7 @@ class C2DispatchableConsumer(unittest.TestCase):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-lhr-c2n-"))
         good = dict(self.GOOD, dispatchable=True)
         pool = _lane_pool(tmp, "VERIFY_SECURITY", [good])
-        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool),
+        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool), "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / "tests/fixtures/stub_lane_child.py"),
                "--usage", str(tmp / "usage.jsonl"), "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -740,7 +742,7 @@ class R2Repair(unittest.TestCase):
                 "dispatchable": False, "transport_model": "nvidia/deepseek-ai/deepseek-v4.1-flash",
                 "identity_requirement": "none"}
         pool = _lane_pool(tmp, "VERIFY_SECURITY", [good, dead])
-        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool),
+        cmd = ["--lane", "VERIFY_SECURITY", "--pool", str(pool), "--require-arm", "opencode-go/deepseek-v4.1-flash",
                "--codex-executable", str(ROOT / self.STUB), "--usage", str(tmp / "usage.jsonl"),
                "--timeout", "30", "--prompt", "x"]
         p, rec, _ = _run_dispatch(cmd, env=_stub_env(tmp))
@@ -765,6 +767,7 @@ class R2Repair(unittest.TestCase):
     def test_guard_refusal_receipt_also_carries_both_home_fields(self):
         tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-r2-home-"))
         p, rec, _ = _run_dispatch(["--lane", "VERIFY_SECURITY", "--prompt", "x",
+                                   "--require-arm", "opencode-go/deepseek-v4.1-flash",
                                    "--guard-subject", str(tmp / "absent-dir")])
         self.assertEqual(p.returncode, 4, p.stdout + p.stderr)
         self.assertEqual(rec["code"], "ERR_GUARD_ROOT_MISSING")
