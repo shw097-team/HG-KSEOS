@@ -93,6 +93,12 @@ class MissionSecurityTests(unittest.TestCase):
         path.write_text(json.dumps(doc), encoding='utf-8')
         return doc
 
+    def bind(self, mission=MISSION_SELECTED):
+        # A selector is only lawful once the supervisor recorded the same mission (OWNER ruling
+        # 2026-11-17 §2). Selection tests therefore bind first instead of relying on the env.
+        with patch.object(n, 'REGISTRY', self.legacy), patch.object(n, 'assert_protected'):
+            return n.bind_supervisor_scope(mission)
+
     def bundle(self, doc, request, mission_id_for_references, seed='A', generation=0):
         sha = n.digest_request(request)
         now = datetime.now(timezone.utc)
@@ -122,6 +128,7 @@ class MissionSecurityTests(unittest.TestCase):
     # -- 1. cross-mission leakage ----------------------------------------------------------------
     def test_cross_mission_leakage_is_refused_by_name(self):
         os.environ[n.MISSION_SELECTOR_ENV] = MISSION_SELECTED
+        self.bind()
         doc = self.write(self.mission_file, self.document(MISSION_SELECTED))
         self.write(self.other_file, self.document(MISSION_OTHER))
         request = n.taskspec_request('TS', 'R', 'objective', 'maker', self.artifact,
@@ -168,13 +175,18 @@ class MissionSecurityTests(unittest.TestCase):
                 n.machine_registry_path(n.mission_selector())
 
     def test_resolved_mission_path_is_always_under_the_protected_base(self):
+        # The path builder is pure: it takes an already-validated id. The selector itself is not a
+        # way in on an unbound host, so this test binds nothing and asserts both halves.
         with patch.object(n, 'REGISTRY', self.legacy):
             for good in ('M1', 'MISSION-2', 'wp06_2026.11.17', 'a'):
-                os.environ[n.MISSION_SELECTOR_ENV] = good
-                resolved = n.machine_registry_path(n.mission_selector())
+                resolved = n.machine_registry_path(good)
                 self.assertEqual(resolved.parent.parent.parent, self.adm)
                 self.assertEqual(resolved.name, 'registry.json')
                 self.assertNotIn('..', resolved.parts)
+            os.environ[n.MISSION_SELECTOR_ENV] = 'M1'
+            with self.assertRaisesRegex(InvariantViolation,
+                                        '^ERR_NATIVE_SUPERVISOR_BINDING_ABSENT$'):
+                n.mission_selector()
 
     # -- 3. symlink / reparse ------------------------------------------------------------------
     def test_junction_in_place_of_the_mission_dir_is_refused(self):
@@ -189,6 +201,7 @@ class MissionSecurityTests(unittest.TestCase):
                         "New-Item -ItemType Junction -Path '" + str(link) + "' -Target '"
                         + str(elsewhere) + "' | Out-Null"], check=True, capture_output=True)
         try:
+            self.bind()
             os.environ[n.MISSION_SELECTOR_ENV] = MISSION_SELECTED
             with patch.object(n, 'REGISTRY', self.legacy), patch.object(n, 'assert_protected'), \
                     patch.object(n, 'assert_mission_protected'):
@@ -212,8 +225,10 @@ class MissionSecurityTests(unittest.TestCase):
         # assert_mission_protected twice, and a third time once the document names its checker SID.
         self.write(self.mission_file, self.document(MISSION_SELECTED))
         os.environ[n.MISSION_SELECTOR_ENV] = MISSION_SELECTED
+        self.bind()
         seen = []
         with patch.object(n, 'REGISTRY', self.legacy), \
+                patch.object(n, 'assert_protected'), \
                 patch.object(n, 'assert_mission_protected',
                              side_effect=lambda p, checker=None: seen.append((Path(p), checker))):
             n.ProtectedRegistry().snapshot()

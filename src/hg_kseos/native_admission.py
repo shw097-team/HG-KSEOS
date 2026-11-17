@@ -163,8 +163,9 @@ def mission_selector():
     Deliberately takes no argument: no request dict, bundle or argv line can reach it. Four
     mutations are refused by name instead of resolved: a malformed id, a selector that disagrees
     with the supervisor record (worker reselection), a blank selector while a record exists (the
-    silent fallback to B1's unscoped constant), and any selection at all on a host where scoping is
-    installed but the record is missing (an unprotected environment override).
+    silent fallback to B1's unscoped constant), and any non-empty selector on a host with no
+    supervisor record at all (an unprotected environment override - refused whether or not the
+    supervisor directory exists).
 
     Unbound hosts keep B1 exactly as it was: no selector means the ProgramData constant.
     """
@@ -174,12 +175,14 @@ def mission_selector():
         refuse('MISSION_SELECTOR_SHAPE')
     bound = supervisor_binding()
     if bound is None:
-        if raw and _binding_dir().exists():
-            # `missions/`-style scoping is installed on this host (the supervisor dir exists) but
-            # no decision was recorded: the value can only have come from the worker's own
-            # environment, which is not a binding.
+        if raw:
+            # No supervisor record: an environment variable is not a binding. A worker sets its own
+            # environment, so honouring the selector here is the unprotected override this whole
+            # function exists to stop - and it must not depend on whether the supervisor directory
+            # happens to exist, because that made the refusal host-dependent and left the R4a shape
+            # (unbound host + non-empty selector + another mission's registry already present) open.
             refuse('SUPERVISOR_BINDING_ABSENT')
-        return raw or None
+        return None
     if raw_present and not raw:
         refuse('MISSION_SELECTOR_BLANK')
     if raw:

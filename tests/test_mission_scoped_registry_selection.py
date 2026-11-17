@@ -62,6 +62,18 @@ class SelectionTests(unittest.TestCase):
 
     def select(self, mission):
         os.environ[n.MISSION_SELECTOR_ENV] = mission
+        if not n._mission_id_ok(mission):
+            return          # shape tests drive the raw selector; a binding would pre-empt the refusal
+        with self.patched():
+            # A selector is only lawful once the supervisor recorded the same mission. These tests
+            # exercise the SELECTION logic, so they take the lawful path; the unprotected
+            # env-only path is a named refusal (tests/test_mission_unbound_selector_negative.py).
+            record = self.base / n.SUPERVISOR_DIRNAME / n.SUPERVISOR_BINDING_FILENAME
+            if record.exists():
+                # re-binding inside one test is a stand-in convenience only: the one-shot
+                # immutability rule is locked separately in test_mission_supervisor_binding.py
+                record.unlink()
+            n.bind_supervisor_scope(mission)
 
     @contextmanager
     def patched(self):

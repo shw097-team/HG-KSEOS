@@ -56,12 +56,13 @@ class SupervisorBindingTests(unittest.TestCase):
         self.assertEqual(n.registry_path(), self.constant)
         self.assertEqual(n.trust_profile(), n.MACHINE_PROFILE)
 
-    def test_unbound_host_still_honours_an_explicit_env_selector(self):
-        # The pre-binding behaviour is kept on purpose: a host that never installed a supervisor
-        # record is exactly today's B1/deployment behaviour, env selection included.
+    def test_unbound_host_refuses_an_explicit_env_selector(self):
+        # OWNER ruling 2026-11-17 §2: an environment variable is not a supervisor decision, and the
+        # refusal may not depend on whether <base>/supervisor happens to exist. Withdraws the
+        # pre-binding behaviour this test previously locked. No selector at all still stays B1.
         os.environ[n.MISSION_SELECTOR_ENV] = MISSION
-        self.assertEqual(n.mission_selector(), MISSION)
-        self.assertEqual(n.registry_path(), self.base / 'missions' / MISSION / 'registry.json')
+        self.refused('SUPERVISOR_BINDING_ABSENT', n.mission_selector)
+        self.refused('SUPERVISOR_BINDING_ABSENT', n.registry_path)
 
     def test_unbound_host_still_accepts_the_user_profile(self):
         os.environ[n.TRUST_PROFILE_ENV] = n.USER_PROFILE
