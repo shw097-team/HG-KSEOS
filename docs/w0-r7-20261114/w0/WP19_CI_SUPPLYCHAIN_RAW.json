@@ -1,0 +1,136 @@
+{
+ "ledger": "WP-FHS-19 CI/License/NOTICE/SBOM raw",
+ "round": "W0_R7_FULL_20261114",
+ "candidate_binding": {
+  "deliverable_main_sha256": "44a56f583bb9aaf161212dc8151c54a785dbda53f9a3ee01fccc7b98cbf051d2",
+  "deliverable_appendix_sha256": "d156ab4fd5acbcd6de9beb513c1f2b5704726e7c51446f9854374c00645b73c5",
+  "note": "every row below is bound to this candidate pair; nothing is aggregated across candidates"
+ },
+ "licenses": {
+  "Fabric": {
+   "license_files": [],
+   "present": false
+  },
+  "SBL": {
+   "license_files": [
+    {
+     "path": "LICENSE",
+     "bytes": 1068,
+     "sha256": "759b0f8830b642eadfb405bd92703a4058a80b3a886f07282a27f5851a43bfc8"
+    },
+    {
+     "path": "NOTICE",
+     "bytes": 684,
+     "sha256": "3ffd9f06639e9a95b3f057b3400574d6d8c6682318375559221c46a62d81d7fc"
+    }
+   ],
+   "present": true
+  },
+  "HG-KSEOS": {
+   "license_files": [],
+   "present": false
+  }
+ },
+ "artifacts": [
+  {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\deliverables\\FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_實質正文.md",
+   "exists": true,
+   "bytes": 25804,
+   "sha256": "44a56f583bb9aaf161212dc8151c54a785dbda53f9a3ee01fccc7b98cbf051d2"
+  },
+  {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\deliverables\\FHS_PIPD-LS-PKG_W0_vNEXT_2026-11-14_r2_證據型附錄.md",
+   "exists": true,
+   "bytes": 48359,
+   "sha256": "d156ab4fd5acbcd6de9beb513c1f2b5704726e7c51446f9854374c00645b73c5"
+  },
+  {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\WP16_485_DISPOSITION.csv",
+   "exists": true,
+   "bytes": 50131,
+   "sha256": "5e5de5bdcf20b899463dd7a6d0a0d5e5e3eff4615fed38ad7951203b55088dba"
+  },
+  {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\SIGN_BODY_POS02.json",
+   "exists": true,
+   "bytes": 2478,
+   "sha256": "6f4933269b7c9f7b6388cb4be76d30d3a53eacca78a28b6432bf1e326c79404b"
+  },
+  {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\SIGN_BODY_POS02.SIGNED.json",
+   "exists": true,
+   "bytes": 683,
+   "sha256": "e82bb17ceddc92fba6ac7c848684bc0bd5aeeb0960812c2d4cae3725d57b600a"
+  },
+  {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\SIGN_BODY_ORIGINAL_ACK.json",
+   "exists": true,
+   "bytes": 3173,
+   "sha256": "d0ab1b8ba53b19b35a786211f2eb166e818e2166ab050bcf1e48eccb98755180"
+  },
+  {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT_Workspace\\W0_R7_FULL_20261114\\out\\SIGN_BODY_ORIGINAL_ACK.SIGNED.json",
+   "exists": true,
+   "bytes": 688,
+   "sha256": "d7e7d0a53eb7a24616386041890c6c482a1af83598648fc6e3896921e634d3fe"
+  },
+  {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\control\\FHS_NEXT_W0_THIN_EXECUTION_CONTROL_20261111.md",
+   "exists": true,
+   "bytes": 9617,
+   "sha256": "51f66aec59a9678ed5c8954ac91ef61c1f081287083c5e8d71288d026b852419"
+  },
+  {
+   "path": "C:\\Projects\\Agent_Workspace\\FHS_NEXT\\control\\FHS_NEXT_W0_THIN_BOOTSTRAP_PROMPT_20261111.md",
+   "exists": true,
+   "bytes": 1947,
+   "sha256": "66a414f4bbf95850cfe2ed4f33a82c2e612b36c99deb665d180549bde7c1a6e6"
+  }
+ ],
+ "toolchain": {
+  "python": "3.11.9",
+  "relay": "{\"status\":\"ok\",\"service\":\"opencodex\",\"version\":\"2.11.0\",\"uptime\":773.1112659,\"pid\":7236,\"port\":10101,\"restartCapability\"",
+  "codex": [
+   {
+    "bin_dir": "C:/Users/user/AppData/Local/OpenAI/Codex/bin/9e1da79431da526b",
+    "codex_exe": "C:/Users/user/AppData/Local/OpenAI/Codex/bin/9e1da79431da526b/codex.exe",
+    "exists": true,
+    "size_bytes": 373698352,
+    "mtime_local": "2026-11-12T00:42:54.820759+08:00",
+    "sha256": "83f5c2dd2ac2902e0d96ba5d8ccdd27d513f57df4a9ab73e06a5a518028e9a2f"
+   },
+   {
+    "bin_dir": "C:/Users/user/AppData/Local/OpenAI/Codex/bin/fc32aa0651e37f32",
+    "codex_exe": "C:/Users/user/AppData/Local/OpenAI/Codex/bin/fc32aa0651e37f32/codex.exe",
+    "exists": false,
+    "dir_entries": [
+     "rg.exe"
+    ]
+   }
+  ],
+  "lane_pin": null
+ },
+ "pull_requests": {
+  "fabric": {
+   "number": 58,
+   "html_url": "https://github.com/shw097-team/Fabric/pull/58",
+   "state": "open"
+  },
+  "hgk": {
+   "number": 26,
+   "html_url": "https://github.com/shw097-team/HG-KSEOS/pull/26",
+   "state": "open"
+  },
+  "sbl": {
+   "number": 69,
+   "html_url": "https://github.com/shw097-team/SBL/pull/69",
+   "state": "open"
+  }
+ },
+ "gaps": [
+  "Fabric: no LICENSE/NOTICE file at repo root — supply-chain attestation cannot cite one",
+  "HG-KSEOS: no LICENSE/NOTICE file at repo root — supply-chain attestation cannot cite one",
+  "no SBOM artefact for this round (CycloneDX/SPDX not generated) — WP-19 remains partial"
+ ],
+ "claim": "LOCAL_CHECK + REMOTE_REPO_SOURCE. No SBOM, no signed attestation and no NOTICE text is claimed; gaps are listed, not papered over."
+}

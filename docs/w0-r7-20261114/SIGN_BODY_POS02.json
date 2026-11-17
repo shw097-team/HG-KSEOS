@@ -1,0 +1,48 @@
+{
+ "schema": "FHS.OWNER_SEMANTIC_ACCEPT/1",
+ "act": "OWNER_SEMANTIC_ACCEPT",
+ "issued_by": "Human Owner (single, this host)",
+ "round": "W0_R7_FULL_20261114",
+ "act_date": "2026-11-14",
+ "subject": "FHS-W0-R7-POS02-LOCATOR",
+ "subject_scope": "只裁定 POS-02 的判準形式：以 SOURCE_IMPORT_MAP.json::control_seed[].target_sha256 為 pin，origin 缺席時記 PASS_PIN_ONLY 並保留 source_exists=false；位元不符仍為硬 FAIL。不含任何原域 Canonical、WorkID、Grant 或 Release。",
+ "why": "spec-library origin 子樹 FHS_PIPD-LS-PKG/實作/FHS_NEXT/EXECUTION_CONTROL/ 在知識庫重組後不存在（深度 9 搜尋 0 命中），而 control/ 兩檔 bytes 仍等於清冊宣佈的 target_sha256。原 rglob 定位使檢查永遠紅，屬定位失敗而非內容失敗。",
+ "independent_review": {
+  "lane": "VERIFY_SECURITY",
+  "rank": 3,
+  "arm": "opencode-go/deepseek-v4.1-flash",
+  "receipt": "W0_R7_FULL_20261114/out/VERIFY_POS02_CHALLENGE.json",
+  "stdout_sha256": "727ec0bbbc9c3cbd25c395274d333f758805db96b6dbcf5c330b25e479314c05",
+  "verdict": "PASS",
+  "risk": "If the import-map pin is changed together with a control file, a compromised pair can pass as pin-only while the original source is absent.",
+  "condition": "Keep the hard FAIL whenever the on-disk bytes do not exactly match target_sha256."
+ },
+ "candidate": {
+  "控制包": {
+   "path": "C:/Projects/Agent_Workspace/FHS_NEXT/control/FHS_NEXT_W0_THIN_EXECUTION_CONTROL_20261111.md",
+   "bytes": 9617,
+   "sha256": "51f66aec59a9678ed5c8954ac91ef61c1f081287083c5e8d71288d026b852419"
+  },
+  "啟動Prompt": {
+   "path": "C:/Projects/Agent_Workspace/FHS_NEXT/control/FHS_NEXT_W0_THIN_BOOTSTRAP_PROMPT_20261111.md",
+   "bytes": 1947,
+   "sha256": "66a414f4bbf95850cfe2ed4f33a82c2e612b36c99deb665d180549bde7c1a6e6"
+  },
+  "進口清冊": {
+   "path": "C:/Projects/Agent_Workspace/FHS_NEXT/provenance/SOURCE_IMPORT_MAP.json",
+   "bytes": 256666,
+   "sha256": "1bae7892372ae63a085ff432a430eff7"
+  }
+ },
+ "effect_of_this_act": [
+  "POS-02 由 rglob-origin 比對改為 control_seed pin 比對；selfcheck 由 15/16 變 16/16（已實測，改一 byte 即 FAIL、還原即 16/16）。",
+  "本簽章成為 repo 外的獨立錨，用於偵測「pin 與控制檔被同時改」的共謀情境（VERIFY 指出的 residual risk）。"
+ ],
+ "not_claimed": [
+  "ORIGINAL_ACK（另件簽署）",
+  "NATIVE_ADMISSION",
+  "INDEPENDENT_VERDICT",
+  "RELEASE",
+  "任何原域 Canonical 或 WorkID"
+ ]
+}
