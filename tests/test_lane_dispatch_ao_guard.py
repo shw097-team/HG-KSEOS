@@ -2052,5 +2052,116 @@ class R8StrictDeclarationPass2(unittest.TestCase):
             self.assertEqual(rec["attempts"][0]["carrier_lines_undecodable"], 0)
 
 
+# ---------------------------------------------------------------------------------------------
+# DEF-01 / AA-01: `--force-rank` names a POSITION, not an arm.
+# `automatic_selection: false` is a standing prohibition: an operator-only arm may be reached by
+# an explicit `--require-arm` and by nothing else. #29 enforced that on the unattended walk AND on
+# the `--force-rank` re-admission, but `ERR_FORCE_RANK_OPERATOR_ONLY` had ZERO references anywhere
+# under tests/ -- the prohibition could have been deleted and the whole suite would have stayed
+# green. This case pins it end to end, with the stub child in the loop (no model turn, no relay,
+# no network).
+# ---------------------------------------------------------------------------------------------
+
+
+class ForceRankOperatorOnlyAuthorisation(unittest.TestCase):
+    """AA-01: a rank argument must not re-admit an operator-only arm.
+
+    Four properties, one case:
+      (a) `--force-rank <operator-only rank>` with no `--require-arm` is the NAMED refusal
+          `ERR_FORCE_RANK_OPERATOR_ONLY`, never a spawn and never the generic rank-gap code;
+      (b) that refusal spawns nothing;
+      (c) the same rank IS reachable when the caller names the ARM it means (`--require-arm`);
+      (d) the boundary is not over-tightened: a rank the artifact merely declares
+          `dispatchable: false` is still force-able with a bare `--force-rank`.
+
+    The arms are READ from the assignment artifact, so an owner rebind skips the case instead of
+    silently turning it into a false red or a vacuous green.
+    """
+
+    STUB = "tests/fixtures/stub_lane_child.py"
+
+    @staticmethod
+    def _split(token):
+        provider, model = token.split("/", 1)
+        return provider, model
+
+    def _pool(self, tmp, operator_only_arm, dispatchable_false_arm):
+        op, om = self._split(operator_only_arm)
+        dp, dm = self._split(dispatchable_false_arm)
+        entries = [
+            # rank 1: the operator-only arm, declared perfectly dispatchable -- so the ONLY thing
+            # that can refuse a bare --force-rank 1 here is the authorisation rule itself.
+            {"rank": 1, "provider": op, "model": om, "feasibility": "DISPATCHABLE",
+             "transport_model": f"{op}/{om}", "identity_requirement": "none"},
+            # rank 2: NOT operator-only, explicitly declared non-dispatchable -- the older, still
+            # lawful re-admission path that (d) pins.
+            {"rank": 2, "provider": dp, "model": dm, "dispatchable": False,
+             "transport_model": f"{dp}/{dm}", "identity_requirement": "none"},
+        ]
+        return _lane_pool(tmp, "VERIFY_SECURITY", entries), op, om
+
+    def _run(self, tmp, pool, logs, extra):
+        json_out = tmp / (logs.name + "-receipt.json")
+        env = _stub_env(tmp, provider="opencode-go", model="deepseek-v4.1-flash")
+        cmd = [sys.executable, str(ROOT / "scripts" / "hgk-lane-dispatch.py"),
+               "--lane", "VERIFY_SECURITY", "--pool", str(pool), "--json-out", str(json_out),
+               "--codex-executable", str(ROOT / self.STUB), "--usage", str(tmp / "usage.jsonl"),
+               "--attempt-log-dir", str(logs), "--timeout", "30", "--prompt", "x",
+               "--relay-home", str(tmp / "no-such-relay-home")] + list(extra)
+        p = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8",
+                           errors="replace", stdin=subprocess.DEVNULL, timeout=120,
+                           cwd=str(ROOT), env=env)
+        rec = json.loads(json_out.read_text(encoding="utf-8")) if json_out.is_file() else None
+        return p, rec, json_out
+
+    @staticmethod
+    def _spawned(logs):
+        return sorted(f.name for f in logs.glob("attempt-*")) if logs.is_dir() else []
+
+    def test_force_rank_onto_an_operator_only_arm_needs_the_arm_to_be_named(self):
+        asg = disp.lane_assigned_arms("VERIFY_SECURITY")
+        operator_only = asg.get("supply_selector_operator_only") or []
+        automatic = asg.get("supply_selector_auto") or []
+        if not operator_only or not automatic:
+            self.skipTest("the assignment artifact declares no operator-only arm for "
+                          f"VERIFY_SECURITY (rev {asg.get('revision')}); case not exercised")
+        tmp = pathlib.Path(tempfile.mkdtemp(prefix="hgk-aa01-"))
+        pool, op, om = self._pool(tmp, operator_only[0], automatic[0])
+
+        # (a) + (b) a bare --force-rank onto the operator-only rank refuses BY NAME, spawns nothing
+        p, rec, _ = self._run(tmp, pool, tmp / "logs-a", ["--force-rank", "1"])
+        self.assertEqual(p.returncode, 2, p.stdout + p.stderr)
+        refusal = json.loads(p.stdout.strip().splitlines()[-1])
+        self.assertFalse(refusal["ok"])
+        self.assertEqual(refusal["code"], "ERR_FORCE_RANK_OPERATOR_ONLY")
+        self.assertEqual(refusal["operator_only_arms"], [f"{op}/{om}"])
+        self.assertEqual(refusal["required_authorisation"], "--require-arm")
+        self.assertIsNone(rec, "a refusal must not write a receipt as if the run had proceeded")
+        self.assertEqual(self._spawned(tmp / "logs-a"), [],
+                         "an operator-only refusal must spawn nothing")
+
+        # (c) naming the ARM is the lawful route to the same rank
+        p, rec, _ = self._run(tmp, pool, tmp / "logs-c",
+                              ["--force-rank", "1", "--require-arm", f"{op}/{om}"])
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertEqual(rec["used_rank"], 1)
+        self.assertEqual([a["rank"] for a in rec["attempts"]], [1], p.stdout + p.stderr)
+        self.assertTrue(self._spawned(tmp / "logs-c"), "--require-arm must reach the spawn")
+        self.assertNotIn("ERR_FORCE_RANK_OPERATOR_ONLY", p.stdout + p.stderr)
+
+        # (d) a rank the artifact merely declares non-dispatchable is STILL force-able
+        p, rec, _ = self._run(tmp, pool, tmp / "logs-d", ["--force-rank", "2"])
+        self.assertEqual(p.returncode, 0, p.stdout + p.stderr)
+        self.assertEqual(rec["used_rank"], 2)
+        self.assertEqual([a["rank"] for a in rec["attempts"]], [2], p.stdout + p.stderr)
+        self.assertTrue(self._spawned(tmp / "logs-d"),
+                        "--force-rank must still reach a declared non-dispatchable rank")
+        skipped = {s["rank"]: s["reason"] for s in rec["skipped_arms"]}
+        self.assertIn("not dispatchable", skipped[2],
+                      "the forced rank must still be RECORDED as the declared-dead rank it is")
+        self.assertIn("automatic_selection=false", skipped[1],
+                      "and the operator-only arm must stay skipped in the same walk")
+
+
 if __name__ == "__main__":
     unittest.main()
