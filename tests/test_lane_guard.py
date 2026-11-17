@@ -132,6 +132,20 @@ def _registry_without_declaration(tmp):
     return str(path)
 
 
+def _root_with_assignment(tmp, *, doc, subdir):
+    """Materialise `doc` as the pinned routing source under a temp `--root`, with a registry whose
+    source digest matches it, so the ONLY surface under test is the epoch read."""
+    root = tmp / subdir
+    target = root / lp.load_registry()["source_of_routes"]["path"]
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(doc), encoding="utf-8")
+    reg = copy.deepcopy(lp.load_registry())
+    reg["source_of_routes"]["sha256"] = lp._sha256_file(target)
+    reg_path = tmp / f"registry_{subdir}.json"
+    reg_path.write_text(json.dumps(reg), encoding="utf-8")
+    return root, reg_path
+
+
 PLAN_ARM = ["--lane", "PLAN", "--maker-engine", "opencode-go", "--maker-model", "deepseek-v4.1-flash",
             "--target-engine", "openai-codex", "--target-model", "gpt-6.1-sol", "--target-provider", "openai-codex"]
 VERIFY_ARM = ["--lane", "VERIFY_SECURITY", "--maker-engine", "opencode-go", "--maker-model", "minimax-m3.1-flash-free",
@@ -281,6 +295,91 @@ class TestLaneGuard(unittest.TestCase):
         v = evaluate(PLAN_ARM + ["--admission", self.plan_fix])
         self.assertEqual(v["exit_code"], 0, v["errors"])
         self.assertEqual(v["live_epoch"], 41)
+
+    def test_r2_contract_epoch_wins_over_assignment_revision(self):
+        """OWNER check (1): the assignment carries BOTH the contract epoch (41) and its own revision
+        (44), and they differ. The guard must report the EPOCH. A reader that consults `revision` --
+        first, last, or as a fallback -- reports 44 here and fails."""
+        base = lp.load_site(ROOT / "config" / "model-lane-assignment.json")
+        shapes = {
+            # only the contract-epoch key: the strongest form, nothing else could supply 41
+            "contract_epoch_only": {"registry_epoch": None, "contract_epoch": 41, "epoch": None},
+            # every epoch key agrees; `revision` still says 44
+            "all_epoch_keys": {"registry_epoch": 41, "contract_epoch": 41, "epoch": 41},
+        }
+        for name, fields in shapes.items():
+            with self.subTest(shape=name):
+                doc = copy.deepcopy(base)
+                doc["revision"] = 44
+                for key, value in fields.items():
+                    if value is None:
+                        doc.pop(key, None)
+                    else:
+                        doc[key] = value
+                self.assertEqual(doc["revision"], 44)
+                root, reg = _root_with_assignment(self.tmp, doc=doc, subdir=name)
+                args = guard.build_parser().parse_args(
+                    PLAN_ARM + ["--admission", self.plan_fix, "--registry", str(reg),
+                                "--root", str(root)])
+                live = guard._live_epoch(args, lp.load_registry(reg))
+                self.assertEqual(live, 41, f"{name}: read {live}, not the epoch 41")
+                self.assertNotEqual(live, 44, f"{name}: read the revision 44 as the epoch")
+                v = guard.evaluate(args)
+                self.assertEqual(v["exit_code"], 0, v["errors"])
+                self.assertEqual(v["live_epoch"], 41)
+
+    def test_r2_absent_malformed_or_conflicting_epoch_is_refused(self):
+        """OWNER check (2): an epoch the guard cannot establish is NOT an admission. Absent (only
+        the 44 revision), malformed, and self-contradictory epoch fields are each refused under the
+        existing stale-epoch code ERR_LANE_STALE_EPOCH / exit 4 -- never admitted, and never
+        rescued by falling back to `revision`."""
+        base = lp.load_site(ROOT / "config" / "model-lane-assignment.json")
+        cases = {
+            "absent_revision_only": (
+                {"registry_epoch": None, "contract_epoch": None, "epoch": None}, "EPOCH_ABSENT"),
+            "malformed_epoch": (
+                {"registry_epoch": "epoch-41", "contract_epoch": None, "epoch": None},
+                "EPOCH_MALFORMED"),
+            "conflicting_epoch_fields": (
+                {"registry_epoch": 41, "contract_epoch": None, "epoch": 42}, "EPOCH_CONFLICT"),
+        }
+        for name, (fields, defect) in cases.items():
+            with self.subTest(shape=name):
+                doc = copy.deepcopy(base)
+                doc["revision"] = 44
+                for key, value in fields.items():
+                    if value is None:
+                        doc.pop(key, None)
+                    else:
+                        doc[key] = value
+                root, reg = _root_with_assignment(self.tmp, doc=doc, subdir=f"bad_{name}")
+                v = guard.evaluate(guard.build_parser().parse_args(
+                    PLAN_ARM + ["--admission", self.plan_fix, "--registry", str(reg),
+                                "--root", str(root)]))
+                self.assertEqual(v["exit_code"], 4, f"{name}: {v['errors']} / {v['checks']}")
+                self.assertEqual(v["status"], "REFUSE")
+                self.assertEqual(v["decision"], "REFUSE")
+                self.assertIn("ERR_LANE_STALE_EPOCH", v["errors"])
+                self.assertIsNone(v["live_epoch"], f"{name}: an unestablished epoch still produced a value")
+                check = [c for c in v["checks"] if c["id"] == "epoch_current"][0]
+                self.assertFalse(check["ok"])
+                self.assertEqual(check["code"], "ERR_LANE_STALE_EPOCH")
+                self.assertIn(defect, check["detail"])
+        # An epoch document that is not on disk at all is the same refusal class, not an exemption.
+        with self.subTest(shape="epoch_source_absent"):
+            reg_doc = copy.deepcopy(lp.load_registry())
+            reg_doc["source_of_routes"]["path"] = "config/absent-lane-assignment.json"
+            reg_doc["source_of_routes"].pop("sha256", None)
+            reg_path = self.tmp / "registry_absent_source.json"
+            reg_path.write_text(json.dumps(reg_doc), encoding="utf-8")
+            v = guard.evaluate(guard.build_parser().parse_args(
+                PLAN_ARM + ["--admission", self.plan_fix, "--registry", str(reg_path)]))
+            self.assertEqual(v["exit_code"], 4, f"{v['errors']} / {v['checks']}")
+            self.assertIn("ERR_LANE_STALE_EPOCH", v["errors"])
+            self.assertIsNone(v["live_epoch"])
+            check = [c for c in v["checks"] if c["id"] == "epoch_current"][0]
+            self.assertFalse(check["ok"])
+            self.assertIn("EPOCH_ABSENT", check["detail"])
 
     def test_r2_undeclared_arm_is_still_refused(self):
         """NEG: widening the READ did not widen ACCEPTANCE. An arm in no declared shape -- and the
